@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel - Orbit Gestão</title>
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
     <meta name="robots" content="noindex, nofollow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -745,12 +746,21 @@
             <a href="#" data-view="leadmagnets" onclick="showView('leadmagnets')">
                 <i class="fas fa-magnet"></i> Iscas Digitais
             </a>
+            <a href="#" data-view="stories" onclick="showView('stories')">
+                <i class="fas fa-star"></i> Histórias de Clientes
+            </a>
+            <a href="#" data-view="storyeditor" onclick="showView('storyeditor')">
+                <i class="fas fa-pen-fancy"></i> Nova História
+            </a>
             <div class="nav-divider"></div>
             <a href="#" data-view="users" onclick="showView('users')" id="navUsers" style="display:none;">
                 <i class="fas fa-users-gear"></i> Usuarios
             </a>
             <a href="../pages/blog.html" target="_blank">
                 <i class="fas fa-external-link-alt"></i> Ver Blog
+            </a>
+            <a href="../pages/historias.html" target="_blank">
+                <i class="fas fa-external-link-alt"></i> Ver Histórias
             </a>
             <a href="../index.html" target="_blank">
                 <i class="fas fa-globe"></i> Ver Site
@@ -793,6 +803,10 @@
                     <div class="stat-card">
                         <div class="stat-card__label">Usuarios</div>
                         <div class="stat-card__value" id="statUsers">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__label">Histórias pendentes</div>
+                        <div class="stat-card__value" style="color:var(--warning);" id="statPendingStories">0</div>
                     </div>
                 </div>
 
@@ -1209,6 +1223,265 @@
             </div>
         </div>
 
+        <!-- ══ CUSTOMER STORIES VIEW ══ -->
+        <div class="view" id="view-stories">
+            <div class="topbar">
+                <h1>Histórias de Clientes</h1>
+                <div class="topbar-actions">
+                    <button class="btn btn-primary btn-sm" onclick="clearStoryEditor();showView('storyeditor')">
+                        <i class="fas fa-plus"></i> Nova História
+                    </button>
+                    <a href="../pages/historias.html" target="_blank" class="btn btn-outline btn-sm">
+                        <i class="fas fa-external-link-alt"></i> Ver no site
+                    </a>
+                </div>
+            </div>
+            <div class="content">
+                <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+                    <div class="stat-card">
+                        <div class="stat-card__label">Total</div>
+                        <div class="stat-card__value" id="statStoriesTotal">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__label">Pendentes</div>
+                        <div class="stat-card__value" style="color:var(--warning);" id="statStoriesPending">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__label">Publicadas</div>
+                        <div class="stat-card__value stat-card__value--primary" id="statStoriesPublished">0</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body" style="padding:0;">
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Empresa</th>
+                                        <th>Contato</th>
+                                        <th>Título</th>
+                                        <th>Segmento</th>
+                                        <th>Status</th>
+                                        <th>Data</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="storiesTableBody"></tbody>
+                            </table>
+                        </div>
+                        <div class="empty-state" id="storiesEmpty" style="display:none;">
+                            <i class="fas fa-star"></i>
+                            <p>Nenhuma história enviada ainda</p>
+                            <small>Compartilhe o link <strong>historias-enviar.html</strong> com seus clientes</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ STORY EDITOR VIEW ══ -->
+        <div class="view" id="view-storyeditor">
+            <div class="topbar">
+                <h1 id="storyEditorTitle">Nova História</h1>
+                <div class="topbar-actions">
+                    <button class="btn btn-secondary btn-sm" onclick="saveStoryFromEditor('pending')">
+                        <i class="fas fa-save"></i> Salvar rascunho
+                    </button>
+                    <button class="btn btn-primary btn-sm" onclick="saveStoryFromEditor('published')">
+                        <i class="fas fa-paper-plane"></i> Publicar
+                    </button>
+                </div>
+            </div>
+            <div class="content">
+                <div class="editor-grid">
+                    <!-- Main column -->
+                    <div>
+                        <input type="hidden" id="storyEditId">
+
+                        <div class="card" style="margin-bottom:20px;">
+                            <div class="card-header"><h3><i class="fas fa-building" style="color:var(--primary);margin-right:8px;"></i>Dados da Empresa</h3></div>
+                            <div class="card-body">
+                                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                                    <div class="form-group">
+                                        <label for="seEmpresa">Empresa *</label>
+                                        <input type="text" id="seEmpresa" placeholder="Nome da empresa">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="seSegmento">Segmento *</label>
+                                        <select id="seSegmento">
+                                            <option value="">Selecione...</option>
+                                            <option value="industria">Indústria</option>
+                                            <option value="servicos">Serviços</option>
+                                            <option value="tecnologia">Tecnologia</option>
+                                            <option value="saude">Saúde</option>
+                                            <option value="educacao">Educação</option>
+                                            <option value="varejo">Varejo</option>
+                                            <option value="financeiro">Financeiro</option>
+                                            <option value="agronegocio">Agronegócio</option>
+                                            <option value="outro">Outro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+                                    <div class="form-group">
+                                        <label for="seNome">Nome do contato *</label>
+                                        <input type="text" id="seNome" placeholder="Nome completo">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="seEmail">Email</label>
+                                        <input type="email" id="seEmail" placeholder="email@empresa.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="seCargo">Cargo</label>
+                                        <input type="text" id="seCargo" placeholder="CEO, Diretor, etc.">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="seTelefone">Telefone</label>
+                                    <input type="text" id="seTelefone" placeholder="(00) 00000-0000">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card" style="margin-bottom:20px;">
+                            <div class="card-header"><h3><i class="fas fa-pen-nib" style="color:var(--primary);margin-right:8px;"></i>A História</h3></div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="seTitulo">Título da história *</label>
+                                    <input type="text" id="seTitulo" placeholder="Ex: Como a Empresa X triplicou sua produtividade">
+                                </div>
+                                <div class="form-group">
+                                    <label for="seDesafio">Qual era o desafio antes da Orbit? *</label>
+                                    <textarea id="seDesafio" rows="4" placeholder="Descreva os problemas e desafios enfrentados..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="seSolucao">Como a Orbit ajudou a resolver? *</label>
+                                    <textarea id="seSolucao" rows="4" placeholder="Descreva como a plataforma foi implementada e usada..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="seResultados">Quais resultados foram alcançados? *</label>
+                                    <textarea id="seResultados" rows="4" placeholder="Métricas, ganhos, melhorias concretas..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="seDepoimento">Depoimento / Citação</label>
+                                    <textarea id="seDepoimento" rows="3" placeholder="Uma frase marcante do cliente (opcional)"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar column -->
+                    <div>
+                        <div class="card" style="margin-bottom:20px;">
+                            <div class="card-header"><h3>Logo da empresa</h3></div>
+                            <div class="card-body">
+                                <div class="image-upload-area" id="seLogoDropZone" style="min-height:100px;">
+                                    <input type="file" id="seLogoInput" accept="image/*" onchange="handleStoryLogoUpload(event)">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Arraste ou clique</p>
+                                    <span class="upload-hint">JPG, PNG ou WebP (max 2MB)</span>
+                                </div>
+                                <div class="image-preview" id="seLogoPreview" style="margin-top:8px;"></div>
+                                <input type="hidden" id="seLogoData">
+                            </div>
+                        </div>
+
+                        <div class="card" style="margin-bottom:20px;">
+                            <div class="card-header"><h3>Módulos utilizados</h3></div>
+                            <div class="card-body">
+                                <div style="display:flex;flex-direction:column;gap:10px;">
+                                    <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer;">
+                                        <input type="checkbox" class="se-modulo" value="Processos"> <i class="fas fa-sitemap" style="color:var(--primary);width:18px;"></i> Processos
+                                    </label>
+                                    <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer;">
+                                        <input type="checkbox" class="se-modulo" value="Indicadores"> <i class="fas fa-chart-line" style="color:var(--primary);width:18px;"></i> Indicadores
+                                    </label>
+                                    <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer;">
+                                        <input type="checkbox" class="se-modulo" value="Tarefas"> <i class="fas fa-tasks" style="color:var(--primary);width:18px;"></i> Tarefas
+                                    </label>
+                                    <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer;">
+                                        <input type="checkbox" class="se-modulo" value="Competências"> <i class="fas fa-users" style="color:var(--primary);width:18px;"></i> Competências
+                                    </label>
+                                    <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer;">
+                                        <input type="checkbox" class="se-modulo" value="Auditorias"> <i class="fas fa-clipboard-check" style="color:var(--primary);width:18px;"></i> Auditorias
+                                    </label>
+                                    <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer;">
+                                        <input type="checkbox" class="se-modulo" value="Orbit IA"> <i class="fas fa-robot" style="color:var(--primary);width:18px;"></i> Orbit IA
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card" style="margin-bottom:20px;">
+                            <div class="card-header"><h3>Redes Sociais</h3></div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="seLinkedin"><i class="fab fa-linkedin" style="color:#0077B5;margin-right:4px;"></i> LinkedIn</label>
+                                    <input type="url" id="seLinkedin" placeholder="https://linkedin.com/in/...">
+                                </div>
+                                <div class="form-group">
+                                    <label for="seInstagram"><i class="fab fa-instagram" style="color:#E4405F;margin-right:4px;"></i> Instagram</label>
+                                    <input type="url" id="seInstagram" placeholder="https://instagram.com/...">
+                                </div>
+                                <div class="form-group">
+                                    <label for="seWebsite"><i class="fas fa-globe" style="color:var(--info);margin-right:4px;"></i> Website</label>
+                                    <input type="url" id="seWebsite" placeholder="https://empresa.com.br">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card" style="margin-bottom:20px;">
+                            <div class="card-header"><h3>Fotos</h3></div>
+                            <div class="card-body">
+                                <div class="image-upload-area" id="sePhotosDropZone" style="min-height:80px;">
+                                    <input type="file" id="sePhotosInput" accept="image/*" multiple onchange="handleStoryPhotosUpload(event)">
+                                    <i class="fas fa-images"></i>
+                                    <p>Até 5 fotos (max 2MB cada)</p>
+                                </div>
+                                <div id="sePhotosPreview" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;"></div>
+                            </div>
+                        </div>
+
+                        <div class="card" style="margin-bottom:20px;">
+                            <div class="card-header"><h3>Vídeo</h3></div>
+                            <div class="card-body">
+                                <div class="form-group" style="margin-bottom:0;">
+                                    <label for="seVideoUrl">URL YouTube / Vimeo</label>
+                                    <input type="url" id="seVideoUrl" placeholder="https://youtube.com/watch?v=...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body" style="display:flex;flex-direction:column;gap:8px;">
+                                <button class="btn btn-primary" onclick="saveStoryFromEditor('published')" style="width:100%;">
+                                    <i class="fas fa-paper-plane"></i> Publicar
+                                </button>
+                                <button class="btn btn-secondary" onclick="saveStoryFromEditor('pending')" style="width:100%;">
+                                    <i class="fas fa-save"></i> Salvar rascunho
+                                </button>
+                                <button class="btn btn-outline" onclick="showView('stories')" style="width:100%;">
+                                    <i class="fas fa-arrow-left"></i> Voltar para lista
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ STORY DETAIL MODAL ══ -->
+        <div class="modal-overlay" id="storyDetailModal" style="display:none;padding:20px;" onclick="if(event.target===this)closeStoryDetail()">
+            <div class="modal" style="max-width:800px;max-height:90vh;overflow-y:auto;">
+                <div class="modal-header">
+                    <h3 id="storyDetailTitle">Detalhes da História</h3>
+                    <button class="btn btn-ghost" onclick="closeStoryDetail()"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="modal-body" id="storyDetailContent" style="padding:24px 32px;"></div>
+                <div class="modal-footer" id="storyDetailFooter"></div>
+            </div>
+        </div>
+
         <!-- ══ USERS VIEW (ADMIN ONLY) ══ -->
         <div class="view" id="view-users">
             <div class="topbar">
@@ -1344,11 +1617,12 @@
     // ── DB ──
     function getDB() {
         try {
-            const db = JSON.parse(localStorage.getItem(STORAGE_KEY)) || { users: [], articles: [], leadMagnets: [], version: 1 };
+            const db = JSON.parse(localStorage.getItem(STORAGE_KEY)) || { users: [], articles: [], leadMagnets: [], customerStories: [], version: 1 };
             if (!db.leadMagnets) db.leadMagnets = [];
+            if (!db.customerStories) db.customerStories = [];
             return db;
         }
-        catch { return { users: [], articles: [], leadMagnets: [], version: 1 }; }
+        catch { return { users: [], articles: [], leadMagnets: [], customerStories: [], version: 1 }; }
     }
 
     function setDB(db) {
@@ -1401,6 +1675,12 @@
         if (viewName === 'articles') refreshArticles();
         if (viewName === 'users') refreshUsers();
         if (viewName === 'leadmagnets') refreshLeadMagnets();
+        if (viewName === 'stories') refreshStories();
+        if (viewName === 'storyeditor') {
+            if (!document.getElementById('storyEditId').value) {
+                clearStoryEditor();
+            }
+        }
         if (viewName === 'editor') {
             populateLeadMagnetDropdown();
             // Only clear if not editing
@@ -1445,6 +1725,7 @@
         document.getElementById('statPublished').textContent = published.length;
         document.getElementById('statDrafts').textContent = drafts.length;
         document.getElementById('statUsers').textContent = db.users.length;
+        document.getElementById('statPendingStories').textContent = (db.customerStories || []).filter(s => s.status === 'pending').length;
 
         const tbody = document.getElementById('dashboardArticles');
         const emptyEl = document.getElementById('dashboardEmpty');
@@ -2582,6 +2863,361 @@ ${JSON.stringify(schemaOrg, null, 2)}
         try {
             return new Date(dateStr).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
         } catch { return dateStr; }
+    }
+
+    // ═══ CUSTOMER STORIES ═══
+    const SEGMENT_LABELS = {
+        industria: 'Indústria', servicos: 'Serviços', tecnologia: 'Tecnologia',
+        saude: 'Saúde', educacao: 'Educação', varejo: 'Varejo',
+        financeiro: 'Financeiro', agronegocio: 'Agronegócio', outro: 'Outro'
+    };
+
+    const STORY_STATUS_LABELS = { pending: 'Pendente', published: 'Publicada', rejected: 'Rejeitada' };
+    const STORY_STATUS_COLORS = { pending: 'warning', published: 'published', rejected: 'draft' };
+
+    function refreshStories() {
+        const db = getDB();
+        const stories = db.customerStories || [];
+        const tbody = document.getElementById('storiesTableBody');
+        const emptyEl = document.getElementById('storiesEmpty');
+
+        document.getElementById('statStoriesTotal').textContent = stories.length;
+        document.getElementById('statStoriesPending').textContent = stories.filter(s => s.status === 'pending').length;
+        document.getElementById('statStoriesPublished').textContent = stories.filter(s => s.status === 'published').length;
+
+        if (stories.length === 0) {
+            tbody.innerHTML = '';
+            emptyEl.style.display = 'block';
+            return;
+        }
+
+        emptyEl.style.display = 'none';
+        const sorted = [...stories].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+        tbody.innerHTML = sorted.map(s => {
+            const logo = s.companyLogo ? `<img src="${s.companyLogo}" style="width:32px;height:32px;border-radius:6px;object-fit:cover;margin-right:8px;vertical-align:middle;">` : `<span style="display:inline-flex;width:32px;height:32px;border-radius:6px;background:var(--gray-100);align-items:center;justify-content:center;margin-right:8px;vertical-align:middle;font-size:0.7rem;color:var(--gray-500);"><i class="fas fa-building"></i></span>`;
+            const statusClass = STORY_STATUS_COLORS[s.status] || 'draft';
+            const statusLabel = STORY_STATUS_LABELS[s.status] || s.status;
+            return `
+            <tr>
+                <td><div style="display:flex;align-items:center;">${logo}<strong>${escapeHtml(s.empresa)}</strong></div></td>
+                <td><span style="font-size:0.85rem;">${escapeHtml(s.nome)}</span><br><span style="font-size:0.75rem;color:var(--gray-400);">${escapeHtml(s.email)}</span></td>
+                <td style="max-width:200px;"><span style="font-size:0.85rem;">${escapeHtml(s.titulo || '—')}</span></td>
+                <td><span style="background:rgba(253,183,63,0.15);color:var(--primary);padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:500;">${escapeHtml(SEGMENT_LABELS[s.segmento] || s.segmento || '—')}</span></td>
+                <td><span class="badge badge-${statusClass}">${statusLabel}</span></td>
+                <td style="font-size:0.82rem;">${formatDate(s.createdAt)}</td>
+                <td>
+                    <div style="display:flex;gap:4px;">
+                        <button class="btn btn-secondary btn-icon btn-sm" onclick="viewStoryDetail('${s.id}')" title="Ver detalhes"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-secondary btn-icon btn-sm" onclick="editStoryInEditor('${s.id}')" title="Editar"><i class="fas fa-edit"></i></button>
+                        ${s.status === 'pending' ? `
+                        <button class="btn btn-primary btn-icon btn-sm" onclick="updateStoryStatus('${s.id}','published')" title="Aprovar"><i class="fas fa-check"></i></button>
+                        <button class="btn btn-danger btn-icon btn-sm" onclick="updateStoryStatus('${s.id}','rejected')" title="Rejeitar"><i class="fas fa-ban"></i></button>
+                        ` : s.status === 'published' ? `
+                        <button class="btn btn-secondary btn-icon btn-sm" onclick="updateStoryStatus('${s.id}','pending')" title="Despublicar"><i class="fas fa-undo"></i></button>
+                        ` : `
+                        <button class="btn btn-primary btn-icon btn-sm" onclick="updateStoryStatus('${s.id}','published')" title="Aprovar"><i class="fas fa-check"></i></button>
+                        `}
+                        <button class="btn btn-danger btn-icon btn-sm" onclick="deleteStory('${s.id}')" title="Excluir"><i class="fas fa-trash"></i></button>
+                    </div>
+                </td>
+            </tr>`;
+        }).join('');
+    }
+
+    function updateStoryStatus(id, newStatus) {
+        const db = getDB();
+        const idx = db.customerStories.findIndex(s => s.id === id);
+        if (idx === -1) return;
+        db.customerStories[idx].status = newStatus;
+        setDB(db);
+        refreshStories();
+        toast(newStatus === 'published' ? 'História publicada!' : newStatus === 'rejected' ? 'História rejeitada.' : 'Status atualizado.');
+    }
+
+    function deleteStory(id) {
+        if (!confirm('Excluir esta história de cliente?')) return;
+        const db = getDB();
+        db.customerStories = db.customerStories.filter(s => s.id !== id);
+        setDB(db);
+        refreshStories();
+        toast('História excluída.');
+    }
+
+    function viewStoryDetail(id) {
+        const db = getDB();
+        const s = db.customerStories.find(st => st.id === id);
+        if (!s) return;
+
+        const logo = s.companyLogo ? `<img src="${s.companyLogo}" style="width:64px;height:64px;border-radius:12px;object-fit:cover;">` : `<div style="width:64px;height:64px;border-radius:12px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--gray-400);"><i class="fas fa-building"></i></div>`;
+
+        const modules = (s.modulos || []).map(m => `<span style="background:rgba(253,183,63,0.15);color:var(--primary-dark);padding:3px 12px;border-radius:20px;font-size:0.75rem;font-weight:500;">${escapeHtml(m)}</span>`).join(' ');
+
+        const photos = (s.photos || []).map(p => `<img src="${p}" style="width:120px;height:90px;object-fit:cover;border-radius:8px;cursor:pointer;" onclick="window.open(this.src)">`).join('');
+
+        const socialLinks = [];
+        if (s.linkedin) socialLinks.push(`<a href="${escapeHtml(s.linkedin)}" target="_blank" style="color:#0077B5;font-size:0.85rem;"><i class="fab fa-linkedin"></i> LinkedIn</a>`);
+        if (s.instagram) socialLinks.push(`<a href="${escapeHtml(s.instagram)}" target="_blank" style="color:#E4405F;font-size:0.85rem;"><i class="fab fa-instagram"></i> Instagram</a>`);
+        if (s.website) socialLinks.push(`<a href="${escapeHtml(s.website)}" target="_blank" style="color:var(--info);font-size:0.85rem;"><i class="fas fa-globe"></i> Website</a>`);
+
+        let html = `
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--gray-200);">
+                ${logo}
+                <div>
+                    <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:2px;">${escapeHtml(s.empresa)}</h3>
+                    <span style="font-size:0.82rem;color:var(--gray-500);">${escapeHtml(s.nome)} — ${escapeHtml(s.cargo || '')}</span><br>
+                    <span style="font-size:0.78rem;color:var(--gray-400);">${escapeHtml(s.email)} | ${escapeHtml(s.telefone || '')}</span>
+                </div>
+                <span class="badge badge-${STORY_STATUS_COLORS[s.status]}" style="margin-left:auto;">${STORY_STATUS_LABELS[s.status]}</span>
+            </div>
+
+            ${s.titulo ? `<h4 style="font-size:1rem;font-weight:600;margin-bottom:16px;color:var(--gray-900);">${escapeHtml(s.titulo)}</h4>` : ''}
+
+            ${modules ? `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;">${modules}</div>` : ''}
+
+            <div style="margin-bottom:20px;">
+                <h5 style="font-size:0.82rem;font-weight:600;color:var(--primary-dark);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;"><i class="fas fa-exclamation-triangle" style="margin-right:6px;"></i>O Desafio</h5>
+                <p style="font-size:0.9rem;line-height:1.7;color:var(--gray-700);white-space:pre-line;">${escapeHtml(s.desafio || '—')}</p>
+            </div>
+
+            <div style="margin-bottom:20px;">
+                <h5 style="font-size:0.82rem;font-weight:600;color:var(--primary-dark);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;"><i class="fas fa-lightbulb" style="margin-right:6px;"></i>A Solução</h5>
+                <p style="font-size:0.9rem;line-height:1.7;color:var(--gray-700);white-space:pre-line;">${escapeHtml(s.solucao || '—')}</p>
+            </div>
+
+            <div style="margin-bottom:20px;">
+                <h5 style="font-size:0.82rem;font-weight:600;color:var(--primary-dark);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;"><i class="fas fa-chart-line" style="margin-right:6px;"></i>Os Resultados</h5>
+                <p style="font-size:0.9rem;line-height:1.7;color:var(--gray-700);white-space:pre-line;">${escapeHtml(s.resultados || '—')}</p>
+            </div>
+
+            ${s.depoimento ? `
+            <div style="border-left:4px solid var(--primary);padding:16px 20px;background:rgba(253,183,63,0.05);border-radius:0 12px 12px 0;margin-bottom:20px;">
+                <p style="font-style:italic;font-size:0.9rem;line-height:1.7;color:var(--gray-700);">"${escapeHtml(s.depoimento)}"</p>
+                <span style="font-size:0.78rem;color:var(--gray-500);margin-top:8px;display:block;">— ${escapeHtml(s.nome)}, ${escapeHtml(s.cargo || '')} na ${escapeHtml(s.empresa)}</span>
+            </div>` : ''}
+
+            ${photos ? `<div style="margin-bottom:20px;"><h5 style="font-size:0.82rem;font-weight:600;color:var(--gray-600);margin-bottom:8px;">Fotos</h5><div style="display:flex;gap:8px;flex-wrap:wrap;">${photos}</div></div>` : ''}
+
+            ${s.videoUrl ? `<div style="margin-bottom:20px;"><h5 style="font-size:0.82rem;font-weight:600;color:var(--gray-600);margin-bottom:8px;">Vídeo</h5><a href="${escapeHtml(s.videoUrl)}" target="_blank" style="color:var(--info);font-size:0.85rem;"><i class="fas fa-play-circle"></i> ${escapeHtml(s.videoUrl)}</a></div>` : ''}
+
+            ${socialLinks.length ? `<div style="display:flex;gap:16px;padding-top:16px;border-top:1px solid var(--gray-200);">${socialLinks.join('')}</div>` : ''}
+        `;
+
+        document.getElementById('storyDetailContent').innerHTML = html;
+
+        let footerHtml = '';
+        if (s.status === 'pending') {
+            footerHtml = `
+                <button class="btn btn-danger" onclick="updateStoryStatus('${s.id}','rejected');closeStoryDetail();">Rejeitar</button>
+                <button class="btn btn-primary" onclick="updateStoryStatus('${s.id}','published');closeStoryDetail();">Aprovar e Publicar</button>
+            `;
+        } else if (s.status === 'published') {
+            footerHtml = `
+                <button class="btn btn-secondary" onclick="updateStoryStatus('${s.id}','pending');closeStoryDetail();">Despublicar</button>
+                <a href="../blog/historia.html?id=${s.id}" target="_blank" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Ver no site</a>
+            `;
+        } else {
+            footerHtml = `
+                <button class="btn btn-primary" onclick="updateStoryStatus('${s.id}','published');closeStoryDetail();">Aprovar e Publicar</button>
+            `;
+        }
+        document.getElementById('storyDetailFooter').innerHTML = footerHtml;
+        document.getElementById('storyDetailModal').style.display = 'flex';
+    }
+
+    function closeStoryDetail() {
+        document.getElementById('storyDetailModal').style.display = 'none';
+    }
+
+    // ═══ STORY EDITOR ═══
+    let storyPhotos = []; // base64 array for current editor
+
+    function clearStoryEditor() {
+        document.getElementById('storyEditId').value = '';
+        document.getElementById('seEmpresa').value = '';
+        document.getElementById('seSegmento').value = '';
+        document.getElementById('seNome').value = '';
+        document.getElementById('seEmail').value = '';
+        document.getElementById('seCargo').value = '';
+        document.getElementById('seTelefone').value = '';
+        document.getElementById('seTitulo').value = '';
+        document.getElementById('seDesafio').value = '';
+        document.getElementById('seSolucao').value = '';
+        document.getElementById('seResultados').value = '';
+        document.getElementById('seDepoimento').value = '';
+        document.getElementById('seLinkedin').value = '';
+        document.getElementById('seInstagram').value = '';
+        document.getElementById('seWebsite').value = '';
+        document.getElementById('seVideoUrl').value = '';
+        document.getElementById('seLogoData').value = '';
+        document.getElementById('seLogoPreview').innerHTML = '';
+        document.querySelectorAll('.se-modulo').forEach(cb => cb.checked = false);
+        storyPhotos = [];
+        renderStoryPhotoPreviews();
+        document.getElementById('storyEditorTitle').textContent = 'Nova História';
+    }
+
+    function editStoryInEditor(id) {
+        const db = getDB();
+        const s = db.customerStories.find(st => st.id === id);
+        if (!s) return;
+
+        document.getElementById('storyEditId').value = s.id;
+        document.getElementById('seEmpresa').value = s.empresa || '';
+        document.getElementById('seSegmento').value = s.segmento || '';
+        document.getElementById('seNome').value = s.nome || '';
+        document.getElementById('seEmail').value = s.email || '';
+        document.getElementById('seCargo').value = s.cargo || '';
+        document.getElementById('seTelefone').value = s.telefone || '';
+        document.getElementById('seTitulo').value = s.titulo || '';
+        document.getElementById('seDesafio').value = s.desafio || '';
+        document.getElementById('seSolucao').value = s.solucao || '';
+        document.getElementById('seResultados').value = s.resultados || '';
+        document.getElementById('seDepoimento').value = s.depoimento || '';
+        document.getElementById('seLinkedin').value = s.linkedin || '';
+        document.getElementById('seInstagram').value = s.instagram || '';
+        document.getElementById('seWebsite').value = s.website || '';
+        document.getElementById('seVideoUrl').value = s.videoUrl || '';
+        document.getElementById('seLogoData').value = s.companyLogo || '';
+        document.getElementById('seLogoPreview').innerHTML = s.companyLogo ? `<img src="${s.companyLogo}" alt="Logo" style="max-width:100%;border-radius:8px;"><button class="remove-image" onclick="document.getElementById('seLogoData').value='';document.getElementById('seLogoPreview').innerHTML=''" title="Remover"><i class="fas fa-times"></i></button>` : '';
+
+        // Modules
+        const mods = s.modulos || [];
+        document.querySelectorAll('.se-modulo').forEach(cb => {
+            cb.checked = mods.includes(cb.value);
+        });
+
+        // Photos
+        storyPhotos = (s.photos || []).slice();
+        renderStoryPhotoPreviews();
+
+        document.getElementById('storyEditorTitle').textContent = 'Editar História';
+        showView('storyeditor');
+    }
+
+    function handleStoryLogoUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        if (file.size > 2 * 1024 * 1024) { toast('Imagem muito grande. Max 2MB.', 'error'); return; }
+        if (!file.type.startsWith('image/')) { toast('Selecione um arquivo de imagem.', 'error'); return; }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            document.getElementById('seLogoData').value = e.target.result;
+            document.getElementById('seLogoPreview').innerHTML = `<img src="${e.target.result}" style="max-width:100%;border-radius:8px;"><button class="remove-image" onclick="document.getElementById('seLogoData').value='';document.getElementById('seLogoPreview').innerHTML=''" title="Remover"><i class="fas fa-times"></i></button>`;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function handleStoryPhotosUpload(event) {
+        const files = Array.from(event.target.files);
+        if (storyPhotos.length + files.length > 5) {
+            toast('Máximo 5 fotos.', 'error');
+            return;
+        }
+        files.forEach(file => {
+            if (file.size > 2 * 1024 * 1024) { toast(`${file.name} muito grande. Max 2MB.`, 'error'); return; }
+            if (!file.type.startsWith('image/')) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                storyPhotos.push(e.target.result);
+                renderStoryPhotoPreviews();
+            };
+            reader.readAsDataURL(file);
+        });
+        event.target.value = '';
+    }
+
+    function renderStoryPhotoPreviews() {
+        const container = document.getElementById('sePhotosPreview');
+        if (!container) return;
+        container.innerHTML = storyPhotos.map((p, i) => `
+            <div style="position:relative;display:inline-block;">
+                <img src="${p}" style="width:80px;height:60px;object-fit:cover;border-radius:6px;">
+                <button onclick="storyPhotos.splice(${i},1);renderStoryPhotoPreviews()" style="position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:var(--error);color:#fff;border:none;cursor:pointer;font-size:0.6rem;display:flex;align-items:center;justify-content:center;"><i class="fas fa-times"></i></button>
+            </div>
+        `).join('');
+    }
+
+    // Story editor drag & drop
+    const seLogoZone = document.getElementById('seLogoDropZone');
+    if (seLogoZone) {
+        seLogoZone.addEventListener('dragover', (e) => { e.preventDefault(); seLogoZone.classList.add('dragover'); });
+        seLogoZone.addEventListener('dragleave', () => seLogoZone.classList.remove('dragover'));
+        seLogoZone.addEventListener('drop', (e) => {
+            e.preventDefault(); seLogoZone.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) handleStoryLogoUpload({ target: { files: [file] } });
+        });
+    }
+    const sePhotosZone = document.getElementById('sePhotosDropZone');
+    if (sePhotosZone) {
+        sePhotosZone.addEventListener('dragover', (e) => { e.preventDefault(); sePhotosZone.classList.add('dragover'); });
+        sePhotosZone.addEventListener('dragleave', () => sePhotosZone.classList.remove('dragover'));
+        sePhotosZone.addEventListener('drop', (e) => {
+            e.preventDefault(); sePhotosZone.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length) handleStoryPhotosUpload({ target: { files } });
+        });
+    }
+
+    function saveStoryFromEditor(status) {
+        const empresa = document.getElementById('seEmpresa').value.trim();
+        const segmento = document.getElementById('seSegmento').value;
+        const nome = document.getElementById('seNome').value.trim();
+        const titulo = document.getElementById('seTitulo').value.trim();
+        const desafio = document.getElementById('seDesafio').value.trim();
+        const solucao = document.getElementById('seSolucao').value.trim();
+        const resultados = document.getElementById('seResultados').value.trim();
+
+        if (!empresa) { toast('Informe o nome da empresa.', 'error'); return; }
+        if (!segmento) { toast('Selecione o segmento.', 'error'); return; }
+        if (!nome) { toast('Informe o nome do contato.', 'error'); return; }
+        if (!titulo) { toast('Informe o título da história.', 'error'); return; }
+        if (!desafio) { toast('Descreva o desafio.', 'error'); return; }
+        if (!solucao) { toast('Descreva a solução.', 'error'); return; }
+        if (!resultados) { toast('Descreva os resultados.', 'error'); return; }
+
+        const modulos = [];
+        document.querySelectorAll('.se-modulo:checked').forEach(cb => modulos.push(cb.value));
+
+        const storyData = {
+            empresa, segmento, nome,
+            email: document.getElementById('seEmail').value.trim(),
+            telefone: document.getElementById('seTelefone').value.trim(),
+            cargo: document.getElementById('seCargo').value.trim(),
+            titulo, desafio, solucao, resultados,
+            depoimento: document.getElementById('seDepoimento').value.trim(),
+            linkedin: document.getElementById('seLinkedin').value.trim(),
+            instagram: document.getElementById('seInstagram').value.trim(),
+            website: document.getElementById('seWebsite').value.trim(),
+            videoUrl: document.getElementById('seVideoUrl').value.trim(),
+            companyLogo: document.getElementById('seLogoData').value,
+            modulos,
+            photos: storyPhotos.slice(),
+            status
+        };
+
+        const db = getDB();
+        const editId = document.getElementById('storyEditId').value;
+
+        if (editId) {
+            const idx = db.customerStories.findIndex(s => s.id === editId);
+            if (idx !== -1) {
+                db.customerStories[idx] = { ...db.customerStories[idx], ...storyData, updatedAt: new Date().toISOString() };
+            }
+        } else {
+            db.customerStories.push({
+                id: 'cs_' + Date.now(),
+                ...storyData,
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            });
+        }
+
+        setDB(db);
+        toast(status === 'published' ? 'História publicada!' : 'Rascunho salvo!');
+        clearStoryEditor();
+        showView('stories');
     }
 
     // ═══ INIT ═══

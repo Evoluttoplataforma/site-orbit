@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carregando... - Blog Orbit Gestão</title>
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -149,28 +150,42 @@
         .article-body strong { color: #111; font-weight: 600; }
 
         /* ── Mid-Article CTA Banner ── */
-        .mid-cta-banner {
+        .article-body .mid-cta-banner {
             background: #000; border-radius: 16px;
             padding: 36px 32px; margin: 40px 0;
             position: relative; overflow: hidden;
             display: flex; align-items: center; gap: 24px;
         }
-        .mid-cta-banner--has-image {
+        .article-body .mid-cta-banner--has-image {
             background-size: cover; background-position: center;
         }
-        .mid-cta-banner--has-image::before {
+        .article-body .mid-cta-banner--has-image::before {
             content: ''; position: absolute; inset: 0;
-            background: rgba(0,0,0,0.75); border-radius: 16px;
+            background: rgba(0,0,0,0.65); border-radius: 16px;
         }
-        .mid-cta-banner__content { position: relative; z-index: 1; flex: 1; }
-        .mid-cta-banner__content h4 {
-            font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 6px;
+        .article-body .mid-cta-banner__content { position: relative; z-index: 1; flex: 1; }
+        .article-body .mid-cta-banner__content h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.15rem; font-weight: 700; color: #fff;
+            margin: 0 0 6px; line-height: 1.4;
         }
-        .mid-cta-banner__content p {
-            font-size: 0.88rem; color: rgba(255,255,255,0.6);
-            margin-bottom: 16px; line-height: 1.5;
+        .article-body .mid-cta-banner__content p {
+            font-size: 0.88rem; color: rgba(255,255,255,0.6) !important;
+            margin-bottom: 0; line-height: 1.5; white-space: normal;
         }
-        .mid-cta-banner .btn { position: relative; z-index: 1; white-space: nowrap; }
+        .article-body .mid-cta-banner .btn {
+            position: relative; z-index: 1; white-space: nowrap;
+            flex-shrink: 0;
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+            font-weight: 700;
+        }
+        .article-body .mid-cta-banner .btn:hover {
+            background: #FDB73F;
+            border-color: #FDB73F;
+            color: #000;
+        }
 
         /* ── Share + Tags ── */
         .article-bottom-bar {
@@ -433,7 +448,7 @@
             .article-cta-banner { padding: 36px 24px; margin: 16px 0 48px; }
             .related-card { flex: 0 0 280px; }
             .article-sidebar { grid-template-columns: 1fr; }
-            .mid-cta-banner { flex-direction: column; text-align: center; }
+            .article-body .mid-cta-banner { flex-direction: column; text-align: center; }
         }
         @media (max-width: 480px) {
             .article-cover { height: 260px; }
@@ -453,14 +468,53 @@
                 <li>
                     <a href="../index.html#plataforma">Soluções <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown">
-                        <a href="../pages/processos.html"><i class="fas fa-sitemap"></i> Processos</a>
-                        <a href="../pages/indicadores.html"><i class="fas fa-chart-line"></i> Indicadores</a>
-                        <a href="../pages/tarefas.html"><i class="fas fa-tasks"></i> Tarefas</a>
-                        <a href="../pages/competencias.html"><i class="fas fa-users"></i> Competências</a>
-                        <a href="../pages/auditorias.html"><i class="fas fa-clipboard-check"></i> Auditorias</a>
+                        <div class="dropdown__info">
+                            <span class="dropdown__info-badge"><i class="fas fa-cube"></i> Plataforma</span>
+                            <h4>Orbit Gestão</h4>
+                            <p>5 módulos integrados + IA para transformar sua estratégia em execução real.</p>
+                            <div class="dropdown__info-img">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                        </div>
+                        <div class="dropdown__links">
+                            <a href="../pages/processos.html">
+                                <div class="dd-icon"><i class="fas fa-sitemap"></i></div>
+                                <div class="dd-text"><span>Processos</span><small>Mapeamento e automação</small></div>
+                            </a>
+                            <a href="../pages/indicadores.html">
+                                <div class="dd-icon"><i class="fas fa-chart-line"></i></div>
+                                <div class="dd-text"><span>Indicadores</span><small>KPIs e dashboards</small></div>
+                            </a>
+                            <a href="../pages/tarefas.html">
+                                <div class="dd-icon"><i class="fas fa-tasks"></i></div>
+                                <div class="dd-text"><span>Tarefas</span><small>Kanban estratégico</small></div>
+                            </a>
+                            <a href="../pages/competencias.html">
+                                <div class="dd-icon"><i class="fas fa-users"></i></div>
+                                <div class="dd-text"><span>Competências</span><small>Gestão de pessoas</small></div>
+                            </a>
+                            <a href="../pages/auditorias.html">
+                                <div class="dd-icon"><i class="fas fa-clipboard-check"></i></div>
+                                <div class="dd-text"><span>Auditorias</span><small>Conformidade e qualidade</small></div>
+                            </a>
+                        </div>
                     </div>
                 </li>
-                <li><a href="../pages/blog.html">Conhecimento</a></li>
+                <li>
+                    <a href="../pages/blog.html">Conhecimento <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown dropdown--sm">
+                        <div class="dropdown__links">
+                            <a href="../pages/blog.html">
+                                <div class="dd-icon"><i class="fas fa-newspaper"></i></div>
+                                <div class="dd-text"><span>Blog</span><small>Artigos e insights</small></div>
+                            </a>
+                            <a href="../pages/historias.html">
+                                <div class="dd-icon"><i class="fas fa-star"></i></div>
+                                <div class="dd-text"><span>Histórias de Clientes</span><small>Cases de sucesso</small></div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
                 <li><a href="../pages/parcerias.html">Seja Parceiro</a></li>
                 <li><a href="../index.html#contato-form">Fale Conosco</a></li>
             </ul>
@@ -486,6 +540,7 @@
         <a href="../pages/auditorias.html"><i class="fas fa-clipboard-check"></i> Auditorias</a>
         <div class="mobile-menu__label">Conteúdo</div>
         <a href="../pages/blog.html"><i class="fas fa-newspaper"></i> Blog</a>
+        <a href="../pages/historias.html"><i class="fas fa-star"></i> Histórias de Clientes</a>
         <a href="../pages/parcerias.html"><i class="fas fa-handshake"></i> Seja Parceiro</a>
         <div class="mobile-menu__divider"></div>
         <a href="../index.html#contato-form" class="btn btn-primary">Agendar Demo</a>
@@ -700,13 +755,14 @@
         // ── Mid CTA Banner ──
         const hasMidCta = article.ctaBannerEnabled === '1' && article.ctaBannerTitle;
         const midCtaHTML = hasMidCta ? (() => {
-            const hasImg = article.ctaBannerImage ? ` mid-cta-banner--has-image" style="background-image:url('${article.ctaBannerImage}')` : '"';
-            return `<div class="mid-cta-banner${hasImg}>
+            const imgClass = article.ctaBannerImage ? ' mid-cta-banner--has-image' : '';
+            const imgStyle = article.ctaBannerImage ? ` style="background-image:url('${article.ctaBannerImage}')"` : '';
+            return `<div class="mid-cta-banner${imgClass}"${imgStyle}>
                 <div class="mid-cta-banner__content">
                     <h4>${escapeHtml(article.ctaBannerTitle)}</h4>
                     ${article.ctaBannerDesc ? `<p>${escapeHtml(article.ctaBannerDesc)}</p>` : ''}
                 </div>
-                <a href="${article.ctaBannerCtaUrl || '../index.html#contato-form'}" class="btn btn-primary">
+                <a href="${escapeHtml(article.ctaBannerCtaUrl || '../index.html#contato-form')}" class="btn btn-primary">
                     ${escapeHtml(article.ctaBannerCtaText || 'Agendar demonstração')}
                 </a>
             </div>`;

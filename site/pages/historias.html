@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórias de Clientes - Orbit Gestão | Cases de Sucesso</title>
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <meta name="description" content="Descubra como empresas reais alcançaram resultados extraordinários com a Orbit Gestão. Histórias de sucesso em gestão estratégica.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles-v2.css?v=2">
+    <style>
+        /* ── Hero ── */
+        .stories-hero {
+            background: var(--black);
+            padding: 130px 24px 64px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .stories-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(253,183,63,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .stories-hero__bg {
+            position: absolute; inset: 0; pointer-events: none;
+        }
+        .stories-hero__glow {
+            position: absolute; border-radius: 50%;
+            background: var(--primary); filter: blur(150px);
+        }
+        .stories-hero__glow--1 {
+            width: 400px; height: 400px; top: -180px; right: -80px; opacity: 0.09;
+        }
+        .stories-hero__glow--2 {
+            width: 300px; height: 300px; bottom: -120px; left: -60px; opacity: 0.05;
+        }
+        .stories-hero .container {
+            position: relative; z-index: 1; max-width: 660px; margin: 0 auto;
+        }
+        .stories-hero__badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(253,183,63,0.1); border: 1px solid rgba(253,183,63,0.2);
+            padding: 8px 20px; border-radius: 50px; font-size: 0.8rem;
+            color: var(--primary); font-weight: 600; margin-bottom: 24px;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .stories-hero h1 {
+            font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 800; color: #fff;
+            margin-bottom: 16px; line-height: 1.2;
+        }
+        .stories-hero h1 span {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .stories-hero p {
+            color: rgba(255,255,255,0.5); font-size: 1.05rem; max-width: 500px;
+            margin: 0 auto; line-height: 1.7;
+        }
+
+        /* ── Stories Section ── */
+        .stories-section {
+            background: #F5F0EB;
+            padding: 64px 24px 80px;
+        }
+        .stories-section__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ── Filter Pills ── */
+        .stories-filters {
+            display: flex; gap: 8px; flex-wrap: wrap;
+            justify-content: center; margin-bottom: 48px;
+        }
+        .filter-btn {
+            padding: 8px 22px; border: 1.5px solid #d5cfc8; background: transparent;
+            color: #5a5550; border-radius: 50px; cursor: pointer;
+            font-family: 'Poppins', sans-serif; font-weight: 500; font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover {
+            border-color: #1a1a1a; color: #1a1a1a;
+        }
+        .filter-btn.active {
+            background: #1a1a1a; color: #fff; border-color: #1a1a1a;
+        }
+
+        /* ── Stories Grid ── */
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        /* ── Story Card (Zendesk style) ── */
+        .story-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            transition: box-shadow 0.25s ease;
+        }
+        .story-card:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .story-card__segment {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+        }
+        .story-card__logo {
+            width: 120px;
+            height: 48px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .story-card__logo img {
+            max-width: 120px;
+            max-height: 48px;
+            object-fit: contain;
+        }
+        .story-card__logo-placeholder {
+            width: 48px; height: 48px;
+            background: #f3f0ec;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            color: #c4bfb8;
+            font-size: 1.2rem;
+        }
+        .story-card__company {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+        .story-card__author {
+            font-size: 0.82rem;
+            color: #7a756f;
+            margin-bottom: 20px;
+        }
+        .story-card__title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #3d3832;
+            line-height: 1.5;
+            margin-bottom: 24px;
+            flex: 1;
+        }
+        .story-card__link {
+            color: #1a1a1a;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+        }
+        .story-card__link:hover {
+            color: var(--primary-dark);
+        }
+
+        /* ── Empty State ── */
+        .stories-empty {
+            text-align: center;
+            padding: 80px 20px;
+            color: #9a9590;
+        }
+        .stories-empty i {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            display: block;
+            color: #d5cfc8;
+        }
+        .stories-empty h3 {
+            font-size: 1.15rem;
+            color: #3d3832;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .stories-empty p {
+            font-size: 0.92rem;
+            margin-bottom: 24px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* ── CTA Section ── */
+        .stories-cta {
+            background: #000;
+            padding: 80px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .stories-cta::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(253,183,63,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .stories-cta .container {
+            max-width: 640px; margin: 0 auto; position: relative; z-index: 1;
+        }
+        .stories-cta__badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(253,183,63,0.1); border: 1px solid rgba(253,183,63,0.2);
+            padding: 6px 16px; border-radius: 50px; font-size: 0.75rem;
+            color: var(--primary); font-weight: 600; margin-bottom: 20px;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .stories-cta h3 {
+            font-size: 1.6rem; font-weight: 700; color: #fff; margin-bottom: 12px;
+        }
+        .stories-cta p {
+            color: rgba(255,255,255,0.55); margin-bottom: 32px; font-size: 1rem; line-height: 1.7;
+        }
+        .stories-cta__buttons {
+            display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+        }
+
+        /* ── Dropdown fix ── */
+        .nav-menu > li:hover > .dropdown {
+            opacity: 1; visibility: visible; transform: translateY(0);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 1024px) {
+            .nav-menu, .nav-actions { display: none; }
+            .menu-toggle { display: flex; }
+            .stories-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .stories-hero { padding: 120px 20px 48px; }
+            .stories-hero h1 { font-size: 1.7rem; }
+            .stories-hero p { font-size: 0.95rem; }
+            .stories-grid { grid-template-columns: 1fr; }
+            .stories-filters { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+            .filter-btn { white-space: nowrap; flex-shrink: 0; }
+            .stories-section { padding: 48px 20px 60px; }
+            .stories-cta h3 { font-size: 1.3rem; }
+            .stories-cta__buttons { flex-direction: column; align-items: center; }
+        }
+        @media (max-width: 480px) {
+            .stories-hero { padding: 110px 16px 40px; }
+            .stories-hero h1 { font-size: 1.45rem; }
+            .story-card { padding: 24px; }
+            .stories-cta { padding: 60px 16px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html"><img src="../images/logo-orbit.svg" alt="Orbit Gestão" height="40"></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Início</a></li>
+                <li>
+                    <a href="../index.html#plataforma">Soluções <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown">
+                        <div class="dropdown__info">
+                            <span class="dropdown__info-badge"><i class="fas fa-cube"></i> Plataforma</span>
+                            <h4>Orbit Gestão</h4>
+                            <p>5 módulos integrados + IA para transformar sua estratégia em execução real.</p>
+                            <div class="dropdown__info-img"><i class="fas fa-rocket"></i></div>
+                        </div>
+                        <div class="dropdown__links">
+                            <a href="processos.html"><div class="dd-icon"><i class="fas fa-sitemap"></i></div><div class="dd-text"><span>Processos</span><small>Mapeamento e automação</small></div></a>
+                            <a href="indicadores.html"><div class="dd-icon"><i class="fas fa-chart-line"></i></div><div class="dd-text"><span>Indicadores</span><small>KPIs e dashboards</small></div></a>
+                            <a href="tarefas.html"><div class="dd-icon"><i class="fas fa-tasks"></i></div><div class="dd-text"><span>Tarefas</span><small>Kanban estratégico</small></div></a>
+                            <a href="competencias.html"><div class="dd-icon"><i class="fas fa-users"></i></div><div class="dd-text"><span>Competências</span><small>Gestão de pessoas</small></div></a>
+                            <a href="auditorias.html"><div class="dd-icon"><i class="fas fa-clipboard-check"></i></div><div class="dd-text"><span>Auditorias</span><small>Conformidade e qualidade</small></div></a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="blog.html">Conhecimento <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown dropdown--sm">
+                        <div class="dropdown__links">
+                            <a href="blog.html">
+                                <div class="dd-icon"><i class="fas fa-newspaper"></i></div>
+                                <div class="dd-text"><span>Blog</span><small>Artigos e insights</small></div>
+                            </a>
+                            <a href="historias.html">
+                                <div class="dd-icon"><i class="fas fa-star"></i></div>
+                                <div class="dd-text"><span>Histórias de Clientes</span><small>Cases de sucesso</small></div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="parcerias.html">Seja Parceiro</a></li>
+                <li><a href="../index.html#contato-form">Fale Conosco</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#" class="btn btn-outline">Entrar</a>
+                <a href="../index.html#contato-form" class="btn btn-primary">Agendar Demo</a>
+            </div>
+            <button class="menu-toggle" onclick="document.querySelector('.mobile-menu').classList.toggle('active');document.body.style.overflow=document.querySelector('.mobile-menu').classList.contains('active')?'hidden':''">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+    <div class="mobile-menu">
+        <button class="mobile-menu-close" onclick="this.parentElement.classList.remove('active');document.body.style.overflow=''">&times;</button>
+        <div class="mobile-menu__label">Menu</div>
+        <a href="../index.html"><i class="fas fa-home"></i> Início</a>
+        <a href="../index.html#contato-form"><i class="fas fa-envelope"></i> Fale Conosco</a>
+        <div class="mobile-menu__label">Soluções</div>
+        <a href="processos.html"><i class="fas fa-sitemap"></i> Processos</a>
+        <a href="indicadores.html"><i class="fas fa-chart-line"></i> Indicadores</a>
+        <a href="tarefas.html"><i class="fas fa-tasks"></i> Tarefas</a>
+        <a href="competencias.html"><i class="fas fa-users"></i> Competências</a>
+        <a href="auditorias.html"><i class="fas fa-clipboard-check"></i> Auditorias</a>
+        <div class="mobile-menu__label">Conteúdo</div>
+        <a href="blog.html"><i class="fas fa-newspaper"></i> Blog</a>
+        <a href="historias.html"><i class="fas fa-star"></i> Histórias de Clientes</a>
+        <a href="parcerias.html"><i class="fas fa-handshake"></i> Seja Parceiro</a>
+        <div class="mobile-menu__divider"></div>
+        <a href="../index.html#contato-form" class="btn btn-primary">Agendar Demo</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="stories-hero">
+        <div class="stories-hero__bg">
+            <div class="stories-hero__glow stories-hero__glow--1"></div>
+            <div class="stories-hero__glow stories-hero__glow--2"></div>
+        </div>
+        <div class="container">
+            <div class="stories-hero__badge"><i class="fas fa-trophy"></i> Histórias de Sucesso</div>
+            <h1>Descubra como nossos clientes <span>transformaram</span> sua gestão</h1>
+            <p>Conheça as histórias reais de empresas que alcançaram resultados extraordinários com a Orbit Gestão.</p>
+        </div>
+    </section>
+
+    <!-- Stories Section -->
+    <section class="stories-section">
+        <div class="stories-section__inner">
+            <!-- Filters -->
+            <div class="stories-filters" id="filterBar">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+            </div>
+
+            <!-- Grid -->
+            <div class="stories-grid" id="storiesGrid"></div>
+
+            <!-- Empty State -->
+            <div class="stories-empty" id="storiesEmpty" style="display:none;">
+                <i class="fas fa-book-open"></i>
+                <h3>Em breve teremos histórias incríveis</h3>
+                <p>Estamos reunindo os melhores cases de sucesso dos nossos clientes. Volte em breve!</p>
+                <a href="historias-enviar.html" class="btn btn-primary">Conte sua história</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="stories-cta">
+        <div class="container">
+            <div class="stories-cta__badge"><i class="fas fa-star"></i> Conte sua história</div>
+            <h3>Sua empresa também pode ser destaque</h3>
+            <p>Compartilhe sua experiência com a Orbit Gestão e inspire outras empresas a transformarem sua gestão.</p>
+            <div class="stories-cta__buttons">
+                <a href="historias-enviar.html" class="btn btn-primary btn-lg">Conte sua história</a>
+                <a href="../index.html#contato-form" class="btn btn-outline btn-lg">Agendar demonstração</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo"><img src="../images/logo-orbit.svg" alt="Orbit Gestão" height="36"></div>
+                    <p>Transformando estratégia em execução para empresas de médio porte.</p>
+                    <div class="social-links">
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h5>Contato</h5>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone"></i> +55 (11) 9999-9999</li>
+                        <li><i class="fas fa-envelope"></i> contato@orbit.com</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Soluções</h5>
+                    <ul>
+                        <li><a href="processos.html">Processos</a></li>
+                        <li><a href="indicadores.html">Indicadores</a></li>
+                        <li><a href="tarefas.html">Tarefas</a></li>
+                        <li><a href="competencias.html">Competências</a></li>
+                        <li><a href="auditorias.html">Auditorias</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Conhecimento</h5>
+                    <ul>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="historias.html">Histórias de Clientes</a></li>
+                        <li><a href="#">Documentação</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Orbit Gestão. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" style="display:none;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+    // ── Helpers ──
+    function getDB() {
+        try { return JSON.parse(localStorage.getItem('orbit_cms')) || { customerStories: [] }; }
+        catch { return { customerStories: [] }; }
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+
+    // ── Segment mapping ──
+    const SEGMENTS = {
+        industria: 'Indústria',
+        servicos: 'Serviços',
+        tecnologia: 'Tecnologia',
+        saude: 'Saúde',
+        educacao: 'Educação',
+        varejo: 'Varejo',
+        financeiro: 'Financeiro',
+        agronegocio: 'Agronegócio',
+        outro: 'Outro'
+    };
+
+    // ── Get published stories ──
+    function getPublishedStories() {
+        const db = getDB();
+        const stories = db.customerStories || [];
+        return stories
+            .filter(s => s.status === 'published')
+            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    }
+
+    // ── Build dynamic filters ──
+    function buildFilters(stories) {
+        const filterBar = document.getElementById('filterBar');
+        const segments = [...new Set(stories.map(s => s.segmento || s.segment).filter(Boolean))];
+
+        segments.forEach(seg => {
+            const btn = document.createElement('button');
+            btn.className = 'filter-btn';
+            btn.dataset.filter = seg;
+            btn.textContent = SEGMENTS[seg] || seg;
+            filterBar.appendChild(btn);
+        });
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                renderStories();
+            });
+        });
+    }
+
+    // ── Render stories ──
+    let currentFilter = 'all';
+
+    function renderStories() {
+        const stories = getPublishedStories();
+        const filtered = currentFilter === 'all'
+            ? stories
+            : stories.filter(s => (s.segmento || s.segment) === currentFilter);
+
+        const grid = document.getElementById('storiesGrid');
+        const empty = document.getElementById('storiesEmpty');
+
+        if (filtered.length === 0) {
+            grid.innerHTML = '';
+            empty.style.display = 'block';
+            return;
+        }
+
+        empty.style.display = 'none';
+
+        grid.innerHTML = filtered.map(story => {
+            const segmentLabel = SEGMENTS[story.segmento] || SEGMENTS[story.segment] || story.segmento || story.segment || '';
+
+            // Company logo
+            let logoHtml;
+            if (story.companyLogo || story.logoData) {
+                const logoSrc = story.companyLogo || story.logoData;
+                logoHtml = `<img src="${logoSrc}" alt="${escapeHtml(story.empresa)}" loading="lazy">`;
+            } else {
+                logoHtml = `<div class="story-card__logo-placeholder"><i class="fas fa-building"></i></div>`;
+            }
+
+            const autorCargo = [story.nome, story.cargo].filter(Boolean).join(' — ');
+
+            return `
+            <a href="../blog/historia.html?id=${encodeURIComponent(story.id)}" class="story-card">
+                ${segmentLabel ? `<span class="story-card__segment">${escapeHtml(segmentLabel)}</span>` : ''}
+                <div class="story-card__logo">${logoHtml}</div>
+                <div class="story-card__company">${escapeHtml(story.empresa)}</div>
+                ${autorCargo ? `<div class="story-card__author">${escapeHtml(autorCargo)}</div>` : ''}
+                <div class="story-card__title">${escapeHtml(story.titulo)}</div>
+                <span class="story-card__link">Leia a história &rarr;</span>
+            </a>`;
+        }).join('');
+    }
+
+    // ── Init ──
+    (function init() {
+        const stories = getPublishedStories();
+        buildFilters(stories);
+        renderStories();
+    })();
+
+    // ── Header scroll ──
+    const header = document.querySelector('.header');
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+        if (backToTop) backToTop.style.display = window.scrollY > 400 ? 'flex' : 'none';
+    });
+    if (backToTop) {
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    }
+
+    // ── Dropdown hover ──
+    document.querySelectorAll('.nav-menu > li').forEach(item => {
+        const dropdown = item.querySelector('.dropdown');
+        if (!dropdown) return;
+        item.addEventListener('mouseenter', () => dropdown.classList.add('show'));
+        item.addEventListener('mouseleave', () => dropdown.classList.remove('show'));
+    });
+    </script>
+</body>
+</html>

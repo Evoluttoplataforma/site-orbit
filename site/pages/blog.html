@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - Orbit Gestão | Conhecimento para Gestão Empresarial</title>
+    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
     <meta name="description" content="Artigos, guias e insights sobre gestão estratégica, processos, indicadores e liderança para empresas de médio porte.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,7 +70,24 @@
             background: #fff; border-radius: 16px; padding: 16px 20px;
             box-shadow: 0 4px 24px rgba(0,0,0,0.08);
             display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+            position: relative;
         }
+        .filter-scroll-btn {
+            display: none;
+            position: absolute;
+            top: 50%; transform: translateY(-50%);
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: #000; color: #FDB73F;
+            border: none; cursor: pointer;
+            font-size: 0.75rem;
+            align-items: center; justify-content: center;
+            z-index: 3;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: opacity 0.2s;
+        }
+        .filter-scroll-btn--left { left: -8px; }
+        .filter-scroll-btn--right { right: -8px; }
         .filter-btn {
             padding: 8px 20px; border: 2px solid #e5e7eb; background: #fff;
             color: #374151; border-radius: 50px; cursor: pointer;
@@ -167,8 +185,18 @@
             .blog-hero h1 { font-size: 1.8rem; }
             .blog-hero p { font-size: 1rem; }
             .blog-grid { grid-template-columns: 1fr; }
-            .blog-filters__inner { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; }
+            .blog-filters__inner {
+                justify-content: flex-start;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                scrollbar-width: none;
+                -webkit-overflow-scrolling: touch;
+                scroll-behavior: smooth;
+                padding: 16px 36px;
+            }
+            .blog-filters__inner::-webkit-scrollbar { display: none; }
             .filter-btn { white-space: nowrap; flex-shrink: 0; }
+            .filter-scroll-btn { display: flex; }
         }
     </style>
 </head>
@@ -184,14 +212,53 @@
                 <li>
                     <a href="../index.html#plataforma">Soluções <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown">
-                        <a href="processos.html"><i class="fas fa-sitemap"></i> Processos</a>
-                        <a href="indicadores.html"><i class="fas fa-chart-line"></i> Indicadores</a>
-                        <a href="tarefas.html"><i class="fas fa-tasks"></i> Tarefas</a>
-                        <a href="competencias.html"><i class="fas fa-users"></i> Competências</a>
-                        <a href="auditorias.html"><i class="fas fa-clipboard-check"></i> Auditorias</a>
+                        <div class="dropdown__info">
+                            <span class="dropdown__info-badge"><i class="fas fa-cube"></i> Plataforma</span>
+                            <h4>Orbit Gestão</h4>
+                            <p>5 módulos integrados + IA para transformar sua estratégia em execução real.</p>
+                            <div class="dropdown__info-img">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                        </div>
+                        <div class="dropdown__links">
+                            <a href="processos.html">
+                                <div class="dd-icon"><i class="fas fa-sitemap"></i></div>
+                                <div class="dd-text"><span>Processos</span><small>Mapeamento e automação</small></div>
+                            </a>
+                            <a href="indicadores.html">
+                                <div class="dd-icon"><i class="fas fa-chart-line"></i></div>
+                                <div class="dd-text"><span>Indicadores</span><small>KPIs e dashboards</small></div>
+                            </a>
+                            <a href="tarefas.html">
+                                <div class="dd-icon"><i class="fas fa-tasks"></i></div>
+                                <div class="dd-text"><span>Tarefas</span><small>Kanban estratégico</small></div>
+                            </a>
+                            <a href="competencias.html">
+                                <div class="dd-icon"><i class="fas fa-users"></i></div>
+                                <div class="dd-text"><span>Competências</span><small>Gestão de pessoas</small></div>
+                            </a>
+                            <a href="auditorias.html">
+                                <div class="dd-icon"><i class="fas fa-clipboard-check"></i></div>
+                                <div class="dd-text"><span>Auditorias</span><small>Conformidade e qualidade</small></div>
+                            </a>
+                        </div>
                     </div>
                 </li>
-                <li><a href="blog.html">Conhecimento</a></li>
+                <li>
+                    <a href="blog.html">Conhecimento <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown dropdown--sm">
+                        <div class="dropdown__links">
+                            <a href="blog.html">
+                                <div class="dd-icon"><i class="fas fa-newspaper"></i></div>
+                                <div class="dd-text"><span>Blog</span><small>Artigos e insights</small></div>
+                            </a>
+                            <a href="historias.html">
+                                <div class="dd-icon"><i class="fas fa-star"></i></div>
+                                <div class="dd-text"><span>Histórias de Clientes</span><small>Cases de sucesso</small></div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
                 <li><a href="parcerias.html">Seja Parceiro</a></li>
                 <li><a href="../index.html#contato-form">Fale Conosco</a></li>
             </ul>
@@ -218,6 +285,7 @@
         <a href="auditorias.html"><i class="fas fa-clipboard-check"></i> Auditorias</a>
         <div class="mobile-menu__label">Conteúdo</div>
         <a href="blog.html"><i class="fas fa-newspaper"></i> Blog</a>
+        <a href="historias.html"><i class="fas fa-star"></i> Histórias de Clientes</a>
         <a href="parcerias.html"><i class="fas fa-handshake"></i> Seja Parceiro</a>
         <div class="mobile-menu__divider"></div>
         <a href="../index.html#contato-form" class="btn btn-primary">Agendar Demo</a>
@@ -246,6 +314,8 @@
             <button class="filter-btn" data-filter="lideranca">Liderança</button>
             <button class="filter-btn" data-filter="ia">IA & Inovação</button>
         </div>
+        <button class="filter-scroll-btn filter-scroll-btn--left" id="filterScrollLeft" aria-label="Scroll esquerda"><i class="fas fa-chevron-left"></i></button>
+        <button class="filter-scroll-btn filter-scroll-btn--right" id="filterScrollRight" aria-label="Scroll direita"><i class="fas fa-chevron-right"></i></button>
     </div>
 
     <!-- Blog Grid -->
@@ -303,6 +373,7 @@
                     <h5>Conhecimento</h5>
                     <ul>
                         <li><a href="blog.html">Blog</a></li>
+                        <li><a href="historias.html">Histórias de Clientes</a></li>
                         <li><a href="#">Documentação</a></li>
                         <li><a href="#">FAQ</a></li>
                         <li><a href="#">Webinars</a></li>
@@ -431,13 +502,30 @@
     document.querySelectorAll('.nav-menu > li').forEach(item => {
         const dropdown = item.querySelector('.dropdown');
         if (!dropdown) return;
-        item.addEventListener('mouseenter', () => {
-            dropdown.style.opacity = '1'; dropdown.style.visibility = 'visible'; dropdown.style.transform = 'translateY(0)';
-        });
-        item.addEventListener('mouseleave', () => {
-            dropdown.style.opacity = '0'; dropdown.style.visibility = 'hidden'; dropdown.style.transform = 'translateY(10px)';
-        });
+        item.addEventListener('mouseenter', () => dropdown.classList.add('show'));
+        item.addEventListener('mouseleave', () => dropdown.classList.remove('show'));
     });
+
+    // Filter scroll arrows
+    (() => {
+        const bar = document.getElementById('filterBar');
+        const btnL = document.getElementById('filterScrollLeft');
+        const btnR = document.getElementById('filterScrollRight');
+        if (!bar || !btnL || !btnR) return;
+        const step = 200;
+        function updateArrows() {
+            btnL.style.opacity = bar.scrollLeft > 4 ? '1' : '0';
+            btnL.style.pointerEvents = bar.scrollLeft > 4 ? 'auto' : 'none';
+            const maxScroll = bar.scrollWidth - bar.clientWidth;
+            btnR.style.opacity = bar.scrollLeft < maxScroll - 4 ? '1' : '0';
+            btnR.style.pointerEvents = bar.scrollLeft < maxScroll - 4 ? 'auto' : 'none';
+        }
+        btnL.addEventListener('click', () => { bar.scrollBy({ left: -step, behavior: 'smooth' }); });
+        btnR.addEventListener('click', () => { bar.scrollBy({ left: step, behavior: 'smooth' }); });
+        bar.addEventListener('scroll', updateArrows);
+        window.addEventListener('resize', updateArrows);
+        setTimeout(updateArrows, 100);
+    })();
     </script>
 </body>
 </html>

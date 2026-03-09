@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orbit Gestão - Onde a Estratégia vira Execução</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
     <meta name="description" content="Plataforma de gestão estratégica com IA. Transforme sua estratégia em execução com Orbit Gestão.">
 
     <!-- Google Fonts -->
@@ -33,14 +34,53 @@
                 <li>
                     <a href="#plataforma">Soluções <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown">
-                        <a href="pages/processos.html"><i class="fas fa-sitemap"></i> Processos</a>
-                        <a href="pages/indicadores.html"><i class="fas fa-chart-line"></i> Indicadores</a>
-                        <a href="pages/tarefas.html"><i class="fas fa-tasks"></i> Tarefas</a>
-                        <a href="pages/competencias.html"><i class="fas fa-users"></i> Competências</a>
-                        <a href="pages/auditorias.html"><i class="fas fa-check-circle"></i> Auditorias</a>
+                        <div class="dropdown__info">
+                            <span class="dropdown__info-badge"><i class="fas fa-cube"></i> Plataforma</span>
+                            <h4>Orbit Gestão</h4>
+                            <p>5 módulos integrados + IA para transformar sua estratégia em execução real.</p>
+                            <div class="dropdown__info-img">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                        </div>
+                        <div class="dropdown__links">
+                            <a href="pages/processos.html">
+                                <div class="dd-icon"><i class="fas fa-sitemap"></i></div>
+                                <div class="dd-text"><span>Processos</span><small>Mapeamento e automação</small></div>
+                            </a>
+                            <a href="pages/indicadores.html">
+                                <div class="dd-icon"><i class="fas fa-chart-line"></i></div>
+                                <div class="dd-text"><span>Indicadores</span><small>KPIs e dashboards</small></div>
+                            </a>
+                            <a href="pages/tarefas.html">
+                                <div class="dd-icon"><i class="fas fa-tasks"></i></div>
+                                <div class="dd-text"><span>Tarefas</span><small>Kanban estratégico</small></div>
+                            </a>
+                            <a href="pages/competencias.html">
+                                <div class="dd-icon"><i class="fas fa-users"></i></div>
+                                <div class="dd-text"><span>Competências</span><small>Gestão de pessoas</small></div>
+                            </a>
+                            <a href="pages/auditorias.html">
+                                <div class="dd-icon"><i class="fas fa-clipboard-check"></i></div>
+                                <div class="dd-text"><span>Auditorias</span><small>Conformidade e qualidade</small></div>
+                            </a>
+                        </div>
                     </div>
                 </li>
-                <li><a href="pages/blog.html">Conhecimento</a></li>
+                <li>
+                    <a href="pages/blog.html">Conhecimento <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown dropdown--sm">
+                        <div class="dropdown__links">
+                            <a href="pages/blog.html">
+                                <div class="dd-icon"><i class="fas fa-newspaper"></i></div>
+                                <div class="dd-text"><span>Blog</span><small>Artigos e insights</small></div>
+                            </a>
+                            <a href="pages/historias.html">
+                                <div class="dd-icon"><i class="fas fa-star"></i></div>
+                                <div class="dd-text"><span>Histórias de Clientes</span><small>Cases de sucesso</small></div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
                 <li><a href="pages/parcerias.html">Seja Parceiro</a></li>
                 <li><a href="#contato-form">Fale Conosco</a></li>
             </ul>
@@ -72,6 +112,7 @@
         <a href="pages/auditorias.html"><i class="fas fa-clipboard-check"></i> Auditorias</a>
         <div class="mobile-menu__label">Conteúdo</div>
         <a href="pages/blog.html"><i class="fas fa-newspaper"></i> Blog</a>
+        <a href="pages/historias.html"><i class="fas fa-star"></i> Histórias de Clientes</a>
         <a href="pages/parcerias.html"><i class="fas fa-handshake"></i> Seja Parceiro</a>
         <div class="mobile-menu__divider"></div>
         <a href="#contato-form" class="btn btn-primary">Agendar Demo</a>
@@ -502,50 +543,6 @@
         </div>
     </section>
 
-    <!-- ═══ KNOWLEDGE / BLOG ═══ -->
-    <section class="knowledge-section" id="conhecimento">
-        <div class="container">
-            <div class="section-header">
-                <h2>Amplie seus <span class="highlight">conhecimentos</span></h2>
-            </div>
-
-            <div class="knowledge-grid">
-                <div class="knowledge-card">
-                    <div class="knowledge-card__image">
-                        <img src="https://placehold.co/400x250/FDB73F/000000?text=Artigo" alt="Artigo" loading="lazy">
-                        <span class="knowledge-card__type"><i class="fas fa-file-alt"></i> Artigo</span>
-                    </div>
-                    <div class="knowledge-card__body">
-                        <h4>5 Passos para Transformar sua Estratégia em Ação</h4>
-                        <a href="#" class="knowledge-card__link">Ler artigo <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <div class="knowledge-card">
-                    <div class="knowledge-card__image">
-                        <img src="https://placehold.co/400x250/000000/FDB73F?text=Ebook" alt="Ebook" loading="lazy">
-                        <span class="knowledge-card__type"><i class="fas fa-book"></i> Ebook</span>
-                    </div>
-                    <div class="knowledge-card__body">
-                        <h4>Guia Completo de Gestão Estratégica para PMEs</h4>
-                        <a href="#" class="knowledge-card__link">Baixar ebook <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <div class="knowledge-card">
-                    <div class="knowledge-card__image">
-                        <img src="https://placehold.co/400x250/FDB73F/000000?text=Webinar" alt="Webinar" loading="lazy">
-                        <span class="knowledge-card__type"><i class="fas fa-play-circle"></i> Webinar</span>
-                    </div>
-                    <div class="knowledge-card__body">
-                        <h4>Como a IA Melhora a Tomada de Decisão Empresarial</h4>
-                        <a href="#" class="knowledge-card__link">Assistir <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- ═══ CONTACT FORM ═══ -->
     <section class="cta-form-section" id="contato-form">
         <div class="container">
@@ -623,6 +620,24 @@
         </div>
     </section>
 
+    <!-- ═══ KNOWLEDGE / BLOG ═══ -->
+    <section class="knowledge-section" id="conhecimento">
+        <div class="container">
+            <div class="section-header">
+                <h2>Amplie seus <span class="highlight">conhecimentos</span></h2>
+                <p style="color:var(--gray-400);margin-top:8px;font-size:0.95rem;">Artigos recentes do nosso blog sobre gestão estratégica</p>
+            </div>
+
+            <div class="knowledge-grid" id="knowledgeGrid">
+                <!-- Populated by JS from localStorage -->
+            </div>
+
+            <div style="text-align:center;margin-top:36px;">
+                <a href="pages/blog.html" class="btn btn-dark btn-lg">Ver todos os artigos <i class="fas fa-arrow-right" style="margin-left:8px;font-size:0.8rem;"></i></a>
+            </div>
+        </div>
+    </section>
+
     <!-- ═══ FOOTER ═══ -->
     <footer class="footer">
         <div class="container">
@@ -662,6 +677,7 @@
                     <h5>Conhecimento</h5>
                     <ul>
                         <li><a href="pages/blog.html">Blog</a></li>
+                        <li><a href="pages/historias.html">Histórias de Clientes</a></li>
                         <li><a href="#">Documentação</a></li>
                         <li><a href="#">FAQ</a></li>
                         <li><a href="#">Webinars</a></li>
@@ -684,6 +700,60 @@
     <button class="back-to-top" id="backToTop">
         <i class="fas fa-arrow-up"></i>
     </button>
+
+    <!-- Recent Articles -->
+    <script>
+    (function() {
+        var grid = document.getElementById('knowledgeGrid');
+        if (!grid) return;
+
+        var db;
+        try { db = JSON.parse(localStorage.getItem('orbit_cms')) || {}; } catch(e) { db = {}; }
+        var articles = (db.articles || [])
+            .filter(function(a) { return a.status === 'published'; })
+            .sort(function(a, b) { return new Date(b.createdAt) - new Date(a.createdAt); })
+            .slice(0, 3);
+
+        if (articles.length === 0) {
+            grid.innerHTML =
+                '<div class="knowledge-card"><div class="knowledge-card__image"><img src="https://placehold.co/400x250/FDB73F/000000?text=Blog" alt="Blog" loading="lazy"><span class="knowledge-card__type"><i class="fas fa-file-alt"></i> Artigo</span></div><div class="knowledge-card__body"><h4>5 Passos para Transformar sua Estratégia em Ação</h4><a href="pages/blog.html" class="knowledge-card__link">Ler artigo <i class="fas fa-arrow-right"></i></a></div></div>' +
+                '<div class="knowledge-card"><div class="knowledge-card__image"><img src="https://placehold.co/400x250/000000/FDB73F?text=Blog" alt="Blog" loading="lazy"><span class="knowledge-card__type"><i class="fas fa-book"></i> Ebook</span></div><div class="knowledge-card__body"><h4>Guia Completo de Gestão Estratégica para PMEs</h4><a href="pages/blog.html" class="knowledge-card__link">Ler artigo <i class="fas fa-arrow-right"></i></a></div></div>' +
+                '<div class="knowledge-card"><div class="knowledge-card__image"><img src="https://placehold.co/400x250/FDB73F/000000?text=Blog" alt="Blog" loading="lazy"><span class="knowledge-card__type"><i class="fas fa-play-circle"></i> Webinar</span></div><div class="knowledge-card__body"><h4>Como a IA Melhora a Tomada de Decisão Empresarial</h4><a href="pages/blog.html" class="knowledge-card__link">Ler artigo <i class="fas fa-arrow-right"></i></a></div></div>';
+            return;
+        }
+
+        function esc(s) {
+            if (!s) return '';
+            var d = document.createElement('div');
+            d.textContent = s;
+            return d.innerHTML;
+        }
+
+        var CATS = {
+            estrategica: 'Gestão Estratégica',
+            processos: 'Processos',
+            indicadores: 'Indicadores',
+            lideranca: 'Liderança',
+            ia: 'IA & Inovação'
+        };
+
+        grid.innerHTML = articles.map(function(a) {
+            var imgSrc = a.imageData || a.imageUrl || 'https://placehold.co/400x250/111/FDB73F?text=Blog';
+            var slug = a.slug || a.id;
+            var cat = CATS[a.category] || a.category || 'Artigo';
+            return '<a href="blog/leitor.html?slug=' + encodeURIComponent(slug) + '" class="knowledge-card" style="text-decoration:none;color:inherit;">' +
+                '<div class="knowledge-card__image">' +
+                    '<img src="' + imgSrc + '" alt="' + esc(a.title) + '" loading="lazy">' +
+                    '<span class="knowledge-card__type"><i class="fas fa-file-alt"></i> ' + esc(cat) + '</span>' +
+                '</div>' +
+                '<div class="knowledge-card__body">' +
+                    '<h4>' + esc(a.title) + '</h4>' +
+                    '<span class="knowledge-card__link">Ler artigo <i class="fas fa-arrow-right"></i></span>' +
+                '</div>' +
+            '</a>';
+        }).join('');
+    })();
+    </script>
 
     <!-- Scripts -->
     <script src="js/main-v2.js?v=1"></script>

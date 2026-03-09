@@ -60,20 +60,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ═══ NAVBAR DROPDOWN ═══
+  // ═══ NAVBAR DROPDOWN (MEGA MENU) ═══
   document.querySelectorAll('.nav-menu > li').forEach(item => {
     const dropdown = item.querySelector('.dropdown');
     if (!dropdown) return;
-    item.addEventListener('mouseenter', () => {
-      dropdown.style.opacity = '1';
-      dropdown.style.visibility = 'visible';
-      dropdown.style.transform = 'translateY(0)';
-    });
-    item.addEventListener('mouseleave', () => {
-      dropdown.style.opacity = '0';
-      dropdown.style.visibility = 'hidden';
-      dropdown.style.transform = 'translateY(10px)';
-    });
+    item.addEventListener('mouseenter', () => dropdown.classList.add('show'));
+    item.addEventListener('mouseleave', () => dropdown.classList.remove('show'));
   });
 
   // ═══ CAROUSEL (ZOOM-STYLE) ═══
