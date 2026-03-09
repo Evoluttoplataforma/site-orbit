@@ -1,8 +1,8 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/blog/:slug", "destination": "/blog/leitor.html" },
-    { "source": "/historias/:id", "destination": "/historias/historia.html" }
+    { "source": "/blog/:slug", "destination": "/blog/leitor" },
+    { "source": "/historias/:id", "destination": "/historias/historia" }
   ],
   "redirects": [
     { "source": "/pages/blog.html", "destination": "/blog", "statusCode": 301 },
