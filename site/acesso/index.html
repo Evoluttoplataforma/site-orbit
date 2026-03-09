@@ -254,7 +254,7 @@
     // Redirect if already logged in
     const session = getSession();
     if (session) {
-        window.location.href = 'painel.html';
+        window.location.href = '/acesso/painel';
     }
 
     // Toggle password visibility
@@ -311,7 +311,7 @@
                 loginAt: new Date().toISOString()
             }));
 
-            window.location.href = 'painel.html';
+            window.location.href = '/acesso/painel';
         } catch (err) {
             errorEl.textContent = 'Erro ao fazer login. Tente novamente.';
             errorEl.style.display = 'block';
