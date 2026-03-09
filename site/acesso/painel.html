@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel - Orbit Gestão</title>
-    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
     <meta name="robots" content="noindex, nofollow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -730,7 +730,7 @@
     <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-logo">
-            <img src="../images/logo-orbit.svg" alt="Orbit">
+            <img src="/images/logo-orbit.svg" alt="Orbit">
             <span>CMS</span>
         </div>
         <nav class="sidebar-nav">
@@ -756,13 +756,13 @@
             <a href="#" data-view="users" onclick="showView('users')" id="navUsers" style="display:none;">
                 <i class="fas fa-users-gear"></i> Usuarios
             </a>
-            <a href="../pages/blog.html" target="_blank">
+            <a href="/blog" target="_blank">
                 <i class="fas fa-external-link-alt"></i> Ver Blog
             </a>
-            <a href="../pages/historias.html" target="_blank">
+            <a href="/historias" target="_blank">
                 <i class="fas fa-external-link-alt"></i> Ver Histórias
             </a>
-            <a href="../index.html" target="_blank">
+            <a href="/" target="_blank">
                 <i class="fas fa-globe"></i> Ver Site
             </a>
         </nav>
@@ -1095,7 +1095,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="ctaBannerCtaUrl">Link do botao</label>
-                                    <input type="text" id="ctaBannerCtaUrl" placeholder="URL destino" value="../index.html#contato-form">
+                                    <input type="text" id="ctaBannerCtaUrl" placeholder="URL destino" value="/#contato-form">
                                 </div>
                                 <div class="form-group">
                                     <label>Imagem do banner</label>
@@ -1231,7 +1231,7 @@
                     <button class="btn btn-primary btn-sm" onclick="clearStoryEditor();showView('storyeditor')">
                         <i class="fas fa-plus"></i> Nova História
                     </button>
-                    <a href="../pages/historias.html" target="_blank" class="btn btn-outline btn-sm">
+                    <a href="/historias" target="_blank" class="btn btn-outline btn-sm">
                         <i class="fas fa-external-link-alt"></i> Ver no site
                     </a>
                 </div>
@@ -1845,7 +1845,7 @@
         document.getElementById('ctaBannerTitle').value = '';
         document.getElementById('ctaBannerDesc').value = '';
         document.getElementById('ctaBannerCtaText').value = 'Agendar demonstração';
-        document.getElementById('ctaBannerCtaUrl').value = '../index.html#contato-form';
+        document.getElementById('ctaBannerCtaUrl').value = '/#contato-form';
         document.getElementById('ctaBannerImageData').value = '';
         document.getElementById('ctaBannerImagePreview').innerHTML = '';
         updateSeoScore();
@@ -1883,7 +1883,7 @@
         document.getElementById('ctaBannerTitle').value = article.ctaBannerTitle || '';
         document.getElementById('ctaBannerDesc').value = article.ctaBannerDesc || '';
         document.getElementById('ctaBannerCtaText').value = article.ctaBannerCtaText || 'Agendar demonstração';
-        document.getElementById('ctaBannerCtaUrl').value = article.ctaBannerCtaUrl || '../index.html#contato-form';
+        document.getElementById('ctaBannerCtaUrl').value = article.ctaBannerCtaUrl || '/#contato-form';
         document.getElementById('ctaBannerImageData').value = article.ctaBannerImage || '';
         if (article.ctaBannerImage) {
             document.getElementById('ctaBannerImagePreview').innerHTML = `<img src="${article.ctaBannerImage}" style="max-width:100%;border-radius:8px;">`;
@@ -2469,7 +2469,7 @@
             "@type": "BreadcrumbList",
             "itemListElement": [
                 { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://orbitgestao.com.br/" },
-                { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://orbitgestao.com.br/pages/blog.html" },
+                { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://orbitgestao.com.br/blog" },
                 { "@type": "ListItem", "position": 3, "name": escapeHtml(title), "item": escapeHtml(seoCanonical) }
             ]
         };
@@ -2490,7 +2490,7 @@
             "url": "https://orbitgestao.com.br",
             "potentialAction": {
                 "@type": "SearchAction",
-                "target": "https://orbitgestao.com.br/pages/blog.html?q={search_term_string}",
+                "target": "https://orbitgestao.com.br/blog?q={search_term_string}",
                 "query-input": "required name=search_term_string"
             }
         };
@@ -2553,7 +2553,7 @@ ${JSON.stringify(schemaOrg, null, 2)}
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/styles-v2.css?v=2">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=2">
     <style>
         .article-hero{background:#000;padding:140px 24px 80px;text-align:center;position:relative;overflow:hidden}
         .article-hero__bg{position:absolute;inset:0;pointer-events:none}
@@ -2589,25 +2589,25 @@ ${JSON.stringify(schemaOrg, null, 2)}
 <body>
     <header class="header">
         <div class="container">
-            <div class="logo"><a href="../index.html"><img src="../images/logo-orbit.svg" alt="Orbit Gestao" height="40"></a></div>
+            <div class="logo"><a href="/"><img src="/images/logo-orbit.svg" alt="Orbit Gestao" height="40"></a></div>
             <ul class="nav-menu">
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="../index.html#plataforma">Solucoes <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/#plataforma">Solucoes <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown">
-                        <a href="../pages/processos.html"><i class="fas fa-sitemap"></i> Processos</a>
-                        <a href="../pages/indicadores.html"><i class="fas fa-chart-line"></i> Indicadores</a>
-                        <a href="../pages/tarefas.html"><i class="fas fa-tasks"></i> Tarefas</a>
-                        <a href="../pages/competencias.html"><i class="fas fa-users"></i> Competencias</a>
-                        <a href="../pages/auditorias.html"><i class="fas fa-clipboard-check"></i> Auditorias</a>
+                        <a href="/processos"><i class="fas fa-sitemap"></i> Processos</a>
+                        <a href="/indicadores"><i class="fas fa-chart-line"></i> Indicadores</a>
+                        <a href="/tarefas"><i class="fas fa-tasks"></i> Tarefas</a>
+                        <a href="/competencias"><i class="fas fa-users"></i> Competencias</a>
+                        <a href="/auditorias"><i class="fas fa-clipboard-check"></i> Auditorias</a>
                     </div>
                 </li>
-                <li><a href="../pages/blog.html">Conhecimento</a></li>
-                <li><a href="../pages/parcerias.html">Seja Parceiro</a></li>
-                <li><a href="../index.html#contato-form">Fale Conosco</a></li>
+                <li><a href="/blog">Conhecimento</a></li>
+                <li><a href="/parcerias">Seja Parceiro</a></li>
+                <li><a href="/#contato-form">Fale Conosco</a></li>
             </ul>
             <div class="nav-actions">
                 <a href="#" class="btn btn-outline">Entrar</a>
-                <a href="../index.html#contato-form" class="btn btn-primary">Agendar Demo</a>
+                <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>
             </div>
             <button class="menu-toggle" onclick="document.querySelector('.mobile-menu').classList.toggle('active');document.body.style.overflow=document.querySelector('.mobile-menu').classList.contains('active')?'hidden':''">
                 <span></span><span></span><span></span>
@@ -2616,15 +2616,15 @@ ${JSON.stringify(schemaOrg, null, 2)}
     </header>
     <div class="mobile-menu">
         <button class="mobile-menu-close" onclick="this.parentElement.classList.remove('active');document.body.style.overflow=''">&times;</button>
-        <a href="../index.html">Home</a>
-        <a href="../pages/processos.html">Processos</a>
-        <a href="../pages/indicadores.html">Indicadores</a>
-        <a href="../pages/tarefas.html">Tarefas</a>
-        <a href="../pages/competencias.html">Competencias</a>
-        <a href="../pages/auditorias.html">Auditorias</a>
-        <a href="../pages/blog.html">Conhecimento</a>
-        <a href="../pages/parcerias.html">Seja Parceiro</a>
-        <a href="../index.html#contato-form">Fale Conosco</a>
+        <a href="/">Home</a>
+        <a href="/processos">Processos</a>
+        <a href="/indicadores">Indicadores</a>
+        <a href="/tarefas">Tarefas</a>
+        <a href="/competencias">Competencias</a>
+        <a href="/auditorias">Auditorias</a>
+        <a href="/blog">Conhecimento</a>
+        <a href="/parcerias">Seja Parceiro</a>
+        <a href="/#contato-form">Fale Conosco</a>
     </div>
     <section class="article-hero">
         <div class="article-hero__bg"><div class="article-hero__glow"></div></div>
@@ -2642,8 +2642,8 @@ ${JSON.stringify(schemaOrg, null, 2)}
         <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(title)}" loading="eager" width="900" height="450">
     </div>
     <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="../index.html">Home</a><span>/</span>
-        <a href="../pages/blog.html">Blog</a><span>/</span>
+        <a href="/">Home</a><span>/</span>
+        <a href="/blog">Blog</a><span>/</span>
         ${escapeHtml(title)}
     </nav>
     <article class="article-body" itemscope itemtype="https://schema.org/BlogPosting">
@@ -2657,14 +2657,14 @@ ${JSON.stringify(schemaOrg, null, 2)}
         <div class="container">
             <h3>Pronto para transformar sua gestao?</h3>
             <p>Veja como a Orbit pode ajudar sua empresa a executar a estrategia com mais eficiencia.</p>
-            <a href="../index.html#contato-form" class="btn btn-primary btn-lg">Agendar demonstracao</a>
+            <a href="/#contato-form" class="btn btn-primary btn-lg">Agendar demonstracao</a>
         </div>
     </section>
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <div class="footer-logo"><img src="../images/logo-orbit.svg" alt="Orbit Gestao" height="36"></div>
+                    <div class="footer-logo"><img src="/images/logo-orbit.svg" alt="Orbit Gestao" height="36"></div>
                     <p>Transformando estrategia em execucao para empresas de medio porte.</p>
                     <div class="social-links">
                         <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
@@ -2673,8 +2673,8 @@ ${JSON.stringify(schemaOrg, null, 2)}
                     </div>
                 </div>
                 <div class="footer-column"><h5>Contato</h5><ul class="footer-contact"><li><i class="fas fa-phone"></i> +55 (11) 9999-9999</li><li><i class="fas fa-envelope"></i> contato@orbit.com</li></ul></div>
-                <div class="footer-column"><h5>Solucoes</h5><ul><li><a href="../pages/processos.html">Processos</a></li><li><a href="../pages/indicadores.html">Indicadores</a></li><li><a href="../pages/tarefas.html">Tarefas</a></li><li><a href="../pages/competencias.html">Competencias</a></li><li><a href="../pages/auditorias.html">Auditorias</a></li></ul></div>
-                <div class="footer-column"><h5>Conhecimento</h5><ul><li><a href="../pages/blog.html">Blog</a></li><li><a href="#">Documentacao</a></li><li><a href="#">FAQ</a></li></ul></div>
+                <div class="footer-column"><h5>Solucoes</h5><ul><li><a href="/processos">Processos</a></li><li><a href="/indicadores">Indicadores</a></li><li><a href="/tarefas">Tarefas</a></li><li><a href="/competencias">Competencias</a></li><li><a href="/auditorias">Auditorias</a></li></ul></div>
+                <div class="footer-column"><h5>Conhecimento</h5><ul><li><a href="/blog">Blog</a></li><li><a href="#">Documentacao</a></li><li><a href="#">FAQ</a></li></ul></div>
             </div>
             <div class="footer-bottom"><p>&copy; 2024 Orbit Gestao. Todos os direitos reservados.</p></div>
         </div>
@@ -3014,7 +3014,7 @@ ${JSON.stringify(schemaOrg, null, 2)}
         } else if (s.status === 'published') {
             footerHtml = `
                 <button class="btn btn-secondary" onclick="updateStoryStatus('${s.id}','pending');closeStoryDetail();">Despublicar</button>
-                <a href="../blog/historia.html?id=${s.id}" target="_blank" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Ver no site</a>
+                <a href="/historias/${s.id}" target="_blank" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Ver no site</a>
             `;
         } else {
             footerHtml = `

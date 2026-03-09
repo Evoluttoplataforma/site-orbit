@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão de Competências - Orbit Gestão</title>
-    <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
-    <meta name="description" content="Desenvolva e retenha talentos com a Gestão de Competências da Orbit Gestão.">
+    <title>Gestão de Indicadores - Orbit Gestão</title>
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <meta name="description" content="Acompanhe seus KPIs em tempo real e tome decisões baseadas em dados com a Orbit Gestão.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../css/styles-v2.css?v=2">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=2">
 </head>
 <body>
     <header class="header">
         <div class="container">
             <div class="logo">
-                <a href="../index.html">
-                    <img src="../images/logo-orbit.svg" alt="Orbit Gestão" height="40">
+                <a href="/">
+                    <img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="40">
                 </a>
             </div>
             <ul class="nav-menu">
-                <li><a href="../index.html">Início</a></li>
+                <li><a href="/">Início</a></li>
                 <li>
-                    <a href="../index.html#plataforma">Soluções <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <a href="/#plataforma">Soluções <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown">
                         <div class="dropdown__info">
                             <span class="dropdown__info-badge"><i class="fas fa-cube"></i> Plataforma</span>
@@ -34,23 +34,23 @@
                             </div>
                         </div>
                         <div class="dropdown__links">
-                            <a href="processos.html">
+                            <a href="/processos">
                                 <div class="dd-icon"><i class="fas fa-sitemap"></i></div>
                                 <div class="dd-text"><span>Processos</span><small>Mapeamento e automação</small></div>
                             </a>
-                            <a href="indicadores.html">
+                            <a href="/indicadores">
                                 <div class="dd-icon"><i class="fas fa-chart-line"></i></div>
                                 <div class="dd-text"><span>Indicadores</span><small>KPIs e dashboards</small></div>
                             </a>
-                            <a href="tarefas.html">
+                            <a href="/tarefas">
                                 <div class="dd-icon"><i class="fas fa-tasks"></i></div>
                                 <div class="dd-text"><span>Tarefas</span><small>Kanban estratégico</small></div>
                             </a>
-                            <a href="competencias.html">
+                            <a href="/competencias">
                                 <div class="dd-icon"><i class="fas fa-users"></i></div>
                                 <div class="dd-text"><span>Competências</span><small>Gestão de pessoas</small></div>
                             </a>
-                            <a href="auditorias.html">
+                            <a href="/auditorias">
                                 <div class="dd-icon"><i class="fas fa-clipboard-check"></i></div>
                                 <div class="dd-text"><span>Auditorias</span><small>Conformidade e qualidade</small></div>
                             </a>
@@ -58,26 +58,26 @@
                     </div>
                 </li>
                 <li>
-                    <a href="blog.html">Conhecimento <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <a href="/blog">Conhecimento <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown dropdown--sm">
                         <div class="dropdown__links">
-                            <a href="blog.html">
+                            <a href="/blog">
                                 <div class="dd-icon"><i class="fas fa-newspaper"></i></div>
                                 <div class="dd-text"><span>Blog</span><small>Artigos e insights</small></div>
                             </a>
-                            <a href="historias.html">
+                            <a href="/historias">
                                 <div class="dd-icon"><i class="fas fa-star"></i></div>
                                 <div class="dd-text"><span>Histórias de Clientes</span><small>Cases de sucesso</small></div>
                             </a>
                         </div>
                     </div>
                 </li>
-                <li><a href="parcerias.html">Seja Parceiro</a></li>
-                <li><a href="../index.html#contato-form">Fale Conosco</a></li>
+                <li><a href="/parcerias">Seja Parceiro</a></li>
+                <li><a href="/#contato-form">Fale Conosco</a></li>
             </ul>
             <div class="nav-actions">
                 <a href="#" class="btn btn-outline">Entrar</a>
-                <a href="../index.html#contato-form" class="btn btn-primary">Agendar Demo</a>
+                <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>
             </div>
             <button class="menu-toggle" onclick="document.querySelector('.mobile-menu').classList.toggle('active');document.body.style.overflow=document.querySelector('.mobile-menu').classList.contains('active')?'hidden':''">
                 <span></span><span></span><span></span>
@@ -87,20 +87,20 @@
     <div class="mobile-menu">
         <button class="mobile-menu-close" onclick="this.parentElement.classList.remove('active');document.body.style.overflow=''">&times;</button>
         <div class="mobile-menu__label">Menu</div>
-        <a href="../index.html"><i class="fas fa-home"></i> Início</a>
-        <a href="../index.html#contato-form"><i class="fas fa-envelope"></i> Fale Conosco</a>
+        <a href="/"><i class="fas fa-home"></i> Início</a>
+        <a href="/#contato-form"><i class="fas fa-envelope"></i> Fale Conosco</a>
         <div class="mobile-menu__label">Soluções</div>
-        <a href="processos.html"><i class="fas fa-sitemap"></i> Processos</a>
-        <a href="indicadores.html"><i class="fas fa-chart-line"></i> Indicadores</a>
-        <a href="tarefas.html"><i class="fas fa-tasks"></i> Tarefas</a>
-        <a href="competencias.html"><i class="fas fa-users"></i> Competências</a>
-        <a href="auditorias.html"><i class="fas fa-clipboard-check"></i> Auditorias</a>
+        <a href="/processos"><i class="fas fa-sitemap"></i> Processos</a>
+        <a href="/indicadores"><i class="fas fa-chart-line"></i> Indicadores</a>
+        <a href="/tarefas"><i class="fas fa-tasks"></i> Tarefas</a>
+        <a href="/competencias"><i class="fas fa-users"></i> Competências</a>
+        <a href="/auditorias"><i class="fas fa-clipboard-check"></i> Auditorias</a>
         <div class="mobile-menu__label">Conteúdo</div>
-        <a href="blog.html"><i class="fas fa-newspaper"></i> Blog</a>
-        <a href="historias.html"><i class="fas fa-star"></i> Histórias de Clientes</a>
-        <a href="parcerias.html"><i class="fas fa-handshake"></i> Seja Parceiro</a>
+        <a href="/blog"><i class="fas fa-newspaper"></i> Blog</a>
+        <a href="/historias"><i class="fas fa-star"></i> Histórias de Clientes</a>
+        <a href="/parcerias"><i class="fas fa-handshake"></i> Seja Parceiro</a>
         <div class="mobile-menu__divider"></div>
-        <a href="../index.html#contato-form" class="btn btn-primary">Agendar Demo</a>
+        <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>
     </div>
 
     <!-- ═══ PRODUCT HERO ═══ -->
@@ -113,16 +113,16 @@
         <div class="container">
             <div class="product-hero__grid">
                 <div>
-                    <div class="product-hero__badge"><i class="fas fa-users"></i> Competências</div>
-                    <h1 class="product-hero__title">Gestão de <span>Competências</span></h1>
-                    <p class="product-hero__desc">Mapeie, avalie e desenvolva as competências do seu time. Feche gaps de habilidades e construa equipes de alta performance.</p>
+                    <div class="product-hero__badge"><i class="fas fa-chart-line"></i> Indicadores</div>
+                    <h1 class="product-hero__title">Gestão de <span>Indicadores</span></h1>
+                    <p class="product-hero__desc">Acompanhe todos os seus KPIs em um único dashboard. Tome decisões rápidas e assertivas baseadas em dados em tempo real.</p>
                     <div class="product-hero__ctas">
-                        <a href="../index.html#contato-form" class="btn btn-primary btn-lg">Agendar Demonstração</a>
+                        <a href="/#contato-form" class="btn btn-primary btn-lg">Agendar Demonstração</a>
                         <a href="#detalhes" class="btn btn-ghost btn-lg">Conhecer Recursos <i class="fas fa-arrow-down"></i></a>
                     </div>
                 </div>
                 <div class="product-hero__image">
-                    <img src="https://placehold.co/560x400/FDB73F/000000?text=Compet%C3%AAncias&font=poppins" alt="Gestão de Competências">
+                    <img src="https://placehold.co/560x400/FDB73F/000000?text=Indicadores+%26+KPIs&font=poppins" alt="Gestão de Indicadores">
                 </div>
             </div>
         </div>
@@ -133,23 +133,23 @@
         <div class="container">
             <div class="section-header">
                 <h2>Principais <span class="highlight">Benefícios</span></h2>
-                <p>Por que escolher a Orbit para competências</p>
+                <p>Por que escolher a Orbit para indicadores</p>
             </div>
             <div class="benefits-grid-v2">
                 <div class="benefit-card-v2">
-                    <div class="benefit-card-v2__icon"><i class="fas fa-search"></i></div>
-                    <h4>Mapeamento de Gaps</h4>
-                    <p>Identifique lacunas de competências antes que afetem resultados</p>
+                    <div class="benefit-card-v2__icon"><i class="fas fa-chart-line"></i></div>
+                    <h4>Visibilidade em Tempo Real</h4>
+                    <p>Acompanhe todos os indicadores em dashboards atualizados instantaneamente</p>
                 </div>
                 <div class="benefit-card-v2">
-                    <div class="benefit-card-v2__icon"><i class="fas fa-graduation-cap"></i></div>
-                    <h4>Desenvolvimento Contínuo</h4>
-                    <p>PDIs personalizados para cada colaborador</p>
+                    <div class="benefit-card-v2__icon"><i class="fas fa-database"></i></div>
+                    <h4>Decisões Baseadas em Dados</h4>
+                    <p>Insights acionáveis com análises profundas e comparativas</p>
                 </div>
                 <div class="benefit-card-v2">
-                    <div class="benefit-card-v2__icon"><i class="fas fa-heart"></i></div>
-                    <h4>Retenção de Talentos</h4>
-                    <p>Valorize e desenvolva seu capital humano</p>
+                    <div class="benefit-card-v2__icon"><i class="fas fa-bell"></i></div>
+                    <h4>Alertas Inteligentes</h4>
+                    <p>Notificações automáticas quando indicadores desviam das metas</p>
                 </div>
             </div>
         </div>
@@ -160,40 +160,40 @@
         <div class="container">
             <div class="section-header">
                 <h2>Recursos <span class="highlight">Poderosos</span></h2>
-                <p>Tudo que você precisa para gerenciar competências com excelência</p>
+                <p>Tudo que você precisa para gerenciar indicadores com excelência</p>
             </div>
             <div class="features-grid-v2">
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Matriz de Competências</strong><p>Mapeie skills do time visualmente</p></div>
+                    <div><strong>Dashboards Customizáveis</strong><p>Crie visualizações personalizadas por área</p></div>
                 </div>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Avaliações 360°</strong><p>Feedback multi-fonte estruturado</p></div>
+                    <div><strong>KPIs por Área</strong><p>Organize indicadores por departamento ou função</p></div>
                 </div>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>PDI Individual</strong><p>Planos de desenvolvimento personalizados</p></div>
+                    <div><strong>Metas Vinculadas</strong><p>Relacione indicadores a objetivos estratégicos</p></div>
                 </div>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Trilhas de Capacitação</strong><p>Caminhos de aprendizado estruturados</p></div>
+                    <div><strong>Drill-down</strong><p>Explore detalhes clicando nos indicadores</p></div>
                 </div>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Feedback Contínuo</strong><p>Conversas de desenvolvimento regulares</p></div>
+                    <div><strong>Exportação de Relatórios</strong><p>Gere PDFs e gráficos profissionais</p></div>
                 </div>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Certificações</strong><p>Registro de certificados e validações</p></div>
+                    <div><strong>Comparativo de Períodos</strong><p>Compare performance mês a mês</p></div>
                 </div>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Gap Analysis por Equipe</strong><p>Identifique necessidades coletivas</p></div>
+                    <div><strong>Semáforos Automáticos</strong><p>Status visual verde, amarelo e vermelho</p></div>
                 </div>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Relatórios de Evolução</strong><p>Acompanhe progresso de aprendizado</p></div>
+                    <div><strong>IA Preditiva</strong><p>Antecipe resultados com análise de tendências</p></div>
                 </div>
             </div>
         </div>
@@ -204,16 +204,16 @@
         <div class="container">
             <div class="product-detail-v2__grid">
                 <div class="product-detail-v2__image">
-                    <img src="https://placehold.co/500x360/000000/FDB73F?text=Matriz+Competencias&font=poppins" alt="Matriz de Competências Visual">
+                    <img src="https://placehold.co/500x360/000000/FDB73F?text=Dashboard+Analytics&font=poppins" alt="Dashboards Interativos em Tempo Real">
                 </div>
                 <div class="product-detail-v2__text">
-                    <h2>Matriz de Competências Visual</h2>
-                    <p>Visualize em um único painel todas as competências do time, gaps identificados e planos de ação em andamento para fechá-los.</p>
+                    <h2>Dashboards Interativos em Tempo Real</h2>
+                    <p>Visualize todos os seus KPIs em um único lugar. Customize gráficos, filtros e comparações para seus diferentes públicos.</p>
                     <ul class="product-detail-v2__list">
-                        <li><i class="fas fa-check-circle"></i> Heatmap de competências</li>
-                        <li><i class="fas fa-check-circle"></i> Comparação entre equipes</li>
-                        <li><i class="fas fa-check-circle"></i> Score individual por colaborador</li>
-                        <li><i class="fas fa-check-circle"></i> Histórico de evolução</li>
+                        <li><i class="fas fa-check-circle"></i> Múltiplos tipos de gráficos</li>
+                        <li><i class="fas fa-check-circle"></i> Atualização em tempo real</li>
+                        <li><i class="fas fa-check-circle"></i> Compartilhamento de dashboards</li>
+                        <li><i class="fas fa-check-circle"></i> Acesso mobile responsivo</li>
                     </ul>
                 </div>
             </div>
@@ -227,10 +227,10 @@
                 <div class="product-testimonial-v2__stars">
                     <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                 </div>
-                <blockquote>"Conseguimos identificar e reter talentos estratégicos que antes perdíamos. A taxa de retenção subiu 28% no primeiro ano."</blockquote>
+                <blockquote>"Os dashboards da Orbit nos permitiram identificar tendências que antes passávamos despercebidas. Melhoramos nossa tomada de decisão em 35%."</blockquote>
                 <div class="product-testimonial-v2__author">
-                    <strong>Ana Paula Rocha</strong>
-                    <span>CHRO, Indústria Beta</span>
+                    <strong>Fernando Costa</strong>
+                    <span>Gerente de Desenvolvimento, Tech Innovation</span>
                 </div>
             </div>
         </div>
@@ -239,11 +239,11 @@
     <!-- ═══ CTA ═══ -->
     <section class="product-cta-v2">
         <div class="container">
-            <h2>Pronto para desenvolver seu time?</h2>
+            <h2>Pronto para transformar dados em insights?</h2>
             <p>Comece com uma demonstração personalizada hoje mesmo</p>
             <div class="product-cta-v2__buttons">
-                <a href="../index.html#contato-form" class="btn btn-primary btn-lg">Agendar Demo Gratuita</a>
-                <a href="../index.html#contato-form" class="btn btn-outline btn-lg">Contato de Vendas</a>
+                <a href="/#contato-form" class="btn btn-primary btn-lg">Agendar Demo Gratuita</a>
+                <a href="/#contato-form" class="btn btn-outline btn-lg">Contato de Vendas</a>
             </div>
         </div>
     </section>
@@ -252,7 +252,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <div class="footer-logo"><img src="../images/logo-orbit.svg" alt="Orbit Gestão" height="36"></div>
+                    <div class="footer-logo"><img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="36"></div>
                     <p>Transformando estratégia em execução para empresas de médio porte.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-linkedin"></i></a>
@@ -272,17 +272,17 @@
                 <div class="footer-column">
                     <h5>Soluções</h5>
                     <ul>
-                        <li><a href="processos.html">Processos</a></li>
-                        <li><a href="indicadores.html">Indicadores</a></li>
-                        <li><a href="tarefas.html">Tarefas</a></li>
-                        <li><a href="competencias.html">Competências</a></li>
-                        <li><a href="auditorias.html">Auditorias</a></li>
+                        <li><a href="/processos">Processos</a></li>
+                        <li><a href="/indicadores">Indicadores</a></li>
+                        <li><a href="/tarefas">Tarefas</a></li>
+                        <li><a href="/competencias">Competências</a></li>
+                        <li><a href="/auditorias">Auditorias</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h5>Conhecimento</h5>
                     <ul>
-                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="/blog">Blog</a></li>
                         <li><a href="#">Documentação</a></li>
                         <li><a href="#">FAQ</a></li>
                         <li><a href="#">Webinars</a></li>
