@@ -746,8 +746,9 @@
             <a href="#" data-view="leadmagnets" onclick="showView('leadmagnets')">
                 <i class="fas fa-magnet"></i> Iscas Digitais
             </a>
-            <a href="#" data-view="stories" onclick="showView('stories')">
+            <a href="#" data-view="stories" onclick="showView('stories')" style="position:relative;">
                 <i class="fas fa-star"></i> Histórias de Clientes
+                <span id="pendingBadge" class="pending-badge" style="display:none;">0</span>
             </a>
             <a href="#" data-view="storyeditor" onclick="showView('storyeditor')">
                 <i class="fas fa-pen-fancy"></i> Nova História
@@ -2930,6 +2931,10 @@ ${JSON.stringify(schemaOrg, null, 2)}
         const idx = db.customerStories.findIndex(s => s.id === id);
         if (idx === -1) return;
         db.customerStories[idx].status = newStatus;
+        // Generate slug if missing
+        if (!db.customerStories[idx].slug && db.customerStories[idx].titulo) {
+            db.customerStories[idx].slug = generateSlugFromTitle(db.customerStories[idx].titulo);
+        }
         setDB(db);
         refreshStories();
         toast(newStatus === 'published' ? 'História publicada!' : newStatus === 'rejected' ? 'História rejeitada.' : 'Status atualizado.');
