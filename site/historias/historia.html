@@ -782,10 +782,11 @@
     // Primary: extract from path /historias/story-id
     // Fallback: ?id= query param
     const params = new URLSearchParams(window.location.search);
-    const pathId = window.location.pathname.split('/historias/')[1] || '';
-    const storyId = (pathId && pathId !== 'historia' && pathId !== 'historia.html') ? decodeURIComponent(pathId) : params.get('id');
+    const pathSlug = window.location.pathname.split('/historias/')[1] || '';
+    const storySlug = (pathSlug && pathSlug !== 'historia' && pathSlug !== 'historia.html') ? decodeURIComponent(pathSlug) : (params.get('slug') || params.get('id'));
     const db = getDB();
-    const story = (db.customerStories || []).find(s => s.id === storyId && s.status === 'published');
+    // Search by slug first, then fall back to ID for backwards compat
+    const story = (db.customerStories || []).find(s => (s.slug === storySlug || s.id === storySlug) && s.status === 'published');
     const container = document.getElementById('storyContent');
 
     if (!story) {
@@ -1020,7 +1021,7 @@
             html += '</div>';
             html += '<div class="related-carousel-wrap"><div class="related-carousel">';
             otherStories.forEach(function(s) {
-                html += '<a href="/historias/' + s.id + '" class="related-card">';
+                html += '<a href="/historias/' + (s.slug || s.id) + '" class="related-card">';
                 html += '<div class="related-card__segment">' + escapeHtml(SEGMENTS[s.segmento] || s.segmento || '') + '</div>';
                 html += '<div class="related-card__company">' + escapeHtml(s.empresa) + '</div>';
                 html += '<h4>' + escapeHtml(s.titulo) + '</h4>';

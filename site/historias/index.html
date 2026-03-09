@@ -533,7 +533,7 @@
             const autorCargo = [story.nome, story.cargo].filter(Boolean).join(' — ');
 
             return `
-            <a href="/historias/${encodeURIComponent(story.id)}" class="story-card">
+            <a href="/historias/${encodeURIComponent(story.slug || story.id)}" class="story-card">
                 ${segmentLabel ? `<span class="story-card__segment">${escapeHtml(segmentLabel)}</span>` : ''}
                 <div class="story-card__logo">${logoHtml}</div>
                 <div class="story-card__company">${escapeHtml(story.empresa)}</div>

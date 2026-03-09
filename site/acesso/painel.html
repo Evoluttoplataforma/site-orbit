@@ -3180,8 +3180,10 @@ ${JSON.stringify(schemaOrg, null, 2)}
         const modulos = [];
         document.querySelectorAll('.se-modulo:checked').forEach(cb => modulos.push(cb.value));
 
+        const slug = generateSlugFromTitle(titulo);
+
         const storyData = {
-            empresa, segmento, nome,
+            empresa, segmento, nome, slug,
             email: document.getElementById('seEmail').value.trim(),
             telefone: document.getElementById('seTelefone').value.trim(),
             cargo: document.getElementById('seCargo').value.trim(),
