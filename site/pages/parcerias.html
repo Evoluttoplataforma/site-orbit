@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seja Parceiro - Orbit Gestão</title>
+    <meta name="description" content="Junte-se ao programa de parcerias da Orbit Gestão. Receita recorrente, treinamento e suporte dedicado para consultores e agências.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles-v2.css?v=2">
+    <style>
+        /* ── Partner Hero ── */
+        .partner-hero {
+            background: var(--black); padding: 160px 0 100px;
+            position: relative; overflow: hidden;
+        }
+        .partner-hero::before {
+            content: ''; position: absolute;
+            width: 600px; height: 600px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(253,183,63,0.12), transparent 70%);
+            top: -200px; right: -100px; pointer-events: none;
+        }
+        .partner-hero::after {
+            content: ''; position: absolute;
+            width: 400px; height: 400px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(253,183,63,0.08), transparent 70%);
+            bottom: -100px; left: -80px; pointer-events: none;
+        }
+        .partner-hero .container {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 60px; align-items: center; position: relative; z-index: 1;
+        }
+        .partner-hero__badge {
+            display: inline-block; background: rgba(253,183,63,0.12);
+            color: var(--primary); padding: 6px 18px; border-radius: 50px;
+            font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; margin-bottom: 20px;
+        }
+        .partner-hero h1 {
+            font-size: clamp(2rem, 4vw, 3rem); font-weight: 800;
+            color: var(--white); line-height: 1.15; margin-bottom: 20px;
+        }
+        .partner-hero h1 span {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .partner-hero__desc {
+            font-size: 1.05rem; color: rgba(255,255,255,0.6);
+            line-height: 1.7; margin-bottom: 32px; max-width: 520px;
+        }
+        .partner-hero__ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+        .partner-hero__visual {
+            display: flex; align-items: center; justify-content: center;
+        }
+        .partner-hero__stats {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+        }
+        .hero-stat-card {
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px; padding: 28px 24px; text-align: center;
+            transition: var(--transition);
+        }
+        .hero-stat-card:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(253,183,63,0.2);
+            transform: translateY(-4px);
+        }
+        .hero-stat-card .stat-value {
+            font-size: 2rem; font-weight: 800; color: var(--primary);
+            display: block; margin-bottom: 4px;
+        }
+        .hero-stat-card .stat-label {
+            font-size: 0.78rem; color: rgba(255,255,255,0.5); font-weight: 500;
+        }
+
+        /* ── Benefits ── */
+        .partner-benefits { padding: 100px 0; background: var(--white); }
+        .partner-benefits .section-header { text-align: center; margin-bottom: 60px; }
+        .partner-benefits .section-header h2 {
+            font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800;
+            color: var(--gray-900); margin-bottom: 12px;
+        }
+        .partner-benefits .section-header p {
+            font-size: 1.05rem; color: var(--gray-500); max-width: 560px; margin: 0 auto;
+        }
+        .benefits-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+        }
+        .benefit-card {
+            padding: 32px 28px; border-radius: 16px; border: 1px solid var(--gray-200);
+            background: var(--white); transition: var(--transition);
+        }
+        .benefit-card:hover {
+            transform: translateY(-6px); box-shadow: var(--shadow-lg);
+            border-color: rgba(253,183,63,0.3);
+        }
+        .benefit-card__icon {
+            width: 48px; height: 48px; border-radius: 12px;
+            background: rgba(253,183,63,0.1); display: flex;
+            align-items: center; justify-content: center;
+            margin-bottom: 18px; font-size: 1.1rem; color: var(--primary);
+        }
+        .benefit-card h3 {
+            font-size: 1rem; font-weight: 700; color: var(--gray-900);
+            margin-bottom: 8px;
+        }
+        .benefit-card p {
+            font-size: 0.88rem; color: var(--gray-500); line-height: 1.6;
+        }
+
+        /* ── Steps ── */
+        .partner-steps { padding: 100px 0; background: var(--gray-50); }
+        .partner-steps .section-header { text-align: center; margin-bottom: 60px; }
+        .partner-steps .section-header h2 {
+            font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800;
+            color: var(--gray-900); margin-bottom: 12px;
+        }
+        .partner-steps .section-header p {
+            font-size: 1.05rem; color: var(--gray-500); max-width: 500px; margin: 0 auto;
+        }
+        .steps-track {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+            position: relative;
+        }
+        .steps-track::before {
+            content: ''; position: absolute; top: 40px;
+            left: 60px; right: 60px; height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            opacity: 0.3; z-index: 0;
+        }
+        .step-item { text-align: center; position: relative; z-index: 1; }
+        .step-item__number {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: var(--black); color: var(--primary);
+            font-size: 1.2rem; font-weight: 800;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px; border: 3px solid rgba(253,183,63,0.2);
+            transition: var(--transition);
+        }
+        .step-item:hover .step-item__number {
+            background: var(--primary); color: var(--black);
+            border-color: var(--primary);
+        }
+        .step-item__icon {
+            font-size: 1.3rem; color: var(--primary); margin-bottom: 10px;
+        }
+        .step-item h3 {
+            font-size: 0.95rem; font-weight: 700; color: var(--gray-900);
+            margin-bottom: 8px;
+        }
+        .step-item p {
+            font-size: 0.82rem; color: var(--gray-500); line-height: 1.6;
+            max-width: 220px; margin: 0 auto;
+        }
+
+        /* ── Tiers ── */
+        .partner-tiers { padding: 100px 0; background: var(--white); }
+        .partner-tiers .section-header { text-align: center; margin-bottom: 60px; }
+        .partner-tiers .section-header h2 {
+            font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800;
+            color: var(--gray-900); margin-bottom: 12px;
+        }
+        .partner-tiers .section-header p {
+            font-size: 1.05rem; color: var(--gray-500); max-width: 520px; margin: 0 auto;
+        }
+        .tiers-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 24px; align-items: start;
+        }
+        .tier-card {
+            border-radius: 20px; padding: 36px 28px; border: 1px solid var(--gray-200);
+            background: var(--white); transition: var(--transition); position: relative;
+        }
+        .tier-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+        .tier-card--featured {
+            border-color: var(--primary); background: var(--black);
+            box-shadow: 0 12px 48px rgba(253,183,63,0.15);
+        }
+        .tier-card--featured:hover {
+            box-shadow: 0 20px 60px rgba(253,183,63,0.25);
+        }
+        .tier-badge {
+            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            background: var(--primary); color: var(--black);
+            padding: 4px 16px; border-radius: 50px;
+            font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .tier-card__name {
+            font-size: 1.1rem; font-weight: 700; margin-bottom: 6px;
+        }
+        .tier-card--featured .tier-card__name { color: var(--white); }
+        .tier-card__desc {
+            font-size: 0.82rem; color: var(--gray-500); margin-bottom: 20px; line-height: 1.5;
+        }
+        .tier-card--featured .tier-card__desc { color: rgba(255,255,255,0.5); }
+        .tier-card__commission {
+            display: flex; align-items: baseline; gap: 6px; margin-bottom: 24px;
+            padding-bottom: 24px; border-bottom: 1px solid var(--gray-100);
+        }
+        .tier-card--featured .tier-card__commission { border-color: rgba(255,255,255,0.1); }
+        .tier-commission-value {
+            font-size: 2.2rem; font-weight: 800; color: var(--primary);
+        }
+        .tier-commission-label {
+            font-size: 0.78rem; color: var(--gray-500);
+        }
+        .tier-card--featured .tier-commission-label { color: rgba(255,255,255,0.4); }
+        .tier-features { list-style: none; margin-bottom: 28px; }
+        .tier-features li {
+            display: flex; align-items: center; gap: 10px;
+            padding: 8px 0; font-size: 0.85rem;
+        }
+        .tier-features li i.fa-check { color: var(--primary); font-size: 0.7rem; }
+        .tier-features li i.fa-times { color: var(--gray-300); font-size: 0.7rem; }
+        .tier-card--featured .tier-features li { color: rgba(255,255,255,0.7); }
+        .tier-card--featured .tier-features li i.fa-times { color: rgba(255,255,255,0.2); }
+        .tier-card .btn { width: 100%; text-align: center; justify-content: center; }
+
+        /* ── Testimonials ── */
+        .partner-testimonials { padding: 100px 0; background: var(--gray-50); }
+        .partner-testimonials .section-header { text-align: center; margin-bottom: 60px; }
+        .partner-testimonials .section-header h2 {
+            font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800;
+            color: var(--gray-900); margin-bottom: 12px;
+        }
+        .testimonials-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+        }
+        .testimonial-card {
+            background: var(--white); border-radius: 16px; padding: 32px 28px;
+            border: 1px solid var(--gray-200); transition: var(--transition);
+        }
+        .testimonial-card:hover {
+            transform: translateY(-4px); box-shadow: var(--shadow-lg);
+        }
+        .testimonial-card__stars {
+            display: flex; gap: 3px; color: var(--primary);
+            font-size: 0.75rem; margin-bottom: 16px;
+        }
+        .testimonial-card__text {
+            font-size: 0.9rem; color: var(--gray-600); line-height: 1.7;
+            margin-bottom: 20px; font-style: italic;
+        }
+        .testimonial-card__author {
+            display: flex; align-items: center; gap: 12px;
+            padding-top: 16px; border-top: 1px solid var(--gray-100);
+        }
+        .testimonial-avatar {
+            width: 44px; height: 44px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex; align-items: center; justify-content: center;
+            color: var(--black); font-weight: 700; font-size: 0.85rem; flex-shrink: 0;
+        }
+        .testimonial-name { font-size: 0.85rem; font-weight: 700; color: var(--gray-900); }
+        .testimonial-role { font-size: 0.75rem; color: var(--gray-400); }
+
+        /* ── Form Section ── */
+        .partner-form-section {
+            padding: 100px 0; background: var(--black);
+            position: relative; overflow: hidden;
+        }
+        .partner-form-section::before {
+            content: ''; position: absolute;
+            width: 500px; height: 500px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(253,183,63,0.08), transparent 70%);
+            top: -150px; left: -100px; pointer-events: none;
+        }
+        .partner-form-section .container {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 60px; align-items: start; position: relative; z-index: 1;
+        }
+        .form-info h2 {
+            font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800;
+            color: var(--white); margin-bottom: 16px;
+        }
+        .form-info h2 span {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .form-info > p {
+            font-size: 1rem; color: rgba(255,255,255,0.5);
+            line-height: 1.7; margin-bottom: 36px;
+        }
+        .form-info__checklist { list-style: none; }
+        .form-info__checklist li {
+            display: flex; align-items: flex-start; gap: 12px;
+            padding: 10px 0; font-size: 0.9rem; color: rgba(255,255,255,0.7);
+        }
+        .form-info__checklist li i {
+            color: var(--primary); margin-top: 3px; font-size: 0.8rem;
+        }
+        .form-card {
+            background: var(--white); border-radius: 20px;
+            padding: 36px 32px; box-shadow: 0 24px 80px rgba(0,0,0,0.3);
+        }
+        .form-card h3 {
+            font-size: 1.1rem; font-weight: 700; color: var(--gray-900);
+            margin-bottom: 24px; text-align: center;
+        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .form-row--full { grid-template-columns: 1fr; }
+        .form-field { margin-bottom: 16px; }
+        .form-field label {
+            display: block; font-size: 0.78rem; font-weight: 600;
+            color: var(--gray-700); margin-bottom: 5px;
+        }
+        .form-field input, .form-field select, .form-field textarea {
+            width: 100%; padding: 11px 14px;
+            border: 1px solid var(--gray-200); border-radius: 10px;
+            font-family: 'Poppins', sans-serif; font-size: 0.88rem;
+            color: var(--gray-800); outline: none; transition: border-color 0.2s;
+        }
+        .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+            border-color: var(--primary);
+        }
+        .form-field textarea { resize: vertical; min-height: 100px; }
+        .form-check {
+            display: flex; align-items: flex-start; gap: 10px;
+            margin-bottom: 20px;
+        }
+        .form-check input[type="checkbox"] {
+            width: 18px; height: 18px; margin-top: 2px;
+            accent-color: var(--primary); flex-shrink: 0;
+        }
+        .form-check label {
+            font-size: 0.78rem; color: var(--gray-500); line-height: 1.5; cursor: pointer;
+        }
+        .form-submit {
+            width: 100%; padding: 14px 24px;
+            background: var(--primary); color: var(--black); border: none;
+            border-radius: 50px; font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem; font-weight: 700; cursor: pointer;
+            transition: var(--transition); display: flex;
+            align-items: center; justify-content: center; gap: 8px;
+        }
+        .form-submit:hover { background: var(--primary-dark); transform: translateY(-2px); }
+        .form-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .form-success {
+            text-align: center; padding: 20px 0; display: none;
+        }
+        .form-success i { font-size: 2.5rem; color: var(--success); margin-bottom: 12px; }
+        .form-success h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
+        .form-success p { font-size: 0.85rem; color: var(--gray-500); }
+
+        /* ── CTA Final ── */
+        .partner-cta { padding: 80px 0; background: var(--gray-50); text-align: center; }
+        .partner-cta h2 {
+            font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800;
+            color: var(--gray-900); margin-bottom: 12px;
+        }
+        .partner-cta p {
+            font-size: 1rem; color: var(--gray-500); margin-bottom: 28px;
+            max-width: 480px; margin-left: auto; margin-right: auto;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 1024px) {
+            .partner-hero .container { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+            .partner-hero__desc { margin: 0 auto 32px; }
+            .partner-hero__ctas { justify-content: center; }
+            .partner-hero__stats { max-width: 400px; margin: 0 auto; }
+            .benefits-grid { grid-template-columns: repeat(2, 1fr); }
+            .steps-track { grid-template-columns: repeat(2, 1fr); }
+            .steps-track::before { display: none; }
+            .tiers-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+            .testimonials-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+            .partner-form-section .container { grid-template-columns: 1fr; }
+            .form-info { text-align: center; }
+            .form-info__checklist { display: inline-block; text-align: left; }
+        }
+        @media (max-width: 768px) {
+            .partner-hero { padding: 140px 0 80px; }
+            .partner-hero__stats { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .benefits-grid { grid-template-columns: 1fr; }
+            .steps-track { grid-template-columns: 1fr; gap: 24px; }
+            .step-item p { max-width: 100%; }
+            .form-row { grid-template-columns: 1fr; }
+            .partner-benefits, .partner-steps, .partner-tiers,
+            .partner-testimonials, .partner-form-section { padding: 80px 0; }
+        }
+        @media (max-width: 480px) {
+            .partner-hero__ctas { flex-direction: column; }
+            .partner-hero__ctas .btn { width: 100%; text-align: center; justify-content: center; }
+            .hero-stat-card { padding: 20px 16px; }
+            .hero-stat-card .stat-value { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../images/logo-orbit.svg" alt="Orbit Gestão" height="40">
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Início</a></li>
+                <li>
+                    <a href="../index.html#plataforma">Soluções <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown">
+                        <a href="processos.html"><i class="fas fa-sitemap"></i> Processos</a>
+                        <a href="indicadores.html"><i class="fas fa-chart-line"></i> Indicadores</a>
+                        <a href="tarefas.html"><i class="fas fa-tasks"></i> Tarefas</a>
+                        <a href="competencias.html"><i class="fas fa-users"></i> Competências</a>
+                        <a href="auditorias.html"><i class="fas fa-clipboard-check"></i> Auditorias</a>
+                    </div>
+                </li>
+                <li><a href="blog.html">Conhecimento</a></li>
+                <li><a href="parcerias.html">Seja Parceiro</a></li>
+                <li><a href="../index.html#contato-form">Fale Conosco</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#" class="btn btn-outline">Entrar</a>
+                <a href="../index.html#contato-form" class="btn btn-primary">Agendar Demo</a>
+            </div>
+            <button class="menu-toggle" onclick="document.querySelector('.mobile-menu').classList.toggle('active');document.body.style.overflow=document.querySelector('.mobile-menu').classList.contains('active')?'hidden':''">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+    <div class="mobile-menu">
+        <button class="mobile-menu-close" onclick="this.parentElement.classList.remove('active');document.body.style.overflow=''">&times;</button>
+        <div class="mobile-menu__label">Menu</div>
+        <a href="../index.html"><i class="fas fa-home"></i> Início</a>
+        <a href="../index.html#contato-form"><i class="fas fa-envelope"></i> Fale Conosco</a>
+        <div class="mobile-menu__label">Soluções</div>
+        <a href="processos.html"><i class="fas fa-sitemap"></i> Processos</a>
+        <a href="indicadores.html"><i class="fas fa-chart-line"></i> Indicadores</a>
+        <a href="tarefas.html"><i class="fas fa-tasks"></i> Tarefas</a>
+        <a href="competencias.html"><i class="fas fa-users"></i> Competências</a>
+        <a href="auditorias.html"><i class="fas fa-clipboard-check"></i> Auditorias</a>
+        <div class="mobile-menu__label">Conteúdo</div>
+        <a href="blog.html"><i class="fas fa-newspaper"></i> Blog</a>
+        <a href="parcerias.html"><i class="fas fa-handshake"></i> Seja Parceiro</a>
+        <div class="mobile-menu__divider"></div>
+        <a href="../index.html#contato-form" class="btn btn-primary">Agendar Demo</a>
+    </div>
+
+    <!-- ══ HERO ══ -->
+    <section class="partner-hero">
+        <div class="container">
+            <div>
+                <span class="partner-hero__badge"><i class="fas fa-handshake" style="margin-right:6px;"></i> Programa de Parcerias</span>
+                <h1>Mais receita para sua <span>consultoria</span></h1>
+                <p class="partner-hero__desc">
+                    Junte-se ao programa de parcerias da Orbit Gestão e ofereça soluções de gestão integrada aos seus clientes. Receita recorrente, suporte dedicado e treinamento completo.
+                </p>
+                <div class="partner-hero__ctas">
+                    <a href="#formulario" class="btn btn-primary btn-lg">
+                        <i class="fas fa-arrow-right"></i> Quero ser Parceiro
+                    </a>
+                    <a href="#niveis" class="btn btn-outline btn-lg">Ver planos</a>
+                </div>
+            </div>
+            <div class="partner-hero__visual">
+                <div class="partner-hero__stats">
+                    <div class="hero-stat-card">
+                        <span class="stat-value">300+</span>
+                        <span class="stat-label">Clientes ativos</span>
+                    </div>
+                    <div class="hero-stat-card">
+                        <span class="stat-value">25%</span>
+                        <span class="stat-label">Comissão recorrente</span>
+                    </div>
+                    <div class="hero-stat-card">
+                        <span class="stat-value">50+</span>
+                        <span class="stat-label">Parceiros ativos</span>
+                    </div>
+                    <div class="hero-stat-card">
+                        <span class="stat-value">10+</span>
+                        <span class="stat-label">Anos de mercado</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ BENEFITS ══ -->
+    <section class="partner-benefits">
+        <div class="container">
+            <div class="section-header">
+                <h2>Por que se tornar parceiro?</h2>
+                <p>Oferecemos uma oportunidade real de crescimento para consultores e agências</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-card__icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Receita Recorrente</h3>
+                    <p>Comissões mensais por cada cliente indicado. Estrutura transparente e competitiva de remuneração.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-card__icon"><i class="fas fa-rocket"></i></div>
+                    <h3>Inovação Contínua</h3>
+                    <p>Acesso prioritário a novas funcionalidades. Seja o primeiro a oferecer novidades aos seus clientes.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-card__icon"><i class="fas fa-headset"></i></div>
+                    <h3>Suporte Dedicado</h3>
+                    <p>Conta de sucesso dedicada, materiais de marketing exclusivos e prioridade no atendimento.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-card__icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>Treinamento e Certificação</h3>
+                    <p>Programa de capacitação completo. Certificação oficial de especialista Orbit para sua equipe.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-card__icon"><i class="fas fa-users"></i></div>
+                    <h3>Comunidade de Parceiros</h3>
+                    <p>Rede exclusiva de consultores e agências. Partilhe conhecimentos e boas práticas.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-card__icon"><i class="fas fa-briefcase"></i></div>
+                    <h3>Oportunidades de Negócio</h3>
+                    <p>Acesso a prospectos qualificados. Oportunidades pré-selecionadas para seu perfil.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ STEPS ══ -->
+    <section class="partner-steps">
+        <div class="container">
+            <div class="section-header">
+                <h2>Como funciona</h2>
+                <p>Quatro passos simples para começar a gerar receita</p>
+            </div>
+            <div class="steps-track">
+                <div class="step-item">
+                    <div class="step-item__number">1</div>
+                    <div class="step-item__icon"><i class="fas fa-clipboard-list"></i></div>
+                    <h3>Cadastro</h3>
+                    <p>Preencha o formulário de parceria com informações da sua empresa.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-item__number">2</div>
+                    <div class="step-item__icon"><i class="fas fa-book-open"></i></div>
+                    <h3>Treinamento</h3>
+                    <p>Participe da capacitação e aprenda tudo sobre nossas soluções.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-item__number">3</div>
+                    <div class="step-item__icon"><i class="fas fa-handshake"></i></div>
+                    <h3>Indicação</h3>
+                    <p>Indique clientes e ofereça nossas soluções como parte do seu portfólio.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-item__number">4</div>
+                    <div class="step-item__icon"><i class="fas fa-coins"></i></div>
+                    <h3>Receita</h3>
+                    <p>Ganhe comissões mensais por cada cliente ativo. Simples e consistente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ TIERS ══ -->
+    <section class="partner-tiers" id="niveis">
+        <div class="container">
+            <div class="section-header">
+                <h2>Níveis de Parceria</h2>
+                <p>Escolha o nível que melhor se adequa ao seu modelo de negócio</p>
+            </div>
+            <div class="tiers-grid">
+                <div class="tier-card">
+                    <div class="tier-card__name">Indicador</div>
+                    <p class="tier-card__desc">Ideal para consultores independentes que desejam complementar seus serviços</p>
+                    <div class="tier-card__commission">
+                        <span class="tier-commission-value">15%</span>
+                        <span class="tier-commission-label">de comissão recorrente</span>
+                    </div>
+                    <ul class="tier-features">
+                        <li><i class="fas fa-check"></i> Acesso à plataforma Orbit</li>
+                        <li><i class="fas fa-check"></i> Suporte por email</li>
+                        <li><i class="fas fa-check"></i> Materiais de marketing básicos</li>
+                        <li><i class="fas fa-check"></i> Relatórios de performance</li>
+                        <li><i class="fas fa-times"></i> Conta dedicada</li>
+                        <li><i class="fas fa-times"></i> Prioridade em funcionalidades</li>
+                    </ul>
+                    <a href="#formulario" class="btn btn-dark">Saber Mais</a>
+                </div>
+
+                <div class="tier-card tier-card--featured">
+                    <span class="tier-badge">Recomendado</span>
+                    <div class="tier-card__name">Silver</div>
+                    <p class="tier-card__desc">Para agências e consultores em crescimento</p>
+                    <div class="tier-card__commission">
+                        <span class="tier-commission-value">20%</span>
+                        <span class="tier-commission-label">de comissão recorrente</span>
+                    </div>
+                    <ul class="tier-features">
+                        <li><i class="fas fa-check"></i> Tudo do plano Indicador</li>
+                        <li><i class="fas fa-check"></i> Conta dedicada de sucesso</li>
+                        <li><i class="fas fa-check"></i> Materiais de marketing premium</li>
+                        <li><i class="fas fa-check"></i> Treinamento mensal</li>
+                        <li><i class="fas fa-check"></i> Acesso à comunidade exclusiva</li>
+                        <li><i class="fas fa-times"></i> Prioridade em desenvolvimento</li>
+                    </ul>
+                    <a href="#formulario" class="btn btn-primary">Quero ser Silver</a>
+                </div>
+
+                <div class="tier-card">
+                    <div class="tier-card__name">Gold</div>
+                    <p class="tier-card__desc">Para agências que desejam máxima integração</p>
+                    <div class="tier-card__commission">
+                        <span class="tier-commission-value">25%</span>
+                        <span class="tier-commission-label">de comissão recorrente</span>
+                    </div>
+                    <ul class="tier-features">
+                        <li><i class="fas fa-check"></i> Tudo do plano Silver</li>
+                        <li><i class="fas fa-check"></i> Prioridade em desenvolvimento</li>
+                        <li><i class="fas fa-check"></i> Integração customizada</li>
+                        <li><i class="fas fa-check"></i> White-label disponível</li>
+                        <li><i class="fas fa-check"></i> Suporte 24/7 prioritário</li>
+                        <li><i class="fas fa-check"></i> Oportunidades exclusivas</li>
+                    </ul>
+                    <a href="#formulario" class="btn btn-dark">Saber Mais</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ TESTIMONIALS ══ -->
+    <section class="partner-testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>O que nossos parceiros dizem</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-card__stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-card__text">
+                        "A parceria com Orbit revolucionou nosso negócio. Em 6 meses, triplicamos a receita recorrente. O suporte dedicado e o treinamento foram essenciais."
+                    </p>
+                    <div class="testimonial-card__author">
+                        <div class="testimonial-avatar">JC</div>
+                        <div>
+                            <div class="testimonial-name">João Costa</div>
+                            <div class="testimonial-role">Diretor - Costa Consultoria</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-card__stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-card__text">
+                        "O programa é muito bem estruturado. Nossos clientes adoram as soluções e a comissão recorrente virou parte importante do faturamento da agência."
+                    </p>
+                    <div class="testimonial-card__author">
+                        <div class="testimonial-avatar">MS</div>
+                        <div>
+                            <div class="testimonial-name">Marina Silva</div>
+                            <div class="testimonial-role">Sócia - Silva & Associados</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-card__stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-card__text">
+                        "Como parceiro Gold, temos acesso a oportunidades exclusivas que nos permitiram expandir para novos mercados. Recomendo fortemente."
+                    </p>
+                    <div class="testimonial-card__author">
+                        <div class="testimonial-avatar">RP</div>
+                        <div>
+                            <div class="testimonial-name">Roberto Paulo</div>
+                            <div class="testimonial-role">Consultor Sênior - Paulo Soluções</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ FORM ══ -->
+    <section class="partner-form-section" id="formulario">
+        <div class="container">
+            <div class="form-info">
+                <h2>Solicite sua <span>Parceria</span></h2>
+                <p>Preencha o formulário e nossa equipe entrará em contato para discutir as melhores oportunidades para o seu negócio.</p>
+                <ul class="form-info__checklist">
+                    <li><i class="fas fa-check-circle"></i> Análise personalizada do seu perfil</li>
+                    <li><i class="fas fa-check-circle"></i> Apresentação completa do programa</li>
+                    <li><i class="fas fa-check-circle"></i> Definição do nível ideal de parceria</li>
+                    <li><i class="fas fa-check-circle"></i> Onboarding e treinamento inclusos</li>
+                    <li><i class="fas fa-check-circle"></i> Sem taxa de adesão ou custo fixo</li>
+                </ul>
+            </div>
+            <div class="form-card">
+                <h3>Preencha seus dados</h3>
+                <form id="partnerForm">
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="pName">Nome completo *</label>
+                            <input type="text" id="pName" required placeholder="Seu nome">
+                        </div>
+                        <div class="form-field">
+                            <label for="pEmail">E-mail *</label>
+                            <input type="email" id="pEmail" required placeholder="seu@email.com">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="pPhone">Telefone *</label>
+                            <input type="tel" id="pPhone" required placeholder="(11) 99999-9999">
+                        </div>
+                        <div class="form-field">
+                            <label for="pCompany">Empresa *</label>
+                            <input type="text" id="pCompany" required placeholder="Sua empresa">
+                        </div>
+                    </div>
+                    <div class="form-row form-row--full">
+                        <div class="form-field">
+                            <label for="pTier">Nível de interesse</label>
+                            <select id="pTier">
+                                <option value="">Selecione um nível</option>
+                                <option value="indicador">Indicador (15%)</option>
+                                <option value="silver">Silver (20%)</option>
+                                <option value="gold">Gold (25%)</option>
+                                <option value="custom">Customizado</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row form-row--full">
+                        <div class="form-field">
+                            <label for="pMessage">Mensagem</label>
+                            <textarea id="pMessage" placeholder="Conte-nos sobre sua empresa e sua proposta..." rows="4"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="pTerms" required>
+                        <label for="pTerms">Concordo em receber comunicações sobre o programa de parcerias da Orbit Gestão</label>
+                    </div>
+                    <button type="submit" class="form-submit" id="partnerSubmitBtn">
+                        <i class="fas fa-paper-plane"></i> Enviar Solicitação
+                    </button>
+                </form>
+                <div class="form-success" id="partnerSuccess">
+                    <i class="fas fa-check-circle"></i>
+                    <h4>Solicitação enviada!</h4>
+                    <p>Entraremos em contato em breve para discutir as oportunidades de parceria.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ CTA FINAL ══ -->
+    <section class="partner-cta">
+        <div class="container">
+            <h2>Pronto para crescer?</h2>
+            <p>Junte-se a dezenas de consultores que já aumentaram sua receita com Orbit Gestão</p>
+            <a href="#formulario" class="btn btn-primary btn-lg"><i class="fas fa-arrow-right"></i> Quero ser Parceiro</a>
+        </div>
+    </section>
+
+    <!-- ══ FOOTER ══ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo"><img src="../images/logo-orbit.svg" alt="Orbit Gestão" height="36"></div>
+                    <p>Transformando estratégia em execução para empresas de médio porte.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h5>Contato</h5>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone"></i> <a href="tel:+5511999999999">+55 (11) 9999-9999</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contato@orbitgestao.com">contato@orbitgestao.com</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> São Paulo - SP</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Soluções</h5>
+                    <ul>
+                        <li><a href="processos.html">Processos</a></li>
+                        <li><a href="indicadores.html">Indicadores</a></li>
+                        <li><a href="tarefas.html">Tarefas</a></li>
+                        <li><a href="competencias.html">Competências</a></li>
+                        <li><a href="auditorias.html">Auditorias</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Conhecimento</h5>
+                    <ul>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="#">Documentação</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Webinars</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Orbit Gestão. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+    // Header scroll + back to top
+    window.addEventListener('scroll', () => {
+        document.querySelector('.header').classList.toggle('scrolled', window.scrollY > 50);
+        document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 400);
+    });
+
+    // Dropdown hover
+    document.querySelectorAll('.nav-menu li').forEach(li => {
+        const dd = li.querySelector('.dropdown');
+        if (dd) {
+            li.addEventListener('mouseenter', () => { dd.style.opacity='1'; dd.style.visibility='visible'; dd.style.transform='translateY(0)'; });
+            li.addEventListener('mouseleave', () => { dd.style.opacity='0'; dd.style.visibility='hidden'; dd.style.transform='translateY(10px)'; });
+        }
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', (e) => {
+            const target = document.querySelector(a.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                const offset = 80;
+                const y = target.getBoundingClientRect().top + window.scrollY - offset;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+        });
+    });
+
+    // Phone mask
+    const phoneInput = document.getElementById('pPhone');
+    phoneInput.addEventListener('input', function() {
+        let v = this.value.replace(/\D/g, '').slice(0, 11);
+        if (v.length > 6) v = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+        else if (v.length > 2) v = '(' + v.slice(0,2) + ') ' + v.slice(2);
+        else if (v.length > 0) v = '(' + v;
+        this.value = v;
+    });
+
+    // Form submit
+    document.getElementById('partnerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('partnerSubmitBtn');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+
+        const formData = {
+            nome: document.getElementById('pName').value.trim(),
+            email: document.getElementById('pEmail').value.trim(),
+            telefone: document.getElementById('pPhone').value.trim(),
+            empresa: document.getElementById('pCompany').value.trim(),
+            nivel: document.getElementById('pTier').value,
+            mensagem: document.getElementById('pMessage').value.trim()
+        };
+
+        // GTM dataLayer
+        if (window.dataLayer) {
+            window.dataLayer.push({
+                event: 'partner_form_submit',
+                ...formData
+            });
+        }
+
+        console.log('[Orbit] Partner form:', formData);
+
+        setTimeout(() => {
+            this.style.display = 'none';
+            document.getElementById('partnerSuccess').style.display = 'block';
+        }, 1200);
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.benefit-card, .step-item, .tier-card, .testimonial-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+    </script>
+</body>
+</html>

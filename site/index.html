@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbit Gestão - Onde a Estratégia vira Execução</title>
+    <meta name="description" content="Plataforma de gestão estratégica com IA. Transforme sua estratégia em execução com Orbit Gestão.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles-v2.css?v=1">
+</head>
+<body>
+
+    <!-- ═══ HEADER ═══ -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="#home">
+                    <img src="images/logo-orbit.svg" alt="Orbit Gestão" height="40">
+                </a>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="#home">Início</a></li>
+                <li>
+                    <a href="#plataforma">Soluções <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown">
+                        <a href="pages/processos.html"><i class="fas fa-sitemap"></i> Processos</a>
+                        <a href="pages/indicadores.html"><i class="fas fa-chart-line"></i> Indicadores</a>
+                        <a href="pages/tarefas.html"><i class="fas fa-tasks"></i> Tarefas</a>
+                        <a href="pages/competencias.html"><i class="fas fa-users"></i> Competências</a>
+                        <a href="pages/auditorias.html"><i class="fas fa-check-circle"></i> Auditorias</a>
+                    </div>
+                </li>
+                <li><a href="pages/blog.html">Conhecimento</a></li>
+                <li><a href="pages/parcerias.html">Seja Parceiro</a></li>
+                <li><a href="#contato-form">Fale Conosco</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="#" class="btn btn-outline">Entrar</a>
+                <a href="#contato-form" class="btn btn-primary">Agendar Demo</a>
+            </div>
+
+            <button class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <button class="mobile-menu-close" onclick="this.parentElement.classList.remove('active');document.body.style.overflow=''">&times;</button>
+        <div class="mobile-menu__label">Menu</div>
+        <a href="#home"><i class="fas fa-home"></i> Início</a>
+        <a href="#contato-form"><i class="fas fa-envelope"></i> Fale Conosco</a>
+        <div class="mobile-menu__label">Soluções</div>
+        <a href="pages/processos.html"><i class="fas fa-sitemap"></i> Processos</a>
+        <a href="pages/indicadores.html"><i class="fas fa-chart-line"></i> Indicadores</a>
+        <a href="pages/tarefas.html"><i class="fas fa-tasks"></i> Tarefas</a>
+        <a href="pages/competencias.html"><i class="fas fa-users"></i> Competências</a>
+        <a href="pages/auditorias.html"><i class="fas fa-clipboard-check"></i> Auditorias</a>
+        <div class="mobile-menu__label">Conteúdo</div>
+        <a href="pages/blog.html"><i class="fas fa-newspaper"></i> Blog</a>
+        <a href="pages/parcerias.html"><i class="fas fa-handshake"></i> Seja Parceiro</a>
+        <div class="mobile-menu__divider"></div>
+        <a href="#contato-form" class="btn btn-primary">Agendar Demo</a>
+    </div>
+
+    <!-- ═══ HERO SECTION — ZOOM-STYLE ═══ -->
+    <!-- ═══ HERO ═══ -->
+    <section class="hero-zoom" id="home">
+        <div class="hero-zoom__bg-image"></div>
+        <div class="hero-zoom__bg">
+            <div class="hero-zoom__glow hero-zoom__glow--1"></div>
+            <div class="hero-zoom__glow hero-zoom__glow--2"></div>
+        </div>
+
+        <div class="container">
+            <div class="hero-zoom__header">
+                <h1 class="hero-zoom__title">
+                    Uma plataforma para <span class="hero-zoom__title-highlight">toda a gestão</span> da sua empresa
+                </h1>
+                <p class="hero-zoom__subtitle">Conecte estratégia, processos, indicadores e pessoas em um só lugar. Com inteligência artificial integrada.</p>
+                <div class="hero-zoom__ctas">
+                    <a href="#contato-form" class="btn btn-primary btn-lg">Agendar demonstração</a>
+                    <a href="#solucoes" class="btn btn-ghost btn-lg">Conhecer soluções <i class="fas fa-arrow-down"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ SOLUÇÕES CAROUSEL ═══ -->
+    <section class="solutions-carousel" id="solucoes">
+        <div class="container">
+            <div class="solutions-carousel__header">
+                <h2>Conheça nossas <span class="highlight">soluções</span></h2>
+                <p>Módulos integrados que cobrem toda a gestão da sua empresa</p>
+            </div>
+
+            <!-- CAROUSEL -->
+            <div class="carousel-wrapper">
+                <button class="carousel-arrow carousel-arrow--prev" aria-label="Anterior">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <div class="carousel-viewport">
+                    <div class="carousel-track">
+                        <!-- Card 1: Processos -->
+                        <a href="pages/processos.html" class="carousel-card" data-product="processos">
+                            <div class="carousel-card__image">
+                                <img src="https://placehold.co/380x240/000000/FDB73F?text=Processos" alt="Gestão de Processos" loading="lazy">
+                            </div>
+                            <div class="carousel-card__content">
+                                <div class="carousel-card__icon"><i class="fas fa-sitemap"></i></div>
+                                <h3>Processos</h3>
+                                <p>Padronize e otimize seus processos críticos</p>
+                            </div>
+                        </a>
+
+                        <!-- Card 2: Indicadores -->
+                        <a href="pages/indicadores.html" class="carousel-card" data-product="indicadores">
+                            <div class="carousel-card__image">
+                                <img src="https://placehold.co/380x240/000000/FDB73F?text=Indicadores" alt="Gestão de Indicadores" loading="lazy">
+                            </div>
+                            <div class="carousel-card__content">
+                                <div class="carousel-card__icon"><i class="fas fa-chart-line"></i></div>
+                                <h3>Indicadores</h3>
+                                <p>KPIs em tempo real com dashboards inteligentes</p>
+                            </div>
+                        </a>
+
+                        <!-- Card 3: Tarefas -->
+                        <a href="pages/tarefas.html" class="carousel-card" data-product="tarefas">
+                            <div class="carousel-card__image">
+                                <img src="https://placehold.co/380x240/000000/FDB73F?text=Tarefas" alt="Gestão de Tarefas" loading="lazy">
+                            </div>
+                            <div class="carousel-card__content">
+                                <div class="carousel-card__icon"><i class="fas fa-tasks"></i></div>
+                                <h3>Tarefas</h3>
+                                <p>Alinhe tarefas à sua estratégia e objetivos</p>
+                            </div>
+                        </a>
+
+                        <!-- Card 4: Competências -->
+                        <a href="pages/competencias.html" class="carousel-card" data-product="competencias">
+                            <div class="carousel-card__image">
+                                <img src="https://placehold.co/380x240/000000/FDB73F?text=Competências" alt="Gestão de Competências" loading="lazy">
+                            </div>
+                            <div class="carousel-card__content">
+                                <div class="carousel-card__icon"><i class="fas fa-users"></i></div>
+                                <h3>Competências</h3>
+                                <p>Desenvolva o potencial do seu time</p>
+                            </div>
+                        </a>
+
+                        <!-- Card 5: Auditorias -->
+                        <a href="pages/auditorias.html" class="carousel-card" data-product="auditorias">
+                            <div class="carousel-card__image">
+                                <img src="https://placehold.co/380x240/000000/FDB73F?text=Auditorias" alt="Gestão de Auditorias" loading="lazy">
+                            </div>
+                            <div class="carousel-card__content">
+                                <div class="carousel-card__icon"><i class="fas fa-clipboard-check"></i></div>
+                                <h3>Auditorias</h3>
+                                <p>Conformidade e qualidade nos processos</p>
+                            </div>
+                        </a>
+
+                        <!-- Card 6: Orbit IA -->
+                        <a href="#orbit-ia" class="carousel-card carousel-card--highlight" data-product="ia">
+                            <div class="carousel-card__image">
+                                <img src="https://placehold.co/380x240/FDB73F/000000?text=Orbit+IA" alt="Orbit IA" loading="lazy">
+                            </div>
+                            <div class="carousel-card__content">
+                                <div class="carousel-card__icon"><i class="fas fa-brain"></i></div>
+                                <h3>Orbit IA</h3>
+                                <p>Inteligência artificial que entende seu negócio</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <button class="carousel-arrow carousel-arrow--next" aria-label="Próximo">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+
+            <!-- Dots -->
+            <div class="carousel-dots">
+                <button class="carousel-dot active" data-index="0"></button>
+                <button class="carousel-dot" data-index="1"></button>
+                <button class="carousel-dot" data-index="2"></button>
+                <button class="carousel-dot" data-index="3"></button>
+                <button class="carousel-dot" data-index="4"></button>
+                <button class="carousel-dot" data-index="5"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ ONE PLATFORM TABS — ZOOM STYLE ═══ -->
+    <section class="one-platform" id="plataforma">
+        <div class="container">
+            <div class="one-platform__header">
+                <h2>Uma plataforma. <span class="highlight">Tudo conectado.</span></h2>
+                <p>Descubra como cada módulo da Orbit trabalha junto para transformar a gestão da sua empresa.</p>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <div class="platform-tabs">
+                <button class="platform-tab active" data-tab="processos">
+                    <i class="fas fa-sitemap"></i> Processos
+                </button>
+                <button class="platform-tab" data-tab="indicadores">
+                    <i class="fas fa-chart-line"></i> Indicadores
+                </button>
+                <button class="platform-tab" data-tab="tarefas">
+                    <i class="fas fa-tasks"></i> Tarefas
+                </button>
+                <button class="platform-tab" data-tab="competencias">
+                    <i class="fas fa-users"></i> Competências
+                </button>
+                <button class="platform-tab" data-tab="auditorias">
+                    <i class="fas fa-clipboard-check"></i> Auditorias
+                </button>
+                <button class="platform-tab" data-tab="ia">
+                    <i class="fas fa-brain"></i> Orbit IA
+                </button>
+            </div>
+
+            <!-- Tab Panels -->
+            <div class="platform-panels">
+                <!-- Processos -->
+                <div class="platform-panel active" data-panel="processos">
+                    <div class="platform-panel__content">
+                        <div class="platform-panel__text">
+                            <div class="platform-panel__badge">Orbit Processos</div>
+                            <h3>Padronize e otimize seus processos críticos</h3>
+                            <p>Reduza retrabalho, aumente consistência e garanta qualidade em cada execução. Mapeie, automatize e monitore todos os processos do seu negócio em um só lugar.</p>
+                            <ul class="platform-panel__features">
+                                <li><i class="fas fa-check"></i> Mapeamento visual de processos</li>
+                                <li><i class="fas fa-check"></i> Automação de fluxos</li>
+                                <li><i class="fas fa-check"></i> Monitoramento em tempo real</li>
+                                <li><i class="fas fa-check"></i> Integração com ISO e normas</li>
+                            </ul>
+                            <a href="pages/processos.html" class="btn btn-primary">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="platform-panel__image">
+                            <img src="https://placehold.co/560x380/000000/FDB73F?text=Processos+Dashboard" alt="Orbit Processos">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Indicadores -->
+                <div class="platform-panel" data-panel="indicadores">
+                    <div class="platform-panel__content">
+                        <div class="platform-panel__text">
+                            <div class="platform-panel__badge">Orbit Indicadores</div>
+                            <h3>KPIs em tempo real com dashboards inteligentes</h3>
+                            <p>Tome decisões rápidas e assertivas baseadas em dados. Dashboard interativo com todos os seus indicadores estratégicos em tempo real.</p>
+                            <ul class="platform-panel__features">
+                                <li><i class="fas fa-check"></i> Dashboards personalizáveis</li>
+                                <li><i class="fas fa-check"></i> Alertas automáticos de desvio</li>
+                                <li><i class="fas fa-check"></i> OKRs e BSC integrados</li>
+                                <li><i class="fas fa-check"></i> Relatórios exportáveis</li>
+                            </ul>
+                            <a href="pages/indicadores.html" class="btn btn-primary">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="platform-panel__image">
+                            <img src="https://placehold.co/560x380/000000/FDB73F?text=Indicadores+Dashboard" alt="Orbit Indicadores">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarefas -->
+                <div class="platform-panel" data-panel="tarefas">
+                    <div class="platform-panel__content">
+                        <div class="platform-panel__text">
+                            <div class="platform-panel__badge">Orbit Tarefas</div>
+                            <h3>Alinhe tarefas à estratégia e aos objetivos</h3>
+                            <p>Mantenha a equipe sincronizada e acompanhe o progresso em direção aos objetivos estratégicos com visibilidade total.</p>
+                            <ul class="platform-panel__features">
+                                <li><i class="fas fa-check"></i> Kanban e lista de tarefas</li>
+                                <li><i class="fas fa-check"></i> Vínculo com objetivos estratégicos</li>
+                                <li><i class="fas fa-check"></i> Cronogramas e dependências</li>
+                                <li><i class="fas fa-check"></i> Notificações inteligentes</li>
+                            </ul>
+                            <a href="pages/tarefas.html" class="btn btn-primary">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="platform-panel__image">
+                            <img src="https://placehold.co/560x380/000000/FDB73F?text=Tarefas+Dashboard" alt="Orbit Tarefas">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Competências -->
+                <div class="platform-panel" data-panel="competencias">
+                    <div class="platform-panel__content">
+                        <div class="platform-panel__text">
+                            <div class="platform-panel__badge">Orbit Competências</div>
+                            <h3>Desenvolva o potencial do seu time</h3>
+                            <p>Identifique gaps de competências e crie planos de desenvolvimento personalizados para cada colaborador.</p>
+                            <ul class="platform-panel__features">
+                                <li><i class="fas fa-check"></i> Matriz de competências</li>
+                                <li><i class="fas fa-check"></i> Avaliações 360°</li>
+                                <li><i class="fas fa-check"></i> PDI automatizado</li>
+                                <li><i class="fas fa-check"></i> Analytics de desempenho</li>
+                            </ul>
+                            <a href="pages/competencias.html" class="btn btn-primary">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="platform-panel__image">
+                            <img src="https://placehold.co/560x380/000000/FDB73F?text=Competências+Dashboard" alt="Orbit Competências">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Auditorias -->
+                <div class="platform-panel" data-panel="auditorias">
+                    <div class="platform-panel__content">
+                        <div class="platform-panel__text">
+                            <div class="platform-panel__badge">Orbit Auditorias</div>
+                            <h3>Conformidade e qualidade nos processos</h3>
+                            <p>Mantenha compliance total, reduza riscos e garanta que seus processos estejam sempre alinhados aos padrões regulatórios.</p>
+                            <ul class="platform-panel__features">
+                                <li><i class="fas fa-check"></i> Checklists automatizados</li>
+                                <li><i class="fas fa-check"></i> Planos de ação corretiva</li>
+                                <li><i class="fas fa-check"></i> Histórico de conformidade</li>
+                                <li><i class="fas fa-check"></i> Relatórios de auditoria</li>
+                            </ul>
+                            <a href="pages/auditorias.html" class="btn btn-primary">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="platform-panel__image">
+                            <img src="https://placehold.co/560x380/000000/FDB73F?text=Auditorias+Dashboard" alt="Orbit Auditorias">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orbit IA -->
+                <div class="platform-panel" data-panel="ia" id="orbit-ia">
+                    <div class="platform-panel__content">
+                        <div class="platform-panel__text">
+                            <div class="platform-panel__badge platform-panel__badge--ia">Orbit IA</div>
+                            <h3>Inteligência artificial que entende seu negócio</h3>
+                            <p>A Orbit IA analisa seus dados, identifica padrões e sugere ações para acelerar a execução da sua estratégia.</p>
+                            <ul class="platform-panel__features">
+                                <li><i class="fas fa-check"></i> Formula estratégia com insights</li>
+                                <li><i class="fas fa-check"></i> Vincula IA a resultados</li>
+                                <li><i class="fas fa-check"></i> Agilidade para decidir</li>
+                                <li><i class="fas fa-check"></i> Economia de tempo</li>
+                            </ul>
+                            <a href="#contato-form" class="btn btn-primary">Experimentar <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="platform-panel__image">
+                            <img src="https://placehold.co/560x380/FDB73F/000000?text=Orbit+IA+Interface" alt="Orbit IA">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ TRUST MARQUEE (LOGOS) ═══ -->
+    <section class="trust-marquee">
+        <div class="container">
+            <p class="trust-marquee__label">Empresas que confiam na Orbit</p>
+            <div class="trust-marquee__track">
+                <div class="trust-marquee__logos">
+                    <img src="https://placehold.co/120x48/cccccc/888888?text=Logo+1" alt="Cliente 1">
+                    <img src="https://placehold.co/120x48/cccccc/888888?text=Logo+2" alt="Cliente 2">
+                    <img src="https://placehold.co/120x48/cccccc/888888?text=Logo+3" alt="Cliente 3">
+                    <img src="https://placehold.co/120x48/cccccc/888888?text=Logo+4" alt="Cliente 4">
+                    <img src="https://placehold.co/120x48/cccccc/888888?text=Logo+5" alt="Cliente 5">
+                    <img src="https://placehold.co/120x48/cccccc/888888?text=Logo+6" alt="Cliente 6">
+                    <img src="https://placehold.co/120x48/cccccc/888888?text=Logo+7" alt="Cliente 7">
+                    <img src="https://placehold.co/120x48/cccccc/888888?text=Logo+8" alt="Cliente 8">
+                    <!-- Duplicate for infinite scroll -->
+                    <img src="https://placehold.co/120x48/cccccc/888888?text=Logo+1" alt="Cliente 1">
+                    <img src="https://placehold.co/120x48/cccccc/888888?text=Logo+2" alt="Cliente 2">
+                    <img src="https://placehold.co/120x48/cccccc/888888?text=Logo+3" alt="Cliente 3">
+                    <img src="https://placehold.co/120x48/cccccc/888888?text=Logo+4" alt="Cliente 4">
+                    <img src="https://placehold.co/120x48/cccccc/888888?text=Logo+5" alt="Cliente 5">
+                    <img src="https://placehold.co/120x48/cccccc/888888?text=Logo+6" alt="Cliente 6">
+                    <img src="https://placehold.co/120x48/cccccc/888888?text=Logo+7" alt="Cliente 7">
+                    <img src="https://placehold.co/120x48/cccccc/888888?text=Logo+8" alt="Cliente 8">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ STATS BANNER ═══ -->
+    <section class="stats-banner">
+        <div class="container">
+            <div class="stats-banner__grid">
+                <div class="stats-banner__item">
+                    <span class="stats-banner__number">500+</span>
+                    <span class="stats-banner__label">Empresas atendidas</span>
+                </div>
+                <div class="stats-banner__item">
+                    <span class="stats-banner__number">10+</span>
+                    <span class="stats-banner__label">Anos de mercado</span>
+                </div>
+                <div class="stats-banner__item">
+                    <span class="stats-banner__number">300</span>
+                    <span class="stats-banner__label">Clientes ativos</span>
+                </div>
+                <div class="stats-banner__item">
+                    <span class="stats-banner__number">5</span>
+                    <span class="stats-banner__label">Módulos integrados</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ TESTIMONIALS ═══ -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>O que nossos clientes <span class="highlight">dizem</span></h2>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-card__stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <blockquote>Orbit transformou a forma como executamos nossa estratégia. Antes, os planos ficavam na gaveta. Hoje, cada colaborador sabe exatamente o que fazer e por quê.</blockquote>
+                    <div class="testimonial-card__author">
+                        <div class="testimonial-card__avatar">CS</div>
+                        <div>
+                            <strong>Carlos Silva</strong>
+                            <span>CEO, TechCorp</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-card__stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <blockquote>A redução de retrabalho foi de 40%. O time está muito mais engajado e focado nos objetivos estratégicos. A IA nos dá insights incríveis.</blockquote>
+                    <div class="testimonial-card__author">
+                        <div class="testimonial-card__avatar">MS</div>
+                        <div>
+                            <strong>Marina Santos</strong>
+                            <span>Diretora de Operações, Indústria ABC</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-card__stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <blockquote>Implementação rápida, suporte excelente e ROI comprovado. Em 6 meses, nossa velocidade de execução aumentou 60%.</blockquote>
+                    <div class="testimonial-card__author">
+                        <div class="testimonial-card__avatar">RC</div>
+                        <div>
+                            <strong>Roberto Costa</strong>
+                            <span>Gerente de Estratégia, Retail Plus</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ INTEGRATION 360 ═══ -->
+    <section class="integration-section">
+        <div class="container">
+            <div class="integration-section__grid">
+                <div class="integration-section__visual">
+                    <div class="integration-section__orbit-ring">
+                        <div class="orbit-center-logo">
+                            <img src="images/logo-orbit.svg" alt="Orbit" height="40">
+                        </div>
+                        <div class="orbit-float-icon orbit-float-icon--1"><i class="fab fa-google"></i></div>
+                        <div class="orbit-float-icon orbit-float-icon--2"><i class="fab fa-slack"></i></div>
+                        <div class="orbit-float-icon orbit-float-icon--3"><i class="fab fa-microsoft"></i></div>
+                        <div class="orbit-float-icon orbit-float-icon--4"><i class="fas fa-cloud"></i></div>
+                    </div>
+                </div>
+                <div class="integration-section__text">
+                    <h2>Integração 360° com <span class="highlight">Google Workspace</span></h2>
+                    <p>Conecte todas as suas ferramentas em um ecossistema unificado. A Orbit se integra nativamente com o Google Workspace para máxima produtividade.</p>
+                    <ul class="integration-section__list">
+                        <li><i class="fas fa-check-circle"></i> Maior produtividade</li>
+                        <li><i class="fas fa-check-circle"></i> Segurança empresarial</li>
+                        <li><i class="fas fa-check-circle"></i> Automação inteligente</li>
+                        <li><i class="fas fa-check-circle"></i> Sincronização em tempo real</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ KNOWLEDGE / BLOG ═══ -->
+    <section class="knowledge-section" id="conhecimento">
+        <div class="container">
+            <div class="section-header">
+                <h2>Amplie seus <span class="highlight">conhecimentos</span></h2>
+            </div>
+
+            <div class="knowledge-grid">
+                <div class="knowledge-card">
+                    <div class="knowledge-card__image">
+                        <img src="https://placehold.co/400x250/FDB73F/000000?text=Artigo" alt="Artigo" loading="lazy">
+                        <span class="knowledge-card__type"><i class="fas fa-file-alt"></i> Artigo</span>
+                    </div>
+                    <div class="knowledge-card__body">
+                        <h4>5 Passos para Transformar sua Estratégia em Ação</h4>
+                        <a href="#" class="knowledge-card__link">Ler artigo <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="knowledge-card">
+                    <div class="knowledge-card__image">
+                        <img src="https://placehold.co/400x250/000000/FDB73F?text=Ebook" alt="Ebook" loading="lazy">
+                        <span class="knowledge-card__type"><i class="fas fa-book"></i> Ebook</span>
+                    </div>
+                    <div class="knowledge-card__body">
+                        <h4>Guia Completo de Gestão Estratégica para PMEs</h4>
+                        <a href="#" class="knowledge-card__link">Baixar ebook <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="knowledge-card">
+                    <div class="knowledge-card__image">
+                        <img src="https://placehold.co/400x250/FDB73F/000000?text=Webinar" alt="Webinar" loading="lazy">
+                        <span class="knowledge-card__type"><i class="fas fa-play-circle"></i> Webinar</span>
+                    </div>
+                    <div class="knowledge-card__body">
+                        <h4>Como a IA Melhora a Tomada de Decisão Empresarial</h4>
+                        <a href="#" class="knowledge-card__link">Assistir <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ CONTACT FORM ═══ -->
+    <section class="cta-form-section" id="contato-form">
+        <div class="container">
+            <div class="cta-form-grid">
+                <div class="cta-form-text">
+                    <h2>Pronto para transformar sua <span class="highlight">gestão estratégica</span>?</h2>
+                    <p>Fale com um consultor e descubra como a Orbit pode acelerar a execução da sua estratégia.</p>
+                    <ul class="cta-benefits">
+                        <li><i class="fas fa-check-circle"></i> Demonstração personalizada</li>
+                        <li><i class="fas fa-check-circle"></i> Implantação assistida</li>
+                        <li><i class="fas fa-check-circle"></i> Suporte dedicado</li>
+                        <li><i class="fas fa-check-circle"></i> ROI comprovado em 90 dias</li>
+                    </ul>
+                </div>
+
+                <div class="cta-form-card">
+                    <div class="form-card-header">
+                        <h3>Agende sua demonstração</h3>
+                        <p>Preencha o formulário e entraremos em contato em até 24h.</p>
+                    </div>
+
+                    <form id="form-lead" class="lead-form" novalidate>
+                        <div class="form-group">
+                            <label for="nome">Nome completo *</label>
+                            <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail corporativo *</label>
+                            <input type="email" id="email" name="email" placeholder="seu@empresa.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">WhatsApp *</label>
+                            <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="empresa">Empresa</label>
+                            <input type="text" id="empresa" name="empresa" placeholder="Nome da sua empresa">
+                        </div>
+                        <div class="form-group">
+                            <label for="cargo">Cargo</label>
+                            <input type="text" id="cargo" name="cargo" placeholder="Seu cargo">
+                        </div>
+
+                        <!-- Hidden UTM fields -->
+                        <input type="hidden" name="utm_source" data-field-id="utm_source">
+                        <input type="hidden" name="utm_medium" data-field-id="utm_medium">
+                        <input type="hidden" name="utm_campaign" data-field-id="utm_campaign">
+                        <input type="hidden" name="utm_content" data-field-id="utm_content">
+                        <input type="hidden" name="utm_term" data-field-id="utm_term">
+                        <input type="hidden" name="gclid" data-field-id="gclid">
+                        <input type="hidden" name="fbclid" data-field-id="fbclid">
+                        <input type="hidden" name="gbraid" data-field-id="gbraid">
+                        <input type="hidden" name="wbraid" data-field-id="wbraid">
+                        <input type="hidden" name="ttclid" data-field-id="ttclid">
+                        <input type="hidden" name="msclkid" data-field-id="msclkid">
+                        <input type="hidden" name="session_id" id="hidden_session_id">
+                        <input type="hidden" name="landing_page" data-field-id="landing_page">
+                        <input type="hidden" name="session_attributes_encoded" data-field-id="session_attributes_encoded">
+
+                        <button type="submit" class="btn btn-primary btn-submit">
+                            <span class="btn-text">AGENDAR DEMONSTRAÇÃO</span>
+                            <span class="btn-loading" style="display:none;"><i class="fas fa-spinner fa-spin"></i> Enviando...</span>
+                        </button>
+
+                        <div class="form-error" id="form-error" style="display:none;"></div>
+                    </form>
+
+                    <div class="form-success" id="form-success" style="display:none;">
+                        <div class="form-success-icon"><i class="fas fa-check"></i></div>
+                        <h4>Recebemos seu contato!</h4>
+                        <p>Nosso time entrará em contato em até 24 horas úteis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="images/logo-orbit.svg" alt="Orbit Gestão" height="36">
+                    </div>
+                    <p>Transformando estratégia em execução para empresas de médio porte.</p>
+                    <div class="social-links">
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h5>Contato</h5>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone"></i> +55 (11) 9999-9999</li>
+                        <li><i class="fas fa-envelope"></i> contato@orbit.com</li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h5>Soluções</h5>
+                    <ul>
+                        <li><a href="pages/processos.html">Processos</a></li>
+                        <li><a href="pages/indicadores.html">Indicadores</a></li>
+                        <li><a href="pages/tarefas.html">Tarefas</a></li>
+                        <li><a href="pages/competencias.html">Competências</a></li>
+                        <li><a href="pages/auditorias.html">Auditorias</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h5>Conhecimento</h5>
+                    <ul>
+                        <li><a href="pages/blog.html">Blog</a></li>
+                        <li><a href="#">Documentação</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Webinars</a></li>
+                    </ul>
+                    <h5 style="margin-top: 20px;">Orbit</h5>
+                    <ul>
+                        <li><a href="pages/parcerias.html">Seja Parceiro</a></li>
+                        <li><a href="#">Sobre Nós</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Orbit Gestão. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="js/main-v2.js?v=1"></script>
+</body>
+</html>

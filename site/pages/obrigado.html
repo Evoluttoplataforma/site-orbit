@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obrigado! - Orbit Gestão</title>
+    <meta name="description" content="Recebemos seu contato. Nossa equipe entrará em contato em breve.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles-v2.css?v=2">
+    <style>
+        .thankyou-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--black);
+            position: relative;
+            overflow: hidden;
+            padding: 120px 24px 80px;
+        }
+
+        .thankyou-hero__bg {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .thankyou-hero__glow {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+        }
+
+        .thankyou-hero__glow--1 {
+            width: 500px;
+            height: 500px;
+            background: var(--primary, #FDB73F);
+            top: -100px;
+            right: -100px;
+        }
+
+        .thankyou-hero__glow--2 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary, #FDB73F);
+            bottom: -80px;
+            left: -80px;
+        }
+
+        .thankyou-content {
+            text-align: center;
+            max-width: 640px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .thankyou-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--primary, #FDB73F);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 32px;
+            animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .thankyou-icon i {
+            font-size: 48px;
+            color: var(--black, #000);
+        }
+
+        .thankyou-content h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .thankyou-content h1 span {
+            background: linear-gradient(135deg, var(--primary, #FDB73F), var(--primary-light, #FEC85F));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .thankyou-content p {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .thankyou-content p strong {
+            color: #fff;
+        }
+
+        .thankyou-steps {
+            display: flex;
+            gap: 24px;
+            margin: 40px 0;
+            text-align: left;
+        }
+
+        .thankyou-step {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .thankyou-step__number {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary, #FDB73F);
+            color: #000;
+            font-weight: 700;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .thankyou-step h4 {
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .thankyou-step p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 0;
+        }
+
+        .thankyou-ctas {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .thankyou-steps {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .thankyou-ctas {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .thankyou-ctas .btn {
+                width: 100%;
+                max-width: 320px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../images/logo-orbit.svg" alt="Orbit Gestão" height="40">
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Início</a></li>
+                <li>
+                    <a href="../index.html#plataforma">Soluções <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown">
+                        <a href="processos.html"><i class="fas fa-sitemap"></i> Processos</a>
+                        <a href="indicadores.html"><i class="fas fa-chart-line"></i> Indicadores</a>
+                        <a href="tarefas.html"><i class="fas fa-tasks"></i> Tarefas</a>
+                        <a href="competencias.html"><i class="fas fa-users"></i> Competências</a>
+                        <a href="auditorias.html"><i class="fas fa-clipboard-check"></i> Auditorias</a>
+                    </div>
+                </li>
+                <li><a href="blog.html">Conhecimento</a></li>
+                <li><a href="parcerias.html">Seja Parceiro</a></li>
+                <li><a href="../index.html#contato-form">Fale Conosco</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#" class="btn btn-outline">Entrar</a>
+                <a href="../index.html#contato-form" class="btn btn-primary">Agendar Demo</a>
+            </div>
+            <button class="menu-toggle" onclick="document.querySelector('.mobile-menu').classList.toggle('active');document.body.style.overflow=document.querySelector('.mobile-menu').classList.contains('active')?'hidden':''">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="mobile-menu">
+        <button class="mobile-menu-close" onclick="this.parentElement.classList.remove('active');document.body.style.overflow=''">&times;</button>
+        <div class="mobile-menu__label">Menu</div>
+        <a href="../index.html"><i class="fas fa-home"></i> Início</a>
+        <a href="../index.html#contato-form"><i class="fas fa-envelope"></i> Fale Conosco</a>
+        <div class="mobile-menu__label">Soluções</div>
+        <a href="processos.html"><i class="fas fa-sitemap"></i> Processos</a>
+        <a href="indicadores.html"><i class="fas fa-chart-line"></i> Indicadores</a>
+        <a href="tarefas.html"><i class="fas fa-tasks"></i> Tarefas</a>
+        <a href="competencias.html"><i class="fas fa-users"></i> Competências</a>
+        <a href="auditorias.html"><i class="fas fa-clipboard-check"></i> Auditorias</a>
+        <div class="mobile-menu__label">Conteúdo</div>
+        <a href="blog.html"><i class="fas fa-newspaper"></i> Blog</a>
+        <a href="parcerias.html"><i class="fas fa-handshake"></i> Seja Parceiro</a>
+        <div class="mobile-menu__divider"></div>
+        <a href="../index.html#contato-form" class="btn btn-primary">Agendar Demo</a>
+    </div>
+
+    <!-- Thank You Section -->
+    <section class="thankyou-hero">
+        <div class="thankyou-hero__bg">
+            <div class="thankyou-hero__glow thankyou-hero__glow--1"></div>
+            <div class="thankyou-hero__glow thankyou-hero__glow--2"></div>
+        </div>
+
+        <div class="thankyou-content">
+            <div class="thankyou-icon">
+                <i class="fas fa-check"></i>
+            </div>
+
+            <h1>Recebemos seu <span>contato!</span></h1>
+            <p>Nosso time de consultores entrará em contato em até <strong>24 horas úteis</strong> para agendar sua demonstração personalizada.</p>
+
+            <div class="thankyou-steps">
+                <div class="thankyou-step">
+                    <div class="thankyou-step__number">1</div>
+                    <h4>Análise do perfil</h4>
+                    <p>Vamos entender o momento da sua empresa.</p>
+                </div>
+                <div class="thankyou-step">
+                    <div class="thankyou-step__number">2</div>
+                    <h4>Demo personalizada</h4>
+                    <p>Demonstração focada nas suas necessidades.</p>
+                </div>
+                <div class="thankyou-step">
+                    <div class="thankyou-step__number">3</div>
+                    <h4>Proposta sob medida</h4>
+                    <p>Plano de implantação adequado ao seu negócio.</p>
+                </div>
+            </div>
+
+            <div class="thankyou-ctas">
+                <a href="../index.html" class="btn btn-primary btn-lg">Voltar ao site</a>
+                <a href="blog.html" class="btn btn-outline btn-lg">Explorar conteúdos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="../images/logo-orbit.svg" alt="Orbit Gestão" height="36">
+                    </div>
+                    <p>Transformando estratégia em execução para empresas de médio porte.</p>
+                    <div class="social-links">
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h5>Contato</h5>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone"></i> +55 (11) 9999-9999</li>
+                        <li><i class="fas fa-envelope"></i> contato@orbit.com</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Soluções</h5>
+                    <ul>
+                        <li><a href="processos.html">Processos</a></li>
+                        <li><a href="indicadores.html">Indicadores</a></li>
+                        <li><a href="tarefas.html">Tarefas</a></li>
+                        <li><a href="competencias.html">Competências</a></li>
+                        <li><a href="auditorias.html">Auditorias</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Conhecimento</h5>
+                    <ul>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="#">Documentação</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Webinars</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Orbit Gestão. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll
+        const header = document.querySelector('.header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Dropdown hover
+        document.querySelectorAll('.nav-menu > li').forEach(item => {
+            const dropdown = item.querySelector('.dropdown');
+            if (!dropdown) return;
+            item.addEventListener('mouseenter', () => {
+                dropdown.style.opacity = '1';
+                dropdown.style.visibility = 'visible';
+                dropdown.style.transform = 'translateY(0)';
+            });
+            item.addEventListener('mouseleave', () => {
+                dropdown.style.opacity = '0';
+                dropdown.style.visibility = 'hidden';
+                dropdown.style.transform = 'translateY(10px)';
+            });
+        });
+    </script>
+</body>
+</html>

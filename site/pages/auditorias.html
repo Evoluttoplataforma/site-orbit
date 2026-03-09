@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auditorias Internas - Orbit Gestão</title>
+    <meta name="description" content="Estruture e automatize suas auditorias internas com a Orbit Gestão.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles-v2.css?v=2">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../images/logo-orbit.svg" alt="Orbit Gestão" height="40">
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Início</a></li>
+                <li>
+                    <a href="../index.html#plataforma">Soluções <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown">
+                        <a href="processos.html"><i class="fas fa-sitemap"></i> Processos</a>
+                        <a href="indicadores.html"><i class="fas fa-chart-line"></i> Indicadores</a>
+                        <a href="tarefas.html"><i class="fas fa-tasks"></i> Tarefas</a>
+                        <a href="competencias.html"><i class="fas fa-users"></i> Competências</a>
+                        <a href="auditorias.html"><i class="fas fa-clipboard-check"></i> Auditorias</a>
+                    </div>
+                </li>
+                <li><a href="blog.html">Conhecimento</a></li>
+                <li><a href="parcerias.html">Seja Parceiro</a></li>
+                <li><a href="../index.html#contato-form">Fale Conosco</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#" class="btn btn-outline">Entrar</a>
+                <a href="../index.html#contato-form" class="btn btn-primary">Agendar Demo</a>
+            </div>
+            <button class="menu-toggle" onclick="document.querySelector('.mobile-menu').classList.toggle('active');document.body.style.overflow=document.querySelector('.mobile-menu').classList.contains('active')?'hidden':''">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+    <div class="mobile-menu">
+        <button class="mobile-menu-close" onclick="this.parentElement.classList.remove('active');document.body.style.overflow=''">&times;</button>
+        <div class="mobile-menu__label">Menu</div>
+        <a href="../index.html"><i class="fas fa-home"></i> Início</a>
+        <a href="../index.html#contato-form"><i class="fas fa-envelope"></i> Fale Conosco</a>
+        <div class="mobile-menu__label">Soluções</div>
+        <a href="processos.html"><i class="fas fa-sitemap"></i> Processos</a>
+        <a href="indicadores.html"><i class="fas fa-chart-line"></i> Indicadores</a>
+        <a href="tarefas.html"><i class="fas fa-tasks"></i> Tarefas</a>
+        <a href="competencias.html"><i class="fas fa-users"></i> Competências</a>
+        <a href="auditorias.html"><i class="fas fa-clipboard-check"></i> Auditorias</a>
+        <div class="mobile-menu__label">Conteúdo</div>
+        <a href="blog.html"><i class="fas fa-newspaper"></i> Blog</a>
+        <a href="parcerias.html"><i class="fas fa-handshake"></i> Seja Parceiro</a>
+        <div class="mobile-menu__divider"></div>
+        <a href="../index.html#contato-form" class="btn btn-primary">Agendar Demo</a>
+    </div>
+
+    <!-- ═══ PRODUCT HERO ═══ -->
+    <section class="product-hero">
+        <div class="product-hero__bg">
+            <div class="product-hero__glow product-hero__glow--1"></div>
+            <div class="product-hero__glow product-hero__glow--2"></div>
+            <div class="product-hero__glow product-hero__glow--3"></div>
+        </div>
+        <div class="container">
+            <div class="product-hero__grid">
+                <div>
+                    <div class="product-hero__badge"><i class="fas fa-clipboard-check"></i> Auditorias</div>
+                    <h1 class="product-hero__title">Auditorias <span>Internas</span></h1>
+                    <p class="product-hero__desc">Automatize auditorias, capture evidências e garanta conformidade. Tudo em uma plataforma integrada com sua gestão.</p>
+                    <div class="product-hero__ctas">
+                        <a href="../index.html#contato-form" class="btn btn-primary btn-lg">Agendar Demonstração</a>
+                        <a href="#detalhes" class="btn btn-ghost btn-lg">Conhecer Recursos <i class="fas fa-arrow-down"></i></a>
+                    </div>
+                </div>
+                <div class="product-hero__image">
+                    <img src="https://placehold.co/560x400/FDB73F/000000?text=Auditorias+Internas&font=poppins" alt="Auditorias Internas">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ BENEFITS ═══ -->
+    <section class="product-benefits-v2">
+        <div class="container">
+            <div class="section-header">
+                <h2>Principais <span class="highlight">Benefícios</span></h2>
+                <p>Por que escolher a Orbit para auditorias</p>
+            </div>
+            <div class="benefits-grid-v2">
+                <div class="benefit-card-v2">
+                    <div class="benefit-card-v2__icon"><i class="fas fa-shield-alt"></i></div>
+                    <h4>Conformidade</h4>
+                    <p>Garanta aderência a normas ISO, regulamentos e políticas internas</p>
+                </div>
+                <div class="benefit-card-v2">
+                    <div class="benefit-card-v2__icon"><i class="fas fa-exclamation-triangle"></i></div>
+                    <h4>Prevenção de Riscos</h4>
+                    <p>Identifique e corrija não-conformidades antes de se agravarem</p>
+                </div>
+                <div class="benefit-card-v2">
+                    <div class="benefit-card-v2__icon"><i class="fas fa-balance-scale"></i></div>
+                    <h4>Governança</h4>
+                    <p>Transparência e rastreabilidade em todos os processos de auditoria</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ FEATURES ═══ -->
+    <section class="product-features-v2" id="detalhes">
+        <div class="container">
+            <div class="section-header">
+                <h2>Recursos <span class="highlight">Poderosos</span></h2>
+                <p>Tudo que você precisa para gerenciar auditorias com excelência</p>
+            </div>
+            <div class="features-grid-v2">
+                <div class="feature-item-v2">
+                    <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
+                    <div><strong>Checklists de Auditoria</strong><p>Templates customizáveis e reutilizáveis</p></div>
+                </div>
+                <div class="feature-item-v2">
+                    <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
+                    <div><strong>Evidências Fotográficas</strong><p>Capture e anexe fotos e documentos</p></div>
+                </div>
+                <div class="feature-item-v2">
+                    <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
+                    <div><strong>Planos de Ação</strong><p>Crie e acompanhe correções de não-conformidades</p></div>
+                </div>
+                <div class="feature-item-v2">
+                    <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
+                    <div><strong>Agendamento Automático</strong><p>Agendar auditorias por calendário</p></div>
+                </div>
+                <div class="feature-item-v2">
+                    <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
+                    <div><strong>Não-conformidades</strong><p>Registro e rastreamento de desvios</p></div>
+                </div>
+                <div class="feature-item-v2">
+                    <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
+                    <div><strong>Relatórios PDF</strong><p>Gere relatórios profissionais automaticamente</p></div>
+                </div>
+                <div class="feature-item-v2">
+                    <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
+                    <div><strong>Scoring por Área</strong><p>Visualize performance de conformidade</p></div>
+                </div>
+                <div class="feature-item-v2">
+                    <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
+                    <div><strong>Histórico de Auditorias</strong><p>Rastreabilidade completa de auditorias</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ DETAIL SECTION ═══ -->
+    <section class="product-detail-v2">
+        <div class="container">
+            <div class="product-detail-v2__grid">
+                <div class="product-detail-v2__image">
+                    <img src="https://placehold.co/500x360/000000/FDB73F?text=Evidencias+Audit&font=poppins" alt="Rastreamento Completo de Evidências">
+                </div>
+                <div class="product-detail-v2__text">
+                    <h2>Rastreamento Completo de Evidências</h2>
+                    <p>Capture evidências fotográficas, anexe documentos e mantenha um registro completo de cada não-conformidade encontrada.</p>
+                    <ul class="product-detail-v2__list">
+                        <li><i class="fas fa-check-circle"></i> Upload de fotos em campo</li>
+                        <li><i class="fas fa-check-circle"></i> Anexos de documentos</li>
+                        <li><i class="fas fa-check-circle"></i> Timeline de correções</li>
+                        <li><i class="fas fa-check-circle"></i> Assinatura digital</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ TESTIMONIAL ═══ -->
+    <section class="product-testimonial-v2">
+        <div class="container">
+            <div class="product-testimonial-v2__card">
+                <div class="product-testimonial-v2__stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <blockquote>"Com as auditorias automatizadas, reduzimos o tempo de execução em 70% e zeramos não-conformidades recorrentes em 6 meses."</blockquote>
+                <div class="product-testimonial-v2__author">
+                    <strong>Ricardo Mendes</strong>
+                    <span>Gerente de Qualidade, Construção Delta</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ CTA ═══ -->
+    <section class="product-cta-v2">
+        <div class="container">
+            <h2>Pronto para estruturar suas auditorias?</h2>
+            <p>Comece com uma demonstração personalizada hoje mesmo</p>
+            <div class="product-cta-v2__buttons">
+                <a href="../index.html#contato-form" class="btn btn-primary btn-lg">Agendar Demo Gratuita</a>
+                <a href="../index.html#contato-form" class="btn btn-outline btn-lg">Contato de Vendas</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo"><img src="../images/logo-orbit.svg" alt="Orbit Gestão" height="36"></div>
+                    <p>Transformando estratégia em execução para empresas de médio porte.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h5>Contato</h5>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone"></i> <a href="tel:+5511999999999">+55 (11) 9999-9999</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contato@orbitgestao.com">contato@orbitgestao.com</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> São Paulo - SP</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Soluções</h5>
+                    <ul>
+                        <li><a href="processos.html">Processos</a></li>
+                        <li><a href="indicadores.html">Indicadores</a></li>
+                        <li><a href="tarefas.html">Tarefas</a></li>
+                        <li><a href="competencias.html">Competências</a></li>
+                        <li><a href="auditorias.html">Auditorias</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Conhecimento</h5>
+                    <ul>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="#">Documentação</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Webinars</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Orbit Gestão. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+    // Header scroll
+    window.addEventListener('scroll',()=>{
+        document.querySelector('.header').classList.toggle('scrolled',window.scrollY>50);
+        document.getElementById('backToTop').classList.toggle('visible',window.scrollY>400);
+    });
+    // Dropdown hover
+    document.querySelectorAll('.nav-menu li').forEach(li=>{
+        const dd=li.querySelector('.dropdown');
+        if(dd){li.addEventListener('mouseenter',()=>{dd.style.opacity='1';dd.style.visibility='visible';dd.style.transform='translateY(0)'});
+        li.addEventListener('mouseleave',()=>{dd.style.opacity='0';dd.style.visibility='hidden';dd.style.transform='translateY(10px)'})}
+    });
+    </script>
+</body>
+</html>
