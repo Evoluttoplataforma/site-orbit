@@ -1,5 +1,4 @@
 {
-  "buildCommand": "",
   "cleanUrls": true,
   "rewrites": [
     { "source": "/blog/:slug", "destination": "/blog/leitor.html" },
