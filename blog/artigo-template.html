@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TÍTULO DO ARTIGO - Blog Orbit Gestão</title>
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <meta name="description" content="DESCRIÇÃO DO ARTIGO EM ATÉ 160 CARACTERES">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=2">
+    <style>
+        /* ── Article Hero ── */
+        .article-hero {
+            background: var(--black, #000);
+            padding: 140px 24px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-hero__bg {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .article-hero__glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: var(--primary, #FDB73F);
+            filter: blur(150px);
+            opacity: 0.1;
+            top: -100px;
+            right: -100px;
+        }
+
+        .article-hero .container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .article-hero__tag {
+            display: inline-block;
+            background: var(--primary, #FDB73F);
+            color: #000;
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 24px;
+        }
+
+        .article-hero h1 {
+            font-size: clamp(1.75rem, 4vw, 2.75rem);
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.25;
+            margin-bottom: 20px;
+        }
+
+        .article-hero__meta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        .article-hero__meta i {
+            margin-right: 6px;
+        }
+
+        /* ── Article Body ── */
+        .article-body {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
+        }
+
+        .article-body h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--black, #000);
+            margin: 48px 0 16px;
+            line-height: 1.3;
+        }
+
+        .article-body h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--black, #000);
+            margin: 36px 0 12px;
+        }
+
+        .article-body p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        .article-body ul,
+        .article-body ol {
+            margin: 16px 0 24px 24px;
+            color: #444;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .article-body li {
+            margin-bottom: 8px;
+            list-style: disc;
+        }
+
+        .article-body ol li {
+            list-style: decimal;
+        }
+
+        .article-body blockquote {
+            border-left: 4px solid var(--primary, #FDB73F);
+            margin: 32px 0;
+            padding: 16px 24px;
+            background: #fdf8ee;
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            color: #333;
+        }
+
+        .article-body img {
+            width: 100%;
+            border-radius: 12px;
+            margin: 32px 0;
+        }
+
+        .article-body a {
+            color: var(--primary-dark, #E5A235);
+            font-weight: 500;
+            text-decoration: underline;
+        }
+
+        .article-body a:hover {
+            color: var(--black, #000);
+        }
+
+        /* ── Featured Image ── */
+        .article-featured-image {
+            max-width: 900px;
+            margin: -40px auto 0;
+            padding: 0 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .article-featured-image img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        /* ── CTA Banner ── */
+        .article-cta {
+            background: var(--black, #000);
+            padding: 60px 24px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .article-cta .container {
+            max-width: 640px;
+        }
+
+        .article-cta h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+        }
+
+        .article-cta p {
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 24px;
+            font-size: 1rem;
+        }
+
+        /* ── Related Articles ── */
+        .related-articles {
+            padding: 60px 24px;
+            background: #f9f9f9;
+        }
+
+        .related-articles h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .related-articles__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .related-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .related-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .related-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .related-card__body {
+            padding: 20px;
+        }
+
+        .related-card__tag {
+            display: inline-block;
+            background: var(--primary, #FDB73F);
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .related-card__body h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: #000;
+        }
+
+        @media (max-width: 768px) {
+            .article-hero {
+                padding: 120px 20px 60px;
+            }
+
+            .article-hero__meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .article-body {
+                padding: 40px 20px 60px;
+            }
+
+            .related-articles__grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="40">
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/">Início</a></li>
+                <li>
+                    <a href="/#plataforma">Soluções <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown">
+                        <div class="dropdown__info">
+                            <span class="dropdown__info-badge"><i class="fas fa-cube"></i> Plataforma</span>
+                            <h4>Orbit Gestão</h4>
+                            <p>5 módulos integrados + IA para transformar sua estratégia em execução real.</p>
+                            <div class="dropdown__info-img">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                        </div>
+                        <div class="dropdown__links">
+                            <a href="/processos">
+                                <div class="dd-icon"><i class="fas fa-sitemap"></i></div>
+                                <div class="dd-text"><span>Processos</span><small>Mapeamento e automação</small></div>
+                            </a>
+                            <a href="/indicadores">
+                                <div class="dd-icon"><i class="fas fa-chart-line"></i></div>
+                                <div class="dd-text"><span>Indicadores</span><small>KPIs e dashboards</small></div>
+                            </a>
+                            <a href="/tarefas">
+                                <div class="dd-icon"><i class="fas fa-tasks"></i></div>
+                                <div class="dd-text"><span>Tarefas</span><small>Kanban estratégico</small></div>
+                            </a>
+                            <a href="/competencias">
+                                <div class="dd-icon"><i class="fas fa-users"></i></div>
+                                <div class="dd-text"><span>Competências</span><small>Gestão de pessoas</small></div>
+                            </a>
+                            <a href="/auditorias">
+                                <div class="dd-icon"><i class="fas fa-clipboard-check"></i></div>
+                                <div class="dd-text"><span>Auditorias</span><small>Conformidade e qualidade</small></div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="/blog">Conhecimento</a></li>
+                <li><a href="/parcerias">Seja Parceiro</a></li>
+                <li><a href="/#contato-form">Fale Conosco</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#" class="btn btn-outline">Entrar</a>
+                <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>
+            </div>
+            <button class="menu-toggle" onclick="document.querySelector('.mobile-menu').classList.toggle('active');document.body.style.overflow=document.querySelector('.mobile-menu').classList.contains('active')?'hidden':''">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="mobile-menu">
+        <button class="mobile-menu-close" onclick="this.parentElement.classList.remove('active');document.body.style.overflow=''">&times;</button>
+        <div class="mobile-menu__label">Menu</div>
+        <a href="/"><i class="fas fa-home"></i> Início</a>
+        <a href="/#contato-form"><i class="fas fa-envelope"></i> Fale Conosco</a>
+        <div class="mobile-menu__label">Soluções</div>
+        <a href="/processos"><i class="fas fa-sitemap"></i> Processos</a>
+        <a href="/indicadores"><i class="fas fa-chart-line"></i> Indicadores</a>
+        <a href="/tarefas"><i class="fas fa-tasks"></i> Tarefas</a>
+        <a href="/competencias"><i class="fas fa-users"></i> Competências</a>
+        <a href="/auditorias"><i class="fas fa-clipboard-check"></i> Auditorias</a>
+        <div class="mobile-menu__label">Conteúdo</div>
+        <a href="/blog"><i class="fas fa-newspaper"></i> Blog</a>
+        <a href="/parcerias"><i class="fas fa-handshake"></i> Seja Parceiro</a>
+        <div class="mobile-menu__divider"></div>
+        <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>
+    </div>
+
+    <!-- Article Hero -->
+    <section class="article-hero">
+        <div class="article-hero__bg">
+            <div class="article-hero__glow"></div>
+        </div>
+        <div class="container">
+            <span class="article-hero__tag">CATEGORIA</span>
+            <h1>Título do Artigo Vai Aqui</h1>
+            <div class="article-hero__meta">
+                <span><i class="fas fa-calendar-alt"></i> 09 Mar 2026</span>
+                <span><i class="fas fa-clock"></i> 5 min de leitura</span>
+                <span><i class="fas fa-user"></i> Equipe Orbit</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Image -->
+    <div class="article-featured-image">
+        <img src="https://placehold.co/900x450/000000/FDB73F?text=Imagem+do+Artigo" alt="Imagem destaque do artigo">
+    </div>
+
+    <!-- Article Content -->
+    <article class="article-body">
+
+        <p>Parágrafo de abertura que contextualiza o tema e prende a atenção do leitor. Explique brevemente o problema ou oportunidade que será abordado no artigo.</p>
+
+        <h2>Primeiro subtítulo do artigo</h2>
+
+        <p>Desenvolva o primeiro ponto do artigo aqui. Use parágrafos curtos e diretos para facilitar a leitura.</p>
+
+        <ul>
+            <li>Primeiro item de uma lista</li>
+            <li>Segundo item de uma lista</li>
+            <li>Terceiro item de uma lista</li>
+        </ul>
+
+        <h2>Segundo subtítulo do artigo</h2>
+
+        <p>Continue o desenvolvimento do tema. Inclua dados, exemplos práticos e referências quando possível.</p>
+
+        <blockquote>
+            "Uma citação relevante ou destaque importante que reforce o ponto do artigo."
+        </blockquote>
+
+        <h3>Sub-seção opcional</h3>
+
+        <p>Detalhamento adicional sobre um ponto específico.</p>
+
+        <ol>
+            <li>Passo um de um processo</li>
+            <li>Passo dois de um processo</li>
+            <li>Passo três de um processo</li>
+        </ol>
+
+        <h2>Conclusão</h2>
+
+        <p>Encerre o artigo com um resumo dos pontos principais e uma chamada para ação.</p>
+
+    </article>
+
+    <!-- CTA Banner -->
+    <section class="article-cta">
+        <div class="container">
+            <h3>Pronto para transformar sua gestão?</h3>
+            <p>Veja como a Orbit pode ajudar sua empresa a executar a estratégia com mais eficiência.</p>
+            <a href="/#contato-form" class="btn btn-primary btn-lg">Agendar demonstração</a>
+        </div>
+    </section>
+
+    <!-- Related Articles -->
+    <section class="related-articles">
+        <h3>Artigos relacionados</h3>
+        <div class="related-articles__grid">
+            <a href="#" class="related-card">
+                <img src="https://placehold.co/400x250/000000/FDB73F?text=Artigo+1" alt="Artigo relacionado">
+                <div class="related-card__body">
+                    <span class="related-card__tag">Categoria</span>
+                    <h4>Título do artigo relacionado 1</h4>
+                </div>
+            </a>
+            <a href="#" class="related-card">
+                <img src="https://placehold.co/400x250/000000/FDB73F?text=Artigo+2" alt="Artigo relacionado">
+                <div class="related-card__body">
+                    <span class="related-card__tag">Categoria</span>
+                    <h4>Título do artigo relacionado 2</h4>
+                </div>
+            </a>
+            <a href="#" class="related-card">
+                <img src="https://placehold.co/400x250/000000/FDB73F?text=Artigo+3" alt="Artigo relacionado">
+                <div class="related-card__body">
+                    <span class="related-card__tag">Categoria</span>
+                    <h4>Título do artigo relacionado 3</h4>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="36">
+                    </div>
+                    <p>Transformando estratégia em execução para empresas de médio porte.</p>
+                    <div class="social-links">
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h5>Contato</h5>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone"></i> +55 (11) 9999-9999</li>
+                        <li><i class="fas fa-envelope"></i> contato@orbit.com</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Soluções</h5>
+                    <ul>
+                        <li><a href="/processos">Processos</a></li>
+                        <li><a href="/indicadores">Indicadores</a></li>
+                        <li><a href="/tarefas">Tarefas</a></li>
+                        <li><a href="/competencias">Competências</a></li>
+                        <li><a href="/auditorias">Auditorias</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Conhecimento</h5>
+                    <ul>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="#">Documentação</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Webinars</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Orbit Gestão. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll
+        const header = document.querySelector('.header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Dropdown hover
+        document.querySelectorAll('.nav-menu > li').forEach(item => {
+            const dropdown = item.querySelector('.dropdown');
+            if (!dropdown) return;
+            item.addEventListener('mouseenter', () => {
+                dropdown.style.opacity = '1';
+                dropdown.style.visibility = 'visible';
+                dropdown.style.transform = 'translateY(0)';
+            });
+            item.addEventListener('mouseleave', () => {
+                dropdown.style.opacity = '0';
+                dropdown.style.visibility = 'hidden';
+                dropdown.style.transform = 'translateY(10px)';
+            });
+        });
+    </script>
+</body>
+</html>

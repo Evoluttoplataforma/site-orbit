@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conte sua História - Orbit Gestão | Histórias de Clientes</title>
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <meta name="description" content="Compartilhe sua experiência com a Orbit Gestão. Conte como nossa plataforma ajudou sua empresa a transformar estratégia em execução.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=2">
+    <style>
+        /* Hero */
+        .story-hero {
+            background: var(--black);
+            padding: 160px 24px 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .story-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(253,183,63,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .story-hero__bg {
+            position: absolute; inset: 0; pointer-events: none;
+        }
+        .story-hero__glow {
+            position: absolute; border-radius: 50%;
+            background: var(--primary); filter: blur(150px);
+        }
+        .story-hero__glow--1 {
+            width: 500px; height: 500px; top: -200px; right: -100px; opacity: 0.1;
+        }
+        .story-hero__glow--2 {
+            width: 400px; height: 400px; bottom: -150px; left: -80px; opacity: 0.06;
+        }
+        .story-hero .container { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+        .story-hero__badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(253,183,63,0.1); border: 1px solid rgba(253,183,63,0.2);
+            padding: 8px 20px; border-radius: 50px; font-size: 0.8rem;
+            color: var(--primary); font-weight: 600; margin-bottom: 24px;
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .story-hero__title {
+            font-size: 3rem; font-weight: 800; color: #fff;
+            line-height: 1.15; margin-bottom: 16px;
+        }
+        .story-hero__title span {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .story-hero__subtitle {
+            color: var(--gray-400); font-size: 1.15rem; line-height: 1.6;
+            max-width: 560px; margin: 0 auto;
+        }
+
+        /* Form Section */
+        .story-form-section {
+            padding: 80px 24px 100px;
+            background: var(--gray-50);
+        }
+        .story-form-card {
+            max-width: 820px; margin: 0 auto;
+            background: #fff; border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        /* Form Sections */
+        .form-section {
+            padding: 40px 48px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .form-section:last-of-type {
+            border-bottom: none;
+        }
+        .form-section__header {
+            display: flex; align-items: center; gap: 14px;
+            margin-bottom: 28px;
+        }
+        .form-section__icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            background: rgba(253,183,63,0.1);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary); font-size: 1.1rem; flex-shrink: 0;
+        }
+        .form-section__title {
+            font-size: 1.25rem; font-weight: 700; color: var(--black);
+        }
+        .form-section__desc {
+            font-size: 0.85rem; color: var(--gray-500); margin-top: 2px;
+        }
+
+        /* Form Grid */
+        .form-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+        }
+        .form-grid .full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* Form Fields */
+        .form-group {
+            display: flex; flex-direction: column; gap: 6px;
+        }
+        .form-group label {
+            font-size: 0.85rem; font-weight: 600; color: var(--gray-700);
+        }
+        .form-group label .required {
+            color: var(--error); margin-left: 2px;
+        }
+        .form-group label .optional {
+            color: var(--gray-400); font-weight: 400; font-size: 0.8rem;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group input[type="url"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%; padding: 12px 16px;
+            border: 1.5px solid var(--gray-200);
+            border-radius: var(--radius-sm);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem; color: var(--gray-800);
+            background: #fff;
+            transition: var(--transition);
+            outline: none;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(253,183,63,0.15);
+        }
+        .form-group input.error,
+        .form-group select.error,
+        .form-group textarea.error {
+            border-color: var(--error);
+            box-shadow: 0 0 0 3px rgba(239,68,68,0.1);
+        }
+        .form-group .error-msg {
+            font-size: 0.78rem; color: var(--error); display: none;
+        }
+        .form-group textarea {
+            resize: vertical; min-height: 110px;
+        }
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 36px;
+        }
+
+        /* Checkboxes Group */
+        .checkbox-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+        }
+        .checkbox-item {
+            display: flex; align-items: center; gap: 10px;
+            padding: 10px 14px; border: 1.5px solid var(--gray-200);
+            border-radius: var(--radius-sm); cursor: pointer;
+            transition: var(--transition);
+        }
+        .checkbox-item:hover {
+            border-color: var(--primary); background: rgba(253,183,63,0.03);
+        }
+        .checkbox-item input[type="checkbox"] {
+            width: 18px; height: 18px; accent-color: var(--primary);
+            cursor: pointer; flex-shrink: 0;
+        }
+        .checkbox-item span {
+            font-size: 0.85rem; color: var(--gray-700); font-weight: 500;
+        }
+
+        /* File Upload */
+        .file-upload-area {
+            border: 2px dashed var(--gray-200);
+            border-radius: var(--radius-sm);
+            padding: 28px; text-align: center;
+            cursor: pointer; transition: var(--transition);
+            position: relative;
+        }
+        .file-upload-area:hover, .file-upload-area.dragover {
+            border-color: var(--primary); background: rgba(253,183,63,0.03);
+        }
+        .file-upload-area input[type="file"] {
+            position: absolute; inset: 0; opacity: 0; cursor: pointer;
+        }
+        .file-upload-area i {
+            font-size: 2rem; color: var(--gray-300); margin-bottom: 8px;
+        }
+        .file-upload-area p {
+            font-size: 0.85rem; color: var(--gray-500); margin-top: 4px;
+        }
+        .file-upload-area .upload-hint {
+            font-size: 0.75rem; color: var(--gray-400); margin-top: 6px;
+        }
+
+        /* Thumbnails */
+        .thumbnail-grid {
+            display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px;
+        }
+        .thumbnail-item {
+            position: relative; width: 90px; height: 90px; border-radius: 8px;
+            overflow: hidden; border: 2px solid var(--gray-100);
+        }
+        .thumbnail-item img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .thumbnail-item .remove-thumb {
+            position: absolute; top: 4px; right: 4px;
+            width: 22px; height: 22px; border-radius: 50%;
+            background: rgba(0,0,0,0.7); color: #fff;
+            border: none; cursor: pointer; display: flex;
+            align-items: center; justify-content: center;
+            font-size: 0.7rem; transition: var(--transition);
+        }
+        .thumbnail-item .remove-thumb:hover {
+            background: var(--error);
+        }
+
+        /* Logo Preview */
+        .logo-preview {
+            margin-top: 12px; display: none;
+        }
+        .logo-preview img {
+            max-width: 160px; max-height: 80px;
+            border-radius: 8px; border: 2px solid var(--gray-100);
+        }
+
+        /* Consent */
+        .consent-section {
+            padding: 32px 48px;
+            background: var(--gray-50); border-top: 1px solid var(--gray-100);
+        }
+        .consent-label {
+            display: flex; align-items: flex-start; gap: 12px; cursor: pointer;
+        }
+        .consent-label input[type="checkbox"] {
+            width: 20px; height: 20px; accent-color: var(--primary);
+            cursor: pointer; margin-top: 2px; flex-shrink: 0;
+        }
+        .consent-label span {
+            font-size: 0.9rem; color: var(--gray-600); line-height: 1.5;
+        }
+
+        /* Submit */
+        .submit-section {
+            padding: 32px 48px 48px; text-align: center;
+        }
+        .submit-btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 16px 48px; background: var(--primary);
+            color: var(--black); font-family: 'Poppins', sans-serif;
+            font-size: 1rem; font-weight: 700; border: none;
+            border-radius: 50px; cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 20px rgba(253,183,63,0.3);
+        }
+        .submit-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(253,183,63,0.4);
+        }
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        .submit-btn:disabled {
+            opacity: 0.6; cursor: not-allowed; transform: none;
+        }
+        .submit-btn i {
+            font-size: 1.1rem;
+        }
+
+        /* Success Message */
+        .success-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.6); z-index: 9999;
+            align-items: center; justify-content: center;
+            padding: 24px;
+        }
+        .success-overlay.active {
+            display: flex;
+        }
+        .success-card {
+            background: #fff; border-radius: var(--radius-lg);
+            padding: 48px; text-align: center; max-width: 480px;
+            width: 100%; box-shadow: var(--shadow-xl);
+            animation: successIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @keyframes successIn {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .success-card__icon {
+            width: 72px; height: 72px; border-radius: 50%;
+            background: rgba(34,197,94,0.1); margin: 0 auto 20px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .success-card__icon i {
+            font-size: 2rem; color: var(--success);
+        }
+        .success-card h3 {
+            font-size: 1.5rem; font-weight: 700; margin-bottom: 12px;
+        }
+        .success-card p {
+            color: var(--gray-500); font-size: 0.95rem; line-height: 1.6; margin-bottom: 28px;
+        }
+        .success-card .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .story-hero__title { font-size: 2.5rem; }
+            .form-section { padding: 32px 36px; }
+            .consent-section, .submit-section { padding-left: 36px; padding-right: 36px; }
+        }
+        @media (max-width: 768px) {
+            .story-hero { padding: 140px 24px 80px; }
+            .story-hero__title { font-size: 2rem; }
+            .story-hero__subtitle { font-size: 1rem; }
+            .form-grid { grid-template-columns: 1fr; }
+            .checkbox-grid { grid-template-columns: 1fr 1fr; }
+            .form-section { padding: 28px 24px; }
+            .consent-section, .submit-section { padding-left: 24px; padding-right: 24px; }
+        }
+        @media (max-width: 480px) {
+            .story-hero { padding: 120px 16px 60px; }
+            .story-hero__title { font-size: 1.65rem; }
+            .story-hero__badge { font-size: 0.7rem; padding: 6px 14px; }
+            .checkbox-grid { grid-template-columns: 1fr; }
+            .form-section { padding: 24px 18px; }
+            .consent-section, .submit-section { padding-left: 18px; padding-right: 18px; }
+            .submit-btn { width: 100%; justify-content: center; }
+            .thumbnail-item { width: 70px; height: 70px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="/"><img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="40"></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/">Início</a></li>
+                <li>
+                    <a href="/#plataforma">Soluções <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown">
+                        <div class="dropdown__info">
+                            <span class="dropdown__info-badge"><i class="fas fa-cube"></i> Plataforma</span>
+                            <h4>Orbit Gestão</h4>
+                            <p>5 módulos integrados + IA para transformar sua estratégia em execução real.</p>
+                            <div class="dropdown__info-img"><i class="fas fa-rocket"></i></div>
+                        </div>
+                        <div class="dropdown__links">
+                            <a href="/processos"><div class="dd-icon"><i class="fas fa-sitemap"></i></div><div class="dd-text"><span>Processos</span><small>Mapeamento e automação</small></div></a>
+                            <a href="/indicadores"><div class="dd-icon"><i class="fas fa-chart-line"></i></div><div class="dd-text"><span>Indicadores</span><small>KPIs e dashboards</small></div></a>
+                            <a href="/tarefas"><div class="dd-icon"><i class="fas fa-tasks"></i></div><div class="dd-text"><span>Tarefas</span><small>Kanban estratégico</small></div></a>
+                            <a href="/competencias"><div class="dd-icon"><i class="fas fa-users"></i></div><div class="dd-text"><span>Competências</span><small>Gestão de pessoas</small></div></a>
+                            <a href="/auditorias"><div class="dd-icon"><i class="fas fa-clipboard-check"></i></div><div class="dd-text"><span>Auditorias</span><small>Conformidade e qualidade</small></div></a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="/blog">Conhecimento <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown dropdown--sm">
+                        <div class="dropdown__links">
+                            <a href="/blog">
+                                <div class="dd-icon"><i class="fas fa-newspaper"></i></div>
+                                <div class="dd-text"><span>Blog</span><small>Artigos e insights</small></div>
+                            </a>
+                            <a href="/historias">
+                                <div class="dd-icon"><i class="fas fa-star"></i></div>
+                                <div class="dd-text"><span>Histórias de Clientes</span><small>Cases de sucesso</small></div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="/parcerias">Seja Parceiro</a></li>
+                <li><a href="/#contato-form">Fale Conosco</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#" class="btn btn-outline">Entrar</a>
+                <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>
+            </div>
+            <button class="menu-toggle" onclick="document.querySelector('.mobile-menu').classList.toggle('active');document.body.style.overflow=document.querySelector('.mobile-menu').classList.contains('active')?'hidden':''">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="mobile-menu">
+        <button class="mobile-menu-close" onclick="this.parentElement.classList.remove('active');document.body.style.overflow=''">&times;</button>
+        <div class="mobile-menu__label">Menu</div>
+        <a href="/"><i class="fas fa-home"></i> Início</a>
+        <a href="/#contato-form"><i class="fas fa-envelope"></i> Fale Conosco</a>
+        <div class="mobile-menu__label">Soluções</div>
+        <a href="/processos"><i class="fas fa-sitemap"></i> Processos</a>
+        <a href="/indicadores"><i class="fas fa-chart-line"></i> Indicadores</a>
+        <a href="/tarefas"><i class="fas fa-tasks"></i> Tarefas</a>
+        <a href="/competencias"><i class="fas fa-users"></i> Competências</a>
+        <a href="/auditorias"><i class="fas fa-clipboard-check"></i> Auditorias</a>
+        <div class="mobile-menu__label">Conteúdo</div>
+        <a href="/blog"><i class="fas fa-newspaper"></i> Blog</a>
+        <a href="/historias"><i class="fas fa-star"></i> Histórias de Clientes</a>
+        <a href="/parcerias"><i class="fas fa-handshake"></i> Seja Parceiro</a>
+        <div class="mobile-menu__divider"></div>
+        <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>
+    </div>
+
+    <!-- Hero -->
+    <section class="story-hero">
+        <div class="story-hero__bg">
+            <div class="story-hero__glow story-hero__glow--1"></div>
+            <div class="story-hero__glow story-hero__glow--2"></div>
+        </div>
+        <div class="container">
+            <div class="story-hero__badge"><i class="fas fa-star"></i> Histórias de Clientes</div>
+            <h1 class="story-hero__title">Conte sua história <span>com a Orbit</span></h1>
+            <p class="story-hero__subtitle">Sua experiência pode inspirar outras empresas a transformarem sua gestão. Compartilhe como a Orbit Gestão fez a diferença no seu negócio.</p>
+        </div>
+    </section>
+
+    <!-- Form -->
+    <section class="story-form-section">
+        <form id="storyForm" class="story-form-card" novalidate>
+
+            <!-- Customer Info -->
+            <div class="form-section">
+                <div class="form-section__header">
+                    <div class="form-section__icon"><i class="fas fa-user"></i></div>
+                    <div>
+                        <div class="form-section__title">Informações Pessoais</div>
+                        <div class="form-section__desc">Dados de contato para identificação</div>
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nome completo <span class="required">*</span></label>
+                        <input type="text" name="nomeCompleto" required placeholder="Seu nome completo">
+                        <span class="error-msg">Campo obrigatório</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Email <span class="required">*</span></label>
+                        <input type="email" name="email" required placeholder="seu@email.com">
+                        <span class="error-msg">Informe um email válido</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone <span class="required">*</span></label>
+                        <input type="tel" name="telefone" required placeholder="(00) 00000-0000" id="telefoneInput">
+                        <span class="error-msg">Informe um telefone válido</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Cargo / Função <span class="required">*</span></label>
+                        <input type="text" name="cargo" required placeholder="Ex: Gerente de Qualidade">
+                        <span class="error-msg">Campo obrigatório</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Empresa <span class="required">*</span></label>
+                        <input type="text" name="empresa" required placeholder="Nome da empresa">
+                        <span class="error-msg">Campo obrigatório</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Segmento da empresa <span class="required">*</span></label>
+                        <select name="segmento" required>
+                            <option value="">Selecione o segmento</option>
+                            <option value="Indústria">Indústria</option>
+                            <option value="Serviços">Serviços</option>
+                            <option value="Tecnologia">Tecnologia</option>
+                            <option value="Saúde">Saúde</option>
+                            <option value="Educação">Educação</option>
+                            <option value="Varejo">Varejo</option>
+                            <option value="Financeiro">Financeiro</option>
+                            <option value="Agronegócio">Agronegócio</option>
+                            <option value="Outro">Outro</option>
+                        </select>
+                        <span class="error-msg">Selecione um segmento</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Media -->
+            <div class="form-section">
+                <div class="form-section__header">
+                    <div class="form-section__icon"><i class="fas fa-share-nodes"></i></div>
+                    <div>
+                        <div class="form-section__title">Redes Sociais</div>
+                        <div class="form-section__desc">Links opcionais para enriquecer sua história</div>
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>LinkedIn <span class="optional">(opcional)</span></label>
+                        <input type="url" name="linkedin" placeholder="https://linkedin.com/in/seu-perfil">
+                    </div>
+                    <div class="form-group">
+                        <label>Instagram <span class="optional">(opcional)</span></label>
+                        <input type="url" name="instagram" placeholder="https://instagram.com/seu-perfil">
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Website da empresa <span class="optional">(opcional)</span></label>
+                        <input type="url" name="website" placeholder="https://suaempresa.com.br">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Story -->
+            <div class="form-section">
+                <div class="form-section__header">
+                    <div class="form-section__icon"><i class="fas fa-pen-fancy"></i></div>
+                    <div>
+                        <div class="form-section__title">Sua História</div>
+                        <div class="form-section__desc">Conte em detalhes como a Orbit impactou sua empresa</div>
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label>Título da sua história <span class="required">*</span></label>
+                        <input type="text" name="titulo" required placeholder="Ex: Como reduzimos 40% dos retrabalhos com a Orbit">
+                        <span class="error-msg">Campo obrigatório</span>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Qual era o desafio antes da Orbit? <span class="required">*</span></label>
+                        <textarea name="desafio" required placeholder="Descreva os problemas e desafios que sua empresa enfrentava antes de usar a Orbit Gestão..."></textarea>
+                        <span class="error-msg">Campo obrigatório</span>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Como a Orbit ajudou a resolver? <span class="required">*</span></label>
+                        <textarea name="solucao" required placeholder="Conte como a plataforma foi implementada e quais funcionalidades fizeram a diferença..."></textarea>
+                        <span class="error-msg">Campo obrigatório</span>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Quais resultados alcançados? <span class="required">*</span></label>
+                        <textarea name="resultados" required placeholder="Compartilhe números, métricas, melhorias concretas que sua empresa obteve..."></textarea>
+                        <span class="error-msg">Campo obrigatório</span>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Depoimento livre / Mensagem adicional <span class="optional">(opcional)</span></label>
+                        <textarea name="depoimento" placeholder="Fique à vontade para deixar uma mensagem adicional, dica ou depoimento pessoal..."></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Quais módulos utiliza?</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="modulos" value="Processos">
+                                <span>Processos</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="modulos" value="Indicadores">
+                                <span>Indicadores</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="modulos" value="Tarefas">
+                                <span>Tarefas</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="modulos" value="Competências">
+                                <span>Competências</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="modulos" value="Auditorias">
+                                <span>Auditorias</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="modulos" value="Orbit IA">
+                                <span>Orbit IA</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Media -->
+            <div class="form-section">
+                <div class="form-section__header">
+                    <div class="form-section__icon"><i class="fas fa-image"></i></div>
+                    <div>
+                        <div class="form-section__title">Mídia</div>
+                        <div class="form-section__desc">Fotos, vídeos e logo para ilustrar sua história</div>
+                    </div>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label>Upload de fotos <span class="optional">(até 5 imagens, máx. 2MB cada)</span></label>
+                        <div class="file-upload-area" id="photosUploadArea">
+                            <input type="file" id="photosInput" accept="image/*" multiple>
+                            <i class="fas fa-cloud-arrow-up"></i>
+                            <p>Arraste fotos aqui ou clique para selecionar</p>
+                            <span class="upload-hint">JPG, PNG ou WebP - Máximo 5 imagens de 2MB cada</span>
+                        </div>
+                        <div class="thumbnail-grid" id="photosThumbnails"></div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>URL de vídeo do YouTube ou Vimeo <span class="optional">(opcional)</span></label>
+                        <input type="text" name="videoUrl" placeholder="https://youtube.com/watch?v=... ou https://vimeo.com/...">
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Logo da empresa <span class="optional">(opcional, máx. 2MB)</span></label>
+                        <div class="file-upload-area" id="logoUploadArea">
+                            <input type="file" id="logoInput" accept="image/*">
+                            <i class="fas fa-building"></i>
+                            <p>Arraste o logo aqui ou clique para selecionar</p>
+                            <span class="upload-hint">JPG, PNG ou SVG - Máximo 2MB</span>
+                        </div>
+                        <div class="logo-preview" id="logoPreview">
+                            <img id="logoPreviewImg" alt="Logo preview">
+                            <button type="button" class="remove-thumb" id="removeLogo" title="Remover logo" style="margin-top:8px;width:auto;height:auto;border-radius:6px;padding:4px 12px;font-size:0.78rem;background:var(--error);color:#fff;border:none;cursor:pointer;">
+                                <i class="fas fa-trash"></i> Remover
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Consent -->
+            <div class="consent-section">
+                <label class="consent-label">
+                    <input type="checkbox" name="consentimento" id="consentCheckbox" required>
+                    <span>Autorizo a Orbit Gestão a publicar minha história no site, incluindo nome, empresa e imagens enviadas. <span class="required">*</span></span>
+                </label>
+                <span class="error-msg" id="consentError" style="margin-left:32px;">Você precisa autorizar para enviar</span>
+            </div>
+
+            <!-- Submit -->
+            <div class="submit-section">
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <i class="fas fa-paper-plane"></i> Enviar minha história
+                </button>
+            </div>
+
+        </form>
+    </section>
+
+    <!-- Success Overlay -->
+    <div class="success-overlay" id="successOverlay">
+        <div class="success-card">
+            <div class="success-card__icon"><i class="fas fa-check-circle"></i></div>
+            <h3>História enviada com sucesso!</h3>
+            <p>Obrigado por compartilhar sua experiência. Nossa equipe irá revisar sua história e em breve ela poderá ser publicada no site.</p>
+            <a href="/historias" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Ver Histórias</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo"><img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="36"></div>
+                    <p>Transformando estratégia em execução para empresas de médio porte.</p>
+                    <div class="social-links">
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h5>Contato</h5>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone"></i> +55 (11) 9999-9999</li>
+                        <li><i class="fas fa-envelope"></i> contato@orbit.com</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Soluções</h5>
+                    <ul>
+                        <li><a href="/processos">Processos</a></li>
+                        <li><a href="/indicadores">Indicadores</a></li>
+                        <li><a href="/tarefas">Tarefas</a></li>
+                        <li><a href="/competencias">Competências</a></li>
+                        <li><a href="/auditorias">Auditorias</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Conhecimento</h5>
+                    <ul>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/historias">Histórias de Clientes</a></li>
+                        <li><a href="#">Documentação</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Webinars</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Orbit Gestão. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" style="display:none;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+    // ========== Dropdown ==========
+    document.querySelectorAll('.nav-menu > li').forEach(item => {
+        const dropdown = item.querySelector('.dropdown');
+        if (!dropdown) return;
+        item.addEventListener('mouseenter', () => dropdown.classList.add('show'));
+        item.addEventListener('mouseleave', () => dropdown.classList.remove('show'));
+    });
+
+    // ========== Header Scroll ==========
+    window.addEventListener('scroll', () => {
+        document.querySelector('.header').classList.toggle('scrolled', window.scrollY > 50);
+        const btn = document.getElementById('backToTop');
+        btn.style.display = window.scrollY > 400 ? 'flex' : 'none';
+    });
+    document.getElementById('backToTop').addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ========== Phone Mask ==========
+    const telefoneInput = document.getElementById('telefoneInput');
+    telefoneInput.addEventListener('input', function () {
+        let v = this.value.replace(/\D/g, '');
+        if (v.length > 11) v = v.slice(0, 11);
+        if (v.length > 6) {
+            this.value = '(' + v.slice(0, 2) + ') ' + v.slice(2, 7) + '-' + v.slice(7);
+        } else if (v.length > 2) {
+            this.value = '(' + v.slice(0, 2) + ') ' + v.slice(2);
+        } else if (v.length > 0) {
+            this.value = '(' + v;
+        }
+    });
+
+    // ========== Photo Upload ==========
+    const photosInput = document.getElementById('photosInput');
+    const photosArea = document.getElementById('photosUploadArea');
+    const photosThumbnails = document.getElementById('photosThumbnails');
+    let uploadedPhotos = []; // { file, base64 }
+
+    ['dragenter', 'dragover'].forEach(evt => {
+        photosArea.addEventListener(evt, e => { e.preventDefault(); photosArea.classList.add('dragover'); });
+    });
+    ['dragleave', 'drop'].forEach(evt => {
+        photosArea.addEventListener(evt, e => { e.preventDefault(); photosArea.classList.remove('dragover'); });
+    });
+    photosArea.addEventListener('drop', e => {
+        handlePhotoFiles(e.dataTransfer.files);
+    });
+    photosInput.addEventListener('change', () => {
+        handlePhotoFiles(photosInput.files);
+        photosInput.value = '';
+    });
+
+    function handlePhotoFiles(files) {
+        const remaining = 5 - uploadedPhotos.length;
+        const toProcess = Array.from(files).slice(0, remaining);
+        toProcess.forEach(file => {
+            if (!file.type.startsWith('image/')) return;
+            if (file.size > 2 * 1024 * 1024) {
+                alert('A imagem "' + file.name + '" excede 2MB. Por favor, escolha uma imagem menor.');
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                uploadedPhotos.push({ name: file.name, base64: e.target.result });
+                renderPhotoThumbnails();
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    function renderPhotoThumbnails() {
+        photosThumbnails.innerHTML = uploadedPhotos.map((p, i) =>
+            '<div class="thumbnail-item">' +
+                '<img src="' + p.base64 + '" alt="' + p.name + '">' +
+                '<button type="button" class="remove-thumb" onclick="removePhoto(' + i + ')" title="Remover">&times;</button>' +
+            '</div>'
+        ).join('');
+    }
+
+    function removePhoto(index) {
+        uploadedPhotos.splice(index, 1);
+        renderPhotoThumbnails();
+    }
+
+    // ========== Logo Upload ==========
+    const logoInput = document.getElementById('logoInput');
+    const logoArea = document.getElementById('logoUploadArea');
+    const logoPreview = document.getElementById('logoPreview');
+    const logoPreviewImg = document.getElementById('logoPreviewImg');
+    const removeLogo = document.getElementById('removeLogo');
+    let uploadedLogo = null;
+
+    ['dragenter', 'dragover'].forEach(evt => {
+        logoArea.addEventListener(evt, e => { e.preventDefault(); logoArea.classList.add('dragover'); });
+    });
+    ['dragleave', 'drop'].forEach(evt => {
+        logoArea.addEventListener(evt, e => { e.preventDefault(); logoArea.classList.remove('dragover'); });
+    });
+    logoArea.addEventListener('drop', e => {
+        handleLogoFile(e.dataTransfer.files[0]);
+    });
+    logoInput.addEventListener('change', () => {
+        if (logoInput.files[0]) handleLogoFile(logoInput.files[0]);
+        logoInput.value = '';
+    });
+
+    function handleLogoFile(file) {
+        if (!file || !file.type.startsWith('image/')) return;
+        if (file.size > 2 * 1024 * 1024) {
+            alert('O arquivo excede 2MB. Por favor, escolha uma imagem menor.');
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            uploadedLogo = e.target.result;
+            logoPreviewImg.src = uploadedLogo;
+            logoPreview.style.display = 'block';
+            logoArea.style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+    }
+
+    removeLogo.addEventListener('click', () => {
+        uploadedLogo = null;
+        logoPreview.style.display = 'none';
+        logoArea.style.display = '';
+    });
+
+    // ========== Form Submission ==========
+    const form = document.getElementById('storyForm');
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!validateForm()) return;
+
+        const fd = new FormData(form);
+        const modulos = Array.from(form.querySelectorAll('input[name="modulos"]:checked')).map(c => c.value);
+
+        const story = {
+            id: 'cs_' + Date.now(),
+            status: 'pending',
+            nome: fd.get('nomeCompleto'),
+            email: fd.get('email'),
+            telefone: fd.get('telefone'),
+            cargo: fd.get('cargo'),
+            empresa: fd.get('empresa'),
+            segmento: fd.get('segmento'),
+            linkedin: fd.get('linkedin'),
+            instagram: fd.get('instagram'),
+            website: fd.get('website'),
+            titulo: fd.get('titulo'),
+            desafio: fd.get('desafio'),
+            solucao: fd.get('solucao'),
+            resultados: fd.get('resultados'),
+            depoimento: fd.get('depoimento'),
+            modulos: modulos,
+            videoUrl: fd.get('videoUrl'),
+            photos: uploadedPhotos.map(p => p.base64),
+            companyLogo: uploadedLogo,
+            consentimento: true,
+            createdAt: new Date().toISOString()
+        };
+
+        // Save to localStorage
+        let db;
+        try { db = JSON.parse(localStorage.getItem('orbit_cms')) || {}; }
+        catch { db = {}; }
+        if (!Array.isArray(db.customerStories)) db.customerStories = [];
+        db.customerStories.push(story);
+        localStorage.setItem('orbit_cms', JSON.stringify(db));
+
+        // DataLayer push
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: 'customer_story_submit',
+            empresa: story.empresa,
+            email: story.email
+        });
+
+        // Show success
+        document.getElementById('successOverlay').classList.add('active');
+        form.reset();
+        uploadedPhotos = [];
+        uploadedLogo = null;
+        photosThumbnails.innerHTML = '';
+        logoPreview.style.display = 'none';
+        logoArea.style.display = '';
+    });
+
+    function validateForm() {
+        let valid = true;
+
+        // Clear previous errors
+        form.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+        form.querySelectorAll('.error-msg').forEach(el => el.style.display = 'none');
+
+        // Required text/email/tel/select fields
+        form.querySelectorAll('[required]').forEach(field => {
+            if (field.type === 'checkbox') return; // handle consent separately
+            const val = field.value.trim();
+            if (!val) {
+                field.classList.add('error');
+                const msg = field.closest('.form-group')?.querySelector('.error-msg');
+                if (msg) msg.style.display = 'block';
+                valid = false;
+            }
+        });
+
+        // Email validation
+        const emailField = form.querySelector('[name="email"]');
+        if (emailField.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value.trim())) {
+            emailField.classList.add('error');
+            const msg = emailField.closest('.form-group')?.querySelector('.error-msg');
+            if (msg) msg.style.display = 'block';
+            valid = false;
+        }
+
+        // Phone validation (at least 14 chars with mask)
+        const phoneField = form.querySelector('[name="telefone"]');
+        if (phoneField.value && phoneField.value.replace(/\D/g, '').length < 10) {
+            phoneField.classList.add('error');
+            const msg = phoneField.closest('.form-group')?.querySelector('.error-msg');
+            if (msg) msg.style.display = 'block';
+            valid = false;
+        }
+
+        // Consent
+        const consent = document.getElementById('consentCheckbox');
+        const consentError = document.getElementById('consentError');
+        if (!consent.checked) {
+            consentError.style.display = 'block';
+            valid = false;
+        } else {
+            consentError.style.display = 'none';
+        }
+
+        // Scroll to first error
+        if (!valid) {
+            const firstError = form.querySelector('.error, .error-msg[style*="block"]');
+            if (firstError) {
+                firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        return valid;
+    }
+
+    // Remove error on input
+    form.addEventListener('input', function (e) {
+        if (e.target.classList.contains('error')) {
+            e.target.classList.remove('error');
+            const msg = e.target.closest('.form-group')?.querySelector('.error-msg');
+            if (msg) msg.style.display = 'none';
+        }
+    });
+    form.addEventListener('change', function (e) {
+        if (e.target.classList.contains('error')) {
+            e.target.classList.remove('error');
+            const msg = e.target.closest('.form-group')?.querySelector('.error-msg');
+            if (msg) msg.style.display = 'none';
+        }
+        if (e.target.id === 'consentCheckbox') {
+            document.getElementById('consentError').style.display = e.target.checked ? 'none' : 'block';
+        }
+    });
+
+    // Close success overlay on background click
+    document.getElementById('successOverlay').addEventListener('click', function (e) {
+        if (e.target === this) this.classList.remove('active');
+    });
+    </script>
+
+</body>
+</html>

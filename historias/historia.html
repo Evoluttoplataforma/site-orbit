@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>História de Cliente - Orbit Gestão</title>
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=2">
+    <style>
+        /* ══════ HERO ══════ */
+        .story-hero {
+            padding: 140px 24px 80px;
+            max-width: 1140px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+        .story-hero__left {}
+        .story-hero__logo {
+            margin-bottom: 28px;
+        }
+        .story-hero__logo img {
+            max-height: 48px;
+            max-width: 180px;
+            object-fit: contain;
+        }
+        .story-hero__logo-fallback {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #111;
+        }
+        .story-hero__logo-fallback i {
+            font-size: 1.4rem;
+            color: #9CA3AF;
+        }
+        .story-hero h1 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 800;
+            color: #111;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            letter-spacing: -0.5px;
+        }
+        .story-hero__desc {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #4B5563;
+            margin-bottom: 28px;
+        }
+        .story-hero__social {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .story-hero__social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f3f4f6;
+            color: #374151;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .story-hero__social a:hover {
+            background: #000;
+            color: #FDB73F;
+        }
+        .story-hero__buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .story-hero__buttons .btn {
+            font-size: 0.85rem;
+        }
+        .btn-outline-dark {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 24px;
+            border: 1.5px solid #111;
+            border-radius: 50px;
+            background: transparent;
+            color: #111;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .btn-outline-dark:hover {
+            background: #111;
+            color: #fff;
+        }
+        .story-hero__image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+        }
+        .story-hero__image img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            display: block;
+        }
+        .story-hero__image-empty {
+            width: 100%;
+            height: 380px;
+            background: linear-gradient(135deg, #f9fafb, #e5e7eb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d1d5db;
+            font-size: 3rem;
+        }
+
+        /* ══════ TESTIMONIALS (side by side) ══════ */
+        .story-testimonials {
+            border-top: 1px solid #e5e7eb;
+            padding: 60px 24px;
+        }
+        .story-testimonials__inner {
+            max-width: 1140px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+        .story-quote {
+            padding: 0 16px;
+        }
+        .story-quote__text {
+            font-size: 0.95rem;
+            font-style: italic;
+            line-height: 1.8;
+            color: #374151;
+            margin-bottom: 20px;
+        }
+        .story-quote__author {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #111;
+        }
+        .story-quote__role {
+            font-size: 0.8rem;
+            color: #FDB73F;
+            font-weight: 600;
+        }
+
+        /* ══════ COMPANY INFO BAR ══════ */
+        .story-info-bar {
+            border-top: 1px solid #e5e7eb;
+            padding: 40px 24px;
+        }
+        .story-info-bar__inner {
+            max-width: 1140px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            text-align: center;
+        }
+        .info-item__label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #111;
+            margin-bottom: 6px;
+        }
+        .info-item__value {
+            font-size: 0.88rem;
+            color: #6B7280;
+        }
+
+        /* ══════ RESULTS METRICS ══════ */
+        .story-metrics {
+            padding: 60px 24px 72px;
+        }
+        .story-metrics__inner {
+            max-width: 1140px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+        .metric-item {}
+        .metric-item__number {
+            font-size: clamp(2.2rem, 4vw, 3rem);
+            font-weight: 800;
+            color: #FDB73F;
+            line-height: 1.1;
+            margin-bottom: 6px;
+        }
+        .metric-item__label {
+            font-size: 0.82rem;
+            color: #6B7280;
+            font-weight: 500;
+        }
+
+        /* ══════ ARTICLE CONTENT ══════ */
+        .story-content {
+            border-top: 1px solid #e5e7eb;
+            padding: 64px 24px 80px;
+        }
+        .story-content__inner {
+            max-width: 760px;
+            margin: 0 auto;
+            font-family: 'Inter', 'Poppins', sans-serif;
+        }
+        .story-content h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #111;
+            margin: 48px 0 16px;
+            line-height: 1.3;
+        }
+        .story-content h2:first-child {
+            margin-top: 0;
+        }
+        .story-content p {
+            font-size: 1.02rem;
+            line-height: 1.9;
+            color: #374151;
+            margin-bottom: 24px;
+            white-space: pre-line;
+        }
+        .story-content blockquote {
+            border-left: 3px solid #FDB73F;
+            margin: 36px 0;
+            padding: 20px 28px;
+            background: #FFFDF5;
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            color: #4B5563;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        .story-content blockquote footer {
+            font-style: normal;
+            font-size: 0.82rem;
+            color: #9CA3AF;
+            margin-top: 12px;
+            font-weight: 600;
+        }
+        .story-content img {
+            max-width: 100%;
+            border-radius: 12px;
+            margin: 36px 0;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        }
+        .story-content strong {
+            color: #111;
+            font-weight: 600;
+        }
+
+        /* ── Photo Gallery ── */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 12px;
+            margin: 36px 0;
+        }
+        .photo-gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            cursor: pointer;
+            margin: 0;
+            transition: transform 0.3s;
+        }
+        .photo-gallery img:hover {
+            transform: scale(1.03);
+        }
+
+        /* ── Video Embed ── */
+        .video-embed {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 12px;
+            margin: 36px 0;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+        }
+        .video-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* ── Modules Pills ── */
+        .story-modules {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .story-module-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 16px;
+            border-radius: 50px;
+            background: rgba(253,183,63,0.1);
+            color: #E5A235;
+            font-size: 0.78rem;
+            font-weight: 600;
+        }
+        .story-module-pill i {
+            font-size: 0.7rem;
+        }
+
+        /* ══════ SHARE BAR ══════ */
+        .story-share-bar {
+            border-top: 1px solid #e5e7eb;
+            padding: 32px 24px;
+        }
+        .story-share-bar__inner {
+            max-width: 760px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .share-label {
+            font-size: 0.82rem;
+            color: #9CA3AF;
+            font-weight: 500;
+        }
+        .share-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        .share-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f3f4f6;
+            border: none;
+            color: #6B7280;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .share-btn:hover {
+            background: #000;
+            color: #FDB73F;
+        }
+
+        /* ══════ CTA BANNER ══════ */
+        .story-cta {
+            background: #000;
+            padding: 64px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .story-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(253,183,63,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .story-cta h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .story-cta p {
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 24px;
+            font-size: 0.95rem;
+            position: relative;
+        }
+        .story-cta .btn {
+            position: relative;
+        }
+
+        /* ══════ RELATED ══════ */
+        .related-section {
+            padding: 64px 0 80px;
+            background: #f9fafb;
+            overflow: hidden;
+        }
+        .related-section__header {
+            text-align: center;
+            margin-bottom: 36px;
+            padding: 0 24px;
+        }
+        .related-section__header h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #111;
+        }
+        .related-section__header p {
+            font-size: 0.92rem;
+            color: #9CA3AF;
+            margin-top: 6px;
+        }
+        .related-carousel-wrap {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        .related-carousel {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+        }
+        .related-carousel::-webkit-scrollbar {
+            display: none;
+        }
+        .related-card {
+            flex: 0 0 340px;
+            scroll-snap-align: start;
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+            border: 1px solid #f3f4f6;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            padding: 28px;
+        }
+        .related-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+        }
+        .related-card__segment {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #E5A235;
+            margin-bottom: 12px;
+        }
+        .related-card__company {
+            font-size: 0.82rem;
+            color: #9CA3AF;
+            margin-bottom: 8px;
+        }
+        .related-card h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            line-height: 1.4;
+            color: #111;
+            margin-bottom: 16px;
+            flex: 1;
+        }
+        .related-card__link {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #111;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        /* ══════ LIGHTBOX ══════ */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        .lightbox.active {
+            display: flex;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 8px;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* ══════ NOT FOUND ══════ */
+        .article-not-found {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px;
+            margin-top: 72px;
+            flex-direction: column;
+        }
+        .article-not-found i {
+            font-size: 3rem;
+            color: #d1d5db;
+            margin-bottom: 20px;
+        }
+        .article-not-found h2 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: #1f2937;
+        }
+        .article-not-found p {
+            color: #6B7280;
+            margin-bottom: 24px;
+        }
+
+        /* ══════ RESPONSIVE ══════ */
+        @media (max-width: 1024px) {
+            .nav-menu, .nav-actions { display: none; }
+            .menu-toggle { display: flex; }
+            .story-hero {
+                grid-template-columns: 1fr;
+                padding: 120px 24px 60px;
+                gap: 36px;
+            }
+            .story-testimonials__inner {
+                grid-template-columns: 1fr;
+                gap: 36px;
+            }
+            .story-info-bar__inner {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .story-hero {
+                padding: 110px 20px 48px;
+            }
+            .story-hero h1 {
+                font-size: 1.6rem;
+            }
+            .story-hero__image img,
+            .story-hero__image-empty {
+                height: 260px;
+            }
+            .story-info-bar__inner {
+                grid-template-columns: 1fr 1fr;
+                gap: 24px;
+            }
+            .story-metrics__inner {
+                grid-template-columns: 1fr 1fr;
+                gap: 28px;
+            }
+            .story-content h2 {
+                font-size: 1.2rem;
+            }
+            .story-share-bar__inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .related-card {
+                flex: 0 0 280px;
+            }
+            .photo-gallery {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 480px) {
+            .story-hero {
+                padding: 100px 16px 40px;
+            }
+            .story-hero h1 {
+                font-size: 1.4rem;
+            }
+            .story-hero__image img,
+            .story-hero__image-empty {
+                height: 200px;
+            }
+            .story-info-bar__inner {
+                grid-template-columns: 1fr;
+            }
+            .story-metrics__inner {
+                grid-template-columns: 1fr;
+            }
+            .photo-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo"><a href="/"><img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="40"></a></div>
+            <ul class="nav-menu">
+                <li><a href="/">Inicio</a></li>
+                <li>
+                    <a href="/#plataforma">Soluções <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown">
+                        <div class="dropdown__info">
+                            <span class="dropdown__info-badge"><i class="fas fa-cube"></i> Plataforma</span>
+                            <h4>Orbit Gestão</h4>
+                            <p>5 módulos integrados + IA para transformar sua estratégia em execução real.</p>
+                            <div class="dropdown__info-img"><i class="fas fa-rocket"></i></div>
+                        </div>
+                        <div class="dropdown__links">
+                            <a href="/processos"><div class="dd-icon"><i class="fas fa-sitemap"></i></div><div class="dd-text"><span>Processos</span><small>Mapeamento e automação</small></div></a>
+                            <a href="/indicadores"><div class="dd-icon"><i class="fas fa-chart-line"></i></div><div class="dd-text"><span>Indicadores</span><small>KPIs e dashboards</small></div></a>
+                            <a href="/tarefas"><div class="dd-icon"><i class="fas fa-tasks"></i></div><div class="dd-text"><span>Tarefas</span><small>Kanban estratégico</small></div></a>
+                            <a href="/competencias"><div class="dd-icon"><i class="fas fa-users"></i></div><div class="dd-text"><span>Competências</span><small>Gestão de pessoas</small></div></a>
+                            <a href="/auditorias"><div class="dd-icon"><i class="fas fa-clipboard-check"></i></div><div class="dd-text"><span>Auditorias</span><small>Conformidade e qualidade</small></div></a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="/blog">Conhecimento <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown dropdown--sm">
+                        <div class="dropdown__links">
+                            <a href="/blog"><div class="dd-icon"><i class="fas fa-newspaper"></i></div><div class="dd-text"><span>Blog</span><small>Artigos e insights</small></div></a>
+                            <a href="/historias"><div class="dd-icon"><i class="fas fa-star"></i></div><div class="dd-text"><span>Histórias de Clientes</span><small>Cases de sucesso</small></div></a>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="/parcerias">Seja Parceiro</a></li>
+                <li><a href="/#contato-form">Fale Conosco</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#" class="btn btn-outline">Entrar</a>
+                <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>
+            </div>
+            <button class="menu-toggle" onclick="document.querySelector('.mobile-menu').classList.toggle('active');document.body.style.overflow=document.querySelector('.mobile-menu').classList.contains('active')?'hidden':''">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+    <div class="mobile-menu">
+        <button class="mobile-menu-close" onclick="this.parentElement.classList.remove('active');document.body.style.overflow=''">&times;</button>
+        <div class="mobile-menu__label">Menu</div>
+        <a href="/"><i class="fas fa-home"></i> Inicio</a>
+        <a href="/#contato-form"><i class="fas fa-envelope"></i> Fale Conosco</a>
+        <div class="mobile-menu__label">Soluções</div>
+        <a href="/processos"><i class="fas fa-sitemap"></i> Processos</a>
+        <a href="/indicadores"><i class="fas fa-chart-line"></i> Indicadores</a>
+        <a href="/tarefas"><i class="fas fa-tasks"></i> Tarefas</a>
+        <a href="/competencias"><i class="fas fa-users"></i> Competências</a>
+        <a href="/auditorias"><i class="fas fa-clipboard-check"></i> Auditorias</a>
+        <div class="mobile-menu__label">Conteudo</div>
+        <a href="/blog"><i class="fas fa-newspaper"></i> Blog</a>
+        <a href="/historias"><i class="fas fa-star"></i> Historias de Clientes</a>
+        <a href="/parcerias"><i class="fas fa-handshake"></i> Seja Parceiro</a>
+        <div class="mobile-menu__divider"></div>
+        <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>
+    </div>
+
+    <div id="storyContent"></div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" onclick="this.classList.remove('active')">
+        <button class="lightbox-close" onclick="document.getElementById('lightbox').classList.remove('active')"><i class="fas fa-times"></i></button>
+        <img id="lightboxImg" src="" alt="">
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo"><img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="36"></div>
+                    <p>Transformando estrategia em execução para empresas de medio porte.</p>
+                    <div class="social-links">
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h5>Contato</h5>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone"></i> +55 (11) 9999-9999</li>
+                        <li><i class="fas fa-envelope"></i> contato@orbit.com</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Soluções</h5>
+                    <ul>
+                        <li><a href="/processos">Processos</a></li>
+                        <li><a href="/indicadores">Indicadores</a></li>
+                        <li><a href="/tarefas">Tarefas</a></li>
+                        <li><a href="/competencias">Competências</a></li>
+                        <li><a href="/auditorias">Auditorias</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Conhecimento</h5>
+                    <ul>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/historias">Historias de Clientes</a></li>
+                        <li><a href="#">Documentação</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Orbit Gestão. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+    const SEGMENTS = {
+        industria: 'Indústria', servicos: 'Serviços', tecnologia: 'Tecnologia',
+        saude: 'Saúde', educacao: 'Educação', varejo: 'Varejo',
+        financeiro: 'Financeiro', agronegocio: 'Agronegócio', outro: 'Outro'
+    };
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        const d = document.createElement('div');
+        d.textContent = str;
+        return d.innerHTML;
+    }
+
+    function formatDate(d) {
+        try { return new Date(d).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' }); }
+        catch { return d; }
+    }
+
+    function getDB() {
+        try { return JSON.parse(localStorage.getItem('orbit_cms')) || { customerStories: [] }; }
+        catch { return { customerStories: [] }; }
+    }
+
+    function getVideoEmbed(url) {
+        if (!url) return '';
+        const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&?#]+)/);
+        if (ytMatch) return '<div class="video-embed"><iframe src="https://www.youtube.com/embed/' + ytMatch[1] + '" allowfullscreen></iframe></div>';
+        const vmMatch = url.match(/vimeo\.com\/(\d+)/);
+        if (vmMatch) return '<div class="video-embed"><iframe src="https://player.vimeo.com/video/' + vmMatch[1] + '" allowfullscreen></iframe></div>';
+        return '<p><a href="' + escapeHtml(url) + '" target="_blank"><i class="fas fa-play-circle"></i> Assistir video</a></p>';
+    }
+
+    // ══ Load Story ══
+    // Read ID from URL path (Vercel rewrite: /historias/:id → /historias/historia.html)
+    // Primary: extract from path /historias/story-id
+    // Fallback: ?id= query param
+    const params = new URLSearchParams(window.location.search);
+    const pathId = window.location.pathname.split('/historias/')[1] || '';
+    const storyId = (pathId && pathId !== 'historia' && pathId !== 'historia.html') ? decodeURIComponent(pathId) : params.get('id');
+    const db = getDB();
+    const story = (db.customerStories || []).find(s => s.id === storyId && s.status === 'published');
+    const container = document.getElementById('storyContent');
+
+    if (!story) {
+        container.innerHTML = '<div class="article-not-found">' +
+            '<i class="fas fa-search"></i>' +
+            '<h2>História não encontrada</h2>' +
+            '<p>Esta história pode ter sido removida ou ainda não foi publicada.</p>' +
+            '<a href="/historias" class="btn btn-primary">Ver todas as histórias</a>' +
+        '</div>';
+    } else {
+        document.title = escapeHtml(story.titulo) + ' — ' + escapeHtml(story.empresa) + ' | Orbit Gestão';
+
+        const coverImg = (story.photos && story.photos.length) ? story.photos[0] : '';
+        const segment = SEGMENTS[story.segmento] || story.segmento || '';
+        const modulos = story.modulos || [];
+        const photos = (story.photos || []).slice(1);
+        const pageUrl = encodeURIComponent(window.location.href);
+        const pageTitle = encodeURIComponent(story.titulo);
+
+        const moduleIcons = {
+            'Processos': 'fa-sitemap', 'Indicadores': 'fa-chart-line', 'Tarefas': 'fa-tasks',
+            'Competências': 'fa-users', 'Auditorias': 'fa-clipboard-check', 'Orbit IA': 'fa-robot'
+        };
+
+        let html = '';
+
+        // ═══ HERO: two columns (left: text, right: image) ═══
+        html += '<section class="story-hero">';
+        html += '<div class="story-hero__left">';
+
+        // Company logo
+        html += '<div class="story-hero__logo">';
+        if (story.companyLogo) {
+            html += '<img src="' + story.companyLogo + '" alt="' + escapeHtml(story.empresa) + '">';
+        } else {
+            html += '<div class="story-hero__logo-fallback"><i class="fas fa-building"></i> ' + escapeHtml(story.empresa) + '</div>';
+        }
+        html += '</div>';
+
+        // Title
+        html += '<h1>' + escapeHtml(story.titulo) + '</h1>';
+
+        // Description (first 2 lines of desafio as intro)
+        const introText = (story.desafio || '').split('\n').slice(0, 3).join(' ').slice(0, 300);
+        if (introText) {
+            html += '<p class="story-hero__desc">' + escapeHtml(introText) + (story.desafio.length > 300 ? '...' : '') + '</p>';
+        }
+
+        // Social links
+        if (story.linkedin || story.instagram || story.website) {
+            html += '<div class="story-hero__social">';
+            if (story.linkedin) html += '<a href="' + escapeHtml(story.linkedin) + '" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>';
+            if (story.instagram) html += '<a href="' + escapeHtml(story.instagram) + '" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>';
+            if (story.website) html += '<a href="' + escapeHtml(story.website) + '" target="_blank" title="Website"><i class="fas fa-globe"></i></a>';
+            html += '</div>';
+        }
+
+        // Buttons
+        html += '<div class="story-hero__buttons">';
+        html += '<a href="/#contato-form" class="btn btn-primary">Conhecer Orbit</a>';
+        html += '<a href="/historias" class="btn-outline-dark">Ver todas as histórias</a>';
+        html += '</div>';
+
+        html += '</div>'; // end left
+
+        // Right: main image
+        html += '<div class="story-hero__image">';
+        if (coverImg) {
+            html += '<img src="' + coverImg + '" alt="' + escapeHtml(story.titulo) + '">';
+        } else {
+            html += '<div class="story-hero__image-empty"><i class="fas fa-image"></i></div>';
+        }
+        html += '</div>';
+
+        html += '</section>'; // end hero
+
+        // ═══ TESTIMONIAL (depoimento) ═══
+        if (story.depoimento) {
+            html += '<section class="story-testimonials">';
+            html += '<div class="story-testimonials__inner">';
+            // Split depoimento in two if it's long enough, otherwise show single centered
+            const depoText = story.depoimento;
+            const midIdx = depoText.length > 200 ? Math.floor(depoText.length / 2) : -1;
+            let splitAt = -1;
+            if (midIdx > 0) {
+                // Find nearest period or comma near the middle
+                for (let i = midIdx; i < midIdx + 80 && i < depoText.length; i++) {
+                    if (depoText[i] === '.' || depoText[i] === ',' || depoText[i] === ';') { splitAt = i + 1; break; }
+                }
+                if (splitAt === -1) {
+                    for (let i = midIdx; i > midIdx - 80 && i >= 0; i--) {
+                        if (depoText[i] === '.' || depoText[i] === ',' || depoText[i] === ';') { splitAt = i + 1; break; }
+                    }
+                }
+            }
+            if (splitAt > 0) {
+                const part1 = depoText.slice(0, splitAt).trim();
+                const part2 = depoText.slice(splitAt).trim();
+                html += '<div class="story-quote">';
+                html += '<p class="story-quote__text">&ldquo;' + escapeHtml(part1) + '&rdquo;</p>';
+                html += '<div class="story-quote__author">' + escapeHtml(story.nome) + '</div>';
+                html += '<div class="story-quote__role">' + escapeHtml(story.cargo || '') + (story.cargo && story.empresa ? ' - ' : '') + escapeHtml(story.empresa) + '</div>';
+                html += '</div>';
+                html += '<div class="story-quote">';
+                html += '<p class="story-quote__text">&ldquo;' + escapeHtml(part2) + '&rdquo;</p>';
+                html += '<div class="story-quote__author">' + escapeHtml(story.nome) + '</div>';
+                html += '<div class="story-quote__role">' + escapeHtml(story.cargo || '') + (story.cargo && story.empresa ? ' - ' : '') + escapeHtml(story.empresa) + '</div>';
+                html += '</div>';
+            } else {
+                html += '<div class="story-quote" style="grid-column:1/-1;max-width:600px;margin:0 auto;">';
+                html += '<p class="story-quote__text">&ldquo;' + escapeHtml(depoText) + '&rdquo;</p>';
+                html += '<div class="story-quote__author">' + escapeHtml(story.nome) + '</div>';
+                html += '<div class="story-quote__role">' + escapeHtml(story.cargo || '') + (story.cargo && story.empresa ? ' - ' : '') + escapeHtml(story.empresa) + '</div>';
+                html += '</div>';
+            }
+            html += '</div></section>';
+        }
+
+        // ═══ COMPANY INFO BAR ═══
+        html += '<section class="story-info-bar">';
+        html += '<div class="story-info-bar__inner">';
+        html += '<div class="info-item"><div class="info-item__label">Empresa</div><div class="info-item__value">' + escapeHtml(story.empresa) + '</div></div>';
+        html += '<div class="info-item"><div class="info-item__label">Segmento</div><div class="info-item__value">' + escapeHtml(segment) + '</div></div>';
+        html += '<div class="info-item"><div class="info-item__label">Responsável</div><div class="info-item__value">' + escapeHtml(story.nome) + '</div></div>';
+        html += '<div class="info-item"><div class="info-item__label">Cargo</div><div class="info-item__value">' + escapeHtml(story.cargo || '—') + '</div></div>';
+        html += '</div></section>';
+
+        // ═══ RESULTS METRICS (if resultados has numbers) ═══
+        // Try to extract metrics from resultados text
+        const metricsRegex = /(\d+[\d.,]*\s*%?)\s*(?:de\s+)?([a-záàãéêíóôúç\s]+)/gi;
+        const metrics = [];
+        let match;
+        const resText = story.resultados || '';
+        while ((match = metricsRegex.exec(resText)) !== null && metrics.length < 4) {
+            const num = match[1].trim();
+            const label = match[2].trim();
+            if (label.length > 3 && label.length < 40) {
+                metrics.push({ number: num, label: label });
+            }
+        }
+
+        // Also add modules as a metric if we have few
+        if (modulos.length > 0 && metrics.length < 4) {
+            metrics.push({ number: modulos.length.toString(), label: 'Módulos utilizados' });
+        }
+
+        if (metrics.length >= 2) {
+            html += '<section class="story-metrics">';
+            html += '<div class="story-metrics__inner">';
+            metrics.forEach(function(m) {
+                html += '<div class="metric-item">';
+                html += '<div class="metric-item__number">' + escapeHtml(m.number) + '</div>';
+                html += '<div class="metric-item__label">' + escapeHtml(m.label) + '</div>';
+                html += '</div>';
+            });
+            html += '</div></section>';
+        }
+
+        // ═══ ARTICLE CONTENT ═══
+        html += '<section class="story-content">';
+        html += '<div class="story-content__inner">';
+
+        // Modules
+        if (modulos.length) {
+            html += '<div class="story-modules">';
+            modulos.forEach(function(m) {
+                var icon = moduleIcons[m] || 'fa-cube';
+                html += '<span class="story-module-pill"><i class="fas ' + icon + '"></i> ' + escapeHtml(m) + '</span>';
+            });
+            html += '</div>';
+        }
+
+        // O Desafio
+        html += '<h2>O Desafio</h2>';
+        html += '<p>' + escapeHtml(story.desafio) + '</p>';
+
+        // A Solução
+        html += '<h2>A Solução com a Orbit</h2>';
+        html += '<p>' + escapeHtml(story.solucao) + '</p>';
+
+        // Os Resultados
+        html += '<h2>Os Resultados</h2>';
+        html += '<p>' + escapeHtml(story.resultados) + '</p>';
+
+        // Video
+        if (story.videoUrl) {
+            html += '<h2>Vídeo</h2>';
+            html += getVideoEmbed(story.videoUrl);
+        }
+
+        // Photo gallery
+        if (photos.length) {
+            html += '<h2>Galeria</h2>';
+            html += '<div class="photo-gallery">';
+            photos.forEach(function(p) {
+                html += '<img src="' + p + '" alt="Foto" onclick="document.getElementById(\'lightboxImg\').src=this.src;document.getElementById(\'lightbox\').classList.add(\'active\')">';
+            });
+            html += '</div>';
+        }
+
+        html += '</div></section>'; // end content
+
+        // ═══ SHARE BAR ═══
+        html += '<section class="story-share-bar">';
+        html += '<div class="story-share-bar__inner">';
+        html += '<span class="share-label">Compartilhar esta história</span>';
+        html += '<div class="share-buttons">';
+        html += '<a href="https://www.linkedin.com/sharing/share-offsite/?url=' + pageUrl + '" target="_blank" class="share-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>';
+        html += '<a href="https://twitter.com/intent/tweet?url=' + pageUrl + '&text=' + pageTitle + '" target="_blank" class="share-btn" title="Twitter"><i class="fab fa-x-twitter"></i></a>';
+        html += '<a href="https://api.whatsapp.com/send?text=' + pageTitle + '%20' + pageUrl + '" target="_blank" class="share-btn" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>';
+        html += '<button class="share-btn" title="Copiar link" onclick="navigator.clipboard.writeText(window.location.href);this.innerHTML=\'<i class=\\\'fas fa-check\\\'></i>\';setTimeout(()=>this.innerHTML=\'<i class=\\\'fas fa-link\\\'></i>\',2000)"><i class="fas fa-link"></i></button>';
+        html += '</div></div></section>';
+
+        // ═══ CTA ═══
+        html += '<section class="story-cta">';
+        html += '<h3>Sua empresa também pode ser destaque</h3>';
+        html += '<p>Conte como a Orbit transformou sua gestão e inspire outros negócios.</p>';
+        html += '<a href="/historias/enviar" class="btn btn-primary btn-lg">Conte sua história</a>';
+        html += '</section>';
+
+        // ═══ RELATED STORIES ═══
+        const otherStories = (db.customerStories || [])
+            .filter(function(s) { return s.id !== storyId && s.status === 'published'; })
+            .sort(function(a, b) { return new Date(b.createdAt) - new Date(a.createdAt); })
+            .slice(0, 4);
+
+        if (otherStories.length) {
+            html += '<section class="related-section">';
+            html += '<div class="related-section__header">';
+            html += '<h3>Outras histórias de sucesso</h3>';
+            html += '<p>Veja como outras empresas transformaram sua gestão</p>';
+            html += '</div>';
+            html += '<div class="related-carousel-wrap"><div class="related-carousel">';
+            otherStories.forEach(function(s) {
+                html += '<a href="/historias/' + s.id + '" class="related-card">';
+                html += '<div class="related-card__segment">' + escapeHtml(SEGMENTS[s.segmento] || s.segmento || '') + '</div>';
+                html += '<div class="related-card__company">' + escapeHtml(s.empresa) + '</div>';
+                html += '<h4>' + escapeHtml(s.titulo) + '</h4>';
+                html += '<span class="related-card__link">Leia a história &rarr;</span>';
+                html += '</a>';
+            });
+            html += '</div></div></section>';
+        }
+
+        container.innerHTML = html;
+    }
+
+    // ── Header scroll ──
+    const header = document.querySelector('.header');
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function() {
+        header.classList.toggle('scrolled', window.scrollY > 50);
+        if (backToTop) backToTop.style.display = window.scrollY > 400 ? 'flex' : 'none';
+    });
+    if (backToTop) {
+        backToTop.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+    }
+
+    // Dropdown hover
+    document.querySelectorAll('.nav-menu > li').forEach(function(item) {
+        var dropdown = item.querySelector('.dropdown');
+        if (!dropdown) return;
+        item.addEventListener('mouseenter', function() { dropdown.classList.add('show'); });
+        item.addEventListener('mouseleave', function() { dropdown.classList.remove('show'); });
+    });
+    </script>
+</body>
+</html>
