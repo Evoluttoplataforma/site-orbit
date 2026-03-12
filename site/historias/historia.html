@@ -25,6 +25,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/css/styles-v2.css?v=2">
     <style>
+        /* ── Page Background Override ── */
+        body { background: #FFFFFF; color: #1A1D23; }
+
+        /* Force content visible — override data-reveal opacity:0 from styles-v2.css */
+        [data-reveal], [data-reveal-stagger] {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+        body.reveal-ready [data-reveal]:not(.revealed) {
+            opacity: 0 !important;
+            transform: translateY(40px) !important;
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        body.reveal-ready [data-reveal].revealed {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
         /* ══════ HERO ══════ */
         .story-hero {
             padding: 140px 24px 80px;
@@ -759,7 +778,7 @@
         <a href="/#contato-form" class="btn btn-primary">Conhecer o Time de IA</a>
     </div>
 
-    <div id="storyContent" data-reveal></div>
+    <div id="storyContent"></div>
 
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox" onclick="this.classList.remove('active')">
@@ -838,12 +857,12 @@
 
     function formatDate(d) {
         try { return new Date(d).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' }); }
-        catch { return d; }
+        catch(e) { return d; }
     }
 
     function getDB() {
         try { return JSON.parse(localStorage.getItem('orbit_cms')) || { customerStories: [] }; }
-        catch { return { customerStories: [] }; }
+        catch(e) { return { customerStories: [] }; }
     }
 
     function getVideoEmbed(url) {
@@ -1135,6 +1154,7 @@
     <script>
     (function() {
         var els = document.querySelectorAll('[data-reveal],[data-reveal-stagger]');
+        document.body.classList.add('reveal-ready');
         if ('IntersectionObserver' in window) {
             var io = new IntersectionObserver(function(entries) {
                 entries.forEach(function(e) {

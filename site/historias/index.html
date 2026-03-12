@@ -26,6 +26,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/css/styles-v2.css?v=2">
     <style>
+        /* ── Page Background Override ── */
+        body { background: #FFFFFF; color: #1A1D23; }
+
+        /* Force content visible — override data-reveal opacity:0 from styles-v2.css */
+        [data-reveal], [data-reveal-stagger] {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+        /* Re-enable reveal animation only when JS has loaded and set the class */
+        body.reveal-ready [data-reveal]:not(.revealed) {
+            opacity: 0 !important;
+            transform: translateY(40px) !important;
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        body.reveal-ready [data-reveal].revealed {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
         /* ── Hero ── */
         .stories-hero {
             background: var(--black);
@@ -406,7 +426,7 @@
     </div>
 
     <!-- Hero -->
-    <section class="stories-hero" data-reveal>
+    <section class="stories-hero">
         <div class="stories-hero__bg">
             <div class="stories-hero__glow stories-hero__glow--1"></div>
             <div class="stories-hero__glow stories-hero__glow--2"></div>
@@ -646,6 +666,8 @@
     <script>
     (function() {
         var els = document.querySelectorAll('[data-reveal],[data-reveal-stagger]');
+        // Enable reveal animations — content is visible by default via CSS override
+        document.body.classList.add('reveal-ready');
         if ('IntersectionObserver' in window) {
             var io = new IntersectionObserver(function(entries) {
                 entries.forEach(function(e) {
