@@ -778,7 +778,14 @@
         <a href="/#contato-form" class="btn btn-primary">Conhecer o Time de IA</a>
     </div>
 
-    <div id="storyContent"></div>
+    <div id="storyContent">
+        <div class="article-not-found" id="storyFallback">
+            <i class="fas fa-spinner fa-spin" style="color:#D4A017;"></i>
+            <h2>Carregando história...</h2>
+            <p>Se a página não carregar, a história pode não estar disponível neste dispositivo.</p>
+            <a href="/historias" class="btn btn-primary">Ver todas as histórias</a>
+        </div>
+    </div>
 
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox" onclick="this.classList.remove('active')">
@@ -842,6 +849,7 @@
     <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
 
     <script>
+    try {
     const SEGMENTS = {
         industria: 'Indústria', servicos: 'Serviços', tecnologia: 'Tecnologia',
         saude: 'Saúde', educacao: 'Educação', varejo: 'Varejo',
@@ -1149,6 +1157,15 @@
         item.addEventListener('mouseenter', function() { dropdown.classList.add('show'); });
         item.addEventListener('mouseleave', function() { dropdown.classList.remove('show'); });
     });
+    } catch(e) {
+        console.error('Story render error:', e);
+        var c = document.getElementById('storyContent');
+        if (c) c.innerHTML = '<div class="article-not-found">' +
+            '<i class="fas fa-exclamation-triangle"></i>' +
+            '<h2>Erro ao carregar história</h2>' +
+            '<p>Ocorreu um erro ao carregar esta história. Tente novamente.</p>' +
+            '<a href="/historias" class="btn btn-primary">Ver todas as histórias</a></div>';
+    }
     </script>
     <!-- Scroll Reveal -->
     <script>
