@@ -3,16 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão de Indicadores - Orbit Gestão</title>
+    <title>Orbit Indicadores — Agente de IA que monitora seus KPIs</title>
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
-    <meta name="description" content="Acompanhe seus KPIs em tempo real e tome decisões baseadas em dados com a Orbit Gestão.">
+    <meta name="description" content="O Agente de Indicadores monitora KPIs em tempo real, identifica desvios e sugere ações corretivas antes que o problema cresça.">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orbitgestao.com.br/indicadores">
+    <meta property="og:title" content="Orbit Indicadores — Agente de IA que monitora seus KPIs">
+    <meta property="og:description" content="O Agente de Indicadores monitora KPIs em tempo real, identifica desvios e sugere ações corretivas antes que o problema cresça.">
+    <meta property="og:image" content="https://orbitgestao.com.br/images/og-default.png">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Orbit">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Orbit Indicadores — Agente de IA que monitora seus KPIs">
+    <meta name="twitter:description" content="O Agente de Indicadores monitora KPIs em tempo real, identifica desvios e sugere ações corretivas antes que o problema cresça.">
+    <meta name="twitter:image" content="https://orbitgestao.com.br/images/og-default.png">
+    <link rel="canonical" href="https://orbitgestao.com.br/indicadores">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/css/styles-v2.css?v=2">
 </head>
 <body>
+    <!-- ═══ HEADER ═══ -->
     <header class="header">
         <div class="container">
             <div class="logo">
@@ -20,20 +36,25 @@
                     <img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="40">
                 </a>
             </div>
+
             <ul class="nav-menu">
                 <li><a href="/">Início</a></li>
                 <li>
-                    <a href="/#plataforma">Soluções <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <a href="#plataforma">Plataforma <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown">
                         <div class="dropdown__info">
                             <span class="dropdown__info-badge"><i class="fas fa-cube"></i> Plataforma</span>
                             <h4>Orbit Gestão</h4>
-                            <p>5 módulos integrados + IA para transformar sua estratégia em execução real.</p>
+                            <p>5 módulos integrados + 6 agentes de IA para transformar sua estratégia em execução real.</p>
                             <div class="dropdown__info-img">
                                 <i class="fas fa-rocket"></i>
                             </div>
                         </div>
                         <div class="dropdown__links">
+                            <a href="/agentes">
+                                <div class="dd-icon"><i class="fas fa-robot"></i></div>
+                                <div class="dd-text"><span>Agentes de IA</span><small>6 especialistas 24/7</small></div>
+                            </a>
                             <a href="/processos">
                                 <div class="dd-icon"><i class="fas fa-sitemap"></i></div>
                                 <div class="dd-text"><span>Processos</span><small>Mapeamento e automação</small></div>
@@ -57,8 +78,9 @@
                         </div>
                     </div>
                 </li>
+                <li><a href="/pricing">Planos</a></li>
                 <li>
-                    <a href="/blog">Conhecimento <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <a href="/blog">Conteúdo <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown dropdown--sm">
                         <div class="dropdown__links">
                             <a href="/blog">
@@ -69,27 +91,56 @@
                                 <div class="dd-icon"><i class="fas fa-star"></i></div>
                                 <div class="dd-text"><span>Histórias de Clientes</span><small>Cases de sucesso</small></div>
                             </a>
+                            <a href="/faq">
+                                <div class="dd-icon"><i class="fas fa-circle-question"></i></div>
+                                <div class="dd-text"><span>FAQ</span><small>Perguntas frequentes</small></div>
+                            </a>
                         </div>
                     </div>
                 </li>
-                <li><a href="/parcerias">Seja Parceiro</a></li>
-                <li><a href="/#contato-form">Fale Conosco</a></li>
+                <li>
+                    <a href="/sobre">Empresa <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown dropdown--sm">
+                        <div class="dropdown__links">
+                            <a href="/sobre">
+                                <div class="dd-icon"><i class="fas fa-building"></i></div>
+                                <div class="dd-text"><span>Sobre Nós</span><small>30 anos de história</small></div>
+                            </a>
+                            <a href="/parcerias">
+                                <div class="dd-icon"><i class="fas fa-handshake"></i></div>
+                                <div class="dd-text"><span>Seja Parceiro</span><small>Programa de canais</small></div>
+                            </a>
+                            <a href="/canais">
+                                <div class="dd-icon"><i class="fas fa-network-wired"></i></div>
+                                <div class="dd-text"><span>Canais B2B2B</span><small>Para consultores e mentores</small></div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
             </ul>
+
             <div class="nav-actions">
-                <a href="#" class="btn btn-outline">Entrar</a>
-                <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>
+                <a href="/acesso" class="btn btn-outline">Entrar</a>
+                <a href="/#contato-form" class="btn btn-primary">Conhecer o Time de IA</a>
             </div>
-            <button class="menu-toggle" onclick="document.querySelector('.mobile-menu').classList.toggle('active');document.body.style.overflow=document.querySelector('.mobile-menu').classList.contains('active')?'hidden':''">
-                <span></span><span></span><span></span>
+
+            <button class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
         </div>
     </header>
+
+    <!-- Mobile Menu -->
     <div class="mobile-menu">
         <button class="mobile-menu-close" onclick="this.parentElement.classList.remove('active');document.body.style.overflow=''">&times;</button>
         <div class="mobile-menu__label">Menu</div>
         <a href="/"><i class="fas fa-home"></i> Início</a>
+        <a href="/pricing"><i class="fas fa-tag"></i> Planos e Preços</a>
         <a href="/#contato-form"><i class="fas fa-envelope"></i> Fale Conosco</a>
-        <div class="mobile-menu__label">Soluções</div>
+        <div class="mobile-menu__label">Plataforma</div>
+        <a href="/agentes"><i class="fas fa-robot"></i> Agentes de IA</a>
         <a href="/processos"><i class="fas fa-sitemap"></i> Processos</a>
         <a href="/indicadores"><i class="fas fa-chart-line"></i> Indicadores</a>
         <a href="/tarefas"><i class="fas fa-tasks"></i> Tarefas</a>
@@ -98,9 +149,13 @@
         <div class="mobile-menu__label">Conteúdo</div>
         <a href="/blog"><i class="fas fa-newspaper"></i> Blog</a>
         <a href="/historias"><i class="fas fa-star"></i> Histórias de Clientes</a>
+        <a href="/faq"><i class="fas fa-circle-question"></i> FAQ</a>
+        <div class="mobile-menu__label">Empresa</div>
+        <a href="/sobre"><i class="fas fa-building"></i> Sobre Nós</a>
         <a href="/parcerias"><i class="fas fa-handshake"></i> Seja Parceiro</a>
+        <a href="/canais"><i class="fas fa-network-wired"></i> Canais B2B2B</a>
         <div class="mobile-menu__divider"></div>
-        <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>
+        <a href="/#contato-form" class="btn btn-primary">Conhecer o Time de IA</a>
     </div>
 
     <!-- ═══ PRODUCT HERO ═══ -->
@@ -113,43 +168,68 @@
         <div class="container">
             <div class="product-hero__grid">
                 <div>
-                    <div class="product-hero__badge"><i class="fas fa-chart-line"></i> Indicadores</div>
-                    <h1 class="product-hero__title">Gestão de <span>Indicadores</span></h1>
-                    <p class="product-hero__desc">Acompanhe todos os seus KPIs em um único dashboard. Tome decisões rápidas e assertivas baseadas em dados em tempo real.</p>
+                    <div class="product-hero__badge">
+                        <i class="fas fa-chart-column"></i>
+                        Indicadores + IA
+                    </div>
+                    <h1 class="product-hero__title">Gestão de <span>Indicadores</span> com IA</h1>
+                    <p class="product-hero__desc">O Agente de Indicadores monitora seus KPIs 24/7, identifica desvios e sugere hipóteses de causa raiz e ações corretivas — antes que o problema cresça.</p>
                     <div class="product-hero__ctas">
-                        <a href="/#contato-form" class="btn btn-primary btn-lg">Agendar Demonstração</a>
+                        <a href="/#contato-form" class="btn btn-primary btn-lg">Conhecer o Time de IA</a>
                         <a href="#detalhes" class="btn btn-ghost btn-lg">Conhecer Recursos <i class="fas fa-arrow-down"></i></a>
                     </div>
                 </div>
                 <div class="product-hero__image">
-                    <img src="https://placehold.co/560x400/FDB73F/000000?text=Indicadores+%26+KPIs&font=poppins" alt="Gestão de Indicadores">
+                    <img src="https://placehold.co/560x400/0D1117/D4A017?text=Gest%C3%A3o+de+Indicadores&font=raleway" alt="Gestão de Indicadores com IA">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ AGENT HIGHLIGHT ═══ -->
+    <section class="agent-highlight">
+        <div class="container">
+            <div class="agent-highlight__grid" data-reveal>
+                <div class="agent-highlight__info">
+                    <div class="agent-highlight__badge"><span></span> Ativo 24/7</div>
+                    <h2>Agente de Indicadores</h2>
+                    <p>Monitora KPIs em tempo real, detecta desvios automaticamente e gera hipóteses de causa raiz. Sugere ações corretivas e envia alertas proativos para os responsáveis antes que o impacto se materialize.</p>
+                    <div class="agent-highlight__equiv">
+                        <div class="agent-highlight__equiv-label">Equivale a</div>
+                        <div class="agent-highlight__equiv-value">Analista BI · R$ 8-15k/mês</div>
+                    </div>
+                </div>
+                <div class="agent-highlight__visual">
+                    <div class="agent-highlight__visual-circle">
+                        <i class="fas fa-chart-column" style="font-size:48px;color:#fff;"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ═══ BENEFITS ═══ -->
-    <section class="product-benefits-v2">
+    <section class="product-benefits-v2 section--light">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" data-reveal>
                 <h2>Principais <span class="highlight">Benefícios</span></h2>
-                <p>Por que escolher a Orbit para indicadores</p>
+                <p>Por que escolher o Orbit para indicadores</p>
             </div>
-            <div class="benefits-grid-v2">
+            <div class="benefits-grid-v2" data-reveal-stagger>
                 <div class="benefit-card-v2">
-                    <div class="benefit-card-v2__icon"><i class="fas fa-chart-line"></i></div>
-                    <h4>Visibilidade em Tempo Real</h4>
-                    <p>Acompanhe todos os indicadores em dashboards atualizados instantaneamente</p>
+                    <div class="benefit-card-v2__icon icon-premium icon-premium--solid"><i class="fas fa-clock"></i></div>
+                    <h4>Monitoramento 24/7</h4>
+                    <p>KPIs acompanhados em tempo real, sem precisar abrir dashboards manualmente</p>
                 </div>
                 <div class="benefit-card-v2">
-                    <div class="benefit-card-v2__icon"><i class="fas fa-database"></i></div>
-                    <h4>Decisões Baseadas em Dados</h4>
-                    <p>Insights acionáveis com análises profundas e comparativas</p>
+                    <div class="benefit-card-v2__icon icon-premium icon-premium--solid"><i class="fas fa-magnifying-glass"></i></div>
+                    <h4>Diagnóstico Inteligente</h4>
+                    <p>Hipóteses de causa raiz geradas automaticamente pela IA</p>
                 </div>
                 <div class="benefit-card-v2">
-                    <div class="benefit-card-v2__icon"><i class="fas fa-bell"></i></div>
-                    <h4>Alertas Inteligentes</h4>
-                    <p>Notificações automáticas quando indicadores desviam das metas</p>
+                    <div class="benefit-card-v2__icon icon-premium icon-premium--solid"><i class="fas fa-shield-halved"></i></div>
+                    <h4>Ações Proativas</h4>
+                    <p>Sugestões de correção antes do impacto se materializar</p>
                 </div>
             </div>
         </div>
@@ -158,92 +238,76 @@
     <!-- ═══ FEATURES ═══ -->
     <section class="product-features-v2" id="detalhes">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" data-reveal>
                 <h2>Recursos <span class="highlight">Poderosos</span></h2>
-                <p>Tudo que você precisa para gerenciar indicadores com excelência</p>
+                <p>Tudo que você precisa para monitorar indicadores com excelência</p>
             </div>
-            <div class="features-grid-v2">
+            <div class="features-grid-v2" data-reveal-stagger>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Dashboards Customizáveis</strong><p>Crie visualizações personalizadas por área</p></div>
+                    <div><strong>Dashboards personalizáveis</strong><p>Visualizações drag-and-drop para cada área</p></div>
                 </div>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>KPIs por Área</strong><p>Organize indicadores por departamento ou função</p></div>
+                    <div><strong>Alertas automáticos de desvio</strong><p>Notificações em tempo real quando KPIs saem da faixa</p></div>
                 </div>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Metas Vinculadas</strong><p>Relacione indicadores a objetivos estratégicos</p></div>
+                    <div><strong>OKRs e BSC integrados</strong><p>Metodologias de gestão unificadas na plataforma</p></div>
                 </div>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Drill-down</strong><p>Explore detalhes clicando nos indicadores</p></div>
+                    <div><strong>Análise de causa raiz com IA</strong><p>Hipóteses automáticas para desvios identificados</p></div>
                 </div>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Exportação de Relatórios</strong><p>Gere PDFs e gráficos profissionais</p></div>
+                    <div><strong>Metas por período</strong><p>Defina e acompanhe metas mensal, trimestral e anual</p></div>
                 </div>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Comparativo de Períodos</strong><p>Compare performance mês a mês</p></div>
+                    <div><strong>Drill-down multinível</strong><p>Navegue do macro ao detalhe em qualquer indicador</p></div>
                 </div>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Semáforos Automáticos</strong><p>Status visual verde, amarelo e vermelho</p></div>
+                    <div><strong>Relatórios exportáveis</strong><p>Exporte em PDF, Excel e compartilhe por link</p></div>
                 </div>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>IA Preditiva</strong><p>Antecipe resultados com análise de tendências</p></div>
+                    <div><strong>Benchmark por segmento</strong><p>Compare seus indicadores com referências do mercado</p></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ═══ DETAIL SECTION ═══ -->
-    <section class="product-detail-v2">
+    <section class="product-detail-v2 section--light">
         <div class="container">
-            <div class="product-detail-v2__grid">
+            <div class="product-detail-v2__grid" data-reveal>
                 <div class="product-detail-v2__image">
-                    <img src="https://placehold.co/500x360/000000/FDB73F?text=Dashboard+Analytics&font=poppins" alt="Dashboards Interativos em Tempo Real">
+                    <img src="https://placehold.co/500x360/0D1117/D4A017?text=Dashboards+em+Tempo+Real&font=raleway" alt="Dashboards em Tempo Real">
                 </div>
                 <div class="product-detail-v2__text">
-                    <h2>Dashboards Interativos em Tempo Real</h2>
-                    <p>Visualize todos os seus KPIs em um único lugar. Customize gráficos, filtros e comparações para seus diferentes públicos.</p>
+                    <h2>Dashboards em Tempo Real</h2>
+                    <p>Construa painéis visuais poderosos que mostram exatamente o que sua empresa precisa acompanhar, sem complexidade técnica.</p>
                     <ul class="product-detail-v2__list">
-                        <li><i class="fas fa-check-circle"></i> Múltiplos tipos de gráficos</li>
-                        <li><i class="fas fa-check-circle"></i> Atualização em tempo real</li>
-                        <li><i class="fas fa-check-circle"></i> Compartilhamento de dashboards</li>
-                        <li><i class="fas fa-check-circle"></i> Acesso mobile responsivo</li>
+                        <li><i class="fas fa-circle-check" style="color:var(--primary);"></i> Visualização drag-and-drop</li>
+                        <li><i class="fas fa-circle-check" style="color:var(--primary);"></i> Múltiplos tipos de gráfico</li>
+                        <li><i class="fas fa-circle-check" style="color:var(--primary);"></i> Filtros dinâmicos</li>
+                        <li><i class="fas fa-circle-check" style="color:var(--primary);"></i> Compartilhamento por link</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ═══ TESTIMONIAL ═══ -->
-    <section class="product-testimonial-v2">
-        <div class="container">
-            <div class="product-testimonial-v2__card">
-                <div class="product-testimonial-v2__stars">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                </div>
-                <blockquote>"Os dashboards da Orbit nos permitiram identificar tendências que antes passávamos despercebidas. Melhoramos nossa tomada de decisão em 35%."</blockquote>
-                <div class="product-testimonial-v2__author">
-                    <strong>Fernando Costa</strong>
-                    <span>Gerente de Desenvolvimento, Tech Innovation</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- ═══ CTA ═══ -->
-    <section class="product-cta-v2">
+    <section class="product-cta-v2" data-reveal>
         <div class="container">
-            <h2>Pronto para transformar dados em insights?</h2>
-            <p>Comece com uma demonstração personalizada hoje mesmo</p>
+            <h2>Pronto para monitorar seus KPIs com IA?</h2>
+            <p>Conheça o time de agentes que vai transformar a gestão da sua empresa</p>
             <div class="product-cta-v2__buttons">
-                <a href="/#contato-form" class="btn btn-primary btn-lg">Agendar Demo Gratuita</a>
-                <a href="/#contato-form" class="btn btn-outline btn-lg">Contato de Vendas</a>
+                <a href="/#contato-form" class="btn btn-primary btn-lg">Conhecer o Time de IA</a>
+                <a href="/#contato-form" class="btn btn-outline btn-lg">Falar com Especialista</a>
             </div>
         </div>
     </section>
@@ -253,20 +317,18 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="footer-logo"><img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="36"></div>
-                    <p>Transformando estratégia em execução para empresas de médio porte.</p>
+                    <p>Plataforma de gestão com IA. Contrate um time que executa.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="footer-column">
                     <h5>Contato</h5>
                     <ul class="footer-contact">
-                        <li><i class="fas fa-phone"></i> <a href="tel:+5511999999999">+55 (11) 9999-9999</a></li>
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:contato@orbitgestao.com">contato@orbitgestao.com</a></li>
-                        <li><i class="fas fa-map-marker-alt"></i> São Paulo - SP</li>
+                        <li><i class="fas fa-phone"></i> (48) 99120-6282</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Square SC, Florianópolis - SC</li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -283,34 +345,54 @@
                     <h5>Conhecimento</h5>
                     <ul>
                         <li><a href="/blog">Blog</a></li>
+                        <li><a href="/historias">Histórias de Clientes</a></li>
                         <li><a href="#">Documentação</a></li>
                         <li><a href="#">FAQ</a></li>
                         <li><a href="#">Webinars</a></li>
                     </ul>
+                    <h5 style="margin-top: 20px;">Orbit</h5>
+                    <ul>
+                        <li><a href="/parcerias">Seja Parceiro</a></li>
+                        <li><a href="#">Sobre Nós</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Orbit Gestão. Todos os direitos reservados.</p>
+                <p>&copy; 2026 Orbit — Grupo GSN. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
-    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
 
     <script>
-    // Header scroll
     window.addEventListener('scroll',()=>{
         document.querySelector('.header').classList.toggle('scrolled',window.scrollY>50);
         document.getElementById('backToTop').classList.toggle('visible',window.scrollY>400);
     });
-    // Dropdown hover
     document.querySelectorAll('.nav-menu li').forEach(li=>{
         const dd=li.querySelector('.dropdown');
         if(dd){li.addEventListener('mouseenter',()=>{dd.style.opacity='1';dd.style.visibility='visible';dd.style.transform='translateY(0)'});
         li.addEventListener('mouseleave',()=>{dd.style.opacity='0';dd.style.visibility='hidden';dd.style.transform='translateY(10px)'})}
     });
     </script>
+
+    <!-- Scroll Reveal -->
+    <script>
+    (function() {
+        var io = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+                if (e.isIntersecting) {
+                    e.target.classList.add('revealed');
+                    io.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('[data-reveal],[data-reveal-stagger]').forEach(function(el) {
+            io.observe(el);
+        });
+    })();
+    </script>
+    <script src="/js/seo.js"></script>
 </body>
 </html>

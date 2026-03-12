@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orbit — Contrate um time de IA que executa | Gestão empresarial com agentes de IA</title>
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <meta name="description" content="6 agentes de IA especializados que constroem e operam a gestão da sua empresa. Planejamento, processos, treinamento, indicadores — trabalhando 24/7. Uma fração do custo.">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orbitgestao.com.br/lp-empresas">
+    <meta property="og:title" content="Orbit — Contrate um time de IA que executa | Gestão empresarial com agentes de IA">
+    <meta property="og:description" content="6 agentes de IA especializados que constroem e operam a gestão da sua empresa. Planejamento, processos, treinamento, indicadores — trabalhando 24/7. Uma fração do custo.">
+    <meta property="og:image" content="https://orbitgestao.com.br/images/og-default.png">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Orbit">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Orbit — Contrate um time de IA que executa | Gestão empresarial com agentes de IA">
+    <meta name="twitter:description" content="6 agentes de IA especializados que constroem e operam a gestão da sua empresa. Planejamento, processos, treinamento, indicadores — trabalhando 24/7. Uma fração do custo.">
+    <meta name="twitter:image" content="https://orbitgestao.com.br/images/og-default.png">
+    <link rel="canonical" href="https://orbitgestao.com.br/lp-empresas">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Base Styles -->
+    <link rel="stylesheet" href="/css/styles-v2.css?v=2">
+
+    <style>
+    /* ═══════════════════════════════════════════════════════
+       LP EMPRESAS — Page-specific styles
+       ═══════════════════════════════════════════════════════ */
+
+    /* ═══ LAYOUT ═══ */
+    .lp-section {
+        padding: 100px 0;
+        position: relative;
+        overflow: hidden;
+    }
+    .lp-section--dark {
+        background: #0D1117;
+    }
+    .lp-section--light {
+        background: #FAFBFC;
+    }
+    .lp-section--alt {
+        background: #161B22;
+    }
+
+    .lp-header {
+        text-align: center;
+        margin-bottom: 56px;
+    }
+    .lp-header h2 {
+        font-size: clamp(32px, 4.5vw, 48px);
+        font-weight: 800;
+        line-height: 1.15;
+    }
+    .lp-section--dark .lp-header h2,
+    .lp-section--alt .lp-header h2 {
+        color: #fff;
+    }
+    .lp-section--light .lp-header h2 {
+        color: #1A1D23;
+    }
+    .lp-header p {
+        font-size: 18px;
+        margin-top: 16px;
+        max-width: 640px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+    }
+    .lp-section--dark .lp-header p,
+    .lp-section--alt .lp-header p {
+        color: rgba(255,255,255,0.6);
+    }
+    .lp-section--light .lp-header p {
+        color: #5A6069;
+    }
+    .lp-badge {
+        display: inline-block;
+        padding: 8px 20px;
+        border-radius: 50px;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 16px;
+    }
+    .lp-badge--gold {
+        background: rgba(212,160,23,0.12);
+        color: #D4A017;
+        border: 1px solid rgba(212,160,23,0.25);
+    }
+    .lp-badge--light {
+        background: rgba(26,29,35,0.06);
+        color: #5A6069;
+        border: 1px solid rgba(0,0,0,0.08);
+    }
+    .text-gold { color: #D4A017; }
+
+    /* ═══ 1. HERO ═══ */
+    .lp-hero {
+        padding: 160px 0 100px;
+        background: #0D1117;
+        position: relative;
+        overflow: hidden;
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+    }
+    .lp-hero__glow {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(120px);
+        pointer-events: none;
+    }
+    .lp-hero__glow--1 {
+        width: 500px;
+        height: 500px;
+        background: rgba(212,160,23,0.08);
+        top: -150px;
+        right: -100px;
+    }
+    .lp-hero__glow--2 {
+        width: 400px;
+        height: 400px;
+        background: rgba(212,160,23,0.05);
+        bottom: -100px;
+        left: -100px;
+    }
+    .lp-hero .container {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+    }
+    .lp-hero__badge {
+        display: inline-block;
+        padding: 10px 24px;
+        background: rgba(212,160,23,0.1);
+        border: 1px solid rgba(212,160,23,0.25);
+        border-radius: 50px;
+        color: #D4A017;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 32px;
+    }
+    .lp-hero h1 {
+        font-size: clamp(36px, 5vw, 56px);
+        font-weight: 800;
+        color: #fff;
+        line-height: 1.12;
+        max-width: 860px;
+        margin: 0 auto 24px;
+    }
+    .lp-hero h1 .text-gold {
+        background: linear-gradient(135deg, #D4A017, #F5C518);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    .lp-hero__sub {
+        font-size: 19px;
+        color: rgba(255,255,255,0.65);
+        max-width: 720px;
+        margin: 0 auto 40px;
+        line-height: 1.65;
+    }
+    .lp-hero__stats {
+        display: flex;
+        justify-content: center;
+        gap: 48px;
+        margin-bottom: 40px;
+    }
+    .lp-hero__stat {
+        text-align: center;
+    }
+    .lp-hero__stat strong {
+        display: block;
+        font-size: 28px;
+        font-weight: 800;
+        color: #D4A017;
+    }
+    .lp-hero__stat span {
+        font-size: 13px;
+        color: rgba(255,255,255,0.5);
+    }
+    .lp-hero__stat + .lp-hero__stat {
+        position: relative;
+    }
+    .lp-hero__stat + .lp-hero__stat::before {
+        content: '';
+        position: absolute;
+        left: -24px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 1px;
+        height: 36px;
+        background: rgba(255,255,255,0.12);
+    }
+    .lp-hero__note {
+        margin-top: 20px;
+        font-size: 14px;
+        color: rgba(255,255,255,0.45);
+    }
+    .btn-gold {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 16px 36px;
+        background: linear-gradient(135deg, #D4A017, #F5C518);
+        color: #000;
+        font-weight: 700;
+        font-size: 16px;
+        border-radius: 50px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 24px rgba(212,160,23,0.25);
+        letter-spacing: 0.3px;
+    }
+    .btn-gold:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 32px rgba(212,160,23,0.35);
+    }
+    .btn-red {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 16px 36px;
+        background: linear-gradient(135deg, #EF4444, #DC2626);
+        color: #fff;
+        font-weight: 700;
+        font-size: 16px;
+        border-radius: 50px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 24px rgba(239,68,68,0.25);
+    }
+    .btn-red:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 32px rgba(239,68,68,0.35);
+    }
+
+    /* ═══ 2. PAIN POINTS ═══ */
+    .pain-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    .pain-card {
+        background: #fff;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 16px;
+        padding: 28px;
+        transition: all 0.3s ease;
+    }
+    .pain-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    }
+    .pain-card .icon-premium {
+        margin-bottom: 16px;
+    }
+    .pain-card p {
+        font-size: 16px;
+        font-weight: 600;
+        color: #1A1D23;
+        line-height: 1.45;
+    }
+    .pain-cta {
+        text-align: center;
+        margin-top: 48px;
+    }
+
+    /* ═══ 3. REFRAME ═══ */
+    .reframe-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+    }
+    .reframe-col {
+        border-radius: 20px;
+        padding: 40px;
+    }
+    .reframe-col--fail {
+        background: rgba(239,68,68,0.06);
+        border: 1px solid rgba(239,68,68,0.15);
+    }
+    .reframe-col--success {
+        background: rgba(212,160,23,0.06);
+        border: 1px solid rgba(212,160,23,0.2);
+    }
+    .reframe-col__title {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 28px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .reframe-col--fail .reframe-col__title {
+        color: #EF4444;
+    }
+    .reframe-col--success .reframe-col__title {
+        color: #D4A017;
+    }
+    .reframe-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        margin-bottom: 20px;
+    }
+    .reframe-item__icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 14px;
+    }
+    .reframe-col--fail .reframe-item__icon {
+        background: rgba(239,68,68,0.1);
+        color: #EF4444;
+    }
+    .reframe-col--success .reframe-item__icon {
+        background: rgba(212,160,23,0.15);
+        color: #D4A017;
+    }
+    .reframe-item p {
+        font-size: 15px;
+        color: rgba(255,255,255,0.7);
+        line-height: 1.5;
+    }
+    .reframe-result {
+        margin-top: 24px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255,255,255,0.08);
+        font-weight: 700;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .reframe-col--fail .reframe-result {
+        color: #EF4444;
+    }
+    .reframe-col--success .reframe-result {
+        color: #D4A017;
+    }
+
+    /* ═══ 4. AGENTS ═══ */
+    .agents-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+    .agent-card {
+        background: #fff;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 20px;
+        padding: 32px;
+        transition: all 0.3s ease;
+    }
+    .agent-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+    }
+    .agent-card .icon-premium {
+        margin-bottom: 20px;
+    }
+    .agent-card h3 {
+        font-size: 19px;
+        font-weight: 700;
+        color: #1A1D23;
+        margin-bottom: 8px;
+    }
+    .agent-card__desc {
+        font-size: 14px;
+        color: #5A6069;
+        line-height: 1.55;
+        margin-bottom: 16px;
+    }
+    .agent-card__equiv {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        color: #8B949E;
+        background: rgba(0,0,0,0.04);
+        padding: 6px 14px;
+        border-radius: 50px;
+    }
+    .agents-note {
+        text-align: center;
+        margin-top: 48px;
+        padding: 24px;
+        background: rgba(212,160,23,0.06);
+        border: 1px solid rgba(212,160,23,0.15);
+        border-radius: 16px;
+    }
+    .agents-note p {
+        font-size: 18px;
+        font-weight: 700;
+        color: #1A1D23;
+    }
+
+    /* ═══ 5. HOW IT WORKS ═══ */
+    .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
+        position: relative;
+    }
+    .steps-grid::before {
+        content: '';
+        position: absolute;
+        top: 60px;
+        left: 16.66%;
+        right: 16.66%;
+        height: 2px;
+        background: linear-gradient(90deg, rgba(212,160,23,0.3), rgba(212,160,23,0.6), rgba(212,160,23,0.3));
+    }
+    .step-card {
+        text-align: center;
+        position: relative;
+        z-index: 2;
+    }
+    .step-card__number {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: rgba(212,160,23,0.1);
+        border: 2px solid rgba(212,160,23,0.3);
+        color: #D4A017;
+        font-size: 28px;
+        margin-bottom: 24px;
+    }
+    .step-card h3 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 8px;
+    }
+    .step-card__time {
+        font-size: 14px;
+        color: #D4A017;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+    .step-card p {
+        font-size: 15px;
+        color: rgba(255,255,255,0.55);
+        line-height: 1.5;
+    }
+
+    /* ═══ 6. TESTIMONIALS ═══ */
+    .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+    .testimonial-card {
+        background: #fff;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 20px;
+        padding: 32px;
+        position: relative;
+    }
+    .testimonial-card__stars {
+        color: #D4A017;
+        font-size: 14px;
+        margin-bottom: 16px;
+        display: flex;
+        gap: 3px;
+    }
+    .testimonial-card__quote {
+        font-size: 15px;
+        color: #5A6069;
+        line-height: 1.65;
+        margin-bottom: 24px;
+        font-style: italic;
+    }
+    .testimonial-card__author {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .testimonial-card__avatar {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #D4A017, #F5C518);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #000;
+        font-weight: 700;
+        font-size: 16px;
+        flex-shrink: 0;
+    }
+    .testimonial-card__name {
+        font-weight: 700;
+        color: #1A1D23;
+        font-size: 15px;
+    }
+    .testimonial-card__role {
+        font-size: 13px;
+        color: #8B949E;
+    }
+    .testimonial-placeholder {
+        text-align: center;
+        margin-top: 24px;
+        padding: 12px 20px;
+        background: rgba(212,160,23,0.08);
+        border-radius: 8px;
+        color: #8B949E;
+        font-size: 13px;
+    }
+
+    /* ═══ 7. SEGMENTS ═══ */
+    .segments-lp-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+    }
+    .segment-lp-card {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 20px;
+        padding: 32px;
+        transition: all 0.3s ease;
+    }
+    .segment-lp-card:hover {
+        background: rgba(255,255,255,0.06);
+        transform: translateY(-4px);
+    }
+    .segment-lp-card .icon-premium {
+        margin-bottom: 20px;
+    }
+    .segment-lp-card h3 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 16px;
+    }
+    .segment-lp-card ul {
+        list-style: none;
+        padding: 0;
+    }
+    .segment-lp-card li {
+        font-size: 14px;
+        color: rgba(255,255,255,0.6);
+        padding: 6px 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .segment-lp-card li i {
+        color: #22C55E;
+        font-size: 12px;
+    }
+
+    /* ═══ 8. ABOUT / WHO'S BEHIND ═══ */
+    .about-intro {
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto 48px;
+    }
+    .about-intro p {
+        font-size: 18px;
+        color: #5A6069;
+        line-height: 1.65;
+    }
+    .founders-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 24px;
+        margin-bottom: 48px;
+    }
+    .founder-card {
+        text-align: center;
+        padding: 28px 16px;
+        background: #fff;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 16px;
+        transition: all 0.3s ease;
+    }
+    .founder-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    }
+    .founder-card__avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #D4A017, #F5C518);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #000;
+        font-weight: 800;
+        font-size: 24px;
+        margin: 0 auto 16px;
+    }
+    .founder-card h4 {
+        font-size: 16px;
+        font-weight: 700;
+        color: #1A1D23;
+        margin-bottom: 4px;
+    }
+    .founder-card span {
+        font-size: 13px;
+        color: #8B949E;
+    }
+    .about-stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        background: #1A1D23;
+        border-radius: 20px;
+        padding: 36px;
+    }
+    .about-stat {
+        text-align: center;
+    }
+    .about-stat strong {
+        display: block;
+        font-size: 28px;
+        font-weight: 800;
+        color: #D4A017;
+    }
+    .about-stat span {
+        font-size: 13px;
+        color: rgba(255,255,255,0.55);
+    }
+
+    /* ═══ 9. COST COMPARISON ═══ */
+    .cost-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    .cost-card {
+        border-radius: 20px;
+        padding: 40px;
+    }
+    .cost-card--old {
+        background: rgba(239,68,68,0.06);
+        border: 1px solid rgba(239,68,68,0.15);
+    }
+    .cost-card--new {
+        background: rgba(212,160,23,0.06);
+        border: 2px solid rgba(212,160,23,0.35);
+        position: relative;
+    }
+    .cost-card--new::before {
+        content: 'RECOMENDADO';
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, #D4A017, #F5C518);
+        color: #000;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 4px 16px;
+        border-radius: 50px;
+        letter-spacing: 0.5px;
+    }
+    .cost-card__title {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 24px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .cost-card--old .cost-card__title {
+        color: #EF4444;
+    }
+    .cost-card--new .cost-card__title {
+        color: #D4A017;
+    }
+    .cost-card__list {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 24px;
+    }
+    .cost-card__list li {
+        font-size: 14px;
+        color: rgba(255,255,255,0.65);
+        padding: 8px 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .cost-card--old .cost-card__list li i {
+        color: #EF4444;
+    }
+    .cost-card--new .cost-card__list li i {
+        color: #22C55E;
+    }
+    .cost-card__price {
+        padding-top: 20px;
+        border-top: 1px solid rgba(255,255,255,0.08);
+        font-size: 14px;
+        color: rgba(255,255,255,0.5);
+    }
+    .cost-card__price strong {
+        display: block;
+        font-size: 28px;
+        font-weight: 800;
+    }
+    .cost-card--old .cost-card__price strong {
+        color: #EF4444;
+        text-decoration: line-through;
+    }
+    .cost-card--new .cost-card__price strong {
+        color: #D4A017;
+    }
+    .cost-card__extras {
+        margin-top: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .cost-card__extra {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        color: rgba(255,255,255,0.55);
+    }
+    .cost-card__extra i {
+        color: #22C55E;
+    }
+
+    /* ═══ 10. GUARANTEE ═══ */
+    .guarantee-lp {
+        text-align: center;
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 60px 40px;
+        background: #fff;
+        border: 1px solid rgba(0,0,0,0.06);
+        border-radius: 24px;
+        box-shadow: 0 12px 48px rgba(0,0,0,0.06);
+    }
+    .guarantee-lp__icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(34,197,94,0.2));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px;
+        font-size: 36px;
+        color: #22C55E;
+    }
+    .guarantee-lp h2 {
+        font-size: 32px;
+        font-weight: 800;
+        color: #1A1D23;
+        margin-bottom: 16px;
+    }
+    .guarantee-lp p {
+        font-size: 18px;
+        color: #5A6069;
+        line-height: 1.65;
+    }
+
+    /* ═══ 11. FAQ ═══ */
+    .faq-lp-list {
+        max-width: 760px;
+        margin: 0 auto;
+    }
+    .faq-lp-item {
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .faq-lp-item summary {
+        padding: 20px 0;
+        font-size: 17px;
+        font-weight: 600;
+        color: #fff;
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: color 0.3s ease;
+    }
+    .faq-lp-item summary::-webkit-details-marker { display: none; }
+    .faq-lp-item summary::after {
+        content: '+';
+        font-size: 22px;
+        color: #D4A017;
+        font-weight: 400;
+        transition: transform 0.3s ease;
+    }
+    .faq-lp-item[open] summary::after {
+        content: '\2212';
+    }
+    .faq-lp-item summary:hover { color: #D4A017; }
+    .faq-lp-item .faq-answer {
+        padding: 0 0 20px;
+        font-size: 15px;
+        color: rgba(255,255,255,0.6);
+        line-height: 1.65;
+    }
+
+    /* ═══ 12. CTA FINAL ═══ */
+    .lp-cta-final {
+        padding: 120px 0;
+        background: #0D1117;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .lp-cta-final__glow {
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        background: rgba(212,160,23,0.06);
+        filter: blur(120px);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+    }
+    .lp-cta-final .container {
+        position: relative;
+        z-index: 2;
+    }
+    .lp-cta-final h2 {
+        font-size: clamp(32px, 4.5vw, 48px);
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 16px;
+    }
+    .lp-cta-final p {
+        font-size: 19px;
+        color: rgba(255,255,255,0.6);
+        max-width: 600px;
+        margin: 0 auto 40px;
+        line-height: 1.6;
+    }
+    .lp-cta-final__stats {
+        display: flex;
+        justify-content: center;
+        gap: 48px;
+        margin-top: 48px;
+    }
+    .lp-cta-final__stat {
+        text-align: center;
+    }
+    .lp-cta-final__stat strong {
+        display: block;
+        font-size: 24px;
+        font-weight: 800;
+        color: #D4A017;
+    }
+    .lp-cta-final__stat span {
+        font-size: 13px;
+        color: rgba(255,255,255,0.45);
+    }
+
+    /* ═══ ANIMATE FLOAT ═══ */
+    @keyframes floatLP {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+    .animate-float-lp {
+        animation: floatLP 3s ease-in-out infinite;
+    }
+
+    /* ═══ SCROLL REVEAL ═══ */
+    [data-reveal] {
+        opacity: 0;
+        transform: translateY(32px);
+        transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    [data-reveal].revealed {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    [data-reveal="scale"] {
+        opacity: 0;
+        transform: scale(0.92);
+        transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    [data-reveal="scale"].revealed {
+        opacity: 1;
+        transform: scale(1);
+    }
+    [data-reveal-stagger] > * {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.5s cubic-bezier(0.16,1,0.3,1), transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    }
+    [data-reveal-stagger].revealed > *:nth-child(1) { transition-delay: 0s; }
+    [data-reveal-stagger].revealed > *:nth-child(2) { transition-delay: 0.08s; }
+    [data-reveal-stagger].revealed > *:nth-child(3) { transition-delay: 0.16s; }
+    [data-reveal-stagger].revealed > *:nth-child(4) { transition-delay: 0.24s; }
+    [data-reveal-stagger].revealed > *:nth-child(5) { transition-delay: 0.32s; }
+    [data-reveal-stagger].revealed > *:nth-child(6) { transition-delay: 0.40s; }
+    [data-reveal-stagger].revealed > *:nth-child(7) { transition-delay: 0.48s; }
+    [data-reveal-stagger].revealed > * {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    [data-reveal-stagger].revealed > * {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 1024px) {
+        .agents-grid { grid-template-columns: repeat(2, 1fr); }
+        .founders-grid { grid-template-columns: repeat(3, 1fr); }
+        .segments-lp-grid { grid-template-columns: repeat(2, 1fr); }
+        .about-stats { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    }
+    @media (max-width: 768px) {
+        .lp-section { padding: 72px 0; }
+        .lp-hero { padding: 140px 0 80px; min-height: auto; }
+        .lp-hero__stats { gap: 24px; flex-wrap: wrap; }
+        .lp-hero__stat + .lp-hero__stat::before { display: none; }
+        .pain-grid { grid-template-columns: 1fr; }
+        .reframe-grid { grid-template-columns: 1fr; }
+        .agents-grid { grid-template-columns: 1fr; }
+        .steps-grid { grid-template-columns: 1fr; gap: 40px; }
+        .steps-grid::before { display: none; }
+        .testimonials-grid { grid-template-columns: 1fr; }
+        .segments-lp-grid { grid-template-columns: 1fr; }
+        .founders-grid { grid-template-columns: repeat(2, 1fr); }
+        .cost-grid { grid-template-columns: 1fr; }
+        .about-stats { grid-template-columns: repeat(2, 1fr); }
+        .lp-cta-final__stats { gap: 24px; flex-wrap: wrap; }
+        .btn-gold, .btn-red { width: 100%; justify-content: center; }
+    }
+    @media (max-width: 480px) {
+        .lp-hero h1 { font-size: 28px; }
+        .lp-hero__sub { font-size: 16px; }
+        .founders-grid { grid-template-columns: 1fr 1fr; }
+        .guarantee-lp { padding: 40px 24px; }
+    }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ HEADER ═══ -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="40">
+                </a>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="/">Início</a></li>
+                <li>
+                    <a href="#plataforma">Plataforma <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown">
+                        <div class="dropdown__info">
+                            <span class="dropdown__info-badge"><i class="fas fa-cube"></i> Plataforma</span>
+                            <h4>Orbit Gestão</h4>
+                            <p>5 módulos integrados + 6 agentes de IA para transformar sua estratégia em execução real.</p>
+                            <div class="dropdown__info-img">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                        </div>
+                        <div class="dropdown__links">
+                            <a href="/agentes">
+                                <div class="dd-icon"><i class="fas fa-robot"></i></div>
+                                <div class="dd-text"><span>Agentes de IA</span><small>6 especialistas 24/7</small></div>
+                            </a>
+                            <a href="/processos">
+                                <div class="dd-icon"><i class="fas fa-sitemap"></i></div>
+                                <div class="dd-text"><span>Processos</span><small>Mapeamento e automação</small></div>
+                            </a>
+                            <a href="/indicadores">
+                                <div class="dd-icon"><i class="fas fa-chart-line"></i></div>
+                                <div class="dd-text"><span>Indicadores</span><small>KPIs e dashboards</small></div>
+                            </a>
+                            <a href="/tarefas">
+                                <div class="dd-icon"><i class="fas fa-tasks"></i></div>
+                                <div class="dd-text"><span>Tarefas</span><small>Kanban estratégico</small></div>
+                            </a>
+                            <a href="/competencias">
+                                <div class="dd-icon"><i class="fas fa-users"></i></div>
+                                <div class="dd-text"><span>Competências</span><small>Gestão de pessoas</small></div>
+                            </a>
+                            <a href="/auditorias">
+                                <div class="dd-icon"><i class="fas fa-clipboard-check"></i></div>
+                                <div class="dd-text"><span>Auditorias</span><small>Conformidade e qualidade</small></div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="/pricing">Planos</a></li>
+                <li>
+                    <a href="/blog">Conteúdo <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown dropdown--sm">
+                        <div class="dropdown__links">
+                            <a href="/blog">
+                                <div class="dd-icon"><i class="fas fa-newspaper"></i></div>
+                                <div class="dd-text"><span>Blog</span><small>Artigos e insights</small></div>
+                            </a>
+                            <a href="/historias">
+                                <div class="dd-icon"><i class="fas fa-star"></i></div>
+                                <div class="dd-text"><span>Histórias de Clientes</span><small>Cases de sucesso</small></div>
+                            </a>
+                            <a href="/faq">
+                                <div class="dd-icon"><i class="fas fa-circle-question"></i></div>
+                                <div class="dd-text"><span>FAQ</span><small>Perguntas frequentes</small></div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="/sobre">Empresa <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown dropdown--sm">
+                        <div class="dropdown__links">
+                            <a href="/sobre">
+                                <div class="dd-icon"><i class="fas fa-building"></i></div>
+                                <div class="dd-text"><span>Sobre Nós</span><small>30 anos de história</small></div>
+                            </a>
+                            <a href="/parcerias">
+                                <div class="dd-icon"><i class="fas fa-handshake"></i></div>
+                                <div class="dd-text"><span>Seja Parceiro</span><small>Programa de canais</small></div>
+                            </a>
+                            <a href="/canais">
+                                <div class="dd-icon"><i class="fas fa-network-wired"></i></div>
+                                <div class="dd-text"><span>Canais B2B2B</span><small>Para consultores e mentores</small></div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="/acesso" class="btn btn-outline">Entrar</a>
+                <a href="/#contato-form" class="btn btn-primary">Conhecer o Time de IA</a>
+            </div>
+
+            <button class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <button class="mobile-menu-close" onclick="this.parentElement.classList.remove('active');document.body.style.overflow=''">&times;</button>
+        <div class="mobile-menu__label">Menu</div>
+        <a href="/"><i class="fas fa-home"></i> Início</a>
+        <a href="/pricing"><i class="fas fa-tag"></i> Planos e Preços</a>
+        <a href="/#contato-form"><i class="fas fa-envelope"></i> Fale Conosco</a>
+        <div class="mobile-menu__label">Plataforma</div>
+        <a href="/agentes"><i class="fas fa-robot"></i> Agentes de IA</a>
+        <a href="/processos"><i class="fas fa-sitemap"></i> Processos</a>
+        <a href="/indicadores"><i class="fas fa-chart-line"></i> Indicadores</a>
+        <a href="/tarefas"><i class="fas fa-tasks"></i> Tarefas</a>
+        <a href="/competencias"><i class="fas fa-users"></i> Competências</a>
+        <a href="/auditorias"><i class="fas fa-clipboard-check"></i> Auditorias</a>
+        <div class="mobile-menu__label">Conteúdo</div>
+        <a href="/blog"><i class="fas fa-newspaper"></i> Blog</a>
+        <a href="/historias"><i class="fas fa-star"></i> Histórias de Clientes</a>
+        <a href="/faq"><i class="fas fa-circle-question"></i> FAQ</a>
+        <div class="mobile-menu__label">Empresa</div>
+        <a href="/sobre"><i class="fas fa-building"></i> Sobre Nós</a>
+        <a href="/parcerias"><i class="fas fa-handshake"></i> Seja Parceiro</a>
+        <a href="/canais"><i class="fas fa-network-wired"></i> Canais B2B2B</a>
+        <div class="mobile-menu__divider"></div>
+        <a href="/#contato-form" class="btn btn-primary">Conhecer o Time de IA</a>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 1 — HERO
+         ═══════════════════════════════════════════════════════ -->
+    <section class="lp-hero" id="hero">
+        <div class="lp-hero__glow lp-hero__glow--1"></div>
+        <div class="lp-hero__glow lp-hero__glow--2"></div>
+        <div class="container">
+            <span class="lp-hero__badge" data-reveal>30 anos de gestão empresarial. Agora com IA.</span>
+            <h1 data-reveal>Contrate um <span class="text-gold">time de IA</span> que executa exatamente o que sua empresa precisa para crescer.</h1>
+            <p class="lp-hero__sub" data-reveal>Não é mais um software. São 6 agentes de IA especializados que constroem e operam a gestão da sua empresa. Planejamento, processos, treinamento, indicadores — trabalhando 24/7.</p>
+
+            <div class="lp-hero__stats" data-reveal>
+                <div class="lp-hero__stat">
+                    <strong>30 anos</strong>
+                    <span>de experiência</span>
+                </div>
+                <div class="lp-hero__stat">
+                    <strong>8.000+</strong>
+                    <span>empresas atendidas</span>
+                </div>
+                <div class="lp-hero__stat">
+                    <strong>2.206</strong>
+                    <span>no Orbit</span>
+                </div>
+            </div>
+
+            <div data-reveal>
+                <a href="#contato" class="btn-gold">QUERO CONHECER O TIME DE IA <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <p class="lp-hero__note" data-reveal>&#9203; 2 min &bull; 100% gratuito &bull; Sem compromisso</p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 2 — PAIN POINTS
+         ═══════════════════════════════════════════════════════ -->
+    <section class="lp-section lp-section--light" id="dores">
+        <div class="container">
+            <div class="lp-header" data-reveal>
+                <span class="lp-badge lp-badge--light">Isso te parece familiar?</span>
+                <h2>Deixa eu adivinhar:</h2>
+                <p>Você planeja o crescimento, mas não faz ideia se a operação está seguindo o script.</p>
+            </div>
+
+            <div class="pain-grid" data-reveal-stagger>
+                <div class="pain-card">
+                    <div class="icon-premium icon-premium--danger"><i class="fas fa-user-tie"></i></div>
+                    <p>"Parece que sou o único que se importa com essa empresa."</p>
+                </div>
+                <div class="pain-card">
+                    <div class="icon-premium icon-premium--danger"><i class="fas fa-eye-slash"></i></div>
+                    <p>"Não tenho controle quando não estou presente."</p>
+                </div>
+                <div class="pain-card">
+                    <div class="icon-premium icon-premium--danger"><i class="fas fa-hands-helping"></i></div>
+                    <p>"Já tentei delegar, mas tudo sai errado."</p>
+                </div>
+                <div class="pain-card">
+                    <div class="icon-premium icon-premium--danger"><i class="fas fa-fire-extinguisher"></i></div>
+                    <p>"Minha equipe só apaga incêndio."</p>
+                </div>
+                <div class="pain-card">
+                    <div class="icon-premium icon-premium--danger"><i class="fas fa-shirt"></i></div>
+                    <p>"Ninguém veste a camisa."</p>
+                </div>
+                <div class="pain-card">
+                    <div class="icon-premium icon-premium--danger"><i class="fas fa-chart-line"></i></div>
+                    <p>"Vivo no sobe e desce do faturamento."</p>
+                </div>
+            </div>
+
+            <div class="pain-cta" data-reveal>
+                <a href="#contato" class="btn-red">QUERO RESOLVER ISSO <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 3 — REFRAME
+         ═══════════════════════════════════════════════════════ -->
+    <section class="lp-section lp-section--dark" id="reframe">
+        <div class="container">
+            <div class="lp-header" data-reveal>
+                <span class="lp-badge lp-badge--gold">O problema real</span>
+                <h2>Por que software sozinho <span class="text-gold">não resolve</span></h2>
+                <p>Você já tentou. ERP, planilha, Trello, consultoria. E continua apagando incêndio.</p>
+            </div>
+
+            <div class="reframe-grid" data-reveal-stagger>
+                <div class="reframe-col reframe-col--fail">
+                    <div class="reframe-col__title">
+                        <i class="fas fa-circle-xmark"></i> O ciclo do fracasso
+                    </div>
+                    <div class="reframe-item">
+                        <div class="reframe-item__icon"><i class="fas fa-laptop"></i></div>
+                        <p>Compra software &rarr; precisa alimentar manualmente &rarr; ninguém alimenta.</p>
+                    </div>
+                    <div class="reframe-item">
+                        <div class="reframe-item__icon"><i class="fas fa-user-tie"></i></div>
+                        <p>Contrata consultoria &rarr; consultor vai embora &rarr; tudo para.</p>
+                    </div>
+                    <div class="reframe-item">
+                        <div class="reframe-item__icon"><i class="fas fa-table"></i></div>
+                        <p>Monta planilha &rarr; fica obsoleta em 2 semanas &rarr; ninguém atualiza.</p>
+                    </div>
+                    <div class="reframe-result">
+                        <i class="fas fa-skull-crossbones"></i> Mais uma ferramenta abandonada
+                    </div>
+                </div>
+
+                <div class="reframe-col reframe-col--success">
+                    <div class="reframe-col__title">
+                        <i class="fas fa-circle-check"></i> A mudança com Orbit
+                    </div>
+                    <div class="reframe-item">
+                        <div class="reframe-item__icon"><i class="fas fa-robot"></i></div>
+                        <p>Os agentes fazem o trabalho pesado — mapeiam, estruturam, monitoram.</p>
+                    </div>
+                    <div class="reframe-item">
+                        <div class="reframe-item__icon"><i class="fas fa-check-double"></i></div>
+                        <p>Você valida e decide — sem planilha, sem alimentação manual.</p>
+                    </div>
+                    <div class="reframe-item">
+                        <div class="reframe-item__icon"><i class="fas fa-clock"></i></div>
+                        <p>Funciona 24h — não depende de consultor, não tira férias.</p>
+                    </div>
+                    <div class="reframe-result">
+                        <i class="fas fa-trophy"></i> Gestão que opera com você, não por você
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 4 — AGENTS
+         ═══════════════════════════════════════════════════════ -->
+    <section class="lp-section lp-section--light" id="agentes">
+        <div class="container">
+            <div class="lp-header" data-reveal>
+                <span class="lp-badge lp-badge--light">6 especialistas. 24/7.</span>
+                <h2>Seu time de especialistas em IA</h2>
+                <p>Cada agente tem uma função. Trabalham 24h. Não tiram férias. Custam uma fração.</p>
+            </div>
+
+            <div class="agents-grid" data-reveal-stagger>
+                <div class="agent-card">
+                    <div class="icon-premium icon-premium--solid"><i class="fas fa-chess-king"></i></div>
+                    <h3>Agente Estrategista</h3>
+                    <p class="agent-card__desc">Planejamento estratégico, análise SWOT, BSC, definição de objetivos e desdobramento de metas.</p>
+                    <span class="agent-card__equiv"><i class="fas fa-user-tie"></i> Equiv: Consultor estratégico R$ 30-80k/projeto</span>
+                </div>
+                <div class="agent-card">
+                    <div class="icon-premium icon-premium--solid"><i class="fas fa-sitemap"></i></div>
+                    <h3>Agente de Processos</h3>
+                    <p class="agent-card__desc">Mapeia processos, cria instruções de trabalho, playbooks e fluxogramas automaticamente.</p>
+                    <span class="agent-card__equiv"><i class="fas fa-user-tie"></i> Equiv: Analista sênior R$ 8-12k/mês</span>
+                </div>
+                <div class="agent-card">
+                    <div class="icon-premium icon-premium--solid"><i class="fas fa-users"></i></div>
+                    <h3>Agente de Pessoas</h3>
+                    <p class="agent-card__desc">Descrição de cargos, avaliação de desempenho, PDIs personalizados para cada colaborador.</p>
+                    <span class="agent-card__equiv"><i class="fas fa-user-tie"></i> Equiv: Analista DHO R$ 6-10k/mês</span>
+                </div>
+                <div class="agent-card">
+                    <div class="icon-premium icon-premium--solid"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>Agente de Treinamento</h3>
+                    <p class="agent-card__desc">Microlearning via WhatsApp, quizzes, trilhas de aprendizado contínuo para o time.</p>
+                    <span class="agent-card__equiv"><i class="fas fa-user-tie"></i> Equiv: Coord. T&D R$ 7-12k/mês</span>
+                </div>
+                <div class="agent-card">
+                    <div class="icon-premium icon-premium--solid"><i class="fas fa-chart-line"></i></div>
+                    <h3>Agente de Indicadores</h3>
+                    <p class="agent-card__desc">Monitora KPIs, identifica causa raiz de desvios e sugere ações corretivas automáticas.</p>
+                    <span class="agent-card__equiv"><i class="fas fa-user-tie"></i> Equiv: Analista BI R$ 8-15k/mês</span>
+                </div>
+                <div class="agent-card">
+                    <div class="icon-premium icon-premium--solid"><i class="fas fa-magnifying-glass-chart"></i></div>
+                    <h3>Agente de Pesquisa</h3>
+                    <p class="agent-card__desc">Pesquisas de clima organizacional, satisfação de clientes e insights acionáveis em tempo real.</p>
+                    <span class="agent-card__equiv"><i class="fas fa-user-tie"></i> Equiv: Analista de dados R$ 6-10k/mês</span>
+                </div>
+            </div>
+
+            <div class="agents-note" data-reveal>
+                <p>O time humano equivalente custaria <span class="text-gold">R$ 50-120k/mês</span>.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 5 — HOW IT WORKS
+         ═══════════════════════════════════════════════════════ -->
+    <section class="lp-section lp-section--dark" id="como-funciona">
+        <div class="container">
+            <div class="lp-header" data-reveal>
+                <span class="lp-badge lp-badge--gold">Simples e rápido</span>
+                <h2>Como funciona</h2>
+            </div>
+
+            <div class="steps-grid" data-reveal-stagger>
+                <div class="step-card">
+                    <div class="step-card__number"><i class="fas fa-rocket"></i></div>
+                    <div class="step-card__time">5 minutos</div>
+                    <h3>01. Cadastre sua empresa</h3>
+                    <p>Preencha as informações básicas e os agentes já começam a trabalhar.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-card__number"><i class="fas fa-wand-magic-sparkles"></i></div>
+                    <div class="step-card__time">1 tarde</div>
+                    <h3>02. Os agentes constroem</h3>
+                    <p>Planejamento, processos, descrições de cargo, indicadores — tudo pronto em horas.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-card__number"><i class="fas fa-bolt"></i></div>
+                    <div class="step-card__time">24/7</div>
+                    <h3>03. Operação ativada</h3>
+                    <p>Monitoramento contínuo, treinamentos automáticos, alertas e ações corretivas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 6 — TESTIMONIALS
+         ═══════════════════════════════════════════════════════ -->
+    <section class="lp-section lp-section--light" id="depoimentos">
+        <div class="container">
+            <div class="lp-header" data-reveal>
+                <span class="lp-badge lp-badge--light">Quem já usa, aprova</span>
+                <h2>Resultados reais, não promessas</h2>
+            </div>
+
+            <div class="testimonials-grid" data-reveal-stagger>
+                <div class="testimonial-card">
+                    <div class="testimonial-card__stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-card__quote">"Em 2 semanas, os agentes mapearam todos os processos que tentamos documentar por 3 anos. Agora meu time segue o padrão sem eu precisar cobrar."</p>
+                    <div class="testimonial-card__author">
+                        <div class="testimonial-card__avatar">C</div>
+                        <div>
+                            <div class="testimonial-card__name">Carlos M.</div>
+                            <div class="testimonial-card__role">Diretor de Operações</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-card__stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-card__quote">"Finalmente consigo sair de férias sem medo. Os indicadores estão no meu WhatsApp todo dia e os treinamentos rodam sozinhos."</p>
+                    <div class="testimonial-card__author">
+                        <div class="testimonial-card__avatar">R</div>
+                        <div>
+                            <div class="testimonial-card__name">Renata S.</div>
+                            <div class="testimonial-card__role">CEO, Indústria</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-card__stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-card__quote">"Substituímos 3 ferramentas pelo Orbit. É a primeira vez que uma plataforma realmente funciona sem eu precisar alimentar o sistema."</p>
+                    <div class="testimonial-card__author">
+                        <div class="testimonial-card__avatar">M</div>
+                        <div>
+                            <div class="testimonial-card__name">Marcos L.</div>
+                            <div class="testimonial-card__role">Sócio-fundador, Serviços</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-placeholder" data-reveal>
+                &#9888;&#65039; Placeholder - substituir por depoimentos reais
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 7 — SEGMENTS
+         ═══════════════════════════════════════════════════════ -->
+    <section class="lp-section lp-section--dark" id="segmentos">
+        <div class="container">
+            <div class="lp-header" data-reveal>
+                <span class="lp-badge lp-badge--gold">Universal</span>
+                <h2>Funciona para <span class="text-gold">qualquer segmento</span></h2>
+            </div>
+
+            <div class="segments-lp-grid" data-reveal-stagger>
+                <div class="segment-lp-card">
+                    <div class="icon-premium icon-premium--solid"><i class="fas fa-gears"></i></div>
+                    <h3>Operações</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Processos padronizados</li>
+                        <li><i class="fas fa-check"></i> Instruções de trabalho automáticas</li>
+                        <li><i class="fas fa-check"></i> Monitoramento 24/7</li>
+                    </ul>
+                </div>
+                <div class="segment-lp-card">
+                    <div class="icon-premium icon-premium--solid"><i class="fas fa-certificate"></i></div>
+                    <h3>Qualidade / ISO</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Conformidade contínua</li>
+                        <li><i class="fas fa-check"></i> Auditorias automatizadas</li>
+                        <li><i class="fas fa-check"></i> Documentação sempre atualizada</li>
+                    </ul>
+                </div>
+                <div class="segment-lp-card">
+                    <div class="icon-premium icon-premium--solid"><i class="fas fa-users"></i></div>
+                    <h3>RH / Pessoas</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Descrição de cargos com IA</li>
+                        <li><i class="fas fa-check"></i> PDIs personalizados</li>
+                        <li><i class="fas fa-check"></i> Treinamento via WhatsApp</li>
+                    </ul>
+                </div>
+                <div class="segment-lp-card">
+                    <div class="icon-premium icon-premium--solid"><i class="fas fa-crown"></i></div>
+                    <h3>Liderança</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Planejamento estratégico</li>
+                        <li><i class="fas fa-check"></i> KPIs em tempo real</li>
+                        <li><i class="fas fa-check"></i> Decisões baseadas em dados</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 8 — ABOUT / WHO'S BEHIND
+         ═══════════════════════════════════════════════════════ -->
+    <section class="lp-section lp-section--light" id="sobre">
+        <div class="container">
+            <div class="lp-header" data-reveal>
+                <span class="lp-badge lp-badge--light">Grupo GSN</span>
+                <h2>Quem está por trás</h2>
+            </div>
+
+            <div class="about-intro" data-reveal>
+                <p>Maior grupo de consultoria em gestão e ISO do Brasil. <strong>30 anos de experiência</strong>, agora potencializados com IA para entregar resultado em escala.</p>
+            </div>
+
+            <div class="founders-grid" data-reveal-stagger>
+                <div class="founder-card">
+                    <div class="founder-card__avatar">I</div>
+                    <h4>Igor</h4>
+                    <span>CEO</span>
+                </div>
+                <div class="founder-card">
+                    <div class="founder-card__avatar">D</div>
+                    <h4>Daniela</h4>
+                    <span>Operações</span>
+                </div>
+                <div class="founder-card">
+                    <div class="founder-card__avatar">C</div>
+                    <h4>Christian</h4>
+                    <span>Produto</span>
+                </div>
+                <div class="founder-card">
+                    <div class="founder-card__avatar">R</div>
+                    <h4>Rodrigo</h4>
+                    <span>Vendas</span>
+                </div>
+                <div class="founder-card">
+                    <div class="founder-card__avatar">O</div>
+                    <h4>Omar</h4>
+                    <span>Tecnologia</span>
+                </div>
+            </div>
+
+            <div class="about-stats" data-reveal>
+                <div class="about-stat">
+                    <strong>30 anos</strong>
+                    <span>de experiência</span>
+                </div>
+                <div class="about-stat">
+                    <strong>8.000+</strong>
+                    <span>empresas atendidas</span>
+                </div>
+                <div class="about-stat">
+                    <strong>2.206</strong>
+                    <span>no Orbit</span>
+                </div>
+                <div class="about-stat">
+                    <strong>98%</strong>
+                    <span>satisfação</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 9 — COST COMPARISON
+         ═══════════════════════════════════════════════════════ -->
+    <section class="lp-section lp-section--dark" id="investimento">
+        <div class="container">
+            <div class="lp-header" data-reveal>
+                <span class="lp-badge lp-badge--gold">Investimento</span>
+                <h2>Quanto custa esse time?</h2>
+            </div>
+
+            <div class="cost-grid" data-reveal-stagger>
+                <div class="cost-card cost-card--old">
+                    <div class="cost-card__title">
+                        <i class="fas fa-users"></i> Time tradicional
+                    </div>
+                    <ul class="cost-card__list">
+                        <li><i class="fas fa-xmark"></i> Consultor estratégico</li>
+                        <li><i class="fas fa-xmark"></i> Analista de processos</li>
+                        <li><i class="fas fa-xmark"></i> Analista de DHO</li>
+                        <li><i class="fas fa-xmark"></i> Coordenador de T&D</li>
+                        <li><i class="fas fa-xmark"></i> Analista de BI</li>
+                        <li><i class="fas fa-xmark"></i> Analista de dados</li>
+                    </ul>
+                    <div class="cost-card__price">
+                        6 profissionais, horário comercial
+                        <strong>R$ 50-120k/mês</strong>
+                    </div>
+                </div>
+
+                <div class="cost-card cost-card--new">
+                    <div class="cost-card__title">
+                        <i class="fas fa-robot"></i> 6 Agentes Orbit
+                    </div>
+                    <ul class="cost-card__list">
+                        <li><i class="fas fa-check"></i> Agente Estrategista</li>
+                        <li><i class="fas fa-check"></i> Agente de Processos</li>
+                        <li><i class="fas fa-check"></i> Agente de Pessoas</li>
+                        <li><i class="fas fa-check"></i> Agente de Treinamento</li>
+                        <li><i class="fas fa-check"></i> Agente de Indicadores</li>
+                        <li><i class="fas fa-check"></i> Agente de Pesquisa</li>
+                    </ul>
+                    <div class="cost-card__price">
+                        6 agentes, 24/7, sem férias
+                        <strong>Uma fração do custo</strong>
+                    </div>
+                    <div class="cost-card__extras">
+                        <div class="cost-card__extra"><i class="fas fa-check"></i> Setup e onboarding inclusos</div>
+                        <div class="cost-card__extra"><i class="fas fa-check"></i> 20% de desconto no plano anual</div>
+                        <div class="cost-card__extra"><i class="fas fa-check"></i> Garantia de 90 dias</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 10 — GUARANTEE
+         ═══════════════════════════════════════════════════════ -->
+    <section class="lp-section lp-section--light" id="garantia">
+        <div class="container">
+            <div class="guarantee-lp" data-reveal="scale">
+                <div class="guarantee-lp__icon animate-float-lp">
+                    <i class="fas fa-shield-halved"></i>
+                </div>
+                <h2>Garantia de 90 dias</h2>
+                <p>Se não gerar resultado em 90 dias, devolvemos seu investimento. Risco zero para você.</p>
+                <div style="margin-top: 28px;">
+                    <a href="#contato" class="btn-gold">QUERO TESTAR SEM RISCO <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 11 — FAQ
+         ═══════════════════════════════════════════════════════ -->
+    <section class="lp-section lp-section--dark" id="faq">
+        <div class="container">
+            <div class="lp-header" data-reveal>
+                <span class="lp-badge lp-badge--gold">Dúvidas</span>
+                <h2>Perguntas frequentes</h2>
+            </div>
+
+            <div class="faq-lp-list" data-reveal-stagger>
+                <details class="faq-lp-item">
+                    <summary>O que é o Orbit?</summary>
+                    <div class="faq-answer">
+                        <p>O Orbit é uma plataforma de gestão empresarial com 6 agentes de IA especializados. Não é mais um software que você precisa alimentar — são agentes que constroem e operam a gestão da sua empresa, 24/7.</p>
+                    </div>
+                </details>
+                <details class="faq-lp-item">
+                    <summary>Para quem é indicado?</summary>
+                    <div class="faq-answer">
+                        <p>Para empresas de 5 a 100+ funcionários, de qualquer segmento, que querem profissionalizar a gestão sem depender exclusivamente de software que ninguém usa.</p>
+                    </div>
+                </details>
+                <details class="faq-lp-item">
+                    <summary>Quanto tempo leva para começar?</summary>
+                    <div class="faq-answer">
+                        <p>Cadastro em 5 minutos. Planejamento e processos em 1 tarde. Operação completa rodando em 7 dias.</p>
+                    </div>
+                </details>
+                <details class="faq-lp-item">
+                    <summary>É mais um software de gestão?</summary>
+                    <div class="faq-answer">
+                        <p>Não. Software é ferramenta vazia que espera ser alimentada. O Orbit tem agentes de IA que fazem o trabalho pesado — você valida e decide.</p>
+                    </div>
+                </details>
+                <details class="faq-lp-item">
+                    <summary>Funciona para o meu segmento?</summary>
+                    <div class="faq-answer">
+                        <p>Sim. Em 30 anos, já atendemos 8.000+ empresas de todos os segmentos. Gestão é universal. O que muda é o conteúdo — e é exatamente isso que a IA personaliza.</p>
+                    </div>
+                </details>
+                <details class="faq-lp-item">
+                    <summary>Meu time vai precisar aprender a usar?</summary>
+                    <div class="faq-answer">
+                        <p>Seu time nem precisa logar. Processos e treinamentos chegam pelo WhatsApp — que todo mundo já usa.</p>
+                    </div>
+                </details>
+                <details class="faq-lp-item">
+                    <summary>E se não funcionar?</summary>
+                    <div class="faq-answer">
+                        <p>Garantia de 90 dias. Se não gerar resultado, devolvemos seu investimento. Sem letras miúdas.</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 12 — CTA FINAL
+         ═══════════════════════════════════════════════════════ -->
+    <section class="lp-cta-final" id="contato">
+        <div class="lp-cta-final__glow"></div>
+        <div class="container">
+            <h2 data-reveal>Pronto para montar seu <span class="text-gold">time de IA</span>?</h2>
+            <p data-reveal>Agende uma demonstração gratuita e veja os agentes trabalhando com a SUA empresa.</p>
+            <div data-reveal>
+                <a href="/#contato-form" class="btn-gold">QUERO CONHECER O TIME DE IA <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="lp-cta-final__stats" data-reveal>
+                <div class="lp-cta-final__stat">
+                    <strong>30 anos</strong>
+                    <span>de experiência</span>
+                </div>
+                <div class="lp-cta-final__stat">
+                    <strong>8.000+</strong>
+                    <span>empresas</span>
+                </div>
+                <div class="lp-cta-final__stat">
+                    <strong>2.206</strong>
+                    <span>no Orbit</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="36">
+                    </div>
+                    <p>Plataforma de gestão com IA. Contrate um time que executa.</p>
+                    <div class="social-links">
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h5>Contato</h5>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone"></i> (48) 99120-6282</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Square SC, Florianópolis - SC</li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h5>Plataforma</h5>
+                    <ul>
+                        <li><a href="/agentes">Agentes de IA</a></li>
+                        <li><a href="/processos">Processos</a></li>
+                        <li><a href="/indicadores">Indicadores</a></li>
+                        <li><a href="/tarefas">Tarefas</a></li>
+                        <li><a href="/competencias">Competências</a></li>
+                        <li><a href="/auditorias">Auditorias</a></li>
+                        <li><a href="/pricing">Planos e Preços</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h5>Conteúdo</h5>
+                    <ul>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/historias">Histórias de Clientes</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                    </ul>
+                    <h5 style="margin-top: 20px;">Empresa</h5>
+                    <ul>
+                        <li><a href="/sobre">Sobre Nós</a></li>
+                        <li><a href="/parcerias">Seja Parceiro</a></li>
+                        <li><a href="/canais">Canais B2B2B</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Orbit — Grupo GSN. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- ═══ SCRIPTS ═══ -->
+
+    <!-- Header scroll + mobile menu + back to top -->
+    <script>
+    (function() {
+        // Header scroll
+        var header = document.querySelector('.header');
+        window.addEventListener('scroll', function() {
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Mobile menu toggle
+        var toggle = document.querySelector('.menu-toggle');
+        var mobileMenu = document.querySelector('.mobile-menu');
+        if (toggle && mobileMenu) {
+            toggle.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            });
+            // Close on link click
+            mobileMenu.querySelectorAll('a').forEach(function(a) {
+                a.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        }
+
+        // Dropdown hover (desktop)
+        document.querySelectorAll('.nav-menu > li').forEach(function(li) {
+            var dd = li.querySelector('.dropdown');
+            if (!dd) return;
+            li.addEventListener('mouseenter', function() { dd.style.opacity = '1'; dd.style.visibility = 'visible'; dd.style.transform = 'translateY(0)'; });
+            li.addEventListener('mouseleave', function() { dd.style.opacity = '0'; dd.style.visibility = 'hidden'; dd.style.transform = 'translateY(12px)'; });
+        });
+
+        // Back to top
+        var btn = document.getElementById('backToTop');
+        if (btn) {
+            window.addEventListener('scroll', function() {
+                btn.classList.toggle('visible', window.scrollY > 400);
+            });
+            btn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+    })();
+    </script>
+
+    <!-- Scroll Reveal -->
+    <script>
+    (function() {
+        var io = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+                if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('[data-reveal],[data-reveal-stagger]').forEach(function(el) { io.observe(el); });
+    })();
+    </script>
+
+    <script src="/js/seo.js"></script>
+</body>
+</html>

@@ -2,67 +2,150 @@
 
 ## Project Overview
 
-Static website for **Orbit Gestão**, a strategic management platform with AI for mid-market companies. Built with pure HTML/CSS/JS (no frameworks). Visual design inspired by Zoom.com.
+Site e Landing Pages do **Orbit** — plataforma de gestão empresarial com agentes de IA do Grupo GSN. Built with pure HTML/CSS/JS (no frameworks).
 
-**Brand:** Orbit Gestão — "Onde a Estratégia vira Execução"
-**Target:** Mid-market companies (R$ 5M–100M/year revenue)
-**Product:** 5 modules + AI (Processos, Indicadores, Tarefas, Competências, Auditorias, Orbit IA)
+**Brand:** Orbit — "Plataforma de gestão com IA. Contrate um time que executa."
+**Grupo:** GSN (Gestão e Suporte para Negócios) — 30 anos, 8.000+ empresas
+**Target B2B:** PMEs (5–100+ funcionários, R$ 500k–R$ 20M/ano)
+**Target B2B2B:** Consultores, mentores, associações, hubs
+**Product:** 6 agentes de IA (Estrategista, Processos, Pessoas, Treinamento, Indicadores, Pesquisa)
 
-## Quick Reference
+> ⚠️ **POSICIONAMENTO ATUALIZADO (2026):** O Orbit foi reposicionado de "plataforma de gestão estratégica" para "plataforma de gestão com agentes de IA". Consulte os docs de posicionamento antes de criar qualquer peça de comunicação.
 
-### Brand Identity
-- **Primary color (yellow):** `#FDB73F` → CSS var `--primary`
-- **Primary dark:** `#E5A235` → CSS var `--primary-dark`
-- **Primary light:** `#FEC85F` → CSS var `--primary-light`
-- **Black:** `#000000` → CSS var `--black`
-- **Font:** Poppins (Google Fonts), weights 300–900
-- **Icons:** Font Awesome 6
+## Positioning Documents (★ READ FIRST)
+
+Antes de criar ou editar QUALQUER peça de comunicação, leia os docs de posicionamento:
+
+| Doc | Conteúdo | Quando consultar |
+|-----|----------|-----------------|
+| **[BRAND-POSITIONING.md](./docs/BRAND-POSITIONING.md)** | Quem somos, proposta de valor, 6 agentes, moat, receita, identidade visual, restrições narrativas | SEMPRE — é a bíblia |
+| **[AUDIENCES-MESSAGING.md](./docs/AUDIENCES-MESSAGING.md)** | Personas (Carlos B2B, Fernanda B2B2B, Marcos Associação), copy de LPs, objeções, headlines, CTAs | Ao criar copy, ads, emails, conteúdo |
+| **[GROWTH-PLAYBOOK.md](./docs/GROWTH-PLAYBOOK.md)** | Arquitetura de funis, 3 motores de aquisição, economia de canais, KPIs, pricing, roadmap | Ao planejar campanhas, analisar métricas |
+| **[GROWTH-COPILOT.md](./docs/GROWTH-COPILOT.md)** | System prompt do agente de Growth (comportamento, escopo, formato) | Ao configurar agentes de IA para Growth |
+| **[PROCESSES-MAP.md](./docs/PROCESSES-MAP.md)** | Mapa completo: docs → páginas → funis → operações → pendências | Para entender como tudo se conecta |
+| **[TRACKING-ARCHITECTURE.md](./docs/TRACKING-ARCHITECTURE.md)** | Tracking end-to-end, dataLayer, 19 hidden fields, session ID, lead scoring, GTM | Ao implementar formulários e tracking |
+| **[LP-STANDARDS.md](./docs/LP-STANDARDS.md)** | 17 seções de LP, animações (12 efeitos), design system CSS, CRO, checklist | Ao criar ou revisar Landing Pages |
+| **[INDEXING-STRATEGY.md](./docs/INDEXING-STRATEGY.md)** | Google News, Schema NewsArticle, News Sitemap, Publisher Center, KPIs | Ao publicar artigos e otimizar indexação |
+
+### Narrative Restrictions (ABSOLUTE)
+1. **NUNCA** diga "consultoria tradicional não escala" — frase proibida
+2. **NUNCA** mencione Evolutto em materiais de marketing
+3. **NUNCA** diga que IA substitui consultores — IA potencializa
+4. **NUNCA** invente dados financeiros ou depoimentos
+5. **NUNCA** use linguagem técnica de IA (LLMs, tokens, API) — use "time de IA", "funcionários digitais", "agentes especializados"
+6. **TOM:** Direto, confiante, anti-software, pragmático. Linguagem de negócio, não de tecnologia.
+
+### Brand Identity — NEW Positioning (2026)
+
+| Token | Hex | Uso |
+|-------|-----|-----|
+| Dark (fundo) | `#0D1117` | Background principal |
+| Dark 2 | `#161B22` | Seções alternadas |
+| Dark 3 | `#1C2333` | Cards e elementos |
+| Gold (destaque) | `#D4A017` | CTAs, badges, ações |
+| Gold Light | `#F5C518` | Hover states |
+| Green | `#22C55E` | Métricas positivas |
+| Red | `#EF4444` | Pain points, urgência |
+| White | `#FFFFFF` | Títulos principais |
+| Gray | `#8B949E` | Texto secundário |
+| Light | `#C9D1D9` | Texto body |
+
+- **Font:** Plus Jakarta Sans (400, 600, 700, 800)
+- **Style:** Dark mode padrão, cards border-radius 12-20px, gold para ação
+
+### Brand Identity — CURRENT Site
+- **Primary color (gold):** `#D4A017` (migrado de #FDB73F)
+- **Font:** Plus Jakarta Sans (400, 600, 700, 800) — migrado de Poppins
+- **Icons:** Font Awesome 6 Solid
 - **Logo:** `images/logo-orbit.svg` (yellow rounded square with black "O")
+- **Dark sections:** `#0D1117` background, white/light text
+- **Light sections:** `#FAFBFC` background, hardcoded text colors (`#1A1D23` títulos, `#5A6069` body, `#E5E7EB` borders)
+
+> ⚠️ Em seções claras, SEMPRE usar cores hardcoded (não `var(--gray-*)`) para evitar problemas de transparência.
 
 ### File Structure
 ```
 site/
 ├── CLAUDE.md                    # THIS FILE — project context for Claude Code
-├── index.html                   # Homepage (v2 Zoom-style, ~693 lines)
+├── index.html                   # Homepage (v2 Zoom-style)
+├── lp-empresas.html             # LP B2B — 12 seções, 6 agentes, pricing
+├── canais.html                  # LP B2B2B — consultores/canais, modelo recorrente
+├── sobre.html                   # Sobre — história, ecosystem, diretores
+├── faq.html                     # FAQ — 13 Q&As em 4 categorias, accordion
+├── pricing.html                 # Pricing — 3 planos, comparação de custos
+├── agentes.html                 # AI Agents — showcase dos 6 agentes
+├── parcerias.html               # Partners page (v2)
+├── robots.txt                   # SEO — Allow all, block /acesso/
+├── sitemap.xml                  # SEO — 15 URLs com prioridades
 ├── css/
-│   ├── styles-v2.css            # ★ ACTIVE design system (~1598 lines)
-│   └── styles.css               # ✗ LEGACY v1 — DO NOT USE for new pages
+│   ├── styles-v2.css            # ★ ACTIVE design system
+│   └── styles.css               # ✗ LEGACY v1 — DO NOT USE
 ├── js/
-│   ├── main-v2.js               # ★ ACTIVE homepage JS (~369 lines)
-│   └── main.js                  # ✗ LEGACY v1 — DO NOT USE for new pages
+│   ├── main-v2.js               # ★ ACTIVE homepage JS
+│   ├── main.js                  # ✗ LEGACY v1 — DO NOT USE
+│   ├── seo.js                   # SEO — JSON-LD Schema (Organization + WebSite)
+│   ├── db.js                    # Data abstraction layer (OrbitDB) — localStorage + Supabase
+│   └── db-config.js             # Supabase config (USE_SUPABASE toggle)
 ├── images/
 │   ├── logo-orbit.svg           # Brand logo SVG
 │   ├── hero-bg.avif             # Homepage hero background image
 │   └── manual-marca.pdf         # Brand manual (reference only)
 ├── pages/
-│   ├── processos.html           # Product page: Processos (v2)
-│   ├── indicadores.html         # Product page: Indicadores (v2)
-│   ├── tarefas.html             # Product page: Tarefas (v2)
-│   ├── competencias.html        # Product page: Competências (v2)
-│   ├── auditorias.html          # Product page: Auditorias (v2)
-│   ├── blog.html                # Blog listing page (v2)
-│   ├── parcerias.html           # Partners page (v2)
+│   ├── processos.html           # Product page: Processos
+│   ├── indicadores.html         # Product page: Indicadores
+│   ├── tarefas.html             # Product page: Tarefas
+│   ├── competencias.html        # Product page: Competências
+│   ├── auditorias.html          # Product page: Auditorias
+│   ├── blog.html                # Blog listing page
 │   └── obrigado.html            # Thank you page
 ├── blog/
-│   ├── leitor.html              # Article reader page (v2, ~794 lines)
+│   ├── index.html               # Blog listing (alternate path)
+│   ├── leitor.html              # Article reader page
 │   └── artigo-template.html     # Article template reference
+├── historias/
+│   ├── index.html               # Customer stories listing
+│   ├── historia.html            # Story reader
+│   └── enviar.html              # Submit story form
 ├── acesso/
 │   ├── index.html               # CMS login page
-│   └── painel.html              # CMS admin panel (~2583 lines)
+│   └── painel.html              # CMS admin panel
 └── docs/
     ├── ARCHITECTURE.md           # Detailed architecture reference
     ├── DESIGN-SYSTEM.md          # CSS variables, components, patterns
     ├── CMS.md                    # CMS system documentation
-    └── BLOG.md                   # Blog system documentation
+    ├── BLOG.md                   # Blog system documentation
+    ├── SUPABASE-MIGRATION.md     # ★ Guia de migração localStorage → Supabase
+    ├── TEMPLATE-BLOG-CMS.md      # ★ Template reutilizável blog+CMS para novos projetos
+    ├── BRAND-POSITIONING.md      # ★ Bíblia de posicionamento (2026)
+    ├── AUDIENCES-MESSAGING.md    # ★ Personas, copy, objeções, LPs
+    ├── GROWTH-PLAYBOOK.md        # ★ Funis, canais, KPIs, roadmap
+    ├── GROWTH-COPILOT.md         # ★ System prompt do agente de Growth
+    ├── PROCESSES-MAP.md          # ★ Mapa de processos doc → site → operação
+    ├── TRACKING-ARCHITECTURE.md  # ★ Tracking, dataLayer, GTM, hidden fields, lead scoring
+    ├── LP-STANDARDS.md           # ★ Seções de LP, animações, design system, CRO
+    └── INDEXING-STRATEGY.md      # ★ Google News, Schema, News Sitemap, Publisher Center
 ```
 
 ### Active vs Legacy Files
 | Status | CSS | JS | Pages |
 |--------|-----|-----|-------|
-| ★ ACTIVE (v2) | `styles-v2.css` | `main-v2.js` | `index.html`, 5 product pages, `blog.html`, `leitor.html` |
-| ✗ LEGACY (v1) | `styles.css` | `main.js` | `parcerias.html` |
+| ★ ACTIVE (v2) | `styles-v2.css` | `main-v2.js` | All pages |
+| ✗ LEGACY (v1) | `styles.css` | `main.js` | DO NOT USE |
 
-**IMPORTANT:** All new pages and modifications MUST use `styles-v2.css`. Never reference `styles.css` for new work.
+**IMPORTANT:** All pages use `styles-v2.css`. Never reference `styles.css` for new work.
+
+### SEO (All Pages)
+- **OG/Twitter meta tags** applied to all 19 HTML pages
+- **JSON-LD Schema** (Organization + WebSite) via `js/seo.js`
+- **robots.txt** — allows all crawlers, blocks `/acesso/`
+- **sitemap.xml** — 15 URLs with priority levels
+- **Canonical URLs** on all pages
+
+### Data Abstraction Layer (Supabase-Ready)
+- **`js/db.js`** — `OrbitDB` class with `LocalBackend` and `SupabaseBackend`
+- **`js/db-config.js`** — Config with `USE_SUPABASE` toggle (currently `false`)
+- When Supabase credentials are provided: update `db-config.js`, run SQL from `docs/SUPABASE-MIGRATION.md`
+- All CMS and blog pages can switch backends without UI changes
 
 ## Design System (CSS)
 
@@ -259,12 +342,29 @@ Replace with real product screenshots before production:
 - Client logos: `120x48`
 
 ## Pending Work
+
+### 🔴 Crítico
+- [ ] Atualizar homepage com novo hero/copy ("Contrate um time de IA que executa")
+- [ ] Coletar depoimentos reais (placeholders atuais são pendência crítica)
+- [ ] Criar imagem OG padrão (`images/og-default.png`) — referenciada nos meta tags mas não existe
+- [ ] Integrar Supabase (user fornecerá credenciais) — usar `docs/SUPABASE-MIGRATION.md`
+
+### 🟡 Site Técnico
 - [ ] Replace placeholder images with real product screenshots
 - [ ] Connect form to real webhook (n8n/Zapier)
 - [ ] Install GTM container snippet
-- [ ] Migrate `parcerias.html` to v2 design
-- [ ] Add SEO meta tags (OG, Twitter Cards) across all pages
-- [ ] Add sitemap.xml and robots.txt
 - [ ] Minify CSS/JS for production
 - [ ] WCAG accessibility audit
 - [ ] Deploy to Vercel/hosting
+
+### ✅ Concluído
+- [x] Criar LP B2B (`lp-empresas.html`) — 12 seções, 6 agentes
+- [x] Criar LP B2B2B Canais (`canais.html`) — modelo recorrente, matemática
+- [x] Criar páginas: Sobre, FAQ, Pricing, Agentes
+- [x] Migrar identidade visual: Poppins → Plus Jakarta Sans, #FDB73F → #D4A017
+- [x] SEO meta tags (OG, Twitter Cards) em todas as 19 páginas
+- [x] sitemap.xml e robots.txt
+- [x] JSON-LD Schema (Organization + WebSite) via seo.js
+- [x] Data abstraction layer (OrbitDB) para migração Supabase
+- [x] Corrigir parcerias.html (ícones, cores, botões, scroll reveal)
+- [x] Atualizar blog e histórias (nav, footer, data-reveal, cores)

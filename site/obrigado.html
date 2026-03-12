@@ -6,10 +6,24 @@
     <title>Obrigado! - Orbit Gestão</title>
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
     <meta name="description" content="Recebemos seu contato. Nossa equipe entrará em contato em breve.">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orbitgestao.com.br/obrigado">
+    <meta property="og:title" content="Obrigado! - Orbit Gestão">
+    <meta property="og:description" content="Recebemos seu contato. Nossa equipe entrará em contato em breve.">
+    <meta property="og:image" content="https://orbitgestao.com.br/images/og-default.png">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Orbit">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Obrigado! - Orbit Gestão">
+    <meta name="twitter:description" content="Recebemos seu contato. Nossa equipe entrará em contato em breve.">
+    <meta name="twitter:image" content="https://orbitgestao.com.br/images/og-default.png">
+    <link rel="canonical" href="https://orbitgestao.com.br/obrigado">
     <meta name="robots" content="noindex, nofollow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/css/styles-v2.css?v=2">
     <style>
@@ -40,7 +54,7 @@
         .thankyou-hero__glow--1 {
             width: 500px;
             height: 500px;
-            background: var(--primary, #FDB73F);
+            background: var(--primary, #D4A017);
             top: -100px;
             right: -100px;
         }
@@ -48,7 +62,7 @@
         .thankyou-hero__glow--2 {
             width: 400px;
             height: 400px;
-            background: var(--primary, #FDB73F);
+            background: var(--primary, #D4A017);
             bottom: -80px;
             left: -80px;
         }
@@ -64,7 +78,7 @@
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            background: var(--primary, #FDB73F);
+            background: var(--primary, #D4A017);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -86,7 +100,7 @@
         }
 
         .thankyou-content h1 span {
-            background: linear-gradient(135deg, var(--primary, #FDB73F), var(--primary-light, #FEC85F));
+            background: linear-gradient(135deg, var(--primary, #D4A017), var(--primary-light, #E8B824));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -122,7 +136,7 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background: var(--primary, #FDB73F);
+            background: var(--primary, #D4A017);
             color: #000;
             font-weight: 700;
             font-size: 0.875rem;
@@ -194,17 +208,21 @@
             <ul class="nav-menu">
                 <li><a href="/">Início</a></li>
                 <li>
-                    <a href="/#plataforma">Soluções <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <a href="#plataforma">Plataforma <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown">
                         <div class="dropdown__info">
                             <span class="dropdown__info-badge"><i class="fas fa-cube"></i> Plataforma</span>
                             <h4>Orbit Gestão</h4>
-                            <p>5 módulos integrados + IA para transformar sua estratégia em execução real.</p>
+                            <p>5 módulos integrados + 6 agentes de IA para transformar sua estratégia em execução real.</p>
                             <div class="dropdown__info-img">
                                 <i class="fas fa-rocket"></i>
                             </div>
                         </div>
                         <div class="dropdown__links">
+                            <a href="/agentes">
+                                <div class="dd-icon"><i class="fas fa-robot"></i></div>
+                                <div class="dd-text"><span>Agentes de IA</span><small>6 especialistas 24/7</small></div>
+                            </a>
                             <a href="/processos">
                                 <div class="dd-icon"><i class="fas fa-sitemap"></i></div>
                                 <div class="dd-text"><span>Processos</span><small>Mapeamento e automação</small></div>
@@ -228,13 +246,49 @@
                         </div>
                     </div>
                 </li>
-                <li><a href="/blog">Conhecimento</a></li>
-                <li><a href="/parcerias">Seja Parceiro</a></li>
-                <li><a href="/#contato-form">Fale Conosco</a></li>
+                <li><a href="/pricing">Planos</a></li>
+                <li>
+                    <a href="/blog">Conteúdo <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown dropdown--sm">
+                        <div class="dropdown__links">
+                            <a href="/blog">
+                                <div class="dd-icon"><i class="fas fa-newspaper"></i></div>
+                                <div class="dd-text"><span>Blog</span><small>Artigos e insights</small></div>
+                            </a>
+                            <a href="/historias">
+                                <div class="dd-icon"><i class="fas fa-star"></i></div>
+                                <div class="dd-text"><span>Histórias de Clientes</span><small>Cases de sucesso</small></div>
+                            </a>
+                            <a href="/faq">
+                                <div class="dd-icon"><i class="fas fa-circle-question"></i></div>
+                                <div class="dd-text"><span>FAQ</span><small>Perguntas frequentes</small></div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="/sobre">Empresa <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown dropdown--sm">
+                        <div class="dropdown__links">
+                            <a href="/sobre">
+                                <div class="dd-icon"><i class="fas fa-building"></i></div>
+                                <div class="dd-text"><span>Sobre Nós</span><small>30 anos de história</small></div>
+                            </a>
+                            <a href="/parcerias">
+                                <div class="dd-icon"><i class="fas fa-handshake"></i></div>
+                                <div class="dd-text"><span>Seja Parceiro</span><small>Programa de canais</small></div>
+                            </a>
+                            <a href="/canais">
+                                <div class="dd-icon"><i class="fas fa-network-wired"></i></div>
+                                <div class="dd-text"><span>Canais B2B2B</span><small>Para consultores e mentores</small></div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
             </ul>
             <div class="nav-actions">
-                <a href="#" class="btn btn-outline">Entrar</a>
-                <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>
+                <a href="/acesso" class="btn btn-outline">Entrar</a>
+                <a href="/#contato-form" class="btn btn-primary">Conhecer o Time de IA</a>
             </div>
             <button class="menu-toggle" onclick="document.querySelector('.mobile-menu').classList.toggle('active');document.body.style.overflow=document.querySelector('.mobile-menu').classList.contains('active')?'hidden':''">
                 <span></span><span></span><span></span>
@@ -246,8 +300,10 @@
         <button class="mobile-menu-close" onclick="this.parentElement.classList.remove('active');document.body.style.overflow=''">&times;</button>
         <div class="mobile-menu__label">Menu</div>
         <a href="/"><i class="fas fa-home"></i> Início</a>
+        <a href="/pricing"><i class="fas fa-tag"></i> Planos e Preços</a>
         <a href="/#contato-form"><i class="fas fa-envelope"></i> Fale Conosco</a>
-        <div class="mobile-menu__label">Soluções</div>
+        <div class="mobile-menu__label">Plataforma</div>
+        <a href="/agentes"><i class="fas fa-robot"></i> Agentes de IA</a>
         <a href="/processos"><i class="fas fa-sitemap"></i> Processos</a>
         <a href="/indicadores"><i class="fas fa-chart-line"></i> Indicadores</a>
         <a href="/tarefas"><i class="fas fa-tasks"></i> Tarefas</a>
@@ -255,9 +311,14 @@
         <a href="/auditorias"><i class="fas fa-clipboard-check"></i> Auditorias</a>
         <div class="mobile-menu__label">Conteúdo</div>
         <a href="/blog"><i class="fas fa-newspaper"></i> Blog</a>
+        <a href="/historias"><i class="fas fa-star"></i> Histórias de Clientes</a>
+        <a href="/faq"><i class="fas fa-circle-question"></i> FAQ</a>
+        <div class="mobile-menu__label">Empresa</div>
+        <a href="/sobre"><i class="fas fa-building"></i> Sobre Nós</a>
         <a href="/parcerias"><i class="fas fa-handshake"></i> Seja Parceiro</a>
+        <a href="/canais"><i class="fas fa-network-wired"></i> Canais B2B2B</a>
         <div class="mobile-menu__divider"></div>
-        <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>
+        <a href="/#contato-form" class="btn btn-primary">Conhecer o Time de IA</a>
     </div>
 
     <!-- Thank You Section -->
@@ -308,7 +369,7 @@
                     <div class="footer-logo">
                         <img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="36">
                     </div>
-                    <p>Transformando estratégia em execução para empresas de médio porte.</p>
+                    <p>Plataforma de gestão com IA. Contrate um time que executa.</p>
                     <div class="social-links">
                         <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
                         <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
@@ -318,32 +379,40 @@
                 <div class="footer-column">
                     <h5>Contato</h5>
                     <ul class="footer-contact">
-                        <li><i class="fas fa-phone"></i> +55 (11) 9999-9999</li>
-                        <li><i class="fas fa-envelope"></i> contato@orbit.com</li>
+                        <li><i class="fas fa-phone"></i> (48) 99120-6282</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Square SC, Florianópolis - SC</li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h5>Soluções</h5>
+                    <h5>Plataforma</h5>
                     <ul>
+                        <li><a href="/agentes">Agentes de IA</a></li>
                         <li><a href="/processos">Processos</a></li>
                         <li><a href="/indicadores">Indicadores</a></li>
                         <li><a href="/tarefas">Tarefas</a></li>
                         <li><a href="/competencias">Competências</a></li>
                         <li><a href="/auditorias">Auditorias</a></li>
+                        <li><a href="/pricing">Planos e Preços</a></li>
                     </ul>
                 </div>
+
                 <div class="footer-column">
-                    <h5>Conhecimento</h5>
+                    <h5>Conteúdo</h5>
                     <ul>
                         <li><a href="/blog">Blog</a></li>
-                        <li><a href="#">Documentação</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Webinars</a></li>
+                        <li><a href="/historias">Histórias de Clientes</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                    </ul>
+                    <h5 style="margin-top: 20px;">Empresa</h5>
+                    <ul>
+                        <li><a href="/sobre">Sobre Nós</a></li>
+                        <li><a href="/parcerias">Seja Parceiro</a></li>
+                        <li><a href="/canais">Canais B2B2B</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Orbit Gestão. Todos os direitos reservados.</p>
+                <p>&copy; 2026 Orbit — Grupo GSN. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
@@ -371,5 +440,22 @@
             });
         });
     </script>
+    <!-- Scroll Reveal -->
+    <script>
+    (function() {
+        var io = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+                if (e.isIntersecting) {
+                    e.target.classList.add('revealed');
+                    io.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('[data-reveal],[data-reveal-stagger]').forEach(function(el) {
+            io.observe(el);
+        });
+    })();
+    </script>
+    <script src="/js/seo.js"></script>
 </body>
 </html>

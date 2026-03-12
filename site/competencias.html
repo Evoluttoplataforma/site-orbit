@@ -3,16 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão de Competências - Orbit Gestão</title>
+    <title>Orbit Competências — Agente de IA para gestão de pessoas</title>
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
-    <meta name="description" content="Desenvolva e retenha talentos com a Gestão de Competências da Orbit Gestão.">
+    <meta name="description" content="O Agente de Pessoas cria descrições de cargo, avaliações de desempenho e PDIs personalizados automaticamente.">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orbitgestao.com.br/competencias">
+    <meta property="og:title" content="Orbit Competências — Agente de IA para gestão de pessoas">
+    <meta property="og:description" content="O Agente de Pessoas cria descrições de cargo, avaliações de desempenho e PDIs personalizados automaticamente.">
+    <meta property="og:image" content="https://orbitgestao.com.br/images/og-default.png">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Orbit">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Orbit Competências — Agente de IA para gestão de pessoas">
+    <meta name="twitter:description" content="O Agente de Pessoas cria descrições de cargo, avaliações de desempenho e PDIs personalizados automaticamente.">
+    <meta name="twitter:image" content="https://orbitgestao.com.br/images/og-default.png">
+    <link rel="canonical" href="https://orbitgestao.com.br/competencias">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/css/styles-v2.css?v=2">
 </head>
 <body>
+    <!-- ═══ HEADER ═══ -->
     <header class="header">
         <div class="container">
             <div class="logo">
@@ -20,20 +36,25 @@
                     <img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="40">
                 </a>
             </div>
+
             <ul class="nav-menu">
                 <li><a href="/">Início</a></li>
                 <li>
-                    <a href="/#plataforma">Soluções <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <a href="#plataforma">Plataforma <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown">
                         <div class="dropdown__info">
                             <span class="dropdown__info-badge"><i class="fas fa-cube"></i> Plataforma</span>
                             <h4>Orbit Gestão</h4>
-                            <p>5 módulos integrados + IA para transformar sua estratégia em execução real.</p>
+                            <p>5 módulos integrados + 6 agentes de IA para transformar sua estratégia em execução real.</p>
                             <div class="dropdown__info-img">
                                 <i class="fas fa-rocket"></i>
                             </div>
                         </div>
                         <div class="dropdown__links">
+                            <a href="/agentes">
+                                <div class="dd-icon"><i class="fas fa-robot"></i></div>
+                                <div class="dd-text"><span>Agentes de IA</span><small>6 especialistas 24/7</small></div>
+                            </a>
                             <a href="/processos">
                                 <div class="dd-icon"><i class="fas fa-sitemap"></i></div>
                                 <div class="dd-text"><span>Processos</span><small>Mapeamento e automação</small></div>
@@ -57,8 +78,9 @@
                         </div>
                     </div>
                 </li>
+                <li><a href="/pricing">Planos</a></li>
                 <li>
-                    <a href="/blog">Conhecimento <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <a href="/blog">Conteúdo <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown dropdown--sm">
                         <div class="dropdown__links">
                             <a href="/blog">
@@ -69,27 +91,56 @@
                                 <div class="dd-icon"><i class="fas fa-star"></i></div>
                                 <div class="dd-text"><span>Histórias de Clientes</span><small>Cases de sucesso</small></div>
                             </a>
+                            <a href="/faq">
+                                <div class="dd-icon"><i class="fas fa-circle-question"></i></div>
+                                <div class="dd-text"><span>FAQ</span><small>Perguntas frequentes</small></div>
+                            </a>
                         </div>
                     </div>
                 </li>
-                <li><a href="/parcerias">Seja Parceiro</a></li>
-                <li><a href="/#contato-form">Fale Conosco</a></li>
+                <li>
+                    <a href="/sobre">Empresa <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown dropdown--sm">
+                        <div class="dropdown__links">
+                            <a href="/sobre">
+                                <div class="dd-icon"><i class="fas fa-building"></i></div>
+                                <div class="dd-text"><span>Sobre Nós</span><small>30 anos de história</small></div>
+                            </a>
+                            <a href="/parcerias">
+                                <div class="dd-icon"><i class="fas fa-handshake"></i></div>
+                                <div class="dd-text"><span>Seja Parceiro</span><small>Programa de canais</small></div>
+                            </a>
+                            <a href="/canais">
+                                <div class="dd-icon"><i class="fas fa-network-wired"></i></div>
+                                <div class="dd-text"><span>Canais B2B2B</span><small>Para consultores e mentores</small></div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
             </ul>
+
             <div class="nav-actions">
-                <a href="#" class="btn btn-outline">Entrar</a>
-                <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>
+                <a href="/acesso" class="btn btn-outline">Entrar</a>
+                <a href="/#contato-form" class="btn btn-primary">Conhecer o Time de IA</a>
             </div>
-            <button class="menu-toggle" onclick="document.querySelector('.mobile-menu').classList.toggle('active');document.body.style.overflow=document.querySelector('.mobile-menu').classList.contains('active')?'hidden':''">
-                <span></span><span></span><span></span>
+
+            <button class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </button>
         </div>
     </header>
+
+    <!-- Mobile Menu -->
     <div class="mobile-menu">
         <button class="mobile-menu-close" onclick="this.parentElement.classList.remove('active');document.body.style.overflow=''">&times;</button>
         <div class="mobile-menu__label">Menu</div>
         <a href="/"><i class="fas fa-home"></i> Início</a>
+        <a href="/pricing"><i class="fas fa-tag"></i> Planos e Preços</a>
         <a href="/#contato-form"><i class="fas fa-envelope"></i> Fale Conosco</a>
-        <div class="mobile-menu__label">Soluções</div>
+        <div class="mobile-menu__label">Plataforma</div>
+        <a href="/agentes"><i class="fas fa-robot"></i> Agentes de IA</a>
         <a href="/processos"><i class="fas fa-sitemap"></i> Processos</a>
         <a href="/indicadores"><i class="fas fa-chart-line"></i> Indicadores</a>
         <a href="/tarefas"><i class="fas fa-tasks"></i> Tarefas</a>
@@ -98,9 +149,13 @@
         <div class="mobile-menu__label">Conteúdo</div>
         <a href="/blog"><i class="fas fa-newspaper"></i> Blog</a>
         <a href="/historias"><i class="fas fa-star"></i> Histórias de Clientes</a>
+        <a href="/faq"><i class="fas fa-circle-question"></i> FAQ</a>
+        <div class="mobile-menu__label">Empresa</div>
+        <a href="/sobre"><i class="fas fa-building"></i> Sobre Nós</a>
         <a href="/parcerias"><i class="fas fa-handshake"></i> Seja Parceiro</a>
+        <a href="/canais"><i class="fas fa-network-wired"></i> Canais B2B2B</a>
         <div class="mobile-menu__divider"></div>
-        <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>
+        <a href="/#contato-form" class="btn btn-primary">Conhecer o Time de IA</a>
     </div>
 
     <!-- ═══ PRODUCT HERO ═══ -->
@@ -113,43 +168,68 @@
         <div class="container">
             <div class="product-hero__grid">
                 <div>
-                    <div class="product-hero__badge"><i class="fas fa-users"></i> Competências</div>
-                    <h1 class="product-hero__title">Gestão de <span>Competências</span></h1>
-                    <p class="product-hero__desc">Mapeie, avalie e desenvolva as competências do seu time. Feche gaps de habilidades e construa equipes de alta performance.</p>
+                    <div class="product-hero__badge">
+                        <i class="fas fa-user-group"></i>
+                        Pessoas + IA
+                    </div>
+                    <h1 class="product-hero__title">Gestão de <span>Competências</span> com IA</h1>
+                    <p class="product-hero__desc">O Agente de Pessoas cria descrições de cargo, avaliações 360° e PDIs personalizados automaticamente. Desenvolva seu time sem depender de consultoria de RH.</p>
                     <div class="product-hero__ctas">
-                        <a href="/#contato-form" class="btn btn-primary btn-lg">Agendar Demonstração</a>
+                        <a href="/#contato-form" class="btn btn-primary btn-lg">Conhecer o Time de IA</a>
                         <a href="#detalhes" class="btn btn-ghost btn-lg">Conhecer Recursos <i class="fas fa-arrow-down"></i></a>
                     </div>
                 </div>
                 <div class="product-hero__image">
-                    <img src="https://placehold.co/560x400/FDB73F/000000?text=Compet%C3%AAncias&font=poppins" alt="Gestão de Competências">
+                    <img src="https://placehold.co/560x400/0D1117/D4A017?text=Gest%C3%A3o+de+Compet%C3%AAncias&font=raleway" alt="Gestão de Competências com IA">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ AGENT HIGHLIGHT ═══ -->
+    <section class="agent-highlight">
+        <div class="container">
+            <div class="agent-highlight__grid" data-reveal>
+                <div class="agent-highlight__info">
+                    <div class="agent-highlight__badge"><span></span> Ativo 24/7</div>
+                    <h2>Agente de Pessoas</h2>
+                    <p>Cria descrições de cargo completas, monta ciclos de avaliação 360°, gera PDIs personalizados e identifica gaps de competência na equipe. Tudo automaticamente, com base nos dados da sua empresa.</p>
+                    <div class="agent-highlight__equiv">
+                        <div class="agent-highlight__equiv-label">Equivale a</div>
+                        <div class="agent-highlight__equiv-value">Analista DHO · R$ 6-10k/mês</div>
+                    </div>
+                </div>
+                <div class="agent-highlight__visual">
+                    <div class="agent-highlight__visual-circle">
+                        <i class="fas fa-user-group" style="font-size:48px;color:#fff;"></i>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ═══ BENEFITS ═══ -->
-    <section class="product-benefits-v2">
+    <section class="product-benefits-v2 section--light">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" data-reveal>
                 <h2>Principais <span class="highlight">Benefícios</span></h2>
-                <p>Por que escolher a Orbit para competências</p>
+                <p>Por que escolher o Orbit para gestão de pessoas</p>
             </div>
-            <div class="benefits-grid-v2">
+            <div class="benefits-grid-v2" data-reveal-stagger>
                 <div class="benefit-card-v2">
-                    <div class="benefit-card-v2__icon"><i class="fas fa-search"></i></div>
-                    <h4>Mapeamento de Gaps</h4>
-                    <p>Identifique lacunas de competências antes que afetem resultados</p>
+                    <div class="benefit-card-v2__icon icon-premium icon-premium--solid"><i class="fas fa-file-lines"></i></div>
+                    <h4>Descrição de Cargos</h4>
+                    <p>Gerada automaticamente com IA, pronta para uso em recrutamento e avaliação</p>
                 </div>
                 <div class="benefit-card-v2">
-                    <div class="benefit-card-v2__icon"><i class="fas fa-graduation-cap"></i></div>
-                    <h4>Desenvolvimento Contínuo</h4>
-                    <p>PDIs personalizados para cada colaborador</p>
+                    <div class="benefit-card-v2__icon icon-premium icon-premium--solid"><i class="fas fa-star"></i></div>
+                    <h4>Avaliação 360°</h4>
+                    <p>Ciclos completos sem planilhas, com calibração automática</p>
                 </div>
                 <div class="benefit-card-v2">
-                    <div class="benefit-card-v2__icon"><i class="fas fa-heart"></i></div>
-                    <h4>Retenção de Talentos</h4>
-                    <p>Valorize e desenvolva seu capital humano</p>
+                    <div class="benefit-card-v2__icon icon-premium icon-premium--solid"><i class="fas fa-chart-line"></i></div>
+                    <h4>PDI Personalizado</h4>
+                    <p>Planos de desenvolvimento individuais criados automaticamente pela IA</p>
                 </div>
             </div>
         </div>
@@ -158,92 +238,76 @@
     <!-- ═══ FEATURES ═══ -->
     <section class="product-features-v2" id="detalhes">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" data-reveal>
                 <h2>Recursos <span class="highlight">Poderosos</span></h2>
-                <p>Tudo que você precisa para gerenciar competências com excelência</p>
+                <p>Tudo que você precisa para desenvolver seu time</p>
             </div>
-            <div class="features-grid-v2">
+            <div class="features-grid-v2" data-reveal-stagger>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Matriz de Competências</strong><p>Mapeie skills do time visualmente</p></div>
+                    <div><strong>Matriz de competências</strong><p>Mapeamento visual de skills por cargo e área</p></div>
                 </div>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Avaliações 360°</strong><p>Feedback multi-fonte estruturado</p></div>
+                    <div><strong>Avaliações 360° configuráveis</strong><p>Ciclos personalizados com múltiplos avaliadores</p></div>
                 </div>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>PDI Individual</strong><p>Planos de desenvolvimento personalizados</p></div>
+                    <div><strong>PDI automatizado com IA</strong><p>Planos de desenvolvimento gerados pela IA</p></div>
                 </div>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Trilhas de Capacitação</strong><p>Caminhos de aprendizado estruturados</p></div>
+                    <div><strong>Analytics de desempenho</strong><p>Dashboards com evolução individual e por equipe</p></div>
                 </div>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Feedback Contínuo</strong><p>Conversas de desenvolvimento regulares</p></div>
+                    <div><strong>Descrição de cargos com IA</strong><p>Geração automática de job descriptions completas</p></div>
                 </div>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Certificações</strong><p>Registro de certificados e validações</p></div>
+                    <div><strong>Feedback contínuo</strong><p>Canal estruturado para feedback entre liderança e equipe</p></div>
                 </div>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Gap Analysis por Equipe</strong><p>Identifique necessidades coletivas</p></div>
+                    <div><strong>Gaps de competência</strong><p>Identifique lacunas e priorize desenvolvimento</p></div>
                 </div>
                 <div class="feature-item-v2">
                     <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Relatórios de Evolução</strong><p>Acompanhe progresso de aprendizado</p></div>
+                    <div><strong>Relatórios gerenciais</strong><p>Visão consolidada para decisões de RH</p></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ═══ DETAIL SECTION ═══ -->
-    <section class="product-detail-v2">
+    <section class="product-detail-v2 section--light">
         <div class="container">
-            <div class="product-detail-v2__grid">
+            <div class="product-detail-v2__grid" data-reveal>
                 <div class="product-detail-v2__image">
-                    <img src="https://placehold.co/500x360/000000/FDB73F?text=Matriz+Competencias&font=poppins" alt="Matriz de Competências Visual">
+                    <img src="https://placehold.co/500x360/0D1117/D4A017?text=Matriz+de+Compet%C3%AAncias&font=raleway" alt="Matriz de Competências">
                 </div>
                 <div class="product-detail-v2__text">
-                    <h2>Matriz de Competências Visual</h2>
-                    <p>Visualize em um único painel todas as competências do time, gaps identificados e planos de ação em andamento para fechá-los.</p>
+                    <h2>Matriz de Competências</h2>
+                    <p>Visualize as skills de toda a equipe, identifique gaps por área e acompanhe a evolução ao longo do tempo com calibração automática.</p>
                     <ul class="product-detail-v2__list">
-                        <li><i class="fas fa-check-circle"></i> Heatmap de competências</li>
-                        <li><i class="fas fa-check-circle"></i> Comparação entre equipes</li>
-                        <li><i class="fas fa-check-circle"></i> Score individual por colaborador</li>
-                        <li><i class="fas fa-check-circle"></i> Histórico de evolução</li>
+                        <li><i class="fas fa-circle-check" style="color:var(--primary);"></i> Mapeamento visual de skills</li>
+                        <li><i class="fas fa-circle-check" style="color:var(--primary);"></i> Análise de gaps por área</li>
+                        <li><i class="fas fa-circle-check" style="color:var(--primary);"></i> Evolução temporal</li>
+                        <li><i class="fas fa-circle-check" style="color:var(--primary);"></i> Calibração de avaliações</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ═══ TESTIMONIAL ═══ -->
-    <section class="product-testimonial-v2">
-        <div class="container">
-            <div class="product-testimonial-v2__card">
-                <div class="product-testimonial-v2__stars">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                </div>
-                <blockquote>"Conseguimos identificar e reter talentos estratégicos que antes perdíamos. A taxa de retenção subiu 28% no primeiro ano."</blockquote>
-                <div class="product-testimonial-v2__author">
-                    <strong>Ana Paula Rocha</strong>
-                    <span>CHRO, Indústria Beta</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- ═══ CTA ═══ -->
-    <section class="product-cta-v2">
+    <section class="product-cta-v2" data-reveal>
         <div class="container">
-            <h2>Pronto para desenvolver seu time?</h2>
-            <p>Comece com uma demonstração personalizada hoje mesmo</p>
+            <h2>Pronto para desenvolver seu time com IA?</h2>
+            <p>Conheça o time de agentes que vai transformar a gestão da sua empresa</p>
             <div class="product-cta-v2__buttons">
-                <a href="/#contato-form" class="btn btn-primary btn-lg">Agendar Demo Gratuita</a>
-                <a href="/#contato-form" class="btn btn-outline btn-lg">Contato de Vendas</a>
+                <a href="/#contato-form" class="btn btn-primary btn-lg">Conhecer o Time de IA</a>
+                <a href="/#contato-form" class="btn btn-outline btn-lg">Falar com Especialista</a>
             </div>
         </div>
     </section>
@@ -253,20 +317,18 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="footer-logo"><img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="36"></div>
-                    <p>Transformando estratégia em execução para empresas de médio porte.</p>
+                    <p>Plataforma de gestão com IA. Contrate um time que executa.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="footer-column">
                     <h5>Contato</h5>
                     <ul class="footer-contact">
-                        <li><i class="fas fa-phone"></i> <a href="tel:+5511999999999">+55 (11) 9999-9999</a></li>
-                        <li><i class="fas fa-envelope"></i> <a href="mailto:contato@orbitgestao.com">contato@orbitgestao.com</a></li>
-                        <li><i class="fas fa-map-marker-alt"></i> São Paulo - SP</li>
+                        <li><i class="fas fa-phone"></i> (48) 99120-6282</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Square SC, Florianópolis - SC</li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -283,34 +345,54 @@
                     <h5>Conhecimento</h5>
                     <ul>
                         <li><a href="/blog">Blog</a></li>
+                        <li><a href="/historias">Histórias de Clientes</a></li>
                         <li><a href="#">Documentação</a></li>
                         <li><a href="#">FAQ</a></li>
                         <li><a href="#">Webinars</a></li>
                     </ul>
+                    <h5 style="margin-top: 20px;">Orbit</h5>
+                    <ul>
+                        <li><a href="/parcerias">Seja Parceiro</a></li>
+                        <li><a href="#">Sobre Nós</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Orbit Gestão. Todos os direitos reservados.</p>
+                <p>&copy; 2026 Orbit — Grupo GSN. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
-    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+    <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
 
     <script>
-    // Header scroll
     window.addEventListener('scroll',()=>{
         document.querySelector('.header').classList.toggle('scrolled',window.scrollY>50);
         document.getElementById('backToTop').classList.toggle('visible',window.scrollY>400);
     });
-    // Dropdown hover
     document.querySelectorAll('.nav-menu li').forEach(li=>{
         const dd=li.querySelector('.dropdown');
         if(dd){li.addEventListener('mouseenter',()=>{dd.style.opacity='1';dd.style.visibility='visible';dd.style.transform='translateY(0)'});
         li.addEventListener('mouseleave',()=>{dd.style.opacity='0';dd.style.visibility='hidden';dd.style.transform='translateY(10px)'})}
     });
     </script>
+
+    <!-- Scroll Reveal -->
+    <script>
+    (function() {
+        var io = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+                if (e.isIntersecting) {
+                    e.target.classList.add('revealed');
+                    io.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('[data-reveal],[data-reveal-stagger]').forEach(function(el) {
+            io.observe(el);
+        });
+    })();
+    </script>
+    <script src="/js/seo.js"></script>
 </body>
 </html>

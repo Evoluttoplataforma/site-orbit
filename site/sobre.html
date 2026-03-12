@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre o Orbit — 30 anos de gestão empresarial. Agora com IA.</title>
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <meta name="description" content="Conheça a história do Orbit e do Grupo GSN. 30 anos de experiência em gestão empresarial, 8.000+ empresas atendidas, agora com agentes de IA especializados.">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orbitgestao.com.br/sobre">
+    <meta property="og:title" content="Sobre o Orbit — 30 anos de gestão empresarial. Agora com IA.">
+    <meta property="og:description" content="Conheça a história do Orbit e do Grupo GSN. 30 anos de experiência em gestão empresarial, 8.000+ empresas atendidas, agora com agentes de IA especializados.">
+    <meta property="og:image" content="https://orbitgestao.com.br/images/og-default.png">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Orbit">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sobre o Orbit — 30 anos de gestão empresarial. Agora com IA.">
+    <meta name="twitter:description" content="Conheça a história do Orbit e do Grupo GSN. 30 anos de experiência em gestão empresarial, 8.000+ empresas atendidas, agora com agentes de IA especializados.">
+    <meta name="twitter:image" content="https://orbitgestao.com.br/images/og-default.png">
+    <link rel="canonical" href="https://orbitgestao.com.br/sobre">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles-v2.css?v=2">
+
+    <style>
+        /* ═══ SOBRE PAGE STYLES ═══ */
+
+        /* Hero */
+        .sobre-hero {
+            background: #000;
+            padding: 160px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .sobre-hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(253,183,63,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .sobre-hero .section-badge {
+            display: inline-block;
+            background: rgba(253,183,63,0.1);
+            color: #FDB73F;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            border: 1px solid rgba(253,183,63,0.2);
+        }
+        .sobre-hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .sobre-hero p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        /* Stats / Números */
+        .numeros-section {
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+        .numeros-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+        .numero-card {
+            text-align: center;
+            padding: 36px 24px;
+            border-radius: 16px;
+            background: #fff;
+            border: 1px solid #e8eaed;
+            transition: all 0.3s ease;
+        }
+        .numero-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+        }
+        .numero-card .numero {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #1A1D23;
+            display: block;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .numero-card .numero-label {
+            font-size: 0.95rem;
+            color: #5A6069;
+            font-weight: 500;
+        }
+
+        /* Nossa História / Timeline */
+        .historia-section {
+            background: #000;
+            padding: 100px 0;
+        }
+        .historia-section .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        .historia-section .section-header h2 {
+            color: #fff;
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            font-weight: 800;
+        }
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding-left: 48px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 16px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #FDB73F, rgba(253,183,63,0.2));
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 48px;
+            padding-left: 24px;
+        }
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -40px;
+            top: 6px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #FDB73F;
+            border: 3px solid #000;
+            z-index: 1;
+        }
+        .timeline-item .timeline-date {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #FDB73F;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .timeline-item h3 {
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .timeline-item p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .historia-quote {
+            max-width: 700px;
+            margin: 64px auto 0;
+            text-align: center;
+            padding: 32px;
+            border-radius: 16px;
+            background: rgba(253,183,63,0.05);
+            border: 1px solid rgba(253,183,63,0.15);
+        }
+        .historia-quote p {
+            color: rgba(255,255,255,0.85);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            font-style: italic;
+        }
+
+        /* Ecossistema */
+        .ecossistema-section {
+            background: #f8f9fa;
+            padding: 100px 0;
+        }
+        .ecossistema-section .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+        .ecossistema-section .section-header h2 {
+            color: #1A1D23;
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            font-weight: 800;
+        }
+        .ecossistema-section .section-header p {
+            color: #5A6069;
+            margin-top: 12px;
+            font-size: 1.05rem;
+        }
+        .ecossistema-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        .eco-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: center;
+            border: 1px solid #e8eaed;
+            transition: all 0.3s ease;
+        }
+        .eco-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+        }
+        .eco-card .eco-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.4rem;
+        }
+        .eco-card .eco-icon--orbit { background: rgba(253,183,63,0.12); color: #FDB73F; }
+        .eco-card .eco-icon--templum { background: rgba(34,197,94,0.12); color: #22C55E; }
+        .eco-card .eco-icon--alpha { background: rgba(99,102,241,0.12); color: #6366F1; }
+        .eco-card .eco-icon--sce { background: rgba(239,68,68,0.12); color: #EF4444; }
+        .eco-card h3 {
+            color: #1A1D23;
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .eco-card p {
+            color: #5A6069;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Diretoria */
+        .diretoria-section {
+            background: #000;
+            padding: 100px 0;
+        }
+        .diretoria-section .section-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+        .diretoria-section .section-header h2 {
+            color: #fff;
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            font-weight: 800;
+        }
+        .diretoria-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .founder-card {
+            text-align: center;
+        }
+        .founder-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FDB73F, #E5A235);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #000;
+        }
+        .founder-card h4 {
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .founder-card span {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.82rem;
+        }
+        .diretoria-sede {
+            text-align: center;
+            margin-top: 48px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+        .diretoria-sede i {
+            margin-right: 6px;
+            color: #FDB73F;
+        }
+
+        /* CTA Section */
+        .sobre-cta {
+            background: #000;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .sobre-cta::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(253,183,63,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .sobre-cta h2 {
+            color: #fff;
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            font-weight: 800;
+            margin-bottom: 24px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .ecossistema-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .diretoria-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 32px;
+            }
+        }
+        @media (max-width: 768px) {
+            .numeros-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+            .ecossistema-grid {
+                grid-template-columns: 1fr;
+            }
+            .diretoria-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px;
+            }
+        }
+        @media (max-width: 480px) {
+            .numeros-grid {
+                grid-template-columns: 1fr;
+            }
+            .diretoria-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ HEADER ═══ -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="40">
+                </a>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="/">Início</a></li>
+                <li>
+                    <a href="#plataforma">Plataforma <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown">
+                        <div class="dropdown__info">
+                            <span class="dropdown__info-badge"><i class="fas fa-cube"></i> Plataforma</span>
+                            <h4>Orbit Gestão</h4>
+                            <p>5 módulos integrados + 6 agentes de IA para transformar sua estratégia em execução real.</p>
+                            <div class="dropdown__info-img"><i class="fas fa-rocket"></i></div>
+                        </div>
+                        <div class="dropdown__links">
+                            <a href="/agentes"><div class="dd-icon"><i class="fas fa-robot"></i></div><div class="dd-text"><span>Agentes de IA</span><small>6 especialistas 24/7</small></div></a>
+                            <a href="/processos"><div class="dd-icon"><i class="fas fa-sitemap"></i></div><div class="dd-text"><span>Processos</span><small>Mapeamento e automação</small></div></a>
+                            <a href="/indicadores"><div class="dd-icon"><i class="fas fa-chart-line"></i></div><div class="dd-text"><span>Indicadores</span><small>KPIs e dashboards</small></div></a>
+                            <a href="/tarefas"><div class="dd-icon"><i class="fas fa-tasks"></i></div><div class="dd-text"><span>Tarefas</span><small>Kanban estratégico</small></div></a>
+                            <a href="/competencias"><div class="dd-icon"><i class="fas fa-users"></i></div><div class="dd-text"><span>Competências</span><small>Gestão de pessoas</small></div></a>
+                            <a href="/auditorias"><div class="dd-icon"><i class="fas fa-clipboard-check"></i></div><div class="dd-text"><span>Auditorias</span><small>Conformidade e qualidade</small></div></a>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="/pricing">Planos</a></li>
+                <li>
+                    <a href="/blog">Conteúdo <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown dropdown--sm">
+                        <div class="dropdown__links">
+                            <a href="/blog"><div class="dd-icon"><i class="fas fa-newspaper"></i></div><div class="dd-text"><span>Blog</span><small>Artigos e insights</small></div></a>
+                            <a href="/historias"><div class="dd-icon"><i class="fas fa-star"></i></div><div class="dd-text"><span>Histórias de Clientes</span><small>Cases de sucesso</small></div></a>
+                            <a href="/faq"><div class="dd-icon"><i class="fas fa-circle-question"></i></div><div class="dd-text"><span>FAQ</span><small>Perguntas frequentes</small></div></a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="/sobre">Empresa <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown dropdown--sm">
+                        <div class="dropdown__links">
+                            <a href="/sobre"><div class="dd-icon"><i class="fas fa-building"></i></div><div class="dd-text"><span>Sobre Nós</span><small>30 anos de história</small></div></a>
+                            <a href="/parcerias"><div class="dd-icon"><i class="fas fa-handshake"></i></div><div class="dd-text"><span>Seja Parceiro</span><small>Programa de canais</small></div></a>
+                            <a href="/canais"><div class="dd-icon"><i class="fas fa-network-wired"></i></div><div class="dd-text"><span>Canais B2B2B</span><small>Para consultores e mentores</small></div></a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="/acesso" class="btn btn-outline">Entrar</a>
+                <a href="/#contato-form" class="btn btn-primary">Conhecer o Time de IA</a>
+            </div>
+
+            <button class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <button class="mobile-menu-close" onclick="this.parentElement.classList.remove('active');document.body.style.overflow=''">&times;</button>
+        <div class="mobile-menu__label">Menu</div>
+        <a href="/"><i class="fas fa-home"></i> Início</a>
+        <a href="/pricing"><i class="fas fa-tag"></i> Planos e Preços</a>
+        <a href="#contato-form"><i class="fas fa-envelope"></i> Fale Conosco</a>
+        <div class="mobile-menu__label">Plataforma</div>
+        <a href="/agentes"><i class="fas fa-robot"></i> Agentes de IA</a>
+        <a href="/processos"><i class="fas fa-sitemap"></i> Processos</a>
+        <a href="/indicadores"><i class="fas fa-chart-line"></i> Indicadores</a>
+        <a href="/tarefas"><i class="fas fa-tasks"></i> Tarefas</a>
+        <a href="/competencias"><i class="fas fa-users"></i> Competências</a>
+        <a href="/auditorias"><i class="fas fa-clipboard-check"></i> Auditorias</a>
+        <div class="mobile-menu__label">Conteúdo</div>
+        <a href="/blog"><i class="fas fa-newspaper"></i> Blog</a>
+        <a href="/historias"><i class="fas fa-star"></i> Histórias de Clientes</a>
+        <a href="/faq"><i class="fas fa-circle-question"></i> FAQ</a>
+        <div class="mobile-menu__label">Empresa</div>
+        <a href="/sobre"><i class="fas fa-building"></i> Sobre Nós</a>
+        <a href="/parcerias"><i class="fas fa-handshake"></i> Seja Parceiro</a>
+        <a href="/canais"><i class="fas fa-network-wired"></i> Canais B2B2B</a>
+        <div class="mobile-menu__divider"></div>
+        <a href="#contato-form" class="btn btn-primary">Conhecer o Time de IA</a>
+    </div>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="sobre-hero">
+        <div class="container" data-reveal>
+            <span class="section-badge">Sobre o Orbit</span>
+            <h1>30 anos de gestão empresarial. Agora com IA.</h1>
+            <p>O Orbit nasceu do Grupo GSN, o maior grupo de consultoria em gestão e ISO do Brasil. Nossa missão: transformar a gestão empresarial com agentes de IA especializados.</p>
+        </div>
+    </section>
+
+    <!-- ═══ NÚMEROS ═══ -->
+    <section class="numeros-section">
+        <div class="container">
+            <div class="numeros-grid" data-reveal-stagger>
+                <div class="numero-card">
+                    <span class="numero">30</span>
+                    <span class="numero-label">Anos de experiência</span>
+                </div>
+                <div class="numero-card">
+                    <span class="numero">8.000+</span>
+                    <span class="numero-label">Empresas atendidas</span>
+                </div>
+                <div class="numero-card">
+                    <span class="numero">2.206</span>
+                    <span class="numero-label">Empresas no Orbit</span>
+                </div>
+                <div class="numero-card">
+                    <span class="numero">98%</span>
+                    <span class="numero-label">De satisfação</span>
+                </div>
+                <div class="numero-card">
+                    <span class="numero">30+</span>
+                    <span class="numero-label">Consultorias parceiras</span>
+                </div>
+                <div class="numero-card">
+                    <span class="numero">6</span>
+                    <span class="numero-label">Agentes de IA especializados</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ NOSSA HISTÓRIA ═══ -->
+    <section class="historia-section">
+        <div class="container">
+            <div class="section-header" data-reveal>
+                <h2>Nossa História</h2>
+            </div>
+
+            <div class="timeline" data-reveal-stagger>
+                <div class="timeline-item">
+                    <div class="timeline-date">Há 30 anos</div>
+                    <h3>O início</h3>
+                    <p>Grupo GSN nasce como consultoria de gestão e ISO, levando profissionalização para empresas de todos os portes e segmentos.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">8.000+ empresas depois</div>
+                    <h3>Liderança nacional</h3>
+                    <p>O Grupo GSN se consolida como o maior grupo de consultoria em gestão do Brasil, com uma rede de mais de 30 consultorias parceiras.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">A evolução</div>
+                    <h3>Do presencial ao digital</h3>
+                    <p>A plataforma é digitalizada, passando a atender milhares de empresas de forma escalável sem perder a essência consultiva.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2026 — O Orbit</div>
+                    <h3>IA integrada à gestão</h3>
+                    <p>6 agentes de IA especializados são integrados à plataforma. Consultoria recorrente, automatizada e acessível para qualquer empresa.</p>
+                </div>
+            </div>
+
+            <div class="historia-quote" data-reveal>
+                <p>"A consultoria não morre — ela evolui. O que antes exigia um consultor presencial, agora um agente de IA executa 24/7."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ ECOSSISTEMA ═══ -->
+    <section class="ecossistema-section">
+        <div class="container">
+            <div class="section-header" data-reveal>
+                <h2>Como tudo se conecta</h2>
+                <p>O ecossistema completo do Grupo GSN</p>
+            </div>
+
+            <div class="ecossistema-grid" data-reveal-stagger>
+                <div class="eco-card">
+                    <div class="eco-icon eco-icon--orbit"><i class="fas fa-robot"></i></div>
+                    <h3>Orbit</h3>
+                    <p>Plataforma central SaaS com 6 agentes de IA especializados em gestão empresarial.</p>
+                </div>
+                <div class="eco-card">
+                    <div class="eco-icon eco-icon--templum"><i class="fas fa-building"></i></div>
+                    <h3>Templum</h3>
+                    <p>Consultoria de gestão e conformidade. A expertise humana por trás de 30 anos de mercado.</p>
+                </div>
+                <div class="eco-card">
+                    <div class="eco-icon eco-icon--alpha"><i class="fas fa-crown"></i></div>
+                    <h3>Alpha Club</h3>
+                    <p>Comunidade de mentoria e consultores. Rede colaborativa de especialistas em gestão.</p>
+                </div>
+                <div class="eco-card">
+                    <div class="eco-icon eco-icon--sce"><i class="fas fa-calendar-star"></i></div>
+                    <h3>SCE</h3>
+                    <p>Eventos e imersões de aquisição. Experiências presenciais de alto impacto para empresários.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ DIRETORIA ═══ -->
+    <section class="diretoria-section">
+        <div class="container">
+            <div class="section-header" data-reveal>
+                <h2>Quem está por trás</h2>
+            </div>
+
+            <div class="diretoria-grid" data-reveal-stagger>
+                <div class="founder-card">
+                    <div class="founder-avatar">IG</div>
+                    <h4>Igor</h4>
+                    <span>CEO</span>
+                </div>
+                <div class="founder-card">
+                    <div class="founder-avatar">DA</div>
+                    <h4>Daniela</h4>
+                    <span>Diretora de Operações</span>
+                </div>
+                <div class="founder-card">
+                    <div class="founder-avatar">CH</div>
+                    <h4>Christian</h4>
+                    <span>Diretor de Produto</span>
+                </div>
+                <div class="founder-card">
+                    <div class="founder-avatar">RO</div>
+                    <h4>Rodrigo</h4>
+                    <span>Diretor de Vendas</span>
+                </div>
+                <div class="founder-card">
+                    <div class="founder-avatar">OM</div>
+                    <h4>Omar</h4>
+                    <span>Diretor de Tecnologia</span>
+                </div>
+            </div>
+
+            <div class="diretoria-sede" data-reveal>
+                <i class="fas fa-map-marker-alt"></i> Sede: Square SC, Florianópolis - SC
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ CTA ═══ -->
+    <section class="sobre-cta">
+        <div class="container" data-reveal>
+            <h2>Pronto para conhecer o Orbit?</h2>
+            <a href="/#contato-form" class="btn btn-primary btn-lg">Conhecer o Time de IA <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="36">
+                    </div>
+                    <p>Plataforma de gestão com IA. Contrate um time que executa.</p>
+                    <div class="social-links">
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h5>Contato</h5>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone"></i> (48) 99120-6282</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Square SC, Florianópolis - SC</li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h5>Plataforma</h5>
+                    <ul>
+                        <li><a href="/agentes">Agentes de IA</a></li>
+                        <li><a href="/processos">Processos</a></li>
+                        <li><a href="/indicadores">Indicadores</a></li>
+                        <li><a href="/tarefas">Tarefas</a></li>
+                        <li><a href="/competencias">Competências</a></li>
+                        <li><a href="/auditorias">Auditorias</a></li>
+                        <li><a href="/pricing">Planos e Preços</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Conteúdo</h5>
+                    <ul>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/historias">Histórias de Clientes</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                    </ul>
+                    <h5 style="margin-top: 20px;">Empresa</h5>
+                    <ul>
+                        <li><a href="/sobre">Sobre Nós</a></li>
+                        <li><a href="/parcerias">Seja Parceiro</a></li>
+                        <li><a href="/canais">Canais B2B2B</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Orbit — Grupo GSN. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scroll Reveal -->
+    <script>
+    (function() {
+        var io = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+                if (e.isIntersecting) {
+                    e.target.classList.add('revealed');
+                    io.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('[data-reveal],[data-reveal-stagger]').forEach(function(el) {
+            io.observe(el);
+        });
+    })();
+    </script>
+
+    <!-- Scripts -->
+    <script src="/js/main-v2.js?v=1"></script>
+    <script src="/js/seo.js"></script>
+</body>
+</html>

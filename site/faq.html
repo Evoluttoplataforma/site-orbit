@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ — Perguntas Frequentes | Orbit Gestão</title>
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+    <meta name="description" content="Perguntas frequentes sobre o Orbit, agentes de IA, implementação, investimento e programa de canais. Tudo que você precisa saber.">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orbitgestao.com.br/faq">
+    <meta property="og:title" content="FAQ — Perguntas Frequentes | Orbit Gestão">
+    <meta property="og:description" content="Perguntas frequentes sobre o Orbit, agentes de IA, implementação, investimento e programa de canais. Tudo que você precisa saber.">
+    <meta property="og:image" content="https://orbitgestao.com.br/images/og-default.png">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Orbit">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FAQ — Perguntas Frequentes | Orbit Gestão">
+    <meta name="twitter:description" content="Perguntas frequentes sobre o Orbit, agentes de IA, implementação, investimento e programa de canais. Tudo que você precisa saber.">
+    <meta name="twitter:image" content="https://orbitgestao.com.br/images/og-default.png">
+    <link rel="canonical" href="https://orbitgestao.com.br/faq">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles-v2.css?v=2">
+
+    <style>
+        /* ═══ FAQ PAGE STYLES ═══ */
+
+        /* Hero */
+        .faq-hero {
+            background: #000;
+            padding: 160px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .faq-hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(253,183,63,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .faq-hero .section-badge {
+            display: inline-block;
+            background: rgba(253,183,63,0.1);
+            color: #FDB73F;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            border: 1px solid rgba(253,183,63,0.2);
+        }
+        .faq-hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+        .faq-hero p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            max-width: 580px;
+            margin: 0 auto;
+        }
+
+        /* FAQ Section */
+        .faq-page-section {
+            background: #f8f9fa;
+            padding: 80px 0 100px;
+        }
+        .faq-category {
+            max-width: 780px;
+            margin: 0 auto 48px;
+        }
+        .faq-category:last-child {
+            margin-bottom: 0;
+        }
+        .faq-category-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1A1D23;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #FDB73F;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .faq-category-title i {
+            color: #FDB73F;
+            font-size: 1.1rem;
+        }
+
+        /* Accordion */
+        .faq-item {
+            background: #fff;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #e8eaed;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .faq-item:hover {
+            border-color: #d0d3d8;
+        }
+        .faq-item.active {
+            border-color: #FDB73F;
+            box-shadow: 0 4px 20px rgba(253,183,63,0.08);
+        }
+        .faq-question {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1A1D23;
+            text-align: left;
+            line-height: 1.4;
+            gap: 16px;
+        }
+        .faq-question:hover {
+            color: #000;
+        }
+        .faq-question .faq-icon {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #f1f3f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: #5A6069;
+            transition: all 0.3s ease;
+        }
+        .faq-item.active .faq-icon {
+            background: #FDB73F;
+            color: #000;
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.35s ease;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+        }
+        .faq-answer-inner {
+            padding: 0 24px 20px;
+            color: #5A6069;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* CTA Section */
+        .faq-cta {
+            background: #000;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .faq-cta::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(253,183,63,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .faq-cta h2 {
+            color: #fff;
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        .faq-cta p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1.05rem;
+            margin-bottom: 32px;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .faq-question {
+                padding: 16px 20px;
+                font-size: 0.95rem;
+            }
+            .faq-answer-inner {
+                padding: 0 20px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══ HEADER ═══ -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="40">
+                </a>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="/">Início</a></li>
+                <li>
+                    <a href="#plataforma">Plataforma <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown">
+                        <div class="dropdown__info">
+                            <span class="dropdown__info-badge"><i class="fas fa-cube"></i> Plataforma</span>
+                            <h4>Orbit Gestão</h4>
+                            <p>5 módulos integrados + 6 agentes de IA para transformar sua estratégia em execução real.</p>
+                            <div class="dropdown__info-img"><i class="fas fa-rocket"></i></div>
+                        </div>
+                        <div class="dropdown__links">
+                            <a href="/agentes"><div class="dd-icon"><i class="fas fa-robot"></i></div><div class="dd-text"><span>Agentes de IA</span><small>6 especialistas 24/7</small></div></a>
+                            <a href="/processos"><div class="dd-icon"><i class="fas fa-sitemap"></i></div><div class="dd-text"><span>Processos</span><small>Mapeamento e automação</small></div></a>
+                            <a href="/indicadores"><div class="dd-icon"><i class="fas fa-chart-line"></i></div><div class="dd-text"><span>Indicadores</span><small>KPIs e dashboards</small></div></a>
+                            <a href="/tarefas"><div class="dd-icon"><i class="fas fa-tasks"></i></div><div class="dd-text"><span>Tarefas</span><small>Kanban estratégico</small></div></a>
+                            <a href="/competencias"><div class="dd-icon"><i class="fas fa-users"></i></div><div class="dd-text"><span>Competências</span><small>Gestão de pessoas</small></div></a>
+                            <a href="/auditorias"><div class="dd-icon"><i class="fas fa-clipboard-check"></i></div><div class="dd-text"><span>Auditorias</span><small>Conformidade e qualidade</small></div></a>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="/pricing">Planos</a></li>
+                <li>
+                    <a href="/blog">Conteúdo <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown dropdown--sm">
+                        <div class="dropdown__links">
+                            <a href="/blog"><div class="dd-icon"><i class="fas fa-newspaper"></i></div><div class="dd-text"><span>Blog</span><small>Artigos e insights</small></div></a>
+                            <a href="/historias"><div class="dd-icon"><i class="fas fa-star"></i></div><div class="dd-text"><span>Histórias de Clientes</span><small>Cases de sucesso</small></div></a>
+                            <a href="/faq"><div class="dd-icon"><i class="fas fa-circle-question"></i></div><div class="dd-text"><span>FAQ</span><small>Perguntas frequentes</small></div></a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="/sobre">Empresa <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown dropdown--sm">
+                        <div class="dropdown__links">
+                            <a href="/sobre"><div class="dd-icon"><i class="fas fa-building"></i></div><div class="dd-text"><span>Sobre Nós</span><small>30 anos de história</small></div></a>
+                            <a href="/parcerias"><div class="dd-icon"><i class="fas fa-handshake"></i></div><div class="dd-text"><span>Seja Parceiro</span><small>Programa de canais</small></div></a>
+                            <a href="/canais"><div class="dd-icon"><i class="fas fa-network-wired"></i></div><div class="dd-text"><span>Canais B2B2B</span><small>Para consultores e mentores</small></div></a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="/acesso" class="btn btn-outline">Entrar</a>
+                <a href="/#contato-form" class="btn btn-primary">Conhecer o Time de IA</a>
+            </div>
+
+            <button class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <button class="mobile-menu-close" onclick="this.parentElement.classList.remove('active');document.body.style.overflow=''">&times;</button>
+        <div class="mobile-menu__label">Menu</div>
+        <a href="/"><i class="fas fa-home"></i> Início</a>
+        <a href="/pricing"><i class="fas fa-tag"></i> Planos e Preços</a>
+        <a href="#contato-form"><i class="fas fa-envelope"></i> Fale Conosco</a>
+        <div class="mobile-menu__label">Plataforma</div>
+        <a href="/agentes"><i class="fas fa-robot"></i> Agentes de IA</a>
+        <a href="/processos"><i class="fas fa-sitemap"></i> Processos</a>
+        <a href="/indicadores"><i class="fas fa-chart-line"></i> Indicadores</a>
+        <a href="/tarefas"><i class="fas fa-tasks"></i> Tarefas</a>
+        <a href="/competencias"><i class="fas fa-users"></i> Competências</a>
+        <a href="/auditorias"><i class="fas fa-clipboard-check"></i> Auditorias</a>
+        <div class="mobile-menu__label">Conteúdo</div>
+        <a href="/blog"><i class="fas fa-newspaper"></i> Blog</a>
+        <a href="/historias"><i class="fas fa-star"></i> Histórias de Clientes</a>
+        <a href="/faq"><i class="fas fa-circle-question"></i> FAQ</a>
+        <div class="mobile-menu__label">Empresa</div>
+        <a href="/sobre"><i class="fas fa-building"></i> Sobre Nós</a>
+        <a href="/parcerias"><i class="fas fa-handshake"></i> Seja Parceiro</a>
+        <a href="/canais"><i class="fas fa-network-wired"></i> Canais B2B2B</a>
+        <div class="mobile-menu__divider"></div>
+        <a href="#contato-form" class="btn btn-primary">Conhecer o Time de IA</a>
+    </div>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="faq-hero">
+        <div class="container" data-reveal>
+            <span class="section-badge">Central de Ajuda</span>
+            <h1>Perguntas Frequentes</h1>
+            <p>Tudo que você precisa saber sobre o Orbit, nossos agentes de IA e como funciona.</p>
+        </div>
+    </section>
+
+    <!-- ═══ FAQ ACCORDION ═══ -->
+    <section class="faq-page-section">
+        <div class="container">
+
+            <!-- Sobre o Orbit -->
+            <div class="faq-category" data-reveal>
+                <div class="faq-category-title"><i class="fas fa-rocket"></i> Sobre o Orbit</div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        O que é o Orbit?
+                        <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">O Orbit é uma plataforma de gestão empresarial com 6 agentes de IA integrados. Não é mais um software — são agentes especializados que constroem e operam a gestão da sua empresa. Planejamento, processos, treinamento, indicadores — trabalhando 24/7.</div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Para quem é indicado?
+                        <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Para empresas de 5 a 100+ funcionários, faturamento de R$ 500k a R$ 20M/ano, de qualquer segmento. Em 30 anos, já atendemos 8.000+ empresas de todos os setores.</div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        É mais um software?
+                        <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Não. Software é ferramenta vazia que espera ser alimentada. O Orbit tem agentes de IA que fazem o trabalho pesado. Você valida e decide — não alimenta.</div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Funciona pro meu segmento?
+                        <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Sim. Gestão por processos e indicadores é universal. O que muda é o conteúdo — e a IA personaliza para cada empresa.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Implementação -->
+            <div class="faq-category" data-reveal>
+                <div class="faq-category-title"><i class="fas fa-cogs"></i> Implementação</div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Quanto tempo leva?
+                        <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Cadastro em 5 minutos. Planejamento e processos em 1 tarde. Operação completa em 7 dias.</div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Meu time vai precisar aprender?
+                        <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Seu time nem precisa logar. Processos e treinamentos chegam pelo WhatsApp — que todo mundo já usa.</div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Preciso de infraestrutura de TI?
+                        <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Não. O Orbit roda 100% na nuvem. Só precisa de internet.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Investimento -->
+            <div class="faq-category" data-reveal>
+                <div class="faq-category-title"><i class="fas fa-dollar-sign"></i> Investimento</div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Quanto custa?
+                        <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">O investimento varia conforme o tamanho da empresa. Temos planos a partir de R$ 997/mês. O time humano equivalente custaria R$ 50-120k/mês.</div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Tem plano anual?
+                        <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Sim. O plano anual tem 20% de desconto sobre o mensal.</div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        E se não funcionar?
+                        <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Garantia de 90 dias. Se não gerar resultado, devolvemos seu investimento. Risco zero.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Para Consultores/Canais -->
+            <div class="faq-category" data-reveal>
+                <div class="faq-category-title"><i class="fas fa-handshake"></i> Para Consultores / Canais</div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Posso oferecer o Orbit aos meus clientes?
+                        <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Sim! Temos um programa de canais com receita recorrente de ~R$ 250/mês por cliente, margem de ~90% e custo zero de tecnologia.</div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Vou poder criar meus próprios agentes?
+                        <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Sim. O roadmap inclui ferramentas para que canais configurem agentes específicos para suas verticais.</div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        É white-label?
+                        <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">Sim. Sua marca, seu relacionamento, seus clientes. O Orbit é a infraestrutura.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══ CTA ═══ -->
+    <section class="faq-cta">
+        <div class="container" data-reveal>
+            <h2>Não encontrou sua resposta?</h2>
+            <p>Fale com nosso time e tire todas as suas dúvidas.</p>
+            <a href="/#contato-form" class="btn btn-primary btn-lg">Falar com o Time <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="36">
+                    </div>
+                    <p>Plataforma de gestão com IA. Contrate um time que executa.</p>
+                    <div class="social-links">
+                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h5>Contato</h5>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-phone"></i> (48) 99120-6282</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Square SC, Florianópolis - SC</li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h5>Plataforma</h5>
+                    <ul>
+                        <li><a href="/agentes">Agentes de IA</a></li>
+                        <li><a href="/processos">Processos</a></li>
+                        <li><a href="/indicadores">Indicadores</a></li>
+                        <li><a href="/tarefas">Tarefas</a></li>
+                        <li><a href="/competencias">Competências</a></li>
+                        <li><a href="/auditorias">Auditorias</a></li>
+                        <li><a href="/pricing">Planos e Preços</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h5>Conteúdo</h5>
+                    <ul>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/historias">Histórias de Clientes</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                    </ul>
+                    <h5 style="margin-top: 20px;">Empresa</h5>
+                    <ul>
+                        <li><a href="/sobre">Sobre Nós</a></li>
+                        <li><a href="/parcerias">Seja Parceiro</a></li>
+                        <li><a href="/canais">Canais B2B2B</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Orbit — Grupo GSN. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- FAQ Accordion -->
+    <script>
+    document.querySelectorAll('.faq-question').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var item = this.parentElement;
+            var wasOpen = item.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('active'); });
+            if (!wasOpen) item.classList.add('active');
+        });
+    });
+    </script>
+
+    <!-- Scroll Reveal -->
+    <script>
+    (function() {
+        var io = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+                if (e.isIntersecting) {
+                    e.target.classList.add('revealed');
+                    io.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('[data-reveal],[data-reveal-stagger]').forEach(function(el) {
+            io.observe(el);
+        });
+    })();
+    </script>
+
+    <!-- Scripts -->
+    <script src="/js/main-v2.js?v=1"></script>
+    <script src="/js/seo.js"></script>
+</body>
+</html>

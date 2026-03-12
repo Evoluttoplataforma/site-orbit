@@ -4,17 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carregando... - Blog Orbit Gestão</title>
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://orbitgestao.com.br/blog">
+    <meta property="og:title" content="Carregando... - Blog Orbit Gestão">
+    <meta property="og:description" content="Carregando... - Blog Orbit Gestão">
+    <meta property="og:image" content="https://orbitgestao.com.br/images/og-default.png">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="Orbit">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Carregando... - Blog Orbit Gestão">
+    <meta name="twitter:description" content="Carregando... - Blog Orbit Gestão">
+    <meta name="twitter:image" content="https://orbitgestao.com.br/images/og-default.png">
+    <link rel="canonical" href="https://orbitgestao.com.br/blog">
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/css/styles-v2.css?v=2">
     <style>
         /* ── Reading Progress ── */
         .reading-progress {
             position: fixed; top: 72px; left: 0; width: 0; height: 3px;
-            background: linear-gradient(90deg, #FDB73F, #FEC85F);
+            background: linear-gradient(90deg, #D4A017, #E8B824);
             z-index: 999; transition: width 0.05s linear;
         }
 
@@ -34,7 +48,7 @@
         .article-cover__category {
             position: absolute; top: 24px; left: 50%;
             transform: translateX(-50%);
-            background: #FDB73F; color: #000;
+            background: #D4A017; color: #000;
             padding: 6px 20px; border-radius: 50px;
             font-size: 0.75rem; font-weight: 700;
             text-transform: uppercase; letter-spacing: 0.8px; z-index: 2;
@@ -65,7 +79,7 @@
         .article-header__breadcrumb a {
             color: #9CA3AF; text-decoration: none; transition: color 0.2s;
         }
-        .article-header__breadcrumb a:hover { color: #FDB73F; }
+        .article-header__breadcrumb a:hover { color: #D4A017; }
         .article-header__breadcrumb i { font-size: 0.55rem; }
         .article-header h1 {
             font-size: clamp(1.75rem, 4vw, 2.5rem);
@@ -80,7 +94,7 @@
         }
         .author-avatar {
             width: 40px; height: 40px; border-radius: 50%;
-            background: linear-gradient(135deg, #FDB73F, #E5A235);
+            background: linear-gradient(135deg, #D4A017, #E5A235);
             display: flex; align-items: center; justify-content: center;
             color: #000; font-weight: 700; font-size: 0.85rem; flex-shrink: 0;
         }
@@ -96,16 +110,16 @@
         /* ── Article Body ── */
         .article-body {
             padding-bottom: 48px;
-            font-family: 'Inter', 'Poppins', sans-serif;
+            font-family: 'Inter', 'Plus Jakarta Sans', sans-serif;
         }
         .article-body h2 {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 1.45rem; font-weight: 700; color: #111;
             margin: 52px 0 16px; line-height: 1.3;
         }
         .article-body h2:first-child { margin-top: 0; }
         .article-body h3 {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 1.15rem; font-weight: 600; color: #1f2937;
             margin: 40px 0 12px;
         }
@@ -121,7 +135,7 @@
         }
         .article-body ul li::before {
             content: ''; position: absolute; left: 2px; top: 11px;
-            width: 7px; height: 7px; border-radius: 50%; background: #FDB73F;
+            width: 7px; height: 7px; border-radius: 50%; background: #D4A017;
         }
         .article-body ol { counter-reset: ol-counter; }
         .article-body ol li {
@@ -131,10 +145,10 @@
         .article-body ol li::before {
             content: counter(ol-counter) '.';
             position: absolute; left: 0; top: 0;
-            color: #FDB73F; font-weight: 700; font-size: 1.05rem;
+            color: #D4A017; font-weight: 700; font-size: 1.05rem;
         }
         .article-body blockquote {
-            border-left: 3px solid #FDB73F; margin: 36px 0; padding: 20px 28px;
+            border-left: 3px solid #D4A017; margin: 36px 0; padding: 20px 28px;
             background: #FFFDF5; border-radius: 0 12px 12px 0;
             font-style: italic; color: #4B5563; font-size: 1.1rem; line-height: 1.8;
         }
@@ -165,7 +179,7 @@
         }
         .article-body .mid-cta-banner__content { position: relative; z-index: 1; flex: 1; }
         .article-body .mid-cta-banner__content h4 {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 1.15rem; font-weight: 700; color: #fff;
             margin: 0 0 6px; line-height: 1.4;
         }
@@ -182,8 +196,8 @@
             font-weight: 700;
         }
         .article-body .mid-cta-banner .btn:hover {
-            background: #FDB73F;
-            border-color: #FDB73F;
+            background: #D4A017;
+            border-color: #D4A017;
             color: #000;
         }
 
@@ -198,7 +212,7 @@
             padding: 6px 16px; border-radius: 50px;
             background: #f3f4f6; font-size: 0.78rem; color: #4B5563; font-weight: 500;
         }
-        .bottom-tag:hover { background: #000; color: #FDB73F; }
+        .bottom-tag:hover { background: #000; color: #D4A017; }
         .bottom-share { display: flex; align-items: center; gap: 8px; }
         .bottom-share__label { font-size: 0.8rem; color: #9CA3AF; font-weight: 500; margin-right: 4px; }
         .share-btn {
@@ -207,7 +221,7 @@
             background: #f3f4f6; border: none; color: #6B7280; font-size: 0.9rem;
             cursor: pointer; transition: all 0.2s; text-decoration: none;
         }
-        .share-btn:hover { background: #000; color: #FDB73F; }
+        .share-btn:hover { background: #000; color: #D4A017; }
 
         /* ── Bottom CTA ── */
         .article-cta-banner {
@@ -217,7 +231,7 @@
         }
         .article-cta-banner::before {
             content: ''; position: absolute; inset: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(253,183,63,0.1) 0%, transparent 60%);
+            background: radial-gradient(circle at 50% 50%, rgba(212,160,23,0.1) 0%, transparent 60%);
             pointer-events: none;
         }
         .article-cta-banner h3 { font-size: 1.4rem; font-weight: 700; color: #fff; margin-bottom: 10px; position: relative; }
@@ -253,15 +267,15 @@
         .sidebar-lead__img::after {
             content: '';
             position: absolute; width: 200px; height: 200px;
-            background: rgba(253,183,63,0.15); border-radius: 50%;
+            background: rgba(212,160,23,0.15); border-radius: 50%;
             filter: blur(60px); top: -60px; right: -40px;
         }
         .sidebar-lead__icon {
-            font-size: 2.2rem; color: #FDB73F; position: relative; z-index: 1;
+            font-size: 2.2rem; color: #D4A017; position: relative; z-index: 1;
         }
         .sidebar-lead__body { padding: 20px; }
         .sidebar-lead__badge {
-            display: inline-block; background: rgba(253,183,63,0.12);
+            display: inline-block; background: rgba(212,160,23,0.12);
             color: #E5A235; padding: 3px 10px; border-radius: 50px;
             font-size: 0.68rem; font-weight: 700;
             text-transform: uppercase; margin-bottom: 8px;
@@ -276,8 +290,8 @@
         .sidebar-lead__btn {
             display: flex; align-items: center; justify-content: center;
             gap: 8px; width: 100%; padding: 11px 20px;
-            background: #FDB73F; color: #000; border: none; border-radius: 50px;
-            font-family: 'Poppins', sans-serif;
+            background: #D4A017; color: #000; border: none; border-radius: 50px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 0.82rem; font-weight: 600;
             cursor: pointer; transition: all 0.2s; text-decoration: none;
         }
@@ -305,7 +319,7 @@
         }
         .lm-popup__header::after {
             content: ''; position: absolute; width: 200px; height: 200px;
-            background: rgba(253,183,63,0.12); border-radius: 50%;
+            background: rgba(212,160,23,0.12); border-radius: 50%;
             filter: blur(80px); top: -80px; right: -40px;
         }
         .lm-popup__close {
@@ -315,7 +329,7 @@
             font-size: 0.85rem; cursor: pointer; transition: background 0.2s; z-index: 1;
         }
         .lm-popup__close:hover { background: rgba(255,255,255,0.2); }
-        .lm-popup__icon { font-size: 2rem; color: #FDB73F; margin-bottom: 12px; position: relative; z-index: 1; }
+        .lm-popup__icon { font-size: 2rem; color: #D4A017; margin-bottom: 12px; position: relative; z-index: 1; }
         .lm-popup__header h3 {
             font-size: 1.1rem; font-weight: 700; color: #fff;
             line-height: 1.3; margin-bottom: 6px; position: relative; z-index: 1;
@@ -332,16 +346,16 @@
         .lm-popup__field input {
             width: 100%; padding: 11px 14px;
             border: 1px solid #e5e7eb; border-radius: 10px;
-            font-family: 'Poppins', sans-serif; font-size: 0.88rem;
+            font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.88rem;
             color: #111; outline: none; transition: border-color 0.2s;
         }
-        .lm-popup__field input:focus { border-color: #FDB73F; }
+        .lm-popup__field input:focus { border-color: #D4A017; }
         .lm-popup__field input::placeholder { color: #9CA3AF; }
         .lm-popup__submit {
             display: flex; align-items: center; justify-content: center;
             gap: 8px; width: 100%; padding: 13px 20px;
-            background: #FDB73F; color: #000; border: none; border-radius: 50px;
-            font-family: 'Poppins', sans-serif;
+            background: #D4A017; color: #000; border: none; border-radius: 50px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 0.9rem; font-weight: 700;
             cursor: pointer; transition: all 0.2s; margin-top: 6px;
         }
@@ -399,7 +413,7 @@
         .related-card:hover .related-card__img img { transform: scale(1.05); }
         .related-card__body { padding: 18px 20px 22px; }
         .related-card__tag {
-            display: inline-block; background: rgba(253,183,63,0.1); color: #E5A235;
+            display: inline-block; background: rgba(212,160,23,0.1); color: #E5A235;
             padding: 4px 12px; border-radius: 50px; font-size: 0.7rem; font-weight: 600;
             text-transform: uppercase; margin-bottom: 8px;
         }
@@ -411,7 +425,7 @@
             font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
             display: flex; align-items: center; justify-content: center;
         }
-        .related-nav button:hover { background: #000; color: #FDB73F; border-color: #000; }
+        .related-nav button:hover { background: #000; color: #D4A017; border-color: #000; }
 
         /* ── Not Found ── */
         .article-not-found {
@@ -466,17 +480,21 @@
             <ul class="nav-menu">
                 <li><a href="/">Início</a></li>
                 <li>
-                    <a href="/#plataforma">Soluções <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <a href="#plataforma">Plataforma <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown">
                         <div class="dropdown__info">
                             <span class="dropdown__info-badge"><i class="fas fa-cube"></i> Plataforma</span>
                             <h4>Orbit Gestão</h4>
-                            <p>5 módulos integrados + IA para transformar sua estratégia em execução real.</p>
+                            <p>5 módulos integrados + 6 agentes de IA para transformar sua estratégia em execução real.</p>
                             <div class="dropdown__info-img">
                                 <i class="fas fa-rocket"></i>
                             </div>
                         </div>
                         <div class="dropdown__links">
+                            <a href="/agentes">
+                                <div class="dd-icon"><i class="fas fa-robot"></i></div>
+                                <div class="dd-text"><span>Agentes de IA</span><small>6 especialistas 24/7</small></div>
+                            </a>
                             <a href="/processos">
                                 <div class="dd-icon"><i class="fas fa-sitemap"></i></div>
                                 <div class="dd-text"><span>Processos</span><small>Mapeamento e automação</small></div>
@@ -500,8 +518,9 @@
                         </div>
                     </div>
                 </li>
+                <li><a href="/pricing">Planos</a></li>
                 <li>
-                    <a href="/blog">Conhecimento <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <a href="/blog">Conteúdo <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown dropdown--sm">
                         <div class="dropdown__links">
                             <a href="/blog">
@@ -512,15 +531,36 @@
                                 <div class="dd-icon"><i class="fas fa-star"></i></div>
                                 <div class="dd-text"><span>Histórias de Clientes</span><small>Cases de sucesso</small></div>
                             </a>
+                            <a href="/faq">
+                                <div class="dd-icon"><i class="fas fa-circle-question"></i></div>
+                                <div class="dd-text"><span>FAQ</span><small>Perguntas frequentes</small></div>
+                            </a>
                         </div>
                     </div>
                 </li>
-                <li><a href="/parcerias">Seja Parceiro</a></li>
-                <li><a href="/#contato-form">Fale Conosco</a></li>
+                <li>
+                    <a href="/sobre">Empresa <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown dropdown--sm">
+                        <div class="dropdown__links">
+                            <a href="/sobre">
+                                <div class="dd-icon"><i class="fas fa-building"></i></div>
+                                <div class="dd-text"><span>Sobre Nós</span><small>30 anos de história</small></div>
+                            </a>
+                            <a href="/parcerias">
+                                <div class="dd-icon"><i class="fas fa-handshake"></i></div>
+                                <div class="dd-text"><span>Seja Parceiro</span><small>Programa de canais</small></div>
+                            </a>
+                            <a href="/canais">
+                                <div class="dd-icon"><i class="fas fa-network-wired"></i></div>
+                                <div class="dd-text"><span>Canais B2B2B</span><small>Para consultores e mentores</small></div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
             </ul>
             <div class="nav-actions">
-                <a href="#" class="btn btn-outline">Entrar</a>
-                <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>
+                <a href="/acesso" class="btn btn-outline">Entrar</a>
+                <a href="#contato-form" class="btn btn-primary">Conhecer o Time de IA</a>
             </div>
             <button class="menu-toggle" onclick="document.querySelector('.mobile-menu').classList.toggle('active');document.body.style.overflow=document.querySelector('.mobile-menu').classList.contains('active')?'hidden':''">
                 <span></span><span></span><span></span>
@@ -543,7 +583,7 @@
         <a href="/historias"><i class="fas fa-star"></i> Histórias de Clientes</a>
         <a href="/parcerias"><i class="fas fa-handshake"></i> Seja Parceiro</a>
         <div class="mobile-menu__divider"></div>
-        <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>
+        <a href="/#contato-form" class="btn btn-primary">Conhecer o Time de IA</a>
     </div>
 
     <div id="articleContent"></div>
@@ -553,18 +593,18 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="footer-logo"><img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="36"></div>
-                    <p>Transformando estratégia em execução para empresas de médio porte.</p>
+                    <p>Plataforma de gestão com IA. Contrate um time que executa.</p>
                     <div class="social-links">
                         <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
                         <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
                         <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-                <div class="footer-column"><h5>Contato</h5><ul class="footer-contact"><li><i class="fas fa-phone"></i> +55 (11) 9999-9999</li><li><i class="fas fa-envelope"></i> contato@orbit.com</li></ul></div>
+                <div class="footer-column"><h5>Contato</h5><ul class="footer-contact"><li><i class="fas fa-phone"></i> (48) 99120-6282</li><li><i class="fas fa-map-marker-alt"></i> Square SC, Florianópolis - SC</li></ul></div>
                 <div class="footer-column"><h5>Soluções</h5><ul><li><a href="/processos">Processos</a></li><li><a href="/indicadores">Indicadores</a></li><li><a href="/tarefas">Tarefas</a></li><li><a href="/competencias">Competências</a></li><li><a href="/auditorias">Auditorias</a></li></ul></div>
-                <div class="footer-column"><h5>Conhecimento</h5><ul><li><a href="/blog">Blog</a></li><li><a href="#">Documentação</a></li><li><a href="#">FAQ</a></li></ul></div>
+                <div class="footer-column"><h5>Conhecimento</h5><ul><li><a href="/blog">Blog</a></li><li><a href="/historias">Histórias de Clientes</a></li><li><a href="#">Documentação</a></li><li><a href="#">FAQ</a></li><li><a href="#">Webinars</a></li></ul><h5 style="margin-top: 20px;">Orbit</h5><ul><li><a href="/parcerias">Seja Parceiro</a></li><li><a href="#">Sobre Nós</a></li></ul></div>
             </div>
-            <div class="footer-bottom"><p>&copy; 2024 Orbit Gestão. Todos os direitos reservados.</p></div>
+            <div class="footer-bottom"><p>&copy; 2026 Orbit — Grupo GSN. Todos os direitos reservados.</p></div>
         </div>
     </footer>
 
@@ -797,7 +837,7 @@
             }).slice(0, 3);
 
         const relatedHTML = related.length > 0 ? `
-            <section class="related-section">
+            <section class="related-section" data-reveal>
                 <div class="related-section__header">
                     <h3>Continue aprendendo</h3>
                     <p>Outros artigos que podem interessar você</p>
@@ -880,10 +920,10 @@
                         </div>
                     </div>
 
-                    <div class="article-cta-banner">
+                    <div class="article-cta-banner" data-reveal>
                         <h3>Pronto para transformar sua gestão?</h3>
-                        <p>Agende uma demonstração e veja a Orbit em ação.</p>
-                        <a href="/#contato-form" class="btn btn-primary btn-lg">Agendar demonstração</a>
+                        <p>Conheça o time de IA que executa exatamente o que sua empresa precisa para crescer.</p>
+                        <a href="/#contato-form" class="btn btn-primary btn-lg">Conhecer o Time de IA</a>
                     </div>
                 </div>
 
@@ -1074,7 +1114,7 @@
                     <i class="fas fa-check-circle"></i>
                     <h4>Pronto! Seu material está a caminho.</h4>
                     <p>Verifique seu e-mail ou clique no botão abaixo.</p>
-                    ${redirectUrl ? `<a href="${redirectUrl}" target="_blank" style="display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:12px 28px;background:#FDB73F;color:#000;border-radius:50px;font-weight:700;font-size:0.88rem;text-decoration:none;transition:background 0.2s;"><i class="fas fa-download"></i> Acessar material</a>` : ''}
+                    ${redirectUrl ? `<a href="${redirectUrl}" target="_blank" style="display:inline-flex;align-items:center;gap:8px;margin-top:20px;padding:12px 28px;background:#D4A017;color:#000;border-radius:50px;font-weight:700;font-size:0.88rem;text-decoration:none;transition:background 0.2s;"><i class="fas fa-download"></i> Acessar material</a>` : ''}
                 </div>
             `;
             if (redirectUrl) {
@@ -1085,5 +1125,24 @@
         return false;
     }
     </script>
+
+    <!-- Scroll Reveal -->
+    <script>
+    (function() {
+        var io = new IntersectionObserver(function(entries) {
+            entries.forEach(function(e) {
+                if (e.isIntersecting) {
+                    e.target.classList.add('revealed');
+                    io.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('[data-reveal],[data-reveal-stagger]').forEach(function(el) {
+            io.observe(el);
+        });
+    })();
+    </script>
+    <script src="/js/seo.js"></script>
 </body>
 </html>
