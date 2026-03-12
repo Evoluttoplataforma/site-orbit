@@ -849,8 +849,7 @@
     <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button>
 
     <script>
-    try {
-    const SEGMENTS = {
+    var SEGMENTS = {
         industria: 'Indústria', servicos: 'Serviços', tecnologia: 'Tecnologia',
         saude: 'Saúde', educacao: 'Educação', varejo: 'Varejo',
         financeiro: 'Financeiro', agronegocio: 'Agronegócio', outro: 'Outro'
@@ -858,7 +857,7 @@
 
     function escapeHtml(str) {
         if (!str) return '';
-        const d = document.createElement('div');
+        var d = document.createElement('div');
         d.textContent = str;
         return d.innerHTML;
     }
@@ -875,24 +874,20 @@
 
     function getVideoEmbed(url) {
         if (!url) return '';
-        const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&?#]+)/);
+        var ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&?#]+)/);
         if (ytMatch) return '<div class="video-embed"><iframe src="https://www.youtube.com/embed/' + ytMatch[1] + '" allowfullscreen></iframe></div>';
-        const vmMatch = url.match(/vimeo\.com\/(\d+)/);
+        var vmMatch = url.match(/vimeo\.com\/(\d+)/);
         if (vmMatch) return '<div class="video-embed"><iframe src="https://player.vimeo.com/video/' + vmMatch[1] + '" allowfullscreen></iframe></div>';
         return '<p><a href="' + escapeHtml(url) + '" target="_blank"><i class="fas fa-play-circle"></i> Assistir video</a></p>';
     }
 
-    // ══ Load Story ══
-    // Read ID from URL path (Vercel rewrite: /historias/:id → /historias/historia.html)
-    // Primary: extract from path /historias/story-id
-    // Fallback: ?id= query param
-    const params = new URLSearchParams(window.location.search);
-    const pathSlug = window.location.pathname.split('/historias/')[1] || '';
-    const storySlug = (pathSlug && pathSlug !== 'historia' && pathSlug !== 'historia.html') ? decodeURIComponent(pathSlug) : (params.get('slug') || params.get('id'));
-    const db = getDB();
-    // Search by slug first, then fall back to ID for backwards compat
-    const story = (db.customerStories || []).find(s => (s.slug === storySlug || s.id === storySlug) && s.status === 'published');
-    const container = document.getElementById('storyContent');
+    try {
+    var params = new URLSearchParams(window.location.search);
+    var pathSlug = window.location.pathname.split('/historias/')[1] || '';
+    var storySlug = (pathSlug && pathSlug !== 'historia' && pathSlug !== 'historia.html') ? decodeURIComponent(pathSlug) : (params.get('slug') || params.get('id'));
+    var db = getDB();
+    var story = (db.customerStories || []).find(function(s) { return (s.slug === storySlug || s.id === storySlug) && s.status === 'published'; });
+    var container = document.getElementById('storyContent');
 
     if (!story) {
         container.innerHTML = '<div class="article-not-found">' +
@@ -900,23 +895,24 @@
             '<h2>História não encontrada</h2>' +
             '<p>Esta história pode ter sido removida ou ainda não foi publicada.</p>' +
             '<a href="/historias" class="btn btn-primary">Ver todas as histórias</a>' +
-        '</div>';
+            '</div>';
     } else {
+        var storyId = story.id || storySlug;
         document.title = escapeHtml(story.titulo) + ' — ' + escapeHtml(story.empresa) + ' | Orbit Gestão';
 
-        const coverImg = (story.photos && story.photos.length) ? story.photos[0] : '';
-        const segment = SEGMENTS[story.segmento] || story.segmento || '';
-        const modulos = story.modulos || [];
-        const photos = (story.photos || []).slice(1);
-        const pageUrl = encodeURIComponent(window.location.href);
-        const pageTitle = encodeURIComponent(story.titulo);
+        var coverImg = (story.photos && story.photos.length) ? story.photos[0] : '';
+        var segment = SEGMENTS[story.segmento] || story.segmento || '';
+        var modulos = story.modulos || [];
+        var photos = (story.photos || []).slice(1);
+        var pageUrl = encodeURIComponent(window.location.href);
+        var pageTitle = encodeURIComponent(story.titulo);
 
-        const moduleIcons = {
+        var moduleIcons = {
             'Processos': 'fa-sitemap', 'Indicadores': 'fa-chart-line', 'Tarefas': 'fa-tasks',
             'Competências': 'fa-users', 'Auditorias': 'fa-clipboard-check', 'Orbit IA': 'fa-robot'
         };
 
-        let html = '';
+        var html = '';
 
         // ═══ HERO: two columns (left: text, right: image) ═══
         html += '<section class="story-hero">';
@@ -935,7 +931,7 @@
         html += '<h1>' + escapeHtml(story.titulo) + '</h1>';
 
         // Description (first 2 lines of desafio as intro)
-        const introText = (story.desafio || '').split('\n').slice(0, 3).join(' ').slice(0, 300);
+        var introText = (story.desafio || '').split('\n').slice(0, 3).join(' ').slice(0, 300);
         if (introText) {
             html += '<p class="story-hero__desc">' + escapeHtml(introText) + (story.desafio.length > 300 ? '...' : '') + '</p>';
         }
@@ -973,23 +969,23 @@
             html += '<section class="story-testimonials">';
             html += '<div class="story-testimonials__inner">';
             // Split depoimento in two if it's long enough, otherwise show single centered
-            const depoText = story.depoimento;
-            const midIdx = depoText.length > 200 ? Math.floor(depoText.length / 2) : -1;
-            let splitAt = -1;
+            var depoText = story.depoimento;
+            var midIdx = depoText.length > 200 ? Math.floor(depoText.length / 2) : -1;
+            var splitAt = -1;
             if (midIdx > 0) {
                 // Find nearest period or comma near the middle
-                for (let i = midIdx; i < midIdx + 80 && i < depoText.length; i++) {
+                for (var i = midIdx; i < midIdx + 80 && i < depoText.length; i++) {
                     if (depoText[i] === '.' || depoText[i] === ',' || depoText[i] === ';') { splitAt = i + 1; break; }
                 }
                 if (splitAt === -1) {
-                    for (let i = midIdx; i > midIdx - 80 && i >= 0; i--) {
-                        if (depoText[i] === '.' || depoText[i] === ',' || depoText[i] === ';') { splitAt = i + 1; break; }
+                    for (var j = midIdx; j > midIdx - 80 && j >= 0; j--) {
+                        if (depoText[j] === '.' || depoText[j] === ',' || depoText[j] === ';') { splitAt = j + 1; break; }
                     }
                 }
             }
             if (splitAt > 0) {
-                const part1 = depoText.slice(0, splitAt).trim();
-                const part2 = depoText.slice(splitAt).trim();
+                var part1 = depoText.slice(0, splitAt).trim();
+                var part2 = depoText.slice(splitAt).trim();
                 html += '<div class="story-quote">';
                 html += '<p class="story-quote__text">&ldquo;' + escapeHtml(part1) + '&rdquo;</p>';
                 html += '<div class="story-quote__author">' + escapeHtml(story.nome) + '</div>';
@@ -1021,13 +1017,13 @@
 
         // ═══ RESULTS METRICS (if resultados has numbers) ═══
         // Try to extract metrics from resultados text
-        const metricsRegex = /(\d+[\d.,]*\s*%?)\s*(?:de\s+)?([a-záàãéêíóôúç\s]+)/gi;
-        const metrics = [];
-        let match;
-        const resText = story.resultados || '';
+        var metricsRegex = /(\d+[\d.,]*\s*%?)\s*(?:de\s+)?([a-záàãéêíóôúç\s]+)/gi;
+        var metrics = [];
+        var match;
+        var resText = story.resultados || '';
         while ((match = metricsRegex.exec(resText)) !== null && metrics.length < 4) {
-            const num = match[1].trim();
-            const label = match[2].trim();
+            var num = match[1].trim();
+            var label = match[2].trim();
             if (label.length > 3 && label.length < 40) {
                 metrics.push({ number: num, label: label });
             }
@@ -1102,7 +1098,7 @@
         html += '<a href="https://www.linkedin.com/sharing/share-offsite/?url=' + pageUrl + '" target="_blank" class="share-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>';
         html += '<a href="https://twitter.com/intent/tweet?url=' + pageUrl + '&text=' + pageTitle + '" target="_blank" class="share-btn" title="Twitter"><i class="fab fa-x-twitter"></i></a>';
         html += '<a href="https://api.whatsapp.com/send?text=' + pageTitle + '%20' + pageUrl + '" target="_blank" class="share-btn" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>';
-        html += '<button class="share-btn" title="Copiar link" onclick="navigator.clipboard.writeText(window.location.href);this.innerHTML=\'<i class=\\\'fas fa-check\\\'></i>\';setTimeout(()=>this.innerHTML=\'<i class=\\\'fas fa-link\\\'></i>\',2000)"><i class="fas fa-link"></i></button>';
+        html += '<button class="share-btn" title="Copiar link" onclick="var b=this;navigator.clipboard.writeText(window.location.href);b.innerHTML=\'<i class=\\\'fas fa-check\\\'></i>\';setTimeout(function(){b.innerHTML=\'<i class=\\\'fas fa-link\\\'></i>\';},2000)"><i class="fas fa-link"></i></button>';
         html += '</div></div></section>';
 
         // ═══ CTA ═══
@@ -1113,7 +1109,7 @@
         html += '</section>';
 
         // ═══ RELATED STORIES ═══
-        const otherStories = (db.customerStories || [])
+        var otherStories = (db.customerStories || [])
             .filter(function(s) { return s.id !== storyId && s.status === 'published'; })
             .sort(function(a, b) { return new Date(b.createdAt) - new Date(a.createdAt); })
             .slice(0, 4);
@@ -1140,8 +1136,8 @@
     }
 
     // ── Header scroll ──
-    const header = document.querySelector('.header');
-    const backToTop = document.getElementById('backToTop');
+    var header = document.querySelector('.header');
+    var backToTop = document.getElementById('backToTop');
     window.addEventListener('scroll', function() {
         header.classList.toggle('scrolled', window.scrollY > 50);
         if (backToTop) backToTop.style.display = window.scrollY > 400 ? 'flex' : 'none';
