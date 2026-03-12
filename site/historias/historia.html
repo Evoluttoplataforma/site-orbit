@@ -638,6 +638,7 @@
             }
         }
     </style>
+    <noscript><style>[data-reveal],[data-reveal-stagger]{opacity:1!important;transform:none!important;}</style></noscript>
 </head>
 <body>
     <header class="header">
@@ -1133,17 +1134,22 @@
     <!-- Scroll Reveal -->
     <script>
     (function() {
-        var io = new IntersectionObserver(function(entries) {
-            entries.forEach(function(e) {
-                if (e.isIntersecting) {
-                    e.target.classList.add('revealed');
-                    io.unobserve(e.target);
-                }
-            });
-        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-        document.querySelectorAll('[data-reveal],[data-reveal-stagger]').forEach(function(el) {
-            io.observe(el);
-        });
+        var els = document.querySelectorAll('[data-reveal],[data-reveal-stagger]');
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) {
+                    if (e.isIntersecting) {
+                        e.target.classList.add('revealed');
+                        io.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+            els.forEach(function(el) { io.observe(el); });
+        }
+        // Fallback: force reveal all after 800ms in case observer didn't fire
+        setTimeout(function() {
+            els.forEach(function(el) { el.classList.add('revealed'); });
+        }, 800);
     })();
     </script>
     <script src="/js/seo.js"></script>
