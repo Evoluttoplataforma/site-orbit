@@ -8,7 +8,7 @@ Site e Landing Pages do **Orbit** — plataforma de gestão empresarial com agen
 **Grupo:** GSN (Gestão e Suporte para Negócios) — 30 anos, 8.000+ empresas
 **Target B2B:** PMEs (5–100+ funcionários, R$ 500k–R$ 20M/ano)
 **Target B2B2B:** Consultores, mentores, associações, hubs
-**Product:** 6 agentes de IA (Estrategista, Processos, Pessoas, Treinamento, Indicadores, Pesquisa)
+**Product:** 12 agentes de IA (Estrategista, Processos, Pessoas, Treinamento, Indicadores, Pesquisa, Riscos, Oportunidades, Problemas, Documentos, Vendas, Reuniões)
 
 > ⚠️ **POSICIONAMENTO ATUALIZADO (2026):** O Orbit foi reposicionado de "plataforma de gestão estratégica" para "plataforma de gestão com agentes de IA". Consulte os docs de posicionamento antes de criar qualquer peça de comunicação.
 
@@ -18,7 +18,7 @@ Antes de criar ou editar QUALQUER peça de comunicação, leia os docs de posici
 
 | Doc | Conteúdo | Quando consultar |
 |-----|----------|-----------------|
-| **[BRAND-POSITIONING.md](./docs/BRAND-POSITIONING.md)** | Quem somos, proposta de valor, 6 agentes, moat, receita, identidade visual, restrições narrativas | SEMPRE — é a bíblia |
+| **[BRAND-POSITIONING.md](./docs/BRAND-POSITIONING.md)** | Quem somos, proposta de valor, 12 agentes, moat, receita, identidade visual, restrições narrativas | SEMPRE — é a bíblia |
 | **[AUDIENCES-MESSAGING.md](./docs/AUDIENCES-MESSAGING.md)** | Personas (Carlos B2B, Fernanda B2B2B, Marcos Associação), copy de LPs, objeções, headlines, CTAs | Ao criar copy, ads, emails, conteúdo |
 | **[GROWTH-PLAYBOOK.md](./docs/GROWTH-PLAYBOOK.md)** | Arquitetura de funis, 3 motores de aquisição, economia de canais, KPIs, pricing, roadmap | Ao planejar campanhas, analisar métricas |
 | **[GROWTH-COPILOT.md](./docs/GROWTH-COPILOT.md)** | System prompt do agente de Growth (comportamento, escopo, formato) | Ao configurar agentes de IA para Growth |
@@ -68,12 +68,12 @@ Antes de criar ou editar QUALQUER peça de comunicação, leia os docs de posici
 site/
 ├── CLAUDE.md                    # THIS FILE — project context for Claude Code
 ├── index.html                   # Homepage (v2 Zoom-style)
-├── lp-empresas.html             # LP B2B — 12 seções, 6 agentes, pricing
+├── lp-empresas.html             # LP B2B — 12 seções, 12 agentes, pricing
 ├── canais.html                  # LP B2B2B — consultores/canais, modelo recorrente
 ├── sobre.html                   # Sobre — história, ecosystem, diretores
 ├── faq.html                     # FAQ — 13 Q&As em 4 categorias, accordion
 ├── pricing.html                 # Pricing — 3 planos, comparação de custos
-├── agentes.html                 # AI Agents — showcase dos 6 agentes
+├── agentes.html                 # AI Agents — showcase dos 12 agentes
 ├── parcerias.html               # Partners page (v2)
 ├── robots.txt                   # SEO — Allow all, block /acesso/
 ├── sitemap.xml                  # SEO — 15 URLs com prioridades
@@ -358,7 +358,7 @@ Replace with real product screenshots before production:
 - [ ] Deploy to Vercel/hosting
 
 ### ✅ Concluído
-- [x] Criar LP B2B (`lp-empresas.html`) — 12 seções, 6 agentes
+- [x] Criar LP B2B (`lp-empresas.html`) — 12 seções, 12 agentes
 - [x] Criar LP B2B2B Canais (`canais.html`) — modelo recorrente, matemática
 - [x] Criar páginas: Sobre, FAQ, Pricing, Agentes
 - [x] Migrar identidade visual: Poppins → Plus Jakarta Sans, #FDB73F → #D4A017

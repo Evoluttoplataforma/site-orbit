@@ -34,7 +34,7 @@ Os agentes do Orbit são construídos sobre arquitetura proprietária WAT (Workf
 > "Contrate um time de IA que executa exatamente o que sua empresa precisa para crescer."
 
 **Subheadline:**
-> "Não é mais um software. São 6 agentes de IA especializados que constroem e operam a gestão da sua empresa. Planejamento, processos, treinamento, indicadores — trabalhando 24/7."
+> "Não é mais um software. São 12 agentes de IA especializados que constroem e operam a gestão da sua empresa. Planejamento, processos, treinamento, indicadores — trabalhando 24/7."
 
 **Badge de autoridade:**
 > "30 anos de gestão empresarial. Agora com IA."
@@ -121,7 +121,7 @@ Templum + Validation (Motor de Caixa e Laboratório)
 
 ---
 
-## 4. OS 6 AGENTES DE IA
+## 4. OS 12 AGENTES DE IA
 
 | Agente | Função | Equivalente Humano | Custo Humano |
 |--------|--------|--------------------|--------------|
@@ -131,8 +131,14 @@ Templum + Validation (Motor de Caixa e Laboratório)
 | **Agente de Treinamento** | Microlearning diário via WhatsApp com conteúdo da empresa, quizzes | Coord. T&D | R$ 7-12k/mês |
 | **Agente de Indicadores** | Monitora KPIs, hipóteses de causa raiz, ações corretivas proativas | Analista BI | R$ 8-15k/mês |
 | **Agente de Pesquisa** | Analisa formulários, pesquisas de clima, gera insights acionáveis | Analista de dados | R$ 6-10k/mês |
+| **Agente de Riscos** | Riscos estratégicos, mitigações | Analista de riscos | R$ 8-12k/mês |
+| **Agente de Oportunidades** | Mercado, portfólio, parcerias | Analista de inteligência | R$ 8-12k/mês |
+| **Agente de Problemas** | NC, causa raiz, ações corretivas | Analista de melhoria | R$ 7-10k/mês |
+| **Agente de Documentos** | Docs corporativos conectados | Analista de documentação | R$ 5-8k/mês |
+| **Agente de Vendas** | CRM, funil, coaching comercial | Consultor comercial | R$ 10-15k/mês |
+| **Agente de Reuniões** | Transcrição, análise, distribuição | Assistente executivo | R$ 5-8k/mês |
 
-**Ancoragem de custo total:** O time humano equivalente custaria R$ 50-120k/mês. O Orbit entrega tudo isso por uma fração.
+**Ancoragem de custo total:** O time humano equivalente custaria R$ 80-180k/mês. O Orbit entrega tudo isso por uma fração.
 
 **Cada agente trabalha 24/7. Não tira férias. Não pede aumento. Não precisa de onboarding.**
 
@@ -146,7 +152,7 @@ Templum + Validation (Motor de Caixa e Laboratório)
 Empresários investem em software, consultoria e planilhas — mas nada funciona de forma contínua. O consultor sai e tudo volta ao caos. O software precisa ser alimentado manualmente. A planilha ninguém atualiza. Resultado: mais uma ferramenta abandonada.
 
 **A solução Orbit:**
-Um time de 6 agentes de IA especializados que constroem e operam a gestão da empresa. Não é ferramenta que espera ser alimentada — são agentes que fazem o trabalho pesado. O empresário valida e decide; os agentes executam.
+Um time de 12 agentes de IA especializados que constroem e operam a gestão da empresa. Não é ferramenta que espera ser alimentada — são agentes que fazem o trabalho pesado. O empresário valida e decide; os agentes executam.
 
 **Velocidade como diferencial:**
 Cadastro em 5 min → agentes constroem planejamento e mapeiam processos em 1 tarde → operação completa rodando em 7 dias → execução contínua 24/7.

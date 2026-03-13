@@ -135,13 +135,13 @@ Ofereça aos associados um time de IA personalizado para o negócio deles. Nova 
 | Estágio | Objetivo | Mensagem Central | Tom |
 |---------|----------|-------------------|-----|
 | **AWARENESS** (Topo) | Identificação com a dor | "Você é o bombeiro-chefe da sua empresa?" / "Por que software sozinho não resolve sua gestão" | Provocativo, empático |
-| **CONSIDERAÇÃO** (Meio) | Apresentar a solução | "Conheça o time de IA que constrói e opera a gestão da sua empresa" / "6 agentes. 24/7. Uma fração do custo." | Informativo, confiante |
+| **CONSIDERAÇÃO** (Meio) | Apresentar a solução | "Conheça o time de IA que constrói e opera a gestão da sua empresa" / "12 agentes. 24/7. Uma fração do custo." | Informativo, confiante |
 | **DECISÃO** (Fundo) | Converter | "Agende uma demonstração e veja os agentes trabalhando com a SUA empresa" / "Garantia de 90 dias. Risco zero." | Direto, urgente |
 
 **Ângulos de awareness (para ads, posts, conteúdo de topo):**
 1. Pain-first: "Parece que sou o único que se importa com essa empresa" — identificação emocional
 2. Anti-software: "Por que mais um software não vai resolver sua gestão" — posiciona contra a categoria
-3. Custo de oportunidade: "Quanto custa NÃO ter um time de gestão?" — ancoragem financeira (R$ 50-120k/mês)
+3. Custo de oportunidade: "Quanto custa NÃO ter um time de gestão?" — ancoragem financeira (R$ 80-180k/mês)
 4. Velocidade: "Planejamento estratégico em 1 tarde, não em 45 dias" — resultado rápido
 5. WhatsApp: "Seu time consulta processos e recebe treinamento pelo WhatsApp" — tangibilidade
 
@@ -207,7 +207,7 @@ Ofereça aos associados um time de IA personalizado para o negócio deles. Nova 
 
 | Objeção | Resposta | Prova |
 |---------|----------|-------|
-| "Meus clientes são pequenos" | "Exatamente o ponto. Clientes pequenos não pagam R$ 50-120k/mês por um time de gestão. Mas pagam R$ 997-2.500/mês por agentes de IA. Você torna acessível o que antes era exclusivo de grandes empresas." | Ancoragem de custo na LP |
+| "Meus clientes são pequenos" | "Exatamente o ponto. Clientes pequenos não pagam R$ 80-180k/mês por um time de gestão. Mas pagam R$ 997-2.500/mês por agentes de IA. Você torna acessível o que antes era exclusivo de grandes empresas." | Ancoragem de custo na LP |
 | "Vou perder o controle?" | "Não. O Orbit é white-label. Sua marca. Seu relacionamento. Seus clientes. O Orbit é a infraestrutura invisível." | Modelo white-label |
 | "Quanto eu ganho de verdade?" | "R$ 250/mês por cliente ativado, ~90% de margem. Com 10 clientes, são R$ 2.500/mês de recorrência. Com 50, R$ 12.500/mês. Sem fazer nada além do que já faz." | Matemática do canal |
 | "E se o Orbit não atender minha metodologia?" | "O Orbit é plataforma, não metodologia. Você configura os agentes com seu conteúdo, sua abordagem, seus processos. A plataforma executa; a inteligência é sua." | Flexibilidade dos agentes |
@@ -224,7 +224,7 @@ Esta é a copy validada da Landing Page B2B. Use como "gold standard" para qualq
 1. **Hero**
    - Badge: "30 anos de gestão empresarial. Agora com IA."
    - H1: "Contrate um time de IA que executa exatamente o que sua empresa precisa para crescer."
-   - Sub: "Não é mais um software. São 6 agentes de IA especializados que constroem e operam a gestão da sua empresa. Planejamento, processos, treinamento, indicadores — trabalhando 24/7."
+   - Sub: "Não é mais um software. São 12 agentes de IA especializados que constroem e operam a gestão da sua empresa. Planejamento, processos, treinamento, indicadores — trabalhando 24/7."
    - Credenciais: 30 anos | 8.000+ empresas | 2.206 no Orbit
    - CTA: "QUERO CONHECER O TIME DE IA"
    - Nota: "⏱️ 2 min • 100% gratuito • Sem compromisso"
@@ -241,7 +241,7 @@ Esta é a copy validada da Landing Page B2B. Use como "gold standard" para qualq
 
 4. **Agentes — "Seu time de especialistas em IA"**
    - Sub: "Cada agente tem uma função. Trabalham 24h. Não tiram férias. Custam uma fração."
-   - Grid 3×2 com os 6 agentes (nome + descrição + equivalente humano com custo)
+   - Grid 4×3 com os 12 agentes (nome + descrição + equivalente humano com custo)
 
 5. **Como funciona — 3 passos**
    - 01: Cadastre sua empresa (5 minutos)
@@ -262,8 +262,8 @@ Esta é a copy validada da Landing Page B2B. Use como "gold standard" para qualq
    - Stats bar: 30 anos | 8.000+ empresas | 2.206 no Orbit | 98% satisfação
 
 9. **Comparação de custo — "Quanto custa esse time?"**
-   - Lado esquerdo (vermelho): contratação tradicional com 6 profissionais = R$ 50-120k/mês
-   - Lado direito (gold): 6 agentes de IA 24/7, por uma fração + setup/onboarding inclusos + plano anual 20% economia
+   - Lado esquerdo (vermelho): contratação tradicional com 12 profissionais = R$ 80-180k/mês
+   - Lado direito (gold): 12 agentes de IA 24/7, por uma fração + setup/onboarding inclusos + plano anual 20% economia
 
 10. **Garantia — 90 dias**
     - "Se não gerar resultado em 90 dias, devolvemos seu investimento. Risco zero para você. Confiança total para nós."
@@ -306,7 +306,7 @@ Copy validada da Landing Page para consultores/canais. Reconstruída a partir do
    - Projeção: 10 clientes = R$ 2.500/mês, 50 clientes = R$ 12.500/mês
    - Custo de tecnologia: zero
 
-5. **Os 6 Agentes** (mesmos da LP B2B, reframeados para o consultor como "o time que você oferece ao seu cliente")
+5. **Os 12 Agentes** (mesmos da LP B2B, reframeados para o consultor como "o time que você oferece ao seu cliente")
 
 6. **Economia do Canal — o que você ganha**
    - Receita recorrente (mensalidade do cliente)
@@ -331,7 +331,7 @@ Copy validada da Landing Page para consultores/canais. Reconstruída a partir do
 
 ### Headlines B2B (validadas ou aprovadas):
 - "Contrate um time de IA que executa exatamente o que sua empresa precisa para crescer."
-- "6 agentes de IA. 24/7. Uma fração do custo de um time humano."
+- "12 agentes de IA. 24/7. Uma fração do custo de um time humano."
 - "Seu time de especialistas em IA"
 - "Por que software sozinho não resolve"
 - "Resultados reais, não promessas"

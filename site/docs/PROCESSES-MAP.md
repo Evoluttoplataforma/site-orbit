@@ -12,7 +12,7 @@ docs/
 │   ├── Quem somos (§1)
 │   ├── Posicionamento por público (§2)
 │   ├── Ecossistema GSN (§3)
-│   ├── 6 Agentes de IA (§4)
+│   ├── 12 Agentes de IA (§4)
 │   ├── Proposta de valor B2B + B2B2B (§5)
 │   ├── Moat / vantagem defensável (§6)
 │   ├── Modelo de receita (§7)
@@ -65,7 +65,7 @@ docs/
 | Hero B2B (headline, sub, CTA, badge) | AUDIENCES §4.1 | `index.html` | ⚠️ DESATUALIZADO — site usa copy legacy |
 | Pain points ("Deixa eu adivinhar") | AUDIENCES §4.2 | Nova LP B2B | 🔴 NÃO EXISTE |
 | Reframe ("Por que software não resolve") | AUDIENCES §4.3 | Nova LP B2B | 🔴 NÃO EXISTE |
-| 6 Agentes de IA (grid) | POSITIONING §4 | Nova LP B2B | 🔴 NÃO EXISTE |
+| 12 Agentes de IA (grid) | POSITIONING §4 | Nova LP B2B | 🔴 NÃO EXISTE |
 | Como funciona (3 passos) | AUDIENCES §4.5 | Nova LP B2B | 🔴 NÃO EXISTE |
 | Social proof / depoimentos | AUDIENCES §4.6 | `index.html` (placeholders) | ⚠️ PLACEHOLDERS |
 | Segmentos atendidos | AUDIENCES §4.7 | Nova LP B2B | 🔴 NÃO EXISTE |
@@ -97,7 +97,7 @@ docs/
 | **TOPO** — Awareness | Criar post LinkedIn autoridade | GROWTH §7 (Pilar 1: Autoridade) | + POSITIONING §9 (dados de mercado) |
 | **TOPO** — Awareness | Criar Reel Instagram dor | GROWTH §7 (Pilar 2: Identificação) | + AUDIENCES §1 (dores do Carlos) |
 | **MEIO** — Consideração | Criar email nurturing | AUDIENCES §7 (Framework email) | Sequência pós-captura |
-| **MEIO** — Consideração | Criar conteúdo de agentes | POSITIONING §4 (6 agentes) | + AUDIENCES §2 (ângulos consideração) |
+| **MEIO** — Consideração | Criar conteúdo de agentes | POSITIONING §4 (12 agentes) | + AUDIENCES §2 (ângulos consideração) |
 | **FUNDO** — Decisão | Criar LP B2B | AUDIENCES §4 (copy completa) | 12 seções em ordem |
 | **FUNDO** — Decisão | Tratar objeção | AUDIENCES §3 (tabela objeções B2B) | Resposta + prova |
 | **FUNDO** — Decisão | Script de demo | POSITIONING §4-5 + AUDIENCES §3 | Agentes + proposta de valor + objeções |
