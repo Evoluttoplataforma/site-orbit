@@ -12,7 +12,9 @@ body {
   background: #0D1117;
   color: #C9D1D9;
   line-height: 1.6;
+  letter-spacing: -0.01em;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 img { max-width: 100%; height: auto; display: block; }
@@ -79,10 +81,11 @@ ul { list-style: none; }
 }
 .section-header h2 {
   font-size: clamp(32px, 4.5vw, 48px);
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.15;
   letter-spacing: -0.02em;
   color: var(--white);
+  text-wrap: balance;
 }
 .section-header p {
   font-size: 18px;
@@ -105,7 +108,7 @@ ul { list-style: none; }
   font-weight: 600;
   font-size: 15px;
   cursor: pointer;
-  transition: var(--transition);
+  transition: all 0.15s ease;
   border: 2px solid transparent;
   text-decoration: none;
   white-space: nowrap;
@@ -124,11 +127,11 @@ ul { list-style: none; }
 .btn-outline {
   background: transparent;
   color: var(--white);
-  border-color: rgba(255,255,255,0.3);
+  border-color: rgba(255,255,255,0.2);
 }
 .btn-outline:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: var(--white);
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.4);
 }
 .btn-ghost {
   background: transparent;
@@ -467,9 +470,10 @@ ul { list-style: none; }
 }
 .solutions-carousel__header h2 {
   font-size: clamp(24px, 4vw, 40px);
-  font-weight: 700;
+  font-weight: 600;
   color: var(--white);
   line-height: 1.2;
+  letter-spacing: -0.02em;
   margin-bottom: 12px;
 }
 .solutions-carousel__header p {
@@ -513,11 +517,15 @@ ul { list-style: none; }
 }
 .hero-zoom__title {
   font-size: clamp(36px, 6vw, 64px);
-  font-weight: 800;
-  color: var(--white);
+  font-weight: 600;
+  background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.55) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   line-height: 1.1;
   letter-spacing: -0.03em;
   margin-bottom: 20px;
+  text-wrap: balance;
 }
 .hero-zoom__title-highlight {
   background: linear-gradient(135deg, var(--primary), var(--primary-light));
@@ -672,7 +680,7 @@ ul { list-style: none; }
 .carousel-card__content h3 {
   color: var(--white);
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 6px;
 }
 .carousel-card__content p {
@@ -738,9 +746,10 @@ ul { list-style: none; }
 }
 .one-platform__header h2 {
   font-size: clamp(28px, 4vw, 44px);
-  font-weight: 700;
+  font-weight: 600;
   color: var(--white);
   line-height: 1.2;
+  text-wrap: balance;
   letter-spacing: -0.01em;
 }
 .one-platform__header p {
@@ -821,10 +830,12 @@ ul { list-style: none; }
 }
 .platform-panel__text h3 {
   font-size: clamp(24px, 3vw, 34px);
-  font-weight: 700;
+  font-weight: 600;
   color: var(--white);
   line-height: 1.25;
+  letter-spacing: -0.02em;
   margin-bottom: 16px;
+  text-wrap: balance;
 }
 .platform-panel__text p {
   font-size: 16px;
@@ -1059,10 +1070,12 @@ ul { list-style: none; }
 
 .integration-section__text h2 {
   font-size: clamp(28px, 3vw, 38px);
-  font-weight: 700;
+  font-weight: 600;
   color: var(--white);
   line-height: 1.25;
+  letter-spacing: -0.02em;
   margin-bottom: 16px;
+  text-wrap: balance;
 }
 .integration-section__text p {
   font-size: 16px;
@@ -1392,7 +1405,7 @@ ul { list-style: none; }
 }
 .agent-card h3 {
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--white);
   margin-bottom: 10px;
 }
@@ -1486,7 +1499,7 @@ ul { list-style: none; }
 }
 .how-step h3 {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--white);
   margin-bottom: 12px;
 }
@@ -1559,7 +1572,7 @@ ul { list-style: none; }
 .segment-card__icon i { font-size: 22px; color: #fff; }
 .segment-card h3 {
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--white);
   margin-bottom: 16px;
 }
@@ -1643,9 +1656,10 @@ ul { list-style: none; }
 }
 .guarantee-card h2 {
   font-size: clamp(26px, 3vw, 36px);
-  font-weight: 800;
+  font-weight: 600;
   color: var(--white);
   margin-bottom: 16px;
+  text-wrap: balance;
 }
 .guarantee-card p {
   font-size: 16px;
@@ -1809,9 +1823,10 @@ ul { list-style: none; }
 }
 .cta-form-text h2 {
   font-size: clamp(28px, 3vw, 40px);
-  font-weight: 700;
+  font-weight: 600;
   color: var(--white);
   line-height: 1.25;
+  letter-spacing: -0.02em;
   margin-bottom: 16px;
 }
 .cta-form-text p {
@@ -3196,5 +3211,26 @@ ul { list-style: none; }
 }
 .img-subtle:hover {
   opacity: 1;
+}
+
+/* Glow divider line (gold gradient, replaces solid borders between sections) */
+.glow-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 160, 23, 0.3), transparent);
+  border: none;
+  margin: 0;
+}
+
+/* Gradient text hero (white to semi-transparent — adds depth) */
+.gradient-text-depth {
+  background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.5) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Text wrap balance for headings */
+h1, h2, h3 {
+  text-wrap: balance;
 }
 
