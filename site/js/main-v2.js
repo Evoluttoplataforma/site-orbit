@@ -358,4 +358,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // ═══ PREMIUM ANIMATIONS (fade-in-up + stagger-children) ═══
+  const animObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        animObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in-up, .stagger-children').forEach(el => {
+    animObserver.observe(el);
+  });
+
 });
