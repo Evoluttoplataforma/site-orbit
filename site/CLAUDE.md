@@ -18,6 +18,7 @@ Antes de criar ou editar QUALQUER peça de comunicação, leia os docs de posici
 
 | Doc | Conteúdo | Quando consultar |
 |-----|----------|-----------------|
+| **[NARRATIVE-FRAMEWORK.md](./docs/NARRATIVE-FRAMEWORK.md)** | Framework narrativo v2: movimento, categoria, Olívia, 12 agentes com personas, dinâmicas, manifesto, ICPs, ecossistema GSN | SEMPRE — documento-mãe de toda comunicação |
 | **[BRAND-POSITIONING.md](./docs/BRAND-POSITIONING.md)** | Quem somos, proposta de valor, 12 agentes, moat, receita, identidade visual, restrições narrativas | SEMPRE — é a bíblia |
 | **[AUDIENCES-MESSAGING.md](./docs/AUDIENCES-MESSAGING.md)** | Personas (Carlos B2B, Fernanda B2B2B, Marcos Associação), copy de LPs, objeções, headlines, CTAs | Ao criar copy, ads, emails, conteúdo |
 | **[GROWTH-PLAYBOOK.md](./docs/GROWTH-PLAYBOOK.md)** | Arquitetura de funis, 3 motores de aquisição, economia de canais, KPIs, pricing, roadmap | Ao planejar campanhas, analisar métricas |
@@ -123,7 +124,8 @@ site/
     ├── PROCESSES-MAP.md          # ★ Mapa de processos doc → site → operação
     ├── TRACKING-ARCHITECTURE.md  # ★ Tracking, dataLayer, GTM, hidden fields, lead scoring
     ├── LP-STANDARDS.md           # ★ Seções de LP, animações, design system, CRO
-    └── INDEXING-STRATEGY.md      # ★ Google News, Schema, News Sitemap, Publisher Center
+    ├── INDEXING-STRATEGY.md      # ★ Google News, Schema, News Sitemap, Publisher Center
+    └── NARRATIVE-FRAMEWORK.md    # ★ Framework narrativo v2 (movimento, Olívia, 12 agentes, manifesto)
 ```
 
 ### Active vs Legacy Files
