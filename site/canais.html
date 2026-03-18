@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/styles-v2.css?v=2">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=d8b11dbe">
 
     <style>
         /* ═══ CANAIS LP — INLINE STYLES ═══ */
@@ -231,66 +231,204 @@
             text-align: center;
         }
 
-        /* --- 3. NOVO MODELO --- */
-        .model-comparison {
+        /* --- 3. NOVO MODELO (v2) --- */
+        .model-v2 {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 32px;
+            grid-template-columns: 1fr 64px 1fr;
+            gap: 0;
             margin-bottom: 48px;
+            align-items: stretch;
         }
-        .model-box {
+        .model-v2__side {
             border-radius: 20px;
-            padding: 36px;
+            padding: 40px 36px;
+            position: relative;
         }
-        .model-box--before {
-            background: rgba(239,68,68,0.06);
+        .model-v2__side--before {
+            background: linear-gradient(135deg, rgba(239,68,68,0.08), rgba(239,68,68,0.02));
             border: 1px solid rgba(239,68,68,0.15);
         }
-        .model-box--after {
-            background: rgba(212,160,23,0.06);
-            border: 1px solid rgba(212,160,23,0.15);
+        .model-v2__side--after {
+            background: linear-gradient(135deg, rgba(212,160,23,0.03), rgba(212,160,23,0.1));
+            border: 1px solid rgba(212,160,23,0.2);
+            box-shadow: 0 8px 40px rgba(212,160,23,0.08);
         }
-        .model-box h3 {
-            font-size: 1.25rem;
+        .model-v2__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
             font-weight: 700;
-            margin: 0 0 24px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 28px;
         }
-        .model-box--before h3 { color: #EF4444 !important; }
-        .model-box--after h3 { color: #D4A017 !important; }
-        .model-flow {
+        .model-v2__side--before .model-v2__badge {
+            background: rgba(239,68,68,0.12);
+            color: #EF4444;
+            border: 1px solid rgba(239,68,68,0.2);
+        }
+        .model-v2__side--after .model-v2__badge {
+            background: rgba(212,160,23,0.12);
+            color: #D4A017;
+            border: 1px solid rgba(212,160,23,0.25);
+        }
+        .model-v2__steps {
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 0;
+        }
+        .model-v2__step {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+        }
+        .model-v2__step:last-child { border-bottom: none; }
+        .model-v2__step-num {
+            width: 32px;
+            height: 32px;
+            min-width: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 800;
+        }
+        .model-v2__side--before .model-v2__step-num {
+            background: rgba(239,68,68,0.12);
+            color: #EF4444;
+            border: 1px solid rgba(239,68,68,0.2);
+        }
+        .model-v2__side--after .model-v2__step-num {
+            background: rgba(212,160,23,0.15);
+            color: #D4A017;
+            border: 1px solid rgba(212,160,23,0.25);
+        }
+        .model-v2__step-text {
+            flex: 1;
+        }
+        .model-v2__step-text strong {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 2px;
+        }
+        .model-v2__step-text span {
+            font-size: 0.825rem;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.4;
+        }
+        .model-v2__step-icon {
+            font-size: 14px;
+            width: 28px;
+            text-align: center;
+        }
+        .model-v2__side--before .model-v2__step-icon { color: rgba(239,68,68,0.5); }
+        .model-v2__side--after .model-v2__step-icon { color: rgba(34,197,94,0.7); }
+        .model-v2__result {
+            margin-top: 24px;
+            padding: 16px 20px;
+            border-radius: 12px;
+            display: flex;
             align-items: center;
             gap: 12px;
         }
-        .model-flow__step {
-            background: rgba(255,255,255,0.08);
-            border-radius: 12px;
-            padding: 12px 20px;
+        .model-v2__side--before .model-v2__result {
+            background: rgba(239,68,68,0.08);
+            border: 1px solid rgba(239,68,68,0.15);
+        }
+        .model-v2__side--after .model-v2__result {
+            background: rgba(34,197,94,0.08);
+            border: 1px solid rgba(34,197,94,0.15);
+        }
+        .model-v2__result-icon {
+            font-size: 1.25rem;
+        }
+        .model-v2__side--before .model-v2__result-icon { color: #EF4444; }
+        .model-v2__side--after .model-v2__result-icon { color: #22C55E; }
+        .model-v2__result-text {
             font-size: 0.9rem;
             font-weight: 600;
-            color: rgba(255,255,255,0.85);
+            color: rgba(255,255,255,0.85) !important;
         }
-        .model-flow__arrow {
-            color: rgba(255,255,255,0.3);
-            font-size: 0.875rem;
+        /* VS divider */
+        .model-v2__vs {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .model-keypoint {
-            background: rgba(212,160,23,0.08);
+        .model-v2__vs-badge {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #1C2333;
+            border: 2px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 800;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 1px;
+            z-index: 1;
+        }
+        /* Recommended tag */
+        .model-v2__tag {
+            position: absolute;
+            top: -14px;
+            right: 24px;
+            background: linear-gradient(135deg, #D4A017, #F5C518);
+            color: #000;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 5px 14px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 16px rgba(212,160,23,0.3);
+        }
+        /* Keypoint */
+        .model-v2__keypoint {
+            background: linear-gradient(135deg, rgba(212,160,23,0.06), rgba(212,160,23,0.12));
             border: 1px solid rgba(212,160,23,0.2);
             border-radius: 16px;
-            padding: 28px 32px;
+            padding: 32px 40px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-        .model-keypoint p {
-            font-size: 1.125rem;
+        .model-v2__keypoint::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #D4A017, transparent);
+        }
+        .model-v2__keypoint p {
+            font-size: 1.1rem;
             font-weight: 500;
             color: rgba(255,255,255,0.85) !important;
             margin: 0;
-            line-height: 1.6;
+            line-height: 1.7;
         }
-        .model-keypoint strong {
+        .model-v2__keypoint strong {
             color: #D4A017;
+        }
+        @media (max-width: 768px) {
+            .model-v2 {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .model-v2__vs { padding: 8px 0; }
+            .model-v2__vs-badge { width: 40px; height: 40px; font-size: 12px; }
+            .model-v2__side { padding: 28px 24px; }
         }
 
         /* --- 4. MATH --- */
@@ -650,6 +788,51 @@
             .model-comparison { grid-template-columns: 1fr; }
             .math-numbers { grid-template-columns: repeat(3, 1fr); }
         }
+
+        /* ═══ ORBITAL HUB ═══ */
+        .orbit-hub { position: relative; width: 100%; max-width: 860px; height: 860px; margin: 0 auto; }
+        .orbit-hub__lines { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .orbit-hub__center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; z-index: 3; }
+        .orbit-hub__glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 260px; height: 260px; border-radius: 50%; background: radial-gradient(circle, rgba(212,160,23,0.2) 0%, rgba(212,160,23,0.05) 50%, transparent 70%); animation: orbit-glow 3.5s ease-in-out infinite; pointer-events: none; }
+        @keyframes orbit-glow { 0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); } 50% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); } }
+        .orbit-hub__photo { width: 140px; height: 140px; border-radius: 50%; border: 4px solid rgba(212,160,23,0.6); overflow: hidden; box-shadow: 0 0 40px rgba(212,160,23,0.4), 0 0 80px rgba(212,160,23,0.15); animation: orbit-photo-breathe 3.5s ease-in-out infinite; position: relative; z-index: 2; }
+        @keyframes orbit-photo-breathe { 0%, 100% { box-shadow: 0 0 40px rgba(212,160,23,0.4), 0 0 80px rgba(212,160,23,0.15); } 50% { box-shadow: 0 0 50px rgba(212,160,23,0.6), 0 0 100px rgba(212,160,23,0.25); } }
+        .orbit-hub__photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+        .orbit-hub__name { color: #D4A017; font-size: 20px; font-weight: 800; margin-top: 14px; letter-spacing: 1px; text-transform: uppercase; }
+        .orbit-hub__role { color: rgba(255,255,255,0.5); font-size: 13px; margin-top: 4px; }
+        .orbit-hub__ring { position: absolute; top: 50%; left: 50%; border-radius: 50%; border: 1.5px solid rgba(212,160,23,0.12); pointer-events: none; animation: orbit-ring 3.5s ease-in-out infinite; }
+        .orbit-hub__ring--1 { width: 180px; height: 180px; transform: translate(-50%, calc(-50% - 12px)); }
+        .orbit-hub__ring--2 { width: 220px; height: 220px; border-color: rgba(212,160,23,0.07); transform: translate(-50%, calc(-50% - 12px)); animation-delay: 0.5s; }
+        .orbit-hub__ring--3 { width: 264px; height: 264px; border-color: rgba(212,160,23,0.04); transform: translate(-50%, calc(-50% - 12px)); animation-delay: 1s; }
+        @keyframes orbit-ring { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+        .orbit-hub__node { position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 2; cursor: default; transition: transform 0.3s ease; opacity: 0; scale: 0.5; }
+        .orbit-visible .orbit-hub__node { animation: orbit-node-in 0.6s cubic-bezier(0.16,1,0.3,1) forwards; }
+        .orbit-visible .orbit-hub__node[data-idx="0"] { animation-delay: 0.1s; }
+        .orbit-visible .orbit-hub__node[data-idx="1"] { animation-delay: 0.15s; }
+        .orbit-visible .orbit-hub__node[data-idx="2"] { animation-delay: 0.2s; }
+        .orbit-visible .orbit-hub__node[data-idx="3"] { animation-delay: 0.25s; }
+        .orbit-visible .orbit-hub__node[data-idx="4"] { animation-delay: 0.3s; }
+        .orbit-visible .orbit-hub__node[data-idx="5"] { animation-delay: 0.35s; }
+        .orbit-visible .orbit-hub__node[data-idx="6"] { animation-delay: 0.4s; }
+        .orbit-visible .orbit-hub__node[data-idx="7"] { animation-delay: 0.45s; }
+        .orbit-visible .orbit-hub__node[data-idx="8"] { animation-delay: 0.5s; }
+        .orbit-visible .orbit-hub__node[data-idx="9"] { animation-delay: 0.55s; }
+        .orbit-visible .orbit-hub__node[data-idx="10"] { animation-delay: 0.6s; }
+        .orbit-visible .orbit-hub__node[data-idx="11"] { animation-delay: 0.65s; }
+        @keyframes orbit-node-in { to { opacity: 1; scale: 1; } }
+        .orbit-hub__node:hover { transform: translate(-50%, -50%) scale(1.12); }
+        .orbit-hub__node:hover .orbit-hub__node-icon { border-color: #D4A017; box-shadow: 0 0 24px rgba(212,160,23,0.5); background: linear-gradient(135deg, rgba(212,160,23,0.35), rgba(212,160,23,0.1)); }
+        .orbit-hub__node-icon { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, rgba(212,160,23,0.15), rgba(212,160,23,0.04)); border: 2px solid rgba(212,160,23,0.3); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; backdrop-filter: blur(4px); }
+        .orbit-hub__node-icon i { font-size: 20px; color: #D4A017; }
+        .orbit-hub__node-label { font-size: 14px; font-weight: 800; color: #fff; white-space: nowrap; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+        .orbit-hub__node-desc { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.7); white-space: nowrap; text-shadow: 0 2px 10px rgba(0,0,0,0.8); margin-top: -2px; }
+        .orbit-hub__center { opacity: 0; scale: 0.3; }
+        .orbit-visible .orbit-hub__center { animation: orbit-center-in 0.8s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+        @keyframes orbit-center-in { to { opacity: 1; scale: 1; } }
+        .orbit-hub__lines { opacity: 0; }
+        .orbit-visible .orbit-hub__lines { animation: orbit-lines-in 0.8s ease 0.3s forwards; }
+        @keyframes orbit-lines-in { to { opacity: 1; } }
+
         @media (max-width: 768px) {
             .lp-section { padding: 72px 0; }
             .lp-hero { padding: 140px 0 72px; }
@@ -684,6 +867,18 @@
             }
             .math-table { font-size: 0.875rem; }
             .math-table th, .math-table td { padding: 12px 16px; }
+            .orbit-hub { height: auto; max-width: 400px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 20px 0; }
+            .orbit-hub__lines { display: none; }
+            .orbit-hub__center { grid-column: 1 / -1; position: relative; top: auto; left: auto; transform: none; opacity: 1; scale: 1; margin-bottom: 16px; }
+            .orbit-hub__glow { width: 160px; height: 160px; }
+            .orbit-hub__photo { width: 100px; height: 100px; }
+            .orbit-hub__ring { display: none; }
+            .orbit-hub__node { position: relative; top: auto !important; left: auto !important; transform: none; opacity: 1; scale: 1; animation: none !important; flex-direction: row; gap: 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(212,160,23,0.12); border-radius: 12px; padding: 12px 14px; }
+            .orbit-hub__node:hover { transform: none; }
+            .orbit-hub__node-icon { width: 40px; height: 40px; min-width: 40px; border-radius: 10px; }
+            .orbit-hub__node-icon i { font-size: 16px; }
+            .orbit-hub__node-label { font-size: 13px; }
+            .orbit-hub__node-desc { font-size: 11px; white-space: normal; text-shadow: none; margin-top: 0; }
         }
         @media (max-width: 480px) {
             .lp-hero h1 { font-size: 1.625rem; }
@@ -897,42 +1092,111 @@
     </section>
 
 
-    <!-- ═══ 3. O NOVO MODELO ═══ -->
+    <!-- ═══ 3. O NOVO MODELO (v2) ═══ -->
     <section class="lp-section lp-section--dark">
         <div class="lp-container">
             <div class="lp-section-header" data-reveal>
-                <h2>Ganhe recorrência com IA trabalhando pelo seu cliente.</h2>
+                <span class="lp-badge">Modelo de negócio</span>
+                <h2>Ganhe recorrência com IA<br>trabalhando pelo seu cliente.</h2>
+                <p>Pare de depender de novos projetos. Com o Orbit, agentes continuam executando — e você ganha receita recorrente real.</p>
             </div>
 
-            <div class="model-comparison" data-reveal-stagger>
-                <div class="model-box model-box--before">
-                    <h3><i class="fas fa-xmark"></i> Antes</h3>
-                    <div class="model-flow">
-                        <span class="model-flow__step">Projeto pontual</span>
-                        <span class="model-flow__arrow"><i class="fas fa-arrow-right"></i></span>
-                        <span class="model-flow__step">Entrega</span>
-                        <span class="model-flow__arrow"><i class="fas fa-arrow-right"></i></span>
-                        <span class="model-flow__step">Churn</span>
-                        <span class="model-flow__arrow"><i class="fas fa-arrow-right"></i></span>
-                        <span class="model-flow__step">Venda nova</span>
+            <div class="model-v2" data-reveal>
+                <!-- ANTES -->
+                <div class="model-v2__side model-v2__side--before">
+                    <div class="model-v2__badge"><i class="fas fa-xmark"></i> Modelo Tradicional</div>
+                    <div class="model-v2__steps">
+                        <div class="model-v2__step">
+                            <div class="model-v2__step-num">1</div>
+                            <div class="model-v2__step-text">
+                                <strong>Projeto pontual</strong>
+                                <span>Escopo fechado, prazo curto, entrega única</span>
+                            </div>
+                            <div class="model-v2__step-icon"><i class="fas fa-arrow-down"></i></div>
+                        </div>
+                        <div class="model-v2__step">
+                            <div class="model-v2__step-num">2</div>
+                            <div class="model-v2__step-text">
+                                <strong>Entrega e encerramento</strong>
+                                <span>Cliente recebe o material e o contrato acaba</span>
+                            </div>
+                            <div class="model-v2__step-icon"><i class="fas fa-arrow-down"></i></div>
+                        </div>
+                        <div class="model-v2__step">
+                            <div class="model-v2__step-num">3</div>
+                            <div class="model-v2__step-text">
+                                <strong>Churn inevitável</strong>
+                                <span>Sem operação contínua, cliente para de pagar</span>
+                            </div>
+                            <div class="model-v2__step-icon"><i class="fas fa-arrow-down"></i></div>
+                        </div>
+                        <div class="model-v2__step">
+                            <div class="model-v2__step-num">4</div>
+                            <div class="model-v2__step-text">
+                                <strong>Começar do zero</strong>
+                                <span>Precisa vender um novo projeto para faturar</span>
+                            </div>
+                            <div class="model-v2__step-icon"><i class="fas fa-rotate"></i></div>
+                        </div>
+                    </div>
+                    <div class="model-v2__result">
+                        <div class="model-v2__result-icon"><i class="fas fa-chart-line-down"></i></div>
+                        <div class="model-v2__result-text">Receita instável, ciclo de venda eterno</div>
                     </div>
                 </div>
-                <div class="model-box model-box--after">
-                    <h3><i class="fas fa-check"></i> Agora</h3>
-                    <div class="model-flow">
-                        <span class="model-flow__step">Projeto + Agentes</span>
-                        <span class="model-flow__arrow"><i class="fas fa-arrow-right"></i></span>
-                        <span class="model-flow__step">Operação contínua</span>
-                        <span class="model-flow__arrow"><i class="fas fa-arrow-right"></i></span>
-                        <span class="model-flow__step">Recorrência</span>
-                        <span class="model-flow__arrow"><i class="fas fa-arrow-right"></i></span>
-                        <span class="model-flow__step">Expansão</span>
+
+                <!-- VS -->
+                <div class="model-v2__vs">
+                    <div class="model-v2__vs-badge">VS</div>
+                </div>
+
+                <!-- AGORA -->
+                <div class="model-v2__side model-v2__side--after">
+                    <div class="model-v2__tag"><i class="fas fa-star" style="margin-right:4px;"></i> Recomendado</div>
+                    <div class="model-v2__badge"><i class="fas fa-check"></i> Modelo com Orbit</div>
+                    <div class="model-v2__steps">
+                        <div class="model-v2__step">
+                            <div class="model-v2__step-num">1</div>
+                            <div class="model-v2__step-text">
+                                <strong>Projeto + ativação de agentes</strong>
+                                <span>Mesmo escopo, mas agora com IA embutida</span>
+                            </div>
+                            <div class="model-v2__step-icon"><i class="fas fa-check"></i></div>
+                        </div>
+                        <div class="model-v2__step">
+                            <div class="model-v2__step-num">2</div>
+                            <div class="model-v2__step-text">
+                                <strong>Operação contínua com IA</strong>
+                                <span>Agentes seguem executando após a entrega</span>
+                            </div>
+                            <div class="model-v2__step-icon"><i class="fas fa-check"></i></div>
+                        </div>
+                        <div class="model-v2__step">
+                            <div class="model-v2__step-num">3</div>
+                            <div class="model-v2__step-text">
+                                <strong>Receita recorrente</strong>
+                                <span>Cliente paga mensalidade porque IA continua trabalhando</span>
+                            </div>
+                            <div class="model-v2__step-icon"><i class="fas fa-check"></i></div>
+                        </div>
+                        <div class="model-v2__step">
+                            <div class="model-v2__step-num">4</div>
+                            <div class="model-v2__step-text">
+                                <strong>Expansão natural</strong>
+                                <span>Ativar novos agentes = upsell sem venda nova</span>
+                            </div>
+                            <div class="model-v2__step-icon"><i class="fas fa-arrow-trend-up"></i></div>
+                        </div>
+                    </div>
+                    <div class="model-v2__result">
+                        <div class="model-v2__result-icon"><i class="fas fa-circle-check"></i></div>
+                        <div class="model-v2__result-text">Receita previsível, margem ~90%, crescimento composto</div>
                     </div>
                 </div>
             </div>
 
-            <div class="model-keypoint" data-reveal>
-                <p><strong>Agentes continuam executando depois que você termina.</strong><br>Cliente continua pagando porque agentes continuam trabalhando. Com o Orbit, agentes continuam executando após o projeto. Você ganha receita recorrente real. Isso é <strong style="color:#D4A017;">consultoria recorrente passiva</strong>.</p>
+            <div class="model-v2__keypoint" data-reveal>
+                <p><strong>Agentes continuam executando depois que você termina.</strong><br>Cliente continua pagando porque agentes continuam trabalhando. Você ganha receita recorrente real. Isso é <strong>consultoria recorrente passiva</strong>.</p>
             </div>
 
             <div data-reveal style="margin-top:32px; padding:24px 32px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:12px; max-width:740px; margin-left:auto; margin-right:auto;">
@@ -1005,79 +1269,177 @@
     </section>
 
 
-    <!-- ═══ 5. OS 12 AGENTES ═══ -->
+    <!-- ═══ 5. OS 12 AGENTES (Orbital Hub) ═══ -->
     <section class="lp-section lp-section--dark">
         <div class="lp-container">
             <div class="lp-section-header" data-reveal>
                 <span class="lp-badge">O time que você oferece ao seu cliente</span>
-                <h2>12 agentes especializados. Prontos para operar.</h2>
+                <h2>12 agentes especializados.<br>Coordenados pela <span style="color:#D4A017;">Olívia</span>.</h2>
             </div>
 
-            <div class="agents-grid" data-reveal-stagger>
-                <div class="agent-card">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-chess-king"></i></div>
-                    <h3>Agente Estrategista</h3>
-                    <p>Gera planejamento estratégico, desdobra metas e cria planos de ação com base nos dados do cliente.</p>
+            <div class="orbit-hub" id="orbitHub3">
+                <div class="orbit-hub__center">
+                    <div class="orbit-hub__glow"></div>
+                    <div class="orbit-hub__photo">
+                        <img src="/images/olivia.png" alt="Olívia">
+                    </div>
+                    <div class="orbit-hub__name">Olívia</div>
+                    <div class="orbit-hub__role">Coordenadora Geral</div>
+                    <div class="orbit-hub__ring orbit-hub__ring--1"></div>
+                    <div class="orbit-hub__ring orbit-hub__ring--2"></div>
+                    <div class="orbit-hub__ring orbit-hub__ring--3"></div>
                 </div>
-                <div class="agent-card">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-sitemap"></i></div>
-                    <h3>Agente de Processos</h3>
-                    <p>Mapeia, padroniza e otimiza processos. Cria fluxogramas e instruções de trabalho automaticamente.</p>
+
+                <svg class="orbit-hub__lines" id="orbitLines3"></svg>
+
+                <div class="orbit-hub__node" data-idx="0">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-compass"></i></div>
+                    <div class="orbit-hub__node-label">Estrategista</div>
+                    <div class="orbit-hub__node-desc">SWOT, BSC e planejamento estratégico</div>
                 </div>
-                <div class="agent-card">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-users"></i></div>
-                    <h3>Agente de Pessoas</h3>
-                    <p>Avalia competências, identifica gaps e gera planos de desenvolvimento individuais.</p>
+                <div class="orbit-hub__node" data-idx="1">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-diagram-project"></i></div>
+                    <div class="orbit-hub__node-label">Processos</div>
+                    <div class="orbit-hub__node-desc">Mapeamento, playbooks e automação</div>
                 </div>
-                <div class="agent-card">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-graduation-cap"></i></div>
-                    <h3>Agente de Treinamento</h3>
-                    <p>Cria trilhas de capacitação, envia conteúdo diário via WhatsApp e avalia retenção.</p>
+                <div class="orbit-hub__node" data-idx="2">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-user-group"></i></div>
+                    <div class="orbit-hub__node-label">Pessoas</div>
+                    <div class="orbit-hub__node-desc">Cargos, desempenho e PDIs</div>
                 </div>
-                <div class="agent-card">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-chart-line"></i></div>
-                    <h3>Agente de Indicadores</h3>
-                    <p>Monitora KPIs em tempo real, envia alertas e gera relatórios automatizados.</p>
+                <div class="orbit-hub__node" data-idx="3">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="orbit-hub__node-label">Treinamento</div>
+                    <div class="orbit-hub__node-desc">Microlearning e trilhas via WhatsApp</div>
                 </div>
-                <div class="agent-card">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-magnifying-glass-chart"></i></div>
-                    <h3>Agente de Pesquisa</h3>
-                    <p>Aplica pesquisas de clima, satisfação e NPS. Analisa resultados e recomenda ações.</p>
+                <div class="orbit-hub__node" data-idx="4">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-chart-column"></i></div>
+                    <div class="orbit-hub__node-label">Indicadores</div>
+                    <div class="orbit-hub__node-desc">KPIs em tempo real e causa raiz</div>
                 </div>
-                <div class="agent-card">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-shield-halved"></i></div>
-                    <h3>Agente de Riscos</h3>
-                    <p>Identifica riscos estratégicos, propõe mitigações e monitora exposição continuamente.</p>
+                <div class="orbit-hub__node" data-idx="5">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-magnifying-glass-chart"></i></div>
+                    <div class="orbit-hub__node-label">Pesquisa</div>
+                    <div class="orbit-hub__node-desc">Clima, formulários e insights</div>
                 </div>
-                <div class="agent-card">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-lightbulb"></i></div>
-                    <h3>Agente de Oportunidades</h3>
-                    <p>Analisa mercado, portfólio e parcerias para identificar oportunidades de crescimento.</p>
+                <div class="orbit-hub__node" data-idx="6">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-shield-halved"></i></div>
+                    <div class="orbit-hub__node-label">Riscos</div>
+                    <div class="orbit-hub__node-desc">Mitigação e prevenção contínua</div>
                 </div>
-                <div class="agent-card">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-triangle-exclamation"></i></div>
-                    <h3>Agente de Problemas</h3>
-                    <p>Registra não-conformidades, investiga causa raiz e gera ações corretivas automaticamente.</p>
+                <div class="orbit-hub__node" data-idx="7">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-lightbulb"></i></div>
+                    <div class="orbit-hub__node-label">Oportunidades</div>
+                    <div class="orbit-hub__node-desc">Mercado, parcerias e expansão</div>
                 </div>
-                <div class="agent-card">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-file-lines"></i></div>
-                    <h3>Agente de Documentos</h3>
-                    <p>Gera e mantém documentos corporativos conectados, sempre atualizados e rastreáveis.</p>
+                <div class="orbit-hub__node" data-idx="8">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-triangle-exclamation"></i></div>
+                    <div class="orbit-hub__node-label">Problemas</div>
+                    <div class="orbit-hub__node-desc">Não-conformidades e PDCA</div>
                 </div>
-                <div class="agent-card">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-handshake"></i></div>
-                    <h3>Agente de Vendas</h3>
-                    <p>Gerencia CRM, analisa funil de vendas e oferece coaching comercial baseado em dados.</p>
+                <div class="orbit-hub__node" data-idx="9">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-file-lines"></i></div>
+                    <div class="orbit-hub__node-label">Documentos</div>
+                    <div class="orbit-hub__node-desc">Padronização e controle</div>
                 </div>
-                <div class="agent-card">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-video"></i></div>
-                    <h3>Agente de Reuniões</h3>
-                    <p>Transcreve reuniões, analisa decisões e distribui ações automaticamente para o time.</p>
+                <div class="orbit-hub__node" data-idx="10">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-handshake"></i></div>
+                    <div class="orbit-hub__node-label">Vendas</div>
+                    <div class="orbit-hub__node-desc">CRM, funil e coaching comercial</div>
+                </div>
+                <div class="orbit-hub__node" data-idx="11">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-video"></i></div>
+                    <div class="orbit-hub__node-label">Reuniões</div>
+                    <div class="orbit-hub__node-desc">Transcrição e planos de ação</div>
                 </div>
             </div>
 
-            <p class="agents-tagline" data-reveal>Cada cliente é atendido pela <strong style="color:#D4A017;">Olívia</strong>, a Coordenadora Geral de IA, que lidera os 12 agentes e garante operação contínua.</p>
-            <p class="agents-tagline" data-reveal style="margin-top:8px; font-size:0.9em;">Cada agente trabalha 24/7. Não tira férias. Não pede aumento.</p>
+            <div style="text-align:center;margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.06);" data-reveal>
+                <p style="color:rgba(255,255,255,0.5);font-size:1rem;">Cada agente trabalha 24/7. Não tira férias. Não pede aumento.</p>
+            </div>
+
+            <script>
+            (function() {
+                var hub = document.getElementById('orbitHub3');
+                if (!hub) return;
+                var TOTAL = 12;
+                var nodes = hub.querySelectorAll('.orbit-hub__node');
+                var svg = document.getElementById('orbitLines3');
+
+                function layout() {
+                    var w = hub.offsetWidth;
+                    var h = hub.offsetHeight;
+                    var cx = w / 2;
+                    var cy = h / 2;
+                    var radius = Math.min(w, h) / 2 - 50;
+                    if (radius < 160) radius = 160;
+                    if (radius > 360) radius = 360;
+
+                    svg.setAttribute('width', w);
+                    svg.setAttribute('height', h);
+                    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+                    svg.innerHTML = '';
+
+                    var defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+                    defs.innerHTML = '<filter id="lineGlow3"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>';
+                    svg.appendChild(defs);
+
+                    nodes.forEach(function(node, i) {
+                        var angle = (i / TOTAL) * Math.PI * 2 - Math.PI / 2;
+                        var nx = cx + Math.cos(angle) * radius;
+                        var ny = cy + Math.sin(angle) * radius;
+                        node.style.left = nx + 'px';
+                        node.style.top = ny + 'px';
+
+                        var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                        line.setAttribute('x1', cx);
+                        line.setAttribute('y1', cy);
+                        line.setAttribute('x2', nx);
+                        line.setAttribute('y2', ny);
+                        line.setAttribute('stroke', 'rgba(212,160,23,0.2)');
+                        line.setAttribute('stroke-width', '1.5');
+                        line.setAttribute('filter', 'url(#lineGlow3)');
+                        svg.appendChild(line);
+
+                        var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                        circle.setAttribute('r', '3.5');
+                        circle.setAttribute('fill', '#F5C518');
+                        circle.setAttribute('filter', 'url(#lineGlow3)');
+                        var anim = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
+                        anim.setAttribute('dur', '2.5s');
+                        anim.setAttribute('repeatCount', 'indefinite');
+                        anim.setAttribute('begin', (i * 0.2) + 's');
+                        var path = document.createElementNS('http://www.w3.org/2000/svg', 'mpath');
+                        var pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                        pathEl.setAttribute('id', 'cn-orbit-path-' + i);
+                        pathEl.setAttribute('d', 'M' + nx + ',' + ny + ' L' + cx + ',' + cy);
+                        pathEl.setAttribute('fill', 'none');
+                        defs.appendChild(pathEl);
+                        path.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#cn-orbit-path-' + i);
+                        anim.appendChild(path);
+                        circle.appendChild(anim);
+                        svg.appendChild(circle);
+                    });
+                }
+
+                var observer = new IntersectionObserver(function(entries) {
+                    if (entries[0].isIntersecting) {
+                        hub.classList.add('orbit-visible');
+                        layout();
+                        observer.disconnect();
+                    }
+                }, { threshold: 0.1 });
+                observer.observe(hub);
+
+                var resizeTimer;
+                window.addEventListener('resize', function() {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(function() {
+                        if (hub.classList.contains('orbit-visible')) layout();
+                    }, 150);
+                });
+            })();
+            </script>
         </div>
     </section>
 
@@ -1266,10 +1628,10 @@
     </section>
 
     <!-- ═══ CLOSING PHRASE ═══ -->
-    <section style="background:linear-gradient(135deg,#D4A017,#E8B824);padding:60px 0;text-align:center;">
+    <section class="site-closing">
         <div class="container">
-            <h2 style="font-size:2rem;font-weight:800;color:#000;max-width:700px;margin:0 auto;line-height:1.3;">Orbit é o time de gestão que sua empresa sempre precisou. <span style="display:block;margin-top:8px;">E que nunca para de trabalhar.</span></h2>
-            <a href="/#contato-form" class="btn" style="background:#000;color:#fff;margin-top:24px;padding:16px 36px;border-radius:50px;font-weight:700;">Conhecer o Time de IA</a>
+            <h2>Orbit é o time de gestão que sua empresa sempre precisou. <span style="display:block;margin-top:8px;">E que nunca para de trabalhar.</span></h2>
+            <a href="/#contato-form" class="btn">Conhecer o Time de IA</a>
         </div>
     </section>
 

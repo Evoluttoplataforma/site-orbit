@@ -24,7 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/styles-v2.css?v=2">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=d8b11dbe">
     <style>
         /* ── Partner Hero ── */
         .partner-hero {
@@ -136,48 +136,92 @@
         }
 
         /* ── Steps ── */
-        .partner-steps { padding: 100px 0; background: var(--gray-50); }
-        .partner-steps .section-header { text-align: center; margin-bottom: 60px; }
+        .partner-steps {
+            padding: 100px 0;
+            background: #0D1117;
+            position: relative;
+            overflow: hidden;
+        }
+        .partner-steps::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(212,160,23,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .partner-steps .section-header { text-align: center; margin-bottom: 64px; position: relative; }
         .partner-steps .section-header h2 {
             font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800;
-            color: #1A1D23; margin-bottom: 12px;
+            color: #fff; margin-bottom: 12px;
         }
         .partner-steps .section-header p {
-            font-size: 1.05rem; color: #5A6069; max-width: 500px; margin: 0 auto;
+            font-size: 1.05rem; color: rgba(255,255,255,0.5); max-width: 500px; margin: 0 auto;
         }
         .steps-track {
-            display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
             position: relative;
         }
         .steps-track::before {
-            content: ''; position: absolute; top: 40px;
-            left: 60px; right: 60px; height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--primary-light));
-            opacity: 0.3; z-index: 0;
+            content: ''; position: absolute; top: 48px;
+            left: 80px; right: 80px; height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(212,160,23,0.4), rgba(212,160,23,0.4), transparent);
+            z-index: 0;
         }
-        .step-item { text-align: center; position: relative; z-index: 1; }
+        .step-item {
+            text-align: center; position: relative; z-index: 1;
+            padding: 32px 20px;
+            background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .step-item:hover {
+            background: linear-gradient(160deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 100%);
+            border-color: rgba(212,160,23,0.2);
+            transform: translateY(-4px);
+        }
         .step-item__number {
-            width: 56px; height: 56px; border-radius: 50%;
-            background: var(--black); color: var(--primary);
-            font-size: 1.2rem; font-weight: 800;
+            width: 64px; height: 64px; border-radius: 50%;
+            background: linear-gradient(135deg, rgba(212,160,23,0.15), rgba(212,160,23,0.05));
+            color: #D4A017;
+            font-size: 1.4rem; font-weight: 800;
             display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 20px; border: 3px solid rgba(212,160,23,0.2);
-            transition: var(--transition);
+            margin: 0 auto 20px;
+            border: 2px solid rgba(212,160,23,0.3);
+            position: relative;
+        }
+        .step-item__number::after {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 1px solid rgba(212,160,23,0.1);
         }
         .step-item:hover .step-item__number {
-            background: var(--primary); color: var(--black);
-            border-color: var(--primary);
+            background: linear-gradient(135deg, #D4A017, #F5C518);
+            color: #000;
+            border-color: #D4A017;
+            box-shadow: 0 0 30px rgba(212,160,23,0.3);
         }
         .step-item__icon {
-            font-size: 1.3rem; color: var(--primary); margin-bottom: 10px;
+            font-size: 1.5rem; color: #D4A017; margin-bottom: 14px;
         }
         .step-item h3 {
-            font-size: 0.95rem; font-weight: 700; color: #1A1D23;
-            margin-bottom: 8px;
+            font-size: 1rem; font-weight: 700; color: #fff;
+            margin-bottom: 10px;
         }
         .step-item p {
-            font-size: 0.82rem; color: #5A6069; line-height: 1.6;
+            font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.6;
             max-width: 220px; margin: 0 auto;
+        }
+        @media (max-width: 768px) {
+            .steps-track { grid-template-columns: 1fr 1fr; }
+            .steps-track::before { display: none; }
+        }
+        @media (max-width: 480px) {
+            .steps-track { grid-template-columns: 1fr; }
         }
 
         /* ── Tiers ── */
@@ -401,7 +445,7 @@
             .steps-track { grid-template-columns: repeat(2, 1fr); }
             .steps-track::before { display: none; }
             .tiers-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-            .testimonials-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+            .testimonials-grid { grid-template-columns: 1fr 1fr; }
             .partner-form-section .container { grid-template-columns: 1fr; }
             .form-info { text-align: center; }
             .form-info__checklist { display: inline-block; text-align: left; }
@@ -412,6 +456,8 @@
             .benefits-grid { grid-template-columns: 1fr; }
             .steps-track { grid-template-columns: 1fr; gap: 24px; }
             .step-item p { max-width: 100%; }
+            .tiers-grid { gap: 16px; }
+            .testimonials-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
             .form-row { grid-template-columns: 1fr; }
             .partner-benefits, .partner-steps, .partner-tiers,
             .partner-testimonials, .partner-form-section { padding: 80px 0; }
@@ -878,11 +924,26 @@
     </section>
 
     <!-- ══ CTA FINAL ══ -->
-    <section class="partner-cta">
+    <section class="site-cta">
+        <div class="site-cta__particles"><span></span><span></span><span></span><span></span></div>
         <div class="container">
-            <h2>Pronto para crescer?</h2>
-            <p>Junte-se a dezenas de consultores que já aumentaram sua receita com Orbit Gestão</p>
-            <a href="#formulario" class="btn btn-primary btn-lg"><i class="fas fa-arrow-right"></i> Quero ser Parceiro</a>
+            <div class="site-cta__card" data-reveal="scale">
+                <div class="site-cta__icon"><i class="fas fa-handshake"></i></div>
+                <h2>Pronto para crescer com o Orbit?</h2>
+                <p>Junte-se a dezenas de consultores que já aumentaram sua receita com IA.</p>
+                <div class="site-cta__buttons">
+                    <a href="#formulario" class="btn btn-primary btn-lg">Quero ser Parceiro <i class="fas fa-arrow-right"></i></a>
+                    <a href="#niveis" class="btn btn-outline btn-lg">Ver Planos</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ CLOSING PHRASE ═══ -->
+    <section class="site-closing">
+        <div class="container">
+            <h2>Orbit é o time de gestão que sua empresa sempre precisou. <span style="display:block;margin-top:8px;">E que nunca para de trabalhar.</span></h2>
+            <a href="/#contato-form" class="btn">Conhecer o Time de IA</a>
         </div>
     </section>
 

@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orbit Competências — Agente de IA para gestão de pessoas</title>
+    <title>Orbit Competências — Gestão de Pessoas com IA</title>
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
-    <meta name="description" content="O Agente de Pessoas cria descrições de cargo, avaliações de desempenho e PDIs personalizados automaticamente.">
+    <meta name="description" content="O Agente de Pessoas gerencia cargos, avaliações de desempenho e PDIs automaticamente.">
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://orbitgestao.com.br/competencias">
-    <meta property="og:title" content="Orbit Competências — Agente de IA para gestão de pessoas">
-    <meta property="og:description" content="O Agente de Pessoas cria descrições de cargo, avaliações de desempenho e PDIs personalizados automaticamente.">
+    <meta property="og:title" content="Orbit Competências — Gestão de Pessoas com IA">
+    <meta property="og:description" content="O Agente de Pessoas gerencia cargos, avaliações de desempenho e PDIs automaticamente.">
     <meta property="og:image" content="https://orbitgestao.com.br/images/og-default.png">
     <meta property="og:locale" content="pt_BR">
     <meta property="og:site_name" content="Orbit">
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Orbit Competências — Agente de IA para gestão de pessoas">
-    <meta name="twitter:description" content="O Agente de Pessoas cria descrições de cargo, avaliações de desempenho e PDIs personalizados automaticamente.">
+    <meta name="twitter:title" content="Orbit Competências — Gestão de Pessoas com IA">
+    <meta name="twitter:description" content="O Agente de Pessoas gerencia cargos, avaliações de desempenho e PDIs automaticamente.">
     <meta name="twitter:image" content="https://orbitgestao.com.br/images/og-default.png">
     <link rel="canonical" href="https://orbitgestao.com.br/competencias">
 
@@ -25,7 +25,478 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/styles-v2.css?v=2">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=d8b11dbe">
+    <style>
+    /* ═══ PAGE-SPECIFIC STYLES ═══ */
+
+    /* Modules strip */
+    .modules-strip { position: fixed; top: 96px; left: 0; right: 0; z-index: 99; background: rgba(13,17,23,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .modules-strip__inner { display: flex; align-items: center; gap: 4px; overflow-x: auto; scrollbar-width: none; padding: 8px 0; }
+    .modules-strip__inner::-webkit-scrollbar { display: none; }
+    .modules-strip__item { display: flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.5); text-decoration: none; white-space: nowrap; transition: all 0.2s ease; }
+    .modules-strip__item:hover { color: #fff; background: rgba(255,255,255,0.06); }
+    .modules-strip__item i { font-size: 14px; }
+    .modules-strip__item--active { color: #D4A017; background: rgba(212,160,23,0.1); border: 1px solid rgba(212,160,23,0.2); }
+
+    /* Hero — centered, no image */
+    .pp-hero {
+        padding: 200px 0 100px;
+        background: #0D1117;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .pp-hero::before {
+        content: '';
+        position: absolute;
+        top: -200px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 800px;
+        height: 800px;
+        background: radial-gradient(circle, rgba(212,160,23,0.08) 0%, transparent 60%);
+        border-radius: 50%;
+        pointer-events: none;
+    }
+    .pp-hero__agent-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 20px 8px 8px;
+        background: rgba(34,197,94,0.08);
+        border: 1px solid rgba(34,197,94,0.2);
+        border-radius: 50px;
+        margin-bottom: 24px;
+    }
+    .pp-hero__agent-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #22C55E;
+        animation: pulse-dot 2s ease-in-out infinite;
+    }
+    .pp-hero__agent-badge span {
+        font-size: 13px;
+        font-weight: 600;
+        color: #22C55E;
+    }
+    .pp-hero h1 {
+        font-size: clamp(36px, 6vw, 64px);
+        font-weight: 800;
+        color: #fff;
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+        margin-bottom: 20px;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .pp-hero h1 span {
+        background: linear-gradient(135deg, #D4A017, #F5C518);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .pp-hero__desc {
+        font-size: clamp(16px, 2vw, 19px);
+        color: rgba(255,255,255,0.5);
+        line-height: 1.7;
+        max-width: 600px;
+        margin: 0 auto 36px;
+    }
+    .pp-hero__ctas {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .pp-hero__equiv {
+        margin-top: 48px;
+        display: inline-flex;
+        align-items: center;
+        gap: 16px;
+        padding: 14px 28px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 12px;
+    }
+    .pp-hero__equiv-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, rgba(212,160,23,0.15), rgba(212,160,23,0.05));
+        border: 1px solid rgba(212,160,23,0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .pp-hero__equiv-icon i { color: #D4A017; font-size: 18px; }
+    .pp-hero__equiv-text { text-align: left; }
+    .pp-hero__equiv-text strong { display: block; color: #fff; font-size: 14px; font-weight: 600; }
+    .pp-hero__equiv-text span { color: rgba(255,255,255,0.4); font-size: 13px; }
+
+    /* Metrics strip */
+    .pp-metrics {
+        padding: 0;
+        margin-top: -48px;
+        position: relative;
+        z-index: 2;
+    }
+    .pp-metrics__inner {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        background: rgba(255,255,255,0.06);
+        border-radius: 16px;
+        overflow: hidden;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    .pp-metrics__item {
+        background: #161B22;
+        padding: 28px 24px;
+        text-align: center;
+    }
+    .pp-metrics__item-value {
+        font-size: 28px;
+        font-weight: 800;
+        color: #D4A017;
+        margin-bottom: 4px;
+    }
+    .pp-metrics__item-label {
+        font-size: 13px;
+        color: rgba(255,255,255,0.45);
+    }
+
+    /* Alternating feature blocks */
+    .pp-blocks {
+        padding: 100px 0;
+        background: #0D1117;
+    }
+    .pp-block {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+        align-items: center;
+        max-width: 1040px;
+        margin: 0 auto;
+    }
+    .pp-block + .pp-block {
+        margin-top: 80px;
+    }
+    .pp-block--reverse .pp-block__visual { order: -1; }
+    .pp-block__text h3 {
+        font-size: clamp(22px, 3vw, 32px);
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 16px;
+        line-height: 1.2;
+    }
+    .pp-block__text p {
+        font-size: 16px;
+        color: rgba(255,255,255,0.5);
+        line-height: 1.7;
+        margin-bottom: 24px;
+    }
+    .pp-block__checks {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    .pp-block__check {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 15px;
+        color: rgba(255,255,255,0.65);
+    }
+    .pp-block__check i {
+        color: #22C55E;
+        font-size: 14px;
+        flex-shrink: 0;
+    }
+    .pp-block__visual {
+        background: linear-gradient(135deg, #1C2333, #161B22);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 20px;
+        padding: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 320px;
+        position: relative;
+        overflow: hidden;
+    }
+    .pp-block__visual::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 30% 30%, rgba(212,160,23,0.06), transparent 60%);
+        pointer-events: none;
+    }
+    .pp-block__visual-icon {
+        font-size: 80px;
+        color: rgba(212,160,23,0.15);
+    }
+
+    /* Features grid — tech/AI style */
+    .pp-features {
+        padding: 100px 0;
+        background: #161B22;
+        position: relative;
+        overflow: hidden;
+    }
+    .pp-features::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 50%;
+        transform: translateX(-50%);
+        width: 800px; height: 800px;
+        background: radial-gradient(circle, rgba(212,160,23,0.03) 0%, transparent 70%);
+        pointer-events: none;
+    }
+    .pp-features__grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        max-width: 1040px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+    }
+    .pp-feat {
+        padding: 32px 24px 28px;
+        border-radius: 16px;
+        background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+        border: 1px solid rgba(255,255,255,0.06);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .pp-feat::before {
+        content: '';
+        position: absolute;
+        top: 0; left: -100%;
+        width: 100%; height: 2px;
+        background: linear-gradient(90deg, transparent, #D4A017, transparent);
+        transition: left 0.6s ease;
+    }
+    .pp-feat:hover::before {
+        left: 100%;
+    }
+    .pp-feat::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 16px;
+        background: radial-gradient(circle at 50% 0%, rgba(212,160,23,0.08) 0%, transparent 60%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        pointer-events: none;
+    }
+    .pp-feat:hover {
+        border-color: rgba(212,160,23,0.25);
+        transform: translateY(-6px);
+        box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 30px rgba(212,160,23,0.06);
+    }
+    .pp-feat:hover::after { opacity: 1; }
+    .pp-feat__icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 14px;
+        background: linear-gradient(135deg, rgba(212,160,23,0.15), rgba(212,160,23,0.04));
+        border: 1px solid rgba(212,160,23,0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 18px;
+        position: relative;
+        transition: all 0.4s ease;
+    }
+    .pp-feat:hover .pp-feat__icon {
+        border-color: rgba(212,160,23,0.5);
+        box-shadow: 0 0 20px rgba(212,160,23,0.2);
+        background: linear-gradient(135deg, rgba(212,160,23,0.25), rgba(212,160,23,0.08));
+        transform: scale(1.08);
+    }
+    .pp-feat__icon i { color: #D4A017; font-size: 20px; transition: transform 0.3s ease; }
+    .pp-feat:hover .pp-feat__icon i { transform: scale(1.1); }
+    .pp-feat h4 {
+        font-size: 15px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 8px;
+    }
+    .pp-feat p {
+        font-size: 13px;
+        color: rgba(255,255,255,0.45);
+        line-height: 1.6;
+    }
+
+    /* CTA Final */
+    .pp-cta {
+        padding: 120px 0 80px;
+        background: linear-gradient(180deg, #161B22 0%, #0D1117 100%);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .pp-cta::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 50%;
+        transform: translateX(-50%);
+        width: 100%; max-width: 900px; height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(212,160,23,0.3), transparent);
+    }
+    .pp-cta__card {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 60px 48px;
+        background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 24px;
+        position: relative;
+        overflow: hidden;
+    }
+    .pp-cta__card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 24px;
+        background: radial-gradient(circle at 50% 0%, rgba(212,160,23,0.08) 0%, transparent 60%);
+        pointer-events: none;
+    }
+    .pp-cta__card::after {
+        content: '';
+        position: absolute;
+        top: -1px; left: 20%; right: 20%; height: 2px;
+        background: linear-gradient(90deg, transparent, #D4A017, transparent);
+        border-radius: 2px;
+    }
+    .pp-cta__icon {
+        width: 64px; height: 64px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(212,160,23,0.2), rgba(212,160,23,0.05));
+        border: 2px solid rgba(212,160,23,0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px;
+        animation: ctaIconPulse 3s ease-in-out infinite;
+    }
+    .pp-cta__icon i { font-size: 24px; color: #D4A017; }
+    @keyframes ctaIconPulse {
+        0%, 100% { box-shadow: 0 0 20px rgba(212,160,23,0.1); }
+        50% { box-shadow: 0 0 40px rgba(212,160,23,0.25); }
+    }
+    .pp-cta h2 {
+        font-size: clamp(24px, 3.5vw, 36px);
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 12px;
+        position: relative;
+        line-height: 1.3;
+    }
+    .pp-cta p {
+        font-size: 16px;
+        color: rgba(255,255,255,0.5);
+        margin-bottom: 32px;
+        position: relative;
+        line-height: 1.6;
+    }
+    .pp-cta__buttons {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+        position: relative;
+    }
+    .pp-cta__particles {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+    }
+    .pp-cta__particles span {
+        position: absolute;
+        width: 3px; height: 3px;
+        background: #D4A017;
+        border-radius: 50%;
+        opacity: 0;
+        animation: ctaParticle 5s ease-in-out infinite;
+    }
+    .pp-cta__particles span:nth-child(1) { left: 10%; top: 30%; animation-delay: 0s; }
+    .pp-cta__particles span:nth-child(2) { left: 85%; top: 20%; animation-delay: 1s; width: 2px; height: 2px; }
+    .pp-cta__particles span:nth-child(3) { left: 90%; top: 70%; animation-delay: 2s; }
+    .pp-cta__particles span:nth-child(4) { left: 5%; top: 75%; animation-delay: 3s; width: 2px; height: 2px; }
+    @keyframes ctaParticle {
+        0%, 100% { opacity: 0; transform: translateY(0); }
+        30% { opacity: 0.6; }
+        70% { opacity: 0.3; }
+        100% { opacity: 0; transform: translateY(-20px); }
+    }
+
+    /* Other modules strip */
+    .pp-other {
+        padding: 60px 0;
+        background: #161B22;
+        text-align: center;
+    }
+    .pp-other h4 {
+        font-size: 14px;
+        font-weight: 600;
+        color: rgba(255,255,255,0.35);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 24px;
+    }
+    .pp-other__grid {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .pp-other__link {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 24px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 50px;
+        color: rgba(255,255,255,0.6);
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    .pp-other__link i { color: #D4A017; font-size: 15px; }
+    .pp-other__link:hover {
+        border-color: rgba(212,160,23,0.3);
+        color: #fff;
+        background: rgba(212,160,23,0.05);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+        .pp-block { grid-template-columns: 1fr; gap: 40px; }
+        .pp-block--reverse .pp-block__visual { order: 0; }
+        .pp-features__grid { grid-template-columns: repeat(2, 1fr); }
+        .pp-metrics__inner { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+        .modules-strip { top: 60px; }
+        .pp-hero { padding: 180px 0 80px; }
+        .pp-features__grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+        .pp-metrics__inner { grid-template-columns: 1fr 1fr; }
+        .pp-hero__ctas { flex-direction: column; align-items: center; }
+        .pp-hero__ctas .btn { width: 100%; max-width: 320px; justify-content: center; }
+    }
+    @media (max-width: 480px) {
+        .pp-features__grid { grid-template-columns: 1fr; }
+    }
+    </style>
 </head>
 <body>
     <!-- ═══ HEADER ═══ -->
@@ -36,7 +507,6 @@
                     <img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="40">
                 </a>
             </div>
-
             <ul class="nav-menu">
                 <li><a href="/">Início</a></li>
                 <li>
@@ -46,35 +516,15 @@
                             <span class="dropdown__info-badge"><i class="fas fa-cube"></i> Plataforma</span>
                             <h4>Orbit Gestão</h4>
                             <p>5 módulos integrados + 12 agentes de IA para transformar sua estratégia em execução real.</p>
-                            <div class="dropdown__info-img">
-                                <i class="fas fa-rocket"></i>
-                            </div>
+                            <div class="dropdown__info-img"><i class="fas fa-rocket"></i></div>
                         </div>
                         <div class="dropdown__links">
-                            <a href="/agentes">
-                                <div class="dd-icon"><i class="fas fa-robot"></i></div>
-                                <div class="dd-text"><span>Agentes de IA</span><small>12 especialistas 24/7</small></div>
-                            </a>
-                            <a href="/processos">
-                                <div class="dd-icon"><i class="fas fa-sitemap"></i></div>
-                                <div class="dd-text"><span>Processos</span><small>Mapeamento e automação</small></div>
-                            </a>
-                            <a href="/indicadores">
-                                <div class="dd-icon"><i class="fas fa-chart-line"></i></div>
-                                <div class="dd-text"><span>Indicadores</span><small>KPIs e dashboards</small></div>
-                            </a>
-                            <a href="/tarefas">
-                                <div class="dd-icon"><i class="fas fa-tasks"></i></div>
-                                <div class="dd-text"><span>Tarefas</span><small>Kanban estratégico</small></div>
-                            </a>
-                            <a href="/competencias">
-                                <div class="dd-icon"><i class="fas fa-users"></i></div>
-                                <div class="dd-text"><span>Competências</span><small>Gestão de pessoas</small></div>
-                            </a>
-                            <a href="/auditorias">
-                                <div class="dd-icon"><i class="fas fa-clipboard-check"></i></div>
-                                <div class="dd-text"><span>Auditorias</span><small>Conformidade e qualidade</small></div>
-                            </a>
+                            <a href="/agentes"><div class="dd-icon"><i class="fas fa-robot"></i></div><div class="dd-text"><span>Agentes de IA</span><small>12 especialistas 24/7</small></div></a>
+                            <a href="/processos"><div class="dd-icon"><i class="fas fa-sitemap"></i></div><div class="dd-text"><span>Processos</span><small>Mapeamento e automação</small></div></a>
+                            <a href="/indicadores"><div class="dd-icon"><i class="fas fa-chart-line"></i></div><div class="dd-text"><span>Indicadores</span><small>KPIs e dashboards</small></div></a>
+                            <a href="/tarefas"><div class="dd-icon"><i class="fas fa-tasks"></i></div><div class="dd-text"><span>Tarefas</span><small>Kanban estratégico</small></div></a>
+                            <a href="/competencias"><div class="dd-icon"><i class="fas fa-users"></i></div><div class="dd-text"><span>Competências</span><small>Gestão de pessoas</small></div></a>
+                            <a href="/auditorias"><div class="dd-icon"><i class="fas fa-clipboard-check"></i></div><div class="dd-text"><span>Auditorias</span><small>Conformidade e qualidade</small></div></a>
                         </div>
                     </div>
                 </li>
@@ -82,18 +532,9 @@
                     <a href="/#para-quem">Para quem <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown dropdown--sm">
                         <div class="dropdown__links">
-                            <a href="/lp-empresas">
-                                <div class="dd-icon"><i class="fas fa-building"></i></div>
-                                <div class="dd-text"><span>Empresários</span><small>Time de IA para sua empresa</small></div>
-                            </a>
-                            <a href="/canais">
-                                <div class="dd-icon"><i class="fas fa-user-tie"></i></div>
-                                <div class="dd-text"><span>Consultores</span><small>Modelo de canais B2B2B</small></div>
-                            </a>
-                            <a href="/#contato-form">
-                                <div class="dd-icon"><i class="fas fa-landmark"></i></div>
-                                <div class="dd-text"><span>Associações e Hubs</span><small>Hub de operação para associados</small></div>
-                            </a>
+                            <a href="/lp-empresas"><div class="dd-icon"><i class="fas fa-building"></i></div><div class="dd-text"><span>Empresários</span><small>Time de IA para sua empresa</small></div></a>
+                            <a href="/canais"><div class="dd-icon"><i class="fas fa-user-tie"></i></div><div class="dd-text"><span>Consultores</span><small>Modelo de canais B2B2B</small></div></a>
+                            <a href="/#contato-form"><div class="dd-icon"><i class="fas fa-landmark"></i></div><div class="dd-text"><span>Associações e Hubs</span><small>Hub de operação para associados</small></div></a>
                         </div>
                     </div>
                 </li>
@@ -102,18 +543,9 @@
                     <a href="/blog">Conteúdo <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown dropdown--sm">
                         <div class="dropdown__links">
-                            <a href="/blog">
-                                <div class="dd-icon"><i class="fas fa-newspaper"></i></div>
-                                <div class="dd-text"><span>Blog</span><small>Artigos e insights</small></div>
-                            </a>
-                            <a href="/historias">
-                                <div class="dd-icon"><i class="fas fa-star"></i></div>
-                                <div class="dd-text"><span>Histórias de Clientes</span><small>Cases de sucesso</small></div>
-                            </a>
-                            <a href="/faq">
-                                <div class="dd-icon"><i class="fas fa-circle-question"></i></div>
-                                <div class="dd-text"><span>FAQ</span><small>Perguntas frequentes</small></div>
-                            </a>
+                            <a href="/blog"><div class="dd-icon"><i class="fas fa-newspaper"></i></div><div class="dd-text"><span>Blog</span><small>Artigos e insights</small></div></a>
+                            <a href="/historias"><div class="dd-icon"><i class="fas fa-star"></i></div><div class="dd-text"><span>Histórias de Clientes</span><small>Cases de sucesso</small></div></a>
+                            <a href="/faq"><div class="dd-icon"><i class="fas fa-circle-question"></i></div><div class="dd-text"><span>FAQ</span><small>Perguntas frequentes</small></div></a>
                         </div>
                     </div>
                 </li>
@@ -121,33 +553,18 @@
                     <a href="/sobre">Empresa <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown dropdown--sm">
                         <div class="dropdown__links">
-                            <a href="/sobre">
-                                <div class="dd-icon"><i class="fas fa-building"></i></div>
-                                <div class="dd-text"><span>Sobre Nós</span><small>30 anos de história</small></div>
-                            </a>
-                            <a href="/parcerias">
-                                <div class="dd-icon"><i class="fas fa-handshake"></i></div>
-                                <div class="dd-text"><span>Seja Parceiro</span><small>Programa de canais</small></div>
-                            </a>
-                            <a href="/canais">
-                                <div class="dd-icon"><i class="fas fa-network-wired"></i></div>
-                                <div class="dd-text"><span>Canais B2B2B</span><small>Para consultores e mentores</small></div>
-                            </a>
+                            <a href="/sobre"><div class="dd-icon"><i class="fas fa-building"></i></div><div class="dd-text"><span>Sobre Nós</span><small>30 anos de história</small></div></a>
+                            <a href="/parcerias"><div class="dd-icon"><i class="fas fa-handshake"></i></div><div class="dd-text"><span>Seja Parceiro</span><small>Programa de canais</small></div></a>
+                            <a href="/canais"><div class="dd-icon"><i class="fas fa-network-wired"></i></div><div class="dd-text"><span>Canais B2B2B</span><small>Para consultores e mentores</small></div></a>
                         </div>
                     </div>
                 </li>
             </ul>
-
             <div class="nav-actions">
                 <a href="/acesso" class="btn btn-outline">Entrar</a>
                 <a href="/#contato-form" class="btn btn-primary">Conhecer o Time de IA</a>
             </div>
-
-            <button class="menu-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            <button class="menu-toggle"><span></span><span></span><span></span></button>
         </div>
     </header>
 
@@ -177,160 +594,168 @@
         <a href="/#contato-form" class="btn btn-primary">Conhecer o Time de IA</a>
     </div>
 
-    <!-- ═══ PRODUCT HERO ═══ -->
-    <section class="product-hero">
-        <div class="product-hero__bg">
-            <div class="product-hero__glow product-hero__glow--1"></div>
-            <div class="product-hero__glow product-hero__glow--2"></div>
-            <div class="product-hero__glow product-hero__glow--3"></div>
-        </div>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="pp-hero">
         <div class="container">
-            <div class="product-hero__grid">
-                <div>
-                    <div class="product-hero__badge">
-                        <i class="fas fa-user-group"></i>
-                        Pessoas + IA
-                    </div>
-                    <h1 class="product-hero__title">Gestão de <span>Competências</span> com IA</h1>
-                    <p class="product-hero__desc">O Agente de Pessoas cria descrições de cargo, avaliações 360° e PDIs personalizados automaticamente. Desenvolva seu time sem depender de consultoria de RH.</p>
-                    <div class="product-hero__ctas">
-                        <a href="/#contato-form" class="btn btn-primary btn-lg">Conhecer o Time de IA</a>
-                        <a href="#detalhes" class="btn btn-ghost btn-lg">Conhecer Recursos <i class="fas fa-arrow-down"></i></a>
-                    </div>
-                </div>
-                <div class="product-hero__image">
-                    <img src="https://placehold.co/560x400/0D1117/D4A017?text=Gest%C3%A3o+de+Compet%C3%AAncias&font=raleway" alt="Gestão de Competências com IA">
+            <div class="pp-hero__agent-badge">
+                <div class="pp-hero__agent-dot"></div>
+                <span>Agente de Pessoas — Ativo 24/7</span>
+            </div>
+            <h1>Desenvolva seu time com <span>gestão de competências</span> por IA</h1>
+            <p class="pp-hero__desc">O Agente de Pessoas cria descrições de cargos, conduz avaliações de desempenho e gera PDIs personalizados — tudo automático.</p>
+            <div class="pp-hero__ctas">
+                <a href="/#contato-form" class="btn btn-primary btn-lg">Conhecer o Time de IA</a>
+                <a href="#recursos" class="btn btn-outline btn-lg">Ver Recursos <i class="fas fa-arrow-down"></i></a>
+            </div>
+            <div class="pp-hero__equiv">
+                <div class="pp-hero__equiv-icon"><i class="fas fa-user-group"></i></div>
+                <div class="pp-hero__equiv-text">
+                    <strong>Equivale a um Analista DHO</strong>
+                    <span>R$ 6-10k/mês — incluso no Orbit</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ═══ AGENT HIGHLIGHT ═══ -->
-    <section class="agent-highlight">
+    <!-- ═══ METRICS ═══ -->
+    <div class="pp-metrics">
         <div class="container">
-            <div class="agent-highlight__grid" data-reveal>
-                <div class="agent-highlight__info">
-                    <div class="agent-highlight__badge"><span></span> Ativo 24/7</div>
-                    <h2>Agente de Pessoas</h2>
-                    <p>Cria descrições de cargo completas, monta ciclos de avaliação 360°, gera PDIs personalizados e identifica gaps de competência na equipe. Tudo automaticamente, com base nos dados da sua empresa.</p>
-                    <div class="agent-highlight__equiv">
-                        <div class="agent-highlight__equiv-label">Equivale a</div>
-                        <div class="agent-highlight__equiv-value">Analista DHO · R$ 6-10k/mês</div>
+            <div class="pp-metrics__inner" data-reveal>
+                <div class="pp-metrics__item">
+                    <div class="pp-metrics__item-value">+50%</div>
+                    <div class="pp-metrics__item-label">Engajamento</div>
+                </div>
+                <div class="pp-metrics__item">
+                    <div class="pp-metrics__item-value">360°</div>
+                    <div class="pp-metrics__item-label">Avaliação</div>
+                </div>
+                <div class="pp-metrics__item">
+                    <div class="pp-metrics__item-value">100%</div>
+                    <div class="pp-metrics__item-label">PDIs gerados</div>
+                </div>
+                <div class="pp-metrics__item">
+                    <div class="pp-metrics__item-value">-80%</div>
+                    <div class="pp-metrics__item-label">Tempo de avaliação</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ FEATURE BLOCKS ═══ -->
+    <section class="pp-blocks">
+        <div class="container">
+            <div class="pp-block" data-reveal>
+                <div class="pp-block__text">
+                    <h3>Avaliação 360° e matriz de competências</h3>
+                    <p>O agente conduz avaliações de desempenho com múltiplas perspectivas, mapeia gaps de competência e gera a matriz de habilidades da empresa.</p>
+                    <div class="pp-block__checks">
+                        <div class="pp-block__check"><i class="fas fa-check"></i> Avaliação 360° automatizada</div>
+                        <div class="pp-block__check"><i class="fas fa-check"></i> Matriz de competências por cargo</div>
+                        <div class="pp-block__check"><i class="fas fa-check"></i> Gap analysis por colaborador</div>
+                        <div class="pp-block__check"><i class="fas fa-check"></i> Benchmarks por função</div>
                     </div>
                 </div>
-                <div class="agent-highlight__visual">
-                    <div class="agent-highlight__visual-circle">
-                        <i class="fas fa-user-group" style="font-size:48px;color:#fff;"></i>
+                <div class="pp-block__visual">
+                    <i class="fas fa-users pp-block__visual-icon"></i>
+                </div>
+            </div>
+
+            <div class="pp-block pp-block--reverse" data-reveal>
+                <div class="pp-block__text">
+                    <h3>PDIs personalizados e trilhas de desenvolvimento</h3>
+                    <p>Com base nos gaps identificados, o agente gera Planos de Desenvolvimento Individual personalizados e sugere trilhas de aprendizado.</p>
+                    <div class="pp-block__checks">
+                        <div class="pp-block__check"><i class="fas fa-check"></i> PDIs gerados automaticamente</div>
+                        <div class="pp-block__check"><i class="fas fa-check"></i> Trilhas de desenvolvimento</div>
+                        <div class="pp-block__check"><i class="fas fa-check"></i> Metas de evolução por competência</div>
+                        <div class="pp-block__check"><i class="fas fa-check"></i> Acompanhamento contínuo</div>
                     </div>
+                </div>
+                <div class="pp-block__visual">
+                    <i class="fas fa-graduation-cap pp-block__visual-icon"></i>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ═══ BENEFITS ═══ -->
-    <section class="product-benefits-v2 section--light">
+    <!-- ═══ FEATURES GRID ═══ -->
+    <section class="pp-features" id="recursos">
         <div class="container">
             <div class="section-header" data-reveal>
-                <h2>Principais <span class="highlight">Benefícios</span></h2>
-                <p>Por que escolher o Orbit para gestão de pessoas</p>
+                <span class="section-badge section-badge--gold">Recursos</span>
+                <h2>Tudo que o Agente de Pessoas faz</h2>
             </div>
-            <div class="benefits-grid-v2" data-reveal-stagger>
-                <div class="benefit-card-v2">
-                    <div class="benefit-card-v2__icon icon-premium icon-premium--solid"><i class="fas fa-file-lines"></i></div>
-                    <h4>Descrição de Cargos</h4>
-                    <p>Gerada automaticamente com IA, pronta para uso em recrutamento e avaliação</p>
+            <div class="pp-features__grid" data-reveal-stagger>
+                <div class="pp-feat">
+                    <div class="pp-feat__icon"><i class="fas fa-id-card"></i></div>
+                    <h4>Descrição de cargos</h4>
+                    <p>Perfis completos por função</p>
                 </div>
-                <div class="benefit-card-v2">
-                    <div class="benefit-card-v2__icon icon-premium icon-premium--solid"><i class="fas fa-star"></i></div>
+                <div class="pp-feat">
+                    <div class="pp-feat__icon"><i class="fas fa-star"></i></div>
                     <h4>Avaliação 360°</h4>
-                    <p>Ciclos completos sem planilhas, com calibração automática</p>
+                    <p>Multi-perspectiva automatizada</p>
                 </div>
-                <div class="benefit-card-v2">
-                    <div class="benefit-card-v2__icon icon-premium icon-premium--solid"><i class="fas fa-chart-line"></i></div>
-                    <h4>PDI Personalizado</h4>
-                    <p>Planos de desenvolvimento individuais criados automaticamente pela IA</p>
+                <div class="pp-feat">
+                    <div class="pp-feat__icon"><i class="fas fa-chart-area"></i></div>
+                    <h4>Matriz de competências</h4>
+                    <p>Gap analysis visual</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══ FEATURES ═══ -->
-    <section class="product-features-v2" id="detalhes">
-        <div class="container">
-            <div class="section-header" data-reveal>
-                <h2>Recursos <span class="highlight">Poderosos</span></h2>
-                <p>Tudo que você precisa para desenvolver seu time</p>
-            </div>
-            <div class="features-grid-v2" data-reveal-stagger>
-                <div class="feature-item-v2">
-                    <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Matriz de competências</strong><p>Mapeamento visual de skills por cargo e área</p></div>
+                <div class="pp-feat">
+                    <div class="pp-feat__icon"><i class="fas fa-route"></i></div>
+                    <h4>PDIs automáticos</h4>
+                    <p>Planos personalizados por IA</p>
                 </div>
-                <div class="feature-item-v2">
-                    <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Avaliações 360° configuráveis</strong><p>Ciclos personalizados com múltiplos avaliadores</p></div>
+                <div class="pp-feat">
+                    <div class="pp-feat__icon"><i class="fas fa-award"></i></div>
+                    <h4>Metas de evolução</h4>
+                    <p>Objetivos por competência</p>
                 </div>
-                <div class="feature-item-v2">
-                    <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>PDI automatizado com IA</strong><p>Planos de desenvolvimento gerados pela IA</p></div>
+                <div class="pp-feat">
+                    <div class="pp-feat__icon"><i class="fas fa-history"></i></div>
+                    <h4>Histórico de evolução</h4>
+                    <p>Acompanhe o progresso</p>
                 </div>
-                <div class="feature-item-v2">
-                    <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Analytics de desempenho</strong><p>Dashboards com evolução individual e por equipe</p></div>
+                <div class="pp-feat">
+                    <div class="pp-feat__icon"><i class="fas fa-sitemap"></i></div>
+                    <h4>Organograma</h4>
+                    <p>Estrutura visual da empresa</p>
                 </div>
-                <div class="feature-item-v2">
-                    <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Descrição de cargos com IA</strong><p>Geração automática de job descriptions completas</p></div>
-                </div>
-                <div class="feature-item-v2">
-                    <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Feedback contínuo</strong><p>Canal estruturado para feedback entre liderança e equipe</p></div>
-                </div>
-                <div class="feature-item-v2">
-                    <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Gaps de competência</strong><p>Identifique lacunas e priorize desenvolvimento</p></div>
-                </div>
-                <div class="feature-item-v2">
-                    <div class="feature-item-v2__check"><i class="fas fa-check"></i></div>
-                    <div><strong>Relatórios gerenciais</strong><p>Visão consolidada para decisões de RH</p></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══ DETAIL SECTION ═══ -->
-    <section class="product-detail-v2 section--light">
-        <div class="container">
-            <div class="product-detail-v2__grid" data-reveal>
-                <div class="product-detail-v2__image">
-                    <img src="https://placehold.co/500x360/0D1117/D4A017?text=Matriz+de+Compet%C3%AAncias&font=raleway" alt="Matriz de Competências">
-                </div>
-                <div class="product-detail-v2__text">
-                    <h2>Matriz de Competências</h2>
-                    <p>Visualize as skills de toda a equipe, identifique gaps por área e acompanhe a evolução ao longo do tempo com calibração automática.</p>
-                    <ul class="product-detail-v2__list">
-                        <li><i class="fas fa-circle-check" style="color:var(--primary);"></i> Mapeamento visual de skills</li>
-                        <li><i class="fas fa-circle-check" style="color:var(--primary);"></i> Análise de gaps por área</li>
-                        <li><i class="fas fa-circle-check" style="color:var(--primary);"></i> Evolução temporal</li>
-                        <li><i class="fas fa-circle-check" style="color:var(--primary);"></i> Calibração de avaliações</li>
-                    </ul>
+                <div class="pp-feat">
+                    <div class="pp-feat__icon"><i class="fas fa-file-alt"></i></div>
+                    <h4>Relatórios RH</h4>
+                    <p>Dashboards de desenvolvimento</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ═══ CTA ═══ -->
-    <section class="product-cta-v2" data-reveal>
+    <section class="pp-cta">
+        <div class="pp-cta__particles"><span></span><span></span><span></span><span></span></div>
         <div class="container">
-            <h2>Pronto para desenvolver seu time com IA?</h2>
-            <p>Conheça o time de agentes que vai transformar a gestão da sua empresa</p>
-            <div class="product-cta-v2__buttons">
-                <a href="/#contato-form" class="btn btn-primary btn-lg">Conhecer o Time de IA</a>
-                <a href="/#contato-form" class="btn btn-outline btn-lg">Falar com Especialista</a>
+            <div class="pp-cta__card" data-reveal="scale">
+                <div class="pp-cta__icon"><i class="fas fa-rocket"></i></div>
+                <h2>Pronto para desenvolver seu time com IA?</h2>
+                <p>O Agente de Pessoas começa a mapear competências em minutos.</p>
+                <div class="pp-cta__buttons">
+                    <a href="/#contato-form" class="btn btn-primary btn-lg">Conhecer o Time de IA</a>
+                    <a href="/#contato-form" class="btn btn-outline btn-lg">Falar com Especialista</a>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- ═══ CLOSING PHRASE ═══ -->
+    <section class="site-closing">
+        <div class="container">
+            <h2>Orbit é o time de gestão que sua empresa sempre precisou. <span style="display:block;margin-top:8px;">E que nunca para de trabalhar.</span></h2>
+            <a href="/#contato-form" class="btn">Conhecer o Time de IA</a>
+        </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -365,14 +790,12 @@
                     <ul>
                         <li><a href="/blog">Blog</a></li>
                         <li><a href="/historias">Histórias de Clientes</a></li>
-                        <li><a href="#">Documentação</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Webinars</a></li>
+                        <li><a href="/faq">FAQ</a></li>
                     </ul>
                     <h5 style="margin-top: 20px;">Orbit</h5>
                     <ul>
+                        <li><a href="/sobre">Sobre Nós</a></li>
                         <li><a href="/parcerias">Seja Parceiro</a></li>
-                        <li><a href="#">Sobre Nós</a></li>
                     </ul>
                 </div>
             </div>
@@ -394,22 +817,16 @@
         if(dd){li.addEventListener('mouseenter',()=>{dd.style.opacity='1';dd.style.visibility='visible';dd.style.transform='translateY(0)'});
         li.addEventListener('mouseleave',()=>{dd.style.opacity='0';dd.style.visibility='hidden';dd.style.transform='translateY(10px)'})}
     });
+    document.querySelector('.menu-toggle').addEventListener('click',function(){document.querySelector('.mobile-menu').classList.add('active');document.body.style.overflow='hidden'});
     </script>
-
-    <!-- Scroll Reveal -->
     <script>
     (function() {
         var io = new IntersectionObserver(function(entries) {
             entries.forEach(function(e) {
-                if (e.isIntersecting) {
-                    e.target.classList.add('revealed');
-                    io.unobserve(e.target);
-                }
+                if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
             });
         }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-        document.querySelectorAll('[data-reveal],[data-reveal-stagger]').forEach(function(el) {
-            io.observe(el);
-        });
+        document.querySelectorAll('[data-reveal],[data-reveal-stagger]').forEach(function(el) { io.observe(el); });
     })();
     </script>
     <script src="/js/seo.js"></script>

@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/styles-v2.css?v=2">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=d8b11dbe">
 
     <style>
         /* ═══ AGENTS PAGE STYLES ═══ */
@@ -398,12 +398,177 @@
             .agent-section {
                 padding: 72px 0;
             }
-            #olivia-section .olivia-grid {
-                grid-template-columns: 1fr !important;
-            }
             .dynamics-grid {
                 grid-template-columns: 1fr !important;
             }
+        }
+
+        /* ═══ ORBITAL HUB (same as homepage) ═══ */
+        .orbit-hub {
+            position: relative;
+            width: 100%;
+            max-width: 860px;
+            height: 860px;
+            margin: 0 auto;
+        }
+        .orbit-hub__lines {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .orbit-hub__center {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 3;
+            opacity: 0; scale: 0.3;
+        }
+        .orbit-visible .orbit-hub__center {
+            animation: orbit-center-in 0.8s cubic-bezier(0.34,1.56,0.64,1) forwards;
+        }
+        .orbit-hub__glow {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 260px; height: 260px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212,160,23,0.2) 0%, rgba(212,160,23,0.05) 50%, transparent 70%);
+            animation: orbit-glow 3.5s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes orbit-glow {
+            0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
+        }
+        .orbit-hub__photo {
+            width: 140px; height: 140px;
+            border-radius: 50%;
+            border: 4px solid rgba(212,160,23,0.6);
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(212,160,23,0.4), 0 0 80px rgba(212,160,23,0.15);
+            animation: orbit-photo-breathe 3.5s ease-in-out infinite;
+            position: relative; z-index: 2;
+        }
+        @keyframes orbit-photo-breathe {
+            0%, 100% { box-shadow: 0 0 40px rgba(212,160,23,0.4), 0 0 80px rgba(212,160,23,0.15); }
+            50% { box-shadow: 0 0 50px rgba(212,160,23,0.6), 0 0 100px rgba(212,160,23,0.25); }
+        }
+        .orbit-hub__photo img {
+            width: 100%; height: 100%;
+            object-fit: cover; border-radius: 50%;
+        }
+        .orbit-hub__name {
+            color: #D4A017; font-size: 20px; font-weight: 800;
+            margin-top: 14px; letter-spacing: 1px; text-transform: uppercase;
+        }
+        .orbit-hub__role {
+            color: rgba(255,255,255,0.5); font-size: 13px; margin-top: 4px;
+        }
+        .orbit-hub__ring {
+            position: absolute; top: 50%; left: 50%;
+            border-radius: 50%;
+            border: 1.5px solid rgba(212,160,23,0.12);
+            pointer-events: none;
+            animation: orbit-ring 3.5s ease-in-out infinite;
+        }
+        .orbit-hub__ring--1 { width: 180px; height: 180px; transform: translate(-50%, calc(-50% - 12px)); }
+        .orbit-hub__ring--2 { width: 220px; height: 220px; border-color: rgba(212,160,23,0.07); transform: translate(-50%, calc(-50% - 12px)); animation-delay: 0.5s; }
+        .orbit-hub__ring--3 { width: 264px; height: 264px; border-color: rgba(212,160,23,0.04); transform: translate(-50%, calc(-50% - 12px)); animation-delay: 1s; }
+        @keyframes orbit-ring { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+        .orbit-hub__node {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            display: flex; flex-direction: column;
+            align-items: center; gap: 8px;
+            z-index: 2; cursor: default;
+            transition: transform 0.3s ease;
+            opacity: 0; scale: 0.5;
+        }
+        .orbit-visible .orbit-hub__node {
+            animation: orbit-node-in 0.6s cubic-bezier(0.16,1,0.3,1) forwards;
+        }
+        .orbit-visible .orbit-hub__node[data-idx="0"]  { animation-delay: 0.1s; }
+        .orbit-visible .orbit-hub__node[data-idx="1"]  { animation-delay: 0.15s; }
+        .orbit-visible .orbit-hub__node[data-idx="2"]  { animation-delay: 0.2s; }
+        .orbit-visible .orbit-hub__node[data-idx="3"]  { animation-delay: 0.25s; }
+        .orbit-visible .orbit-hub__node[data-idx="4"]  { animation-delay: 0.3s; }
+        .orbit-visible .orbit-hub__node[data-idx="5"]  { animation-delay: 0.35s; }
+        .orbit-visible .orbit-hub__node[data-idx="6"]  { animation-delay: 0.4s; }
+        .orbit-visible .orbit-hub__node[data-idx="7"]  { animation-delay: 0.45s; }
+        .orbit-visible .orbit-hub__node[data-idx="8"]  { animation-delay: 0.5s; }
+        .orbit-visible .orbit-hub__node[data-idx="9"]  { animation-delay: 0.55s; }
+        .orbit-visible .orbit-hub__node[data-idx="10"] { animation-delay: 0.6s; }
+        .orbit-visible .orbit-hub__node[data-idx="11"] { animation-delay: 0.65s; }
+        @keyframes orbit-node-in { to { opacity: 1; scale: 1; } }
+        @keyframes orbit-center-in { to { opacity: 1; scale: 1; } }
+
+        .orbit-hub__node:hover { transform: translate(-50%, -50%) scale(1.12); }
+        .orbit-hub__node:hover .orbit-hub__node-icon {
+            border-color: #D4A017;
+            box-shadow: 0 0 24px rgba(212,160,23,0.5);
+            background: linear-gradient(135deg, rgba(212,160,23,0.35), rgba(212,160,23,0.1));
+        }
+        .orbit-hub__node-icon {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: linear-gradient(135deg, rgba(212,160,23,0.15), rgba(212,160,23,0.04));
+            border: 2px solid rgba(212,160,23,0.3);
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+        .orbit-hub__node-icon i { font-size: 20px; color: #D4A017; }
+        .orbit-hub__node-label {
+            font-size: 14px; font-weight: 800; color: #fff;
+            white-space: nowrap; text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+        }
+        .orbit-hub__node-desc {
+            font-size: 12px; font-weight: 500;
+            color: rgba(255,255,255,0.7);
+            white-space: nowrap; text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            margin-top: -2px;
+        }
+        .orbit-hub__lines { opacity: 0; }
+        .orbit-visible .orbit-hub__lines {
+            animation: orbit-lines-in 0.8s ease 0.3s forwards;
+        }
+        @keyframes orbit-lines-in { to { opacity: 1; } }
+
+        @media (max-width: 768px) {
+            .orbit-hub {
+                height: auto; max-width: 400px;
+                display: grid; grid-template-columns: 1fr 1fr;
+                gap: 12px; padding: 20px 0;
+            }
+            .orbit-hub__lines { display: none; }
+            .orbit-hub__center {
+                grid-column: 1 / -1;
+                position: relative; top: auto; left: auto;
+                transform: none; opacity: 1; scale: 1;
+                margin-bottom: 16px;
+            }
+            .orbit-hub__glow { width: 160px; height: 160px; }
+            .orbit-hub__photo { width: 100px; height: 100px; }
+            .orbit-hub__ring { display: none; }
+            .orbit-hub__node {
+                position: relative; top: auto !important; left: auto !important;
+                transform: none; opacity: 1; scale: 1;
+                animation: none !important;
+                flex-direction: row; gap: 10px;
+                background: rgba(255,255,255,0.03);
+                border: 1px solid rgba(212,160,23,0.12);
+                border-radius: 12px; padding: 12px 14px;
+            }
+            .orbit-hub__node:hover { transform: none; }
+            .orbit-hub__node-icon { width: 40px; height: 40px; min-width: 40px; border-radius: 10px; }
+            .orbit-hub__node-icon i { font-size: 16px; }
+            .orbit-hub__node-label { font-size: 13px; }
+            .orbit-hub__node-desc { font-size: 11px; white-space: normal; text-shadow: none; margin-top: 0; }
         }
     </style>
 </head>
@@ -421,17 +586,21 @@
             <ul class="nav-menu">
                 <li><a href="/">Início</a></li>
                 <li>
-                    <a href="/#plataforma">Soluções <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <a href="#plataforma">Plataforma <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown">
                         <div class="dropdown__info">
                             <span class="dropdown__info-badge"><i class="fas fa-cube"></i> Plataforma</span>
                             <h4>Orbit Gestão</h4>
-                            <p>5 módulos integrados + IA para transformar sua estratégia em execução real.</p>
+                            <p>5 módulos integrados + 12 agentes de IA para transformar sua estratégia em execução real.</p>
                             <div class="dropdown__info-img">
                                 <i class="fas fa-rocket"></i>
                             </div>
                         </div>
                         <div class="dropdown__links">
+                            <a href="/agentes">
+                                <div class="dd-icon"><i class="fas fa-robot"></i></div>
+                                <div class="dd-text"><span>Agentes de IA</span><small>12 especialistas 24/7</small></div>
+                            </a>
                             <a href="/processos">
                                 <div class="dd-icon"><i class="fas fa-sitemap"></i></div>
                                 <div class="dd-text"><span>Processos</span><small>Mapeamento e automação</small></div>
@@ -456,21 +625,6 @@
                     </div>
                 </li>
                 <li>
-                    <a href="/blog">Conhecimento <i class="fas fa-chevron-down dropdown-arrow"></i></a>
-                    <div class="dropdown dropdown--sm">
-                        <div class="dropdown__links">
-                            <a href="/blog">
-                                <div class="dd-icon"><i class="fas fa-newspaper"></i></div>
-                                <div class="dd-text"><span>Blog</span><small>Artigos e insights</small></div>
-                            </a>
-                            <a href="/historias">
-                                <div class="dd-icon"><i class="fas fa-star"></i></div>
-                                <div class="dd-text"><span>Histórias de Clientes</span><small>Cases de sucesso</small></div>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-                <li>
                     <a href="/#para-quem">Para quem <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown dropdown--sm">
                         <div class="dropdown__links">
@@ -489,8 +643,45 @@
                         </div>
                     </div>
                 </li>
-                <li><a href="/parcerias">Seja Parceiro</a></li>
-                <li><a href="/#contato-form">Fale Conosco</a></li>
+                <li><a href="/pricing">Planos</a></li>
+                <li>
+                    <a href="/blog">Conteúdo <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown dropdown--sm">
+                        <div class="dropdown__links">
+                            <a href="/blog">
+                                <div class="dd-icon"><i class="fas fa-newspaper"></i></div>
+                                <div class="dd-text"><span>Blog</span><small>Artigos e insights</small></div>
+                            </a>
+                            <a href="/historias">
+                                <div class="dd-icon"><i class="fas fa-star"></i></div>
+                                <div class="dd-text"><span>Histórias de Clientes</span><small>Cases de sucesso</small></div>
+                            </a>
+                            <a href="/faq">
+                                <div class="dd-icon"><i class="fas fa-circle-question"></i></div>
+                                <div class="dd-text"><span>FAQ</span><small>Perguntas frequentes</small></div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="/sobre">Empresa <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown dropdown--sm">
+                        <div class="dropdown__links">
+                            <a href="/sobre">
+                                <div class="dd-icon"><i class="fas fa-building"></i></div>
+                                <div class="dd-text"><span>Sobre Nós</span><small>30 anos de história</small></div>
+                            </a>
+                            <a href="/parcerias">
+                                <div class="dd-icon"><i class="fas fa-handshake"></i></div>
+                                <div class="dd-text"><span>Seja Parceiro</span><small>Programa de canais</small></div>
+                            </a>
+                            <a href="/canais">
+                                <div class="dd-icon"><i class="fas fa-network-wired"></i></div>
+                                <div class="dd-text"><span>Canais B2B2B</span><small>Para consultores e mentores</small></div>
+                            </a>
+                        </div>
+                    </div>
+                </li>
             </ul>
 
             <div class="nav-actions">
@@ -511,8 +702,10 @@
         <button class="mobile-menu-close" onclick="this.parentElement.classList.remove('active');document.body.style.overflow=''">&times;</button>
         <div class="mobile-menu__label">Menu</div>
         <a href="/"><i class="fas fa-home"></i> Início</a>
+        <a href="/pricing"><i class="fas fa-tag"></i> Planos e Preços</a>
         <a href="/#contato-form"><i class="fas fa-envelope"></i> Fale Conosco</a>
-        <div class="mobile-menu__label">Soluções</div>
+        <div class="mobile-menu__label">Plataforma</div>
+        <a href="/agentes"><i class="fas fa-robot"></i> Agentes de IA</a>
         <a href="/processos"><i class="fas fa-sitemap"></i> Processos</a>
         <a href="/indicadores"><i class="fas fa-chart-line"></i> Indicadores</a>
         <a href="/tarefas"><i class="fas fa-tasks"></i> Tarefas</a>
@@ -521,7 +714,11 @@
         <div class="mobile-menu__label">Conteúdo</div>
         <a href="/blog"><i class="fas fa-newspaper"></i> Blog</a>
         <a href="/historias"><i class="fas fa-star"></i> Histórias de Clientes</a>
+        <a href="/faq"><i class="fas fa-circle-question"></i> FAQ</a>
+        <div class="mobile-menu__label">Empresa</div>
+        <a href="/sobre"><i class="fas fa-building"></i> Sobre Nós</a>
         <a href="/parcerias"><i class="fas fa-handshake"></i> Seja Parceiro</a>
+        <a href="/canais"><i class="fas fa-network-wired"></i> Canais B2B2B</a>
         <div class="mobile-menu__divider"></div>
         <a href="/#contato-form" class="btn btn-primary">Conhecer o Time de IA</a>
     </div>
@@ -549,108 +746,186 @@
         </div>
     </section>
 
-    <!-- ═══ OLÍVIA — COORDENADORA GERAL ═══ -->
-    <section id="olivia-section" style="background:#161B22;padding:80px 0;">
-        <div class="container" style="max-width:1000px;">
-            <div style="text-align:center;margin-bottom:48px;" data-reveal>
+    <!-- ═══ OLÍVIA — ORBITAL HUB (igual home) ═══ -->
+    <section id="olivia-section" style="background:#0D1117;padding:80px 0;">
+        <div class="container" style="max-width:1100px;">
+            <div style="text-align:center;margin-bottom:24px;" data-reveal>
                 <span class="section-badge">A líder do time</span>
-                <h2 style="font-size:2.5rem;font-weight:800;color:#fff;margin:16px 0;">Conheça <span style="color:#D4A017;">Olívia</span></h2>
-                <p style="color:#8B949E;font-size:1.1rem;max-width:600px;margin:0 auto;">A Coordenadora Geral de IA que lidera seus 12 agentes.</p>
-            </div>
-            <div class="olivia-grid" style="display:grid;grid-template-columns:350px 1fr;gap:48px;align-items:start;" data-reveal>
-                <div style="background:linear-gradient(135deg,rgba(212,160,23,0.1),rgba(212,160,23,0.02));border:2px solid rgba(212,160,23,0.2);border-radius:20px;padding:40px;text-align:center;">
-                    <img src="/images/olivia.png" alt="Olívia — Coordenadora Geral de IA do Orbit" style="width:160px;height:160px;border-radius:50%;object-fit:cover;border:4px solid #D4A017;margin:0 auto 20px;display:block;">
-                    <h3 style="color:#fff;font-size:1.5rem;margin-bottom:4px;">Olívia</h3>
-                    <p style="color:#D4A017;margin-bottom:16px;">Coordenadora Geral de IA</p>
-                    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
-                        <span style="background:rgba(212,160,23,0.15);color:#D4A017;padding:5px 12px;border-radius:20px;font-size:0.8rem;">Coordena 12 agentes</span>
-                        <span style="background:rgba(212,160,23,0.15);color:#D4A017;padding:5px 12px;border-radius:20px;font-size:0.8rem;">Conecta dados</span>
-                        <span style="background:rgba(212,160,23,0.15);color:#D4A017;padding:5px 12px;border-radius:20px;font-size:0.8rem;">Traduz em decisão</span>
-                    </div>
-                </div>
-                <div>
-                    <p style="color:#C9D1D9;font-size:1.1rem;line-height:1.8;margin-bottom:20px;">Olívia é a especialista em IA do Orbit e a <strong style="color:#fff;">voz do sistema</strong> para sua empresa. Ela é a líder do time de agentes: coordena, conecta, prioriza e traduz a complexidade dos dados em clareza para a tomada de decisão.</p>
-                    <p style="color:#8B949E;font-size:1rem;line-height:1.8;margin-bottom:24px;">Quando um agente detecta um risco, é a Olívia que cruza com o Agente de Oportunidades e apresenta o cenário completo ao empresário. Dentro do produto, Olívia é o agente-macro de cada empresa — a especialista no negócio específico do cliente.</p>
-                    <div style="background:#1C2333;border-left:3px solid #D4A017;padding:20px 24px;border-radius:0 12px 12px 0;margin-bottom:20px;">
-                        <p style="color:#C9D1D9;font-style:italic;margin:0;">"Bom dia! Analisei os dados da semana. Três pontos precisam da sua atenção: margem caiu 2%, o time comercial bateu recorde, e temos uma oportunidade no segmento B que ninguém está olhando. Vamos resolver?"</p>
-                        <span style="color:#D4A017;font-size:0.875rem;margin-top:8px;display:block;">— Olívia, Coordenadora Geral</span>
-                    </div>
-                    <p style="color:#8B949E;font-size:0.9rem;"><strong style="color:#C9D1D9;">Tom:</strong> Confiante, articulada, estratégica. Direta sem ser fria. Empática sem ser condescendente. Fala com o empresário como uma parceira que entende o negócio dele melhor do que ele imagina.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══ AGENT GRID OVERVIEW ═══ -->
-    <section class="agents-overview">
-        <div class="container">
-            <div class="section-header" data-reveal>
-                <h2>Conheça cada agente</h2>
-                <p style="color:#5A6069;margin-top:8px;">12 especialistas que trabalham para sua empresa</p>
+                <h2 style="font-size:2.5rem;font-weight:800;color:#fff;margin:16px 0;">Seu time de IA coordenado pela <span style="color:#D4A017;">Olívia</span></h2>
+                <p style="color:#8B949E;font-size:1.1rem;max-width:600px;margin:0 auto;">Cada agente domina uma área. A Olívia coordena todos, conecta os dados e entrega clareza.</p>
             </div>
 
-            <div class="agents-grid" data-reveal-stagger>
-                <div class="agent-mini-card">
-                    <div class="agent-mini-card__icon"><i class="fas fa-chess-king"></i></div>
-                    <h3>Estrategista</h3>
-                    <p>Planejamento estratégico completo em uma tarde</p>
+            <!-- Orbital container -->
+            <div class="orbit-hub" id="orbitHub">
+                <!-- Center: Olívia -->
+                <div class="orbit-hub__center">
+                    <div class="orbit-hub__glow"></div>
+                    <div class="orbit-hub__photo">
+                        <img src="/images/olivia.png" alt="Olívia">
+                    </div>
+                    <div class="orbit-hub__name">Olívia</div>
+                    <div class="orbit-hub__role">Coordenadora Geral</div>
+                    <div class="orbit-hub__ring orbit-hub__ring--1"></div>
+                    <div class="orbit-hub__ring orbit-hub__ring--2"></div>
+                    <div class="orbit-hub__ring orbit-hub__ring--3"></div>
                 </div>
-                <div class="agent-mini-card">
-                    <div class="agent-mini-card__icon"><i class="fas fa-sitemap"></i></div>
-                    <h3>Processos</h3>
-                    <p>Mapeia processos e gera instruções de trabalho</p>
+
+                <!-- SVG connector lines -->
+                <svg class="orbit-hub__lines" id="orbitLines"></svg>
+
+                <!-- 12 Agent nodes -->
+                <div class="orbit-hub__node" data-idx="0">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-compass"></i></div>
+                    <div class="orbit-hub__node-label">Estrategista</div>
+                    <div class="orbit-hub__node-desc">SWOT, BSC e planejamento estratégico</div>
                 </div>
-                <div class="agent-mini-card">
-                    <div class="agent-mini-card__icon"><i class="fas fa-users"></i></div>
-                    <h3>Pessoas</h3>
-                    <p>Descrição de cargos, desempenho e PDIs</p>
+                <div class="orbit-hub__node" data-idx="1">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-diagram-project"></i></div>
+                    <div class="orbit-hub__node-label">Processos</div>
+                    <div class="orbit-hub__node-desc">Mapeamento, playbooks e automação</div>
                 </div>
-                <div class="agent-mini-card">
-                    <div class="agent-mini-card__icon"><i class="fas fa-graduation-cap"></i></div>
-                    <h3>Treinamento</h3>
-                    <p>Microlearning diário via WhatsApp</p>
+                <div class="orbit-hub__node" data-idx="2">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-user-group"></i></div>
+                    <div class="orbit-hub__node-label">Pessoas</div>
+                    <div class="orbit-hub__node-desc">Cargos, desempenho e PDIs</div>
                 </div>
-                <div class="agent-mini-card">
-                    <div class="agent-mini-card__icon"><i class="fas fa-chart-line"></i></div>
-                    <h3>Indicadores</h3>
-                    <p>Monitora KPIs e sugere ações corretivas</p>
+                <div class="orbit-hub__node" data-idx="3">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="orbit-hub__node-label">Treinamento</div>
+                    <div class="orbit-hub__node-desc">Microlearning e trilhas via WhatsApp</div>
                 </div>
-                <div class="agent-mini-card">
-                    <div class="agent-mini-card__icon"><i class="fas fa-magnifying-glass-chart"></i></div>
-                    <h3>Pesquisa</h3>
-                    <p>Pesquisas de clima e insights acionáveis</p>
+                <div class="orbit-hub__node" data-idx="4">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-chart-column"></i></div>
+                    <div class="orbit-hub__node-label">Indicadores</div>
+                    <div class="orbit-hub__node-desc">KPIs em tempo real e causa raiz</div>
                 </div>
-                <div class="agent-mini-card">
-                    <div class="agent-mini-card__icon"><i class="fas fa-shield-halved"></i></div>
-                    <h3>Riscos</h3>
-                    <p>Identifica riscos e propõe planos de mitigação</p>
+                <div class="orbit-hub__node" data-idx="5">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-magnifying-glass-chart"></i></div>
+                    <div class="orbit-hub__node-label">Pesquisa</div>
+                    <div class="orbit-hub__node-desc">Clima, formulários e insights</div>
                 </div>
-                <div class="agent-mini-card">
-                    <div class="agent-mini-card__icon"><i class="fas fa-lightbulb"></i></div>
-                    <h3>Oportunidades</h3>
-                    <p>Analisa mercado e identifica oportunidades de crescimento</p>
+                <div class="orbit-hub__node" data-idx="6">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-shield-halved"></i></div>
+                    <div class="orbit-hub__node-label">Riscos</div>
+                    <div class="orbit-hub__node-desc">Mitigação e prevenção contínua</div>
                 </div>
-                <div class="agent-mini-card">
-                    <div class="agent-mini-card__icon"><i class="fas fa-triangle-exclamation"></i></div>
-                    <h3>Problemas</h3>
-                    <p>Registra não-conformidades e gera ações corretivas</p>
+                <div class="orbit-hub__node" data-idx="7">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-lightbulb"></i></div>
+                    <div class="orbit-hub__node-label">Oportunidades</div>
+                    <div class="orbit-hub__node-desc">Mercado, parcerias e expansão</div>
                 </div>
-                <div class="agent-mini-card">
-                    <div class="agent-mini-card__icon"><i class="fas fa-file-lines"></i></div>
-                    <h3>Documentos</h3>
-                    <p>Gera e versiona documentos corporativos</p>
+                <div class="orbit-hub__node" data-idx="8">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-triangle-exclamation"></i></div>
+                    <div class="orbit-hub__node-label">Problemas</div>
+                    <div class="orbit-hub__node-desc">Não-conformidades e PDCA</div>
                 </div>
-                <div class="agent-mini-card">
-                    <div class="agent-mini-card__icon"><i class="fas fa-handshake"></i></div>
-                    <h3>Vendas</h3>
-                    <p>Gerencia pipeline e coaching comercial com IA</p>
+                <div class="orbit-hub__node" data-idx="9">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-file-lines"></i></div>
+                    <div class="orbit-hub__node-label">Documentos</div>
+                    <div class="orbit-hub__node-desc">Padronização e controle</div>
                 </div>
-                <div class="agent-mini-card">
-                    <div class="agent-mini-card__icon"><i class="fas fa-video"></i></div>
-                    <h3>Reuniões</h3>
-                    <p>Transcreve reuniões e extrai decisões e ações</p>
+                <div class="orbit-hub__node" data-idx="10">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-handshake"></i></div>
+                    <div class="orbit-hub__node-label">Vendas</div>
+                    <div class="orbit-hub__node-desc">CRM, funil e coaching comercial</div>
+                </div>
+                <div class="orbit-hub__node" data-idx="11">
+                    <div class="orbit-hub__node-icon"><i class="fas fa-video"></i></div>
+                    <div class="orbit-hub__node-label">Reuniões</div>
+                    <div class="orbit-hub__node-desc">Transcrição e planos de ação</div>
                 </div>
             </div>
+
+            <!-- Olívia quote below orbital -->
+            <div style="max-width:760px;margin:40px auto 0;" data-reveal>
+                <div style="background:#1C2333;border-left:3px solid #D4A017;padding:20px 24px;border-radius:0 12px 12px 0;">
+                    <p style="color:#C9D1D9;font-style:italic;margin:0;">"Bom dia! Analisei os dados da semana. Três pontos precisam da sua atenção: margem caiu 2%, o time comercial bateu recorde, e temos uma oportunidade no segmento B que ninguém está olhando. Vamos resolver?"</p>
+                    <span style="color:#D4A017;font-size:0.875rem;margin-top:8px;display:block;">— Olívia, Coordenadora Geral</span>
+                </div>
+            </div>
+
+            <script>
+            (function() {
+                var hub = document.getElementById('orbitHub');
+                if (!hub) return;
+                var TOTAL = 12;
+                var nodes = hub.querySelectorAll('.orbit-hub__node');
+                var svg = document.getElementById('orbitLines');
+
+                function layout() {
+                    var w = hub.offsetWidth;
+                    var h = hub.offsetHeight;
+                    var cx = w / 2;
+                    var cy = h / 2;
+                    var radius = Math.min(w, h) / 2 - 50;
+                    if (radius < 160) radius = 160;
+                    if (radius > 360) radius = 360;
+
+                    svg.setAttribute('width', w);
+                    svg.setAttribute('height', h);
+                    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+                    svg.innerHTML = '';
+
+                    var defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+                    defs.innerHTML = '<filter id="lineGlow2"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>';
+                    svg.appendChild(defs);
+
+                    nodes.forEach(function(node, i) {
+                        var angle = (i / TOTAL) * Math.PI * 2 - Math.PI / 2;
+                        var nx = cx + Math.cos(angle) * radius;
+                        var ny = cy + Math.sin(angle) * radius;
+                        node.style.left = nx + 'px';
+                        node.style.top = ny + 'px';
+
+                        var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                        line.setAttribute('x1', cx);
+                        line.setAttribute('y1', cy);
+                        line.setAttribute('x2', nx);
+                        line.setAttribute('y2', ny);
+                        line.setAttribute('stroke', 'rgba(212,160,23,0.2)');
+                        line.setAttribute('stroke-width', '1.5');
+                        line.setAttribute('filter', 'url(#lineGlow2)');
+                        svg.appendChild(line);
+
+                        var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                        circle.setAttribute('r', '3.5');
+                        circle.setAttribute('fill', '#F5C518');
+                        circle.setAttribute('filter', 'url(#lineGlow2)');
+                        var anim = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
+                        anim.setAttribute('dur', '2.5s');
+                        anim.setAttribute('repeatCount', 'indefinite');
+                        anim.setAttribute('begin', (i * 0.2) + 's');
+                        var pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                        pathEl.setAttribute('id', 'ag-orbit-path-' + i);
+                        pathEl.setAttribute('d', 'M' + nx + ',' + ny + ' L' + cx + ',' + cy);
+                        pathEl.setAttribute('fill', 'none');
+                        defs.appendChild(pathEl);
+                        var path = document.createElementNS('http://www.w3.org/2000/svg', 'mpath');
+                        path.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#ag-orbit-path-' + i);
+                        anim.appendChild(path);
+                        circle.appendChild(anim);
+                        svg.appendChild(circle);
+                    });
+                }
+
+                var observer = new IntersectionObserver(function(entries) {
+                    if (entries[0].isIntersecting) {
+                        hub.classList.add('orbit-visible');
+                        layout();
+                        observer.disconnect();
+                    }
+                }, { threshold: 0.1 });
+                observer.observe(hub);
+
+                var resizeTimer;
+                window.addEventListener('resize', function() {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(function() {
+                        if (hub.classList.contains('orbit-visible')) layout();
+                    }, 150);
+                });
+            })();
+            </script>
         </div>
     </section>
 
@@ -1021,72 +1296,347 @@
     </section>
 
     <!-- ═══ DINÂMICAS ENTRE AGENTES ═══ -->
-    <section style="background:#0D1117;padding:80px 0;">
-        <div class="container" style="max-width:1000px;">
-            <div style="text-align:center;margin-bottom:48px;" data-reveal>
+    <section class="dynamics-section" id="dinamicas">
+        <div class="container" style="max-width:1080px;">
+            <div style="text-align:center;margin-bottom:56px;" data-reveal>
                 <span class="section-badge">Trabalho em equipe</span>
-                <h2 style="font-size:2.25rem;font-weight:800;color:#fff;margin:16px 0;">Tensões produtivas que geram <span style="color:#D4A017;">melhores decisões</span></h2>
-                <p style="color:#8B949E;font-size:1.1rem;max-width:600px;margin:0 auto;">Os agentes foram desenhados para debater entre si. Cada tensão produz uma decisão mais inteligente — e a Olívia orquestra.</p>
+                <h2 style="font-size:2.5rem;font-weight:800;color:#fff;margin:16px 0;">Tensões produtivas que geram <span style="color:#D4A017;">melhores decisões</span></h2>
+                <p style="color:#8B949E;font-size:1.1rem;max-width:620px;margin:0 auto;line-height:1.7;">Os agentes foram desenhados para debater entre si. Cada tensão produz uma decisão mais inteligente — e a Olívia orquestra.</p>
             </div>
-            <div class="dynamics-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;" data-reveal-stagger>
-                <div style="background:#1C2333;border-radius:16px;padding:28px;">
-                    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
-                        <span style="background:rgba(212,160,23,0.15);color:#D4A017;padding:8px 12px;border-radius:10px;font-size:0.85rem;font-weight:600;"><i class="fas fa-shield-halved"></i> Riscos</span>
-                        <span style="color:#8B949E;">&times;</span>
-                        <span style="background:rgba(212,160,23,0.15);color:#D4A017;padding:8px 12px;border-radius:10px;font-size:0.85rem;font-weight:600;"><i class="fas fa-lightbulb"></i> Oportunidades</span>
+
+            <!-- Dynamics cards -->
+            <div class="dyn-grid" data-reveal-stagger>
+                <!-- Card 1: Riscos × Oportunidades -->
+                <div class="dyn-card">
+                    <div class="dyn-card__versus">
+                        <div class="dyn-card__agent">
+                            <div class="dyn-card__icon" style="--agent-color: #EF4444;"><i class="fas fa-shield-halved"></i></div>
+                            <span class="dyn-card__name">Riscos</span>
+                        </div>
+                        <div class="dyn-card__spark">
+                            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M13 2L3 14h9l-1 10 10-12h-9l1-10z" fill="#D4A017"/></svg>
+                        </div>
+                        <div class="dyn-card__agent">
+                            <div class="dyn-card__icon" style="--agent-color: #22C55E;"><i class="fas fa-lightbulb"></i></div>
+                            <span class="dyn-card__name">Oportunidades</span>
+                        </div>
                     </div>
-                    <p style="color:#C9D1D9;font-size:0.95rem;line-height:1.6;margin:0;">O paranoico vs. o otimista. O debate eterno entre cautela e ação. Cada conversa entre eles é uma aula de tomada de decisão.</p>
+                    <div class="dyn-card__label">O paranoico vs. o otimista</div>
+                    <p class="dyn-card__desc">O debate eterno entre cautela e ação. Cada conversa entre eles é uma aula de tomada de decisão.</p>
                 </div>
-                <div style="background:#1C2333;border-radius:16px;padding:28px;">
-                    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
-                        <span style="background:rgba(212,160,23,0.15);color:#D4A017;padding:8px 12px;border-radius:10px;font-size:0.85rem;font-weight:600;"><i class="fas fa-triangle-exclamation"></i> Problemas</span>
-                        <span style="color:#8B949E;">&times;</span>
-                        <span style="background:rgba(212,160,23,0.15);color:#D4A017;padding:8px 12px;border-radius:10px;font-size:0.85rem;font-weight:600;"><i class="fas fa-sitemap"></i> Processos</span>
+
+                <!-- Card 2: Problemas × Processos -->
+                <div class="dyn-card">
+                    <div class="dyn-card__versus">
+                        <div class="dyn-card__agent">
+                            <div class="dyn-card__icon" style="--agent-color: #F59E0B;"><i class="fas fa-triangle-exclamation"></i></div>
+                            <span class="dyn-card__name">Problemas</span>
+                        </div>
+                        <div class="dyn-card__spark">
+                            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M13 2L3 14h9l-1 10 10-12h-9l1-10z" fill="#D4A017"/></svg>
+                        </div>
+                        <div class="dyn-card__agent">
+                            <div class="dyn-card__icon" style="--agent-color: #3B82F6;"><i class="fas fa-sitemap"></i></div>
+                            <span class="dyn-card__name">Processos</span>
+                        </div>
                     </div>
-                    <p style="color:#C9D1D9;font-size:0.95rem;line-height:1.6;margin:0;">O bombeiro vs. o engenheiro. Um apaga o incêndio, o outro redesenha para que não aconteça de novo.</p>
+                    <div class="dyn-card__label">O bombeiro vs. o engenheiro</div>
+                    <p class="dyn-card__desc">Um apaga o incêndio, o outro redesenha para que não aconteça de novo.</p>
                 </div>
-                <div style="background:#1C2333;border-radius:16px;padding:28px;">
-                    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
-                        <span style="background:rgba(212,160,23,0.15);color:#D4A017;padding:8px 12px;border-radius:10px;font-size:0.85rem;font-weight:600;"><i class="fas fa-chart-line"></i> Indicadores</span>
-                        <span style="color:#8B949E;">&times;</span>
-                        <span style="background:rgba(212,160,23,0.15);color:#D4A017;padding:8px 12px;border-radius:10px;font-size:0.85rem;font-weight:600;"><i class="fas fa-chess-king"></i> Estrategista</span>
+
+                <!-- Card 3: Indicadores × Estrategista -->
+                <div class="dyn-card">
+                    <div class="dyn-card__versus">
+                        <div class="dyn-card__agent">
+                            <div class="dyn-card__icon" style="--agent-color: #6366F1;"><i class="fas fa-chart-line"></i></div>
+                            <span class="dyn-card__name">Indicadores</span>
+                        </div>
+                        <div class="dyn-card__spark">
+                            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M13 2L3 14h9l-1 10 10-12h-9l1-10z" fill="#D4A017"/></svg>
+                        </div>
+                        <div class="dyn-card__agent">
+                            <div class="dyn-card__icon" style="--agent-color: #D4A017;"><i class="fas fa-chess-king"></i></div>
+                            <span class="dyn-card__name">Estrategista</span>
+                        </div>
                     </div>
-                    <p style="color:#C9D1D9;font-size:0.95rem;line-height:1.6;margin:0;">O dado vs. a visão. Quando concordam, é hora de agir. Quando divergem, a empresa precisa decidir.</p>
+                    <div class="dyn-card__label">O dado vs. a visão</div>
+                    <p class="dyn-card__desc">Quando concordam, é hora de agir. Quando divergem, a empresa precisa decidir.</p>
                 </div>
-                <div style="background:#1C2333;border-radius:16px;padding:28px;">
-                    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
-                        <span style="background:rgba(212,160,23,0.15);color:#D4A017;padding:8px 12px;border-radius:10px;font-size:0.85rem;font-weight:600;"><i class="fas fa-handshake"></i> Vendas</span>
-                        <span style="color:#8B949E;">&times;</span>
-                        <span style="background:rgba(212,160,23,0.15);color:#D4A017;padding:8px 12px;border-radius:10px;font-size:0.85rem;font-weight:600;"><i class="fas fa-video"></i> Reuniões</span>
+
+                <!-- Card 4: Vendas × Reuniões -->
+                <div class="dyn-card">
+                    <div class="dyn-card__versus">
+                        <div class="dyn-card__agent">
+                            <div class="dyn-card__icon" style="--agent-color: #EC4899;"><i class="fas fa-handshake"></i></div>
+                            <span class="dyn-card__name">Vendas</span>
+                        </div>
+                        <div class="dyn-card__spark">
+                            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M13 2L3 14h9l-1 10 10-12h-9l1-10z" fill="#D4A017"/></svg>
+                        </div>
+                        <div class="dyn-card__agent">
+                            <div class="dyn-card__icon" style="--agent-color: #14B8A6;"><i class="fas fa-video"></i></div>
+                            <span class="dyn-card__name">Reuniões</span>
+                        </div>
                     </div>
-                    <p style="color:#C9D1D9;font-size:0.95rem;line-height:1.6;margin:0;">Velocidade comercial vs. disciplina de execução. Um quer fechar, o outro quer garantir que o fechado seja entregue.</p>
+                    <div class="dyn-card__label">Velocidade vs. disciplina</div>
+                    <p class="dyn-card__desc">Um quer fechar, o outro quer garantir que o fechado seja entregue.</p>
                 </div>
-                <div style="background:#1C2333;border-radius:16px;padding:28px;">
-                    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
-                        <span style="background:rgba(212,160,23,0.15);color:#D4A017;padding:8px 12px;border-radius:10px;font-size:0.85rem;font-weight:600;"><i class="fas fa-users"></i> Pessoas</span>
-                        <span style="color:#8B949E;">&times;</span>
-                        <span style="background:rgba(212,160,23,0.15);color:#D4A017;padding:8px 12px;border-radius:10px;font-size:0.85rem;font-weight:600;"><i class="fas fa-graduation-cap"></i> Treinamento</span>
+
+                <!-- Card 5: Pessoas × Treinamento -->
+                <div class="dyn-card">
+                    <div class="dyn-card__versus">
+                        <div class="dyn-card__agent">
+                            <div class="dyn-card__icon" style="--agent-color: #8B5CF6;"><i class="fas fa-users"></i></div>
+                            <span class="dyn-card__name">Pessoas</span>
+                        </div>
+                        <div class="dyn-card__spark">
+                            <svg viewBox="0 0 24 24" width="20" height="20"><path d="M13 2L3 14h9l-1 10 10-12h-9l1-10z" fill="#D4A017"/></svg>
+                        </div>
+                        <div class="dyn-card__agent">
+                            <div class="dyn-card__icon" style="--agent-color: #06B6D4;"><i class="fas fa-graduation-cap"></i></div>
+                            <span class="dyn-card__name">Treinamento</span>
+                        </div>
                     </div>
-                    <p style="color:#C9D1D9;font-size:0.95rem;line-height:1.6;margin:0;">Diagnóstico vs. solução. Um detecta o problema humano, o outro cria o caminho de desenvolvimento.</p>
+                    <div class="dyn-card__label">Diagnóstico vs. solução</div>
+                    <p class="dyn-card__desc">Um detecta o problema humano, o outro cria o caminho de desenvolvimento.</p>
                 </div>
-                <div style="background:linear-gradient(135deg,rgba(212,160,23,0.08),rgba(212,160,23,0.02));border:2px solid rgba(212,160,23,0.2);border-radius:16px;padding:28px;">
-                    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
-                        <span style="background:rgba(212,160,23,0.3);color:#D4A017;padding:8px 12px;border-radius:10px;font-size:0.85rem;font-weight:700;"><i class="fas fa-robot"></i> Olívia</span>
-                        <span style="color:#D4A017;font-weight:600;">= Orquestradora</span>
+
+                <!-- Olívia: Orquestradora (special card) -->
+                <div class="dyn-card dyn-card--olivia">
+                    <div class="dyn-card__olivia-glow"></div>
+                    <div class="dyn-card__versus" style="justify-content:center;">
+                        <div class="dyn-card__agent">
+                            <div class="dyn-card__icon dyn-card__icon--olivia"><i class="fas fa-robot"></i></div>
+                            <span class="dyn-card__name" style="color:#D4A017;font-weight:700;">Olívia</span>
+                        </div>
                     </div>
-                    <p style="color:#C9D1D9;font-size:0.95rem;line-height:1.6;margin:0;">Resolve os conflitos, prioriza as ações e traduz para o empresário o que o time está fazendo — e por quê.</p>
+                    <div class="dyn-card__label" style="color:#D4A017;">A Orquestradora</div>
+                    <p class="dyn-card__desc">Resolve os conflitos, prioriza as ações e traduz para o empresário o que o time está fazendo — e por quê.</p>
+                    <div class="dyn-card__olivia-lines">
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ═══ TOTAL COST ANCHOR ═══ -->
-    <section class="total-cost-section">
-        <div class="container" data-reveal>
-            <div class="total-cost__old">O time humano equivalente: R$ 80-180k/mês</div>
-            <h2>Com o Orbit, tudo isso por uma fração. E trabalhando 24/7.</h2>
-            <p>12 agentes especializados, setup incluso, garantia de 90 dias.</p>
-            <a href="/#contato-form" class="btn btn-primary">QUERO CONHECER O TIME DE IA</a>
+    <style>
+    /* ═══ DYNAMICS SECTION ═══ */
+    .dynamics-section {
+        background: #0D1117;
+        padding: 100px 0;
+        position: relative;
+        overflow: hidden;
+    }
+    .dynamics-section::before {
+        content: '';
+        position: absolute;
+        width: 600px; height: 600px;
+        background: radial-gradient(circle, rgba(212,160,23,0.04) 0%, transparent 70%);
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+    }
+
+    .dyn-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .dyn-card {
+        background: linear-gradient(160deg, #1C2333 0%, #161B22 100%);
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 20px;
+        padding: 32px 28px;
+        position: relative;
+        transition: all 0.35s ease;
+        overflow: hidden;
+    }
+    .dyn-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 20px;
+        background: linear-gradient(160deg, rgba(212,160,23,0.06) 0%, transparent 50%);
+        opacity: 0;
+        transition: opacity 0.35s ease;
+    }
+    .dyn-card:hover {
+        border-color: rgba(212,160,23,0.2);
+        transform: translateY(-4px);
+        box-shadow: 0 16px 48px rgba(0,0,0,0.3), 0 0 40px rgba(212,160,23,0.06);
+    }
+    .dyn-card:hover::before { opacity: 1; }
+
+    .dyn-card__versus {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .dyn-card__agent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .dyn-card__icon {
+        width: 52px; height: 52px;
+        border-radius: 14px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid var(--agent-color, rgba(255,255,255,0.1));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        color: var(--agent-color, #D4A017);
+        box-shadow: 0 0 20px rgba(212,160,23,0.05);
+        transition: all 0.35s ease;
+    }
+    .dyn-card:hover .dyn-card__icon {
+        background: rgba(212,160,23,0.08);
+        box-shadow: 0 0 24px rgba(212,160,23,0.12);
+    }
+
+    .dyn-card__icon--olivia {
+        width: 60px; height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, rgba(212,160,23,0.15), rgba(212,160,23,0.05));
+        border: 2px solid rgba(212,160,23,0.4);
+        font-size: 24px;
+        color: #D4A017;
+        box-shadow: 0 0 30px rgba(212,160,23,0.15);
+        animation: oliviaIconPulse 3s ease-in-out infinite;
+    }
+    @keyframes oliviaIconPulse {
+        0%, 100% { box-shadow: 0 0 30px rgba(212,160,23,0.15); }
+        50% { box-shadow: 0 0 40px rgba(212,160,23,0.25); }
+    }
+
+    .dyn-card__name {
+        font-size: 12px;
+        font-weight: 600;
+        color: #C9D1D9;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .dyn-card__spark {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: sparkPulse 2s ease-in-out infinite;
+    }
+    @keyframes sparkPulse {
+        0%, 100% { transform: scale(1); opacity: 0.7; }
+        50% { transform: scale(1.2); opacity: 1; }
+    }
+
+    .dyn-card__label {
+        font-size: 15px;
+        font-weight: 700;
+        color: #fff;
+        text-align: center;
+        margin-bottom: 8px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .dyn-card__desc {
+        font-size: 14px;
+        color: #8B949E;
+        text-align: center;
+        line-height: 1.6;
+        margin: 0;
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Olívia special card */
+    .dyn-card--olivia {
+        background: linear-gradient(160deg, rgba(212,160,23,0.08) 0%, #161B22 100%);
+        border: 1px solid rgba(212,160,23,0.2);
+    }
+    .dyn-card--olivia:hover {
+        border-color: rgba(212,160,23,0.4);
+        box-shadow: 0 16px 48px rgba(0,0,0,0.3), 0 0 60px rgba(212,160,23,0.1);
+    }
+
+    .dyn-card__olivia-glow {
+        position: absolute;
+        top: -40px; left: 50%;
+        transform: translateX(-50%);
+        width: 160px; height: 160px;
+        background: radial-gradient(circle, rgba(212,160,23,0.12) 0%, transparent 70%);
+        pointer-events: none;
+        animation: oliviaGlow 4s ease-in-out infinite;
+    }
+    @keyframes oliviaGlow {
+        0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+        50% { opacity: 1; transform: translateX(-50%) scale(1.2); }
+    }
+
+    .dyn-card__olivia-lines {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 16px;
+        position: relative;
+        z-index: 1;
+    }
+    .dyn-card__olivia-lines span {
+        width: 24px; height: 2px;
+        background: linear-gradient(90deg, transparent, #D4A017, transparent);
+        border-radius: 1px;
+        animation: lineGlide 2.5s ease-in-out infinite;
+    }
+    .dyn-card__olivia-lines span:nth-child(2) { animation-delay: 0.3s; width: 32px; }
+    .dyn-card__olivia-lines span:nth-child(3) { animation-delay: 0.6s; width: 20px; }
+    .dyn-card__olivia-lines span:nth-child(4) { animation-delay: 0.9s; width: 28px; }
+    .dyn-card__olivia-lines span:nth-child(5) { animation-delay: 1.2s; }
+    @keyframes lineGlide {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+        .dyn-grid { grid-template-columns: 1fr; gap: 16px; }
+        .dynamics-section { padding: 60px 0; }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .dyn-grid { grid-template-columns: 1fr 1fr; }
+    }
+    </style>
+
+    <!-- ═══ CTA FINAL ═══ -->
+    <section class="site-cta">
+        <div class="site-cta__particles"><span></span><span></span><span></span><span></span></div>
+        <div class="container">
+            <div class="site-cta__card" data-reveal="scale">
+                <div class="site-cta__icon"><i class="fas fa-robot"></i></div>
+                <h2>Pronto para montar seu time de IA?</h2>
+                <p>12 agentes especializados, setup incluso, garantia de 90 dias. Trabalhando 24/7.</p>
+                <div class="site-cta__buttons">
+                    <a href="/#contato-form" class="btn btn-primary btn-lg">QUERO CONHECER O TIME DE IA</a>
+                    <a href="/pricing.html" class="btn btn-outline btn-lg">Ver Planos</a>
+                </div>
+                <p class="cta-note">O time humano equivalente: R$ 80-180k/mês</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ CLOSING PHRASE ═══ -->
+    <section class="site-closing">
+        <div class="container">
+            <h2>Orbit é o time de gestão que sua empresa sempre precisou. <span style="display:block;margin-top:8px;">E que nunca para de trabalhar.</span></h2>
+            <a href="/#contato-form" class="btn">Conhecer o Time de IA</a>
         </div>
     </section>
 

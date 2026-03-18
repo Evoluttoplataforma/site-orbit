@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/styles-v2.css?v=2">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=d8b11dbe">
 
     <style>
         /* ═══ PRICING PAGE STYLES ═══ */
@@ -296,46 +296,6 @@
         .pricing-card .btn-outline:hover {
             border-color: #D4A017;
             color: #D4A017;
-        }
-
-        /* Guarantee */
-        .guarantee-pricing {
-            background: #FAFBFC;
-            padding: 100px 0;
-            text-align: center;
-        }
-        .guarantee-pricing__card {
-            max-width: 640px;
-            margin: 0 auto;
-            padding: 48px;
-        }
-        .guarantee-pricing__icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, rgba(212,160,23,0.15), rgba(212,160,23,0.05));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 24px;
-            box-shadow: 0 0 40px rgba(212,160,23,0.15);
-        }
-        .guarantee-pricing__icon i {
-            font-size: 2rem;
-            color: #D4A017;
-        }
-        .guarantee-pricing h2 {
-            color: #1A1D23;
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 16px;
-        }
-        .guarantee-pricing p {
-            color: #5A6069;
-            font-size: 1.1rem;
-            line-height: 1.7;
-            max-width: 500px;
-            margin: 0 auto;
         }
 
         /* Channels */
@@ -813,14 +773,60 @@
     </section>
 
     <!-- ═══ GUARANTEE ═══ -->
-    <section class="guarantee-pricing">
+    <section class="guarantee-section guarantee-section--light">
         <div class="container">
-            <div class="guarantee-pricing__card" data-reveal="scale">
-                <div class="guarantee-pricing__icon">
-                    <i class="fas fa-shield-halved"></i>
+            <div class="guarantee-lp" data-reveal="scale">
+                <!-- Left: Visual Scene -->
+                <div class="guarantee-lp__scene">
+                    <div class="guarantee-lp__particles">
+                        <span></span><span></span><span></span><span></span><span></span><span></span>
+                    </div>
+
+                    <!-- Contract document -->
+                    <div class="guarantee-lp__contract">
+                        <div class="contract-paper">
+                            <div class="contract-paper__header">
+                                <div class="contract-paper__logo">O</div>
+                                <div class="contract-paper__title">Termo de Garantia</div>
+                            </div>
+                            <div class="contract-line"></div>
+                            <div class="contract-line contract-line--short"></div>
+                            <div class="contract-line contract-line--med"></div>
+                            <div class="contract-line"></div>
+                            <div class="contract-line contract-line--short"></div>
+                            <div class="contract-line contract-line--gold"></div>
+                            <div class="contract-check">
+                                <i class="fas fa-circle-check"></i> Assinado digitalmente
+                            </div>
+                        </div>
+                        <!-- Seal stamp -->
+                        <div class="guarantee-lp__seal">
+                            <div class="seal-circle">
+                                <i class="fas fa-shield-halved"></i>
+                                <span>Garantido</span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <h2>Garantia de 90 dias</h2>
-                <p>Se não gerar resultado em 90 dias, devolvemos seu investimento. Risco zero para você. Confiança total para nós.</p>
+
+                <!-- Right: Content -->
+                <div class="guarantee-lp__content">
+                    <div class="guarantee-lp__badge">
+                        <i class="fas fa-shield-halved"></i> Risco Zero
+                    </div>
+                    <h2>Garantia de 90 dias</h2>
+                    <p>Se em 90 dias o Orbit não gerar resultado mensurável na sua empresa, devolvemos 100% do seu investimento. Sem burocracia, sem letras miúdas.</p>
+                    <ul class="guarantee-lp__checks">
+                        <li><i class="fas fa-circle-check"></i> Resultados mensuráveis em até 90 dias</li>
+                        <li><i class="fas fa-circle-check"></i> Devolução integral sem questionamentos</li>
+                        <li><i class="fas fa-circle-check"></i> Sem contrato de fidelidade</li>
+                        <li><i class="fas fa-circle-check"></i> Cancele quando quiser</li>
+                    </ul>
+                    <div>
+                        <a href="/#contato-form" class="btn btn-primary btn-lg">QUERO TESTAR SEM RISCO <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -908,19 +914,26 @@
     </section>
 
     <!-- ═══ CTA FINAL ═══ -->
-    <section class="cta-final">
-        <div class="container" data-reveal>
-            <h2>Pronto para montar seu time de IA?</h2>
-            <a href="/#contato-form" class="btn btn-primary">QUERO CONHECER O TIME DE IA</a>
-            <p class="cta-note">2 min &bull; Sem compromisso</p>
+    <section class="site-cta">
+        <div class="site-cta__particles"><span></span><span></span><span></span><span></span></div>
+        <div class="container">
+            <div class="site-cta__card" data-reveal="scale">
+                <div class="site-cta__icon"><i class="fas fa-rocket"></i></div>
+                <h2>Pronto para montar seu time de IA?</h2>
+                <p>Agende uma demonstração gratuita e veja os agentes trabalhando com a SUA empresa.</p>
+                <div class="site-cta__buttons">
+                    <a href="/#contato-form" class="btn btn-primary btn-lg">QUERO CONHECER O TIME DE IA</a>
+                </div>
+                <p class="cta-note">2 min &bull; Sem compromisso</p>
+            </div>
         </div>
     </section>
 
     <!-- ═══ CLOSING PHRASE ═══ -->
-    <section style="background:linear-gradient(135deg,#D4A017,#E8B824);padding:60px 0;text-align:center;">
+    <section class="site-closing">
         <div class="container">
-            <h2 style="font-size:2rem;font-weight:800;color:#000;max-width:700px;margin:0 auto;line-height:1.3;">Orbit é o time de gestão que sua empresa sempre precisou. <span style="display:block;margin-top:8px;">E que nunca para de trabalhar.</span></h2>
-            <a href="/#contato-form" class="btn" style="background:#000;color:#fff;margin-top:24px;padding:16px 36px;border-radius:50px;font-weight:700;">Conhecer o Time de IA</a>
+            <h2>Orbit é o time de gestão que sua empresa sempre precisou. <span style="display:block;margin-top:8px;">E que nunca para de trabalhar.</span></h2>
+            <a href="/#contato-form" class="btn">Conhecer o Time de IA</a>
         </div>
     </section>
 
