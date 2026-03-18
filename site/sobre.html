@@ -30,18 +30,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/styles-v2.css?v=7aefaed1">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=12d06f57">
 
     <style>
-        /* ═══ SOBRE PAGE STYLES ═══ */
+        /* ═══ SOBRE PAGE STYLES — CINEMA v2 ═══ */
 
         /* Hero */
         .sobre-hero {
-            background: #000;
-            padding: 160px 0 100px;
+            background: #0D1117;
+            padding: 180px 0 120px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
         }
         .sobre-hero::before {
             content: '';
@@ -49,24 +52,24 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(253,183,63,0.08) 0%, transparent 70%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(212,160,23,0.08) 0%, transparent 70%);
             pointer-events: none;
         }
         .sobre-hero .section-badge {
             display: inline-block;
-            background: rgba(253,183,63,0.1);
-            color: #FDB73F;
+            background: rgba(212,160,23,0.1);
+            color: #D4A017;
             padding: 8px 20px;
             border-radius: 50px;
             font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 24px;
-            border: 1px solid rgba(253,183,63,0.2);
+            border: 1px solid rgba(212,160,23,0.2);
         }
         .sobre-hero h1 {
-            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
             font-weight: 800;
             color: #fff;
             line-height: 1.15;
@@ -75,126 +78,432 @@
             margin-left: auto;
             margin-right: auto;
         }
+        .sobre-hero h1 em {
+            font-style: normal;
+            background: linear-gradient(135deg, #D4A017, #F5C518);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
         .sobre-hero p {
-            color: rgba(255,255,255,0.7);
-            font-size: 1.1rem;
+            color: #8B949E;
+            font-size: 1.15rem;
             line-height: 1.7;
             max-width: 640px;
             margin: 0 auto;
         }
+        /* Hero floating orbs */
+        .sobre-hero__orb {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(80px);
+        }
+        .sobre-hero__orb--1 { width: 300px; height: 300px; background: rgba(212,160,23,0.12); top: 10%; left: -5%; animation: sobreOrbFloat 8s ease-in-out infinite; }
+        .sobre-hero__orb--2 { width: 200px; height: 200px; background: rgba(212,160,23,0.08); bottom: 10%; right: -3%; animation: sobreOrbFloat 10s ease-in-out infinite reverse; }
+        @keyframes sobreOrbFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-30px) scale(1.1); }
+        }
 
-        /* Stats / Números */
+        /* ═══ NÚMEROS — dark with animated counters ═══ */
         .numeros-section {
-            background: #f8f9fa;
-            padding: 80px 0;
+            background: #161B22;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .numeros-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212,160,23,0.3), transparent);
         }
         .numeros-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
+            gap: 24px;
         }
         .numero-card {
             text-align: center;
-            padding: 36px 24px;
+            padding: 40px 24px;
             border-radius: 16px;
-            background: #fff;
-            border: 1px solid #e8eaed;
-            transition: all 0.3s ease;
+            background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .numero-card.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .numero-card::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 20%;
+            right: 20%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(212,160,23,0.4), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
         .numero-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            transform: translateY(-6px);
+            border-color: rgba(212,160,23,0.2);
+            box-shadow: 0 20px 60px rgba(212,160,23,0.08);
+        }
+        .numero-card:hover::before { opacity: 1; }
+        .numero-card .numero-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(212,160,23,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 1.2rem;
+            color: #D4A017;
         }
         .numero-card .numero {
             font-size: 2.8rem;
             font-weight: 800;
-            color: #1A1D23;
+            color: #fff;
             display: block;
             line-height: 1;
             margin-bottom: 8px;
         }
         .numero-card .numero-label {
-            font-size: 0.95rem;
-            color: #5A6069;
+            font-size: 0.9rem;
+            color: #8B949E;
             font-weight: 500;
         }
 
-        /* Nossa História / Timeline */
+        /* ═══ HISTÓRIA — Cinema Timeline ═══ */
         .historia-section {
-            background: #000;
-            padding: 100px 0;
+            background: #0D1117;
+            padding: 140px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .historia-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(212,160,23,0.03) 0%, transparent 70%);
+            pointer-events: none;
         }
         .historia-section .section-header {
             text-align: center;
-            margin-bottom: 64px;
+            margin-bottom: 80px;
         }
         .historia-section .section-header h2 {
             color: #fff;
-            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
             font-weight: 800;
         }
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-            padding-left: 48px;
+        .historia-section .section-header p {
+            color: #8B949E;
+            font-size: 1.1rem;
+            margin-top: 12px;
         }
-        .timeline::before {
-            content: '';
+
+        /* Cinema timeline rail */
+        #historiaCinema .hiw-cinema__rail {
             position: absolute;
-            left: 16px;
+            left: 28px;
             top: 0;
             bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, #FDB73F, rgba(253,183,63,0.2));
+            width: 3px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 3px;
         }
-        .timeline-item {
+        #historiaCinema .hiw-cinema__rail-fill {
+            width: 100%;
+            height: 0%;
+            background: linear-gradient(180deg, #D4A017, #F5C518);
+            border-radius: 3px;
+            transition: height 1.2s cubic-bezier(0.4,0,0.2,1);
+            box-shadow: 0 0 12px rgba(212,160,23,0.4);
+        }
+        #historiaCinema .hiw-cinema__steps {
             position: relative;
-            margin-bottom: 48px;
-            padding-left: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding-left: 0;
         }
-        .timeline-item:last-child {
-            margin-bottom: 0;
+        #historiaCinema .hiw-cinema__step {
+            display: grid;
+            grid-template-columns: 60px 1fr;
+            gap: 32px;
+            margin-bottom: 64px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4,0,0.2,1);
         }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -40px;
-            top: 6px;
-            width: 14px;
-            height: 14px;
+        #historiaCinema .hiw-cinema__step.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #historiaCinema .hiw-cinema__step:last-child { margin-bottom: 0; }
+        #historiaCinema .hiw-cinema__dot {
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
-            background: #FDB73F;
-            border: 3px solid #000;
-            z-index: 1;
-        }
-        .timeline-item .timeline-date {
+            background: #161B22;
+            border: 3px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 0.85rem;
+            font-weight: 800;
+            color: rgba(255,255,255,0.3);
+            transition: all 0.5s;
+            z-index: 2;
+            position: relative;
+        }
+        #historiaCinema .hiw-cinema__step.active .hiw-cinema__dot {
+            border-color: #D4A017;
+            color: #D4A017;
+            box-shadow: 0 0 20px rgba(212,160,23,0.3);
+        }
+        #historiaCinema .hiw-cinema__card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 32px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            align-items: center;
+        }
+        #historiaCinema .hiw-cinema__step.active .hiw-cinema__card {
+            border-color: rgba(212,160,23,0.15);
+        }
+        #historiaCinema .hiw-cinema__info .hiw-cinema__label {
+            display: inline-block;
+            background: rgba(212,160,23,0.1);
+            color: #D4A017;
+            padding: 4px 14px;
+            border-radius: 50px;
+            font-size: 0.75rem;
             font-weight: 700;
-            color: #FDB73F;
-            text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
-        .timeline-item h3 {
+        #historiaCinema .hiw-cinema__info h3 {
             color: #fff;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
-        .timeline-item p {
-            color: rgba(255,255,255,0.7);
+        #historiaCinema .hiw-cinema__info p {
+            color: #8B949E;
             font-size: 0.95rem;
-            line-height: 1.6;
+            line-height: 1.7;
         }
+
+        /* Animated scenes */
+        .hist-scene {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Scene 1: Building blocks */
+        .hist-scene--build .hist-block {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            position: absolute;
+            opacity: 0;
+            transform: scale(0.5);
+        }
+        .hist-scene--build .hist-block:nth-child(1) { background: rgba(212,160,23,0.3); border: 1px solid rgba(212,160,23,0.4); left: 20%; top: 60%; }
+        .hist-scene--build .hist-block:nth-child(2) { background: rgba(212,160,23,0.2); border: 1px solid rgba(212,160,23,0.3); left: 35%; top: 40%; }
+        .hist-scene--build .hist-block:nth-child(3) { background: rgba(212,160,23,0.4); border: 1px solid rgba(212,160,23,0.5); left: 50%; top: 20%; }
+        .hist-scene--build .hist-block:nth-child(4) { background: rgba(212,160,23,0.15); border: 1px solid rgba(212,160,23,0.25); right: 20%; top: 50%; }
+        .hist-scene--build .hist-icon { font-size: 2rem; color: rgba(212,160,23,0.2); }
+        .hiw-cinema__step.active .hist-scene--build .hist-block {
+            animation: histBlockPop 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards;
+        }
+        .hiw-cinema__step.active .hist-scene--build .hist-block:nth-child(1) { animation-delay: 0.3s; }
+        .hiw-cinema__step.active .hist-scene--build .hist-block:nth-child(2) { animation-delay: 0.5s; }
+        .hiw-cinema__step.active .hist-scene--build .hist-block:nth-child(3) { animation-delay: 0.7s; }
+        .hiw-cinema__step.active .hist-scene--build .hist-block:nth-child(4) { animation-delay: 0.9s; }
+        @keyframes histBlockPop {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Scene 2: Network expanding */
+        .hist-scene--network .hist-node {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(34,197,94,0.2);
+            border: 2px solid rgba(34,197,94,0.4);
+            position: absolute;
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: #22C55E;
+        }
+        .hist-scene--network .hist-node--center { width: 44px; height: 44px; background: rgba(212,160,23,0.2); border-color: rgba(212,160,23,0.5); color: #D4A017; font-size: 0.9rem; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+        .hist-scene--network .hist-node:nth-child(2) { left: 20%; top: 30%; }
+        .hist-scene--network .hist-node:nth-child(3) { right: 20%; top: 25%; }
+        .hist-scene--network .hist-node:nth-child(4) { left: 15%; bottom: 25%; }
+        .hist-scene--network .hist-node:nth-child(5) { right: 15%; bottom: 30%; }
+        .hist-scene--network .hist-node:nth-child(6) { left: 40%; top: 15%; }
+        .hiw-cinema__step.active .hist-scene--network .hist-node {
+            animation: histNodeAppear 0.5s ease forwards;
+        }
+        .hiw-cinema__step.active .hist-scene--network .hist-node:nth-child(1) { animation-delay: 0.2s; }
+        .hiw-cinema__step.active .hist-scene--network .hist-node:nth-child(2) { animation-delay: 0.4s; }
+        .hiw-cinema__step.active .hist-scene--network .hist-node:nth-child(3) { animation-delay: 0.6s; }
+        .hiw-cinema__step.active .hist-scene--network .hist-node:nth-child(4) { animation-delay: 0.8s; }
+        .hiw-cinema__step.active .hist-scene--network .hist-node:nth-child(5) { animation-delay: 1s; }
+        .hiw-cinema__step.active .hist-scene--network .hist-node:nth-child(6) { animation-delay: 1.2s; }
+        @keyframes histNodeAppear {
+            to { opacity: 1; }
+        }
+
+        /* Scene 3: Digital transform */
+        .hist-scene--digital .hist-screen {
+            width: 120px;
+            height: 80px;
+            background: #161B22;
+            border: 2px solid rgba(212,160,23,0.3);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hist-scene--digital .hist-screen-bar {
+            position: absolute;
+            left: 8px;
+            height: 4px;
+            border-radius: 2px;
+            background: rgba(212,160,23,0.3);
+            opacity: 0;
+        }
+        .hist-scene--digital .hist-screen-bar:nth-child(1) { top: 12px; width: 60%; }
+        .hist-scene--digital .hist-screen-bar:nth-child(2) { top: 24px; width: 80%; background: rgba(34,197,94,0.3); }
+        .hist-scene--digital .hist-screen-bar:nth-child(3) { top: 36px; width: 45%; }
+        .hist-scene--digital .hist-screen-bar:nth-child(4) { top: 48px; width: 70%; background: rgba(99,102,241,0.3); }
+        .hist-scene--digital .hist-screen-dot { position: absolute; bottom: 8px; right: 8px; width: 10px; height: 10px; border-radius: 50%; background: #22C55E; opacity: 0; }
+        .hiw-cinema__step.active .hist-scene--digital .hist-screen-bar {
+            animation: histBarGrow 0.6s ease forwards;
+        }
+        .hiw-cinema__step.active .hist-scene--digital .hist-screen-bar:nth-child(1) { animation-delay: 0.3s; }
+        .hiw-cinema__step.active .hist-scene--digital .hist-screen-bar:nth-child(2) { animation-delay: 0.5s; }
+        .hiw-cinema__step.active .hist-scene--digital .hist-screen-bar:nth-child(3) { animation-delay: 0.7s; }
+        .hiw-cinema__step.active .hist-scene--digital .hist-screen-bar:nth-child(4) { animation-delay: 0.9s; }
+        .hiw-cinema__step.active .hist-scene--digital .hist-screen-dot {
+            animation: histNodeAppear 0.4s ease 1.1s forwards;
+        }
+        @keyframes histBarGrow {
+            from { opacity: 0; width: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Scene 4: AI agents orbit */
+        .hist-scene--ai .hist-orbit-ring {
+            width: 120px;
+            height: 120px;
+            border: 2px dashed rgba(212,160,23,0.2);
+            border-radius: 50%;
+            position: relative;
+        }
+        .hist-scene--ai .hist-orbit-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(212,160,23,0.2), rgba(212,160,23,0.05));
+            border: 2px solid rgba(212,160,23,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: #D4A017;
+        }
+        .hist-scene--ai .hist-agent {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(212,160,23,0.15);
+            border: 1px solid rgba(212,160,23,0.3);
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.55rem;
+            color: #D4A017;
+            opacity: 0;
+        }
+        .hist-scene--ai .hist-agent:nth-child(2) { top: -12px; left: 50%; transform: translateX(-50%); }
+        .hist-scene--ai .hist-agent:nth-child(3) { top: 10px; right: -12px; }
+        .hist-scene--ai .hist-agent:nth-child(4) { bottom: 10px; right: -12px; }
+        .hist-scene--ai .hist-agent:nth-child(5) { bottom: -12px; left: 50%; transform: translateX(-50%); }
+        .hist-scene--ai .hist-agent:nth-child(6) { bottom: 10px; left: -12px; }
+        .hist-scene--ai .hist-agent:nth-child(7) { top: 10px; left: -12px; }
+        .hiw-cinema__step.active .hist-scene--ai .hist-orbit-ring {
+            animation: histOrbitSpin 20s linear infinite;
+        }
+        .hiw-cinema__step.active .hist-scene--ai .hist-agent {
+            animation: histBlockPop 0.4s ease forwards;
+        }
+        .hiw-cinema__step.active .hist-scene--ai .hist-agent:nth-child(2) { animation-delay: 0.3s; }
+        .hiw-cinema__step.active .hist-scene--ai .hist-agent:nth-child(3) { animation-delay: 0.45s; }
+        .hiw-cinema__step.active .hist-scene--ai .hist-agent:nth-child(4) { animation-delay: 0.6s; }
+        .hiw-cinema__step.active .hist-scene--ai .hist-agent:nth-child(5) { animation-delay: 0.75s; }
+        .hiw-cinema__step.active .hist-scene--ai .hist-agent:nth-child(6) { animation-delay: 0.9s; }
+        .hiw-cinema__step.active .hist-scene--ai .hist-agent:nth-child(7) { animation-delay: 1.05s; }
+        @keyframes histOrbitSpin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Quote card */
         .historia-quote {
             max-width: 700px;
-            margin: 64px auto 0;
+            margin: 80px auto 0;
             text-align: center;
-            padding: 32px;
-            border-radius: 16px;
-            background: rgba(253,183,63,0.05);
-            border: 1px solid rgba(253,183,63,0.15);
+            padding: 40px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(212,160,23,0.06), rgba(212,160,23,0.02));
+            border: 1px solid rgba(212,160,23,0.15);
+            position: relative;
+        }
+        .historia-quote::before {
+            content: '\201C';
+            position: absolute;
+            top: -10px;
+            left: 30px;
+            font-size: 4rem;
+            color: rgba(212,160,23,0.2);
+            font-family: Georgia, serif;
+            line-height: 1;
         }
         .historia-quote p {
             color: rgba(255,255,255,0.85);
@@ -203,22 +512,33 @@
             font-style: italic;
         }
 
-        /* Ecossistema */
+        /* ═══ ECOSSISTEMA — Dark with connections ═══ */
         .ecossistema-section {
-            background: #f8f9fa;
-            padding: 100px 0;
+            background: #161B22;
+            padding: 140px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .ecossistema-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212,160,23,0.3), transparent);
         }
         .ecossistema-section .section-header {
             text-align: center;
-            margin-bottom: 56px;
+            margin-bottom: 64px;
         }
         .ecossistema-section .section-header h2 {
-            color: #1A1D23;
-            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            color: #fff;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
             font-weight: 800;
         }
         .ecossistema-section .section-header p {
-            color: #5A6069;
+            color: #8B949E;
             margin-top: 12px;
             font-size: 1.05rem;
         }
@@ -228,72 +548,123 @@
             gap: 24px;
         }
         .eco-card {
-            background: #fff;
-            border-radius: 16px;
-            padding: 32px 24px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+            border-radius: 20px;
+            padding: 36px 24px;
             text-align: center;
-            border: 1px solid #e8eaed;
-            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+            position: relative;
+            overflow: hidden;
+        }
+        .eco-card::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 20%;
+            right: 20%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--eco-accent, rgba(212,160,23,0.4)), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
         .eco-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            transform: translateY(-8px);
+            border-color: rgba(255,255,255,0.12);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
+        .eco-card:hover::before { opacity: 1; }
         .eco-card .eco-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
+            transition: all 0.3s;
         }
-        .eco-card .eco-icon--orbit { background: rgba(253,183,63,0.12); color: #FDB73F; }
+        .eco-card:hover .eco-icon { transform: scale(1.1); }
+        .eco-card .eco-icon--orbit { background: rgba(212,160,23,0.12); color: #D4A017; }
         .eco-card .eco-icon--templum { background: rgba(34,197,94,0.12); color: #22C55E; }
         .eco-card .eco-icon--alpha { background: rgba(99,102,241,0.12); color: #6366F1; }
         .eco-card .eco-icon--sce { background: rgba(239,68,68,0.12); color: #EF4444; }
+        .eco-card:nth-child(1) { --eco-accent: rgba(212,160,23,0.4); }
+        .eco-card:nth-child(2) { --eco-accent: rgba(34,197,94,0.4); }
+        .eco-card:nth-child(3) { --eco-accent: rgba(99,102,241,0.4); }
+        .eco-card:nth-child(4) { --eco-accent: rgba(239,68,68,0.4); }
         .eco-card h3 {
-            color: #1A1D23;
+            color: #fff;
             font-size: 1.15rem;
             font-weight: 700;
             margin-bottom: 10px;
         }
         .eco-card p {
-            color: #5A6069;
+            color: #8B949E;
             font-size: 0.9rem;
             line-height: 1.6;
         }
+        .eco-card .eco-tag {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .eco-card:nth-child(1) .eco-tag { background: rgba(212,160,23,0.1); color: #D4A017; }
+        .eco-card:nth-child(2) .eco-tag { background: rgba(34,197,94,0.1); color: #22C55E; }
+        .eco-card:nth-child(3) .eco-tag { background: rgba(99,102,241,0.1); color: #6366F1; }
+        .eco-card:nth-child(4) .eco-tag { background: rgba(239,68,68,0.1); color: #EF4444; }
 
-        /* Diretoria */
+        /* ═══ DIRETORIA — Enhanced ═══ */
         .diretoria-section {
-            background: #000;
-            padding: 100px 0;
+            background: #0D1117;
+            padding: 140px 0;
+            position: relative;
+        }
+        .diretoria-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212,160,23,0.3), transparent);
         }
         .diretoria-section .section-header {
             text-align: center;
-            margin-bottom: 56px;
+            margin-bottom: 64px;
         }
         .diretoria-section .section-header h2 {
             color: #fff;
-            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
             font-weight: 800;
+        }
+        .diretoria-section .section-header p {
+            color: #8B949E;
+            margin-top: 12px;
+            font-size: 1.05rem;
         }
         .diretoria-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 24px;
-            max-width: 900px;
+            gap: 32px;
+            max-width: 960px;
             margin: 0 auto;
         }
         .founder-card {
             text-align: center;
+            transition: all 0.4s;
         }
+        .founder-card:hover { transform: translateY(-6px); }
         .founder-avatar {
-            width: 80px;
-            height: 80px;
+            width: 88px;
+            height: 88px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #FDB73F, #E5A235);
+            background: linear-gradient(135deg, #D4A017, #F5C518);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -301,85 +672,71 @@
             font-size: 1.4rem;
             font-weight: 800;
             color: #000;
+            position: relative;
+            transition: all 0.3s;
+            box-shadow: 0 8px 32px rgba(212,160,23,0.2);
+        }
+        .founder-card:hover .founder-avatar {
+            box-shadow: 0 12px 40px rgba(212,160,23,0.35);
+            transform: scale(1.05);
         }
         .founder-card h4 {
             color: #fff;
-            font-size: 1rem;
+            font-size: 1.05rem;
             font-weight: 700;
             margin-bottom: 4px;
         }
         .founder-card span {
-            color: rgba(255,255,255,0.5);
-            font-size: 0.82rem;
+            color: #8B949E;
+            font-size: 0.8rem;
         }
         .diretoria-sede {
             text-align: center;
-            margin-top: 48px;
-            color: rgba(255,255,255,0.5);
+            margin-top: 56px;
+            padding: 20px 32px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 50px;
+            color: #8B949E;
             font-size: 0.9rem;
         }
         .diretoria-sede i {
-            margin-right: 6px;
-            color: #FDB73F;
+            color: #D4A017;
         }
-
-        /* CTA Section */
-        .sobre-cta {
-            background: #000;
-            padding: 100px 0;
+        .diretoria-sede-wrap {
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .sobre-cta::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(253,183,63,0.1) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .sobre-cta h2 {
-            color: #fff;
-            font-size: clamp(1.8rem, 4vw, 2.4rem);
-            font-weight: 800;
-            margin-bottom: 24px;
+            margin-top: 56px;
         }
 
-        /* Responsive */
+        /* ═══ RESPONSIVE ═══ */
         @media (max-width: 1024px) {
-            .ecossistema-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .diretoria-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 32px;
-            }
+            .ecossistema-grid { grid-template-columns: repeat(2, 1fr); }
+            .diretoria-grid { grid-template-columns: repeat(3, 1fr); gap: 32px; }
+            #historiaCinema .hiw-cinema__card { grid-template-columns: 1fr; }
+            .numeros-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
         }
         @media (max-width: 768px) {
-            .numeros-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 16px;
-            }
-            .ecossistema-grid {
-                grid-template-columns: 1fr;
-            }
-            .diretoria-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 32px;
-            }
+            .numeros-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+            .ecossistema-grid { grid-template-columns: 1fr; }
+            .diretoria-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+            #historiaCinema .hiw-cinema__step { grid-template-columns: 48px 1fr; gap: 16px; }
+            #historiaCinema .hiw-cinema__dot { width: 48px; height: 48px; font-size: 0.75rem; }
+            .hist-scene { height: 150px; }
+            .sobre-hero { padding: 140px 0 80px; min-height: auto; }
         }
         @media (max-width: 480px) {
-            .numeros-grid {
-                grid-template-columns: 1fr;
-            }
-            .diretoria-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 24px;
-            }
+            .numeros-grid { grid-template-columns: 1fr; }
+            .numero-card { padding: 20px 16px; }
+            .numero-card .numero { font-size: 2.2rem; }
+            .eco-card { padding: 24px 16px; }
+            .eco-card h3 { font-size: 1rem; }
+            .eco-card p { font-size: 0.85rem; }
+            .diretoria-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+            .founder-avatar { width: 72px; height: 72px; font-size: 1.1rem; }
+            #historiaCinema .hiw-cinema__card { padding: 20px 16px; gap: 16px; }
         }
     </style>
 </head>
@@ -505,9 +862,11 @@
 
     <!-- ═══ HERO ═══ -->
     <section class="sobre-hero">
+        <div class="sobre-hero__orb sobre-hero__orb--1"></div>
+        <div class="sobre-hero__orb sobre-hero__orb--2"></div>
         <div class="container" data-reveal>
             <span class="section-badge">Sobre o Orbit</span>
-            <h1>30 anos de gestão empresarial. Agora com IA.</h1>
+            <h1>30 anos de gestão empresarial.<br><em>Agora com IA.</em></h1>
             <p>O Orbit nasceu do Grupo GSN, o maior grupo de consultoria em gestão e ISO do Brasil. Nossa missão: transformar a gestão empresarial com agentes de IA especializados.</p>
         </div>
     </section>
@@ -515,62 +874,136 @@
     <!-- ═══ NÚMEROS ═══ -->
     <section class="numeros-section">
         <div class="container">
-            <div class="numeros-grid" data-reveal-stagger>
+            <div class="numeros-grid" id="numerosGrid">
                 <div class="numero-card">
-                    <span class="numero">30</span>
+                    <div class="numero-icon"><i class="fas fa-calendar-check"></i></div>
+                    <span class="numero" data-count="30">0</span>
                     <span class="numero-label">Anos de experiência</span>
                 </div>
                 <div class="numero-card">
-                    <span class="numero">8.000+</span>
+                    <div class="numero-icon"><i class="fas fa-building"></i></div>
+                    <span class="numero" data-count="8000" data-suffix="+">0</span>
                     <span class="numero-label">Empresas atendidas</span>
                 </div>
                 <div class="numero-card">
-                    <span class="numero">2.206</span>
+                    <div class="numero-icon"><i class="fas fa-chart-line"></i></div>
+                    <span class="numero" data-count="2206">0</span>
                     <span class="numero-label">Empresas no Orbit</span>
                 </div>
                 <div class="numero-card">
-                    <span class="numero">98%</span>
+                    <div class="numero-icon"><i class="fas fa-star"></i></div>
+                    <span class="numero" data-count="98" data-suffix="%">0</span>
                     <span class="numero-label">De satisfação</span>
                 </div>
                 <div class="numero-card">
-                    <span class="numero">30+</span>
+                    <div class="numero-icon"><i class="fas fa-handshake"></i></div>
+                    <span class="numero" data-count="30" data-suffix="+">0</span>
                     <span class="numero-label">Consultorias parceiras</span>
                 </div>
                 <div class="numero-card">
-                    <span class="numero">12</span>
+                    <div class="numero-icon"><i class="fas fa-robot"></i></div>
+                    <span class="numero" data-count="12">0</span>
                     <span class="numero-label">Agentes de IA especializados</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ═══ NOSSA HISTÓRIA ═══ -->
-    <section class="historia-section">
+    <!-- ═══ NOSSA HISTÓRIA — Cinema Timeline ═══ -->
+    <section class="historia-section" id="historiaCinema">
         <div class="container">
             <div class="section-header" data-reveal>
-                <h2>Nossa História</h2>
+                <span class="section-badge" style="background:rgba(212,160,23,0.1);color:#D4A017;border:1px solid rgba(212,160,23,0.2);display:inline-block;padding:8px 20px;border-radius:50px;font-size:0.85rem;font-weight:600;margin-bottom:16px;">Nossa Trajetória</span>
+                <h2>Uma história de <em style="color:#D4A017;font-style:normal;">transformação</em></h2>
+                <p>De consultoria presencial a plataforma com IA — cada passo construiu o que somos hoje.</p>
             </div>
 
-            <div class="timeline" data-reveal-stagger>
-                <div class="timeline-item">
-                    <div class="timeline-date">Há 30 anos</div>
-                    <h3>O início</h3>
-                    <p>Grupo GSN nasce como consultoria de gestão e ISO, levando profissionalização para empresas de todos os portes e segmentos.</p>
+            <div class="hiw-cinema__steps">
+                <div class="hiw-cinema__rail">
+                    <div class="hiw-cinema__rail-fill" id="histRailFill"></div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">8.000+ empresas depois</div>
-                    <h3>Liderança nacional</h3>
-                    <p>O Grupo GSN se consolida como o maior grupo de consultoria em gestão do Brasil, com uma rede de mais de 30 consultorias parceiras.</p>
+
+                <!-- Step 1 -->
+                <div class="hiw-cinema__step" data-hist-step>
+                    <div class="hiw-cinema__dot">01</div>
+                    <div class="hiw-cinema__card">
+                        <div class="hiw-cinema__info">
+                            <span class="hiw-cinema__label">Há 30 anos</span>
+                            <h3>O início</h3>
+                            <p>Grupo GSN nasce como consultoria de gestão e ISO, levando profissionalização para empresas de todos os portes e segmentos do Brasil.</p>
+                        </div>
+                        <div class="hist-scene hist-scene--build">
+                            <i class="fas fa-building hist-icon"></i>
+                            <div class="hist-block"></div>
+                            <div class="hist-block"></div>
+                            <div class="hist-block"></div>
+                            <div class="hist-block"></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">A evolução</div>
-                    <h3>Do presencial ao digital</h3>
-                    <p>A plataforma é digitalizada, passando a atender milhares de empresas de forma escalável sem perder a essência consultiva.</p>
+
+                <!-- Step 2 -->
+                <div class="hiw-cinema__step" data-hist-step>
+                    <div class="hiw-cinema__dot">02</div>
+                    <div class="hiw-cinema__card">
+                        <div class="hiw-cinema__info">
+                            <span class="hiw-cinema__label">8.000+ empresas depois</span>
+                            <h3>Liderança nacional</h3>
+                            <p>O Grupo GSN se consolida como o maior grupo de consultoria em gestão do Brasil, com uma rede de mais de 30 consultorias parceiras.</p>
+                        </div>
+                        <div class="hist-scene hist-scene--network">
+                            <div class="hist-node hist-node--center"><i class="fas fa-crown"></i></div>
+                            <div class="hist-node"><i class="fas fa-building"></i></div>
+                            <div class="hist-node"><i class="fas fa-building"></i></div>
+                            <div class="hist-node"><i class="fas fa-building"></i></div>
+                            <div class="hist-node"><i class="fas fa-building"></i></div>
+                            <div class="hist-node"><i class="fas fa-building"></i></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-date">2026 — O Orbit</div>
-                    <h3>IA integrada à gestão</h3>
-                    <p>12 agentes de IA especializados são integrados à plataforma. Consultoria recorrente, automatizada e acessível para qualquer empresa.</p>
+
+                <!-- Step 3 -->
+                <div class="hiw-cinema__step" data-hist-step>
+                    <div class="hiw-cinema__dot">03</div>
+                    <div class="hiw-cinema__card">
+                        <div class="hiw-cinema__info">
+                            <span class="hiw-cinema__label">A evolução</span>
+                            <h3>Do presencial ao digital</h3>
+                            <p>A plataforma é digitalizada, passando a atender milhares de empresas de forma escalável sem perder a essência consultiva.</p>
+                        </div>
+                        <div class="hist-scene hist-scene--digital">
+                            <div class="hist-screen">
+                                <div class="hist-screen-bar"></div>
+                                <div class="hist-screen-bar"></div>
+                                <div class="hist-screen-bar"></div>
+                                <div class="hist-screen-bar"></div>
+                                <div class="hist-screen-dot"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="hiw-cinema__step" data-hist-step>
+                    <div class="hiw-cinema__dot">04</div>
+                    <div class="hiw-cinema__card">
+                        <div class="hiw-cinema__info">
+                            <span class="hiw-cinema__label">2026 — O Orbit</span>
+                            <h3>IA integrada à gestão</h3>
+                            <p>12 agentes de IA especializados são integrados à plataforma. Consultoria recorrente, automatizada e acessível para qualquer empresa.</p>
+                        </div>
+                        <div class="hist-scene hist-scene--ai">
+                            <div class="hist-orbit-ring">
+                                <div class="hist-orbit-center"><i class="fas fa-robot"></i></div>
+                                <div class="hist-agent"><i class="fas fa-cog"></i></div>
+                                <div class="hist-agent"><i class="fas fa-chart-bar"></i></div>
+                                <div class="hist-agent"><i class="fas fa-users"></i></div>
+                                <div class="hist-agent"><i class="fas fa-tasks"></i></div>
+                                <div class="hist-agent"><i class="fas fa-shield-halved"></i></div>
+                                <div class="hist-agent"><i class="fas fa-lightbulb"></i></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -584,6 +1017,7 @@
     <section class="ecossistema-section">
         <div class="container">
             <div class="section-header" data-reveal>
+                <span class="section-badge" style="background:rgba(212,160,23,0.1);color:#D4A017;border:1px solid rgba(212,160,23,0.2);display:inline-block;padding:8px 20px;border-radius:50px;font-size:0.85rem;font-weight:600;margin-bottom:16px;">Grupo GSN</span>
                 <h2>Como tudo se conecta</h2>
                 <p>O ecossistema completo do Grupo GSN</p>
             </div>
@@ -593,21 +1027,25 @@
                     <div class="eco-icon eco-icon--orbit"><i class="fas fa-robot"></i></div>
                     <h3>Orbit</h3>
                     <p>Plataforma central SaaS com 12 agentes de IA especializados em gestão empresarial.</p>
+                    <span class="eco-tag">CONVERSÃO</span>
                 </div>
                 <div class="eco-card">
                     <div class="eco-icon eco-icon--templum"><i class="fas fa-building"></i></div>
                     <h3>Templum</h3>
                     <p>Consultoria de gestão e conformidade. A expertise humana por trás de 30 anos de mercado.</p>
+                    <span class="eco-tag">OPERAÇÃO</span>
                 </div>
                 <div class="eco-card">
                     <div class="eco-icon eco-icon--alpha"><i class="fas fa-crown"></i></div>
                     <h3>Alpha Club</h3>
                     <p>Comunidade de mentoria e consultores. Rede colaborativa de especialistas em gestão.</p>
+                    <span class="eco-tag">RETENÇÃO</span>
                 </div>
                 <div class="eco-card">
                     <div class="eco-icon eco-icon--sce"><i class="fas fa-calendar-star"></i></div>
                     <h3>SCE</h3>
                     <p>Eventos e imersões de aquisição. Experiências presenciais de alto impacto para empresários.</p>
+                    <span class="eco-tag">AQUISIÇÃO</span>
                 </div>
             </div>
         </div>
@@ -617,7 +1055,9 @@
     <section class="diretoria-section">
         <div class="container">
             <div class="section-header" data-reveal>
+                <span class="section-badge" style="background:rgba(212,160,23,0.1);color:#D4A017;border:1px solid rgba(212,160,23,0.2);display:inline-block;padding:8px 20px;border-radius:50px;font-size:0.85rem;font-weight:600;margin-bottom:16px;">Liderança</span>
                 <h2>Quem está por trás</h2>
+                <p>A equipe que construiu 30 anos de história em gestão</p>
             </div>
 
             <div class="diretoria-grid" data-reveal-stagger>
@@ -648,8 +1088,10 @@
                 </div>
             </div>
 
-            <div class="diretoria-sede" data-reveal>
-                <i class="fas fa-map-marker-alt"></i> Sede: Square SC, Florianópolis - SC
+            <div class="diretoria-sede-wrap">
+                <div class="diretoria-sede" data-reveal>
+                    <i class="fas fa-map-marker-alt"></i> Sede: Square SC, Florianópolis - SC
+                </div>
             </div>
         </div>
     </section>
@@ -667,14 +1109,6 @@
                     <a href="/#contato-form" class="btn btn-outline btn-lg">Falar com Especialista</a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- ═══ CLOSING PHRASE ═══ -->
-    <section class="site-closing">
-        <div class="container">
-            <h2>Orbit é o time de gestão que sua empresa sempre precisou. <span style="display:block;margin-top:8px;">E que nunca para de trabalhar.</span></h2>
-            <a href="/#contato-form" class="btn">Conhecer o Time de IA</a>
         </div>
     </section>
 
@@ -741,9 +1175,10 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Scroll Reveal -->
+    <!-- Scroll Reveal + Cinema Timeline + Counters -->
     <script>
     (function() {
+        /* Standard reveal */
         var io = new IntersectionObserver(function(entries) {
             entries.forEach(function(e) {
                 if (e.isIntersecting) {
@@ -756,6 +1191,65 @@
         document.querySelectorAll('[data-reveal],[data-reveal-stagger]').forEach(function(el) {
             io.observe(el);
         });
+
+        /* ═══ Animated Counters ═══ */
+        var numerosGrid = document.getElementById('numerosGrid');
+        if (numerosGrid) {
+            var counted = false;
+            var counterIO = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) {
+                    if (e.isIntersecting && !counted) {
+                        counted = true;
+                        var cards = numerosGrid.querySelectorAll('.numero-card');
+                        cards.forEach(function(card, i) {
+                            setTimeout(function() {
+                                card.classList.add('revealed');
+                                var numEl = card.querySelector('.numero');
+                                var target = parseInt(numEl.getAttribute('data-count'));
+                                var suffix = numEl.getAttribute('data-suffix') || '';
+                                var duration = 1500;
+                                var start = performance.now();
+                                function animate(now) {
+                                    var progress = Math.min((now - start) / duration, 1);
+                                    var eased = 1 - Math.pow(1 - progress, 3);
+                                    var current = Math.floor(target * eased);
+                                    numEl.textContent = current.toLocaleString('pt-BR') + suffix;
+                                    if (progress < 1) requestAnimationFrame(animate);
+                                }
+                                requestAnimationFrame(animate);
+                            }, i * 150);
+                        });
+                        counterIO.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            counterIO.observe(numerosGrid);
+        }
+
+        /* ═══ Historia Cinema Timeline ═══ */
+        var histSteps = document.querySelectorAll('#historiaCinema [data-hist-step]');
+        var histRailFill = document.getElementById('histRailFill');
+        var histActivated = 0;
+
+        if (histSteps.length) {
+            var histIO = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) {
+                    if (e.isIntersecting) {
+                        var step = e.target;
+                        if (!step.classList.contains('active')) {
+                            step.classList.add('active');
+                            histActivated++;
+                            if (histRailFill) {
+                                histRailFill.style.height = (histActivated / histSteps.length * 100) + '%';
+                            }
+                        }
+                        histIO.unobserve(step);
+                    }
+                });
+            }, { threshold: 0.25, rootMargin: '0px 0px -60px 0px' });
+
+            histSteps.forEach(function(s) { histIO.observe(s); });
+        }
     })();
     </script>
 

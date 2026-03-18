@@ -24,7 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/styles-v2.css?v=7aefaed1">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=12d06f57">
     <style>
         /* ── Partner Hero ── */
         .partner-hero {
@@ -701,40 +701,678 @@
         </div>
     </section>
 
-    <!-- ══ STEPS ══ -->
-    <section class="partner-steps">
+    <!-- ══ STEPS — Cinema Timeline ══ -->
+    <section class="partner-steps" id="como-funciona-parceiros">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header" data-reveal>
+                <span class="section-badge section-badge--gold">Simples e rápido</span>
                 <h2>Como funciona</h2>
-                <p>Quatro passos simples para começar a gerar receita</p>
+                <p>Quatro passos simples para começar a gerar receita recorrente</p>
             </div>
-            <div class="steps-track" data-reveal-stagger>
-                <div class="step-item">
-                    <div class="step-item__number">1</div>
-                    <div class="step-item__icon"><i class="fas fa-clipboard-list"></i></div>
-                    <h3>Cadastro</h3>
-                    <p>Preencha o formulário de parceria com informações da sua empresa.</p>
+
+            <!-- Vertical progress tracker -->
+            <div class="hiw-cinema" id="hiwCinemaParcerias">
+                <div class="hiw-cinema__rail">
+                    <div class="hiw-cinema__rail-fill"></div>
                 </div>
-                <div class="step-item">
-                    <div class="step-item__number">2</div>
-                    <div class="step-item__icon"><i class="fas fa-book-open"></i></div>
-                    <h3>Treinamento</h3>
-                    <p>Participe da capacitação e aprenda tudo sobre nossas soluções.</p>
+
+                <!-- STEP 1 — Cadastro -->
+                <div class="hiw-cinema__step" data-step="1">
+                    <div class="hiw-cinema__marker">
+                        <div class="hiw-cinema__dot">1</div>
+                        <span class="hiw-cinema__time"><i class="fas fa-clock"></i> 5 min</span>
+                    </div>
+                    <div class="hiw-cinema__card">
+                        <div class="hiw-cinema__text">
+                            <h3>Cadastre sua empresa</h3>
+                            <p>Preencha o formulário de parceria com informações da sua empresa e comece imediatamente.</p>
+                        </div>
+                        <div class="hiw-cinema__scene hiw-scene-form">
+                            <div class="hiw-form-mockup">
+                                <div class="hiw-form-mockup__header">
+                                    <div class="hiw-form-mockup__dots"><span></span><span></span><span></span></div>
+                                    <span class="hiw-form-mockup__title">Orbit — Parceria</span>
+                                </div>
+                                <div class="hiw-form-mockup__body">
+                                    <div class="hiw-form-field hiw-form-field--1">
+                                        <span class="hiw-form-field__label">Empresa</span>
+                                        <div class="hiw-form-field__input"><span class="hiw-typing">Consultoria Acme LTDA</span></div>
+                                    </div>
+                                    <div class="hiw-form-field hiw-form-field--2">
+                                        <span class="hiw-form-field__label">Área de atuação</span>
+                                        <div class="hiw-form-field__input"><span class="hiw-typing">Consultoria empresarial</span></div>
+                                    </div>
+                                    <div class="hiw-form-field hiw-form-field--3">
+                                        <span class="hiw-form-field__label">Tipo de parceria</span>
+                                        <div class="hiw-form-field__input"><span class="hiw-typing">Revendedor</span></div>
+                                    </div>
+                                    <div class="hiw-form-btn hiw-form-field--4">
+                                        <i class="fas fa-check"></i> Enviar cadastro
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="step-item">
-                    <div class="step-item__number">3</div>
-                    <div class="step-item__icon"><i class="fas fa-handshake"></i></div>
-                    <h3>Indicação</h3>
-                    <p>Indique clientes e ofereça nossas soluções como parte do seu portfólio.</p>
+
+                <!-- STEP 2 — Treinamento -->
+                <div class="hiw-cinema__step" data-step="2">
+                    <div class="hiw-cinema__marker">
+                        <div class="hiw-cinema__dot">2</div>
+                        <span class="hiw-cinema__time"><i class="fas fa-clock"></i> 1 semana</span>
+                    </div>
+                    <div class="hiw-cinema__card">
+                        <div class="hiw-cinema__text">
+                            <h3>Capacitação completa</h3>
+                            <p>Participe da capacitação e aprenda tudo sobre nossas soluções, argumentação comercial e cases de sucesso.</p>
+                        </div>
+                        <div class="hiw-cinema__scene hiwp-scene-training">
+                            <div class="hiw-form-mockup">
+                                <div class="hiw-form-mockup__header">
+                                    <div class="hiw-form-mockup__dots"><span></span><span></span><span></span></div>
+                                    <span class="hiw-form-mockup__title">Orbit — Treinamento</span>
+                                </div>
+                                <div class="hiwp-training-body">
+                                    <div class="hiwp-training-item hiwp-training-item--1">
+                                        <div class="hiwp-training-item__check"><i class="fas fa-circle-check"></i></div>
+                                        <span>Plataforma Orbit</span>
+                                        <span class="hiwp-training-item__badge hiwp-training-item__badge--done">Concluído</span>
+                                    </div>
+                                    <div class="hiwp-training-item hiwp-training-item--2">
+                                        <div class="hiwp-training-item__check"><i class="fas fa-circle-check"></i></div>
+                                        <span>12 Agentes de IA</span>
+                                        <span class="hiwp-training-item__badge hiwp-training-item__badge--done">Concluído</span>
+                                    </div>
+                                    <div class="hiwp-training-item hiwp-training-item--3">
+                                        <div class="hiwp-training-item__check"><i class="fas fa-circle-check"></i></div>
+                                        <span>Argumentação comercial</span>
+                                        <span class="hiwp-training-item__badge hiwp-training-item__badge--done">Concluído</span>
+                                    </div>
+                                    <div class="hiwp-training-item hiwp-training-item--4">
+                                        <div class="hiwp-training-item__check hiwp-training-item__check--progress"><i class="fas fa-spinner fa-spin"></i></div>
+                                        <span>Cases de sucesso</span>
+                                        <span class="hiwp-training-item__badge hiwp-training-item__badge--progress">Em andamento</span>
+                                    </div>
+                                    <div class="hiwp-training-progress">
+                                        <div class="hiwp-training-progress__bar"></div>
+                                        <span>75% concluído</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="step-item">
-                    <div class="step-item__number">4</div>
-                    <div class="step-item__icon"><i class="fas fa-coins"></i></div>
-                    <h3>Receita</h3>
-                    <p>Ganhe comissões mensais por cada cliente ativo. Simples e consistente.</p>
+
+                <!-- STEP 3 — Indicação -->
+                <div class="hiw-cinema__step" data-step="3">
+                    <div class="hiw-cinema__marker">
+                        <div class="hiw-cinema__dot">3</div>
+                        <span class="hiw-cinema__time"><i class="fas fa-clock"></i> contínuo</span>
+                    </div>
+                    <div class="hiw-cinema__card">
+                        <div class="hiw-cinema__text">
+                            <h3>Indique e acompanhe</h3>
+                            <p>Indique clientes e ofereça nossas soluções como parte do seu portfólio. Acompanhe cada etapa em tempo real.</p>
+                        </div>
+                        <div class="hiw-cinema__scene hiwp-scene-referral">
+                            <div class="hiwp-referral-list">
+                                <div class="hiwp-referral-card hiwp-referral-card--1">
+                                    <div class="hiwp-referral-card__icon"><i class="fas fa-building"></i></div>
+                                    <div class="hiwp-referral-card__info">
+                                        <span class="hiwp-referral-card__name">Cliente 1 — Tech Solutions</span>
+                                        <span class="hiwp-referral-card__badge hiwp-referral-card__badge--active"><i class="fas fa-circle-check"></i> Ativado</span>
+                                    </div>
+                                </div>
+                                <div class="hiwp-referral-card hiwp-referral-card--2">
+                                    <div class="hiwp-referral-card__icon"><i class="fas fa-building"></i></div>
+                                    <div class="hiwp-referral-card__info">
+                                        <span class="hiwp-referral-card__name">Cliente 2 — Grupo Nova</span>
+                                        <span class="hiwp-referral-card__badge hiwp-referral-card__badge--onboard"><i class="fas fa-spinner fa-spin"></i> Onboarding</span>
+                                    </div>
+                                </div>
+                                <div class="hiwp-referral-card hiwp-referral-card--3">
+                                    <div class="hiwp-referral-card__icon"><i class="fas fa-building"></i></div>
+                                    <div class="hiwp-referral-card__info">
+                                        <span class="hiwp-referral-card__name">Cliente 3 — Logística BR</span>
+                                        <span class="hiwp-referral-card__badge hiwp-referral-card__badge--proposal"><i class="fas fa-paper-plane"></i> Proposta enviada</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 4 — Receita -->
+                <div class="hiw-cinema__step" data-step="4">
+                    <div class="hiw-cinema__marker">
+                        <div class="hiw-cinema__dot hiw-cinema__dot--final">4</div>
+                        <span class="hiw-cinema__time hiw-cinema__time--live"><i class="fas fa-bolt"></i> recorrente</span>
+                    </div>
+                    <div class="hiw-cinema__card hiw-cinema__card--final">
+                        <div class="hiw-cinema__text">
+                            <h3>Receita recorrente — todo mês</h3>
+                            <p>Ganhe comissões mensais por cada cliente ativo. Quanto mais indica, mais cresce sua receita passiva.</p>
+                        </div>
+                        <div class="hiw-cinema__scene hiwp-scene-revenue">
+                            <div class="hiwp-revenue-cards">
+                                <div class="hiw-result-card hiwp-revenue-card--1">
+                                    <div class="hiw-result-card__icon"><i class="fas fa-coins"></i></div>
+                                    <div class="hiw-result-card__value">+R$ 4.800<small>/mês</small></div>
+                                    <div class="hiw-result-card__label">Comissão</div>
+                                </div>
+                                <div class="hiw-result-card hiwp-revenue-card--2">
+                                    <div class="hiw-result-card__icon"><i class="fas fa-chart-line"></i></div>
+                                    <div class="hiw-result-card__value">15-20%</div>
+                                    <div class="hiw-result-card__label">Margem recorrente</div>
+                                </div>
+                                <div class="hiw-result-card hiwp-revenue-card--3">
+                                    <div class="hiw-result-card__icon"><i class="fas fa-users"></i></div>
+                                    <div class="hiw-result-card__value">12</div>
+                                    <div class="hiw-result-card__label">Clientes ativos</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <style>
+            /* ═══ CINEMA TIMELINE — PARCERIAS ═══ */
+            #hiwCinemaParcerias {
+                position: relative;
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 20px 0 0 0;
+            }
+            #hiwCinemaParcerias .hiw-cinema__rail {
+                position: absolute;
+                left: 28px;
+                top: 0;
+                bottom: 0;
+                width: 3px;
+                background: rgba(255,255,255,0.06);
+                border-radius: 3px;
+                z-index: 0;
+            }
+            #hiwCinemaParcerias .hiw-cinema__rail-fill {
+                width: 100%;
+                height: 0%;
+                background: linear-gradient(180deg, #D4A017, #F5C518, #22C55E);
+                border-radius: 3px;
+                transition: height 2.5s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 0 0 12px rgba(212,160,23,0.4);
+            }
+            #hiwCinemaParcerias.hiw-active .hiw-cinema__rail-fill {
+                height: 100%;
+            }
+
+            /* Step container */
+            #hiwCinemaParcerias .hiw-cinema__step {
+                position: relative;
+                padding-left: 80px;
+                margin-bottom: 48px;
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            #hiwCinemaParcerias .hiw-cinema__step:last-child { margin-bottom: 0; }
+            #hiwCinemaParcerias .hiw-cinema__step.hiw-step-visible {
+                opacity: 1;
+                transform: translateY(0);
+                transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
+            }
+
+            /* Marker (dot + time) */
+            #hiwCinemaParcerias .hiw-cinema__marker {
+                position: absolute;
+                left: 0;
+                top: 0;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                z-index: 2;
+            }
+            #hiwCinemaParcerias .hiw-cinema__dot {
+                width: 56px;
+                height: 56px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #D4A017, #E8B824);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 22px;
+                font-weight: 800;
+                color: #000;
+                box-shadow: 0 4px 20px rgba(212,160,23,0.3);
+                flex-shrink: 0;
+            }
+            #hiwCinemaParcerias .hiw-cinema__dot--final {
+                background: linear-gradient(135deg, #22C55E, #16A34A);
+                box-shadow: 0 4px 20px rgba(34,197,94,0.3), 0 0 0 8px rgba(34,197,94,0.1);
+                animation: hiwp-final-pulse 2s ease-in-out infinite;
+            }
+            @keyframes hiwp-final-pulse {
+                0%, 100% { box-shadow: 0 4px 20px rgba(34,197,94,0.3), 0 0 0 8px rgba(34,197,94,0.1); }
+                50% { box-shadow: 0 4px 20px rgba(34,197,94,0.5), 0 0 0 14px rgba(34,197,94,0.05); }
+            }
+            #hiwCinemaParcerias .hiw-cinema__time {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                font-size: 13px;
+                font-weight: 600;
+                color: #D4A017;
+                background: rgba(212,160,23,0.1);
+                padding: 5px 14px;
+                border-radius: 20px;
+                white-space: nowrap;
+            }
+            #hiwCinemaParcerias .hiw-cinema__time--live {
+                background: rgba(34,197,94,0.1);
+                color: #22C55E;
+                animation: hiwp-live-blink 2s ease-in-out infinite;
+            }
+            @keyframes hiwp-live-blink {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.6; }
+            }
+
+            /* Card */
+            #hiwCinemaParcerias .hiw-cinema__card {
+                background: linear-gradient(135deg, #1C2333 0%, #13161D 100%);
+                border: 1px solid rgba(255,255,255,0.06);
+                border-radius: 20px;
+                padding: 36px;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+                align-items: center;
+                margin-top: 8px;
+                transition: all 0.3s ease;
+                overflow: hidden;
+            }
+            #hiwCinemaParcerias .hiw-cinema__card:hover {
+                border-color: rgba(212,160,23,0.15);
+                box-shadow: 0 12px 48px rgba(0,0,0,0.4);
+            }
+            #hiwCinemaParcerias .hiw-cinema__card--final {
+                border-color: rgba(34,197,94,0.2);
+                background: linear-gradient(135deg, #1C2333 0%, rgba(34,197,94,0.05) 100%);
+            }
+            #hiwCinemaParcerias .hiw-cinema__text h3 {
+                font-size: 22px;
+                font-weight: 800;
+                color: #fff;
+                margin-bottom: 12px;
+                line-height: 1.3;
+            }
+            #hiwCinemaParcerias .hiw-cinema__text p {
+                font-size: 15px;
+                color: rgba(255,255,255,0.55);
+                line-height: 1.7;
+            }
+
+            /* ═══ SCENE: Form mockup ═══ */
+            #hiwCinemaParcerias .hiw-cinema__scene {
+                position: relative;
+                min-height: 200px;
+            }
+            #hiwCinemaParcerias .hiw-form-mockup {
+                background: #0D1117;
+                border: 1px solid rgba(255,255,255,0.08);
+                border-radius: 12px;
+                overflow: hidden;
+            }
+            #hiwCinemaParcerias .hiw-form-mockup__header {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 10px 16px;
+                background: rgba(255,255,255,0.03);
+                border-bottom: 1px solid rgba(255,255,255,0.06);
+            }
+            #hiwCinemaParcerias .hiw-form-mockup__dots { display: flex; gap: 6px; }
+            #hiwCinemaParcerias .hiw-form-mockup__dots span {
+                width: 10px; height: 10px; border-radius: 50%;
+            }
+            #hiwCinemaParcerias .hiw-form-mockup__dots span:nth-child(1) { background: #EF4444; }
+            #hiwCinemaParcerias .hiw-form-mockup__dots span:nth-child(2) { background: #F59E0B; }
+            #hiwCinemaParcerias .hiw-form-mockup__dots span:nth-child(3) { background: #22C55E; }
+            #hiwCinemaParcerias .hiw-form-mockup__title {
+                font-size: 12px;
+                color: rgba(255,255,255,0.4);
+                font-weight: 500;
+            }
+            #hiwCinemaParcerias .hiw-form-mockup__body { padding: 20px 16px; }
+            #hiwCinemaParcerias .hiw-form-field {
+                margin-bottom: 14px;
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            #hiwCinemaParcerias .hiw-form-field__label {
+                display: block;
+                font-size: 11px;
+                font-weight: 600;
+                color: rgba(255,255,255,0.35);
+                margin-bottom: 6px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+            #hiwCinemaParcerias .hiw-form-field__input {
+                background: rgba(255,255,255,0.04);
+                border: 1px solid rgba(255,255,255,0.08);
+                border-radius: 8px;
+                padding: 10px 12px;
+                font-size: 13px;
+                color: #fff;
+            }
+            #hiwCinemaParcerias .hiw-typing {
+                display: inline-block;
+                overflow: hidden;
+                white-space: nowrap;
+                width: 0;
+                border-right: 2px solid #D4A017;
+            }
+            #hiwCinemaParcerias .hiw-form-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                background: linear-gradient(135deg, #D4A017, #E8B824);
+                color: #000;
+                font-size: 13px;
+                font-weight: 700;
+                padding: 12px;
+                border-radius: 8px;
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            /* Form field animations */
+            #hiwCinemaParcerias .hiw-step-visible .hiw-form-field--1 {
+                animation: hiwp-field-in 0.5s 0.3s forwards;
+            }
+            #hiwCinemaParcerias .hiw-step-visible .hiw-form-field--2 {
+                animation: hiwp-field-in 0.5s 0.8s forwards;
+            }
+            #hiwCinemaParcerias .hiw-step-visible .hiw-form-field--3 {
+                animation: hiwp-field-in 0.5s 1.3s forwards;
+            }
+            #hiwCinemaParcerias .hiw-step-visible .hiw-form-field--4 {
+                animation: hiwp-btn-in 0.4s 1.8s forwards;
+            }
+            #hiwCinemaParcerias .hiw-step-visible .hiw-form-field--1 .hiw-typing {
+                animation: hiwp-type 0.6s 0.5s forwards;
+            }
+            #hiwCinemaParcerias .hiw-step-visible .hiw-form-field--2 .hiw-typing {
+                animation: hiwp-type 0.5s 1.0s forwards;
+            }
+            #hiwCinemaParcerias .hiw-step-visible .hiw-form-field--3 .hiw-typing {
+                animation: hiwp-type 0.6s 1.5s forwards;
+            }
+            @keyframes hiwp-field-in {
+                to { opacity: 1; transform: translateX(0); }
+            }
+            @keyframes hiwp-type {
+                to { width: 100%; border-right-color: transparent; }
+            }
+            @keyframes hiwp-btn-in {
+                to { opacity: 1; transform: scale(1); }
+            }
+
+            /* ═══ SCENE: Training checklist ═══ */
+            .hiwp-training-body { padding: 14px 16px; }
+            .hiwp-training-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 10px 0;
+                border-bottom: 1px solid rgba(255,255,255,0.04);
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            .hiwp-training-item:last-of-type { border-bottom: none; }
+            .hiwp-training-item__check {
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                background: rgba(34,197,94,0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 14px;
+                color: #22C55E;
+                flex-shrink: 0;
+            }
+            .hiwp-training-item__check--progress {
+                background: rgba(212,160,23,0.1);
+                color: #D4A017;
+            }
+            .hiwp-training-item span:nth-child(2) {
+                font-size: 13px;
+                color: rgba(255,255,255,0.7);
+                flex: 1;
+            }
+            .hiwp-training-item__badge {
+                font-size: 10px;
+                font-weight: 700;
+                padding: 3px 10px;
+                border-radius: 20px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                white-space: nowrap;
+            }
+            .hiwp-training-item__badge--done {
+                background: rgba(34,197,94,0.1);
+                color: #22C55E;
+            }
+            .hiwp-training-item__badge--progress {
+                background: rgba(212,160,23,0.1);
+                color: #D4A017;
+            }
+            #hiwCinemaParcerias .hiw-step-visible .hiwp-training-item--1 { animation: hiwp-field-in 0.4s 0.3s forwards; }
+            #hiwCinemaParcerias .hiw-step-visible .hiwp-training-item--2 { animation: hiwp-field-in 0.4s 0.7s forwards; }
+            #hiwCinemaParcerias .hiw-step-visible .hiwp-training-item--3 { animation: hiwp-field-in 0.4s 1.1s forwards; }
+            #hiwCinemaParcerias .hiw-step-visible .hiwp-training-item--4 { animation: hiwp-field-in 0.4s 1.5s forwards; }
+
+            /* Training progress bar */
+            .hiwp-training-progress {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 12px 0 4px;
+            }
+            .hiwp-training-progress__bar {
+                flex: 1;
+                height: 6px;
+                background: rgba(255,255,255,0.06);
+                border-radius: 6px;
+                overflow: hidden;
+                position: relative;
+            }
+            .hiwp-training-progress__bar::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 0%;
+                background: linear-gradient(90deg, #22C55E, #16A34A);
+                border-radius: 6px;
+                transition: width 2s ease;
+            }
+            #hiwCinemaParcerias .hiw-step-visible .hiwp-training-progress__bar::after {
+                width: 75%;
+            }
+            .hiwp-training-progress span {
+                font-size: 12px;
+                font-weight: 700;
+                color: #22C55E;
+                white-space: nowrap;
+            }
+
+            /* ═══ SCENE: Referral cards ═══ */
+            .hiwp-referral-list {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+            .hiwp-referral-card {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                background: rgba(255,255,255,0.03);
+                border: 1px solid rgba(255,255,255,0.06);
+                border-radius: 12px;
+                padding: 14px 18px;
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            .hiwp-referral-card__icon {
+                width: 38px;
+                height: 38px;
+                border-radius: 10px;
+                background: rgba(212,160,23,0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 16px;
+                color: #D4A017;
+                flex-shrink: 0;
+            }
+            .hiwp-referral-card__info {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                flex: 1;
+            }
+            .hiwp-referral-card__name {
+                font-size: 13px;
+                font-weight: 600;
+                color: rgba(255,255,255,0.8);
+            }
+            .hiwp-referral-card__badge {
+                font-size: 11px;
+                font-weight: 600;
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+                width: fit-content;
+            }
+            .hiwp-referral-card__badge--active { color: #22C55E; }
+            .hiwp-referral-card__badge--onboard { color: #D4A017; }
+            .hiwp-referral-card__badge--proposal { color: #818CF8; }
+
+            #hiwCinemaParcerias .hiw-step-visible .hiwp-referral-card--1 { animation: hiwp-result-in 0.5s 0.3s forwards; }
+            #hiwCinemaParcerias .hiw-step-visible .hiwp-referral-card--2 { animation: hiwp-result-in 0.5s 0.8s forwards; }
+            #hiwCinemaParcerias .hiw-step-visible .hiwp-referral-card--3 { animation: hiwp-result-in 0.5s 1.3s forwards; }
+
+            @keyframes hiwp-result-in {
+                to { opacity: 1; transform: translateX(0); }
+            }
+
+            /* ═══ SCENE: Revenue results ═══ */
+            .hiwp-revenue-cards {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            #hiwCinemaParcerias .hiw-result-card {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                background: rgba(255,255,255,0.03);
+                border: 1px solid rgba(255,255,255,0.06);
+                border-radius: 12px;
+                padding: 14px 18px;
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            #hiwCinemaParcerias .hiw-result-card__icon {
+                width: 38px;
+                height: 38px;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 16px;
+                flex-shrink: 0;
+            }
+            .hiwp-revenue-card--1 .hiw-result-card__icon { background: rgba(34,197,94,0.1); color: #22C55E; }
+            .hiwp-revenue-card--2 .hiw-result-card__icon { background: rgba(212,160,23,0.1); color: #D4A017; }
+            .hiwp-revenue-card--3 .hiw-result-card__icon { background: rgba(99,102,241,0.1); color: #818CF8; }
+            #hiwCinemaParcerias .hiw-result-card__value {
+                font-size: 20px;
+                font-weight: 800;
+                color: #fff;
+            }
+            #hiwCinemaParcerias .hiw-result-card__value small {
+                font-size: 13px;
+                font-weight: 600;
+                color: rgba(255,255,255,0.4);
+            }
+            #hiwCinemaParcerias .hiw-result-card__label {
+                font-size: 12px;
+                color: rgba(255,255,255,0.4);
+            }
+
+            #hiwCinemaParcerias .hiw-step-visible .hiwp-revenue-card--1 { animation: hiwp-result-in 0.5s 1.0s forwards; }
+            #hiwCinemaParcerias .hiw-step-visible .hiwp-revenue-card--2 { animation: hiwp-result-in 0.5s 1.4s forwards; }
+            #hiwCinemaParcerias .hiw-step-visible .hiwp-revenue-card--3 { animation: hiwp-result-in 0.5s 1.8s forwards; }
+
+            /* ═══ RESPONSIVE ═══ */
+            @media (max-width: 768px) {
+                #hiwCinemaParcerias .hiw-cinema__rail { left: 20px; }
+                #hiwCinemaParcerias .hiw-cinema__step { padding-left: 64px; }
+                #hiwCinemaParcerias .hiw-cinema__dot { width: 42px; height: 42px; font-size: 18px; }
+                #hiwCinemaParcerias .hiw-cinema__card {
+                    grid-template-columns: 1fr;
+                    padding: 24px 20px;
+                    gap: 24px;
+                }
+                #hiwCinemaParcerias .hiw-cinema__text h3 { font-size: 18px; }
+                .hiwp-revenue-cards { flex-direction: row; flex-wrap: wrap; }
+                #hiwCinemaParcerias .hiw-result-card { flex: 1; min-width: 120px; padding: 10px 12px; }
+                #hiwCinemaParcerias .hiw-result-card__value { font-size: 16px; }
+            }
+            @media (max-width: 480px) {
+                #hiwCinemaParcerias .hiw-cinema__step { padding-left: 56px; margin-bottom: 36px; }
+                #hiwCinemaParcerias .hiw-cinema__rail { left: 16px; }
+                #hiwCinemaParcerias .hiw-cinema__dot { width: 36px; height: 36px; font-size: 16px; }
+                #hiwCinemaParcerias .hiw-cinema__time { font-size: 11px; padding: 4px 10px; }
+                #hiwCinemaParcerias .hiw-cinema__card { padding: 16px 12px; }
+                #hiwCinemaParcerias .hiwp-revenue-cards { gap: 12px; }
+                #hiwCinemaParcerias .hiwp-revenue-card { padding: 16px; }
+                #hiwCinemaParcerias .hiwp-revenue-card__value { font-size: 18px; }
+                .hiwp-revenue-cards { flex-direction: column; }
+                #hiwCinemaParcerias .hiw-result-card { min-width: unset; }
+            }
+        </style>
+
+        <script>
+        (function() {
+            var cinema = document.getElementById('hiwCinemaParcerias');
+            if (!cinema) return;
+            var steps = cinema.querySelectorAll('.hiw-cinema__step');
+            var activated = false;
+
+            var mainObs = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) {
+                    if (e.isIntersecting && !activated) {
+                        activated = true;
+                        cinema.classList.add('hiw-active');
+                        steps.forEach(function(step, i) {
+                            setTimeout(function() {
+                                step.classList.add('hiw-step-visible');
+                            }, i * 800);
+                        });
+                        mainObs.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+            mainObs.observe(cinema);
+        })();
+        </script>
     </section>
 
     <!-- ══ TIERS ══ -->
@@ -944,14 +1582,6 @@
                     <a href="#niveis" class="btn btn-outline btn-lg">Ver Planos</a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- ═══ CLOSING PHRASE ═══ -->
-    <section class="site-closing">
-        <div class="container">
-            <h2>Orbit é o time de gestão que sua empresa sempre precisou. <span style="display:block;margin-top:8px;">E que nunca para de trabalhar.</span></h2>
-            <a href="/#contato-form" class="btn">Conhecer o Time de IA</a>
         </div>
     </section>
 

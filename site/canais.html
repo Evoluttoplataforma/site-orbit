@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/styles-v2.css?v=7aefaed1">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=12d06f57">
 
     <style>
         /* ═══ CANAIS LP — INLINE STYLES ═══ */
@@ -1061,46 +1061,392 @@
     </section>
 
 
-    <!-- ═══ 2. PAIN — O ciclo do churn ═══ -->
-    <section class="lp-section lp-section--light">
-        <div class="lp-container">
-            <div class="lp-section-header" data-reveal>
+    <!-- ═══ 2. PAIN — O ciclo do churn (Cinema) ═══ -->
+    <section class="pain-cinema" id="dores-canais">
+        <div class="pain-cinema__bg">
+            <div class="pain-cinema__grid-lines"></div>
+            <div class="pain-cinema__glow"></div>
+        </div>
+        <div class="container">
+            <div class="section-header" data-reveal>
+                <span class="section-badge section-badge--red">Isso te parece familiar?</span>
                 <h2>Reconhece esse ciclo?</h2>
-                <p>Vende projeto &rarr; entrega &rarr; cliente sai &rarr; precisa vender de novo. O inimigo não é a concorrência. É o <strong style="color:#EF4444;">churn estrutural</strong>: você entrega, o cliente não mantém, o resultado se perde.</p>
+                <p>Vende projeto &rarr; entrega &rarr; cliente sai &rarr; precisa vender de novo. O inimigo não é a concorrência. É o <strong style="color:#EF4444;">churn estrutural</strong>.</p>
             </div>
 
-            <div class="pain-grid" data-reveal-stagger>
-                <div class="pain-card">
-                    <div class="icon-premium icon-premium--danger"><i class="fas fa-door-open"></i></div>
-                    <p>Quando o projeto acaba, o cliente vai embora.</p>
+            <div class="pain-thoughts" id="painThoughtsCanais">
+                <div class="pain-thought" data-idx="0">
+                    <div class="pain-thought__icon"><i class="fas fa-door-open"></i></div>
+                    <div class="pain-thought__bubble">
+                        <p>"Quando o projeto acaba, o cliente vai embora."</p>
+                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="pain-thought__pulse"></div>
                 </div>
-                <div class="pain-card">
-                    <div class="icon-premium icon-premium--danger"><i class="fas fa-calendar-xmark"></i></div>
-                    <p>Minha receita depende 100% da minha agenda.</p>
+                <div class="pain-thought" data-idx="1">
+                    <div class="pain-thought__icon"><i class="fas fa-calendar-xmark"></i></div>
+                    <div class="pain-thought__bubble">
+                        <p>"Minha receita depende 100% da minha agenda."</p>
+                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="pain-thought__pulse"></div>
                 </div>
-                <div class="pain-card">
-                    <div class="icon-premium icon-premium--danger"><i class="fas fa-arrow-down-wide-short"></i></div>
-                    <p>O mercado está comoditizando o que eu faço.</p>
+                <div class="pain-thought" data-idx="2">
+                    <div class="pain-thought__icon"><i class="fas fa-arrow-down-wide-short"></i></div>
+                    <div class="pain-thought__bubble">
+                        <p>"O mercado está comoditizando o que eu faço."</p>
+                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="pain-thought__pulse"></div>
                 </div>
-                <div class="pain-card">
-                    <div class="icon-premium icon-premium--danger"><i class="fas fa-user-group"></i></div>
-                    <p>Não consigo escalar sem contratar gente.</p>
+                <div class="pain-thought" data-idx="3">
+                    <div class="pain-thought__icon"><i class="fas fa-user-group"></i></div>
+                    <div class="pain-thought__bubble">
+                        <p>"Não consigo escalar sem contratar gente."</p>
+                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="pain-thought__pulse"></div>
                 </div>
-                <div class="pain-card">
-                    <div class="icon-premium icon-premium--danger"><i class="fas fa-rotate"></i></div>
-                    <p>Fico refém da próxima venda.</p>
+                <div class="pain-thought" data-idx="4">
+                    <div class="pain-thought__icon"><i class="fas fa-rotate"></i></div>
+                    <div class="pain-thought__bubble">
+                        <p>"Fico refém da próxima venda."</p>
+                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="pain-thought__pulse"></div>
                 </div>
             </div>
 
-            <div class="pain-cta" data-reveal>
-                <a href="#cta-final" class="lp-btn lp-btn--outline" style="color:#1A1D23; border-color:#1A1D23;">QUERO SAIR DESSE CICLO &rarr;</a>
+            <!-- Resposta do Orbit -->
+            <div class="pain-answer" id="painAnswerCanais">
+                <div class="pain-answer__line"></div>
+                <div class="pain-answer__card">
+                    <div class="pain-answer__avatar">
+                        <img src="images/olivia.png" alt="Olívia">
+                        <div class="pain-answer__status"></div>
+                    </div>
+                    <div class="pain-answer__content">
+                        <span class="pain-answer__name">Olívia — Orbit</span>
+                        <p>"Eu entendo. Com o Orbit, seus clientes operam com IA — e você ganha receita recorrente."</p>
+                    </div>
+                </div>
+                <div class="pain-answer__cta">
+                    <a href="#cta-final" class="lp-btn lp-btn--gold">QUERO SAIR DESSE CICLO <i class="fas fa-arrow-right"></i></a>
+                </div>
             </div>
         </div>
+
+        <style>
+            .pain-cinema {
+                position: relative;
+                padding: 120px 0 80px;
+                background: #FAFBFC;
+                overflow: hidden;
+            }
+            .pain-cinema .section-header h2 {
+                color: #1A1D23;
+            }
+            .pain-cinema .section-header p {
+                color: #5A6069;
+            }
+            .pain-cinema__bg {
+                position: absolute;
+                inset: 0;
+                pointer-events: none;
+            }
+            .pain-cinema__grid-lines {
+                position: absolute;
+                inset: 0;
+                background-image:
+                    linear-gradient(rgba(248,81,73,0.04) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(248,81,73,0.04) 1px, transparent 1px);
+                background-size: 60px 60px;
+                mask-image: radial-gradient(ellipse 60% 60% at 50% 40%, black 30%, transparent 70%);
+            }
+            .pain-cinema__glow {
+                position: absolute;
+                width: 500px;
+                height: 500px;
+                top: 10%;
+                left: 50%;
+                transform: translateX(-50%);
+                background: radial-gradient(circle, rgba(248,81,73,0.06) 0%, transparent 70%);
+                border-radius: 50%;
+                animation: pain-glow-pulse 4s ease-in-out infinite;
+            }
+            @keyframes pain-glow-pulse {
+                0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+                50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+            }
+
+            /* Section badge red */
+            .section-badge--red {
+                background: rgba(248,81,73,0.08);
+                border: 1px solid rgba(248,81,73,0.2);
+                color: #DC2626;
+            }
+
+            /* Pain thoughts container */
+            .pain-thoughts {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+            /* Individual thought */
+            .pain-thought {
+                display: flex;
+                align-items: flex-start;
+                gap: 14px;
+                background: #fff;
+                border: 1px solid #E5E7EB;
+                border-radius: 16px;
+                padding: 22px;
+                position: relative;
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+                transition: border-color 0.3s ease, box-shadow 0.3s ease;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            }
+            .pain-thought:hover {
+                border-color: rgba(248,81,73,0.3);
+                box-shadow: 0 8px 32px rgba(248,81,73,0.1);
+                transform: translateY(-2px) scale(1);
+            }
+            .pain-thought.pain-visible {
+                animation: pain-thought-in 0.6s forwards;
+            }
+            @keyframes pain-thought-in {
+                0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+                60% { transform: translateY(-4px) scale(1.01); }
+                100% { opacity: 1; transform: translateY(0) scale(1); }
+            }
+
+            /* Icon */
+            .pain-thought__icon {
+                width: 44px;
+                height: 44px;
+                border-radius: 12px;
+                background: linear-gradient(135deg, #FEE2E2, #FECACA);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                position: relative;
+                border: none;
+            }
+            .pain-thought__icon i {
+                font-size: 17px;
+                color: #DC2626;
+            }
+
+            /* Pulse ring around icon */
+            .pain-thought__pulse {
+                position: absolute;
+                top: 22px;
+                left: 22px;
+                width: 44px;
+                height: 44px;
+                border-radius: 12px;
+                border: 1px solid rgba(220,38,38,0.3);
+                opacity: 0;
+            }
+            .pain-visible .pain-thought__pulse {
+                animation: pain-icon-ring 2s 0.6s ease-out infinite;
+            }
+            @keyframes pain-icon-ring {
+                0% { transform: scale(1); opacity: 0.5; }
+                100% { transform: scale(1.6); opacity: 0; }
+            }
+
+            /* Bubble */
+            .pain-thought__bubble p {
+                font-size: 15px;
+                color: #3D4450;
+                line-height: 1.6;
+                font-style: italic;
+                margin: 0;
+            }
+
+            /* Typing indicator */
+            .pain-thought__typing {
+                display: flex;
+                gap: 4px;
+                padding: 4px 0;
+                position: absolute;
+                top: 22px;
+                left: 80px;
+            }
+            .pain-thought__typing span {
+                width: 6px;
+                height: 6px;
+                background: rgba(220,38,38,0.35);
+                border-radius: 50%;
+                animation: pain-typing-dot 1s infinite;
+            }
+            .pain-thought__typing span:nth-child(2) { animation-delay: 0.2s; }
+            .pain-thought__typing span:nth-child(3) { animation-delay: 0.4s; }
+            @keyframes pain-typing-dot {
+                0%, 100% { opacity: 0.3; transform: scale(0.8); }
+                50% { opacity: 1; transform: scale(1); }
+            }
+            /* Hide typing once text is shown */
+            .pain-thought.pain-typed .pain-thought__typing {
+                display: none;
+            }
+            .pain-thought__bubble p {
+                opacity: 0;
+            }
+            .pain-thought.pain-typed .pain-thought__bubble p {
+                opacity: 1;
+                animation: pain-text-reveal 0.4s ease;
+            }
+            @keyframes pain-text-reveal {
+                from { opacity: 0; filter: blur(4px); }
+                to { opacity: 1; filter: blur(0); }
+            }
+
+            /* ═══ Orbit Answer ═══ */
+            .pain-answer {
+                max-width: 600px;
+                margin: 48px auto 0;
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            .pain-answer.pain-answer-visible {
+                animation: pain-answer-in 0.8s 0.3s forwards;
+            }
+            @keyframes pain-answer-in {
+                0% { opacity: 0; transform: translateY(20px); }
+                100% { opacity: 1; transform: translateY(0); }
+            }
+            .pain-answer__line {
+                width: 2px;
+                height: 40px;
+                background: linear-gradient(180deg, rgba(220,38,38,0.15), rgba(212,160,23,0.4));
+                margin: 0 auto 0;
+                border-radius: 2px;
+            }
+            .pain-answer__card {
+                display: flex;
+                align-items: flex-start;
+                gap: 16px;
+                background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+                border: 1px solid rgba(212,160,23,0.25);
+                border-radius: 20px;
+                padding: 24px;
+                margin-top: 0;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 4px 20px rgba(212,160,23,0.1);
+            }
+            .pain-answer__card::before {
+                content: '';
+                position: absolute;
+                top: -1px;
+                left: 20%;
+                right: 20%;
+                height: 2px;
+                background: linear-gradient(90deg, transparent, #D4A017, transparent);
+            }
+            .pain-answer__avatar {
+                position: relative;
+                flex-shrink: 0;
+            }
+            .pain-answer__avatar img {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                border: 2px solid #D4A017;
+            }
+            .pain-answer__status {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 12px;
+                height: 12px;
+                background: #22C55E;
+                border-radius: 50%;
+                border: 2px solid #FFFBEB;
+                animation: rfm-live-blink 1.5s ease-in-out infinite;
+            }
+            @keyframes rfm-live-blink {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.4; }
+            }
+            .pain-answer__name {
+                font-size: 12px;
+                font-weight: 700;
+                color: #B8860B;
+                display: block;
+                margin-bottom: 6px;
+            }
+            .pain-answer__content p {
+                font-size: 16px;
+                color: #3D4450;
+                line-height: 1.6;
+                font-style: italic;
+                margin: 0;
+            }
+            .pain-answer__cta {
+                text-align: center;
+                margin-top: 32px;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .pain-thoughts { grid-template-columns: 1fr; max-width: 480px; }
+                .pain-cinema { padding: 80px 0 60px; }
+            }
+            @media (max-width: 480px) {
+                .pain-thought { padding: 16px; gap: 12px; }
+                .pain-thought__icon { width: 38px; height: 38px; border-radius: 10px; }
+                .pain-thought__icon i { font-size: 14px; }
+                .pain-thought__bubble p { font-size: 14px; }
+                .pain-thought__typing { left: 66px; }
+                .pain-thought__pulse { width: 38px; height: 38px; border-radius: 10px; top: 16px; left: 16px; }
+            }
+        </style>
+
+        <script>
+        (function() {
+            var container = document.getElementById('painThoughtsCanais');
+            var answer = document.getElementById('painAnswerCanais');
+            if (!container) return;
+            var thoughts = container.querySelectorAll('.pain-thought');
+            var activated = false;
+
+            var obs = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) {
+                    if (e.isIntersecting && !activated) {
+                        activated = true;
+                        obs.unobserve(e.target);
+
+                        thoughts.forEach(function(t, i) {
+                            setTimeout(function() {
+                                t.classList.add('pain-visible');
+                            }, i * 500);
+                            setTimeout(function() {
+                                t.classList.add('pain-typed');
+                            }, i * 500 + 600);
+                        });
+
+                        setTimeout(function() {
+                            if (answer) answer.classList.add('pain-answer-visible');
+                        }, thoughts.length * 500 + 800);
+                    }
+                });
+            }, { threshold: 0.2 });
+            obs.observe(container);
+        })();
+        </script>
     </section>
 
 
     <!-- ═══ 3. O NOVO MODELO (v2) ═══ -->
-    <section class="lp-section lp-section--dark">
+    <section class="lp-section lp-section--dark" id="modelo">
         <div class="lp-container">
             <div class="lp-section-header" data-reveal>
                 <span class="lp-badge">Modelo de negócio</span>
@@ -1108,111 +1454,464 @@
                 <p>Pare de depender de novos projetos. Com o Orbit, agentes continuam executando — e você ganha receita recorrente real.</p>
             </div>
 
-            <div class="model-v2" data-reveal>
-                <!-- ANTES -->
-                <div class="model-v2__side model-v2__side--before">
-                    <div class="model-v2__badge"><i class="fas fa-xmark"></i> Modelo Tradicional</div>
-                    <div class="model-v2__steps">
-                        <div class="model-v2__step">
-                            <div class="model-v2__step-num">1</div>
-                            <div class="model-v2__step-text">
-                                <strong>Projeto pontual</strong>
-                                <span>Escopo fechado, prazo curto, entrega única</span>
+            <div class="bm-cinema" id="bmCinemaCanais">
+                <!-- Phase 1: Modelo Tradicional -->
+                <div class="bm-phase bm-phase--old" data-phase="old">
+                    <div class="bm-phase__header">
+                        <div class="bm-phase__badge bm-phase__badge--red"><i class="fas fa-xmark"></i> Modelo Tradicional</div>
+                    </div>
+                    <div class="bm-phase__timeline">
+                        <div class="bm-phase__rail"><div class="bm-phase__rail-fill bm-phase__rail-fill--red"></div></div>
+                        <div class="bm-step bm-step--old" data-idx="1">
+                            <div class="bm-step__dot bm-step__dot--red">1</div>
+                            <div class="bm-step__card">
+                                <div class="bm-step__content">
+                                    <strong>Projeto pontual</strong>
+                                    <span>Escopo fechado, prazo curto, entrega única</span>
+                                </div>
+                                <div class="bm-step__scene">
+                                    <div class="bm-scene-doc">
+                                        <div class="bm-scene-doc__icon"><i class="fas fa-file-contract"></i></div>
+                                        <div class="bm-scene-doc__lines"><span></span><span></span><span></span></div>
+                                        <div class="bm-scene-doc__stamp"><i class="fas fa-clock"></i> Prazo: 30 dias</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="model-v2__step-icon"><i class="fas fa-arrow-down"></i></div>
                         </div>
-                        <div class="model-v2__step">
-                            <div class="model-v2__step-num">2</div>
-                            <div class="model-v2__step-text">
-                                <strong>Entrega e encerramento</strong>
-                                <span>Cliente recebe o material e o contrato acaba</span>
+                        <div class="bm-step bm-step--old" data-idx="2">
+                            <div class="bm-step__dot bm-step__dot--red">2</div>
+                            <div class="bm-step__card">
+                                <div class="bm-step__content">
+                                    <strong>Entrega e encerramento</strong>
+                                    <span>Cliente recebe o material e o contrato acaba</span>
+                                </div>
+                                <div class="bm-step__scene">
+                                    <div class="bm-scene-bye">
+                                        <div class="bm-scene-bye__box"><i class="fas fa-box-archive"></i></div>
+                                        <div class="bm-scene-bye__arrow"><i class="fas fa-arrow-right"></i></div>
+                                        <div class="bm-scene-bye__client"><i class="fas fa-user"></i></div>
+                                        <div class="bm-scene-bye__x"><i class="fas fa-link-slash"></i></div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="model-v2__step-icon"><i class="fas fa-arrow-down"></i></div>
                         </div>
-                        <div class="model-v2__step">
-                            <div class="model-v2__step-num">3</div>
-                            <div class="model-v2__step-text">
-                                <strong>Churn inevitável</strong>
-                                <span>Sem operação contínua, cliente para de pagar</span>
+                        <div class="bm-step bm-step--old" data-idx="3">
+                            <div class="bm-step__dot bm-step__dot--red">3</div>
+                            <div class="bm-step__card">
+                                <div class="bm-step__content">
+                                    <strong>Churn inevitável</strong>
+                                    <span>Sem operação contínua, cliente para de pagar</span>
+                                </div>
+                                <div class="bm-step__scene">
+                                    <div class="bm-scene-churn">
+                                        <div class="bm-scene-churn__bar bm-scene-churn__bar--1"></div>
+                                        <div class="bm-scene-churn__bar bm-scene-churn__bar--2"></div>
+                                        <div class="bm-scene-churn__bar bm-scene-churn__bar--3"></div>
+                                        <div class="bm-scene-churn__bar bm-scene-churn__bar--4"></div>
+                                        <div class="bm-scene-churn__label"><i class="fas fa-arrow-trend-down"></i> Receita caindo</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="model-v2__step-icon"><i class="fas fa-arrow-down"></i></div>
                         </div>
-                        <div class="model-v2__step">
-                            <div class="model-v2__step-num">4</div>
-                            <div class="model-v2__step-text">
-                                <strong>Começar do zero</strong>
-                                <span>Precisa vender um novo projeto para faturar</span>
+                        <div class="bm-step bm-step--old" data-idx="4">
+                            <div class="bm-step__dot bm-step__dot--red">4</div>
+                            <div class="bm-step__card">
+                                <div class="bm-step__content">
+                                    <strong>Começar do zero</strong>
+                                    <span>Precisa vender um novo projeto para faturar</span>
+                                </div>
+                                <div class="bm-step__scene">
+                                    <div class="bm-scene-loop">
+                                        <div class="bm-scene-loop__icon"><i class="fas fa-rotate"></i></div>
+                                        <span>Ciclo eterno</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="model-v2__step-icon"><i class="fas fa-rotate"></i></div>
                         </div>
                     </div>
-                    <div class="model-v2__result">
-                        <div class="model-v2__result-icon"><i class="fas fa-chart-line-down"></i></div>
-                        <div class="model-v2__result-text">Receita instável, ciclo de venda eterno</div>
+                    <div class="bm-phase__result bm-phase__result--red">
+                        <i class="fas fa-triangle-exclamation"></i>
+                        <span>Receita instável, ciclo de venda eterno</span>
                     </div>
                 </div>
 
-                <!-- VS -->
-                <div class="model-v2__vs">
-                    <div class="model-v2__vs-badge">VS</div>
+                <!-- VS Divider -->
+                <div class="bm-vs">
+                    <div class="bm-vs__line"></div>
+                    <div class="bm-vs__circle">VS</div>
+                    <div class="bm-vs__line"></div>
                 </div>
 
-                <!-- AGORA -->
-                <div class="model-v2__side model-v2__side--after">
-                    <div class="model-v2__tag"><i class="fas fa-star" style="margin-right:4px;"></i> Recomendado</div>
-                    <div class="model-v2__badge"><i class="fas fa-check"></i> Modelo com Orbit</div>
-                    <div class="model-v2__steps">
-                        <div class="model-v2__step">
-                            <div class="model-v2__step-num">1</div>
-                            <div class="model-v2__step-text">
-                                <strong>Projeto + ativação de agentes</strong>
-                                <span>Mesmo escopo, mas agora com IA embutida</span>
+                <!-- Phase 2: Modelo com Orbit -->
+                <div class="bm-phase bm-phase--new" data-phase="new">
+                    <div class="bm-phase__header">
+                        <div class="bm-phase__badge bm-phase__badge--gold"><i class="fas fa-check"></i> Modelo com Orbit</div>
+                        <div class="bm-phase__tag"><i class="fas fa-crown"></i> Recomendado</div>
+                    </div>
+                    <div class="bm-phase__timeline">
+                        <div class="bm-phase__rail"><div class="bm-phase__rail-fill bm-phase__rail-fill--gold"></div></div>
+                        <div class="bm-step bm-step--new" data-idx="1">
+                            <div class="bm-step__dot bm-step__dot--gold">1</div>
+                            <div class="bm-step__card bm-step__card--gold">
+                                <div class="bm-step__content">
+                                    <strong>Projeto + ativação de agentes</strong>
+                                    <span>Mesmo escopo, mas agora com IA embutida</span>
+                                </div>
+                                <div class="bm-step__scene">
+                                    <div class="bm-scene-activate">
+                                        <div class="bm-scene-activate__agents">
+                                            <span style="--d:0"><i class="fas fa-robot"></i></span>
+                                            <span style="--d:1"><i class="fas fa-robot"></i></span>
+                                            <span style="--d:2"><i class="fas fa-robot"></i></span>
+                                        </div>
+                                        <div class="bm-scene-activate__label"><i class="fas fa-bolt"></i> Agentes ativados</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="model-v2__step-icon"><i class="fas fa-check"></i></div>
                         </div>
-                        <div class="model-v2__step">
-                            <div class="model-v2__step-num">2</div>
-                            <div class="model-v2__step-text">
-                                <strong>Operação contínua com IA</strong>
-                                <span>Agentes seguem executando após a entrega</span>
+                        <div class="bm-step bm-step--new" data-idx="2">
+                            <div class="bm-step__dot bm-step__dot--gold">2</div>
+                            <div class="bm-step__card bm-step__card--gold">
+                                <div class="bm-step__content">
+                                    <strong>Operação contínua com IA</strong>
+                                    <span>Agentes seguem executando após a entrega</span>
+                                </div>
+                                <div class="bm-step__scene">
+                                    <div class="bm-scene-running">
+                                        <div class="bm-scene-running__pulse"></div>
+                                        <div class="bm-scene-running__icon"><i class="fas fa-gear"></i></div>
+                                        <div class="bm-scene-running__label">24/7 operando</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="model-v2__step-icon"><i class="fas fa-check"></i></div>
                         </div>
-                        <div class="model-v2__step">
-                            <div class="model-v2__step-num">3</div>
-                            <div class="model-v2__step-text">
-                                <strong>Receita recorrente</strong>
-                                <span>Cliente paga mensalidade porque IA continua trabalhando</span>
+                        <div class="bm-step bm-step--new" data-idx="3">
+                            <div class="bm-step__dot bm-step__dot--gold">3</div>
+                            <div class="bm-step__card bm-step__card--gold">
+                                <div class="bm-step__content">
+                                    <strong>Receita recorrente</strong>
+                                    <span>Cliente paga mensalidade porque IA continua trabalhando</span>
+                                </div>
+                                <div class="bm-step__scene">
+                                    <div class="bm-scene-revenue">
+                                        <div class="bm-scene-revenue__bar bm-scene-revenue__bar--1"></div>
+                                        <div class="bm-scene-revenue__bar bm-scene-revenue__bar--2"></div>
+                                        <div class="bm-scene-revenue__bar bm-scene-revenue__bar--3"></div>
+                                        <div class="bm-scene-revenue__bar bm-scene-revenue__bar--4"></div>
+                                        <div class="bm-scene-revenue__label"><i class="fas fa-arrow-trend-up"></i> Receita crescente</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="model-v2__step-icon"><i class="fas fa-check"></i></div>
                         </div>
-                        <div class="model-v2__step">
-                            <div class="model-v2__step-num">4</div>
-                            <div class="model-v2__step-text">
-                                <strong>Expansão natural</strong>
-                                <span>Ativar novos agentes = upsell sem venda nova</span>
+                        <div class="bm-step bm-step--new" data-idx="4">
+                            <div class="bm-step__dot bm-step__dot--green">4</div>
+                            <div class="bm-step__card bm-step__card--green">
+                                <div class="bm-step__content">
+                                    <strong>Expansão natural</strong>
+                                    <span>Ativar novos agentes = upsell sem venda nova</span>
+                                </div>
+                                <div class="bm-step__scene">
+                                    <div class="bm-scene-expand">
+                                        <div class="bm-scene-expand__item bm-scene-expand__item--1"><i class="fas fa-user-plus"></i> +3 agentes</div>
+                                        <div class="bm-scene-expand__item bm-scene-expand__item--2"><i class="fas fa-chart-line"></i> +R$ 600/mês</div>
+                                        <div class="bm-scene-expand__item bm-scene-expand__item--3"><i class="fas fa-rocket"></i> Sem venda nova</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="model-v2__step-icon"><i class="fas fa-arrow-trend-up"></i></div>
                         </div>
                     </div>
-                    <div class="model-v2__result">
-                        <div class="model-v2__result-icon"><i class="fas fa-circle-check"></i></div>
-                        <div class="model-v2__result-text">Receita previsível, margem ~90%, crescimento composto</div>
+                    <div class="bm-phase__result bm-phase__result--green">
+                        <i class="fas fa-circle-check"></i>
+                        <span>Receita previsível, margem ~90%, crescimento composto</span>
                     </div>
                 </div>
             </div>
 
-            <div class="model-v2__keypoint" data-reveal>
-                <p><strong>Agentes continuam executando depois que você termina.</strong><br>Cliente continua pagando porque agentes continuam trabalhando. Você ganha receita recorrente real. Isso é <strong>consultoria recorrente passiva</strong>.</p>
+            <!-- Keypoint -->
+            <div class="bm-keypoint" data-reveal>
+                <div class="bm-keypoint__card">
+                    <div class="bm-keypoint__icon"><i class="fas fa-bolt"></i></div>
+                    <p><strong>Agentes continuam executando depois que você termina.</strong><br>Cliente continua pagando porque agentes continuam trabalhando. Você ganha receita recorrente real. Isso é <strong style="color:#D4A017;">consultoria recorrente passiva</strong>.</p>
+                </div>
             </div>
 
-            <div data-reveal style="margin-top:32px; padding:24px 32px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:12px; max-width:740px; margin-left:auto; margin-right:auto;">
-                <p style="color:rgba(255,255,255,0.85); font-size:15px; line-height:1.7; margin:0;">
-                    <i class="fas fa-quote-left" style="color:#D4A017; margin-right:8px;"></i>
-                    O CEO da IBM Consulting declarou que consultorias devem agir como empresas de software para sobreviver à era da IA. A IBM já desenvolveu mais de 5.000 agentes digitais.
-                </p>
+            <!-- IBM Quote -->
+            <div class="bm-quote" data-reveal>
+                <i class="fas fa-quote-left"></i>
+                <p>O CEO da IBM Consulting declarou que consultorias devem agir como empresas de software para sobreviver à era da IA. A IBM já desenvolveu mais de 5.000 agentes digitais.</p>
             </div>
         </div>
+
+        <style>
+        /* ═══ BUSINESS MODEL CINEMA ═══ */
+        .bm-cinema { max-width: 1000px; margin: 0 auto; }
+
+        /* Phase containers */
+        .bm-phase { margin-bottom: 0; }
+        .bm-phase__header { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+        .bm-phase__badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 14px; font-weight: 700; padding: 8px 20px;
+            border-radius: 50px; letter-spacing: 0.5px;
+        }
+        .bm-phase__badge--red { background: rgba(239,68,68,0.1); color: #EF4444; border: 1px solid rgba(239,68,68,0.25); }
+        .bm-phase__badge--gold { background: rgba(212,160,23,0.1); color: #D4A017; border: 1px solid rgba(212,160,23,0.25); }
+        .bm-phase__tag {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: linear-gradient(135deg, #D4A017, #E8B824);
+            color: #000; font-size: 11px; font-weight: 800;
+            padding: 5px 14px; border-radius: 50px;
+            box-shadow: 0 4px 16px rgba(212,160,23,0.3);
+        }
+
+        /* Timeline rail */
+        .bm-phase__timeline { position: relative; padding-left: 60px; }
+        .bm-phase__rail {
+            position: absolute; left: 22px; top: 0; bottom: 0; width: 3px;
+            background: rgba(255,255,255,0.06); border-radius: 3px;
+        }
+        .bm-phase__rail-fill {
+            width: 100%; height: 0%; border-radius: 3px;
+            transition: height 2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bm-phase__rail-fill--red { background: linear-gradient(180deg, #EF4444, rgba(239,68,68,0.3)); box-shadow: 0 0 8px rgba(239,68,68,0.3); }
+        .bm-phase__rail-fill--gold { background: linear-gradient(180deg, #D4A017, #22C55E); box-shadow: 0 0 8px rgba(212,160,23,0.3); }
+        .bm-phase.bm-active .bm-phase__rail-fill { height: 100%; }
+
+        /* Steps */
+        .bm-step {
+            position: relative; margin-bottom: 20px;
+            opacity: 0; transform: translateY(30px);
+        }
+        .bm-step:last-child { margin-bottom: 0; }
+        .bm-step.bm-step-visible {
+            opacity: 1; transform: translateY(0);
+            transition: all 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .bm-step__dot {
+            position: absolute; left: -60px; top: 50%; transform: translateY(-50%);
+            width: 44px; height: 44px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; font-weight: 800; z-index: 2;
+        }
+        .bm-step__dot--red { background: linear-gradient(135deg, #EF4444, #DC2626); color: #fff; box-shadow: 0 4px 16px rgba(239,68,68,0.3); }
+        .bm-step__dot--gold { background: linear-gradient(135deg, #D4A017, #E8B824); color: #000; box-shadow: 0 4px 16px rgba(212,160,23,0.3); }
+        .bm-step__dot--green {
+            background: linear-gradient(135deg, #22C55E, #16A34A); color: #fff;
+            box-shadow: 0 4px 16px rgba(34,197,94,0.3);
+            animation: bm-green-pulse 2s ease-in-out infinite;
+        }
+        @keyframes bm-green-pulse {
+            0%, 100% { box-shadow: 0 4px 16px rgba(34,197,94,0.3), 0 0 0 0 rgba(34,197,94,0.1); }
+            50% { box-shadow: 0 4px 16px rgba(34,197,94,0.5), 0 0 0 10px rgba(34,197,94,0); }
+        }
+
+        /* Card */
+        .bm-step__card {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;
+            background: linear-gradient(135deg, #1C2333, #13161D);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px; padding: 28px 24px;
+            transition: all 0.3s ease;
+        }
+        .bm-step__card:hover {
+            border-color: rgba(255,255,255,0.1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        .bm-step__card--gold { border-color: rgba(212,160,23,0.15); }
+        .bm-step__card--gold:hover { border-color: rgba(212,160,23,0.3); box-shadow: 0 8px 32px rgba(212,160,23,0.1); }
+        .bm-step__card--green { border-color: rgba(34,197,94,0.2); background: linear-gradient(135deg, #1C2333, rgba(34,197,94,0.05)); }
+        .bm-step__content strong { display: block; font-size: 17px; color: #fff; margin-bottom: 6px; font-weight: 700; }
+        .bm-step__content span { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+        .bm-step--old .bm-step__content strong { color: rgba(255,255,255,0.7); }
+
+        /* Scenes */
+        .bm-step__scene { display: flex; align-items: center; justify-content: center; min-height: 80px; }
+
+        /* Scene: Document */
+        .bm-scene-doc { display: flex; align-items: center; gap: 12px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; padding: 14px 18px; width: 100%; }
+        .bm-scene-doc__icon { font-size: 24px; color: rgba(239,68,68,0.5); }
+        .bm-scene-doc__lines { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+        .bm-scene-doc__lines span { height: 4px; background: rgba(255,255,255,0.06); border-radius: 4px; }
+        .bm-scene-doc__lines span:nth-child(1) { width: 80%; }
+        .bm-scene-doc__lines span:nth-child(2) { width: 60%; }
+        .bm-scene-doc__lines span:nth-child(3) { width: 70%; }
+        .bm-step-visible .bm-scene-doc__lines span { animation: bm-line-draw 0.6s ease forwards; opacity: 0; }
+        .bm-step-visible .bm-scene-doc__lines span:nth-child(1) { animation-delay: 0.3s; }
+        .bm-step-visible .bm-scene-doc__lines span:nth-child(2) { animation-delay: 0.5s; }
+        .bm-step-visible .bm-scene-doc__lines span:nth-child(3) { animation-delay: 0.7s; }
+        @keyframes bm-line-draw { to { opacity: 1; } }
+        .bm-scene-doc__stamp { font-size: 10px; color: rgba(239,68,68,0.6); white-space: nowrap; display: flex; align-items: center; gap: 4px; }
+
+        /* Scene: Goodbye */
+        .bm-scene-bye { display: flex; align-items: center; gap: 10px; justify-content: center; }
+        .bm-scene-bye__box, .bm-scene-bye__client { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+        .bm-scene-bye__box { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.3); }
+        .bm-scene-bye__arrow { color: rgba(255,255,255,0.15); font-size: 12px; }
+        .bm-scene-bye__client { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.3); }
+        .bm-scene-bye__x { color: #EF4444; font-size: 14px; opacity: 0; }
+        .bm-step-visible .bm-scene-bye__x { animation: bm-x-appear 0.4s 0.8s forwards; }
+        @keyframes bm-x-appear { to { opacity: 1; } }
+
+        /* Scene: Churn bars (descending) */
+        .bm-scene-churn { display: flex; align-items: flex-end; gap: 6px; height: 60px; position: relative; padding-bottom: 20px; }
+        .bm-scene-churn__bar { width: 20px; border-radius: 4px 4px 0 0; background: rgba(239,68,68,0.3); }
+        .bm-scene-churn__bar--1 { height: 50px; }
+        .bm-scene-churn__bar--2 { height: 38px; }
+        .bm-scene-churn__bar--3 { height: 24px; }
+        .bm-scene-churn__bar--4 { height: 12px; }
+        .bm-step-visible .bm-scene-churn__bar { animation: bm-bar-shrink 1s ease forwards; }
+        @keyframes bm-bar-shrink { from { transform: scaleY(0); transform-origin: bottom; } to { transform: scaleY(1); transform-origin: bottom; } }
+        .bm-scene-churn__label { position: absolute; bottom: 0; left: 0; font-size: 10px; color: #EF4444; display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+
+        /* Scene: Loop */
+        .bm-scene-loop { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .bm-scene-loop__icon { font-size: 28px; color: rgba(239,68,68,0.4); }
+        .bm-step-visible .bm-scene-loop__icon { animation: bm-spin 3s linear infinite; }
+        @keyframes bm-spin { to { transform: rotate(360deg); } }
+        .bm-scene-loop span { font-size: 11px; color: rgba(239,68,68,0.5); font-weight: 600; }
+
+        /* Scene: Activate agents */
+        .bm-scene-activate { text-align: center; }
+        .bm-scene-activate__agents { display: flex; gap: 8px; justify-content: center; margin-bottom: 10px; }
+        .bm-scene-activate__agents span {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: rgba(212,160,23,0.1); border: 1.5px solid rgba(212,160,23,0.3);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; color: #D4A017;
+            opacity: 0; transform: scale(0.5);
+        }
+        .bm-step-visible .bm-scene-activate__agents span { animation: bm-agent-pop 0.4s calc(var(--d) * 0.15s + 0.3s) forwards; }
+        @keyframes bm-agent-pop { 0% { opacity: 0; transform: scale(0.5); } 70% { transform: scale(1.15); } 100% { opacity: 1; transform: scale(1); } }
+        .bm-scene-activate__label { font-size: 10px; font-weight: 700; color: #D4A017; background: rgba(212,160,23,0.08); padding: 4px 12px; border-radius: 20px; display: inline-flex; align-items: center; gap: 4px; }
+
+        /* Scene: Running 24/7 */
+        .bm-scene-running { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+        .bm-scene-running__pulse {
+            position: absolute; width: 50px; height: 50px; border-radius: 50%;
+            border: 2px solid rgba(212,160,23,0.2); top: 50%; left: 50%; transform: translate(-50%, -50%);
+        }
+        .bm-step-visible .bm-scene-running__pulse { animation: bm-running-pulse 2s ease-in-out infinite; }
+        @keyframes bm-running-pulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; } 50% { transform: translate(-50%, -50%) scale(1.4); opacity: 0; } }
+        .bm-scene-running__icon { font-size: 24px; color: #D4A017; position: relative; z-index: 2; }
+        .bm-step-visible .bm-scene-running__icon { animation: bm-gear-spin 4s linear infinite; }
+        @keyframes bm-gear-spin { to { transform: rotate(360deg); } }
+        .bm-scene-running__label { font-size: 10px; font-weight: 700; color: #D4A017; }
+
+        /* Scene: Revenue bars (ascending) */
+        .bm-scene-revenue { display: flex; align-items: flex-end; gap: 6px; height: 60px; position: relative; padding-bottom: 20px; }
+        .bm-scene-revenue__bar { width: 20px; border-radius: 4px 4px 0 0; background: linear-gradient(180deg, #D4A017, rgba(212,160,23,0.4)); }
+        .bm-scene-revenue__bar--1 { height: 14px; }
+        .bm-scene-revenue__bar--2 { height: 26px; }
+        .bm-scene-revenue__bar--3 { height: 38px; }
+        .bm-scene-revenue__bar--4 { height: 52px; }
+        .bm-step-visible .bm-scene-revenue__bar { animation: bm-bar-shrink 1s ease forwards; }
+        .bm-scene-revenue__label { position: absolute; bottom: 0; left: 0; font-size: 10px; color: #22C55E; display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+
+        /* Scene: Expansion */
+        .bm-scene-expand { display: flex; flex-direction: column; gap: 6px; }
+        .bm-scene-expand__item {
+            display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600;
+            padding: 8px 14px; border-radius: 10px; opacity: 0; transform: translateX(20px);
+        }
+        .bm-scene-expand__item i { font-size: 11px; }
+        .bm-scene-expand__item--1 { background: rgba(34,197,94,0.08); color: #22C55E; border: 1px solid rgba(34,197,94,0.15); }
+        .bm-scene-expand__item--2 { background: rgba(212,160,23,0.08); color: #D4A017; border: 1px solid rgba(212,160,23,0.15); }
+        .bm-scene-expand__item--3 { background: rgba(99,102,241,0.08); color: #818CF8; border: 1px solid rgba(99,102,241,0.15); }
+        .bm-step-visible .bm-scene-expand__item--1 { animation: bm-expand-in 0.5s 0.3s forwards; }
+        .bm-step-visible .bm-scene-expand__item--2 { animation: bm-expand-in 0.5s 0.6s forwards; }
+        .bm-step-visible .bm-scene-expand__item--3 { animation: bm-expand-in 0.5s 0.9s forwards; }
+        @keyframes bm-expand-in { to { opacity: 1; transform: translateX(0); } }
+
+        /* VS Divider */
+        .bm-vs { display: flex; align-items: center; gap: 0; margin: 40px 0; }
+        .bm-vs__line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); }
+        .bm-vs__circle {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: #161B22; border: 2px solid rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; font-weight: 800; color: #fff; letter-spacing: 1px;
+            flex-shrink: 0;
+        }
+
+        /* Phase result */
+        .bm-phase__result {
+            display: flex; align-items: center; gap: 10px;
+            padding: 16px 20px; border-radius: 12px; margin-top: 20px; margin-left: 60px;
+            font-size: 14px; font-weight: 600;
+        }
+        .bm-phase__result--red { background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.15); color: rgba(239,68,68,0.7); }
+        .bm-phase__result--green { background: rgba(34,197,94,0.06); border: 1px solid rgba(34,197,94,0.2); color: #22C55E; }
+
+        /* Keypoint card */
+        .bm-keypoint { margin-top: 48px; }
+        .bm-keypoint__card {
+            max-width: 740px; margin: 0 auto;
+            background: linear-gradient(135deg, rgba(212,160,23,0.06), rgba(212,160,23,0.02));
+            border: 1px solid rgba(212,160,23,0.15); border-radius: 16px;
+            padding: 28px 32px; display: flex; align-items: flex-start; gap: 16px;
+        }
+        .bm-keypoint__icon { font-size: 20px; color: #D4A017; flex-shrink: 0; margin-top: 2px; }
+        .bm-keypoint__card p { color: rgba(255,255,255,0.75); font-size: 15px; line-height: 1.7; margin: 0; }
+        .bm-keypoint__card strong { color: #fff; }
+
+        /* Quote */
+        .bm-quote {
+            max-width: 740px; margin: 24px auto 0;
+            padding: 24px 32px; background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06); border-radius: 12px;
+            display: flex; align-items: flex-start; gap: 12px;
+        }
+        .bm-quote i { color: #D4A017; font-size: 16px; flex-shrink: 0; margin-top: 3px; }
+        .bm-quote p { color: rgba(255,255,255,0.7); font-size: 14px; line-height: 1.7; margin: 0; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .bm-phase__timeline { padding-left: 48px; }
+            .bm-step__dot { left: -48px; width: 36px; height: 36px; font-size: 14px; }
+            .bm-step__card { grid-template-columns: 1fr; gap: 16px; padding: 20px 18px; }
+            .bm-phase__result { margin-left: 48px; font-size: 13px; }
+            .bm-vs__circle { width: 44px; height: 44px; font-size: 12px; }
+            .bm-keypoint__card, .bm-quote { padding: 20px 18px; }
+        }
+        @media (max-width: 480px) {
+            .bm-phase__timeline { padding-left: 40px; }
+            .bm-step__dot { left: -40px; width: 32px; height: 32px; font-size: 12px; }
+            .bm-phase__result { margin-left: 40px; }
+            .bm-step__card { padding: 16px 12px; gap: 12px; }
+            .bm-step__text h3 { font-size: 16px; }
+            .bm-step__text p { font-size: 13px; }
+        }
+        </style>
+
+        <script>
+        (function() {
+            var cinema = document.getElementById('bmCinemaCanais');
+            if (!cinema) return;
+            var phases = cinema.querySelectorAll('.bm-phase');
+
+            phases.forEach(function(phase) {
+                var steps = phase.querySelectorAll('.bm-step');
+                var activated = false;
+
+                var obs = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(e) {
+                        if (e.isIntersecting && !activated) {
+                            activated = true;
+                            phase.classList.add('bm-active');
+                            steps.forEach(function(step, i) {
+                                setTimeout(function() {
+                                    step.classList.add('bm-step-visible');
+                                }, i * 600);
+                            });
+                            obs.unobserve(e.target);
+                        }
+                    });
+                }, { threshold: 0.15 });
+                obs.observe(phase);
+            });
+        })();
+        </script>
     </section>
 
 
@@ -1503,24 +2202,226 @@
                 <p>Em breve, você poderá criar agentes específicos para suas verticais. Sua metodologia, operacionalizada por IA.</p>
             </div>
 
-            <div class="roadmap-timeline" data-reveal-stagger>
-                <div class="roadmap-step roadmap-step--active">
-                    <div class="roadmap-step__dot"><i class="fas fa-check"></i></div>
-                    <h3>Agora</h3>
-                    <p>12 agentes especializados prontos para operar nos seus clientes.</p>
+            <div class="rm-cinema" id="rmCinemaCanais">
+                <div class="rm-cinema__rail"><div class="rm-cinema__rail-fill"></div></div>
+
+                <!-- AGORA -->
+                <div class="rm-step" data-step="1">
+                    <div class="rm-step__marker">
+                        <div class="rm-step__dot rm-step__dot--active"><i class="fas fa-check"></i></div>
+                        <span class="rm-step__badge rm-step__badge--active"><i class="fas fa-circle"></i> Ativo agora</span>
+                    </div>
+                    <div class="rm-step__card rm-step__card--active">
+                        <div class="rm-step__text">
+                            <h3>Agora</h3>
+                            <p>12 agentes especializados prontos para operar nos seus clientes.</p>
+                        </div>
+                        <div class="rm-step__scene">
+                            <div class="rm-agents-mini">
+                                <div class="rm-agent-dot" style="--d:0"><i class="fas fa-chess-queen"></i></div>
+                                <div class="rm-agent-dot" style="--d:1"><i class="fas fa-sitemap"></i></div>
+                                <div class="rm-agent-dot" style="--d:2"><i class="fas fa-users"></i></div>
+                                <div class="rm-agent-dot" style="--d:3"><i class="fas fa-chart-line"></i></div>
+                                <div class="rm-agent-dot" style="--d:4"><i class="fas fa-shield-halved"></i></div>
+                                <div class="rm-agent-dot" style="--d:5"><i class="fas fa-lightbulb"></i></div>
+                            </div>
+                            <div class="rm-agents-label"><i class="fas fa-bolt"></i> 12 agentes operando</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="roadmap-step roadmap-step--upcoming">
-                    <div class="roadmap-step__dot"><i class="fas fa-code"></i></div>
-                    <h3>6 meses</h3>
-                    <p>Agentes configuráveis por vertical. Você adapta à sua metodologia.</p>
+
+                <!-- 6 MESES -->
+                <div class="rm-step" data-step="2">
+                    <div class="rm-step__marker">
+                        <div class="rm-step__dot rm-step__dot--upcoming"><i class="fas fa-code"></i></div>
+                        <span class="rm-step__badge rm-step__badge--upcoming"><i class="fas fa-clock"></i> 6 meses</span>
+                    </div>
+                    <div class="rm-step__card">
+                        <div class="rm-step__text">
+                            <h3>6 meses</h3>
+                            <p>Agentes configuráveis por vertical. Você adapta à sua metodologia.</p>
+                        </div>
+                        <div class="rm-step__scene">
+                            <div class="rm-config-mockup">
+                                <div class="rm-config-mockup__header">
+                                    <div class="rm-config-dots"><span></span><span></span><span></span></div>
+                                    <span>Configurador de Agentes</span>
+                                </div>
+                                <div class="rm-config-mockup__body">
+                                    <div class="rm-config-field rm-config-field--1">
+                                        <span class="rm-config-field__label">Vertical</span>
+                                        <div class="rm-config-field__val">Consultoria financeira</div>
+                                    </div>
+                                    <div class="rm-config-field rm-config-field--2">
+                                        <span class="rm-config-field__label">Método</span>
+                                        <div class="rm-config-field__val">Sua metodologia própria</div>
+                                    </div>
+                                    <div class="rm-config-btn rm-config-field--3"><i class="fas fa-wand-magic-sparkles"></i> Gerar agente</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="roadmap-step roadmap-step--upcoming">
-                    <div class="roadmap-step__dot"><i class="fas fa-rocket"></i></div>
-                    <h3>12 meses</h3>
-                    <p>Marketplace de agentes. Crie, publique e monetize seus próprios agentes.</p>
+
+                <!-- 12 MESES -->
+                <div class="rm-step" data-step="3">
+                    <div class="rm-step__marker">
+                        <div class="rm-step__dot rm-step__dot--future"><i class="fas fa-rocket"></i></div>
+                        <span class="rm-step__badge rm-step__badge--upcoming"><i class="fas fa-clock"></i> 12 meses</span>
+                    </div>
+                    <div class="rm-step__card">
+                        <div class="rm-step__text">
+                            <h3>12 meses</h3>
+                            <p>Marketplace de agentes. Crie, publique e monetize seus próprios agentes.</p>
+                        </div>
+                        <div class="rm-step__scene">
+                            <div class="rm-marketplace">
+                                <div class="rm-mp-card rm-mp-card--1">
+                                    <div class="rm-mp-card__icon"><i class="fas fa-building"></i></div>
+                                    <div class="rm-mp-card__info">
+                                        <strong>Agente Financeiro</strong>
+                                        <span>por Você</span>
+                                    </div>
+                                    <div class="rm-mp-card__price">R$ 197/mês</div>
+                                </div>
+                                <div class="rm-mp-card rm-mp-card--2">
+                                    <div class="rm-mp-card__icon"><i class="fas fa-industry"></i></div>
+                                    <div class="rm-mp-card__info">
+                                        <strong>Agente Industrial</strong>
+                                        <span>por Parceiro</span>
+                                    </div>
+                                    <div class="rm-mp-card__price">R$ 247/mês</div>
+                                </div>
+                                <div class="rm-mp-card rm-mp-card--3">
+                                    <div class="rm-mp-card__icon"><i class="fas fa-store"></i></div>
+                                    <div class="rm-mp-card__info">
+                                        <strong>Agente Varejo</strong>
+                                        <span>por Comunidade</span>
+                                    </div>
+                                    <div class="rm-mp-card__price">R$ 147/mês</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <style>
+        /* ═══ ROADMAP CINEMA ═══ */
+        .rm-cinema { position: relative; max-width: 900px; margin: 0 auto; padding: 20px 0 0; }
+        .rm-cinema__rail { position: absolute; left: 28px; top: 0; bottom: 0; width: 3px; background: rgba(255,255,255,0.06); border-radius: 3px; z-index: 0; }
+        .rm-cinema__rail-fill { width: 100%; height: 0%; background: linear-gradient(180deg, #D4A017, #F5C518, #818CF8); border-radius: 3px; transition: height 2.5s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 0 12px rgba(212,160,23,0.4); }
+        .rm-cinema.rm-active .rm-cinema__rail-fill { height: 100%; }
+
+        .rm-step { position: relative; padding-left: 80px; margin-bottom: 48px; opacity: 0; transform: translateY(40px); }
+        .rm-step:last-child { margin-bottom: 0; }
+        .rm-step.rm-step-visible { opacity: 1; transform: translateY(0); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1); }
+
+        .rm-step__marker { position: absolute; left: 0; top: 0; display: flex; align-items: center; gap: 12px; z-index: 2; }
+        .rm-step__dot { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+        .rm-step__dot--active { background: linear-gradient(135deg, #D4A017, #E8B824); color: #000; box-shadow: 0 4px 20px rgba(212,160,23,0.3); animation: rm-dot-pulse 2s ease-in-out infinite; }
+        @keyframes rm-dot-pulse { 0%, 100% { box-shadow: 0 4px 20px rgba(212,160,23,0.3), 0 0 0 0 rgba(212,160,23,0.1); } 50% { box-shadow: 0 4px 20px rgba(212,160,23,0.5), 0 0 0 12px rgba(212,160,23,0); } }
+        .rm-step__dot--upcoming { background: #1C2333; border: 2px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.4); }
+        .rm-step__dot--future { background: linear-gradient(135deg, #6366F1, #818CF8); color: #fff; box-shadow: 0 4px 20px rgba(99,102,241,0.3); }
+
+        .rm-step__badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 20px; white-space: nowrap; }
+        .rm-step__badge--active { background: rgba(212,160,23,0.1); color: #D4A017; }
+        .rm-step__badge--active i { font-size: 6px; animation: rm-blink 1.5s ease-in-out infinite; }
+        @keyframes rm-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .rm-step__badge--upcoming { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.4); }
+
+        .rm-step__card { background: linear-gradient(135deg, #1C2333, #13161D); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: center; margin-top: 8px; transition: all 0.3s ease; overflow: hidden; }
+        .rm-step__card:hover { border-color: rgba(255,255,255,0.1); box-shadow: 0 12px 48px rgba(0,0,0,0.4); }
+        .rm-step__card--active { border-color: rgba(212,160,23,0.2); background: linear-gradient(135deg, #1C2333, rgba(212,160,23,0.04)); }
+        .rm-step__text h3 { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 10px; }
+        .rm-step__card--active .rm-step__text h3 { color: #D4A017; }
+        .rm-step__text p { font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+        /* Scene: Agents mini grid */
+        .rm-agents-mini { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 10px; }
+        .rm-agent-dot { width: 38px; height: 38px; border-radius: 50%; background: rgba(212,160,23,0.1); border: 1.5px solid rgba(212,160,23,0.25); display: flex; align-items: center; justify-content: center; font-size: 13px; color: #D4A017; opacity: 0; transform: scale(0.5); }
+        .rm-step-visible .rm-agent-dot { animation: rm-agent-pop 0.4s calc(var(--d) * 0.1s + 0.3s) forwards; }
+        @keyframes rm-agent-pop { 0% { opacity: 0; transform: scale(0.5); } 70% { transform: scale(1.15); } 100% { opacity: 1; transform: scale(1); } }
+        .rm-agents-label { text-align: center; font-size: 11px; font-weight: 700; color: #D4A017; background: rgba(212,160,23,0.08); padding: 4px 14px; border-radius: 20px; display: inline-flex; align-items: center; gap: 6px; margin: 0 auto; display: flex; width: fit-content; }
+
+        /* Scene: Config mockup */
+        .rm-config-mockup { background: #0D1117; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; width: 100%; }
+        .rm-config-mockup__header { display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: rgba(255,255,255,0.03); border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .rm-config-dots { display: flex; gap: 6px; }
+        .rm-config-dots span { width: 10px; height: 10px; border-radius: 50%; }
+        .rm-config-dots span:nth-child(1) { background: #EF4444; }
+        .rm-config-dots span:nth-child(2) { background: #F59E0B; }
+        .rm-config-dots span:nth-child(3) { background: #22C55E; }
+        .rm-config-mockup__header span { font-size: 12px; color: rgba(255,255,255,0.4); }
+        .rm-config-mockup__body { padding: 16px; }
+        .rm-config-field { margin-bottom: 12px; opacity: 0; transform: translateX(20px); }
+        .rm-config-field__label { display: block; font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .rm-config-field__val { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 8px 12px; font-size: 13px; color: rgba(255,255,255,0.7); }
+        .rm-config-btn { display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, #6366F1, #818CF8); color: #fff; font-size: 13px; font-weight: 700; padding: 10px; border-radius: 8px; opacity: 0; transform: scale(0.9); }
+        .rm-step-visible .rm-config-field--1 { animation: rm-field-in 0.5s 0.3s forwards; }
+        .rm-step-visible .rm-config-field--2 { animation: rm-field-in 0.5s 0.7s forwards; }
+        .rm-step-visible .rm-config-field--3 { animation: rm-btn-in 0.4s 1.1s forwards; }
+        @keyframes rm-field-in { to { opacity: 1; transform: translateX(0); } }
+        @keyframes rm-btn-in { to { opacity: 1; transform: scale(1); } }
+
+        /* Scene: Marketplace */
+        .rm-marketplace { display: flex; flex-direction: column; gap: 8px; }
+        .rm-mp-card { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 12px 16px; opacity: 0; transform: translateX(30px); }
+        .rm-step-visible .rm-mp-card--1 { animation: rm-mp-in 0.5s 0.3s forwards; }
+        .rm-step-visible .rm-mp-card--2 { animation: rm-mp-in 0.5s 0.6s forwards; }
+        .rm-step-visible .rm-mp-card--3 { animation: rm-mp-in 0.5s 0.9s forwards; }
+        @keyframes rm-mp-in { to { opacity: 1; transform: translateX(0); } }
+        .rm-mp-card__icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.2); display: flex; align-items: center; justify-content: center; font-size: 14px; color: #818CF8; flex-shrink: 0; }
+        .rm-mp-card__info { flex: 1; }
+        .rm-mp-card__info strong { display: block; font-size: 13px; color: #fff; font-weight: 600; }
+        .rm-mp-card__info span { font-size: 11px; color: rgba(255,255,255,0.35); }
+        .rm-mp-card__price { font-size: 12px; font-weight: 700; color: #22C55E; background: rgba(34,197,94,0.08); padding: 4px 10px; border-radius: 8px; white-space: nowrap; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .rm-cinema__rail { left: 20px; }
+            .rm-step { padding-left: 64px; }
+            .rm-step__dot { width: 42px; height: 42px; font-size: 16px; }
+            .rm-step__card { grid-template-columns: 1fr; padding: 24px 20px; gap: 20px; }
+        }
+        @media (max-width: 480px) {
+            .rm-step { padding-left: 56px; margin-bottom: 36px; }
+            .rm-cinema__rail { left: 16px; }
+            .rm-step__dot { width: 36px; height: 36px; font-size: 14px; }
+            .rm-step__badge { font-size: 10px; padding: 4px 10px; }
+            .rm-step__card { padding: 20px 16px; }
+            .rm-config-field__label { font-size: 9px; }
+            .rm-config-field__val { font-size: 12px; padding: 6px 10px; }
+            .rm-mp-card { padding: 10px 12px; gap: 10px; }
+            .rm-mp-card__info strong { font-size: 12px; }
+        }
+        </style>
+
+        <script>
+        (function() {
+            var cinema = document.getElementById('rmCinemaCanais');
+            if (!cinema) return;
+            var steps = cinema.querySelectorAll('.rm-step');
+            var activated = false;
+
+            var obs = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) {
+                    if (e.isIntersecting && !activated) {
+                        activated = true;
+                        cinema.classList.add('rm-active');
+                        steps.forEach(function(step, i) {
+                            setTimeout(function() {
+                                step.classList.add('rm-step-visible');
+                            }, i * 800);
+                        });
+                        obs.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+            obs.observe(cinema);
+        })();
+        </script>
     </section>
 
 
@@ -1631,14 +2532,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- ═══ CLOSING PHRASE ═══ -->
-    <section class="site-closing">
-        <div class="container">
-            <h2>Orbit é o time de gestão que sua empresa sempre precisou. <span style="display:block;margin-top:8px;">E que nunca para de trabalhar.</span></h2>
-            <a href="/#contato-form" class="btn">Conhecer o Time de IA</a>
         </div>
     </section>
 

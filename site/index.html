@@ -32,7 +32,7 @@
 
 
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/styles-v2.css?v=7aefaed1">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=12d06f57">
 
     <!-- New Sections Styles -->
     <style>
@@ -610,50 +610,399 @@
         </div>
     </section>
 
-        <!-- ═══ PAIN POINTS ═══ -->
-    <section class="pain-section section--light" id="dores">
+        <!-- ═══ PAIN POINTS — CINEMATIC ═══ -->
+    <section class="pain-cinema" id="dores">
+        <div class="pain-cinema__bg">
+            <div class="pain-cinema__grid-lines"></div>
+            <div class="pain-cinema__glow"></div>
+        </div>
         <div class="container">
             <div class="section-header" data-reveal>
-                <span class="section-badge">Isso te parece familiar?</span>
+                <span class="section-badge section-badge--red">Isso te parece familiar?</span>
                 <h2>Deixa eu adivinhar:</h2>
                 <p>Você planeja o crescimento, mas não faz ideia se a operação está seguindo o script.</p>
             </div>
 
-            <div class="pain-grid" data-reveal-stagger>
-                <div class="pain-card card-float card-shine">
-                    <div class="icon-premium icon-premium--danger"><i class="fas fa-user-slash"></i></div>
-                    <p>"Parece que sou o único que se importa com essa empresa."</p>
+            <div class="pain-thoughts" id="painThoughts">
+                <!-- Pensamentos do empresário -->
+                <div class="pain-thought" data-idx="0">
+                    <div class="pain-thought__icon"><i class="fas fa-user-slash"></i></div>
+                    <div class="pain-thought__bubble">
+                        <p>"Parece que sou o único que se importa com essa empresa."</p>
+                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="pain-thought__pulse"></div>
                 </div>
-                <div class="pain-card card-float card-shine">
-                    <div class="icon-premium icon-premium--danger"><i class="fas fa-eye-slash"></i></div>
-                    <p>"Não tenho controle quando não estou presente."</p>
+                <div class="pain-thought" data-idx="1">
+                    <div class="pain-thought__icon"><i class="fas fa-eye-slash"></i></div>
+                    <div class="pain-thought__bubble">
+                        <p>"Não tenho controle quando não estou presente."</p>
+                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="pain-thought__pulse"></div>
                 </div>
-                <div class="pain-card card-float card-shine">
-                    <div class="icon-premium icon-premium--danger"><i class="fas fa-thumbs-down"></i></div>
-                    <p>"Já tentei delegar, mas tudo sai errado."</p>
+                <div class="pain-thought" data-idx="2">
+                    <div class="pain-thought__icon"><i class="fas fa-thumbs-down"></i></div>
+                    <div class="pain-thought__bubble">
+                        <p>"Já tentei delegar, mas tudo sai errado."</p>
+                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="pain-thought__pulse"></div>
                 </div>
-                <div class="pain-card card-float card-shine">
-                    <div class="icon-premium icon-premium--danger"><i class="fas fa-fire-flame-curved"></i></div>
-                    <p>"Minha equipe só apaga incêndio."</p>
+                <div class="pain-thought" data-idx="3">
+                    <div class="pain-thought__icon"><i class="fas fa-fire-flame-curved"></i></div>
+                    <div class="pain-thought__bubble">
+                        <p>"Minha equipe só apaga incêndio."</p>
+                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="pain-thought__pulse"></div>
                 </div>
-                <div class="pain-card card-float card-shine">
-                    <div class="icon-premium icon-premium--danger"><i class="fas fa-heart-crack"></i></div>
-                    <p>"Ninguém veste a camisa."</p>
+                <div class="pain-thought" data-idx="4">
+                    <div class="pain-thought__icon"><i class="fas fa-heart-crack"></i></div>
+                    <div class="pain-thought__bubble">
+                        <p>"Ninguém veste a camisa."</p>
+                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="pain-thought__pulse"></div>
                 </div>
-                <div class="pain-card card-float card-shine">
-                    <div class="icon-premium icon-premium--danger"><i class="fas fa-arrow-trend-down"></i></div>
-                    <p>"Vivo no sobe e desce do faturamento."</p>
+                <div class="pain-thought" data-idx="5">
+                    <div class="pain-thought__icon"><i class="fas fa-arrow-trend-down"></i></div>
+                    <div class="pain-thought__bubble">
+                        <p>"Vivo no sobe e desce do faturamento."</p>
+                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="pain-thought__pulse"></div>
                 </div>
             </div>
 
-            <div class="pain-cta" data-reveal>
-                <a href="#contato-form" class="btn btn-danger btn-lg">QUERO RESOLVER ISSO <i class="fas fa-arrow-right"></i></a>
+            <!-- Resposta do Orbit -->
+            <div class="pain-answer" id="painAnswer">
+                <div class="pain-answer__line"></div>
+                <div class="pain-answer__card">
+                    <div class="pain-answer__avatar">
+                        <img src="images/olivia.png" alt="Olívia">
+                        <div class="pain-answer__status"></div>
+                    </div>
+                    <div class="pain-answer__content">
+                        <span class="pain-answer__name">Olívia — Orbit</span>
+                        <p>"Eu entendo. E é exatamente isso que resolvo. Me dá 7 dias."</p>
+                    </div>
+                </div>
+                <div class="pain-answer__cta">
+                    <a href="#contato-form" class="btn btn-primary btn-lg">QUERO RESOLVER ISSO <i class="fas fa-arrow-right"></i></a>
+                </div>
             </div>
         </div>
+
+        <style>
+            .pain-cinema {
+                position: relative;
+                padding: 120px 0 80px;
+                background: #FAFBFC;
+                overflow: hidden;
+            }
+            .pain-cinema .section-header h2 {
+                color: #1A1D23;
+            }
+            .pain-cinema .section-header p {
+                color: #5A6069;
+            }
+            .pain-cinema__bg {
+                position: absolute;
+                inset: 0;
+                pointer-events: none;
+            }
+            .pain-cinema__grid-lines {
+                position: absolute;
+                inset: 0;
+                background-image:
+                    linear-gradient(rgba(248,81,73,0.04) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(248,81,73,0.04) 1px, transparent 1px);
+                background-size: 60px 60px;
+                mask-image: radial-gradient(ellipse 60% 60% at 50% 40%, black 30%, transparent 70%);
+            }
+            .pain-cinema__glow {
+                position: absolute;
+                width: 500px;
+                height: 500px;
+                top: 10%;
+                left: 50%;
+                transform: translateX(-50%);
+                background: radial-gradient(circle, rgba(248,81,73,0.06) 0%, transparent 70%);
+                border-radius: 50%;
+                animation: pain-glow-pulse 4s ease-in-out infinite;
+            }
+            @keyframes pain-glow-pulse {
+                0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+                50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+            }
+
+            /* Section badge red */
+            .section-badge--red {
+                background: rgba(248,81,73,0.08);
+                border: 1px solid rgba(248,81,73,0.2);
+                color: #DC2626;
+            }
+
+            /* Pain thoughts container */
+            .pain-thoughts {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+
+            /* Individual thought */
+            .pain-thought {
+                display: flex;
+                align-items: flex-start;
+                gap: 14px;
+                background: #fff;
+                border: 1px solid #E5E7EB;
+                border-radius: 16px;
+                padding: 22px;
+                position: relative;
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+                transition: border-color 0.3s ease, box-shadow 0.3s ease;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            }
+            .pain-thought:hover {
+                border-color: rgba(248,81,73,0.3);
+                box-shadow: 0 8px 32px rgba(248,81,73,0.1);
+                transform: translateY(-2px) scale(1);
+            }
+            .pain-thought.pain-visible {
+                animation: pain-thought-in 0.6s forwards;
+            }
+            @keyframes pain-thought-in {
+                0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+                60% { transform: translateY(-4px) scale(1.01); }
+                100% { opacity: 1; transform: translateY(0) scale(1); }
+            }
+
+            /* Icon */
+            .pain-thought__icon {
+                width: 44px;
+                height: 44px;
+                border-radius: 12px;
+                background: linear-gradient(135deg, #FEE2E2, #FECACA);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+                position: relative;
+                border: none;
+            }
+            .pain-thought__icon i {
+                font-size: 17px;
+                color: #DC2626;
+            }
+
+            /* Pulse ring around icon */
+            .pain-thought__pulse {
+                position: absolute;
+                top: 22px;
+                left: 22px;
+                width: 44px;
+                height: 44px;
+                border-radius: 12px;
+                border: 1px solid rgba(220,38,38,0.3);
+                opacity: 0;
+            }
+            .pain-visible .pain-thought__pulse {
+                animation: pain-icon-ring 2s 0.6s ease-out infinite;
+            }
+            @keyframes pain-icon-ring {
+                0% { transform: scale(1); opacity: 0.5; }
+                100% { transform: scale(1.6); opacity: 0; }
+            }
+
+            /* Bubble */
+            .pain-thought__bubble p {
+                font-size: 15px;
+                color: #3D4450;
+                line-height: 1.6;
+                font-style: italic;
+                margin: 0;
+            }
+
+            /* Typing indicator (shows before text, then hides) */
+            .pain-thought__typing {
+                display: flex;
+                gap: 4px;
+                padding: 4px 0;
+                position: absolute;
+                top: 22px;
+                left: 80px;
+            }
+            .pain-thought__typing span {
+                width: 6px;
+                height: 6px;
+                background: rgba(220,38,38,0.35);
+                border-radius: 50%;
+                animation: pain-typing-dot 1s infinite;
+            }
+            .pain-thought__typing span:nth-child(2) { animation-delay: 0.2s; }
+            .pain-thought__typing span:nth-child(3) { animation-delay: 0.4s; }
+            @keyframes pain-typing-dot {
+                0%, 100% { opacity: 0.3; transform: scale(0.8); }
+                50% { opacity: 1; transform: scale(1); }
+            }
+            /* Hide typing once text is shown */
+            .pain-thought.pain-typed .pain-thought__typing {
+                display: none;
+            }
+            .pain-thought__bubble p {
+                opacity: 0;
+            }
+            .pain-thought.pain-typed .pain-thought__bubble p {
+                opacity: 1;
+                animation: pain-text-reveal 0.4s ease;
+            }
+            @keyframes pain-text-reveal {
+                from { opacity: 0; filter: blur(4px); }
+                to { opacity: 1; filter: blur(0); }
+            }
+
+            /* ═══ Orbit Answer ═══ */
+            .pain-answer {
+                max-width: 600px;
+                margin: 48px auto 0;
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            .pain-answer.pain-answer-visible {
+                animation: pain-answer-in 0.8s 0.3s forwards;
+            }
+            @keyframes pain-answer-in {
+                0% { opacity: 0; transform: translateY(20px); }
+                100% { opacity: 1; transform: translateY(0); }
+            }
+            .pain-answer__line {
+                width: 2px;
+                height: 40px;
+                background: linear-gradient(180deg, rgba(220,38,38,0.15), rgba(212,160,23,0.4));
+                margin: 0 auto 0;
+                border-radius: 2px;
+            }
+            .pain-answer__card {
+                display: flex;
+                align-items: flex-start;
+                gap: 16px;
+                background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+                border: 1px solid rgba(212,160,23,0.25);
+                border-radius: 20px;
+                padding: 24px;
+                margin-top: 0;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 4px 20px rgba(212,160,23,0.1);
+            }
+            .pain-answer__card::before {
+                content: '';
+                position: absolute;
+                top: -1px;
+                left: 20%;
+                right: 20%;
+                height: 2px;
+                background: linear-gradient(90deg, transparent, #D4A017, transparent);
+            }
+            .pain-answer__avatar {
+                position: relative;
+                flex-shrink: 0;
+            }
+            .pain-answer__avatar img {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                border: 2px solid #D4A017;
+            }
+            .pain-answer__status {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 12px;
+                height: 12px;
+                background: #22C55E;
+                border-radius: 50%;
+                border: 2px solid #FFFBEB;
+                animation: rfm-live-blink 1.5s ease-in-out infinite;
+            }
+            .pain-answer__name {
+                font-size: 12px;
+                font-weight: 700;
+                color: #B8860B;
+                display: block;
+                margin-bottom: 6px;
+            }
+            .pain-answer__content p {
+                font-size: 16px;
+                color: #3D4450;
+                line-height: 1.6;
+                font-style: italic;
+                margin: 0;
+            }
+            .pain-answer__cta {
+                text-align: center;
+                margin-top: 32px;
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .pain-thoughts { grid-template-columns: 1fr; max-width: 480px; }
+                .pain-cinema { padding: 80px 0 60px; }
+            }
+            @media (max-width: 480px) {
+                .pain-thought { padding: 16px; gap: 12px; }
+                .pain-thought__icon { width: 38px; height: 38px; border-radius: 10px; }
+                .pain-thought__icon i { font-size: 14px; }
+                .pain-thought__bubble p { font-size: 14px; }
+                .pain-thought__typing { left: 66px; }
+                .pain-thought__pulse { width: 38px; height: 38px; border-radius: 10px; top: 16px; left: 16px; }
+            }
+        </style>
+
+        <script>
+        (function() {
+            var container = document.getElementById('painThoughts');
+            var answer = document.getElementById('painAnswer');
+            if (!container) return;
+            var thoughts = container.querySelectorAll('.pain-thought');
+            var activated = false;
+
+            var obs = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) {
+                    if (e.isIntersecting && !activated) {
+                        activated = true;
+                        obs.unobserve(e.target);
+
+                        thoughts.forEach(function(t, i) {
+                            // First show with typing dots
+                            setTimeout(function() {
+                                t.classList.add('pain-visible');
+                            }, i * 500);
+                            // Then reveal text (typing → text)
+                            setTimeout(function() {
+                                t.classList.add('pain-typed');
+                            }, i * 500 + 600);
+                        });
+
+                        // Show Olívia answer after all thoughts
+                        setTimeout(function() {
+                            if (answer) answer.classList.add('pain-answer-visible');
+                        }, thoughts.length * 500 + 800);
+                    }
+                });
+            }, { threshold: 0.2 });
+            obs.observe(container);
+        })();
+        </script>
     </section>
 
-    <!-- ═══ REFRAME ═══ -->
-    <section class="reframe-section">
+    <!-- ═══ REFRAME — JORNADA VISUAL ═══ -->
+    <section class="reframe-section" id="reframe">
         <div class="container">
             <div class="section-header" data-reveal>
                 <span class="section-badge">E se o problema não fosse falta de método?</span>
@@ -661,56 +1010,192 @@
                 <p>Você já tentou. ERP, planilha, Trello, consultoria. E continua apagando incêndio.</p>
             </div>
 
-            <div class="reframe-grid" data-reveal>
-                <div class="reframe-col reframe-col--fail">
-                    <div class="reframe-col__header">
-                        <div class="reframe-col__icon reframe-col__icon--fail"><i class="fas fa-times"></i></div>
-                        <h3>O ciclo do fracasso</h3>
+            <div class="reframe-journey">
+                <!-- FASE 1 — O FRACASSO -->
+                <div class="reframe-phase reframe-phase--fail" data-reveal>
+                    <div class="reframe-phase__tag reframe-phase__tag--fail">
+                        <i class="fas fa-circle-xmark"></i> O que você já tentou
                     </div>
-                    <ul class="reframe-list">
-                        <li>
-                            <span class="reframe-list__num">1</span>
-                            <div><strong>Compra software</strong> — precisa alimentar manualmente</div>
-                        </li>
-                        <li>
-                            <span class="reframe-list__num">2</span>
-                            <div><strong>Contrata consultoria</strong> — consultor sai, tudo volta ao caos</div>
-                        </li>
-                        <li>
-                            <span class="reframe-list__num">3</span>
-                            <div><strong>Monta planilha</strong> — não escala, ninguém atualiza</div>
-                        </li>
-                    </ul>
-                    <div class="reframe-result reframe-result--fail">
-                        <i class="fas fa-ban"></i> Mais uma ferramenta abandonada.
+                    <div class="reframe-phase__steps">
+                        <div class="reframe-step reframe-step--fail">
+                            <div class="reframe-step__icon"><i class="fas fa-laptop-code"></i></div>
+                            <div class="reframe-step__content">
+                                <h4>Comprou software</h4>
+                                <p>Precisa alimentar manualmente. Ninguém alimenta. Vira shelfware.</p>
+                            </div>
+                            <div class="reframe-step__status"><i class="fas fa-times-circle"></i></div>
+                        </div>
+                        <div class="reframe-step__arrow reframe-step__arrow--fail"><i class="fas fa-arrow-down"></i></div>
+                        <div class="reframe-step reframe-step--fail">
+                            <div class="reframe-step__icon"><i class="fas fa-user-tie"></i></div>
+                            <div class="reframe-step__content">
+                                <h4>Contratou consultoria</h4>
+                                <p>Consultor vai embora. Conhecimento sai pela porta. Tudo volta ao caos.</p>
+                            </div>
+                            <div class="reframe-step__status"><i class="fas fa-times-circle"></i></div>
+                        </div>
+                        <div class="reframe-step__arrow reframe-step__arrow--fail"><i class="fas fa-arrow-down"></i></div>
+                        <div class="reframe-step reframe-step--fail">
+                            <div class="reframe-step__icon"><i class="fas fa-table"></i></div>
+                            <div class="reframe-step__content">
+                                <h4>Montou planilha</h4>
+                                <p>Fica obsoleta em 2 semanas. Não escala. Ninguém confia nos dados.</p>
+                            </div>
+                            <div class="reframe-step__status"><i class="fas fa-times-circle"></i></div>
+                        </div>
+                    </div>
+                    <div class="reframe-verdict reframe-verdict--fail">
+                        <div class="reframe-verdict__icon"><i class="fas fa-rotate-left"></i></div>
+                        <div>
+                            <strong>Resultado: o ciclo se repete.</strong>
+                            <p>Mais uma ferramenta abandonada. Mais dinheiro desperdiçado.</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="reframe-vs">
-                    <div class="reframe-vs__circle">VS</div>
+                <!-- TRANSIÇÃO -->
+                <div class="reframe-transition" data-reveal>
+                    <div class="reframe-transition__line"></div>
+                    <div class="reframe-transition__badge">
+                        <i class="fas fa-bolt"></i>
+                        <span>E se existisse outro caminho?</span>
+                    </div>
+                    <div class="reframe-transition__line"></div>
                 </div>
 
-                <div class="reframe-col reframe-col--win">
-                    <div class="reframe-col__header">
-                        <div class="reframe-col__icon reframe-col__icon--win"><i class="fas fa-check"></i></div>
-                        <h3>A mudança com Orbit</h3>
+                <!-- FASE 2 — O ORBIT (animated scenes) -->
+                <div class="reframe-phase reframe-phase--win" data-reveal>
+                    <div class="reframe-phase__tag reframe-phase__tag--win">
+                        <i class="fas fa-circle-check"></i> Como funciona com Orbit
                     </div>
-                    <ul class="reframe-list">
-                        <li>
-                            <span class="reframe-list__num reframe-list__num--win">1</span>
-                            <div><strong>Agentes de IA</strong> — fazem o trabalho pesado</div>
-                        </li>
-                        <li>
-                            <span class="reframe-list__num reframe-list__num--win">2</span>
-                            <div><strong>Você valida e decide</strong> — não alimenta ferramenta</div>
-                        </li>
-                        <li>
-                            <span class="reframe-list__num reframe-list__num--win">3</span>
-                            <div><strong>Funciona 24h</strong> — inclusive quando você não está</div>
-                        </li>
-                    </ul>
-                    <div class="reframe-result reframe-result--win">
-                        <i class="fas fa-rocket"></i> Gestão que opera com você, não por você.
+                    <div class="reframe-phase__steps reframe-orbit-steps">
+
+                        <!-- CARD 1: 12 agentes trabalhando -->
+                        <div class="reframe-orbit-card">
+                            <div class="reframe-orbit-card__text">
+                                <h4>12 agentes de IA trabalham por você</h4>
+                                <p>Mapeiam processos, monitoram indicadores, treinam equipes. Sem parar.</p>
+                            </div>
+                            <div class="reframe-orbit-card__scene">
+                                <div class="rfm-mini-hub">
+                                    <div class="rfm-mini-hub__center"><img src="images/olivia.png" alt="Olívia"><div class="rfm-mini-hub__pulse"></div></div>
+                                    <div class="rfm-mini-hub__ring">
+                                        <span style="--i:0"><i class="fas fa-chess-queen"></i></span>
+                                        <span style="--i:1"><i class="fas fa-sitemap"></i></span>
+                                        <span style="--i:2"><i class="fas fa-users"></i></span>
+                                        <span style="--i:3"><i class="fas fa-graduation-cap"></i></span>
+                                        <span style="--i:4"><i class="fas fa-chart-line"></i></span>
+                                        <span style="--i:5"><i class="fas fa-magnifying-glass-chart"></i></span>
+                                        <span style="--i:6"><i class="fas fa-shield-halved"></i></span>
+                                        <span style="--i:7"><i class="fas fa-lightbulb"></i></span>
+                                        <span style="--i:8"><i class="fas fa-triangle-exclamation"></i></span>
+                                        <span style="--i:9"><i class="fas fa-file-lines"></i></span>
+                                        <span style="--i:10"><i class="fas fa-handshake"></i></span>
+                                        <span style="--i:11"><i class="fas fa-video"></i></span>
+                                    </div>
+                                    <!-- Animated data lines -->
+                                    <svg class="rfm-mini-hub__svg" viewBox="0 0 200 200">
+                                        <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(212,160,23,0.1)" stroke-width="1" stroke-dasharray="3 3"/>
+                                        <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(212,160,23,0.3)" stroke-width="1.5" stroke-dasharray="20 200" class="rfm-orbit-trace"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="reframe-step__arrow reframe-step__arrow--win"><i class="fas fa-arrow-down"></i></div>
+
+                        <!-- CARD 2: Você valida -->
+                        <div class="reframe-orbit-card">
+                            <div class="reframe-orbit-card__text">
+                                <h4>Você valida e decide</h4>
+                                <p>Sem alimentar ferramenta. Sem depender de consultor. Dados prontos para ação.</p>
+                            </div>
+                            <div class="reframe-orbit-card__scene">
+                                <div class="rfm-validate">
+                                    <div class="rfm-validate__item rfm-validate__item--1">
+                                        <div class="rfm-validate__check"><i class="fas fa-circle-check"></i></div>
+                                        <div class="rfm-validate__bar"></div>
+                                        <span class="rfm-validate__badge">Aprovado</span>
+                                    </div>
+                                    <div class="rfm-validate__item rfm-validate__item--2">
+                                        <div class="rfm-validate__check"><i class="fas fa-circle-check"></i></div>
+                                        <div class="rfm-validate__bar"></div>
+                                        <span class="rfm-validate__badge">Aprovado</span>
+                                    </div>
+                                    <div class="rfm-validate__item rfm-validate__item--3">
+                                        <div class="rfm-validate__check rfm-validate__check--edit"><i class="fas fa-pen"></i></div>
+                                        <div class="rfm-validate__bar rfm-validate__bar--edit"></div>
+                                        <span class="rfm-validate__badge rfm-validate__badge--edit">Ajustado</span>
+                                    </div>
+                                    <div class="rfm-validate__item rfm-validate__item--4">
+                                        <div class="rfm-validate__check"><i class="fas fa-circle-check"></i></div>
+                                        <div class="rfm-validate__bar"></div>
+                                        <span class="rfm-validate__badge">Aprovado</span>
+                                    </div>
+                                    <div class="rfm-validate__cursor">
+                                        <i class="fas fa-hand-pointer"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="reframe-step__arrow reframe-step__arrow--win"><i class="fas fa-arrow-down"></i></div>
+
+                        <!-- CARD 3: 24/7 -->
+                        <div class="reframe-orbit-card">
+                            <div class="reframe-orbit-card__text">
+                                <h4>Funciona 24/7, mesmo sem você</h4>
+                                <p>Consultoria recorrente passiva. A operação não para quando o projeto acaba.</p>
+                            </div>
+                            <div class="reframe-orbit-card__scene">
+                                <div class="rfm-clock">
+                                    <div class="rfm-clock__face">
+                                        <div class="rfm-clock__hand rfm-clock__hand--hour"></div>
+                                        <div class="rfm-clock__hand rfm-clock__hand--min"></div>
+                                        <div class="rfm-clock__dot"></div>
+                                        <!-- Hour markers -->
+                                        <span class="rfm-clock__mark" style="--r:0deg"></span>
+                                        <span class="rfm-clock__mark" style="--r:30deg"></span>
+                                        <span class="rfm-clock__mark" style="--r:60deg"></span>
+                                        <span class="rfm-clock__mark" style="--r:90deg"></span>
+                                        <span class="rfm-clock__mark" style="--r:120deg"></span>
+                                        <span class="rfm-clock__mark" style="--r:150deg"></span>
+                                        <span class="rfm-clock__mark" style="--r:180deg"></span>
+                                        <span class="rfm-clock__mark" style="--r:210deg"></span>
+                                        <span class="rfm-clock__mark" style="--r:240deg"></span>
+                                        <span class="rfm-clock__mark" style="--r:270deg"></span>
+                                        <span class="rfm-clock__mark" style="--r:300deg"></span>
+                                        <span class="rfm-clock__mark" style="--r:330deg"></span>
+                                    </div>
+                                    <div class="rfm-clock__label">
+                                        <span class="rfm-clock__24">24/7</span>
+                                        <span class="rfm-clock__sub">Operando agora</span>
+                                        <span class="rfm-clock__live-dot"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- RESULTADO FINAL -->
+                    <div class="reframe-verdict reframe-verdict--win reframe-verdict--animated">
+                        <div class="rfm-result-scene">
+                            <div class="rfm-rocket-launch">
+                                <div class="rfm-rocket-body"><i class="fas fa-rocket"></i></div>
+                                <div class="rfm-rocket-flame"><span></span><span></span><span></span></div>
+                                <div class="rfm-rocket-trail"></div>
+                            </div>
+                            <div class="rfm-result-metrics">
+                                <div class="rfm-metric"><span class="rfm-metric__val">+47%</span><span class="rfm-metric__lbl">Produtividade</span></div>
+                                <div class="rfm-metric"><span class="rfm-metric__val">-60%</span><span class="rfm-metric__lbl">Retrabalho</span></div>
+                                <div class="rfm-metric"><span class="rfm-metric__val">ROI</span><span class="rfm-metric__lbl">Mês 1</span></div>
+                            </div>
+                        </div>
+                        <div>
+                            <strong>Resultado: gestão que opera com você, não por você.</strong>
+                            <p>Um time de IA que nunca para. Custo de 1 funcionário. ROI desde o mês 1.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1202,68 +1687,197 @@
                 <p>Da ativação à operação completa em poucos dias. Sem instalação, sem complexidade.</p>
             </div>
 
-            <div class="hiw-timeline" id="hiwTimeline">
-                <!-- Progress line -->
-                <div class="hiw-timeline__line">
-                    <div class="hiw-timeline__progress"></div>
+            <!-- Vertical progress tracker -->
+            <div class="hiw-cinema" id="hiwCinema">
+                <div class="hiw-cinema__rail">
+                    <div class="hiw-cinema__rail-fill"></div>
                 </div>
 
-                <div class="hiw-timeline__step">
-                    <div class="hiw-timeline__icon">
-                        <div class="hiw-timeline__dot">1</div>
-                        <i class="fas fa-building"></i>
+                <!-- STEP 1 — Cadastro -->
+                <div class="hiw-cinema__step" data-step="1">
+                    <div class="hiw-cinema__marker">
+                        <div class="hiw-cinema__dot">1</div>
+                        <span class="hiw-cinema__time"><i class="fas fa-clock"></i> 5 min</span>
                     </div>
-                    <div class="hiw-timeline__card">
-                        <div class="hiw-timeline__time"><i class="fas fa-clock"></i> 5 min</div>
-                        <h3>Cadastre sua empresa</h3>
-                        <p>Preencha os dados básicos e os agentes já começam a entender seu negócio.</p>
-                        <div class="hiw-timeline__detail">
-                            <i class="fas fa-check"></i> Dados da empresa, setor, objetivos
+                    <div class="hiw-cinema__card">
+                        <div class="hiw-cinema__text">
+                            <h3>Cadastre sua empresa</h3>
+                            <p>Preencha os dados básicos e os agentes já começam a entender seu negócio.</p>
+                        </div>
+                        <div class="hiw-cinema__scene hiw-scene-form">
+                            <div class="hiw-form-mockup">
+                                <div class="hiw-form-mockup__header">
+                                    <div class="hiw-form-mockup__dots"><span></span><span></span><span></span></div>
+                                    <span class="hiw-form-mockup__title">Orbit — Configuração</span>
+                                </div>
+                                <div class="hiw-form-mockup__body">
+                                    <div class="hiw-form-field hiw-form-field--1">
+                                        <span class="hiw-form-field__label">Empresa</span>
+                                        <div class="hiw-form-field__input"><span class="hiw-typing">Minha Empresa LTDA</span></div>
+                                    </div>
+                                    <div class="hiw-form-field hiw-form-field--2">
+                                        <span class="hiw-form-field__label">Setor</span>
+                                        <div class="hiw-form-field__input"><span class="hiw-typing">Tecnologia</span></div>
+                                    </div>
+                                    <div class="hiw-form-field hiw-form-field--3">
+                                        <span class="hiw-form-field__label">Objetivo</span>
+                                        <div class="hiw-form-field__input"><span class="hiw-typing">Escalar operações</span></div>
+                                    </div>
+                                    <div class="hiw-form-btn hiw-form-field--4">
+                                        <i class="fas fa-check"></i> Ativar agentes
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="hiw-timeline__step">
-                    <div class="hiw-timeline__icon">
-                        <div class="hiw-timeline__dot">2</div>
-                        <i class="fas fa-robot"></i>
+                <!-- STEP 2 — Agentes construindo -->
+                <div class="hiw-cinema__step" data-step="2">
+                    <div class="hiw-cinema__marker">
+                        <div class="hiw-cinema__dot">2</div>
+                        <span class="hiw-cinema__time"><i class="fas fa-clock"></i> 1 tarde</span>
                     </div>
-                    <div class="hiw-timeline__card">
-                        <div class="hiw-timeline__time"><i class="fas fa-clock"></i> 1 tarde</div>
-                        <h3>Os agentes constroem</h3>
-                        <p>O time de IA mapeia processos, cria planejamento estratégico e estrutura indicadores.</p>
-                        <div class="hiw-timeline__detail">
-                            <i class="fas fa-check"></i> 12 agentes trabalhando simultaneamente
+                    <div class="hiw-cinema__card">
+                        <div class="hiw-cinema__text">
+                            <h3>12 agentes constroem tudo</h3>
+                            <p>O time de IA mapeia processos, cria planejamento estratégico, estrutura indicadores e muito mais — tudo ao mesmo tempo.</p>
+                        </div>
+                        <div class="hiw-cinema__scene hiw-scene-agents">
+                            <div class="hiw-agents-grid">
+                                <div class="hiw-agent" style="--d:0"><div class="hiw-agent__avatar"><i class="fas fa-chess-queen"></i></div><span>Estrategista</span><div class="hiw-agent__pulse"></div></div>
+                                <div class="hiw-agent" style="--d:1"><div class="hiw-agent__avatar"><i class="fas fa-sitemap"></i></div><span>Processos</span><div class="hiw-agent__pulse"></div></div>
+                                <div class="hiw-agent" style="--d:2"><div class="hiw-agent__avatar"><i class="fas fa-users"></i></div><span>Pessoas</span><div class="hiw-agent__pulse"></div></div>
+                                <div class="hiw-agent" style="--d:3"><div class="hiw-agent__avatar"><i class="fas fa-graduation-cap"></i></div><span>Treinamento</span><div class="hiw-agent__pulse"></div></div>
+                                <div class="hiw-agent" style="--d:4"><div class="hiw-agent__avatar"><i class="fas fa-chart-line"></i></div><span>Indicadores</span><div class="hiw-agent__pulse"></div></div>
+                                <div class="hiw-agent" style="--d:5"><div class="hiw-agent__avatar"><i class="fas fa-magnifying-glass-chart"></i></div><span>Pesquisa</span><div class="hiw-agent__pulse"></div></div>
+                                <div class="hiw-agent" style="--d:6"><div class="hiw-agent__avatar"><i class="fas fa-shield-halved"></i></div><span>Riscos</span><div class="hiw-agent__pulse"></div></div>
+                                <div class="hiw-agent" style="--d:7"><div class="hiw-agent__avatar"><i class="fas fa-lightbulb"></i></div><span>Oportunidades</span><div class="hiw-agent__pulse"></div></div>
+                                <div class="hiw-agent" style="--d:8"><div class="hiw-agent__avatar"><i class="fas fa-triangle-exclamation"></i></div><span>Problemas</span><div class="hiw-agent__pulse"></div></div>
+                                <div class="hiw-agent" style="--d:9"><div class="hiw-agent__avatar"><i class="fas fa-file-lines"></i></div><span>Documentos</span><div class="hiw-agent__pulse"></div></div>
+                                <div class="hiw-agent" style="--d:10"><div class="hiw-agent__avatar"><i class="fas fa-handshake"></i></div><span>Vendas</span><div class="hiw-agent__pulse"></div></div>
+                                <div class="hiw-agent" style="--d:11"><div class="hiw-agent__avatar"><i class="fas fa-video"></i></div><span>Reuniões</span><div class="hiw-agent__pulse"></div></div>
+                            </div>
+                            <div class="hiw-agents-output">
+                                <div class="hiw-output-line hiw-output-line--1"><i class="fas fa-check-circle"></i> Mapeamento de 14 processos concluído</div>
+                                <div class="hiw-output-line hiw-output-line--2"><i class="fas fa-check-circle"></i> 23 indicadores estruturados</div>
+                                <div class="hiw-output-line hiw-output-line--3"><i class="fas fa-check-circle"></i> Planejamento estratégico gerado</div>
+                                <div class="hiw-output-line hiw-output-line--4"><i class="fas fa-spinner fa-spin"></i> Descrições de cargo em andamento...</div>
+                            </div>
+
+                            <!-- Olívia ativa — orbital hub mini -->
+                            <div class="hiw-olivia-hub">
+                                <div class="hiw-olivia-hub__label"><i class="fas fa-bolt"></i> Olívia ativada — coordenando agentes</div>
+                                <div class="hiw-olivia-orbit" id="hiwOliviaOrbit">
+                                    <svg class="hiw-olivia-orbit__svg" width="100%" height="100%"></svg>
+                                    <div class="hiw-olivia-orbit__center">
+                                        <img src="images/olivia.png" alt="Olívia" class="hiw-olivia-orbit__avatar">
+                                        <div class="hiw-olivia-orbit__pulse"></div>
+                                    </div>
+                                    <!-- 12 agent nodes positioned by JS -->
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="hiw-timeline__step">
-                    <div class="hiw-timeline__icon">
-                        <div class="hiw-timeline__dot">3</div>
-                        <i class="fas fa-sliders"></i>
+                <!-- STEP 3 — Validação -->
+                <div class="hiw-cinema__step" data-step="3">
+                    <div class="hiw-cinema__marker">
+                        <div class="hiw-cinema__dot">3</div>
+                        <span class="hiw-cinema__time"><i class="fas fa-clock"></i> 7 dias</span>
                     </div>
-                    <div class="hiw-timeline__card">
-                        <div class="hiw-timeline__time"><i class="fas fa-clock"></i> 7 dias</div>
-                        <h3>Validação e ajustes</h3>
-                        <p>Você revisa, ajusta e valida com o time. A Olívia aprende e refina a operação.</p>
-                        <div class="hiw-timeline__detail">
-                            <i class="fas fa-check"></i> IA adapta ao contexto real da empresa
+                    <div class="hiw-cinema__card">
+                        <div class="hiw-cinema__text">
+                            <h3>Você valida, a Olívia aprende</h3>
+                            <p>Revise cada entrega, ajuste o que quiser. A IA adapta ao contexto real da sua empresa — e fica mais inteligente a cada feedback.</p>
+                        </div>
+                        <div class="hiw-cinema__scene hiw-scene-validate">
+                            <div class="hiw-validate-screen">
+                                <div class="hiw-validate-screen__header">
+                                    <div class="hiw-form-mockup__dots"><span></span><span></span><span></span></div>
+                                    <span class="hiw-form-mockup__title">Revisão — Processos</span>
+                                </div>
+                                <div class="hiw-validate-list">
+                                    <div class="hiw-validate-item hiw-validate-item--1">
+                                        <div class="hiw-validate-item__check"><i class="fas fa-circle-check"></i></div>
+                                        <span>Fluxo de vendas</span>
+                                        <span class="hiw-validate-item__badge hiw-validate-item__badge--ok">Aprovado</span>
+                                    </div>
+                                    <div class="hiw-validate-item hiw-validate-item--2">
+                                        <div class="hiw-validate-item__check"><i class="fas fa-circle-check"></i></div>
+                                        <span>Onboarding de clientes</span>
+                                        <span class="hiw-validate-item__badge hiw-validate-item__badge--ok">Aprovado</span>
+                                    </div>
+                                    <div class="hiw-validate-item hiw-validate-item--3">
+                                        <div class="hiw-validate-item__check hiw-validate-item__check--adjust"><i class="fas fa-pen"></i></div>
+                                        <span>Gestão financeira</span>
+                                        <span class="hiw-validate-item__badge hiw-validate-item__badge--adjust">Ajustado</span>
+                                    </div>
+                                    <div class="hiw-validate-item hiw-validate-item--4">
+                                        <div class="hiw-validate-item__check"><i class="fas fa-circle-check"></i></div>
+                                        <span>Treinamento do time</span>
+                                        <span class="hiw-validate-item__badge hiw-validate-item__badge--ok">Aprovado</span>
+                                    </div>
+                                </div>
+                                <div class="hiw-validate-progress">
+                                    <div class="hiw-validate-progress__bar"></div>
+                                    <span>87% validado</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="hiw-timeline__step">
-                    <div class="hiw-timeline__icon hiw-timeline__icon--active">
-                        <div class="hiw-timeline__dot">4</div>
-                        <i class="fas fa-rocket"></i>
+                <!-- STEP 4 — Operação ativada -->
+                <div class="hiw-cinema__step" data-step="4">
+                    <div class="hiw-cinema__marker">
+                        <div class="hiw-cinema__dot hiw-cinema__dot--final">4</div>
+                        <span class="hiw-cinema__time hiw-cinema__time--live"><i class="fas fa-bolt"></i> 24/7</span>
                     </div>
-                    <div class="hiw-timeline__card hiw-timeline__card--highlight">
-                        <div class="hiw-timeline__time hiw-timeline__time--live"><i class="fas fa-bolt"></i> 24/7</div>
-                        <h3>Operação ativada</h3>
-                        <p>Consultoria recorrente passiva: os agentes trabalham 24/7, mesmo quando o projeto acaba.</p>
-                        <div class="hiw-timeline__detail">
-                            <i class="fas fa-infinity"></i> Operação contínua e autônoma
+                    <div class="hiw-cinema__card hiw-cinema__card--final">
+                        <div class="hiw-cinema__text">
+                            <h3>Operação ativada — para sempre</h3>
+                            <p>Consultoria recorrente passiva: os agentes trabalham 24 horas por dia, 7 dias por semana. A operação não para quando o projeto acaba.</p>
+                        </div>
+                        <div class="hiw-cinema__scene hiw-scene-launch">
+                            <!-- Rocket -->
+                            <div class="hiw-rocket-container">
+                                <div class="hiw-rocket">
+                                    <div class="hiw-rocket__body">
+                                        <i class="fas fa-rocket"></i>
+                                    </div>
+                                    <div class="hiw-rocket__flame">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                    <div class="hiw-rocket__trail"></div>
+                                </div>
+                                <div class="hiw-rocket__particles">
+                                    <span style="--x:-30px;--delay:0s"></span>
+                                    <span style="--x:20px;--delay:0.2s"></span>
+                                    <span style="--x:-10px;--delay:0.4s"></span>
+                                    <span style="--x:35px;--delay:0.1s"></span>
+                                    <span style="--x:-25px;--delay:0.3s"></span>
+                                </div>
+                            </div>
+                            <!-- Results dashboard -->
+                            <div class="hiw-results">
+                                <div class="hiw-result-card hiw-result-card--1">
+                                    <div class="hiw-result-card__icon"><i class="fas fa-chart-line"></i></div>
+                                    <div class="hiw-result-card__value">+47%</div>
+                                    <div class="hiw-result-card__label">Produtividade</div>
+                                </div>
+                                <div class="hiw-result-card hiw-result-card--2">
+                                    <div class="hiw-result-card__icon"><i class="fas fa-clock"></i></div>
+                                    <div class="hiw-result-card__value">24/7</div>
+                                    <div class="hiw-result-card__label">Operando</div>
+                                </div>
+                                <div class="hiw-result-card hiw-result-card--3">
+                                    <div class="hiw-result-card__icon"><i class="fas fa-brain"></i></div>
+                                    <div class="hiw-result-card__value">12</div>
+                                    <div class="hiw-result-card__label">Agentes ativos</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1271,64 +1885,61 @@
         </div>
 
         <style>
-            .hiw-timeline {
+            /* ═══ CINEMA TIMELINE ═══ */
+            .hiw-cinema {
                 position: relative;
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 24px;
-                max-width: 1100px;
+                max-width: 900px;
                 margin: 0 auto;
-                padding-top: 40px;
+                padding: 20px 0 0 0;
             }
-
-            /* Connecting progress line */
-            .hiw-timeline__line {
+            .hiw-cinema__rail {
                 position: absolute;
-                top: 72px;
-                left: 60px;
-                right: 60px;
-                height: 3px;
+                left: 28px;
+                top: 0;
+                bottom: 0;
+                width: 3px;
                 background: rgba(255,255,255,0.06);
                 border-radius: 3px;
                 z-index: 0;
             }
-            .hiw-timeline__progress {
-                width: 0%;
-                height: 100%;
-                background: linear-gradient(90deg, #D4A017, #F5C518);
+            .hiw-cinema__rail-fill {
+                width: 100%;
+                height: 0%;
+                background: linear-gradient(180deg, #D4A017, #F5C518, #22C55E);
                 border-radius: 3px;
-                transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+                transition: height 2.5s cubic-bezier(0.4, 0, 0.2, 1);
                 box-shadow: 0 0 12px rgba(212,160,23,0.4);
             }
-            .hiw-timeline.hiw-animated .hiw-timeline__progress {
-                width: 100%;
+            .hiw-cinema.hiw-active .hiw-cinema__rail-fill {
+                height: 100%;
             }
 
-            .hiw-timeline__step {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
+            /* Step container */
+            .hiw-cinema__step {
                 position: relative;
-                z-index: 1;
+                padding-left: 80px;
+                margin-bottom: 48px;
                 opacity: 0;
-                transform: translateY(24px);
-                transition: opacity 0.5s ease, transform 0.5s ease;
+                transform: translateY(40px);
             }
-            .hiw-timeline.hiw-animated .hiw-timeline__step {
+            .hiw-cinema__step:last-child { margin-bottom: 0; }
+            .hiw-cinema__step.hiw-step-visible {
                 opacity: 1;
                 transform: translateY(0);
+                transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.25, 0.1, 0.25, 1);
             }
-            .hiw-timeline.hiw-animated .hiw-timeline__step:nth-child(2) { transition-delay: 0.15s; }
-            .hiw-timeline.hiw-animated .hiw-timeline__step:nth-child(3) { transition-delay: 0.30s; }
-            .hiw-timeline.hiw-animated .hiw-timeline__step:nth-child(4) { transition-delay: 0.45s; }
-            .hiw-timeline.hiw-animated .hiw-timeline__step:nth-child(5) { transition-delay: 0.60s; }
 
-            /* Icon + number circle */
-            .hiw-timeline__icon {
-                position: relative;
-                margin-bottom: 24px;
+            /* Marker (dot + time) */
+            .hiw-cinema__marker {
+                position: absolute;
+                left: 0;
+                top: 0;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                z-index: 2;
             }
-            .hiw-timeline__dot {
+            .hiw-cinema__dot {
                 width: 56px;
                 height: 56px;
                 border-radius: 50%;
@@ -1339,67 +1950,19 @@
                 font-size: 22px;
                 font-weight: 800;
                 color: #000;
-                position: relative;
-                z-index: 2;
                 box-shadow: 0 4px 20px rgba(212,160,23,0.3);
+                flex-shrink: 0;
             }
-            .hiw-timeline__icon i {
-                position: absolute;
-                top: -8px;
-                right: -8px;
-                width: 28px;
-                height: 28px;
-                background: #1C2333;
-                border: 2px solid rgba(212,160,23,0.3);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 12px;
-                color: #D4A017;
-                z-index: 3;
+            .hiw-cinema__dot--final {
+                background: linear-gradient(135deg, #22C55E, #16A34A);
+                box-shadow: 0 4px 20px rgba(34,197,94,0.3), 0 0 0 8px rgba(34,197,94,0.1);
+                animation: hiw-final-pulse 2s ease-in-out infinite;
             }
-            .hiw-timeline__icon--active .hiw-timeline__dot {
-                box-shadow: 0 4px 20px rgba(212,160,23,0.3), 0 0 0 8px rgba(212,160,23,0.1);
-                animation: hiw-pulse 2s ease-in-out infinite;
+            @keyframes hiw-final-pulse {
+                0%, 100% { box-shadow: 0 4px 20px rgba(34,197,94,0.3), 0 0 0 8px rgba(34,197,94,0.1); }
+                50% { box-shadow: 0 4px 20px rgba(34,197,94,0.5), 0 0 0 14px rgba(34,197,94,0.05); }
             }
-            @keyframes hiw-pulse {
-                0%, 100% { box-shadow: 0 4px 20px rgba(212,160,23,0.3), 0 0 0 8px rgba(212,160,23,0.1); }
-                50% { box-shadow: 0 4px 20px rgba(212,160,23,0.5), 0 0 0 14px rgba(212,160,23,0.05); }
-            }
-
-            /* Card below */
-            .hiw-timeline__card {
-                background: linear-gradient(135deg, #1C2333 0%, #13161D 100%);
-                border: 1px solid rgba(255,255,255,0.06);
-                border-radius: 16px;
-                padding: 28px 24px;
-                text-align: center;
-                width: 100%;
-                transition: all 0.3s ease;
-            }
-            .hiw-timeline__card:hover {
-                border-color: rgba(212,160,23,0.15);
-                transform: translateY(-4px);
-                box-shadow: 0 12px 32px rgba(0,0,0,0.3);
-            }
-            .hiw-timeline__card--highlight {
-                border-color: rgba(212,160,23,0.2);
-                background: linear-gradient(135deg, #1C2333 0%, rgba(212,160,23,0.05) 100%);
-            }
-            .hiw-timeline__card h3 {
-                font-size: 18px;
-                font-weight: 700;
-                color: #fff;
-                margin-bottom: 10px;
-            }
-            .hiw-timeline__card p {
-                font-size: 14px;
-                color: rgba(255,255,255,0.5);
-                line-height: 1.6;
-                margin-bottom: 16px;
-            }
-            .hiw-timeline__time {
+            .hiw-cinema__time {
                 display: inline-flex;
                 align-items: center;
                 gap: 6px;
@@ -1409,56 +1972,744 @@
                 background: rgba(212,160,23,0.1);
                 padding: 5px 14px;
                 border-radius: 20px;
-                margin-bottom: 16px;
+                white-space: nowrap;
             }
-            .hiw-timeline__time--live {
+            .hiw-cinema__time--live {
                 background: rgba(34,197,94,0.1);
                 color: #22C55E;
                 animation: hiw-live-blink 2s ease-in-out infinite;
             }
             @keyframes hiw-live-blink {
                 0%, 100% { opacity: 1; }
-                50% { opacity: 0.7; }
+                50% { opacity: 0.6; }
             }
-            .hiw-timeline__detail {
+
+            /* Card */
+            .hiw-cinema__card {
+                background: linear-gradient(135deg, #1C2333 0%, #13161D 100%);
+                border: 1px solid rgba(255,255,255,0.06);
+                border-radius: 20px;
+                padding: 36px;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+                align-items: center;
+                margin-top: 8px;
+                transition: all 0.3s ease;
+                overflow: hidden;
+            }
+            .hiw-cinema__card:hover {
+                border-color: rgba(212,160,23,0.15);
+                box-shadow: 0 12px 48px rgba(0,0,0,0.4);
+            }
+            .hiw-cinema__card--final {
+                border-color: rgba(34,197,94,0.2);
+                background: linear-gradient(135deg, #1C2333 0%, rgba(34,197,94,0.05) 100%);
+            }
+            .hiw-cinema__text h3 {
+                font-size: 22px;
+                font-weight: 800;
+                color: #fff;
+                margin-bottom: 12px;
+                line-height: 1.3;
+            }
+            .hiw-cinema__text p {
+                font-size: 15px;
+                color: rgba(255,255,255,0.55);
+                line-height: 1.7;
+            }
+
+            /* ═══ SCENE: Form mockup ═══ */
+            .hiw-cinema__scene {
+                position: relative;
+                min-height: 200px;
+            }
+            .hiw-form-mockup {
+                background: #0D1117;
+                border: 1px solid rgba(255,255,255,0.08);
+                border-radius: 12px;
+                overflow: hidden;
+            }
+            .hiw-form-mockup__header {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 10px 16px;
+                background: rgba(255,255,255,0.03);
+                border-bottom: 1px solid rgba(255,255,255,0.06);
+            }
+            .hiw-form-mockup__dots { display: flex; gap: 6px; }
+            .hiw-form-mockup__dots span {
+                width: 10px; height: 10px; border-radius: 50%;
+            }
+            .hiw-form-mockup__dots span:nth-child(1) { background: #EF4444; }
+            .hiw-form-mockup__dots span:nth-child(2) { background: #F59E0B; }
+            .hiw-form-mockup__dots span:nth-child(3) { background: #22C55E; }
+            .hiw-form-mockup__title {
                 font-size: 12px;
+                color: rgba(255,255,255,0.4);
+                font-weight: 500;
+            }
+            .hiw-form-mockup__body { padding: 20px 16px; }
+            .hiw-form-field {
+                margin-bottom: 14px;
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            .hiw-form-field__label {
+                display: block;
+                font-size: 11px;
+                font-weight: 600;
                 color: rgba(255,255,255,0.35);
+                margin-bottom: 6px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+            .hiw-form-field__input {
+                background: rgba(255,255,255,0.04);
+                border: 1px solid rgba(255,255,255,0.08);
+                border-radius: 8px;
+                padding: 10px 12px;
+                font-size: 13px;
+                color: #fff;
+            }
+            .hiw-typing {
+                display: inline-block;
+                overflow: hidden;
+                white-space: nowrap;
+                width: 0;
+                border-right: 2px solid #D4A017;
+            }
+            .hiw-form-btn {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                gap: 6px;
-                padding-top: 14px;
-                border-top: 1px solid rgba(255,255,255,0.05);
-            }
-            .hiw-timeline__detail i {
-                color: #22C55E;
-                font-size: 11px;
+                gap: 8px;
+                background: linear-gradient(135deg, #D4A017, #E8B824);
+                color: #000;
+                font-size: 13px;
+                font-weight: 700;
+                padding: 12px;
+                border-radius: 8px;
+                opacity: 0;
+                transform: scale(0.9);
             }
 
-            /* Responsive */
-            @media (max-width: 1024px) {
-                .hiw-timeline { grid-template-columns: repeat(2, 1fr); gap: 32px; }
-                .hiw-timeline__line { display: none; }
+            /* Animations for form (triggered when step visible) */
+            .hiw-step-visible .hiw-form-field--1 {
+                animation: hiw-field-in 0.5s 0.3s forwards;
             }
-            @media (max-width: 600px) {
-                .hiw-timeline { grid-template-columns: 1fr; gap: 24px; }
+            .hiw-step-visible .hiw-form-field--2 {
+                animation: hiw-field-in 0.5s 0.8s forwards;
+            }
+            .hiw-step-visible .hiw-form-field--3 {
+                animation: hiw-field-in 0.5s 1.3s forwards;
+            }
+            .hiw-step-visible .hiw-form-field--4 {
+                animation: hiw-btn-in 0.4s 1.8s forwards;
+            }
+            .hiw-step-visible .hiw-form-field--1 .hiw-typing {
+                animation: hiw-type 0.6s 0.5s forwards;
+            }
+            .hiw-step-visible .hiw-form-field--2 .hiw-typing {
+                animation: hiw-type 0.5s 1.0s forwards;
+            }
+            .hiw-step-visible .hiw-form-field--3 .hiw-typing {
+                animation: hiw-type 0.6s 1.5s forwards;
+            }
+            @keyframes hiw-field-in {
+                to { opacity: 1; transform: translateX(0); }
+            }
+            @keyframes hiw-type {
+                to { width: 100%; border-right-color: transparent; }
+            }
+            @keyframes hiw-btn-in {
+                to { opacity: 1; transform: scale(1); }
+            }
+
+            /* ═══ SCENE: Agents working ═══ */
+            .hiw-agents-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 10px;
+                margin-bottom: 16px;
+            }
+            .hiw-agent {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 4px;
+                opacity: 0;
+                transform: scale(0.5);
+                position: relative;
+            }
+            .hiw-step-visible .hiw-agent {
+                animation: hiw-agent-pop 0.4s calc(var(--d) * 0.1s + 0.3s) forwards;
+            }
+            @keyframes hiw-agent-pop {
+                0% { opacity: 0; transform: scale(0.5); }
+                70% { transform: scale(1.1); }
+                100% { opacity: 1; transform: scale(1); }
+            }
+            .hiw-agent__avatar {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: rgba(212,160,23,0.1);
+                border: 1.5px solid rgba(212,160,23,0.25);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 14px;
+                color: #D4A017;
+                position: relative;
+            }
+            .hiw-agent span {
+                font-size: 9px;
+                color: rgba(255,255,255,0.4);
+                text-align: center;
+                line-height: 1.2;
+            }
+            .hiw-agent__pulse {
+                position: absolute;
+                top: -2px;
+                right: -2px;
+                width: 10px;
+                height: 10px;
+                background: #22C55E;
+                border-radius: 50%;
+                border: 2px solid #1C2333;
+            }
+            .hiw-step-visible .hiw-agent__pulse {
+                animation: hiw-agent-blink 1.5s calc(var(--d) * 0.15s + 1.5s) infinite;
+            }
+            @keyframes hiw-agent-blink {
+                0%, 100% { opacity: 1; }
+                50% { opacity: 0.3; }
+            }
+
+            /* Output log */
+            .hiw-agents-output {
+                background: rgba(0,0,0,0.3);
+                border: 1px solid rgba(255,255,255,0.05);
+                border-radius: 8px;
+                padding: 12px 14px;
+                font-family: 'SF Mono', 'Fira Code', monospace;
+            }
+            .hiw-output-line {
+                font-size: 11px;
+                color: rgba(255,255,255,0.5);
+                padding: 4px 0;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                opacity: 0;
+                transform: translateX(10px);
+            }
+            .hiw-output-line i { color: #22C55E; font-size: 10px; }
+            .hiw-output-line:last-child i { color: #D4A017; }
+            .hiw-step-visible .hiw-output-line--1 { animation: hiw-field-in 0.4s 1.8s forwards; }
+            .hiw-step-visible .hiw-output-line--2 { animation: hiw-field-in 0.4s 2.2s forwards; }
+            .hiw-step-visible .hiw-output-line--3 { animation: hiw-field-in 0.4s 2.6s forwards; }
+            .hiw-step-visible .hiw-output-line--4 { animation: hiw-field-in 0.4s 3.0s forwards; }
+
+            /* ═══ SCENE: Validation ═══ */
+            .hiw-validate-screen {
+                background: #0D1117;
+                border: 1px solid rgba(255,255,255,0.08);
+                border-radius: 12px;
+                overflow: hidden;
+            }
+            .hiw-validate-screen__header {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 10px 16px;
+                background: rgba(255,255,255,0.03);
+                border-bottom: 1px solid rgba(255,255,255,0.06);
+            }
+            .hiw-validate-list { padding: 14px 16px; }
+            .hiw-validate-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 10px 0;
+                border-bottom: 1px solid rgba(255,255,255,0.04);
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            .hiw-validate-item:last-child { border-bottom: none; }
+            .hiw-validate-item__check {
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                background: rgba(34,197,94,0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 14px;
+                color: #22C55E;
+                flex-shrink: 0;
+            }
+            .hiw-validate-item__check--adjust {
+                background: rgba(212,160,23,0.1);
+                color: #D4A017;
+            }
+            .hiw-validate-item span:nth-child(2) {
+                font-size: 13px;
+                color: rgba(255,255,255,0.7);
+                flex: 1;
+            }
+            .hiw-validate-item__badge {
+                font-size: 10px;
+                font-weight: 700;
+                padding: 3px 10px;
+                border-radius: 20px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+            .hiw-validate-item__badge--ok {
+                background: rgba(34,197,94,0.1);
+                color: #22C55E;
+            }
+            .hiw-validate-item__badge--adjust {
+                background: rgba(212,160,23,0.1);
+                color: #D4A017;
+            }
+            .hiw-step-visible .hiw-validate-item--1 { animation: hiw-validate-in 0.4s 0.3s forwards; }
+            .hiw-step-visible .hiw-validate-item--2 { animation: hiw-validate-in 0.4s 0.7s forwards; }
+            .hiw-step-visible .hiw-validate-item--3 { animation: hiw-validate-in 0.4s 1.1s forwards; }
+            .hiw-step-visible .hiw-validate-item--4 { animation: hiw-validate-in 0.4s 1.5s forwards; }
+            @keyframes hiw-validate-in {
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            /* Progress bar */
+            .hiw-validate-progress {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 12px 16px;
+                background: rgba(255,255,255,0.02);
+                border-top: 1px solid rgba(255,255,255,0.04);
+            }
+            .hiw-validate-progress__bar {
+                flex: 1;
+                height: 6px;
+                background: rgba(255,255,255,0.06);
+                border-radius: 6px;
+                overflow: hidden;
+                position: relative;
+            }
+            .hiw-validate-progress__bar::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 0%;
+                background: linear-gradient(90deg, #22C55E, #16A34A);
+                border-radius: 6px;
+                transition: width 2s ease;
+            }
+            .hiw-step-visible .hiw-validate-progress__bar::after {
+                width: 87%;
+            }
+            .hiw-validate-progress span {
+                font-size: 12px;
+                font-weight: 700;
+                color: #22C55E;
+                white-space: nowrap;
+            }
+
+            /* ═══ SCENE: Rocket Launch ═══ */
+            .hiw-scene-launch {
+                display: flex;
+                align-items: center;
+                gap: 24px;
+            }
+            .hiw-rocket-container {
+                position: relative;
+                width: 100px;
+                height: 200px;
+                flex-shrink: 0;
+            }
+            .hiw-rocket {
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%) translateY(60px);
+                opacity: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .hiw-step-visible .hiw-rocket {
+                animation: hiw-rocket-launch 1.5s 0.5s forwards;
+            }
+            @keyframes hiw-rocket-launch {
+                0% { transform: translateX(-50%) translateY(60px); opacity: 0; }
+                30% { opacity: 1; transform: translateX(-50%) translateY(40px); }
+                100% { opacity: 1; transform: translateX(-50%) translateY(-20px); }
+            }
+            .hiw-rocket__body {
+                width: 52px;
+                height: 52px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #22C55E, #16A34A);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 22px;
+                color: #fff;
+                box-shadow: 0 0 30px rgba(34,197,94,0.4);
+                position: relative;
+                z-index: 2;
+            }
+            .hiw-rocket__body i {
+                transform: rotate(-45deg);
+            }
+            .hiw-rocket__flame {
+                display: flex;
+                gap: 3px;
+                margin-top: -4px;
+                position: relative;
+                z-index: 1;
+            }
+            .hiw-rocket__flame span {
+                width: 6px;
+                border-radius: 0 0 50% 50%;
+                opacity: 0;
+            }
+            .hiw-step-visible .hiw-rocket__flame span {
+                animation: hiw-flame 0.6s 1s infinite alternate;
+            }
+            .hiw-rocket__flame span:nth-child(1) { height: 20px; background: #F59E0B; animation-delay: 1.0s; }
+            .hiw-rocket__flame span:nth-child(2) { height: 28px; background: #EF4444; animation-delay: 1.1s; }
+            .hiw-rocket__flame span:nth-child(3) { height: 20px; background: #F59E0B; animation-delay: 1.2s; }
+            @keyframes hiw-flame {
+                0% { opacity: 0.6; height: 16px; }
+                100% { opacity: 1; height: 32px; }
+            }
+            .hiw-rocket__trail {
+                width: 3px;
+                height: 0;
+                background: linear-gradient(180deg, rgba(34,197,94,0.6), transparent);
+                border-radius: 3px;
+                margin-top: -2px;
+            }
+            .hiw-step-visible .hiw-rocket__trail {
+                animation: hiw-trail 1.5s 0.8s forwards;
+            }
+            @keyframes hiw-trail {
+                to { height: 80px; }
+            }
+            .hiw-rocket__particles span {
+                position: absolute;
+                bottom: 30px;
+                left: 50%;
+                width: 4px;
+                height: 4px;
+                background: #D4A017;
+                border-radius: 50%;
+                opacity: 0;
+            }
+            .hiw-step-visible .hiw-rocket__particles span {
+                animation: hiw-particle 1s calc(var(--delay) + 1s) infinite;
+            }
+            @keyframes hiw-particle {
+                0% { opacity: 1; transform: translate(0, 0) scale(1); }
+                100% { opacity: 0; transform: translate(var(--x), 50px) scale(0); }
+            }
+
+            /* Result cards */
+            .hiw-results {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .hiw-result-card {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                background: rgba(255,255,255,0.03);
+                border: 1px solid rgba(255,255,255,0.06);
+                border-radius: 12px;
+                padding: 14px 18px;
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            .hiw-step-visible .hiw-result-card--1 { animation: hiw-result-in 0.5s 1.0s forwards; }
+            .hiw-step-visible .hiw-result-card--2 { animation: hiw-result-in 0.5s 1.4s forwards; }
+            .hiw-step-visible .hiw-result-card--3 { animation: hiw-result-in 0.5s 1.8s forwards; }
+            @keyframes hiw-result-in {
+                to { opacity: 1; transform: translateX(0); }
+            }
+            .hiw-result-card__icon {
+                width: 38px;
+                height: 38px;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 16px;
+                flex-shrink: 0;
+            }
+            .hiw-result-card--1 .hiw-result-card__icon { background: rgba(34,197,94,0.1); color: #22C55E; }
+            .hiw-result-card--2 .hiw-result-card__icon { background: rgba(212,160,23,0.1); color: #D4A017; }
+            .hiw-result-card--3 .hiw-result-card__icon { background: rgba(99,102,241,0.1); color: #818CF8; }
+            .hiw-result-card__value {
+                font-size: 20px;
+                font-weight: 800;
+                color: #fff;
+            }
+            .hiw-result-card__label {
+                font-size: 12px;
+                color: rgba(255,255,255,0.4);
+            }
+
+            /* ═══ RESPONSIVE ═══ */
+            @media (max-width: 768px) {
+                .hiw-cinema__rail { left: 20px; }
+                .hiw-cinema__step { padding-left: 64px; }
+                .hiw-cinema__dot { width: 42px; height: 42px; font-size: 18px; }
+                .hiw-cinema__card {
+                    grid-template-columns: 1fr;
+                    padding: 24px 20px;
+                    gap: 24px;
+                }
+                .hiw-cinema__text h3 { font-size: 18px; }
+                .hiw-agents-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+                .hiw-agent__avatar { width: 34px; height: 34px; font-size: 12px; }
+                .hiw-agent span { font-size: 8px; }
+                .hiw-scene-launch { flex-direction: column; }
+                .hiw-rocket-container { width: 80px; height: 140px; }
+                .hiw-results { flex-direction: row; flex-wrap: wrap; }
+                .hiw-result-card { flex: 1; min-width: 120px; padding: 10px 12px; }
+                .hiw-result-card__value { font-size: 16px; }
+            }
+            @media (max-width: 480px) {
+                .hiw-cinema__step { padding-left: 56px; margin-bottom: 36px; }
+                .hiw-cinema__rail { left: 16px; }
+                .hiw-cinema__dot { width: 36px; height: 36px; font-size: 16px; }
+                .hiw-cinema__time { font-size: 11px; padding: 4px 10px; }
+                .hiw-agents-grid { grid-template-columns: repeat(3, 1fr); }
+                .hiw-olivia-orbit { width: 200px !important; height: 200px !important; }
+                .hiw-olivia-orbit__avatar { width: 44px !important; height: 44px !important; }
+            }
+
+            /* ═══ OLÍVIA ORBITAL HUB (mini) ═══ */
+            .hiw-olivia-hub {
+                margin-top: 20px;
+                opacity: 0;
+                transform: scale(0.8);
+                transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+            }
+            .hiw-step-visible .hiw-olivia-hub {
+                animation: hiw-olivia-appear 0.8s 3.6s forwards;
+            }
+            @keyframes hiw-olivia-appear {
+                0% { opacity: 0; transform: scale(0.8); }
+                100% { opacity: 1; transform: scale(1); }
+            }
+            .hiw-olivia-hub__label {
+                text-align: center;
+                font-size: 12px;
+                font-weight: 700;
+                color: #D4A017;
+                background: rgba(212,160,23,0.08);
+                border: 1px solid rgba(212,160,23,0.15);
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                padding: 6px 16px;
+                border-radius: 20px;
+                margin: 0 auto 16px;
+                display: flex;
+                width: fit-content;
+            }
+            .hiw-olivia-orbit {
+                position: relative;
+                width: 280px;
+                height: 280px;
+                margin: 0 auto;
+            }
+            .hiw-olivia-orbit__svg {
+                position: absolute;
+                inset: 0;
+                z-index: 0;
+            }
+            .hiw-olivia-orbit__svg line {
+                stroke: rgba(212,160,23,0.15);
+                stroke-width: 1;
+            }
+            .hiw-olivia-orbit__svg circle.hiw-svg-dot {
+                fill: #D4A017;
+            }
+            .hiw-olivia-orbit__center {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 3;
+            }
+            .hiw-olivia-orbit__avatar {
+                width: 56px;
+                height: 56px;
+                border-radius: 50%;
+                border: 2px solid #D4A017;
+                box-shadow: 0 0 24px rgba(212,160,23,0.3);
+                display: block;
+                position: relative;
+                z-index: 2;
+            }
+            .hiw-olivia-orbit__pulse {
+                position: absolute;
+                inset: -8px;
+                border-radius: 50%;
+                border: 2px solid rgba(212,160,23,0.2);
+                animation: hiw-orbit-pulse 2s ease-in-out infinite;
+            }
+            @keyframes hiw-orbit-pulse {
+                0%, 100% { transform: scale(1); opacity: 0.6; }
+                50% { transform: scale(1.15); opacity: 0; }
+            }
+            /* Agent orbit nodes */
+            .hiw-orbit-node {
+                position: absolute;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                background: rgba(28,35,51,0.9);
+                border: 1.5px solid rgba(212,160,23,0.3);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 12px;
+                color: #D4A017;
+                z-index: 2;
+                transform: translate(-50%, -50%);
+                transition: all 0.3s ease;
+            }
+            .hiw-orbit-node:hover {
+                background: rgba(212,160,23,0.15);
+                border-color: #D4A017;
+                box-shadow: 0 0 12px rgba(212,160,23,0.3);
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+            /* Rotating orbit animation */
+            .hiw-olivia-orbit__ring {
+                position: absolute;
+                inset: 0;
+                animation: hiw-orbit-spin 40s linear infinite;
+            }
+            @keyframes hiw-orbit-spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+            /* Counter-rotate nodes so icons stay upright */
+            .hiw-orbit-node__inner {
+                animation: hiw-orbit-counter-spin 40s linear infinite;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+            }
+            @keyframes hiw-orbit-counter-spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(-360deg); }
+            }
+            @media (max-width: 768px) {
+                .hiw-olivia-orbit { width: 240px; height: 240px; }
+                .hiw-olivia-orbit__avatar { width: 48px; height: 48px; }
+                .hiw-orbit-node { width: 28px; height: 28px; font-size: 10px; }
             }
         </style>
 
         <script>
         (function() {
-            var timeline = document.getElementById('hiwTimeline');
-            var animated = false;
-            var obs = new IntersectionObserver(function(entries) {
+            var cinema = document.getElementById('hiwCinema');
+            if (!cinema) return;
+            var steps = cinema.querySelectorAll('.hiw-cinema__step');
+            var activated = false;
+
+            var mainObs = new IntersectionObserver(function(entries) {
                 entries.forEach(function(e) {
-                    if (e.isIntersecting && !animated) {
-                        animated = true;
-                        timeline.classList.add('hiw-animated');
-                        obs.unobserve(e.target);
+                    if (e.isIntersecting && !activated) {
+                        activated = true;
+                        cinema.classList.add('hiw-active');
+                        steps.forEach(function(step, i) {
+                            setTimeout(function() {
+                                step.classList.add('hiw-step-visible');
+                            }, i * 800);
+                        });
+                        mainObs.unobserve(e.target);
                     }
                 });
-            }, { threshold: 0.2 });
-            obs.observe(timeline);
+            }, { threshold: 0.15 });
+            mainObs.observe(cinema);
+
+            // Build Olívia orbital hub (mini)
+            var orbitEl = document.getElementById('hiwOliviaOrbit');
+            if (!orbitEl) return;
+
+            var agents = [
+                { icon: 'fa-chess-queen', label: 'Estrategista' },
+                { icon: 'fa-sitemap', label: 'Processos' },
+                { icon: 'fa-users', label: 'Pessoas' },
+                { icon: 'fa-graduation-cap', label: 'Treinamento' },
+                { icon: 'fa-chart-line', label: 'Indicadores' },
+                { icon: 'fa-magnifying-glass-chart', label: 'Pesquisa' },
+                { icon: 'fa-shield-halved', label: 'Riscos' },
+                { icon: 'fa-lightbulb', label: 'Oportunidades' },
+                { icon: 'fa-triangle-exclamation', label: 'Problemas' },
+                { icon: 'fa-file-lines', label: 'Documentos' },
+                { icon: 'fa-handshake', label: 'Vendas' },
+                { icon: 'fa-video', label: 'Reuniões' }
+            ];
+
+            // Create rotating ring container
+            var ring = document.createElement('div');
+            ring.className = 'hiw-olivia-orbit__ring';
+
+            var svg = orbitEl.querySelector('.hiw-olivia-orbit__svg');
+            var w = orbitEl.offsetWidth || 280;
+            var h = orbitEl.offsetHeight || 280;
+            var cx = w / 2;
+            var cy = h / 2;
+            var radius = (Math.min(w, h) / 2) - 22;
+
+            // Draw orbit circle path
+            svg.innerHTML = '<circle cx="' + cx + '" cy="' + cy + '" r="' + radius + '" fill="none" stroke="rgba(212,160,23,0.08)" stroke-width="1" stroke-dasharray="4 4"/>';
+
+            agents.forEach(function(ag, i) {
+                var angle = (i / agents.length) * Math.PI * 2 - Math.PI / 2;
+                var x = cx + radius * Math.cos(angle);
+                var y = cy + radius * Math.sin(angle);
+
+                // SVG connection line
+                var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', cx);
+                line.setAttribute('y1', cy);
+                line.setAttribute('x2', x);
+                line.setAttribute('y2', y);
+                line.setAttribute('stroke', 'rgba(212,160,23,0.1)');
+                line.setAttribute('stroke-width', '1');
+                svg.appendChild(line);
+
+                // Node element on rotating ring
+                var node = document.createElement('div');
+                node.className = 'hiw-orbit-node';
+                node.title = ag.label;
+                node.style.left = x + 'px';
+                node.style.top = y + 'px';
+                node.innerHTML = '<div class="hiw-orbit-node__inner"><i class="fas ' + ag.icon + '"></i></div>';
+                ring.appendChild(node);
+            });
+
+            orbitEl.appendChild(ring);
         })();
         </script>
     </section>
@@ -1719,60 +2970,532 @@
 
     <hr class="glow-divider">
 
-    <!-- ═══ PRICING PREVIEW ═══ -->
-    <section class="pricing-preview-section section--light" id="planos-preview">
+    <!-- ═══ PRICING PREVIEW — PREMIUM ═══ -->
+    <section class="price-v2" id="planos-preview">
+        <div class="price-v2__bg">
+            <div class="price-v2__glow"></div>
+        </div>
         <div class="container">
-            <div class="pricing-preview-header" data-reveal>
+            <div class="section-header" data-reveal>
+                <span class="section-badge section-badge--gold">Investimento</span>
                 <h2>Planos que cabem na sua operação</h2>
                 <p>Escolha o plano ideal para o momento da sua empresa. Sem fidelidade, sem surpresas.</p>
-                <p style="margin-top:12px;"><span style="background:#D4A017;color:#000;padding:6px 16px;border-radius:20px;font-size:0.875rem;font-weight:700;">Pague anual e economize 20%</span></p>
             </div>
-            <div class="pricing-preview-grid" data-reveal-stagger>
+
+            <!-- Toggle mensal/anual -->
+            <div class="price-v2__toggle" data-reveal>
+                <span class="price-v2__toggle-label price-v2__toggle-label--active" data-billing="monthly">Mensal</span>
+                <button class="price-v2__switch" id="pricingSwitch" aria-label="Alternar para anual">
+                    <span class="price-v2__switch-thumb"></span>
+                </button>
+                <span class="price-v2__toggle-label" data-billing="annual">Anual</span>
+                <span class="price-v2__save-badge">-20%</span>
+            </div>
+
+            <div class="price-v2__grid" data-reveal-stagger>
                 <!-- Starter -->
-                <div class="pricing-preview-card">
-                    <div class="pricing-preview-card__name">Starter</div>
-                    <div class="pricing-preview-card__price">R$ 997</div>
-                    <div class="pricing-preview-card__period">/mês</div>
-                    <div class="pricing-preview-card__desc">Ideal para começar</div>
-                    <ul class="pricing-preview-card__features">
-                        <li><i class="fa-solid fa-check"></i> 3 agentes de IA</li>
-                        <li><i class="fa-solid fa-check"></i> Até 30 usuários</li>
-                        <li><i class="fa-solid fa-check"></i> Dashboards básicos</li>
-                        <li><i class="fa-solid fa-check"></i> Suporte por email</li>
+                <div class="price-v2__card">
+                    <div class="price-v2__card-header">
+                        <div class="price-v2__icon"><i class="fas fa-seedling"></i></div>
+                        <div class="price-v2__name">Starter</div>
+                        <div class="price-v2__desc">Ideal para começar</div>
+                    </div>
+                    <div class="price-v2__price-wrap">
+                        <span class="price-v2__currency">R$</span>
+                        <span class="price-v2__amount" data-monthly="997" data-annual="797">997</span>
+                        <span class="price-v2__period">/mês</span>
+                    </div>
+                    <div class="price-v2__anchor"><i class="fas fa-calculator"></i> Equivale a R$ 33/dia — menos que um almoço</div>
+                    <ul class="price-v2__features">
+                        <li><i class="fas fa-robot"></i> 3 agentes de IA</li>
+                        <li><i class="fas fa-users"></i> Até 30 usuários</li>
+                        <li><i class="fas fa-chart-pie"></i> Dashboards básicos</li>
+                        <li><i class="fas fa-envelope"></i> Suporte por email</li>
                     </ul>
-                    <a href="/pricing" class="pricing-preview-card__cta">Escolher plano</a>
+                    <a href="/pricing" class="price-v2__cta">Começar agora <i class="fas fa-arrow-right"></i></a>
                 </div>
-                <!-- Advanced -->
-                <div class="pricing-preview-card pricing-preview-card--featured">
-                    <span class="pricing-preview-badge">Mais popular</span>
-                    <div class="pricing-preview-card__name">Advanced</div>
-                    <div class="pricing-preview-card__price">R$ 1.950</div>
-                    <div class="pricing-preview-card__period">/mês</div>
-                    <div class="pricing-preview-card__desc">O mais escolhido</div>
-                    <ul class="pricing-preview-card__features">
-                        <li><i class="fa-solid fa-check"></i> 12 agentes de IA</li>
-                        <li><i class="fa-solid fa-check"></i> Usuários ilimitados</li>
-                        <li><i class="fa-solid fa-check"></i> Treinamento via WhatsApp</li>
-                        <li><i class="fa-solid fa-check"></i> Onboarding dedicado</li>
+
+                <!-- Advanced (featured) -->
+                <div class="price-v2__card price-v2__card--featured">
+                    <div class="price-v2__badge">
+                        <i class="fas fa-crown"></i> Mais popular
+                    </div>
+                    <div class="price-v2__card-header">
+                        <div class="price-v2__icon price-v2__icon--gold"><i class="fas fa-rocket"></i></div>
+                        <div class="price-v2__name">Advanced</div>
+                        <div class="price-v2__desc">O mais escolhido</div>
+                    </div>
+                    <div class="price-v2__price-wrap">
+                        <span class="price-v2__currency">R$</span>
+                        <span class="price-v2__amount" data-monthly="1.950" data-annual="1.560">1.950</span>
+                        <span class="price-v2__period">/mês</span>
+                    </div>
+                    <div class="price-v2__anchor price-v2__anchor--gold"><i class="fas fa-user-tie"></i> Custo de 1 analista Jr. — entrega de um time inteiro</div>
+                    <ul class="price-v2__features">
+                        <li><i class="fas fa-robot"></i> <strong>12 agentes de IA</strong></li>
+                        <li><i class="fas fa-infinity"></i> Usuários ilimitados</li>
+                        <li><i class="fab fa-whatsapp"></i> Treinamento via WhatsApp</li>
+                        <li><i class="fas fa-headset"></i> Onboarding dedicado</li>
+                        <li><i class="fas fa-brain"></i> Olívia como coordenadora</li>
                     </ul>
-                    <a href="/pricing" class="pricing-preview-card__cta">Escolher plano</a>
+                    <a href="/pricing" class="price-v2__cta price-v2__cta--gold">Escolher Advanced <i class="fas fa-arrow-right"></i></a>
+                    <div class="price-v2__guarantee"><i class="fas fa-shield-check"></i> Garantia 90 dias ou seu dinheiro de volta</div>
                 </div>
+
                 <!-- Pro -->
-                <div class="pricing-preview-card">
-                    <div class="pricing-preview-card__name">Pro</div>
-                    <div class="pricing-preview-card__price">R$ 2.500</div>
-                    <div class="pricing-preview-card__period">/mês</div>
-                    <div class="pricing-preview-card__desc">Para empresas em expansão</div>
-                    <ul class="pricing-preview-card__features">
-                        <li><i class="fa-solid fa-check"></i> 12 agentes + customização</li>
-                        <li><i class="fa-solid fa-check"></i> API e integrações</li>
-                        <li><i class="fa-solid fa-check"></i> Gerente de sucesso</li>
-                        <li><i class="fa-solid fa-check"></i> SLA prioritário</li>
+                <div class="price-v2__card">
+                    <div class="price-v2__card-header">
+                        <div class="price-v2__icon"><i class="fas fa-building"></i></div>
+                        <div class="price-v2__name">Pro</div>
+                        <div class="price-v2__desc">Para empresas em expansão</div>
+                    </div>
+                    <div class="price-v2__price-wrap">
+                        <span class="price-v2__currency">R$</span>
+                        <span class="price-v2__amount" data-monthly="2.500" data-annual="2.000">2.500</span>
+                        <span class="price-v2__period">/mês</span>
+                    </div>
+                    <div class="price-v2__anchor"><i class="fas fa-chart-line"></i> ROI médio em 30 dias</div>
+                    <ul class="price-v2__features">
+                        <li><i class="fas fa-robot"></i> 12 agentes + customização</li>
+                        <li><i class="fas fa-plug"></i> API e integrações</li>
+                        <li><i class="fas fa-user-shield"></i> Gerente de sucesso</li>
+                        <li><i class="fas fa-bolt"></i> SLA prioritário</li>
                     </ul>
-                    <a href="/pricing" class="pricing-preview-card__cta">Escolher plano</a>
+                    <a href="/pricing" class="price-v2__cta">Escolher Pro <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Comparação CLT -->
+            <div class="price-v2__compare" data-reveal>
+                <div class="price-v2__compare-row">
+                    <div class="price-v2__compare-item price-v2__compare-item--bad">
+                        <i class="fas fa-user-group"></i>
+                        <div>
+                            <strong>Time humano equivalente</strong>
+                            <span>R$ 35.000+/mês (5 profissionais CLT)</span>
+                        </div>
+                    </div>
+                    <div class="price-v2__compare-vs">VS</div>
+                    <div class="price-v2__compare-item price-v2__compare-item--good">
+                        <i class="fas fa-robot"></i>
+                        <div>
+                            <strong>Orbit Advanced</strong>
+                            <span>R$ 1.950/mês — 12 agentes 24/7</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <style>
+            .price-v2 {
+                position: relative;
+                padding: 120px 0 100px;
+                background: #FAFBFC;
+                overflow: hidden;
+            }
+            .price-v2 .section-header h2 { color: #1A1D23; }
+            .price-v2 .section-header p { color: #5A6069; }
+            .price-v2__bg {
+                position: absolute;
+                inset: 0;
+                pointer-events: none;
+            }
+            .price-v2__glow {
+                position: absolute;
+                width: 600px;
+                height: 600px;
+                top: -100px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: radial-gradient(circle, rgba(212,160,23,0.05) 0%, transparent 70%);
+                border-radius: 50%;
+            }
+
+            /* Toggle */
+            .price-v2__toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                margin-bottom: 48px;
+            }
+            .price-v2__toggle-label {
+                font-size: 14px;
+                font-weight: 600;
+                color: #9CA3AF;
+                transition: color 0.3s;
+                cursor: pointer;
+            }
+            .price-v2__toggle-label--active {
+                color: #1A1D23;
+            }
+            .price-v2__switch {
+                width: 48px;
+                height: 26px;
+                background: #E5E7EB;
+                border: 1px solid #D1D5DB;
+                border-radius: 26px;
+                cursor: pointer;
+                position: relative;
+                transition: background 0.3s;
+                padding: 0;
+            }
+            .price-v2__switch:hover { background: #D1D5DB; }
+            .price-v2__switch-thumb {
+                position: absolute;
+                top: 3px;
+                left: 3px;
+                width: 18px;
+                height: 18px;
+                background: #fff;
+                border-radius: 50%;
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+            }
+            .price-v2__switch.active .price-v2__switch-thumb {
+                transform: translateX(22px);
+            }
+            .price-v2__switch.active {
+                background: #D4A017;
+                border-color: #B8860B;
+            }
+            .price-v2__save-badge {
+                font-size: 11px;
+                font-weight: 700;
+                color: #16A34A;
+                background: #F0FDF4;
+                border: 1px solid #BBF7D0;
+                padding: 3px 10px;
+                border-radius: 20px;
+                opacity: 0.4;
+                transition: opacity 0.3s;
+            }
+            .price-v2__switch.active ~ .price-v2__save-badge {
+                opacity: 1;
+                animation: price-save-pop 0.4s ease;
+            }
+            @keyframes price-save-pop {
+                0% { transform: scale(0.8); }
+                50% { transform: scale(1.15); }
+                100% { transform: scale(1); }
+            }
+
+            /* Grid */
+            .price-v2__grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 24px;
+                max-width: 1060px;
+                margin: 0 auto;
+                align-items: start;
+            }
+
+            /* Card base */
+            .price-v2__card {
+                background: #fff;
+                border: 1px solid #E5E7EB;
+                border-radius: 20px;
+                padding: 36px 28px;
+                position: relative;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            }
+            .price-v2__card:hover {
+                border-color: #D1D5DB;
+                transform: translateY(-6px);
+                box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+            }
+
+            /* Featured card */
+            .price-v2__card--featured {
+                border: 2px solid #D4A017;
+                background: #fff;
+                padding: 44px 28px 36px;
+                transform: scale(1.04);
+                box-shadow: 0 0 60px rgba(212,160,23,0.1), 0 16px 48px rgba(0,0,0,0.08);
+                z-index: 2;
+            }
+            .price-v2__card--featured::before {
+                content: '';
+                position: absolute;
+                top: -2px;
+                left: 15%;
+                right: 15%;
+                height: 3px;
+                background: linear-gradient(90deg, transparent, #D4A017, transparent);
+                border-radius: 3px;
+            }
+            .price-v2__card--featured:hover {
+                transform: scale(1.04) translateY(-6px);
+                border-color: #B8860B;
+                box-shadow: 0 0 80px rgba(212,160,23,0.15), 0 20px 60px rgba(0,0,0,0.1);
+            }
+
+            /* Badge */
+            .price-v2__badge {
+                position: absolute;
+                top: -14px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(135deg, #D4A017, #E8B824);
+                color: #000;
+                font-size: 12px;
+                font-weight: 700;
+                padding: 5px 18px;
+                border-radius: 50px;
+                white-space: nowrap;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                box-shadow: 0 4px 16px rgba(212,160,23,0.3);
+            }
+
+            /* Card header */
+            .price-v2__card-header { margin-bottom: 24px; }
+            .price-v2__icon {
+                width: 48px;
+                height: 48px;
+                border-radius: 14px;
+                background: #F3F4F6;
+                border: 1px solid #E5E7EB;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 20px;
+                color: #6B7280;
+                margin-bottom: 16px;
+            }
+            .price-v2__icon--gold {
+                background: #FFFBEB;
+                border-color: rgba(212,160,23,0.25);
+                color: #D4A017;
+            }
+            .price-v2__name {
+                font-size: 20px;
+                font-weight: 700;
+                color: #1A1D23;
+                margin-bottom: 4px;
+            }
+            .price-v2__desc {
+                font-size: 14px;
+                color: #9CA3AF;
+            }
+
+            /* Price */
+            .price-v2__price-wrap {
+                display: flex;
+                align-items: baseline;
+                gap: 4px;
+                margin-bottom: 6px;
+            }
+            .price-v2__currency {
+                font-size: 18px;
+                font-weight: 700;
+                color: #9CA3AF;
+            }
+            .price-v2__amount {
+                font-size: 42px;
+                font-weight: 900;
+                color: #1A1D23;
+                letter-spacing: -1px;
+                transition: all 0.4s ease;
+                line-height: 1;
+            }
+            .price-v2__card--featured .price-v2__amount {
+                color: #D4A017;
+            }
+            .price-v2__period {
+                font-size: 14px;
+                color: #9CA3AF;
+            }
+
+            /* Anchor */
+            .price-v2__anchor {
+                font-size: 12px;
+                color: #9CA3AF;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                margin-bottom: 24px;
+                padding-bottom: 24px;
+                border-bottom: 1px solid #F3F4F6;
+            }
+            .price-v2__anchor i { font-size: 11px; }
+            .price-v2__anchor--gold {
+                color: #B8860B;
+            }
+
+            /* Features */
+            .price-v2__features {
+                list-style: none;
+                padding: 0;
+                margin: 0 0 28px;
+            }
+            .price-v2__features li {
+                padding: 8px 0;
+                color: #5A6069;
+                font-size: 14px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                border-bottom: 1px solid #F3F4F6;
+            }
+            .price-v2__features li:last-child { border-bottom: none; }
+            .price-v2__features li i {
+                color: #22C55E;
+                font-size: 13px;
+                width: 18px;
+                text-align: center;
+                flex-shrink: 0;
+            }
+            .price-v2__features li strong { color: #1A1D23; }
+            .price-v2__card--featured .price-v2__features li i {
+                color: #D4A017;
+            }
+
+            /* CTA */
+            .price-v2__cta {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                width: 100%;
+                padding: 14px 24px;
+                border-radius: 12px;
+                font-weight: 700;
+                font-size: 15px;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                background: #1A1D23;
+                color: #fff;
+                border: none;
+            }
+            .price-v2__cta:hover {
+                background: #000;
+                transform: translateY(-2px);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            }
+            .price-v2__cta--gold {
+                background: linear-gradient(135deg, #D4A017, #E8B824);
+                color: #000;
+                box-shadow: 0 4px 20px rgba(212,160,23,0.3);
+            }
+            .price-v2__cta--gold:hover {
+                background: linear-gradient(135deg, #E8B824, #F5C518);
+                box-shadow: 0 8px 32px rgba(212,160,23,0.4);
+                transform: translateY(-2px);
+            }
+
+            /* Guarantee */
+            .price-v2__guarantee {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 6px;
+                font-size: 11px;
+                color: #16A34A;
+                margin-top: 14px;
+            }
+
+            /* Compare bar */
+            .price-v2__compare {
+                max-width: 700px;
+                margin: 56px auto 0;
+            }
+            .price-v2__compare-row {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                background: #fff;
+                border: 1px solid #E5E7EB;
+                border-radius: 16px;
+                padding: 20px 24px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            }
+            .price-v2__compare-item {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            .price-v2__compare-item i {
+                font-size: 20px;
+                flex-shrink: 0;
+            }
+            .price-v2__compare-item--bad i { color: #EF4444; }
+            .price-v2__compare-item--bad strong { color: #5A6069; font-size: 14px; display: block; }
+            .price-v2__compare-item--bad span { color: #9CA3AF; font-size: 13px; text-decoration: line-through; }
+            .price-v2__compare-item--good i { color: #D4A017; }
+            .price-v2__compare-item--good strong { color: #1A1D23; font-size: 14px; display: block; }
+            .price-v2__compare-item--good span { color: #B8860B; font-size: 13px; font-weight: 600; }
+            .price-v2__compare-vs {
+                font-size: 12px;
+                font-weight: 800;
+                color: #9CA3AF;
+                background: #F3F4F6;
+                padding: 6px 12px;
+                border-radius: 8px;
+                flex-shrink: 0;
+            }
+
+            /* Responsive */
+            @media (max-width: 1024px) {
+                .price-v2__grid { grid-template-columns: repeat(2, 1fr); max-width: 680px; }
+                .price-v2__card--featured { transform: none; }
+                .price-v2__card--featured:hover { transform: translateY(-6px); }
+            }
+            @media (max-width: 768px) {
+                .price-v2__grid { grid-template-columns: 1fr; max-width: 400px; }
+                .price-v2 { padding: 80px 0 60px; }
+                .price-v2__compare-row { flex-direction: column; text-align: center; }
+                .price-v2__compare-item { justify-content: center; }
+            }
+            @media (max-width: 480px) {
+                .price-v2__amount { font-size: 36px; }
+            }
+        </style>
+
+        <script>
+        (function() {
+            var sw = document.getElementById('pricingSwitch');
+            if (!sw) return;
+            var labels = document.querySelectorAll('.price-v2__toggle-label');
+            var amounts = document.querySelectorAll('.price-v2__amount');
+            var isAnnual = false;
+
+            sw.addEventListener('click', function() {
+                isAnnual = !isAnnual;
+                sw.classList.toggle('active', isAnnual);
+
+                labels.forEach(function(l) {
+                    l.classList.toggle('price-v2__toggle-label--active',
+                        (isAnnual && l.dataset.billing === 'annual') ||
+                        (!isAnnual && l.dataset.billing === 'monthly')
+                    );
+                });
+
+                amounts.forEach(function(el) {
+                    var val = isAnnual ? el.dataset.annual : el.dataset.monthly;
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(-8px)';
+                    setTimeout(function() {
+                        el.textContent = val;
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, 200);
+                });
+            });
+
+            // Click on labels too
+            labels.forEach(function(l) {
+                l.addEventListener('click', function() {
+                    var wantAnnual = l.dataset.billing === 'annual';
+                    if (wantAnnual !== isAnnual) sw.click();
+                });
+            });
+        })();
+        </script>
     </section>
 
     <!-- ═══ DEPOIMENTOS ═══ -->
@@ -1844,41 +3567,65 @@
     <hr class="glow-divider">
 
     <!-- ═══ GARANTIA ═══ -->
-    <section class="guarantee-section guarantee-section--dark">
+    <section class="guarantee-section guarantee-section--dark" id="garantiaSection">
         <div class="container">
             <div class="guarantee-lp" data-reveal="scale">
-                <!-- Left: Visual Scene -->
+                <!-- Left: Animated Contract Scene -->
                 <div class="guarantee-lp__scene">
                     <div class="guarantee-lp__particles">
                         <span></span><span></span><span></span><span></span><span></span><span></span>
                     </div>
 
-                    <!-- Contract document -->
-                    <div class="guarantee-lp__contract">
-                        <div class="contract-paper">
-                            <div class="contract-paper__header">
-                                <div class="contract-paper__logo">O</div>
-                                <div class="contract-paper__title">Termo de Garantia</div>
+                    <div class="gtd-contract" id="gtdContract">
+                        <!-- Paper -->
+                        <div class="gtd-paper">
+                            <div class="gtd-paper__header">
+                                <div class="gtd-paper__logo">O</div>
+                                <div class="gtd-paper__title">Termo de Garantia</div>
                             </div>
-                            <div class="contract-line"></div>
-                            <div class="contract-line contract-line--short"></div>
-                            <div class="contract-line contract-line--med"></div>
-                            <div class="contract-line"></div>
-                            <div class="contract-line contract-line--short"></div>
-                            <div class="contract-line contract-line--gold"></div>
-                            <div class="contract-check">
-                                <i class="fas fa-circle-check"></i> Assinado digitalmente
+                            <div class="gtd-paper__subtitle">Orbit Gestão — 90 dias</div>
+                            <div class="gtd-paper__lines">
+                                <div class="gtd-line gtd-line--1"></div>
+                                <div class="gtd-line gtd-line--2"></div>
+                                <div class="gtd-line gtd-line--3"></div>
+                                <div class="gtd-line gtd-line--4"></div>
+                                <div class="gtd-line gtd-line--5"></div>
+                            </div>
+                            <div class="gtd-paper__separator"></div>
+                            <!-- Signature area -->
+                            <div class="gtd-signature">
+                                <div class="gtd-signature__label">Assinatura</div>
+                                <div class="gtd-signature__line">
+                                    <svg class="gtd-signature__svg" viewBox="0 0 200 40" fill="none">
+                                        <path class="gtd-sig-path" d="M10,30 C20,30 25,10 40,15 C55,20 50,32 65,28 C80,24 75,8 90,12 C105,16 100,30 115,25 C130,20 135,10 150,15 C165,20 160,32 175,28 C185,25 190,20 195,22" stroke="#D4A017" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <!-- Digital stamp -->
+                            <div class="gtd-stamp-area">
+                                <div class="gtd-check-badge">
+                                    <i class="fas fa-circle-check"></i> Assinado digitalmente
+                                </div>
                             </div>
                         </div>
-                        <!-- Seal stamp -->
-                        <div class="guarantee-lp__seal">
-                            <div class="seal-circle">
+                        <!-- Pen -->
+                        <div class="gtd-pen">
+                            <div class="gtd-pen__body">
+                                <div class="gtd-pen__tip"></div>
+                                <div class="gtd-pen__barrel"></div>
+                                <div class="gtd-pen__clip"></div>
+                                <div class="gtd-pen__cap"></div>
+                            </div>
+                        </div>
+                        <!-- Seal -->
+                        <div class="gtd-seal">
+                            <div class="gtd-seal__circle">
                                 <i class="fas fa-shield-halved"></i>
                                 <span>Garantido</span>
                             </div>
+                            <div class="gtd-seal__ring"></div>
                         </div>
                     </div>
-
                 </div>
 
                 <!-- Right: Content -->
@@ -1900,6 +3647,294 @@
                 </div>
             </div>
         </div>
+
+        <style>
+            /* ═══ GUARANTEE ANIMATED CONTRACT ═══ */
+            .gtd-contract {
+                position: relative;
+                width: 300px;
+                margin: 0 auto;
+            }
+
+            /* Paper */
+            .gtd-paper {
+                background: #fff;
+                border-radius: 12px;
+                padding: 28px 24px 20px;
+                box-shadow: 0 8px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.08);
+                position: relative;
+                z-index: 2;
+            }
+            .gtd-paper__header {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 6px;
+            }
+            .gtd-paper__logo {
+                width: 28px;
+                height: 28px;
+                border-radius: 6px;
+                background: linear-gradient(135deg, #D4A017, #E8B824);
+                color: #000;
+                font-weight: 900;
+                font-size: 14px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .gtd-paper__title {
+                font-size: 14px;
+                font-weight: 800;
+                color: #1A1D23;
+            }
+            .gtd-paper__subtitle {
+                font-size: 10px;
+                color: #9CA3AF;
+                margin-bottom: 16px;
+                padding-left: 38px;
+            }
+
+            /* Text lines */
+            .gtd-paper__lines {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                margin-bottom: 16px;
+            }
+            .gtd-line {
+                height: 6px;
+                background: #F3F4F6;
+                border-radius: 3px;
+                transform-origin: left;
+                transform: scaleX(0);
+            }
+            .gtd-contract.gtd-active .gtd-line--1 { animation: gtd-line-draw 0.4s 0.2s forwards; width: 100%; }
+            .gtd-contract.gtd-active .gtd-line--2 { animation: gtd-line-draw 0.4s 0.4s forwards; width: 75%; }
+            .gtd-contract.gtd-active .gtd-line--3 { animation: gtd-line-draw 0.4s 0.6s forwards; width: 90%; }
+            .gtd-contract.gtd-active .gtd-line--4 { animation: gtd-line-draw 0.4s 0.8s forwards; width: 60%; }
+            .gtd-contract.gtd-active .gtd-line--5 { animation: gtd-line-draw 0.4s 1.0s forwards; width: 80%; background: linear-gradient(90deg, #FEF3C7, #FDE68A); }
+            @keyframes gtd-line-draw {
+                from { transform: scaleX(0); }
+                to { transform: scaleX(1); }
+            }
+
+            .gtd-paper__separator {
+                height: 1px;
+                background: #E5E7EB;
+                margin: 16px 0 12px;
+            }
+
+            /* Signature */
+            .gtd-signature {
+                margin-bottom: 14px;
+            }
+            .gtd-signature__label {
+                font-size: 9px;
+                font-weight: 600;
+                color: #9CA3AF;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-bottom: 6px;
+            }
+            .gtd-signature__line {
+                height: 40px;
+                border-bottom: 1px dashed #D1D5DB;
+                position: relative;
+                overflow: hidden;
+            }
+            .gtd-signature__svg {
+                position: absolute;
+                bottom: 2px;
+                left: 0;
+                width: 100%;
+                height: 40px;
+            }
+            .gtd-sig-path {
+                stroke-dasharray: 500;
+                stroke-dashoffset: 500;
+            }
+            .gtd-contract.gtd-active .gtd-sig-path {
+                animation: gtd-sign-draw 1.8s 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            }
+            @keyframes gtd-sign-draw {
+                to { stroke-dashoffset: 0; }
+            }
+
+            /* Digital stamp badge */
+            .gtd-stamp-area {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            .gtd-contract.gtd-active .gtd-stamp-area {
+                animation: gtd-stamp-pop 0.5s 3.6s forwards;
+            }
+            @keyframes gtd-stamp-pop {
+                0% { opacity: 0; transform: scale(0.8); }
+                60% { transform: scale(1.08); }
+                100% { opacity: 1; transform: scale(1); }
+            }
+            .gtd-check-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                font-size: 11px;
+                font-weight: 600;
+                color: #16A34A;
+                background: #F0FDF4;
+                border: 1px solid #BBF7D0;
+                padding: 5px 12px;
+                border-radius: 20px;
+            }
+            .gtd-check-badge i { font-size: 12px; }
+
+            /* ═══ PEN ═══ */
+            .gtd-pen {
+                position: absolute;
+                bottom: 80px;
+                right: -20px;
+                z-index: 5;
+                opacity: 0;
+                transform: translate(40px, -20px) rotate(-35deg);
+            }
+            .gtd-contract.gtd-active .gtd-pen {
+                animation: gtd-pen-move 3.6s 1.2s forwards;
+            }
+            @keyframes gtd-pen-move {
+                0%   { opacity: 0; transform: translate(40px, -20px) rotate(-35deg); }
+                8%   { opacity: 1; transform: translate(10px, 0px) rotate(-40deg); }
+                15%  { transform: translate(-10px, 10px) rotate(-42deg); }
+                /* Signing motion — oscillating across signature line */
+                20%  { transform: translate(-30px, 8px) rotate(-38deg); }
+                28%  { transform: translate(-50px, 14px) rotate(-42deg); }
+                35%  { transform: translate(-70px, 6px) rotate(-36deg); }
+                42%  { transform: translate(-90px, 12px) rotate(-40deg); }
+                50%  { transform: translate(-110px, 5px) rotate(-35deg); }
+                58%  { transform: translate(-130px, 13px) rotate(-42deg); }
+                65%  { transform: translate(-150px, 8px) rotate(-38deg); }
+                72%  { transform: translate(-160px, 10px) rotate(-40deg); }
+                /* Lift off */
+                80%  { opacity: 1; transform: translate(-140px, -10px) rotate(-30deg); }
+                90%  { opacity: 0.6; transform: translate(-100px, -30px) rotate(-25deg); }
+                100% { opacity: 0; transform: translate(-80px, -50px) rotate(-20deg); }
+            }
+            .gtd-pen__body {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .gtd-pen__cap {
+                width: 10px;
+                height: 18px;
+                background: linear-gradient(180deg, #1A1D23, #374151);
+                border-radius: 3px 3px 0 0;
+            }
+            .gtd-pen__clip {
+                position: absolute;
+                top: 2px;
+                right: -3px;
+                width: 3px;
+                height: 14px;
+                background: #D4A017;
+                border-radius: 0 2px 2px 0;
+            }
+            .gtd-pen__barrel {
+                width: 8px;
+                height: 40px;
+                background: linear-gradient(180deg, #374151, #1F2937);
+                border-radius: 0;
+            }
+            .gtd-pen__tip {
+                width: 0;
+                height: 0;
+                border-left: 4px solid transparent;
+                border-right: 4px solid transparent;
+                border-top: 12px solid #9CA3AF;
+            }
+
+            /* ═══ SEAL ═══ */
+            .gtd-seal {
+                position: absolute;
+                bottom: -10px;
+                right: -15px;
+                z-index: 4;
+                opacity: 0;
+                transform: scale(0) rotate(-20deg);
+            }
+            .gtd-contract.gtd-active .gtd-seal {
+                animation: gtd-seal-slam 0.6s 3.8s forwards;
+            }
+            @keyframes gtd-seal-slam {
+                0% { opacity: 0; transform: scale(0) rotate(-20deg); }
+                50% { opacity: 1; transform: scale(1.2) rotate(5deg); }
+                70% { transform: scale(0.95) rotate(-2deg); }
+                100% { opacity: 1; transform: scale(1) rotate(0deg); }
+            }
+            .gtd-seal__circle {
+                width: 72px;
+                height: 72px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #D4A017, #E8B824);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 20px rgba(212,160,23,0.4);
+                position: relative;
+                z-index: 2;
+            }
+            .gtd-seal__circle i {
+                font-size: 18px;
+                color: #000;
+                margin-bottom: 2px;
+            }
+            .gtd-seal__circle span {
+                font-size: 9px;
+                font-weight: 800;
+                color: #000;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+            .gtd-seal__ring {
+                position: absolute;
+                inset: -6px;
+                border-radius: 50%;
+                border: 2px dashed rgba(212,160,23,0.3);
+                animation: gtd-ring-spin 10s linear infinite;
+            }
+            @keyframes gtd-ring-spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .gtd-contract { width: 260px; }
+                .gtd-paper { padding: 22px 18px 16px; }
+                .gtd-seal__circle { width: 60px; height: 60px; }
+                .gtd-seal__circle i { font-size: 15px; }
+            }
+            @media (max-width: 480px) {
+                .gtd-contract { width: 240px; }
+            }
+        </style>
+
+        <script>
+        (function() {
+            var contract = document.getElementById('gtdContract');
+            if (!contract) return;
+            var obs = new IntersectionObserver(function(entries) {
+                entries.forEach(function(e) {
+                    if (e.isIntersecting) {
+                        contract.classList.add('gtd-active');
+                        obs.unobserve(e.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+            obs.observe(contract);
+        })();
+        </script>
     </section>
 
     <hr class="glow-divider">
