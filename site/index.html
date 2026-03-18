@@ -170,18 +170,25 @@
     .icp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1000px; margin: 0 auto; }
     .section-padded { padding: 120px 0; }
     .section-padded-lg { padding: 140px 0; }
+    .olivia-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; max-width: 1000px; margin: 0 auto; }
 
     @media (max-width: 1024px) {
         .icp-grid { grid-template-columns: repeat(2, 1fr); }
+        .olivia-intro { gap: 32px; }
     }
     @media (max-width: 768px) {
         .icp-grid { grid-template-columns: 1fr; max-width: 440px; }
         .section-padded, .section-padded-lg { padding: 60px 0 !important; }
-        #olivia .container > div { grid-template-columns: 1fr !important; gap: 24px !important; }
+        .olivia-intro { grid-template-columns: 1fr; gap: 24px; max-width: 500px; }
+        .olivia-intro > div:last-child { order: -1; }
+        .olivia-intro img { width: 140px !important; height: 140px !important; }
+        .olivia-intro h2 { font-size: 1.6rem !important; }
         #manifesto p { font-size: 1.1rem !important; }
     }
     @media (max-width: 480px) {
         .section-padded, .section-padded-lg { padding: 48px 0 !important; }
+        .olivia-intro img { width: 120px !important; height: 120px !important; }
+        .olivia-intro h2 { font-size: 1.4rem !important; }
         #manifesto p { font-size: 1rem !important; }
         .cost-section, .pricing-preview-section, .testi-section, .consultant-section { padding: 60px 0; }
     }
@@ -709,7 +716,7 @@
     <!-- ═══ OLÍVIA — COORDENADORA ═══ -->
     <section class="section-padded-lg" style="background:#161B22;" id="olivia">
         <div class="container">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;max-width:1000px;margin:0 auto;" data-reveal>
+            <div class="olivia-intro" data-reveal>
                 <div>
                     <span class="section-badge">Conheça a líder do time</span>
                     <h2 style="font-size:2.25rem;font-weight:800;color:#fff;margin:16px 0;">Olívia, sua <span style="color:#D4A017;">Coordenadora de IA</span></h2>
@@ -1137,10 +1144,10 @@
                 @media (max-width: 768px) {
                     .orbit-hub {
                         height: auto;
-                        max-width: 400px;
+                        max-width: 100%;
                         display: grid;
                         grid-template-columns: 1fr 1fr;
-                        gap: 12px;
+                        gap: 10px;
                         padding: 20px 0;
                     }
                     .orbit-hub__lines { display: none; }
@@ -1153,8 +1160,10 @@
                         scale: 1;
                         margin-bottom: 16px;
                     }
-                    .orbit-hub__glow { width: 160px; height: 160px; }
-                    .orbit-hub__photo { width: 100px; height: 100px; }
+                    .orbit-hub__glow { width: 120px; height: 120px; }
+                    .orbit-hub__photo { width: 80px; height: 80px; }
+                    .orbit-hub__name { font-size: 16px; margin-top: 10px; }
+                    .orbit-hub__role { font-size: 12px; }
                     .orbit-hub__ring { display: none; }
                     .orbit-hub__node {
                         position: relative;
@@ -1164,32 +1173,48 @@
                         opacity: 1;
                         scale: 1;
                         animation: none !important;
-                        flex-direction: row;
-                        gap: 10px;
+                        flex-direction: column;
+                        gap: 6px;
+                        text-align: center;
                         background: rgba(255,255,255,0.03);
                         border: 1px solid rgba(212,160,23,0.12);
                         border-radius: 12px;
-                        padding: 12px 14px;
+                        padding: 14px 8px;
                     }
                     .orbit-hub__node:hover {
                         transform: none;
                     }
                     .orbit-hub__node-icon {
-                        width: 40px;
-                        height: 40px;
-                        min-width: 40px;
+                        width: 36px;
+                        height: 36px;
+                        min-width: 36px;
                         border-radius: 10px;
                     }
-                    .orbit-hub__node-icon i { font-size: 16px; }
+                    .orbit-hub__node-icon i { font-size: 14px; }
                     .orbit-hub__node-label {
-                        font-size: 13px;
+                        font-size: 12px;
+                        white-space: normal;
+                        line-height: 1.3;
                     }
                     .orbit-hub__node-desc {
-                        font-size: 11px;
-                        white-space: normal;
-                        text-shadow: none;
-                        margin-top: 0;
+                        display: none;
                     }
+                }
+                @media (max-width: 480px) {
+                    .orbit-hub {
+                        grid-template-columns: 1fr 1fr 1fr;
+                        gap: 8px;
+                    }
+                    .orbit-hub__node {
+                        padding: 10px 6px;
+                    }
+                    .orbit-hub__node-icon {
+                        width: 32px;
+                        height: 32px;
+                        min-width: 32px;
+                    }
+                    .orbit-hub__node-icon i { font-size: 13px; }
+                    .orbit-hub__node-label { font-size: 11px; }
                 }
             </style>
         </div>
