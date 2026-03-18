@@ -1697,6 +1697,31 @@
     <div class="toast-container" id="toastContainer"></div>
 
     <script>
+    // Mobile menu
+    var toggle = document.querySelector('.menu-toggle');
+    var mobileMenu = document.querySelector('.mobile-menu');
+    var overlay = document.querySelector('.mobile-menu-overlay');
+    window.closeMobileMenu = function() {
+        if (toggle) toggle.classList.remove('active');
+        if (mobileMenu) mobileMenu.classList.remove('active');
+        if (overlay) overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+    window.openMobileMenu = function() {
+        if (toggle) toggle.classList.add('active');
+        if (mobileMenu) mobileMenu.classList.add('active');
+        if (overlay) overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    };
+    if (toggle && mobileMenu) {
+        toggle.addEventListener('click', function() {
+            mobileMenu.classList.contains('active') ? closeMobileMenu() : openMobileMenu();
+        });
+        mobileMenu.querySelectorAll('a').forEach(function(a) {
+            a.addEventListener('click', closeMobileMenu);
+        });
+    }
+
     // ═══════════════════════════════════════
     // ORBIT CMS — Admin Panel
     // ═══════════════════════════════════════
@@ -2660,7 +2685,7 @@ ${JSON.stringify(schemaOrg, null, 2)}
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/styles-v2.css?v=d8b11dbe">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=5c357499">
     <style>
         .article-hero{background:#000;padding:140px 24px 80px;text-align:center;position:relative;overflow:hidden}
         .article-hero__bg{position:absolute;inset:0;pointer-events:none}
@@ -2716,22 +2741,31 @@ ${JSON.stringify(schemaOrg, null, 2)}
                 <a href="#" class="btn btn-outline">Entrar</a>
                 <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>
             </div>
-            <button class="menu-toggle" onclick="document.querySelector('.mobile-menu').classList.toggle('active');document.body.style.overflow=document.querySelector('.mobile-menu').classList.contains('active')?'hidden':''">
+            <button class="menu-toggle">
                 <span></span><span></span><span></span>
             </button>
         </div>
     </header>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
     <div class="mobile-menu">
-        <button class="mobile-menu-close" onclick="this.parentElement.classList.remove('active');document.body.style.overflow=''">&times;</button>
-        <a href="/">Home</a>
-        <a href="/processos">Processos</a>
-        <a href="/indicadores">Indicadores</a>
-        <a href="/tarefas">Tarefas</a>
-        <a href="/competencias">Competencias</a>
-        <a href="/auditorias">Auditorias</a>
-        <a href="/blog">Conhecimento</a>
-        <a href="/parcerias">Seja Parceiro</a>
-        <a href="/#contato-form">Fale Conosco</a>
+        <div class="mobile-menu__header">
+            <span class="mobile-menu__header-title">Menu</span>
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">&times;</button>
+        </div>
+        <div class="mobile-menu__body">
+            <a href="/">Home</a>
+            <a href="/processos">Processos</a>
+            <a href="/indicadores">Indicadores</a>
+            <a href="/tarefas">Tarefas</a>
+            <a href="/competencias">Competencias</a>
+            <a href="/auditorias">Auditorias</a>
+            <a href="/blog">Conhecimento</a>
+            <a href="/parcerias">Seja Parceiro</a>
+        </div>
+        <div class="mobile-menu__footer">
+            <a href="/#contato-form" class="btn btn-primary" onclick="closeMobileMenu()">Fale Conosco</a>
+        </div>
     </div>
     <section class="article-hero">
         <div class="article-hero__bg"><div class="article-hero__glow"></div></div>

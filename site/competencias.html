@@ -25,7 +25,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/styles-v2.css?v=d8b11dbe">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=5c357499">
     <style>
     /* ═══ PAGE-SPECIFIC STYLES ═══ */
 
@@ -569,29 +569,36 @@
     </header>
 
     <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
     <div class="mobile-menu">
-        <button class="mobile-menu-close" onclick="this.parentElement.classList.remove('active');document.body.style.overflow=''">&times;</button>
-        <div class="mobile-menu__label">Menu</div>
-        <a href="/"><i class="fas fa-home"></i> Início</a>
-        <a href="/pricing"><i class="fas fa-tag"></i> Planos e Preços</a>
-        <a href="/#contato-form"><i class="fas fa-envelope"></i> Fale Conosco</a>
-        <div class="mobile-menu__label">Plataforma</div>
-        <a href="/agentes"><i class="fas fa-robot"></i> Agentes de IA</a>
-        <a href="/processos"><i class="fas fa-sitemap"></i> Processos</a>
-        <a href="/indicadores"><i class="fas fa-chart-line"></i> Indicadores</a>
-        <a href="/tarefas"><i class="fas fa-tasks"></i> Tarefas</a>
-        <a href="/competencias"><i class="fas fa-users"></i> Competências</a>
-        <a href="/auditorias"><i class="fas fa-clipboard-check"></i> Auditorias</a>
-        <div class="mobile-menu__label">Conteúdo</div>
-        <a href="/blog"><i class="fas fa-newspaper"></i> Blog</a>
-        <a href="/historias"><i class="fas fa-star"></i> Histórias de Clientes</a>
-        <a href="/faq"><i class="fas fa-circle-question"></i> FAQ</a>
-        <div class="mobile-menu__label">Empresa</div>
-        <a href="/sobre"><i class="fas fa-building"></i> Sobre Nós</a>
-        <a href="/parcerias"><i class="fas fa-handshake"></i> Seja Parceiro</a>
-        <a href="/canais"><i class="fas fa-network-wired"></i> Canais B2B2B</a>
-        <div class="mobile-menu__divider"></div>
-        <a href="/#contato-form" class="btn btn-primary">Conhecer o Time de IA</a>
+        <div class="mobile-menu__header">
+            <span class="mobile-menu__header-title">Menu</span>
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">&times;</button>
+        </div>
+        <div class="mobile-menu__body">
+            <div class="mobile-menu__label">Menu</div>
+            <a href="/"><i class="fas fa-home"></i> Início</a>
+            <a href="/pricing"><i class="fas fa-tag"></i> Planos e Preços</a>
+            <a href="/#contato-form"><i class="fas fa-envelope"></i> Fale Conosco</a>
+            <div class="mobile-menu__label">Plataforma</div>
+            <a href="/agentes"><i class="fas fa-robot"></i> Agentes de IA</a>
+            <a href="/processos"><i class="fas fa-sitemap"></i> Processos</a>
+            <a href="/indicadores"><i class="fas fa-chart-line"></i> Indicadores</a>
+            <a href="/tarefas"><i class="fas fa-tasks"></i> Tarefas</a>
+            <a href="/competencias"><i class="fas fa-users"></i> Competências</a>
+            <a href="/auditorias"><i class="fas fa-clipboard-check"></i> Auditorias</a>
+            <div class="mobile-menu__label">Conteúdo</div>
+            <a href="/blog"><i class="fas fa-newspaper"></i> Blog</a>
+            <a href="/historias"><i class="fas fa-star"></i> Histórias de Clientes</a>
+            <a href="/faq"><i class="fas fa-circle-question"></i> FAQ</a>
+            <div class="mobile-menu__label">Empresa</div>
+            <a href="/sobre"><i class="fas fa-building"></i> Sobre Nós</a>
+            <a href="/parcerias"><i class="fas fa-handshake"></i> Seja Parceiro</a>
+            <a href="/canais"><i class="fas fa-network-wired"></i> Canais B2B2B</a>
+        </div>
+        <div class="mobile-menu__footer">
+            <a href="/#contato-form" class="btn btn-primary" onclick="closeMobileMenu()">Conhecer o Time de IA</a>
+        </div>
     </div>
 
 
@@ -817,7 +824,30 @@
         if(dd){li.addEventListener('mouseenter',()=>{dd.style.opacity='1';dd.style.visibility='visible';dd.style.transform='translateY(0)'});
         li.addEventListener('mouseleave',()=>{dd.style.opacity='0';dd.style.visibility='hidden';dd.style.transform='translateY(10px)'})}
     });
-    document.querySelector('.menu-toggle').addEventListener('click',function(){document.querySelector('.mobile-menu').classList.add('active');document.body.style.overflow='hidden'});
+    // Mobile menu
+    var toggle = document.querySelector('.menu-toggle');
+    var mobileMenu = document.querySelector('.mobile-menu');
+    var overlay = document.querySelector('.mobile-menu-overlay');
+    window.closeMobileMenu = function() {
+        if (toggle) toggle.classList.remove('active');
+        if (mobileMenu) mobileMenu.classList.remove('active');
+        if (overlay) overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+    window.openMobileMenu = function() {
+        if (toggle) toggle.classList.add('active');
+        if (mobileMenu) mobileMenu.classList.add('active');
+        if (overlay) overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    };
+    if (toggle && mobileMenu) {
+        toggle.addEventListener('click', function() {
+            mobileMenu.classList.contains('active') ? closeMobileMenu() : openMobileMenu();
+        });
+        mobileMenu.querySelectorAll('a').forEach(function(a) {
+            a.addEventListener('click', closeMobileMenu);
+        });
+    }
     </script>
     <script>
     (function() {
