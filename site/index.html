@@ -121,25 +121,57 @@
         .pricing-preview-header h2 { font-size: 1.75rem; }
     }
 
-    /* ═══ TESTIMONIALS ═══ */
-    .testi-section { background: #0D1117; padding: 140px 0; }
-    .testi-header { text-align: center; margin-bottom: 60px; }
-    .testi-header h2 { font-size: 2.5rem; font-weight: 800; color: #fff; margin-bottom: 16px; }
-    .testi-header p { font-size: 1.125rem; color: #8B949E; max-width: 600px; margin: 0 auto; }
-    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-    .testi-card { background: #1C2333; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 32px 28px; }
-    .testi-stars { margin-bottom: 20px; }
-    .testi-stars i { color: #ffba1a; font-size: 1rem; margin-right: 2px; }
-    .testi-quote { color: #C9D1D9; font-size: 1rem; line-height: 1.7; margin-bottom: 24px; font-style: italic; }
-    .testi-author { display: flex; align-items: center; gap: 14px; }
-    .testi-avatar { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, #ffba1a, #ffc940); display: flex; align-items: center; justify-content: center; color: #000; font-weight: 800; font-size: 1rem; flex-shrink: 0; }
+    /* ═══ TESTIMONIALS — MARQUEE COLUMNS ═══ */
+    .testi-section { background: #0D1117; padding: 140px 0; overflow: hidden; }
+    .testi-header { text-align: center; margin-bottom: 48px; }
+    .testi-badge { display: inline-block; border: 1px solid rgba(255,255,255,0.12); padding: 4px 16px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.7); margin-bottom: 20px; }
+    .testi-header h2 { font-size: clamp(1.75rem, 4vw, 3rem); font-weight: 800; color: #fff; margin-bottom: 16px; letter-spacing: -0.02em; }
+    .testi-header p { font-size: 1.125rem; color: #8B949E; max-width: 540px; margin: 0 auto; }
+    .testi-columns {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        max-height: 740px;
+        overflow: hidden;
+        mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+        -webkit-mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
+    }
+    .testi-column { flex: 0 0 320px; max-width: 320px; overflow: hidden; }
+    .testi-scroll {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        padding-bottom: 24px;
+    }
+    .testi-scroll--1 { animation: testi-marquee 30s linear infinite; }
+    .testi-scroll--2 { animation: testi-marquee 38s linear infinite; }
+    .testi-scroll--3 { animation: testi-marquee 34s linear infinite; }
+    @keyframes testi-marquee {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-50%); }
+    }
+    .testi-card {
+        background: linear-gradient(160deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 20px;
+        padding: 32px 28px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.1), 0 0 0 1px rgba(255,186,26,0.04);
+    }
+    .testi-quote { color: #C9D1D9; font-size: 1rem; line-height: 1.7; margin-bottom: 24px; }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .testi-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #ffba1a, #ffc940); display: flex; align-items: center; justify-content: center; color: #000; font-weight: 800; font-size: 0.85rem; flex-shrink: 0; }
     .testi-info { }
-    .testi-name { color: #fff; font-weight: 700; font-size: 0.95rem; }
-    .testi-role { color: #8B949E; font-size: 0.85rem; margin-top: 2px; }
+    .testi-name { color: #fff; font-weight: 600; font-size: 0.9rem; letter-spacing: -0.01em; }
+    .testi-role { color: rgba(255,255,255,0.4); font-size: 0.8rem; margin-top: 2px; letter-spacing: -0.01em; }
 
-    @media (max-width: 1024px) { .testi-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 768px) {
-        .testi-grid { grid-template-columns: 1fr; }
+    .testi-column--md { display: none; }
+    .testi-column--lg { display: none; }
+    @media (min-width: 768px) { .testi-column--md { display: block; } }
+    @media (min-width: 1024px) { .testi-column--lg { display: block; } }
+    @media (max-width: 767px) {
+        .testi-section { padding: 80px 0; }
+        .testi-columns { max-height: 600px; }
+        .testi-column { flex: 0 0 300px; max-width: 300px; }
         .testi-header h2 { font-size: 1.75rem; }
     }
 
@@ -3502,61 +3534,206 @@
     <section class="testi-section" id="depoimentos">
         <div class="container">
             <div class="testi-header" data-reveal>
+                <div class="testi-badge">Depoimentos</div>
                 <h2>Quem usa, recomenda</h2>
                 <p>Veja como empresas como a sua estão transformando a gestão com o Orbit.</p>
             </div>
-            <div class="testi-grid" data-reveal-stagger>
-                <!-- Testimonial 1 -->
-                <div class="testi-card">
-                    <div class="testi-stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="testi-quote">"Em 3 meses, conseguimos mapear todos os processos críticos e reduzir retrabalho em 40%. O Orbit organizou o que a gente tentava há anos."</p>
-                    <div class="testi-author">
-                        <div class="testi-avatar">MS</div>
-                        <div class="testi-info">
-                            <div class="testi-name">Maria Silva</div>
-                            <div class="testi-role">Diretora de Operações, TechParts Ltda</div>
+            <div class="testi-columns">
+                <!-- Column 1 -->
+                <div class="testi-column">
+                    <div class="testi-scroll testi-scroll--1">
+                        <div class="testi-card">
+                            <p class="testi-quote">"Em 3 meses, conseguimos mapear todos os processos críticos e reduzir retrabalho em 40%. O Orbit organizou o que a gente tentava há anos."</p>
+                            <div class="testi-author">
+                                <div class="testi-avatar">MS</div>
+                                <div class="testi-info">
+                                    <div class="testi-name">Maria Silva</div>
+                                    <div class="testi-role">Diretora de Operações, TechParts Ltda</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testi-card">
+                            <p class="testi-quote">"O agente de treinamento via WhatsApp mudou o jogo. A equipe engaja porque não precisa logar em nada. Simples e direto."</p>
+                            <div class="testi-author">
+                                <div class="testi-avatar">RC</div>
+                                <div class="testi-info">
+                                    <div class="testi-name">Roberto Costa</div>
+                                    <div class="testi-role">CEO, Grupo Nordeste</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testi-card">
+                            <p class="testi-quote">"Finalmente tenho KPIs em tempo real. Antes, descobria os problemas na semana seguinte. Agora, atuo no mesmo dia."</p>
+                            <div class="testi-author">
+                                <div class="testi-avatar">AM</div>
+                                <div class="testi-info">
+                                    <div class="testi-name">Ana Mendes</div>
+                                    <div class="testi-role">Gerente de Qualidade, FastLog</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Duplicate for seamless loop -->
+                        <div class="testi-card">
+                            <p class="testi-quote">"Em 3 meses, conseguimos mapear todos os processos críticos e reduzir retrabalho em 40%. O Orbit organizou o que a gente tentava há anos."</p>
+                            <div class="testi-author">
+                                <div class="testi-avatar">MS</div>
+                                <div class="testi-info">
+                                    <div class="testi-name">Maria Silva</div>
+                                    <div class="testi-role">Diretora de Operações, TechParts Ltda</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testi-card">
+                            <p class="testi-quote">"O agente de treinamento via WhatsApp mudou o jogo. A equipe engaja porque não precisa logar em nada. Simples e direto."</p>
+                            <div class="testi-author">
+                                <div class="testi-avatar">RC</div>
+                                <div class="testi-info">
+                                    <div class="testi-name">Roberto Costa</div>
+                                    <div class="testi-role">CEO, Grupo Nordeste</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testi-card">
+                            <p class="testi-quote">"Finalmente tenho KPIs em tempo real. Antes, descobria os problemas na semana seguinte. Agora, atuo no mesmo dia."</p>
+                            <div class="testi-author">
+                                <div class="testi-avatar">AM</div>
+                                <div class="testi-info">
+                                    <div class="testi-name">Ana Mendes</div>
+                                    <div class="testi-role">Gerente de Qualidade, FastLog</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!-- Testimonial 2 -->
-                <div class="testi-card">
-                    <div class="testi-stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="testi-quote">"O agente de treinamento via WhatsApp mudou o jogo. A equipe engaja porque não precisa logar em nada. Simples e direto."</p>
-                    <div class="testi-author">
-                        <div class="testi-avatar">RC</div>
-                        <div class="testi-info">
-                            <div class="testi-name">Roberto Costa</div>
-                            <div class="testi-role">CEO, Grupo Nordeste</div>
+                <!-- Column 2 -->
+                <div class="testi-column testi-column--md">
+                    <div class="testi-scroll testi-scroll--2">
+                        <div class="testi-card">
+                            <p class="testi-quote">"O Orbit é como ter um consultor 24/7. Os agentes de IA identificam problemas antes que virem crises. Mudou completamente nossa forma de gerir."</p>
+                            <div class="testi-author">
+                                <div class="testi-avatar">PL</div>
+                                <div class="testi-info">
+                                    <div class="testi-name">Paulo Lima</div>
+                                    <div class="testi-role">CEO, Construtora Horizonte</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testi-card">
+                            <p class="testi-quote">"Reduzimos o tempo de auditoria de 2 semanas para 3 dias. Os checklists automáticos e planos de ação são incríveis."</p>
+                            <div class="testi-author">
+                                <div class="testi-avatar">CF</div>
+                                <div class="testi-info">
+                                    <div class="testi-name">Carla Ferreira</div>
+                                    <div class="testi-role">Gerente de Qualidade, Indústria Max</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testi-card">
+                            <p class="testi-quote">"Minha equipe ficou autônoma. O agente de tarefas cobra follow-up, prioriza por impacto estratégico e ninguém esquece mais nada."</p>
+                            <div class="testi-author">
+                                <div class="testi-avatar">DF</div>
+                                <div class="testi-info">
+                                    <div class="testi-name">Diego Fonseca</div>
+                                    <div class="testi-role">Diretor Comercial, VentureLog</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Duplicate for seamless loop -->
+                        <div class="testi-card">
+                            <p class="testi-quote">"O Orbit é como ter um consultor 24/7. Os agentes de IA identificam problemas antes que virem crises. Mudou completamente nossa forma de gerir."</p>
+                            <div class="testi-author">
+                                <div class="testi-avatar">PL</div>
+                                <div class="testi-info">
+                                    <div class="testi-name">Paulo Lima</div>
+                                    <div class="testi-role">CEO, Construtora Horizonte</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testi-card">
+                            <p class="testi-quote">"Reduzimos o tempo de auditoria de 2 semanas para 3 dias. Os checklists automáticos e planos de ação são incríveis."</p>
+                            <div class="testi-author">
+                                <div class="testi-avatar">CF</div>
+                                <div class="testi-info">
+                                    <div class="testi-name">Carla Ferreira</div>
+                                    <div class="testi-role">Gerente de Qualidade, Indústria Max</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testi-card">
+                            <p class="testi-quote">"Minha equipe ficou autônoma. O agente de tarefas cobra follow-up, prioriza por impacto estratégico e ninguém esquece mais nada."</p>
+                            <div class="testi-author">
+                                <div class="testi-avatar">DF</div>
+                                <div class="testi-info">
+                                    <div class="testi-name">Diego Fonseca</div>
+                                    <div class="testi-role">Diretor Comercial, VentureLog</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <!-- Testimonial 3 -->
-                <div class="testi-card">
-                    <div class="testi-stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                    </div>
-                    <p class="testi-quote">"Finalmente tenho KPIs em tempo real. Antes, descobria os problemas na semana seguinte. Agora, atuo no mesmo dia."</p>
-                    <div class="testi-author">
-                        <div class="testi-avatar">AM</div>
-                        <div class="testi-info">
-                            <div class="testi-name">Ana Mendes</div>
-                            <div class="testi-role">Gerente de Qualidade, FastLog</div>
+                <!-- Column 3 -->
+                <div class="testi-column testi-column--lg">
+                    <div class="testi-scroll testi-scroll--3">
+                        <div class="testi-card">
+                            <p class="testi-quote">"Implantamos em 15 dias e já vimos resultado no primeiro mês. O suporte é excepcional — sempre presentes quando precisamos."</p>
+                            <div class="testi-author">
+                                <div class="testi-avatar">LR</div>
+                                <div class="testi-info">
+                                    <div class="testi-name">Luciana Rocha</div>
+                                    <div class="testi-role">COO, Rede Sabor & Cia</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testi-card">
+                            <p class="testi-quote">"Antes eu gastava R$ 18 mil/mês com consultoria pontual. Agora pago uma fração e tenho um time de IA que nunca para."</p>
+                            <div class="testi-author">
+                                <div class="testi-avatar">RN</div>
+                                <div class="testi-info">
+                                    <div class="testi-name">Ricardo Nunes</div>
+                                    <div class="testi-role">Fundador, RN Distribuidora</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testi-card">
+                            <p class="testi-quote">"A gestão por competências transformou nosso RH. Identificamos gaps, criamos trilhas de desenvolvimento e a rotatividade caiu 35%."</p>
+                            <div class="testi-author">
+                                <div class="testi-avatar">JB</div>
+                                <div class="testi-info">
+                                    <div class="testi-name">Juliana Borges</div>
+                                    <div class="testi-role">Head de RH, Grupo Solar</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Duplicate for seamless loop -->
+                        <div class="testi-card">
+                            <p class="testi-quote">"Implantamos em 15 dias e já vimos resultado no primeiro mês. O suporte é excepcional — sempre presentes quando precisamos."</p>
+                            <div class="testi-author">
+                                <div class="testi-avatar">LR</div>
+                                <div class="testi-info">
+                                    <div class="testi-name">Luciana Rocha</div>
+                                    <div class="testi-role">COO, Rede Sabor & Cia</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testi-card">
+                            <p class="testi-quote">"Antes eu gastava R$ 18 mil/mês com consultoria pontual. Agora pago uma fração e tenho um time de IA que nunca para."</p>
+                            <div class="testi-author">
+                                <div class="testi-avatar">RN</div>
+                                <div class="testi-info">
+                                    <div class="testi-name">Ricardo Nunes</div>
+                                    <div class="testi-role">Fundador, RN Distribuidora</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testi-card">
+                            <p class="testi-quote">"A gestão por competências transformou nosso RH. Identificamos gaps, criamos trilhas de desenvolvimento e a rotatividade caiu 35%."</p>
+                            <div class="testi-author">
+                                <div class="testi-avatar">JB</div>
+                                <div class="testi-info">
+                                    <div class="testi-name">Juliana Borges</div>
+                                    <div class="testi-role">Head de RH, Grupo Solar</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
