@@ -14608,3 +14608,13 @@ hr.glow-divider { display: none !important; }
   color: #fff !important;
   font-weight: 600 !important;
 }
+
+/* Fix hero rotate gap on mobile */
+@media (max-width: 768px) {
+  .hero-rotate {
+    display: block !important;
+    min-width: auto !important;
+    width: 100% !important;
+    text-align: center !important;
+  }
+}

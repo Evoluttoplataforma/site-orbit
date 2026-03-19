@@ -10,7 +10,6 @@ export const headerHTML = `
             </div>
 
             <ul class="nav-menu">
-                <li><a href="/" data-i18n="nav.home">Início</a></li>
                 <li>
                     <a href="/agentes"><span data-i18n="nav.agents_menu">Agentes de IA</span> <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown dropdown--sm">
