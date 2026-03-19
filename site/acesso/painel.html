@@ -13,9 +13,9 @@
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --primary: #FDB73F;
+            --primary: #ffba1a;
             --primary-dark: #E5A235;
-            --primary-light: #FEC85F;
+            --primary-light: #ffca4a;
             --black: #000000;
             --black-soft: #111111;
             --white: #FFFFFF;
@@ -74,7 +74,7 @@
         .sidebar-logo span {
             font-size: 0.75rem;
             color: var(--primary);
-            background: rgba(253,183,63,0.12);
+            background: rgba(255,186,26,0.12);
             padding: 2px 10px;
             border-radius: 20px;
             font-weight: 500;
@@ -102,7 +102,7 @@
             color: #fff;
         }
         .sidebar-nav a.active {
-            background: rgba(253,183,63,0.12);
+            background: rgba(255,186,26,0.12);
             color: var(--primary);
             font-weight: 500;
         }
@@ -397,7 +397,7 @@
         }
         .badge-published { background: rgba(34,197,94,0.1); color: var(--success); }
         .badge-draft { background: rgba(107,114,128,0.1); color: var(--gray-500); }
-        .badge-admin { background: rgba(253,183,63,0.15); color: var(--primary-dark); }
+        .badge-admin { background: rgba(255,186,26,0.15); color: var(--primary-dark); }
         .badge-editor { background: rgba(59,130,246,0.1); color: var(--info); }
 
         .article-title-cell {
@@ -711,7 +711,7 @@
         .image-upload-area:hover,
         .image-upload-area.dragover {
             border-color: var(--primary);
-            background: rgba(253,183,63,0.05);
+            background: rgba(255,186,26,0.05);
         }
         .image-upload-area i {
             font-size: 1.5rem;
@@ -822,7 +822,7 @@
     <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-logo">
-            <img src="/images/logo-orbit.svg" alt="Orbit">
+            <img src="/images/logo-orbit-white.png" alt="Orbit">
             <span>CMS</span>
         </div>
         <nav class="sidebar-nav">
@@ -2287,7 +2287,7 @@
         }
         tbody.innerHTML = db.leadMagnets.map(lm => `
             <tr>
-                <td><span style="background:rgba(253,183,63,0.15);color:var(--primary);padding:4px 10px;border-radius:20px;font-size:0.78rem;font-weight:500;">${LEAD_TYPE_LABELS[lm.type] || lm.type}</span></td>
+                <td><span style="background:rgba(255,186,26,0.15);color:var(--primary);padding:4px 10px;border-radius:20px;font-size:0.78rem;font-weight:500;">${LEAD_TYPE_LABELS[lm.type] || lm.type}</span></td>
                 <td><strong>${escapeHtml(lm.title)}</strong></td>
                 <td style="color:var(--gray-500);font-size:0.85rem;">${escapeHtml(lm.desc || '—')}</td>
                 <td style="font-size:0.85rem;">${escapeHtml(lm.cta || 'Baixar agora')}</td>
@@ -2488,7 +2488,7 @@
         const categoryLabel = CATEGORIES[article.category] || article.category;
         const previewHTML = `
             <div style="background:#000;margin:-24px -32px 0;padding:40px 32px 32px;text-align:center;border-radius:16px 16px 0 0;">
-                <span style="background:#FDB73F;color:#000;padding:4px 14px;border-radius:20px;font-size:0.7rem;font-weight:600;text-transform:uppercase;">${escapeHtml(categoryLabel)}</span>
+                <span style="background:#ffba1a;color:#000;padding:4px 14px;border-radius:20px;font-size:0.7rem;font-weight:600;text-transform:uppercase;">${escapeHtml(categoryLabel)}</span>
                 <h1 style="font-size:1.5rem;font-weight:700;color:#fff;margin:16px 0 8px;line-height:1.3;">${escapeHtml(article.title)}</h1>
                 <p style="color:rgba(255,255,255,.5);font-size:0.82rem;">
                     <i class="fas fa-calendar-alt"></i> ${formatDate(article.updatedAt)}
@@ -2521,7 +2521,7 @@
 
         const previewHTML = `
             <div style="background:#000;margin:-24px -32px 0;padding:40px 32px 32px;text-align:center;border-radius:16px 16px 0 0;">
-                <span style="background:#FDB73F;color:#000;padding:4px 14px;border-radius:20px;font-size:0.7rem;font-weight:600;text-transform:uppercase;">${CATEGORIES[category] || 'Categoria'}</span>
+                <span style="background:#ffba1a;color:#000;padding:4px 14px;border-radius:20px;font-size:0.7rem;font-weight:600;text-transform:uppercase;">${CATEGORIES[category] || 'Categoria'}</span>
                 <h1 style="font-size:1.5rem;font-weight:700;color:#fff;margin:16px 0 8px;line-height:1.3;">${escapeHtml(title)}</h1>
                 <p style="color:rgba(255,255,255,.5);font-size:0.82rem;">Por ${escapeHtml(author)}</p>
             </div>
@@ -2578,7 +2578,7 @@
                 "name": "Orbit Gestao",
                 "logo": {
                     "@type": "ImageObject",
-                    "url": "https://orbitgestao.com.br/images/logo-orbit.svg"
+                    "url": "https://orbitgestao.com.br/images/logo-orbit-white.png"
                 }
             },
             "datePublished": isoDate,
@@ -2611,7 +2611,7 @@
             "@type": "Organization",
             "name": "Orbit Gestao",
             "url": "https://orbitgestao.com.br",
-            "logo": "https://orbitgestao.com.br/images/logo-orbit.svg",
+            "logo": "https://orbitgestao.com.br/images/logo-orbit-white.png",
             "sameAs": []
         };
 
@@ -2685,13 +2685,13 @@ ${JSON.stringify(schemaOrg, null, 2)}
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/styles-v2.css?v=7aefaed1">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=a4f33c4e">
     <style>
         .article-hero{background:#000;padding:140px 24px 80px;text-align:center;position:relative;overflow:hidden}
         .article-hero__bg{position:absolute;inset:0;pointer-events:none}
-        .article-hero__glow{position:absolute;width:400px;height:400px;border-radius:50%;background:#FDB73F;filter:blur(150px);opacity:.1;top:-100px;right:-100px}
+        .article-hero__glow{position:absolute;width:400px;height:400px;border-radius:50%;background:#ffba1a;filter:blur(150px);opacity:.1;top:-100px;right:-100px}
         .article-hero .container{position:relative;z-index:1;max-width:800px;margin:0 auto}
-        .article-hero__tag{display:inline-block;background:#FDB73F;color:#000;padding:6px 18px;border-radius:50px;font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:24px}
+        .article-hero__tag{display:inline-block;background:#ffba1a;color:#000;padding:6px 18px;border-radius:50px;font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:24px}
         .article-hero h1{font-size:clamp(1.75rem,4vw,2.75rem);font-weight:700;color:#fff;line-height:1.25;margin-bottom:20px}
         .article-hero__meta{display:flex;align-items:center;justify-content:center;gap:24px;color:rgba(255,255,255,.5);font-size:.9rem}
         .article-hero__meta i{margin-right:6px}
@@ -2704,7 +2704,7 @@ ${JSON.stringify(schemaOrg, null, 2)}
         .article-body ul,.article-body ol{margin:16px 0 24px 24px;color:#444;line-height:1.8;font-size:1.05rem}
         .article-body li{margin-bottom:8px;list-style:disc}
         .article-body ol li{list-style:decimal}
-        .article-body blockquote{border-left:4px solid #FDB73F;margin:32px 0;padding:16px 24px;background:#fdf8ee;border-radius:0 12px 12px 0;font-style:italic;color:#333}
+        .article-body blockquote{border-left:4px solid #ffba1a;margin:32px 0;padding:16px 24px;background:#fdf8ee;border-radius:0 12px 12px 0;font-style:italic;color:#333}
         .article-body img{max-width:100%;border-radius:12px;margin:32px 0}
         .article-body a{color:#E5A235;font-weight:500;text-decoration:underline}
         .article-cta{background:#000;padding:60px 24px;text-align:center;margin-top:40px}
@@ -2721,7 +2721,7 @@ ${JSON.stringify(schemaOrg, null, 2)}
 <body>
     <header class="header">
         <div class="container">
-            <div class="logo"><a href="/"><img src="/images/logo-orbit.svg" alt="Orbit Gestao" height="40"></a></div>
+            <div class="logo"><a href="/"><img src="/images/logo-orbit-white.png" alt="Orbit Gestao" height="40"></a></div>
             <ul class="nav-menu">
                 <li><a href="/">Inicio</a></li>
                 <li><a href="/#plataforma">Solucoes <i class="fas fa-chevron-down dropdown-arrow"></i></a>
@@ -2805,7 +2805,7 @@ ${JSON.stringify(schemaOrg, null, 2)}
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <div class="footer-logo"><img src="/images/logo-orbit.svg" alt="Orbit Gestao" height="36"></div>
+                    <div class="footer-logo"><img src="/images/logo-orbit-white.png" alt="Orbit Gestao" height="36"></div>
                     <p>Transformando estrategia em execucao para empresas de medio porte.</p>
                     <div class="social-links">
                         <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
@@ -3045,7 +3045,7 @@ ${JSON.stringify(schemaOrg, null, 2)}
                 <td><div style="display:flex;align-items:center;">${logo}<strong>${escapeHtml(s.empresa)}</strong></div></td>
                 <td><span style="font-size:0.85rem;">${escapeHtml(s.nome)}</span><br><span style="font-size:0.75rem;color:var(--gray-400);">${escapeHtml(s.email)}</span></td>
                 <td style="max-width:200px;"><span style="font-size:0.85rem;">${escapeHtml(s.titulo || '—')}</span></td>
-                <td><span style="background:rgba(253,183,63,0.15);color:var(--primary);padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:500;">${escapeHtml(SEGMENT_LABELS[s.segmento] || s.segmento || '—')}</span></td>
+                <td><span style="background:rgba(255,186,26,0.15);color:var(--primary);padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:500;">${escapeHtml(SEGMENT_LABELS[s.segmento] || s.segmento || '—')}</span></td>
                 <td><span class="badge badge-${statusClass}">${statusLabel}</span></td>
                 <td style="font-size:0.82rem;">${formatDate(s.createdAt)}</td>
                 <td>
@@ -3097,7 +3097,7 @@ ${JSON.stringify(schemaOrg, null, 2)}
 
         const logo = s.companyLogo ? `<img src="${s.companyLogo}" style="width:64px;height:64px;border-radius:12px;object-fit:cover;">` : `<div style="width:64px;height:64px;border-radius:12px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--gray-400);"><i class="fas fa-building"></i></div>`;
 
-        const modules = (s.modulos || []).map(m => `<span style="background:rgba(253,183,63,0.15);color:var(--primary-dark);padding:3px 12px;border-radius:20px;font-size:0.75rem;font-weight:500;">${escapeHtml(m)}</span>`).join(' ');
+        const modules = (s.modulos || []).map(m => `<span style="background:rgba(255,186,26,0.15);color:var(--primary-dark);padding:3px 12px;border-radius:20px;font-size:0.75rem;font-weight:500;">${escapeHtml(m)}</span>`).join(' ');
 
         const photos = (s.photos || []).map(p => `<img src="${p}" style="width:120px;height:90px;object-fit:cover;border-radius:8px;cursor:pointer;" onclick="window.open(this.src)">`).join('');
 
@@ -3137,7 +3137,7 @@ ${JSON.stringify(schemaOrg, null, 2)}
             </div>
 
             ${s.depoimento ? `
-            <div style="border-left:4px solid var(--primary);padding:16px 20px;background:rgba(253,183,63,0.05);border-radius:0 12px 12px 0;margin-bottom:20px;">
+            <div style="border-left:4px solid var(--primary);padding:16px 20px;background:rgba(255,186,26,0.05);border-radius:0 12px 12px 0;margin-bottom:20px;">
                 <p style="font-style:italic;font-size:0.9rem;line-height:1.7;color:var(--gray-700);">"${escapeHtml(s.depoimento)}"</p>
                 <span style="font-size:0.78rem;color:var(--gray-500);margin-top:8px;display:block;">— ${escapeHtml(s.nome)}, ${escapeHtml(s.cargo || '')} na ${escapeHtml(s.empresa)}</span>
             </div>` : ''}

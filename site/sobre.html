@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/styles-v2.css?v=12d06f57">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=a4f33c4e">
 
     <style>
         /* ═══ SOBRE PAGE STYLES — CINEMA v2 ═══ */
@@ -54,19 +54,19 @@
             transform: translate(-50%, -50%);
             width: 800px;
             height: 800px;
-            background: radial-gradient(circle, rgba(212,160,23,0.08) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255,186,26,0.08) 0%, transparent 70%);
             pointer-events: none;
         }
         .sobre-hero .section-badge {
             display: inline-block;
-            background: rgba(212,160,23,0.1);
-            color: #D4A017;
+            background: rgba(255,186,26,0.1);
+            color: #ffba1a;
             padding: 8px 20px;
             border-radius: 50px;
             font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 24px;
-            border: 1px solid rgba(212,160,23,0.2);
+            border: 1px solid rgba(255,186,26,0.2);
         }
         .sobre-hero h1 {
             font-size: clamp(2.2rem, 5vw, 3.5rem);
@@ -80,7 +80,7 @@
         }
         .sobre-hero h1 em {
             font-style: normal;
-            background: linear-gradient(135deg, #D4A017, #F5C518);
+            background: linear-gradient(135deg, #ffba1a, #ffca4a);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -99,8 +99,8 @@
             pointer-events: none;
             filter: blur(80px);
         }
-        .sobre-hero__orb--1 { width: 300px; height: 300px; background: rgba(212,160,23,0.12); top: 10%; left: -5%; animation: sobreOrbFloat 8s ease-in-out infinite; }
-        .sobre-hero__orb--2 { width: 200px; height: 200px; background: rgba(212,160,23,0.08); bottom: 10%; right: -3%; animation: sobreOrbFloat 10s ease-in-out infinite reverse; }
+        .sobre-hero__orb--1 { width: 300px; height: 300px; background: rgba(255,186,26,0.12); top: 10%; left: -5%; animation: sobreOrbFloat 8s ease-in-out infinite; }
+        .sobre-hero__orb--2 { width: 200px; height: 200px; background: rgba(255,186,26,0.08); bottom: 10%; right: -3%; animation: sobreOrbFloat 10s ease-in-out infinite reverse; }
         @keyframes sobreOrbFloat {
             0%, 100% { transform: translateY(0) scale(1); }
             50% { transform: translateY(-30px) scale(1.1); }
@@ -120,7 +120,7 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(212,160,23,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,186,26,0.3), transparent);
         }
         .numeros-grid {
             display: grid;
@@ -150,27 +150,27 @@
             left: 20%;
             right: 20%;
             height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(212,160,23,0.4), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,186,26,0.4), transparent);
             opacity: 0;
             transition: opacity 0.3s;
         }
         .numero-card:hover {
             transform: translateY(-6px);
-            border-color: rgba(212,160,23,0.2);
-            box-shadow: 0 20px 60px rgba(212,160,23,0.08);
+            border-color: rgba(255,186,26,0.2);
+            box-shadow: 0 20px 60px rgba(255,186,26,0.08);
         }
         .numero-card:hover::before { opacity: 1; }
         .numero-card .numero-icon {
             width: 48px;
             height: 48px;
             border-radius: 12px;
-            background: rgba(212,160,23,0.1);
+            background: rgba(255,186,26,0.1);
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 16px;
             font-size: 1.2rem;
-            color: #D4A017;
+            color: #ffba1a;
         }
         .numero-card .numero {
             font-size: 2.8rem;
@@ -201,7 +201,7 @@
             transform: translateX(-50%);
             width: 800px;
             height: 800px;
-            background: radial-gradient(circle, rgba(212,160,23,0.03) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255,186,26,0.03) 0%, transparent 70%);
             pointer-events: none;
         }
         .historia-section .section-header {
@@ -232,10 +232,10 @@
         #historiaCinema .hiw-cinema__rail-fill {
             width: 100%;
             height: 0%;
-            background: linear-gradient(180deg, #D4A017, #F5C518);
+            background: linear-gradient(180deg, #ffba1a, #ffca4a);
             border-radius: 3px;
             transition: height 1.2s cubic-bezier(0.4,0,0.2,1);
-            box-shadow: 0 0 12px rgba(212,160,23,0.4);
+            box-shadow: 0 0 12px rgba(255,186,26,0.4);
         }
         #historiaCinema .hiw-cinema__steps {
             position: relative;
@@ -274,9 +274,9 @@
             position: relative;
         }
         #historiaCinema .hiw-cinema__step.active .hiw-cinema__dot {
-            border-color: #D4A017;
-            color: #D4A017;
-            box-shadow: 0 0 20px rgba(212,160,23,0.3);
+            border-color: #ffba1a;
+            color: #ffba1a;
+            box-shadow: 0 0 20px rgba(255,186,26,0.3);
         }
         #historiaCinema .hiw-cinema__card {
             background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
@@ -289,12 +289,12 @@
             align-items: center;
         }
         #historiaCinema .hiw-cinema__step.active .hiw-cinema__card {
-            border-color: rgba(212,160,23,0.15);
+            border-color: rgba(255,186,26,0.15);
         }
         #historiaCinema .hiw-cinema__info .hiw-cinema__label {
             display: inline-block;
-            background: rgba(212,160,23,0.1);
-            color: #D4A017;
+            background: rgba(255,186,26,0.1);
+            color: #ffba1a;
             padding: 4px 14px;
             border-radius: 50px;
             font-size: 0.75rem;
@@ -336,11 +336,11 @@
             opacity: 0;
             transform: scale(0.5);
         }
-        .hist-scene--build .hist-block:nth-child(1) { background: rgba(212,160,23,0.3); border: 1px solid rgba(212,160,23,0.4); left: 20%; top: 60%; }
-        .hist-scene--build .hist-block:nth-child(2) { background: rgba(212,160,23,0.2); border: 1px solid rgba(212,160,23,0.3); left: 35%; top: 40%; }
-        .hist-scene--build .hist-block:nth-child(3) { background: rgba(212,160,23,0.4); border: 1px solid rgba(212,160,23,0.5); left: 50%; top: 20%; }
-        .hist-scene--build .hist-block:nth-child(4) { background: rgba(212,160,23,0.15); border: 1px solid rgba(212,160,23,0.25); right: 20%; top: 50%; }
-        .hist-scene--build .hist-icon { font-size: 2rem; color: rgba(212,160,23,0.2); }
+        .hist-scene--build .hist-block:nth-child(1) { background: rgba(255,186,26,0.3); border: 1px solid rgba(255,186,26,0.4); left: 20%; top: 60%; }
+        .hist-scene--build .hist-block:nth-child(2) { background: rgba(255,186,26,0.2); border: 1px solid rgba(255,186,26,0.3); left: 35%; top: 40%; }
+        .hist-scene--build .hist-block:nth-child(3) { background: rgba(255,186,26,0.4); border: 1px solid rgba(255,186,26,0.5); left: 50%; top: 20%; }
+        .hist-scene--build .hist-block:nth-child(4) { background: rgba(255,186,26,0.15); border: 1px solid rgba(255,186,26,0.25); right: 20%; top: 50%; }
+        .hist-scene--build .hist-icon { font-size: 2rem; color: rgba(255,186,26,0.2); }
         .hiw-cinema__step.active .hist-scene--build .hist-block {
             animation: histBlockPop 0.6s cubic-bezier(0.34,1.56,0.64,1) forwards;
         }
@@ -367,7 +367,7 @@
             font-size: 0.7rem;
             color: #22C55E;
         }
-        .hist-scene--network .hist-node--center { width: 44px; height: 44px; background: rgba(212,160,23,0.2); border-color: rgba(212,160,23,0.5); color: #D4A017; font-size: 0.9rem; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+        .hist-scene--network .hist-node--center { width: 44px; height: 44px; background: rgba(255,186,26,0.2); border-color: rgba(255,186,26,0.5); color: #ffba1a; font-size: 0.9rem; left: 50%; top: 50%; transform: translate(-50%, -50%); }
         .hist-scene--network .hist-node:nth-child(2) { left: 20%; top: 30%; }
         .hist-scene--network .hist-node:nth-child(3) { right: 20%; top: 25%; }
         .hist-scene--network .hist-node:nth-child(4) { left: 15%; bottom: 25%; }
@@ -391,7 +391,7 @@
             width: 120px;
             height: 80px;
             background: #161B22;
-            border: 2px solid rgba(212,160,23,0.3);
+            border: 2px solid rgba(255,186,26,0.3);
             border-radius: 8px;
             position: relative;
             overflow: hidden;
@@ -401,7 +401,7 @@
             left: 8px;
             height: 4px;
             border-radius: 2px;
-            background: rgba(212,160,23,0.3);
+            background: rgba(255,186,26,0.3);
             opacity: 0;
         }
         .hist-scene--digital .hist-screen-bar:nth-child(1) { top: 12px; width: 60%; }
@@ -428,7 +428,7 @@
         .hist-scene--ai .hist-orbit-ring {
             width: 120px;
             height: 120px;
-            border: 2px dashed rgba(212,160,23,0.2);
+            border: 2px dashed rgba(255,186,26,0.2);
             border-radius: 50%;
             position: relative;
         }
@@ -440,26 +440,26 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: linear-gradient(135deg, rgba(212,160,23,0.2), rgba(212,160,23,0.05));
-            border: 2px solid rgba(212,160,23,0.4);
+            background: linear-gradient(135deg, rgba(255,186,26,0.2), rgba(255,186,26,0.05));
+            border: 2px solid rgba(255,186,26,0.4);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1rem;
-            color: #D4A017;
+            color: #ffba1a;
         }
         .hist-scene--ai .hist-agent {
             width: 24px;
             height: 24px;
             border-radius: 50%;
-            background: rgba(212,160,23,0.15);
-            border: 1px solid rgba(212,160,23,0.3);
+            background: rgba(255,186,26,0.15);
+            border: 1px solid rgba(255,186,26,0.3);
             position: absolute;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 0.55rem;
-            color: #D4A017;
+            color: #ffba1a;
             opacity: 0;
         }
         .hist-scene--ai .hist-agent:nth-child(2) { top: -12px; left: 50%; transform: translateX(-50%); }
@@ -491,8 +491,8 @@
             text-align: center;
             padding: 40px;
             border-radius: 20px;
-            background: linear-gradient(135deg, rgba(212,160,23,0.06), rgba(212,160,23,0.02));
-            border: 1px solid rgba(212,160,23,0.15);
+            background: linear-gradient(135deg, rgba(255,186,26,0.06), rgba(255,186,26,0.02));
+            border: 1px solid rgba(255,186,26,0.15);
             position: relative;
         }
         .historia-quote::before {
@@ -501,7 +501,7 @@
             top: -10px;
             left: 30px;
             font-size: 4rem;
-            color: rgba(212,160,23,0.2);
+            color: rgba(255,186,26,0.2);
             font-family: Georgia, serif;
             line-height: 1;
         }
@@ -526,7 +526,7 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(212,160,23,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,186,26,0.3), transparent);
         }
         .ecossistema-section .section-header {
             text-align: center;
@@ -564,7 +564,7 @@
             left: 20%;
             right: 20%;
             height: 2px;
-            background: linear-gradient(90deg, transparent, var(--eco-accent, rgba(212,160,23,0.4)), transparent);
+            background: linear-gradient(90deg, transparent, var(--eco-accent, rgba(255,186,26,0.4)), transparent);
             opacity: 0;
             transition: opacity 0.3s;
         }
@@ -586,11 +586,11 @@
             transition: all 0.3s;
         }
         .eco-card:hover .eco-icon { transform: scale(1.1); }
-        .eco-card .eco-icon--orbit { background: rgba(212,160,23,0.12); color: #D4A017; }
+        .eco-card .eco-icon--orbit { background: rgba(255,186,26,0.12); color: #ffba1a; }
         .eco-card .eco-icon--templum { background: rgba(34,197,94,0.12); color: #22C55E; }
         .eco-card .eco-icon--alpha { background: rgba(99,102,241,0.12); color: #6366F1; }
         .eco-card .eco-icon--sce { background: rgba(239,68,68,0.12); color: #EF4444; }
-        .eco-card:nth-child(1) { --eco-accent: rgba(212,160,23,0.4); }
+        .eco-card:nth-child(1) { --eco-accent: rgba(255,186,26,0.4); }
         .eco-card:nth-child(2) { --eco-accent: rgba(34,197,94,0.4); }
         .eco-card:nth-child(3) { --eco-accent: rgba(99,102,241,0.4); }
         .eco-card:nth-child(4) { --eco-accent: rgba(239,68,68,0.4); }
@@ -614,7 +614,7 @@
             font-weight: 700;
             letter-spacing: 0.5px;
         }
-        .eco-card:nth-child(1) .eco-tag { background: rgba(212,160,23,0.1); color: #D4A017; }
+        .eco-card:nth-child(1) .eco-tag { background: rgba(255,186,26,0.1); color: #ffba1a; }
         .eco-card:nth-child(2) .eco-tag { background: rgba(34,197,94,0.1); color: #22C55E; }
         .eco-card:nth-child(3) .eco-tag { background: rgba(99,102,241,0.1); color: #6366F1; }
         .eco-card:nth-child(4) .eco-tag { background: rgba(239,68,68,0.1); color: #EF4444; }
@@ -632,7 +632,7 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(212,160,23,0.3), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,186,26,0.3), transparent);
         }
         .diretoria-section .section-header {
             text-align: center;
@@ -664,7 +664,7 @@
             width: 88px;
             height: 88px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #D4A017, #F5C518);
+            background: linear-gradient(135deg, #ffba1a, #ffca4a);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -674,10 +674,10 @@
             color: #000;
             position: relative;
             transition: all 0.3s;
-            box-shadow: 0 8px 32px rgba(212,160,23,0.2);
+            box-shadow: 0 8px 32px rgba(255,186,26,0.2);
         }
         .founder-card:hover .founder-avatar {
-            box-shadow: 0 12px 40px rgba(212,160,23,0.35);
+            box-shadow: 0 12px 40px rgba(255,186,26,0.35);
             transform: scale(1.05);
         }
         .founder-card h4 {
@@ -704,7 +704,7 @@
             font-size: 0.9rem;
         }
         .diretoria-sede i {
-            color: #D4A017;
+            color: #ffba1a;
         }
         .diretoria-sede-wrap {
             text-align: center;
@@ -747,7 +747,7 @@
         <div class="container">
             <div class="logo">
                 <a href="/">
-                    <img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="40">
+                    <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" height="40">
                 </a>
             </div>
 
@@ -913,8 +913,8 @@
     <section class="historia-section" id="historiaCinema">
         <div class="container">
             <div class="section-header" data-reveal>
-                <span class="section-badge" style="background:rgba(212,160,23,0.1);color:#D4A017;border:1px solid rgba(212,160,23,0.2);display:inline-block;padding:8px 20px;border-radius:50px;font-size:0.85rem;font-weight:600;margin-bottom:16px;">Nossa Trajetória</span>
-                <h2>Uma história de <em style="color:#D4A017;font-style:normal;">transformação</em></h2>
+                <span class="section-badge" style="background:rgba(255,186,26,0.1);color:#ffba1a;border:1px solid rgba(255,186,26,0.2);display:inline-block;padding:8px 20px;border-radius:50px;font-size:0.85rem;font-weight:600;margin-bottom:16px;">Nossa Trajetória</span>
+                <h2>Uma história de <em style="color:#ffba1a;font-style:normal;">transformação</em></h2>
                 <p>De consultoria presencial a plataforma com IA — cada passo construiu o que somos hoje.</p>
             </div>
 
@@ -1017,7 +1017,7 @@
     <section class="ecossistema-section">
         <div class="container">
             <div class="section-header" data-reveal>
-                <span class="section-badge" style="background:rgba(212,160,23,0.1);color:#D4A017;border:1px solid rgba(212,160,23,0.2);display:inline-block;padding:8px 20px;border-radius:50px;font-size:0.85rem;font-weight:600;margin-bottom:16px;">Grupo GSN</span>
+                <span class="section-badge" style="background:rgba(255,186,26,0.1);color:#ffba1a;border:1px solid rgba(255,186,26,0.2);display:inline-block;padding:8px 20px;border-radius:50px;font-size:0.85rem;font-weight:600;margin-bottom:16px;">Grupo GSN</span>
                 <h2>Como tudo se conecta</h2>
                 <p>O ecossistema completo do Grupo GSN</p>
             </div>
@@ -1055,7 +1055,7 @@
     <section class="diretoria-section">
         <div class="container">
             <div class="section-header" data-reveal>
-                <span class="section-badge" style="background:rgba(212,160,23,0.1);color:#D4A017;border:1px solid rgba(212,160,23,0.2);display:inline-block;padding:8px 20px;border-radius:50px;font-size:0.85rem;font-weight:600;margin-bottom:16px;">Liderança</span>
+                <span class="section-badge" style="background:rgba(255,186,26,0.1);color:#ffba1a;border:1px solid rgba(255,186,26,0.2);display:inline-block;padding:8px 20px;border-radius:50px;font-size:0.85rem;font-weight:600;margin-bottom:16px;">Liderança</span>
                 <h2>Quem está por trás</h2>
                 <p>A equipe que construiu 30 anos de história em gestão</p>
             </div>
@@ -1118,7 +1118,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="footer-logo">
-                        <img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="36">
+                        <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" height="36">
                     </div>
                     <p>Plataforma de gestão com IA. Contrate um time que executa.</p>
                     <div class="social-links">

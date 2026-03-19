@@ -7,7 +7,7 @@
         "name": "Orbit",
         "alternateName": "Orbit Gestão",
         "url": "https://orbitgestao.com.br",
-        "logo": "https://orbitgestao.com.br/images/logo-orbit.svg",
+        "logo": "https://orbitgestao.com.br/images/logo-orbit-white.png",
         "description": "Plataforma de gestão empresarial com agentes de IA integrados. Grupo GSN - 30 anos, 8.000+ empresas.",
         "foundingDate": "1996",
         "numberOfEmployees": { "@type": "QuantitativeValue", "value": "50+" },

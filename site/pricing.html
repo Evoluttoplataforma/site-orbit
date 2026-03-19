@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/styles-v2.css?v=12d06f57">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=a4f33c4e">
 
     <style>
         /* ═══ PRICING PAGE STYLES ═══ */
@@ -51,19 +51,19 @@
             transform: translateX(-50%);
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(212,160,23,0.12) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255,186,26,0.12) 0%, transparent 70%);
             pointer-events: none;
         }
         .pricing-hero .section-badge {
             display: inline-block;
-            background: rgba(212,160,23,0.12);
-            color: #D4A017;
+            background: rgba(255,186,26,0.12);
+            color: #ffba1a;
             padding: 8px 20px;
             border-radius: 50px;
             font-size: 0.85rem;
             font-weight: 600;
             margin-bottom: 24px;
-            border: 1px solid rgba(212,160,23,0.2);
+            border: 1px solid rgba(255,186,26,0.2);
         }
         .pricing-hero h1 {
             color: #fff;
@@ -83,7 +83,7 @@
 
         /* ═══ COST COMPARISON ═══ */
         .cost-section { background: #0D1117; padding: 140px 0; position: relative; overflow: hidden; }
-        .cost-section::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(212,160,23,0.04) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
+        .cost-section::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(255,186,26,0.04) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
         .cost-header { text-align: center; margin-bottom: 60px; }
         .cost-header h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: #fff; margin-bottom: 16px; }
         .cost-header h2 em { color: #EF4444; font-style: italic; }
@@ -91,11 +91,11 @@
         .cost-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0; max-width: 960px; margin: 0 auto; align-items: stretch; }
         .cost-card { border-radius: 16px; padding: 40px 32px; position: relative; }
         .cost-card--manual { background: linear-gradient(135deg, #1C2333 0%, #13161D 100%); border: 1px solid rgba(239,68,68,0.2); }
-        .cost-card--orbit { background: linear-gradient(135deg, rgba(212,160,23,0.08), rgba(212,160,23,0.02)); border: 2px solid rgba(212,160,23,0.4); box-shadow: 0 0 60px rgba(212,160,23,0.08); }
-        .cost-card--orbit::before { content: 'RECOMENDADO'; position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #D4A017, #F5C518); color: #000; font-size: 0.7rem; font-weight: 800; padding: 5px 20px; border-radius: 0 0 10px 10px; letter-spacing: 1.5px; }
+        .cost-card--orbit { background: linear-gradient(135deg, rgba(255,186,26,0.08), rgba(255,186,26,0.02)); border: 2px solid rgba(255,186,26,0.4); box-shadow: 0 0 60px rgba(255,186,26,0.08); }
+        .cost-card--orbit::before { content: 'RECOMENDADO'; position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #ffba1a, #ffca4a); color: #000; font-size: 0.7rem; font-weight: 800; padding: 5px 20px; border-radius: 0 0 10px 10px; letter-spacing: 1.5px; }
         .cost-card__title { font-size: 1.15rem; font-weight: 700; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
         .cost-card--manual .cost-card__title { color: #EF4444; }
-        .cost-card--orbit .cost-card__title { color: #D4A017; }
+        .cost-card--orbit .cost-card__title { color: #ffba1a; }
         .cost-card__title i { font-size: 1.1rem; }
         .cost-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .cost-item__label { color: #C9D1D9; font-size: 0.9rem; }
@@ -117,9 +117,9 @@
         .cost-savings__text { text-align: left; }
         .cost-savings__text strong { display: block; color: #22C55E; font-size: 1.25rem; font-weight: 800; }
         .cost-savings__text span { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
-        .cost-orbit-benefits { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(212,160,23,0.1); }
+        .cost-orbit-benefits { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,186,26,0.1); }
         .cost-orbit-benefit { display: flex; align-items: center; gap: 10px; padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 0.85rem; }
-        .cost-orbit-benefit i { color: #D4A017; font-size: 0.75rem; width: 16px; text-align: center; }
+        .cost-orbit-benefit i { color: #ffba1a; font-size: 0.75rem; width: 16px; text-align: center; }
         @media (max-width: 768px) {
             .cost-grid { grid-template-columns: 1fr; gap: 16px; }
             .cost-vs { padding: 8px 0; }
@@ -163,8 +163,8 @@
         }
         .pricing-card--featured {
             background: linear-gradient(135deg, #1C2333 0%, #161B22 100%);
-            border: 2px solid rgba(212,160,23,0.4);
-            box-shadow: 0 0 40px rgba(212,160,23,0.1);
+            border: 2px solid rgba(255,186,26,0.4);
+            box-shadow: 0 0 40px rgba(255,186,26,0.1);
             transform: scale(1.04);
         }
         .pricing-card--featured:hover {
@@ -175,7 +175,7 @@
             top: -14px;
             left: 50%;
             transform: translateX(-50%);
-            background: #D4A017;
+            background: #ffba1a;
             color: #0D1117;
             padding: 6px 20px;
             border-radius: 50px;
@@ -191,7 +191,7 @@
             margin-bottom: 8px;
         }
         .pricing-card__price {
-            color: #D4A017;
+            color: #ffba1a;
             font-size: 2.4rem;
             font-weight: 800;
             margin-bottom: 4px;
@@ -222,7 +222,7 @@
             border-bottom: 1px solid rgba(255,255,255,0.04);
         }
         .pricing-card__features li i {
-            color: #D4A017;
+            color: #ffba1a;
             font-size: 0.8rem;
             width: 16px;
             text-align: center;
@@ -237,12 +237,12 @@
             transition: all 0.3s ease;
         }
         .pricing-card .btn-primary {
-            background: #D4A017;
+            background: #ffba1a;
             color: #0D1117;
         }
         .pricing-card .btn-primary:hover {
-            background: #F5C518;
-            box-shadow: 0 8px 24px rgba(212,160,23,0.3);
+            background: #ffca4a;
+            box-shadow: 0 8px 24px rgba(255,186,26,0.3);
         }
         .pricing-card .btn-outline {
             border: 2px solid rgba(255,255,255,0.15);
@@ -250,8 +250,8 @@
             background: transparent;
         }
         .pricing-card .btn-outline:hover {
-            border-color: #D4A017;
-            color: #D4A017;
+            border-color: #ffba1a;
+            color: #ffba1a;
         }
 
         /* Channels */
@@ -294,7 +294,7 @@
             gap: 16px;
         }
         .channels-stat i {
-            color: #D4A017;
+            color: #ffba1a;
             font-size: 1.4rem;
             width: 40px;
             text-align: center;
@@ -372,7 +372,7 @@
             transform: translate(-50%, -50%);
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(212,160,23,0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255,186,26,0.1) 0%, transparent 70%);
             pointer-events: none;
         }
         .cta-final h2 {
@@ -382,7 +382,7 @@
             margin-bottom: 32px;
         }
         .cta-final .btn-primary {
-            background: #D4A017;
+            background: #ffba1a;
             color: #0D1117;
             padding: 18px 48px;
             border-radius: 14px;
@@ -393,8 +393,8 @@
             text-decoration: none;
         }
         .cta-final .btn-primary:hover {
-            background: #F5C518;
-            box-shadow: 0 12px 40px rgba(212,160,23,0.3);
+            background: #ffca4a;
+            box-shadow: 0 12px 40px rgba(255,186,26,0.3);
             transform: translateY(-2px);
         }
         .cta-final .cta-note {
@@ -448,7 +448,7 @@
         <div class="container">
             <div class="logo">
                 <a href="/">
-                    <img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="40">
+                    <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" height="40">
                 </a>
             </div>
 
@@ -873,7 +873,7 @@
                 top: -100px;
                 left: 50%;
                 transform: translateX(-50%);
-                background: radial-gradient(circle, rgba(212,160,23,0.05) 0%, transparent 70%);
+                background: radial-gradient(circle, rgba(255,186,26,0.05) 0%, transparent 70%);
                 border-radius: 50%;
             }
 
@@ -922,7 +922,7 @@
                 transform: translateX(22px);
             }
             .price-v2__switch.active {
-                background: #D4A017;
+                background: #ffba1a;
                 border-color: #B8860B;
             }
             .price-v2__save-badge {
@@ -974,11 +974,11 @@
 
             /* Featured card */
             .price-v2__card--featured {
-                border: 2px solid #D4A017;
+                border: 2px solid #ffba1a;
                 background: #fff;
                 padding: 44px 28px 36px;
                 transform: scale(1.04);
-                box-shadow: 0 0 60px rgba(212,160,23,0.1), 0 16px 48px rgba(0,0,0,0.08);
+                box-shadow: 0 0 60px rgba(255,186,26,0.1), 0 16px 48px rgba(0,0,0,0.08);
                 z-index: 2;
             }
             .price-v2__card--featured::before {
@@ -988,13 +988,13 @@
                 left: 15%;
                 right: 15%;
                 height: 3px;
-                background: linear-gradient(90deg, transparent, #D4A017, transparent);
+                background: linear-gradient(90deg, transparent, #ffba1a, transparent);
                 border-radius: 3px;
             }
             .price-v2__card--featured:hover {
                 transform: scale(1.04) translateY(-6px);
                 border-color: #B8860B;
-                box-shadow: 0 0 80px rgba(212,160,23,0.15), 0 20px 60px rgba(0,0,0,0.1);
+                box-shadow: 0 0 80px rgba(255,186,26,0.15), 0 20px 60px rgba(0,0,0,0.1);
             }
 
             /* Badge */
@@ -1003,7 +1003,7 @@
                 top: -14px;
                 left: 50%;
                 transform: translateX(-50%);
-                background: linear-gradient(135deg, #D4A017, #E8B824);
+                background: linear-gradient(135deg, #ffba1a, #ffca4a);
                 color: #000;
                 font-size: 12px;
                 font-weight: 700;
@@ -1013,7 +1013,7 @@
                 display: flex;
                 align-items: center;
                 gap: 6px;
-                box-shadow: 0 4px 16px rgba(212,160,23,0.3);
+                box-shadow: 0 4px 16px rgba(255,186,26,0.3);
             }
 
             /* Card header */
@@ -1033,8 +1033,8 @@
             }
             .price-v2__icon--gold {
                 background: #FFFBEB;
-                border-color: rgba(212,160,23,0.25);
-                color: #D4A017;
+                border-color: rgba(255,186,26,0.25);
+                color: #ffba1a;
             }
             .price-v2__name {
                 font-size: 20px;
@@ -1068,7 +1068,7 @@
                 line-height: 1;
             }
             .price-v2__card--featured .price-v2__amount {
-                color: #D4A017;
+                color: #ffba1a;
             }
             .price-v2__period {
                 font-size: 14px;
@@ -1116,7 +1116,7 @@
             }
             .price-v2__features li strong { color: #1A1D23; }
             .price-v2__card--featured .price-v2__features li i {
-                color: #D4A017;
+                color: #ffba1a;
             }
 
             /* CTA */
@@ -1142,13 +1142,13 @@
                 box-shadow: 0 8px 24px rgba(0,0,0,0.15);
             }
             .price-v2__cta--gold {
-                background: linear-gradient(135deg, #D4A017, #E8B824);
+                background: linear-gradient(135deg, #ffba1a, #ffca4a);
                 color: #000;
-                box-shadow: 0 4px 20px rgba(212,160,23,0.3);
+                box-shadow: 0 4px 20px rgba(255,186,26,0.3);
             }
             .price-v2__cta--gold:hover {
-                background: linear-gradient(135deg, #E8B824, #F5C518);
-                box-shadow: 0 8px 32px rgba(212,160,23,0.4);
+                background: linear-gradient(135deg, #ffca4a, #ffca4a);
+                box-shadow: 0 8px 32px rgba(255,186,26,0.4);
                 transform: translateY(-2px);
             }
 
@@ -1191,7 +1191,7 @@
             .price-v2__compare-item--bad i { color: #EF4444; }
             .price-v2__compare-item--bad strong { color: #5A6069; font-size: 14px; display: block; }
             .price-v2__compare-item--bad span { color: #9CA3AF; font-size: 13px; text-decoration: line-through; }
-            .price-v2__compare-item--good i { color: #D4A017; }
+            .price-v2__compare-item--good i { color: #ffba1a; }
             .price-v2__compare-item--good strong { color: #1A1D23; font-size: 14px; display: block; }
             .price-v2__compare-item--good span { color: #B8860B; font-size: 13px; font-weight: 600; }
             .price-v2__compare-vs {
@@ -1292,9 +1292,9 @@
                                 <div class="gtd-signature__label">Assinatura</div>
                                 <div class="gtd-signature__line">
                                     <svg class="gtd-signature__svg" viewBox="0 0 200 50" fill="none">
-                                        <path class="gtd-sig-path" d="M12,38 C16,38 18,18 24,22 C30,26 28,36 36,30 C44,24 40,14 50,18 C56,20 54,32 62,26 C68,22 72,16 78,20 C84,24 80,34 88,28 L92,26" stroke="#D4A017" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path class="gtd-sig-path gtd-sig-path--2" d="M88,28 C94,22 100,34 108,24 C114,16 118,30 126,22 C132,16 128,10 138,16 C144,20 148,28 156,18 C162,10 158,22 168,16 C174,12 178,20 184,14 L188,12" stroke="#D4A017" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path class="gtd-sig-underline" d="M20,44 C60,42 120,40 180,43" stroke="#D4A017" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.4"/>
+                                        <path class="gtd-sig-path" d="M12,38 C16,38 18,18 24,22 C30,26 28,36 36,30 C44,24 40,14 50,18 C56,20 54,32 62,26 C68,22 72,16 78,20 C84,24 80,34 88,28 L92,26" stroke="#ffba1a" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path class="gtd-sig-path gtd-sig-path--2" d="M88,28 C94,22 100,34 108,24 C114,16 118,30 126,22 C132,16 128,10 138,16 C144,20 148,28 156,18 C162,10 158,22 168,16 C174,12 178,20 184,14 L188,12" stroke="#ffba1a" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path class="gtd-sig-underline" d="M20,44 C60,42 120,40 180,43" stroke="#ffba1a" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.4"/>
                                     </svg>
                                 </div>
                             </div>
@@ -1356,7 +1356,7 @@
                     0 2px 8px rgba(0,0,0,0.08),
                     0 12px 48px rgba(0,0,0,0.25),
                     0 0 0 1px rgba(255,255,255,0.06),
-                    0 0 80px rgba(212,160,23,0.06);
+                    0 0 80px rgba(255,186,26,0.06);
                 position: relative;
                 z-index: 2;
             }
@@ -1378,14 +1378,14 @@
                 width: 30px;
                 height: 30px;
                 border-radius: 8px;
-                background: linear-gradient(135deg, #D4A017, #E8B824);
+                background: linear-gradient(135deg, #ffba1a, #ffca4a);
                 color: #000;
                 font-weight: 900;
                 font-size: 15px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                box-shadow: 0 2px 8px rgba(212,160,23,0.3);
+                box-shadow: 0 2px 8px rgba(255,186,26,0.3);
             }
             .gtd-paper__title {
                 font-size: 14px;
@@ -1528,12 +1528,12 @@
                 width: 72px;
                 height: 72px;
                 border-radius: 50%;
-                background: linear-gradient(135deg, #D4A017, #E8B824);
+                background: linear-gradient(135deg, #ffba1a, #ffca4a);
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-                box-shadow: 0 4px 20px rgba(212,160,23,0.4), inset 0 1px 2px rgba(255,255,255,0.3);
+                box-shadow: 0 4px 20px rgba(255,186,26,0.4), inset 0 1px 2px rgba(255,255,255,0.3);
                 position: relative;
                 z-index: 2;
             }
@@ -1553,7 +1553,7 @@
                 position: absolute;
                 inset: -6px;
                 border-radius: 50%;
-                border: 2px dashed rgba(212,160,23,0.3);
+                border: 2px dashed rgba(255,186,26,0.3);
                 animation: gtd-ring-spin 10s linear infinite;
             }
             @keyframes gtd-ring-spin {
@@ -1597,7 +1597,7 @@
                 <div class="channels-text">
                     <h2>Para consultores e canais</h2>
                     <p>Modelo especial de pricing para quem quer oferecer o Orbit aos seus clientes. Receita recorrente, margem alta, sem custo de tecnologia.</p>
-                    <a href="/canais" class="btn btn-primary" style="display:inline-block;padding:14px 32px;border-radius:12px;font-weight:700;background:#D4A017;color:#0D1117;text-decoration:none;transition:all 0.3s ease;">Conhecer o programa de canais <i class="fas fa-arrow-right"></i></a>
+                    <a href="/canais" class="btn btn-primary" style="display:inline-block;padding:14px 32px;border-radius:12px;font-weight:700;background:#ffba1a;color:#0D1117;text-decoration:none;transition:all 0.3s ease;">Conhecer o programa de canais <i class="fas fa-arrow-right"></i></a>
                 </div>
                 <div class="channels-stats">
                     <div class="channels-stat">
@@ -1694,7 +1694,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="footer-logo">
-                        <img src="/images/logo-orbit.svg" alt="Orbit Gestão" height="36">
+                        <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" height="36">
                     </div>
                     <p>Plataforma de gestão com IA. Contrate um time que executa.</p>
                     <div class="social-links">
