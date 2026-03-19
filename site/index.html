@@ -93,10 +93,15 @@
     .hero-rotate__word {
         position: absolute;
         left: 0;
+        width: 100%;
         opacity: 0;
         transform: translateY(100%);
         transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        color: #ffba1a;
+        color: #ffba1a !important;
+        -webkit-text-fill-color: #ffba1a !important;
+        background: none !important;
+        -webkit-background-clip: unset !important;
+        background-clip: unset !important;
         font-weight: 800;
     }
     .hero-rotate__word--active {
