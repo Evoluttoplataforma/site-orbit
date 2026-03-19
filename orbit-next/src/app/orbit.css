@@ -14624,3 +14624,63 @@ hr.glow-divider { display: none !important; }
   .platform-panel__mockup-bg { display: none !important; }
   .platform-panel__mockup-main { min-height: auto !important; }
 }
+
+/* Fix "que" on same line as rotating word on mobile */
+@media (max-width: 768px) {
+  .hero-rotate {
+    display: inline !important;
+    min-width: auto !important;
+  }
+  .hero-rotate__word--active {
+    position: relative !important;
+    display: inline !important;
+  }
+  .hero-rotate__word {
+    display: none !important;
+  }
+  .hero-rotate__word--active {
+    display: inline !important;
+  }
+  
+  /* Force orbital hub visible on mobile */
+  .orbit-hub {
+    height: auto !important;
+    max-width: 100% !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+    padding: 20px 0 !important;
+  }
+  .orbit-hub__lines { display: none !important; }
+  .orbit-hub__center {
+    grid-column: 1 / -1 !important;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    opacity: 1 !important;
+    scale: 1 !important;
+    margin-bottom: 16px !important;
+  }
+  .orbit-hub__node {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    opacity: 1 !important;
+    scale: 1 !important;
+    animation: none !important;
+    flex-direction: row !important;
+    gap: 10px !important;
+    background: rgba(255,255,255,0.03) !important;
+    border: 1px solid rgba(255,186,26,0.12) !important;
+    border-radius: 12px !important;
+    padding: 12px 14px !important;
+  }
+  .orbit-hub__node:hover { transform: none !important; }
+  .orbit-hub__glow { width: 120px !important; height: 120px !important; }
+  .orbit-hub__photo { width: 80px !important; height: 80px !important; }
+  .orbit-hub__ring { display: none !important; }
+  .orbit-hub__node-desc { display: none !important; }
+  .orbit-node-card { display: none !important; }
+}
