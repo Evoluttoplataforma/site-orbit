@@ -1,4 +1,4 @@
-// Full content including footer and scripts - from site/parcerias.html
+// Auto-generated
 export const pageHTML = `
     <section class="partner-hero" data-reveal>
         <div class="container">
@@ -80,7 +80,7 @@ export const pageHTML = `
         </div>
     </section>
 
-    <!-- ══ STEPS — Cinema Timeline ══ -->
+    <!-- ══ STEPS - Cinema Timeline ══ -->
     <section class="partner-steps" id="como-funciona-parceiros">
         <div class="container">
             <div class="section-header" data-reveal>
@@ -95,7 +95,7 @@ export const pageHTML = `
                     <div class="hiw-cinema__rail-fill"></div>
                 </div>
 
-                <!-- STEP 1 — Cadastro -->
+                <!-- STEP 1 - Cadastro -->
                 <div class="hiw-cinema__step" data-step="1">
                     <div class="hiw-cinema__marker">
                         <div class="hiw-cinema__dot">1</div>
@@ -110,7 +110,7 @@ export const pageHTML = `
                             <div class="hiw-form-mockup">
                                 <div class="hiw-form-mockup__header">
                                     <div class="hiw-form-mockup__dots"><span></span><span></span><span></span></div>
-                                    <span class="hiw-form-mockup__title">Orbit — Parceria</span>
+                                    <span class="hiw-form-mockup__title">Orbit - Parceria</span>
                                 </div>
                                 <div class="hiw-form-mockup__body">
                                     <div class="hiw-form-field hiw-form-field--1">
@@ -134,7 +134,7 @@ export const pageHTML = `
                     </div>
                 </div>
 
-                <!-- STEP 2 — Treinamento -->
+                <!-- STEP 2 - Treinamento -->
                 <div class="hiw-cinema__step" data-step="2">
                     <div class="hiw-cinema__marker">
                         <div class="hiw-cinema__dot">2</div>
@@ -149,7 +149,7 @@ export const pageHTML = `
                             <div class="hiw-form-mockup">
                                 <div class="hiw-form-mockup__header">
                                     <div class="hiw-form-mockup__dots"><span></span><span></span><span></span></div>
-                                    <span class="hiw-form-mockup__title">Orbit — Treinamento</span>
+                                    <span class="hiw-form-mockup__title">Orbit - Treinamento</span>
                                 </div>
                                 <div class="hiwp-training-body">
                                     <div class="hiwp-training-item hiwp-training-item--1">
@@ -182,7 +182,7 @@ export const pageHTML = `
                     </div>
                 </div>
 
-                <!-- STEP 3 — Indicação -->
+                <!-- STEP 3 - Indicação -->
                 <div class="hiw-cinema__step" data-step="3">
                     <div class="hiw-cinema__marker">
                         <div class="hiw-cinema__dot">3</div>
@@ -198,21 +198,21 @@ export const pageHTML = `
                                 <div class="hiwp-referral-card hiwp-referral-card--1">
                                     <div class="hiwp-referral-card__icon"><i class="fas fa-building"></i></div>
                                     <div class="hiwp-referral-card__info">
-                                        <span class="hiwp-referral-card__name">Cliente 1 — Tech Solutions</span>
+                                        <span class="hiwp-referral-card__name">Cliente 1 - Tech Solutions</span>
                                         <span class="hiwp-referral-card__badge hiwp-referral-card__badge--active"><i class="fas fa-circle-check"></i> Ativado</span>
                                     </div>
                                 </div>
                                 <div class="hiwp-referral-card hiwp-referral-card--2">
                                     <div class="hiwp-referral-card__icon"><i class="fas fa-building"></i></div>
                                     <div class="hiwp-referral-card__info">
-                                        <span class="hiwp-referral-card__name">Cliente 2 — Grupo Nova</span>
+                                        <span class="hiwp-referral-card__name">Cliente 2 - Grupo Nova</span>
                                         <span class="hiwp-referral-card__badge hiwp-referral-card__badge--onboard"><i class="fas fa-spinner fa-spin"></i> Onboarding</span>
                                     </div>
                                 </div>
                                 <div class="hiwp-referral-card hiwp-referral-card--3">
                                     <div class="hiwp-referral-card__icon"><i class="fas fa-building"></i></div>
                                     <div class="hiwp-referral-card__info">
-                                        <span class="hiwp-referral-card__name">Cliente 3 — Logística BR</span>
+                                        <span class="hiwp-referral-card__name">Cliente 3 - Logística BR</span>
                                         <span class="hiwp-referral-card__badge hiwp-referral-card__badge--proposal"><i class="fas fa-paper-plane"></i> Proposta enviada</span>
                                     </div>
                                 </div>
@@ -221,7 +221,7 @@ export const pageHTML = `
                     </div>
                 </div>
 
-                <!-- STEP 4 — Receita -->
+                <!-- STEP 4 - Receita -->
                 <div class="hiw-cinema__step" data-step="4">
                     <div class="hiw-cinema__marker">
                         <div class="hiw-cinema__dot hiw-cinema__dot--final">4</div>
@@ -229,7 +229,7 @@ export const pageHTML = `
                     </div>
                     <div class="hiw-cinema__card hiw-cinema__card--final">
                         <div class="hiw-cinema__text">
-                            <h3>Receita recorrente — todo mês</h3>
+                            <h3>Receita recorrente - todo mês</h3>
                             <p>Ganhe comissões mensais por cada cliente ativo. Quanto mais indica, mais cresce sua receita passiva.</p>
                         </div>
                         <div class="hiw-cinema__scene hiwp-scene-revenue">
@@ -257,7 +257,7 @@ export const pageHTML = `
         </div>
 
         <style>
-            /* ═══ CINEMA TIMELINE — PARCERIAS ═══ */
+            /* ═══ CINEMA TIMELINE - PARCERIAS ═══ */
             #hiwCinemaParcerias {
                 position: relative;
                 max-width: 900px;
@@ -1062,12 +1062,11 @@ export const pageHTML = `
                     <ul>
                         <li><a href="/sobre" data-i18n="footer.about">Sobre Nós</a></li>
                         <li><a href="/parcerias" data-i18n="footer.partners">Seja Parceiro</a></li>
-                        <li><a href="/consultores" data-i18n="footer.channels">Canais B2B2B</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p data-i18n="footer.rights">&copy; 2026 Orbit — Grupo GSN. Todos os direitos reservados.</p>
+                <p data-i18n="footer.rights">&copy; 2026 Orbit - Grupo GSN. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>

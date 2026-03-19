@@ -1,4 +1,4 @@
-// Full content including footer and scripts - from site/pricing.html
+// Auto-generated
 export const pageHTML = `
     <!-- ═══ HERO ═══ -->
     <section class="pricing-hero">
@@ -171,7 +171,7 @@ export const pageHTML = `
                         <span class="price-v2__amount" data-monthly="997" data-annual="797">997</span>
                         <span class="price-v2__period">/mês</span>
                     </div>
-                    <div class="price-v2__anchor"><i class="fas fa-calculator"></i> Equivale a R$ 33/dia — menos que um almoço</div>
+                    <div class="price-v2__anchor"><i class="fas fa-calculator"></i> Equivale a R$ 33/dia - menos que um almoço</div>
                     <ul class="price-v2__features">
                         <li><i class="fas fa-robot"></i> 3 agentes de IA</li>
                         <li><i class="fas fa-users"></i> Até 30 usuários</li>
@@ -196,7 +196,7 @@ export const pageHTML = `
                         <span class="price-v2__amount" data-monthly="1.950" data-annual="1.560">1.950</span>
                         <span class="price-v2__period">/mês</span>
                     </div>
-                    <div class="price-v2__anchor price-v2__anchor--gold"><i class="fas fa-user-tie"></i> Custo de 1 analista Jr. — entrega de um time inteiro</div>
+                    <div class="price-v2__anchor price-v2__anchor--gold"><i class="fas fa-user-tie"></i> Custo de 1 analista Jr. - entrega de um time inteiro</div>
                     <ul class="price-v2__features">
                         <li><i class="fas fa-robot"></i> <strong>12 agentes de IA</strong></li>
                         <li><i class="fas fa-infinity"></i> Usuários ilimitados</li>
@@ -246,7 +246,7 @@ export const pageHTML = `
                         <i class="fas fa-robot"></i>
                         <div>
                             <strong>Orbit Advanced</strong>
-                            <span>R$ 1.950/mês — 12 agentes 24/7</span>
+                            <span>R$ 1.950/mês - 12 agentes 24/7</span>
                         </div>
                     </div>
                 </div>
@@ -680,7 +680,7 @@ export const pageHTML = `
                                 <div class="gtd-paper__logo">O</div>
                                 <div class="gtd-paper__title">Termo de Garantia</div>
                             </div>
-                            <div class="gtd-paper__subtitle">Orbit Gestão — 90 dias</div>
+                            <div class="gtd-paper__subtitle">Orbit Gestão - 90 dias</div>
                             <div class="gtd-paper__lines">
                                 <div class="gtd-line gtd-line--1"></div>
                                 <div class="gtd-line gtd-line--2"></div>
@@ -1150,13 +1150,12 @@ export const pageHTML = `
                     <ul>
                         <li><a href="/sobre" data-i18n="footer.about">Sobre Nós</a></li>
                         <li><a href="/parcerias" data-i18n="footer.partners">Seja Parceiro</a></li>
-                        <li><a href="/consultores" data-i18n="footer.channels">Canais B2B2B</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <p data-i18n="footer.rights">&copy; 2026 Orbit — Grupo GSN. Todos os direitos reservados.</p>
+                <p data-i18n="footer.rights">&copy; 2026 Orbit - Grupo GSN. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>

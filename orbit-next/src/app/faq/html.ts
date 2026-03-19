@@ -1,4 +1,4 @@
-// Full content including footer and scripts - from site/faq.html
+// Auto-generated
 export const pageHTML = `
     <!-- ═══ HERO ═══ -->
     <section class="faq-hero">
@@ -23,7 +23,7 @@ export const pageHTML = `
                         <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
                     </button>
                     <div class="faq-answer">
-                        <div class="faq-answer-inner">O Orbit é uma plataforma de gestão empresarial com 12 agentes de IA integrados. Não é mais um software — são agentes especializados que constroem e operam a gestão da sua empresa. Planejamento, processos, treinamento, indicadores — trabalhando 24/7.</div>
+                        <div class="faq-answer-inner">O Orbit é uma plataforma de gestão empresarial com 12 agentes de IA integrados. Não é mais um software - são agentes especializados que constroem e operam a gestão da sua empresa. Planejamento, processos, treinamento, indicadores - trabalhando 24/7.</div>
                     </div>
                 </div>
 
@@ -43,7 +43,7 @@ export const pageHTML = `
                         <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
                     </button>
                     <div class="faq-answer">
-                        <div class="faq-answer-inner">Não. Software é ferramenta vazia que espera ser alimentada. O Orbit tem agentes de IA que fazem o trabalho pesado. Você valida e decide — não alimenta.</div>
+                        <div class="faq-answer-inner">Não. Software é ferramenta vazia que espera ser alimentada. O Orbit tem agentes de IA que fazem o trabalho pesado. Você valida e decide - não alimenta.</div>
                     </div>
                 </div>
 
@@ -53,7 +53,7 @@ export const pageHTML = `
                         <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
                     </button>
                     <div class="faq-answer">
-                        <div class="faq-answer-inner">Sim. Gestão por processos e indicadores é universal. O que muda é o conteúdo — e a IA personaliza para cada empresa.</div>
+                        <div class="faq-answer-inner">Sim. Gestão por processos e indicadores é universal. O que muda é o conteúdo - e a IA personaliza para cada empresa.</div>
                     </div>
                 </div>
 
@@ -63,7 +63,7 @@ export const pageHTML = `
                         <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
                     </button>
                     <div class="faq-answer">
-                        <div class="faq-answer-inner">Olívia é a Coordenadora Geral de IA do Orbit — a líder do time de 12 agentes. Ela conecta dados de todos os departamentos, coordena a atuação dos agentes e traduz a complexidade em clareza para a tomada de decisão. Dentro do produto, Olívia é a especialista no seu negócio específico e o seu ponto de contato principal com o sistema.</div>
+                        <div class="faq-answer-inner">Olívia é a Coordenadora Geral de IA do Orbit - a líder do time de 12 agentes. Ela conecta dados de todos os departamentos, coordena a atuação dos agentes e traduz a complexidade em clareza para a tomada de decisão. Dentro do produto, Olívia é a especialista no seu negócio específico e o seu ponto de contato principal com o sistema.</div>
                     </div>
                 </div>
 
@@ -73,7 +73,7 @@ export const pageHTML = `
                         <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
                     </button>
                     <div class="faq-answer">
-                        <div class="faq-answer-inner">Gestão Operada por IA é uma nova categoria onde um time de agentes de inteligência artificial executa continuamente as funções de gestão de uma empresa. Diferente de ferramentas ou chatbots, os agentes do Orbit trabalham de forma autônoma após a configuração — isso é consultoria recorrente passiva: a gestão continua acontecendo mesmo sem intervenção humana constante. Apenas 11% das empresas utilizam IA agentic em produção (Deloitte, 2025), o que significa que quem adotar agora está na vanguarda.</div>
+                        <div class="faq-answer-inner">Gestão Operada por IA é uma nova categoria onde um time de agentes de inteligência artificial executa continuamente as funções de gestão de uma empresa. Diferente de ferramentas ou chatbots, os agentes do Orbit trabalham de forma autônoma após a configuração - isso é consultoria recorrente passiva: a gestão continua acontecendo mesmo sem intervenção humana constante. Apenas 11% das empresas utilizam IA agentic em produção (Deloitte, 2025), o que significa que quem adotar agora está na vanguarda.</div>
                     </div>
                 </div>
 
@@ -83,7 +83,7 @@ export const pageHTML = `
                         <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
                     </button>
                     <div class="faq-answer">
-                        <div class="faq-answer-inner">Os agentes foram desenhados com personalidades complementares que geram tensões produtivas. O Agente de Riscos debate com o de Oportunidades (cautela vs. ação). O de Problemas trabalha com o de Processos (apagar incêndio vs. redesenhar). O de Indicadores confronta o Estrategista (dado vs. visão). A Olívia orquestra essas dinâmicas, resolve conflitos e traduz para o empresário o que o time está fazendo — e por quê.</div>
+                        <div class="faq-answer-inner">Os agentes foram desenhados com personalidades complementares que geram tensões produtivas. O Agente de Riscos debate com o de Oportunidades (cautela vs. ação). O de Problemas trabalha com o de Processos (apagar incêndio vs. redesenhar). O de Indicadores confronta o Estrategista (dado vs. visão). A Olívia orquestra essas dinâmicas, resolve conflitos e traduz para o empresário o que o time está fazendo - e por quê.</div>
                     </div>
                 </div>
             </div>
@@ -108,7 +108,7 @@ export const pageHTML = `
                         <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
                     </button>
                     <div class="faq-answer">
-                        <div class="faq-answer-inner">Seu time nem precisa logar. Processos e treinamentos chegam pelo WhatsApp — que todo mundo já usa.</div>
+                        <div class="faq-answer-inner">Seu time nem precisa logar. Processos e treinamentos chegam pelo WhatsApp - que todo mundo já usa.</div>
                     </div>
                 </div>
 
@@ -198,7 +198,7 @@ export const pageHTML = `
                         <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
                     </button>
                     <div class="faq-answer">
-                        <div class="faq-answer-inner">É o modelo onde agentes de IA continuam executando as tarefas de gestão de forma autônoma após a configuração inicial do projeto. Diferente da consultoria tradicional — onde o consultor entrega o projeto e o cliente não mantém —, os agentes do Orbit garantem operação contínua. Para o consultor, isso significa receita recorrente real: o cliente continua pagando porque a gestão continua funcionando. É a solução para o churn estrutural da consultoria.</div>
+                        <div class="faq-answer-inner">É o modelo onde agentes de IA continuam executando as tarefas de gestão de forma autônoma após a configuração inicial do projeto. Diferente da consultoria tradicional - onde o consultor entrega o projeto e o cliente não mantém -, os agentes do Orbit garantem operação contínua. Para o consultor, isso significa receita recorrente real: o cliente continua pagando porque a gestão continua funcionando. É a solução para o churn estrutural da consultoria.</div>
                     </div>
                 </div>
             </div>
@@ -280,13 +280,12 @@ export const pageHTML = `
                     <ul>
                         <li><a href="/sobre" data-i18n="footer.about">Sobre Nós</a></li>
                         <li><a href="/parcerias" data-i18n="footer.partners">Seja Parceiro</a></li>
-                        <li><a href="/consultores" data-i18n="footer.channels">Canais B2B2B</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <p data-i18n="footer.rights">&copy; 2026 Orbit — Grupo GSN. Todos os direitos reservados.</p>
+                <p data-i18n="footer.rights">&copy; 2026 Orbit - Grupo GSN. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>

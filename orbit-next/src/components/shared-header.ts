@@ -1,4 +1,4 @@
-// Shared header + mobile menu - auto-generated
+// Shared header - auto-generated
 export const headerHTML = `
     <!-- ═══ HEADER ═══ -->
     <header class="header">
@@ -22,6 +22,10 @@ export const headerHTML = `
                             <a href="#olivia">
                                 <div class="dd-icon"><i class="fas fa-crown"></i></div>
                                 <div class="dd-text"><span>Olívia</span><small>Coordenadora Geral de IA</small></div>
+                            </a>
+                            <a href="/agentes/estrategista">
+                                <div class="dd-icon"><i class="fas fa-compass"></i></div>
+                                <div class="dd-text"><span>Agente Estratégico</span><small>Planejamento e execução estratégica</small></div>
                             </a>
                         </div>
                     </div>
@@ -114,7 +118,6 @@ export const headerHTML = `
             <div class="mobile-menu__label" data-i18n="mobile.content">Conteúdo</div>
             <a href="/blog"><i class="fas fa-newspaper"></i> Blog</a>
             <a href="/historias"><i class="fas fa-star"></i> Histórias de Clientes</a>
-            <a href="/faq"><i class="fas fa-circle-question"></i> FAQ</a>
             <div class="mobile-menu__label" data-i18n="mobile.company">Empresa</div>
             <a href="/sobre"><i class="fas fa-building"></i> Sobre Nós</a>
             <a href="/parcerias"><i class="fas fa-handshake"></i> Seja Parceiro</a>

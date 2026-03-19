@@ -60,13 +60,12 @@ export const footerHTML = `
                     <ul>
                         <li><a href="/sobre" data-i18n="footer.about">Sobre Nós</a></li>
                         <li><a href="/parcerias" data-i18n="footer.partners">Seja Parceiro</a></li>
-                        <li><a href="/consultores" data-i18n="footer.channels">Canais B2B2B</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <p data-i18n="footer.rights">&copy; 2026 Orbit — Grupo GSN. Todos os direitos reservados.</p>
+                <p data-i18n="footer.rights">&copy; 2026 Orbit - Grupo GSN. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>

@@ -1,0 +1,2620 @@
+// Auto-generated from site/acesso/painel.html
+export const pageHTML = `
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <img src="/images/logo-orbit-white.png" alt="Orbit">
+            <span>CMS</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" class="active" data-view="dashboard" onclick="showView('dashboard')">
+                <i class="fas fa-home"></i> Dashboard
+            </a>
+            <a href="#" data-view="articles" onclick="showView('articles')">
+                <i class="fas fa-file-alt"></i> Artigos
+            </a>
+            <a href="#" data-view="editor" onclick="showView('editor')">
+                <i class="fas fa-pen-to-square"></i> Novo Artigo
+            </a>
+            <a href="#" data-view="leadmagnets" onclick="showView('leadmagnets')">
+                <i class="fas fa-magnet"></i> Iscas Digitais
+            </a>
+            <a href="#" data-view="stories" onclick="showView('stories')">
+                <i class="fas fa-star"></i> Histórias de Clientes
+            </a>
+            <a href="#" data-view="storyeditor" onclick="showView('storyeditor')">
+                <i class="fas fa-pen-fancy"></i> Nova História
+            </a>
+            <div class="nav-divider"></div>
+            <a href="#" data-view="users" onclick="showView('users')" id="navUsers" style="display:none;">
+                <i class="fas fa-users-gear"></i> Usuarios
+            </a>
+            <a href="/blog" target="_blank">
+                <i class="fas fa-external-link-alt"></i> Ver Blog
+            </a>
+            <a href="/historias" target="_blank">
+                <i class="fas fa-external-link-alt"></i> Ver Histórias
+            </a>
+            <a href="/" target="_blank">
+                <i class="fas fa-globe"></i> Ver Site
+            </a>
+        </nav>
+        <div class="sidebar-user">
+            <div class="sidebar-user__avatar" id="userAvatar">--</div>
+            <div class="sidebar-user__info">
+                <div class="sidebar-user__name" id="userName">--</div>
+                <div class="sidebar-user__role" id="userRole">--</div>
+            </div>
+            <button class="sidebar-user__logout" onclick="logout()" title="Sair">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+
+        <!-- ══ NOTIFICATION BELL (global, fixed) ══ -->
+        <div id="notifBellWrapper" style="position:fixed; top:14px; right:32px; z-index:999;">
+            <button class="notif-bell" onclick="toggleNotifDropdown()" title="Notificações">
+                <i class="fas fa-bell"></i>
+                <span class="notif-bell__badge" id="notifBadge" data-count="0"></span>
+            </button>
+            <div class="notif-dropdown" id="notifDropdown">
+                <div class="notif-dropdown__header">
+                    <span>Notificações</span>
+                    <span id="notifCount" style="color:var(--gray-400);font-size:0.8rem;"></span>
+                </div>
+                <div class="notif-dropdown__list" id="notifList"></div>
+            </div>
+        </div>
+
+        <!-- ══ DASHBOARD VIEW ══ -->
+        <div class="view active" id="view-dashboard">
+            <div class="topbar">
+                <h1>Dashboard</h1>
+            </div>
+            <div class="content">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-card__label">Total de artigos</div>
+                        <div class="stat-card__value" id="statTotal">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__label">Publicados</div>
+                        <div class="stat-card__value stat-card__value--primary" id="statPublished">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__label">Rascunhos</div>
+                        <div class="stat-card__value" id="statDrafts">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__label">Usuarios</div>
+                        <div class="stat-card__value" id="statUsers">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__label">Histórias pendentes</div>
+                        <div class="stat-card__value" style="color:var(--warning);" id="statPendingStories">0</div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Artigos recentes</h3>
+                        <button class="btn btn-primary btn-sm" onclick="showView('editor')">
+                            <i class="fas fa-plus"></i> Novo Artigo
+                        </button>
+                    </div>
+                    <div class="card-body" style="padding:0;">
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Titulo</th>
+                                        <th>Categoria</th>
+                                        <th>Status</th>
+                                        <th>Data</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dashboardArticles"></tbody>
+                            </table>
+                        </div>
+                        <div class="empty-state" id="dashboardEmpty" style="display:none;">
+                            <i class="fas fa-newspaper"></i>
+                            <p>Nenhum artigo criado ainda</p>
+                            <button class="btn btn-primary" onclick="showView('editor')">
+                                <i class="fas fa-plus"></i> Criar primeiro artigo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ ARTICLES LIST VIEW ══ -->
+        <div class="view" id="view-articles">
+            <div class="topbar">
+                <h1>Artigos</h1>
+                <div class="topbar-actions">
+                    <button class="btn btn-primary btn-sm" onclick="showView('editor')">
+                        <i class="fas fa-plus"></i> Novo Artigo
+                    </button>
+                </div>
+            </div>
+            <div class="content">
+                <div class="card">
+                    <div class="card-body" style="padding:0;">
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Titulo</th>
+                                        <th>Autor</th>
+                                        <th>Categoria</th>
+                                        <th>Status</th>
+                                        <th>Data</th>
+                                        <th>Acoes</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="articlesTableBody"></tbody>
+                            </table>
+                        </div>
+                        <div class="empty-state" id="articlesEmpty" style="display:none;">
+                            <i class="fas fa-newspaper"></i>
+                            <p>Nenhum artigo encontrado</p>
+                            <button class="btn btn-primary" onclick="showView('editor')">
+                                <i class="fas fa-plus"></i> Criar artigo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ EDITOR VIEW ══ -->
+        <div class="view" id="view-editor">
+            <div class="topbar">
+                <h1 id="editorTitle">Novo Artigo</h1>
+                <div class="topbar-actions">
+                    <button class="btn btn-secondary btn-sm" onclick="saveArticle('draft')">
+                        <i class="fas fa-save"></i> Salvar rascunho
+                    </button>
+                    <button class="btn btn-primary btn-sm" onclick="saveArticle('published')">
+                        <i class="fas fa-paper-plane"></i> Publicar
+                    </button>
+                </div>
+            </div>
+            <div class="content">
+                <div class="editor-grid">
+                    <!-- Main editor column -->
+                    <div>
+                        <div class="card">
+                            <div class="card-body">
+                                <input type="hidden" id="articleId">
+
+                                <div class="form-group">
+                                    <label for="articleTitleInput">Titulo do artigo *</label>
+                                    <input type="text" id="articleTitleInput" placeholder="Digite o titulo do artigo" oninput="generateSlug()">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Slug (URL)</label>
+                                    <input type="text" id="articleSlug" placeholder="titulo-do-artigo">
+                                    <div class="slug-preview">
+                                        /blog/<span id="slugPreview">titulo-do-artigo</span>.html
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Conteudo *</label>
+                                    <div class="editor-toolbar">
+                                        <button onclick="execCmd('formatBlock','<h2>')" title="Titulo H2"><b>H2</b></button>
+                                        <button onclick="execCmd('formatBlock','<h3>')" title="Titulo H3"><b>H3</b></button>
+                                        <button onclick="execCmd('formatBlock','<p>')" title="Paragrafo">P</button>
+                                        <div class="toolbar-divider"></div>
+                                        <button onclick="execCmd('bold')" title="Negrito"><i class="fas fa-bold"></i></button>
+                                        <button onclick="execCmd('italic')" title="Italico"><i class="fas fa-italic"></i></button>
+                                        <button onclick="execCmd('underline')" title="Sublinhado"><i class="fas fa-underline"></i></button>
+                                        <div class="toolbar-divider"></div>
+                                        <button onclick="execCmd('insertUnorderedList')" title="Lista"><i class="fas fa-list-ul"></i></button>
+                                        <button onclick="execCmd('insertOrderedList')" title="Lista numerada"><i class="fas fa-list-ol"></i></button>
+                                        <button onclick="insertBlockquote()" title="Citacao"><i class="fas fa-quote-left"></i></button>
+                                        <div class="toolbar-divider"></div>
+                                        <button onclick="insertLink()" title="Link"><i class="fas fa-link"></i></button>
+                                        <button onclick="insertImageFromFile()" title="Upload imagem"><i class="fas fa-image"></i></button>
+                                        <button onclick="insertImage()" title="Imagem por URL"><i class="fas fa-globe"></i></button>
+                                        <div class="toolbar-divider"></div>
+                                        <button onclick="execCmd('removeFormat')" title="Limpar formatacao"><i class="fas fa-eraser"></i></button>
+                                    </div>
+                                    <div class="rich-editor" id="richEditor" contenteditable="true"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar column -->
+                    <div>
+                        <div class="card" style="margin-bottom:20px;">
+                            <div class="card-header">
+                                <h3>Configuracoes</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="articleCategory">Categoria *</label>
+                                    <select id="articleCategory">
+                                        <option value="">Selecione...</option>
+                                        <option value="estrategica">Gestao Estrategica</option>
+                                        <option value="processos">Processos</option>
+                                        <option value="indicadores">Indicadores</option>
+                                        <option value="lideranca">Lideranca</option>
+                                        <option value="ia">IA & Inovacao</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="articleAuthor">Autor</label>
+                                    <input type="text" id="articleAuthor" placeholder="Equipe Orbit">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="articleReadTime">Tempo de leitura</label>
+                                    <input type="text" id="articleReadTime" placeholder="5 min">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="articleMetaDesc">Meta descricao</label>
+                                    <textarea id="articleMetaDesc" rows="3" placeholder="Descricao para SEO (ate 160 caracteres)"></textarea>
+                                    <div class="hint"><span id="metaCharCount">0</span>/160 caracteres</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card" style="margin-bottom:20px;">
+                            <div class="card-header">
+                                <h3>Imagem destaque</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="image-tabs">
+                                    <button class="image-tab active" onclick="switchImageTab('upload')">
+                                        <i class="fas fa-upload"></i> Upload
+                                    </button>
+                                    <button class="image-tab" onclick="switchImageTab('url')">
+                                        <i class="fas fa-link"></i> URL
+                                    </button>
+                                </div>
+
+                                <div class="image-tab-content active" id="imageTabUpload">
+                                    <div class="image-upload-area" id="imageDropZone">
+                                        <input type="file" id="imageFileInput" accept="image/*" onchange="handleImageUpload(event)">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                        <p>Arraste uma imagem ou clique para selecionar</p>
+                                        <span class="upload-hint">JPG, PNG ou WebP (max 2MB)</span>
+                                    </div>
+                                </div>
+
+                                <div class="image-tab-content" id="imageTabUrl">
+                                    <div class="form-group" style="margin-bottom:0;">
+                                        <input type="text" id="articleImageUrl" placeholder="https://..." oninput="previewFeaturedImage()">
+                                    </div>
+                                </div>
+
+                                <div class="image-preview" id="featuredImagePreview"></div>
+                                <input type="hidden" id="articleImageData">
+                            </div>
+                        </div>
+
+                        <div class="card" style="margin-bottom:20px;">
+                            <div class="card-header">
+                                <h3><i class="fas fa-search" style="font-size:0.85rem;margin-right:6px;color:var(--primary);"></i> SEO & Schema</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="seoTitle">Titulo SEO</label>
+                                    <input type="text" id="seoTitle" placeholder="Titulo para Google (ate 60 chars)" oninput="updateSeoScore()">
+                                    <div class="hint"><span id="seoTitleCount">0</span>/60 caracteres</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="seoCanonical">URL Canonica</label>
+                                    <input type="text" id="seoCanonical" placeholder="https://orbitgestao.com.br/blog/slug">
+                                    <div class="hint">URL oficial da pagina</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="seoKeyword">Palavra-chave foco</label>
+                                    <input type="text" id="seoKeyword" placeholder="ex: gestao estrategica" oninput="updateSeoScore()">
+                                </div>
+                                <div class="form-group">
+                                    <label for="seoOgImage">Imagem OG (1200x630)</label>
+                                    <input type="text" id="seoOgImage" placeholder="URL da imagem para redes sociais">
+                                    <div class="hint">Deixe vazio para usar a imagem destaque</div>
+                                </div>
+
+                                <label style="font-size:0.82rem;font-weight:500;color:var(--gray-700);margin-bottom:8px;display:block;">Score SEO</label>
+                                <div class="seo-score-bar">
+                                    <div class="seo-score-fill" id="seoScoreFill" style="width:0%;background:var(--gray-400);"></div>
+                                </div>
+                                <ul class="seo-checklist" id="seoChecklist">
+                                    <li><span class="seo-check fail" id="seoCheckTitle"><i class="fas fa-circle"></i></span> Titulo SEO preenchido</li>
+                                    <li><span class="seo-check fail" id="seoCheckDesc"><i class="fas fa-circle"></i></span> Meta descricao (120-160 chars)</li>
+                                    <li><span class="seo-check fail" id="seoCheckKeyword"><i class="fas fa-circle"></i></span> Palavra-chave definida</li>
+                                    <li><span class="seo-check fail" id="seoCheckImage"><i class="fas fa-circle"></i></span> Imagem destaque</li>
+                                    <li><span class="seo-check fail" id="seoCheckSlug"><i class="fas fa-circle"></i></span> Slug otimizado</li>
+                                    <li><span class="seo-check fail" id="seoCheckContent"><i class="fas fa-circle"></i></span> Conteudo com +300 palavras</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 style="font-weight:600;margin-bottom:16px;"><i class="fas fa-magnet" style="color:var(--primary);margin-right:8px;"></i>Isca Digital (Lead Magnet)</h4>
+                                <div class="form-group">
+                                    <label>Selecionar isca</label>
+                                    <div style="position:relative;">
+                                        <select id="leadMagnetSelect" style="appearance:none;-webkit-appearance:none;padding-right:40px;cursor:pointer;">
+                                            <option value="">-- Selecione uma isca --</option>
+                                        </select>
+                                        <i class="fas fa-chevron-down" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--primary);font-size:0.75rem;pointer-events:none;"></i>
+                                    </div>
+                                    <div class="hint" style="margin-top:6px;">Cadastre iscas no menu <a href="#" onclick="event.preventDefault();showView('leadmagnets')" style="color:var(--primary);font-weight:600;text-decoration:underline;">Iscas Digitais</a></div>
+                                </div>
+                                <hr style="border:none;border-top:1px solid rgba(255,255,255,0.08);margin:16px 0;">
+                                <h5 style="font-weight:600;margin-bottom:12px;font-size:0.85rem;"><i class="fas fa-image" style="color:var(--primary);margin-right:6px;"></i>Banner CTA no meio do artigo</h5>
+                                <div class="form-group">
+                                    <label>Ativar banner CTA</label>
+                                    <div style="position:relative;">
+                                        <select id="ctaBannerEnabled" style="appearance:none;-webkit-appearance:none;padding-right:40px;cursor:pointer;">
+                                            <option value="0">Desativado</option>
+                                            <option value="1">Ativado</option>
+                                        </select>
+                                        <i class="fas fa-chevron-down" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--primary);font-size:0.75rem;pointer-events:none;"></i>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ctaBannerTitle">Titulo do banner</label>
+                                    <input type="text" id="ctaBannerTitle" placeholder="Ex: Transforme sua gestão agora">
+                                </div>
+                                <div class="form-group">
+                                    <label for="ctaBannerDesc">Descricao</label>
+                                    <input type="text" id="ctaBannerDesc" placeholder="Texto persuasivo">
+                                </div>
+                                <div class="form-group">
+                                    <label for="ctaBannerCtaText">Texto do botao</label>
+                                    <input type="text" id="ctaBannerCtaText" placeholder="Agendar demonstração" value="Agendar demonstração">
+                                </div>
+                                <div class="form-group">
+                                    <label for="ctaBannerCtaUrl">Link do botao</label>
+                                    <input type="text" id="ctaBannerCtaUrl" placeholder="URL destino" value="/#contato-form">
+                                </div>
+                                <div class="form-group">
+                                    <label>Imagem do banner</label>
+                                    <div class="image-upload-area" id="ctaBannerImageDropZone" style="min-height:100px;">
+                                        <input type="file" id="ctaBannerImageFileInput" accept="image/*" onchange="handleCtaBannerImageUpload(event)">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                        <p>Arraste uma imagem ou clique</p>
+                                        <span class="upload-hint">JPG, PNG ou WebP (max 2MB)</span>
+                                    </div>
+                                    <div class="image-preview" id="ctaBannerImagePreview" style="margin-top:8px;"></div>
+                                    <input type="hidden" id="ctaBannerImageData">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body" style="display:flex;flex-direction:column;gap:8px;">
+                                <button class="btn btn-primary" onclick="saveArticle('published')" style="width:100%;">
+                                    <i class="fas fa-paper-plane"></i> Publicar
+                                </button>
+                                <button class="btn btn-secondary" onclick="saveArticle('draft')" style="width:100%;">
+                                    <i class="fas fa-save"></i> Salvar rascunho
+                                </button>
+                                <button class="btn btn-outline" onclick="previewArticle()" style="width:100%;">
+                                    <i class="fas fa-eye"></i> Pre-visualizar
+                                </button>
+                                <button class="btn btn-outline" onclick="exportArticleHTML()" style="width:100%;">
+                                    <i class="fas fa-download"></i> Exportar HTML
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ LEAD MAGNETS VIEW ══ -->
+        <div class="view" id="view-leadmagnets">
+            <div class="topbar">
+                <h1>Iscas Digitais</h1>
+                <div class="topbar-actions">
+                    <button class="btn btn-primary btn-sm" onclick="openLeadMagnetModal()">
+                        <i class="fas fa-plus"></i> Nova Isca
+                    </button>
+                </div>
+            </div>
+            <div class="content">
+                <div class="card">
+                    <div class="card-body" style="padding:0;">
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Tipo</th>
+                                        <th>Titulo</th>
+                                        <th>Descricao</th>
+                                        <th>CTA</th>
+                                        <th style="width:120px;">Acoes</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="leadMagnetsTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ LEAD MAGNET MODAL ══ -->
+        <div class="modal-overlay" id="leadMagnetModal" style="display:none;" onclick="if(event.target===this)closeLeadMagnetModal()">
+            <div class="modal" style="max-width:540px;">
+                <div class="modal-header">
+                    <h3 id="leadMagnetModalTitle">Nova Isca Digital</h3>
+                    <button class="btn btn-ghost" onclick="closeLeadMagnetModal()"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="lmId">
+                    <div class="form-group">
+                        <label for="lmType">Tipo</label>
+                        <select id="lmType">
+                            <option value="ebook">Ebook</option>
+                            <option value="checklist">Checklist</option>
+                            <option value="planilha">Planilha</option>
+                            <option value="webinar">Webinar</option>
+                            <option value="trial">Trial Gratuito</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="lmTitle">Titulo</label>
+                        <input type="text" id="lmTitle" placeholder="Ex: Guia Completo de Gestão Estratégica">
+                    </div>
+                    <div class="form-group">
+                        <label for="lmDesc">Descricao curta</label>
+                        <input type="text" id="lmDesc" placeholder="Frase persuasiva para download">
+                    </div>
+                    <div class="form-group">
+                        <label for="lmCta">Texto do botao</label>
+                        <input type="text" id="lmCta" placeholder="Baixar agora" value="Baixar agora">
+                    </div>
+                    <div class="form-group">
+                        <label for="lmUrl">Link do material (apos conversao)</label>
+                        <input type="text" id="lmUrl" placeholder="URL de download ou thank you page">
+                    </div>
+                    <div class="form-group">
+                        <label for="lmEvent">Evento RD Station</label>
+                        <input type="text" id="lmEvent" placeholder="Ex: download-ebook-gestao-estrategica">
+                        <div class="hint">Identificador do evento para integracao com RD Station</div>
+                    </div>
+                    <div class="form-group">
+                        <label>Imagem da isca</label>
+                        <div class="image-upload-area" id="lmImageDropZone" style="min-height:120px;">
+                            <input type="file" id="lmImageFileInput" accept="image/*" onchange="handleLmImageUpload(event)">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Arraste uma imagem ou clique para selecionar</p>
+                            <span class="upload-hint">JPG, PNG ou WebP (max 2MB)</span>
+                        </div>
+                        <div class="image-preview" id="lmImagePreview" style="margin-top:8px;"></div>
+                        <input type="hidden" id="lmImageData">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="closeLeadMagnetModal()">Cancelar</button>
+                    <button class="btn btn-primary" onclick="saveLeadMagnet()">Salvar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ CUSTOMER STORIES VIEW ══ -->
+        <div class="view" id="view-stories">
+            <div class="topbar">
+                <h1>Histórias de Clientes</h1>
+                <div class="topbar-actions">
+                    <button class="btn btn-primary btn-sm" onclick="clearStoryEditor();showView('storyeditor')">
+                        <i class="fas fa-plus"></i> Nova História
+                    </button>
+                    <a href="/historias" target="_blank" class="btn btn-outline btn-sm">
+                        <i class="fas fa-external-link-alt"></i> Ver no site
+                    </a>
+                </div>
+            </div>
+            <div class="content">
+                <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+                    <div class="stat-card">
+                        <div class="stat-card__label">Total</div>
+                        <div class="stat-card__value" id="statStoriesTotal">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__label">Pendentes</div>
+                        <div class="stat-card__value" style="color:var(--warning);" id="statStoriesPending">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__label">Publicadas</div>
+                        <div class="stat-card__value stat-card__value--primary" id="statStoriesPublished">0</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body" style="padding:0;">
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Empresa</th>
+                                        <th>Contato</th>
+                                        <th>Título</th>
+                                        <th>Segmento</th>
+                                        <th>Status</th>
+                                        <th>Data</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="storiesTableBody"></tbody>
+                            </table>
+                        </div>
+                        <div class="empty-state" id="storiesEmpty" style="display:none;">
+                            <i class="fas fa-star"></i>
+                            <p>Nenhuma história enviada ainda</p>
+                            <small>Compartilhe o link <strong>historias-enviar.html</strong> com seus clientes</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ STORY EDITOR VIEW ══ -->
+        <div class="view" id="view-storyeditor">
+            <div class="topbar">
+                <h1 id="storyEditorTitle">Nova História</h1>
+                <div class="topbar-actions">
+                    <button class="btn btn-secondary btn-sm" onclick="saveStoryFromEditor('pending')">
+                        <i class="fas fa-save"></i> Salvar rascunho
+                    </button>
+                    <button class="btn btn-primary btn-sm" onclick="saveStoryFromEditor('published')">
+                        <i class="fas fa-paper-plane"></i> Publicar
+                    </button>
+                </div>
+            </div>
+            <div class="content">
+                <div class="editor-grid">
+                    <!-- Main column -->
+                    <div>
+                        <input type="hidden" id="storyEditId">
+
+                        <div class="card" style="margin-bottom:20px;">
+                            <div class="card-header"><h3><i class="fas fa-building" style="color:var(--primary);margin-right:8px;"></i>Dados da Empresa</h3></div>
+                            <div class="card-body">
+                                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                                    <div class="form-group">
+                                        <label for="seEmpresa">Empresa *</label>
+                                        <input type="text" id="seEmpresa" placeholder="Nome da empresa">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="seSegmento">Segmento *</label>
+                                        <select id="seSegmento">
+                                            <option value="">Selecione...</option>
+                                            <option value="industria">Indústria</option>
+                                            <option value="servicos">Serviços</option>
+                                            <option value="tecnologia">Tecnologia</option>
+                                            <option value="saude">Saúde</option>
+                                            <option value="educacao">Educação</option>
+                                            <option value="varejo">Varejo</option>
+                                            <option value="financeiro">Financeiro</option>
+                                            <option value="agronegocio">Agronegócio</option>
+                                            <option value="outro">Outro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+                                    <div class="form-group">
+                                        <label for="seNome">Nome do contato *</label>
+                                        <input type="text" id="seNome" placeholder="Nome completo">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="seEmail">Email</label>
+                                        <input type="email" id="seEmail" placeholder="email@empresa.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="seCargo">Cargo</label>
+                                        <input type="text" id="seCargo" placeholder="CEO, Diretor, etc.">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="seTelefone">Telefone</label>
+                                    <input type="text" id="seTelefone" placeholder="(00) 00000-0000">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card" style="margin-bottom:20px;">
+                            <div class="card-header"><h3><i class="fas fa-pen-nib" style="color:var(--primary);margin-right:8px;"></i>A História</h3></div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="seTitulo">Título da história *</label>
+                                    <input type="text" id="seTitulo" placeholder="Ex: Como a Empresa X triplicou sua produtividade">
+                                </div>
+                                <div class="form-group">
+                                    <label for="seDesafio">Qual era o desafio antes da Orbit? *</label>
+                                    <textarea id="seDesafio" rows="4" placeholder="Descreva os problemas e desafios enfrentados..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="seSolucao">Como a Orbit ajudou a resolver? *</label>
+                                    <textarea id="seSolucao" rows="4" placeholder="Descreva como a plataforma foi implementada e usada..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="seResultados">Quais resultados foram alcançados? *</label>
+                                    <textarea id="seResultados" rows="4" placeholder="Métricas, ganhos, melhorias concretas..."></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="seDepoimento">Depoimento / Citação</label>
+                                    <textarea id="seDepoimento" rows="3" placeholder="Uma frase marcante do cliente (opcional)"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar column -->
+                    <div>
+                        <div class="card" style="margin-bottom:20px;">
+                            <div class="card-header"><h3>Logo da empresa</h3></div>
+                            <div class="card-body">
+                                <div class="image-upload-area" id="seLogoDropZone" style="min-height:100px;">
+                                    <input type="file" id="seLogoInput" accept="image/*" onchange="handleStoryLogoUpload(event)">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p>Arraste ou clique</p>
+                                    <span class="upload-hint">JPG, PNG ou WebP (max 2MB)</span>
+                                </div>
+                                <div class="image-preview" id="seLogoPreview" style="margin-top:8px;"></div>
+                                <input type="hidden" id="seLogoData">
+                            </div>
+                        </div>
+
+                        <div class="card" style="margin-bottom:20px;">
+                            <div class="card-header"><h3>Módulos utilizados</h3></div>
+                            <div class="card-body">
+                                <div style="display:flex;flex-direction:column;gap:10px;">
+                                    <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer;">
+                                        <input type="checkbox" class="se-modulo" value="Processos"> <i class="fas fa-sitemap" style="color:var(--primary);width:18px;"></i> Processos
+                                    </label>
+                                    <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer;">
+                                        <input type="checkbox" class="se-modulo" value="Indicadores"> <i class="fas fa-chart-line" style="color:var(--primary);width:18px;"></i> Indicadores
+                                    </label>
+                                    <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer;">
+                                        <input type="checkbox" class="se-modulo" value="Tarefas"> <i class="fas fa-tasks" style="color:var(--primary);width:18px;"></i> Tarefas
+                                    </label>
+                                    <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer;">
+                                        <input type="checkbox" class="se-modulo" value="Competências"> <i class="fas fa-users" style="color:var(--primary);width:18px;"></i> Competências
+                                    </label>
+                                    <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer;">
+                                        <input type="checkbox" class="se-modulo" value="Auditorias"> <i class="fas fa-clipboard-check" style="color:var(--primary);width:18px;"></i> Auditorias
+                                    </label>
+                                    <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer;">
+                                        <input type="checkbox" class="se-modulo" value="Orbit IA"> <i class="fas fa-robot" style="color:var(--primary);width:18px;"></i> Orbit IA
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card" style="margin-bottom:20px;">
+                            <div class="card-header"><h3>Redes Sociais</h3></div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="seLinkedin"><i class="fab fa-linkedin" style="color:#0077B5;margin-right:4px;"></i> LinkedIn</label>
+                                    <input type="url" id="seLinkedin" placeholder="https://linkedin.com/in/...">
+                                </div>
+                                <div class="form-group">
+                                    <label for="seInstagram"><i class="fab fa-instagram" style="color:#E4405F;margin-right:4px;"></i> Instagram</label>
+                                    <input type="url" id="seInstagram" placeholder="https://instagram.com/...">
+                                </div>
+                                <div class="form-group">
+                                    <label for="seWebsite"><i class="fas fa-globe" style="color:var(--info);margin-right:4px;"></i> Website</label>
+                                    <input type="url" id="seWebsite" placeholder="https://empresa.com.br">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card" style="margin-bottom:20px;">
+                            <div class="card-header"><h3>Fotos</h3></div>
+                            <div class="card-body">
+                                <div class="image-upload-area" id="sePhotosDropZone" style="min-height:80px;">
+                                    <input type="file" id="sePhotosInput" accept="image/*" multiple onchange="handleStoryPhotosUpload(event)">
+                                    <i class="fas fa-images"></i>
+                                    <p>Até 5 fotos (max 2MB cada)</p>
+                                </div>
+                                <div id="sePhotosPreview" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;"></div>
+                            </div>
+                        </div>
+
+                        <div class="card" style="margin-bottom:20px;">
+                            <div class="card-header"><h3>Vídeo</h3></div>
+                            <div class="card-body">
+                                <div class="form-group" style="margin-bottom:0;">
+                                    <label for="seVideoUrl">URL YouTube / Vimeo</label>
+                                    <input type="url" id="seVideoUrl" placeholder="https://youtube.com/watch?v=...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body" style="display:flex;flex-direction:column;gap:8px;">
+                                <button class="btn btn-primary" onclick="saveStoryFromEditor('published')" style="width:100%;">
+                                    <i class="fas fa-paper-plane"></i> Publicar
+                                </button>
+                                <button class="btn btn-secondary" onclick="saveStoryFromEditor('pending')" style="width:100%;">
+                                    <i class="fas fa-save"></i> Salvar rascunho
+                                </button>
+                                <button class="btn btn-outline" onclick="showView('stories')" style="width:100%;">
+                                    <i class="fas fa-arrow-left"></i> Voltar para lista
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ STORY DETAIL MODAL ══ -->
+        <div class="modal-overlay" id="storyDetailModal" style="display:none;padding:20px;" onclick="if(event.target===this)closeStoryDetail()">
+            <div class="modal" style="max-width:800px;max-height:90vh;overflow-y:auto;">
+                <div class="modal-header">
+                    <h3 id="storyDetailTitle">Detalhes da História</h3>
+                    <button class="btn btn-ghost" onclick="closeStoryDetail()"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="modal-body" id="storyDetailContent" style="padding:24px 32px;"></div>
+                <div class="modal-footer" id="storyDetailFooter"></div>
+            </div>
+        </div>
+
+        <!-- ══ USERS VIEW (ADMIN ONLY) ══ -->
+        <div class="view" id="view-users">
+            <div class="topbar">
+                <h1>Usuarios</h1>
+                <div class="topbar-actions">
+                    <button class="btn btn-primary btn-sm" onclick="openUserModal()">
+                        <i class="fas fa-user-plus"></i> Novo Usuario
+                    </button>
+                </div>
+            </div>
+            <div class="content">
+                <div class="card">
+                    <div class="card-body" style="padding:0;">
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>E-mail</th>
+                                        <th>Perfil</th>
+                                        <th>Status</th>
+                                        <th>Acoes</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="usersTableBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- MOBILE SIDEBAR TOGGLE -->
+    <button class="mobile-sidebar-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- USER MODAL -->
+    <div class="modal-overlay" id="userModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="userModalTitle">Novo Usuario</h3>
+                <button class="modal-close" onclick="closeUserModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="modalUserId">
+                <div class="form-group">
+                    <label for="modalUserName">Nome completo *</label>
+                    <input type="text" id="modalUserName" placeholder="Nome do usuario">
+                </div>
+                <div class="form-group">
+                    <label for="modalUserEmail">E-mail *</label>
+                    <input type="email" id="modalUserEmail" placeholder="email@empresa.com">
+                </div>
+                <div class="form-group">
+                    <label for="modalUserPassword">Senha *</label>
+                    <input type="password" id="modalUserPassword" placeholder="Minimo 6 caracteres">
+                    <div class="hint" id="passwordHint">Obrigatorio para novos usuarios</div>
+                </div>
+                <div class="form-group">
+                    <label for="modalUserRole">Perfil *</label>
+                    <select id="modalUserRole">
+                        <option value="editor">Editor</option>
+                        <option value="admin">Admin Full</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeUserModal()">Cancelar</button>
+                <button class="btn btn-primary" onclick="saveUser()">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DELETE CONFIRM MODAL -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Confirmar exclusao</h3>
+                <button class="modal-close" onclick="closeDeleteModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="deleteMessage">Tem certeza que deseja excluir?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeDeleteModal()">Cancelar</button>
+                <button class="btn btn-danger" id="deleteConfirmBtn">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PREVIEW MODAL -->
+    <div class="modal-overlay" id="previewModal" style="padding:20px;">
+        <div class="modal" style="max-width:800px;max-height:90vh;overflow-y:auto;">
+            <div class="modal-header">
+                <h3>Pre-visualizacao</h3>
+                <button class="modal-close" onclick="document.getElementById('previewModal').classList.remove('active')">&times;</button>
+            </div>
+            <div class="modal-body" id="previewContent" style="padding:24px 32px;"></div>
+        </div>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+    // Mobile menu
+    var toggle = document.querySelector('.menu-toggle');
+    var mobileMenu = document.querySelector('.mobile-menu');
+    var overlay = document.querySelector('.mobile-menu-overlay');
+    window.closeMobileMenu = function() {
+        if (toggle) toggle.classList.remove('active');
+        if (mobileMenu) mobileMenu.classList.remove('active');
+        if (overlay) overlay.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+    window.openMobileMenu = function() {
+        if (toggle) toggle.classList.add('active');
+        if (mobileMenu) mobileMenu.classList.add('active');
+        if (overlay) overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    };
+    if (toggle && mobileMenu) {
+        toggle.addEventListener('click', function() {
+            mobileMenu.classList.contains('active') ? closeMobileMenu() : openMobileMenu();
+        });
+        mobileMenu.querySelectorAll('a').forEach(function(a) {
+            a.addEventListener('click', closeMobileMenu);
+        });
+    }
+
+    // ═══════════════════════════════════════
+    // ORBIT CMS - Admin Panel
+    // ═══════════════════════════════════════
+
+    const STORAGE_KEY = 'orbit_cms';
+    const CATEGORIES = {
+        estrategica: 'Gestao Estrategica',
+        processos: 'Processos',
+        indicadores: 'Indicadores',
+        lideranca: 'Lideranca',
+        ia: 'IA & Inovacao'
+    };
+
+    // ── Auth Check ──
+    function getSession() {
+        try { return JSON.parse(sessionStorage.getItem('orbit_session')) || null; }
+        catch { return null; }
+    }
+
+    const session = getSession();
+    if (!session) {
+        window.location.href = '/acesso';
+    }
+
+    // ── DB ──
+    function getDB() {
+        try {
+            const db = JSON.parse(localStorage.getItem(STORAGE_KEY)) || { users: [], articles: [], leadMagnets: [], customerStories: [], version: 1 };
+            if (!db.leadMagnets) db.leadMagnets = [];
+            if (!db.customerStories) db.customerStories = [];
+            return db;
+        }
+        catch { return { users: [], articles: [], leadMagnets: [], customerStories: [], version: 1 }; }
+    }
+
+    function setDB(db) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
+    }
+
+    async function hashPassword(password) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(password + '_orbit_salt_2024');
+        const hash = await crypto.subtle.digest('SHA-256', data);
+        return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // ── Init UI ──
+    function initUI() {
+        if (!session) return;
+
+        const initials = session.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+        document.getElementById('userAvatar').textContent = initials;
+        document.getElementById('userName').textContent = session.name;
+        document.getElementById('userRole').textContent = session.role === 'admin' ? 'Admin Full' : 'Editor';
+
+        // Show users nav for admins only
+        if (session.role === 'admin') {
+            document.getElementById('navUsers').style.display = 'flex';
+        }
+
+        refreshDashboard();
+    }
+
+    // ── Navigation ──
+    function showView(viewName) {
+        // Check permission
+        if (viewName === 'users' && session.role !== 'admin') {
+            toast('Acesso restrito a administradores.', 'error');
+            return;
+        }
+
+        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+        document.querySelectorAll('.sidebar-nav a').forEach(a => a.classList.remove('active'));
+
+        const view = document.getElementById('view-' + viewName);
+        if (view) view.classList.add('active');
+
+        const navLink = document.querySelector(\`.sidebar-nav a[data-view="\${viewName}"]\`);
+        if (navLink) navLink.classList.add('active');
+
+        // Refresh data
+        if (viewName === 'dashboard') refreshDashboard();
+        if (viewName === 'articles') refreshArticles();
+        if (viewName === 'users') refreshUsers();
+        if (viewName === 'leadmagnets') refreshLeadMagnets();
+        if (viewName === 'stories') refreshStories();
+        if (viewName === 'storyeditor') {
+            if (!document.getElementById('storyEditId').value) {
+                clearStoryEditor();
+            }
+        }
+        if (viewName === 'editor') {
+            populateLeadMagnetDropdown();
+            // Only clear if not editing
+            if (!document.getElementById('articleId').value) {
+                clearEditor();
+            }
+        }
+
+        // Close mobile sidebar
+        document.getElementById('sidebar').classList.remove('open');
+    }
+
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('open');
+    }
+
+    // ── Toast ──
+    function toast(message, type = 'success') {
+        const container = document.getElementById('toastContainer');
+        const el = document.createElement('div');
+        el.className = \`toast toast--\${type}\`;
+        const icon = type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
+        el.innerHTML = \`<i class="fas \${icon}" style="color:var(--\${type})"></i> \${message}\`;
+        container.appendChild(el);
+        setTimeout(() => { el.remove(); }, 3500);
+    }
+
+    // ── Logout ──
+    function logout() {
+        sessionStorage.removeItem('orbit_session');
+        window.location.href = '/acesso';
+    }
+
+    // ═══ DASHBOARD ═══
+    function refreshDashboard() {
+        const db = getDB();
+        const articles = session.role === 'admin' ? db.articles : db.articles.filter(a => a.authorId === session.id);
+        const published = articles.filter(a => a.status === 'published');
+        const drafts = articles.filter(a => a.status === 'draft');
+
+        document.getElementById('statTotal').textContent = articles.length;
+        document.getElementById('statPublished').textContent = published.length;
+        document.getElementById('statDrafts').textContent = drafts.length;
+        document.getElementById('statUsers').textContent = db.users.length;
+        document.getElementById('statPendingStories').textContent = (db.customerStories || []).filter(s => s.status === 'pending').length;
+
+        const tbody = document.getElementById('dashboardArticles');
+        const emptyEl = document.getElementById('dashboardEmpty');
+
+        if (articles.length === 0) {
+            tbody.innerHTML = '';
+            emptyEl.style.display = 'block';
+            return;
+        }
+
+        emptyEl.style.display = 'none';
+        const recent = [...articles].sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)).slice(0, 5);
+
+        tbody.innerHTML = recent.map(a => {
+            const thumb = a.imageData || a.imageUrl || 'https://placehold.co/48x36/000/FDB73F?text=.';
+            return \`
+            <tr>
+                <td>
+                    <div class="article-title-cell">
+                        <img class="article-thumb" src="\${thumb}" alt="">
+                        <span>\${escapeHtml(a.title)}</span>
+                    </div>
+                </td>
+                <td>\${CATEGORIES[a.category] || a.category}</td>
+                <td><span class="badge badge-\${a.status}">\${a.status === 'published' ? 'Publicado' : 'Rascunho'}</span></td>
+                <td>\${formatDate(a.updatedAt)}</td>
+                <td>
+                    <div class="actions-cell">
+                        <button class="btn btn-secondary btn-icon btn-sm" onclick="viewArticle('\${a.id}')" title="Visualizar">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-secondary btn-icon btn-sm" onclick="editArticle('\${a.id}')" title="Editar">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>\`;
+        }).join('');
+    }
+
+    // ═══ ARTICLES LIST ═══
+    function refreshArticles() {
+        const db = getDB();
+        const articles = session.role === 'admin' ? db.articles : db.articles.filter(a => a.authorId === session.id);
+        const tbody = document.getElementById('articlesTableBody');
+        const emptyEl = document.getElementById('articlesEmpty');
+
+        if (articles.length === 0) {
+            tbody.innerHTML = '';
+            emptyEl.style.display = 'block';
+            return;
+        }
+
+        emptyEl.style.display = 'none';
+        const sorted = [...articles].sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+
+        tbody.innerHTML = sorted.map(a => {
+            const authorUser = db.users.find(u => u.id === a.authorId);
+            const thumb = a.imageData || a.imageUrl || 'https://placehold.co/48x36/000/FDB73F?text=.';
+            return \`
+            <tr>
+                <td>
+                    <div class="article-title-cell">
+                        <img class="article-thumb" src="\${thumb}" alt="">
+                        <span>\${escapeHtml(a.title)}</span>
+                    </div>
+                </td>
+                <td>\${authorUser ? authorUser.name : 'Desconhecido'}</td>
+                <td>\${CATEGORIES[a.category] || a.category}</td>
+                <td><span class="badge badge-\${a.status}">\${a.status === 'published' ? 'Publicado' : 'Rascunho'}</span></td>
+                <td>\${formatDate(a.updatedAt)}</td>
+                <td>
+                    <div class="actions-cell">
+                        <button class="btn btn-secondary btn-icon btn-sm" onclick="viewArticle('\${a.id}')" title="Visualizar">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-secondary btn-icon btn-sm" onclick="editArticle('\${a.id}')" title="Editar">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-secondary btn-icon btn-sm" onclick="duplicateArticle('\${a.id}')" title="Duplicar">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button class="btn btn-danger btn-icon btn-sm" onclick="confirmDeleteArticle('\${a.id}')" title="Excluir">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>\`;
+        }).join('');
+    }
+
+    // ═══ EDITOR ═══
+    function clearEditor() {
+        document.getElementById('articleId').value = '';
+        document.getElementById('articleTitleInput').value = '';
+        document.getElementById('articleSlug').value = '';
+        document.getElementById('slugPreview').textContent = 'titulo-do-artigo';
+        document.getElementById('richEditor').innerHTML = '<p>Comece a escrever seu artigo aqui...</p>';
+        document.getElementById('articleCategory').value = '';
+        document.getElementById('articleAuthor').value = session.name;
+        document.getElementById('articleReadTime').value = '';
+        document.getElementById('articleMetaDesc').value = '';
+        document.getElementById('metaCharCount').textContent = '0';
+        document.getElementById('articleImageUrl').value = '';
+        document.getElementById('articleImageData').value = '';
+        document.getElementById('featuredImagePreview').innerHTML = '';
+        document.getElementById('editorTitle').textContent = 'Novo Artigo';
+        // SEO fields
+        document.getElementById('seoTitle').value = '';
+        document.getElementById('seoTitleCount').textContent = '0';
+        document.getElementById('seoCanonical').value = '';
+        document.getElementById('seoKeyword').value = '';
+        document.getElementById('seoOgImage').value = '';
+        populateLeadMagnetDropdown();
+        document.getElementById('leadMagnetSelect').value = '';
+        document.getElementById('ctaBannerEnabled').value = '0';
+        document.getElementById('ctaBannerTitle').value = '';
+        document.getElementById('ctaBannerDesc').value = '';
+        document.getElementById('ctaBannerCtaText').value = 'Agendar demonstração';
+        document.getElementById('ctaBannerCtaUrl').value = '/#contato-form';
+        document.getElementById('ctaBannerImageData').value = '';
+        document.getElementById('ctaBannerImagePreview').innerHTML = '';
+        updateSeoScore();
+    }
+
+    function editArticle(id) {
+        const db = getDB();
+        const article = db.articles.find(a => a.id === id);
+        if (!article) return;
+
+        document.getElementById('articleId').value = article.id;
+        document.getElementById('articleTitleInput').value = article.title;
+        document.getElementById('articleSlug').value = article.slug;
+        document.getElementById('slugPreview').textContent = article.slug;
+        document.getElementById('richEditor').innerHTML = article.content;
+        document.getElementById('articleCategory').value = article.category;
+        document.getElementById('articleAuthor').value = article.author || '';
+        document.getElementById('articleReadTime').value = article.readTime || '';
+        document.getElementById('articleMetaDesc').value = article.metaDesc || '';
+        document.getElementById('metaCharCount').textContent = (article.metaDesc || '').length;
+        document.getElementById('articleImageUrl').value = article.imageUrl || '';
+        document.getElementById('articleImageData').value = article.imageData || '';
+        document.getElementById('editorTitle').textContent = 'Editar Artigo';
+        // SEO fields
+        document.getElementById('seoTitle').value = article.seoTitle || '';
+        document.getElementById('seoTitleCount').textContent = (article.seoTitle || '').length;
+        document.getElementById('seoCanonical').value = article.seoCanonical || '';
+        document.getElementById('seoKeyword').value = article.seoKeyword || '';
+        document.getElementById('seoOgImage').value = article.seoOgImage || '';
+        // Lead magnet dropdown
+        populateLeadMagnetDropdown();
+        document.getElementById('leadMagnetSelect').value = article.leadMagnetId || '';
+        // CTA banner
+        document.getElementById('ctaBannerEnabled').value = article.ctaBannerEnabled || '0';
+        document.getElementById('ctaBannerTitle').value = article.ctaBannerTitle || '';
+        document.getElementById('ctaBannerDesc').value = article.ctaBannerDesc || '';
+        document.getElementById('ctaBannerCtaText').value = article.ctaBannerCtaText || 'Agendar demonstração';
+        document.getElementById('ctaBannerCtaUrl').value = article.ctaBannerCtaUrl || '/#contato-form';
+        document.getElementById('ctaBannerImageData').value = article.ctaBannerImage || '';
+        if (article.ctaBannerImage) {
+            document.getElementById('ctaBannerImagePreview').innerHTML = \`<img src="\${article.ctaBannerImage}" style="max-width:100%;border-radius:8px;">\`;
+        } else {
+            document.getElementById('ctaBannerImagePreview').innerHTML = '';
+        }
+        previewFeaturedImage();
+        updateSeoScore();
+
+        showView('editor');
+    }
+
+    function duplicateArticle(id) {
+        const db = getDB();
+        const article = db.articles.find(a => a.id === id);
+        if (!article) return;
+
+        const newArticle = {
+            ...article,
+            id: 'art_' + Date.now(),
+            title: article.title + ' (copia)',
+            slug: article.slug + '-copia',
+            status: 'draft',
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+            authorId: session.id
+        };
+
+        db.articles.push(newArticle);
+        setDB(db);
+        refreshArticles();
+        toast('Artigo duplicado como rascunho.');
+    }
+
+    function generateSlug() {
+        const title = document.getElementById('articleTitleInput').value;
+        const slug = title
+            .toLowerCase()
+            .normalize('NFD').replace(/[\\u0300-\\u036f]/g, '')
+            .replace(/[^a-z0-9\\s-]/g, '')
+            .replace(/\\s+/g, '-')
+            .replace(/-+/g, '-')
+            .replace(/^-|-$/g, '')
+            .slice(0, 80);
+        document.getElementById('articleSlug').value = slug;
+        document.getElementById('slugPreview').textContent = slug || 'titulo-do-artigo';
+    }
+
+    function saveArticle(status) {
+        const title = document.getElementById('articleTitleInput').value.trim();
+        const slug = document.getElementById('articleSlug').value.trim();
+        const content = document.getElementById('richEditor').innerHTML;
+        const category = document.getElementById('articleCategory').value;
+        const author = document.getElementById('articleAuthor').value.trim() || session.name;
+        const readTime = document.getElementById('articleReadTime').value.trim();
+        const metaDesc = document.getElementById('articleMetaDesc').value.trim();
+        const imageUrl = document.getElementById('articleImageUrl').value.trim();
+        const imageData = document.getElementById('articleImageData').value;
+        const articleId = document.getElementById('articleId').value;
+        // SEO fields
+        const seoTitle = document.getElementById('seoTitle').value.trim();
+        const seoCanonical = document.getElementById('seoCanonical').value.trim();
+        const seoKeyword = document.getElementById('seoKeyword').value.trim();
+        const seoOgImage = document.getElementById('seoOgImage').value.trim();
+        const leadMagnetId = document.getElementById('leadMagnetSelect').value;
+        const ctaBannerEnabled = document.getElementById('ctaBannerEnabled').value;
+        const ctaBannerTitle = document.getElementById('ctaBannerTitle').value.trim();
+        const ctaBannerDesc = document.getElementById('ctaBannerDesc').value.trim();
+        const ctaBannerCtaText = document.getElementById('ctaBannerCtaText').value.trim();
+        const ctaBannerCtaUrl = document.getElementById('ctaBannerCtaUrl').value.trim();
+        const ctaBannerImage = document.getElementById('ctaBannerImageData').value;
+
+        if (!title) { toast('Informe o titulo do artigo.', 'error'); return; }
+        if (!category) { toast('Selecione uma categoria.', 'error'); return; }
+        if (!content || content === '<p>Comece a escrever seu artigo aqui...</p>') {
+            toast('Escreva o conteudo do artigo.', 'error'); return;
+        }
+
+        const db = getDB();
+        const now = new Date().toISOString();
+        const finalImageUrl = imageData || imageUrl;
+
+        if (articleId) {
+            const idx = db.articles.findIndex(a => a.id === articleId);
+            if (idx === -1) { toast('Artigo nao encontrado.', 'error'); return; }
+
+            db.articles[idx] = {
+                ...db.articles[idx],
+                title, slug, content, category, author, readTime, metaDesc,
+                imageUrl: finalImageUrl, imageData,
+                seoTitle, seoCanonical, seoKeyword, seoOgImage,
+                leadMagnetId,
+                ctaBannerEnabled, ctaBannerTitle, ctaBannerDesc, ctaBannerCtaText, ctaBannerCtaUrl, ctaBannerImage,
+                status,
+                updatedAt: now
+            };
+        } else {
+            const finalSlug = slug || generateSlugFromTitle(title);
+            db.articles.push({
+                id: 'art_' + Date.now(),
+                title, slug: finalSlug, content, category, author, readTime, metaDesc,
+                imageUrl: finalImageUrl, imageData,
+                seoTitle, seoCanonical, seoKeyword, seoOgImage,
+                leadMagnetId,
+                ctaBannerEnabled, ctaBannerTitle, ctaBannerDesc, ctaBannerCtaText, ctaBannerCtaUrl, ctaBannerImage,
+                status,
+                authorId: session.id,
+                createdAt: now,
+                updatedAt: now
+            });
+        }
+
+        setDB(db);
+        toast(status === 'published' ? 'Artigo publicado!' : 'Rascunho salvo!');
+
+        // Reset editor
+        clearEditor();
+        showView('articles');
+    }
+
+    function generateSlugFromTitle(title) {
+        return title
+            .toLowerCase()
+            .normalize('NFD').replace(/[\\u0300-\\u036f]/g, '')
+            .replace(/[^a-z0-9\\s-]/g, '')
+            .replace(/\\s+/g, '-')
+            .replace(/-+/g, '-')
+            .replace(/^-|-$/g, '')
+            .slice(0, 80);
+    }
+
+    // Rich text commands
+    function execCmd(cmd, value) {
+        document.getElementById('richEditor').focus();
+        document.execCommand(cmd, false, value || null);
+    }
+
+    function insertBlockquote() {
+        execCmd('formatBlock', '<blockquote>');
+    }
+
+    function insertLink() {
+        const url = prompt('URL do link:');
+        if (url) execCmd('createLink', url);
+    }
+
+    function insertImage() {
+        const url = prompt('URL da imagem:');
+        if (url) execCmd('insertImage', url);
+    }
+
+    function insertImageFromFile() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.onchange = (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            if (file.size > 2 * 1024 * 1024) {
+                toast('Imagem muito grande. Max 2MB.', 'error');
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                const editor = document.getElementById('richEditor');
+                editor.focus();
+                document.execCommand('insertImage', false, ev.target.result);
+            };
+            reader.readAsDataURL(file);
+        };
+        input.click();
+    }
+
+    // ── Image Upload ──
+    function switchImageTab(tab) {
+        document.querySelectorAll('.image-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.image-tab-content').forEach(c => c.classList.remove('active'));
+        if (tab === 'upload') {
+            document.querySelector('.image-tab:first-child').classList.add('active');
+            document.getElementById('imageTabUpload').classList.add('active');
+        } else {
+            document.querySelector('.image-tab:last-child').classList.add('active');
+            document.getElementById('imageTabUrl').classList.add('active');
+        }
+    }
+
+    function handleImageUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        if (file.size > 2 * 1024 * 1024) {
+            toast('Imagem muito grande. Maximo 2MB.', 'error');
+            return;
+        }
+        if (!file.type.startsWith('image/')) {
+            toast('Selecione um arquivo de imagem.', 'error');
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            document.getElementById('articleImageData').value = e.target.result;
+            showImagePreview(e.target.result);
+            updateSeoScore();
+        };
+        reader.readAsDataURL(file);
+    }
+
+    // Drag & drop
+    const dropZone = document.getElementById('imageDropZone');
+    if (dropZone) {
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const fakeEvent = { target: { files: [file] } };
+                handleImageUpload(fakeEvent);
+            }
+        });
+    }
+
+    function showImagePreview(src) {
+        const container = document.getElementById('featuredImagePreview');
+        container.innerHTML = \`
+            <img src="\${src}" alt="Preview">
+            <button class="remove-image" onclick="removeImage()" title="Remover imagem">
+                <i class="fas fa-times"></i>
+            </button>
+        \`;
+    }
+
+    function removeImage() {
+        document.getElementById('articleImageData').value = '';
+        document.getElementById('articleImageUrl').value = '';
+        document.getElementById('featuredImagePreview').innerHTML = '';
+        const fileInput = document.getElementById('imageFileInput');
+        if (fileInput) fileInput.value = '';
+        updateSeoScore();
+    }
+
+    function previewFeaturedImage() {
+        const url = document.getElementById('articleImageUrl').value.trim();
+        if (url) {
+            document.getElementById('articleImageData').value = '';
+            showImagePreview(url);
+        } else {
+            const data = document.getElementById('articleImageData').value;
+            if (!data) document.getElementById('featuredImagePreview').innerHTML = '';
+        }
+        updateSeoScore();
+    }
+
+    // ══ LEAD MAGNETS CRUD ══
+    const LEAD_TYPE_LABELS = { ebook: 'Ebook', checklist: 'Checklist', planilha: 'Planilha', webinar: 'Webinar', trial: 'Trial Gratuito' };
+
+    function refreshLeadMagnets() {
+        const db = getDB();
+        const tbody = document.getElementById('leadMagnetsTableBody');
+        if (!tbody) return;
+        if (!db.leadMagnets.length) {
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:32px;color:var(--gray-500);">Nenhuma isca cadastrada. Clique em "Nova Isca" para criar.</td></tr>';
+            return;
+        }
+        tbody.innerHTML = db.leadMagnets.map(lm => \`
+            <tr>
+                <td><span style="background:rgba(255,186,26,0.15);color:var(--primary);padding:4px 10px;border-radius:20px;font-size:0.78rem;font-weight:500;">\${LEAD_TYPE_LABELS[lm.type] || lm.type}</span></td>
+                <td><strong>\${escapeHtml(lm.title)}</strong></td>
+                <td style="color:var(--gray-500);font-size:0.85rem;">\${escapeHtml(lm.desc || '-')}</td>
+                <td style="font-size:0.85rem;">\${escapeHtml(lm.cta || 'Baixar agora')}</td>
+                <td>
+                    <div style="display:flex;gap:4px;">
+                        <button class="btn btn-ghost btn-sm" onclick="editLeadMagnet('\${lm.id}')" title="Editar"><i class="fas fa-pen" style="font-size:0.75rem;"></i></button>
+                        <button class="btn btn-ghost btn-sm" onclick="deleteLeadMagnet('\${lm.id}')" title="Excluir"><i class="fas fa-trash" style="font-size:0.75rem;color:var(--error);"></i></button>
+                    </div>
+                </td>
+            </tr>
+        \`).join('');
+    }
+
+    function openLeadMagnetModal(id) {
+        document.getElementById('lmId').value = '';
+        document.getElementById('lmType').value = 'ebook';
+        document.getElementById('lmTitle').value = '';
+        document.getElementById('lmDesc').value = '';
+        document.getElementById('lmCta').value = 'Baixar agora';
+        document.getElementById('lmUrl').value = '';
+        document.getElementById('lmEvent').value = '';
+        document.getElementById('lmImageData').value = '';
+        document.getElementById('lmImagePreview').innerHTML = '';
+        document.getElementById('leadMagnetModalTitle').textContent = 'Nova Isca Digital';
+        document.getElementById('leadMagnetModal').style.display = 'flex';
+    }
+
+    function closeLeadMagnetModal() {
+        document.getElementById('leadMagnetModal').style.display = 'none';
+    }
+
+    function editLeadMagnet(id) {
+        const db = getDB();
+        const lm = db.leadMagnets.find(l => l.id === id);
+        if (!lm) return;
+        document.getElementById('lmId').value = lm.id;
+        document.getElementById('lmType').value = lm.type || 'ebook';
+        document.getElementById('lmTitle').value = lm.title || '';
+        document.getElementById('lmDesc').value = lm.desc || '';
+        document.getElementById('lmCta').value = lm.cta || 'Baixar agora';
+        document.getElementById('lmUrl').value = lm.url || '';
+        document.getElementById('lmEvent').value = lm.event || '';
+        document.getElementById('lmImageData').value = lm.image || '';
+        document.getElementById('lmImagePreview').innerHTML = lm.image ? \`<img src="\${lm.image}" style="max-width:100%;border-radius:8px;">\` : '';
+        document.getElementById('leadMagnetModalTitle').textContent = 'Editar Isca Digital';
+        document.getElementById('leadMagnetModal').style.display = 'flex';
+    }
+
+    function saveLeadMagnet() {
+        const title = document.getElementById('lmTitle').value.trim();
+        if (!title) { toast('Informe o titulo da isca.', 'error'); return; }
+        const db = getDB();
+        const id = document.getElementById('lmId').value;
+        const data = {
+            type: document.getElementById('lmType').value,
+            title,
+            desc: document.getElementById('lmDesc').value.trim(),
+            cta: document.getElementById('lmCta').value.trim() || 'Baixar agora',
+            url: document.getElementById('lmUrl').value.trim(),
+            event: document.getElementById('lmEvent').value.trim(),
+            image: document.getElementById('lmImageData').value
+        };
+        if (id) {
+            const idx = db.leadMagnets.findIndex(l => l.id === id);
+            if (idx !== -1) db.leadMagnets[idx] = { ...db.leadMagnets[idx], ...data };
+        } else {
+            db.leadMagnets.push({ id: 'lm_' + Date.now(), ...data });
+        }
+        setDB(db);
+        closeLeadMagnetModal();
+        refreshLeadMagnets();
+        toast('Isca salva!');
+    }
+
+    function deleteLeadMagnet(id) {
+        if (!confirm('Excluir esta isca digital?')) return;
+        const db = getDB();
+        db.leadMagnets = db.leadMagnets.filter(l => l.id !== id);
+        setDB(db);
+        refreshLeadMagnets();
+        toast('Isca excluida.');
+    }
+
+    function populateLeadMagnetDropdown() {
+        const db = getDB();
+        const select = document.getElementById('leadMagnetSelect');
+        if (!select) return;
+        const currentVal = select.value;
+        select.innerHTML = '<option value="">Nenhuma (desativado)</option>' +
+            db.leadMagnets.map(lm => \`<option value="\${lm.id}">\${LEAD_TYPE_LABELS[lm.type] || lm.type} - \${escapeHtml(lm.title)}</option>\`).join('');
+        select.value = currentVal;
+    }
+
+    // Lead Magnet modal image upload
+    function handleLmImageUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        if (file.size > 2 * 1024 * 1024) { toast('Imagem muito grande. Max 2MB.', 'error'); return; }
+        if (!file.type.startsWith('image/')) { toast('Selecione um arquivo de imagem.', 'error'); return; }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            document.getElementById('lmImageData').value = e.target.result;
+            document.getElementById('lmImagePreview').innerHTML = \`<img src="\${e.target.result}" style="max-width:100%;border-radius:8px;">\`;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    // Lead Magnet modal drag & drop
+    const lmDropZone = document.getElementById('lmImageDropZone');
+    if (lmDropZone) {
+        lmDropZone.addEventListener('dragover', (e) => { e.preventDefault(); lmDropZone.classList.add('dragover'); });
+        lmDropZone.addEventListener('dragleave', () => { lmDropZone.classList.remove('dragover'); });
+        lmDropZone.addEventListener('drop', (e) => {
+            e.preventDefault(); lmDropZone.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) handleLmImageUpload({ target: { files: [file] } });
+        });
+    }
+
+    // ══ CTA BANNER IMAGE UPLOAD ══
+    function handleCtaBannerImageUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        if (file.size > 2 * 1024 * 1024) { toast('Imagem muito grande. Max 2MB.', 'error'); return; }
+        if (!file.type.startsWith('image/')) { toast('Selecione um arquivo de imagem.', 'error'); return; }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            document.getElementById('ctaBannerImageData').value = e.target.result;
+            document.getElementById('ctaBannerImagePreview').innerHTML = \`<img src="\${e.target.result}" style="max-width:100%;border-radius:8px;">\`;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    const ctaBannerDropZone = document.getElementById('ctaBannerImageDropZone');
+    if (ctaBannerDropZone) {
+        ctaBannerDropZone.addEventListener('dragover', (e) => { e.preventDefault(); ctaBannerDropZone.classList.add('dragover'); });
+        ctaBannerDropZone.addEventListener('dragleave', () => { ctaBannerDropZone.classList.remove('dragover'); });
+        ctaBannerDropZone.addEventListener('drop', (e) => {
+            e.preventDefault(); ctaBannerDropZone.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) handleCtaBannerImageUpload({ target: { files: [file] } });
+        });
+    }
+
+    // Meta description counter
+    document.getElementById('articleMetaDesc').addEventListener('input', function() {
+        document.getElementById('metaCharCount').textContent = this.value.length;
+        updateSeoScore();
+    });
+
+    // SEO title counter
+    document.getElementById('seoTitle').addEventListener('input', function() {
+        document.getElementById('seoTitleCount').textContent = this.value.length;
+    });
+
+    // ── SEO Score ──
+    function updateSeoScore() {
+        const title = document.getElementById('seoTitle').value.trim();
+        const desc = document.getElementById('articleMetaDesc').value.trim();
+        const keyword = document.getElementById('seoKeyword').value.trim();
+        const image = document.getElementById('articleImageData').value || document.getElementById('articleImageUrl').value.trim();
+        const slug = document.getElementById('articleSlug').value.trim();
+        const content = document.getElementById('richEditor').innerText || '';
+        const wordCount = content.split(/\\s+/).filter(w => w.length > 0).length;
+
+        let score = 0;
+        const checks = {
+            seoCheckTitle: title.length > 0 && title.length <= 60,
+            seoCheckDesc: desc.length >= 120 && desc.length <= 160,
+            seoCheckKeyword: keyword.length > 0,
+            seoCheckImage: image.length > 0,
+            seoCheckSlug: slug.length > 0 && slug.length <= 80,
+            seoCheckContent: wordCount >= 300
+        };
+
+        Object.entries(checks).forEach(([id, pass]) => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.className = 'seo-check ' + (pass ? 'pass' : 'fail');
+                el.innerHTML = pass ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-circle"></i>';
+            }
+            if (pass) score++;
+        });
+
+        const pct = Math.round((score / 6) * 100);
+        const fill = document.getElementById('seoScoreFill');
+        fill.style.width = pct + '%';
+        fill.style.background = pct >= 80 ? 'var(--success)' : pct >= 50 ? 'var(--warning)' : 'var(--error)';
+    }
+
+    // View article from list (opens preview modal for a saved article)
+    function viewArticle(id) {
+        const db = getDB();
+        const article = db.articles.find(a => a.id === id);
+        if (!article) return;
+
+        const imgSrc = article.imageData || article.imageUrl || '';
+        const categoryLabel = CATEGORIES[article.category] || article.category;
+        const previewHTML = \`
+            <div style="background:#000;margin:-24px -32px 0;padding:40px 32px 32px;text-align:center;border-radius:16px 16px 0 0;">
+                <span style="background:#ffba1a;color:#000;padding:4px 14px;border-radius:20px;font-size:0.7rem;font-weight:600;text-transform:uppercase;">\${escapeHtml(categoryLabel)}</span>
+                <h1 style="font-size:1.5rem;font-weight:700;color:#fff;margin:16px 0 8px;line-height:1.3;">\${escapeHtml(article.title)}</h1>
+                <p style="color:rgba(255,255,255,.5);font-size:0.82rem;">
+                    <i class="fas fa-calendar-alt"></i> \${formatDate(article.updatedAt)}
+                    &nbsp;&nbsp;<i class="fas fa-clock"></i> \${escapeHtml(article.readTime || '5 min')}
+                    &nbsp;&nbsp;<i class="fas fa-user"></i> \${escapeHtml(article.author || 'Equipe Orbit')}
+                </p>
+            </div>
+            \${imgSrc ? \`<img src="\${imgSrc}" style="width:100%;max-height:350px;object-fit:cover;border-radius:0 0 12px 12px;margin-bottom:24px;" alt="\${escapeHtml(article.title)}">\` : ''}
+            <div style="line-height:1.8;font-size:0.95rem;padding-top:\${imgSrc ? '0' : '24px'};">
+                \${article.content}
+            </div>
+            <div style="border-top:1px solid #eee;margin-top:24px;padding-top:16px;display:flex;gap:8px;flex-wrap:wrap;">
+                <span class="badge badge-\${article.status}" style="font-size:0.72rem;">\${article.status === 'published' ? 'Publicado' : 'Rascunho'}</span>
+                \${article.seoKeyword ? \`<span style="background:rgba(59,130,246,0.1);color:#3B82F6;padding:3px 10px;border-radius:20px;font-size:0.7rem;font-weight:500;">Keyword: \${escapeHtml(article.seoKeyword)}</span>\` : ''}
+                \${article.metaDesc ? \`<p style="font-size:0.78rem;color:#888;margin-top:8px;width:100%;"><strong>Meta:</strong> \${escapeHtml(article.metaDesc)}</p>\` : ''}
+            </div>
+        \`;
+
+        document.getElementById('previewContent').innerHTML = previewHTML;
+        document.getElementById('previewModal').classList.add('active');
+    }
+
+    // Preview article (from editor)
+    function previewArticle() {
+        const title = document.getElementById('articleTitleInput').value || 'Sem titulo';
+        const content = document.getElementById('richEditor').innerHTML;
+        const category = document.getElementById('articleCategory').value;
+        const author = document.getElementById('articleAuthor').value || session.name;
+        const imgSrc = document.getElementById('articleImageData').value || document.getElementById('articleImageUrl').value;
+
+        const previewHTML = \`
+            <div style="background:#000;margin:-24px -32px 0;padding:40px 32px 32px;text-align:center;border-radius:16px 16px 0 0;">
+                <span style="background:#ffba1a;color:#000;padding:4px 14px;border-radius:20px;font-size:0.7rem;font-weight:600;text-transform:uppercase;">\${CATEGORIES[category] || 'Categoria'}</span>
+                <h1 style="font-size:1.5rem;font-weight:700;color:#fff;margin:16px 0 8px;line-height:1.3;">\${escapeHtml(title)}</h1>
+                <p style="color:rgba(255,255,255,.5);font-size:0.82rem;">Por \${escapeHtml(author)}</p>
+            </div>
+            \${imgSrc ? \`<img src="\${imgSrc}" style="width:100%;max-height:350px;object-fit:cover;border-radius:0 0 12px 12px;margin-bottom:24px;" alt="Destaque">\` : ''}
+            <div style="line-height:1.8;font-size:0.95rem;padding-top:\${imgSrc ? '0' : '24px'};">\${content}</div>
+        \`;
+
+        document.getElementById('previewContent').innerHTML = previewHTML;
+        document.getElementById('previewModal').classList.add('active');
+    }
+
+    // Export article as HTML file with full SEO + Schema
+    function exportArticleHTML() {
+        const title = document.getElementById('articleTitleInput').value || 'artigo';
+        const slug = document.getElementById('articleSlug').value || 'artigo';
+        const content = document.getElementById('richEditor').innerHTML;
+        const category = document.getElementById('articleCategory').value;
+        const author = document.getElementById('articleAuthor').value || 'Equipe Orbit';
+        const readTime = document.getElementById('articleReadTime').value || '5 min';
+        const metaDesc = document.getElementById('articleMetaDesc').value || '';
+        const imageData = document.getElementById('articleImageData').value;
+        const imageUrl = imageData || document.getElementById('articleImageUrl').value || 'https://placehold.co/900x450/000000/FDB73F?text=Artigo';
+        // SEO
+        const seoTitle = document.getElementById('seoTitle').value || title;
+        const seoCanonical = document.getElementById('seoCanonical').value || 'https://orbitgestao.com.br/blog/' + slug + '.html';
+        const seoKeyword = document.getElementById('seoKeyword').value || '';
+        const seoOgImage = document.getElementById('seoOgImage').value || imageUrl;
+
+        const categoryLabel = CATEGORIES[category] || 'Blog';
+        const now = new Date();
+        const isoDate = now.toISOString();
+        const today = now.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
+        const readMinutes = parseInt(readTime) || 5;
+
+        // Extract plain text word count for schema
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = content;
+        const plainText = tempDiv.textContent || '';
+        const wordCount = plainText.split(/\\\\s+/).filter(w => w.length > 0).length;
+
+        // Build JSON-LD Schema
+        const schemaArticle = {
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": escapeHtml(seoTitle),
+            "description": escapeHtml(metaDesc),
+            "image": escapeHtml(seoOgImage),
+            "author": {
+                "@type": "Person",
+                "name": escapeHtml(author)
+            },
+            "publisher": {
+                "@type": "Organization",
+                "name": "Orbit Gestao",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://orbitgestao.com.br/images/logo-orbit-white.png"
+                }
+            },
+            "datePublished": isoDate,
+            "dateModified": isoDate,
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": escapeHtml(seoCanonical)
+            },
+            "wordCount": wordCount,
+            "articleSection": escapeHtml(categoryLabel),
+            "inLanguage": "pt-BR",
+            "timeRequired": "PT" + readMinutes + "M"
+        };
+        if (seoKeyword) {
+            schemaArticle.keywords = escapeHtml(seoKeyword);
+        }
+
+        const schemaBreadcrumb = {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://orbitgestao.com.br/" },
+                { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://orbitgestao.com.br/blog" },
+                { "@type": "ListItem", "position": 3, "name": escapeHtml(title), "item": escapeHtml(seoCanonical) }
+            ]
+        };
+
+        const schemaOrg = {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Orbit Gestao",
+            "url": "https://orbitgestao.com.br",
+            "logo": "https://orbitgestao.com.br/images/logo-orbit-white.png",
+            "sameAs": []
+        };
+
+        const schemaFAQ = {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "Orbit Gestao",
+            "url": "https://orbitgestao.com.br",
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://orbitgestao.com.br/blog?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+            }
+        };
+
+        const html = \`<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Primary Meta Tags -->
+    <title>\${escapeHtml(seoTitle)} | Blog Orbit Gestao</title>
+    <meta name="title" content="\${escapeHtml(seoTitle)} | Blog Orbit Gestao">
+    <meta name="description" content="\${escapeHtml(metaDesc)}">
+    \${seoKeyword ? \`<meta name="keywords" content="\${escapeHtml(seoKeyword)}, gestao estrategica, orbit gestao, gestao empresarial">\` : ''}
+    <meta name="author" content="\${escapeHtml(author)}">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <link rel="canonical" href="\${escapeHtml(seoCanonical)}">
+    <meta name="language" content="pt-BR">
+    <meta name="revisit-after" content="7 days">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="\${escapeHtml(seoCanonical)}">
+    <meta property="og:title" content="\${escapeHtml(seoTitle)}">
+    <meta property="og:description" content="\${escapeHtml(metaDesc)}">
+    <meta property="og:image" content="\${escapeHtml(seoOgImage)}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="\${escapeHtml(title)}">
+    <meta property="og:site_name" content="Orbit Gestao">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="article:published_time" content="\${isoDate}">
+    <meta property="article:modified_time" content="\${isoDate}">
+    <meta property="article:author" content="\${escapeHtml(author)}">
+    <meta property="article:section" content="\${escapeHtml(categoryLabel)}">
+    \${seoKeyword ? \`<meta property="article:tag" content="\${escapeHtml(seoKeyword)}">\` : ''}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="\${escapeHtml(seoCanonical)}">
+    <meta name="twitter:title" content="\${escapeHtml(seoTitle)}">
+    <meta name="twitter:description" content="\${escapeHtml(metaDesc)}">
+    <meta name="twitter:image" content="\${escapeHtml(seoOgImage)}">
+    <meta name="twitter:image:alt" content="\${escapeHtml(title)}">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+\${JSON.stringify(schemaArticle, null, 2)}
+    <\\/script>
+    <script type="application/ld+json">
+\${JSON.stringify(schemaBreadcrumb, null, 2)}
+    <\\/script>
+    <script type="application/ld+json">
+\${JSON.stringify(schemaOrg, null, 2)}
+    <\\/script>
+
+    <!-- Preconnect & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=4fbbda1e">
+    <style>
+        .article-hero{background:#000;padding:140px 24px 80px;text-align:center;position:relative;overflow:hidden}
+        .article-hero__bg{position:absolute;inset:0;pointer-events:none}
+        .article-hero__glow{position:absolute;width:400px;height:400px;border-radius:50%;background:#ffba1a;filter:blur(150px);opacity:.1;top:-100px;right:-100px}
+        .article-hero .container{position:relative;z-index:1;max-width:800px;margin:0 auto}
+        .article-hero__tag{display:inline-block;background:#ffba1a;color:#000;padding:6px 18px;border-radius:50px;font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:24px}
+        .article-hero h1{font-size:clamp(1.75rem,4vw,2.75rem);font-weight:700;color:#fff;line-height:1.25;margin-bottom:20px}
+        .article-hero__meta{display:flex;align-items:center;justify-content:center;gap:24px;color:rgba(255,255,255,.5);font-size:.9rem}
+        .article-hero__meta i{margin-right:6px}
+        .article-featured-image{max-width:900px;margin:-40px auto 0;padding:0 24px;position:relative;z-index:2}
+        .article-featured-image img{width:100%;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+        .article-body{max-width:760px;margin:0 auto;padding:60px 24px 80px}
+        .article-body h2{font-size:1.5rem;font-weight:700;color:#000;margin:48px 0 16px;line-height:1.3}
+        .article-body h3{font-size:1.2rem;font-weight:600;color:#000;margin:36px 0 12px}
+        .article-body p{font-size:1.05rem;line-height:1.8;color:#444;margin-bottom:20px}
+        .article-body ul,.article-body ol{margin:16px 0 24px 24px;color:#444;line-height:1.8;font-size:1.05rem}
+        .article-body li{margin-bottom:8px;list-style:disc}
+        .article-body ol li{list-style:decimal}
+        .article-body blockquote{border-left:4px solid #ffba1a;margin:32px 0;padding:16px 24px;background:#fdf8ee;border-radius:0 12px 12px 0;font-style:italic;color:#333}
+        .article-body img{max-width:100%;border-radius:12px;margin:32px 0}
+        .article-body a{color:#E5A235;font-weight:500;text-decoration:underline}
+        .article-cta{background:#000;padding:60px 24px;text-align:center;margin-top:40px}
+        .article-cta .container{max-width:640px;margin:0 auto}
+        .article-cta h3{font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:12px}
+        .article-cta p{color:rgba(255,255,255,.6);margin-bottom:24px;font-size:1rem}
+        nav.breadcrumb{max-width:760px;margin:24px auto 0;padding:0 24px;font-size:.82rem}
+        nav.breadcrumb a{color:#E5A235;text-decoration:none}
+        nav.breadcrumb a:hover{text-decoration:underline}
+        nav.breadcrumb span{color:#999;margin:0 8px}
+        @media(max-width:768px){.article-hero{padding:120px 20px 60px}.article-hero__meta{flex-direction:column;gap:8px}.article-body{padding:40px 20px 60px}}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo"><a href="/"><img src="/images/logo-orbit-white.png" alt="Orbit Gestao" height="40"></a></div>
+            <ul class="nav-menu">
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/#plataforma">Solucoes <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown">
+                        <a href="/processos"><i class="fas fa-sitemap"></i> Processos</a>
+                        <a href="/indicadores"><i class="fas fa-chart-line"></i> Indicadores</a>
+                        <a href="/tarefas"><i class="fas fa-tasks"></i> Tarefas</a>
+                        <a href="/competencias"><i class="fas fa-users"></i> Competencias</a>
+                        <a href="/auditorias"><i class="fas fa-clipboard-check"></i> Auditorias</a>
+                    </div>
+                </li>
+                <li><a href="/blog">Conhecimento</a></li>
+                <li><a href="/parcerias" data-i18n="footer.partners">Seja Parceiro</a></li>
+                <li><a href="/#contato-form">Fale Conosco</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="#" class="btn btn-outline" data-i18n="nav.login">Entrar</a>
+                <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>
+            </div>
+            <button class="lang-switch" onclick="switchLang()" aria-label="Change language">
+                <span class="lang-switch__flag">🇺🇸</span>
+                <span class="lang-switch__label">EN</span>
+            </button>
+
+            <button class="menu-toggle">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
+    <div class="mobile-menu">
+        <div class="mobile-menu__header">
+            <span class="mobile-menu__header-title" data-i18n="mobile.title">Menu</span>
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">&times;</button>
+        </div>
+        <div class="mobile-menu__body">
+            <a href="/">Home</a>
+            <a href="/processos">Processos</a>
+            <a href="/indicadores">Indicadores</a>
+            <a href="/tarefas">Tarefas</a>
+            <a href="/competencias">Competencias</a>
+            <a href="/auditorias">Auditorias</a>
+            <a href="/blog">Conhecimento</a>
+            <a href="/parcerias" data-i18n="footer.partners">Seja Parceiro</a>
+        </div>
+        <div class="mobile-menu__footer">
+            <button class="lang-switch" onclick="switchLang()" aria-label="Change language">
+                <span class="lang-switch__flag">🇺🇸</span>
+                <span class="lang-switch__label">EN</span>
+            </button>
+            <a href="/#contato-form" class="btn btn-primary" onclick="closeMobileMenu()">Fale Conosco</a>
+        </div>
+    </div>
+    <section class="article-hero">
+        <div class="article-hero__bg"><div class="article-hero__glow"></div></div>
+        <div class="container">
+            <span class="article-hero__tag">\${escapeHtml(categoryLabel)}</span>
+            <h1>\${escapeHtml(title)}</h1>
+            <div class="article-hero__meta">
+                <span><i class="fas fa-calendar-alt"></i> <time datetime="\${isoDate}">\${today}</time></span>
+                <span><i class="fas fa-clock"></i> \${escapeHtml(readTime)} de leitura</span>
+                <span><i class="fas fa-user"></i> \${escapeHtml(author)}</span>
+            </div>
+        </div>
+    </section>
+    <div class="article-featured-image">
+        <img src="\${escapeHtml(imageUrl)}" alt="\${escapeHtml(title)}" loading="eager" width="900" height="450">
+    </div>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>/</span>
+        <a href="/blog">Blog</a><span>/</span>
+        \${escapeHtml(title)}
+    </nav>
+    <article class="article-body" itemscope itemtype="https://schema.org/BlogPosting">
+        <meta itemprop="headline" content="\${escapeHtml(title)}">
+        <meta itemprop="author" content="\${escapeHtml(author)}">
+        <meta itemprop="datePublished" content="\${isoDate}">
+        <meta itemprop="image" content="\${escapeHtml(imageUrl)}">
+        \${content}
+    </article>
+    <section class="article-cta">
+        <div class="container">
+            <h3>Pronto para transformar sua gestao?</h3>
+            <p>Veja como a Orbit pode ajudar sua empresa a executar a estrategia com mais eficiencia.</p>
+            <a href="/#contato-form" class="btn btn-primary btn-lg">Agendar demonstracao</a>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo"><img src="/images/logo-orbit-white.png" alt="Orbit Gestao" height="36"></div>
+                    <p>Transformando estrategia em execucao para empresas de medio porte.</p>
+                    <div class="social-hover">
+                        <a href="#" class="social-hover__item" data-name="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                            <span class="social-hover__label">LinkedIn</span>
+                        </a>
+                        <a href="#" class="social-hover__item" data-name="Facebook">
+                            <i class="fab fa-facebook"></i>
+                            <span class="social-hover__label">Facebook</span>
+                        </a>
+                        <a href="#" class="social-hover__item" data-name="Instagram">
+                            <i class="fab fa-instagram"></i>
+                            <span class="social-hover__label">Instagram</span>
+                        </a>
+                        <a href="#" class="social-hover__item" data-name="YouTube">
+                            <i class="fab fa-youtube"></i>
+                            <span class="social-hover__label">YouTube</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-column"><h5 data-i18n="footer.contact">Contato</h5><ul class="footer-contact"><li><i class="fas fa-phone"></i> +55 (11) 9999-9999</li><li><i class="fas fa-envelope"></i> contato@orbit.com</li></ul></div>
+                <div class="footer-column"><h5>Solucoes</h5><ul><li><a href="/processos">Processos</a></li><li><a href="/indicadores">Indicadores</a></li><li><a href="/tarefas">Tarefas</a></li><li><a href="/competencias">Competencias</a></li><li><a href="/auditorias">Auditorias</a></li></ul></div>
+                <div class="footer-column"><h5 data-i18n="footer.knowledge">Conhecimento</h5><ul><li><a href="/blog">Blog</a></li><li><a href="#">Documentacao</a></li><li><a href="#">FAQ</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2024 Orbit Gestao. Todos os direitos reservados.</p></div>
+        </div>
+    </footer>
+    <script>
+        const header = document.querySelector('.header');
+        window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 50); });
+        document.querySelectorAll('.nav-menu > li').forEach(item => {
+            const dropdown = item.querySelector('.dropdown');
+            if (!dropdown) return;
+            item.addEventListener('mouseenter', () => { dropdown.style.opacity='1'; dropdown.style.visibility='visible'; dropdown.style.transform='translateY(0)'; });
+            item.addEventListener('mouseleave', () => { dropdown.style.opacity='0'; dropdown.style.visibility='hidden'; dropdown.style.transform='translateY(10px)'; });
+        });
+    <\\/script>
+</body>
+</html>\`;
+
+        const blob = new Blob([html], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = slug + '.html';
+        a.click();
+        URL.revokeObjectURL(url);
+        toast('HTML exportado com SEO + Schema! Coloque na pasta blog/');
+    }
+
+    // ═══ USERS MANAGEMENT ═══
+    function refreshUsers() {
+        const db = getDB();
+        const tbody = document.getElementById('usersTableBody');
+
+        tbody.innerHTML = db.users.map(u => \`
+            <tr>
+                <td><strong>\${escapeHtml(u.name)}</strong></td>
+                <td>\${escapeHtml(u.email)}</td>
+                <td><span class="badge badge-\${u.role}">\${u.role === 'admin' ? 'Admin Full' : 'Editor'}</span></td>
+                <td><span class="badge \${u.active !== false ? 'badge-published' : 'badge-draft'}">\${u.active !== false ? 'Ativo' : 'Inativo'}</span></td>
+                <td>
+                    <div class="actions-cell">
+                        <button class="btn btn-secondary btn-icon btn-sm" onclick="editUser('\${u.id}')" title="Editar">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        \${u.email !== 'rodrigoosouzaamarketing@gmail.com' ? \`
+                        <button class="btn btn-danger btn-icon btn-sm" onclick="confirmDeleteUser('\${u.id}')" title="Excluir">
+                            <i class="fas fa-trash"></i>
+                        </button>\` : ''}
+                    </div>
+                </td>
+            </tr>
+        \`).join('');
+    }
+
+    function openUserModal(userId) {
+        document.getElementById('modalUserId').value = '';
+        document.getElementById('modalUserName').value = '';
+        document.getElementById('modalUserEmail').value = '';
+        document.getElementById('modalUserPassword').value = '';
+        document.getElementById('modalUserRole').value = 'editor';
+        document.getElementById('userModalTitle').textContent = 'Novo Usuario';
+        document.getElementById('passwordHint').textContent = 'Obrigatorio para novos usuarios';
+        document.getElementById('userModal').classList.add('active');
+    }
+
+    function editUser(id) {
+        const db = getDB();
+        const user = db.users.find(u => u.id === id);
+        if (!user) return;
+
+        document.getElementById('modalUserId').value = user.id;
+        document.getElementById('modalUserName').value = user.name;
+        document.getElementById('modalUserEmail').value = user.email;
+        document.getElementById('modalUserPassword').value = '';
+        document.getElementById('modalUserRole').value = user.role;
+        document.getElementById('userModalTitle').textContent = 'Editar Usuario';
+        document.getElementById('passwordHint').textContent = 'Deixe em branco para manter a senha atual';
+        document.getElementById('userModal').classList.add('active');
+    }
+
+    function closeUserModal() {
+        document.getElementById('userModal').classList.remove('active');
+    }
+
+    async function saveUser() {
+        const id = document.getElementById('modalUserId').value;
+        const name = document.getElementById('modalUserName').value.trim();
+        const email = document.getElementById('modalUserEmail').value.trim().toLowerCase();
+        const password = document.getElementById('modalUserPassword').value;
+        const role = document.getElementById('modalUserRole').value;
+
+        if (!name || !email) {
+            toast('Preencha nome e e-mail.', 'error');
+            return;
+        }
+
+        const db = getDB();
+
+        if (id) {
+            // Update
+            const idx = db.users.findIndex(u => u.id === id);
+            if (idx === -1) return;
+
+            // Check duplicate email
+            const dup = db.users.find(u => u.email === email && u.id !== id);
+            if (dup) { toast('Ja existe um usuario com este e-mail.', 'error'); return; }
+
+            db.users[idx].name = name;
+            db.users[idx].email = email;
+            db.users[idx].role = role;
+            if (password) {
+                if (password.length < 6) { toast('Senha deve ter pelo menos 6 caracteres.', 'error'); return; }
+                db.users[idx].password = await hashPassword(password);
+            }
+        } else {
+            // Create
+            if (!password || password.length < 6) {
+                toast('Senha deve ter pelo menos 6 caracteres.', 'error');
+                return;
+            }
+
+            const dup = db.users.find(u => u.email === email);
+            if (dup) { toast('Ja existe um usuario com este e-mail.', 'error'); return; }
+
+            db.users.push({
+                id: 'usr_' + Date.now(),
+                email,
+                name,
+                password: await hashPassword(password),
+                role,
+                createdAt: new Date().toISOString(),
+                active: true
+            });
+        }
+
+        setDB(db);
+        closeUserModal();
+        refreshUsers();
+        refreshDashboard();
+        toast(id ? 'Usuario atualizado!' : 'Usuario criado!');
+    }
+
+    // ═══ DELETE CONFIRMATIONS ═══
+    let pendingDeleteFn = null;
+
+    function confirmDeleteArticle(id) {
+        document.getElementById('deleteMessage').textContent = 'Tem certeza que deseja excluir este artigo? Esta acao nao pode ser desfeita.';
+        document.getElementById('deleteConfirmBtn').onclick = () => {
+            const db = getDB();
+            db.articles = db.articles.filter(a => a.id !== id);
+            setDB(db);
+            closeDeleteModal();
+            refreshArticles();
+            refreshDashboard();
+            toast('Artigo excluido.');
+        };
+        document.getElementById('deleteModal').classList.add('active');
+    }
+
+    function confirmDeleteUser(id) {
+        document.getElementById('deleteMessage').textContent = 'Tem certeza que deseja excluir este usuario?';
+        document.getElementById('deleteConfirmBtn').onclick = () => {
+            const db = getDB();
+            db.users = db.users.filter(u => u.id !== id);
+            setDB(db);
+            closeDeleteModal();
+            refreshUsers();
+            refreshDashboard();
+            toast('Usuario excluido.');
+        };
+        document.getElementById('deleteModal').classList.add('active');
+    }
+
+    function closeDeleteModal() {
+        document.getElementById('deleteModal').classList.remove('active');
+    }
+
+    // ═══ HELPERS ═══
+    function escapeHtml(str) {
+        if (!str) return '';
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+
+    function formatDate(dateStr) {
+        try {
+            return new Date(dateStr).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
+        } catch { return dateStr; }
+    }
+
+    // ═══ CUSTOMER STORIES ═══
+    const SEGMENT_LABELS = {
+        industria: 'Indústria', servicos: 'Serviços', tecnologia: 'Tecnologia',
+        saude: 'Saúde', educacao: 'Educação', varejo: 'Varejo',
+        financeiro: 'Financeiro', agronegocio: 'Agronegócio', outro: 'Outro'
+    };
+
+    const STORY_STATUS_LABELS = { pending: 'Pendente', published: 'Publicada', rejected: 'Rejeitada' };
+    const STORY_STATUS_COLORS = { pending: 'warning', published: 'published', rejected: 'draft' };
+
+    function refreshStories() {
+        updateNotifications();
+        const db = getDB();
+        const stories = db.customerStories || [];
+        const tbody = document.getElementById('storiesTableBody');
+        const emptyEl = document.getElementById('storiesEmpty');
+
+        document.getElementById('statStoriesTotal').textContent = stories.length;
+        document.getElementById('statStoriesPending').textContent = stories.filter(s => s.status === 'pending').length;
+        document.getElementById('statStoriesPublished').textContent = stories.filter(s => s.status === 'published').length;
+
+        if (stories.length === 0) {
+            tbody.innerHTML = '';
+            emptyEl.style.display = 'block';
+            return;
+        }
+
+        emptyEl.style.display = 'none';
+        const sorted = [...stories].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+        tbody.innerHTML = sorted.map(s => {
+            const logo = s.companyLogo ? \`<img src="\${s.companyLogo}" style="width:32px;height:32px;border-radius:6px;object-fit:cover;margin-right:8px;vertical-align:middle;">\` : \`<span style="display:inline-flex;width:32px;height:32px;border-radius:6px;background:var(--gray-100);align-items:center;justify-content:center;margin-right:8px;vertical-align:middle;font-size:0.7rem;color:var(--gray-500);"><i class="fas fa-building"></i></span>\`;
+            const statusClass = STORY_STATUS_COLORS[s.status] || 'draft';
+            const statusLabel = STORY_STATUS_LABELS[s.status] || s.status;
+            return \`
+            <tr>
+                <td><div style="display:flex;align-items:center;">\${logo}<strong>\${escapeHtml(s.empresa)}</strong></div></td>
+                <td><span style="font-size:0.85rem;">\${escapeHtml(s.nome)}</span><br><span style="font-size:0.75rem;color:var(--gray-400);">\${escapeHtml(s.email)}</span></td>
+                <td style="max-width:200px;"><span style="font-size:0.85rem;">\${escapeHtml(s.titulo || '-')}</span></td>
+                <td><span style="background:rgba(255,186,26,0.15);color:var(--primary);padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:500;">\${escapeHtml(SEGMENT_LABELS[s.segmento] || s.segmento || '-')}</span></td>
+                <td><span class="badge badge-\${statusClass}">\${statusLabel}</span></td>
+                <td style="font-size:0.82rem;">\${formatDate(s.createdAt)}</td>
+                <td>
+                    <div style="display:flex;gap:4px;">
+                        <button class="btn btn-secondary btn-icon btn-sm" onclick="viewStoryDetail('\${s.id}')" title="Ver detalhes"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-secondary btn-icon btn-sm" onclick="editStoryInEditor('\${s.id}')" title="Editar"><i class="fas fa-edit"></i></button>
+                        \${s.status === 'pending' ? \`
+                        <button class="btn btn-primary btn-icon btn-sm" onclick="updateStoryStatus('\${s.id}','published')" title="Aprovar"><i class="fas fa-check"></i></button>
+                        <button class="btn btn-danger btn-icon btn-sm" onclick="updateStoryStatus('\${s.id}','rejected')" title="Rejeitar"><i class="fas fa-ban"></i></button>
+                        \` : s.status === 'published' ? \`
+                        <button class="btn btn-secondary btn-icon btn-sm" onclick="updateStoryStatus('\${s.id}','pending')" title="Despublicar"><i class="fas fa-undo"></i></button>
+                        \` : \`
+                        <button class="btn btn-primary btn-icon btn-sm" onclick="updateStoryStatus('\${s.id}','published')" title="Aprovar"><i class="fas fa-check"></i></button>
+                        \`}
+                        <button class="btn btn-danger btn-icon btn-sm" onclick="deleteStory('\${s.id}')" title="Excluir"><i class="fas fa-trash"></i></button>
+                    </div>
+                </td>
+            </tr>\`;
+        }).join('');
+    }
+
+    function updateStoryStatus(id, newStatus) {
+        const db = getDB();
+        const idx = db.customerStories.findIndex(s => s.id === id);
+        if (idx === -1) return;
+        db.customerStories[idx].status = newStatus;
+        // Generate slug if missing
+        if (!db.customerStories[idx].slug && db.customerStories[idx].titulo) {
+            db.customerStories[idx].slug = generateSlugFromTitle(db.customerStories[idx].titulo);
+        }
+        setDB(db);
+        refreshStories();
+        toast(newStatus === 'published' ? 'História publicada!' : newStatus === 'rejected' ? 'História rejeitada.' : 'Status atualizado.');
+    }
+
+    function deleteStory(id) {
+        if (!confirm('Excluir esta história de cliente?')) return;
+        const db = getDB();
+        db.customerStories = db.customerStories.filter(s => s.id !== id);
+        setDB(db);
+        refreshStories();
+        toast('História excluída.');
+    }
+
+    function viewStoryDetail(id) {
+        const db = getDB();
+        const s = db.customerStories.find(st => st.id === id);
+        if (!s) return;
+
+        const logo = s.companyLogo ? \`<img src="\${s.companyLogo}" style="width:64px;height:64px;border-radius:12px;object-fit:cover;">\` : \`<div style="width:64px;height:64px;border-radius:12px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--gray-400);"><i class="fas fa-building"></i></div>\`;
+
+        const modules = (s.modulos || []).map(m => \`<span style="background:rgba(255,186,26,0.15);color:var(--primary-dark);padding:3px 12px;border-radius:20px;font-size:0.75rem;font-weight:500;">\${escapeHtml(m)}</span>\`).join(' ');
+
+        const photos = (s.photos || []).map(p => \`<img src="\${p}" style="width:120px;height:90px;object-fit:cover;border-radius:8px;cursor:pointer;" onclick="window.open(this.src)">\`).join('');
+
+        const socialLinks = [];
+        if (s.linkedin) socialLinks.push(\`<a href="\${escapeHtml(s.linkedin)}" target="_blank" style="color:#0077B5;font-size:0.85rem;"><i class="fab fa-linkedin"></i> LinkedIn</a>\`);
+        if (s.instagram) socialLinks.push(\`<a href="\${escapeHtml(s.instagram)}" target="_blank" style="color:#E4405F;font-size:0.85rem;"><i class="fab fa-instagram"></i> Instagram</a>\`);
+        if (s.website) socialLinks.push(\`<a href="\${escapeHtml(s.website)}" target="_blank" style="color:var(--info);font-size:0.85rem;"><i class="fas fa-globe"></i> Website</a>\`);
+
+        let html = \`
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--gray-200);">
+                \${logo}
+                <div>
+                    <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:2px;">\${escapeHtml(s.empresa)}</h3>
+                    <span style="font-size:0.82rem;color:var(--gray-500);">\${escapeHtml(s.nome)} - \${escapeHtml(s.cargo || '')}</span><br>
+                    <span style="font-size:0.78rem;color:var(--gray-400);">\${escapeHtml(s.email)} | \${escapeHtml(s.telefone || '')}</span>
+                </div>
+                <span class="badge badge-\${STORY_STATUS_COLORS[s.status]}" style="margin-left:auto;">\${STORY_STATUS_LABELS[s.status]}</span>
+            </div>
+
+            \${s.titulo ? \`<h4 style="font-size:1rem;font-weight:600;margin-bottom:16px;color:var(--gray-900);">\${escapeHtml(s.titulo)}</h4>\` : ''}
+
+            \${modules ? \`<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;">\${modules}</div>\` : ''}
+
+            <div style="margin-bottom:20px;">
+                <h5 style="font-size:0.82rem;font-weight:600;color:var(--primary-dark);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;"><i class="fas fa-exclamation-triangle" style="margin-right:6px;"></i>O Desafio</h5>
+                <p style="font-size:0.9rem;line-height:1.7;color:var(--gray-700);white-space:pre-line;">\${escapeHtml(s.desafio || '-')}</p>
+            </div>
+
+            <div style="margin-bottom:20px;">
+                <h5 style="font-size:0.82rem;font-weight:600;color:var(--primary-dark);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;"><i class="fas fa-lightbulb" style="margin-right:6px;"></i>A Solução</h5>
+                <p style="font-size:0.9rem;line-height:1.7;color:var(--gray-700);white-space:pre-line;">\${escapeHtml(s.solucao || '-')}</p>
+            </div>
+
+            <div style="margin-bottom:20px;">
+                <h5 style="font-size:0.82rem;font-weight:600;color:var(--primary-dark);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;"><i class="fas fa-chart-line" style="margin-right:6px;"></i>Os Resultados</h5>
+                <p style="font-size:0.9rem;line-height:1.7;color:var(--gray-700);white-space:pre-line;">\${escapeHtml(s.resultados || '-')}</p>
+            </div>
+
+            \${s.depoimento ? \`
+            <div style="border-left:4px solid var(--primary);padding:16px 20px;background:rgba(255,186,26,0.05);border-radius:0 12px 12px 0;margin-bottom:20px;">
+                <p style="font-style:italic;font-size:0.9rem;line-height:1.7;color:var(--gray-700);">"\${escapeHtml(s.depoimento)}"</p>
+                <span style="font-size:0.78rem;color:var(--gray-500);margin-top:8px;display:block;">- \${escapeHtml(s.nome)}, \${escapeHtml(s.cargo || '')} na \${escapeHtml(s.empresa)}</span>
+            </div>\` : ''}
+
+            \${photos ? \`<div style="margin-bottom:20px;"><h5 style="font-size:0.82rem;font-weight:600;color:var(--gray-600);margin-bottom:8px;">Fotos</h5><div style="display:flex;gap:8px;flex-wrap:wrap;">\${photos}</div></div>\` : ''}
+
+            \${s.videoUrl ? \`<div style="margin-bottom:20px;"><h5 style="font-size:0.82rem;font-weight:600;color:var(--gray-600);margin-bottom:8px;">Vídeo</h5><a href="\${escapeHtml(s.videoUrl)}" target="_blank" style="color:var(--info);font-size:0.85rem;"><i class="fas fa-play-circle"></i> \${escapeHtml(s.videoUrl)}</a></div>\` : ''}
+
+            \${socialLinks.length ? \`<div style="display:flex;gap:16px;padding-top:16px;border-top:1px solid var(--gray-200);">\${socialLinks.join('')}</div>\` : ''}
+        \`;
+
+        document.getElementById('storyDetailContent').innerHTML = html;
+
+        let footerHtml = '';
+        if (s.status === 'pending') {
+            footerHtml = \`
+                <button class="btn btn-danger" onclick="updateStoryStatus('\${s.id}','rejected');closeStoryDetail();">Rejeitar</button>
+                <button class="btn btn-primary" onclick="updateStoryStatus('\${s.id}','published');closeStoryDetail();">Aprovar e Publicar</button>
+            \`;
+        } else if (s.status === 'published') {
+            footerHtml = \`
+                <button class="btn btn-secondary" onclick="updateStoryStatus('\${s.id}','pending');closeStoryDetail();">Despublicar</button>
+                <a href="/historias/\${s.id}" target="_blank" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Ver no site</a>
+            \`;
+        } else {
+            footerHtml = \`
+                <button class="btn btn-primary" onclick="updateStoryStatus('\${s.id}','published');closeStoryDetail();">Aprovar e Publicar</button>
+            \`;
+        }
+        document.getElementById('storyDetailFooter').innerHTML = footerHtml;
+        document.getElementById('storyDetailModal').style.display = 'flex';
+    }
+
+    function closeStoryDetail() {
+        document.getElementById('storyDetailModal').style.display = 'none';
+    }
+
+    // ═══ STORY EDITOR ═══
+    let storyPhotos = []; // base64 array for current editor
+
+    function clearStoryEditor() {
+        document.getElementById('storyEditId').value = '';
+        document.getElementById('seEmpresa').value = '';
+        document.getElementById('seSegmento').value = '';
+        document.getElementById('seNome').value = '';
+        document.getElementById('seEmail').value = '';
+        document.getElementById('seCargo').value = '';
+        document.getElementById('seTelefone').value = '';
+        document.getElementById('seTitulo').value = '';
+        document.getElementById('seDesafio').value = '';
+        document.getElementById('seSolucao').value = '';
+        document.getElementById('seResultados').value = '';
+        document.getElementById('seDepoimento').value = '';
+        document.getElementById('seLinkedin').value = '';
+        document.getElementById('seInstagram').value = '';
+        document.getElementById('seWebsite').value = '';
+        document.getElementById('seVideoUrl').value = '';
+        document.getElementById('seLogoData').value = '';
+        document.getElementById('seLogoPreview').innerHTML = '';
+        document.querySelectorAll('.se-modulo').forEach(cb => cb.checked = false);
+        storyPhotos = [];
+        renderStoryPhotoPreviews();
+        document.getElementById('storyEditorTitle').textContent = 'Nova História';
+    }
+
+    function editStoryInEditor(id) {
+        const db = getDB();
+        const s = db.customerStories.find(st => st.id === id);
+        if (!s) return;
+
+        document.getElementById('storyEditId').value = s.id;
+        document.getElementById('seEmpresa').value = s.empresa || '';
+        document.getElementById('seSegmento').value = s.segmento || '';
+        document.getElementById('seNome').value = s.nome || '';
+        document.getElementById('seEmail').value = s.email || '';
+        document.getElementById('seCargo').value = s.cargo || '';
+        document.getElementById('seTelefone').value = s.telefone || '';
+        document.getElementById('seTitulo').value = s.titulo || '';
+        document.getElementById('seDesafio').value = s.desafio || '';
+        document.getElementById('seSolucao').value = s.solucao || '';
+        document.getElementById('seResultados').value = s.resultados || '';
+        document.getElementById('seDepoimento').value = s.depoimento || '';
+        document.getElementById('seLinkedin').value = s.linkedin || '';
+        document.getElementById('seInstagram').value = s.instagram || '';
+        document.getElementById('seWebsite').value = s.website || '';
+        document.getElementById('seVideoUrl').value = s.videoUrl || '';
+        document.getElementById('seLogoData').value = s.companyLogo || '';
+        document.getElementById('seLogoPreview').innerHTML = s.companyLogo ? \`<img src="\${s.companyLogo}" alt="Logo" style="max-width:100%;border-radius:8px;"><button class="remove-image" onclick="document.getElementById('seLogoData').value='';document.getElementById('seLogoPreview').innerHTML=''" title="Remover"><i class="fas fa-times"></i></button>\` : '';
+
+        // Modules
+        const mods = s.modulos || [];
+        document.querySelectorAll('.se-modulo').forEach(cb => {
+            cb.checked = mods.includes(cb.value);
+        });
+
+        // Photos
+        storyPhotos = (s.photos || []).slice();
+        renderStoryPhotoPreviews();
+
+        document.getElementById('storyEditorTitle').textContent = 'Editar História';
+        showView('storyeditor');
+    }
+
+    function handleStoryLogoUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        if (file.size > 2 * 1024 * 1024) { toast('Imagem muito grande. Max 2MB.', 'error'); return; }
+        if (!file.type.startsWith('image/')) { toast('Selecione um arquivo de imagem.', 'error'); return; }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            document.getElementById('seLogoData').value = e.target.result;
+            document.getElementById('seLogoPreview').innerHTML = \`<img src="\${e.target.result}" style="max-width:100%;border-radius:8px;"><button class="remove-image" onclick="document.getElementById('seLogoData').value='';document.getElementById('seLogoPreview').innerHTML=''" title="Remover"><i class="fas fa-times"></i></button>\`;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function handleStoryPhotosUpload(event) {
+        const files = Array.from(event.target.files);
+        if (storyPhotos.length + files.length > 5) {
+            toast('Máximo 5 fotos.', 'error');
+            return;
+        }
+        files.forEach(file => {
+            if (file.size > 2 * 1024 * 1024) { toast(\`\${file.name} muito grande. Max 2MB.\`, 'error'); return; }
+            if (!file.type.startsWith('image/')) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                storyPhotos.push(e.target.result);
+                renderStoryPhotoPreviews();
+            };
+            reader.readAsDataURL(file);
+        });
+        event.target.value = '';
+    }
+
+    function renderStoryPhotoPreviews() {
+        const container = document.getElementById('sePhotosPreview');
+        if (!container) return;
+        container.innerHTML = storyPhotos.map((p, i) => \`
+            <div style="position:relative;display:inline-block;">
+                <img src="\${p}" style="width:80px;height:60px;object-fit:cover;border-radius:6px;">
+                <button onclick="storyPhotos.splice(\${i},1);renderStoryPhotoPreviews()" style="position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:var(--error);color:#fff;border:none;cursor:pointer;font-size:0.6rem;display:flex;align-items:center;justify-content:center;"><i class="fas fa-times"></i></button>
+            </div>
+        \`).join('');
+    }
+
+    // Story editor drag & drop
+    const seLogoZone = document.getElementById('seLogoDropZone');
+    if (seLogoZone) {
+        seLogoZone.addEventListener('dragover', (e) => { e.preventDefault(); seLogoZone.classList.add('dragover'); });
+        seLogoZone.addEventListener('dragleave', () => seLogoZone.classList.remove('dragover'));
+        seLogoZone.addEventListener('drop', (e) => {
+            e.preventDefault(); seLogoZone.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) handleStoryLogoUpload({ target: { files: [file] } });
+        });
+    }
+    const sePhotosZone = document.getElementById('sePhotosDropZone');
+    if (sePhotosZone) {
+        sePhotosZone.addEventListener('dragover', (e) => { e.preventDefault(); sePhotosZone.classList.add('dragover'); });
+        sePhotosZone.addEventListener('dragleave', () => sePhotosZone.classList.remove('dragover'));
+        sePhotosZone.addEventListener('drop', (e) => {
+            e.preventDefault(); sePhotosZone.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length) handleStoryPhotosUpload({ target: { files } });
+        });
+    }
+
+    function saveStoryFromEditor(status) {
+        const empresa = document.getElementById('seEmpresa').value.trim();
+        const segmento = document.getElementById('seSegmento').value;
+        const nome = document.getElementById('seNome').value.trim();
+        const titulo = document.getElementById('seTitulo').value.trim();
+        const desafio = document.getElementById('seDesafio').value.trim();
+        const solucao = document.getElementById('seSolucao').value.trim();
+        const resultados = document.getElementById('seResultados').value.trim();
+
+        if (!empresa) { toast('Informe o nome da empresa.', 'error'); return; }
+        if (!segmento) { toast('Selecione o segmento.', 'error'); return; }
+        if (!nome) { toast('Informe o nome do contato.', 'error'); return; }
+        if (!titulo) { toast('Informe o título da história.', 'error'); return; }
+        if (!desafio) { toast('Descreva o desafio.', 'error'); return; }
+        if (!solucao) { toast('Descreva a solução.', 'error'); return; }
+        if (!resultados) { toast('Descreva os resultados.', 'error'); return; }
+
+        const modulos = [];
+        document.querySelectorAll('.se-modulo:checked').forEach(cb => modulos.push(cb.value));
+
+        const slug = generateSlugFromTitle(titulo);
+
+        const storyData = {
+            empresa, segmento, nome, slug,
+            email: document.getElementById('seEmail').value.trim(),
+            telefone: document.getElementById('seTelefone').value.trim(),
+            cargo: document.getElementById('seCargo').value.trim(),
+            titulo, desafio, solucao, resultados,
+            depoimento: document.getElementById('seDepoimento').value.trim(),
+            linkedin: document.getElementById('seLinkedin').value.trim(),
+            instagram: document.getElementById('seInstagram').value.trim(),
+            website: document.getElementById('seWebsite').value.trim(),
+            videoUrl: document.getElementById('seVideoUrl').value.trim(),
+            companyLogo: document.getElementById('seLogoData').value,
+            modulos,
+            photos: storyPhotos.slice(),
+            status
+        };
+
+        const db = getDB();
+        const editId = document.getElementById('storyEditId').value;
+
+        if (editId) {
+            const idx = db.customerStories.findIndex(s => s.id === editId);
+            if (idx !== -1) {
+                db.customerStories[idx] = { ...db.customerStories[idx], ...storyData, updatedAt: new Date().toISOString() };
+            }
+        } else {
+            db.customerStories.push({
+                id: 'cs_' + Date.now(),
+                ...storyData,
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+            });
+        }
+
+        setDB(db);
+        toast(status === 'published' ? 'História publicada!' : 'Rascunho salvo!');
+        clearStoryEditor();
+        showView('stories');
+    }
+
+    // ═══ NOTIFICATIONS ═══
+    function updateNotifications() {
+        const db = getDB();
+        const pending = (db.customerStories || []).filter(s => s.status === 'pending');
+        const badge = document.getElementById('notifBadge');
+        const countEl = document.getElementById('notifCount');
+        const list = document.getElementById('notifList');
+
+        badge.textContent = pending.length;
+        badge.setAttribute('data-count', pending.length);
+        countEl.textContent = pending.length ? pending.length + ' pendente' + (pending.length > 1 ? 's' : '') : '';
+
+        if (pending.length === 0) {
+            list.innerHTML = '<div class="notif-dropdown__empty"><i class="fas fa-check-circle" style="font-size:1.5rem;margin-bottom:8px;display:block;color:var(--success);"></i>Nenhuma notificação pendente</div>';
+            return;
+        }
+
+        list.innerHTML = pending.map(function(s) {
+            const date = s.createdAt ? new Date(s.createdAt).toLocaleDateString('pt-BR') : '';
+            return '<div class="notif-dropdown__item" onclick="showView(\\'stories\\');closeNotifDropdown();">' +
+                '<div class="notif-dropdown__title"><i class="fas fa-clock" style="color:#F59E0B;margin-right:6px;"></i>' + escapeHtml(s.empresa || 'Empresa') + ' enviou uma história</div>' +
+                '<div class="notif-dropdown__meta">"' + escapeHtml((s.titulo || '').slice(0, 50)) + (s.titulo && s.titulo.length > 50 ? '...' : '') + '" · ' + date + '</div>' +
+            '</div>';
+        }).join('');
+    }
+
+    function toggleNotifDropdown() {
+        document.getElementById('notifDropdown').classList.toggle('open');
+    }
+
+    function closeNotifDropdown() {
+        document.getElementById('notifDropdown').classList.remove('open');
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('#notifBellWrapper')) {
+            closeNotifDropdown();
+        }
+    });
+
+    // ═══ INIT ═══
+    initUI();
+    updateNotifications();
+    </script>
+`;

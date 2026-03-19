@@ -1,4 +1,4 @@
-/* ORBIT — Init all interactive features */
+/* ORBIT - Init all interactive features */
 document.addEventListener('DOMContentLoaded', function() {
 
   // ═══ LANGUAGE SWITCHER ═══
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
     applyEnglish();
   }
 
-  // ═══ ORBITAL HUB — Agent click cards ═══
+  // ═══ ORBITAL HUB - Agent click cards ═══
   document.querySelectorAll('.orbit-hub').forEach(function(hub) {
     var nodes = hub.querySelectorAll('.orbit-hub__node');
     nodes.forEach(function(node) {
@@ -52,6 +52,90 @@ document.addEventListener('DOMContentLoaded', function() {
           n.classList.remove('orbit-node--active', 'orbit-node--dimmed');
         });
       }
+    });
+  });
+
+  // ═══ ORBITAL HUB LAYOUT (position nodes in circle + SVG lines) ═══
+  document.querySelectorAll('.orbit-hub').forEach(function(hub) {
+    var TOTAL = 12;
+    var nodes = hub.querySelectorAll('.orbit-hub__node');
+    var svg = hub.querySelector('.orbit-hub__lines');
+    if (!svg || nodes.length === 0) return;
+
+    function layout() {
+      var w = hub.offsetWidth;
+      var h = hub.offsetHeight;
+      if (w === 0 || h === 0) return;
+      var cx = w / 2;
+      var cy = h / 2;
+      var radius = Math.min(w, h) / 2 - 40;
+      if (w < 500) radius = Math.min(w, h) / 2 - 30;
+      if (radius < 100) radius = 100;
+      if (radius > 360) radius = 360;
+
+      svg.setAttribute('width', w);
+      svg.setAttribute('height', h);
+      svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+      svg.innerHTML = '';
+
+      var defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+      defs.innerHTML = '<filter id="lineGlow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>';
+      svg.appendChild(defs);
+
+      var hubId = hub.id || 'hub';
+      nodes.forEach(function(node, i) {
+        var angle = (i / TOTAL) * Math.PI * 2 - Math.PI / 2;
+        var nx = cx + Math.cos(angle) * radius;
+        var ny = cy + Math.sin(angle) * radius;
+        node.style.left = nx + 'px';
+        node.style.top = ny + 'px';
+
+        var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', cx);
+        line.setAttribute('y1', cy);
+        line.setAttribute('x2', nx);
+        line.setAttribute('y2', ny);
+        line.setAttribute('stroke', 'rgba(255,186,26,0.2)');
+        line.setAttribute('stroke-width', '1.5');
+        line.setAttribute('filter', 'url(#lineGlow)');
+        svg.appendChild(line);
+
+        var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('r', '3.5');
+        circle.setAttribute('fill', '#ffca4a');
+        circle.setAttribute('filter', 'url(#lineGlow)');
+        var anim = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
+        anim.setAttribute('dur', '2.5s');
+        anim.setAttribute('repeatCount', 'indefinite');
+        anim.setAttribute('begin', (i * 0.2) + 's');
+        var pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        pathEl.setAttribute('id', 'orbit-path-' + hubId + '-' + i);
+        pathEl.setAttribute('d', 'M' + nx + ',' + ny + ' L' + cx + ',' + cy);
+        pathEl.setAttribute('fill', 'none');
+        defs.appendChild(pathEl);
+        var mpath = document.createElementNS('http://www.w3.org/2000/svg', 'mpath');
+        mpath.setAttributeNS('http://www.w3.org/1999/xlink', 'href', '#orbit-path-' + hubId + '-' + i);
+        anim.appendChild(mpath);
+        circle.appendChild(anim);
+        svg.appendChild(circle);
+      });
+    }
+
+    var observer = new IntersectionObserver(function(entries) {
+      if (entries[0].isIntersecting) {
+        hub.classList.add('orbit-visible');
+        layout();
+        observer.disconnect();
+      }
+    }, { threshold: 0.1 });
+    observer.observe(hub);
+
+    var resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        if (hub.classList.contains('orbit-visible')) layout();
+      }, 150);
     });
   });
 });
@@ -115,7 +199,7 @@ function applyEnglish() {
     // === PLATFORM ===
     'Uma plataforma.': 'One platform.',
     'Tudo conectado.': 'Everything connected.',
-    '5 módulos. 12 agentes. Uma Olívia que conecta tudo — e traduz dados em decisão.': '5 modules. 12 agents. One Olívia who connects it all — and turns data into decisions.',
+    '5 módulos. 12 agentes. Uma Olívia que conecta tudo - e traduz dados em decisão.': '5 modules. 12 agents. One Olívia who connects it all - and turns data into decisions.',
     'Orbit Processos': 'Orbit Processes',
     'Padronize e otimize seus processos críticos': 'Standardize and optimize your critical processes',
     'Orbit Indicadores': 'Orbit Indicators',
@@ -241,7 +325,7 @@ function applyEnglish() {
     'Olívia é a especialista em IA do Orbit e a voz do sistema para sua empresa. Ela coordena os 12 agentes, conecta dados de todos os departamentos e traduz complexidade em clareza para a tomada de decisão.': "Olívia is Orbit's AI expert and the system's voice for your company. She coordinates the 12 agents, connects data from all departments, and translates complexity into clarity for decision-making.",
     'Quando o Agente de Riscos detecta uma ameaça, é a Olívia que cruza com o Agente de Oportunidades e apresenta o cenário completo. Humana o suficiente para criar vínculo. Inteligente o suficiente para gerar valor real.': 'When the Risk Agent detects a threat, Olívia crosses it with the Opportunities Agent and presents the complete picture. Human enough to create connection. Smart enough to generate real value.',
     '"Bom dia! Analisei os dados da semana. Três pontos precisam da sua atenção: margem caiu 2%, o time comercial bateu recorde, e temos uma oportunidade no segmento B que ninguém está olhando. Vamos resolver?"': '"Good morning! I analyzed this week\'s data. Three points need your attention: margin dropped 2%, the sales team hit a record, and we have an opportunity in segment B that nobody\'s looking at. Shall we solve it?"',
-    '— Olívia, Coordenadora Geral': '— Olívia, General Coordinator',
+    '- Olívia, Coordenadora Geral': '- Olívia, General Coordinator',
 
     // === AGENTS ===
     'Estrategista': 'Strategist',
@@ -308,15 +392,15 @@ function applyEnglish() {
     'Escalar operações': 'Scale operations',
     '1 tarde': '1 afternoon',
     '12 agentes constroem tudo': '12 agents build everything',
-    'O time de IA mapeia processos, cria planejamento estratégico, estrutura indicadores e muito mais — tudo ao mesmo tempo.': "The AI team maps processes, creates strategic planning, structures indicators and much more—all at the same time.",
+    'O time de IA mapeia processos, cria planejamento estratégico, estrutura indicadores e muito mais - tudo ao mesmo tempo.': "The AI team maps processes, creates strategic planning, structures indicators and much more-all at the same time.",
     'Mapeamento de 14 processos concluído': '14 processes mapping completed',
     '23 indicadores estruturados': '23 structured indicators',
     'Planejamento estratégico gerado': 'Strategic planning generated',
     'Descrições de cargo em andamento...': 'Job descriptions in progress...',
-    'Olívia ativada — coordenando agentes': 'Olívia activated — coordinating agents',
+    'Olívia ativada - coordenando agentes': 'Olívia activated - coordinating agents',
     '7 dias': '7 days',
     '87% validado': '87% validated',
-    'Operação ativada — para sempre': 'Operation activated — forever',
+    'Operação ativada - para sempre': 'Operation activated - forever',
     'Consultoria recorrente passiva: os agentes trabalham 24 horas por dia, 7 dias por semana. A operação não para quando o projeto acaba.': "Recurring passive consulting: agents work 24 hours a day, 7 days a week. Operations don't stop when the project ends.",
     'Operando': 'Operating',
     'Agentes ativos': 'Active agents',
@@ -362,7 +446,7 @@ function applyEnglish() {
     'Anual': 'Annual',
     'Starter': 'Starter',
     'Ideal para começar': 'Ideal to start',
-    'Equivale a R$ 33/dia — menos que um almoço': 'Equals R$ 33/day—less than a lunch',
+    'Equivale a R$ 33/dia - menos que um almoço': 'Equals R$ 33/day-less than a lunch',
     '3 agentes de IA': '3 AI agents',
     'Até 30 usuários': 'Up to 30 users',
     'Dashboards básicos': 'Basic dashboards',
@@ -387,7 +471,7 @@ function applyEnglish() {
     'Time humano equivalente': 'Equivalent human team',
     'R$ 35.000+/mês (5 profissionais CLT)': 'R$ 35,000+/month (5 employees)',
     'Orbit Advanced': 'Orbit Advanced',
-    'R$ 1.950/mês — 12 agentes 24/7': 'R$ 1,950/month—12 agents 24/7',
+    'R$ 1.950/mês - 12 agentes 24/7': 'R$ 1,950/month-12 agents 24/7',
 
     // === TESTIMONIALS ===
     'Depoimentos': 'Testimonials',
@@ -405,7 +489,7 @@ function applyEnglish() {
 
     // === GUARANTEE ===
     'Termo de Garantia': 'Guarantee Terms',
-    'Orbit Gestão — 90 dias': 'Orbit Management — 90 days',
+    'Orbit Gestão - 90 dias': 'Orbit Management - 90 days',
     'Assinatura': 'Signature',
     'Assinado digitalmente': 'Digitally signed',
     'Garantido': 'Guaranteed',
@@ -434,17 +518,17 @@ function applyEnglish() {
 
     // === FAQ ===
     'O que é o Orbit?': 'What is Orbit?',
-    'O Orbit é uma plataforma de gestão empresarial com 12 agentes de IA especializados. Não é mais um software que você precisa alimentar — são agentes que constroem e operam a gestão da sua empresa, 24/7.': "Orbit is a business management platform with 12 specialized AI agents. It's not another software you need to feed—they're agents that build and operate your company's management, 24/7.",
+    'O Orbit é uma plataforma de gestão empresarial com 12 agentes de IA especializados. Não é mais um software que você precisa alimentar - são agentes que constroem e operam a gestão da sua empresa, 24/7.': "Orbit is a business management platform with 12 specialized AI agents. It's not another software you need to feed-they're agents that build and operate your company's management, 24/7.",
     'Para quem é indicado?': 'Who is it recommended for?',
     'Para empresas de 5 a 100+ funcionários, de qualquer segmento, que querem profissionalizar a gestão sem depender exclusivamente de consultoria ou software que ninguém usa.': 'For companies with 5 to 100+ employees, in any industry, that want to professionalize management without relying exclusively on consulting or unused software.',
     'Quanto tempo leva para começar?': 'How long does it take to start?',
     'Cadastro em 5 minutos. Planejamento e processos em 1 tarde. Operação completa rodando em 7 dias.': 'Registration in 5 minutes. Planning and processes in 1 afternoon. Full operation running in 7 days.',
     'É mais um software de gestão?': 'Is it just another management software?',
-    'Não. Software é ferramenta vazia que espera ser alimentada. O Orbit tem agentes de IA que fazem o trabalho pesado — você valida e decide.': "No. Software is an empty tool waiting to be fed. Orbit has AI agents that do the heavy lifting—you validate and decide.",
+    'Não. Software é ferramenta vazia que espera ser alimentada. O Orbit tem agentes de IA que fazem o trabalho pesado - você valida e decide.': "No. Software is an empty tool waiting to be fed. Orbit has AI agents that do the heavy lifting-you validate and decide.",
     'Funciona para o meu segmento?': 'Does it work for my industry?',
-    'Sim. Em 30 anos, já atendemos 8.000+ empresas de todos os segmentos. Gestão é universal. O que muda é o conteúdo — e é exatamente isso que a IA personaliza.': "Yes. In 30 years, we've served 8,000+ companies across all industries. Management is universal. What changes is the content—and that's exactly what AI personalizes.",
+    'Sim. Em 30 anos, já atendemos 8.000+ empresas de todos os segmentos. Gestão é universal. O que muda é o conteúdo - e é exatamente isso que a IA personaliza.': "Yes. In 30 years, we've served 8,000+ companies across all industries. Management is universal. What changes is the content-and that's exactly what AI personalizes.",
     'Meu time vai precisar aprender a usar?': 'Will my team need to learn how to use it?',
-    'Seu time nem precisa logar. Processos e treinamentos chegam pelo WhatsApp — que todo mundo já usa.': "Your team doesn't even need to log in. Processes and training come via WhatsApp—which everyone already uses.",
+    'Seu time nem precisa logar. Processos e treinamentos chegam pelo WhatsApp - que todo mundo já usa.': "Your team doesn't even need to log in. Processes and training come via WhatsApp-which everyone already uses.",
     'E se não funcionar?': "What if it doesn't work?",
     'Garantia de 90 dias. Se não gerar resultado, devolvemos seu investimento. Sem letras miúdas.': "90-day guarantee. If it doesn't generate results, we return your investment. No fine print.",
 
@@ -453,7 +537,7 @@ function applyEnglish() {
     'Agende uma demonstração gratuita e veja os agentes trabalhando com a SUA empresa.': 'Schedule a free demo and see the agents working with YOUR company.',
     'Demonstração com dados da sua empresa': "Demo with your company's data",
     'Setup + onboarding guiado incluso': 'Setup + guided onboarding included',
-    'Garantia de 90 dias — risco zero': '90-day guarantee—zero risk',
+    'Garantia de 90 dias - risco zero': '90-day guarantee-zero risk',
     'Plano anual com 20% de economia': 'Annual plan with 20% savings',
     'Conheça o time de IA': 'Meet the AI team',
     'Preencha e entraremos em contato em até 24h.': "Fill in and we'll contact you within 24 hours.",
@@ -490,7 +574,7 @@ function applyEnglish() {
     'Plataforma de gestão com IA. Contrate um time que executa.': 'AI-powered management platform. Hire a team that executes.',
     'Contato': 'Contact',
     'Plataforma': 'Platform',
-    '© 2026 Orbit — Grupo GSN. Todos os direitos reservados.': '© 2026 Orbit — Grupo GSN. All rights reserved.',
+    '© 2026 Orbit - Grupo GSN. Todos os direitos reservados.': '© 2026 Orbit - Grupo GSN. All rights reserved.',
 
     // === TESTIMONIAL QUOTES ===
     'Em 3 meses, conseguimos mapear todos os processos críticos e reduzir retrabalho em 40%. O Orbit organizou o que a gente tentava há anos.': 'In 3 months, we managed to map all critical processes and reduce rework by 40%. Orbit organized what we had been trying for years.',
@@ -499,7 +583,7 @@ function applyEnglish() {
     'O Orbit é como ter um consultor 24/7. Os agentes de IA identificam problemas antes que virem crises. Mudou completamente nossa forma de gerir.': 'Orbit is like having a 24/7 consultant. The AI agents identify problems before they become crises. It completely changed how we manage.',
     'Reduzimos o tempo de auditoria de 2 semanas para 3 dias. Os checklists automáticos e planos de ação são incríveis.': 'We reduced audit time from 2 weeks to 3 days. The automated checklists and action plans are amazing.',
     'Minha equipe ficou autônoma. O agente de tarefas cobra follow-up, prioriza por impacto estratégico e ninguém esquece mais nada.': 'My team became autonomous. The tasks agent follows up, prioritizes by strategic impact, and nothing gets forgotten.',
-    'Implantamos em 15 dias e já vimos resultado no primeiro mês. O suporte é excepcional — sempre presentes quando precisamos.': 'We implemented in 15 days and saw results in the first month. The support is exceptional — always there when we need.',
+    'Implantamos em 15 dias e já vimos resultado no primeiro mês. O suporte é excepcional - sempre presentes quando precisamos.': 'We implemented in 15 days and saw results in the first month. The support is exceptional - always there when we need.',
     'Antes eu gastava R$ 18 mil/mês com consultoria pontual. Agora pago uma fração e tenho um time de IA que nunca para.': "Before I spent R$ 18k/month on occasional consulting. Now I pay a fraction and have an AI team that never stops.",
     'A gestão por competências transformou nosso RH. Identificamos gaps, criamos trilhas de desenvolvimento e a rotatividade caiu 35%.': 'Competency management transformed our HR. We identified gaps, created development paths, and turnover dropped 35%.',
 
@@ -514,8 +598,8 @@ function applyEnglish() {
     'não resolve': "doesn't solve it",
     'O que você já tentou': 'What you\'ve already tried',
     'Você valida, a Olívia aprende': 'You validate, Olívia learns',
-    'Revise cada entrega, ajuste o que quiser. A IA adapta ao contexto real da sua empresa — e fica mais inteligente a cada feedback.': 'Review every delivery, adjust whatever you want. The AI adapts to your company\'s real context — and gets smarter with every feedback.',
-    'Revisão — Processos': 'Review — Processes',
+    'Revise cada entrega, ajuste o que quiser. A IA adapta ao contexto real da sua empresa - e fica mais inteligente a cada feedback.': 'Review every delivery, adjust whatever you want. The AI adapts to your company\'s real context - and gets smarter with every feedback.',
+    'Revisão - Processos': 'Review - Processes',
     'Fluxo de vendas': 'Sales flow',
     'Onboarding de clientes': 'Client onboarding',
     'Gestão financeira': 'Financial management',
@@ -523,7 +607,7 @@ function applyEnglish() {
     'APPROVED': 'APPROVED',
     'ADJUSTED': 'ADJUSTED',
     '87% validated': '87% validated',
-    'Orbit — Configuração': 'Orbit — Setup',
+    'Orbit - Configuração': 'Orbit - Setup',
     'Durante anos as empresas compraram software esperando resolver problemas de gestão. Compraram CRM. Compraram ERP. Compraram plataformas de produtividade. Mas': 'For years, companies bought software hoping to solve management problems. They bought CRM. They bought ERP. They bought productivity platforms. But',
     'ferramentas não geram gestão.': "tools don't generate management.",
     'Gestão acontece quando dados se conectam, decisões são tomadas e processos são executados continuamente.': 'Management happens when data connects, decisions are made, and processes execute continuously.',
@@ -567,10 +651,10 @@ function applyEnglish() {
     'R$ 5-8k/mês': 'R$ 5-8k/month',
     'R$ 10-15k/mês': 'R$ 10-15k/month',
     'R$ 30-80k/proj': 'R$ 30-80k/project',
-    'Orbit — Olívia': 'Orbit — Olívia',
+    'Orbit - Olívia': 'Orbit - Olívia',
 
     // === FRAGMENTED TEXT (split by inline tags) ===
-    'Gestão Operada por IA com consultoria recorrente passiva. 12 agentes especializados constroem e operam a gestão da sua empresa — trabalhando 24/7, mesmo quando o projeto acaba.': 'AI-Operated Management with recurring passive consulting. 12 specialized agents build and operate your company\'s management — working 24/7, even after the project ends.',
+    'Gestão Operada por IA com consultoria recorrente passiva. 12 agentes especializados constroem e operam a gestão da sua empresa - trabalhando 24/7, mesmo quando o projeto acaba.': 'AI-Operated Management with recurring passive consulting. 12 specialized agents build and operate your company\'s management - working 24/7, even after the project ends.',
     'consultoria recorrente passiva': 'recurring passive consulting',
     'Conheça os módulos onde os': 'Meet the modules where',
     'agentes operam': 'agents operate',
@@ -601,8 +685,8 @@ function applyEnglish() {
     'Sua empresa não precisa de mais ferramentas. Precisa de um time de IA.': "Your company doesn't need more tools. It needs an AI team.",
     'Contrate um': 'Hire an',
     'que executa exatamente o que sua empresa precisa para crescer.': 'that executes exactly what your company needs to grow.',
-    'Não é mais um software. São 12 agentes de IA especializados — liderados pela': "It's not another software. They're 12 specialized AI agents — led by",
-    ', a Coordenadora Geral de IA — que constroem e operam a gestão da sua empresa. Planejamento, processos, treinamento, indicadores — trabalhando 24/7.': ", the General AI Coordinator — that build and operate your company's management. Planning, processes, training, indicators — working 24/7.",
+    'Não é mais um software. São 12 agentes de IA especializados - liderados pela': "It's not another software. They're 12 specialized AI agents - led by",
+    ', a Coordenadora Geral de IA - que constroem e operam a gestão da sua empresa. Planejamento, processos, treinamento, indicadores - trabalhando 24/7.': ", the General AI Coordinator - that build and operate your company's management. Planning, processes, training, indicators - working 24/7.",
     'QUERO RESOLVER ISSO': 'I WANT TO SOLVE THIS',
     'O problema real': 'The real problem',
     'Você já tentou. ERP, planilha, Trello, consultoria. E continua apagando incêndio. Apenas 11% das empresas usam IA agentic em produção. As outras 89% ainda estão presas nesse ciclo.': "You've tried. ERP, spreadsheets, Trello, consulting. And you still put out fires. Only 11% of companies use agentic AI in production. The other 89% are still stuck in this cycle.",
@@ -611,7 +695,7 @@ function applyEnglish() {
     'Consultoria recorrente passiva. A operação não para quando o projeto acaba.': "Recurring passive consulting. Operations don't stop when the project ends.",
     'Resultado: gestão que opera com você, não por você.': 'Result: management that operates with you, not for you.',
     'Um time de IA que nunca para. Custo de 1 funcionário. ROI desde o mês 1.': 'An AI team that never stops. Cost of 1 employee. ROI from month 1.',
-    'Constrói o planejamento estratégico da sua empresa. SWOT, BSC, objetivos, planos de ação — tudo em uma tarde.': 'Builds your company\'s strategic planning. SWOT, BSC, objectives, action plans — all in one afternoon.',
+    'Constrói o planejamento estratégico da sua empresa. SWOT, BSC, objetivos, planos de ação - tudo em uma tarde.': 'Builds your company\'s strategic planning. SWOT, BSC, objectives, action plans - all in one afternoon.',
     'Diagnóstico estratégico': 'Strategic diagnosis',
     'Definição de objetivos e metas': 'Objectives and goals definition',
     'Planos de ação estruturados': 'Structured action plans',
@@ -675,7 +759,7 @@ function applyEnglish() {
     '"O mercado está comoditizando o que eu faço."': '"The market is commoditizing what I do."',
     '"Não consigo escalar sem contratar gente."': '"I can\'t scale without hiring people."',
     '"Fico refém da próxima venda."': '"I\'m hostage to the next sale."',
-    '"Eu entendo. Com o Orbit, seus clientes operam com IA — e você ganha receita recorrente."': '"I understand. With Orbit, your clients operate with AI — and you earn recurring revenue."',
+    '"Eu entendo. Com o Orbit, seus clientes operam com IA - e você ganha receita recorrente."': '"I understand. With Orbit, your clients operate with AI - and you earn recurring revenue."',
     'QUERO SAIR DESSE CICLO': 'I WANT TO BREAK THIS CYCLE',
     'churn estrutural': 'structural churn',
     'O novo modelo': 'The new model',
@@ -730,7 +814,7 @@ function applyEnglish() {
     'Olívia coordenadora': 'Olívia coordinator',
     'Setup + onboarding': 'Setup + onboarding',
     'Garantia 90 dias ou dinheiro de volta': '90-day guarantee or money back',
-    'Equivale a R$ 66/dia — um café por funcionário': 'Equals R$ 66/day — a coffee per employee',
+    'Equivale a R$ 66/dia - um café por funcionário': 'Equals R$ 66/day - a coffee per employee',
     'Canais de receita recorrente': 'Recurring revenue channels',
     'É consultor, mentor ou associação? Ofereça o Orbit aos seus clientes com white-label e ganhe receita recorrente.': 'Are you a consultant, mentor or association? Offer Orbit to your clients with white-label and earn recurring revenue.',
     'de receita por cliente/mês': 'revenue per client/month',
@@ -755,7 +839,7 @@ function applyEnglish() {
     '/mês economizados': '/month saved',
     'A líder do time': 'The team leader',
     'Tensões produtivas': 'Productive tensions',
-    'Os agentes foram desenhados com personalidades complementares que geram confronto de ideias — e decisões melhores.': 'The agents were designed with complementary personalities that generate idea confrontation — and better decisions.',
+    'Os agentes foram desenhados com personalidades complementares que geram confronto de ideias - e decisões melhores.': 'The agents were designed with complementary personalities that generate idea confrontation - and better decisions.',
     'Cautela': 'Caution',
     'Ação': 'Action',
     'O Agente de Riscos identifica ameaças e sugere prudência. O de Oportunidades empurra para a ação. A Olívia arbitra.': 'The Risk Agent identifies threats and suggests caution. The Opportunities Agent pushes for action. Olívia arbitrates.',
@@ -774,24 +858,24 @@ function applyEnglish() {
     'Tudo que você precisa saber sobre o Orbit, nossos agentes de IA e como funciona.': 'Everything you need to know about Orbit, our AI agents and how it works.',
     'Sobre o Orbit': 'About Orbit',
     'O que é o Orbit?': 'What is Orbit?',
-    'O Orbit é uma plataforma de gestão empresarial com 12 agentes de IA integrados. Não é mais um software — são agentes especializados que constroem e operam a gestão da sua empresa. Planejamento, processos, treinamento, indicadores — trabalhando 24/7.': "Orbit is a business management platform with 12 integrated AI agents. It's not just software — they're specialized agents that build and operate your company's management. Planning, processes, training, indicators — working 24/7.",
+    'O Orbit é uma plataforma de gestão empresarial com 12 agentes de IA integrados. Não é mais um software - são agentes especializados que constroem e operam a gestão da sua empresa. Planejamento, processos, treinamento, indicadores - trabalhando 24/7.': "Orbit is a business management platform with 12 integrated AI agents. It's not just software - they're specialized agents that build and operate your company's management. Planning, processes, training, indicators - working 24/7.",
     'Para quem é indicado?': 'Who is it for?',
     'Para empresas de 5 a 100+ funcionários, faturamento de R$ 500k a R$ 20M/ano, de qualquer segmento. Em 30 anos, já atendemos 8.000+ empresas de todos os setores.': 'For companies with 5 to 100+ employees, revenue from R$ 500k to R$ 20M/year, in any industry. In 30 years, we have served 8,000+ companies across all sectors.',
     'É mais um software?': 'Is it just another software?',
-    'Não. Software é ferramenta vazia que espera ser alimentada. O Orbit tem agentes de IA que fazem o trabalho pesado. Você valida e decide — não alimenta.': "No. Software is an empty tool that waits to be fed. Orbit has AI agents that do the heavy lifting. You validate and decide — you don't feed it.",
+    'Não. Software é ferramenta vazia que espera ser alimentada. O Orbit tem agentes de IA que fazem o trabalho pesado. Você valida e decide - não alimenta.': "No. Software is an empty tool that waits to be fed. Orbit has AI agents that do the heavy lifting. You validate and decide - you don't feed it.",
     'Funciona pro meu segmento?': 'Does it work for my industry?',
-    'Sim. Gestão por processos e indicadores é universal. O que muda é o conteúdo — e a IA personaliza para cada empresa.': 'Yes. Management by processes and indicators is universal. What changes is the content — and AI personalizes it for each company.',
+    'Sim. Gestão por processos e indicadores é universal. O que muda é o conteúdo - e a IA personaliza para cada empresa.': 'Yes. Management by processes and indicators is universal. What changes is the content - and AI personalizes it for each company.',
     'Quem é Olívia?': 'Who is Olívia?',
-    'Olívia é a Coordenadora Geral de IA do Orbit — a líder do time de 12 agentes. Ela conecta dados de todos os departamentos, coordena a atuação dos agentes e traduz a complexidade em clareza para a tomada de decisão. Dentro do produto, Olívia é a especialista no seu negócio específico e o seu ponto de contato principal com o sistema.': "Olívia is Orbit's General AI Coordinator — the leader of the 12-agent team. She connects data from all departments, coordinates agent actions and translates complexity into clarity for decision-making. Within the product, Olívia is the expert on your specific business and your main point of contact with the system.",
+    'Olívia é a Coordenadora Geral de IA do Orbit - a líder do time de 12 agentes. Ela conecta dados de todos os departamentos, coordena a atuação dos agentes e traduz a complexidade em clareza para a tomada de decisão. Dentro do produto, Olívia é a especialista no seu negócio específico e o seu ponto de contato principal com o sistema.': "Olívia is Orbit's General AI Coordinator - the leader of the 12-agent team. She connects data from all departments, coordinates agent actions and translates complexity into clarity for decision-making. Within the product, Olívia is the expert on your specific business and your main point of contact with the system.",
     'O que é Gestão Operada por IA?': 'What is AI-Operated Management?',
-    'Gestão Operada por IA é uma nova categoria onde um time de agentes de inteligência artificial executa continuamente as funções de gestão de uma empresa. Diferente de ferramentas ou chatbots, os agentes do Orbit trabalham de forma autônoma após a configuração — isso é consultoria recorrente passiva: a gestão continua acontecendo mesmo sem intervenção humana constante. Apenas 11% das empresas utilizam IA agentic em produção (Deloitte, 2025), o que significa que quem adotar agora está na vanguarda.': "AI-Operated Management is a new category where a team of AI agents continuously executes a company's management functions. Unlike tools or chatbots, Orbit's agents work autonomously after setup — this is recurring passive consulting: management keeps happening even without constant human intervention. Only 11% of companies use agentic AI in production (Deloitte, 2025), which means those who adopt now are at the forefront.",
+    'Gestão Operada por IA é uma nova categoria onde um time de agentes de inteligência artificial executa continuamente as funções de gestão de uma empresa. Diferente de ferramentas ou chatbots, os agentes do Orbit trabalham de forma autônoma após a configuração - isso é consultoria recorrente passiva: a gestão continua acontecendo mesmo sem intervenção humana constante. Apenas 11% das empresas utilizam IA agentic em produção (Deloitte, 2025), o que significa que quem adotar agora está na vanguarda.': "AI-Operated Management is a new category where a team of AI agents continuously executes a company's management functions. Unlike tools or chatbots, Orbit's agents work autonomously after setup - this is recurring passive consulting: management keeps happening even without constant human intervention. Only 11% of companies use agentic AI in production (Deloitte, 2025), which means those who adopt now are at the forefront.",
     'Como os 12 agentes trabalham juntos?': 'How do the 12 agents work together?',
-    'Os agentes foram desenhados com personalidades complementares que geram tensões produtivas. O Agente de Riscos debate com o de Oportunidades (cautela vs. ação). O de Problemas trabalha com o de Processos (apagar incêndio vs. redesenhar). O de Indicadores confronta o Estrategista (dado vs. visão). A Olívia orquestra essas dinâmicas, resolve conflitos e traduz para o empresário o que o time está fazendo — e por quê.': 'The agents were designed with complementary personalities that generate productive tensions. The Risk Agent debates with Opportunities (caution vs. action). Problems works with Processes (firefighting vs. redesign). Indicators confronts the Strategist (data vs. vision). Olívia orchestrates these dynamics, resolves conflicts and translates for the business owner what the team is doing — and why.',
+    'Os agentes foram desenhados com personalidades complementares que geram tensões produtivas. O Agente de Riscos debate com o de Oportunidades (cautela vs. ação). O de Problemas trabalha com o de Processos (apagar incêndio vs. redesenhar). O de Indicadores confronta o Estrategista (dado vs. visão). A Olívia orquestra essas dinâmicas, resolve conflitos e traduz para o empresário o que o time está fazendo - e por quê.': 'The agents were designed with complementary personalities that generate productive tensions. The Risk Agent debates with Opportunities (caution vs. action). Problems works with Processes (firefighting vs. redesign). Indicators confronts the Strategist (data vs. vision). Olívia orchestrates these dynamics, resolves conflicts and translates for the business owner what the team is doing - and why.',
     'Implementação': 'Implementation',
     'Quanto tempo leva?': 'How long does it take?',
     'Cadastro em 5 minutos. Planejamento e processos em 1 tarde. Operação completa em 7 dias.': 'Registration in 5 minutes. Planning and processes in 1 afternoon. Full operation in 7 days.',
     'Meu time vai precisar aprender?': 'Will my team need to learn?',
-    'Seu time nem precisa logar. Processos e treinamentos chegam pelo WhatsApp — que todo mundo já usa.': "Your team doesn't even need to log in. Processes and training come via WhatsApp — which everyone already uses.",
+    'Seu time nem precisa logar. Processos e treinamentos chegam pelo WhatsApp - que todo mundo já usa.': "Your team doesn't even need to log in. Processes and training come via WhatsApp - which everyone already uses.",
     'Preciso de infraestrutura de TI?': 'Do I need IT infrastructure?',
     'Não. O Orbit roda 100% na nuvem. Só precisa de internet.': 'No. Orbit runs 100% in the cloud. You just need internet.',
     'Quanto custa?': 'How much does it cost?',
@@ -808,7 +892,7 @@ function applyEnglish() {
     'É white-label?': 'Is it white-label?',
     'Sim. Sua marca, seu relacionamento, seus clientes. O Orbit é a infraestrutura.': 'Yes. Your brand, your relationship, your clients. Orbit is the infrastructure.',
     'O que é consultoria recorrente passiva?': 'What is recurring passive consulting?',
-    'É o modelo onde agentes de IA continuam executando as tarefas de gestão de forma autônoma após a configuração inicial do projeto. Diferente da consultoria tradicional — onde o consultor entrega o projeto e o cliente não mantém —, os agentes do Orbit garantem operação contínua. Para o consultor, isso significa receita recorrente real: o cliente continua pagando porque a gestão continua funcionando. É a solução para o churn estrutural da consultoria.': "It's the model where AI agents continue executing management tasks autonomously after the initial project setup. Unlike traditional consulting — where the consultant delivers the project and the client doesn't maintain it —, Orbit's agents ensure continuous operation. For the consultant, this means real recurring revenue: the client keeps paying because management keeps working. It's the solution for structural consulting churn.",
+    'É o modelo onde agentes de IA continuam executando as tarefas de gestão de forma autônoma após a configuração inicial do projeto. Diferente da consultoria tradicional - onde o consultor entrega o projeto e o cliente não mantém -, os agentes do Orbit garantem operação contínua. Para o consultor, isso significa receita recorrente real: o cliente continua pagando porque a gestão continua funcionando. É a solução para o churn estrutural da consultoria.': "It's the model where AI agents continue executing management tasks autonomously after the initial project setup. Unlike traditional consulting - where the consultant delivers the project and the client doesn't maintain it -, Orbit's agents ensure continuous operation. For the consultant, this means real recurring revenue: the client keeps paying because management keeps working. It's the solution for structural consulting churn.",
     'Não encontrou sua resposta?': "Didn't find your answer?",
     'Fale com nosso time e tire todas as suas dúvidas.': 'Talk to our team and clear all your doubts.',
     'Falar com o Time': 'Talk to the Team',
@@ -829,7 +913,7 @@ function applyEnglish() {
     'Nossa Trajetória': 'Our Journey',
     'Uma história de': 'A story of',
     'transformação': 'transformation',
-    'De consultoria presencial a plataforma com IA — cada passo construiu o que somos hoje.': 'From in-person consulting to AI platform — each step built what we are today.',
+    'De consultoria presencial a plataforma com IA - cada passo construiu o que somos hoje.': 'From in-person consulting to AI platform - each step built what we are today.',
     'Há 30 anos': '30 years ago',
     'O início': 'The beginning',
     'Grupo GSN nasce como consultoria de gestão e ISO, levando profissionalização para empresas de todos os portes e segmentos do Brasil.': 'Grupo GSN is born as a management and ISO consulting firm, bringing professionalization to companies of all sizes and industries in Brazil.',
@@ -839,10 +923,10 @@ function applyEnglish() {
     'A evolução': 'The evolution',
     'Do presencial ao digital': 'From in-person to digital',
     'A plataforma é digitalizada, passando a atender milhares de empresas de forma escalável sem perder a essência consultiva.': 'The platform is digitalized, now serving thousands of companies in a scalable way without losing the consulting essence.',
-    '2026 — O Orbit': '2026 — Orbit',
+    '2026 - O Orbit': '2026 - Orbit',
     'IA integrada à gestão': 'AI integrated into management',
     '12 agentes de IA especializados são integrados à plataforma. Consultoria recorrente, automatizada e acessível para qualquer empresa.': '12 specialized AI agents are integrated into the platform. Recurring, automated and accessible consulting for any company.',
-    '"A consultoria não morre — ela evolui. O que antes exigia um consultor presencial, agora um agente de IA executa 24/7."': '"Consulting doesn\'t die — it evolves. What once required an in-person consultant, now an AI agent executes 24/7."',
+    '"A consultoria não morre - ela evolui. O que antes exigia um consultor presencial, agora um agente de IA executa 24/7."': '"Consulting doesn\'t die - it evolves. What once required an in-person consultant, now an AI agent executes 24/7."',
     'Grupo GSN': 'Grupo GSN',
     'Como tudo se conecta': 'How it all connects',
     'O ecossistema completo do Grupo GSN': "Grupo GSN's complete ecosystem",
@@ -890,7 +974,7 @@ function applyEnglish() {
     'Participe da capacitação e aprenda tudo sobre nossas soluções, argumentação comercial e cases de sucesso.': 'Participate in training and learn everything about our solutions, sales arguments and success cases.',
     'Indique e acompanhe': 'Refer and track',
     'Indique clientes e ofereça nossas soluções como parte do seu portfólio. Acompanhe cada etapa em tempo real.': 'Refer clients and offer our solutions as part of your portfolio. Track each step in real time.',
-    'Receita recorrente — todo mês': 'Recurring revenue — every month',
+    'Receita recorrente - todo mês': 'Recurring revenue - every month',
     'Ganhe comissões mensais por cada cliente ativo. Quanto mais indica, mais cresce sua receita passiva.': 'Earn monthly commissions for each active client. The more you refer, the more your passive income grows.',
     '1 semana': '1 week',
     'contínuo': 'ongoing',
@@ -932,15 +1016,15 @@ function applyEnglish() {
     // === AGENTES PAGE - Agent quotes ===
     'Você está crescendo 12% ao trimestre, mas sua estrutura de custos vai travar o crescimento em 8 meses. Precisamos falar sobre isso agora.': "You're growing 12% per quarter, but your cost structure will block growth in 8 months. We need to talk about this now.",
     'Esse processo tem 4 etapas que não agregam valor. Vamos cortar para 3 e ganhar 22 horas/mês.': "This process has 4 steps that add no value. Let's cut to 3 and gain 22 hours/month.",
-    'O turnover do comercial subiu 18% no trimestre. Não é salário — é a falta de clareza nas metas.': "Sales turnover went up 18% this quarter. It's not salary — it's the lack of clarity in goals.",
-    'Três vendedores erraram o mesmo passo da negociação esta semana. Não é falta de vontade — é falta de treino. Montei uma trilha de 45 minutos que resolve isso.': "Three salespeople made the same negotiation mistake this week. It's not lack of will — it's lack of training. I built a 45-minute path that fixes this.",
-    'Margem bruta caiu 3,2 pontos em fevereiro. Não é sazonal — o custo de matéria-prima subiu acima do repasse. Se não corrigir agora, março compromete o trimestre.': "Gross margin dropped 3.2 points in February. It's not seasonal — raw material cost rose above pass-through. If not corrected now, March compromises the quarter.",
+    'O turnover do comercial subiu 18% no trimestre. Não é salário - é a falta de clareza nas metas.': "Sales turnover went up 18% this quarter. It's not salary - it's the lack of clarity in goals.",
+    'Três vendedores erraram o mesmo passo da negociação esta semana. Não é falta de vontade - é falta de treino. Montei uma trilha de 45 minutos que resolve isso.': "Three salespeople made the same negotiation mistake this week. It's not lack of will - it's lack of training. I built a 45-minute path that fixes this.",
+    'Margem bruta caiu 3,2 pontos em fevereiro. Não é sazonal - o custo de matéria-prima subiu acima do repasse. Se não corrigir agora, março compromete o trimestre.': "Gross margin dropped 3.2 points in February. It's not seasonal - raw material cost rose above pass-through. If not corrected now, March compromises the quarter.",
     'Pipeline saudável, mas 40% das oportunidades paradas há mais de 15 dias. Vou atacar as 5 maiores hoje.': "Healthy pipeline, but 40% of opportunities stalled for over 15 days. I'll tackle the 5 biggest today.",
     'Três concorrentes seus mudaram o modelo de precificação nos últimos 60 dias. Todos foram para assinatura. Tem uma janela aqui que vale investigar.': 'Three of your competitors changed their pricing model in the last 60 days. All went to subscription. There is a window here worth investigating.',
-    'De novo essa falha no processo de entrega. Terceira vez no mês. Já corrigi — mas da próxima, vou escalar pro Processos redesenhar o fluxo inteiro.': "Again this delivery process failure. Third time this month. Already fixed — but next time, I'll escalate to Processes to redesign the entire flow.",
+    'De novo essa falha no processo de entrega. Terceira vez no mês. Já corrigi - mas da próxima, vou escalar pro Processos redesenhar o fluxo inteiro.': "Again this delivery process failure. Third time this month. Already fixed - but next time, I'll escalate to Processes to redesign the entire flow.",
     'Essa expansão é atraente, mas o fluxo de caixa não aguenta os dois primeiros meses. Vamos montar um plano B antes.': "This expansion is attractive, but cash flow can't handle the first two months. Let's build a plan B first.",
     'A ata da reunião de ontem já está organizada com decisões, responsáveis e prazos. E encontrei que essa mesma decisão foi tomada em setembro e não executada.': "Yesterday's meeting minutes are already organized with decisions, responsible parties and deadlines. And I found that this same decision was made in September and never executed.",
-    'A reunião de segunda durou 47 minutos. Foram tomadas 3 decisões, 2 tinham responsável claro. A terceira ficou em aberto — estou cobrando agora.': "Monday's meeting lasted 47 minutes. 3 decisions were made, 2 had clear ownership. The third remained open — I'm following up now.",
+    'A reunião de segunda durou 47 minutos. Foram tomadas 3 decisões, 2 tinham responsável claro. A terceira ficou em aberto - estou cobrando agora.': "Monday's meeting lasted 47 minutes. 3 decisions were made, 2 had clear ownership. The third remained open - I'm following up now.",
     'A Orquestradora': 'The Orchestrator',
     'Analisa formulários, pesquisas de clima organizacional e gera insights acionáveis.': 'Analyzes surveys, organizational climate research and generates actionable insights.',
     'Analisa mercado, portfólio de produtos e parcerias para identificar oportunidades de crescimento e diversificação.': 'Analyzes market, product portfolio and partnerships to identify growth and diversification opportunities.',
@@ -975,7 +1059,7 @@ function applyEnglish() {
     'Ganhe recorrência com IA trabalhando pelo seu cliente.': 'Earn recurring revenue with AI working for your client.',
     'Ganhe recorrência com IA': 'Earn recurring revenue with AI',
     'trabalhando pelo seu cliente.': 'working for your client.',
-    'Pare de depender de novos projetos. With Orbit, agents continuam executando — e você ganha receita recurring real.': 'Stop depending on new projects. With Orbit, agents keep executing — and you earn real recurring revenue.',
+    'Pare de depender de novos projetos. With Orbit, agents continuam executando - e você ganha receita recurring real.': 'Stop depending on new projects. With Orbit, agents keep executing - and you earn real recurring revenue.',
     'Pare de depender de novos projetos.': 'Stop depending on new projects.',
     'você ganha receita': 'you earn revenue',
     'real.': 'real.',
@@ -1113,7 +1197,7 @@ function applyEnglish() {
     'Escolha seu plano': 'Choose your plan',
     'Mais popular': 'Most popular',
     'Sem fidelidade, sem surpresas. Escolha o plano ideal para o momento da sua empresa.': "No lock-in, no surprises. Choose the ideal plan for your company's moment.",
-    'Custo de 1 analista Jr. — entrega de um time inteiro': 'Cost of 1 Jr. analyst — delivers an entire team',
+    'Custo de 1 analista Jr. - entrega de um time inteiro': 'Cost of 1 Jr. analyst - delivers an entire team',
     'Como funciona o plano anual?': 'How does the annual plan work?',
     '20% de economia no valor mensal, com pagamento à vista ou parcelado.': '20% savings on the monthly value, with lump sum or installment payment.',
     'Posso mudar de plano?': 'Can I switch plans?',
@@ -1152,9 +1236,9 @@ function applyEnglish() {
     'Conta dedicada': 'Dedicated account',
     'Conta dedicada de sucesso': 'Dedicated success account',
     'Customizado': 'Customized',
-    'Cliente 1 — Tech Solutions': 'Client 1 — Tech Solutions',
-    'Cliente 2 — Grupo Nova': 'Client 2 — Grupo Nova',
-    'Cliente 3 — Logística BR': 'Client 3 — Logística BR',
+    'Cliente 1 - Tech Solutions': 'Client 1 - Tech Solutions',
+    'Cliente 2 - Grupo Nova': 'Client 2 - Grupo Nova',
+    'Cliente 3 - Logística BR': 'Client 3 - Logística BR',
     '+R$ 4.800/mês': '+R$ 4,800/month',
     '12 Agentes de IA': '12 AI Agents',
     '1 semana': '1 week',
@@ -1240,7 +1324,7 @@ function applyEnglish() {
     'Minha equipe ficou autônoma. O agente de tarefas cobra follow-up e ninguém esquece mais nada.': 'My team became autonomous. The tasks agent follows up and nothing gets forgotten.',
     'A gestão por competências transformou nosso RH. A rotatividade caiu 35%.': 'Competency management transformed our HR. Turnover dropped 35%.',
     'agents de IA identificam problemas antes': 'AI agents identify problems before',
-    'Implantamos em 15 dias e já vimos resultado no primeiro mês. O suporte é excepcional — sempre presentes quando precisamos.': 'We implemented in 15 days and saw results in the first month. The support is exceptional — always there when we need.',
+    'Implantamos em 15 dias e já vimos resultado no primeiro mês. O suporte é excepcional - sempre presentes quando precisamos.': 'We implemented in 15 days and saw results in the first month. The support is exceptional - always there when we need.',
     'RECOMENDADO': 'RECOMMENDED',
     'Quatro passos simples para começar a gerar receita recorrente': 'Four simple steps to start generating recurring revenue',
 
@@ -1253,6 +1337,97 @@ function applyEnglish() {
     'Igor': 'Igor',
     'Omar': 'Omar',
     'Rodrigo': 'Rodrigo',
+
+    // === HISTÓRIAS ===
+    'HISTÓRIAS DE SUCESSO': 'SUCCESS STORIES',
+    'Descubra como nossos clientes': 'Discover how our clients',
+    'transformaram': 'transformed',
+    'sua gestão': 'their management',
+    'Conheça as histórias reais de empresas que alcançaram resultados extraordinários com a Orbit Gestão.': 'Discover real stories of companies that achieved extraordinary results with Orbit Management.',
+    'Todos': 'All',
+    'Em breve teremos histórias incríveis': 'Amazing stories coming soon',
+    'Estamos reunindo os melhores cases de sucesso dos nossos clientes. Volte em breve!': "We're gathering our best client success cases. Come back soon!",
+    'Conte sua história': 'Tell your story',
+    'Conte sua hist': 'Tell your sto',
+    'CONTE SUA HISTÓRIA': 'TELL YOUR STORY',
+    'Sua empresa também pode ser destaque': 'Your company can also be featured',
+    'Compartilhe sua experiência com a Orbit Gestão e inspire outras empresas a transformarem sua gestão.': 'Share your experience with Orbit Management and inspire other companies to transform their management.',
+    'Agendar demonstração': 'Schedule a demo',
+
+    // === OBRIGADO ===
+    'Recebemos seu': 'We received your',
+    'contato!': 'contact!',
+    'Nosso time de consultores entrará em contato em até': 'Our team of consultants will contact you within',
+    '24 horas úteis': '24 business hours',
+    'para agendar sua demonstração personalizada.': 'to schedule your personalized demo.',
+    'Análise do perfil': 'Profile analysis',
+    'Vamos entender o momento da sua empresa.': "We'll understand your company's current situation.",
+    'Demo personalizada': 'Personalized demo',
+    'Demonstração focada nas suas necessidades.': 'Demo focused on your needs.',
+    'Proposta sob medida': 'Custom proposal',
+    'Plano de implantação adequado ao seu negócio.': 'Implementation plan tailored to your business.',
+    'Voltar ao site': 'Back to site',
+    'Explorar conteúdos': 'Explore content',
+
+    // === AGENTE ESTRATÉGICO PAGE ===
+    'Agente Estratégico': 'Strategic Agent',
+    'Sua empresa não precisa de mais estratégia.': "Your company doesn't need more strategy.",
+    'Precisa de estratégia sendo': 'It needs strategy being',
+    'executada todos os dias.': 'executed every day.',
+    'Enquanto você planeja, ajusta e reprioriza... nada realmente muda na operação. O Orbit transforma decisões em execução contínua.': "While you plan, adjust and reprioritize... nothing really changes in operations. Orbit transforms decisions into continuous execution.",
+    'Reuniões viram plano automaticamente': 'Meetings become plans automatically',
+    'Prioridades deixam de depender de você': 'Priorities stop depending on you',
+    'A estratégia passa a rodar todos os dias': 'Strategy starts running every day',
+    'Ver demonstração': 'See demo',
+    'Veja como isso funcionaria na sua empresa.': 'See how this would work in your company.',
+    'Planejamento estratégico não resolve o problema da sua empresa.': "Strategic planning doesn't solve your company's problem.",
+    'Você já definiu metas. Já fez reuniões. Já alinhou direção.': "You've already set goals. Already had meetings. Already aligned direction.",
+    'E mesmo assim... nada muda.': 'And yet... nothing changes.',
+    'Porque o problema nunca foi saber o que fazer.': 'Because the problem was never knowing what to do.',
+    'A estratégia não chega na operação': "Strategy doesn't reach operations",
+    'Metas que ninguém acompanha': 'Goals nobody tracks',
+    'Decisões que não viram ação': "Decisions that don't become action",
+    'Prioridades mudam toda semana': 'Priorities change every week',
+    'Cada área segue um caminho': 'Each area follows a different path',
+    'Tudo depende de você': 'Everything depends on you',
+    'Ela precisa de': 'It needs',
+    'execução estratégica contínua.': 'continuous strategic execution.',
+    'Prova real': 'Real proof',
+    'Veja o que acontece depois de uma decisão': 'See what happens after a decision',
+    'Você não precisa organizar nada. O Orbit transforma automaticamente em estrutura estratégica.': "You don't need to organize anything. Orbit automatically transforms it into strategic structure.",
+    'Você não analisa cenário. O sistema já organiza tudo.': "You don't analyze scenarios. The system already organizes everything.",
+    'Classifica, prioriza e estrutura automaticamente o que realmente impacta sua empresa.': 'Automatically classifies, prioritizes and structures what really impacts your company.',
+    'A análise vira direcionamento claro.': 'Analysis becomes clear direction.',
+    'Você sabe exatamente para onde ir.': 'You know exactly where to go.',
+    'A estratégia deixa de ser ideia': 'Strategy stops being just an idea',
+    'E vira plano estruturado com lógica clara. Com justificativa, direcionamento e organização completa.': 'And becomes a structured plan with clear logic. With justification, direction and complete organization.',
+    'E o mais importante:': 'And most importantly:',
+    'começa a ser executado': 'it starts being executed',
+    'Nada fica parado. Cada decisão vira ação com responsável e prazo.': 'Nothing stays idle. Every decision becomes action with an owner and deadline.',
+    'Tudo está conectado': 'Everything is connected',
+    'Metas, estratégia e execução deixam de ser separados. Agora fazem parte do mesmo fluxo.': 'Goals, strategy and execution stop being separate. They are now part of the same flow.',
+    'Antes vs Depois': 'Before vs After',
+    'ANTES': 'BEFORE',
+    'DEPOIS': 'AFTER',
+    'Você define a estratégia': 'You define the strategy',
+    'O time interpreta': 'The team interprets',
+    'Nada é acompanhado': 'Nothing is tracked',
+    'Estratégia vira estrutura': 'Strategy becomes structure',
+    'Estrutura vira plano': 'Structure becomes plan',
+    'Plano vira execução': 'Plan becomes execution',
+    'Execução é acompanhada automaticamente': 'Execution is tracked automatically',
+    'Para fazer isso manualmente, você precisaria de:': 'To do this manually, you would need:',
+    'Diretor estratégico': 'Strategic director',
+    'Analistas': 'Analysts',
+    'Acompanhamento diário': 'Daily tracking',
+    'Controle constante': 'Constant control',
+    'Agora isso acontece automaticamente.': 'Now this happens automatically.',
+    'Veja isso acontecendo na prática': 'See this happening in practice',
+    'Vídeo demonstrando fluxo real': 'Video showing real workflow',
+    'Veja sua estratégia sendo': 'See your strategy being',
+    'executada': 'executed',
+    'Em poucos minutos você entende como isso se aplica à sua empresa.': 'In a few minutes you understand how this applies to your company.',
+    'Quero ver o Orbit funcionando': 'I want to see Orbit working',
 
     // === MISC ===
     'Conheça os 12': 'Meet the 12',
@@ -1336,7 +1511,7 @@ function applyEnglish() {
     'footer.tagline': 'AI-powered management platform. Hire a team that executes.',
     'footer.contact': 'Contact', 'footer.platform': 'Platform',
     'footer.content': 'Resources', 'footer.company': 'Company',
-    'footer.rights': '© 2026 Orbit — Grupo GSN. All rights reserved.',
+    'footer.rights': '© 2026 Orbit - Grupo GSN. All rights reserved.',
     'footer.agents': 'AI Agents', 'footer.plans': 'Plans & Pricing',
     'footer.stories': 'Customer Stories', 'footer.about': 'About Us',
     'footer.partners': 'Become a Partner', 'footer.channels': 'B2B2B Channels',
@@ -1364,7 +1539,7 @@ function applyEnglish() {
   });
 
   // Update page title and lang
-  document.title = 'Orbit — Hire an AI team that executes';
+  document.title = 'Orbit - Hire an AI team that executes';
   document.documentElement.lang = 'en';
 
   // Update placeholder attributes

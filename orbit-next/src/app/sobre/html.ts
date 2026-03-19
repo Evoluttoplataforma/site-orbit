@@ -1,4 +1,4 @@
-// Full content including footer and scripts - from site/sobre.html
+// Auto-generated
 export const pageHTML = `
     <!-- ═══ HERO ═══ -->
     <section class="sobre-hero">
@@ -49,13 +49,13 @@ export const pageHTML = `
         </div>
     </section>
 
-    <!-- ═══ NOSSA HISTÓRIA — Cinema Timeline ═══ -->
+    <!-- ═══ NOSSA HISTÓRIA - Cinema Timeline ═══ -->
     <section class="historia-section" id="historiaCinema">
         <div class="container">
             <div class="section-header" data-reveal>
                 <span class="section-badge" style="background:rgba(255,186,26,0.1);color:#ffba1a;border:1px solid rgba(255,186,26,0.2);display:inline-block;padding:8px 20px;border-radius:50px;font-size:0.85rem;font-weight:600;margin-bottom:16px;">Nossa Trajetória</span>
                 <h2>Uma história de <em style="color:#ffba1a;font-style:normal;">transformação</em></h2>
-                <p>De consultoria presencial a plataforma com IA — cada passo construiu o que somos hoje.</p>
+                <p>De consultoria presencial a plataforma com IA - cada passo construiu o que somos hoje.</p>
             </div>
 
             <div class="hiw-cinema__steps">
@@ -128,7 +128,7 @@ export const pageHTML = `
                     <div class="hiw-cinema__dot">04</div>
                     <div class="hiw-cinema__card">
                         <div class="hiw-cinema__info">
-                            <span class="hiw-cinema__label">2026 — O Orbit</span>
+                            <span class="hiw-cinema__label">2026 - O Orbit</span>
                             <h3>IA integrada à gestão</h3>
                             <p>12 agentes de IA especializados são integrados à plataforma. Consultoria recorrente, automatizada e acessível para qualquer empresa.</p>
                         </div>
@@ -148,7 +148,7 @@ export const pageHTML = `
             </div>
 
             <div class="historia-quote" data-reveal>
-                <p>"A consultoria não morre — ela evolui. O que antes exigia um consultor presencial, agora um agente de IA executa 24/7."</p>
+                <p>"A consultoria não morre - ela evolui. O que antes exigia um consultor presencial, agora um agente de IA executa 24/7."</p>
             </div>
         </div>
     </section>
@@ -312,13 +312,12 @@ export const pageHTML = `
                     <ul>
                         <li><a href="/sobre" data-i18n="footer.about">Sobre Nós</a></li>
                         <li><a href="/parcerias" data-i18n="footer.partners">Seja Parceiro</a></li>
-                        <li><a href="/consultores" data-i18n="footer.channels">Canais B2B2B</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <p data-i18n="footer.rights">&copy; 2026 Orbit — Grupo GSN. Todos os direitos reservados.</p>
+                <p data-i18n="footer.rights">&copy; 2026 Orbit - Grupo GSN. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>

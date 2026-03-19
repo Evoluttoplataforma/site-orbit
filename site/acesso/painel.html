@@ -1726,7 +1726,7 @@
     }
 
     // ═══════════════════════════════════════
-    // ORBIT CMS — Admin Panel
+    // ORBIT CMS - Admin Panel
     // ═══════════════════════════════════════
 
     const STORAGE_KEY = 'orbit_cms';
@@ -2292,7 +2292,7 @@
             <tr>
                 <td><span style="background:rgba(255,186,26,0.15);color:var(--primary);padding:4px 10px;border-radius:20px;font-size:0.78rem;font-weight:500;">${LEAD_TYPE_LABELS[lm.type] || lm.type}</span></td>
                 <td><strong>${escapeHtml(lm.title)}</strong></td>
-                <td style="color:var(--gray-500);font-size:0.85rem;">${escapeHtml(lm.desc || '—')}</td>
+                <td style="color:var(--gray-500);font-size:0.85rem;">${escapeHtml(lm.desc || '-')}</td>
                 <td style="font-size:0.85rem;">${escapeHtml(lm.cta || 'Baixar agora')}</td>
                 <td>
                     <div style="display:flex;gap:4px;">
@@ -2380,7 +2380,7 @@
         if (!select) return;
         const currentVal = select.value;
         select.innerHTML = '<option value="">Nenhuma (desativado)</option>' +
-            db.leadMagnets.map(lm => `<option value="${lm.id}">${LEAD_TYPE_LABELS[lm.type] || lm.type} — ${escapeHtml(lm.title)}</option>`).join('');
+            db.leadMagnets.map(lm => `<option value="${lm.id}">${LEAD_TYPE_LABELS[lm.type] || lm.type} - ${escapeHtml(lm.title)}</option>`).join('');
         select.value = currentVal;
     }
 
@@ -3072,8 +3072,8 @@ ${JSON.stringify(schemaOrg, null, 2)}
             <tr>
                 <td><div style="display:flex;align-items:center;">${logo}<strong>${escapeHtml(s.empresa)}</strong></div></td>
                 <td><span style="font-size:0.85rem;">${escapeHtml(s.nome)}</span><br><span style="font-size:0.75rem;color:var(--gray-400);">${escapeHtml(s.email)}</span></td>
-                <td style="max-width:200px;"><span style="font-size:0.85rem;">${escapeHtml(s.titulo || '—')}</span></td>
-                <td><span style="background:rgba(255,186,26,0.15);color:var(--primary);padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:500;">${escapeHtml(SEGMENT_LABELS[s.segmento] || s.segmento || '—')}</span></td>
+                <td style="max-width:200px;"><span style="font-size:0.85rem;">${escapeHtml(s.titulo || '-')}</span></td>
+                <td><span style="background:rgba(255,186,26,0.15);color:var(--primary);padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:500;">${escapeHtml(SEGMENT_LABELS[s.segmento] || s.segmento || '-')}</span></td>
                 <td><span class="badge badge-${statusClass}">${statusLabel}</span></td>
                 <td style="font-size:0.82rem;">${formatDate(s.createdAt)}</td>
                 <td>
@@ -3139,7 +3139,7 @@ ${JSON.stringify(schemaOrg, null, 2)}
                 ${logo}
                 <div>
                     <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:2px;">${escapeHtml(s.empresa)}</h3>
-                    <span style="font-size:0.82rem;color:var(--gray-500);">${escapeHtml(s.nome)} — ${escapeHtml(s.cargo || '')}</span><br>
+                    <span style="font-size:0.82rem;color:var(--gray-500);">${escapeHtml(s.nome)} - ${escapeHtml(s.cargo || '')}</span><br>
                     <span style="font-size:0.78rem;color:var(--gray-400);">${escapeHtml(s.email)} | ${escapeHtml(s.telefone || '')}</span>
                 </div>
                 <span class="badge badge-${STORY_STATUS_COLORS[s.status]}" style="margin-left:auto;">${STORY_STATUS_LABELS[s.status]}</span>
@@ -3151,23 +3151,23 @@ ${JSON.stringify(schemaOrg, null, 2)}
 
             <div style="margin-bottom:20px;">
                 <h5 style="font-size:0.82rem;font-weight:600;color:var(--primary-dark);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;"><i class="fas fa-exclamation-triangle" style="margin-right:6px;"></i>O Desafio</h5>
-                <p style="font-size:0.9rem;line-height:1.7;color:var(--gray-700);white-space:pre-line;">${escapeHtml(s.desafio || '—')}</p>
+                <p style="font-size:0.9rem;line-height:1.7;color:var(--gray-700);white-space:pre-line;">${escapeHtml(s.desafio || '-')}</p>
             </div>
 
             <div style="margin-bottom:20px;">
                 <h5 style="font-size:0.82rem;font-weight:600;color:var(--primary-dark);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;"><i class="fas fa-lightbulb" style="margin-right:6px;"></i>A Solução</h5>
-                <p style="font-size:0.9rem;line-height:1.7;color:var(--gray-700);white-space:pre-line;">${escapeHtml(s.solucao || '—')}</p>
+                <p style="font-size:0.9rem;line-height:1.7;color:var(--gray-700);white-space:pre-line;">${escapeHtml(s.solucao || '-')}</p>
             </div>
 
             <div style="margin-bottom:20px;">
                 <h5 style="font-size:0.82rem;font-weight:600;color:var(--primary-dark);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;"><i class="fas fa-chart-line" style="margin-right:6px;"></i>Os Resultados</h5>
-                <p style="font-size:0.9rem;line-height:1.7;color:var(--gray-700);white-space:pre-line;">${escapeHtml(s.resultados || '—')}</p>
+                <p style="font-size:0.9rem;line-height:1.7;color:var(--gray-700);white-space:pre-line;">${escapeHtml(s.resultados || '-')}</p>
             </div>
 
             ${s.depoimento ? `
             <div style="border-left:4px solid var(--primary);padding:16px 20px;background:rgba(255,186,26,0.05);border-radius:0 12px 12px 0;margin-bottom:20px;">
                 <p style="font-style:italic;font-size:0.9rem;line-height:1.7;color:var(--gray-700);">"${escapeHtml(s.depoimento)}"</p>
-                <span style="font-size:0.78rem;color:var(--gray-500);margin-top:8px;display:block;">— ${escapeHtml(s.nome)}, ${escapeHtml(s.cargo || '')} na ${escapeHtml(s.empresa)}</span>
+                <span style="font-size:0.78rem;color:var(--gray-500);margin-top:8px;display:block;">- ${escapeHtml(s.nome)}, ${escapeHtml(s.cargo || '')} na ${escapeHtml(s.empresa)}</span>
             </div>` : ''}
 
             ${photos ? `<div style="margin-bottom:20px;"><h5 style="font-size:0.82rem;font-weight:600;color:var(--gray-600);margin-bottom:8px;">Fotos</h5><div style="display:flex;gap:8px;flex-wrap:wrap;">${photos}</div></div>` : ''}

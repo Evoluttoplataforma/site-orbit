@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════
-   ORBIT GESTÃO — v2 Main JavaScript
+   ORBIT GESTÃO - v2 Main JavaScript
    Carousel + Tabs + Form + Interactions
    ═══════════════════════════════════════════════════════ */
 

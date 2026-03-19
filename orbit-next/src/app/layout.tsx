@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Orbit — Contrate um time de IA que executa",
+  title: "Orbit - Contrate um time de IA que executa",
   description: "Gestão Operada por IA com consultoria recorrente passiva. 12 agentes especializados constroem e operam a gestão da sua empresa 24/7.",
   icons: { icon: '/images/favicon.svg' },
 };

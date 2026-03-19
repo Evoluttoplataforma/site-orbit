@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { headerHTML } from './shared-header';
-import { footerHTML } from './shared-footer';
+import { oliviaHTML } from './shared-olivia';
 
 interface PageLayoutProps {
   contentHTML: string;
@@ -14,27 +14,31 @@ export function PageLayout({ contentHTML }: PageLayoutProps) {
   useEffect(() => {
     if (!ref.current) return;
 
-    // Execute inline scripts from the content HTML
-    const scripts = ref.current.querySelectorAll('script');
-    const executed: HTMLScriptElement[] = [];
+    // Wait for DOM to be fully rendered, then execute inline scripts
+    const timer = setTimeout(() => {
+      const scripts = ref.current?.querySelectorAll('script');
+      if (!scripts) return;
 
-    scripts.forEach(oldScript => {
-      const newScript = document.createElement('script');
-      if (oldScript.src) {
-        newScript.src = oldScript.src;
-      } else if (oldScript.textContent) {
-        newScript.textContent = oldScript.textContent;
-      }
-      document.body.appendChild(newScript);
-      executed.push(newScript);
-    });
+      scripts.forEach(oldScript => {
+        if (oldScript.src) {
+          const newScript = document.createElement('script');
+          newScript.src = oldScript.src;
+          document.body.appendChild(newScript);
+        } else if (oldScript.textContent) {
+          try {
+            const fn = new Function(oldScript.textContent);
+            fn();
+          } catch (e) {
+            console.warn('Script execution error:', e);
+          }
+        }
+      });
+    }, 150);
 
-    return () => {
-      executed.forEach(s => s.remove());
-    };
+    return () => clearTimeout(timer);
   }, []);
 
-  // Content already includes footer and page-specific scripts
+  // Content already includes footer, Olivia hub, and page-specific scripts
   const fullHTML = headerHTML + '\n' + contentHTML;
 
   return <div ref={ref} dangerouslySetInnerHTML={{ __html: fullHTML }} />;

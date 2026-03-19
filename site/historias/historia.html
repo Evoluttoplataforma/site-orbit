@@ -28,7 +28,7 @@
         /* ── Page Background Override ── */
         body { background: #FFFFFF; color: #1A1D23; }
 
-        /* Force content visible — override data-reveal opacity:0 from styles-v2.css */
+        /* Force content visible - override data-reveal opacity:0 from styles-v2.css */
         [data-reveal], [data-reveal-stagger] {
             opacity: 1 !important;
             transform: none !important;
@@ -888,7 +888,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p data-i18n="footer.rights">&copy; 2026 Orbit — Grupo GSN. Todos os direitos reservados.</p>
+                <p data-i18n="footer.rights">&copy; 2026 Orbit - Grupo GSN. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
@@ -945,7 +945,7 @@
             '</div>';
     } else {
         var storyId = story.id || storySlug;
-        document.title = escapeHtml(story.titulo) + ' — ' + escapeHtml(story.empresa) + ' | Orbit Gestão';
+        document.title = escapeHtml(story.titulo) + ' - ' + escapeHtml(story.empresa) + ' | Orbit Gestão';
 
         var coverImg = (story.photos && story.photos.length) ? story.photos[0] : '';
         var segment = SEGMENTS[story.segmento] || story.segmento || '';
@@ -1059,7 +1059,7 @@
         html += '<div class="info-item"><div class="info-item__label">Empresa</div><div class="info-item__value">' + escapeHtml(story.empresa) + '</div></div>';
         html += '<div class="info-item"><div class="info-item__label">Segmento</div><div class="info-item__value">' + escapeHtml(segment) + '</div></div>';
         html += '<div class="info-item"><div class="info-item__label">Responsável</div><div class="info-item__value">' + escapeHtml(story.nome) + '</div></div>';
-        html += '<div class="info-item"><div class="info-item__label">Cargo</div><div class="info-item__value">' + escapeHtml(story.cargo || '—') + '</div></div>';
+        html += '<div class="info-item"><div class="info-item__label">Cargo</div><div class="info-item__value">' + escapeHtml(story.cargo || '-') + '</div></div>';
         html += '</div></section>';
 
         // ═══ RESULTS METRICS (if resultados has numbers) ═══

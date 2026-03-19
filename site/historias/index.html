@@ -29,7 +29,7 @@
         /* ── Page Background Override ── */
         body { background: #FFFFFF; color: #1A1D23; }
 
-        /* Force content visible — override data-reveal opacity:0 from styles-v2.css */
+        /* Force content visible - override data-reveal opacity:0 from styles-v2.css */
         [data-reveal], [data-reveal-stagger] {
             opacity: 1 !important;
             transform: none !important;
@@ -568,7 +568,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p data-i18n="footer.rights">&copy; 2026 Orbit — Grupo GSN. Todos os direitos reservados.</p>
+                <p data-i18n="footer.rights">&copy; 2026 Orbit - Grupo GSN. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
@@ -669,7 +669,7 @@
                 logoHtml = `<div class="story-card__logo-placeholder"><i class="fas fa-building"></i></div>`;
             }
 
-            const autorCargo = [story.nome, story.cargo].filter(Boolean).join(' — ');
+            const autorCargo = [story.nome, story.cargo].filter(Boolean).join(' - ');
 
             return `
             <a href="/historias/${encodeURIComponent(story.slug || story.id)}" class="story-card">
@@ -738,7 +738,7 @@
     <script>
     (function() {
         var els = document.querySelectorAll('[data-reveal],[data-reveal-stagger]');
-        // Enable reveal animations — content is visible by default via CSS override
+        // Enable reveal animations - content is visible by default via CSS override
         document.body.classList.add('reveal-ready');
         if ('IntersectionObserver' in window) {
             var io = new IntersectionObserver(function(entries) {
