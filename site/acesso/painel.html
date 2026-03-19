@@ -816,6 +816,9 @@
             transition: width 0.3s, background 0.3s;
         }
     </style>
+<script>window.switchLang=function(){var l=localStorage.getItem("orbit_lang")||"pt";localStorage.setItem("orbit_lang",l==="pt"?"en":"pt");location.reload();};</script>
+<script src="/js/translations/common.js"></script>
+<script src="/js/i18n.js"></script>
 </head>
 <body>
 
@@ -2685,7 +2688,7 @@ ${JSON.stringify(schemaOrg, null, 2)}
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/styles-v2.css?v=be4bc32a">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=4fbbda1e">
     <style>
         .article-hero{background:#000;padding:140px 24px 80px;text-align:center;position:relative;overflow:hidden}
         .article-hero__bg{position:absolute;inset:0;pointer-events:none}
@@ -2717,6 +2720,9 @@ ${JSON.stringify(schemaOrg, null, 2)}
         nav.breadcrumb span{color:#999;margin:0 8px}
         @media(max-width:768px){.article-hero{padding:120px 20px 60px}.article-hero__meta{flex-direction:column;gap:8px}.article-body{padding:40px 20px 60px}}
     </style>
+<script>window.switchLang=function(){var l=localStorage.getItem("orbit_lang")||"pt";localStorage.setItem("orbit_lang",l==="pt"?"en":"pt");location.reload();};</script>
+<script src="/js/translations/common.js"></script>
+<script src="/js/i18n.js"></script>
 </head>
 <body>
     <header class="header">
@@ -2738,10 +2744,10 @@ ${JSON.stringify(schemaOrg, null, 2)}
                 <li><a href="/#contato-form">Fale Conosco</a></li>
             </ul>
             <div class="nav-actions">
-                <a href="#" class="btn btn-outline">Entrar</a>
+                <a href="#" class="btn btn-outline" data-i18n="nav.login">Entrar</a>
                 <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>
             </div>
-            <button class="lang-switch" onclick="OrbitI18n.toggle()" aria-label="Change language">
+            <button class="lang-switch" onclick="switchLang()" aria-label="Change language">
                 <span class="lang-switch__flag">🇺🇸</span>
                 <span class="lang-switch__label">EN</span>
             </button>
@@ -2755,7 +2761,7 @@ ${JSON.stringify(schemaOrg, null, 2)}
     <div class="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
     <div class="mobile-menu">
         <div class="mobile-menu__header">
-            <span class="mobile-menu__header-title">Menu</span>
+            <span class="mobile-menu__header-title" data-i18n="mobile.title">Menu</span>
             <button class="mobile-menu-close" onclick="closeMobileMenu()">&times;</button>
         </div>
         <div class="mobile-menu__body">
@@ -2769,7 +2775,7 @@ ${JSON.stringify(schemaOrg, null, 2)}
             <a href="/parcerias" data-i18n="footer.partners">Seja Parceiro</a>
         </div>
         <div class="mobile-menu__footer">
-            <button class="lang-switch" onclick="OrbitI18n.toggle(); closeMobileMenu();" aria-label="Change language">
+            <button class="lang-switch" onclick="switchLang()" aria-label="Change language">
                 <span class="lang-switch__flag">🇺🇸</span>
                 <span class="lang-switch__label">EN</span>
             </button>
@@ -2852,8 +2858,6 @@ ${JSON.stringify(schemaOrg, null, 2)}
             item.addEventListener('mouseleave', () => { dropdown.style.opacity='0'; dropdown.style.visibility='hidden'; dropdown.style.transform='translateY(10px)'; });
         });
     <\/script>
-    <script src="/js/translations/common.js"></script>
-    <script src="/js/i18n.js"></script>
 </body>
 </html>`;
 
@@ -3437,7 +3441,5 @@ ${JSON.stringify(schemaOrg, null, 2)}
     initUI();
     updateNotifications();
     </script>
-    <script src="/js/translations/common.js"></script>
-    <script src="/js/i18n.js"></script>
 </body>
 </html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><title>i18n test</title></head>
+<body>
+<h1>Test i18n</h1>
+<p data-i18n="footer.tagline">Texto em PT</p>
+<p data-i18n="footer.rights">Copyright PT</p>
+<button onclick="OrbitI18n.toggle()">TROCAR IDIOMA</button>
+<p id="debug"></p>
+<script src="/js/translations/common.js"></script>
+<script src="/js/i18n.js"></script>
+<script>
+document.getElementById('debug').textContent = 
+  'OrbitI18n: ' + (typeof window.OrbitI18n) + 
+  ' | lang: ' + (window.OrbitI18n ? OrbitI18n.getLang() : 'N/A') +
+  ' | COMMON: ' + (typeof window.ORBIT_I18N_COMMON);
+</script>
+</body>
+</html>

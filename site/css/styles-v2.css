@@ -421,6 +421,9 @@ ul { list-style: none; }
   font-weight: 600;
   font-family: 'Plus Jakarta Sans', sans-serif;
   transition: all 0.2s ease;
+  position: relative;
+  z-index: 100;
+  pointer-events: auto;
 }
 .lang-switch:hover {
   background: rgba(255,255,255,0.1);
@@ -3300,6 +3303,7 @@ ul { list-style: none; }
 @media (max-width: 1024px) {
   .nav-menu, .nav-actions { display: none; }
   .menu-toggle { display: flex; }
+  .header .lang-switch { display: flex; z-index: 10; position: relative; }
   .header { max-width: 96%; top: 8px; border-radius: 12px; }
   .header .container { height: 60px; }
   .carousel-card { flex: 0 0 calc(50% - 10px); }

@@ -32,7 +32,7 @@
 
 
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/styles-v2.css?v=be4bc32a">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=4fbbda1e">
 
     <!-- New Sections Styles -->
     <style>
@@ -312,6 +312,9 @@
         .cost-section, .pricing-preview-section, .testi-section, .consultant-section { padding: 60px 0; }
     }
     </style>
+<script>window.switchLang=function(){var l=localStorage.getItem("orbit_lang")||"pt";localStorage.setItem("orbit_lang",l==="pt"?"en":"pt");location.reload();};</script>
+<script src="/js/translations/common.js"></script>
+<script src="/js/i18n.js"></script>
 </head>
 <body>
 
@@ -325,96 +328,72 @@
             </div>
 
             <ul class="nav-menu">
-                <li><a href="/">Início</a></li>
+                <li><a href="/" data-i18n="nav.home">Início</a></li>
                 <li>
-                    <a href="#plataforma">Plataforma <i class="fas fa-chevron-down dropdown-arrow"></i></a>
-                    <div class="dropdown">
-                        <div class="dropdown__info">
-                            <span class="dropdown__info-badge"><i class="fas fa-cube"></i> Plataforma</span>
-                            <h4>Orbit Gestão</h4>
-                            <p>5 módulos integrados + 12 agentes de IA para transformar sua estratégia em execução real.</p>
-                            <div class="dropdown__info-img">
-                                <i class="fas fa-rocket"></i>
-                            </div>
-                        </div>
+                    <a href="/agentes"><span data-i18n="nav.agents_menu">Agentes de IA</span> <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown dropdown--sm">
                         <div class="dropdown__links">
                             <a href="/agentes">
                                 <div class="dd-icon"><i class="fas fa-robot"></i></div>
-                                <div class="dd-text"><span>Agentes de IA</span><small>12 especialistas 24/7</small></div>
+                                <div class="dd-text"><span>Todos os Agentes</span><small>Conheça os 12 especialistas</small></div>
                             </a>
-                            <a href="/processos">
-                                <div class="dd-icon"><i class="fas fa-sitemap"></i></div>
-                                <div class="dd-text"><span>Processos</span><small>Mapeamento e automação</small></div>
-                            </a>
-                            <a href="/indicadores">
-                                <div class="dd-icon"><i class="fas fa-chart-line"></i></div>
-                                <div class="dd-text"><span>Indicadores</span><small>KPIs e dashboards</small></div>
-                            </a>
-                            <a href="/tarefas">
-                                <div class="dd-icon"><i class="fas fa-tasks"></i></div>
-                                <div class="dd-text"><span>Tarefas</span><small>Kanban estratégico</small></div>
-                            </a>
-                            <a href="/competencias">
-                                <div class="dd-icon"><i class="fas fa-users"></i></div>
-                                <div class="dd-text"><span>Competências</span><small>Gestão de pessoas</small></div>
-                            </a>
-                            <a href="/auditorias">
-                                <div class="dd-icon"><i class="fas fa-clipboard-check"></i></div>
-                                <div class="dd-text"><span>Auditorias</span><small>Conformidade e qualidade</small></div>
+                            <a href="#olivia">
+                                <div class="dd-icon"><i class="fas fa-crown"></i></div>
+                                <div class="dd-text"><span>Olívia</span><small>Coordenadora Geral de IA</small></div>
                             </a>
                         </div>
                     </div>
                 </li>
                 <li>
-                    <a href="#para-quem">Para quem <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <a href="#para-quem"><span data-i18n="nav.for_who">Para quem</span> <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown dropdown--sm">
                         <div class="dropdown__links">
                             <a href="/lp-empresas">
                                 <div class="dd-icon"><i class="fas fa-building"></i></div>
-                                <div class="dd-text"><span>Empresários</span><small>Time de IA para sua empresa</small></div>
+                                <div class="dd-text"><span data-i18n="nav.businesses">Empresários</span><small data-i18n="nav.businesses.sub">Time de IA para sua empresa</small></div>
                             </a>
                             <a href="/consultores">
                                 <div class="dd-icon"><i class="fas fa-user-tie"></i></div>
-                                <div class="dd-text"><span>Consultores</span><small>Modelo de canais B2B2B</small></div>
+                                <div class="dd-text"><span data-i18n="nav.consultants">Consultores</span><small data-i18n="nav.consultants.sub">Modelo de canais B2B2B</small></div>
                             </a>
                         </div>
                     </div>
                 </li>
-                <li><a href="/pricing">Planos</a></li>
+                <li><a href="/pricing" data-i18n="nav.plans">Planos</a></li>
                 <li>
-                    <a href="/blog">Conteúdo <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <a href="/blog"><span data-i18n="nav.content">Conteúdo</span> <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown dropdown--sm">
                         <div class="dropdown__links">
                             <a href="/blog">
                                 <div class="dd-icon"><i class="fas fa-newspaper"></i></div>
-                                <div class="dd-text"><span>Blog</span><small>Artigos e insights</small></div>
+                                <div class="dd-text"><span data-i18n="nav.blog">Blog</span><small data-i18n="nav.blog.sub">Artigos e insights</small></div>
                             </a>
                             <a href="/historias">
                                 <div class="dd-icon"><i class="fas fa-star"></i></div>
-                                <div class="dd-text"><span>Histórias de Clientes</span><small>Cases de sucesso</small></div>
+                                <div class="dd-text"><span data-i18n="nav.stories">Histórias de Clientes</span><small data-i18n="nav.stories.sub">Cases de sucesso</small></div>
                             </a>
                             <a href="/faq">
                                 <div class="dd-icon"><i class="fas fa-circle-question"></i></div>
-                                <div class="dd-text"><span>FAQ</span><small>Perguntas frequentes</small></div>
+                                <div class="dd-text"><span data-i18n="nav.faq">FAQ</span><small data-i18n="nav.faq.sub">Perguntas frequentes</small></div>
                             </a>
                         </div>
                     </div>
                 </li>
                 <li>
-                    <a href="/sobre">Empresa <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <a href="/sobre"><span data-i18n="nav.company">Empresa</span> <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown dropdown--sm">
                         <div class="dropdown__links">
                             <a href="/sobre">
                                 <div class="dd-icon"><i class="fas fa-building"></i></div>
-                                <div class="dd-text"><span>Sobre Nós</span><small>30 anos de história</small></div>
+                                <div class="dd-text"><span data-i18n="nav.about">Sobre Nós</span><small data-i18n="nav.about.sub">30 anos de história</small></div>
                             </a>
                             <a href="/parcerias">
                                 <div class="dd-icon"><i class="fas fa-handshake"></i></div>
-                                <div class="dd-text"><span>Seja Parceiro</span><small>Programa de canais</small></div>
+                                <div class="dd-text"><span data-i18n="nav.partners">Seja Parceiro</span><small data-i18n="nav.partners.sub">Programa de canais</small></div>
                             </a>
                             <a href="/consultores">
                                 <div class="dd-icon"><i class="fas fa-network-wired"></i></div>
-                                <div class="dd-text"><span>Canais B2B2B</span><small>Para consultores e mentores</small></div>
+                                <div class="dd-text"><span data-i18n="nav.channels">Canais B2B2B</span><small data-i18n="nav.channels.sub">Para consultores e mentores</small></div>
                             </a>
                         </div>
                     </div>
@@ -422,11 +401,11 @@
             </ul>
 
             <div class="nav-actions">
-                <a href="/acesso" class="btn btn-outline">Entrar</a>
-                <a href="#contato-form" class="btn btn-primary">Conhecer o Time de IA</a>
+                <a href="/acesso" class="btn btn-outline" data-i18n="nav.login">Entrar</a>
+                <a href="#contato-form" class="btn btn-primary" data-i18n="nav.cta">Conhecer o Time de IA</a>
             </div>
 
-            <button class="lang-switch" onclick="OrbitI18n.toggle()" aria-label="Change language">
+            <button class="lang-switch" onclick="switchLang()" aria-label="Change language">
                 <span class="lang-switch__flag">🇺🇸</span>
                 <span class="lang-switch__label">EN</span>
             </button>
@@ -443,36 +422,35 @@
     <div class="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
     <div class="mobile-menu">
         <div class="mobile-menu__header">
-            <span class="mobile-menu__header-title">Menu</span>
+            <span class="mobile-menu__header-title" data-i18n="mobile.title">Menu</span>
             <button class="mobile-menu-close" onclick="closeMobileMenu()">&times;</button>
         </div>
         <div class="mobile-menu__body">
-            <div class="mobile-menu__label">Navegação</div>
-            <a href="/"><i class="fas fa-home"></i> Início</a>
-            <a href="/pricing"><i class="fas fa-tag"></i> Planos e Preços</a>
-            <a href="#contato-form" onclick="closeMobileMenu()"><i class="fas fa-envelope"></i> Fale Conosco</a>
-            <div class="mobile-menu__label">Plataforma</div>
+            <div class="mobile-menu__label" data-i18n="mobile.nav">Navegação</div>
+            <a href="/"><i class="fas fa-home"></i> <span data-i18n="nav.home">Início</span></a>
+            <a href="/pricing"><i class="fas fa-tag"></i> <span data-i18n="mobile.plans">Planos e Preços</span></a>
+            <a href="#contato-form" onclick="closeMobileMenu()"><i class="fas fa-envelope"></i> <span data-i18n="mobile.contact">Fale Conosco</span></a>
+            <div class="mobile-menu__label" data-i18n="mobile.platform">Plataforma</div>
             <a href="/agentes"><i class="fas fa-robot"></i> Agentes de IA</a>
             <a href="/processos"><i class="fas fa-sitemap"></i> Processos</a>
             <a href="/indicadores"><i class="fas fa-chart-line"></i> Indicadores</a>
             <a href="/tarefas"><i class="fas fa-tasks"></i> Tarefas</a>
             <a href="/competencias"><i class="fas fa-users"></i> Competências</a>
             <a href="/auditorias"><i class="fas fa-clipboard-check"></i> Auditorias</a>
-            <div class="mobile-menu__label">Conteúdo</div>
+            <div class="mobile-menu__label" data-i18n="mobile.content">Conteúdo</div>
             <a href="/blog"><i class="fas fa-newspaper"></i> Blog</a>
             <a href="/historias"><i class="fas fa-star"></i> Histórias de Clientes</a>
             <a href="/faq"><i class="fas fa-circle-question"></i> FAQ</a>
-            <div class="mobile-menu__label">Empresa</div>
+            <div class="mobile-menu__label" data-i18n="mobile.company">Empresa</div>
             <a href="/sobre"><i class="fas fa-building"></i> Sobre Nós</a>
             <a href="/parcerias"><i class="fas fa-handshake"></i> Seja Parceiro</a>
-            <a href="/consultores"><i class="fas fa-network-wired"></i> Canais B2B2B</a>
         </div>
         <div class="mobile-menu__footer">
-            <button class="lang-switch" onclick="OrbitI18n.toggle(); closeMobileMenu();" aria-label="Change language">
+            <button class="lang-switch" onclick="switchLang()" aria-label="Change language">
                 <span class="lang-switch__flag">🇺🇸</span>
                 <span class="lang-switch__label">EN</span>
             </button>
-            <a href="#contato-form" class="btn btn-primary" onclick="closeMobileMenu()">Conhecer o Time de IA</a>
+            <a href="#contato-form" class="btn btn-primary" onclick="closeMobileMenu()" data-i18n="nav.cta">Conhecer o Time de IA</a>
         </div>
     </div>
 
@@ -3244,8 +3222,8 @@
     <section class="solutions-carousel section--light" id="solucoes">
         <div class="container">
             <div class="solutions-carousel__header" data-reveal>
-                <h2>Conheça os módulos onde os <span class="highlight">agentes operam</span></h2>
-                <p>A plataforma Orbit integra 5 módulos + IA. Os agentes trabalham dentro deles.</p>
+                <h2>Conheça os 12 <span class="highlight">agentes de IA</span></h2>
+                <p>Cada agente é um especialista. Trabalhando 24/7 para sua empresa.</p>
             </div>
 
             <div class="carousel-wrapper">
@@ -3255,69 +3233,100 @@
 
                 <div class="carousel-viewport">
                     <div class="carousel-track">
-                        <a href="/processos" class="carousel-card" data-product="processos">
-                            <div class="carousel-card__image">
-                                <img src="https://placehold.co/380x240/0D1117/D4A017?text=Processos" alt="Gestão de Processos" loading="lazy">
-                            </div>
+                        <a href="/agentes" class="carousel-card">
+                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-compass"></i></div>
                             <div class="carousel-card__content">
-                                <div class="carousel-card__icon"><i class="fas fa-sitemap"></i></div>
+                                <div class="carousel-card__icon"><i class="fas fa-compass"></i></div>
+                                <h3>Estrategista</h3>
+                                <p>SWOT, BSC e planejamento estratégico</p>
+                            </div>
+                        </a>
+                        <a href="/agentes" class="carousel-card">
+                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-diagram-project"></i></div>
+                            <div class="carousel-card__content">
+                                <div class="carousel-card__icon"><i class="fas fa-diagram-project"></i></div>
                                 <h3>Processos</h3>
-                                <p>Padronize e otimize seus processos críticos</p>
+                                <p>Mapeamento, playbooks e automação</p>
                             </div>
                         </a>
-
-                        <a href="/indicadores" class="carousel-card" data-product="indicadores">
-                            <div class="carousel-card__image">
-                                <img src="https://placehold.co/380x240/0D1117/D4A017?text=Indicadores" alt="Gestão de Indicadores" loading="lazy">
-                            </div>
+                        <a href="/agentes" class="carousel-card">
+                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-user-group"></i></div>
                             <div class="carousel-card__content">
-                                <div class="carousel-card__icon"><i class="fas fa-chart-line"></i></div>
+                                <div class="carousel-card__icon"><i class="fas fa-user-group"></i></div>
+                                <h3>Pessoas</h3>
+                                <p>Cargos, desempenho e PDIs</p>
+                            </div>
+                        </a>
+                        <a href="/agentes" class="carousel-card">
+                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-graduation-cap"></i></div>
+                            <div class="carousel-card__content">
+                                <div class="carousel-card__icon"><i class="fas fa-graduation-cap"></i></div>
+                                <h3>Treinamento</h3>
+                                <p>Microlearning e trilhas via WhatsApp</p>
+                            </div>
+                        </a>
+                        <a href="/agentes" class="carousel-card">
+                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-chart-column"></i></div>
+                            <div class="carousel-card__content">
+                                <div class="carousel-card__icon"><i class="fas fa-chart-column"></i></div>
                                 <h3>Indicadores</h3>
-                                <p>KPIs em tempo real com dashboards inteligentes</p>
+                                <p>KPIs em tempo real e causa raiz</p>
                             </div>
                         </a>
-
-                        <a href="/tarefas" class="carousel-card" data-product="tarefas">
-                            <div class="carousel-card__image">
-                                <img src="https://placehold.co/380x240/0D1117/D4A017?text=Tarefas" alt="Gestão de Tarefas" loading="lazy">
-                            </div>
+                        <a href="/agentes" class="carousel-card">
+                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-magnifying-glass-chart"></i></div>
                             <div class="carousel-card__content">
-                                <div class="carousel-card__icon"><i class="fas fa-tasks"></i></div>
-                                <h3>Tarefas</h3>
-                                <p>Alinhe tarefas à sua estratégia e objetivos</p>
+                                <div class="carousel-card__icon"><i class="fas fa-magnifying-glass-chart"></i></div>
+                                <h3>Pesquisa</h3>
+                                <p>Clima, formulários e insights</p>
                             </div>
                         </a>
-
-                        <a href="/competencias" class="carousel-card" data-product="competencias">
-                            <div class="carousel-card__image">
-                                <img src="https://placehold.co/380x240/0D1117/D4A017?text=Competências" alt="Gestão de Competências" loading="lazy">
-                            </div>
+                        <a href="/agentes" class="carousel-card">
+                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-shield-halved"></i></div>
                             <div class="carousel-card__content">
-                                <div class="carousel-card__icon"><i class="fas fa-users"></i></div>
-                                <h3>Competências</h3>
-                                <p>Desenvolva o potencial do seu time</p>
+                                <div class="carousel-card__icon"><i class="fas fa-shield-halved"></i></div>
+                                <h3>Riscos</h3>
+                                <p>Mitigação e prevenção contínua</p>
                             </div>
                         </a>
-
-                        <a href="/auditorias" class="carousel-card" data-product="auditorias">
-                            <div class="carousel-card__image">
-                                <img src="https://placehold.co/380x240/0D1117/D4A017?text=Auditorias" alt="Gestão de Auditorias" loading="lazy">
-                            </div>
+                        <a href="/agentes" class="carousel-card">
+                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-lightbulb"></i></div>
                             <div class="carousel-card__content">
-                                <div class="carousel-card__icon"><i class="fas fa-clipboard-check"></i></div>
-                                <h3>Auditorias</h3>
-                                <p>Conformidade e qualidade nos processos</p>
+                                <div class="carousel-card__icon"><i class="fas fa-lightbulb"></i></div>
+                                <h3>Oportunidades</h3>
+                                <p>Mercado, parcerias e expansão</p>
                             </div>
                         </a>
-
-                        <a href="#agentes" class="carousel-card carousel-card--highlight" data-product="ia">
-                            <div class="carousel-card__image">
-                                <img src="https://placehold.co/380x240/D4A017/0D1117?text=Orbit+IA" alt="Orbit IA" loading="lazy">
-                            </div>
+                        <a href="/agentes" class="carousel-card">
+                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-triangle-exclamation"></i></div>
                             <div class="carousel-card__content">
-                                <div class="carousel-card__icon"><i class="fas fa-brain"></i></div>
-                                <h3>Orbit IA</h3>
-                                <p>12 agentes especializados que operam sua gestão</p>
+                                <div class="carousel-card__icon"><i class="fas fa-triangle-exclamation"></i></div>
+                                <h3>Problemas</h3>
+                                <p>Não-conformidades e PDCA</p>
+                            </div>
+                        </a>
+                        <a href="/agentes" class="carousel-card">
+                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-file-lines"></i></div>
+                            <div class="carousel-card__content">
+                                <div class="carousel-card__icon"><i class="fas fa-file-lines"></i></div>
+                                <h3>Documentos</h3>
+                                <p>Padronização e controle</p>
+                            </div>
+                        </a>
+                        <a href="/agentes" class="carousel-card">
+                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-handshake"></i></div>
+                            <div class="carousel-card__content">
+                                <div class="carousel-card__icon"><i class="fas fa-handshake"></i></div>
+                                <h3>Vendas</h3>
+                                <p>CRM, funil e coaching comercial</p>
+                            </div>
+                        </a>
+                        <a href="/agentes" class="carousel-card">
+                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-video"></i></div>
+                            <div class="carousel-card__content">
+                                <div class="carousel-card__icon"><i class="fas fa-video"></i></div>
+                                <h3>Reuniões</h3>
+                                <p>Transcrição e planos de ação</p>
                             </div>
                         </a>
                     </div>
@@ -3326,15 +3335,6 @@
                 <button class="carousel-arrow carousel-arrow--next" aria-label="Próximo">
                     <i class="fas fa-chevron-right"></i>
                 </button>
-            </div>
-
-            <div class="carousel-dots">
-                <button class="carousel-dot active" data-index="0"></button>
-                <button class="carousel-dot" data-index="1"></button>
-                <button class="carousel-dot" data-index="2"></button>
-                <button class="carousel-dot" data-index="3"></button>
-                <button class="carousel-dot" data-index="4"></button>
-                <button class="carousel-dot" data-index="5"></button>
             </div>
         </div>
     </section>
@@ -4800,7 +4800,5 @@
     <!-- Scripts -->
     <script src="/js/main-v2.js?v=1"></script>
     <script src="/js/seo.js"></script>
-    <script src="/js/translations/common.js"></script>
-    <script src="/js/i18n.js"></script>
 </body>
 </html>
