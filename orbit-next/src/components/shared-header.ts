@@ -4,7 +4,7 @@ export const headerHTML = `
     <header class="header">
         <div class="container">
             <div class="logo">
-                <a href="#home">
+                <a href="/">
                     <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" height="40">
                 </a>
             </div>
@@ -19,10 +19,6 @@ export const headerHTML = `
                                 <div class="dd-icon"><i class="fas fa-robot"></i></div>
                                 <div class="dd-text"><span>Todos os Agentes</span><small>Conheça os 12 especialistas</small></div>
                             </a>
-                            <a href="#olivia">
-                                <div class="dd-icon"><i class="fas fa-crown"></i></div>
-                                <div class="dd-text"><span>Olívia</span><small>Coordenadora Geral de IA</small></div>
-                            </a>
                             <a href="/agentes/estrategista">
                                 <div class="dd-icon"><i class="fas fa-compass"></i></div>
                                 <div class="dd-text"><span>Agente Estratégico</span><small>Planejamento e execução estratégica</small></div>
@@ -34,7 +30,7 @@ export const headerHTML = `
                     <a href="#para-quem"><span data-i18n="nav.for_who">Para quem</span> <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown dropdown--sm">
                         <div class="dropdown__links">
-                            <a href="/lp-empresas">
+                            <a href="/empresarios">
                                 <div class="dd-icon"><i class="fas fa-building"></i></div>
                                 <div class="dd-text"><span data-i18n="nav.businesses">Empresários</span><small data-i18n="nav.businesses.sub">Time de IA para sua empresa</small></div>
                             </a>
@@ -45,7 +41,7 @@ export const headerHTML = `
                         </div>
                     </div>
                 </li>
-                <li><a href="/pricing" data-i18n="nav.plans">Planos</a></li>
+                <li><a href="/preco" data-i18n="nav.plans">Planos</a></li>
                 <li>
                     <a href="/blog"><span data-i18n="nav.content">Conteúdo</span> <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown dropdown--sm">
@@ -106,7 +102,7 @@ export const headerHTML = `
         <div class="mobile-menu__body">
             <div class="mobile-menu__label" data-i18n="mobile.nav">Navegação</div>
             <a href="/"><i class="fas fa-home"></i> <span data-i18n="nav.home">Início</span></a>
-            <a href="/pricing"><i class="fas fa-tag"></i> <span data-i18n="mobile.plans">Planos e Preços</span></a>
+            <a href="/preco"><i class="fas fa-tag"></i> <span data-i18n="mobile.plans">Planos e Preços</span></a>
             <a href="#contato-form" onclick="closeMobileMenu()"><i class="fas fa-envelope"></i> <span data-i18n="mobile.contact">Fale Conosco</span></a>
             <div class="mobile-menu__label" data-i18n="mobile.platform">Plataforma</div>
             <a href="/agentes"><i class="fas fa-robot"></i> Agentes de IA</a>

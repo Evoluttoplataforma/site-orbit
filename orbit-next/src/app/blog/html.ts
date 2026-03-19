@@ -95,7 +95,7 @@ export const pageHTML = `
                         <li><a href="/tarefas">Tarefas</a></li>
                         <li><a href="/competencias">Competências</a></li>
                         <li><a href="/auditorias">Auditorias</a></li>
-                        <li><a href="/pricing" data-i18n="footer.plans">Planos e Preços</a></li>
+                        <li><a href="/preco" data-i18n="footer.plans">Planos e Preços</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">

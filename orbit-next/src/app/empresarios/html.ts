@@ -2567,7 +2567,7 @@ export const pageHTML = `
                                 <div class="cost-orbit-benefit"><i class="fas fa-star"></i> Operação imediata</div>
                             </div>
                             <div class="cost-cta">
-                                <a href="/pricing" class="btn btn-primary btn-lg" style="border-radius:50px;width:100%;">Ver planos completos <i class="fa-solid fa-arrow-right"></i></a>
+                                <a href="/preco" class="btn btn-primary btn-lg" style="border-radius:50px;width:100%;">Ver planos completos <i class="fa-solid fa-arrow-right"></i></a>
                             </div>
                         </div>
             </div>
@@ -3104,7 +3104,7 @@ export const pageHTML = `
                         <li><a href="/tarefas">Tarefas</a></li>
                         <li><a href="/competencias">Competências</a></li>
                         <li><a href="/auditorias">Auditorias</a></li>
-                        <li><a href="/pricing" data-i18n="footer.plans">Planos e Preços</a></li>
+                        <li><a href="/preco" data-i18n="footer.plans">Planos e Preços</a></li>
                     </ul>
                 </div>
 
