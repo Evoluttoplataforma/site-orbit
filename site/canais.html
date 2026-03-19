@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/styles-v2.css?v=03e4b421">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=84290829">
 
     <style>
         /* ═══ CANAIS LP — INLINE STYLES ═══ */
@@ -826,6 +826,117 @@
         .orbit-hub__node-icon i { font-size: 20px; color: #ffba1a; }
         .orbit-hub__node-label { font-size: 14px; font-weight: 800; color: #fff; white-space: nowrap; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
         .orbit-hub__node-desc { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.7); white-space: nowrap; text-shadow: 0 2px 10px rgba(0,0,0,0.8); margin-top: -2px; }
+        /* Agent card on click */
+        .orbit-hub__node { cursor: pointer; }
+        .orbit-hub__node.orbit-node--active {
+            transform: translate(-50%, -50%) scale(1.2);
+            z-index: 100;
+        }
+        .orbit-hub__node.orbit-node--active .orbit-hub__node-icon {
+            border-color: #ffba1a;
+            box-shadow: 0 0 30px rgba(255,186,26,0.6);
+            background: linear-gradient(135deg, rgba(255,186,26,0.4), rgba(255,186,26,0.15));
+        }
+        .orbit-hub__node.orbit-node--dimmed {
+            opacity: 0.3 !important;
+        }
+        .orbit-node-card {
+            position: absolute;
+            top: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%) scale(0.9);
+            width: 260px;
+            background: rgba(13,17,23,0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,186,26,0.25);
+            border-radius: 16px;
+            padding: 20px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 200;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.5), 0 0 40px rgba(255,186,26,0.08);
+        }
+        .orbit-node--active .orbit-node-card {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) scale(1);
+        }
+        .orbit-node-card::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            width: 10px;
+            height: 10px;
+            background: rgba(13,17,23,0.95);
+            border-left: 1px solid rgba(255,186,26,0.25);
+            border-top: 1px solid rgba(255,186,26,0.25);
+        }
+        .orbit-node-card__status {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #22C55E;
+            background: rgba(34,197,94,0.1);
+            border: 1px solid rgba(34,197,94,0.2);
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+        .orbit-node-card__title {
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .orbit-node-card__text {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.8rem;
+            line-height: 1.6;
+            margin-bottom: 14px;
+        }
+        .orbit-node-card__bar {
+            margin-bottom: 12px;
+        }
+        .orbit-node-card__bar-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 4px;
+        }
+        .orbit-node-card__bar-track {
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .orbit-node-card__bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffba1a, #ffca4a);
+            border-radius: 2px;
+        }
+        .orbit-node-card__tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .orbit-node-card__tag {
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
         .orbit-hub__center { opacity: 0; scale: 0.3; }
         .orbit-visible .orbit-hub__center { animation: orbit-center-in 0.8s cubic-bezier(0.34,1.56,0.64,1) forwards; }
         @keyframes orbit-center-in { to { opacity: 1; scale: 1; } }
@@ -879,6 +990,9 @@
             .orbit-hub__node-icon i { font-size: 16px; }
             .orbit-hub__node-label { font-size: 13px; }
             .orbit-hub__node-desc { font-size: 11px; white-space: normal; text-shadow: none; margin-top: 0; }
+        }
+        @media (max-width: 768px) {
+            .orbit-node-card { width: 220px; padding: 16px; }
         }
         @media (max-width: 480px) {
             .lp-hero h1 { font-size: 1.625rem; }
@@ -2002,61 +2116,145 @@
                     <div class="orbit-hub__node-icon"><i class="fas fa-compass"></i></div>
                     <div class="orbit-hub__node-label">Estrategista</div>
                     <div class="orbit-hub__node-desc">SWOT, BSC e planejamento estratégico</div>
+                    <div class="orbit-node-card">
+                        <div class="orbit-node-card__status"><i class="fas fa-circle" style="font-size:5px"></i> Ativo 24/7</div>
+                        <div class="orbit-node-card__title">Agente Estrategista</div>
+                        <div class="orbit-node-card__text">Analisa o cenário da empresa com SWOT, define OKRs e monta o planejamento estratégico. Cruza dados de todos os outros agentes para alinhar a direção.</div>
+                        <div class="orbit-node-card__bar"><div class="orbit-node-card__bar-label"><span>Impacto</span><span>95%</span></div><div class="orbit-node-card__bar-track"><div class="orbit-node-card__bar-fill" style="width:95%"></div></div></div>
+                        <div class="orbit-node-card__tags"><span class="orbit-node-card__tag">SWOT</span><span class="orbit-node-card__tag">BSC</span><span class="orbit-node-card__tag">OKRs</span></div>
+                    </div>
                 </div>
                 <div class="orbit-hub__node" data-idx="1">
                     <div class="orbit-hub__node-icon"><i class="fas fa-diagram-project"></i></div>
                     <div class="orbit-hub__node-label">Processos</div>
                     <div class="orbit-hub__node-desc">Mapeamento, playbooks e automação</div>
+                    <div class="orbit-node-card">
+                        <div class="orbit-node-card__status"><i class="fas fa-circle" style="font-size:5px"></i> Ativo 24/7</div>
+                        <div class="orbit-node-card__title">Agente de Processos</div>
+                        <div class="orbit-node-card__text">Mapeia, documenta e gera instruções de trabalho automaticamente. Reduz retrabalho e garante qualidade em cada execução.</div>
+                        <div class="orbit-node-card__bar"><div class="orbit-node-card__bar-label"><span>Impacto</span><span>90%</span></div><div class="orbit-node-card__bar-track"><div class="orbit-node-card__bar-fill" style="width:90%"></div></div></div>
+                        <div class="orbit-node-card__tags"><span class="orbit-node-card__tag">Playbooks</span><span class="orbit-node-card__tag">ISO</span><span class="orbit-node-card__tag">Automação</span></div>
+                    </div>
                 </div>
                 <div class="orbit-hub__node" data-idx="2">
                     <div class="orbit-hub__node-icon"><i class="fas fa-user-group"></i></div>
                     <div class="orbit-hub__node-label">Pessoas</div>
                     <div class="orbit-hub__node-desc">Cargos, desempenho e PDIs</div>
+                    <div class="orbit-node-card">
+                        <div class="orbit-node-card__status"><i class="fas fa-circle" style="font-size:5px"></i> Ativo 24/7</div>
+                        <div class="orbit-node-card__title">Agente de Pessoas</div>
+                        <div class="orbit-node-card__text">Cria descrições de cargo, avaliações de desempenho e PDIs personalizados. Identifica gaps de competência e sugere trilhas de desenvolvimento.</div>
+                        <div class="orbit-node-card__bar"><div class="orbit-node-card__bar-label"><span>Impacto</span><span>88%</span></div><div class="orbit-node-card__bar-track"><div class="orbit-node-card__bar-fill" style="width:88%"></div></div></div>
+                        <div class="orbit-node-card__tags"><span class="orbit-node-card__tag">360°</span><span class="orbit-node-card__tag">PDI</span><span class="orbit-node-card__tag">Skills</span></div>
+                    </div>
                 </div>
                 <div class="orbit-hub__node" data-idx="3">
                     <div class="orbit-hub__node-icon"><i class="fas fa-graduation-cap"></i></div>
                     <div class="orbit-hub__node-label">Treinamento</div>
                     <div class="orbit-hub__node-desc">Microlearning e trilhas via WhatsApp</div>
+                    <div class="orbit-node-card">
+                        <div class="orbit-node-card__status"><i class="fas fa-circle" style="font-size:5px"></i> Ativo 24/7</div>
+                        <div class="orbit-node-card__title">Agente de Treinamento</div>
+                        <div class="orbit-node-card__text">Treina equipes via WhatsApp com microlearning diário. Adapta conteúdo ao nível de cada colaborador e acompanha engajamento.</div>
+                        <div class="orbit-node-card__bar"><div class="orbit-node-card__bar-label"><span>Impacto</span><span>92%</span></div><div class="orbit-node-card__bar-track"><div class="orbit-node-card__bar-fill" style="width:92%"></div></div></div>
+                        <div class="orbit-node-card__tags"><span class="orbit-node-card__tag">WhatsApp</span><span class="orbit-node-card__tag">Micro</span><span class="orbit-node-card__tag">Quiz</span></div>
+                    </div>
                 </div>
                 <div class="orbit-hub__node" data-idx="4">
                     <div class="orbit-hub__node-icon"><i class="fas fa-chart-column"></i></div>
                     <div class="orbit-hub__node-label">Indicadores</div>
                     <div class="orbit-hub__node-desc">KPIs em tempo real e causa raiz</div>
+                    <div class="orbit-node-card">
+                        <div class="orbit-node-card__status"><i class="fas fa-circle" style="font-size:5px"></i> Ativo 24/7</div>
+                        <div class="orbit-node-card__title">Agente de Indicadores</div>
+                        <div class="orbit-node-card__text">Monitora KPIs em tempo real, identifica desvios e sugere hipóteses de causa raiz com IA antes que o problema cresça.</div>
+                        <div class="orbit-node-card__bar"><div class="orbit-node-card__bar-label"><span>Impacto</span><span>94%</span></div><div class="orbit-node-card__bar-track"><div class="orbit-node-card__bar-fill" style="width:94%"></div></div></div>
+                        <div class="orbit-node-card__tags"><span class="orbit-node-card__tag">KPIs</span><span class="orbit-node-card__tag">Dashboard</span><span class="orbit-node-card__tag">Alertas</span></div>
+                    </div>
                 </div>
                 <div class="orbit-hub__node" data-idx="5">
                     <div class="orbit-hub__node-icon"><i class="fas fa-magnifying-glass-chart"></i></div>
                     <div class="orbit-hub__node-label">Pesquisa</div>
                     <div class="orbit-hub__node-desc">Clima, formulários e insights</div>
+                    <div class="orbit-node-card">
+                        <div class="orbit-node-card__status"><i class="fas fa-circle" style="font-size:5px"></i> Ativo 24/7</div>
+                        <div class="orbit-node-card__title">Agente de Pesquisa</div>
+                        <div class="orbit-node-card__text">Cria pesquisas de clima, satisfação e NPS. Analisa respostas e entrega insights acionáveis sobre a percepção das equipes.</div>
+                        <div class="orbit-node-card__bar"><div class="orbit-node-card__bar-label"><span>Impacto</span><span>82%</span></div><div class="orbit-node-card__bar-track"><div class="orbit-node-card__bar-fill" style="width:82%"></div></div></div>
+                        <div class="orbit-node-card__tags"><span class="orbit-node-card__tag">NPS</span><span class="orbit-node-card__tag">Clima</span><span class="orbit-node-card__tag">Insights</span></div>
+                    </div>
                 </div>
                 <div class="orbit-hub__node" data-idx="6">
                     <div class="orbit-hub__node-icon"><i class="fas fa-shield-halved"></i></div>
                     <div class="orbit-hub__node-label">Riscos</div>
                     <div class="orbit-hub__node-desc">Mitigação e prevenção contínua</div>
+                    <div class="orbit-node-card">
+                        <div class="orbit-node-card__status"><i class="fas fa-circle" style="font-size:5px"></i> Ativo 24/7</div>
+                        <div class="orbit-node-card__title">Agente de Riscos</div>
+                        <div class="orbit-node-card__text">Identifica ameaças antes que virem crises. Monitora indicadores de risco e sugere planos de mitigação preventivos.</div>
+                        <div class="orbit-node-card__bar"><div class="orbit-node-card__bar-label"><span>Impacto</span><span>91%</span></div><div class="orbit-node-card__bar-track"><div class="orbit-node-card__bar-fill" style="width:91%"></div></div></div>
+                        <div class="orbit-node-card__tags"><span class="orbit-node-card__tag">Prevenção</span><span class="orbit-node-card__tag">PDCA</span><span class="orbit-node-card__tag">Alertas</span></div>
+                    </div>
                 </div>
                 <div class="orbit-hub__node" data-idx="7">
                     <div class="orbit-hub__node-icon"><i class="fas fa-lightbulb"></i></div>
                     <div class="orbit-hub__node-label">Oportunidades</div>
                     <div class="orbit-hub__node-desc">Mercado, parcerias e expansão</div>
+                    <div class="orbit-node-card">
+                        <div class="orbit-node-card__status"><i class="fas fa-circle" style="font-size:5px"></i> Ativo 24/7</div>
+                        <div class="orbit-node-card__title">Agente de Oportunidades</div>
+                        <div class="orbit-node-card__text">Escaneia o mercado, identifica novas oportunidades e cruza com dados internos para sugerir ações de expansão e parcerias.</div>
+                        <div class="orbit-node-card__bar"><div class="orbit-node-card__bar-label"><span>Impacto</span><span>87%</span></div><div class="orbit-node-card__bar-track"><div class="orbit-node-card__bar-fill" style="width:87%"></div></div></div>
+                        <div class="orbit-node-card__tags"><span class="orbit-node-card__tag">Mercado</span><span class="orbit-node-card__tag">Growth</span><span class="orbit-node-card__tag">Parcerias</span></div>
+                    </div>
                 </div>
                 <div class="orbit-hub__node" data-idx="8">
                     <div class="orbit-hub__node-icon"><i class="fas fa-triangle-exclamation"></i></div>
                     <div class="orbit-hub__node-label">Problemas</div>
                     <div class="orbit-hub__node-desc">Não-conformidades e PDCA</div>
+                    <div class="orbit-node-card">
+                        <div class="orbit-node-card__status"><i class="fas fa-circle" style="font-size:5px"></i> Ativo 24/7</div>
+                        <div class="orbit-node-card__title">Agente de Problemas</div>
+                        <div class="orbit-node-card__text">Registra não-conformidades, aplica PDCA automaticamente e acompanha a resolução até o fechamento com evidências.</div>
+                        <div class="orbit-node-card__bar"><div class="orbit-node-card__bar-label"><span>Impacto</span><span>89%</span></div><div class="orbit-node-card__bar-track"><div class="orbit-node-card__bar-fill" style="width:89%"></div></div></div>
+                        <div class="orbit-node-card__tags"><span class="orbit-node-card__tag">PDCA</span><span class="orbit-node-card__tag">5W2H</span><span class="orbit-node-card__tag">NC</span></div>
+                    </div>
                 </div>
                 <div class="orbit-hub__node" data-idx="9">
                     <div class="orbit-hub__node-icon"><i class="fas fa-file-lines"></i></div>
                     <div class="orbit-hub__node-label">Documentos</div>
                     <div class="orbit-hub__node-desc">Padronização e controle</div>
+                    <div class="orbit-node-card">
+                        <div class="orbit-node-card__status"><i class="fas fa-circle" style="font-size:5px"></i> Ativo 24/7</div>
+                        <div class="orbit-node-card__title">Agente de Documentos</div>
+                        <div class="orbit-node-card__text">Padroniza, versiona e controla todos os documentos da empresa. Garante que todos trabalhem com a versão mais recente.</div>
+                        <div class="orbit-node-card__bar"><div class="orbit-node-card__bar-label"><span>Impacto</span><span>80%</span></div><div class="orbit-node-card__bar-track"><div class="orbit-node-card__bar-fill" style="width:80%"></div></div></div>
+                        <div class="orbit-node-card__tags"><span class="orbit-node-card__tag">Versão</span><span class="orbit-node-card__tag">ISO</span><span class="orbit-node-card__tag">Padrão</span></div>
+                    </div>
                 </div>
                 <div class="orbit-hub__node" data-idx="10">
                     <div class="orbit-hub__node-icon"><i class="fas fa-handshake"></i></div>
                     <div class="orbit-hub__node-label">Vendas</div>
                     <div class="orbit-hub__node-desc">CRM, funil e coaching comercial</div>
+                    <div class="orbit-node-card">
+                        <div class="orbit-node-card__status"><i class="fas fa-circle" style="font-size:5px"></i> Ativo 24/7</div>
+                        <div class="orbit-node-card__title">Agente de Vendas</div>
+                        <div class="orbit-node-card__text">Gerencia o funil comercial, faz coaching da equipe de vendas e identifica oportunidades de upsell e cross-sell com IA.</div>
+                        <div class="orbit-node-card__bar"><div class="orbit-node-card__bar-label"><span>Impacto</span><span>93%</span></div><div class="orbit-node-card__bar-track"><div class="orbit-node-card__bar-fill" style="width:93%"></div></div></div>
+                        <div class="orbit-node-card__tags"><span class="orbit-node-card__tag">CRM</span><span class="orbit-node-card__tag">Funil</span><span class="orbit-node-card__tag">Coaching</span></div>
+                    </div>
                 </div>
                 <div class="orbit-hub__node" data-idx="11">
                     <div class="orbit-hub__node-icon"><i class="fas fa-video"></i></div>
                     <div class="orbit-hub__node-label">Reuniões</div>
                     <div class="orbit-hub__node-desc">Transcrição e planos de ação</div>
+                    <div class="orbit-node-card">
+                        <div class="orbit-node-card__status"><i class="fas fa-circle" style="font-size:5px"></i> Ativo 24/7</div>
+                        <div class="orbit-node-card__title">Agente de Reuniões</div>
+                        <div class="orbit-node-card__text">Transcreve reuniões, extrai decisões e gera planos de ação automaticamente. Nunca mais perca um follow-up.</div>
+                        <div class="orbit-node-card__bar"><div class="orbit-node-card__bar-label"><span>Impacto</span><span>86%</span></div><div class="orbit-node-card__bar-track"><div class="orbit-node-card__bar-fill" style="width:86%"></div></div></div>
+                        <div class="orbit-node-card__tags"><span class="orbit-node-card__tag">Ata</span><span class="orbit-node-card__tag">Follow-up</span><span class="orbit-node-card__tag">IA</span></div>
+                    </div>
                 </div>
             </div>
 
@@ -2143,6 +2341,30 @@
                     resizeTimer = setTimeout(function() {
                         if (hub.classList.contains('orbit-visible')) layout();
                     }, 150);
+                });
+
+                /* Click to expand agent card */
+                nodes.forEach(function(node) {
+                    node.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        var wasActive = node.classList.contains('orbit-node--active');
+                        nodes.forEach(function(n) {
+                            n.classList.remove('orbit-node--active', 'orbit-node--dimmed');
+                        });
+                        if (!wasActive) {
+                            node.classList.add('orbit-node--active');
+                            nodes.forEach(function(n) {
+                                if (n !== node) n.classList.add('orbit-node--dimmed');
+                            });
+                        }
+                    });
+                });
+                document.addEventListener('click', function(e) {
+                    if (!hub.contains(e.target)) {
+                        nodes.forEach(function(n) {
+                            n.classList.remove('orbit-node--active', 'orbit-node--dimmed');
+                        });
+                    }
                 });
             })();
             </script>
