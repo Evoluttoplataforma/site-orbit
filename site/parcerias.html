@@ -24,7 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/styles-v2.css?v=84290829">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=4ba4b2b7">
     <style>
         /* ── Partner Hero ── */
         .partner-hero {
@@ -299,42 +299,6 @@
         }
 
         /* ── Testimonials ── */
-        .partner-testimonials { padding: 100px 0; background: var(--gray-50); }
-        .partner-testimonials .section-header { text-align: center; margin-bottom: 60px; }
-        .partner-testimonials .section-header h2 {
-            font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800;
-            color: #1A1D23; margin-bottom: 12px;
-        }
-        .testimonials-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-        }
-        .testimonial-card {
-            background: #fff; border-radius: 16px; padding: 32px 28px;
-            border: 1px solid #E5E7EB; transition: all 0.3s ease;
-        }
-        .testimonial-card:hover {
-            transform: translateY(-4px); box-shadow: var(--shadow-lg);
-        }
-        .testimonial-card__stars {
-            display: flex; gap: 3px; color: var(--primary);
-            font-size: 0.75rem; margin-bottom: 16px;
-        }
-        .testimonial-card__text {
-            font-size: 0.9rem; color: #4B5563; line-height: 1.7;
-            margin-bottom: 20px; font-style: italic;
-        }
-        .testimonial-card__author {
-            display: flex; align-items: center; gap: 12px;
-            padding-top: 16px; border-top: 1px solid #E5E7EB;
-        }
-        .testimonial-avatar {
-            width: 44px; height: 44px; border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            display: flex; align-items: center; justify-content: center;
-            color: var(--black); font-weight: 700; font-size: 0.85rem; flex-shrink: 0;
-        }
-        .testimonial-name { font-size: 0.85rem; font-weight: 700; color: #1A1D23; }
-        .testimonial-role { font-size: 0.75rem; color: #6B7280; }
 
         /* ── Form Section ── */
         .partner-form-section {
@@ -445,7 +409,6 @@
             .steps-track { grid-template-columns: repeat(2, 1fr); }
             .steps-track::before { display: none; }
             .tiers-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-            .testimonials-grid { grid-template-columns: 1fr 1fr; }
             .partner-form-section .container { grid-template-columns: 1fr; }
             .form-info { text-align: center; }
             .form-info__checklist { display: inline-block; text-align: left; }
@@ -457,10 +420,9 @@
             .steps-track { grid-template-columns: 1fr; gap: 24px; }
             .step-item p { max-width: 100%; }
             .tiers-grid { gap: 16px; }
-            .testimonials-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
             .form-row { grid-template-columns: 1fr; }
             .partner-benefits, .partner-steps, .partner-tiers,
-            .partner-testimonials, .partner-form-section { padding: 80px 0; }
+            .partner-form-section { padding: 80px 0; }
         }
         @media (max-width: 480px) {
             .partner-hero__ctas { flex-direction: column; }
@@ -527,7 +489,7 @@
                                 <div class="dd-icon"><i class="fas fa-building"></i></div>
                                 <div class="dd-text"><span>Empresários</span><small>Time de IA para sua empresa</small></div>
                             </a>
-                            <a href="/canais">
+                            <a href="/consultores">
                                 <div class="dd-icon"><i class="fas fa-user-tie"></i></div>
                                 <div class="dd-text"><span>Consultores</span><small>Modelo de canais B2B2B</small></div>
                             </a>
@@ -570,7 +532,7 @@
                                 <div class="dd-icon"><i class="fas fa-handshake"></i></div>
                                 <div class="dd-text"><span>Seja Parceiro</span><small>Programa de canais</small></div>
                             </a>
-                            <a href="/canais">
+                            <a href="/consultores">
                                 <div class="dd-icon"><i class="fas fa-network-wired"></i></div>
                                 <div class="dd-text"><span>Canais B2B2B</span><small>Para consultores e mentores</small></div>
                             </a>
@@ -613,7 +575,7 @@
             <div class="mobile-menu__label">Empresa</div>
             <a href="/sobre"><i class="fas fa-building"></i> Sobre Nós</a>
             <a href="/parcerias"><i class="fas fa-handshake"></i> Seja Parceiro</a>
-            <a href="/canais"><i class="fas fa-network-wired"></i> Canais B2B2B</a>
+            <a href="/consultores"><i class="fas fa-network-wired"></i> Canais B2B2B</a>
         </div>
         <div class="mobile-menu__footer">
             <a href="/#contato-form" class="btn btn-primary" onclick="closeMobileMenu()">Conhecer o Time de IA</a>
@@ -1442,60 +1404,101 @@
     </section>
 
     <!-- ══ TESTIMONIALS ══ -->
-    <section class="partner-testimonials">
-        <div class="container">
-            <div class="section-header">
-                <h2>O que nossos parceiros dizem</h2>
+<section class="testi-section" id="depoimentos">
+    <div class="container">
+        <div class="testi-header" data-reveal>
+            <div class="testi-badge">Depoimentos</div>
+            <h2>Quem usa, recomenda</h2>
+            <p>Veja como empresas como a sua estão transformando a gestão com o Orbit.</p>
+        </div>
+        <div class="testi-columns">
+            <div class="testi-column">
+                <div class="testi-scroll testi-scroll--1">
+                    <div class="testi-card">
+                        <p class="testi-quote">"Em 3 meses, conseguimos mapear todos os processos críticos e reduzir retrabalho em 40%. O Orbit organizou o que a gente tentava há anos."</p>
+                        <div class="testi-author"><div class="testi-avatar">MS</div><div class="testi-info"><div class="testi-name">Maria Silva</div><div class="testi-role">Diretora de Operações, TechParts Ltda</div></div></div>
+                    </div>
+                    <div class="testi-card">
+                        <p class="testi-quote">"O agente de treinamento via WhatsApp mudou o jogo. A equipe engaja porque não precisa logar em nada."</p>
+                        <div class="testi-author"><div class="testi-avatar">RC</div><div class="testi-info"><div class="testi-name">Roberto Costa</div><div class="testi-role">CEO, Grupo Nordeste</div></div></div>
+                    </div>
+                    <div class="testi-card">
+                        <p class="testi-quote">"Finalmente tenho KPIs em tempo real. Antes, descobria os problemas na semana seguinte. Agora, atuo no mesmo dia."</p>
+                        <div class="testi-author"><div class="testi-avatar">AM</div><div class="testi-info"><div class="testi-name">Ana Mendes</div><div class="testi-role">Gerente de Qualidade, FastLog</div></div></div>
+                    </div>
+                    <div class="testi-card">
+                        <p class="testi-quote">"Em 3 meses, conseguimos mapear todos os processos críticos e reduzir retrabalho em 40%. O Orbit organizou o que a gente tentava há anos."</p>
+                        <div class="testi-author"><div class="testi-avatar">MS</div><div class="testi-info"><div class="testi-name">Maria Silva</div><div class="testi-role">Diretora de Operações, TechParts Ltda</div></div></div>
+                    </div>
+                    <div class="testi-card">
+                        <p class="testi-quote">"O agente de treinamento via WhatsApp mudou o jogo. A equipe engaja porque não precisa logar em nada."</p>
+                        <div class="testi-author"><div class="testi-avatar">RC</div><div class="testi-info"><div class="testi-name">Roberto Costa</div><div class="testi-role">CEO, Grupo Nordeste</div></div></div>
+                    </div>
+                    <div class="testi-card">
+                        <p class="testi-quote">"Finalmente tenho KPIs em tempo real. Antes, descobria os problemas na semana seguinte. Agora, atuo no mesmo dia."</p>
+                        <div class="testi-author"><div class="testi-avatar">AM</div><div class="testi-info"><div class="testi-name">Ana Mendes</div><div class="testi-role">Gerente de Qualidade, FastLog</div></div></div>
+                    </div>
+                </div>
             </div>
-            <div class="testimonials-grid" data-reveal-stagger>
-                <div class="testimonial-card">
-                    <div class="testimonial-card__stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <div class="testi-column testi-column--md">
+                <div class="testi-scroll testi-scroll--2">
+                    <div class="testi-card">
+                        <p class="testi-quote">"O Orbit é como ter um consultor 24/7. Os agentes de IA identificam problemas antes que virem crises."</p>
+                        <div class="testi-author"><div class="testi-avatar">PL</div><div class="testi-info"><div class="testi-name">Paulo Lima</div><div class="testi-role">CEO, Construtora Horizonte</div></div></div>
                     </div>
-                    <p class="testimonial-card__text">
-                        "A parceria com Orbit revolucionou nosso negócio. Em 6 meses, triplicamos a receita recorrente. O suporte dedicado e o treinamento foram essenciais."
-                    </p>
-                    <div class="testimonial-card__author">
-                        <div class="testimonial-avatar">JC</div>
-                        <div>
-                            <div class="testimonial-name">João Costa</div>
-                            <div class="testimonial-role">Diretor - Costa Consultoria</div>
-                        </div>
+                    <div class="testi-card">
+                        <p class="testi-quote">"Reduzimos o tempo de auditoria de 2 semanas para 3 dias. Os checklists automáticos são incríveis."</p>
+                        <div class="testi-author"><div class="testi-avatar">CF</div><div class="testi-info"><div class="testi-name">Carla Ferreira</div><div class="testi-role">Gerente de Qualidade, Indústria Max</div></div></div>
                     </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-card__stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <div class="testi-card">
+                        <p class="testi-quote">"Minha equipe ficou autônoma. O agente de tarefas cobra follow-up e ninguém esquece mais nada."</p>
+                        <div class="testi-author"><div class="testi-avatar">DF</div><div class="testi-info"><div class="testi-name">Diego Fonseca</div><div class="testi-role">Diretor Comercial, VentureLog</div></div></div>
                     </div>
-                    <p class="testimonial-card__text">
-                        "O programa é muito bem estruturado. Nossos clientes adoram as soluções e a comissão recorrente virou parte importante do faturamento da agência."
-                    </p>
-                    <div class="testimonial-card__author">
-                        <div class="testimonial-avatar">MS</div>
-                        <div>
-                            <div class="testimonial-name">Marina Silva</div>
-                            <div class="testimonial-role">Sócia - Silva & Associados</div>
-                        </div>
+                    <div class="testi-card">
+                        <p class="testi-quote">"O Orbit é como ter um consultor 24/7. Os agentes de IA identificam problemas antes que virem crises."</p>
+                        <div class="testi-author"><div class="testi-avatar">PL</div><div class="testi-info"><div class="testi-name">Paulo Lima</div><div class="testi-role">CEO, Construtora Horizonte</div></div></div>
+                    </div>
+                    <div class="testi-card">
+                        <p class="testi-quote">"Reduzimos o tempo de auditoria de 2 semanas para 3 dias. Os checklists automáticos são incríveis."</p>
+                        <div class="testi-author"><div class="testi-avatar">CF</div><div class="testi-info"><div class="testi-name">Carla Ferreira</div><div class="testi-role">Gerente de Qualidade, Indústria Max</div></div></div>
+                    </div>
+                    <div class="testi-card">
+                        <p class="testi-quote">"Minha equipe ficou autônoma. O agente de tarefas cobra follow-up e ninguém esquece mais nada."</p>
+                        <div class="testi-author"><div class="testi-avatar">DF</div><div class="testi-info"><div class="testi-name">Diego Fonseca</div><div class="testi-role">Diretor Comercial, VentureLog</div></div></div>
                     </div>
                 </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-card__stars">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <div class="testi-column testi-column--lg">
+                <div class="testi-scroll testi-scroll--3">
+                    <div class="testi-card">
+                        <p class="testi-quote">"Implantamos em 15 dias e já vimos resultado no primeiro mês. O suporte é excepcional."</p>
+                        <div class="testi-author"><div class="testi-avatar">LR</div><div class="testi-info"><div class="testi-name">Luciana Rocha</div><div class="testi-role">COO, Rede Sabor & Cia</div></div></div>
                     </div>
-                    <p class="testimonial-card__text">
-                        "Como parceiro Gold, temos acesso a oportunidades exclusivas que nos permitiram expandir para novos mercados. Recomendo fortemente."
-                    </p>
-                    <div class="testimonial-card__author">
-                        <div class="testimonial-avatar">RP</div>
-                        <div>
-                            <div class="testimonial-name">Roberto Paulo</div>
-                            <div class="testimonial-role">Consultor Sênior - Paulo Soluções</div>
-                        </div>
+                    <div class="testi-card">
+                        <p class="testi-quote">"Antes eu gastava R$ 18 mil/mês com consultoria pontual. Agora pago uma fração e tenho um time de IA que nunca para."</p>
+                        <div class="testi-author"><div class="testi-avatar">RN</div><div class="testi-info"><div class="testi-name">Ricardo Nunes</div><div class="testi-role">Fundador, RN Distribuidora</div></div></div>
+                    </div>
+                    <div class="testi-card">
+                        <p class="testi-quote">"A gestão por competências transformou nosso RH. A rotatividade caiu 35%."</p>
+                        <div class="testi-author"><div class="testi-avatar">JB</div><div class="testi-info"><div class="testi-name">Juliana Borges</div><div class="testi-role">Head de RH, Grupo Solar</div></div></div>
+                    </div>
+                    <div class="testi-card">
+                        <p class="testi-quote">"Implantamos em 15 dias e já vimos resultado no primeiro mês. O suporte é excepcional."</p>
+                        <div class="testi-author"><div class="testi-avatar">LR</div><div class="testi-info"><div class="testi-name">Luciana Rocha</div><div class="testi-role">COO, Rede Sabor & Cia</div></div></div>
+                    </div>
+                    <div class="testi-card">
+                        <p class="testi-quote">"Antes eu gastava R$ 18 mil/mês com consultoria pontual. Agora pago uma fração e tenho um time de IA que nunca para."</p>
+                        <div class="testi-author"><div class="testi-avatar">RN</div><div class="testi-info"><div class="testi-name">Ricardo Nunes</div><div class="testi-role">Fundador, RN Distribuidora</div></div></div>
+                    </div>
+                    <div class="testi-card">
+                        <p class="testi-quote">"A gestão por competências transformou nosso RH. A rotatividade caiu 35%."</p>
+                        <div class="testi-author"><div class="testi-avatar">JB</div><div class="testi-info"><div class="testi-name">Juliana Borges</div><div class="testi-role">Head de RH, Grupo Solar</div></div></div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- ══ FORM ══ -->
     <section class="partner-form-section" id="formulario">
@@ -1642,7 +1645,7 @@
                     <ul>
                         <li><a href="/sobre">Sobre Nós</a></li>
                         <li><a href="/parcerias">Seja Parceiro</a></li>
-                        <li><a href="/canais">Canais B2B2B</a></li>
+                        <li><a href="/consultores">Canais B2B2B</a></li>
                     </ul>
                 </div>
             </div>

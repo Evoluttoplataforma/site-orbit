@@ -20,6 +20,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 2500);
   }
 
+  // ═══ COST MOCKUP PARALLAX ═══
+  const costMockup = document.querySelector('.cost-mockup-visual');
+  if (costMockup) {
+    const mockupObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          costMockup.classList.add('parallax-active');
+        }
+      });
+    }, { threshold: 0.3 });
+    mockupObs.observe(costMockup);
+  }
+
   // ═══ HEADER SCROLL ═══
   const header = document.querySelector('.header');
   const backToTop = document.getElementById('backToTop');

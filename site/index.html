@@ -32,7 +32,7 @@
 
 
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/styles-v2.css?v=84290829">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=4ba4b2b7">
 
     <!-- New Sections Styles -->
     <style>
@@ -262,60 +262,6 @@
         .pricing-preview-header h2 { font-size: 1.75rem; }
     }
 
-    /* ═══ TESTIMONIALS — MARQUEE COLUMNS ═══ */
-    .testi-section { background: #0D1117; padding: 140px 0; overflow: hidden; }
-    .testi-header { text-align: center; margin-bottom: 48px; }
-    .testi-badge { display: inline-block; border: 1px solid rgba(255,255,255,0.12); padding: 4px 16px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.7); margin-bottom: 20px; }
-    .testi-header h2 { font-size: clamp(1.75rem, 4vw, 3rem); font-weight: 800; color: #fff; margin-bottom: 16px; letter-spacing: -0.02em; }
-    .testi-header p { font-size: 1.125rem; color: #8B949E; max-width: 540px; margin: 0 auto; }
-    .testi-columns {
-        display: flex;
-        justify-content: center;
-        gap: 24px;
-        max-height: 740px;
-        overflow: hidden;
-        mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
-        -webkit-mask-image: linear-gradient(to bottom, transparent, black 25%, black 75%, transparent);
-    }
-    .testi-column { flex: 0 0 320px; max-width: 320px; overflow: hidden; }
-    .testi-scroll {
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-        padding-bottom: 24px;
-    }
-    .testi-scroll--1 { animation: testi-marquee 30s linear infinite; }
-    .testi-scroll--2 { animation: testi-marquee 38s linear infinite; }
-    .testi-scroll--3 { animation: testi-marquee 34s linear infinite; }
-    @keyframes testi-marquee {
-        0% { transform: translateY(0); }
-        100% { transform: translateY(-50%); }
-    }
-    .testi-card {
-        background: linear-gradient(160deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
-        border: 1px solid rgba(255,255,255,0.06);
-        border-radius: 20px;
-        padding: 32px 28px;
-        box-shadow: 0 4px 24px rgba(0,0,0,0.1), 0 0 0 1px rgba(255,186,26,0.04);
-    }
-    .testi-quote { color: #C9D1D9; font-size: 1rem; line-height: 1.7; margin-bottom: 24px; }
-    .testi-author { display: flex; align-items: center; gap: 12px; }
-    .testi-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #ffba1a, #ffc940); display: flex; align-items: center; justify-content: center; color: #000; font-weight: 800; font-size: 0.85rem; flex-shrink: 0; }
-    .testi-info { }
-    .testi-name { color: #fff; font-weight: 600; font-size: 0.9rem; letter-spacing: -0.01em; }
-    .testi-role { color: rgba(255,255,255,0.4); font-size: 0.8rem; margin-top: 2px; letter-spacing: -0.01em; }
-
-    .testi-column--md { display: none; }
-    .testi-column--lg { display: none; }
-    @media (min-width: 768px) { .testi-column--md { display: block; } }
-    @media (min-width: 1024px) { .testi-column--lg { display: block; } }
-    @media (max-width: 767px) {
-        .testi-section { padding: 80px 0; }
-        .testi-columns { max-height: 600px; }
-        .testi-column { flex: 0 0 300px; max-width: 300px; }
-        .testi-header h2 { font-size: 1.75rem; }
-    }
-
     /* ═══ BANNER CONSULTORES ═══ */
     .consultant-section { background: #FAFBFC; padding: 140px 0; }
     .consultant-banner { background: #fff; border: 1px solid #E5E7EB; border-radius: 14px; padding: 56px 48px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
@@ -427,7 +373,7 @@
                                 <div class="dd-icon"><i class="fas fa-building"></i></div>
                                 <div class="dd-text"><span>Empresários</span><small>Time de IA para sua empresa</small></div>
                             </a>
-                            <a href="/canais">
+                            <a href="/consultores">
                                 <div class="dd-icon"><i class="fas fa-user-tie"></i></div>
                                 <div class="dd-text"><span>Consultores</span><small>Modelo de canais B2B2B</small></div>
                             </a>
@@ -470,7 +416,7 @@
                                 <div class="dd-icon"><i class="fas fa-handshake"></i></div>
                                 <div class="dd-text"><span>Seja Parceiro</span><small>Programa de canais</small></div>
                             </a>
-                            <a href="/canais">
+                            <a href="/consultores">
                                 <div class="dd-icon"><i class="fas fa-network-wired"></i></div>
                                 <div class="dd-text"><span>Canais B2B2B</span><small>Para consultores e mentores</small></div>
                             </a>
@@ -518,7 +464,7 @@
             <div class="mobile-menu__label">Empresa</div>
             <a href="/sobre"><i class="fas fa-building"></i> Sobre Nós</a>
             <a href="/parcerias"><i class="fas fa-handshake"></i> Seja Parceiro</a>
-            <a href="/canais"><i class="fas fa-network-wired"></i> Canais B2B2B</a>
+            <a href="/consultores"><i class="fas fa-network-wired"></i> Canais B2B2B</a>
         </div>
         <div class="mobile-menu__footer">
             <a href="#contato-form" class="btn btn-primary" onclick="closeMobileMenu()">Conhecer o Time de IA</a>
@@ -791,7 +737,7 @@
                     <div class="icon-premium icon-premium--solid"><i class="fas fa-user-tie"></i></div>
                     <h3>Consultores</h3>
                     <p style="color:#5A6069;font-size:0.95rem;line-height:1.6;margin-bottom:20px;">Pare de vender projeto. Venda operação com receita recorrente e white-label.</p>
-                    <a href="/canais" class="btn btn-dark" style="width:100%;">Modelo de canais <i class="fas fa-arrow-right"></i></a>
+                    <a href="/consultores" class="btn btn-dark" style="width:100%;">Modelo de canais <i class="fas fa-arrow-right"></i></a>
                 </div>
 
                 <!-- ICP 3 — Associações -->
@@ -4499,7 +4445,7 @@
                     <div class="consultant-banner__subtitle">Pare de vender projeto. Comece a vender operação.</div>
                     <h2 class="consultant-banner__title">Consultores, mentores e associações</h2>
                     <p class="consultant-banner__desc">Ofereça um time de IA aos seus clientes ou associados. Receita recorrente, white-label, sem investimento em tecnologia. Consultoria recorrente passiva: os agentes continuam trabalhando após o projeto.</p>
-                    <a href="/canais" class="consultant-banner__cta">Conhecer programa de canais <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="/consultores" class="consultant-banner__cta">Conhecer programa de canais <i class="fa-solid fa-arrow-right"></i></a>
                 </div>
                 <div class="consultant-stats">
                     <div class="consultant-stat">
@@ -4758,7 +4704,7 @@
                     <ul>
                         <li><a href="/sobre">Sobre Nós</a></li>
                         <li><a href="/parcerias">Seja Parceiro</a></li>
-                        <li><a href="/canais">Canais B2B2B</a></li>
+                        <li><a href="/consultores">Canais B2B2B</a></li>
                     </ul>
                 </div>
             </div>
