@@ -36,6 +36,114 @@
 
     <!-- New Sections Styles -->
     <style>
+    /* ═══ DOCK — macOS STYLE ═══ */
+    .dock-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        height: 100px;
+        margin-bottom: 40px;
+    }
+    .dock {
+        display: flex;
+        align-items: flex-end;
+        gap: 4px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 10px 16px;
+        border-radius: 20px;
+    }
+    .dock-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        background: none;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        padding: 0;
+    }
+    .dock-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: linear-gradient(160deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+        border: 1px solid rgba(255,255,255,0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(255,255,255,0.7);
+        font-size: 1.1rem;
+        transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .dock-item:hover .dock-icon,
+    .dock-item.active .dock-icon {
+        color: #ffba1a;
+        border-color: rgba(255,186,26,0.3);
+        background: linear-gradient(160deg, rgba(255,186,26,0.12), rgba(255,186,26,0.04));
+        box-shadow: 0 4px 20px rgba(255,186,26,0.15);
+    }
+    .dock-item--gold .dock-icon {
+        background: linear-gradient(135deg, #ffba1a, #ffca4a);
+        color: #000;
+        border-color: rgba(255,186,26,0.5);
+    }
+    .dock-item--gold:hover .dock-icon {
+        background: linear-gradient(135deg, #ffca4a, #ffba1a);
+        box-shadow: 0 4px 24px rgba(255,186,26,0.4);
+    }
+    .dock-item.active::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 5px;
+        height: 5px;
+        background: #ffba1a;
+        border-radius: 50%;
+    }
+    .dock-label {
+        position: absolute;
+        top: -32px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.9);
+        border: 1px solid rgba(255,255,255,0.12);
+        color: #fff;
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 6px;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.15s ease;
+    }
+    .dock-item:hover .dock-label { opacity: 1; }
+    .dock-divider {
+        width: 1px;
+        height: 36px;
+        background: rgba(255,255,255,0.08);
+        margin: 0 8px;
+        align-self: center;
+    }
+    @media (max-width: 768px) {
+        .dock-container { height: 80px; margin-bottom: 24px; }
+        .dock { gap: 2px; padding: 8px 12px; border-radius: 16px; }
+        .dock-icon { width: 40px; height: 40px; font-size: 0.9rem; border-radius: 12px; }
+        .dock-label { display: none; }
+        .dock-divider { height: 28px; margin: 0 4px; }
+    }
+    @media (max-width: 480px) {
+        .dock-icon { width: 36px; height: 36px; font-size: 0.8rem; border-radius: 10px; }
+    }
+
     /* ═══ COST COMPARISON ═══ */
     .cost-section { background: #0D1117; padding: 140px 0; position: relative; overflow: hidden; }
     .cost-section::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(255,186,26,0.04) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
@@ -436,25 +544,35 @@
                 <p>5 módulos. 12 agentes. Uma Olívia que conecta tudo — e traduz dados em decisão.</p>
             </div>
 
-            <div class="platform-tabs">
-                <button class="platform-tab active" data-tab="processos">
-                    <i class="fas fa-sitemap"></i> Processos
-                </button>
-                <button class="platform-tab" data-tab="indicadores">
-                    <i class="fas fa-chart-line"></i> Indicadores
-                </button>
-                <button class="platform-tab" data-tab="tarefas">
-                    <i class="fas fa-tasks"></i> Tarefas
-                </button>
-                <button class="platform-tab" data-tab="competencias">
-                    <i class="fas fa-users"></i> Competências
-                </button>
-                <button class="platform-tab" data-tab="auditorias">
-                    <i class="fas fa-clipboard-check"></i> Auditorias
-                </button>
-                <button class="platform-tab" data-tab="ia">
-                    <i class="fas fa-brain"></i> Orbit IA
-                </button>
+            <!-- Dock macOS-style -->
+            <div class="dock-container">
+                <div class="dock" id="platformDock">
+                    <button class="dock-item active" data-tab="processos" aria-label="Processos">
+                        <div class="dock-icon"><i class="fas fa-sitemap"></i></div>
+                        <div class="dock-label">Processos</div>
+                    </button>
+                    <button class="dock-item" data-tab="indicadores" aria-label="Indicadores">
+                        <div class="dock-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="dock-label">Indicadores</div>
+                    </button>
+                    <button class="dock-item" data-tab="tarefas" aria-label="Tarefas">
+                        <div class="dock-icon"><i class="fas fa-tasks"></i></div>
+                        <div class="dock-label">Tarefas</div>
+                    </button>
+                    <button class="dock-item" data-tab="competencias" aria-label="Competências">
+                        <div class="dock-icon"><i class="fas fa-users"></i></div>
+                        <div class="dock-label">Competências</div>
+                    </button>
+                    <button class="dock-item" data-tab="auditorias" aria-label="Auditorias">
+                        <div class="dock-icon"><i class="fas fa-clipboard-check"></i></div>
+                        <div class="dock-label">Auditorias</div>
+                    </button>
+                    <div class="dock-divider"></div>
+                    <button class="dock-item dock-item--gold" data-tab="ia" aria-label="Orbit IA">
+                        <div class="dock-icon"><i class="fas fa-brain"></i></div>
+                        <div class="dock-label">Orbit IA</div>
+                    </button>
+                </div>
             </div>
 
             <div class="platform-panels">

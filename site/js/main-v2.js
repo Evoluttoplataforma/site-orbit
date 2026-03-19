@@ -184,26 +184,55 @@ document.addEventListener('DOMContentLoaded', () => {
     resizeTimeout = setTimeout(() => updateCarousel(false), 150);
   });
 
-  // ═══ PLATFORM TABS ═══
-  const tabs = document.querySelectorAll('.platform-tab');
+  // ═══ PLATFORM DOCK (macOS-style) ═══
+  const dock = document.getElementById('platformDock');
+  const dockItems = document.querySelectorAll('.dock-item');
   const panels = document.querySelectorAll('.platform-panel');
 
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const target = tab.dataset.tab;
-
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-
+  // Tab switching
+  dockItems.forEach(item => {
+    if (!item.dataset.tab) return;
+    item.addEventListener('click', () => {
+      const target = item.dataset.tab;
+      dockItems.forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
       panels.forEach(p => {
-        if (p.dataset.panel === target) {
-          p.classList.add('active');
-        } else {
-          p.classList.remove('active');
-        }
+        p.classList.toggle('active', p.dataset.panel === target);
       });
     });
   });
+
+  // Dock magnification effect
+  if (dock) {
+    const MAGNIFICATION = 76;
+    const BASE_SIZE = 48;
+    const DISTANCE = 140;
+
+    dock.addEventListener('mousemove', (e) => {
+      dockItems.forEach(item => {
+        const icon = item.querySelector('.dock-icon');
+        if (!icon) return;
+        const rect = item.getBoundingClientRect();
+        const itemCenterX = rect.left + rect.width / 2;
+        const dist = Math.abs(e.clientX - itemCenterX);
+        const scale = Math.max(BASE_SIZE, MAGNIFICATION - (MAGNIFICATION - BASE_SIZE) * (dist / DISTANCE));
+        const size = Math.min(MAGNIFICATION, scale);
+        icon.style.width = size + 'px';
+        icon.style.height = size + 'px';
+        icon.style.fontSize = (size / BASE_SIZE) * 1.1 + 'rem';
+      });
+    });
+
+    dock.addEventListener('mouseleave', () => {
+      dockItems.forEach(item => {
+        const icon = item.querySelector('.dock-icon');
+        if (!icon) return;
+        icon.style.width = '';
+        icon.style.height = '';
+        icon.style.fontSize = '';
+      });
+    });
+  }
 
   // ═══ SMOOTH SCROLL ═══
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
