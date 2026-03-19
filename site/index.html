@@ -36,6 +36,79 @@
 
     <!-- New Sections Styles -->
     <style>
+    /* ═══ SOCIAL HOVER LINKS ═══ */
+    .social-hover {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        margin-top: 20px;
+    }
+    .social-hover__item {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 16px;
+        color: rgba(255,255,255,0.5);
+        font-size: 1.2rem;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        text-decoration: none;
+    }
+    .social-hover__item:hover { color: #fff; }
+    .social-hover:has(.social-hover__item:hover) .social-hover__item:not(:hover) {
+        opacity: 0.4;
+    }
+    .social-hover__label {
+        position: absolute;
+        top: -28px;
+        left: 50%;
+        transform: translateX(-50%) translateY(8px);
+        background: rgba(255,186,26,0.15);
+        border: 1px solid rgba(255,186,26,0.3);
+        color: #ffba1a;
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 6px;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .social-hover__item:hover .social-hover__label {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    /* ═══ HERO ROTATING WORDS ═══ */
+    .hero-rotate {
+        position: relative;
+        display: inline-flex;
+        overflow: hidden;
+        vertical-align: bottom;
+        height: 1.2em;
+        min-width: 200px;
+    }
+    .hero-rotate__word {
+        position: absolute;
+        left: 0;
+        opacity: 0;
+        transform: translateY(100%);
+        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        color: #ffba1a;
+        font-weight: 800;
+    }
+    .hero-rotate__word--active {
+        position: relative;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .hero-rotate__word--exit {
+        opacity: 0;
+        transform: translateY(-120%);
+    }
+
     /* ═══ DOCK — macOS STYLE ═══ */
     .dock-container {
         display: flex;
@@ -506,7 +579,14 @@
                 <span class="hero-zoom__badge">30 anos de gestão empresarial. Agora com IA.</span>
                 <h1 class="hero-zoom__title">
                     Sua empresa não precisa de mais ferramentas.<br>
-                    Precisa de um <span class="hero-zoom__title-highlight">time de IA</span> que executa.
+                    Precisa de um <span class="hero-zoom__title-highlight">time de IA</span> que
+                    <span class="hero-rotate" id="heroRotate">
+                        <span class="hero-rotate__word hero-rotate__word--active">executa.</span>
+                        <span class="hero-rotate__word">organiza.</span>
+                        <span class="hero-rotate__word">decide.</span>
+                        <span class="hero-rotate__word">opera 24/7.</span>
+                        <span class="hero-rotate__word">nunca para.</span>
+                    </span>
                 </h1>
                 <p class="hero-zoom__subtitle">Gestão Operada por IA com consultoria recorrente passiva. 12 agentes especializados constroem e operam a gestão da sua empresa — trabalhando 24/7, mesmo quando o projeto acaba.</p>
                 <div class="hero-zoom__ctas">
@@ -4410,10 +4490,23 @@
                         <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" height="36">
                     </div>
                     <p>Plataforma de gestão com IA. Contrate um time que executa.</p>
-                    <div class="social-links">
-                        <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <div class="social-hover">
+                        <a href="#" class="social-hover__item" data-name="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                            <span class="social-hover__label">LinkedIn</span>
+                        </a>
+                        <a href="#" class="social-hover__item" data-name="Facebook">
+                            <i class="fab fa-facebook"></i>
+                            <span class="social-hover__label">Facebook</span>
+                        </a>
+                        <a href="#" class="social-hover__item" data-name="Instagram">
+                            <i class="fab fa-instagram"></i>
+                            <span class="social-hover__label">Instagram</span>
+                        </a>
+                        <a href="#" class="social-hover__item" data-name="YouTube">
+                            <i class="fab fa-youtube"></i>
+                            <span class="social-hover__label">YouTube</span>
+                        </a>
                     </div>
                 </div>
 

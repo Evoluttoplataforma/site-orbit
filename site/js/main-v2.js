@@ -5,6 +5,21 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // ═══ HERO ROTATING WORDS ═══
+  const heroRotate = document.getElementById('heroRotate');
+  if (heroRotate) {
+    const words = heroRotate.querySelectorAll('.hero-rotate__word');
+    let currentIndex = 0;
+    setInterval(() => {
+      const current = words[currentIndex];
+      current.classList.remove('hero-rotate__word--active');
+      current.classList.add('hero-rotate__word--exit');
+      setTimeout(() => { current.classList.remove('hero-rotate__word--exit'); }, 500);
+      currentIndex = (currentIndex + 1) % words.length;
+      words[currentIndex].classList.add('hero-rotate__word--active');
+    }, 2500);
+  }
+
   // ═══ HEADER SCROLL ═══
   const header = document.querySelector('.header');
   const backToTop = document.getElementById('backToTop');
