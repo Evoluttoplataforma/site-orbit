@@ -2685,7 +2685,7 @@ ${JSON.stringify(schemaOrg, null, 2)}
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/styles-v2.css?v=4ba4b2b7">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=be4bc32a">
     <style>
         .article-hero{background:#000;padding:140px 24px 80px;text-align:center;position:relative;overflow:hidden}
         .article-hero__bg{position:absolute;inset:0;pointer-events:none}
@@ -2734,13 +2734,18 @@ ${JSON.stringify(schemaOrg, null, 2)}
                     </div>
                 </li>
                 <li><a href="/blog">Conhecimento</a></li>
-                <li><a href="/parcerias">Seja Parceiro</a></li>
+                <li><a href="/parcerias" data-i18n="footer.partners">Seja Parceiro</a></li>
                 <li><a href="/#contato-form">Fale Conosco</a></li>
             </ul>
             <div class="nav-actions">
                 <a href="#" class="btn btn-outline">Entrar</a>
                 <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>
             </div>
+            <button class="lang-switch" onclick="OrbitI18n.toggle()" aria-label="Change language">
+                <span class="lang-switch__flag">🇺🇸</span>
+                <span class="lang-switch__label">EN</span>
+            </button>
+
             <button class="menu-toggle">
                 <span></span><span></span><span></span>
             </button>
@@ -2761,9 +2766,13 @@ ${JSON.stringify(schemaOrg, null, 2)}
             <a href="/competencias">Competencias</a>
             <a href="/auditorias">Auditorias</a>
             <a href="/blog">Conhecimento</a>
-            <a href="/parcerias">Seja Parceiro</a>
+            <a href="/parcerias" data-i18n="footer.partners">Seja Parceiro</a>
         </div>
         <div class="mobile-menu__footer">
+            <button class="lang-switch" onclick="OrbitI18n.toggle(); closeMobileMenu();" aria-label="Change language">
+                <span class="lang-switch__flag">🇺🇸</span>
+                <span class="lang-switch__label">EN</span>
+            </button>
             <a href="/#contato-form" class="btn btn-primary" onclick="closeMobileMenu()">Fale Conosco</a>
         </div>
     </div>
@@ -2826,9 +2835,9 @@ ${JSON.stringify(schemaOrg, null, 2)}
                         </a>
                     </div>
                 </div>
-                <div class="footer-column"><h5>Contato</h5><ul class="footer-contact"><li><i class="fas fa-phone"></i> +55 (11) 9999-9999</li><li><i class="fas fa-envelope"></i> contato@orbit.com</li></ul></div>
+                <div class="footer-column"><h5 data-i18n="footer.contact">Contato</h5><ul class="footer-contact"><li><i class="fas fa-phone"></i> +55 (11) 9999-9999</li><li><i class="fas fa-envelope"></i> contato@orbit.com</li></ul></div>
                 <div class="footer-column"><h5>Solucoes</h5><ul><li><a href="/processos">Processos</a></li><li><a href="/indicadores">Indicadores</a></li><li><a href="/tarefas">Tarefas</a></li><li><a href="/competencias">Competencias</a></li><li><a href="/auditorias">Auditorias</a></li></ul></div>
-                <div class="footer-column"><h5>Conhecimento</h5><ul><li><a href="/blog">Blog</a></li><li><a href="#">Documentacao</a></li><li><a href="#">FAQ</a></li></ul></div>
+                <div class="footer-column"><h5 data-i18n="footer.knowledge">Conhecimento</h5><ul><li><a href="/blog">Blog</a></li><li><a href="#">Documentacao</a></li><li><a href="#">FAQ</a></li></ul></div>
             </div>
             <div class="footer-bottom"><p>&copy; 2024 Orbit Gestao. Todos os direitos reservados.</p></div>
         </div>
@@ -2843,6 +2852,8 @@ ${JSON.stringify(schemaOrg, null, 2)}
             item.addEventListener('mouseleave', () => { dropdown.style.opacity='0'; dropdown.style.visibility='hidden'; dropdown.style.transform='translateY(10px)'; });
         });
     <\/script>
+    <script src="/js/translations/common.js"></script>
+    <script src="/js/i18n.js"></script>
 </body>
 </html>`;
 
@@ -3426,5 +3437,7 @@ ${JSON.stringify(schemaOrg, null, 2)}
     initUI();
     updateNotifications();
     </script>
+    <script src="/js/translations/common.js"></script>
+    <script src="/js/i18n.js"></script>
 </body>
 </html>

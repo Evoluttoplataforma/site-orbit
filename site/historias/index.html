@@ -24,7 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/styles-v2.css?v=4ba4b2b7">
+    <link rel="stylesheet" href="/css/styles-v2.css?v=be4bc32a">
     <style>
         /* ── Page Background Override ── */
         body { background: #FFFFFF; color: #1A1D23; }
@@ -410,6 +410,11 @@
                 <a href="/acesso" class="btn btn-outline">Entrar</a>
                 <a href="/#contato-form" class="btn btn-primary">Conhecer o Time de IA</a>
             </div>
+            <button class="lang-switch" onclick="OrbitI18n.toggle()" aria-label="Change language">
+                <span class="lang-switch__flag">🇺🇸</span>
+                <span class="lang-switch__label">EN</span>
+            </button>
+
             <button class="menu-toggle">
                 <span></span><span></span><span></span>
             </button>
@@ -444,6 +449,10 @@
             <a href="/consultores"><i class="fas fa-network-wired"></i> Canais B2B2B</a>
         </div>
         <div class="mobile-menu__footer">
+            <button class="lang-switch" onclick="OrbitI18n.toggle(); closeMobileMenu();" aria-label="Change language">
+                <span class="lang-switch__flag">🇺🇸</span>
+                <span class="lang-switch__label">EN</span>
+            </button>
             <a href="/#contato-form" class="btn btn-primary" onclick="closeMobileMenu()">Conhecer o Time de IA</a>
         </div>
     </div>
@@ -501,7 +510,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="footer-logo"><img src="/images/logo-orbit-white.png" alt="Orbit Gestão" height="36"></div>
-                    <p>Plataforma de gestão com IA. Contrate um time que executa.</p>
+                    <p data-i18n="footer.tagline">Plataforma de gestão com IA. Contrate um time que executa.</p>
                     <div class="social-hover">
                         <a href="#" class="social-hover__item" data-name="LinkedIn">
                             <i class="fab fa-linkedin"></i>
@@ -522,42 +531,42 @@
                     </div>
                 </div>
                 <div class="footer-column">
-                    <h5>Contato</h5>
+                    <h5 data-i18n="footer.contact">Contato</h5>
                     <ul class="footer-contact">
                         <li><i class="fas fa-phone"></i> (48) 99120-6282</li>
                         <li><i class="fas fa-map-marker-alt"></i> Square SC, Florianópolis - SC</li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h5>Plataforma</h5>
+                    <h5 data-i18n="footer.platform">Plataforma</h5>
                     <ul>
-                        <li><a href="/agentes">Agentes de IA</a></li>
+                        <li><a href="/agentes" data-i18n="footer.agents">Agentes de IA</a></li>
                         <li><a href="/processos">Processos</a></li>
                         <li><a href="/indicadores">Indicadores</a></li>
                         <li><a href="/tarefas">Tarefas</a></li>
                         <li><a href="/competencias">Competências</a></li>
                         <li><a href="/auditorias">Auditorias</a></li>
-                        <li><a href="/pricing">Planos e Preços</a></li>
+                        <li><a href="/pricing" data-i18n="footer.plans">Planos e Preços</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-column">
-                    <h5>Conteúdo</h5>
+                    <h5 data-i18n="footer.content">Conteúdo</h5>
                     <ul>
                         <li><a href="/blog">Blog</a></li>
-                        <li><a href="/historias">Histórias de Clientes</a></li>
+                        <li><a href="/historias" data-i18n="footer.stories">Histórias de Clientes</a></li>
                         <li><a href="/faq">FAQ</a></li>
                     </ul>
-                    <h5 style="margin-top: 20px;">Empresa</h5>
+                    <h5 style="margin-top: 20px;" data-i18n="footer.company">Empresa</h5>
                     <ul>
-                        <li><a href="/sobre">Sobre Nós</a></li>
-                        <li><a href="/parcerias">Seja Parceiro</a></li>
-                        <li><a href="/consultores">Canais B2B2B</a></li>
+                        <li><a href="/sobre" data-i18n="footer.about">Sobre Nós</a></li>
+                        <li><a href="/parcerias" data-i18n="footer.partners">Seja Parceiro</a></li>
+                        <li><a href="/consultores" data-i18n="footer.channels">Canais B2B2B</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Orbit — Grupo GSN. Todos os direitos reservados.</p>
+                <p data-i18n="footer.rights">&copy; 2026 Orbit — Grupo GSN. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
@@ -747,5 +756,7 @@
     })();
     </script>
     <script src="/js/seo.js"></script>
+    <script src="/js/translations/common.js"></script>
+    <script src="/js/i18n.js"></script>
 </body>
 </html>

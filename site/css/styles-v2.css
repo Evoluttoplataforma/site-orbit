@@ -406,6 +406,36 @@ ul { list-style: none; }
   align-items: center;
 }
 .nav-actions .btn { font-size: 13px; }
+/* Language Switcher */
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  color: rgba(255,255,255,0.7);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: all 0.2s ease;
+}
+.lang-switch:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.2);
+  color: #fff;
+}
+.lang-switch__flag { font-size: 16px; line-height: 1; }
+.lang-switch__label { font-size: 12px; font-weight: 700; letter-spacing: 0.5px; }
+.mobile-menu .lang-switch {
+  width: 100%;
+  justify-content: center;
+  padding: 12px;
+  margin-top: 8px;
+  border-radius: 10px;
+}
 .nav-actions .btn-outline { padding: 8px 20px; color: #fff; border-color: rgba(255,255,255,0.2); }
 .nav-actions .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,0.05); }
 .nav-actions .btn-primary { padding: 8px 8px 8px 20px; padding-right: 44px; font-size: 13px; }
