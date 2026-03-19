@@ -14618,3 +14618,9 @@ hr.glow-divider { display: none !important; }
     text-align: center !important;
   }
 }
+
+/* Hide mockup background on mobile */
+@media (max-width: 768px) {
+  .platform-panel__mockup-bg { display: none !important; }
+  .platform-panel__mockup-main { min-height: auto !important; }
+}
