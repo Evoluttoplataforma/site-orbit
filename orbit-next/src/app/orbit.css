@@ -14642,19 +14642,22 @@ hr.glow-divider { display: none !important; }
     display: inline !important;
   }
   
-  /* Orbital hub on mobile - keep circular, just smaller */
+  /* Orbital hub on mobile - circular but fits screen */
   .orbit-hub {
-    height: 420px !important;
-    max-width: 100% !important;
+    height: 340px !important;
+    width: 340px !important;
+    max-width: 95vw !important;
+    margin: 0 auto !important;
+    overflow: visible !important;
   }
-  .orbit-hub__glow { width: 140px !important; height: 140px !important; }
-  .orbit-hub__photo { width: 80px !important; height: 80px !important; }
+  .orbit-hub__glow { width: 100px !important; height: 100px !important; }
+  .orbit-hub__photo { width: 70px !important; height: 70px !important; }
   .orbit-hub__ring { display: none !important; }
-  .orbit-hub__node-icon { width: 36px !important; height: 36px !important; }
-  .orbit-hub__node-icon i { font-size: 14px !important; }
-  .orbit-hub__node-label { font-size: 10px !important; }
+  .orbit-hub__node-icon { width: 32px !important; height: 32px !important; }
+  .orbit-hub__node-icon i { font-size: 12px !important; }
+  .orbit-hub__node-label { font-size: 9px !important; }
   .orbit-hub__node-desc { display: none !important; }
-  .orbit-hub__name { font-size: 14px !important; }
-  .orbit-hub__role { font-size: 10px !important; }
+  .orbit-hub__name { font-size: 12px !important; }
+  .orbit-hub__role { font-size: 9px !important; }
   .orbit-node-card { display: none !important; }
 }
