@@ -123,8 +123,8 @@ ul { list-style: none; }
   border-color: var(--primary);
   position: relative;
   overflow: hidden;
-  padding-right: 52px;
-  padding-left: 24px;
+  padding: 14px 56px 14px 28px;
+  font-size: 15px;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .btn-primary::after {
