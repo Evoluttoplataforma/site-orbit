@@ -1532,6 +1532,8 @@ function applyEnglish() {
     'nav.about': 'About Us', 'nav.about.sub': '30 years of history',
     'nav.partners': 'Become a Partner', 'nav.partners.sub': 'Channel program',
     'nav.channels': 'B2B2B Channels', 'nav.channels.sub': 'For consultants & mentors',
+    'hero.subtitle': 'AI-Operated Management: 12 specialized agents build and operate your company\'s management working 24/7, even after the project ends.',
+    'platform.subtitle': '5 modules. 12 agents. A brain that connects everything and translates data into decisions.',
   };
   document.querySelectorAll('[data-i18n]').forEach(function(el) {
     var key = el.getAttribute('data-i18n');

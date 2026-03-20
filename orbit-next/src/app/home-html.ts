@@ -23,7 +23,7 @@ export const pageHTML = `
                         <span class="hero-rotate__word">nunca para.</span>
                     </span>
                 </h1>
-                <p class="hero-zoom__subtitle">Gestão Operada por IA: 12 agentes especializados constroem e operam a gestão da sua empresa trabalhando 24/7, mesmo quando o projeto acaba.</p>
+                <p class="hero-zoom__subtitle" data-i18n="hero.subtitle">Gestão Operada por IA: 12 agentes especializados constroem e operam a gestão da sua empresa trabalhando 24/7, mesmo quando o projeto acaba.</p>
                 <div class="hero-zoom__ctas">
                     <a href="#contato-form" class="btn btn-primary btn-lg hero-cta-glow">QUERO CONHECER O TIME DE IA</a>
                     <a href="#agentes" class="btn btn-ghost btn-lg">Ver os 12 agentes <i class="fas fa-arrow-down"></i></a>
@@ -56,7 +56,7 @@ export const pageHTML = `
         <div class="container">
             <div class="one-platform__header" data-reveal>
                 <h2>Uma plataforma. <span class="highlight">Tudo conectado.</span></h2>
-                <p>5 módulos. 12 agentes. Um cérebro que conecta tudo e traduz dados em decisão.</p>
+                <p data-i18n="platform.subtitle">5 módulos. 12 agentes. Um cérebro que conecta tudo e traduz dados em decisão.</p>
             </div>
 
             <!-- Dock macOS-style -->
