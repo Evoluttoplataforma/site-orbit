@@ -12714,8 +12714,15 @@ html[lang="en"] .pricing-card--featured::before { content: "RECOMMENDED" !import
         .btn-primary {
             background: var(--primary);
             color: var(--black);
+            overflow: visible;
+            padding: 10px 20px;
+            position: static;
         }
-        .btn-primary:hover { background: var(--primary-dark); }
+        .btn-primary::after { display: none; }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            padding: 10px 20px;
+        }
         .btn-secondary {
             background: var(--gray-100);
             color: var(--gray-700);
