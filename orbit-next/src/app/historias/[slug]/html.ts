@@ -1,5 +1,6 @@
 // Auto-generated from site/historias/historia.html
 export const pageHTML = `
+    <div id="storyContent">
         <div class="article-not-found" id="storyFallback">
             <i class="fas fa-spinner fa-spin" style="color:#ffba1a;"></i>
             <h2>Carregando história...</h2>
