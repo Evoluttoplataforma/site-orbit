@@ -3280,6 +3280,9 @@ ul { list-style: none; }
   transition: var(--transition);
   z-index: 999;
   box-shadow: 0 4px 16px rgba(255,186,26,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .back-to-top.visible {
   opacity: 1;
