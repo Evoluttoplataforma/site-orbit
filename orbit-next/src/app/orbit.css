@@ -14655,6 +14655,70 @@ html[lang="en"] .pricing-card--featured::before { content: "RECOMMENDED" !import
             margin-bottom: 28px;
         }
 
+        /* Story page buttons - no arrow effect */
+        #storyContent .btn-primary {
+            overflow: visible !important;
+            padding: 12px 28px !important;
+            position: static !important;
+        }
+        #storyContent .btn-primary::after { display: none !important; }
+        #storyContent .btn-primary:hover {
+            padding: 12px 28px !important;
+        }
+
+        /* Related stories (JS uses different class names) */
+        #storyContent .related-section {
+            padding: 60px 24px;
+            background: #fff;
+        }
+        #storyContent .related-section__header {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1A1D23;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+        #storyContent .related-carousel-wrap {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        #storyContent .related-carousel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        #storyContent .related-card {
+            background: #fff;
+            border: 1px solid #E5E7EB;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: block;
+        }
+        #storyContent .related-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+        }
+        #storyContent .related-card__segment {
+            font-size: 0.75rem;
+            color: #ffba1a;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        #storyContent .related-card__company {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #1A1D23;
+            margin-bottom: 8px;
+        }
+        #storyContent .related-card__link {
+            font-size: 0.85rem;
+            color: #ffba1a;
+            font-weight: 600;
+        }
+
         /* Story page responsive */
         @media (max-width: 768px) {
             #storyContent .story-hero {

@@ -1407,6 +1407,23 @@ function applyEnglish() {
     'Selecione um segmento': 'Select a segment',
     '(opcional)': '(optional)',
 
+    // === STORY DETAIL PAGE ===
+    'O Desafio': 'The Challenge',
+    'A Solução com a Orbit': 'The Solution with Orbit',
+    'Os Resultados': 'The Results',
+    'Vídeo': 'Video',
+    'Galeria': 'Gallery',
+    'Compartilhar esta história': 'Share this story',
+    'Segmento': 'Segment',
+    'Responsável': 'Responsible',
+    'Sua empresa também pode ser destaque': 'Your company can also be featured',
+    'Conte como a Orbit transformou sua gestão e inspire outros negócios.': 'Tell how Orbit transformed your management and inspire other businesses.',
+    'Conte sua história': 'Tell your story',
+    'Módulos utilizados': 'Modules used',
+    'Copiar link': 'Copy link',
+    'Outras histórias': 'Other stories',
+    'Ver história': 'View story',
+
     // === OBRIGADO ===
     'Recebemos seu': 'We received your',
     'contato!': 'contact!',
