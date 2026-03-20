@@ -23,7 +23,7 @@ export const pageHTML = `
                         <span class="hero-rotate__word">nunca para.</span>
                     </span>
                 </h1>
-                <p class="hero-zoom__subtitle">Gestão Operada por IA com consultoria recorrente passiva. 12 agentes especializados constroem e operam a gestão da sua empresa - trabalhando 24/7, mesmo quando o projeto acaba.</p>
+                <p class="hero-zoom__subtitle">Gestão Operada por IA: 12 agentes especializados constroem e operam a gestão da sua empresa trabalhando 24/7, mesmo quando o projeto acaba.</p>
                 <div class="hero-zoom__ctas">
                     <a href="#contato-form" class="btn btn-primary btn-lg hero-cta-glow">QUERO CONHECER O TIME DE IA</a>
                     <a href="#agentes" class="btn btn-ghost btn-lg">Ver os 12 agentes <i class="fas fa-arrow-down"></i></a>
@@ -56,7 +56,7 @@ export const pageHTML = `
         <div class="container">
             <div class="one-platform__header" data-reveal>
                 <h2>Uma plataforma. <span class="highlight">Tudo conectado.</span></h2>
-                <p>5 módulos. 12 agentes. Uma Olívia que conecta tudo - e traduz dados em decisão.</p>
+                <p>5 módulos. 12 agentes. Um cérebro que conecta tudo e traduz dados em decisão.</p>
             </div>
 
             <!-- Dock macOS-style -->
@@ -103,7 +103,7 @@ export const pageHTML = `
                                 <li><i class="fas fa-check"></i> Monitoramento em tempo real</li>
                                 <li><i class="fas fa-check"></i> Integração com ISO e normas</li>
                             </ul>
-                            <a href="/processos" class="btn btn-primary">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                            <a href="/processos" class="btn btn-primary">Saiba mais</a>
                         </div>
                         <div class="platform-panel__image">
                             <div class="platform-panel__mockup-bg">
@@ -128,7 +128,7 @@ export const pageHTML = `
                                 <li><i class="fas fa-check"></i> OKRs e BSC integrados</li>
                                 <li><i class="fas fa-check"></i> Hipóteses de causa raiz com IA</li>
                             </ul>
-                            <a href="/indicadores" class="btn btn-primary">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                            <a href="/indicadores" class="btn btn-primary">Saiba mais</a>
                         </div>
                         <div class="platform-panel__image">
                             <div class="platform-panel__mockup-bg">
@@ -153,7 +153,7 @@ export const pageHTML = `
                                 <li><i class="fas fa-check"></i> Cronogramas e dependências</li>
                                 <li><i class="fas fa-check"></i> Notificações inteligentes</li>
                             </ul>
-                            <a href="/tarefas" class="btn btn-primary">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                            <a href="/tarefas" class="btn btn-primary">Saiba mais</a>
                         </div>
                         <div class="platform-panel__image">
                             <div class="platform-panel__mockup-bg">
@@ -178,7 +178,7 @@ export const pageHTML = `
                                 <li><i class="fas fa-check"></i> PDI automatizado com IA</li>
                                 <li><i class="fas fa-check"></i> Analytics de desempenho</li>
                             </ul>
-                            <a href="/competencias" class="btn btn-primary">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                            <a href="/competencias" class="btn btn-primary">Saiba mais</a>
                         </div>
                         <div class="platform-panel__image">
                             <div class="platform-panel__mockup-bg">
@@ -203,7 +203,7 @@ export const pageHTML = `
                                 <li><i class="fas fa-check"></i> Histórico de conformidade</li>
                                 <li><i class="fas fa-check"></i> Relatórios de auditoria</li>
                             </ul>
-                            <a href="/auditorias" class="btn btn-primary">Saiba mais <i class="fas fa-arrow-right"></i></a>
+                            <a href="/auditorias" class="btn btn-primary">Saiba mais</a>
                         </div>
                         <div class="platform-panel__image">
                             <div class="platform-panel__mockup-bg">

@@ -218,17 +218,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const panels = document.querySelectorAll('.platform-panel');
 
   // Tab switching
+  var tabOrder = ['processos', 'indicadores', 'tarefas', 'competencias', 'auditorias', 'ia'];
+  var currentTabIdx = 0;
+  var autoplayTimer = null;
+
+  function switchTab(target) {
+    dockItems.forEach(i => i.classList.remove('active'));
+    panels.forEach(p => p.classList.toggle('active', p.dataset.panel === target));
+    dockItems.forEach(i => { if (i.dataset.tab === target) i.classList.add('active'); });
+    currentTabIdx = tabOrder.indexOf(target);
+  }
+
   dockItems.forEach(item => {
     if (!item.dataset.tab) return;
     item.addEventListener('click', () => {
-      const target = item.dataset.tab;
-      dockItems.forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-      panels.forEach(p => {
-        p.classList.toggle('active', p.dataset.panel === target);
-      });
+      switchTab(item.dataset.tab);
+      // Reset autoplay on manual click
+      clearInterval(autoplayTimer);
+      autoplayTimer = setInterval(autoAdvance, 5000);
     });
   });
+
+  // Autoplay: cycle tabs every 5s
+  function autoAdvance() {
+    currentTabIdx = (currentTabIdx + 1) % tabOrder.length;
+    switchTab(tabOrder[currentTabIdx]);
+  }
+  autoplayTimer = setInterval(autoAdvance, 5000);
 
   // Dock magnification effect
   if (dock) {
