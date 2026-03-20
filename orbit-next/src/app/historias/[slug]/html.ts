@@ -399,8 +399,56 @@ export const pageHTML = `
         var lang = localStorage.getItem('orbit_lang') || 'pt';
         if (lang === 'en' && typeof applyEnglish === 'function') {
             applyEnglish();
+            // Auto-translate user content via Google Translate free API
+            autoTranslateContent('pt', 'en');
         }
     }, 200);
+
+    function autoTranslateContent(from, to) {
+        var selectors = [
+            '#storyContent .story-hero__left h1',
+            '#storyContent .story-hero__desc',
+            '#storyContent .story-quote__text',
+            '#storyContent .story-content__inner > p',
+            '#storyContent .story-cta p'
+        ];
+        var elements = [];
+        selectors.forEach(function(sel) {
+            document.querySelectorAll(sel).forEach(function(el) {
+                if (el.textContent.trim()) elements.push(el);
+            });
+        });
+        if (!elements.length) return;
+
+        // Batch translate: collect all texts
+        var texts = elements.map(function(el) { return el.textContent.trim(); });
+
+        // Use Google Translate free endpoint (batched)
+        var url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=' + from + '&tl=' + to + '&dt=t';
+        texts.forEach(function(t) { url += '&q=' + encodeURIComponent(t); });
+
+        // For multiple texts, send individual requests (free API doesn't batch well)
+        elements.forEach(function(el, idx) {
+            var text = texts[idx];
+            if (!text || text.length < 5) return;
+            var reqUrl = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=' + from + '&tl=' + to + '&dt=t&q=' + encodeURIComponent(text);
+            fetch(reqUrl)
+                .then(function(r) { return r.json(); })
+                .then(function(data) {
+                    if (data && data[0]) {
+                        var translated = data[0].map(function(s) { return s[0]; }).join('');
+                        if (translated) {
+                            // Preserve quotes for testimonials
+                            if (el.classList.contains('story-quote__text') || el.closest('.story-quote')) {
+                                translated = '\\u201C' + translated.replace(/^[\\u201C\\u201D"]+|[\\u201C\\u201D"]+$/g, '') + '\\u201D';
+                            }
+                            el.textContent = translated;
+                        }
+                    }
+                })
+                .catch(function() { /* silently fail, keep original text */ });
+        });
+    }
 
     // ── Header scroll ──
     var header = document.querySelector('.header');
