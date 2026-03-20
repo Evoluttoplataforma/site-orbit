@@ -12573,6 +12573,8 @@ html[lang="en"] .pricing-card--featured::before { content: "RECOMMENDED" !import
         .main {
             margin-left: var(--sidebar-w);
             min-height: 100vh;
+            max-width: calc(100vw - var(--sidebar-w));
+            overflow-x: hidden;
         }
         .topbar {
             height: var(--header-h);
@@ -12690,6 +12692,8 @@ html[lang="en"] .pricing-card--featured::before { content: "RECOMMENDED" !import
         }
         .content {
             padding: 32px;
+            max-width: 100%;
+            overflow-x: hidden;
         }
 
         /* ── BUTTONS ── */
