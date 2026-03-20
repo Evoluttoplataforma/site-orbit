@@ -394,6 +394,14 @@ export const pageHTML = `
         });
     }
 
+    // Re-apply English translation if lang is EN (content was rendered after initial translation)
+    setTimeout(function() {
+        var lang = localStorage.getItem('orbit_lang') || 'pt';
+        if (lang === 'en' && typeof applyEnglish === 'function') {
+            applyEnglish();
+        }
+    }, 200);
+
     // ── Header scroll ──
     var header = document.querySelector('.header');
     var backToTop = document.getElementById('backToTop');

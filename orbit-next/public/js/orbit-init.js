@@ -1424,6 +1424,15 @@ function applyEnglish() {
     'Outras histórias': 'Other stories',
     'Ver história': 'View story',
 
+    'Conhecer Orbit': 'Meet Orbit',
+    'Ver todas as histórias': 'View all stories',
+    'Erro ao carregar história': 'Error loading story',
+    'Ocorreu um erro ao carregar esta história. Tente novamente.': 'An error occurred while loading this story. Please try again.',
+    'História não encontrada': 'Story not found',
+    'Esta história pode ter sido removida ou ainda não foi publicada.': 'This story may have been removed or is not yet published.',
+    'Carregando história...': 'Loading story...',
+    'Se a página não carregar, a história pode não estar disponível neste dispositivo.': 'If the page does not load, the story may not be available on this device.',
+
     // === OBRIGADO ===
     'Recebemos seu': 'We received your',
     'contato!': 'contact!',
