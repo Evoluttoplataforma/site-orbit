@@ -298,30 +298,22 @@ export const oliviaHTML = `
                         }, 150);
                     });
 
-                    /* Click to expand agent card */
+                    /* Hover to expand agent card */
                     nodes.forEach(function(node) {
-                        node.addEventListener('click', function(e) {
-                            e.stopPropagation();
-                            var wasActive = node.classList.contains('orbit-node--active');
-                            /* Close all */
+                        node.addEventListener('mouseenter', function() {
                             nodes.forEach(function(n) {
                                 n.classList.remove('orbit-node--active', 'orbit-node--dimmed');
                             });
-                            if (!wasActive) {
-                                node.classList.add('orbit-node--active');
-                                nodes.forEach(function(n) {
-                                    if (n !== node) n.classList.add('orbit-node--dimmed');
-                                });
-                            }
+                            node.classList.add('orbit-node--active');
+                            nodes.forEach(function(n) {
+                                if (n !== node) n.classList.add('orbit-node--dimmed');
+                            });
                         });
-                    });
-                    /* Click outside to close */
-                    document.addEventListener('click', function(e) {
-                        if (!hub.contains(e.target)) {
+                        node.addEventListener('mouseleave', function() {
                             nodes.forEach(function(n) {
                                 n.classList.remove('orbit-node--active', 'orbit-node--dimmed');
                             });
-                        }
+                        });
                     });
                 })();
                 </script>
