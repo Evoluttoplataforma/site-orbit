@@ -13,14 +13,14 @@ export const pageHTML = `
             <div class="hero-zoom__header">
                 <span class="hero-zoom__badge">30 anos de gestão empresarial. Agora com IA.</span>
                 <h1 class="hero-zoom__title">
-                    Sua empresa não precisa de mais ferramentas.<br>
-                    Precisa de um <span class="hero-zoom__title-highlight">time de IA</span> que
+                    <span data-i18n="hero.line1">Sua empresa não precisa de mais ferramentas.</span><br>
+                    <span data-i18n="hero.line2">Precisa de um</span> <span class="hero-zoom__title-highlight" data-i18n="hero.highlight">time de IA</span> <span data-i18n="hero.connector">que</span>
                     <span class="hero-rotate" id="heroRotate">
-                        <span class="hero-rotate__word hero-rotate__word--active">executa.</span>
-                        <span class="hero-rotate__word">organiza.</span>
-                        <span class="hero-rotate__word">decide.</span>
-                        <span class="hero-rotate__word">opera 24/7.</span>
-                        <span class="hero-rotate__word">nunca para.</span>
+                        <span class="hero-rotate__word hero-rotate__word--active" data-i18n="hero.w1">executa.</span>
+                        <span class="hero-rotate__word" data-i18n="hero.w2">organiza.</span>
+                        <span class="hero-rotate__word" data-i18n="hero.w3">decide.</span>
+                        <span class="hero-rotate__word" data-i18n="hero.w4">opera 24/7.</span>
+                        <span class="hero-rotate__word" data-i18n="hero.w5">nunca para.</span>
                     </span>
                 </h1>
                 <p class="hero-zoom__subtitle" data-i18n="hero.subtitle">Gestão Operada por IA: 12 agentes especializados constroem e operam a gestão da sua empresa trabalhando 24/7, mesmo quando o projeto acaba.</p>
@@ -41,7 +41,7 @@ export const pageHTML = `
                     </div>
                     <div class="hero-zoom__credential-divider"></div>
                     <div class="hero-zoom__credential">
-                        <strong>2.206</strong>
+                        <strong>+2.900</strong>
                         <span>no Orbit</span>
                     </div>
                 </div>
@@ -51,66 +51,152 @@ export const pageHTML = `
 
     <hr class="glow-divider">
 
-    <!-- ═══ PLATAFORMA TABS ═══ -->
+    <!-- ═══ 12 AGENTES ═══ -->
     <section class="one-platform" id="plataforma">
         <div class="container">
             <div class="one-platform__header" data-reveal>
-                <h2>Uma plataforma. <span class="highlight">Tudo conectado.</span></h2>
-                <p data-i18n="platform.subtitle">5 módulos. 12 agentes. Um cérebro que conecta tudo e traduz dados em decisão.</p>
+                <h2>12 agentes. <span class="highlight">Um time completo.</span></h2>
+                <p data-i18n="platform.subtitle">12 agentes. Um cérebro que conecta tudo e traduz dados em decisão.</p>
             </div>
 
-            <!-- Dock macOS-style -->
+            <!-- Dock macOS-style: 12 agents -->
             <div class="dock-container">
-                <div class="dock" id="platformDock">
-                    <button class="dock-item active" data-tab="processos" aria-label="Processos">
+                <div class="dock" id="platformDock" style="overflow-x:auto;max-width:100%;">
+                    <button class="dock-item active" data-tab="estrategista" aria-label="Estrategista">
+                        <div class="dock-icon"><i class="fas fa-chess-king"></i></div>
+                        <div class="dock-label">Estrategista</div>
+                    </button>
+                    <button class="dock-item" data-tab="processos" aria-label="Processos">
                         <div class="dock-icon"><i class="fas fa-sitemap"></i></div>
                         <div class="dock-label">Processos</div>
+                    </button>
+                    <button class="dock-item" data-tab="pessoas" aria-label="Pessoas">
+                        <div class="dock-icon"><i class="fas fa-users"></i></div>
+                        <div class="dock-label">Pessoas</div>
+                    </button>
+                    <button class="dock-item" data-tab="treinamento" aria-label="Treinamento">
+                        <div class="dock-icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="dock-label">Treinamento</div>
                     </button>
                     <button class="dock-item" data-tab="indicadores" aria-label="Indicadores">
                         <div class="dock-icon"><i class="fas fa-chart-line"></i></div>
                         <div class="dock-label">Indicadores</div>
                     </button>
-                    <button class="dock-item" data-tab="tarefas" aria-label="Tarefas">
-                        <div class="dock-icon"><i class="fas fa-tasks"></i></div>
-                        <div class="dock-label">Tarefas</div>
+                    <button class="dock-item" data-tab="pesquisa" aria-label="Pesquisa">
+                        <div class="dock-icon"><i class="fas fa-magnifying-glass-chart"></i></div>
+                        <div class="dock-label">Pesquisa</div>
                     </button>
-                    <button class="dock-item" data-tab="competencias" aria-label="Competências">
-                        <div class="dock-icon"><i class="fas fa-users"></i></div>
-                        <div class="dock-label">Competências</div>
+                    <button class="dock-item" data-tab="riscos" aria-label="Riscos">
+                        <div class="dock-icon"><i class="fas fa-shield-halved"></i></div>
+                        <div class="dock-label">Riscos</div>
                     </button>
-                    <button class="dock-item" data-tab="auditorias" aria-label="Auditorias">
-                        <div class="dock-icon"><i class="fas fa-clipboard-check"></i></div>
-                        <div class="dock-label">Auditorias</div>
+                    <button class="dock-item" data-tab="oportunidades" aria-label="Oportunidades">
+                        <div class="dock-icon"><i class="fas fa-lightbulb"></i></div>
+                        <div class="dock-label">Oportunidades</div>
                     </button>
-                    <div class="dock-divider"></div>
-                    <button class="dock-item dock-item--gold" data-tab="ia" aria-label="Orbit IA">
-                        <div class="dock-icon"><i class="fas fa-brain"></i></div>
-                        <div class="dock-label">Orbit IA</div>
+                    <button class="dock-item" data-tab="problemas" aria-label="Problemas">
+                        <div class="dock-icon"><i class="fas fa-triangle-exclamation"></i></div>
+                        <div class="dock-label">Problemas</div>
+                    </button>
+                    <button class="dock-item" data-tab="documentos" aria-label="Documentos">
+                        <div class="dock-icon"><i class="fas fa-file-lines"></i></div>
+                        <div class="dock-label">Documentos</div>
+                    </button>
+                    <button class="dock-item" data-tab="vendas" aria-label="Vendas">
+                        <div class="dock-icon"><i class="fas fa-handshake"></i></div>
+                        <div class="dock-label">Vendas</div>
+                    </button>
+                    <button class="dock-item" data-tab="reunioes" aria-label="Reuniões">
+                        <div class="dock-icon"><i class="fas fa-video"></i></div>
+                        <div class="dock-label">Reuniões</div>
                     </button>
                 </div>
             </div>
 
             <div class="platform-panels">
-                <div class="platform-panel active" data-panel="processos">
+                <div class="platform-panel active" data-panel="estrategista">
                     <div class="platform-panel__content">
                         <div class="platform-panel__text">
-                            <div class="platform-panel__badge">Orbit Processos</div>
-                            <h3>Padronize e otimize seus processos críticos</h3>
-                            <p>O Agente de Processos mapeia, documenta e gera instruções de trabalho automaticamente. Reduza retrabalho e garanta qualidade em cada execução.</p>
+                            <div class="platform-panel__badge">Agente Estrategista</div>
+                            <h3>Planejamento estratégico em uma tarde</h3>
+                            <p>Constrói SWOT, BSC, objetivos e planos de ação. Tudo estruturado, priorizado e pronto para execução.</p>
+                            <ul class="platform-panel__features">
+                                <li><i class="fas fa-check"></i> Diagnóstico estratégico completo</li>
+                                <li><i class="fas fa-check"></i> Definição de objetivos e metas</li>
+                                <li><i class="fas fa-check"></i> Planos de ação estruturados</li>
+                                <li><i class="fas fa-check"></i> Análise SWOT automatizada</li>
+                            </ul>
+                            <a href="/agentes/estrategista" class="btn btn-primary">Saiba mais</a>
+                        </div>
+                        <div class="platform-panel__image">
+                            <div class="platform-panel__mockup-main">
+                                <div class="pp-mock"><div class="pp-mock__bar"><span></span><span></span><span></span><div class="pp-mock__title">Orbit - Planejamento</div></div><div class="pp-mock__body"><div class="pp-mock__label">ANÁLISE SWOT</div><div class="pp-mock__grid4"><div class="pp-mock__cell pp-mock__cell--green">Forças<br><small>8 itens</small></div><div class="pp-mock__cell pp-mock__cell--yellow">Fraquezas<br><small>5 itens</small></div><div class="pp-mock__cell pp-mock__cell--blue">Oportunidades<br><small>6 itens</small></div><div class="pp-mock__cell pp-mock__cell--red">Ameaças<br><small>3 itens</small></div></div><div class="pp-mock__label" style="margin-top:16px;">OBJETIVOS ESTRATÉGICOS</div><div class="pp-mock__row"><span class="pp-mock__dot pp-mock__dot--gold"></span> Aumentar faturamento em 30%<span class="pp-mock__tag pp-mock__tag--gold">Em andamento</span></div><div class="pp-mock__row"><span class="pp-mock__dot pp-mock__dot--green"></span> Reduzir custos operacionais<span class="pp-mock__tag pp-mock__tag--green">Concluído</span></div></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="platform-panel" data-panel="processos">
+                    <div class="platform-panel__content">
+                        <div class="platform-panel__text">
+                            <div class="platform-panel__badge">Agente de Processos</div>
+                            <h3>Mapeamento e padronização automática</h3>
+                            <p>Mapeia todos os processos, gera instruções de trabalho e playbooks operacionais. Padronização ISO incluída.</p>
                             <ul class="platform-panel__features">
                                 <li><i class="fas fa-check"></i> Mapeamento visual de processos</li>
                                 <li><i class="fas fa-check"></i> Instruções de trabalho automáticas</li>
-                                <li><i class="fas fa-check"></i> Monitoramento em tempo real</li>
-                                <li><i class="fas fa-check"></i> Integração com ISO e normas</li>
+                                <li><i class="fas fa-check"></i> Playbooks operacionais</li>
+                                <li><i class="fas fa-check"></i> Padronização ISO</li>
                             </ul>
-                            <a href="/processos" class="btn btn-primary">Saiba mais</a>
+                            <a href="/agentes" class="btn btn-primary">Saiba mais</a>
                         </div>
                         <div class="platform-panel__image">
-                            <div class="platform-panel__mockup-bg">
-                                <img src="https://placehold.co/472x500/0D1117/ffba1a?text=Processos" alt="">
-                            </div>
                             <div class="platform-panel__mockup-main">
-                                <img src="https://placehold.co/560x400/0D1117/ffba1a?text=Processos+Dashboard" alt="Orbit Processos">
+                                <div class="pp-mock"><div class="pp-mock__bar"><span></span><span></span><span></span><div class="pp-mock__title">Orbit - Processos</div></div><div class="pp-mock__body"><div class="pp-mock__label">FLUXO: ONBOARDING DE CLIENTE</div><div class="pp-mock__flow"><div class="pp-mock__flow-step pp-mock__flow-step--done"><i class="fas fa-check"></i> Cadastro</div><div class="pp-mock__flow-arrow">→</div><div class="pp-mock__flow-step pp-mock__flow-step--done"><i class="fas fa-check"></i> Documentos</div><div class="pp-mock__flow-arrow">→</div><div class="pp-mock__flow-step pp-mock__flow-step--active"><i class="fas fa-spinner"></i> Integração</div><div class="pp-mock__flow-arrow">→</div><div class="pp-mock__flow-step">Treinamento</div></div><div class="pp-mock__label" style="margin-top:16px;">INSTRUÇÃO DE TRABALHO</div><div class="pp-mock__doc"><div class="pp-mock__doc-line" style="width:90%"></div><div class="pp-mock__doc-line" style="width:75%"></div><div class="pp-mock__doc-line" style="width:85%"></div><div class="pp-mock__doc-line" style="width:60%"></div></div></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="platform-panel" data-panel="pessoas">
+                    <div class="platform-panel__content">
+                        <div class="platform-panel__text">
+                            <div class="platform-panel__badge">Agente de Pessoas</div>
+                            <h3>Gestão de pessoas com inteligência</h3>
+                            <p>Descrição de cargos, avaliação de desempenho e PDIs personalizados automaticamente.</p>
+                            <ul class="platform-panel__features">
+                                <li><i class="fas fa-check"></i> Descrição de cargos</li>
+                                <li><i class="fas fa-check"></i> Avaliação de desempenho 360°</li>
+                                <li><i class="fas fa-check"></i> PDIs personalizados</li>
+                                <li><i class="fas fa-check"></i> Matriz de competências</li>
+                            </ul>
+                            <a href="/agentes" class="btn btn-primary">Saiba mais</a>
+                        </div>
+                        <div class="platform-panel__image">
+                            <div class="platform-panel__mockup-main">
+                                <div class="pp-mock"><div class="pp-mock__bar"><span></span><span></span><span></span><div class="pp-mock__title">Orbit - Pessoas</div></div><div class="pp-mock__body"><div class="pp-mock__label">AVALIAÇÃO 360° — MARIA SILVA</div><div class="pp-mock__meter"><div class="pp-mock__meter-label">Liderança</div><div class="pp-mock__meter-bar"><div style="width:85%" class="pp-mock__meter-fill pp-mock__meter-fill--gold"></div></div><span>85%</span></div><div class="pp-mock__meter"><div class="pp-mock__meter-label">Comunicação</div><div class="pp-mock__meter-bar"><div style="width:72%" class="pp-mock__meter-fill pp-mock__meter-fill--green"></div></div><span>72%</span></div><div class="pp-mock__meter"><div class="pp-mock__meter-label">Técnico</div><div class="pp-mock__meter-bar"><div style="width:90%" class="pp-mock__meter-fill pp-mock__meter-fill--blue"></div></div><span>90%</span></div><div class="pp-mock__label" style="margin-top:14px;">PDI GERADO</div><div class="pp-mock__row"><span class="pp-mock__dot pp-mock__dot--gold"></span> Curso de liderança situacional</div><div class="pp-mock__row"><span class="pp-mock__dot pp-mock__dot--green"></span> Mentoria com gestor sênior</div></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="platform-panel" data-panel="treinamento">
+                    <div class="platform-panel__content">
+                        <div class="platform-panel__text">
+                            <div class="platform-panel__badge">Agente de Treinamento</div>
+                            <h3>Microlearning diário via WhatsApp</h3>
+                            <p>Treina equipes com conteúdo personalizado da empresa. Quizzes, trilhas e acompanhamento de engajamento.</p>
+                            <ul class="platform-panel__features">
+                                <li><i class="fas fa-check"></i> Microlearning via WhatsApp</li>
+                                <li><i class="fas fa-check"></i> Conteúdo personalizado</li>
+                                <li><i class="fas fa-check"></i> Quizzes e avaliações</li>
+                                <li><i class="fas fa-check"></i> Trilhas de aprendizagem</li>
+                            </ul>
+                            <a href="/agentes" class="btn btn-primary">Saiba mais</a>
+                        </div>
+                        <div class="platform-panel__image">
+                            <div class="platform-panel__mockup-main">
+                                <div class="pp-mock"><div class="pp-mock__bar"><span></span><span></span><span></span><div class="pp-mock__title">Orbit - Treinamento</div></div><div class="pp-mock__body"><div class="pp-mock__label">MICROLEARNING — HOJE</div><div class="pp-mock__chat-row pp-mock__chat-row--recv"><strong>Olívia:</strong> Bom dia! Hoje vamos aprender sobre atendimento ao cliente. Pronto?</div><div class="pp-mock__chat-row pp-mock__chat-row--sent">Pronto! 💪</div><div class="pp-mock__chat-row pp-mock__chat-row--recv"><strong>Olívia:</strong> Qual é o primeiro passo ao receber um cliente insatisfeito?<br><small style="color:rgba(255,186,26,0.6);">A) Explicar o processo B) Ouvir primeiro C) Transferir</small></div><div class="pp-mock__label" style="margin-top:14px;">ENGAJAMENTO DO TIME</div><div class="pp-mock__meter"><div class="pp-mock__meter-label">Conclusão</div><div class="pp-mock__meter-bar"><div style="width:78%" class="pp-mock__meter-fill pp-mock__meter-fill--green"></div></div><span>78%</span></div></div></div>
                             </div>
                         </div>
                     </div>
@@ -119,123 +205,174 @@ export const pageHTML = `
                 <div class="platform-panel" data-panel="indicadores">
                     <div class="platform-panel__content">
                         <div class="platform-panel__text">
-                            <div class="platform-panel__badge">Orbit Indicadores</div>
-                            <h3>KPIs em tempo real com dashboards inteligentes</h3>
-                            <p>O Agente de Indicadores monitora seus KPIs, identifica desvios e sugere ações corretivas antes que o problema cresça.</p>
+                            <div class="platform-panel__badge">Agente de Indicadores</div>
+                            <h3>KPIs em tempo real com causa raiz</h3>
+                            <p>Monitora indicadores, identifica desvios e sugere hipóteses de causa raiz com IA antes que o problema cresça.</p>
                             <ul class="platform-panel__features">
-                                <li><i class="fas fa-check"></i> Dashboards personalizáveis</li>
-                                <li><i class="fas fa-check"></i> Alertas automáticos de desvio</li>
-                                <li><i class="fas fa-check"></i> OKRs e BSC integrados</li>
-                                <li><i class="fas fa-check"></i> Hipóteses de causa raiz com IA</li>
+                                <li><i class="fas fa-check"></i> Monitoramento de KPIs</li>
+                                <li><i class="fas fa-check"></i> Hipóteses de causa raiz</li>
+                                <li><i class="fas fa-check"></i> Dashboards inteligentes</li>
+                                <li><i class="fas fa-check"></i> Alertas automáticos</li>
                             </ul>
-                            <a href="/indicadores" class="btn btn-primary">Saiba mais</a>
+                            <a href="/agentes" class="btn btn-primary">Saiba mais</a>
                         </div>
                         <div class="platform-panel__image">
-                            <div class="platform-panel__mockup-bg">
-                                <img src="https://placehold.co/472x500/0D1117/ffba1a?text=Indicadores" alt="">
-                            </div>
                             <div class="platform-panel__mockup-main">
-                                <img src="https://placehold.co/560x400/0D1117/ffba1a?text=Indicadores+Dashboard" alt="Orbit Indicadores">
+                                <div class="pp-mock"><div class="pp-mock__bar"><span></span><span></span><span></span><div class="pp-mock__title">Orbit - Indicadores</div></div><div class="pp-mock__body"><div class="pp-mock__label">DASHBOARD — KPIs MARÇO</div><div class="pp-mock__kpi-grid"><div class="pp-mock__kpi"><span class="pp-mock__kpi-val pp-mock__kpi-val--green">R$ 1.2M</span><span class="pp-mock__kpi-label">Faturamento</span></div><div class="pp-mock__kpi"><span class="pp-mock__kpi-val pp-mock__kpi-val--red">32%</span><span class="pp-mock__kpi-label">Margem</span></div><div class="pp-mock__kpi"><span class="pp-mock__kpi-val pp-mock__kpi-val--gold">4.2</span><span class="pp-mock__kpi-label">NPS</span></div></div><div class="pp-mock__alert"><i class="fas fa-triangle-exclamation" style="color:#EF4444;"></i> <strong>Alerta:</strong> Margem caiu 3% — <span style="color:#ffba1a;">Ver causa raiz</span></div></div></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="platform-panel" data-panel="tarefas">
+                <div class="platform-panel" data-panel="pesquisa">
                     <div class="platform-panel__content">
                         <div class="platform-panel__text">
-                            <div class="platform-panel__badge">Orbit Tarefas</div>
-                            <h3>Alinhe tarefas à estratégia e aos objetivos</h3>
-                            <p>Mantenha a equipe sincronizada com visibilidade total do progresso em direção aos objetivos estratégicos.</p>
+                            <div class="platform-panel__badge">Agente de Pesquisa</div>
+                            <h3>Clima, NPS e insights acionáveis</h3>
+                            <p>Cria pesquisas de clima e satisfação, analisa respostas e entrega insights sobre a percepção das equipes.</p>
                             <ul class="platform-panel__features">
-                                <li><i class="fas fa-check"></i> Kanban e lista de tarefas</li>
-                                <li><i class="fas fa-check"></i> Vínculo com objetivos estratégicos</li>
-                                <li><i class="fas fa-check"></i> Cronogramas e dependências</li>
-                                <li><i class="fas fa-check"></i> Notificações inteligentes</li>
+                                <li><i class="fas fa-check"></i> Pesquisas de clima</li>
+                                <li><i class="fas fa-check"></i> NPS e satisfação</li>
+                                <li><i class="fas fa-check"></i> Insights acionáveis</li>
+                                <li><i class="fas fa-check"></i> Relatórios automatizados</li>
                             </ul>
-                            <a href="/tarefas" class="btn btn-primary">Saiba mais</a>
+                            <a href="/agentes" class="btn btn-primary">Saiba mais</a>
                         </div>
                         <div class="platform-panel__image">
-                            <div class="platform-panel__mockup-bg">
-                                <img src="https://placehold.co/472x500/0D1117/ffba1a?text=Tarefas" alt="">
-                            </div>
                             <div class="platform-panel__mockup-main">
-                                <img src="https://placehold.co/560x400/0D1117/ffba1a?text=Tarefas+Dashboard" alt="Orbit Tarefas">
+                                <div class="pp-mock"><div class="pp-mock__bar"><span></span><span></span><span></span><div class="pp-mock__title">Orbit - Pesquisa</div></div><div class="pp-mock__body"><div class="pp-mock__label">PESQUISA DE CLIMA — Q1 2026</div><div class="pp-mock__meter"><div class="pp-mock__meter-label">Satisfação geral</div><div class="pp-mock__meter-bar"><div style="width:82%" class="pp-mock__meter-fill pp-mock__meter-fill--green"></div></div><span>82%</span></div><div class="pp-mock__meter"><div class="pp-mock__meter-label">Liderança</div><div class="pp-mock__meter-bar"><div style="width:74%" class="pp-mock__meter-fill pp-mock__meter-fill--gold"></div></div><span>74%</span></div><div class="pp-mock__meter"><div class="pp-mock__meter-label">Comunicação</div><div class="pp-mock__meter-bar"><div style="width:68%" class="pp-mock__meter-fill pp-mock__meter-fill--red"></div></div><span>68%</span></div><div class="pp-mock__label" style="margin-top:14px;">INSIGHT</div><div class="pp-mock__row"><i class="fas fa-lightbulb" style="color:#ffba1a;"></i> Equipe comercial precisa de feedback mais frequente</div></div></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="platform-panel" data-panel="competencias">
+                <div class="platform-panel" data-panel="riscos">
                     <div class="platform-panel__content">
                         <div class="platform-panel__text">
-                            <div class="platform-panel__badge">Orbit Competências</div>
-                            <h3>Desenvolva o potencial do seu time</h3>
-                            <p>O Agente de Pessoas cria descrições de cargo, avaliações de desempenho e PDIs personalizados automaticamente.</p>
+                            <div class="platform-panel__badge">Agente de Riscos</div>
+                            <h3>Prevenção antes que vire crise</h3>
+                            <p>Identifica ameaças, monitora indicadores de risco e sugere planos de mitigação preventivos.</p>
                             <ul class="platform-panel__features">
-                                <li><i class="fas fa-check"></i> Matriz de competências</li>
-                                <li><i class="fas fa-check"></i> Avaliações 360°</li>
-                                <li><i class="fas fa-check"></i> PDI automatizado com IA</li>
-                                <li><i class="fas fa-check"></i> Analytics de desempenho</li>
+                                <li><i class="fas fa-check"></i> Mapeamento de riscos</li>
+                                <li><i class="fas fa-check"></i> Matriz probabilidade × impacto</li>
+                                <li><i class="fas fa-check"></i> Planos de mitigação automáticos</li>
+                                <li><i class="fas fa-check"></i> Monitoramento contínuo</li>
                             </ul>
-                            <a href="/competencias" class="btn btn-primary">Saiba mais</a>
+                            <a href="/agentes" class="btn btn-primary">Saiba mais</a>
                         </div>
                         <div class="platform-panel__image">
-                            <div class="platform-panel__mockup-bg">
-                                <img src="https://placehold.co/472x500/0D1117/ffba1a?text=Competências" alt="">
-                            </div>
                             <div class="platform-panel__mockup-main">
-                                <img src="https://placehold.co/560x400/0D1117/ffba1a?text=Competências+Dashboard" alt="Orbit Competências">
+                                <div class="pp-mock"><div class="pp-mock__bar"><span></span><span></span><span></span><div class="pp-mock__title">Orbit - Riscos</div></div><div class="pp-mock__body"><div class="pp-mock__label">MATRIZ DE RISCOS</div><div class="pp-mock__risk-matrix"><div class="pp-mock__risk-cell" style="background:rgba(239,68,68,0.2);color:#EF4444;">ALTO<br><strong>2</strong></div><div class="pp-mock__risk-cell" style="background:rgba(255,186,26,0.15);color:#ffba1a;">MÉDIO<br><strong>5</strong></div><div class="pp-mock__risk-cell" style="background:rgba(34,197,94,0.15);color:#22C55E;">BAIXO<br><strong>8</strong></div></div><div class="pp-mock__label" style="margin-top:14px;">MITIGAÇÃO ATIVA</div><div class="pp-mock__row"><span class="pp-mock__dot pp-mock__dot--red"></span> Risco cambial — hedge contratado<span class="pp-mock__tag pp-mock__tag--green">Mitigado</span></div></div></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="platform-panel" data-panel="auditorias">
+                <div class="platform-panel" data-panel="oportunidades">
                     <div class="platform-panel__content">
                         <div class="platform-panel__text">
-                            <div class="platform-panel__badge">Orbit Auditorias</div>
-                            <h3>Conformidade e qualidade nos processos</h3>
-                            <p>Mantenha compliance total, reduza riscos e garanta que seus processos estejam sempre alinhados aos padrões regulatórios.</p>
+                            <div class="platform-panel__badge">Agente de Oportunidades</div>
+                            <h3>Mercado, parcerias e expansão</h3>
+                            <p>Analisa mercado, identifica oportunidades de crescimento e cruza com dados internos para sugerir ações.</p>
                             <ul class="platform-panel__features">
-                                <li><i class="fas fa-check"></i> Checklists automatizados</li>
+                                <li><i class="fas fa-check"></i> Análise de mercado</li>
+                                <li><i class="fas fa-check"></i> Mapeamento de portfólio</li>
+                                <li><i class="fas fa-check"></i> Parcerias estratégicas</li>
+                                <li><i class="fas fa-check"></i> Relatórios de oportunidades</li>
+                            </ul>
+                            <a href="/agentes" class="btn btn-primary">Saiba mais</a>
+                        </div>
+                        <div class="platform-panel__image">
+                            <div class="platform-panel__mockup-main">
+                                <div class="pp-mock"><div class="pp-mock__bar"><span></span><span></span><span></span><div class="pp-mock__title">Orbit - Oportunidades</div></div><div class="pp-mock__body"><div class="pp-mock__label">OPORTUNIDADES IDENTIFICADAS</div><div class="pp-mock__row"><span class="pp-mock__dot pp-mock__dot--gold"></span> Segmento B2B inexplorado<span class="pp-mock__tag pp-mock__tag--gold">R$ 400k</span></div><div class="pp-mock__row"><span class="pp-mock__dot pp-mock__dot--green"></span> Parceria com distribuidor SP<span class="pp-mock__tag pp-mock__tag--green">Novo</span></div><div class="pp-mock__row"><span class="pp-mock__dot pp-mock__dot--blue"></span> Expansão para região Sul<span class="pp-mock__tag pp-mock__tag--blue">Análise</span></div><div class="pp-mock__label" style="margin-top:14px;">POTENCIAL ESTIMADO</div><div class="pp-mock__big-number">R$ 1.8M<small>/ano</small></div></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="platform-panel" data-panel="problemas">
+                    <div class="platform-panel__content">
+                        <div class="platform-panel__text">
+                            <div class="platform-panel__badge">Agente de Problemas</div>
+                            <h3>PDCA automático e causa raiz</h3>
+                            <p>Registra não-conformidades, aplica PDCA e acompanha a resolução até o fechamento com evidências.</p>
+                            <ul class="platform-panel__features">
+                                <li><i class="fas fa-check"></i> Registro de não-conformidades</li>
+                                <li><i class="fas fa-check"></i> Ishikawa e 5 Porquês</li>
                                 <li><i class="fas fa-check"></i> Planos de ação corretiva</li>
-                                <li><i class="fas fa-check"></i> Histórico de conformidade</li>
-                                <li><i class="fas fa-check"></i> Relatórios de auditoria</li>
+                                <li><i class="fas fa-check"></i> Acompanhamento de eficácia</li>
                             </ul>
-                            <a href="/auditorias" class="btn btn-primary">Saiba mais</a>
+                            <a href="/agentes" class="btn btn-primary">Saiba mais</a>
                         </div>
                         <div class="platform-panel__image">
-                            <div class="platform-panel__mockup-bg">
-                                <img src="https://placehold.co/472x500/0D1117/ffba1a?text=Auditorias" alt="">
-                            </div>
                             <div class="platform-panel__mockup-main">
-                                <img src="https://placehold.co/560x400/0D1117/ffba1a?text=Auditorias+Dashboard" alt="Orbit Auditorias">
+                                <div class="pp-mock"><div class="pp-mock__bar"><span></span><span></span><span></span><div class="pp-mock__title">Orbit - Problemas</div></div><div class="pp-mock__body"><div class="pp-mock__label">NC #0047 — ATRASO NA ENTREGA</div><div class="pp-mock__flow"><div class="pp-mock__flow-step pp-mock__flow-step--done"><i class="fas fa-check"></i> Registro</div><div class="pp-mock__flow-arrow">→</div><div class="pp-mock__flow-step pp-mock__flow-step--done"><i class="fas fa-check"></i> Causa raiz</div><div class="pp-mock__flow-arrow">→</div><div class="pp-mock__flow-step pp-mock__flow-step--active"><i class="fas fa-spinner"></i> Ação</div><div class="pp-mock__flow-arrow">→</div><div class="pp-mock__flow-step">Verificação</div></div><div class="pp-mock__label" style="margin-top:14px;">5 PORQUÊS</div><div class="pp-mock__doc"><div class="pp-mock__doc-line" style="width:100%;background:rgba(239,68,68,0.2)"></div><div class="pp-mock__doc-line" style="width:85%;background:rgba(239,68,68,0.15)"></div><div class="pp-mock__doc-line" style="width:70%;background:rgba(255,186,26,0.15)"></div><div class="pp-mock__doc-line" style="width:55%;background:rgba(34,197,94,0.15)"></div></div></div></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="platform-panel" data-panel="ia" id="orbit-ia">
+                <div class="platform-panel" data-panel="documentos">
                     <div class="platform-panel__content">
                         <div class="platform-panel__text">
-                            <div class="platform-panel__badge platform-panel__badge--ia">Orbit IA</div>
-                            <h3>Olívia + 12 agentes que operam sua gestão</h3>
-                            <p>A Olívia é a Coordenadora Geral: conecta dados de todos os módulos, lidera os 12 agentes especializados e traduz complexidade em clareza. Construídos sobre 30 anos de experiência do Grupo GSN.</p>
+                            <div class="platform-panel__badge">Agente de Documentos</div>
+                            <h3>Padronização e controle de versões</h3>
+                            <p>Gera, versiona e conecta documentos corporativos. Toda a base documental padronizada e atualizada.</p>
                             <ul class="platform-panel__features">
-                                <li><i class="fas fa-check"></i> Olívia coordena e prioriza ações</li>
-                                <li><i class="fas fa-check"></i> 12 agentes com personalidade e cargo funcional</li>
-                                <li><i class="fas fa-check"></i> Tensões produtivas geram melhores decisões</li>
-                                <li><i class="fas fa-check"></i> Consultoria recorrente passiva: opera 24/7</li>
+                                <li><i class="fas fa-check"></i> Geração automática</li>
+                                <li><i class="fas fa-check"></i> Controle de versões</li>
+                                <li><i class="fas fa-check"></i> Conexão entre documentos</li>
+                                <li><i class="fas fa-check"></i> Templates padronizados</li>
                             </ul>
-                            <a href="#olivia" class="btn btn-primary">Conhecer a Olívia</a>
+                            <a href="/agentes" class="btn btn-primary">Saiba mais</a>
                         </div>
                         <div class="platform-panel__image">
-                            <div class="platform-panel__mockup-bg">
-                                <img src="https://placehold.co/472x500/ffba1a/0D1117?text=Orbit+IA" alt="">
-                            </div>
                             <div class="platform-panel__mockup-main">
-                                <img src="https://placehold.co/560x400/ffba1a/0D1117?text=Orbit+IA+Agentes" alt="Orbit IA">
+                                <div class="pp-mock"><div class="pp-mock__bar"><span></span><span></span><span></span><div class="pp-mock__title">Orbit - Documentos</div></div><div class="pp-mock__body"><div class="pp-mock__label">DOCUMENTOS RECENTES</div><div class="pp-mock__row"><i class="fas fa-file-pdf" style="color:#EF4444;"></i> Manual de Qualidade v3.2<span class="pp-mock__tag pp-mock__tag--green">Aprovado</span></div><div class="pp-mock__row"><i class="fas fa-file-lines" style="color:#3B82F6;"></i> IT-024 — Processo de vendas<span class="pp-mock__tag pp-mock__tag--gold">Revisão</span></div><div class="pp-mock__row"><i class="fas fa-file-contract" style="color:#ffba1a;"></i> Política de home office<span class="pp-mock__tag pp-mock__tag--green">Publicado</span></div><div class="pp-mock__label" style="margin-top:14px;">COMPLIANCE</div><div class="pp-mock__meter"><div class="pp-mock__meter-label">Documentos atualizados</div><div class="pp-mock__meter-bar"><div style="width:94%" class="pp-mock__meter-fill pp-mock__meter-fill--green"></div></div><span>94%</span></div></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="platform-panel" data-panel="vendas">
+                    <div class="platform-panel__content">
+                        <div class="platform-panel__text">
+                            <div class="platform-panel__badge">Agente de Vendas</div>
+                            <h3>CRM, funil e coaching comercial</h3>
+                            <p>Gerencia pipeline, acompanha funil e oferece coaching baseado em dados para a equipe comercial.</p>
+                            <ul class="platform-panel__features">
+                                <li><i class="fas fa-check"></i> Gestão de CRM e pipeline</li>
+                                <li><i class="fas fa-check"></i> Funil de vendas</li>
+                                <li><i class="fas fa-check"></i> Coaching comercial com IA</li>
+                                <li><i class="fas fa-check"></i> Previsão de receita</li>
+                            </ul>
+                            <a href="/agentes" class="btn btn-primary">Saiba mais</a>
+                        </div>
+                        <div class="platform-panel__image">
+                            <div class="platform-panel__mockup-main">
+                                <div class="pp-mock"><div class="pp-mock__bar"><span></span><span></span><span></span><div class="pp-mock__title">Orbit - Vendas</div></div><div class="pp-mock__body"><div class="pp-mock__label">FUNIL DE VENDAS</div><div class="pp-mock__funnel"><div class="pp-mock__funnel-row" style="width:100%;background:rgba(255,186,26,0.15);">Leads — 148</div><div class="pp-mock__funnel-row" style="width:75%;background:rgba(255,186,26,0.2);">Qualificados — 89</div><div class="pp-mock__funnel-row" style="width:50%;background:rgba(255,186,26,0.25);">Proposta — 42</div><div class="pp-mock__funnel-row" style="width:30%;background:rgba(34,197,94,0.25);">Fechados — 18</div></div><div class="pp-mock__label" style="margin-top:14px;">PREVISÃO</div><div class="pp-mock__big-number">R$ 520k<small>/mês</small></div></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="platform-panel" data-panel="reunioes">
+                    <div class="platform-panel__content">
+                        <div class="platform-panel__text">
+                            <div class="platform-panel__badge">Agente de Reuniões</div>
+                            <h3>Transcrição e planos de ação</h3>
+                            <p>Transcreve reuniões, extrai decisões e gera planos de ação automaticamente. Nunca mais perca um follow-up.</p>
+                            <ul class="platform-panel__features">
+                                <li><i class="fas fa-check"></i> Transcrição automática</li>
+                                <li><i class="fas fa-check"></i> Extração de decisões</li>
+                                <li><i class="fas fa-check"></i> Atas e resumos</li>
+                                <li><i class="fas fa-check"></i> Follow-up automático</li>
+                            </ul>
+                            <a href="/agentes" class="btn btn-primary">Saiba mais</a>
+                        </div>
+                        <div class="platform-panel__image">
+                            <div class="platform-panel__mockup-main">
+                                <div class="pp-mock"><div class="pp-mock__bar"><span></span><span></span><span></span><div class="pp-mock__title">Orbit - Reuniões</div></div><div class="pp-mock__body"><div class="pp-mock__label">REUNIÃO — ALINHAMENTO SEMANAL</div><div class="pp-mock__row"><i class="fas fa-clock" style="color:#8B949E;"></i> 45 min — 8 participantes</div><div class="pp-mock__label" style="margin-top:12px;">DECISÕES EXTRAÍDAS</div><div class="pp-mock__row"><span class="pp-mock__dot pp-mock__dot--green"></span> Priorizar projeto Alpha no Q2</div><div class="pp-mock__row"><span class="pp-mock__dot pp-mock__dot--gold"></span> Contratar 2 devs para o time</div><div class="pp-mock__label" style="margin-top:12px;">FOLLOW-UP AUTOMÁTICO</div><div class="pp-mock__row"><i class="fas fa-paper-plane" style="color:#22C55E;"></i> 5 tarefas criadas e atribuídas</div></div></div>
                             </div>
                         </div>
                     </div>
@@ -245,452 +382,893 @@ export const pageHTML = `
     </section>
 
     <!-- ═══ PARA QUEM ═══ -->
-    <section class="segments-section section--light" id="para-quem">
-        <div class="container">
-            <div class="section-header" data-reveal>
-                <span class="section-badge">Para quem é o Orbit</span>
-                <h2>Encontre <span class="highlight">seu caminho</span></h2>
+    <section class="pq-section" id="para-quem">
+        <div class="container" style="max-width:1100px;">
+            <div style="text-align:center;margin-bottom:64px;" data-reveal>
+                <h2 style="font-size:clamp(2rem,4.5vw,3rem);font-weight:800;color:#fff;margin:0 0 12px;" data-i18n="pq.title">Para quem é o Orbit</h2>
+                <p style="color:#8B949E;font-size:1.1rem;" data-i18n="pq.subtitle">Três modelos. Um resultado: gestão que opera sozinha.</p>
             </div>
 
-            <div class="icp-grid" data-reveal-stagger>
-                <!-- ICP 1 - Empresário -->
-                <div class="segment-card card-float card-shine" style="text-align:center;">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-building"></i></div>
-                    <h3>Empresários</h3>
-                    <p style="color:#5A6069;font-size:0.95rem;line-height:1.6;margin-bottom:20px;">Ferramentas demais e gestão de menos? Um time de IA opera sua empresa 24/7.</p>
-                    <a href="/lp-empresas" class="btn btn-dark" style="width:100%;">Ver como funciona</a>
-                </div>
+            <div class="pq-grid" data-reveal-stagger>
+                <a href="/empresarios" class="pq-card">
+                    <img src="/images/pq-empresarios.png" alt="Empresários">
+                    <div class="pq-card__content">
+                        <div class="pq-card__icon"><i class="fas fa-building"></i></div>
+                        <h3 data-i18n="pq.c1.title">Empresários</h3>
+                        <p data-i18n="pq.c1.desc">Um time de IA que opera sua empresa 24/7. 12 agentes especializados.</p>
+                        <span class="pq-card__link"><span data-i18n="pq.learn">Saiba mais</span> <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
 
-                <!-- ICP 2 - Consultor -->
-                <div class="segment-card card-float card-shine" style="text-align:center;">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-user-tie"></i></div>
-                    <h3>Consultores</h3>
-                    <p style="color:#5A6069;font-size:0.95rem;line-height:1.6;margin-bottom:20px;">Pare de vender projeto. Venda operação com receita recorrente e white-label.</p>
-                    <a href="/consultores" class="btn btn-dark" style="width:100%;">Modelo de canais</a>
-                </div>
+                <a href="/consultores" class="pq-card">
+                    <img src="/images/pq-consultores.png" alt="Consultores">
+                    <div class="pq-card__content">
+                        <div class="pq-card__icon"><i class="fas fa-user-tie"></i></div>
+                        <h3 data-i18n="pq.c2.title">Consultores</h3>
+                        <p data-i18n="pq.c2.desc">De projeto para operação recorrente. White-label com margem de 60%.</p>
+                        <span class="pq-card__link"><span data-i18n="pq.learn">Saiba mais</span> <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
 
-                <!-- ICP 3 - Associações -->
-                <div class="segment-card card-float card-shine" style="text-align:center;">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-landmark"></i></div>
-                    <h3>Associações e Hubs</h3>
-                    <p style="color:#5A6069;font-size:0.95rem;line-height:1.6;margin-bottom:20px;">Transforme sua associação de hub de eventos em hub de operação para cada associado.</p>
-                    <a href="#contato-form" class="btn btn-dark" style="width:100%;">Fale conosco</a>
+                <a href="/#contato-form" class="pq-card">
+                    <img src="/images/pq-hubs.png" alt="Associações e Hubs">
+                    <div class="pq-card__content">
+                        <div class="pq-card__icon"><i class="fas fa-landmark"></i></div>
+                        <h3 data-i18n="pq.c3.title">Associações e Hubs</h3>
+                        <p data-i18n="pq.c3.desc">De hub de eventos para hub de operação. Gestão para cada associado.</p>
+                        <span class="pq-card__link"><span data-i18n="pq.learn">Saiba mais</span> <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ DADOS DE MERCADO ═══ -->
+    <section class="mkt-section">
+        <div class="mkt-bg">
+            <div class="mkt-grid-lines"></div>
+            <div class="mkt-glow mkt-glow--1"></div>
+            <div class="mkt-glow mkt-glow--2"></div>
+        </div>
+        <div class="container" style="max-width:1100px;position:relative;z-index:1;">
+            <div class="mkt-header" data-reveal>
+                <div class="mkt-badge"><i class="fas fa-bolt"></i> <span data-i18n="mkt.badge">Dados de mercado</span></div>
+                <h2 data-i18n="mkt.title">Quem está usando IA agentic<br>está <span>saindo na frente</span></h2>
+            </div>
+            <div class="mkt-cards" data-reveal-stagger>
+                <div class="mkt-card mkt-card--highlight">
+                    <div class="mkt-card__header">
+                        <div class="mkt-card__number">11%</div>
+                        <div class="mkt-card__pulse"></div>
+                    </div>
+                    <p class="mkt-card__headline" data-i18n="mkt.c1">das empresas já operam com <strong>IA agentic</strong> em produção</p>
+                    <div class="mkt-card__footer">
+                        <div class="mkt-card__source">Deloitte</div>
+                        <div class="mkt-card__date">2025</div>
+                    </div>
+                    <div class="mkt-card__tag" data-i18n="mkt.tag">O Orbit está nesse grupo</div>
+                </div>
+                <div class="mkt-card">
+                    <div class="mkt-card__header">
+                        <div class="mkt-card__number">62%</div>
+                    </div>
+                    <p class="mkt-card__headline" data-i18n="mkt.c2">estão <strong>experimentando</strong> agentes de IA nos processos</p>
+                    <div class="mkt-card__footer">
+                        <div class="mkt-card__source">McKinsey</div>
+                        <div class="mkt-card__date">2025</div>
+                    </div>
+                </div>
+                <div class="mkt-card">
+                    <div class="mkt-card__header">
+                        <div class="mkt-card__number">40%</div>
+                    </div>
+                    <p class="mkt-card__headline" data-i18n="mkt.c3"><strong>mais qualidade</strong> nas entregas com apoio de IA</p>
+                    <div class="mkt-card__footer">
+                        <div class="mkt-card__source">BCG + Harvard</div>
+                        <div class="mkt-card__date">2024</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <hr class="glow-divider">
-
-    <!-- ═══ CATEGORY DEFINITION ═══ -->
-    <section class="section-padded" style="background:#0D1117;text-align:center;">
-        <div class="container">
-            <span class="section-badge" data-reveal>Uma nova categoria</span>
-            <h2 style="font-size:2rem;font-weight:800;color:#fff;margin:16px auto;max-width:800px;" data-reveal>Gestão Operada por IA com <span style="color:#ffba1a;">Consultoria Recorrente Passiva</span></h2>
-            <p style="color:#8B949E;font-size:1.125rem;max-width:700px;margin:0 auto 24px;" data-reveal>Diferente de ferramentas ou chatbots, os agentes do Orbit trabalham de forma autônoma após a configuração. A gestão continua acontecendo mesmo sem intervenção humana constante.</p>
-            <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:32px;" data-reveal>
-                <div style="background:#1C2333;border-radius:12px;padding:20px 28px;text-align:center;">
-                    <div style="font-size:2rem;font-weight:800;color:#ffba1a;">11%</div>
-                    <div style="color:#8B949E;font-size:0.875rem;">das empresas usam IA agentic<br><small>Deloitte, 2025</small></div>
-                </div>
-                <div style="background:#1C2333;border-radius:12px;padding:20px 28px;text-align:center;">
-                    <div style="font-size:2rem;font-weight:800;color:#ffba1a;">62%</div>
-                    <div style="color:#8B949E;font-size:0.875rem;">estão experimentando<br><small>McKinsey, 2025</small></div>
-                </div>
-                <div style="background:#1C2333;border-radius:12px;padding:20px 28px;text-align:center;">
-                    <div style="font-size:2rem;font-weight:800;color:#ffba1a;">40%</div>
-                    <div style="color:#8B949E;font-size:0.875rem;">mais qualidade com IA<br><small>BCG/Harvard</small></div>
-                </div>
-            </div>
+        <!-- ═══ PAIN POINTS - WHATSAPP CHAT ═══ -->
+    <section class="wa-section" id="dores">
+        <div class="wa-section__bg">
+            <div class="wa-section__gradient"></div>
         </div>
-    </section>
-
-        <!-- ═══ PAIN POINTS - CINEMATIC ═══ -->
-    <section class="pain-cinema" id="dores">
-        <div class="pain-cinema__bg">
-            <div class="pain-cinema__grid-lines"></div>
-            <div class="pain-cinema__glow"></div>
-        </div>
-        <div class="container">
+        <div class="container" style="max-width:1200px;">
             <div class="section-header" data-reveal>
-                <span class="section-badge section-badge--red">Isso te parece familiar?</span>
-                <h2>Deixa eu adivinhar:</h2>
-                <p>Você planeja o crescimento, mas não faz ideia se a operação está seguindo o script.</p>
+                <span class="section-badge section-badge--red" data-i18n="wa.badge">Isso te parece familiar?</span>
+                <h2 style="color:#1A1D23;" data-i18n="wa.title">Deixa eu adivinhar:</h2>
+                <p style="color:#6B7280;max-width:620px;margin:0 auto;" data-i18n="wa.subtitle">Esse é o WhatsApp da Olívia em tempo real, tirando as dúvidas dos nossos futuros clientes.</p>
             </div>
 
-            <div class="pain-thoughts" id="painThoughts">
-                <!-- Pensamentos do empresário -->
-                <div class="pain-thought" data-idx="0">
-                    <div class="pain-thought__icon"><i class="fas fa-user-slash"></i></div>
-                    <div class="pain-thought__bubble">
-                        <p>"Parece que sou o único que se importa com essa empresa."</p>
-                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
+            <!-- Phones grid -->
+            <div class="wa-phones" id="waPhones">
+
+                <!-- ═══ PHONE 1 — Rodrigo ═══ -->
+                <div class="wa-device" data-chat="0">
+                    <div class="wa-device__frame">
+                        <!-- Status bar -->
+                        <div class="wa-statusbar">
+                            <span>9:14</span>
+                            <div class="wa-statusbar__right">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-full"></i>
+                            </div>
+                        </div>
+                        <!-- WA Header -->
+                        <div class="wa-header">
+                            <i class="fas fa-arrow-left wa-header__back"></i>
+                            <div class="wa-header__contact">
+                                <img src="/images/cliente-1.jpg" alt="Rodrigo" class="wa-header__avatar">
+                                <div class="wa-header__online"></div>
+                            </div>
+                            <div class="wa-header__info">
+                                <span class="wa-header__name">Rodrigo - CEO</span>
+                                <span class="wa-header__status">online</span>
+                            </div>
+                            <div class="wa-header__actions">
+                                <i class="fas fa-video"></i>
+                                <i class="fas fa-phone"></i>
+                                <i class="fas fa-ellipsis-vertical"></i>
+                            </div>
+                        </div>
+                        <!-- Chat body -->
+                        <div class="wa-chat">
+                            <div class="wa-chat__date"><span data-i18n="wa.today">Hoje</span></div>
+
+                            <!-- Cliente → Olívia → Cliente → Olívia -->
+                            <div class="wa-row wa-row--right wa-row--hidden">
+                                <div class="wa-bubble wa-bubble--green">
+                                    <p data-i18n="wa.1.s1">Sinto que sou o único que se importa com a empresa. Deleguei e tudo saiu errado.</p>
+                                    <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
+                                </div>
+                                <img src="/images/cliente-1.jpg" alt="" class="wa-row__avatar">
+                            </div>
+                            <div class="wa-row wa-row--left wa-row--hidden">
+                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <div class="wa-bubble wa-bubble--dark">
+                                    <span class="wa-bubble__sender">Olívia - Orbit</span>
+                                    <p data-i18n="wa.1.r1">Eu entendo. <strong>72% dos empresários</strong> sentem isso. O problema não é sua equipe — é a falta de uma camada de gestão operando 24/7.</p>
+                                    <span class="wa-bubble__meta"></span>
+                                </div>
+                            </div>
+                            <div class="wa-row wa-row--right wa-row--hidden">
+                                <div class="wa-bubble wa-bubble--green">
+                                    <p data-i18n="wa.1.s2">Minha equipe só apaga incêndio. Ninguém pensa estrategicamente.</p>
+                                    <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
+                                </div>
+                                <img src="/images/cliente-1.jpg" alt="" class="wa-row__avatar">
+                            </div>
+                            <div class="wa-row wa-row--left wa-row--hidden">
+                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <div class="wa-bubble wa-bubble--dark">
+                                    <span class="wa-bubble__sender">Olívia - Orbit</span>
+                                    <p data-i18n="wa.1.r2">Me dá 7 dias. Vou montar o diagnóstico e colocar meus <strong>12 agentes</strong> pra trabalhar. Você vai sentir a diferença na primeira semana. ✨</p>
+                                    <span class="wa-bubble__meta"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Input -->
+                        <div class="wa-input">
+                            <div class="wa-input__field">
+                                <i class="fas fa-face-smile"></i>
+                                <span data-i18n="wa.input">Mensagem</span>
+                                <i class="fas fa-paperclip"></i>
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="wa-input__mic"><i class="fas fa-microphone"></i></div>
+                        </div>
                     </div>
-                    <div class="pain-thought__pulse"></div>
+                    <!-- Client label below phone -->
                 </div>
-                <div class="pain-thought" data-idx="1">
-                    <div class="pain-thought__icon"><i class="fas fa-eye-slash"></i></div>
-                    <div class="pain-thought__bubble">
-                        <p>"Não tenho controle quando não estou presente."</p>
-                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
+
+                <!-- ═══ PHONE 2 — Gustavo ═══ -->
+                <div class="wa-device" data-chat="1">
+                    <div class="wa-device__frame">
+                        <div class="wa-statusbar">
+                            <span>10:32</span>
+                            <div class="wa-statusbar__right">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-three-quarters"></i>
+                            </div>
+                        </div>
+                        <div class="wa-header">
+                            <i class="fas fa-arrow-left wa-header__back"></i>
+                            <div class="wa-header__contact">
+                                <img src="/images/cliente-2.jpg" alt="Gustavo" class="wa-header__avatar">
+                                <div class="wa-header__online"></div>
+                            </div>
+                            <div class="wa-header__info">
+                                <span class="wa-header__name">Gustavo - Consultoria</span>
+                                <span class="wa-header__status">online</span>
+                            </div>
+                            <div class="wa-header__actions">
+                                <i class="fas fa-video"></i>
+                                <i class="fas fa-phone"></i>
+                                <i class="fas fa-ellipsis-vertical"></i>
+                            </div>
+                        </div>
+                        <div class="wa-chat">
+                            <div class="wa-chat__date"><span data-i18n="wa.today">Hoje</span></div>
+
+                            <div class="wa-row wa-row--right wa-row--hidden">
+                                <div class="wa-bubble wa-bubble--green">
+                                    <p data-i18n="wa.2.s1">Comprei ERP, implantei OKR, contratei consultoria... nada mudou de verdade.</p>
+                                    <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
+                                </div>
+                                <img src="/images/cliente-2.jpg" alt="" class="wa-row__avatar">
+                            </div>
+                            <div class="wa-row wa-row--left wa-row--hidden">
+                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <div class="wa-bubble wa-bubble--dark">
+                                    <span class="wa-bubble__sender">Olívia - Orbit</span>
+                                    <p data-i18n="wa.2.r1">Software sem operação é como carro sem motorista. Você comprou a ferramenta, mas <strong>ninguém opera ela</strong>. Meus agentes fazem isso — todos os dias.</p>
+                                    <span class="wa-bubble__meta"></span>
+                                </div>
+                            </div>
+                            <div class="wa-row wa-row--right wa-row--hidden">
+                                <div class="wa-bubble wa-bubble--green">
+                                    <p data-i18n="wa.2.s2">Faturamento sobe e desce todo mês. Não tenho previsibilidade nenhuma.</p>
+                                    <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
+                                </div>
+                                <img src="/images/cliente-2.jpg" alt="" class="wa-row__avatar">
+                            </div>
+                            <div class="wa-row wa-row--left wa-row--hidden">
+                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <div class="wa-bubble wa-bubble--dark">
+                                    <span class="wa-bubble__sender">Olívia - Orbit</span>
+                                    <p data-i18n="wa.2.r2">O Agente de Indicadores já vai mapear seus KPIs e te alertar <strong>antes</strong> do desvio virar crise. Bora? 🚀</p>
+                                    <span class="wa-bubble__meta"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wa-input">
+                            <div class="wa-input__field">
+                                <i class="fas fa-face-smile"></i>
+                                <span data-i18n="wa.input">Mensagem</span>
+                                <i class="fas fa-paperclip"></i>
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="wa-input__mic"><i class="fas fa-microphone"></i></div>
+                        </div>
                     </div>
-                    <div class="pain-thought__pulse"></div>
                 </div>
-                <div class="pain-thought" data-idx="2">
-                    <div class="pain-thought__icon"><i class="fas fa-thumbs-down"></i></div>
-                    <div class="pain-thought__bubble">
-                        <p>"Já tentei delegar, mas tudo sai errado."</p>
-                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
+
+                <!-- ═══ PHONE 3 — Gabriel ═══ -->
+                <div class="wa-device" data-chat="2">
+                    <div class="wa-device__frame">
+                        <div class="wa-statusbar">
+                            <span>14:05</span>
+                            <div class="wa-statusbar__right">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-half"></i>
+                            </div>
+                        </div>
+                        <div class="wa-header">
+                            <i class="fas fa-arrow-left wa-header__back"></i>
+                            <div class="wa-header__contact">
+                                <img src="/images/cliente-3.jpg" alt="Gabriel" class="wa-header__avatar">
+                                <div class="wa-header__online"></div>
+                            </div>
+                            <div class="wa-header__info">
+                                <span class="wa-header__name">Gabriel - Diretor</span>
+                                <span class="wa-header__status">online</span>
+                            </div>
+                            <div class="wa-header__actions">
+                                <i class="fas fa-video"></i>
+                                <i class="fas fa-phone"></i>
+                                <i class="fas fa-ellipsis-vertical"></i>
+                            </div>
+                        </div>
+                        <div class="wa-chat">
+                            <div class="wa-chat__date"><span data-i18n="wa.today">Hoje</span></div>
+
+                            <div class="wa-row wa-row--right wa-row--hidden">
+                                <div class="wa-bubble wa-bubble--green">
+                                    <p data-i18n="wa.3.s1">Ninguém veste a camisa. Processos existem só no papel.</p>
+                                    <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
+                                </div>
+                                <img src="/images/cliente-3.jpg" alt="" class="wa-row__avatar">
+                            </div>
+                            <div class="wa-row wa-row--left wa-row--hidden">
+                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <div class="wa-bubble wa-bubble--dark">
+                                    <span class="wa-bubble__sender">Olívia - Orbit</span>
+                                    <p data-i18n="wa.3.r1">Processo no papel não funciona porque <strong>ninguém cobra execução</strong>. Meu Agente de Processos mapeia, gera instruções e <strong>monitora em tempo real</strong>.</p>
+                                    <span class="wa-bubble__meta"></span>
+                                </div>
+                            </div>
+                            <div class="wa-row wa-row--right wa-row--hidden">
+                                <div class="wa-bubble wa-bubble--green">
+                                    <p data-i18n="wa.3.s2">Já tentei padronizar mas ninguém segue. Não sei nem se estão fazendo certo.</p>
+                                    <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
+                                </div>
+                                <img src="/images/cliente-3.jpg" alt="" class="wa-row__avatar">
+                            </div>
+                            <div class="wa-row wa-row--left wa-row--hidden">
+                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <div class="wa-bubble wa-bubble--dark">
+                                    <span class="wa-bubble__sender">Olívia - Orbit</span>
+                                    <p data-i18n="wa.3.r2">E o Agente de Treinamento envia microlearning diário pro time pelo WhatsApp. <strong>A cultura muda de dentro pra fora.</strong> 💪</p>
+                                    <span class="wa-bubble__meta"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wa-input">
+                            <div class="wa-input__field">
+                                <i class="fas fa-face-smile"></i>
+                                <span data-i18n="wa.input">Mensagem</span>
+                                <i class="fas fa-paperclip"></i>
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="wa-input__mic"><i class="fas fa-microphone"></i></div>
+                        </div>
                     </div>
-                    <div class="pain-thought__pulse"></div>
                 </div>
-                <div class="pain-thought" data-idx="3">
-                    <div class="pain-thought__icon"><i class="fas fa-fire-flame-curved"></i></div>
-                    <div class="pain-thought__bubble">
-                        <p>"Minha equipe só apaga incêndio."</p>
-                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
-                    </div>
-                    <div class="pain-thought__pulse"></div>
-                </div>
-                <div class="pain-thought" data-idx="4">
-                    <div class="pain-thought__icon"><i class="fas fa-heart-crack"></i></div>
-                    <div class="pain-thought__bubble">
-                        <p>"Ninguém veste a camisa."</p>
-                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
-                    </div>
-                    <div class="pain-thought__pulse"></div>
-                </div>
-                <div class="pain-thought" data-idx="5">
-                    <div class="pain-thought__icon"><i class="fas fa-arrow-trend-down"></i></div>
-                    <div class="pain-thought__bubble">
-                        <p>"Vivo no sobe e desce do faturamento."</p>
-                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
-                    </div>
-                    <div class="pain-thought__pulse"></div>
-                </div>
+
             </div>
 
-            <!-- Resposta do Orbit -->
-            <div class="pain-answer" id="painAnswer">
-                <div class="pain-answer__line"></div>
-                <div class="pain-answer__card">
-                    <div class="pain-answer__avatar">
-                        <img src="images/olivia.png" alt="Olívia">
-                        <div class="pain-answer__status"></div>
-                    </div>
-                    <div class="pain-answer__content">
-                        <span class="pain-answer__name">Olívia - Orbit</span>
-                        <p>"Eu entendo. E é exatamente isso que resolvo. Me dá 7 dias."</p>
-                    </div>
-                </div>
-                <div class="pain-answer__cta">
-                    <a href="#contato-form" class="btn btn-primary btn-lg">QUERO RESOLVER ISSO</a>
-                </div>
+            <!-- Mobile dots -->
+            <div class="wa-dots" id="waDots">
+                <button class="wa-dot wa-dot--active" data-idx="0"></button>
+                <button class="wa-dot" data-idx="1"></button>
+                <button class="wa-dot" data-idx="2"></button>
+            </div>
+
+            <div style="text-align:center;margin-top:56px;" data-reveal>
+                <a href="#contato-form" class="btn btn-primary btn-lg">QUERO RESOLVER ISSO</a>
             </div>
         </div>
 
         <style>
-            .pain-cinema {
+            /* ═══ WA CHAT SECTION ═══ */
+            .wa-section {
                 position: relative;
-                padding: 120px 0 80px;
-                background: #FAFBFC;
+                padding: 120px 0 100px;
+                background: linear-gradient(180deg, #F8F9FB 0%, #EEF0F4 100%);
                 overflow: hidden;
             }
-            .pain-cinema .section-header h2 {
-                color: #1A1D23;
-            }
-            .pain-cinema .section-header p {
-                color: #5A6069;
-            }
-            .pain-cinema__bg {
+            .wa-section__bg {
                 position: absolute;
                 inset: 0;
                 pointer-events: none;
             }
-            .pain-cinema__grid-lines {
+            .wa-section__gradient {
                 position: absolute;
-                inset: 0;
-                background-image:
-                    linear-gradient(rgba(248,81,73,0.04) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(248,81,73,0.04) 1px, transparent 1px);
-                background-size: 60px 60px;
-                mask-image: radial-gradient(ellipse 60% 60% at 50% 40%, black 30%, transparent 70%);
-            }
-            .pain-cinema__glow {
-                position: absolute;
-                width: 500px;
-                height: 500px;
-                top: 10%;
+                width: 800px;
+                height: 800px;
+                top: -200px;
                 left: 50%;
                 transform: translateX(-50%);
-                background: radial-gradient(circle, rgba(248,81,73,0.06) 0%, transparent 70%);
+                background: radial-gradient(circle, rgba(255,186,26,0.06) 0%, transparent 60%);
                 border-radius: 50%;
-                animation: pain-glow-pulse 4s ease-in-out infinite;
             }
-            @keyframes pain-glow-pulse {
-                0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
-                50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
-            }
-
-            /* Section badge red */
             .section-badge--red {
                 background: rgba(248,81,73,0.08);
                 border: 1px solid rgba(248,81,73,0.2);
                 color: #DC2626;
             }
 
-            /* Pain thoughts container */
-            .pain-thoughts {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 16px;
-                max-width: 800px;
-                margin: 0 auto;
+            /* ═══ PHONES GRID ═══ */
+            .wa-phones {
+                display: flex;
+                gap: 40px;
+                justify-content: center;
+                align-items: flex-start;
+                transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             }
 
-            /* Individual thought */
-            .pain-thought {
+            /* ═══ DEVICE (phone + label) ═══ */
+            .wa-device {
+                flex-shrink: 0;
                 display: flex;
-                align-items: flex-start;
-                gap: 14px;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+
+            /* Client label below phone */
+            .wa-device__label {
+                display: flex;
+                align-items: center;
+                gap: 12px;
                 background: #fff;
                 border: 1px solid #E5E7EB;
                 border-radius: 16px;
-                padding: 22px;
-                position: relative;
-                opacity: 0;
-                transform: translateY(20px) scale(0.95);
-                transition: border-color 0.3s ease, box-shadow 0.3s ease;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+                padding: 12px 20px;
+                box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+                width: 100%;
+                max-width: 320px;
             }
-            .pain-thought:hover {
-                border-color: rgba(248,81,73,0.3);
-                box-shadow: 0 8px 32px rgba(248,81,73,0.1);
-                transform: translateY(-2px) scale(1);
+            .wa-device__label img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 2px solid #E5E7EB;
             }
-            .pain-thought.pain-visible {
-                animation: pain-thought-in 0.6s forwards;
+            .wa-device__label strong {
+                font-size: 14px;
+                color: #1A1D23;
+                display: block;
+                line-height: 1.3;
             }
-            @keyframes pain-thought-in {
-                0% { opacity: 0; transform: translateY(20px) scale(0.95); }
-                60% { transform: translateY(-4px) scale(1.01); }
-                100% { opacity: 1; transform: translateY(0) scale(1); }
+            .wa-device__label span {
+                font-size: 12px;
+                color: #8B949E;
             }
 
-            /* Icon */
-            .pain-thought__icon {
-                width: 44px;
-                height: 44px;
-                border-radius: 12px;
-                background: linear-gradient(135deg, #FEE2E2, #FECACA);
+            /* ═══ PHONE FRAME ═══ */
+            .wa-device__frame {
+                width: 340px;
+                background: #000;
+                border-radius: 44px;
+                padding: 6px;
+                position: relative;
+                box-shadow:
+                    0 0 0 1px rgba(255,255,255,0.1),
+                    0 30px 80px rgba(0,0,0,0.3),
+                    0 10px 30px rgba(0,0,0,0.15),
+                    inset 0 0 0 1px rgba(255,255,255,0.05);
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+            }
+            .wa-device:hover .wa-device__frame {
+                transform: translateY(-6px) scale(1.01);
+                box-shadow:
+                    0 0 0 1px rgba(255,255,255,0.15),
+                    0 40px 100px rgba(0,0,0,0.35),
+                    0 15px 40px rgba(0,0,0,0.2),
+                    inset 0 0 0 1px rgba(255,255,255,0.08);
+            }
+
+            /* ═══ STATUS BAR ═══ */
+            .wa-statusbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 24px 4px;
+                background: #1F2C34;
+                border-radius: 38px 38px 0 0;
+            }
+            .wa-statusbar span {
+                font-size: 12px;
+                font-weight: 700;
+                color: #E9EDEF;
+            }
+            .wa-statusbar__right {
+                display: flex;
+                gap: 6px;
+                font-size: 11px;
+                color: #E9EDEF;
+            }
+
+            /* ═══ WA HEADER ═══ */
+            .wa-header {
                 display: flex;
                 align-items: center;
-                justify-content: center;
-                flex-shrink: 0;
-                position: relative;
-                border: none;
+                gap: 10px;
+                padding: 6px 12px 10px;
+                background: #1F2C34;
             }
-            .pain-thought__icon i {
-                font-size: 17px;
-                color: #DC2626;
+            .wa-header__back {
+                color: #00A884;
+                font-size: 16px;
             }
-
-            /* Pulse ring around icon */
-            .pain-thought__pulse {
-                position: absolute;
-                top: 22px;
-                left: 22px;
-                width: 44px;
-                height: 44px;
-                border-radius: 12px;
-                border: 1px solid rgba(220,38,38,0.3);
-                opacity: 0;
-            }
-            .pain-visible .pain-thought__pulse {
-                animation: pain-icon-ring 2s 0.6s ease-out infinite;
-            }
-            @keyframes pain-icon-ring {
-                0% { transform: scale(1); opacity: 0.5; }
-                100% { transform: scale(1.6); opacity: 0; }
-            }
-
-            /* Bubble */
-            .pain-thought__bubble p {
-                font-size: 15px;
-                color: #3D4450;
-                line-height: 1.6;
-                font-style: italic;
-                margin: 0;
-            }
-
-            /* Typing indicator (shows before text, then hides) */
-            .pain-thought__typing {
-                display: flex;
-                gap: 4px;
-                padding: 4px 0;
-                position: absolute;
-                top: 22px;
-                left: 80px;
-            }
-            .pain-thought__typing span {
-                width: 6px;
-                height: 6px;
-                background: rgba(220,38,38,0.35);
-                border-radius: 50%;
-                animation: pain-typing-dot 1s infinite;
-            }
-            .pain-thought__typing span:nth-child(2) { animation-delay: 0.2s; }
-            .pain-thought__typing span:nth-child(3) { animation-delay: 0.4s; }
-            @keyframes pain-typing-dot {
-                0%, 100% { opacity: 0.3; transform: scale(0.8); }
-                50% { opacity: 1; transform: scale(1); }
-            }
-            /* Hide typing once text is shown */
-            .pain-thought.pain-typed .pain-thought__typing {
-                display: none;
-            }
-            .pain-thought__bubble p {
-                opacity: 0;
-            }
-            .pain-thought.pain-typed .pain-thought__bubble p {
-                opacity: 1;
-                animation: pain-text-reveal 0.4s ease;
-            }
-            @keyframes pain-text-reveal {
-                from { opacity: 0; filter: blur(4px); }
-                to { opacity: 1; filter: blur(0); }
-            }
-
-            /* ═══ Orbit Answer ═══ */
-            .pain-answer {
-                max-width: 600px;
-                margin: 48px auto 0;
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            .pain-answer.pain-answer-visible {
-                animation: pain-answer-in 0.8s 0.3s forwards;
-            }
-            @keyframes pain-answer-in {
-                0% { opacity: 0; transform: translateY(20px); }
-                100% { opacity: 1; transform: translateY(0); }
-            }
-            .pain-answer__line {
-                width: 2px;
-                height: 40px;
-                background: linear-gradient(180deg, rgba(220,38,38,0.15), rgba(255,186,26,0.4));
-                margin: 0 auto 0;
-                border-radius: 2px;
-            }
-            .pain-answer__card {
-                display: flex;
-                align-items: flex-start;
-                gap: 16px;
-                background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
-                border: 1px solid rgba(255,186,26,0.25);
-                border-radius: 20px;
-                padding: 24px;
-                margin-top: 0;
-                position: relative;
-                overflow: hidden;
-                box-shadow: 0 4px 20px rgba(255,186,26,0.1);
-            }
-            .pain-answer__card::before {
-                content: '';
-                position: absolute;
-                top: -1px;
-                left: 20%;
-                right: 20%;
-                height: 2px;
-                background: linear-gradient(90deg, transparent, #ffba1a, transparent);
-            }
-            .pain-answer__avatar {
+            .wa-header__contact {
                 position: relative;
                 flex-shrink: 0;
             }
-            .pain-answer__avatar img {
-                width: 48px;
-                height: 48px;
+            .wa-header__avatar {
+                width: 36px;
+                height: 36px;
                 border-radius: 50%;
-                border: 2px solid #ffba1a;
+                object-fit: cover;
             }
-            .pain-answer__status {
+            .wa-header__online {
                 position: absolute;
                 bottom: 0;
                 right: 0;
-                width: 12px;
-                height: 12px;
-                background: #22C55E;
+                width: 10px;
+                height: 10px;
+                background: #00A884;
                 border-radius: 50%;
-                border: 2px solid #FFFBEB;
-                animation: rfm-live-blink 1.5s ease-in-out infinite;
+                border: 2px solid #1F2C34;
             }
-            .pain-answer__name {
+            .wa-header__info {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+            .wa-header__name {
+                font-size: 15px;
+                font-weight: 600;
+                color: #E9EDEF;
+                line-height: 1.2;
+            }
+            .wa-header__status {
                 font-size: 12px;
-                font-weight: 700;
-                color: #B8860B;
-                display: block;
-                margin-bottom: 6px;
+                color: #00A884;
+                font-weight: 500;
             }
-            .pain-answer__content p {
-                font-size: 16px;
-                color: #3D4450;
-                line-height: 1.6;
-                font-style: italic;
-                margin: 0;
-            }
-            .pain-answer__cta {
-                text-align: center;
-                margin-top: 32px;
+            .wa-header__actions {
+                display: flex;
+                gap: 20px;
+                color: #8696A0;
+                font-size: 17px;
             }
 
-            /* Responsive */
-            @media (max-width: 768px) {
-                .pain-thoughts { grid-template-columns: 1fr; max-width: 480px; }
-                .pain-cinema { padding: 80px 0 60px; }
+            /* ═══ CHAT BODY ═══ */
+            .wa-chat {
+                flex: 1;
+                background: #0B141A;
+                background-image:
+                    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cdefs%3E%3Cpattern id='p' width='40' height='40' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='10' cy='10' r='1' fill='rgba(255,255,255,0.015)'/%3E%3Ccircle cx='30' cy='30' r='0.8' fill='rgba(255,255,255,0.01)'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='200' height='200' fill='url(%23p)'/%3E%3C/svg%3E");
+                padding: 10px 10px 6px;
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+                min-height: 420px;
+                overflow: hidden;
             }
-            @media (max-width: 480px) {
-                .pain-thought { padding: 16px; gap: 12px; }
-                .pain-thought__icon { width: 38px; height: 38px; border-radius: 10px; }
-                .pain-thought__icon i { font-size: 14px; }
-                .pain-thought__bubble p { font-size: 14px; }
-                .pain-thought__typing { left: 66px; }
-                .pain-thought__pulse { width: 38px; height: 38px; border-radius: 10px; top: 16px; left: 16px; }
+
+            /* Date pill */
+            .wa-chat__date {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+            .wa-chat__date span {
+                display: inline-block;
+                background: rgba(29,43,54,0.9);
+                color: rgba(134,150,160,0.85);
+                font-size: 11px;
+                font-weight: 600;
+                padding: 5px 16px;
+                border-radius: 8px;
+                letter-spacing: 0.3px;
+                text-transform: uppercase;
+            }
+
+            /* ═══ MESSAGE ROW (avatar + bubble) ═══ */
+            .wa-row {
+                display: flex;
+                align-items: flex-end;
+                gap: 6px;
+                margin-bottom: 4px;
+            }
+            .wa-row--right { justify-content: flex-end; }
+            .wa-row--left { justify-content: flex-start; }
+            .wa-row__avatar {
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                object-fit: cover;
+                flex-shrink: 0;
+                margin-bottom: 2px;
+            }
+
+            /* Hidden / visible animation */
+            .wa-row--hidden {
+                opacity: 0;
+                transform: translateY(16px) scale(0.92);
+            }
+            .wa-row--visible {
+                animation: wa-msg-pop 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+            @keyframes wa-msg-pop {
+                0% { opacity: 0; transform: translateY(16px) scale(0.92); }
+                100% { opacity: 1; transform: translateY(0) scale(1); }
+            }
+
+            /* ═══ BUBBLES ═══ */
+            .wa-bubble {
+                max-width: 240px;
+                padding: 8px 10px 3px;
+                position: relative;
+            }
+            .wa-bubble p {
+                font-size: 13.5px;
+                line-height: 1.5;
+                margin: 0 0 1px;
+            }
+            .wa-bubble__sender {
+                display: block;
+                font-size: 11.5px;
+                font-weight: 700;
+                margin-bottom: 3px;
+                color: #ffba1a;
+            }
+            .wa-bubble__meta {
+                font-size: 10px;
+                display: flex;
+                align-items: center;
+                gap: 3px;
+                justify-content: flex-end;
+                padding-top: 1px;
+                padding-bottom: 2px;
+            }
+
+            /* Green bubble (sent) */
+            .wa-bubble--green {
+                background: #005C4B;
+                border-radius: 10px 2px 10px 10px;
+            }
+            .wa-bubble--green p { color: #E9EDEF; }
+            .wa-bubble--green .wa-bubble__meta { color: rgba(255,255,255,0.45); }
+            .wa-bubble--green .wa-bubble__meta i { color: #53BDEB; font-size: 14px; }
+
+            /* Dark bubble (received) */
+            .wa-bubble--dark {
+                background: #1F2C34;
+                border-radius: 2px 10px 10px 10px;
+            }
+            .wa-bubble--dark p { color: #E9EDEF; }
+            .wa-bubble--dark strong { color: #ffba1a; font-weight: 700; }
+            .wa-bubble--dark .wa-bubble__meta { color: rgba(255,255,255,0.35); }
+
+            /* ═══ TYPING INDICATOR ═══ */
+            .wa-typing {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                padding: 4px 0;
+            }
+            .wa-typing--hidden { display: none !important; }
+            .wa-typing--visible { display: flex !important; }
+            .wa-typing {
+                animation: wa-msg-pop 0.3s ease forwards;
+            }
+            .wa-typing__pic {
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+            .wa-typing__bubble {
+                display: flex;
+                gap: 4px;
+                background: #1F2C34;
+                padding: 12px 16px;
+                border-radius: 2px 12px 12px 12px;
+            }
+            .wa-typing__bubble span {
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                background: #8696A0;
+                animation: wa-dot-bounce 1.4s ease-in-out infinite;
+            }
+            .wa-typing__bubble span:nth-child(2) { animation-delay: 0.15s; }
+            .wa-typing__bubble span:nth-child(3) { animation-delay: 0.3s; }
+            @keyframes wa-dot-bounce {
+                0%, 60%, 100% { transform: translateY(0); opacity: 0.35; }
+                30% { transform: translateY(-6px); opacity: 1; }
+            }
+
+            /* ═══ INPUT BAR ═══ */
+            .wa-input {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 6px 8px 10px;
+                background: #0B141A;
+                border-radius: 0 0 38px 38px;
+            }
+            .wa-input__field {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                background: #2A3942;
+                border-radius: 24px;
+                padding: 10px 14px;
+            }
+            .wa-input__field i { color: #8696A0; font-size: 18px; }
+            .wa-input__field span { flex: 1; font-size: 14px; color: #8696A0; }
+            .wa-input__mic {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: #00A884;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                font-size: 16px;
+                flex-shrink: 0;
+            }
+
+            /* ═══ DOTS (mobile) ═══ */
+            .wa-dots {
+                display: none;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 32px;
+            }
+            .wa-dot {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                border: none;
+                background: #D1D5DB;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                padding: 0;
+            }
+            .wa-dot--active {
+                background: #ffba1a;
+                transform: scale(1.4);
+                box-shadow: 0 0 12px rgba(255,186,26,0.4);
+            }
+
+            /* ═══ RESPONSIVE ═══ */
+            @media (max-width: 1100px) {
+                .wa-phones {
+                    justify-content: flex-start;
+                    overflow: hidden;
+                    padding: 0 calc(50% - 170px);
+                }
+                .wa-dots { display: flex; }
+            }
+            @media (max-width: 768px) {
+                .wa-section { padding: 80px 0 60px; }
+                .wa-device__frame { width: 310px; }
+                .wa-chat { min-height: 380px; }
+                .wa-phones { padding: 0 calc(50% - 155px); gap: 32px; }
+            }
+            @media (max-width: 380px) {
+                .wa-device__frame { width: 290px; }
+                .wa-phones { padding: 0 calc(50% - 145px); }
             }
         </style>
 
         <script>
         (function() {
-            var container = document.getElementById('painThoughts');
-            var answer = document.getElementById('painAnswer');
+            var container = document.getElementById('waPhones');
             if (!container) return;
-            var thoughts = container.querySelectorAll('.pain-thought');
-            var activated = false;
+            var devices = container.querySelectorAll('.wa-device');
+            var dots = document.querySelectorAll('.wa-dot');
+            var current = 0;
+            var animated = [false, false, false];
 
+            // ═══ REAL-TIME CLOCK ═══
+            function pad(n) { return n < 10 ? '0' + n : '' + n; }
+            function fmt(h, m) { return pad(h) + ':' + pad(m); }
+
+            function updateTimes() {
+                var now = new Date();
+                var nowStr = fmt(now.getHours(), now.getMinutes());
+
+                container.querySelectorAll('.wa-statusbar > span').forEach(function(el) {
+                    el.textContent = nowStr;
+                });
+
+                var offsets = [{ base: -5 }, { base: -8 }, { base: -11 }];
+                devices.forEach(function(dev, idx) {
+                    var minute = offsets[idx].base;
+                    dev.querySelectorAll('.wa-row').forEach(function(row) {
+                        var d = new Date(now.getTime() + minute * 60000);
+                        var ts = fmt(d.getHours(), d.getMinutes());
+                        var meta = row.querySelector('.wa-bubble__meta');
+                        if (meta) {
+                            var check = meta.querySelector('i');
+                            meta.textContent = ts + ' ';
+                            if (check) meta.appendChild(check);
+                        }
+                        minute += 1;
+                    });
+                });
+            }
+
+            updateTimes();
+            setInterval(updateTimes, 30000);
+
+            // ═══ CHAT ANIMATION — typing before EVERY message ═══
+            function animateChat(idx) {
+                if (animated[idx]) return;
+                animated[idx] = true;
+                var device = devices[idx];
+                var chat = device.querySelector('.wa-chat');
+                var rows = Array.prototype.slice.call(device.querySelectorAll('.wa-row'));
+
+                // Header status
+                var statusEl = device.querySelector('.wa-header__status');
+                // Client avatar from header
+                var clientAvatar = device.querySelector('.wa-header__avatar');
+                var clientSrc = clientAvatar ? clientAvatar.src : '';
+
+                function clearTyping() {
+                    chat.querySelectorAll('.wa-typing').forEach(function(el) { el.remove(); });
+                    if (statusEl) statusEl.textContent = 'online';
+                }
+
+                // side = 'left' (Olívia) or 'right' (cliente)
+                function addTyping(side) {
+                    clearTyping();
+                    var el = document.createElement('div');
+                    el.className = 'wa-typing';
+                    if (side === 'left') {
+                        el.style.alignSelf = 'flex-start';
+                        el.innerHTML = '<img src="/images/olivia.png" alt="" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
+                        if (statusEl) statusEl.textContent = 'digitando...';
+                    } else {
+                        el.style.alignSelf = 'flex-end';
+                        el.style.flexDirection = 'row-reverse';
+                        el.innerHTML = '<img src="' + clientSrc + '" alt="" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
+                        if (statusEl) statusEl.textContent = 'online';
+                    }
+                    chat.appendChild(el);
+                    chat.scrollTop = chat.scrollHeight;
+                }
+
+                // Sequência: digitando (lado certo) → msg, digitando → msg, ...
+                var t = 400;
+                rows.forEach(function(row) {
+                    var isOlivia = row.classList.contains('wa-row--left');
+                    var side = isOlivia ? 'left' : 'right';
+                    var showAt = t;
+                    var revealAt = t + 1500;
+
+                    setTimeout(function() { addTyping(side); }, showAt);
+                    setTimeout(function() {
+                        clearTyping();
+                        row.classList.remove('wa-row--hidden');
+                        row.classList.add('wa-row--visible');
+                        chat.scrollTop = chat.scrollHeight;
+                    }, revealAt);
+
+                    t = revealAt + 800;
+                });
+            }
+
+            function goTo(idx) {
+                if (idx < 0 || idx >= devices.length) return;
+                current = idx;
+                var deviceW = devices[0].offsetWidth + 40;
+                container.style.transform = 'translateX(-' + (idx * deviceW) + 'px)';
+                dots.forEach(function(d, i) {
+                    d.classList.toggle('wa-dot--active', i === idx);
+                });
+                animateChat(idx);
+            }
+
+            dots.forEach(function(d) {
+                d.addEventListener('click', function() { goTo(parseInt(d.dataset.idx)); });
+            });
+
+            // Swipe
+            var sx = 0;
+            container.addEventListener('touchstart', function(e) { sx = e.touches[0].clientX; }, { passive: true });
+            container.addEventListener('touchend', function(e) {
+                var diff = sx - e.changedTouches[0].clientX;
+                if (Math.abs(diff) > 50) {
+                    diff > 0 ? goTo(current + 1) : goTo(current - 1);
+                }
+            }, { passive: true });
+
+            // Intersection observer
             var obs = new IntersectionObserver(function(entries) {
                 entries.forEach(function(e) {
-                    if (e.isIntersecting && !activated) {
-                        activated = true;
+                    if (e.isIntersecting) {
                         obs.unobserve(e.target);
-
-                        thoughts.forEach(function(t, i) {
-                            // First show with typing dots
-                            setTimeout(function() {
-                                t.classList.add('pain-visible');
-                            }, i * 500);
-                            // Then reveal text (typing → text)
-                            setTimeout(function() {
-                                t.classList.add('pain-typed');
-                            }, i * 500 + 600);
-                        });
-
-                        // Show Olívia answer after all thoughts
-                        setTimeout(function() {
-                            if (answer) answer.classList.add('pain-answer-visible');
-                        }, thoughts.length * 500 + 800);
+                        if (window.innerWidth > 1100) {
+                            animateChat(0);
+                            setTimeout(function() { animateChat(1); }, 800);
+                            setTimeout(function() { animateChat(2); }, 1600);
+                        } else {
+                            animateChat(0);
+                        }
                     }
                 });
-            }, { threshold: 0.2 });
+            }, { threshold: 0.12 });
             obs.observe(container);
         })();
         </script>
@@ -700,53 +1278,87 @@ export const pageHTML = `
     <section class="reframe-section" id="reframe">
         <div class="container">
             <div class="section-header" data-reveal>
-                <span class="section-badge">E se o problema não fosse falta de método?</span>
-                <h2>Por que software sozinho <span class="highlight">não resolve</span></h2>
-                <p>Você já tentou. ERP, planilha, Trello, consultoria. E continua apagando incêndio.</p>
+                <span class="section-badge" data-i18n="reframe.badge">Por que software sozinho não resolve?</span>
+                <h2 data-i18n="reframe.title">Software não é ruim. <span class="highlight">O problema é outro.</span></h2>
+                <p data-i18n="reframe.subtitle">Mesmo depois de parametrizar, o software não entrega tudo que você precisa. Porque ele depende de você preencher tudo — e ninguém preenche.</p>
             </div>
 
             <div class="reframe-journey">
-                <!-- FASE 1 - O FRACASSO -->
-                <div class="reframe-phase reframe-phase--fail" data-reveal>
-                    <div class="reframe-phase__tag reframe-phase__tag--fail">
-                        <i class="fas fa-circle-xmark"></i> O que você já tentou
-                    </div>
-                    <div class="reframe-phase__steps">
-                        <div class="reframe-step reframe-step--fail">
-                            <div class="reframe-step__icon"><i class="fas fa-laptop-code"></i></div>
-                            <div class="reframe-step__content">
-                                <h4>Comprou software</h4>
-                                <p>Precisa alimentar manualmente. Ninguém alimenta. Vira shelfware.</p>
+                <!-- FASE 1 - RODA DO CICLO -->
+                <div class="roda" data-reveal>
+                    <div class="roda__scene">
+                        <div class="roda__wheel">
+                            <svg class="roda__ring" viewBox="0 0 500 500">
+                                <defs>
+                                    <linearGradient id="rodaGrad" gradientTransform="rotate(90)">
+                                        <stop offset="0%" stop-color="rgba(255,186,26,0.25)"/>
+                                        <stop offset="25%" stop-color="rgba(255,186,26,0.06)"/>
+                                        <stop offset="50%" stop-color="rgba(255,186,26,0.25)"/>
+                                        <stop offset="75%" stop-color="rgba(255,186,26,0.06)"/>
+                                        <stop offset="100%" stop-color="rgba(255,186,26,0.25)"/>
+                                    </linearGradient>
+                                    <filter id="rodaGlow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                                </defs>
+                                <circle cx="250" cy="250" r="200" fill="none" stroke="rgba(255,186,26,0.04)" stroke-width="40"/>
+                                <circle cx="250" cy="250" r="200" fill="none" stroke="url(#rodaGrad)" stroke-width="2"/>
+                                <circle cx="250" cy="250" r="200" fill="none" stroke="rgba(255,186,26,0.1)" stroke-width="1" stroke-dasharray="6 12" stroke-linecap="round"/>
+                                <g fill="#ffba1a" opacity="0.5">
+                                    <polygon points="450,244 438,236 438,252" transform="rotate(15 250 250)"/>
+                                    <polygon points="450,244 438,236 438,252" transform="rotate(135 250 250)"/>
+                                    <polygon points="450,244 438,236 438,252" transform="rotate(255 250 250)"/>
+                                </g>
+                                <circle r="5" fill="#ffba1a" filter="url(#rodaGlow)">
+                                    <animateMotion dur="4s" repeatCount="indefinite"><mpath href="#rodaOrbit"/></animateMotion>
+                                </circle>
+                                <circle r="12" fill="rgba(255,186,26,0.12)">
+                                    <animateMotion dur="4s" repeatCount="indefinite"><mpath href="#rodaOrbit"/></animateMotion>
+                                </circle>
+                                <circle r="3" fill="rgba(255,186,26,0.5)">
+                                    <animateMotion dur="4s" begin="-2s" repeatCount="indefinite"><mpath href="#rodaOrbit"/></animateMotion>
+                                </circle>
+                                <path id="rodaOrbit" d="M250 50 A200 200 0 1 1 249.99 50" fill="none"/>
+                            </svg>
+
+                            <div class="roda__spinner">
+                                <div class="roda__arm roda__arm--1">
+                                    <div class="roda__card">
+                                        <span class="roda__card-num">01</span>
+                                        <div class="roda__card-icon"><i class="fas fa-laptop-code"></i></div>
+                                        <strong data-i18n="reframe.step1.title">Comprou software</strong>
+                                        <p data-i18n="reframe.step1.desc">Precisa alimentar manualmente. Ninguém alimenta. Vira shelfware.</p>
+                                    </div>
+                                </div>
+                                <div class="roda__arm roda__arm--2">
+                                    <div class="roda__card">
+                                        <span class="roda__card-num">02</span>
+                                        <div class="roda__card-icon"><i class="fas fa-clipboard-list"></i></div>
+                                        <strong data-i18n="reframe.step2.title">Investiu meses em padronização</strong>
+                                        <p data-i18n="reframe.step2.desc">Criou processos, manuais, fluxogramas. Ninguém seguiu. Virou documento morto.</p>
+                                    </div>
+                                </div>
+                                <div class="roda__arm roda__arm--3">
+                                    <div class="roda__card">
+                                        <span class="roda__card-num">03</span>
+                                        <div class="roda__card-icon"><i class="fas fa-table"></i></div>
+                                        <strong data-i18n="reframe.step3.title">Teve que voltar a usar planilhas</strong>
+                                        <p data-i18n="reframe.step3.desc">O software não entregou tudo. A planilha voltou. E ninguém confia nos dados.</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="reframe-step__status"><i class="fas fa-times-circle"></i></div>
-                        </div>
-                        <div class="reframe-step__arrow reframe-step__arrow--fail"><i class="fas fa-arrow-down"></i></div>
-                        <div class="reframe-step reframe-step--fail">
-                            <div class="reframe-step__icon"><i class="fas fa-user-tie"></i></div>
-                            <div class="reframe-step__content">
-                                <h4>Contratou consultoria</h4>
-                                <p>Consultor vai embora. Conhecimento sai pela porta. Tudo volta ao caos.</p>
+
+                            <div class="roda__hub">
+                                <div class="roda__hub-outer">
+                                    <div class="roda__hub-inner">
+                                        <i class="fas fa-infinity"></i>
+                                    </div>
+                                </div>
+                                <strong data-i18n="reframe.verdict.title">O ciclo se repete</strong>
+                                <span data-i18n="reframe.verdict.desc">Mais uma ferramenta abandonada.<br>Mais dinheiro desperdiçado.</span>
                             </div>
-                            <div class="reframe-step__status"><i class="fas fa-times-circle"></i></div>
-                        </div>
-                        <div class="reframe-step__arrow reframe-step__arrow--fail"><i class="fas fa-arrow-down"></i></div>
-                        <div class="reframe-step reframe-step--fail">
-                            <div class="reframe-step__icon"><i class="fas fa-table"></i></div>
-                            <div class="reframe-step__content">
-                                <h4>Montou planilha</h4>
-                                <p>Fica obsoleta em 2 semanas. Não escala. Ninguém confia nos dados.</p>
-                            </div>
-                            <div class="reframe-step__status"><i class="fas fa-times-circle"></i></div>
-                        </div>
-                    </div>
-                    <div class="reframe-verdict reframe-verdict--fail">
-                        <div class="reframe-verdict__icon"><i class="fas fa-rotate-left"></i></div>
-                        <div>
-                            <strong>Resultado: o ciclo se repete.</strong>
-                            <p>Mais uma ferramenta abandonada. Mais dinheiro desperdiçado.</p>
                         </div>
                     </div>
                 </div>
+
 
                 <!-- TRANSIÇÃO -->
                 <div class="reframe-transition" data-reveal>
@@ -765,7 +1377,6 @@ export const pageHTML = `
                     </div>
                     <div class="reframe-phase__steps reframe-orbit-steps">
 
-                        <!-- CARD 1: 12 agentes trabalhando -->
                         <div class="reframe-orbit-card">
                             <div class="reframe-orbit-card__text">
                                 <h4>12 agentes de IA trabalham por você</h4>
@@ -788,7 +1399,6 @@ export const pageHTML = `
                                         <span style="--i:10"><i class="fas fa-handshake"></i></span>
                                         <span style="--i:11"><i class="fas fa-video"></i></span>
                                     </div>
-                                    <!-- Animated data lines -->
                                     <svg class="rfm-mini-hub__svg" viewBox="0 0 200 200">
                                         <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(255,186,26,0.1)" stroke-width="1" stroke-dasharray="3 3"/>
                                         <circle cx="100" cy="100" r="70" fill="none" stroke="rgba(255,186,26,0.3)" stroke-width="1.5" stroke-dasharray="20 200" class="rfm-orbit-trace"/>
@@ -799,7 +1409,6 @@ export const pageHTML = `
 
                         <div class="reframe-step__arrow reframe-step__arrow--win"><i class="fas fa-arrow-down"></i></div>
 
-                        <!-- CARD 2: Você valida -->
                         <div class="reframe-orbit-card">
                             <div class="reframe-orbit-card__text">
                                 <h4>Você valida e decide</h4>
@@ -836,11 +1445,10 @@ export const pageHTML = `
 
                         <div class="reframe-step__arrow reframe-step__arrow--win"><i class="fas fa-arrow-down"></i></div>
 
-                        <!-- CARD 3: 24/7 -->
                         <div class="reframe-orbit-card">
                             <div class="reframe-orbit-card__text">
                                 <h4>Funciona 24/7, mesmo sem você</h4>
-                                <p>Consultoria recorrente passiva. A operação não para quando o projeto acaba.</p>
+                                <p>A operação não para quando o projeto acaba. Os agentes continuam trabalhando 24/7.</p>
                             </div>
                             <div class="reframe-orbit-card__scene">
                                 <div class="rfm-clock">
@@ -848,7 +1456,6 @@ export const pageHTML = `
                                         <div class="rfm-clock__hand rfm-clock__hand--hour"></div>
                                         <div class="rfm-clock__hand rfm-clock__hand--min"></div>
                                         <div class="rfm-clock__dot"></div>
-                                        <!-- Hour markers -->
                                         <span class="rfm-clock__mark" style="--r:0deg"></span>
                                         <span class="rfm-clock__mark" style="--r:30deg"></span>
                                         <span class="rfm-clock__mark" style="--r:60deg"></span>
@@ -873,7 +1480,6 @@ export const pageHTML = `
 
                     </div>
 
-                    <!-- RESULTADO FINAL -->
                     <div class="reframe-verdict reframe-verdict--win reframe-verdict--animated">
                         <div class="rfm-result-scene">
                             <div class="rfm-rocket-launch">
@@ -882,8 +1488,6 @@ export const pageHTML = `
                                 <div class="rfm-rocket-trail"></div>
                             </div>
                             <div class="rfm-result-metrics">
-                                <div class="rfm-metric"><span class="rfm-metric__val">+47%</span><span class="rfm-metric__lbl">Produtividade</span></div>
-                                <div class="rfm-metric"><span class="rfm-metric__val">-60%</span><span class="rfm-metric__lbl">Retrabalho</span></div>
                                 <div class="rfm-metric"><span class="rfm-metric__val">ROI</span><span class="rfm-metric__lbl">Mês 1</span></div>
                             </div>
                         </div>
@@ -912,7 +1516,7 @@ export const pageHTML = `
                     </div>
                 </div>
                 <div style="background:linear-gradient(135deg,rgba(255,186,26,0.1),rgba(255,186,26,0.02));border:2px solid rgba(255,186,26,0.2);border-radius:14px;padding:32px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                    <img src="/images/olivia.png" alt="Olívia - Coordenadora Geral de IA do Orbit" style="width:200px;height:200px;border-radius:50%;object-fit:cover;border:4px solid #ffba1a;margin-bottom:24px;">
+                    <img src="/images/olivia.png" alt="Olívia - Coordenadora Geral de IA do Orbit" style="width:200px;height:200px;border-radius:50%;object-fit:cover;object-position:center 20%;border:4px solid #ffba1a;margin-bottom:24px;">
                     <h3 style="color:#fff;font-size:1.5rem;margin-bottom:8px;">Olívia</h3>
                     <p style="color:#ffba1a;font-size:0.95rem;margin-bottom:16px;">Coordenadora Geral de IA</p>
                     <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
@@ -1753,7 +2357,7 @@ export const pageHTML = `
                     <div class="hiw-cinema__card hiw-cinema__card--final">
                         <div class="hiw-cinema__text">
                             <h3>Operação ativada - para sempre</h3>
-                            <p>Consultoria recorrente passiva: os agentes trabalham 24 horas por dia, 7 dias por semana. A operação não para quando o projeto acaba.</p>
+                            <p>Os agentes trabalham 24 horas por dia, 7 dias por semana. A operação não para quando o projeto acaba.</p>
                         </div>
                         <div class="hiw-cinema__scene hiw-scene-launch">
                             <!-- Rocket -->
@@ -1777,11 +2381,6 @@ export const pageHTML = `
                             </div>
                             <!-- Results dashboard -->
                             <div class="hiw-results">
-                                <div class="hiw-result-card hiw-result-card--1">
-                                    <div class="hiw-result-card__icon"><i class="fas fa-chart-line"></i></div>
-                                    <div class="hiw-result-card__value">+47%</div>
-                                    <div class="hiw-result-card__label">Produtividade</div>
-                                </div>
                                 <div class="hiw-result-card hiw-result-card--2">
                                     <div class="hiw-result-card__icon"><i class="fas fa-clock"></i></div>
                                     <div class="hiw-result-card__value">24/7</div>
@@ -2730,7 +3329,7 @@ export const pageHTML = `
                     </div>
                     <div class="cost-total">
                         <span class="cost-total__label">A partir de</span>
-                        <span class="cost-total__value">R$ 997/mês</span>
+                        <span class="cost-total__value">R$ 1.200/mês</span>
                     </div>
                     <div class="cost-orbit-benefits">
                         <div class="cost-orbit-benefit"><i class="fas fa-star"></i> Coordenado pela Olívia (IA)</div>
@@ -2738,7 +3337,7 @@ export const pageHTML = `
                         <div class="cost-orbit-benefit"><i class="fas fa-star"></i> Operação imediata</div>
                     </div>
                     <div class="cost-cta">
-                        <a href="/pricing" class="btn btn-primary btn-lg" style="border-radius:50px;width:100%;">Ver planos completos</a>
+                        <a href="#contato-form" class="btn btn-primary btn-lg" style="border-radius:50px;width:100%;">Ver planos completos</a>
                     </div>
                 </div>
             </div>
@@ -2749,7 +3348,7 @@ export const pageHTML = `
                     <i class="fas fa-piggy-bank"></i>
                     <div class="cost-savings__text">
                         <strong>Economia de até 99% vs. time tradicional</strong>
-                        <span>R$ 997/mês vs. R$ 108-204k/mês em salários e consultorias</span>
+                        <span>R$ 1.200/mês vs. R$ 108-204k/mês em salários e consultorias</span>
                     </div>
                 </div>
             </div>
@@ -2758,7 +3357,7 @@ export const pageHTML = `
 
     <hr class="glow-divider">
 
-    <!-- ═══ SOLUÇÕES CAROUSEL ═══ -->
+    <!-- ═══ SOLUÇÕES CAROUSEL 3D ═══ -->
     <section class="solutions-carousel section--light" id="solucoes">
         <div class="container">
             <div class="solutions-carousel__header" data-reveal>
@@ -2766,116 +3365,100 @@ export const pageHTML = `
                 <p>Cada agente é um especialista. Trabalhando 24/7 para sua empresa.</p>
             </div>
 
-            <div class="carousel-wrapper">
-                <button class="carousel-arrow carousel-arrow--prev" aria-label="Anterior">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-
-                <div class="carousel-viewport">
-                    <div class="carousel-track">
-                        <a href="/agentes" class="carousel-card">
-                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-compass"></i></div>
-                            <div class="carousel-card__content">
-                                <div class="carousel-card__icon"><i class="fas fa-compass"></i></div>
-                                <h3>Estrategista</h3>
-                                <p>SWOT, BSC e planejamento estratégico</p>
-                            </div>
-                        </a>
-                        <a href="/agentes" class="carousel-card">
-                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-diagram-project"></i></div>
-                            <div class="carousel-card__content">
-                                <div class="carousel-card__icon"><i class="fas fa-diagram-project"></i></div>
-                                <h3>Processos</h3>
-                                <p>Mapeamento, playbooks e automação</p>
-                            </div>
-                        </a>
-                        <a href="/agentes" class="carousel-card">
-                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-user-group"></i></div>
-                            <div class="carousel-card__content">
-                                <div class="carousel-card__icon"><i class="fas fa-user-group"></i></div>
-                                <h3>Pessoas</h3>
-                                <p>Cargos, desempenho e PDIs</p>
-                            </div>
-                        </a>
-                        <a href="/agentes" class="carousel-card">
-                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-graduation-cap"></i></div>
-                            <div class="carousel-card__content">
-                                <div class="carousel-card__icon"><i class="fas fa-graduation-cap"></i></div>
-                                <h3>Treinamento</h3>
-                                <p>Microlearning e trilhas via WhatsApp</p>
-                            </div>
-                        </a>
-                        <a href="/agentes" class="carousel-card">
-                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-chart-column"></i></div>
-                            <div class="carousel-card__content">
-                                <div class="carousel-card__icon"><i class="fas fa-chart-column"></i></div>
-                                <h3>Indicadores</h3>
-                                <p>KPIs em tempo real e causa raiz</p>
-                            </div>
-                        </a>
-                        <a href="/agentes" class="carousel-card">
-                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-magnifying-glass-chart"></i></div>
-                            <div class="carousel-card__content">
-                                <div class="carousel-card__icon"><i class="fas fa-magnifying-glass-chart"></i></div>
-                                <h3>Pesquisa</h3>
-                                <p>Clima, formulários e insights</p>
-                            </div>
-                        </a>
-                        <a href="/agentes" class="carousel-card">
-                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-shield-halved"></i></div>
-                            <div class="carousel-card__content">
-                                <div class="carousel-card__icon"><i class="fas fa-shield-halved"></i></div>
-                                <h3>Riscos</h3>
-                                <p>Mitigação e prevenção contínua</p>
-                            </div>
-                        </a>
-                        <a href="/agentes" class="carousel-card">
-                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-lightbulb"></i></div>
-                            <div class="carousel-card__content">
-                                <div class="carousel-card__icon"><i class="fas fa-lightbulb"></i></div>
-                                <h3>Oportunidades</h3>
-                                <p>Mercado, parcerias e expansão</p>
-                            </div>
-                        </a>
-                        <a href="/agentes" class="carousel-card">
-                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-triangle-exclamation"></i></div>
-                            <div class="carousel-card__content">
-                                <div class="carousel-card__icon"><i class="fas fa-triangle-exclamation"></i></div>
-                                <h3>Problemas</h3>
-                                <p>Não-conformidades e PDCA</p>
-                            </div>
-                        </a>
-                        <a href="/agentes" class="carousel-card">
-                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-file-lines"></i></div>
-                            <div class="carousel-card__content">
-                                <div class="carousel-card__icon"><i class="fas fa-file-lines"></i></div>
-                                <h3>Documentos</h3>
-                                <p>Padronização e controle</p>
-                            </div>
-                        </a>
-                        <a href="/agentes" class="carousel-card">
-                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-handshake"></i></div>
-                            <div class="carousel-card__content">
-                                <div class="carousel-card__icon"><i class="fas fa-handshake"></i></div>
-                                <h3>Vendas</h3>
-                                <p>CRM, funil e coaching comercial</p>
-                            </div>
-                        </a>
-                        <a href="/agentes" class="carousel-card">
-                            <div class="carousel-card__image" style="display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#ffba1a;"><i class="fas fa-video"></i></div>
-                            <div class="carousel-card__content">
-                                <div class="carousel-card__icon"><i class="fas fa-video"></i></div>
-                                <h3>Reuniões</h3>
-                                <p>Transcrição e planos de ação</p>
-                            </div>
-                        </a>
-                    </div>
+            <div class="gallery3d" id="gallery3d">
+                <div class="gallery3d__track" id="gallery3d-track">
+                    <div class="gallery3d__card"><a href="/agentes/estrategista"><img src="/images/agente-estrategista.png" alt="Estrategista"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-chess-king"></i></div><h3>Estrategista</h3><p>SWOT, BSC e planejamento estratégico</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/processos"><img src="/images/agente-processos.jpg" alt="Processos"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-sitemap"></i></div><h3>Processos</h3><p>Mapeamento, playbooks e automação</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/pessoas"><img src="/images/agente-pessoas.png" alt="Pessoas"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-users"></i></div><h3>Pessoas</h3><p>Cargos, desempenho e PDIs</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/treinamento"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Treinamento" alt="Treinamento"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-graduation-cap"></i></div><h3>Treinamento</h3><p>Microlearning e trilhas via WhatsApp</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/indicadores"><img src="/images/agente-indicadores.jpg" alt="Indicadores"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-chart-line"></i></div><h3>Indicadores</h3><p>KPIs em tempo real e causa raiz</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/pesquisa"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Pesquisa" alt="Pesquisa"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-magnifying-glass-chart"></i></div><h3>Pesquisa</h3><p>Clima, formulários e insights</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/riscos"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Riscos" alt="Riscos"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-shield-halved"></i></div><h3>Riscos</h3><p>Mitigação e prevenção contínua</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/oportunidades"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Oportunidades" alt="Oportunidades"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-lightbulb"></i></div><h3>Oportunidades</h3><p>Mercado, parcerias e expansão</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/problemas"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Problemas" alt="Problemas"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-triangle-exclamation"></i></div><h3>Problemas</h3><p>Não-conformidades e PDCA</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/documentos"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Documentos" alt="Documentos"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-file-lines"></i></div><h3>Documentos</h3><p>Padronização e controle</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/vendas"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Vendas" alt="Vendas"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-handshake"></i></div><h3>Vendas</h3><p>CRM, funil e coaching comercial</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/reunioes"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Reuniões" alt="Reuniões"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-video"></i></div><h3>Reuniões</h3><p>Transcrição e planos de ação</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
                 </div>
-
-                <button class="carousel-arrow carousel-arrow--next" aria-label="Próximo">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
             </div>
+
+            <script>
+            (function(){
+                var track = document.getElementById('gallery3d-track');
+                if (!track) return;
+                var cards = track.querySelectorAll('.gallery3d__card');
+                var n = cards.length;
+                var step = 360 / n;
+                var rotation = 0;
+                var isDragging = false;
+                var dragStartX = 0;
+                var rotStart = 0;
+                var dragDelta = 0;
+
+                function getRadius() {
+                    var w = window.innerWidth;
+                    if (w < 480) return 380;
+                    if (w < 768) return 480;
+                    return 600;
+                }
+
+                function updateCards() {
+                    var R = getRadius();
+                    var totalRot = ((rotation % 360) + 360) % 360;
+
+                    for (var i = 0; i < n; i++) {
+                        var itemAngle = i * step;
+
+                        // Position: each card rotates + pushes out
+                        cards[i].style.transform = 'rotateY(' + itemAngle + 'deg) translateZ(' + R + 'px)';
+
+                        // Opacity: front cards = bright, back cards = dim
+                        var relAngle = ((itemAngle + totalRot + 360) % 360);
+                        var normAngle = relAngle > 180 ? 360 - relAngle : relAngle;
+                        // Front cards (0-60°) = full opacity, sides fade, back = dim
+                        var opacity = normAngle < 60 ? 1 : Math.max(0.25, 1 - ((normAngle - 60) / 120));
+                        cards[i].style.opacity = opacity;
+                    }
+
+                    // Rotate the whole track
+                    track.style.transform = 'rotateY(' + rotation + 'deg)';
+                }
+
+                // Auto-rotate
+                function animate() {
+                    if (!isDragging) {
+                        rotation += 0.08;
+                    }
+                    updateCards();
+                    requestAnimationFrame(animate);
+                }
+
+                // Drag
+                var gallery = document.getElementById('gallery3d');
+                gallery.addEventListener('pointerdown', function(e) {
+                    isDragging = true;
+                    dragStartX = e.clientX;
+                    rotStart = rotation;
+                    dragDelta = 0;
+                    e.preventDefault();
+                });
+                window.addEventListener('pointermove', function(e) {
+                    if (!isDragging) return;
+                    dragDelta = e.clientX - dragStartX;
+                    rotation = rotStart + dragDelta * 0.25;
+                });
+                window.addEventListener('pointerup', function() {
+                    isDragging = false;
+                });
+
+                // Prevent click after drag
+                track.addEventListener('click', function(e) {
+                    if (Math.abs(dragDelta) > 8) e.preventDefault();
+                }, true);
+
+                animate();
+            })();
+            </script>
         </div>
     </section>
 
@@ -2894,7 +3477,7 @@ export const pageHTML = `
                     <span class="stats-banner__label">Empresas atendidas</span>
                 </div>
                 <div class="stats-banner__item">
-                    <span class="stats-banner__number">2.206</span>
+                    <span class="stats-banner__number">+2.900</span>
                     <span class="stats-banner__label">Empresas no Orbit</span>
                 </div>
                 <div class="stats-banner__item">
@@ -2921,84 +3504,101 @@ export const pageHTML = `
 
             <!-- Toggle mensal/anual -->
             <div class="price-v2__toggle" data-reveal>
-                <span class="price-v2__toggle-label price-v2__toggle-label--active" data-billing="monthly">Mensal</span>
-                <button class="price-v2__switch" id="pricingSwitch" aria-label="Alternar para anual">
+                <span class="price-v2__toggle-label" data-billing="annual">Anual</span>
+                <button class="price-v2__switch" id="pricingSwitch" aria-label="Alternar para mensal">
                     <span class="price-v2__switch-thumb"></span>
                 </button>
-                <span class="price-v2__toggle-label" data-billing="annual">Anual</span>
+                <span class="price-v2__toggle-label price-v2__toggle-label--active" data-billing="monthly">Mensal</span>
                 <span class="price-v2__save-badge">-20%</span>
             </div>
 
             <div class="price-v2__grid" data-reveal-stagger>
-                <!-- Starter -->
-                <div class="price-v2__card">
+                <!-- Smart -->
+                <div class="price-v2__card" data-plan-monthly="1.200" data-plan-annual="11.520" data-plan-annual-full="14.400" data-plan-annual-eq="960">
+                    <div class="price-v2__off-badge" style="display:none;">20% OFF</div>
                     <div class="price-v2__card-header">
                         <div class="price-v2__icon"><i class="fas fa-seedling"></i></div>
-                        <div class="price-v2__name">Starter</div>
-                        <div class="price-v2__desc">Ideal para começar</div>
+                        <div class="price-v2__name">Smart</div>
+                        <div class="price-v2__desc">Ideal para pequenas empresas que querem estruturar processos e criar a cultura de gestão com base em dados</div>
                     </div>
                     <div class="price-v2__price-wrap">
-                        <span class="price-v2__currency">R$</span>
-                        <span class="price-v2__amount" data-monthly="997" data-annual="797">997</span>
-                        <span class="price-v2__period">/mês</span>
+                        <div class="price-v2__original" style="display:none;"></div>
+                        <div class="price-v2__price-row">
+                            <span class="price-v2__currency">R$</span>
+                            <span class="price-v2__amount" data-monthly="1.200" data-annual="11.520">1.200</span>
+                            <span class="price-v2__period">/por mês</span>
+                        </div>
+                        <div class="price-v2__equiv" style="display:none;"></div>
                     </div>
-                    <div class="price-v2__anchor"><i class="fas fa-calculator"></i> Equivale a R$ 33/dia - menos que um almoço</div>
+
+                    <div class="price-v2__anchor"><i class="fas fa-users"></i> Até 50 usuários</div>
                     <ul class="price-v2__features">
-                        <li><i class="fas fa-robot"></i> 3 agentes de IA</li>
-                        <li><i class="fas fa-users"></i> Até 30 usuários</li>
-                        <li><i class="fas fa-chart-pie"></i> Dashboards básicos</li>
-                        <li><i class="fas fa-envelope"></i> Suporte por email</li>
+                        <li><i class="fas fa-robot"></i> Agentes de IA</li>
+                        <li><i class="fas fa-users"></i> Até 50 usuários</li>
+                        <li><i class="fas fa-chart-pie"></i> Dashboards</li>
+                        <li><i class="fas fa-envelope"></i> Suporte</li>
                     </ul>
-                    <a href="/pricing" class="price-v2__cta">Começar agora</a>
+                    <a href="#contato-form" class="price-v2__cta">COMECE AGORA <i class="fas fa-chevron-right"></i></a>
                 </div>
 
-                <!-- Advanced (featured) -->
-                <div class="price-v2__card price-v2__card--featured">
+                <!-- Pró (featured) -->
+                <div class="price-v2__card price-v2__card--featured" data-plan-monthly="1.997" data-plan-annual="19.171" data-plan-annual-full="23.964" data-plan-annual-eq="1.598">
+                    <div class="price-v2__off-badge" style="display:none;">20% OFF</div>
                     <div class="price-v2__badge">
-                        <i class="fas fa-crown"></i> Mais popular
+                        <i class="fas fa-crown"></i> Melhor escolha
                     </div>
                     <div class="price-v2__card-header">
                         <div class="price-v2__icon price-v2__icon--gold"><i class="fas fa-rocket"></i></div>
-                        <div class="price-v2__name">Advanced</div>
-                        <div class="price-v2__desc">O mais escolhido</div>
+                        <div class="price-v2__name">Pró</div>
+                        <div class="price-v2__desc">Desenhado para médias empresas que buscam alta performance</div>
                     </div>
                     <div class="price-v2__price-wrap">
-                        <span class="price-v2__currency">R$</span>
-                        <span class="price-v2__amount" data-monthly="1.950" data-annual="1.560">1.950</span>
-                        <span class="price-v2__period">/mês</span>
+                        <div class="price-v2__original" style="display:none;"></div>
+                        <div class="price-v2__price-row">
+                            <span class="price-v2__currency">R$</span>
+                            <span class="price-v2__amount" data-monthly="1.997" data-annual="19.171">1.997</span>
+                            <span class="price-v2__period">/por mês</span>
+                        </div>
+                        <div class="price-v2__equiv" style="display:none;"></div>
                     </div>
-                    <div class="price-v2__anchor price-v2__anchor--gold"><i class="fas fa-user-tie"></i> Custo de 1 analista Jr. - entrega de um time inteiro</div>
+
+                    <div class="price-v2__anchor price-v2__anchor--gold"><i class="fas fa-users"></i> Até 100 usuários</div>
                     <ul class="price-v2__features">
                         <li><i class="fas fa-robot"></i> <strong>12 agentes de IA</strong></li>
-                        <li><i class="fas fa-infinity"></i> Usuários ilimitados</li>
+                        <li><i class="fas fa-users"></i> Até 100 usuários</li>
                         <li><i class="fab fa-whatsapp"></i> Treinamento via WhatsApp</li>
                         <li><i class="fas fa-headset"></i> Onboarding dedicado</li>
                         <li><i class="fas fa-brain"></i> Olívia como coordenadora</li>
                     </ul>
-                    <a href="/pricing" class="price-v2__cta price-v2__cta--gold">Escolher Advanced</a>
-                    <div class="price-v2__guarantee"><i class="fas fa-shield-check"></i> Garantia 90 dias ou seu dinheiro de volta</div>
+                    <a href="#contato-form" class="price-v2__cta price-v2__cta--gold">COMECE AGORA <i class="fas fa-chevron-right"></i></a>
                 </div>
 
-                <!-- Pro -->
-                <div class="price-v2__card">
+                <!-- Ultra -->
+                <div class="price-v2__card" data-plan-monthly="4.500" data-plan-annual="43.200" data-plan-annual-full="54.000" data-plan-annual-eq="3.600">
+                    <div class="price-v2__off-badge" style="display:none;">20% OFF</div>
                     <div class="price-v2__card-header">
                         <div class="price-v2__icon"><i class="fas fa-building"></i></div>
-                        <div class="price-v2__name">Pro</div>
-                        <div class="price-v2__desc">Para empresas em expansão</div>
+                        <div class="price-v2__name">Ultra</div>
+                        <div class="price-v2__desc">Feito para empresas que precisam de mais robustez na gestão</div>
                     </div>
                     <div class="price-v2__price-wrap">
-                        <span class="price-v2__currency">R$</span>
-                        <span class="price-v2__amount" data-monthly="2.500" data-annual="2.000">2.500</span>
-                        <span class="price-v2__period">/mês</span>
+                        <div class="price-v2__original" style="display:none;"></div>
+                        <div class="price-v2__price-row">
+                            <span class="price-v2__currency">R$</span>
+                            <span class="price-v2__amount" data-monthly="4.500" data-annual="43.200">4.500</span>
+                            <span class="price-v2__period">/por mês</span>
+                        </div>
+                        <div class="price-v2__equiv" style="display:none;"></div>
                     </div>
-                    <div class="price-v2__anchor"><i class="fas fa-chart-line"></i> ROI médio em 30 dias</div>
+
+                    <div class="price-v2__anchor"><i class="fas fa-users"></i> Até 300 usuários</div>
                     <ul class="price-v2__features">
                         <li><i class="fas fa-robot"></i> 12 agentes + customização</li>
-                        <li><i class="fas fa-plug"></i> API e integrações</li>
+                        <li><i class="fas fa-users"></i> Até 300 usuários</li>
                         <li><i class="fas fa-user-shield"></i> Gerente de sucesso</li>
                         <li><i class="fas fa-bolt"></i> SLA prioritário</li>
                     </ul>
-                    <a href="/pricing" class="price-v2__cta">Escolher Pro</a>
+                    <a href="#contato-form" class="price-v2__cta">COMECE AGORA <i class="fas fa-chevron-right"></i></a>
                 </div>
             </div>
 
@@ -3016,8 +3616,8 @@ export const pageHTML = `
                     <div class="price-v2__compare-item price-v2__compare-item--good">
                         <i class="fas fa-robot"></i>
                         <div>
-                            <strong>Orbit Advanced</strong>
-                            <span>R$ 1.950/mês - 12 agentes 24/7</span>
+                            <strong>Orbit Pró</strong>
+                            <span>R$ 1.997/mês - 12 agentes 24/7</span>
                         </div>
                     </div>
                 </div>
@@ -3247,6 +3847,40 @@ export const pageHTML = `
                 color: #9CA3AF;
             }
 
+            /* Annual extras */
+            .price-v2__price-wrap {
+                display: flex;
+                flex-direction: column;
+            }
+            .price-v2__price-row {
+                display: flex;
+                align-items: baseline;
+                gap: 4px;
+            }
+            .price-v2__original {
+                font-size: 14px;
+                color: #9CA3AF;
+                text-decoration: line-through;
+                margin-bottom: 2px;
+            }
+            .price-v2__equiv {
+                font-size: 13px;
+                color: #9CA3AF;
+                margin-top: 4px;
+            }
+            .price-v2__off-badge {
+                position: absolute;
+                top: 16px; right: 16px;
+                background: #22C55E;
+                color: #fff;
+                font-size: 0.7rem;
+                font-weight: 800;
+                padding: 4px 10px;
+                border-radius: 6px;
+                letter-spacing: 0.5px;
+                z-index: 2;
+            }
+
             /* Anchor */
             .price-v2__anchor {
                 font-size: 12px;
@@ -3398,13 +4032,10 @@ export const pageHTML = `
             var sw = document.getElementById('pricingSwitch');
             if (!sw) return;
             var labels = document.querySelectorAll('.price-v2__toggle-label');
-            var amounts = document.querySelectorAll('.price-v2__amount');
+            var cards = document.querySelectorAll('.price-v2__card[data-plan-monthly]');
             var isAnnual = false;
 
-            sw.addEventListener('click', function() {
-                isAnnual = !isAnnual;
-                sw.classList.toggle('active', isAnnual);
-
+            function updatePricing() {
                 labels.forEach(function(l) {
                     l.classList.toggle('price-v2__toggle-label--active',
                         (isAnnual && l.dataset.billing === 'annual') ||
@@ -3412,19 +4043,39 @@ export const pageHTML = `
                     );
                 });
 
-                amounts.forEach(function(el) {
-                    var val = isAnnual ? el.dataset.annual : el.dataset.monthly;
-                    el.style.opacity = '0';
-                    el.style.transform = 'translateY(-8px)';
-                    setTimeout(function() {
-                        el.textContent = val;
-                        el.style.opacity = '1';
-                        el.style.transform = 'translateY(0)';
-                    }, 200);
+                cards.forEach(function(card) {
+                    var amount = card.querySelector('.price-v2__amount');
+                    var period = card.querySelector('.price-v2__period');
+                    var original = card.querySelector('.price-v2__original');
+                    var equiv = card.querySelector('.price-v2__equiv');
+                    var offBadge = card.querySelector('.price-v2__off-badge');
+
+                    if (isAnnual) {
+                        // Show annual
+                        amount.textContent = card.dataset.planAnnual;
+                        period.textContent = '/por ano';
+                        original.textContent = 'R$ ' + card.dataset.planAnnualFull + '/ano';
+                        original.style.display = 'block';
+                        equiv.textContent = 'Equivalente a: R$ ' + card.dataset.planAnnualEq + '/mês';
+                        equiv.style.display = 'block';
+                        if (offBadge) offBadge.style.display = 'inline-block';
+                    } else {
+                        // Show monthly
+                        amount.textContent = card.dataset.planMonthly;
+                        period.textContent = '/por mês';
+                        original.style.display = 'none';
+                        equiv.style.display = 'none';
+                        if (offBadge) offBadge.style.display = 'none';
+                    }
                 });
+            }
+
+            sw.addEventListener('click', function() {
+                isAnnual = !isAnnual;
+                sw.classList.toggle('active', isAnnual);
+                updatePricing();
             });
 
-            // Click on labels too
             labels.forEach(function(l) {
                 l.addEventListener('click', function() {
                     var wantAnnual = l.dataset.billing === 'annual';
@@ -3649,79 +4300,7 @@ export const pageHTML = `
     <hr class="glow-divider">
 
     <!-- ═══ GARANTIA ═══ -->
-    <section class="guarantee-section guarantee-section--dark" id="garantiaSection">
-        <div class="container">
-            <div class="guarantee-lp" data-reveal="scale">
-                <!-- Left: Animated Contract Scene -->
-                <div class="guarantee-lp__scene">
-                    <div class="guarantee-lp__particles">
-                        <span></span><span></span><span></span><span></span><span></span><span></span>
-                    </div>
-
-                    <div class="gtd-contract" id="gtdContract">
-                        <!-- Paper -->
-                        <div class="gtd-paper">
-                            <div class="gtd-paper__header">
-                                <div class="gtd-paper__logo">O</div>
-                                <div class="gtd-paper__title">Termo de Garantia</div>
-                            </div>
-                            <div class="gtd-paper__subtitle">Orbit Gestão - 90 dias</div>
-                            <div class="gtd-paper__lines">
-                                <div class="gtd-line gtd-line--1"></div>
-                                <div class="gtd-line gtd-line--2"></div>
-                                <div class="gtd-line gtd-line--3"></div>
-                                <div class="gtd-line gtd-line--4"></div>
-                                <div class="gtd-line gtd-line--5"></div>
-                            </div>
-                            <div class="gtd-paper__separator"></div>
-                            <!-- Signature area -->
-                            <div class="gtd-signature">
-                                <div class="gtd-signature__label">Assinatura</div>
-                                <div class="gtd-signature__line">
-                                    <svg class="gtd-signature__svg" viewBox="0 0 200 50" fill="none">
-                                        <path class="gtd-sig-path" d="M12,38 C16,38 18,18 24,22 C30,26 28,36 36,30 C44,24 40,14 50,18 C56,20 54,32 62,26 C68,22 72,16 78,20 C84,24 80,34 88,28 L92,26" stroke="#ffba1a" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path class="gtd-sig-path gtd-sig-path--2" d="M88,28 C94,22 100,34 108,24 C114,16 118,30 126,22 C132,16 128,10 138,16 C144,20 148,28 156,18 C162,10 158,22 168,16 C174,12 178,20 184,14 L188,12" stroke="#ffba1a" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path class="gtd-sig-underline" d="M20,44 C60,42 120,40 180,43" stroke="#ffba1a" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.4"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <!-- Digital stamp -->
-                            <div class="gtd-stamp-area">
-                                <div class="gtd-check-badge">
-                                    <i class="fas fa-circle-check"></i> Assinado digitalmente
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Seal -->
-                        <div class="gtd-seal">
-                            <div class="gtd-seal__circle">
-                                <i class="fas fa-shield-halved"></i>
-                                <span>Garantido</span>
-                            </div>
-                            <div class="gtd-seal__ring"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right: Content -->
-                <div class="guarantee-lp__content">
-                    <div class="guarantee-lp__badge">
-                        <i class="fas fa-shield-halved"></i> Risco Zero
-                    </div>
-                    <h2>Garantia de 90 dias</h2>
-                    <p>Se em 90 dias o Orbit não gerar resultado mensurável na sua empresa, devolvemos 100% do seu investimento. Sem burocracia, sem letras miúdas.</p>
-                    <ul class="guarantee-lp__checks">
-                        <li><i class="fas fa-circle-check"></i> Resultados mensuráveis em até 90 dias</li>
-                        <li><i class="fas fa-circle-check"></i> Devolução integral sem questionamentos</li>
-                        <li><i class="fas fa-circle-check"></i> Sem contrato de fidelidade</li>
-                        <li><i class="fas fa-circle-check"></i> Cancele quando quiser</li>
-                    </ul>
-                    <div>
-                        <a href="#contato-form" class="btn btn-primary btn-lg">QUERO TESTAR SEM RISCO</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Guarantee section removed -->
 
         <style>
             /* ═══ GUARANTEE ANIMATED CONTRACT ═══ */
@@ -3963,70 +4542,14 @@ export const pageHTML = `
             }
         </style>
 
-        <script>
-        (function() {
-            var contract = document.getElementById('gtdContract');
-            if (!contract) return;
-            var obs = new IntersectionObserver(function(entries) {
-                entries.forEach(function(e) {
-                    if (e.isIntersecting) {
-                        contract.classList.add('gtd-active');
-                        obs.unobserve(e.target);
-                    }
-                });
-            }, { threshold: 0.3 });
-            obs.observe(contract);
-        })();
-        </script>
-    </section>
-
-    <hr class="glow-divider">
-
-    <!-- ═══ BANNER CONSULTORES ═══ -->
-    <section class="consultant-section" id="consultores-banner">
-        <div class="container">
-            <div class="consultant-banner" data-reveal>
-                <div class="consultant-banner__content">
-                    <div class="consultant-banner__subtitle">Pare de vender projeto. Comece a vender operação.</div>
-                    <h2 class="consultant-banner__title">Consultores, mentores e associações</h2>
-                    <p class="consultant-banner__desc">Ofereça um time de IA aos seus clientes ou associados. Receita recorrente, white-label, sem investimento em tecnologia. Consultoria recorrente passiva: os agentes continuam trabalhando após o projeto.</p>
-                    <a href="/consultores" class="consultant-banner__cta">Conhecer programa de canais</a>
-                </div>
-                <div class="consultant-stats">
-                    <div class="consultant-stat">
-                        <div class="consultant-stat__value">R$ 250</div>
-                        <div class="consultant-stat__label">por mês, por cliente</div>
-                    </div>
-                    <div class="consultant-stat">
-                        <div class="consultant-stat__value">90%</div>
-                        <div class="consultant-stat__label">margem operacional</div>
-                    </div>
-                    <div class="consultant-stat">
-                        <div class="consultant-stat__value">~0%</div>
-                        <div class="consultant-stat__label">churn próximo de zero</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Guarantee script removed -->
     </section>
 
     <!-- ═══ MANIFESTO ═══ -->
     <section class="section-padded-lg" style="background:#0D1117;" id="manifesto">
         <div class="container" style="max-width:800px;">
-            <div style="text-align:center;margin-bottom:48px;" data-reveal>
-                <span class="section-badge">Manifesto</span>
-            </div>
-            <div style="color:#C9D1D9;font-size:1.15rem;line-height:1.9;" data-reveal>
-                <p style="font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:24px;">O mundo não precisa de mais ferramentas.</p>
-                <p>Durante anos as empresas compraram software esperando resolver problemas de gestão. Compraram CRM. Compraram ERP. Compraram plataformas de produtividade. Mas <strong style="color:#ffba1a;">ferramentas não geram gestão.</strong></p>
-                <p>Gestão acontece quando dados se conectam, decisões são tomadas e processos são executados continuamente.</p>
-                <p>A primeira geração de inteligência artificial trouxe robôs inteligentes. Mas isolados. Marketing conversa com uma IA. Vendas com outra. RH com outra. <strong style="color:#EF4444;">Robôs inteligentes trabalhando de forma desconectada.</strong></p>
-                <p>Nós provamos, em 30 anos de consultoria e 10 anos de plataforma, que gestão digitalizada escala. Agora, damos o próximo passo.</p>
-                <p>O Orbit nasce para resolver isso. Não criando mais uma ferramenta. Mas criando <strong style="color:#ffba1a;">um time.</strong></p>
-                <p>Um time de agentes de inteligência artificial conectados que operam a gestão da empresa continuamente. Liderados pela Olívia. Cada um com sua especialidade. Todos trabalhando com os mesmos dados.</p>
-                <p>E quando o projeto acaba, eles não param. Continuam executando. Continuam aprendendo. Continuam gerando resultado. <strong style="color:#ffba1a;">Isso é consultoria recorrente passiva.</strong></p>
-                <p style="font-size:1.3rem;font-weight:700;color:#fff;margin-top:32px;">Essa é a nova categoria. Gestão Operada por IA.</p>
-                <p style="font-size:1.4rem;font-weight:800;color:#ffba1a;margin-top:16px;">Orbit não é software. É o time de gestão que sua empresa sempre precisou.</p>
+            <div style="text-align:center;" data-reveal>
+                <p style="font-size:clamp(1.5rem,3vw,2rem);font-weight:800;color:#ffba1a;margin:0;line-height:1.4;">Orbit não é software. É o time de gestão que sua empresa sempre precisou.</p>
             </div>
         </div>
     </section>
@@ -4049,7 +4572,7 @@ export const pageHTML = `
                 <details class="faq-item">
                     <summary>Para quem é indicado?</summary>
                     <div class="faq-item__answer">
-                        <p>Para empresas de 5 a 100+ funcionários, de qualquer segmento, que querem profissionalizar a gestão sem depender exclusivamente de consultoria ou software que ninguém usa.</p>
+                        <p>Para empresas de 20 a 300 funcionários, de qualquer segmento, que querem profissionalizar a gestão sem depender exclusivamente de consultoria ou software que ninguém usa.</p>
                     </div>
                 </details>
 
@@ -4070,23 +4593,10 @@ export const pageHTML = `
                 <details class="faq-item">
                     <summary>Funciona para o meu segmento?</summary>
                     <div class="faq-item__answer">
-                        <p>Sim. Em 30 anos, já atendemos 8.000+ empresas de todos os segmentos. Gestão é universal. O que muda é o conteúdo - e é exatamente isso que a IA personaliza.</p>
+                        <p>Sim. Em 30 anos, já atendemos +9.000 empresas de todos os segmentos. Gestão é universal. O que muda é o conteúdo - e é exatamente isso que a IA personaliza.</p>
                     </div>
                 </details>
 
-                <details class="faq-item">
-                    <summary>Meu time vai precisar aprender a usar?</summary>
-                    <div class="faq-item__answer">
-                        <p>Seu time nem precisa logar. Processos e treinamentos chegam pelo WhatsApp - que todo mundo já usa.</p>
-                    </div>
-                </details>
-
-                <details class="faq-item">
-                    <summary>E se não funcionar?</summary>
-                    <div class="faq-item__answer">
-                        <p>Garantia de 90 dias. Se não gerar resultado, devolvemos seu investimento. Sem letras miúdas.</p>
-                    </div>
-                </details>
             </div>
         </div>
     </section>
@@ -4228,13 +4738,12 @@ export const pageHTML = `
                 <div class="footer-column">
                     <h5 data-i18n="footer.platform">Plataforma</h5>
                     <ul>
-                        <li><a href="/agentes" data-i18n="footer.agents">Agentes de IA</a></li>
+                        <li><a href="/agentes/estrategista" data-i18n="footer.agents">Agentes de IA</a></li>
                         <li><a href="/processos">Processos</a></li>
                         <li><a href="/indicadores">Indicadores</a></li>
                         <li><a href="/tarefas">Tarefas</a></li>
                         <li><a href="/competencias">Competências</a></li>
                         <li><a href="/auditorias">Auditorias</a></li>
-                        <li><a href="/pricing" data-i18n="footer.plans">Planos e Preços</a></li>
                     </ul>
                 </div>
 
@@ -4248,7 +4757,6 @@ export const pageHTML = `
                     <h5 style="margin-top: 20px;" data-i18n="footer.company">Empresa</h5>
                     <ul>
                         <li><a href="/sobre" data-i18n="footer.about">Sobre Nós</a></li>
-                        <li><a href="/parcerias" data-i18n="footer.partners">Seja Parceiro</a></li>
                     </ul>
                 </div>
             </div>

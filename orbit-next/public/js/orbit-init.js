@@ -180,12 +180,16 @@ function applyEnglish() {
     // === HERO ===
     '30 anos de gestão empresarial. Agora com IA.': '30 years of business management. Now with AI.',
     'Sua empresa não precisa de mais ferramentas.': "Your company doesn't need more tools.",
+    'Agora com um': 'Now with an',
+    'que': 'that',
     'time de IA': 'AI team',
+    'transforma.': 'transforms.',
     'executa.': 'executes.',
     'organiza.': 'organizes.',
     'decide.': 'decides.',
     'opera 24/7.': 'operates 24/7.',
     'nunca para.': 'never stops.',
+    'escala.': 'scales.',
     'QUERO CONHECER O TIME DE IA': 'MEET THE AI TEAM',
     'Ver os 12 agentes': 'See the 12 agents',
     '⏱️ 2 min • 100% gratuito • Sem compromisso': '⏱️ 2 min • 100% free • No commitment',
@@ -1527,29 +1531,187 @@ function applyEnglish() {
     'Conheça nossas soluções': 'Meet our solutions',
     'Módulos integrados que cobrem toda a gestão da sua empresa': 'Integrated modules covering all your company management',
     'RECOMENDADO': 'RECOMMENDED',
+    // === CONSULTORES PAGE - Missing translations ===
+    'Pronto para ter receita recorrente?': 'Ready for recurring revenue?',
+    'Vantagens exclusivas': 'Exclusive benefits',
+    'Margem por cliente': 'Margin per client',
+    'Alertas': 'Alerts',
+    'Parcerias': 'Partnerships',
+
+    // === HOME PAGE - Agent Panel Descriptions (missing) ===
+    'Constrói SWOT, BSC, objetivos e planos de ação. Tudo estruturado, priorizado e pronto para execução.': 'Builds SWOT, BSC, objectives and action plans. Everything structured, prioritized and ready for execution.',
+    'Mapeia todos os processos, gera instruções de trabalho e playbooks operacionais. Padronização ISO incluída.': 'Maps all processes, generates work instructions and operational playbooks. ISO standardization included.',
+    'Descrição de cargos, avaliação de desempenho e PDIs personalizados automaticamente.': 'Job descriptions, performance evaluations and personalized development plans automatically.',
+    'Treina equipes com conteúdo personalizado da empresa. Quizzes, trilhas e acompanhamento de engajamento.': 'Trains teams with company-customized content. Quizzes, learning paths and engagement tracking.',
+    'Monitora indicadores, identifica desvios e sugere hipóteses de causa raiz com IA antes que o problema cresça.': 'Monitors indicators, identifies deviations and suggests AI-powered root cause hypotheses before problems grow.',
+    'Cria pesquisas de clima e satisfação, analisa respostas e entrega insights sobre a percepção das equipes.': 'Creates climate and satisfaction surveys, analyzes responses and delivers insights about team perception.',
+    'Identifica ameaças, monitora indicadores de risco e sugere planos de mitigação preventivos.': 'Identifies threats, monitors risk indicators and suggests preventive mitigation plans.',
+    'Analisa mercado, identifica oportunidades de crescimento e cruza com dados internos para sugerir ações.': 'Analyzes market, identifies growth opportunities and crosses with internal data to suggest actions.',
+    'Registra não-conformidades, aplica PDCA e acompanha a resolução até o fechamento com evidências.': 'Records non-conformities, applies PDCA and tracks resolution until closure with evidence.',
+    'Gera, versiona e conecta documentos corporativos. Toda a base documental padronizada e atualizada.': 'Generates, versions and connects corporate documents. The entire document base standardized and updated.',
+    'Gerencia pipeline, acompanha funil e oferece coaching baseado em dados para a equipe comercial.': 'Manages pipeline, tracks funnel and offers data-driven coaching for the sales team.',
+    'digitando...': 'typing...',
+    'Seu cargo': 'Your position',
+
+    // === HOME PAGE - FAQ text corrections ===
+    'Para empresas de 20 a 300 funcionários': 'For companies with 20 to 300 employees',
+
+    // === EMPRESARIOS PAGE - WA Chat Messages ===
+    'Sinto que sou o único que se importa com a empresa. Deleguei e tudo saiu errado.': 'I feel like I\'m the only one who cares about this company. I tried delegating and everything went wrong.',
+    'Eu entendo.': 'I understand.',
+    '72% dos empresários': '72% of business owners',
+    'sentem isso. O problema não é sua equipe — é a falta de uma camada de gestão operando 24/7.': 'feel this way. The problem isn\'t your team — it\'s the lack of a management layer operating 24/7.',
+    'Minha equipe só apaga incêndio. Ninguém pensa estrategicamente.': 'My team only puts out fires. Nobody thinks strategically.',
+    'Me dá 7 dias. Vou montar o diagnóstico e colocar meus': 'Give me 7 days. I\'ll build the full diagnosis and put my',
+    '12 agentes': '12 agents',
+    'pra trabalhar. Você vai sentir a diferença na primeira semana.': 'to work. You\'ll feel the difference in the first week.',
+    'Comprei ERP, implantei OKR, contratei consultoria... nada mudou de verdade.': 'I bought an ERP, implemented OKRs, hired consultants... nothing really changed.',
+    'Software sem operação é como carro sem motorista. Você comprou a ferramenta, mas': 'Software without operation is like a car without a driver. You bought the tool, but',
+    'ninguém opera ela': 'nobody operates it',
+    '. Meus agentes fazem isso — todos os dias.': '. My agents do that — every single day.',
+    'Faturamento sobe e desce todo mês. Não tenho previsibilidade nenhuma.': 'Revenue goes up and down every month. I have zero predictability.',
+    'O Agente de Indicadores já vai mapear seus KPIs e te alertar': 'The KPI Agent will map your indicators and alert you',
+    'do desvio virar crise. Bora?': 'a deviation becomes a crisis. Let\'s go?',
+    'Ninguém veste a camisa. Processos existem só no papel.': 'Nobody owns it. Processes only exist on paper.',
+    'Processo no papel não funciona porque': 'Paper processes don\'t work because',
+    'ninguém cobra execução': 'nobody enforces execution',
+    '. Meu Agente de Processos mapeia, gera instruções e': '. My Process Agent maps, generates work instructions, and',
+    'monitora em tempo real': 'monitors in real time',
+    'Já tentei padronizar mas ninguém segue. Não sei nem se estão fazendo certo.': 'I\'ve tried standardizing but nobody follows through. I don\'t even know if they\'re doing it right.',
+    'E o Agente de Treinamento envia microlearning diário pro time pelo WhatsApp.': 'And the Training Agent sends daily microlearning to your team via WhatsApp.',
+    'A cultura muda de dentro pra fora.': 'Culture changes from within.',
+
+    // === EMPRESARIOS PAGE - Reframe Section ===
+    'Por que software sozinho não resolve?': 'Why software alone doesn\'t solve it?',
+    'Software não é ruim.': 'Software isn\'t bad.',
+    'O problema é outro.': 'The problem is something else.',
+    'Mesmo depois de parametrizar, o software não entrega tudo que você precisa. Porque ele depende de você preencher tudo — e ninguém preenche.': 'Even after setup, software doesn\'t deliver everything you need. Because it depends on you filling everything in — and nobody does.',
+    'Investiu meses em padronização': 'Spent months on standardization',
+    'Criou processos, manuais, fluxogramas. Ninguém seguiu. Virou documento morto.': 'Created processes, manuals, flowcharts. Nobody followed them. Became dead documents.',
+    'Teve que voltar a usar planilhas': 'Had to go back to spreadsheets',
+    'O software não entregou tudo. A planilha voltou. E ninguém confia nos dados.': 'Software didn\'t deliver everything. Spreadsheets came back. And nobody trusts the data.',
+    'O ciclo se repete': 'The cycle repeats',
+    'Mais uma ferramenta abandonada.': 'Another abandoned tool.',
+    'Mais dinheiro desperdiçado.': 'More money wasted.',
+
+    // === EMPRESARIOS PAGE - Olívia Introduction ===
+    'Bom dia! Analisei os dados da semana. Três pontos precisam da sua atenção: margem caiu 2%, o time comercial bateu recorde, e temos uma oportunidade no segmento B que ninguém está olhando. Vamos resolver?': 'Good morning! I analyzed this week\'s data. Three points need your attention: margin dropped 2%, the sales team broke a record, and we have an opportunity in segment B that nobody is looking at. Shall we solve it?',
+
+    // === EMPRESARIOS PAGE - How It Works ===
+    'Os agentes trabalham 24 horas por dia, 7 dias por semana. A operação não para quando o projeto acaba.': 'Agents work 24 hours a day, 7 days a week. Operations don\'t stop when the project ends.',
+
+    // === EMPRESARIOS PAGE - Segments Marquee ===
+    'Universal': 'Universal',
+    'Funciona para': 'Works for',
+    'qualquer segmento': 'any segment',
+    'Jurídico': 'Legal',
+    'Contabilidade': 'Accounting',
+    'Indústrias': 'Industries',
+    'Agências': 'Agencies',
+    'Construtoras': 'Construction',
+    'Logística': 'Logistics',
+    'Consultorias': 'Consulting',
+    'Associações': 'Associations',
+
+    // === EMPRESARIOS PAGE - Where It All Started ===
+    'Onde': 'Where',
+    'começou': 'started',
+
+    // === EMPRESARIOS PAGE - Cost Comparison ===
+    'R$ 1.200/mês vs. R$ 108-204k/mês em salários e consultorias': 'R$ 1,200/month vs. R$ 108-204k/month in salaries and consulting',
+
+    // === EMPRESARIOS PAGE - FAQ ===
+    'Para empresas de 20 a 300 funcionários, de qualquer segmento, que querem profissionalizar a gestão sem depender exclusivamente de consultoria ou software que ninguém usa.': 'For companies with 20 to 300 employees, of any segment, that want to professionalize management without relying solely on consulting or software nobody uses.',
+    'Sim. Em 30 anos, já atendemos +9.000 empresas de todos os segmentos. Gestão é universal. O que muda é o conteúdo - e é exatamente isso que a IA personaliza.': 'Yes. In 30 years, we have served 9,000+ companies across all segments. Management is universal. What changes is the content - and that\'s exactly what the AI personalizes.',
+
+    // === SOBRE PAGE - Hero subtitle (text nodes split by <strong>) ===
+    'O Orbit nasceu do Grupo GSN \u2014 o maior grupo de consultoria em gestão e ISO do Brasil. Nossa missão: transformar a gestão empresarial com': 'Orbit was born from Grupo GSN \u2014 the largest management and ISO consulting group in Brazil. Our mission: transform business management with',
+    ', coordenados pela Olívia.': ', coordinated by Olívia.',
+    'O Orbit nasceu do Grupo GSN — o maior grupo de consultoria em gestão e ISO do Brasil. Nossa missão: transformar a gestão empresarial com': 'Orbit was born from Grupo GSN — the largest management and ISO consulting group in Brazil. Our mission: transform business management with',
+    '12 agentes de IA especializados': '12 specialized AI agents',
+
+    // === SOBRE PAGE - Timeline step text (exact HTML content) ===
+    '1996 — A fundação': '1996 — The founding',
+    'Nasce o Grupo GSN': 'Grupo GSN is born',
+    'Uma consultoria de gestão e ISO com um propósito claro: levar método e profissionalização para empresas que precisavam crescer com estrutura.': 'A management and ISO consulting firm with a clear purpose: bringing method and professionalization to companies that needed to grow with structure.',
+    '8.000+ empresas atendidas': '8,000+ companies served',
+    'Maior grupo do Brasil': "Brazil's largest group",
+    'Consolidamos a liderança nacional em consultoria de gestão, com uma rede de mais de 30 consultorias parceiras operando em todo o país.': "We consolidated national leadership in management consulting, with a network of over 30 partner consultancies operating across the country.",
+    'A transformação digital': 'The digital transformation',
+    'Plataforma online': 'Online platform',
+    '30 anos de metodologia são digitalizados. A plataforma passa a atender milhares de empresas de forma escalável, sem perder a essência consultiva.': '30 years of methodology are digitalized. The platform starts serving thousands of companies in a scalable way, without losing the consulting essence.',
+    '2026 — O Orbit': '2026 — Orbit',
+    'Nasce a Olívia e os 12 agentes': 'Olívia and the 12 agents are born',
+    'A IA é integrada à gestão. Olívia coordena 12 agentes especializados que operam 24/7 nas empresas. Consultoria recorrente, automatizada e acessível.': 'AI is integrated into management. Olívia coordinates 12 specialized agents that operate 24/7 in companies. Recurring, automated and accessible consulting.',
+
+    // === SOBRE PAGE - "Onde tudo começou" paragraphs ===
+    'Onde tudo começou': 'Where it all started',
+    'tudo': 'it all',
+    'O Grupo GSN nasce a partir de uma constatação simples e incômoda: gerir empresas no Brasil exige mais do que boas intenções e teoria. Exige método, repertório e decisões sustentadas por experiências reais.': 'Grupo GSN was born from a simple and uncomfortable realization: managing companies in Brazil demands more than good intentions and theory. It demands method, repertoire and decisions supported by real experiences.',
+    'Naquele momento, o ecossistema empresarial oferecia informação em excesso e direção de menos. Faltavam referências aplicáveis para quem precisava decidir sob pressão, estruturar crescimento e liderar empresas em ambientes complexos.': 'At that time, the business ecosystem offered too much information and too little direction. There were no applicable references for those who needed to decide under pressure, structure growth and lead companies in complex environments.',
+    'aproximar prática e método da realidade de quem constrói negócios no país': 'bridge practice and method with the reality of those who build businesses in the country',
+    'O Grupo GSN surge para ocupar esse espaço, com um foco claro:': 'Grupo GSN emerged to fill this gap, with a clear focus:',
+    'Com o tempo, os desafios dos empresários evoluíram. As empresas cresceram, as decisões ganharam escala e as consequências se tornaram maiores. A atuação do GSN evoluiu junto — e o Orbit é a expressão máxima dessa evolução:': "Over time, the challenges of business owners evolved. Companies grew, decisions scaled and consequences became bigger. GSN's work evolved alongside — and Orbit is the ultimate expression of that evolution:",
+    '30 anos de experiência operando através de IA': '30 years of experience operating through AI',
+
+    // === SOBRE PAGE - Director bios ===
+    'Fundador e CEO do Grupo GSN. 30 anos liderando operações de gestão e consultoria em milhares de empresas.': 'Founder and CEO of Grupo GSN. 30 years leading management and consulting operations across thousands of companies.',
+    'Diretora de Operações. Responsável pela entrega e qualidade — garante resultado mensurável para cada cliente.': 'Director of Operations. Responsible for delivery and quality — ensures measurable results for every client.',
+    'Diretor de Produto. Lidera o desenvolvimento da plataforma e a evolução dos 12 agentes de IA.': 'Director of Product. Leads the platform development and the evolution of the 12 AI agents.',
+    'Diretor de Vendas. Responsável pela expansão comercial, canais e parcerias estratégicas.': 'Director of Sales. Responsible for commercial expansion, channels and strategic partnerships.',
+    'Diretor de Tecnologia. Arquiteto da infraestrutura que garante performance, segurança e escala.': 'Director of Technology. Architect of the infrastructure that ensures performance, security and scale.',
+
+    // === SOBRE PAGE - CTA ===
+    'Pronto para conhecer o Orbit?': 'Ready to discover Orbit?',
+    'Agende uma demonstração gratuita e veja como 12 agentes de IA podem transformar a gestão da sua empresa.': 'Schedule a free demo and see how 12 AI agents can transform your company\'s management.',
+    'Conhecer o Time de IA': 'Meet the AI Team',
+
+    // === SOBRE PAGE - Ecosystem ===
+    'A equipe que construiu 30 anos de história em gestão': 'The team that built 30 years of management history',
+
   };
 
-  // Sort keys by length (longest first) to avoid partial replacements
-  var keys = Object.keys(t).sort(function(a, b) { return b.length - a.length; });
+  // Separate short keys (<=30 chars) from long keys (>30 chars)
+  // Short keys: only match when they are the ENTIRE trimmed text of a text node (exact match)
+  // Long keys: use substring matching (they are full sentences, safe from accidental matches)
+  var SHORT_THRESHOLD = 30;
+  var allKeys = Object.keys(t);
+  var longKeys = [];
+  var shortKeys = {};
+  allKeys.forEach(function(k) {
+    if (k.length > SHORT_THRESHOLD) {
+      longKeys.push(k);
+    } else {
+      shortKeys[k] = t[k];
+    }
+  });
+  // Sort long keys by length (longest first) to avoid partial replacements
+  longKeys.sort(function(a, b) { return b.length - a.length; });
 
-  // Replace text in all text nodes AND innerHTML for elements with mixed content
+  // Replace text in all text nodes
   function translateNode(el) {
     // Skip script/style tags
     if (el.tagName === 'SCRIPT' || el.tagName === 'STYLE') return;
 
-    // For elements with children, recurse
     if (el.childNodes) {
       for (var i = 0; i < el.childNodes.length; i++) {
         var child = el.childNodes[i];
         if (child.nodeType === 3 && child.textContent.trim()) {
-          // Text node: do replacements
           var txt = child.textContent;
-          keys.forEach(function(k) {
-            if (txt.indexOf(k) !== -1) {
-              txt = txt.split(k).join(t[k]);
-            }
-          });
-          child.textContent = txt;
+          var trimmed = txt.trim();
+
+          // First try exact match with short keys (safe, no corruption)
+          if (shortKeys[trimmed]) {
+            child.textContent = txt.replace(trimmed, shortKeys[trimmed]);
+          } else {
+            // Then do substring matching with long keys only (full sentences)
+            longKeys.forEach(function(k) {
+              if (txt.indexOf(k) !== -1) {
+                txt = txt.split(k).join(t[k]);
+              }
+            });
+            child.textContent = txt;
+          }
         } else if (child.nodeType === 1) {
           translateNode(child);
         }
@@ -1558,8 +1720,7 @@ function applyEnglish() {
   }
   translateNode(document.body);
 
-  // Translate short words that are the ENTIRE text content of an element
-  // These can't go in the main dictionary because they'd corrupt longer phrases
+  // Also handle short words that need exact text-node matching
   var shortWords = {
     'não': 'not',
     'Não': 'No',

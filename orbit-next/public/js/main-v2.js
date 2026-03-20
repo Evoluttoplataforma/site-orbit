@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const panels = document.querySelectorAll('.platform-panel');
 
   // Tab switching
-  var tabOrder = ['processos', 'indicadores', 'tarefas', 'competencias', 'auditorias', 'ia'];
+  var tabOrder = ['estrategista', 'processos', 'pessoas', 'treinamento', 'indicadores', 'pesquisa', 'riscos', 'oportunidades', 'problemas', 'documentos', 'vendas', 'reunioes'];
   var currentTabIdx = 0;
   var autoplayTimer = null;
 

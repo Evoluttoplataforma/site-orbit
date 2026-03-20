@@ -4,414 +4,851 @@ export const pageHTML = `
          SECTION 1 - HERO
          ═══════════════════════════════════════════════════════ -->
     <section class="lp-hero" id="hero">
+        <div class="lp-hero__bg-image">
+            <img src="/images/bg-market-data.jpg" alt="" style="width:100%;height:100%;object-fit:cover;">
+        </div>
         <div class="lp-hero__glow lp-hero__glow--1"></div>
         <div class="lp-hero__glow lp-hero__glow--2"></div>
         <div class="container">
-            <span class="lp-hero__badge" data-reveal>30 anos de gestão empresarial. Agora com IA.</span>
-            <p class="lp-hero__movement" data-reveal style="font-size:20px; color:#ffba1a; font-weight:700; margin-bottom:20px; letter-spacing:0.5px;">Sua empresa não precisa de mais ferramentas. Precisa de um time de IA.</p>
-            <h1 data-reveal>Contrate um <span class="text-gold">time de IA</span> que executa exatamente o que sua empresa precisa para crescer.</h1>
-            <p class="lp-hero__sub" data-reveal>Não é mais um software. São 12 agentes de IA especializados - liderados pela <strong style="color:#ffba1a;">Olívia</strong>, a Coordenadora Geral de IA - que constroem e operam a gestão da sua empresa. Planejamento, processos, treinamento, indicadores - trabalhando 24/7.</p>
+            <span class="hero-zoom__badge" data-reveal>30 anos de gestão empresarial. Agora com IA.</span>
 
-            <div class="lp-hero__stats" data-reveal>
-                <div class="lp-hero__stat">
+            <h1 class="hero-zoom__title" data-reveal>
+                Sua empresa não precisa de mais ferramentas.<br>
+                Precisa de um <span class="hero-zoom__title-highlight">time de IA</span> que
+                <span class="hero-rotate" id="heroRotate">
+                    <span class="hero-rotate__word hero-rotate__word--active">executa.</span>
+                    <span class="hero-rotate__word">organiza.</span>
+                    <span class="hero-rotate__word">decide.</span>
+                    <span class="hero-rotate__word">opera 24/7.</span>
+                    <span class="hero-rotate__word">nunca para.</span>
+                </span>
+            </h1>
+
+            <p class="hero-zoom__subtitle" data-reveal>Não é mais um software. São 12 agentes de IA especializados - liderados pela <strong style="color:#ffba1a;">Olívia</strong>, a Coordenadora Geral de IA - que constroem e operam a gestão da sua empresa. Planejamento, processos, treinamento, indicadores - trabalhando 24/7.</p>
+
+            <div class="hero-zoom__credentials" data-reveal>
+                <div class="hero-zoom__credential">
                     <strong>30 anos</strong>
                     <span>de experiência</span>
                 </div>
-                <div class="lp-hero__stat">
+                <div class="hero-zoom__credential-divider"></div>
+                <div class="hero-zoom__credential">
                     <strong>8.000+</strong>
                     <span>empresas atendidas</span>
                 </div>
-                <div class="lp-hero__stat">
-                    <strong>2.206</strong>
+                <div class="hero-zoom__credential-divider"></div>
+                <div class="hero-zoom__credential">
+                    <strong>+2.900</strong>
                     <span>no Orbit</span>
                 </div>
             </div>
 
-            <div data-reveal>
-                <a href="#contato" class="btn-gold">QUERO CONHECER O TIME DE IA</a>
+            <div class="hero-zoom__ctas" data-reveal style="margin-top:40px;">
+                <a href="#contato" class="btn btn-primary btn-lg hero-cta-glow">QUERO CONHECER O TIME DE IA</a>
             </div>
-            <p class="lp-hero__note" data-reveal>&#9203; 2 min &bull; 100% gratuito &bull; Sem compromisso</p>
+            <p class="hero-zoom__note" data-reveal>⏱️ 2 min • 100% gratuito • Sem compromisso</p>
         </div>
     </section>
 
     <!-- ═══════════════════════════════════════════════════════
          SECTION 2 - PAIN POINTS (Cinema Style)
          ═══════════════════════════════════════════════════════ -->
-    <section class="pain-cinema" id="dores">
-        <div class="pain-cinema__bg">
-            <div class="pain-cinema__grid-lines"></div>
-            <div class="pain-cinema__glow"></div>
+    <section class="wa-section" id="dores">
+        <div class="wa-section__bg">
+            <div class="wa-section__gradient"></div>
         </div>
-        <div class="container">
+        <div class="container" style="max-width:1200px;">
             <div class="section-header" data-reveal>
-                <span class="section-badge section-badge--red">Isso te parece familiar?</span>
-                <h2>Deixa eu adivinhar:</h2>
-                <p>Você planeja o crescimento, mas não faz ideia se a operação está seguindo o script.</p>
+                <span class="section-badge section-badge--red" data-i18n="wa.badge">Isso te parece familiar?</span>
+                <h2 style="color:#1A1D23;" data-i18n="wa.title">Deixa eu adivinhar:</h2>
+                <p style="color:#6B7280;max-width:620px;margin:0 auto;" data-i18n="wa.subtitle">Esse é o WhatsApp da Olívia em tempo real, tirando as dúvidas dos nossos futuros clientes.</p>
             </div>
 
-            <div class="pain-thoughts" id="painThoughtsLP">
-                <div class="pain-thought" data-idx="0">
-                    <div class="pain-thought__icon"><i class="fas fa-user-tie"></i></div>
-                    <div class="pain-thought__bubble">
-                        <p>"Parece que sou o único que se importa com essa empresa."</p>
-                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
+            <!-- Phones grid -->
+            <div class="wa-phones" id="waPhones">
+
+                <!-- ═══ PHONE 1 — Rodrigo ═══ -->
+                <div class="wa-device" data-chat="0">
+                    <div class="wa-device__frame">
+                        <!-- Status bar -->
+                        <div class="wa-statusbar">
+                            <span>9:14</span>
+                            <div class="wa-statusbar__right">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-full"></i>
+                            </div>
+                        </div>
+                        <!-- WA Header -->
+                        <div class="wa-header">
+                            <i class="fas fa-arrow-left wa-header__back"></i>
+                            <div class="wa-header__contact">
+                                <img src="/images/cliente-1.jpg" alt="Rodrigo" class="wa-header__avatar">
+                                <div class="wa-header__online"></div>
+                            </div>
+                            <div class="wa-header__info">
+                                <span class="wa-header__name">Rodrigo - CEO</span>
+                                <span class="wa-header__status">online</span>
+                            </div>
+                            <div class="wa-header__actions">
+                                <i class="fas fa-video"></i>
+                                <i class="fas fa-phone"></i>
+                                <i class="fas fa-ellipsis-vertical"></i>
+                            </div>
+                        </div>
+                        <!-- Chat body -->
+                        <div class="wa-chat">
+                            <div class="wa-chat__date"><span data-i18n="wa.today">Hoje</span></div>
+
+                            <!-- Cliente → Olívia → Cliente → Olívia -->
+                            <div class="wa-row wa-row--right wa-row--hidden">
+                                <div class="wa-bubble wa-bubble--green">
+                                    <p data-i18n="wa.1.s1">Sinto que sou o único que se importa com a empresa. Deleguei e tudo saiu errado.</p>
+                                    <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
+                                </div>
+                                <img src="/images/cliente-1.jpg" alt="" class="wa-row__avatar">
+                            </div>
+                            <div class="wa-row wa-row--left wa-row--hidden">
+                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <div class="wa-bubble wa-bubble--dark">
+                                    <span class="wa-bubble__sender">Olívia - Orbit</span>
+                                    <p data-i18n="wa.1.r1">Eu entendo. <strong>72% dos empresários</strong> sentem isso. O problema não é sua equipe — é a falta de uma camada de gestão operando 24/7.</p>
+                                    <span class="wa-bubble__meta"></span>
+                                </div>
+                            </div>
+                            <div class="wa-row wa-row--right wa-row--hidden">
+                                <div class="wa-bubble wa-bubble--green">
+                                    <p data-i18n="wa.1.s2">Minha equipe só apaga incêndio. Ninguém pensa estrategicamente.</p>
+                                    <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
+                                </div>
+                                <img src="/images/cliente-1.jpg" alt="" class="wa-row__avatar">
+                            </div>
+                            <div class="wa-row wa-row--left wa-row--hidden">
+                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <div class="wa-bubble wa-bubble--dark">
+                                    <span class="wa-bubble__sender">Olívia - Orbit</span>
+                                    <p data-i18n="wa.1.r2">Me dá 7 dias. Vou montar o diagnóstico e colocar meus <strong>12 agentes</strong> pra trabalhar. Você vai sentir a diferença na primeira semana. ✨</p>
+                                    <span class="wa-bubble__meta"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Input -->
+                        <div class="wa-input">
+                            <div class="wa-input__field">
+                                <i class="fas fa-face-smile"></i>
+                                <span data-i18n="wa.input">Mensagem</span>
+                                <i class="fas fa-paperclip"></i>
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="wa-input__mic"><i class="fas fa-microphone"></i></div>
+                        </div>
                     </div>
-                    <div class="pain-thought__pulse"></div>
+                    <!-- Client label below phone -->
                 </div>
-                <div class="pain-thought" data-idx="1">
-                    <div class="pain-thought__icon"><i class="fas fa-eye-slash"></i></div>
-                    <div class="pain-thought__bubble">
-                        <p>"Não tenho controle quando não estou presente."</p>
-                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
+
+                <!-- ═══ PHONE 2 — Gustavo ═══ -->
+                <div class="wa-device" data-chat="1">
+                    <div class="wa-device__frame">
+                        <div class="wa-statusbar">
+                            <span>10:32</span>
+                            <div class="wa-statusbar__right">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-three-quarters"></i>
+                            </div>
+                        </div>
+                        <div class="wa-header">
+                            <i class="fas fa-arrow-left wa-header__back"></i>
+                            <div class="wa-header__contact">
+                                <img src="/images/cliente-2.jpg" alt="Gustavo" class="wa-header__avatar">
+                                <div class="wa-header__online"></div>
+                            </div>
+                            <div class="wa-header__info">
+                                <span class="wa-header__name">Gustavo - Consultoria</span>
+                                <span class="wa-header__status">online</span>
+                            </div>
+                            <div class="wa-header__actions">
+                                <i class="fas fa-video"></i>
+                                <i class="fas fa-phone"></i>
+                                <i class="fas fa-ellipsis-vertical"></i>
+                            </div>
+                        </div>
+                        <div class="wa-chat">
+                            <div class="wa-chat__date"><span data-i18n="wa.today">Hoje</span></div>
+
+                            <div class="wa-row wa-row--right wa-row--hidden">
+                                <div class="wa-bubble wa-bubble--green">
+                                    <p data-i18n="wa.2.s1">Comprei ERP, implantei OKR, contratei consultoria... nada mudou de verdade.</p>
+                                    <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
+                                </div>
+                                <img src="/images/cliente-2.jpg" alt="" class="wa-row__avatar">
+                            </div>
+                            <div class="wa-row wa-row--left wa-row--hidden">
+                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <div class="wa-bubble wa-bubble--dark">
+                                    <span class="wa-bubble__sender">Olívia - Orbit</span>
+                                    <p data-i18n="wa.2.r1">Software sem operação é como carro sem motorista. Você comprou a ferramenta, mas <strong>ninguém opera ela</strong>. Meus agentes fazem isso — todos os dias.</p>
+                                    <span class="wa-bubble__meta"></span>
+                                </div>
+                            </div>
+                            <div class="wa-row wa-row--right wa-row--hidden">
+                                <div class="wa-bubble wa-bubble--green">
+                                    <p data-i18n="wa.2.s2">Faturamento sobe e desce todo mês. Não tenho previsibilidade nenhuma.</p>
+                                    <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
+                                </div>
+                                <img src="/images/cliente-2.jpg" alt="" class="wa-row__avatar">
+                            </div>
+                            <div class="wa-row wa-row--left wa-row--hidden">
+                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <div class="wa-bubble wa-bubble--dark">
+                                    <span class="wa-bubble__sender">Olívia - Orbit</span>
+                                    <p data-i18n="wa.2.r2">O Agente de Indicadores já vai mapear seus KPIs e te alertar <strong>antes</strong> do desvio virar crise. Bora? 🚀</p>
+                                    <span class="wa-bubble__meta"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wa-input">
+                            <div class="wa-input__field">
+                                <i class="fas fa-face-smile"></i>
+                                <span data-i18n="wa.input">Mensagem</span>
+                                <i class="fas fa-paperclip"></i>
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="wa-input__mic"><i class="fas fa-microphone"></i></div>
+                        </div>
                     </div>
-                    <div class="pain-thought__pulse"></div>
                 </div>
-                <div class="pain-thought" data-idx="2">
-                    <div class="pain-thought__icon"><i class="fas fa-hands-helping"></i></div>
-                    <div class="pain-thought__bubble">
-                        <p>"Já tentei delegar, mas tudo sai errado."</p>
-                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
+
+                <!-- ═══ PHONE 3 — Gabriel ═══ -->
+                <div class="wa-device" data-chat="2">
+                    <div class="wa-device__frame">
+                        <div class="wa-statusbar">
+                            <span>14:05</span>
+                            <div class="wa-statusbar__right">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-half"></i>
+                            </div>
+                        </div>
+                        <div class="wa-header">
+                            <i class="fas fa-arrow-left wa-header__back"></i>
+                            <div class="wa-header__contact">
+                                <img src="/images/cliente-3.jpg" alt="Gabriel" class="wa-header__avatar">
+                                <div class="wa-header__online"></div>
+                            </div>
+                            <div class="wa-header__info">
+                                <span class="wa-header__name">Gabriel - Diretor</span>
+                                <span class="wa-header__status">online</span>
+                            </div>
+                            <div class="wa-header__actions">
+                                <i class="fas fa-video"></i>
+                                <i class="fas fa-phone"></i>
+                                <i class="fas fa-ellipsis-vertical"></i>
+                            </div>
+                        </div>
+                        <div class="wa-chat">
+                            <div class="wa-chat__date"><span data-i18n="wa.today">Hoje</span></div>
+
+                            <div class="wa-row wa-row--right wa-row--hidden">
+                                <div class="wa-bubble wa-bubble--green">
+                                    <p data-i18n="wa.3.s1">Ninguém veste a camisa. Processos existem só no papel.</p>
+                                    <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
+                                </div>
+                                <img src="/images/cliente-3.jpg" alt="" class="wa-row__avatar">
+                            </div>
+                            <div class="wa-row wa-row--left wa-row--hidden">
+                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <div class="wa-bubble wa-bubble--dark">
+                                    <span class="wa-bubble__sender">Olívia - Orbit</span>
+                                    <p data-i18n="wa.3.r1">Processo no papel não funciona porque <strong>ninguém cobra execução</strong>. Meu Agente de Processos mapeia, gera instruções e <strong>monitora em tempo real</strong>.</p>
+                                    <span class="wa-bubble__meta"></span>
+                                </div>
+                            </div>
+                            <div class="wa-row wa-row--right wa-row--hidden">
+                                <div class="wa-bubble wa-bubble--green">
+                                    <p data-i18n="wa.3.s2">Já tentei padronizar mas ninguém segue. Não sei nem se estão fazendo certo.</p>
+                                    <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
+                                </div>
+                                <img src="/images/cliente-3.jpg" alt="" class="wa-row__avatar">
+                            </div>
+                            <div class="wa-row wa-row--left wa-row--hidden">
+                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <div class="wa-bubble wa-bubble--dark">
+                                    <span class="wa-bubble__sender">Olívia - Orbit</span>
+                                    <p data-i18n="wa.3.r2">E o Agente de Treinamento envia microlearning diário pro time pelo WhatsApp. <strong>A cultura muda de dentro pra fora.</strong> 💪</p>
+                                    <span class="wa-bubble__meta"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wa-input">
+                            <div class="wa-input__field">
+                                <i class="fas fa-face-smile"></i>
+                                <span data-i18n="wa.input">Mensagem</span>
+                                <i class="fas fa-paperclip"></i>
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="wa-input__mic"><i class="fas fa-microphone"></i></div>
+                        </div>
                     </div>
-                    <div class="pain-thought__pulse"></div>
                 </div>
-                <div class="pain-thought" data-idx="3">
-                    <div class="pain-thought__icon"><i class="fas fa-fire-extinguisher"></i></div>
-                    <div class="pain-thought__bubble">
-                        <p>"Minha equipe só apaga incêndio."</p>
-                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
-                    </div>
-                    <div class="pain-thought__pulse"></div>
-                </div>
-                <div class="pain-thought" data-idx="4">
-                    <div class="pain-thought__icon"><i class="fas fa-shirt"></i></div>
-                    <div class="pain-thought__bubble">
-                        <p>"Ninguém veste a camisa."</p>
-                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
-                    </div>
-                    <div class="pain-thought__pulse"></div>
-                </div>
-                <div class="pain-thought" data-idx="5">
-                    <div class="pain-thought__icon"><i class="fas fa-chart-line"></i></div>
-                    <div class="pain-thought__bubble">
-                        <p>"Vivo no sobe e desce do faturamento."</p>
-                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
-                    </div>
-                    <div class="pain-thought__pulse"></div>
-                </div>
+
             </div>
 
-            <!-- Resposta do Orbit -->
-            <div class="pain-answer" id="painAnswerLP">
-                <div class="pain-answer__line"></div>
-                <div class="pain-answer__card">
-                    <div class="pain-answer__avatar">
-                        <img src="images/olivia.png" alt="Olívia">
-                        <div class="pain-answer__status"></div>
-                    </div>
-                    <div class="pain-answer__content">
-                        <span class="pain-answer__name">Olívia - Orbit</span>
-                        <p>"Eu entendo. E é exatamente isso que resolvo. Me dá 7 dias."</p>
-                    </div>
-                </div>
-                <div class="pain-answer__cta">
-                    <a href="#contato" class="btn btn-primary btn-lg">QUERO RESOLVER ISSO</a>
-                </div>
+            <!-- Mobile dots -->
+            <div class="wa-dots" id="waDots">
+                <button class="wa-dot wa-dot--active" data-idx="0"></button>
+                <button class="wa-dot" data-idx="1"></button>
+                <button class="wa-dot" data-idx="2"></button>
+            </div>
+
+            <div style="text-align:center;margin-top:56px;" data-reveal>
+                <a href="#contato-form" class="btn btn-primary btn-lg">QUERO RESOLVER ISSO</a>
             </div>
         </div>
 
         <style>
-            .pain-cinema {
+            /* ═══ WA CHAT SECTION ═══ */
+            .wa-section {
                 position: relative;
-                padding: 120px 0 80px;
-                background: #FAFBFC;
+                padding: 120px 0 100px;
+                background: linear-gradient(180deg, #F8F9FB 0%, #EEF0F4 100%);
                 overflow: hidden;
             }
-            .pain-cinema .section-header h2 {
-                color: #1A1D23;
-            }
-            .pain-cinema .section-header p {
-                color: #5A6069;
-            }
-            .pain-cinema__bg {
+            .wa-section__bg {
                 position: absolute;
                 inset: 0;
                 pointer-events: none;
             }
-            .pain-cinema__grid-lines {
+            .wa-section__gradient {
                 position: absolute;
-                inset: 0;
-                background-image:
-                    linear-gradient(rgba(248,81,73,0.04) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(248,81,73,0.04) 1px, transparent 1px);
-                background-size: 60px 60px;
-                mask-image: radial-gradient(ellipse 60% 60% at 50% 40%, black 30%, transparent 70%);
-            }
-            .pain-cinema__glow {
-                position: absolute;
-                width: 500px;
-                height: 500px;
-                top: 10%;
+                width: 800px;
+                height: 800px;
+                top: -200px;
                 left: 50%;
                 transform: translateX(-50%);
-                background: radial-gradient(circle, rgba(248,81,73,0.06) 0%, transparent 70%);
+                background: radial-gradient(circle, rgba(255,186,26,0.06) 0%, transparent 60%);
                 border-radius: 50%;
-                animation: pain-glow-pulse-lp 4s ease-in-out infinite;
             }
-            @keyframes pain-glow-pulse-lp {
-                0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
-                50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
-            }
-
             .section-badge--red {
                 background: rgba(248,81,73,0.08);
                 border: 1px solid rgba(248,81,73,0.2);
                 color: #DC2626;
             }
 
-            .pain-thoughts {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 16px;
-                max-width: 800px;
-                margin: 0 auto;
+            /* ═══ PHONES GRID ═══ */
+            .wa-phones {
+                display: flex;
+                gap: 40px;
+                justify-content: center;
+                align-items: flex-start;
+                transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             }
 
-            .pain-thought {
+            /* ═══ DEVICE (phone + label) ═══ */
+            .wa-device {
+                flex-shrink: 0;
                 display: flex;
-                align-items: flex-start;
-                gap: 14px;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+
+            /* Client label below phone */
+            .wa-device__label {
+                display: flex;
+                align-items: center;
+                gap: 12px;
                 background: #fff;
                 border: 1px solid #E5E7EB;
                 border-radius: 16px;
-                padding: 22px;
-                position: relative;
-                opacity: 0;
-                transform: translateY(20px) scale(0.95);
-                transition: border-color 0.3s ease, box-shadow 0.3s ease;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+                padding: 12px 20px;
+                box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+                width: 100%;
+                max-width: 320px;
             }
-            .pain-thought:hover {
-                border-color: rgba(248,81,73,0.3);
-                box-shadow: 0 8px 32px rgba(248,81,73,0.1);
-                transform: translateY(-2px) scale(1);
+            .wa-device__label img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 2px solid #E5E7EB;
             }
-            .pain-thought.pain-visible {
-                animation: pain-thought-in-lp 0.6s forwards;
+            .wa-device__label strong {
+                font-size: 14px;
+                color: #1A1D23;
+                display: block;
+                line-height: 1.3;
             }
-            @keyframes pain-thought-in-lp {
-                0% { opacity: 0; transform: translateY(20px) scale(0.95); }
-                60% { transform: translateY(-4px) scale(1.01); }
-                100% { opacity: 1; transform: translateY(0) scale(1); }
+            .wa-device__label span {
+                font-size: 12px;
+                color: #8B949E;
             }
 
-            .pain-thought__icon {
-                width: 44px;
-                height: 44px;
-                border-radius: 12px;
-                background: linear-gradient(135deg, #FEE2E2, #FECACA);
+            /* ═══ PHONE FRAME ═══ */
+            .wa-device__frame {
+                width: 340px;
+                background: #000;
+                border-radius: 44px;
+                padding: 6px;
+                position: relative;
+                box-shadow:
+                    0 0 0 1px rgba(255,255,255,0.1),
+                    0 30px 80px rgba(0,0,0,0.3),
+                    0 10px 30px rgba(0,0,0,0.15),
+                    inset 0 0 0 1px rgba(255,255,255,0.05);
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+            }
+            .wa-device:hover .wa-device__frame {
+                transform: translateY(-6px) scale(1.01);
+                box-shadow:
+                    0 0 0 1px rgba(255,255,255,0.15),
+                    0 40px 100px rgba(0,0,0,0.35),
+                    0 15px 40px rgba(0,0,0,0.2),
+                    inset 0 0 0 1px rgba(255,255,255,0.08);
+            }
+
+            /* ═══ STATUS BAR ═══ */
+            .wa-statusbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 24px 4px;
+                background: #1F2C34;
+                border-radius: 38px 38px 0 0;
+            }
+            .wa-statusbar span {
+                font-size: 12px;
+                font-weight: 700;
+                color: #E9EDEF;
+            }
+            .wa-statusbar__right {
+                display: flex;
+                gap: 6px;
+                font-size: 11px;
+                color: #E9EDEF;
+            }
+
+            /* ═══ WA HEADER ═══ */
+            .wa-header {
                 display: flex;
                 align-items: center;
-                justify-content: center;
-                flex-shrink: 0;
-                position: relative;
-                border: none;
+                gap: 10px;
+                padding: 6px 12px 10px;
+                background: #1F2C34;
             }
-            .pain-thought__icon i {
-                font-size: 17px;
-                color: #DC2626;
+            .wa-header__back {
+                color: #00A884;
+                font-size: 16px;
             }
-
-            .pain-thought__pulse {
-                position: absolute;
-                top: 22px;
-                left: 22px;
-                width: 44px;
-                height: 44px;
-                border-radius: 12px;
-                border: 1px solid rgba(220,38,38,0.3);
-                opacity: 0;
-            }
-            .pain-visible .pain-thought__pulse {
-                animation: pain-icon-ring-lp 2s 0.6s ease-out infinite;
-            }
-            @keyframes pain-icon-ring-lp {
-                0% { transform: scale(1); opacity: 0.5; }
-                100% { transform: scale(1.6); opacity: 0; }
-            }
-
-            .pain-thought__bubble p {
-                font-size: 15px;
-                color: #3D4450;
-                line-height: 1.6;
-                font-style: italic;
-                margin: 0;
-            }
-
-            .pain-thought__typing {
-                display: flex;
-                gap: 4px;
-                padding: 4px 0;
-                position: absolute;
-                top: 22px;
-                left: 80px;
-            }
-            .pain-thought__typing span {
-                width: 6px;
-                height: 6px;
-                background: rgba(220,38,38,0.35);
-                border-radius: 50%;
-                animation: pain-typing-dot-lp 1s infinite;
-            }
-            .pain-thought__typing span:nth-child(2) { animation-delay: 0.2s; }
-            .pain-thought__typing span:nth-child(3) { animation-delay: 0.4s; }
-            @keyframes pain-typing-dot-lp {
-                0%, 100% { opacity: 0.3; transform: scale(0.8); }
-                50% { opacity: 1; transform: scale(1); }
-            }
-            .pain-thought.pain-typed .pain-thought__typing {
-                display: none;
-            }
-            .pain-thought__bubble p {
-                opacity: 0;
-            }
-            .pain-thought.pain-typed .pain-thought__bubble p {
-                opacity: 1;
-                animation: pain-text-reveal-lp 0.4s ease;
-            }
-            @keyframes pain-text-reveal-lp {
-                from { opacity: 0; filter: blur(4px); }
-                to { opacity: 1; filter: blur(0); }
-            }
-
-            .pain-answer {
-                max-width: 600px;
-                margin: 48px auto 0;
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            .pain-answer.pain-answer-visible {
-                animation: pain-answer-in-lp 0.8s 0.3s forwards;
-            }
-            @keyframes pain-answer-in-lp {
-                0% { opacity: 0; transform: translateY(20px); }
-                100% { opacity: 1; transform: translateY(0); }
-            }
-            .pain-answer__line {
-                width: 2px;
-                height: 40px;
-                background: linear-gradient(180deg, rgba(220,38,38,0.15), rgba(255,186,26,0.4));
-                margin: 0 auto 0;
-                border-radius: 2px;
-            }
-            .pain-answer__card {
-                display: flex;
-                align-items: flex-start;
-                gap: 16px;
-                background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
-                border: 1px solid rgba(255,186,26,0.25);
-                border-radius: 20px;
-                padding: 24px;
-                margin-top: 0;
-                position: relative;
-                overflow: hidden;
-                box-shadow: 0 4px 20px rgba(255,186,26,0.1);
-            }
-            .pain-answer__card::before {
-                content: '';
-                position: absolute;
-                top: -1px;
-                left: 20%;
-                right: 20%;
-                height: 2px;
-                background: linear-gradient(90deg, transparent, #ffba1a, transparent);
-            }
-            .pain-answer__avatar {
+            .wa-header__contact {
                 position: relative;
                 flex-shrink: 0;
             }
-            .pain-answer__avatar img {
-                width: 48px;
-                height: 48px;
+            .wa-header__avatar {
+                width: 36px;
+                height: 36px;
                 border-radius: 50%;
-                border: 2px solid #ffba1a;
+                object-fit: cover;
             }
-            .pain-answer__status {
+            .wa-header__online {
                 position: absolute;
                 bottom: 0;
                 right: 0;
-                width: 12px;
-                height: 12px;
-                background: #22C55E;
+                width: 10px;
+                height: 10px;
+                background: #00A884;
                 border-radius: 50%;
-                border: 2px solid #FFFBEB;
-                animation: rfm-live-blink-lp 1.5s ease-in-out infinite;
+                border: 2px solid #1F2C34;
             }
-            @keyframes rfm-live-blink-lp {
-                0%, 100% { opacity: 1; }
-                50% { opacity: 0.4; }
+            .wa-header__info {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
             }
-            .pain-answer__name {
+            .wa-header__name {
+                font-size: 15px;
+                font-weight: 600;
+                color: #E9EDEF;
+                line-height: 1.2;
+            }
+            .wa-header__status {
                 font-size: 12px;
-                font-weight: 700;
-                color: #B8860B;
-                display: block;
-                margin-bottom: 6px;
+                color: #00A884;
+                font-weight: 500;
             }
-            .pain-answer__content p {
-                font-size: 16px;
-                color: #3D4450;
-                line-height: 1.6;
-                font-style: italic;
-                margin: 0;
-            }
-            .pain-answer__cta {
-                text-align: center;
-                margin-top: 32px;
+            .wa-header__actions {
+                display: flex;
+                gap: 20px;
+                color: #8696A0;
+                font-size: 17px;
             }
 
-            @media (max-width: 768px) {
-                .pain-thoughts { grid-template-columns: 1fr; max-width: 480px; }
-                .pain-cinema { padding: 80px 0 60px; }
+            /* ═══ CHAT BODY ═══ */
+            .wa-chat {
+                flex: 1;
+                background: #0B141A;
+                background-image:
+                    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cdefs%3E%3Cpattern id='p' width='40' height='40' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='10' cy='10' r='1' fill='rgba(255,255,255,0.015)'/%3E%3Ccircle cx='30' cy='30' r='0.8' fill='rgba(255,255,255,0.01)'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='200' height='200' fill='url(%23p)'/%3E%3C/svg%3E");
+                padding: 10px 10px 6px;
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+                min-height: 420px;
+                overflow: hidden;
             }
-            @media (max-width: 480px) {
-                .pain-thought { padding: 16px; gap: 12px; }
-                .pain-thought__icon { width: 38px; height: 38px; border-radius: 10px; }
-                .pain-thought__icon i { font-size: 14px; }
-                .pain-thought__bubble p { font-size: 14px; }
-                .pain-thought__typing { left: 66px; }
-                .pain-thought__pulse { width: 38px; height: 38px; border-radius: 10px; top: 16px; left: 16px; }
+
+            /* Date pill */
+            .wa-chat__date {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+            .wa-chat__date span {
+                display: inline-block;
+                background: rgba(29,43,54,0.9);
+                color: rgba(134,150,160,0.85);
+                font-size: 11px;
+                font-weight: 600;
+                padding: 5px 16px;
+                border-radius: 8px;
+                letter-spacing: 0.3px;
+                text-transform: uppercase;
+            }
+
+            /* ═══ MESSAGE ROW (avatar + bubble) ═══ */
+            .wa-row {
+                display: flex;
+                align-items: flex-end;
+                gap: 6px;
+                margin-bottom: 4px;
+            }
+            .wa-row--right { justify-content: flex-end; }
+            .wa-row--left { justify-content: flex-start; }
+            .wa-row__avatar {
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                object-fit: cover;
+                flex-shrink: 0;
+                margin-bottom: 2px;
+            }
+
+            /* Hidden / visible animation */
+            .wa-row--hidden {
+                opacity: 0;
+                transform: translateY(16px) scale(0.92);
+            }
+            .wa-row--visible {
+                animation: wa-msg-pop 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+            @keyframes wa-msg-pop {
+                0% { opacity: 0; transform: translateY(16px) scale(0.92); }
+                100% { opacity: 1; transform: translateY(0) scale(1); }
+            }
+
+            /* ═══ BUBBLES ═══ */
+            .wa-bubble {
+                max-width: 240px;
+                padding: 8px 10px 3px;
+                position: relative;
+            }
+            .wa-bubble p {
+                font-size: 13.5px;
+                line-height: 1.5;
+                margin: 0 0 1px;
+            }
+            .wa-bubble__sender {
+                display: block;
+                font-size: 11.5px;
+                font-weight: 700;
+                margin-bottom: 3px;
+                color: #ffba1a;
+            }
+            .wa-bubble__meta {
+                font-size: 10px;
+                display: flex;
+                align-items: center;
+                gap: 3px;
+                justify-content: flex-end;
+                padding-top: 1px;
+                padding-bottom: 2px;
+            }
+
+            /* Green bubble (sent) */
+            .wa-bubble--green {
+                background: #005C4B;
+                border-radius: 10px 2px 10px 10px;
+            }
+            .wa-bubble--green p { color: #E9EDEF; }
+            .wa-bubble--green .wa-bubble__meta { color: rgba(255,255,255,0.45); }
+            .wa-bubble--green .wa-bubble__meta i { color: #53BDEB; font-size: 14px; }
+
+            /* Dark bubble (received) */
+            .wa-bubble--dark {
+                background: #1F2C34;
+                border-radius: 2px 10px 10px 10px;
+            }
+            .wa-bubble--dark p { color: #E9EDEF; }
+            .wa-bubble--dark strong { color: #ffba1a; font-weight: 700; }
+            .wa-bubble--dark .wa-bubble__meta { color: rgba(255,255,255,0.35); }
+
+            /* ═══ TYPING INDICATOR ═══ */
+            .wa-typing {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                padding: 4px 0;
+            }
+            .wa-typing--hidden { display: none !important; }
+            .wa-typing--visible { display: flex !important; }
+            .wa-typing {
+                animation: wa-msg-pop 0.3s ease forwards;
+            }
+            .wa-typing__pic {
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+            .wa-typing__bubble {
+                display: flex;
+                gap: 4px;
+                background: #1F2C34;
+                padding: 12px 16px;
+                border-radius: 2px 12px 12px 12px;
+            }
+            .wa-typing__bubble span {
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                background: #8696A0;
+                animation: wa-dot-bounce 1.4s ease-in-out infinite;
+            }
+            .wa-typing__bubble span:nth-child(2) { animation-delay: 0.15s; }
+            .wa-typing__bubble span:nth-child(3) { animation-delay: 0.3s; }
+            @keyframes wa-dot-bounce {
+                0%, 60%, 100% { transform: translateY(0); opacity: 0.35; }
+                30% { transform: translateY(-6px); opacity: 1; }
+            }
+
+            /* ═══ INPUT BAR ═══ */
+            .wa-input {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 6px 8px 10px;
+                background: #0B141A;
+                border-radius: 0 0 38px 38px;
+            }
+            .wa-input__field {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                background: #2A3942;
+                border-radius: 24px;
+                padding: 10px 14px;
+            }
+            .wa-input__field i { color: #8696A0; font-size: 18px; }
+            .wa-input__field span { flex: 1; font-size: 14px; color: #8696A0; }
+            .wa-input__mic {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: #00A884;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                font-size: 16px;
+                flex-shrink: 0;
+            }
+
+            /* ═══ DOTS (mobile) ═══ */
+            .wa-dots {
+                display: none;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 32px;
+            }
+            .wa-dot {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                border: none;
+                background: #D1D5DB;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                padding: 0;
+            }
+            .wa-dot--active {
+                background: #ffba1a;
+                transform: scale(1.4);
+                box-shadow: 0 0 12px rgba(255,186,26,0.4);
+            }
+
+            /* ═══ RESPONSIVE ═══ */
+            @media (max-width: 1100px) {
+                .wa-phones {
+                    justify-content: flex-start;
+                    overflow: hidden;
+                    padding: 0 calc(50% - 170px);
+                }
+                .wa-dots { display: flex; }
+            }
+            @media (max-width: 768px) {
+                .wa-section { padding: 80px 0 60px; }
+                .wa-device__frame { width: 310px; }
+                .wa-chat { min-height: 380px; }
+                .wa-phones { padding: 0 calc(50% - 155px); gap: 32px; }
+            }
+            @media (max-width: 380px) {
+                .wa-device__frame { width: 290px; }
+                .wa-phones { padding: 0 calc(50% - 145px); }
             }
         </style>
 
         <script>
         (function() {
-            var container = document.getElementById('painThoughtsLP');
-            var answer = document.getElementById('painAnswerLP');
+            var container = document.getElementById('waPhones');
             if (!container) return;
-            var thoughts = container.querySelectorAll('.pain-thought');
-            var activated = false;
+            var devices = container.querySelectorAll('.wa-device');
+            var dots = document.querySelectorAll('.wa-dot');
+            var current = 0;
+            var animated = [false, false, false];
 
+            // ═══ REAL-TIME CLOCK ═══
+            function pad(n) { return n < 10 ? '0' + n : '' + n; }
+            function fmt(h, m) { return pad(h) + ':' + pad(m); }
+
+            function updateTimes() {
+                var now = new Date();
+                var nowStr = fmt(now.getHours(), now.getMinutes());
+
+                container.querySelectorAll('.wa-statusbar > span').forEach(function(el) {
+                    el.textContent = nowStr;
+                });
+
+                var offsets = [{ base: -5 }, { base: -8 }, { base: -11 }];
+                devices.forEach(function(dev, idx) {
+                    var minute = offsets[idx].base;
+                    dev.querySelectorAll('.wa-row').forEach(function(row) {
+                        var d = new Date(now.getTime() + minute * 60000);
+                        var ts = fmt(d.getHours(), d.getMinutes());
+                        var meta = row.querySelector('.wa-bubble__meta');
+                        if (meta) {
+                            var check = meta.querySelector('i');
+                            meta.textContent = ts + ' ';
+                            if (check) meta.appendChild(check);
+                        }
+                        minute += 1;
+                    });
+                });
+            }
+
+            updateTimes();
+            setInterval(updateTimes, 30000);
+
+            // ═══ CHAT ANIMATION — typing before EVERY message ═══
+            function animateChat(idx) {
+                if (animated[idx]) return;
+                animated[idx] = true;
+                var device = devices[idx];
+                var chat = device.querySelector('.wa-chat');
+                var rows = Array.prototype.slice.call(device.querySelectorAll('.wa-row'));
+
+                // Header status
+                var statusEl = device.querySelector('.wa-header__status');
+                // Client avatar from header
+                var clientAvatar = device.querySelector('.wa-header__avatar');
+                var clientSrc = clientAvatar ? clientAvatar.src : '';
+
+                function clearTyping() {
+                    chat.querySelectorAll('.wa-typing').forEach(function(el) { el.remove(); });
+                    if (statusEl) statusEl.textContent = 'online';
+                }
+
+                // side = 'left' (Olívia) or 'right' (cliente)
+                function addTyping(side) {
+                    clearTyping();
+                    var el = document.createElement('div');
+                    el.className = 'wa-typing';
+                    if (side === 'left') {
+                        el.style.alignSelf = 'flex-start';
+                        el.innerHTML = '<img src="/images/olivia.png" alt="" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
+                        if (statusEl) statusEl.textContent = 'digitando...';
+                    } else {
+                        el.style.alignSelf = 'flex-end';
+                        el.style.flexDirection = 'row-reverse';
+                        el.innerHTML = '<img src="' + clientSrc + '" alt="" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
+                        if (statusEl) statusEl.textContent = 'online';
+                    }
+                    chat.appendChild(el);
+                    chat.scrollTop = chat.scrollHeight;
+                }
+
+                // Sequência: digitando (lado certo) → msg, digitando → msg, ...
+                var t = 400;
+                rows.forEach(function(row) {
+                    var isOlivia = row.classList.contains('wa-row--left');
+                    var side = isOlivia ? 'left' : 'right';
+                    var showAt = t;
+                    var revealAt = t + 1500;
+
+                    setTimeout(function() { addTyping(side); }, showAt);
+                    setTimeout(function() {
+                        clearTyping();
+                        row.classList.remove('wa-row--hidden');
+                        row.classList.add('wa-row--visible');
+                        chat.scrollTop = chat.scrollHeight;
+                    }, revealAt);
+
+                    t = revealAt + 800;
+                });
+            }
+
+            function goTo(idx) {
+                if (idx < 0 || idx >= devices.length) return;
+                current = idx;
+                var deviceW = devices[0].offsetWidth + 40;
+                container.style.transform = 'translateX(-' + (idx * deviceW) + 'px)';
+                dots.forEach(function(d, i) {
+                    d.classList.toggle('wa-dot--active', i === idx);
+                });
+                animateChat(idx);
+            }
+
+            dots.forEach(function(d) {
+                d.addEventListener('click', function() { goTo(parseInt(d.dataset.idx)); });
+            });
+
+            // Swipe
+            var sx = 0;
+            container.addEventListener('touchstart', function(e) { sx = e.touches[0].clientX; }, { passive: true });
+            container.addEventListener('touchend', function(e) {
+                var diff = sx - e.changedTouches[0].clientX;
+                if (Math.abs(diff) > 50) {
+                    diff > 0 ? goTo(current + 1) : goTo(current - 1);
+                }
+            }, { passive: true });
+
+            // Intersection observer
             var obs = new IntersectionObserver(function(entries) {
-                entries.forEach(function(entry) {
-                    if (entry.isIntersecting && !activated) {
-                        activated = true;
-
-                        thoughts.forEach(function(t, i) {
-                            setTimeout(function() {
-                                t.classList.add('pain-visible');
-                            }, i * 350);
-
-                            setTimeout(function() {
-                                t.classList.add('pain-typed');
-                            }, i * 350 + 500);
-                        });
-
-                        setTimeout(function() {
-                            if (answer) answer.classList.add('pain-answer-visible');
-                        }, thoughts.length * 350 + 800);
+                entries.forEach(function(e) {
+                    if (e.isIntersecting) {
+                        obs.unobserve(e.target);
+                        if (window.innerWidth > 1100) {
+                            animateChat(0);
+                            setTimeout(function() { animateChat(1); }, 800);
+                            setTimeout(function() { animateChat(2); }, 1600);
+                        } else {
+                            animateChat(0);
+                        }
                     }
                 });
-            }, { threshold: 0.2 });
+            }, { threshold: 0.12 });
             obs.observe(container);
         })();
         </script>
@@ -423,50 +860,81 @@ export const pageHTML = `
     <section class="reframe-section" id="reframe">
         <div class="container">
             <div class="section-header" data-reveal>
-                <span class="section-badge">O problema real</span>
-                <h2>Por que software sozinho <span class="highlight">não resolve</span></h2>
-                <p>Você já tentou. ERP, planilha, Trello, consultoria. E continua apagando incêndio. Apenas 11% das empresas usam IA agentic em produção. As outras 89% ainda estão presas nesse ciclo.</p>
+                <span class="section-badge">Por que software sozinho não resolve?</span>
+                <h2>Software não é ruim. <span class="highlight">O problema é outro.</span></h2>
+                <p>Mesmo depois de parametrizar, o software não entrega tudo que você precisa. Porque ele depende de você preencher tudo — e ninguém preenche.</p>
             </div>
 
             <div class="reframe-journey">
-                <!-- FASE 1 - O FRACASSO -->
-                <div class="reframe-phase reframe-phase--fail" data-reveal>
-                    <div class="reframe-phase__tag reframe-phase__tag--fail">
-                        <i class="fas fa-circle-xmark"></i> O que você já tentou
-                    </div>
-                    <div class="reframe-phase__steps">
-                        <div class="reframe-step reframe-step--fail">
-                            <div class="reframe-step__icon"><i class="fas fa-laptop-code"></i></div>
-                            <div class="reframe-step__content">
-                                <h4>Comprou software</h4>
-                                <p>Precisa alimentar manualmente. Ninguém alimenta. Vira shelfware.</p>
+                <!-- FASE 1 - RODA DO CICLO -->
+                <div class="roda" data-reveal>
+                    <div class="roda__scene">
+                        <div class="roda__wheel">
+                            <svg class="roda__ring" viewBox="0 0 500 500">
+                                <defs>
+                                    <linearGradient id="rodaGradE" gradientTransform="rotate(90)">
+                                        <stop offset="0%" stop-color="rgba(255,186,26,0.25)"/>
+                                        <stop offset="25%" stop-color="rgba(255,186,26,0.06)"/>
+                                        <stop offset="50%" stop-color="rgba(255,186,26,0.25)"/>
+                                        <stop offset="75%" stop-color="rgba(255,186,26,0.06)"/>
+                                        <stop offset="100%" stop-color="rgba(255,186,26,0.25)"/>
+                                    </linearGradient>
+                                    <filter id="rodaGlowE"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+                                </defs>
+                                <circle cx="250" cy="250" r="200" fill="none" stroke="rgba(255,186,26,0.04)" stroke-width="40"/>
+                                <circle cx="250" cy="250" r="200" fill="none" stroke="url(#rodaGradE)" stroke-width="2"/>
+                                <circle cx="250" cy="250" r="200" fill="none" stroke="rgba(255,186,26,0.1)" stroke-width="1" stroke-dasharray="6 12" stroke-linecap="round"/>
+                                <g fill="#ffba1a" opacity="0.5">
+                                    <polygon points="450,244 438,236 438,252" transform="rotate(15 250 250)"/>
+                                    <polygon points="450,244 438,236 438,252" transform="rotate(135 250 250)"/>
+                                    <polygon points="450,244 438,236 438,252" transform="rotate(255 250 250)"/>
+                                </g>
+                                <circle r="5" fill="#ffba1a" filter="url(#rodaGlowE)">
+                                    <animateMotion dur="4s" repeatCount="indefinite"><mpath href="#rodaOrbitE"/></animateMotion>
+                                </circle>
+                                <circle r="12" fill="rgba(255,186,26,0.12)">
+                                    <animateMotion dur="4s" repeatCount="indefinite"><mpath href="#rodaOrbitE"/></animateMotion>
+                                </circle>
+                                <circle r="3" fill="rgba(255,186,26,0.5)">
+                                    <animateMotion dur="4s" begin="-2s" repeatCount="indefinite"><mpath href="#rodaOrbitE"/></animateMotion>
+                                </circle>
+                                <path id="rodaOrbitE" d="M250 50 A200 200 0 1 1 249.99 50" fill="none"/>
+                            </svg>
+                            <div class="roda__spinner">
+                                <div class="roda__arm roda__arm--1">
+                                    <div class="roda__card">
+                                        <span class="roda__card-num">01</span>
+                                        <div class="roda__card-icon"><i class="fas fa-laptop-code"></i></div>
+                                        <strong>Comprou software</strong>
+                                        <p>Precisa alimentar manualmente. Ninguém alimenta. Vira shelfware.</p>
+                                    </div>
+                                </div>
+                                <div class="roda__arm roda__arm--2">
+                                    <div class="roda__card">
+                                        <span class="roda__card-num">02</span>
+                                        <div class="roda__card-icon"><i class="fas fa-clipboard-list"></i></div>
+                                        <strong>Investiu meses em padronização</strong>
+                                        <p>Criou processos, manuais, fluxogramas. Ninguém seguiu. Virou documento morto.</p>
+                                    </div>
+                                </div>
+                                <div class="roda__arm roda__arm--3">
+                                    <div class="roda__card">
+                                        <span class="roda__card-num">03</span>
+                                        <div class="roda__card-icon"><i class="fas fa-table"></i></div>
+                                        <strong>Teve que voltar a usar planilhas</strong>
+                                        <p>O software não entregou tudo. A planilha voltou. E ninguém confia nos dados.</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="reframe-step__status"><i class="fas fa-times-circle"></i></div>
-                        </div>
-                        <div class="reframe-step__arrow reframe-step__arrow--fail"><i class="fas fa-arrow-down"></i></div>
-                        <div class="reframe-step reframe-step--fail">
-                            <div class="reframe-step__icon"><i class="fas fa-user-tie"></i></div>
-                            <div class="reframe-step__content">
-                                <h4>Contratou consultoria</h4>
-                                <p>Consultor vai embora. Conhecimento sai pela porta. Tudo volta ao caos.</p>
+                            <div class="roda__hub">
+                                <div class="roda__hub-outer">
+                                    <div class="roda__hub-inner">
+                                        <i class="fas fa-infinity"></i>
+                                    </div>
+                                </div>
+                                <strong>O ciclo se repete</strong>
+                                <span>Mais uma ferramenta abandonada.<br>Mais dinheiro desperdiçado.</span>
                             </div>
-                            <div class="reframe-step__status"><i class="fas fa-times-circle"></i></div>
-                        </div>
-                        <div class="reframe-step__arrow reframe-step__arrow--fail"><i class="fas fa-arrow-down"></i></div>
-                        <div class="reframe-step reframe-step--fail">
-                            <div class="reframe-step__icon"><i class="fas fa-table"></i></div>
-                            <div class="reframe-step__content">
-                                <h4>Montou planilha</h4>
-                                <p>Fica obsoleta em 2 semanas. Não escala. Ninguém confia nos dados.</p>
-                            </div>
-                            <div class="reframe-step__status"><i class="fas fa-times-circle"></i></div>
-                        </div>
-                    </div>
-                    <div class="reframe-verdict reframe-verdict--fail">
-                        <div class="reframe-verdict__icon"><i class="fas fa-rotate-left"></i></div>
-                        <div>
-                            <strong>Resultado: o ciclo se repete.</strong>
-                            <p>Mais uma ferramenta abandonada. Mais dinheiro desperdiçado.</p>
                         </div>
                     </div>
                 </div>
@@ -562,7 +1030,7 @@ export const pageHTML = `
                         <div class="reframe-orbit-card">
                             <div class="reframe-orbit-card__text">
                                 <h4>Funciona 24/7, mesmo sem você</h4>
-                                <p>Consultoria recorrente passiva. A operação não para quando o projeto acaba.</p>
+                                <p>A operação não para quando o projeto acaba. Os agentes continuam trabalhando 24/7.</p>
                             </div>
                             <div class="reframe-orbit-card__scene">
                                 <div class="rfm-clock">
@@ -603,8 +1071,6 @@ export const pageHTML = `
                                 <div class="rfm-rocket-trail"></div>
                             </div>
                             <div class="rfm-result-metrics">
-                                <div class="rfm-metric"><span class="rfm-metric__val">+47%</span><span class="rfm-metric__lbl">Produtividade</span></div>
-                                <div class="rfm-metric"><span class="rfm-metric__val">-60%</span><span class="rfm-metric__lbl">Retrabalho</span></div>
                                 <div class="rfm-metric"><span class="rfm-metric__val">ROI</span><span class="rfm-metric__lbl">Mês 1</span></div>
                             </div>
                         </div>
@@ -621,21 +1087,6 @@ export const pageHTML = `
     <!-- ═══════════════════════════════════════════════════════
          SECTION 3.5 - CATEGORY DEFINITION
          ═══════════════════════════════════════════════════════ -->
-    <section class="lp-section lp-section--alt" id="categoria" style="padding:80px 0;">
-        <div class="container">
-            <div class="lp-header" data-reveal style="margin-bottom:0;">
-                <span class="lp-badge lp-badge--gold">Uma nova categoria</span>
-                <h2 style="color:#fff;">Gestão Operada por IA com <span class="text-gold">Consultoria Recorrente Passiva</span></h2>
-                <p style="color:rgba(255,255,255,0.7); max-width:740px;">Os agentes trabalham de forma autônoma após a configuração. A gestão continua mesmo sem intervenção humana constante. Isso é consultoria recorrente passiva: a operação não para quando o projeto acaba.</p>
-                <div style="margin-top:32px; padding:24px 32px; background:rgba(255,186,26,0.08); border:1px solid rgba(255,186,26,0.2); border-radius:12px; max-width:740px; margin-left:auto; margin-right:auto; text-align:left;">
-                    <p style="color:rgba(255,255,255,0.85); font-size:16px; line-height:1.7; margin:0;">
-                        <i class="fas fa-chart-bar" style="color:#ffba1a; margin-right:8px;"></i>
-                        Apenas 11% das empresas usam IA agentic em produção <span style="color:rgba(255,255,255,0.5);">(Deloitte, 2025)</span>. 62% estão experimentando <span style="color:rgba(255,255,255,0.5);">(McKinsey)</span>. Quem definir a categoria agora, lidera.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- ═══════════════════════════════════════════════════════
          SECTION 4 - AGENTS (Orbital Hub)
@@ -1499,7 +1950,7 @@ export const pageHTML = `
                     <div class="hiw-cinema__card hiw-cinema__card--final">
                         <div class="hiw-cinema__text">
                             <h3>Operação ativada - para sempre</h3>
-                            <p>Consultoria recorrente passiva: os agentes trabalham 24 horas por dia, 7 dias por semana. A operação não para quando o projeto acaba.</p>
+                            <p>Os agentes trabalham 24 horas por dia, 7 dias por semana. A operação não para quando o projeto acaba.</p>
                         </div>
                         <div class="hiw-cinema__scene hiw-scene-launch">
                             <!-- Rocket -->
@@ -1523,11 +1974,6 @@ export const pageHTML = `
                             </div>
                             <!-- Results dashboard -->
                             <div class="hiw-results">
-                                <div class="hiw-result-card hiw-result-card--1">
-                                    <div class="hiw-result-card__icon"><i class="fas fa-chart-line"></i></div>
-                                    <div class="hiw-result-card__value">+47%</div>
-                                    <div class="hiw-result-card__label">Produtividade</div>
-                                </div>
                                 <div class="hiw-result-card hiw-result-card--2">
                                     <div class="hiw-result-card__icon"><i class="fas fa-clock"></i></div>
                                     <div class="hiw-result-card__value">24/7</div>
@@ -2346,44 +2792,119 @@ export const pageHTML = `
                 <h2>Funciona para <span class="text-gold">qualquer segmento</span></h2>
             </div>
 
-            <div class="segments-lp-grid" data-reveal-stagger>
-                <div class="segment-lp-card">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-gears"></i></div>
-                    <h3>Operações</h3>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Processos padronizados</li>
-                        <li><i class="fas fa-check"></i> Instruções de trabalho automáticas</li>
-                        <li><i class="fas fa-check"></i> Monitoramento 24/7</li>
-                    </ul>
+            <!-- Dual marquee de segmentos -->
+            <div class="seg-dual">
+                <!-- Fade edges -->
+                <div class="seg-dual__fade seg-dual__fade--l"></div>
+                <div class="seg-dual__fade seg-dual__fade--r"></div>
+
+                <!-- Row 1: scroll left -->
+                <div class="seg-dual__row seg-dual__row--left">
+                    <div class="seg-dual__pill"><i class="fas fa-gavel"></i><span>Jurídico</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-heart-pulse"></i><span>Saúde</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-calculator"></i><span>Contabilidade</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-industry"></i><span>Indústrias</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-bullhorn"></i><span>Agências</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-helmet-safety"></i><span>Construtoras</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-microchip"></i><span>Tecnologia</span></div>
+                    <!-- duplicate -->
+                    <div class="seg-dual__pill"><i class="fas fa-gavel"></i><span>Jurídico</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-heart-pulse"></i><span>Saúde</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-calculator"></i><span>Contabilidade</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-industry"></i><span>Indústrias</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-bullhorn"></i><span>Agências</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-helmet-safety"></i><span>Construtoras</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-microchip"></i><span>Tecnologia</span></div>
                 </div>
-                <div class="segment-lp-card">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-certificate"></i></div>
-                    <h3>Qualidade / ISO</h3>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Conformidade contínua</li>
-                        <li><i class="fas fa-check"></i> Auditorias automatizadas</li>
-                        <li><i class="fas fa-check"></i> Documentação sempre atualizada</li>
-                    </ul>
-                </div>
-                <div class="segment-lp-card">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-users"></i></div>
-                    <h3>RH / Pessoas</h3>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Descrição de cargos com IA</li>
-                        <li><i class="fas fa-check"></i> PDIs personalizados</li>
-                        <li><i class="fas fa-check"></i> Treinamento via WhatsApp</li>
-                    </ul>
-                </div>
-                <div class="segment-lp-card">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-crown"></i></div>
-                    <h3>Liderança</h3>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Planejamento estratégico</li>
-                        <li><i class="fas fa-check"></i> KPIs em tempo real</li>
-                        <li><i class="fas fa-check"></i> Decisões baseadas em dados</li>
-                    </ul>
+
+                <!-- Row 2: scroll right -->
+                <div class="seg-dual__row seg-dual__row--right">
+                    <div class="seg-dual__pill"><i class="fas fa-store"></i><span>Varejo</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-truck"></i><span>Logística</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-utensils"></i><span>Food Service</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-graduation-cap"></i><span>Educação</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-briefcase"></i><span>Consultorias</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-landmark"></i><span>Associações</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-seedling"></i><span>Agronegócio</span></div>
+                    <!-- duplicate -->
+                    <div class="seg-dual__pill"><i class="fas fa-store"></i><span>Varejo</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-truck"></i><span>Logística</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-utensils"></i><span>Food Service</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-graduation-cap"></i><span>Educação</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-briefcase"></i><span>Consultorias</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-landmark"></i><span>Associações</span></div>
+                    <div class="seg-dual__pill"><i class="fas fa-seedling"></i><span>Agronegócio</span></div>
                 </div>
             </div>
+
+            <style>
+                .seg-dual {
+                    position: relative;
+                    overflow: hidden;
+                    margin: 0 calc(-50vw + 50%);
+                    width: 100vw;
+                    padding: 8px 0;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 14px;
+                }
+                .seg-dual__fade {
+                    position: absolute;
+                    top: 0; bottom: 0;
+                    width: 120px;
+                    z-index: 2;
+                    pointer-events: none;
+                }
+                .seg-dual__fade--l { left: 0; background: linear-gradient(90deg, #0D1117, transparent); }
+                .seg-dual__fade--r { right: 0; background: linear-gradient(-90deg, #0D1117, transparent); }
+
+                .seg-dual__row {
+                    display: flex;
+                    gap: 14px;
+                    width: max-content;
+                }
+                .seg-dual__row--left { animation: segLeft 28s linear infinite; }
+                .seg-dual__row--right { animation: segRight 32s linear infinite; }
+
+                @keyframes segLeft {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-50%); }
+                }
+                @keyframes segRight {
+                    0% { transform: translateX(-50%); }
+                    100% { transform: translateX(0); }
+                }
+
+                .seg-dual__pill {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    background: rgba(255,186,26,0.04);
+                    border: 1px solid rgba(255,186,26,0.1);
+                    border-radius: 50px;
+                    padding: 14px 28px;
+                    white-space: nowrap;
+                    transition: all 0.3s ease;
+                }
+                .seg-dual__pill:hover {
+                    background: rgba(255,186,26,0.1);
+                    border-color: rgba(255,186,26,0.3);
+                    transform: scale(1.05);
+                    box-shadow: 0 4px 20px rgba(255,186,26,0.1);
+                }
+                .seg-dual__pill i {
+                    font-size: 18px;
+                    color: #ffba1a;
+                    width: 20px;
+                    text-align: center;
+                }
+                .seg-dual__pill span {
+                    font-size: 0.95rem;
+                    font-weight: 700;
+                    color: #fff;
+                    letter-spacing: 0.3px;
+                }
+            </style>
         </div>
     </section>
 
@@ -2392,62 +2913,285 @@ export const pageHTML = `
          ═══════════════════════════════════════════════════════ -->
     <section class="lp-section lp-section--light" id="sobre">
         <div class="container">
-            <div class="lp-header" data-reveal>
-                <span class="lp-badge lp-badge--light">Grupo GSN</span>
-                <h2>Quem está por trás</h2>
-            </div>
+            <div class="origin-layout" data-reveal>
+                <!-- Left: Narrative -->
+                <div class="origin-text">
+                    <h2>Onde <em>tudo</em> começou</h2>
 
-            <div class="about-intro" data-reveal>
-                <p>Maior grupo de consultoria em gestão e ISO do Brasil. <strong>30 anos de experiência</strong>, agora potencializados com IA para entregar resultado em escala.</p>
-            </div>
+                    <p>O Grupo GSN nasce a partir de uma constatação simples e incômoda: gerir empresas no Brasil exige mais do que boas intenções e teoria. Exige método, repertório e decisões sustentadas por experiências reais.</p>
 
-            <div class="founders-grid" data-reveal-stagger>
-                <div class="founder-card">
-                    <div class="founder-card__avatar">I</div>
-                    <h4>Igor</h4>
-                    <span>CEO</span>
-                </div>
-                <div class="founder-card">
-                    <div class="founder-card__avatar">D</div>
-                    <h4>Daniela</h4>
-                    <span>Operações</span>
-                </div>
-                <div class="founder-card">
-                    <div class="founder-card__avatar">C</div>
-                    <h4>Christian</h4>
-                    <span>Produto</span>
-                </div>
-                <div class="founder-card">
-                    <div class="founder-card__avatar">R</div>
-                    <h4>Rodrigo</h4>
-                    <span>Vendas</span>
-                </div>
-                <div class="founder-card">
-                    <div class="founder-card__avatar">O</div>
-                    <h4>Omar</h4>
-                    <span>Tecnologia</span>
-                </div>
-            </div>
+                    <p>Naquele momento, o ecossistema empresarial oferecia informação em excesso e direção de menos. Faltavam referências aplicáveis para quem precisava decidir sob pressão, estruturar crescimento e liderar empresas em ambientes complexos.</p>
 
-            <div class="about-stats" data-reveal>
-                <div class="about-stat">
-                    <strong>30 anos</strong>
-                    <span>de experiência</span>
+                    <p>O Grupo GSN surge para ocupar esse espaço, com um foco claro: <strong>aproximar prática e método da realidade de quem constrói negócios no país</strong>.</p>
+
+                    <p>Com o tempo, os desafios dos empresários evoluíram. As empresas cresceram, as decisões ganharam escala e as consequências se tornaram maiores. A atuação do GSN evoluiu junto — e o Orbit é a expressão máxima dessa evolução: <strong>30 anos de experiência operando através de IA</strong>.</p>
                 </div>
-                <div class="about-stat">
-                    <strong>8.000+</strong>
-                    <span>empresas atendidas</span>
-                </div>
-                <div class="about-stat">
-                    <strong>2.206</strong>
-                    <span>no Orbit</span>
-                </div>
-                <div class="about-stat">
-                    <strong>98%</strong>
-                    <span>satisfação</span>
+
+                <!-- Right: Director Carousel -->
+                <div class="origin-carousel">
+                    <div class="origin-carousel__track" id="originCarouselTrack">
+                        <div class="origin-director-card">
+                            <div class="origin-director-card__avatar">IG</div>
+                            <div class="origin-director-card__info">
+                                <h3>Igor Furniel</h3>
+                                <p>Fundador e CEO do Grupo GSN. 30 anos liderando operações de gestão e consultoria em milhares de empresas.</p>
+                                <div class="origin-director-card__links">
+                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="origin-director-card">
+                            <div class="origin-director-card__avatar">DA</div>
+                            <div class="origin-director-card__info">
+                                <h3>Dani Albuquerque</h3>
+                                <p>Diretora de Operações. Responsável pela entrega e qualidade — garante resultado mensurável para cada cliente.</p>
+                                <div class="origin-director-card__links">
+                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="origin-director-card">
+                            <div class="origin-director-card__avatar">CH</div>
+                            <div class="origin-director-card__info">
+                                <h3>Christian Hart</h3>
+                                <p>Diretor de Produto. Lidera o desenvolvimento da plataforma e a evolução dos 12 agentes de IA.</p>
+                                <div class="origin-director-card__links">
+                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="origin-director-card">
+                            <div class="origin-director-card__avatar">RO</div>
+                            <div class="origin-director-card__info">
+                                <h3>Rodrigo Furniel</h3>
+                                <p>Diretor de Vendas. Responsável pela expansão comercial, canais e parcerias estratégicas.</p>
+                                <div class="origin-director-card__links">
+                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="origin-director-card">
+                            <div class="origin-director-card__avatar">OM</div>
+                            <div class="origin-director-card__info">
+                                <h3>Omar</h3>
+                                <p>Diretor de Tecnologia. Arquiteto da infraestrutura que garante performance, segurança e escala.</p>
+                                <div class="origin-director-card__links">
+                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="origin-carousel__nav">
+                        <button class="origin-carousel__btn" id="originPrev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+                        <div class="origin-carousel__dots" id="originDots"></div>
+                        <button class="origin-carousel__btn" id="originNext" aria-label="Próximo"><i class="fas fa-chevron-right"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <style>
+            .origin-layout {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 64px;
+                align-items: start;
+            }
+            .origin-text h2 {
+                font-size: clamp(28px, 4vw, 42px);
+                font-weight: 800;
+                color: #1a1d23;
+                margin-bottom: 28px;
+                line-height: 1.15;
+            }
+            .origin-text h2 em {
+                font-style: italic;
+                color: var(--primary-dark);
+            }
+            .origin-text p {
+                font-size: 16px;
+                color: #4B5563;
+                line-height: 1.7;
+                margin-bottom: 18px;
+            }
+            .origin-text strong {
+                color: #1a1d23;
+            }
+
+            /* Director carousel */
+            .origin-carousel {
+                position: relative;
+            }
+            .origin-carousel__track {
+                position: relative;
+                overflow: hidden;
+                border-radius: 20px;
+            }
+            .origin-director-card {
+                display: none;
+                flex-direction: column;
+                background: linear-gradient(145deg, #1a1d23 0%, #0D1117 100%);
+                border-radius: 20px;
+                overflow: hidden;
+                min-height: 400px;
+            }
+            .origin-director-card.active {
+                display: flex;
+                animation: originFadeIn 0.4s ease;
+            }
+            @keyframes originFadeIn {
+                from { opacity: 0; transform: translateX(20px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            .origin-director-card__avatar {
+                width: 100%;
+                height: 240px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 72px;
+                font-weight: 900;
+                color: rgba(255,255,255,0.06);
+                background: linear-gradient(145deg, #1F2937 0%, #111827 100%);
+                position: relative;
+            }
+            .origin-director-card__avatar::after {
+                content: attr(data-initials);
+                position: absolute;
+                font-size: 180px;
+                font-weight: 900;
+                color: rgba(255,255,255,0.03);
+                letter-spacing: -8px;
+            }
+            .origin-director-card__info {
+                padding: 28px 28px 24px;
+            }
+            .origin-director-card__info h3 {
+                font-size: 26px;
+                font-weight: 800;
+                color: var(--primary);
+                margin-bottom: 8px;
+            }
+            .origin-director-card__info p {
+                font-size: 15px;
+                color: rgba(255,255,255,0.65);
+                line-height: 1.6;
+                margin-bottom: 16px;
+            }
+            .origin-director-card__links {
+                display: flex;
+                gap: 10px;
+            }
+            .origin-director-card__links a {
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                border: 1px solid rgba(255,255,255,0.15);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: rgba(255,255,255,0.5);
+                font-size: 14px;
+                transition: all 0.2s;
+            }
+            .origin-director-card__links a:hover {
+                border-color: var(--primary);
+                color: var(--primary);
+            }
+
+            /* Carousel nav */
+            .origin-carousel__nav {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 16px;
+                margin-top: 20px;
+            }
+            .origin-carousel__btn {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                border: 1px solid #D1D5DB;
+                background: #fff;
+                color: #6B7280;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                font-size: 14px;
+                transition: all 0.2s;
+            }
+            .origin-carousel__btn:hover {
+                border-color: var(--primary);
+                color: var(--primary);
+            }
+            .origin-carousel__dots {
+                display: flex;
+                gap: 8px;
+            }
+            .origin-carousel__dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: #D1D5DB;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+            .origin-carousel__dot.active {
+                background: var(--primary);
+                width: 24px;
+                border-radius: 4px;
+            }
+
+            @media (max-width: 768px) {
+                .origin-layout {
+                    grid-template-columns: 1fr;
+                    gap: 40px;
+                }
+                .origin-director-card { min-height: 340px; }
+                .origin-director-card__avatar { height: 180px; }
+                .origin-director-card__info h3 { font-size: 22px; }
+            }
+        </style>
+
+        <script>
+        (function() {
+            var cards = document.querySelectorAll('.origin-director-card');
+            var dotsContainer = document.getElementById('originDots');
+            var prevBtn = document.getElementById('originPrev');
+            var nextBtn = document.getElementById('originNext');
+            if (!cards.length || !dotsContainer) return;
+
+            var current = 0;
+            var total = cards.length;
+
+            // Create dots
+            for (var i = 0; i < total; i++) {
+                var dot = document.createElement('div');
+                dot.className = 'origin-carousel__dot' + (i === 0 ? ' active' : '');
+                dot.dataset.index = i;
+                dot.addEventListener('click', function() { goTo(parseInt(this.dataset.index)); });
+                dotsContainer.appendChild(dot);
+            }
+
+            function goTo(index) {
+                cards[current].classList.remove('active');
+                dotsContainer.children[current].classList.remove('active');
+                current = (index + total) % total;
+                cards[current].classList.add('active');
+                dotsContainer.children[current].classList.add('active');
+            }
+
+            // Init first card
+            cards[0].classList.add('active');
+
+            prevBtn.addEventListener('click', function() { goTo(current - 1); });
+            nextBtn.addEventListener('click', function() { goTo(current + 1); });
+
+            // Auto-advance every 5s
+            setInterval(function() { goTo(current + 1); }, 5000);
+        })();
+        </script>
     </section>
 
     <!-- ═══════════════════════════════════════════════════════
@@ -2553,7 +3297,7 @@ export const pageHTML = `
                             </div>
                             <div class="cost-total">
                                 <span class="cost-total__label">A partir de</span>
-                                <span class="cost-total__value">R$ 997/mês</span>
+                                <span class="cost-total__value">R$ 1.200/mês</span>
                             </div>
                             <div class="cost-orbit-benefits">
                                 <div class="cost-orbit-benefit"><i class="fas fa-star"></i> Coordenado pela Olívia (IA)</div>
@@ -2572,7 +3316,7 @@ export const pageHTML = `
                     <i class="fas fa-piggy-bank"></i>
                     <div class="cost-savings__text">
                         <strong>Economia de até 99% vs. time tradicional</strong>
-                        <span>R$ 997/mês vs. R$ 108-204k/mês em salários e consultorias</span>
+                        <span>R$ 1.200/mês vs. R$ 108-204k/mês em salários e consultorias</span>
                     </div>
                 </div>
             </div>
@@ -2633,392 +3377,53 @@ export const pageHTML = `
         </style>
     </section>
 
-    <!-- ═══════════════════════════════════════════════════════
-         SECTION 10 - GUARANTEE
-         ═══════════════════════════════════════════════════════ -->
-    <section class="lp-section lp-section--light" id="garantia">
-        <div class="container">
-            <div class="guarantee-lp" data-reveal="scale">
-                <!-- Left: Animated Contract Scene -->
-                <div class="guarantee-lp__scene">
-                    <div class="guarantee-lp__particles">
-                        <span></span><span></span><span></span><span></span><span></span><span></span>
-                    </div>
-
-                    <div class="gtd-contract" id="gtdContractLP">
-                        <!-- Paper -->
-                        <div class="gtd-paper">
-                            <div class="gtd-paper__header">
-                                <div class="gtd-paper__logo">O</div>
-                                <div class="gtd-paper__title">Termo de Garantia</div>
-                            </div>
-                            <div class="gtd-paper__subtitle">Orbit Gestão - 90 dias</div>
-                            <div class="gtd-paper__lines">
-                                <div class="gtd-line gtd-line--1"></div>
-                                <div class="gtd-line gtd-line--2"></div>
-                                <div class="gtd-line gtd-line--3"></div>
-                                <div class="gtd-line gtd-line--4"></div>
-                                <div class="gtd-line gtd-line--5"></div>
-                            </div>
-                            <div class="gtd-paper__separator"></div>
-                            <!-- Signature area -->
-                            <div class="gtd-signature">
-                                <div class="gtd-signature__label">Assinatura</div>
-                                <div class="gtd-signature__line">
-                                    <svg class="gtd-signature__svg" viewBox="0 0 200 50" fill="none">
-                                        <path class="gtd-sig-path" d="M12,38 C16,38 18,18 24,22 C30,26 28,36 36,30 C44,24 40,14 50,18 C56,20 54,32 62,26 C68,22 72,16 78,20 C84,24 80,34 88,28 L92,26" stroke="#ffba1a" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path class="gtd-sig-path gtd-sig-path--2" d="M88,28 C94,22 100,34 108,24 C114,16 118,30 126,22 C132,16 128,10 138,16 C144,20 148,28 156,18 C162,10 158,22 168,16 C174,12 178,20 184,14 L188,12" stroke="#ffba1a" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path class="gtd-sig-underline" d="M20,44 C60,42 120,40 180,43" stroke="#ffba1a" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.4"/>
-                                    </svg>
-                                </div>
-                            </div>
-                            <!-- Digital stamp -->
-                            <div class="gtd-stamp-area">
-                                <div class="gtd-check-badge">
-                                    <i class="fas fa-circle-check"></i> Assinado digitalmente
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Seal -->
-                        <div class="gtd-seal">
-                            <div class="gtd-seal__circle">
-                                <i class="fas fa-shield-halved"></i>
-                                <span>Garantido</span>
-                            </div>
-                            <div class="gtd-seal__ring"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right: Content -->
-                <div class="guarantee-lp__content">
-                    <div class="guarantee-lp__badge">
-                        <i class="fas fa-shield-halved"></i> Risco Zero
-                    </div>
-                    <h2>Garantia de 90 dias</h2>
-                    <p>Se em 90 dias o Orbit não gerar resultado mensurável na sua empresa, devolvemos 100% do seu investimento. Sem burocracia, sem letras miúdas.</p>
-                    <ul class="guarantee-lp__checks">
-                        <li><i class="fas fa-circle-check"></i> Resultados mensuráveis em até 90 dias</li>
-                        <li><i class="fas fa-circle-check"></i> Devolução integral sem questionamentos</li>
-                        <li><i class="fas fa-circle-check"></i> Sem contrato de fidelidade</li>
-                        <li><i class="fas fa-circle-check"></i> Cancele quando quiser</li>
-                    </ul>
-                    <div>
-                        <a href="#contato" class="btn-gold">QUERO TESTAR SEM RISCO</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <style>
-            /* ═══ GUARANTEE ANIMATED CONTRACT ═══ */
-            .gtd-contract {
-                position: relative;
-                width: 300px;
-                margin: 0 auto;
-                animation: gtd-float 6s ease-in-out infinite;
-            }
-            @keyframes gtd-float {
-                0%, 100% { transform: translateY(0); }
-                50% { transform: translateY(-8px); }
-            }
-
-            /* Paper */
-            .gtd-paper {
-                background: #fff;
-                border-radius: 14px;
-                padding: 28px 24px 20px;
-                box-shadow:
-                    0 2px 8px rgba(0,0,0,0.08),
-                    0 12px 48px rgba(0,0,0,0.25),
-                    0 0 0 1px rgba(255,255,255,0.06),
-                    0 0 80px rgba(255,186,26,0.06);
-                position: relative;
-                z-index: 2;
-            }
-            .gtd-paper::after {
-                content: '';
-                position: absolute;
-                top: 0; right: 0;
-                width: 24px; height: 24px;
-                background: linear-gradient(225deg, #E5E7EB 50%, transparent 50%);
-                border-radius: 0 14px 0 0;
-            }
-            .gtd-paper__header {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-                margin-bottom: 6px;
-            }
-            .gtd-paper__logo {
-                width: 30px;
-                height: 30px;
-                border-radius: 8px;
-                background: linear-gradient(135deg, #ffba1a, #ffca4a);
-                color: #000;
-                font-weight: 900;
-                font-size: 15px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                box-shadow: 0 2px 8px rgba(255,186,26,0.3);
-            }
-            .gtd-paper__title {
-                font-size: 14px;
-                font-weight: 800;
-                color: #1A1D23;
-            }
-            .gtd-paper__subtitle {
-                font-size: 10px;
-                color: #9CA3AF;
-                margin-bottom: 16px;
-                padding-left: 40px;
-            }
-
-            /* Text lines */
-            .gtd-paper__lines {
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-                margin-bottom: 16px;
-            }
-            .gtd-line {
-                height: 6px;
-                background: #F3F4F6;
-                border-radius: 3px;
-                transform-origin: left;
-                transform: scaleX(0);
-            }
-            .gtd-contract.gtd-active .gtd-line--1 { animation: gtd-line-draw 0.4s 0.2s forwards; width: 100%; }
-            .gtd-contract.gtd-active .gtd-line--2 { animation: gtd-line-draw 0.4s 0.4s forwards; width: 75%; }
-            .gtd-contract.gtd-active .gtd-line--3 { animation: gtd-line-draw 0.4s 0.6s forwards; width: 90%; }
-            .gtd-contract.gtd-active .gtd-line--4 { animation: gtd-line-draw 0.4s 0.8s forwards; width: 60%; }
-            .gtd-contract.gtd-active .gtd-line--5 { animation: gtd-line-draw 0.4s 1.0s forwards; width: 80%; background: linear-gradient(90deg, #FEF3C7, #FDE68A); }
-            @keyframes gtd-line-draw {
-                from { transform: scaleX(0); }
-                to { transform: scaleX(1); }
-            }
-
-            .gtd-paper__separator {
-                height: 1px;
-                background: #E5E7EB;
-                margin: 16px 0 12px;
-            }
-
-            /* Signature */
-            .gtd-signature {
-                margin-bottom: 14px;
-            }
-            .gtd-signature__label {
-                font-size: 9px;
-                font-weight: 600;
-                color: #9CA3AF;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-                margin-bottom: 4px;
-            }
-            .gtd-signature__line {
-                height: 50px;
-                border-bottom: 1px solid #E5E7EB;
-                position: relative;
-                overflow: hidden;
-            }
-            .gtd-signature__svg {
-                position: absolute;
-                bottom: 2px;
-                left: 0;
-                width: 100%;
-                height: 50px;
-            }
-            .gtd-sig-path {
-                stroke-dasharray: 400;
-                stroke-dashoffset: 400;
-            }
-            .gtd-sig-path--2 {
-                stroke-dasharray: 400;
-                stroke-dashoffset: 400;
-            }
-            .gtd-sig-underline {
-                stroke-dasharray: 200;
-                stroke-dashoffset: 200;
-            }
-            .gtd-contract.gtd-active .gtd-sig-path {
-                animation: gtd-sign-draw 1.4s 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-            }
-            .gtd-contract.gtd-active .gtd-sig-path--2 {
-                animation: gtd-sign-draw 1.2s 2.0s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-            }
-            .gtd-contract.gtd-active .gtd-sig-underline {
-                animation: gtd-sign-draw 0.8s 2.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-            }
-            @keyframes gtd-sign-draw {
-                to { stroke-dashoffset: 0; }
-            }
-
-            /* Digital stamp badge */
-            .gtd-stamp-area {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            .gtd-contract.gtd-active .gtd-stamp-area {
-                animation: gtd-stamp-pop 0.5s 3.2s forwards;
-            }
-            @keyframes gtd-stamp-pop {
-                0% { opacity: 0; transform: scale(0.8); }
-                60% { transform: scale(1.08); }
-                100% { opacity: 1; transform: scale(1); }
-            }
-            .gtd-check-badge {
-                display: inline-flex;
-                align-items: center;
-                gap: 6px;
-                font-size: 11px;
-                font-weight: 600;
-                color: #16A34A;
-                background: #F0FDF4;
-                border: 1px solid #BBF7D0;
-                padding: 5px 12px;
-                border-radius: 20px;
-            }
-            .gtd-check-badge i { font-size: 12px; }
-
-            /* ═══ SEAL ═══ */
-            .gtd-seal {
-                position: absolute;
-                bottom: -10px;
-                right: -15px;
-                z-index: 4;
-                opacity: 0;
-                transform: scale(0) rotate(-20deg);
-            }
-            .gtd-contract.gtd-active .gtd-seal {
-                animation: gtd-seal-slam 0.6s 3.4s forwards;
-            }
-            @keyframes gtd-seal-slam {
-                0% { opacity: 0; transform: scale(0) rotate(-20deg); }
-                50% { opacity: 1; transform: scale(1.2) rotate(5deg); }
-                70% { transform: scale(0.95) rotate(-2deg); }
-                100% { opacity: 1; transform: scale(1) rotate(0deg); }
-            }
-            .gtd-seal__circle {
-                width: 72px;
-                height: 72px;
-                border-radius: 50%;
-                background: linear-gradient(135deg, #ffba1a, #ffca4a);
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                box-shadow: 0 4px 20px rgba(255,186,26,0.4), inset 0 1px 2px rgba(255,255,255,0.3);
-                position: relative;
-                z-index: 2;
-            }
-            .gtd-seal__circle i {
-                font-size: 18px;
-                color: #000;
-                margin-bottom: 2px;
-            }
-            .gtd-seal__circle span {
-                font-size: 9px;
-                font-weight: 800;
-                color: #000;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-            }
-            .gtd-seal__ring {
-                position: absolute;
-                inset: -6px;
-                border-radius: 50%;
-                border: 2px dashed rgba(255,186,26,0.3);
-                animation: gtd-ring-spin 10s linear infinite;
-            }
-            @keyframes gtd-ring-spin {
-                from { transform: rotate(0deg); }
-                to { transform: rotate(360deg); }
-            }
-
-            /* Responsive */
-            @media (max-width: 768px) {
-                .gtd-contract { width: 260px; }
-                .gtd-paper { padding: 22px 18px 16px; }
-                .gtd-seal__circle { width: 60px; height: 60px; }
-                .gtd-seal__circle i { font-size: 15px; }
-            }
-            @media (max-width: 480px) {
-                .gtd-contract { width: 240px; }
-            }
-        </style>
-
-        <script>
-        (function() {
-            var contract = document.getElementById('gtdContractLP');
-            if (!contract) return;
-            var obs = new IntersectionObserver(function(entries) {
-                entries.forEach(function(e) {
-                    if (e.isIntersecting) {
-                        contract.classList.add('gtd-active');
-                        obs.unobserve(e.target);
-                    }
-                });
-            }, { threshold: 0.3 });
-            obs.observe(contract);
-        })();
-        </script>
-    </section>
+    <!-- Guarantee section removed -->
 
     <!-- ═══════════════════════════════════════════════════════
          SECTION 11 - FAQ
          ═══════════════════════════════════════════════════════ -->
-    <section class="lp-section lp-section--dark" id="faq">
+    <section class="faq-section section--light" id="faq">
         <div class="container">
-            <div class="lp-header" data-reveal>
-                <span class="lp-badge lp-badge--gold">Dúvidas</span>
+            <div class="section-header" data-reveal>
                 <h2>Perguntas frequentes</h2>
             </div>
 
-            <div class="faq-lp-list" data-reveal-stagger>
-                <details class="faq-lp-item">
+            <div class="faq-list" data-reveal-stagger>
+                <details class="faq-item">
                     <summary>O que é o Orbit?</summary>
-                    <div class="faq-answer">
+                    <div class="faq-item__answer">
                         <p>O Orbit é uma plataforma de gestão empresarial com 12 agentes de IA especializados. Não é mais um software que você precisa alimentar - são agentes que constroem e operam a gestão da sua empresa, 24/7.</p>
                     </div>
                 </details>
-                <details class="faq-lp-item">
+
+                <details class="faq-item">
                     <summary>Para quem é indicado?</summary>
-                    <div class="faq-answer">
-                        <p>Para empresas de 5 a 100+ funcionários, de qualquer segmento, que querem profissionalizar a gestão sem depender exclusivamente de software que ninguém usa.</p>
+                    <div class="faq-item__answer">
+                        <p>Para empresas de 20 a 300 funcionários, de qualquer segmento, que querem profissionalizar a gestão sem depender exclusivamente de consultoria ou software que ninguém usa.</p>
                     </div>
                 </details>
-                <details class="faq-lp-item">
+
+                <details class="faq-item">
                     <summary>Quanto tempo leva para começar?</summary>
-                    <div class="faq-answer">
+                    <div class="faq-item__answer">
                         <p>Cadastro em 5 minutos. Planejamento e processos em 1 tarde. Operação completa rodando em 7 dias.</p>
                     </div>
                 </details>
-                <details class="faq-lp-item">
+
+                <details class="faq-item">
                     <summary>É mais um software de gestão?</summary>
-                    <div class="faq-answer">
+                    <div class="faq-item__answer">
                         <p>Não. Software é ferramenta vazia que espera ser alimentada. O Orbit tem agentes de IA que fazem o trabalho pesado - você valida e decide.</p>
                     </div>
                 </details>
-                <details class="faq-lp-item">
+
+                <details class="faq-item">
                     <summary>Funciona para o meu segmento?</summary>
-                    <div class="faq-answer">
-                        <p>Sim. Em 30 anos, já atendemos 8.000+ empresas de todos os segmentos. Gestão é universal. O que muda é o conteúdo - e é exatamente isso que a IA personaliza.</p>
+                    <div class="faq-item__answer">
+                        <p>Sim. Em 30 anos, já atendemos +9.000 empresas de todos os segmentos. Gestão é universal. O que muda é o conteúdo - e é exatamente isso que a IA personaliza.</p>
                     </div>
                 </details>
-                <details class="faq-lp-item">
-                    <summary>Meu time vai precisar aprender a usar?</summary>
-                    <div class="faq-answer">
-                        <p>Seu time nem precisa logar. Processos e treinamentos chegam pelo WhatsApp - que todo mundo já usa.</p>
-                    </div>
-                </details>
-                <details class="faq-lp-item">
-                    <summary>E se não funcionar?</summary>
-                    <div class="faq-answer">
-                        <p>Garantia de 90 dias. Se não gerar resultado, devolvemos seu investimento. Sem letras miúdas.</p>
-                    </div>
-                </details>
+
             </div>
         </div>
     </section>
@@ -3045,7 +3450,7 @@ export const pageHTML = `
                     <span>empresas</span>
                 </div>
                 <div class="lp-cta-final__stat">
-                    <strong>2.206</strong>
+                    <strong>+2.900</strong>
                     <span>no Orbit</span>
                 </div>
             </div>

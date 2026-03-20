@@ -1,53 +1,54 @@
 // Auto-generated
 export const pageHTML = `
     <!-- ═══ HERO ═══ -->
-    <section class="sobre-hero">
-        <div class="sobre-hero__orb sobre-hero__orb--1"></div>
-        <div class="sobre-hero__orb sobre-hero__orb--2"></div>
-        <div class="container" data-reveal>
-            <span class="section-badge">Sobre o Orbit</span>
-            <h1>30 anos de gestão empresarial.<br><em>Agora com IA.</em></h1>
-            <p>O Orbit nasceu do Grupo GSN, o maior grupo de consultoria em gestão e ISO do Brasil. Nossa missão: transformar a gestão empresarial com agentes de IA especializados.</p>
+    <section class="lp-hero" id="hero">
+        <div class="lp-hero__bg-image" style="opacity:0.35;">
+            <img src="/images/sobre-hero.jpg" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;">
+        </div>
+        <div class="lp-hero__glow lp-hero__glow--1"></div>
+        <div class="lp-hero__glow lp-hero__glow--2"></div>
+        <div class="container">
+            <span class="hero-zoom__badge" data-reveal>Sobre o Orbit</span>
+
+            <h1 class="hero-zoom__title" data-reveal>
+                30 anos de gestão empresarial.<br>
+                Agora com um <span class="hero-zoom__title-highlight">time de IA</span> que
+                <span class="hero-rotate" id="heroRotate">
+                    <span class="hero-rotate__word hero-rotate__word--active">transforma.</span>
+                    <span class="hero-rotate__word">executa.</span>
+                    <span class="hero-rotate__word">escala.</span>
+                    <span class="hero-rotate__word">opera 24/7.</span>
+                    <span class="hero-rotate__word">nunca para.</span>
+                </span>
+            </h1>
+
+            <p class="hero-zoom__subtitle" data-reveal>O Orbit nasceu do Grupo GSN — o maior grupo de consultoria em gestão e ISO do Brasil. Nossa missão: transformar a gestão empresarial com <strong style="color:#ffba1a;">12 agentes de IA especializados</strong>, coordenados pela Olívia.</p>
+
+            <div class="hero-zoom__credentials" data-reveal>
+                <div class="hero-zoom__credential">
+                    <strong>30 anos</strong>
+                    <span>de experiência</span>
+                </div>
+                <div class="hero-zoom__credential-divider"></div>
+                <div class="hero-zoom__credential">
+                    <strong>8.000+</strong>
+                    <span>empresas atendidas</span>
+                </div>
+                <div class="hero-zoom__credential-divider"></div>
+                <div class="hero-zoom__credential">
+                    <strong>+2.900</strong>
+                    <span>no Orbit</span>
+                </div>
+            </div>
+
+            <div class="hero-zoom__ctas" data-reveal style="margin-top:40px;">
+                <a href="/#contato-form" class="btn btn-primary btn-lg hero-cta-glow">QUERO CONHECER O TIME DE IA</a>
+            </div>
+            <p class="hero-zoom__note" data-reveal>⏱️ 2 min • 100% gratuito • Sem compromisso</p>
         </div>
     </section>
 
-    <!-- ═══ NÚMEROS ═══ -->
-    <section class="numeros-section">
-        <div class="container">
-            <div class="numeros-grid" id="numerosGrid">
-                <div class="numero-card">
-                    <div class="numero-icon"><i class="fas fa-calendar-check"></i></div>
-                    <span class="numero" data-count="30">0</span>
-                    <span class="numero-label">Anos de experiência</span>
-                </div>
-                <div class="numero-card">
-                    <div class="numero-icon"><i class="fas fa-building"></i></div>
-                    <span class="numero" data-count="8000" data-suffix="+">0</span>
-                    <span class="numero-label">Empresas atendidas</span>
-                </div>
-                <div class="numero-card">
-                    <div class="numero-icon"><i class="fas fa-chart-line"></i></div>
-                    <span class="numero" data-count="2206">0</span>
-                    <span class="numero-label">Empresas no Orbit</span>
-                </div>
-                <div class="numero-card">
-                    <div class="numero-icon"><i class="fas fa-star"></i></div>
-                    <span class="numero" data-count="98" data-suffix="%">0</span>
-                    <span class="numero-label">De satisfação</span>
-                </div>
-                <div class="numero-card">
-                    <div class="numero-icon"><i class="fas fa-handshake"></i></div>
-                    <span class="numero" data-count="30" data-suffix="+">0</span>
-                    <span class="numero-label">Consultorias parceiras</span>
-                </div>
-                <div class="numero-card">
-                    <div class="numero-icon"><i class="fas fa-robot"></i></div>
-                    <span class="numero" data-count="12">0</span>
-                    <span class="numero-label">Agentes de IA especializados</span>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Números section removed -->
 
     <!-- ═══ NOSSA HISTÓRIA - Cinema Timeline ═══ -->
     <section class="historia-section" id="historiaCinema">
@@ -63,14 +64,14 @@ export const pageHTML = `
                     <div class="hiw-cinema__rail-fill" id="histRailFill"></div>
                 </div>
 
-                <!-- Step 1 -->
+                <!-- Step 1: Fundação -->
                 <div class="hiw-cinema__step" data-hist-step>
                     <div class="hiw-cinema__dot">01</div>
                     <div class="hiw-cinema__card">
                         <div class="hiw-cinema__info">
-                            <span class="hiw-cinema__label">Há 30 anos</span>
-                            <h3>O início</h3>
-                            <p>Grupo GSN nasce como consultoria de gestão e ISO, levando profissionalização para empresas de todos os portes e segmentos do Brasil.</p>
+                            <span class="hiw-cinema__label">1996 — A fundação</span>
+                            <h3>Nasce o Grupo GSN</h3>
+                            <p>Uma consultoria de gestão e ISO com um propósito claro: levar método e profissionalização para empresas que precisavam crescer com estrutura.</p>
                         </div>
                         <div class="hist-scene hist-scene--build">
                             <i class="fas fa-building hist-icon"></i>
@@ -82,14 +83,14 @@ export const pageHTML = `
                     </div>
                 </div>
 
-                <!-- Step 2 -->
+                <!-- Step 2: Escala -->
                 <div class="hiw-cinema__step" data-hist-step>
                     <div class="hiw-cinema__dot">02</div>
                     <div class="hiw-cinema__card">
                         <div class="hiw-cinema__info">
-                            <span class="hiw-cinema__label">8.000+ empresas depois</span>
-                            <h3>Liderança nacional</h3>
-                            <p>O Grupo GSN se consolida como o maior grupo de consultoria em gestão do Brasil, com uma rede de mais de 30 consultorias parceiras.</p>
+                            <span class="hiw-cinema__label">8.000+ empresas atendidas</span>
+                            <h3>Maior grupo do Brasil</h3>
+                            <p>Consolidamos a liderança nacional em consultoria de gestão, com uma rede de mais de 30 consultorias parceiras operando em todo o país.</p>
                         </div>
                         <div class="hist-scene hist-scene--network">
                             <div class="hist-node hist-node--center"><i class="fas fa-crown"></i></div>
@@ -102,14 +103,14 @@ export const pageHTML = `
                     </div>
                 </div>
 
-                <!-- Step 3 -->
+                <!-- Step 3: Digital -->
                 <div class="hiw-cinema__step" data-hist-step>
                     <div class="hiw-cinema__dot">03</div>
                     <div class="hiw-cinema__card">
                         <div class="hiw-cinema__info">
-                            <span class="hiw-cinema__label">A evolução</span>
-                            <h3>Do presencial ao digital</h3>
-                            <p>A plataforma é digitalizada, passando a atender milhares de empresas de forma escalável sem perder a essência consultiva.</p>
+                            <span class="hiw-cinema__label">A transformação digital</span>
+                            <h3>Plataforma online</h3>
+                            <p>30 anos de metodologia são digitalizados. A plataforma passa a atender milhares de empresas de forma escalável, sem perder a essência consultiva.</p>
                         </div>
                         <div class="hist-scene hist-scene--digital">
                             <div class="hist-screen">
@@ -123,22 +124,22 @@ export const pageHTML = `
                     </div>
                 </div>
 
-                <!-- Step 4 -->
+                <!-- Step 4: IA com Olívia -->
                 <div class="hiw-cinema__step" data-hist-step>
                     <div class="hiw-cinema__dot">04</div>
                     <div class="hiw-cinema__card">
                         <div class="hiw-cinema__info">
-                            <span class="hiw-cinema__label">2026 - O Orbit</span>
-                            <h3>IA integrada à gestão</h3>
-                            <p>12 agentes de IA especializados são integrados à plataforma. Consultoria recorrente, automatizada e acessível para qualquer empresa.</p>
+                            <span class="hiw-cinema__label">2026 — O Orbit</span>
+                            <h3>Nasce a Olívia e os 12 agentes</h3>
+                            <p>A IA é integrada à gestão. Olívia coordena 12 agentes especializados que operam 24/7 nas empresas. Consultoria recorrente, automatizada e acessível.</p>
                         </div>
                         <div class="hist-scene hist-scene--ai">
                             <div class="hist-orbit-ring">
-                                <div class="hist-orbit-center"><i class="fas fa-robot"></i></div>
-                                <div class="hist-agent"><i class="fas fa-cog"></i></div>
-                                <div class="hist-agent"><i class="fas fa-chart-bar"></i></div>
+                                <div class="hist-orbit-center"><img src="/images/olivia.png" alt="Olívia" style="width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center 15%;"></div>
+                                <div class="hist-agent"><i class="fas fa-chess-king"></i></div>
+                                <div class="hist-agent"><i class="fas fa-sitemap"></i></div>
                                 <div class="hist-agent"><i class="fas fa-users"></i></div>
-                                <div class="hist-agent"><i class="fas fa-tasks"></i></div>
+                                <div class="hist-agent"><i class="fas fa-chart-line"></i></div>
                                 <div class="hist-agent"><i class="fas fa-shield-halved"></i></div>
                                 <div class="hist-agent"><i class="fas fa-lightbulb"></i></div>
                             </div>
@@ -153,102 +154,306 @@ export const pageHTML = `
         </div>
     </section>
 
-    <!-- ═══ ECOSSISTEMA ═══ -->
-    <section class="ecossistema-section">
-        <div class="container">
-            <div class="section-header" data-reveal>
-                <span class="section-badge" style="background:rgba(255,186,26,0.1);color:#ffba1a;border:1px solid rgba(255,186,26,0.2);display:inline-block;padding:8px 20px;border-radius:50px;font-size:0.85rem;font-weight:600;margin-bottom:16px;">Grupo GSN</span>
-                <h2>Como tudo se conecta</h2>
-                <p>O ecossistema completo do Grupo GSN</p>
-            </div>
+    <!-- Ecossistema removed -->
 
-            <div class="ecossistema-grid" data-reveal-stagger>
-                <div class="eco-card">
-                    <div class="eco-icon eco-icon--orbit"><i class="fas fa-robot"></i></div>
-                    <h3>Orbit</h3>
-                    <p>Plataforma central SaaS com 12 agentes de IA especializados em gestão empresarial.</p>
-                    <span class="eco-tag">CONVERSÃO</span>
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 8 - ABOUT / WHO'S BEHIND
+         ═══════════════════════════════════════════════════════ -->
+    <section class="lp-section lp-section--light" id="sobre">
+        <div class="container">
+            <div class="origin-layout" data-reveal>
+                <!-- Left: Narrative -->
+                <div class="origin-text">
+                    <h2>Onde <em>tudo</em> começou</h2>
+
+                    <p>O Grupo GSN nasce a partir de uma constatação simples e incômoda: gerir empresas no Brasil exige mais do que boas intenções e teoria. Exige método, repertório e decisões sustentadas por experiências reais.</p>
+
+                    <p>Naquele momento, o ecossistema empresarial oferecia informação em excesso e direção de menos. Faltavam referências aplicáveis para quem precisava decidir sob pressão, estruturar crescimento e liderar empresas em ambientes complexos.</p>
+
+                    <p>O Grupo GSN surge para ocupar esse espaço, com um foco claro: <strong>aproximar prática e método da realidade de quem constrói negócios no país</strong>.</p>
+
+                    <p>Com o tempo, os desafios dos empresários evoluíram. As empresas cresceram, as decisões ganharam escala e as consequências se tornaram maiores. A atuação do GSN evoluiu junto — e o Orbit é a expressão máxima dessa evolução: <strong>30 anos de experiência operando através de IA</strong>.</p>
                 </div>
-                <div class="eco-card">
-                    <div class="eco-icon eco-icon--templum"><i class="fas fa-building"></i></div>
-                    <h3>Templum</h3>
-                    <p>Consultoria de gestão e conformidade. A expertise humana por trás de 30 anos de mercado.</p>
-                    <span class="eco-tag">OPERAÇÃO</span>
-                </div>
-                <div class="eco-card">
-                    <div class="eco-icon eco-icon--alpha"><i class="fas fa-crown"></i></div>
-                    <h3>Alpha Club</h3>
-                    <p>Comunidade de mentoria e consultores. Rede colaborativa de especialistas em gestão.</p>
-                    <span class="eco-tag">RETENÇÃO</span>
-                </div>
-                <div class="eco-card">
-                    <div class="eco-icon eco-icon--sce"><i class="fas fa-calendar-star"></i></div>
-                    <h3>SCE</h3>
-                    <p>Eventos e imersões de aquisição. Experiências presenciais de alto impacto para empresários.</p>
-                    <span class="eco-tag">AQUISIÇÃO</span>
+
+                <!-- Right: Director Carousel -->
+                <div class="origin-carousel">
+                    <div class="origin-carousel__track" id="originCarouselTrack">
+                        <div class="origin-director-card">
+                            <div class="origin-director-card__avatar">IG</div>
+                            <div class="origin-director-card__info">
+                                <h3>Igor Furniel</h3>
+                                <p>Fundador e CEO do Grupo GSN. 30 anos liderando operações de gestão e consultoria em milhares de empresas.</p>
+                                <div class="origin-director-card__links">
+                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="origin-director-card">
+                            <div class="origin-director-card__avatar">DA</div>
+                            <div class="origin-director-card__info">
+                                <h3>Dani Albuquerque</h3>
+                                <p>Diretora de Operações. Responsável pela entrega e qualidade — garante resultado mensurável para cada cliente.</p>
+                                <div class="origin-director-card__links">
+                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="origin-director-card">
+                            <div class="origin-director-card__avatar">CH</div>
+                            <div class="origin-director-card__info">
+                                <h3>Christian Hart</h3>
+                                <p>Diretor de Produto. Lidera o desenvolvimento da plataforma e a evolução dos 12 agentes de IA.</p>
+                                <div class="origin-director-card__links">
+                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="origin-director-card">
+                            <div class="origin-director-card__avatar">RO</div>
+                            <div class="origin-director-card__info">
+                                <h3>Rodrigo Furniel</h3>
+                                <p>Diretor de Vendas. Responsável pela expansão comercial, canais e parcerias estratégicas.</p>
+                                <div class="origin-director-card__links">
+                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="origin-director-card">
+                            <div class="origin-director-card__avatar">OM</div>
+                            <div class="origin-director-card__info">
+                                <h3>Omar</h3>
+                                <p>Diretor de Tecnologia. Arquiteto da infraestrutura que garante performance, segurança e escala.</p>
+                                <div class="origin-director-card__links">
+                                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="origin-carousel__nav">
+                        <button class="origin-carousel__btn" id="originPrev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+                        <div class="origin-carousel__dots" id="originDots"></div>
+                        <button class="origin-carousel__btn" id="originNext" aria-label="Próximo"><i class="fas fa-chevron-right"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <style>
+            .origin-layout {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 64px;
+                align-items: start;
+            }
+            .origin-text h2 {
+                font-size: clamp(28px, 4vw, 42px);
+                font-weight: 800;
+                color: #1a1d23;
+                margin-bottom: 28px;
+                line-height: 1.15;
+            }
+            .origin-text h2 em {
+                font-style: italic;
+                color: var(--primary-dark);
+            }
+            .origin-text p {
+                font-size: 16px;
+                color: #4B5563;
+                line-height: 1.7;
+                margin-bottom: 18px;
+            }
+            .origin-text strong {
+                color: #1a1d23;
+            }
+
+            /* Director carousel */
+            .origin-carousel {
+                position: relative;
+            }
+            .origin-carousel__track {
+                position: relative;
+                overflow: hidden;
+                border-radius: 20px;
+            }
+            .origin-director-card {
+                display: none;
+                flex-direction: column;
+                background: linear-gradient(145deg, #1a1d23 0%, #0D1117 100%);
+                border-radius: 20px;
+                overflow: hidden;
+                min-height: 400px;
+            }
+            .origin-director-card.active {
+                display: flex;
+                animation: originFadeIn 0.4s ease;
+            }
+            @keyframes originFadeIn {
+                from { opacity: 0; transform: translateX(20px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            .origin-director-card__avatar {
+                width: 100%;
+                height: 240px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 72px;
+                font-weight: 900;
+                color: rgba(255,255,255,0.06);
+                background: linear-gradient(145deg, #1F2937 0%, #111827 100%);
+                position: relative;
+            }
+            .origin-director-card__avatar::after {
+                content: attr(data-initials);
+                position: absolute;
+                font-size: 180px;
+                font-weight: 900;
+                color: rgba(255,255,255,0.03);
+                letter-spacing: -8px;
+            }
+            .origin-director-card__info {
+                padding: 28px 28px 24px;
+            }
+            .origin-director-card__info h3 {
+                font-size: 26px;
+                font-weight: 800;
+                color: var(--primary);
+                margin-bottom: 8px;
+            }
+            .origin-director-card__info p {
+                font-size: 15px;
+                color: rgba(255,255,255,0.65);
+                line-height: 1.6;
+                margin-bottom: 16px;
+            }
+            .origin-director-card__links {
+                display: flex;
+                gap: 10px;
+            }
+            .origin-director-card__links a {
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                border: 1px solid rgba(255,255,255,0.15);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: rgba(255,255,255,0.5);
+                font-size: 14px;
+                transition: all 0.2s;
+            }
+            .origin-director-card__links a:hover {
+                border-color: var(--primary);
+                color: var(--primary);
+            }
+
+            /* Carousel nav */
+            .origin-carousel__nav {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 16px;
+                margin-top: 20px;
+            }
+            .origin-carousel__btn {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                border: 1px solid #D1D5DB;
+                background: #fff;
+                color: #6B7280;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                font-size: 14px;
+                transition: all 0.2s;
+            }
+            .origin-carousel__btn:hover {
+                border-color: var(--primary);
+                color: var(--primary);
+            }
+            .origin-carousel__dots {
+                display: flex;
+                gap: 8px;
+            }
+            .origin-carousel__dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: #D1D5DB;
+                cursor: pointer;
+                transition: all 0.2s;
+            }
+            .origin-carousel__dot.active {
+                background: var(--primary);
+                width: 24px;
+                border-radius: 4px;
+            }
+
+            @media (max-width: 768px) {
+                .origin-layout {
+                    grid-template-columns: 1fr;
+                    gap: 40px;
+                }
+                .origin-director-card { min-height: 340px; }
+                .origin-director-card__avatar { height: 180px; }
+                .origin-director-card__info h3 { font-size: 22px; }
+            }
+        </style>
+
+        <script>
+        (function() {
+            var cards = document.querySelectorAll('.origin-director-card');
+            var dotsContainer = document.getElementById('originDots');
+            var prevBtn = document.getElementById('originPrev');
+            var nextBtn = document.getElementById('originNext');
+            if (!cards.length || !dotsContainer) return;
+
+            var current = 0;
+            var total = cards.length;
+
+            // Create dots
+            for (var i = 0; i < total; i++) {
+                var dot = document.createElement('div');
+                dot.className = 'origin-carousel__dot' + (i === 0 ? ' active' : '');
+                dot.dataset.index = i;
+                dot.addEventListener('click', function() { goTo(parseInt(this.dataset.index)); });
+                dotsContainer.appendChild(dot);
+            }
+
+            function goTo(index) {
+                cards[current].classList.remove('active');
+                dotsContainer.children[current].classList.remove('active');
+                current = (index + total) % total;
+                cards[current].classList.add('active');
+                dotsContainer.children[current].classList.add('active');
+            }
+
+            // Init first card
+            cards[0].classList.add('active');
+
+            prevBtn.addEventListener('click', function() { goTo(current - 1); });
+            nextBtn.addEventListener('click', function() { goTo(current + 1); });
+
+            // Auto-advance every 5s
+            setInterval(function() { goTo(current + 1); }, 5000);
+        })();
+        </script>
     </section>
 
-    <!-- ═══ DIRETORIA ═══ -->
-    <section class="diretoria-section">
-        <div class="container">
-            <div class="section-header" data-reveal>
-                <span class="section-badge" style="background:rgba(255,186,26,0.1);color:#ffba1a;border:1px solid rgba(255,186,26,0.2);display:inline-block;padding:8px 20px;border-radius:50px;font-size:0.85rem;font-weight:600;margin-bottom:16px;">Liderança</span>
-                <h2>Quem está por trás</h2>
-                <p>A equipe que construiu 30 anos de história em gestão</p>
-            </div>
+    <!-- ═══════════════════════════════════════════════════════
 
-            <div class="diretoria-grid" data-reveal-stagger>
-                <div class="founder-card">
-                    <div class="founder-avatar">IG</div>
-                    <h4>Igor</h4>
-                    <span>CEO</span>
-                </div>
-                <div class="founder-card">
-                    <div class="founder-avatar">DA</div>
-                    <h4>Daniela</h4>
-                    <span>Diretora de Operações</span>
-                </div>
-                <div class="founder-card">
-                    <div class="founder-avatar">CH</div>
-                    <h4>Christian</h4>
-                    <span>Diretor de Produto</span>
-                </div>
-                <div class="founder-card">
-                    <div class="founder-avatar">RO</div>
-                    <h4>Rodrigo</h4>
-                    <span>Diretor de Vendas</span>
-                </div>
-                <div class="founder-card">
-                    <div class="founder-avatar">OM</div>
-                    <h4>Omar</h4>
-                    <span>Diretor de Tecnologia</span>
-                </div>
-            </div>
-
-            <div class="diretoria-sede-wrap">
-                <div class="diretoria-sede" data-reveal>
-                    <i class="fas fa-map-marker-alt"></i> Sede: Square SC, Florianópolis - SC
-                </div>
-            </div>
+        <!-- ═══ CTA ═══ -->
+    <section style="position:relative;padding:120px 0;overflow:hidden;">
+        <div style="position:absolute;inset:0;">
+            <img src="/images/fundo-orbit.jpg" alt="" style="width:100%;height:100%;object-fit:cover;">
         </div>
-    </section>
-
-    <!-- ═══ CTA ═══ -->
-    <section class="site-cta">
-        <div class="site-cta__particles"><span></span><span></span><span></span><span></span></div>
-        <div class="container">
-            <div class="site-cta__card" data-reveal="scale">
-                <div class="site-cta__icon"><i class="fas fa-rocket"></i></div>
-                <h2>Pronto para conhecer o Orbit?</h2>
-                <p>Agende uma demonstração e veja os agentes trabalhando com a sua empresa.</p>
-                <div class="site-cta__buttons">
-                    <a href="/#contato-form" class="btn btn-primary btn-lg">Conhecer o Time de IA</a>
-                    <a href="/#contato-form" class="btn btn-outline btn-lg">Falar com Especialista</a>
-                </div>
-            </div>
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,17,23,0.9) 0%,rgba(13,17,23,0.75) 50%,rgba(13,17,23,0.9) 100%);"></div>
+        <div class="container" style="position:relative;z-index:1;text-align:center;">
+            <h2 style="font-size:clamp(28px,4vw,42px);font-weight:800;color:#fff;margin-bottom:16px;">Pronto para conhecer o Orbit?</h2>
+            <p style="color:rgba(255,255,255,0.6);font-size:18px;font-weight:400;margin-bottom:40px;max-width:500px;margin-left:auto;margin-right:auto;letter-spacing:0;">Agende uma demonstração e veja os agentes trabalhando com a sua empresa.</p>
+            <a href="/#contato-form" class="btn btn-primary btn-lg hero-cta-glow">Conhecer o Time de IA</a>
         </div>
     </section>
 

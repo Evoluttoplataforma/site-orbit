@@ -11,16 +11,56 @@ export const headerHTML = `
 
             <ul class="nav-menu">
                 <li>
-                    <a href="/agentes"><span data-i18n="nav.agents_menu">Agentes de IA</span> <i class="fas fa-chevron-down dropdown-arrow"></i></a>
-                    <div class="dropdown dropdown--sm">
+                    <a href="#plataforma"><span data-i18n="nav.agents_menu">Agentes de IA</span> <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <div class="dropdown dropdown--lg">
                         <div class="dropdown__links">
-                            <a href="/agentes">
-                                <div class="dd-icon"><i class="fas fa-robot"></i></div>
-                                <div class="dd-text"><span>Todos os Agentes</span><small>Conheça os 12 especialistas</small></div>
-                            </a>
                             <a href="/agentes/estrategista">
-                                <div class="dd-icon"><i class="fas fa-compass"></i></div>
-                                <div class="dd-text"><span>Agente Estratégico</span><small>Planejamento e execução estratégica</small></div>
+                                <div class="dd-icon"><i class="fas fa-chess-king"></i></div>
+                                <div class="dd-text"><span>Estrategista</span><small>Planejamento estratégico</small></div>
+                            </a>
+                            <a href="/agentes/processos">
+                                <div class="dd-icon"><i class="fas fa-sitemap"></i></div>
+                                <div class="dd-text"><span>Processos</span><small>Mapeamento e padronização</small></div>
+                            </a>
+                            <a href="/agentes/pessoas">
+                                <div class="dd-icon"><i class="fas fa-users"></i></div>
+                                <div class="dd-text"><span>Pessoas</span><small>Cargos, avaliação e PDIs</small></div>
+                            </a>
+                            <a href="/agentes/treinamento">
+                                <div class="dd-icon"><i class="fas fa-graduation-cap"></i></div>
+                                <div class="dd-text"><span>Treinamento</span><small>Microlearning via WhatsApp</small></div>
+                            </a>
+                            <a href="/agentes/indicadores">
+                                <div class="dd-icon"><i class="fas fa-chart-line"></i></div>
+                                <div class="dd-text"><span>Indicadores</span><small>KPIs e causa raiz</small></div>
+                            </a>
+                            <a href="/agentes/pesquisa">
+                                <div class="dd-icon"><i class="fas fa-magnifying-glass-chart"></i></div>
+                                <div class="dd-text"><span>Pesquisa</span><small>Clima, NPS e insights</small></div>
+                            </a>
+                            <a href="/agentes/riscos">
+                                <div class="dd-icon"><i class="fas fa-shield-halved"></i></div>
+                                <div class="dd-text"><span>Riscos</span><small>Prevenção e mitigação</small></div>
+                            </a>
+                            <a href="/agentes/oportunidades">
+                                <div class="dd-icon"><i class="fas fa-lightbulb"></i></div>
+                                <div class="dd-text"><span>Oportunidades</span><small>Mercado e expansão</small></div>
+                            </a>
+                            <a href="/agentes/problemas">
+                                <div class="dd-icon"><i class="fas fa-triangle-exclamation"></i></div>
+                                <div class="dd-text"><span>Problemas</span><small>PDCA e causa raiz</small></div>
+                            </a>
+                            <a href="/agentes/documentos">
+                                <div class="dd-icon"><i class="fas fa-file-lines"></i></div>
+                                <div class="dd-text"><span>Documentos</span><small>Controle e versões</small></div>
+                            </a>
+                            <a href="/agentes/vendas">
+                                <div class="dd-icon"><i class="fas fa-handshake"></i></div>
+                                <div class="dd-text"><span>Vendas</span><small>CRM, funil e coaching</small></div>
+                            </a>
+                            <a href="/agentes/reunioes">
+                                <div class="dd-icon"><i class="fas fa-video"></i></div>
+                                <div class="dd-text"><span>Reuniões</span><small>Transcrição e atas</small></div>
                             </a>
                         </div>
                     </div>
@@ -40,7 +80,6 @@ export const headerHTML = `
                         </div>
                     </div>
                 </li>
-                <li><a href="/preco" data-i18n="nav.plans">Planos</a></li>
                 <li>
                     <a href="/blog"><span data-i18n="nav.content">Conteúdo</span> <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown dropdown--sm">
@@ -57,19 +96,7 @@ export const headerHTML = `
                     </div>
                 </li>
                 <li>
-                    <a href="/sobre"><span data-i18n="nav.company">Empresa</span> <i class="fas fa-chevron-down dropdown-arrow"></i></a>
-                    <div class="dropdown dropdown--sm">
-                        <div class="dropdown__links">
-                            <a href="/sobre">
-                                <div class="dd-icon"><i class="fas fa-building"></i></div>
-                                <div class="dd-text"><span data-i18n="nav.about">Sobre Nós</span><small data-i18n="nav.about.sub">30 anos de história</small></div>
-                            </a>
-                            <a href="/parcerias">
-                                <div class="dd-icon"><i class="fas fa-handshake"></i></div>
-                                <div class="dd-text"><span data-i18n="nav.partners">Seja Parceiro</span><small data-i18n="nav.partners.sub">Programa de canais</small></div>
-                            </a>
-                        </div>
-                    </div>
+                    <a href="/sobre"><span data-i18n="nav.company">Empresa</span></a>
                 </li>
             </ul>
 
@@ -101,21 +128,25 @@ export const headerHTML = `
         <div class="mobile-menu__body">
             <div class="mobile-menu__label" data-i18n="mobile.nav">Navegação</div>
             <a href="/"><i class="fas fa-home"></i> <span data-i18n="nav.home">Início</span></a>
-            <a href="/preco"><i class="fas fa-tag"></i> <span data-i18n="mobile.plans">Planos e Preços</span></a>
             <a href="#contato-form" onclick="closeMobileMenu()"><i class="fas fa-envelope"></i> <span data-i18n="mobile.contact">Fale Conosco</span></a>
-            <div class="mobile-menu__label" data-i18n="mobile.platform">Plataforma</div>
-            <a href="/agentes"><i class="fas fa-robot"></i> Agentes de IA</a>
-            <a href="/processos"><i class="fas fa-sitemap"></i> Processos</a>
-            <a href="/indicadores"><i class="fas fa-chart-line"></i> Indicadores</a>
-            <a href="/tarefas"><i class="fas fa-tasks"></i> Tarefas</a>
-            <a href="/competencias"><i class="fas fa-users"></i> Competências</a>
-            <a href="/auditorias"><i class="fas fa-clipboard-check"></i> Auditorias</a>
+            <div class="mobile-menu__label">Agentes de IA</div>
+            <a href="/agentes/estrategista"><i class="fas fa-chess-king"></i> Estrategista</a>
+            <a href="/agentes/processos"><i class="fas fa-sitemap"></i> Processos</a>
+            <a href="/agentes/pessoas"><i class="fas fa-users"></i> Pessoas</a>
+            <a href="/agentes/treinamento"><i class="fas fa-graduation-cap"></i> Treinamento</a>
+            <a href="/agentes/indicadores"><i class="fas fa-chart-line"></i> Indicadores</a>
+            <a href="/agentes/pesquisa"><i class="fas fa-magnifying-glass-chart"></i> Pesquisa</a>
+            <a href="/agentes/riscos"><i class="fas fa-shield-halved"></i> Riscos</a>
+            <a href="/agentes/oportunidades"><i class="fas fa-lightbulb"></i> Oportunidades</a>
+            <a href="/agentes/problemas"><i class="fas fa-triangle-exclamation"></i> Problemas</a>
+            <a href="/agentes/documentos"><i class="fas fa-file-lines"></i> Documentos</a>
+            <a href="/agentes/vendas"><i class="fas fa-handshake"></i> Vendas</a>
+            <a href="/agentes/reunioes"><i class="fas fa-video"></i> Reuniões</a>
             <div class="mobile-menu__label" data-i18n="mobile.content">Conteúdo</div>
             <a href="/blog"><i class="fas fa-newspaper"></i> Blog</a>
             <a href="/historias"><i class="fas fa-star"></i> Histórias de Clientes</a>
             <div class="mobile-menu__label" data-i18n="mobile.company">Empresa</div>
             <a href="/sobre"><i class="fas fa-building"></i> Sobre Nós</a>
-            <a href="/parcerias"><i class="fas fa-handshake"></i> Seja Parceiro</a>
         </div>
         <div class="mobile-menu__footer">
             <button class="lang-switch" onclick="switchLang()" aria-label="Change language">

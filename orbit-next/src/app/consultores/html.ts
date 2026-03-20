@@ -1,403 +1,854 @@
 // Auto-generated
 export const pageHTML = `
     <!-- ═══ 1. HERO ═══ -->
-    <section class="lp-hero lp-section--dark">
-        <div class="lp-container">
-            <div data-reveal>
-                <span class="lp-badge">30+ consultorias já são recorrentes com o Orbit</span>
-                <p style="font-size:20px; color:#ffba1a; font-weight:700; margin-bottom:20px; letter-spacing:0.5px;">Pare de vender projeto. Comece a vender operação.</p>
-                <h1>Seja uma plataforma de funcionários de IA para os seus clientes.</h1>
-                <p class="lp-hero__sub">Transforme consultoria pontual em operação recorrente. Seus clientes ficam, sua receita cresce, seus agentes trabalham 24/7.</p>
-                <a href="#cta-final" class="lp-btn lp-btn--gold">QUERO SER UMA PLATAFORMA DE IA PARA MEUS CLIENTES</a>
-                <p class="lp-hero__note">&#9201; 2 min &bull; 100% gratuito &bull; Sem compromisso</p>
+    <section class="lp-hero" id="hero">
+        <div class="lp-hero__bg-image">
+            <img src="/images/bg-market-data.jpg" alt="" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="lp-hero__glow lp-hero__glow--1"></div>
+        <div class="lp-hero__glow lp-hero__glow--2"></div>
+        <div class="container">
+            <span class="hero-zoom__badge" data-reveal>30+ consultorias já são recorrentes com o Orbit</span>
+
+            <h1 class="hero-zoom__title" data-reveal>
+                Pare de vender projeto.<br>
+                Comece a vender <span class="hero-zoom__title-highlight">operação de IA</span> que
+                <span class="hero-rotate" id="heroRotate">
+                    <span class="hero-rotate__word hero-rotate__word--active">escala.</span>
+                    <span class="hero-rotate__word">retém.</span>
+                    <span class="hero-rotate__word">opera 24/7.</span>
+                    <span class="hero-rotate__word">gera recorrência.</span>
+                    <span class="hero-rotate__word">nunca para.</span>
+                </span>
+            </h1>
+
+            <p class="hero-zoom__subtitle" data-reveal>Transforme consultoria recorrente passiva pontual em operação recorrente. Seus clientes ficam, sua receita cresce, seus 12 agentes de IA trabalham 24/7 — coordenados pela <strong style="color:#ffba1a;">Olívia</strong>.</p>
+
+            <div class="hero-zoom__credentials" data-reveal>
+                <div class="hero-zoom__credential">
+                    <strong>30+</strong>
+                    <span>consultorias ativas</span>
+                </div>
+                <div class="hero-zoom__credential-divider"></div>
+                <div class="hero-zoom__credential">
+                    <strong>60%</strong>
+                    <span>margem white-label</span>
+                </div>
+                <div class="hero-zoom__credential-divider"></div>
+                <div class="hero-zoom__credential">
+                    <strong>24/7</strong>
+                    <span>operação contínua</span>
+                </div>
             </div>
+
+            <div class="hero-zoom__ctas" data-reveal style="margin-top:40px;">
+                <a href="#cta-final" class="btn btn-primary btn-lg hero-cta-glow">QUERO SER UMA PLATAFORMA DE IA</a>
+            </div>
+            <p class="hero-zoom__note" data-reveal>⏱️ 2 min • 100% gratuito • Sem compromisso</p>
         </div>
     </section>
 
 
-    <!-- ═══ 2. PAIN - O ciclo do churn (Cinema) ═══ -->
-    <section class="pain-cinema" id="dores-canais">
-        <div class="pain-cinema__bg">
-            <div class="pain-cinema__grid-lines"></div>
-            <div class="pain-cinema__glow"></div>
+    <section class="wa-section" id="dores">
+        <div class="wa-section__bg">
+            <div class="wa-section__gradient"></div>
         </div>
-        <div class="container">
+        <div class="container" style="max-width:1200px;">
             <div class="section-header" data-reveal>
-                <span class="section-badge section-badge--red">Isso te parece familiar?</span>
-                <h2>Reconhece esse ciclo?</h2>
-                <p>Vende projeto &rarr; entrega &rarr; cliente sai &rarr; precisa vender de novo. O inimigo não é a concorrência. É o <strong style="color:#EF4444;">churn estrutural</strong>.</p>
+                <span class="section-badge section-badge--red" data-i18n="wa.badge">Isso te parece familiar?</span>
+                <h2 style="color:#1A1D23;" data-i18n="wa.title">Deixa eu adivinhar:</h2>
+                <p style="color:#6B7280;max-width:620px;margin:0 auto;" data-i18n="wa.subtitle">Esse é o WhatsApp da Olívia em tempo real, tirando as dúvidas de consultores como você.</p>
             </div>
 
-            <div class="pain-thoughts" id="painThoughtsCanais">
-                <div class="pain-thought" data-idx="0">
-                    <div class="pain-thought__icon"><i class="fas fa-door-open"></i></div>
-                    <div class="pain-thought__bubble">
-                        <p>"Quando o projeto acaba, o cliente vai embora."</p>
-                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
+            <!-- Phones grid -->
+            <div class="wa-phones" id="waPhones">
+
+                <!-- ═══ PHONE 1 — Rodrigo ═══ -->
+                <div class="wa-device" data-chat="0">
+                    <div class="wa-device__frame">
+                        <!-- Status bar -->
+                        <div class="wa-statusbar">
+                            <span>9:14</span>
+                            <div class="wa-statusbar__right">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-full"></i>
+                            </div>
+                        </div>
+                        <!-- WA Header -->
+                        <div class="wa-header">
+                            <i class="fas fa-arrow-left wa-header__back"></i>
+                            <div class="wa-header__contact">
+                                <img src="/images/cliente-1.jpg" alt="Rodrigo" class="wa-header__avatar">
+                                <div class="wa-header__online"></div>
+                            </div>
+                            <div class="wa-header__info">
+                                <span class="wa-header__name">Marcos - Consultor</span>
+                                <span class="wa-header__status">online</span>
+                            </div>
+                            <div class="wa-header__actions">
+                                <i class="fas fa-video"></i>
+                                <i class="fas fa-phone"></i>
+                                <i class="fas fa-ellipsis-vertical"></i>
+                            </div>
+                        </div>
+                        <!-- Chat body -->
+                        <div class="wa-chat">
+                            <div class="wa-chat__date"><span data-i18n="wa.today">Hoje</span></div>
+
+                            <!-- Cliente → Olívia → Cliente → Olívia -->
+                            <div class="wa-row wa-row--right wa-row--hidden">
+                                <div class="wa-bubble wa-bubble--green">
+                                    <p data-i18n="wa.1.s1">Entrego o projeto, o cliente agradece... e cancela no mês seguinte. Vivo nesse ciclo.</p>
+                                    <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
+                                </div>
+                                <img src="/images/cliente-1.jpg" alt="" class="wa-row__avatar">
+                            </div>
+                            <div class="wa-row wa-row--left wa-row--hidden">
+                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <div class="wa-bubble wa-bubble--dark">
+                                    <span class="wa-bubble__sender">Olívia - Orbit</span>
+                                    <p data-i18n="wa.1.r1">Eu entendo. <strong>83% das consultorias</strong> vivem disso. O problema não é o seu projeto — é que quando você sai, a operação para.</p>
+                                    <span class="wa-bubble__meta"></span>
+                                </div>
+                            </div>
+                            <div class="wa-row wa-row--right wa-row--hidden">
+                                <div class="wa-bubble wa-bubble--green">
+                                    <p data-i18n="wa.1.s2">Minha receita depende 100% da minha agenda. Não consigo escalar.</p>
+                                    <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
+                                </div>
+                                <img src="/images/cliente-1.jpg" alt="" class="wa-row__avatar">
+                            </div>
+                            <div class="wa-row wa-row--left wa-row--hidden">
+                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <div class="wa-bubble wa-bubble--dark">
+                                    <span class="wa-bubble__sender">Olívia - Orbit</span>
+                                    <p data-i18n="wa.1.r2">Com o Orbit, você entrega uma <strong>operação contínua</strong> — não um projeto. Seus clientes ficam porque os 12 agentes continuam trabalhando. Sua receita vira recorrente. ✨</p>
+                                    <span class="wa-bubble__meta"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Input -->
+                        <div class="wa-input">
+                            <div class="wa-input__field">
+                                <i class="fas fa-face-smile"></i>
+                                <span data-i18n="wa.input">Mensagem</span>
+                                <i class="fas fa-paperclip"></i>
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="wa-input__mic"><i class="fas fa-microphone"></i></div>
+                        </div>
                     </div>
-                    <div class="pain-thought__pulse"></div>
+                    <!-- Client label below phone -->
                 </div>
-                <div class="pain-thought" data-idx="1">
-                    <div class="pain-thought__icon"><i class="fas fa-calendar-xmark"></i></div>
-                    <div class="pain-thought__bubble">
-                        <p>"Minha receita depende 100% da minha agenda."</p>
-                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
+
+                <!-- ═══ PHONE 2 — Gustavo ═══ -->
+                <div class="wa-device" data-chat="1">
+                    <div class="wa-device__frame">
+                        <div class="wa-statusbar">
+                            <span>10:32</span>
+                            <div class="wa-statusbar__right">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-three-quarters"></i>
+                            </div>
+                        </div>
+                        <div class="wa-header">
+                            <i class="fas fa-arrow-left wa-header__back"></i>
+                            <div class="wa-header__contact">
+                                <img src="/images/cliente-2.jpg" alt="Gustavo" class="wa-header__avatar">
+                                <div class="wa-header__online"></div>
+                            </div>
+                            <div class="wa-header__info">
+                                <span class="wa-header__name">Fernando - Consultoria</span>
+                                <span class="wa-header__status">online</span>
+                            </div>
+                            <div class="wa-header__actions">
+                                <i class="fas fa-video"></i>
+                                <i class="fas fa-phone"></i>
+                                <i class="fas fa-ellipsis-vertical"></i>
+                            </div>
+                        </div>
+                        <div class="wa-chat">
+                            <div class="wa-chat__date"><span data-i18n="wa.today">Hoje</span></div>
+
+                            <div class="wa-row wa-row--right wa-row--hidden">
+                                <div class="wa-bubble wa-bubble--green">
+                                    <p data-i18n="wa.2.s1">O mercado está comoditizando o que eu faço. Qualquer um oferece consultoria de gestão.</p>
+                                    <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
+                                </div>
+                                <img src="/images/cliente-2.jpg" alt="" class="wa-row__avatar">
+                            </div>
+                            <div class="wa-row wa-row--left wa-row--hidden">
+                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <div class="wa-bubble wa-bubble--dark">
+                                    <span class="wa-bubble__sender">Olívia - Orbit</span>
+                                    <p data-i18n="wa.2.r1">A diferença é que você pode oferecer uma <strong>plataforma de IA com 12 agentes</strong> operando na empresa do cliente. Nenhum concorrente tem isso. White-label, <strong>margem de 60%</strong>.</p>
+                                    <span class="wa-bubble__meta"></span>
+                                </div>
+                            </div>
+                            <div class="wa-row wa-row--right wa-row--hidden">
+                                <div class="wa-bubble wa-bubble--green">
+                                    <p data-i18n="wa.2.s2">Mas como convencer o cliente a pagar mensalidade se ele já pagou o projeto?</p>
+                                    <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
+                                </div>
+                                <img src="/images/cliente-2.jpg" alt="" class="wa-row__avatar">
+                            </div>
+                            <div class="wa-row wa-row--left wa-row--hidden">
+                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <div class="wa-bubble wa-bubble--dark">
+                                    <span class="wa-bubble__sender">Olívia - Orbit</span>
+                                    <p data-i18n="wa.2.r2">Porque não é mensalidade por nada — são <strong>12 agentes trabalhando 24/7</strong> na empresa dele. Processos, indicadores, treinamento. O cliente vê valor todo dia. 🚀</p>
+                                    <span class="wa-bubble__meta"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wa-input">
+                            <div class="wa-input__field">
+                                <i class="fas fa-face-smile"></i>
+                                <span data-i18n="wa.input">Mensagem</span>
+                                <i class="fas fa-paperclip"></i>
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="wa-input__mic"><i class="fas fa-microphone"></i></div>
+                        </div>
                     </div>
-                    <div class="pain-thought__pulse"></div>
                 </div>
-                <div class="pain-thought" data-idx="2">
-                    <div class="pain-thought__icon"><i class="fas fa-arrow-down-wide-short"></i></div>
-                    <div class="pain-thought__bubble">
-                        <p>"O mercado está comoditizando o que eu faço."</p>
-                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
+
+                <!-- ═══ PHONE 3 — Gabriel ═══ -->
+                <div class="wa-device" data-chat="2">
+                    <div class="wa-device__frame">
+                        <div class="wa-statusbar">
+                            <span>14:05</span>
+                            <div class="wa-statusbar__right">
+                                <i class="fas fa-signal"></i>
+                                <i class="fas fa-wifi"></i>
+                                <i class="fas fa-battery-half"></i>
+                            </div>
+                        </div>
+                        <div class="wa-header">
+                            <i class="fas fa-arrow-left wa-header__back"></i>
+                            <div class="wa-header__contact">
+                                <img src="/images/cliente-3.jpg" alt="Gabriel" class="wa-header__avatar">
+                                <div class="wa-header__online"></div>
+                            </div>
+                            <div class="wa-header__info">
+                                <span class="wa-header__name">Ricardo - Consultoria</span>
+                                <span class="wa-header__status">online</span>
+                            </div>
+                            <div class="wa-header__actions">
+                                <i class="fas fa-video"></i>
+                                <i class="fas fa-phone"></i>
+                                <i class="fas fa-ellipsis-vertical"></i>
+                            </div>
+                        </div>
+                        <div class="wa-chat">
+                            <div class="wa-chat__date"><span data-i18n="wa.today">Hoje</span></div>
+
+                            <div class="wa-row wa-row--right wa-row--hidden">
+                                <div class="wa-bubble wa-bubble--green">
+                                    <p data-i18n="wa.3.s1">Não consigo escalar sem contratar gente. E contratar aumenta custo fixo.</p>
+                                    <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
+                                </div>
+                                <img src="/images/cliente-3.jpg" alt="" class="wa-row__avatar">
+                            </div>
+                            <div class="wa-row wa-row--left wa-row--hidden">
+                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <div class="wa-bubble wa-bubble--dark">
+                                    <span class="wa-bubble__sender">Olívia - Orbit</span>
+                                    <p data-i18n="wa.3.r1">Com o Orbit, você escala sem contratar. Os <strong>agentes de IA</strong> fazem o trabalho operacional. Você foca em vender e coordenar. <strong>Cada cliente novo é receita pura</strong>.</p>
+                                    <span class="wa-bubble__meta"></span>
+                                </div>
+                            </div>
+                            <div class="wa-row wa-row--right wa-row--hidden">
+                                <div class="wa-bubble wa-bubble--green">
+                                    <p data-i18n="wa.3.s2">Fico refém da próxima venda. Não tenho previsibilidade.</p>
+                                    <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
+                                </div>
+                                <img src="/images/cliente-3.jpg" alt="" class="wa-row__avatar">
+                            </div>
+                            <div class="wa-row wa-row--left wa-row--hidden">
+                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <div class="wa-bubble wa-bubble--dark">
+                                    <span class="wa-bubble__sender">Olívia - Orbit</span>
+                                    <p data-i18n="wa.3.r2">Consultoria + Orbit = <strong>receita recorrente passiva</strong>. Seus clientes operam com IA, você recebe todo mês. Sem depender da próxima venda. 💪</p>
+                                    <span class="wa-bubble__meta"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wa-input">
+                            <div class="wa-input__field">
+                                <i class="fas fa-face-smile"></i>
+                                <span data-i18n="wa.input">Mensagem</span>
+                                <i class="fas fa-paperclip"></i>
+                                <i class="fas fa-camera"></i>
+                            </div>
+                            <div class="wa-input__mic"><i class="fas fa-microphone"></i></div>
+                        </div>
                     </div>
-                    <div class="pain-thought__pulse"></div>
                 </div>
-                <div class="pain-thought" data-idx="3">
-                    <div class="pain-thought__icon"><i class="fas fa-user-group"></i></div>
-                    <div class="pain-thought__bubble">
-                        <p>"Não consigo escalar sem contratar gente."</p>
-                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
-                    </div>
-                    <div class="pain-thought__pulse"></div>
-                </div>
-                <div class="pain-thought" data-idx="4">
-                    <div class="pain-thought__icon"><i class="fas fa-rotate"></i></div>
-                    <div class="pain-thought__bubble">
-                        <p>"Fico refém da próxima venda."</p>
-                        <div class="pain-thought__typing"><span></span><span></span><span></span></div>
-                    </div>
-                    <div class="pain-thought__pulse"></div>
-                </div>
+
             </div>
 
-            <!-- Resposta do Orbit -->
-            <div class="pain-answer" id="painAnswerCanais">
-                <div class="pain-answer__line"></div>
-                <div class="pain-answer__card">
-                    <div class="pain-answer__avatar">
-                        <img src="images/olivia.png" alt="Olívia">
-                        <div class="pain-answer__status"></div>
-                    </div>
-                    <div class="pain-answer__content">
-                        <span class="pain-answer__name">Olívia - Orbit</span>
-                        <p>"Eu entendo. Com o Orbit, seus clientes operam com IA - e você ganha receita recorrente."</p>
-                    </div>
-                </div>
-                <div class="pain-answer__cta">
-                    <a href="#cta-final" class="lp-btn lp-btn--gold">QUERO SAIR DESSE CICLO</a>
-                </div>
+            <!-- Mobile dots -->
+            <div class="wa-dots" id="waDots">
+                <button class="wa-dot wa-dot--active" data-idx="0"></button>
+                <button class="wa-dot" data-idx="1"></button>
+                <button class="wa-dot" data-idx="2"></button>
+            </div>
+
+            <div style="text-align:center;margin-top:56px;" data-reveal>
+                <a href="#cta-final" class="btn btn-primary btn-lg">QUERO SAIR DESSE CICLO</a>
             </div>
         </div>
 
         <style>
-            .pain-cinema {
+            /* ═══ WA CHAT SECTION ═══ */
+            .wa-section {
                 position: relative;
-                padding: 120px 0 80px;
-                background: #FAFBFC;
+                padding: 120px 0 100px;
+                background: linear-gradient(180deg, #F8F9FB 0%, #EEF0F4 100%);
                 overflow: hidden;
             }
-            .pain-cinema .section-header h2 {
-                color: #1A1D23;
-            }
-            .pain-cinema .section-header p {
-                color: #5A6069;
-            }
-            .pain-cinema__bg {
+            .wa-section__bg {
                 position: absolute;
                 inset: 0;
                 pointer-events: none;
             }
-            .pain-cinema__grid-lines {
+            .wa-section__gradient {
                 position: absolute;
-                inset: 0;
-                background-image:
-                    linear-gradient(rgba(248,81,73,0.04) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(248,81,73,0.04) 1px, transparent 1px);
-                background-size: 60px 60px;
-                mask-image: radial-gradient(ellipse 60% 60% at 50% 40%, black 30%, transparent 70%);
-            }
-            .pain-cinema__glow {
-                position: absolute;
-                width: 500px;
-                height: 500px;
-                top: 10%;
+                width: 800px;
+                height: 800px;
+                top: -200px;
                 left: 50%;
                 transform: translateX(-50%);
-                background: radial-gradient(circle, rgba(248,81,73,0.06) 0%, transparent 70%);
+                background: radial-gradient(circle, rgba(255,186,26,0.06) 0%, transparent 60%);
                 border-radius: 50%;
-                animation: pain-glow-pulse 4s ease-in-out infinite;
             }
-            @keyframes pain-glow-pulse {
-                0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
-                50% { opacity: 1; transform: translateX(-50%) scale(1.1); }
-            }
-
-            /* Section badge red */
             .section-badge--red {
                 background: rgba(248,81,73,0.08);
                 border: 1px solid rgba(248,81,73,0.2);
                 color: #DC2626;
             }
 
-            /* Pain thoughts container */
-            .pain-thoughts {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                gap: 16px;
-                max-width: 800px;
-                margin: 0 auto;
+            /* ═══ PHONES GRID ═══ */
+            .wa-phones {
+                display: flex;
+                gap: 40px;
+                justify-content: center;
+                align-items: flex-start;
+                transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             }
 
-            /* Individual thought */
-            .pain-thought {
+            /* ═══ DEVICE (phone + label) ═══ */
+            .wa-device {
+                flex-shrink: 0;
                 display: flex;
-                align-items: flex-start;
-                gap: 14px;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+
+            /* Client label below phone */
+            .wa-device__label {
+                display: flex;
+                align-items: center;
+                gap: 12px;
                 background: #fff;
                 border: 1px solid #E5E7EB;
                 border-radius: 16px;
-                padding: 22px;
-                position: relative;
-                opacity: 0;
-                transform: translateY(20px) scale(0.95);
-                transition: border-color 0.3s ease, box-shadow 0.3s ease;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+                padding: 12px 20px;
+                box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+                width: 100%;
+                max-width: 320px;
             }
-            .pain-thought:hover {
-                border-color: rgba(248,81,73,0.3);
-                box-shadow: 0 8px 32px rgba(248,81,73,0.1);
-                transform: translateY(-2px) scale(1);
+            .wa-device__label img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 2px solid #E5E7EB;
             }
-            .pain-thought.pain-visible {
-                animation: pain-thought-in 0.6s forwards;
+            .wa-device__label strong {
+                font-size: 14px;
+                color: #1A1D23;
+                display: block;
+                line-height: 1.3;
             }
-            @keyframes pain-thought-in {
-                0% { opacity: 0; transform: translateY(20px) scale(0.95); }
-                60% { transform: translateY(-4px) scale(1.01); }
-                100% { opacity: 1; transform: translateY(0) scale(1); }
+            .wa-device__label span {
+                font-size: 12px;
+                color: #8B949E;
             }
 
-            /* Icon */
-            .pain-thought__icon {
-                width: 44px;
-                height: 44px;
-                border-radius: 12px;
-                background: linear-gradient(135deg, #FEE2E2, #FECACA);
+            /* ═══ PHONE FRAME ═══ */
+            .wa-device__frame {
+                width: 340px;
+                background: #000;
+                border-radius: 44px;
+                padding: 6px;
+                position: relative;
+                box-shadow:
+                    0 0 0 1px rgba(255,255,255,0.1),
+                    0 30px 80px rgba(0,0,0,0.3),
+                    0 10px 30px rgba(0,0,0,0.15),
+                    inset 0 0 0 1px rgba(255,255,255,0.05);
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+            }
+            .wa-device:hover .wa-device__frame {
+                transform: translateY(-6px) scale(1.01);
+                box-shadow:
+                    0 0 0 1px rgba(255,255,255,0.15),
+                    0 40px 100px rgba(0,0,0,0.35),
+                    0 15px 40px rgba(0,0,0,0.2),
+                    inset 0 0 0 1px rgba(255,255,255,0.08);
+            }
+
+            /* ═══ STATUS BAR ═══ */
+            .wa-statusbar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px 24px 4px;
+                background: #1F2C34;
+                border-radius: 38px 38px 0 0;
+            }
+            .wa-statusbar span {
+                font-size: 12px;
+                font-weight: 700;
+                color: #E9EDEF;
+            }
+            .wa-statusbar__right {
+                display: flex;
+                gap: 6px;
+                font-size: 11px;
+                color: #E9EDEF;
+            }
+
+            /* ═══ WA HEADER ═══ */
+            .wa-header {
                 display: flex;
                 align-items: center;
-                justify-content: center;
-                flex-shrink: 0;
-                position: relative;
-                border: none;
+                gap: 10px;
+                padding: 6px 12px 10px;
+                background: #1F2C34;
             }
-            .pain-thought__icon i {
-                font-size: 17px;
-                color: #DC2626;
+            .wa-header__back {
+                color: #00A884;
+                font-size: 16px;
             }
-
-            /* Pulse ring around icon */
-            .pain-thought__pulse {
-                position: absolute;
-                top: 22px;
-                left: 22px;
-                width: 44px;
-                height: 44px;
-                border-radius: 12px;
-                border: 1px solid rgba(220,38,38,0.3);
-                opacity: 0;
-            }
-            .pain-visible .pain-thought__pulse {
-                animation: pain-icon-ring 2s 0.6s ease-out infinite;
-            }
-            @keyframes pain-icon-ring {
-                0% { transform: scale(1); opacity: 0.5; }
-                100% { transform: scale(1.6); opacity: 0; }
-            }
-
-            /* Bubble */
-            .pain-thought__bubble p {
-                font-size: 15px;
-                color: #3D4450;
-                line-height: 1.6;
-                font-style: italic;
-                margin: 0;
-            }
-
-            /* Typing indicator */
-            .pain-thought__typing {
-                display: flex;
-                gap: 4px;
-                padding: 4px 0;
-                position: absolute;
-                top: 22px;
-                left: 80px;
-            }
-            .pain-thought__typing span {
-                width: 6px;
-                height: 6px;
-                background: rgba(220,38,38,0.35);
-                border-radius: 50%;
-                animation: pain-typing-dot 1s infinite;
-            }
-            .pain-thought__typing span:nth-child(2) { animation-delay: 0.2s; }
-            .pain-thought__typing span:nth-child(3) { animation-delay: 0.4s; }
-            @keyframes pain-typing-dot {
-                0%, 100% { opacity: 0.3; transform: scale(0.8); }
-                50% { opacity: 1; transform: scale(1); }
-            }
-            /* Hide typing once text is shown */
-            .pain-thought.pain-typed .pain-thought__typing {
-                display: none;
-            }
-            .pain-thought__bubble p {
-                opacity: 0;
-            }
-            .pain-thought.pain-typed .pain-thought__bubble p {
-                opacity: 1;
-                animation: pain-text-reveal 0.4s ease;
-            }
-            @keyframes pain-text-reveal {
-                from { opacity: 0; filter: blur(4px); }
-                to { opacity: 1; filter: blur(0); }
-            }
-
-            /* ═══ Orbit Answer ═══ */
-            .pain-answer {
-                max-width: 600px;
-                margin: 48px auto 0;
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            .pain-answer.pain-answer-visible {
-                animation: pain-answer-in 0.8s 0.3s forwards;
-            }
-            @keyframes pain-answer-in {
-                0% { opacity: 0; transform: translateY(20px); }
-                100% { opacity: 1; transform: translateY(0); }
-            }
-            .pain-answer__line {
-                width: 2px;
-                height: 40px;
-                background: linear-gradient(180deg, rgba(220,38,38,0.15), rgba(255,186,26,0.4));
-                margin: 0 auto 0;
-                border-radius: 2px;
-            }
-            .pain-answer__card {
-                display: flex;
-                align-items: flex-start;
-                gap: 16px;
-                background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
-                border: 1px solid rgba(255,186,26,0.25);
-                border-radius: 20px;
-                padding: 24px;
-                margin-top: 0;
-                position: relative;
-                overflow: hidden;
-                box-shadow: 0 4px 20px rgba(255,186,26,0.1);
-            }
-            .pain-answer__card::before {
-                content: '';
-                position: absolute;
-                top: -1px;
-                left: 20%;
-                right: 20%;
-                height: 2px;
-                background: linear-gradient(90deg, transparent, #ffba1a, transparent);
-            }
-            .pain-answer__avatar {
+            .wa-header__contact {
                 position: relative;
                 flex-shrink: 0;
             }
-            .pain-answer__avatar img {
-                width: 48px;
-                height: 48px;
+            .wa-header__avatar {
+                width: 36px;
+                height: 36px;
                 border-radius: 50%;
-                border: 2px solid #ffba1a;
+                object-fit: cover;
             }
-            .pain-answer__status {
+            .wa-header__online {
                 position: absolute;
                 bottom: 0;
                 right: 0;
-                width: 12px;
-                height: 12px;
-                background: #22C55E;
+                width: 10px;
+                height: 10px;
+                background: #00A884;
                 border-radius: 50%;
-                border: 2px solid #FFFBEB;
-                animation: rfm-live-blink 1.5s ease-in-out infinite;
+                border: 2px solid #1F2C34;
             }
-            @keyframes rfm-live-blink {
-                0%, 100% { opacity: 1; }
-                50% { opacity: 0.4; }
+            .wa-header__info {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
             }
-            .pain-answer__name {
+            .wa-header__name {
+                font-size: 15px;
+                font-weight: 600;
+                color: #E9EDEF;
+                line-height: 1.2;
+            }
+            .wa-header__status {
                 font-size: 12px;
-                font-weight: 700;
-                color: #B8860B;
-                display: block;
-                margin-bottom: 6px;
+                color: #00A884;
+                font-weight: 500;
             }
-            .pain-answer__content p {
-                font-size: 16px;
-                color: #3D4450;
-                line-height: 1.6;
-                font-style: italic;
-                margin: 0;
-            }
-            .pain-answer__cta {
-                text-align: center;
-                margin-top: 32px;
+            .wa-header__actions {
+                display: flex;
+                gap: 20px;
+                color: #8696A0;
+                font-size: 17px;
             }
 
-            /* Responsive */
-            @media (max-width: 768px) {
-                .pain-thoughts { grid-template-columns: 1fr; max-width: 480px; }
-                .pain-cinema { padding: 80px 0 60px; }
+            /* ═══ CHAT BODY ═══ */
+            .wa-chat {
+                flex: 1;
+                background: #0B141A;
+                background-image:
+                    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cdefs%3E%3Cpattern id='p' width='40' height='40' patternUnits='userSpaceOnUse'%3E%3Ccircle cx='10' cy='10' r='1' fill='rgba(255,255,255,0.015)'/%3E%3Ccircle cx='30' cy='30' r='0.8' fill='rgba(255,255,255,0.01)'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='200' height='200' fill='url(%23p)'/%3E%3C/svg%3E");
+                padding: 10px 10px 6px;
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+                min-height: 420px;
+                overflow: hidden;
             }
-            @media (max-width: 480px) {
-                .pain-thought { padding: 16px; gap: 12px; }
-                .pain-thought__icon { width: 38px; height: 38px; border-radius: 10px; }
-                .pain-thought__icon i { font-size: 14px; }
-                .pain-thought__bubble p { font-size: 14px; }
-                .pain-thought__typing { left: 66px; }
-                .pain-thought__pulse { width: 38px; height: 38px; border-radius: 10px; top: 16px; left: 16px; }
+
+            /* Date pill */
+            .wa-chat__date {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+            .wa-chat__date span {
+                display: inline-block;
+                background: rgba(29,43,54,0.9);
+                color: rgba(134,150,160,0.85);
+                font-size: 11px;
+                font-weight: 600;
+                padding: 5px 16px;
+                border-radius: 8px;
+                letter-spacing: 0.3px;
+                text-transform: uppercase;
+            }
+
+            /* ═══ MESSAGE ROW (avatar + bubble) ═══ */
+            .wa-row {
+                display: flex;
+                align-items: flex-end;
+                gap: 6px;
+                margin-bottom: 4px;
+            }
+            .wa-row--right { justify-content: flex-end; }
+            .wa-row--left { justify-content: flex-start; }
+            .wa-row__avatar {
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                object-fit: cover;
+                flex-shrink: 0;
+                margin-bottom: 2px;
+            }
+
+            /* Hidden / visible animation */
+            .wa-row--hidden {
+                opacity: 0;
+                transform: translateY(16px) scale(0.92);
+            }
+            .wa-row--visible {
+                animation: wa-msg-pop 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+            @keyframes wa-msg-pop {
+                0% { opacity: 0; transform: translateY(16px) scale(0.92); }
+                100% { opacity: 1; transform: translateY(0) scale(1); }
+            }
+
+            /* ═══ BUBBLES ═══ */
+            .wa-bubble {
+                max-width: 240px;
+                padding: 8px 10px 3px;
+                position: relative;
+            }
+            .wa-bubble p {
+                font-size: 13.5px;
+                line-height: 1.5;
+                margin: 0 0 1px;
+            }
+            .wa-bubble__sender {
+                display: block;
+                font-size: 11.5px;
+                font-weight: 700;
+                margin-bottom: 3px;
+                color: #ffba1a;
+            }
+            .wa-bubble__meta {
+                font-size: 10px;
+                display: flex;
+                align-items: center;
+                gap: 3px;
+                justify-content: flex-end;
+                padding-top: 1px;
+                padding-bottom: 2px;
+            }
+
+            /* Green bubble (sent) */
+            .wa-bubble--green {
+                background: #005C4B;
+                border-radius: 10px 2px 10px 10px;
+            }
+            .wa-bubble--green p { color: #E9EDEF; }
+            .wa-bubble--green .wa-bubble__meta { color: rgba(255,255,255,0.45); }
+            .wa-bubble--green .wa-bubble__meta i { color: #53BDEB; font-size: 14px; }
+
+            /* Dark bubble (received) */
+            .wa-bubble--dark {
+                background: #1F2C34;
+                border-radius: 2px 10px 10px 10px;
+            }
+            .wa-bubble--dark p { color: #E9EDEF; }
+            .wa-bubble--dark strong { color: #ffba1a; font-weight: 700; }
+            .wa-bubble--dark .wa-bubble__meta { color: rgba(255,255,255,0.35); }
+
+            /* ═══ TYPING INDICATOR ═══ */
+            .wa-typing {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                padding: 4px 0;
+            }
+            .wa-typing--hidden { display: none !important; }
+            .wa-typing--visible { display: flex !important; }
+            .wa-typing {
+                animation: wa-msg-pop 0.3s ease forwards;
+            }
+            .wa-typing__pic {
+                width: 28px;
+                height: 28px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+            .wa-typing__bubble {
+                display: flex;
+                gap: 4px;
+                background: #1F2C34;
+                padding: 12px 16px;
+                border-radius: 2px 12px 12px 12px;
+            }
+            .wa-typing__bubble span {
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                background: #8696A0;
+                animation: wa-dot-bounce 1.4s ease-in-out infinite;
+            }
+            .wa-typing__bubble span:nth-child(2) { animation-delay: 0.15s; }
+            .wa-typing__bubble span:nth-child(3) { animation-delay: 0.3s; }
+            @keyframes wa-dot-bounce {
+                0%, 60%, 100% { transform: translateY(0); opacity: 0.35; }
+                30% { transform: translateY(-6px); opacity: 1; }
+            }
+
+            /* ═══ INPUT BAR ═══ */
+            .wa-input {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 6px 8px 10px;
+                background: #0B141A;
+                border-radius: 0 0 38px 38px;
+            }
+            .wa-input__field {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                background: #2A3942;
+                border-radius: 24px;
+                padding: 10px 14px;
+            }
+            .wa-input__field i { color: #8696A0; font-size: 18px; }
+            .wa-input__field span { flex: 1; font-size: 14px; color: #8696A0; }
+            .wa-input__mic {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: #00A884;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                font-size: 16px;
+                flex-shrink: 0;
+            }
+
+            /* ═══ DOTS (mobile) ═══ */
+            .wa-dots {
+                display: none;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 32px;
+            }
+            .wa-dot {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                border: none;
+                background: #D1D5DB;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                padding: 0;
+            }
+            .wa-dot--active {
+                background: #ffba1a;
+                transform: scale(1.4);
+                box-shadow: 0 0 12px rgba(255,186,26,0.4);
+            }
+
+            /* ═══ RESPONSIVE ═══ */
+            @media (max-width: 1100px) {
+                .wa-phones {
+                    justify-content: flex-start;
+                    overflow: hidden;
+                    padding: 0 calc(50% - 170px);
+                }
+                .wa-dots { display: flex; }
+            }
+            @media (max-width: 768px) {
+                .wa-section { padding: 80px 0 60px; }
+                .wa-device__frame { width: 310px; }
+                .wa-chat { min-height: 380px; }
+                .wa-phones { padding: 0 calc(50% - 155px); gap: 32px; }
+            }
+            @media (max-width: 380px) {
+                .wa-device__frame { width: 290px; }
+                .wa-phones { padding: 0 calc(50% - 145px); }
             }
         </style>
 
         <script>
         (function() {
-            var container = document.getElementById('painThoughtsCanais');
-            var answer = document.getElementById('painAnswerCanais');
+            var container = document.getElementById('waPhones');
             if (!container) return;
-            var thoughts = container.querySelectorAll('.pain-thought');
-            var activated = false;
+            var devices = container.querySelectorAll('.wa-device');
+            var dots = document.querySelectorAll('.wa-dot');
+            var current = 0;
+            var animated = [false, false, false];
 
+            // ═══ REAL-TIME CLOCK ═══
+            function pad(n) { return n < 10 ? '0' + n : '' + n; }
+            function fmt(h, m) { return pad(h) + ':' + pad(m); }
+
+            function updateTimes() {
+                var now = new Date();
+                var nowStr = fmt(now.getHours(), now.getMinutes());
+
+                container.querySelectorAll('.wa-statusbar > span').forEach(function(el) {
+                    el.textContent = nowStr;
+                });
+
+                var offsets = [{ base: -5 }, { base: -8 }, { base: -11 }];
+                devices.forEach(function(dev, idx) {
+                    var minute = offsets[idx].base;
+                    dev.querySelectorAll('.wa-row').forEach(function(row) {
+                        var d = new Date(now.getTime() + minute * 60000);
+                        var ts = fmt(d.getHours(), d.getMinutes());
+                        var meta = row.querySelector('.wa-bubble__meta');
+                        if (meta) {
+                            var check = meta.querySelector('i');
+                            meta.textContent = ts + ' ';
+                            if (check) meta.appendChild(check);
+                        }
+                        minute += 1;
+                    });
+                });
+            }
+
+            updateTimes();
+            setInterval(updateTimes, 30000);
+
+            // ═══ CHAT ANIMATION — typing before EVERY message ═══
+            function animateChat(idx) {
+                if (animated[idx]) return;
+                animated[idx] = true;
+                var device = devices[idx];
+                var chat = device.querySelector('.wa-chat');
+                var rows = Array.prototype.slice.call(device.querySelectorAll('.wa-row'));
+
+                // Header status
+                var statusEl = device.querySelector('.wa-header__status');
+                // Client avatar from header
+                var clientAvatar = device.querySelector('.wa-header__avatar');
+                var clientSrc = clientAvatar ? clientAvatar.src : '';
+
+                function clearTyping() {
+                    chat.querySelectorAll('.wa-typing').forEach(function(el) { el.remove(); });
+                    if (statusEl) statusEl.textContent = 'online';
+                }
+
+                // side = 'left' (Olívia) or 'right' (cliente)
+                function addTyping(side) {
+                    clearTyping();
+                    var el = document.createElement('div');
+                    el.className = 'wa-typing';
+                    if (side === 'left') {
+                        el.style.alignSelf = 'flex-start';
+                        el.innerHTML = '<img src="/images/olivia.png" alt="" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
+                        if (statusEl) statusEl.textContent = 'digitando...';
+                    } else {
+                        el.style.alignSelf = 'flex-end';
+                        el.style.flexDirection = 'row-reverse';
+                        el.innerHTML = '<img src="' + clientSrc + '" alt="" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
+                        if (statusEl) statusEl.textContent = 'online';
+                    }
+                    chat.appendChild(el);
+                    chat.scrollTop = chat.scrollHeight;
+                }
+
+                // Sequência: digitando (lado certo) → msg, digitando → msg, ...
+                var t = 400;
+                rows.forEach(function(row) {
+                    var isOlivia = row.classList.contains('wa-row--left');
+                    var side = isOlivia ? 'left' : 'right';
+                    var showAt = t;
+                    var revealAt = t + 1500;
+
+                    setTimeout(function() { addTyping(side); }, showAt);
+                    setTimeout(function() {
+                        clearTyping();
+                        row.classList.remove('wa-row--hidden');
+                        row.classList.add('wa-row--visible');
+                        chat.scrollTop = chat.scrollHeight;
+                    }, revealAt);
+
+                    t = revealAt + 800;
+                });
+            }
+
+            function goTo(idx) {
+                if (idx < 0 || idx >= devices.length) return;
+                current = idx;
+                var deviceW = devices[0].offsetWidth + 40;
+                container.style.transform = 'translateX(-' + (idx * deviceW) + 'px)';
+                dots.forEach(function(d, i) {
+                    d.classList.toggle('wa-dot--active', i === idx);
+                });
+                animateChat(idx);
+            }
+
+            dots.forEach(function(d) {
+                d.addEventListener('click', function() { goTo(parseInt(d.dataset.idx)); });
+            });
+
+            // Swipe
+            var sx = 0;
+            container.addEventListener('touchstart', function(e) { sx = e.touches[0].clientX; }, { passive: true });
+            container.addEventListener('touchend', function(e) {
+                var diff = sx - e.changedTouches[0].clientX;
+                if (Math.abs(diff) > 50) {
+                    diff > 0 ? goTo(current + 1) : goTo(current - 1);
+                }
+            }, { passive: true });
+
+            // Intersection observer
             var obs = new IntersectionObserver(function(entries) {
                 entries.forEach(function(e) {
-                    if (e.isIntersecting && !activated) {
-                        activated = true;
+                    if (e.isIntersecting) {
                         obs.unobserve(e.target);
-
-                        thoughts.forEach(function(t, i) {
-                            setTimeout(function() {
-                                t.classList.add('pain-visible');
-                            }, i * 500);
-                            setTimeout(function() {
-                                t.classList.add('pain-typed');
-                            }, i * 500 + 600);
-                        });
-
-                        setTimeout(function() {
-                            if (answer) answer.classList.add('pain-answer-visible');
-                        }, thoughts.length * 500 + 800);
+                        if (window.innerWidth > 1100) {
+                            animateChat(0);
+                            setTimeout(function() { animateChat(1); }, 800);
+                            setTimeout(function() { animateChat(2); }, 1600);
+                        } else {
+                            animateChat(0);
+                        }
                     }
                 });
-            }, { threshold: 0.2 });
+            }, { threshold: 0.12 });
             obs.observe(container);
         })();
         </script>
     </section>
-
 
     <!-- ═══ 3. O NOVO MODELO (v2) ═══ -->
     <section class="lp-section lp-section--dark" id="modelo">
@@ -496,87 +947,61 @@ export const pageHTML = `
                     <div class="bm-vs__line"></div>
                 </div>
 
-                <!-- Phase 2: Modelo com Orbit -->
+                <!-- Phase 2: Modelo Orbit - Orbital -->
                 <div class="bm-phase bm-phase--new" data-phase="new">
                     <div class="bm-phase__header">
                         <div class="bm-phase__badge bm-phase__badge--gold"><i class="fas fa-check"></i> Modelo com Orbit</div>
                         <div class="bm-phase__tag"><i class="fas fa-crown"></i> Recomendado</div>
                     </div>
-                    <div class="bm-phase__timeline">
-                        <div class="bm-phase__rail"><div class="bm-phase__rail-fill bm-phase__rail-fill--gold"></div></div>
-                        <div class="bm-step bm-step--new" data-idx="1">
-                            <div class="bm-step__dot bm-step__dot--gold">1</div>
-                            <div class="bm-step__card bm-step__card--gold">
-                                <div class="bm-step__content">
-                                    <strong>Projeto + ativação de agentes</strong>
-                                    <span>Mesmo escopo, mas agora com IA embutida</span>
-                                </div>
-                                <div class="bm-step__scene">
-                                    <div class="bm-scene-activate">
-                                        <div class="bm-scene-activate__agents">
-                                            <span style="--d:0"><i class="fas fa-robot"></i></span>
-                                            <span style="--d:1"><i class="fas fa-robot"></i></span>
-                                            <span style="--d:2"><i class="fas fa-robot"></i></span>
-                                        </div>
-                                        <div class="bm-scene-activate__label"><i class="fas fa-bolt"></i> Agentes ativados</div>
-                                    </div>
-                                </div>
+
+                    <div class="bm-orb" id="bmOrb">
+                        <svg class="bm-orb__svg" id="bmOrbSvg"></svg>
+
+                        <!-- Center -->
+                        <div class="bm-orb__center">
+                            <div class="bm-orb__center-glow"></div>
+                            <div class="bm-orb__center-ring"></div>
+                            <img src="/images/logo-orbit-white.png" alt="Orbit" class="bm-orb__logo">
+                        </div>
+
+                        <!-- Nodes with inline cards -->
+                        <div class="bm-orb__node" data-idx="0">
+                            <div class="bm-orb__card">
+                                <div class="bm-orb__card-num">01</div>
+                                <div class="bm-orb__card-icon"><i class="fas fa-bolt"></i></div>
+                                <h4>Projeto + IA</h4>
+                                <p>Seu método + ativação dos 12 agentes na entrega</p>
                             </div>
                         </div>
-                        <div class="bm-step bm-step--new" data-idx="2">
-                            <div class="bm-step__dot bm-step__dot--gold">2</div>
-                            <div class="bm-step__card bm-step__card--gold">
-                                <div class="bm-step__content">
-                                    <strong>Operação contínua com IA</strong>
-                                    <span>Agentes seguem executando após a entrega</span>
-                                </div>
-                                <div class="bm-step__scene">
-                                    <div class="bm-scene-running">
-                                        <div class="bm-scene-running__pulse"></div>
-                                        <div class="bm-scene-running__icon"><i class="fas fa-gear"></i></div>
-                                        <div class="bm-scene-running__label">24/7 operando</div>
-                                    </div>
-                                </div>
+                        <div class="bm-orb__node" data-idx="1">
+                            <div class="bm-orb__card">
+                                <div class="bm-orb__card-num">02</div>
+                                <div class="bm-orb__card-icon"><i class="fas fa-gear"></i></div>
+                                <h4>Operação 24/7</h4>
+                                <p>Agentes seguem executando após a entrega</p>
                             </div>
                         </div>
-                        <div class="bm-step bm-step--new" data-idx="3">
-                            <div class="bm-step__dot bm-step__dot--gold">3</div>
-                            <div class="bm-step__card bm-step__card--gold">
-                                <div class="bm-step__content">
-                                    <strong>Receita recorrente</strong>
-                                    <span>Cliente paga mensalidade porque IA continua trabalhando</span>
-                                </div>
-                                <div class="bm-step__scene">
-                                    <div class="bm-scene-revenue">
-                                        <div class="bm-scene-revenue__bar bm-scene-revenue__bar--1"></div>
-                                        <div class="bm-scene-revenue__bar bm-scene-revenue__bar--2"></div>
-                                        <div class="bm-scene-revenue__bar bm-scene-revenue__bar--3"></div>
-                                        <div class="bm-scene-revenue__bar bm-scene-revenue__bar--4"></div>
-                                        <div class="bm-scene-revenue__label"><i class="fas fa-arrow-trend-up"></i> Receita crescente</div>
-                                    </div>
-                                </div>
+                        <div class="bm-orb__node" data-idx="2">
+                            <div class="bm-orb__card">
+                                <div class="bm-orb__card-num">03</div>
+                                <div class="bm-orb__card-icon"><i class="fas fa-arrow-trend-up"></i></div>
+                                <h4>Receita recorrente</h4>
+                                <p>Cliente paga porque IA continua gerando valor</p>
                             </div>
                         </div>
-                        <div class="bm-step bm-step--new" data-idx="4">
-                            <div class="bm-step__dot bm-step__dot--green">4</div>
-                            <div class="bm-step__card bm-step__card--green">
-                                <div class="bm-step__content">
-                                    <strong>Expansão natural</strong>
-                                    <span>Ativar novos agentes = upsell sem venda nova</span>
-                                </div>
-                                <div class="bm-step__scene">
-                                    <div class="bm-scene-expand">
-                                        <div class="bm-scene-expand__item bm-scene-expand__item--1"><i class="fas fa-user-plus"></i> +3 agentes</div>
-                                        <div class="bm-scene-expand__item bm-scene-expand__item--2"><i class="fas fa-chart-line"></i> +R$ 600/mês</div>
-                                        <div class="bm-scene-expand__item bm-scene-expand__item--3"><i class="fas fa-rocket"></i> Sem venda nova</div>
-                                    </div>
-                                </div>
+                        <div class="bm-orb__node" data-idx="3">
+                            <div class="bm-orb__card">
+                                <div class="bm-orb__card-num">04</div>
+                                <div class="bm-orb__card-icon"><i class="fas fa-rocket"></i></div>
+                                <h4>Expansão natural</h4>
+                                <p>Ative novos agentes sem venda nova</p>
                             </div>
                         </div>
                     </div>
+
                     <div class="bm-phase__result bm-phase__result--green">
                         <i class="fas fa-circle-check"></i>
-                        <span>Receita previsível, margem ~90%, crescimento composto</span>
+                        <span>Receita previsível, margem ~60%, crescimento composto</span>
                     </div>
                 </div>
             </div>
@@ -836,27 +1261,185 @@ export const pageHTML = `
             .bm-step__text h3 { font-size: 16px; }
             .bm-step__text p { font-size: 13px; }
         }
+
+        /* ═══ ORBITAL VISUALIZATION ═══ */
+        .bm-orb {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 48px auto 24px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            grid-template-rows: 1fr auto 1fr;
+            gap: 32px;
+            align-items: center;
+            justify-items: center;
+        }
+        .bm-orb__svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: visible;
+        }
+
+        /* Center */
+        .bm-orb__center {
+            grid-column: 2;
+            grid-row: 2;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 5;
+        }
+        .bm-orb__center-glow {
+            position: absolute;
+            inset: -20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,186,26,0.15) 0%, transparent 70%);
+            animation: bm-glow-pulse 3s ease-in-out infinite;
+        }
+        @keyframes bm-glow-pulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        .bm-orb__center-ring {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,186,26,0.25);
+            animation: bm-ring-rotate 20s linear infinite;
+        }
+        .bm-orb__center-ring::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            background: #ffba1a;
+            border-radius: 50%;
+            margin-left: -4px;
+        }
+        @keyframes bm-ring-rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .bm-orb__logo {
+            height: 36px;
+            width: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Node cards */
+        .bm-orb__node {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .bm-orb--visible .bm-orb__node { opacity: 1; transform: translateY(0); }
+        .bm-orb__node[data-idx="0"] { grid-column: 2; grid-row: 1; transition-delay: 0.1s; }
+        .bm-orb__node[data-idx="1"] { grid-column: 3; grid-row: 2; transition-delay: 0.3s; }
+        .bm-orb__node[data-idx="2"] { grid-column: 2; grid-row: 3; transition-delay: 0.5s; }
+        .bm-orb__node[data-idx="3"] { grid-column: 1; grid-row: 2; transition-delay: 0.7s; }
+
+        .bm-orb__card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 24px 20px;
+            width: 220px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s ease;
+        }
+        .bm-orb__card:hover {
+            background: rgba(255,186,26,0.06);
+            border-color: rgba(255,186,26,0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+        .bm-orb__card-num {
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            font-size: 36px;
+            font-weight: 900;
+            color: rgba(255,255,255,0.03);
+            line-height: 1;
+        }
+        .bm-orb__card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(255,186,26,0.2), rgba(255,186,26,0.05));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffba1a;
+            font-size: 20px;
+            margin: 0 auto 14px;
+            transition: all 0.3s;
+        }
+        .bm-orb__card:hover .bm-orb__card-icon {
+            background: linear-gradient(135deg, #ffba1a, #ffca4a);
+            color: #000;
+            box-shadow: 0 4px 20px rgba(255,186,26,0.3);
+        }
+        .bm-orb__card h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+        .bm-orb__card p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.45);
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .bm-orb {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto;
+                gap: 16px;
+            }
+            .bm-orb__center { grid-column: span 2; grid-row: auto; width: 80px; height: 80px; margin: 8px auto; }
+            .bm-orb__logo { height: 24px; }
+            .bm-orb__node { grid-column: auto !important; grid-row: auto !important; }
+            .bm-orb__card { width: 100%; }
+            .bm-orb__center-glow { inset: -12px; }
+        }
+        @media (max-width: 480px) {
+            .bm-orb { grid-template-columns: 1fr; }
+            .bm-orb__center { grid-column: span 1; }
+        }
         </style>
 
         <script>
         (function() {
+            // Original timeline animation
             var cinema = document.getElementById('bmCinemaCanais');
             if (!cinema) return;
             var phases = cinema.querySelectorAll('.bm-phase');
-
             phases.forEach(function(phase) {
                 var steps = phase.querySelectorAll('.bm-step');
                 var activated = false;
-
                 var obs = new IntersectionObserver(function(entries) {
                     entries.forEach(function(e) {
                         if (e.isIntersecting && !activated) {
                             activated = true;
                             phase.classList.add('bm-active');
                             steps.forEach(function(step, i) {
-                                setTimeout(function() {
-                                    step.classList.add('bm-step-visible');
-                                }, i * 600);
+                                setTimeout(function() { step.classList.add('bm-step-visible'); }, i * 600);
                             });
                             obs.unobserve(e.target);
                         }
@@ -864,6 +1447,88 @@ export const pageHTML = `
                 }, { threshold: 0.15 });
                 obs.observe(phase);
             });
+
+            // Orbital visualization
+            var orb = document.getElementById('bmOrb');
+            if (orb) {
+                var svg = document.getElementById('bmOrbSvg');
+                var nodes = orb.querySelectorAll('.bm-orb__node');
+                var center = orb.querySelector('.bm-orb__center');
+
+                function drawLines() {
+                    if (!svg || !center) return;
+                    var orbRect = orb.getBoundingClientRect();
+                    svg.setAttribute('width', orb.offsetWidth);
+                    svg.setAttribute('height', orb.offsetHeight);
+                    svg.innerHTML = '';
+
+                    var cx = center.offsetLeft + center.offsetWidth / 2;
+                    var cy = center.offsetTop + center.offsetHeight / 2;
+
+                    nodes.forEach(function(node, i) {
+                        var card = node.querySelector('.bm-orb__card');
+                        if (!card) return;
+                        var nx = node.offsetLeft + card.offsetWidth / 2;
+                        var ny = node.offsetTop + card.offsetHeight / 2;
+
+                        // Dashed line
+                        var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                        line.setAttribute('x1', cx);
+                        line.setAttribute('y1', cy);
+                        line.setAttribute('x2', nx);
+                        line.setAttribute('y2', ny);
+                        line.setAttribute('stroke', 'rgba(255,186,26,0.12)');
+                        line.setAttribute('stroke-width', '1.5');
+                        line.setAttribute('stroke-dasharray', '6,6');
+                        svg.appendChild(line);
+
+                        // Animated dot traveling from center to node
+                        var dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                        dot.setAttribute('r', '4');
+                        dot.setAttribute('fill', '#ffba1a');
+                        dot.setAttribute('filter', 'url(#bmGlow)');
+                        var anim = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
+                        anim.setAttribute('dur', (2.5 + i * 0.6) + 's');
+                        anim.setAttribute('repeatCount', 'indefinite');
+                        anim.setAttribute('path', 'M' + cx + ',' + cy + ' L' + nx + ',' + ny);
+                        dot.appendChild(anim);
+                        svg.appendChild(dot);
+
+                        // Second dot (return)
+                        var dot2 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                        dot2.setAttribute('r', '3');
+                        dot2.setAttribute('fill', '#ffba1a');
+                        dot2.setAttribute('opacity', '0.4');
+                        var anim2 = document.createElementNS('http://www.w3.org/2000/svg', 'animateMotion');
+                        anim2.setAttribute('dur', (3 + i * 0.4) + 's');
+                        anim2.setAttribute('repeatCount', 'indefinite');
+                        anim2.setAttribute('path', 'M' + nx + ',' + ny + ' L' + cx + ',' + cy);
+                        dot2.appendChild(anim2);
+                        svg.appendChild(dot2);
+                    });
+
+                    // Glow filter
+                    var defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+                    defs.innerHTML = '<filter id="bmGlow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>';
+                    svg.prepend(defs);
+                }
+
+                var orbObs = new IntersectionObserver(function(entries) {
+                    if (entries[0].isIntersecting) {
+                        orb.classList.add('bm-orb--visible');
+                        // Wait for grid layout to settle then draw lines
+                        setTimeout(drawLines, 800);
+                        orbObs.disconnect();
+                    }
+                }, { threshold: 0.15 });
+                orbObs.observe(orb);
+
+                var rTimer;
+                window.addEventListener('resize', function() {
+                    clearTimeout(rTimer);
+                    rTimer = setTimeout(drawLines, 200);
+                });
+            }
         })();
         </script>
     </section>
@@ -878,12 +1543,12 @@ export const pageHTML = `
 
             <div class="math-numbers" data-reveal-stagger>
                 <div class="math-number-card">
-                    <div class="big-number big-number--gold">R$ 250</div>
-                    <div class="big-label">/mês por cliente ativado</div>
+                    <div class="big-number big-number--green">~60%</div>
+                    <div class="big-label">de margem para você</div>
                 </div>
                 <div class="math-number-card">
-                    <div class="big-number big-number--green">~90%</div>
-                    <div class="big-label">de margem para você</div>
+                    <div class="big-number big-number--gold">White-label</div>
+                    <div class="big-label">sua marca, sua operação</div>
                 </div>
                 <div class="math-number-card">
                     <div class="big-number big-number--gold">ZERO</div>
@@ -891,40 +1556,199 @@ export const pageHTML = `
                 </div>
             </div>
 
-            <div data-reveal>
-                <table class="math-table">
-                    <thead>
-                        <tr>
-                            <th>Clientes</th>
-                            <th>Receita Mensal</th>
-                            <th>Receita Anual</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>10 clientes</td>
-                            <td>R$ 2.500/mês</td>
-                            <td>R$ 30.000/ano</td>
-                        </tr>
-                        <tr>
-                            <td>25 clientes</td>
-                            <td>R$ 6.250/mês</td>
-                            <td>R$ 75.000/ano</td>
-                        </tr>
-                        <tr>
-                            <td>50 clientes</td>
-                            <td>R$ 12.500/mês</td>
-                            <td>R$ 150.000/ano</td>
-                        </tr>
-                        <tr>
-                            <td>100 clientes</td>
-                            <td>R$ 25.000/mês</td>
-                            <td>R$ 300.000/ano</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- Calculadora interativa -->
+            <div class="math-calc" data-reveal>
+                <div class="math-calc__header">
+                    <h3>Simule sua receita recorrente</h3>
+                    <p>Preencha os campos e veja quanto você pode faturar com o Orbit.</p>
+                </div>
+
+                <div class="math-calc__form">
+                    <div class="math-calc__field">
+                        <label for="calcClientes">Quantos clientes ativos pretende ter?</label>
+                        <input type="number" id="calcClientes" value="10" min="1" max="500">
+                    </div>
+                    <div class="math-calc__field">
+                        <label for="calcValor">Qual o valor da mensalidade da sua consultoria?</label>
+                        <div class="math-calc__input-prefix">
+                            <span>R$</span>
+                            <input type="number" id="calcValor" value="2500" min="100" step="100">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="math-calc__results" id="calcResults">
+                    <div class="math-calc__result">
+                        <span class="math-calc__result-label">Receita Mensal</span>
+                        <span class="math-calc__result-value" id="calcMensal">R$ 25.000</span>
+                    </div>
+                    <div class="math-calc__result">
+                        <span class="math-calc__result-label">Receita Anual</span>
+                        <span class="math-calc__result-value math-calc__result-value--big" id="calcAnual">R$ 300.000</span>
+                    </div>
+                    <div class="math-calc__result">
+                        <span class="math-calc__result-label">Margem estimada (~60%)</span>
+                        <span class="math-calc__result-value math-calc__result-value--green" id="calcMargem">R$ 180.000/ano</span>
+                    </div>
+                </div>
+
                 <p class="math-note">Além da recorrência, você ganha na implementação (projeto único por cliente).</p>
             </div>
+
+            <style>
+                .math-calc {
+                    max-width: 700px;
+                    margin: 0 auto;
+                    background: #fff;
+                    border-radius: 20px;
+                    padding: 40px 36px;
+                    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+                    border: 1px solid #E5E7EB;
+                }
+                .math-calc__header {
+                    text-align: center;
+                    margin-bottom: 32px;
+                }
+                .math-calc__header h3 {
+                    font-size: 22px;
+                    font-weight: 800;
+                    color: #1a1d23;
+                    margin-bottom: 6px;
+                }
+                .math-calc__header p {
+                    font-size: 15px;
+                    color: #6B7280;
+                }
+                .math-calc__form {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 20px;
+                    margin-bottom: 32px;
+                }
+                .math-calc__field label {
+                    display: block;
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: #374151;
+                    margin-bottom: 8px;
+                }
+                .math-calc__field input {
+                    width: 100%;
+                    padding: 14px 16px;
+                    font-size: 18px;
+                    font-weight: 700;
+                    color: #1a1d23;
+                    border: 2px solid #E5E7EB;
+                    border-radius: 12px;
+                    background: #F9FAFB;
+                    outline: none;
+                    transition: border-color 0.2s;
+                }
+                .math-calc__field input:focus {
+                    border-color: var(--primary);
+                    background: #fff;
+                }
+                .math-calc__input-prefix {
+                    display: flex;
+                    align-items: center;
+                    gap: 0;
+                    border: 2px solid #E5E7EB;
+                    border-radius: 12px;
+                    background: #F9FAFB;
+                    overflow: hidden;
+                    transition: border-color 0.2s;
+                }
+                .math-calc__input-prefix:focus-within {
+                    border-color: var(--primary);
+                    background: #fff;
+                }
+                .math-calc__input-prefix span {
+                    padding: 14px 12px 14px 16px;
+                    font-size: 18px;
+                    font-weight: 700;
+                    color: #9CA3AF;
+                    background: transparent;
+                }
+                .math-calc__input-prefix input {
+                    border: none;
+                    background: transparent;
+                    padding: 14px 16px 14px 0;
+                }
+                .math-calc__input-prefix input:focus {
+                    border: none;
+                    background: transparent;
+                }
+                .math-calc__results {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    gap: 16px;
+                    padding: 24px;
+                    background: #0D1117;
+                    border-radius: 14px;
+                    margin-bottom: 20px;
+                }
+                .math-calc__result {
+                    text-align: center;
+                }
+                .math-calc__result-label {
+                    display: block;
+                    font-size: 12px;
+                    font-weight: 600;
+                    color: rgba(255,255,255,0.5);
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    margin-bottom: 6px;
+                }
+                .math-calc__result-value {
+                    font-size: 22px;
+                    font-weight: 800;
+                    color: var(--primary);
+                    transition: all 0.3s;
+                }
+                .math-calc__result-value--big {
+                    font-size: 26px;
+                    color: #fff;
+                }
+                .math-calc__result-value--green {
+                    color: #22C55E;
+                }
+                @media (max-width: 640px) {
+                    .math-calc { padding: 28px 20px; }
+                    .math-calc__form { grid-template-columns: 1fr; }
+                    .math-calc__results { grid-template-columns: 1fr; gap: 12px; }
+                }
+            </style>
+
+            <script>
+            (function() {
+                var clientesInput = document.getElementById('calcClientes');
+                var valorInput = document.getElementById('calcValor');
+                var mensalEl = document.getElementById('calcMensal');
+                var anualEl = document.getElementById('calcAnual');
+                var margemEl = document.getElementById('calcMargem');
+                if (!clientesInput || !valorInput) return;
+
+                function fmt(n) {
+                    return 'R$ ' + n.toLocaleString('pt-BR');
+                }
+
+                function calc() {
+                    var clientes = parseInt(clientesInput.value) || 0;
+                    var valor = parseInt(valorInput.value) || 0;
+                    var mensal = clientes * valor;
+                    var anual = mensal * 12;
+                    var margem = Math.round(anual * 0.6);
+
+                    mensalEl.textContent = fmt(mensal);
+                    anualEl.textContent = fmt(anual);
+                    margemEl.textContent = fmt(margem) + '/ano';
+                }
+
+                clientesInput.addEventListener('input', calc);
+                valorInput.addEventListener('input', calc);
+                calc();
+            })();
+            </script>
         </div>
     </section>
 
@@ -1631,45 +2455,184 @@ export const pageHTML = `
 
 
     <!-- ═══ 6. O QUE VOCÊ GANHA ═══ -->
-    <section class="lp-section lp-section--light">
-        <div class="lp-container">
-            <div class="lp-section-header" data-reveal>
-                <h2>O que você ganha como parceiro</h2>
+    <section class="vg-section" id="beneficios">
+        <div class="container" style="max-width:1100px;">
+            <div class="section-header" data-reveal>
+                <span class="section-badge" style="background:rgba(255,186,26,0.1);color:#e6a200;border:1px solid rgba(255,186,26,0.2);">Vantagens exclusivas</span>
+                <h2 style="color:#1a1d23;font-size:clamp(28px,4vw,42px);font-weight:800;">O que você ganha como parceiro</h2>
             </div>
 
-            <div class="benefits-grid" data-reveal-stagger>
-                <div class="benefit-card">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-arrows-rotate"></i></div>
-                    <h3>Receita Recorrente</h3>
-                    <p>R$ 250/mês por cliente ativado. Receita que não depende da sua agenda.</p>
+            <!-- Top: 3 big stats -->
+            <div class="vg-stats" data-reveal-stagger>
+                <div class="vg-stat">
+                    <div class="vg-stat__num">~60%</div>
+                    <div class="vg-stat__label">Margem por cliente</div>
                 </div>
-                <div class="benefit-card">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-tag"></i></div>
-                    <h3>White-label</h3>
-                    <p>Sua marca, seu relacionamento. O cliente é seu do início ao fim.</p>
+                <div class="vg-stat">
+                    <div class="vg-stat__num">24/7</div>
+                    <div class="vg-stat__label">Agentes operando</div>
                 </div>
-                <div class="benefit-card">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-lock"></i></div>
-                    <h3>Lock-in Natural</h3>
-                    <p>Cliente opera no software. Quanto mais usa, mais depende. Churn próximo de zero.</p>
+                <div class="vg-stat">
+                    <div class="vg-stat__num">Zero</div>
+                    <div class="vg-stat__label">Custo de tecnologia</div>
                 </div>
-                <div class="benefit-card">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-hand-holding-dollar"></i></div>
-                    <h3>Zero Investimento</h3>
-                    <p>O Grupo GSN opera toda a plataforma. Você não paga nada pela tecnologia.</p>
+            </div>
+
+            <!-- Benefits list -->
+            <div class="vg-list" data-reveal-stagger>
+                <div class="vg-card">
+                    <div class="vg-card__icon"><i class="fas fa-arrows-rotate"></i></div>
+                    <div>
+                        <h3>Receita Recorrente</h3>
+                        <p>Agentes trabalham 24/7 no cliente. Você recebe todo mês, mesmo sem estar presente. Consultoria recorrente passiva.</p>
+                    </div>
                 </div>
-                <div class="benefit-card">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-headset"></i></div>
-                    <h3>Suporte Dedicado</h3>
-                    <p>Onboarding, materiais de venda, treinamento e suporte técnico inclusos.</p>
+                <div class="vg-card">
+                    <div class="vg-card__icon"><i class="fas fa-tag"></i></div>
+                    <div>
+                        <h3>White-label</h3>
+                        <p>Sua marca, seu relacionamento. O cliente é seu do início ao fim.</p>
+                    </div>
                 </div>
-                <div class="benefit-card">
-                    <div class="icon-premium icon-premium--solid"><i class="fas fa-wand-magic-sparkles"></i></div>
-                    <h3>Roadmap de Agentes</h3>
-                    <p>Em breve, agentes customizáveis para suas verticais específicas.</p>
+                <div class="vg-card">
+                    <div class="vg-card__icon"><i class="fas fa-lock"></i></div>
+                    <div>
+                        <h3>Lock-in Natural</h3>
+                        <p>Quanto mais o cliente usa, mais depende. Churn próximo de zero.</p>
+                    </div>
+                </div>
+                <div class="vg-card">
+                    <div class="vg-card__icon"><i class="fas fa-headset"></i></div>
+                    <div>
+                        <h3>Suporte Dedicado</h3>
+                        <p>Onboarding, materiais de venda, treinamento e suporte técnico inclusos.</p>
+                    </div>
+                </div>
+                <div class="vg-card">
+                    <div class="vg-card__icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+                    <div>
+                        <h3>Agentes Customizáveis</h3>
+                        <p>Construa um agente uma vez — ele duplica seu método para outros clientes.</p>
+                    </div>
+                </div>
+                <div class="vg-card">
+                    <div class="vg-card__icon"><i class="fas fa-hand-holding-dollar"></i></div>
+                    <div>
+                        <h3>Sem Risco Financeiro</h3>
+                        <p>Nós operamos a plataforma. Você foca em vender e coordenar.</p>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <style>
+            .vg-section {
+                background: #FAFBFC;
+                padding: 120px 0;
+                position: relative;
+            }
+
+            /* Stats row */
+            .vg-stats {
+                display: flex;
+                justify-content: center;
+                gap: 64px;
+                margin: 56px 0 64px;
+                padding-bottom: 64px;
+                border-bottom: 1px solid #E5E7EB;
+            }
+            .vg-stat { text-align: center; }
+            .vg-stat__num {
+                font-size: clamp(36px, 5vw, 56px);
+                font-weight: 900;
+                color: #ffba1a;
+                line-height: 1;
+                letter-spacing: -2px;
+                margin-bottom: 8px;
+            }
+            .vg-stat__label {
+                font-size: 14px;
+                font-weight: 600;
+                color: #9CA3AF;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            /* Cards grid */
+            .vg-list {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
+            }
+            .vg-card {
+                padding: 32px 28px;
+                background: linear-gradient(145deg, #111827, #0D1117);
+                border: 1px solid rgba(255,255,255,0.06);
+                border-radius: 20px;
+                transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                position: relative;
+                overflow: hidden;
+            }
+            .vg-card::before {
+                content: '';
+                position: absolute;
+                top: 0; left: 0;
+                width: 100%; height: 100%;
+                background: radial-gradient(circle at top right, rgba(255,186,26,0.06) 0%, transparent 60%);
+                opacity: 0;
+                transition: opacity 0.4s;
+            }
+            .vg-card:hover {
+                border-color: rgba(255,186,26,0.2);
+                transform: translateY(-6px);
+                box-shadow: 0 20px 48px rgba(0,0,0,0.2);
+            }
+            .vg-card:hover::before { opacity: 1; }
+
+            .vg-card__icon {
+                width: 52px;
+                height: 52px;
+                border-radius: 16px;
+                background: rgba(255,255,255,0.04);
+                border: 1px solid rgba(255,255,255,0.08);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 22px;
+                color: #ffba1a;
+                margin-bottom: 20px;
+                position: relative;
+                z-index: 1;
+                transition: all 0.4s;
+            }
+            .vg-card:hover .vg-card__icon {
+                background: rgba(255,186,26,0.1);
+                border-color: rgba(255,186,26,0.3);
+                box-shadow: 0 0 20px rgba(255,186,26,0.15);
+                transform: scale(1.05);
+            }
+            .vg-card h3 {
+                font-size: 17px;
+                font-weight: 700;
+                color: #fff;
+                margin-bottom: 8px;
+                position: relative;
+                z-index: 1;
+            }
+            .vg-card p {
+                font-size: 14px;
+                color: rgba(255,255,255,0.45);
+                line-height: 1.6;
+                position: relative;
+                z-index: 1;
+            }
+
+            @media (max-width: 768px) {
+                .vg-stats { gap: 32px; flex-wrap: wrap; }
+                .vg-list { grid-template-columns: 1fr; }
+                .vg-section { padding: 80px 0; }
+            }
+        </style>
     </section>
 
 
@@ -1678,7 +2641,7 @@ export const pageHTML = `
         <div class="lp-container">
             <div class="lp-section-header" data-reveal>
                 <span class="lp-badge">E isso é só o começo</span>
-                <h2>O futuro: agentes customizáveis</h2>
+                <h2>O presente: agentes customizáveis</h2>
                 <p>Em breve, você poderá criar agentes específicos para suas verticais. Sua metodologia, operacionalizada por IA.</p>
             </div>
 
@@ -1714,11 +2677,11 @@ export const pageHTML = `
                 <div class="rm-step" data-step="2">
                     <div class="rm-step__marker">
                         <div class="rm-step__dot rm-step__dot--upcoming"><i class="fas fa-code"></i></div>
-                        <span class="rm-step__badge rm-step__badge--upcoming"><i class="fas fa-clock"></i> 6 meses</span>
+                        <span class="rm-step__badge rm-step__badge--upcoming"><i class="fas fa-clock"></i> Em breve</span>
                     </div>
                     <div class="rm-step__card">
                         <div class="rm-step__text">
-                            <h3>6 meses</h3>
+                            <h3>Em breve</h3>
                             <p>Agentes configuráveis por vertical. Você adapta à sua metodologia.</p>
                         </div>
                         <div class="rm-step__scene">
@@ -1743,47 +2706,7 @@ export const pageHTML = `
                     </div>
                 </div>
 
-                <!-- 12 MESES -->
-                <div class="rm-step" data-step="3">
-                    <div class="rm-step__marker">
-                        <div class="rm-step__dot rm-step__dot--future"><i class="fas fa-rocket"></i></div>
-                        <span class="rm-step__badge rm-step__badge--upcoming"><i class="fas fa-clock"></i> 12 meses</span>
-                    </div>
-                    <div class="rm-step__card">
-                        <div class="rm-step__text">
-                            <h3>12 meses</h3>
-                            <p>Marketplace de agentes. Crie, publique e monetize seus próprios agentes.</p>
-                        </div>
-                        <div class="rm-step__scene">
-                            <div class="rm-marketplace">
-                                <div class="rm-mp-card rm-mp-card--1">
-                                    <div class="rm-mp-card__icon"><i class="fas fa-building"></i></div>
-                                    <div class="rm-mp-card__info">
-                                        <strong>Agente Financeiro</strong>
-                                        <span>por Você</span>
-                                    </div>
-                                    <div class="rm-mp-card__price">R$ 197/mês</div>
-                                </div>
-                                <div class="rm-mp-card rm-mp-card--2">
-                                    <div class="rm-mp-card__icon"><i class="fas fa-industry"></i></div>
-                                    <div class="rm-mp-card__info">
-                                        <strong>Agente Industrial</strong>
-                                        <span>por Parceiro</span>
-                                    </div>
-                                    <div class="rm-mp-card__price">R$ 247/mês</div>
-                                </div>
-                                <div class="rm-mp-card rm-mp-card--3">
-                                    <div class="rm-mp-card__icon"><i class="fas fa-store"></i></div>
-                                    <div class="rm-mp-card__info">
-                                        <strong>Agente Varejo</strong>
-                                        <span>por Comunidade</span>
-                                    </div>
-                                    <div class="rm-mp-card__price">R$ 147/mês</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- 12 meses removed -->
             </div>
         </div>
 
@@ -1968,7 +2891,7 @@ export const pageHTML = `
                     </button>
                     <div class="faq-answer">
                         <div class="faq-answer__inner">
-                            Sim. O roadmap inclui agentes configuráveis por vertical em 6 meses e um marketplace de agentes em 12 meses. Você poderá criar, publicar e monetizar agentes específicos para suas verticais.
+                            Sim. Você pode criar agentes configuráveis por vertical. Construa um agente uma vez e ele duplica seu método, customizando para outros clientes automaticamente.
                         </div>
                     </div>
                 </div>
@@ -2003,7 +2926,7 @@ export const pageHTML = `
                         <span class="cta-stats__label">canais ativos</span>
                     </div>
                     <div class="cta-stats__item">
-                        <span class="cta-stats__number">2.206</span>
+                        <span class="cta-stats__number">+2.900</span>
                         <span class="cta-stats__label">empresas</span>
                     </div>
                     <div class="cta-stats__item">
