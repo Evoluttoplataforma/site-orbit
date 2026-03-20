@@ -10,7 +10,7 @@
 body > div, body > div > div, body > div > div > div { width: 100%; max-width: 100%; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
 body {
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--font-plus-jakarta, 'Plus Jakarta Sans'), -apple-system, BlinkMacSystemFont, sans-serif;
   background: #0D1117;
   color: #C9D1D9;
   line-height: 1.6;
