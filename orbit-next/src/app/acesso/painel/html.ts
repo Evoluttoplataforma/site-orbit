@@ -108,7 +108,7 @@ export const pageHTML = `
                     </div>
                     <div class="card-body" style="padding:0;">
                         <div class="table-wrapper">
-                            <table>
+                            <div class="table-responsive"><table>
                                 <thead>
                                     <tr>
                                         <th>Titulo</th>
@@ -119,7 +119,7 @@ export const pageHTML = `
                                     </tr>
                                 </thead>
                                 <tbody id="dashboardArticles"></tbody>
-                            </table>
+                            </table></div>
                         </div>
                         <div class="empty-state" id="dashboardEmpty" style="display:none;">
                             <i class="fas fa-newspaper"></i>
@@ -147,7 +147,7 @@ export const pageHTML = `
                 <div class="card">
                     <div class="card-body" style="padding:0;">
                         <div class="table-wrapper">
-                            <table>
+                            <div class="table-responsive"><table>
                                 <thead>
                                     <tr>
                                         <th>Titulo</th>
@@ -159,7 +159,7 @@ export const pageHTML = `
                                     </tr>
                                 </thead>
                                 <tbody id="articlesTableBody"></tbody>
-                            </table>
+                            </table></div>
                         </div>
                         <div class="empty-state" id="articlesEmpty" style="display:none;">
                             <i class="fas fa-newspaper"></i>
@@ -435,7 +435,7 @@ export const pageHTML = `
                 <div class="card">
                     <div class="card-body" style="padding:0;">
                         <div class="table-wrapper">
-                            <table>
+                            <div class="table-responsive"><table>
                                 <thead>
                                     <tr>
                                         <th>Tipo</th>
@@ -446,7 +446,7 @@ export const pageHTML = `
                                     </tr>
                                 </thead>
                                 <tbody id="leadMagnetsTableBody"></tbody>
-                            </table>
+                            </table></div>
                         </div>
                     </div>
                 </div>
@@ -543,7 +543,7 @@ export const pageHTML = `
                 <div class="card">
                     <div class="card-body" style="padding:0;">
                         <div class="table-wrapper">
-                            <table>
+                            <div class="table-responsive"><table>
                                 <thead>
                                     <tr>
                                         <th>Empresa</th>
@@ -556,7 +556,7 @@ export const pageHTML = `
                                     </tr>
                                 </thead>
                                 <tbody id="storiesTableBody"></tbody>
-                            </table>
+                            </table></div>
                         </div>
                         <div class="empty-state" id="storiesEmpty" style="display:none;">
                             <i class="fas fa-star"></i>
@@ -785,7 +785,7 @@ export const pageHTML = `
                 <div class="card">
                     <div class="card-body" style="padding:0;">
                         <div class="table-wrapper">
-                            <table>
+                            <div class="table-responsive"><table>
                                 <thead>
                                     <tr>
                                         <th>Nome</th>
@@ -796,7 +796,7 @@ export const pageHTML = `
                                     </tr>
                                 </thead>
                                 <tbody id="usersTableBody"></tbody>
-                            </table>
+                            </table></div>
                         </div>
                     </div>
                 </div>
