@@ -12758,8 +12758,8 @@ html[lang="en"] .pricing-card--featured::before { content: "RECOMMENDED" !import
         /* ── STATS ── */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
             margin-bottom: 28px;
         }
         .stat-card {
