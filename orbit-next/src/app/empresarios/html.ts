@@ -862,11 +862,13 @@ export const pageHTML = `
                         var h = hub.offsetHeight;
                         var cx = w / 2;
                         var cy = h / 2;
-                        /* Radius scales with container */
+                        /* Radius scales with container — tighter on mobile */
                         var radius = Math.min(w, h) / 2 - 40;
                         if (w < 500) radius = Math.min(w, h) / 2 - 30;
-                        if (radius < 100) radius = 100;
-                        if (radius > 360) radius = 360;
+                        if (radius < 80) radius = 80;
+                        if (w <= 480 && radius > 140) radius = 140;
+                        else if (w <= 768 && radius > 170) radius = 170;
+                        else if (radius > 360) radius = 360;
 
                         svg.setAttribute('width', w);
                         svg.setAttribute('height', h);
@@ -938,30 +940,22 @@ export const pageHTML = `
                         }, 150);
                     });
 
-                    /* Click to expand agent card */
+                    /* Hover to expand agent card */
                     nodes.forEach(function(node) {
-                        node.addEventListener('click', function(e) {
-                            e.stopPropagation();
-                            var wasActive = node.classList.contains('orbit-node--active');
-                            /* Close all */
+                        node.addEventListener('mouseenter', function() {
                             nodes.forEach(function(n) {
                                 n.classList.remove('orbit-node--active', 'orbit-node--dimmed');
                             });
-                            if (!wasActive) {
-                                node.classList.add('orbit-node--active');
-                                nodes.forEach(function(n) {
-                                    if (n !== node) n.classList.add('orbit-node--dimmed');
-                                });
-                            }
+                            node.classList.add('orbit-node--active');
+                            nodes.forEach(function(n) {
+                                if (n !== node) n.classList.add('orbit-node--dimmed');
+                            });
                         });
-                    });
-                    /* Click outside to close */
-                    document.addEventListener('click', function(e) {
-                        if (!hub.contains(e.target)) {
+                        node.addEventListener('mouseleave', function() {
                             nodes.forEach(function(n) {
                                 n.classList.remove('orbit-node--active', 'orbit-node--dimmed');
                             });
-                        }
+                        });
                     });
                 })();
                 </script>
