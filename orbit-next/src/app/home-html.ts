@@ -391,7 +391,7 @@ export const pageHTML = `
 
             <div class="pq-grid" data-reveal-stagger>
                 <a href="/empresarios" class="pq-card">
-                    <img src="/images/pq-empresarios.png" alt="Empresários">
+                    <img src="/images/pq-empresarios.png" alt="Empresários" width="1024" height="1536" loading="lazy" decoding="async">
                     <div class="pq-card__content">
                         <div class="pq-card__icon"><i class="fas fa-building"></i></div>
                         <h3 data-i18n="pq.c1.title">Empresários</h3>
@@ -401,7 +401,7 @@ export const pageHTML = `
                 </a>
 
                 <a href="/consultores" class="pq-card">
-                    <img src="/images/pq-consultores.png" alt="Consultores">
+                    <img src="/images/pq-consultores.png" alt="Consultores" width="1024" height="1536" loading="lazy" decoding="async">
                     <div class="pq-card__content">
                         <div class="pq-card__icon"><i class="fas fa-user-tie"></i></div>
                         <h3 data-i18n="pq.c2.title">Consultores</h3>
@@ -411,7 +411,7 @@ export const pageHTML = `
                 </a>
 
                 <a href="/#contato-form" class="pq-card">
-                    <img src="/images/pq-hubs.png" alt="Associações e Hubs">
+                    <img src="/images/pq-hubs.png" alt="Associações e Hubs" width="1200" height="2150" loading="lazy" decoding="async">
                     <div class="pq-card__content">
                         <div class="pq-card__icon"><i class="fas fa-landmark"></i></div>
                         <h3 data-i18n="pq.c3.title">Associações e Hubs</h3>
@@ -503,7 +503,7 @@ export const pageHTML = `
                         <div class="wa-header">
                             <i class="fas fa-arrow-left wa-header__back"></i>
                             <div class="wa-header__contact">
-                                <img src="/images/cliente-1.jpg" alt="Rodrigo" class="wa-header__avatar">
+                                <img src="/images/cliente-1.jpg" alt="Rodrigo" width="1024" height="1536" loading="lazy" decoding="async" class="wa-header__avatar">
                                 <div class="wa-header__online"></div>
                             </div>
                             <div class="wa-header__info">
@@ -526,10 +526,10 @@ export const pageHTML = `
                                     <p data-i18n="wa.1.s1">Sinto que sou o único que se importa com a empresa. Deleguei e tudo saiu errado.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-1.jpg" alt="" class="wa-row__avatar">
+                                <img src="/images/cliente-1.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
-                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
                                 <div class="wa-bubble wa-bubble--dark">
                                     <span class="wa-bubble__sender">Olívia - Orbit</span>
                                     <p data-i18n="wa.1.r1">Eu entendo. <strong>72% dos empresários</strong> sentem isso. O problema não é sua equipe — é a falta de uma camada de gestão operando 24/7.</p>
@@ -541,10 +541,10 @@ export const pageHTML = `
                                     <p data-i18n="wa.1.s2">Minha equipe só apaga incêndio. Ninguém pensa estrategicamente.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-1.jpg" alt="" class="wa-row__avatar">
+                                <img src="/images/cliente-1.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
-                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
                                 <div class="wa-bubble wa-bubble--dark">
                                     <span class="wa-bubble__sender">Olívia - Orbit</span>
                                     <p data-i18n="wa.1.r2">Me dá 7 dias. Vou montar o diagnóstico e colocar meus <strong>12 agentes</strong> pra trabalhar. Você vai sentir a diferença na primeira semana. ✨</p>
@@ -580,7 +580,7 @@ export const pageHTML = `
                         <div class="wa-header">
                             <i class="fas fa-arrow-left wa-header__back"></i>
                             <div class="wa-header__contact">
-                                <img src="/images/cliente-2.jpg" alt="Gustavo" class="wa-header__avatar">
+                                <img src="/images/cliente-2.jpg" alt="Gustavo" width="1024" height="1536" loading="lazy" decoding="async" class="wa-header__avatar">
                                 <div class="wa-header__online"></div>
                             </div>
                             <div class="wa-header__info">
@@ -601,10 +601,10 @@ export const pageHTML = `
                                     <p data-i18n="wa.2.s1">Comprei ERP, implantei OKR, contratei consultoria... nada mudou de verdade.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-2.jpg" alt="" class="wa-row__avatar">
+                                <img src="/images/cliente-2.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
-                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
                                 <div class="wa-bubble wa-bubble--dark">
                                     <span class="wa-bubble__sender">Olívia - Orbit</span>
                                     <p data-i18n="wa.2.r1">Software sem operação é como carro sem motorista. Você comprou a ferramenta, mas <strong>ninguém opera ela</strong>. Meus agentes fazem isso — todos os dias.</p>
@@ -616,10 +616,10 @@ export const pageHTML = `
                                     <p data-i18n="wa.2.s2">Faturamento sobe e desce todo mês. Não tenho previsibilidade nenhuma.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-2.jpg" alt="" class="wa-row__avatar">
+                                <img src="/images/cliente-2.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
-                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
                                 <div class="wa-bubble wa-bubble--dark">
                                     <span class="wa-bubble__sender">Olívia - Orbit</span>
                                     <p data-i18n="wa.2.r2">O Agente de Indicadores já vai mapear seus KPIs e te alertar <strong>antes</strong> do desvio virar crise. Bora? 🚀</p>
@@ -653,7 +653,7 @@ export const pageHTML = `
                         <div class="wa-header">
                             <i class="fas fa-arrow-left wa-header__back"></i>
                             <div class="wa-header__contact">
-                                <img src="/images/cliente-3.jpg" alt="Gabriel" class="wa-header__avatar">
+                                <img src="/images/cliente-3.jpg" alt="Gabriel" width="1024" height="1536" loading="lazy" decoding="async" class="wa-header__avatar">
                                 <div class="wa-header__online"></div>
                             </div>
                             <div class="wa-header__info">
@@ -674,10 +674,10 @@ export const pageHTML = `
                                     <p data-i18n="wa.3.s1">Ninguém veste a camisa. Processos existem só no papel.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-3.jpg" alt="" class="wa-row__avatar">
+                                <img src="/images/cliente-3.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
-                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
                                 <div class="wa-bubble wa-bubble--dark">
                                     <span class="wa-bubble__sender">Olívia - Orbit</span>
                                     <p data-i18n="wa.3.r1">Processo no papel não funciona porque <strong>ninguém cobra execução</strong>. Meu Agente de Processos mapeia, gera instruções e <strong>monitora em tempo real</strong>.</p>
@@ -689,10 +689,10 @@ export const pageHTML = `
                                     <p data-i18n="wa.3.s2">Já tentei padronizar mas ninguém segue. Não sei nem se estão fazendo certo.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-3.jpg" alt="" class="wa-row__avatar">
+                                <img src="/images/cliente-3.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
-                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
                                 <div class="wa-bubble wa-bubble--dark">
                                     <span class="wa-bubble__sender">Olívia - Orbit</span>
                                     <p data-i18n="wa.3.r2">E o Agente de Treinamento envia microlearning diário pro time pelo WhatsApp. <strong>A cultura muda de dentro pra fora.</strong> 💪</p>
@@ -1197,12 +1197,12 @@ export const pageHTML = `
                     el.className = 'wa-typing';
                     if (side === 'left') {
                         el.style.alignSelf = 'flex-start';
-                        el.innerHTML = '<img src="/images/olivia.png" alt="" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
+                        el.innerHTML = '<img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
                         if (statusEl) statusEl.textContent = 'digitando...';
                     } else {
                         el.style.alignSelf = 'flex-end';
                         el.style.flexDirection = 'row-reverse';
-                        el.innerHTML = '<img src="' + clientSrc + '" alt="" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
+                        el.innerHTML = '<img src="' + clientSrc + '" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
                         if (statusEl) statusEl.textContent = 'online';
                     }
                     chat.appendChild(el);
@@ -1384,7 +1384,7 @@ export const pageHTML = `
                             </div>
                             <div class="reframe-orbit-card__scene">
                                 <div class="rfm-mini-hub">
-                                    <div class="rfm-mini-hub__center"><img src="images/olivia.png" alt="Olívia"><div class="rfm-mini-hub__pulse"></div></div>
+                                    <div class="rfm-mini-hub__center"><img src="images/olivia.png" alt="Olívia" width="1200" height="1801" loading="lazy" decoding="async"><div class="rfm-mini-hub__pulse"></div></div>
                                     <div class="rfm-mini-hub__ring">
                                         <span style="--i:0"><i class="fas fa-chess-queen"></i></span>
                                         <span style="--i:1"><i class="fas fa-sitemap"></i></span>
@@ -1516,7 +1516,7 @@ export const pageHTML = `
                     </div>
                 </div>
                 <div style="background:linear-gradient(135deg,rgba(255,186,26,0.1),rgba(255,186,26,0.02));border:2px solid rgba(255,186,26,0.2);border-radius:14px;padding:32px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                    <img src="/images/olivia.png" alt="Olívia - Coordenadora Geral de IA do Orbit" style="width:200px;height:200px;border-radius:50%;object-fit:cover;object-position:center 20%;border:4px solid #ffba1a;margin-bottom:24px;">
+                    <img src="/images/olivia.png" alt="Olívia - Coordenadora Geral de IA do Orbit" width="1200" height="1801" loading="lazy" decoding="async" style="width:200px;height:200px;border-radius:50%;object-fit:cover;object-position:center 20%;border:4px solid #ffba1a;margin-bottom:24px;">
                     <h3 style="color:#fff;font-size:1.5rem;margin-bottom:8px;">Olívia</h3>
                     <p style="color:#ffba1a;font-size:0.95rem;margin-bottom:16px;">Coordenadora Geral de IA</p>
                     <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
@@ -1542,7 +1542,7 @@ export const pageHTML = `
                     <div class="orbit-hub__center">
                         <div class="orbit-hub__glow"></div>
                         <div class="orbit-hub__photo">
-                            <img src="/images/olivia.png" alt="Olívia">
+                            <img src="/images/olivia.png" alt="Olívia" width="1200" height="1801" loading="lazy" decoding="async">
                         </div>
                         <div class="orbit-hub__name">Olívia</div>
                         <div class="orbit-hub__role">Coordenadora Geral</div>
@@ -2290,7 +2290,7 @@ export const pageHTML = `
                                 <div class="hiw-olivia-orbit" id="hiwOliviaOrbit">
                                     <svg class="hiw-olivia-orbit__svg" width="100%" height="100%"></svg>
                                     <div class="hiw-olivia-orbit__center">
-                                        <img src="images/olivia.png" alt="Olívia" class="hiw-olivia-orbit__avatar">
+                                        <img src="images/olivia.png" alt="Olívia" width="1200" height="1801" loading="lazy" decoding="async" class="hiw-olivia-orbit__avatar">
                                         <div class="hiw-olivia-orbit__pulse"></div>
                                     </div>
                                     <!-- 12 agent nodes positioned by JS -->
@@ -3367,18 +3367,18 @@ export const pageHTML = `
 
             <div class="gallery3d" id="gallery3d">
                 <div class="gallery3d__track" id="gallery3d-track">
-                    <div class="gallery3d__card"><a href="/agentes/estrategista"><img src="/images/agente-estrategista.png" alt="Estrategista"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-chess-king"></i></div><h3>Estrategista</h3><p>SWOT, BSC e planejamento estratégico</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/processos"><img src="/images/agente-processos.jpg" alt="Processos"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-sitemap"></i></div><h3>Processos</h3><p>Mapeamento, playbooks e automação</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/pessoas"><img src="/images/agente-pessoas.png" alt="Pessoas"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-users"></i></div><h3>Pessoas</h3><p>Cargos, desempenho e PDIs</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/treinamento"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Treinamento" alt="Treinamento"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-graduation-cap"></i></div><h3>Treinamento</h3><p>Microlearning e trilhas via WhatsApp</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/indicadores"><img src="/images/agente-indicadores.jpg" alt="Indicadores"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-chart-line"></i></div><h3>Indicadores</h3><p>KPIs em tempo real e causa raiz</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/pesquisa"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Pesquisa" alt="Pesquisa"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-magnifying-glass-chart"></i></div><h3>Pesquisa</h3><p>Clima, formulários e insights</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/riscos"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Riscos" alt="Riscos"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-shield-halved"></i></div><h3>Riscos</h3><p>Mitigação e prevenção contínua</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/oportunidades"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Oportunidades" alt="Oportunidades"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-lightbulb"></i></div><h3>Oportunidades</h3><p>Mercado, parcerias e expansão</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/problemas"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Problemas" alt="Problemas"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-triangle-exclamation"></i></div><h3>Problemas</h3><p>Não-conformidades e PDCA</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/documentos"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Documentos" alt="Documentos"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-file-lines"></i></div><h3>Documentos</h3><p>Padronização e controle</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/vendas"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Vendas" alt="Vendas"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-handshake"></i></div><h3>Vendas</h3><p>CRM, funil e coaching comercial</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/reunioes"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Reuniões" alt="Reuniões"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-video"></i></div><h3>Reuniões</h3><p>Transcrição e planos de ação</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/estrategista"><img src="/images/agente-estrategista.png" alt="Estrategista" width="1200" height="2152" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-chess-king"></i></div><h3>Estrategista</h3><p>SWOT, BSC e planejamento estratégico</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/processos"><img src="/images/agente-processos.jpg" alt="Processos" width="1024" height="1750" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-sitemap"></i></div><h3>Processos</h3><p>Mapeamento, playbooks e automação</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/pessoas"><img src="/images/agente-pessoas.png" alt="Pessoas" width="1024" height="1750" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-users"></i></div><h3>Pessoas</h3><p>Cargos, desempenho e PDIs</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/treinamento"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Treinamento" alt="Treinamento" width="400" height="520" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-graduation-cap"></i></div><h3>Treinamento</h3><p>Microlearning e trilhas via WhatsApp</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/indicadores"><img src="/images/agente-indicadores.jpg" alt="Indicadores" width="1024" height="1750" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-chart-line"></i></div><h3>Indicadores</h3><p>KPIs em tempo real e causa raiz</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/pesquisa"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Pesquisa" alt="Pesquisa" width="400" height="520" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-magnifying-glass-chart"></i></div><h3>Pesquisa</h3><p>Clima, formulários e insights</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/riscos"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Riscos" alt="Riscos" width="400" height="520" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-shield-halved"></i></div><h3>Riscos</h3><p>Mitigação e prevenção contínua</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/oportunidades"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Oportunidades" alt="Oportunidades" width="400" height="520" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-lightbulb"></i></div><h3>Oportunidades</h3><p>Mercado, parcerias e expansão</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/problemas"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Problemas" alt="Problemas" width="400" height="520" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-triangle-exclamation"></i></div><h3>Problemas</h3><p>Não-conformidades e PDCA</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/documentos"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Documentos" alt="Documentos" width="400" height="520" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-file-lines"></i></div><h3>Documentos</h3><p>Padronização e controle</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/vendas"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Vendas" alt="Vendas" width="400" height="520" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-handshake"></i></div><h3>Vendas</h3><p>CRM, funil e coaching comercial</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/reunioes"><img src="https://placehold.co/400x520/0D1117/ffba1a?text=Reuniões" alt="Reuniões" width="400" height="520" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-video"></i></div><h3>Reuniões</h3><p>Transcrição e planos de ação</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
                 </div>
             </div>
 
@@ -4704,7 +4704,7 @@ export const pageHTML = `
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="footer-logo">
-                        <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" height="36">
+                        <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" width="92" height="36" loading="lazy" decoding="async">
                     </div>
                     <p data-i18n="footer.tagline">Plataforma de gestão com IA. Contrate um time que executa.</p>
                     <div class="social-hover">
@@ -4787,9 +4787,9 @@ export const pageHTML = `
 
         if (articles.length === 0) {
             grid.innerHTML =
-                '<div class="knowledge-card"><div class="knowledge-card__image"><img src="https://placehold.co/400x250/FDB73F/000000?text=Blog" alt="Blog" loading="lazy"><span class="knowledge-card__type"><i class="fas fa-file-alt"></i> Artigo</span></div><div class="knowledge-card__body"><h4>5 Passos para Transformar sua Estratégia em Ação</h4><a href="/blog" class="knowledge-card__link">Ler artigo</a></div></div>' +
-                '<div class="knowledge-card"><div class="knowledge-card__image"><img src="https://placehold.co/400x250/000000/FDB73F?text=Blog" alt="Blog" loading="lazy"><span class="knowledge-card__type"><i class="fas fa-book"></i> Ebook</span></div><div class="knowledge-card__body"><h4>Guia Completo de Gestão Estratégica para PMEs</h4><a href="/blog" class="knowledge-card__link">Ler artigo</a></div></div>' +
-                '<div class="knowledge-card"><div class="knowledge-card__image"><img src="https://placehold.co/400x250/FDB73F/000000?text=Blog" alt="Blog" loading="lazy"><span class="knowledge-card__type"><i class="fas fa-play-circle"></i> Webinar</span></div><div class="knowledge-card__body"><h4>Como a IA Melhora a Tomada de Decisão Empresarial</h4><a href="/blog" class="knowledge-card__link">Ler artigo</a></div></div>';
+                '<div class="knowledge-card"><div class="knowledge-card__image"><img src="https://placehold.co/400x250/FDB73F/000000?text=Blog" alt="Blog" width="400" height="250" loading="lazy" decoding="async"><span class="knowledge-card__type"><i class="fas fa-file-alt"></i> Artigo</span></div><div class="knowledge-card__body"><h4>5 Passos para Transformar sua Estratégia em Ação</h4><a href="/blog" class="knowledge-card__link">Ler artigo</a></div></div>' +
+                '<div class="knowledge-card"><div class="knowledge-card__image"><img src="https://placehold.co/400x250/000000/FDB73F?text=Blog" alt="Blog" width="400" height="250" loading="lazy" decoding="async"><span class="knowledge-card__type"><i class="fas fa-book"></i> Ebook</span></div><div class="knowledge-card__body"><h4>Guia Completo de Gestão Estratégica para PMEs</h4><a href="/blog" class="knowledge-card__link">Ler artigo</a></div></div>' +
+                '<div class="knowledge-card"><div class="knowledge-card__image"><img src="https://placehold.co/400x250/FDB73F/000000?text=Blog" alt="Blog" width="400" height="250" loading="lazy" decoding="async"><span class="knowledge-card__type"><i class="fas fa-play-circle"></i> Webinar</span></div><div class="knowledge-card__body"><h4>Como a IA Melhora a Tomada de Decisão Empresarial</h4><a href="/blog" class="knowledge-card__link">Ler artigo</a></div></div>';
             return;
         }
 
@@ -4814,7 +4814,7 @@ export const pageHTML = `
             var cat = CATS[a.category] || a.category || 'Artigo';
             return '<a href="/blog/' + encodeURIComponent(slug) + '" class="knowledge-card" style="text-decoration:none;color:inherit;">' +
                 '<div class="knowledge-card__image">' +
-                    '<img src="' + imgSrc + '" alt="' + esc(a.title) + '" loading="lazy">' +
+                    '<img src="' + imgSrc + '" alt="' + esc(a.title) + '" width="400" height="250" loading="lazy" decoding="async">' +
                     '<span class="knowledge-card__type"><i class="fas fa-file-alt"></i> ' + esc(cat) + '</span>' +
                 '</div>' +
                 '<div class="knowledge-card__body">' +

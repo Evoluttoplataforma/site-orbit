@@ -3,7 +3,7 @@ export const pageHTML = `
     <!-- ═══ HERO ═══ -->
     <section class="lp-hero" id="hero">
         <div class="lp-hero__bg-image" style="opacity:0.35;">
-            <img src="/images/sobre-hero.jpg" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;">
+            <img src="/images/sobre-hero.jpg" alt="" width="1920" height="1281" loading="eager" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;">
         </div>
         <div class="lp-hero__glow lp-hero__glow--1"></div>
         <div class="lp-hero__glow lp-hero__glow--2"></div>
@@ -135,7 +135,7 @@ export const pageHTML = `
                         </div>
                         <div class="hist-scene hist-scene--ai">
                             <div class="hist-orbit-ring">
-                                <div class="hist-orbit-center"><img src="/images/olivia.png" alt="Olívia" style="width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center 15%;"></div>
+                                <div class="hist-orbit-center"><img src="/images/olivia.png" alt="Olívia" width="1200" height="1801" loading="lazy" decoding="async" style="width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center 15%;"></div>
                                 <div class="hist-agent"><i class="fas fa-chess-king"></i></div>
                                 <div class="hist-agent"><i class="fas fa-sitemap"></i></div>
                                 <div class="hist-agent"><i class="fas fa-users"></i></div>
@@ -447,7 +447,7 @@ export const pageHTML = `
         <!-- ═══ CTA ═══ -->
     <section style="position:relative;padding:120px 0;overflow:hidden;">
         <div style="position:absolute;inset:0;">
-            <img src="/images/fundo-orbit.jpg" alt="" style="width:100%;height:100%;object-fit:cover;">
+            <img src="/images/fundo-orbit.jpg" alt="" width="1920" height="1072" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,17,23,0.9) 0%,rgba(13,17,23,0.75) 50%,rgba(13,17,23,0.9) 100%);"></div>
         <div class="container" style="position:relative;z-index:1;text-align:center;">
@@ -463,7 +463,7 @@ export const pageHTML = `
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="footer-logo">
-                        <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" height="36">
+                        <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" width="92" height="36" loading="lazy" decoding="async">
                     </div>
                     <p data-i18n="footer.tagline">Plataforma de gestão com IA. Contrate um time que executa.</p>
                     <div class="social-hover">

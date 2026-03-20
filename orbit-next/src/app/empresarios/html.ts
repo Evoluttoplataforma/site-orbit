@@ -5,7 +5,7 @@ export const pageHTML = `
          ═══════════════════════════════════════════════════════ -->
     <section class="lp-hero" id="hero">
         <div class="lp-hero__bg-image">
-            <img src="/images/bg-market-data.jpg" alt="" style="width:100%;height:100%;object-fit:cover;">
+            <img src="/images/bg-market-data.jpg" alt="" width="1920" height="1072" loading="eager" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <div class="lp-hero__glow lp-hero__glow--1"></div>
         <div class="lp-hero__glow lp-hero__glow--2"></div>
@@ -83,7 +83,7 @@ export const pageHTML = `
                         <div class="wa-header">
                             <i class="fas fa-arrow-left wa-header__back"></i>
                             <div class="wa-header__contact">
-                                <img src="/images/cliente-1.jpg" alt="Rodrigo" class="wa-header__avatar">
+                                <img src="/images/cliente-1.jpg" alt="Rodrigo" width="1024" height="1536" loading="lazy" decoding="async" class="wa-header__avatar">
                                 <div class="wa-header__online"></div>
                             </div>
                             <div class="wa-header__info">
@@ -106,10 +106,10 @@ export const pageHTML = `
                                     <p data-i18n="wa.1.s1">Sinto que sou o único que se importa com a empresa. Deleguei e tudo saiu errado.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-1.jpg" alt="" class="wa-row__avatar">
+                                <img src="/images/cliente-1.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
-                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
                                 <div class="wa-bubble wa-bubble--dark">
                                     <span class="wa-bubble__sender">Olívia - Orbit</span>
                                     <p data-i18n="wa.1.r1">Eu entendo. <strong>72% dos empresários</strong> sentem isso. O problema não é sua equipe — é a falta de uma camada de gestão operando 24/7.</p>
@@ -121,10 +121,10 @@ export const pageHTML = `
                                     <p data-i18n="wa.1.s2">Minha equipe só apaga incêndio. Ninguém pensa estrategicamente.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-1.jpg" alt="" class="wa-row__avatar">
+                                <img src="/images/cliente-1.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
-                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
                                 <div class="wa-bubble wa-bubble--dark">
                                     <span class="wa-bubble__sender">Olívia - Orbit</span>
                                     <p data-i18n="wa.1.r2">Me dá 7 dias. Vou montar o diagnóstico e colocar meus <strong>12 agentes</strong> pra trabalhar. Você vai sentir a diferença na primeira semana. ✨</p>
@@ -160,7 +160,7 @@ export const pageHTML = `
                         <div class="wa-header">
                             <i class="fas fa-arrow-left wa-header__back"></i>
                             <div class="wa-header__contact">
-                                <img src="/images/cliente-2.jpg" alt="Gustavo" class="wa-header__avatar">
+                                <img src="/images/cliente-2.jpg" alt="Gustavo" width="1024" height="1536" loading="lazy" decoding="async" class="wa-header__avatar">
                                 <div class="wa-header__online"></div>
                             </div>
                             <div class="wa-header__info">
@@ -181,10 +181,10 @@ export const pageHTML = `
                                     <p data-i18n="wa.2.s1">Comprei ERP, implantei OKR, contratei consultoria... nada mudou de verdade.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-2.jpg" alt="" class="wa-row__avatar">
+                                <img src="/images/cliente-2.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
-                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
                                 <div class="wa-bubble wa-bubble--dark">
                                     <span class="wa-bubble__sender">Olívia - Orbit</span>
                                     <p data-i18n="wa.2.r1">Software sem operação é como carro sem motorista. Você comprou a ferramenta, mas <strong>ninguém opera ela</strong>. Meus agentes fazem isso — todos os dias.</p>
@@ -196,10 +196,10 @@ export const pageHTML = `
                                     <p data-i18n="wa.2.s2">Faturamento sobe e desce todo mês. Não tenho previsibilidade nenhuma.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-2.jpg" alt="" class="wa-row__avatar">
+                                <img src="/images/cliente-2.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
-                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
                                 <div class="wa-bubble wa-bubble--dark">
                                     <span class="wa-bubble__sender">Olívia - Orbit</span>
                                     <p data-i18n="wa.2.r2">O Agente de Indicadores já vai mapear seus KPIs e te alertar <strong>antes</strong> do desvio virar crise. Bora? 🚀</p>
@@ -233,7 +233,7 @@ export const pageHTML = `
                         <div class="wa-header">
                             <i class="fas fa-arrow-left wa-header__back"></i>
                             <div class="wa-header__contact">
-                                <img src="/images/cliente-3.jpg" alt="Gabriel" class="wa-header__avatar">
+                                <img src="/images/cliente-3.jpg" alt="Gabriel" width="1024" height="1536" loading="lazy" decoding="async" class="wa-header__avatar">
                                 <div class="wa-header__online"></div>
                             </div>
                             <div class="wa-header__info">
@@ -254,10 +254,10 @@ export const pageHTML = `
                                     <p data-i18n="wa.3.s1">Ninguém veste a camisa. Processos existem só no papel.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-3.jpg" alt="" class="wa-row__avatar">
+                                <img src="/images/cliente-3.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
-                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
                                 <div class="wa-bubble wa-bubble--dark">
                                     <span class="wa-bubble__sender">Olívia - Orbit</span>
                                     <p data-i18n="wa.3.r1">Processo no papel não funciona porque <strong>ninguém cobra execução</strong>. Meu Agente de Processos mapeia, gera instruções e <strong>monitora em tempo real</strong>.</p>
@@ -269,10 +269,10 @@ export const pageHTML = `
                                     <p data-i18n="wa.3.s2">Já tentei padronizar mas ninguém segue. Não sei nem se estão fazendo certo.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-3.jpg" alt="" class="wa-row__avatar">
+                                <img src="/images/cliente-3.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
-                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
                                 <div class="wa-bubble wa-bubble--dark">
                                     <span class="wa-bubble__sender">Olívia - Orbit</span>
                                     <p data-i18n="wa.3.r2">E o Agente de Treinamento envia microlearning diário pro time pelo WhatsApp. <strong>A cultura muda de dentro pra fora.</strong> 💪</p>
@@ -777,12 +777,12 @@ export const pageHTML = `
                     el.className = 'wa-typing';
                     if (side === 'left') {
                         el.style.alignSelf = 'flex-start';
-                        el.innerHTML = '<img src="/images/olivia.png" alt="" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
+                        el.innerHTML = '<img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
                         if (statusEl) statusEl.textContent = 'digitando...';
                     } else {
                         el.style.alignSelf = 'flex-end';
                         el.style.flexDirection = 'row-reverse';
-                        el.innerHTML = '<img src="' + clientSrc + '" alt="" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
+                        el.innerHTML = '<img src="' + clientSrc + '" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
                         if (statusEl) statusEl.textContent = 'online';
                     }
                     chat.appendChild(el);
@@ -964,7 +964,7 @@ export const pageHTML = `
                             </div>
                             <div class="reframe-orbit-card__scene">
                                 <div class="rfm-mini-hub">
-                                    <div class="rfm-mini-hub__center"><img src="images/olivia.png" alt="Olívia"><div class="rfm-mini-hub__pulse"></div></div>
+                                    <div class="rfm-mini-hub__center"><img src="images/olivia.png" alt="Olívia" width="1200" height="1801" loading="lazy" decoding="async"><div class="rfm-mini-hub__pulse"></div></div>
                                     <div class="rfm-mini-hub__ring">
                                         <span style="--i:0"><i class="fas fa-chess-queen"></i></span>
                                         <span style="--i:1"><i class="fas fa-sitemap"></i></span>
@@ -1108,7 +1108,7 @@ export const pageHTML = `
                     </div>
                 </div>
                 <div style="background:linear-gradient(135deg,rgba(255,186,26,0.1),rgba(255,186,26,0.02));border:2px solid rgba(255,186,26,0.2);border-radius:14px;padding:32px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                    <img src="/images/olivia.png" alt="Olívia - Coordenadora Geral de IA do Orbit" style="width:200px;height:200px;border-radius:50%;object-fit:cover;border:4px solid #ffba1a;margin-bottom:24px;">
+                    <img src="/images/olivia.png" alt="Olívia - Coordenadora Geral de IA do Orbit" width="1200" height="1801" loading="lazy" decoding="async" style="width:200px;height:200px;border-radius:50%;object-fit:cover;border:4px solid #ffba1a;margin-bottom:24px;">
                     <h3 style="color:#fff;font-size:1.5rem;margin-bottom:8px;">Olívia</h3>
                     <p style="color:#ffba1a;font-size:0.95rem;margin-bottom:16px;">Coordenadora Geral de IA</p>
                     <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
@@ -1134,7 +1134,7 @@ export const pageHTML = `
                     <div class="orbit-hub__center">
                         <div class="orbit-hub__glow"></div>
                         <div class="orbit-hub__photo">
-                            <img src="/images/olivia.png" alt="Olívia">
+                            <img src="/images/olivia.png" alt="Olívia" width="1200" height="1801" loading="lazy" decoding="async">
                         </div>
                         <div class="orbit-hub__name">Olívia</div>
                         <div class="orbit-hub__role">Coordenadora Geral</div>
@@ -1883,7 +1883,7 @@ export const pageHTML = `
                                 <div class="hiw-olivia-orbit" id="hiwOliviaOrbitLP">
                                     <svg class="hiw-olivia-orbit__svg" width="100%" height="100%"></svg>
                                     <div class="hiw-olivia-orbit__center">
-                                        <img src="images/olivia.png" alt="Olívia" class="hiw-olivia-orbit__avatar">
+                                        <img src="images/olivia.png" alt="Olívia" width="1200" height="1801" loading="lazy" decoding="async" class="hiw-olivia-orbit__avatar">
                                         <div class="hiw-olivia-orbit__pulse"></div>
                                     </div>
                                     <!-- 12 agent nodes positioned by JS -->
@@ -3322,59 +3322,6 @@ export const pageHTML = `
             </div>
         </div>
 
-        <style>
-        /* ═══ COST COMPARISON ═══ */
-        .cost-section { background: #0D1117; padding: 140px 0; position: relative; overflow: hidden; }
-        .cost-section::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(255,186,26,0.04) 0%, transparent 70%); border-radius: 50%; pointer-events: none; }
-        .cost-header { text-align: center; margin-bottom: 60px; }
-        .cost-header h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; color: #fff; margin-bottom: 16px; }
-        .cost-header h2 em { color: #EF4444; font-style: italic; }
-        .cost-header p { font-size: 1.125rem; color: #8B949E; max-width: 600px; margin: 0 auto; }
-        .cost-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 32px; max-width: 1060px; margin: 0 auto; align-items: center; }
-        .cost-vs { display: flex; align-items: center; justify-content: center; }
-        .cost-vs__circle { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, rgba(255,186,26,0.15), rgba(255,186,26,0.05)); border: 2px solid rgba(255,186,26,0.3); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem; color: #ffba1a; letter-spacing: 1px; }
-        .cost-card { border-radius: 16px; padding: 40px 32px; position: relative; }
-        .cost-card--manual { background: linear-gradient(135deg, #1C2333 0%, #13161D 100%); border: 1px solid rgba(239,68,68,0.2); }
-        .cost-card--orbit { background: linear-gradient(135deg, rgba(255,186,26,0.08), rgba(255,186,26,0.02)); border: 2px solid rgba(255,186,26,0.4); box-shadow: 0 0 60px rgba(255,186,26,0.08); }
-        .cost-card--orbit::before { content: 'RECOMENDADO'; position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #ffba1a, #ffca4a); color: #000; font-size: 0.7rem; font-weight: 800; padding: 5px 20px; border-radius: 0 0 10px 10px; letter-spacing: 1.5px; }
-        .cost-card__title { font-size: 1.15rem; font-weight: 700; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
-        .cost-card--manual .cost-card__title { color: #EF4444; }
-        .cost-card--orbit .cost-card__title { color: #ffba1a; }
-        .cost-card__title i { font-size: 1.1rem; }
-        .cost-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .cost-item__label { color: #C9D1D9; font-size: 0.9rem; }
-        .cost-item__value { font-weight: 600; font-size: 0.875rem; white-space: nowrap; }
-        .cost-card--manual .cost-item__value { color: rgba(239,68,68,0.7); }
-        .cost-card--orbit .cost-item__value { color: #22C55E; display: flex; align-items: center; gap: 6px; }
-        .cost-card--orbit .cost-item__value i { font-size: 0.75rem; }
-        .cost-total { margin-top: 20px; padding-top: 20px; border-top: 2px solid rgba(255,255,255,0.08); }
-        .cost-total__label { color: rgba(255,255,255,0.5); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 4px; }
-        .cost-total__value { font-weight: 800; display: block; }
-        .cost-card--manual .cost-total__value { color: #EF4444; font-size: 1.75rem; text-decoration: line-through; text-decoration-thickness: 2px; }
-        .cost-card--orbit .cost-total__value { color: #22C55E; font-size: 2rem; }
-        .cost-cta { text-align: center; margin-top: 20px; }
-
-        /* Savings badge */
-        .cost-savings { text-align: center; margin-top: 48px; }
-        .cost-savings__badge { display: inline-flex; align-items: center; gap: 12px; background: linear-gradient(135deg, rgba(34,197,94,0.1), rgba(34,197,94,0.03)); border: 1px solid rgba(34,197,94,0.25); border-radius: 14px; padding: 18px 32px; }
-        .cost-savings__badge i { font-size: 1.5rem; color: #22C55E; }
-        .cost-savings__text { text-align: left; }
-        .cost-savings__text strong { display: block; color: #22C55E; font-size: 1.25rem; font-weight: 800; }
-        .cost-savings__text span { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
-
-        /* Orbit benefits list */
-        .cost-orbit-benefits { margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,186,26,0.1); }
-        .cost-orbit-benefit { display: flex; align-items: center; gap: 10px; padding: 8px 0; color: rgba(255,255,255,0.6); font-size: 0.85rem; }
-        .cost-orbit-benefit i { color: #ffba1a; font-size: 0.75rem; width: 16px; text-align: center; }
-
-        @media (max-width: 768px) {
-            .cost-grid { grid-template-columns: 1fr; gap: 24px; }
-            .cost-vs { margin: 8px 0; }
-            .cost-header h2 { font-size: 1.75rem; }
-            .cost-savings__badge { flex-direction: column; text-align: center; padding: 16px 24px; }
-            .cost-savings__text { text-align: center; }
-        }
-        </style>
     </section>
 
     <!-- Guarantee section removed -->
@@ -3463,7 +3410,7 @@ export const pageHTML = `
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="footer-logo">
-                        <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" height="36">
+                        <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" width="92" height="36" loading="lazy" decoding="async">
                     </div>
                     <p data-i18n="footer.tagline">Plataforma de gestão com IA. Contrate um time que executa.</p>
                     <div class="social-hover">

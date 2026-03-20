@@ -3,7 +3,7 @@ export const pageHTML = `
     <!-- ═══ 1. HERO ═══ -->
     <section class="lp-hero" id="hero">
         <div class="lp-hero__bg-image">
-            <img src="/images/bg-market-data.jpg" alt="" style="width:100%;height:100%;object-fit:cover;">
+            <img src="/images/bg-market-data.jpg" alt="" width="1920" height="1072" loading="eager" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <div class="lp-hero__glow lp-hero__glow--1"></div>
         <div class="lp-hero__glow lp-hero__glow--2"></div>
@@ -79,7 +79,7 @@ export const pageHTML = `
                         <div class="wa-header">
                             <i class="fas fa-arrow-left wa-header__back"></i>
                             <div class="wa-header__contact">
-                                <img src="/images/cliente-1.jpg" alt="Rodrigo" class="wa-header__avatar">
+                                <img src="/images/cliente-1.jpg" alt="Rodrigo" width="1024" height="1536" loading="lazy" decoding="async" class="wa-header__avatar">
                                 <div class="wa-header__online"></div>
                             </div>
                             <div class="wa-header__info">
@@ -102,10 +102,10 @@ export const pageHTML = `
                                     <p data-i18n="wa.1.s1">Entrego o projeto, o cliente agradece... e cancela no mês seguinte. Vivo nesse ciclo.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-1.jpg" alt="" class="wa-row__avatar">
+                                <img src="/images/cliente-1.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
-                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
                                 <div class="wa-bubble wa-bubble--dark">
                                     <span class="wa-bubble__sender">Olívia - Orbit</span>
                                     <p data-i18n="wa.1.r1">Eu entendo. <strong>83% das consultorias</strong> vivem disso. O problema não é o seu projeto — é que quando você sai, a operação para.</p>
@@ -117,10 +117,10 @@ export const pageHTML = `
                                     <p data-i18n="wa.1.s2">Minha receita depende 100% da minha agenda. Não consigo escalar.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-1.jpg" alt="" class="wa-row__avatar">
+                                <img src="/images/cliente-1.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
-                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
                                 <div class="wa-bubble wa-bubble--dark">
                                     <span class="wa-bubble__sender">Olívia - Orbit</span>
                                     <p data-i18n="wa.1.r2">Com o Orbit, você entrega uma <strong>operação contínua</strong> — não um projeto. Seus clientes ficam porque os 12 agentes continuam trabalhando. Sua receita vira recorrente. ✨</p>
@@ -156,7 +156,7 @@ export const pageHTML = `
                         <div class="wa-header">
                             <i class="fas fa-arrow-left wa-header__back"></i>
                             <div class="wa-header__contact">
-                                <img src="/images/cliente-2.jpg" alt="Gustavo" class="wa-header__avatar">
+                                <img src="/images/cliente-2.jpg" alt="Gustavo" width="1024" height="1536" loading="lazy" decoding="async" class="wa-header__avatar">
                                 <div class="wa-header__online"></div>
                             </div>
                             <div class="wa-header__info">
@@ -177,10 +177,10 @@ export const pageHTML = `
                                     <p data-i18n="wa.2.s1">O mercado está comoditizando o que eu faço. Qualquer um oferece consultoria de gestão.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-2.jpg" alt="" class="wa-row__avatar">
+                                <img src="/images/cliente-2.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
-                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
                                 <div class="wa-bubble wa-bubble--dark">
                                     <span class="wa-bubble__sender">Olívia - Orbit</span>
                                     <p data-i18n="wa.2.r1">A diferença é que você pode oferecer uma <strong>plataforma de IA com 12 agentes</strong> operando na empresa do cliente. Nenhum concorrente tem isso. White-label, <strong>margem de 60%</strong>.</p>
@@ -192,10 +192,10 @@ export const pageHTML = `
                                     <p data-i18n="wa.2.s2">Mas como convencer o cliente a pagar mensalidade se ele já pagou o projeto?</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-2.jpg" alt="" class="wa-row__avatar">
+                                <img src="/images/cliente-2.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
-                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
                                 <div class="wa-bubble wa-bubble--dark">
                                     <span class="wa-bubble__sender">Olívia - Orbit</span>
                                     <p data-i18n="wa.2.r2">Porque não é mensalidade por nada — são <strong>12 agentes trabalhando 24/7</strong> na empresa dele. Processos, indicadores, treinamento. O cliente vê valor todo dia. 🚀</p>
@@ -229,7 +229,7 @@ export const pageHTML = `
                         <div class="wa-header">
                             <i class="fas fa-arrow-left wa-header__back"></i>
                             <div class="wa-header__contact">
-                                <img src="/images/cliente-3.jpg" alt="Gabriel" class="wa-header__avatar">
+                                <img src="/images/cliente-3.jpg" alt="Gabriel" width="1024" height="1536" loading="lazy" decoding="async" class="wa-header__avatar">
                                 <div class="wa-header__online"></div>
                             </div>
                             <div class="wa-header__info">
@@ -250,10 +250,10 @@ export const pageHTML = `
                                     <p data-i18n="wa.3.s1">Não consigo escalar sem contratar gente. E contratar aumenta custo fixo.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-3.jpg" alt="" class="wa-row__avatar">
+                                <img src="/images/cliente-3.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
-                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
                                 <div class="wa-bubble wa-bubble--dark">
                                     <span class="wa-bubble__sender">Olívia - Orbit</span>
                                     <p data-i18n="wa.3.r1">Com o Orbit, você escala sem contratar. Os <strong>agentes de IA</strong> fazem o trabalho operacional. Você foca em vender e coordenar. <strong>Cada cliente novo é receita pura</strong>.</p>
@@ -265,10 +265,10 @@ export const pageHTML = `
                                     <p data-i18n="wa.3.s2">Fico refém da próxima venda. Não tenho previsibilidade.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-3.jpg" alt="" class="wa-row__avatar">
+                                <img src="/images/cliente-3.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
-                                <img src="/images/olivia.png" alt="" class="wa-row__avatar">
+                                <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
                                 <div class="wa-bubble wa-bubble--dark">
                                     <span class="wa-bubble__sender">Olívia - Orbit</span>
                                     <p data-i18n="wa.3.r2">Consultoria + Orbit = <strong>receita recorrente passiva</strong>. Seus clientes operam com IA, você recebe todo mês. Sem depender da próxima venda. 💪</p>
@@ -773,12 +773,12 @@ export const pageHTML = `
                     el.className = 'wa-typing';
                     if (side === 'left') {
                         el.style.alignSelf = 'flex-start';
-                        el.innerHTML = '<img src="/images/olivia.png" alt="" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
+                        el.innerHTML = '<img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
                         if (statusEl) statusEl.textContent = 'digitando...';
                     } else {
                         el.style.alignSelf = 'flex-end';
                         el.style.flexDirection = 'row-reverse';
-                        el.innerHTML = '<img src="' + clientSrc + '" alt="" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
+                        el.innerHTML = '<img src="' + clientSrc + '" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
                         if (statusEl) statusEl.textContent = 'online';
                     }
                     chat.appendChild(el);
@@ -961,7 +961,7 @@ export const pageHTML = `
                         <div class="bm-orb__center">
                             <div class="bm-orb__center-glow"></div>
                             <div class="bm-orb__center-ring"></div>
-                            <img src="/images/logo-orbit-white.png" alt="Orbit" class="bm-orb__logo">
+                            <img src="/images/logo-orbit-white.png" alt="Orbit" width="1920" height="754" loading="lazy" decoding="async" class="bm-orb__logo">
                         </div>
 
                         <!-- Nodes with inline cards -->
@@ -1771,7 +1771,7 @@ export const pageHTML = `
                     </div>
                 </div>
                 <div style="background:linear-gradient(135deg,rgba(255,186,26,0.1),rgba(255,186,26,0.02));border:2px solid rgba(255,186,26,0.2);border-radius:14px;padding:32px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                    <img src="/images/olivia.png" alt="Olívia - Coordenadora Geral de IA do Orbit" style="width:200px;height:200px;border-radius:50%;object-fit:cover;border:4px solid #ffba1a;margin-bottom:24px;">
+                    <img src="/images/olivia.png" alt="Olívia - Coordenadora Geral de IA do Orbit" width="1200" height="1801" loading="lazy" decoding="async" style="width:200px;height:200px;border-radius:50%;object-fit:cover;border:4px solid #ffba1a;margin-bottom:24px;">
                     <h3 style="color:#fff;font-size:1.5rem;margin-bottom:8px;">Olívia</h3>
                     <p style="color:#ffba1a;font-size:0.95rem;margin-bottom:16px;">Coordenadora Geral de IA</p>
                     <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
@@ -1797,7 +1797,7 @@ export const pageHTML = `
                     <div class="orbit-hub__center">
                         <div class="orbit-hub__glow"></div>
                         <div class="orbit-hub__photo">
-                            <img src="/images/olivia.png" alt="Olívia">
+                            <img src="/images/olivia.png" alt="Olívia" width="1200" height="1801" loading="lazy" decoding="async">
                         </div>
                         <div class="orbit-hub__name">Olívia</div>
                         <div class="orbit-hub__role">Coordenadora Geral</div>
@@ -2944,7 +2944,7 @@ export const pageHTML = `
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="footer-logo">
-                        <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" height="36">
+                        <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" width="92" height="36" loading="lazy" decoding="async">
                     </div>
                     <p data-i18n="footer.tagline">Plataforma de gestão com IA. Contrate um time que executa.</p>
                     <div class="social-hover">
