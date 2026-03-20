@@ -1036,17 +1036,7 @@ ul { list-style: none; }
   min-height: 400px;
 }
 .platform-panel__mockup-bg {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: #090909;
-  border-radius: 24px;
-  top: 10%;
-  left: -15%;
-  filter: blur(1px);
-  z-index: 0;
-  overflow: hidden;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  display: none;
 }
 .platform-panel__mockup-bg img {
   width: 100%;
@@ -5839,18 +5829,7 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
         .about-stats { grid-template-columns: repeat(2, 1fr); }
         .lp-cta-final__stats { gap: 24px; flex-wrap: wrap; }
         .btn-gold, .btn-red { width: 100%; justify-content: center; }
-        .orbit-hub { height: auto; max-width: 400px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 20px 0; }
-        .orbit-hub__lines { display: none; }
-        .orbit-hub__center { grid-column: 1 / -1; position: relative; top: auto; left: auto; transform: none; opacity: 1; scale: 1; margin-bottom: 16px; }
-        .orbit-hub__glow { width: 160px; height: 160px; }
-        .orbit-hub__photo { width: 100px; height: 100px; }
-        .orbit-hub__ring { display: none; }
-        .orbit-hub__node { position: relative; top: auto !important; left: auto !important; transform: none; opacity: 1; scale: 1; animation: none !important; flex-direction: row; gap: 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,186,26,0.12); border-radius: 12px; padding: 12px 14px; }
-        .orbit-hub__node:hover { transform: none; }
-        .orbit-hub__node-icon { width: 40px; height: 40px; min-width: 40px; border-radius: 10px; }
-        .orbit-hub__node-icon i { font-size: 16px; }
-        .orbit-hub__node-label { font-size: 13px; }
-        .orbit-hub__node-desc { font-size: 11px; white-space: normal; text-shadow: none; margin-top: 0; }
+        /* orbit-hub mobile: keep circular layout (styles in shared-olivia.ts) */
     }
     @media (max-width: 480px) {
         .lp-hero h1 { font-size: 28px; }
@@ -7844,18 +7823,7 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
             }
             .math-table { font-size: 0.875rem; }
             .math-table th, .math-table td { padding: 12px 16px; }
-            .orbit-hub { height: auto; max-width: 400px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 20px 0; }
-            .orbit-hub__lines { display: none; }
-            .orbit-hub__center { grid-column: 1 / -1; position: relative; top: auto; left: auto; transform: none; opacity: 1; scale: 1; margin-bottom: 16px; }
-            .orbit-hub__glow { width: 160px; height: 160px; }
-            .orbit-hub__photo { width: 100px; height: 100px; }
-            .orbit-hub__ring { display: none; }
-            .orbit-hub__node { position: relative; top: auto !important; left: auto !important; transform: none; opacity: 1; scale: 1; animation: none !important; flex-direction: row; gap: 10px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,186,26,0.12); border-radius: 12px; padding: 12px 14px; }
-            .orbit-hub__node:hover { transform: none; }
-            .orbit-hub__node-icon { width: 40px; height: 40px; min-width: 40px; border-radius: 10px; }
-            .orbit-hub__node-icon i { font-size: 16px; }
-            .orbit-hub__node-label { font-size: 13px; }
-            .orbit-hub__node-desc { font-size: 11px; white-space: normal; text-shadow: none; margin-top: 0; }
+            /* orbit-hub mobile: keep circular layout (styles in shared-olivia.ts) */
         }
         @media (max-width: 768px) {
             .orbit-node-card { width: 220px; padding: 16px; }
@@ -9984,37 +9952,7 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
         }
         @keyframes orbit-lines-in { to { opacity: 1; } }
 
-        @media (max-width: 768px) {
-            .orbit-hub {
-                height: auto; max-width: 400px;
-                display: grid; grid-template-columns: 1fr 1fr;
-                gap: 12px; padding: 20px 0;
-            }
-            .orbit-hub__lines { display: none; }
-            .orbit-hub__center {
-                grid-column: 1 / -1;
-                position: relative; top: auto; left: auto;
-                transform: none; opacity: 1; scale: 1;
-                margin-bottom: 16px;
-            }
-            .orbit-hub__glow { width: 160px; height: 160px; }
-            .orbit-hub__photo { width: 100px; height: 100px; }
-            .orbit-hub__ring { display: none; }
-            .orbit-hub__node {
-                position: relative; top: auto !important; left: auto !important;
-                transform: none; opacity: 1; scale: 1;
-                animation: none !important;
-                flex-direction: row; gap: 10px;
-                background: rgba(255,255,255,0.03);
-                border: 1px solid rgba(255,186,26,0.12);
-                border-radius: 12px; padding: 12px 14px;
-            }
-            .orbit-hub__node:hover { transform: none; }
-            .orbit-hub__node-icon { width: 40px; height: 40px; min-width: 40px; border-radius: 10px; }
-            .orbit-hub__node-icon i { font-size: 16px; }
-            .orbit-hub__node-label { font-size: 13px; }
-            .orbit-hub__node-desc { font-size: 11px; white-space: normal; text-shadow: none; margin-top: 0; }
-        }
+        /* orbit-hub mobile: keep circular layout (styles in shared-olivia.ts) */
 
         /* ── AGENT CARD ON CLICK ── */
         .orbit-hub__node { cursor: pointer; }
@@ -14660,4 +14598,13 @@ hr.glow-divider { display: none !important; }
   .orbit-hub__name { font-size: 12px !important; }
   .orbit-hub__role { font-size: 9px !important; }
   .orbit-node-card { display: none !important; }
+}
+
+/* ═══ Estrategista page: stack 2-col grids on mobile ═══ */
+@media (max-width: 768px) {
+  [style*="grid-template-columns:1fr 1fr"],
+  [style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
 }

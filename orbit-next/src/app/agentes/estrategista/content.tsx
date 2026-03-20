@@ -99,7 +99,7 @@ const html = `
 <!-- Section 5: Prova Real -->
 <section style="background:#0D1117;padding:120px 0;">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;" data-reveal>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;" data-reveal="left">
       <div>
         <span class="section-badge section-badge--gold">Prova real</span>
         <h2 style="color:#fff;font-size:clamp(24px,3.5vw,36px);font-weight:800;margin:16px 0 16px;">
@@ -119,7 +119,7 @@ const html = `
 <!-- Section 6: Análise Automática (inverted) -->
 <section style="background:#161B22;padding:120px 0;">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;" data-reveal>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;" data-reveal="right">
       <div style="background:linear-gradient(160deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:40px;text-align:center;min-height:400px;display:flex;align-items:center;justify-content:center;transition:all 0.4s ease;box-shadow:0 8px 32px rgba(0,0,0,0.2);" onmouseover="this.style.borderColor='rgba(255,186,26,0.3)';this.style.boxShadow='0 12px 48px rgba(255,186,26,0.08)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.06)';this.style.boxShadow='0 8px 32px rgba(0,0,0,0.2)'">
         <p style="color:#8B949E;font-size:0.9rem;"><i class="fas fa-image" style="font-size:3rem;display:block;margin-bottom:16px;color:#ffba1a;"></i>Print: Análise SWOT</p>
       </div>
@@ -138,7 +138,7 @@ const html = `
 <!-- Section 7: Direcionamento -->
 <section style="background:#0D1117;padding:120px 0;">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;" data-reveal>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;" data-reveal="left">
       <div>
         <h2 style="color:#fff;font-size:clamp(24px,3.5vw,36px);font-weight:800;margin-bottom:16px;">
           A análise vira direcionamento claro.
@@ -157,7 +157,7 @@ const html = `
 <!-- Section 8: Plano Estratégico (inverted) -->
 <section style="background:#161B22;padding:120px 0;">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;" data-reveal>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;" data-reveal="right">
       <div style="background:linear-gradient(160deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:40px;text-align:center;min-height:400px;display:flex;align-items:center;justify-content:center;transition:all 0.4s ease;box-shadow:0 8px 32px rgba(0,0,0,0.2);" onmouseover="this.style.borderColor='rgba(255,186,26,0.3)';this.style.boxShadow='0 12px 48px rgba(255,186,26,0.08)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.06)';this.style.boxShadow='0 8px 32px rgba(0,0,0,0.2)'">
         <p style="color:#8B949E;font-size:0.9rem;"><i class="fas fa-image" style="font-size:3rem;display:block;margin-bottom:16px;color:#ffba1a;"></i>Print: Recomendações estratégicas</p>
       </div>
@@ -176,7 +176,7 @@ const html = `
 <!-- Section 9: Execução Real -->
 <section style="background:#0D1117;padding:120px 0;">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;" data-reveal>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;" data-reveal="left">
       <div>
         <h2 style="color:#fff;font-size:clamp(24px,3.5vw,36px);font-weight:800;margin-bottom:16px;">
           E o mais importante: <span style="color:#ffba1a;">começa a ser executado</span>
@@ -195,7 +195,7 @@ const html = `
 <!-- Section 10: Conexão com Objetivos (inverted) -->
 <section style="background:#161B22;padding:120px 0;">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;" data-reveal>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;" data-reveal="right">
       <div style="background:linear-gradient(160deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:40px;text-align:center;min-height:400px;display:flex;align-items:center;justify-content:center;transition:all 0.4s ease;box-shadow:0 8px 32px rgba(0,0,0,0.2);" onmouseover="this.style.borderColor='rgba(255,186,26,0.3)';this.style.boxShadow='0 12px 48px rgba(255,186,26,0.08)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.06)';this.style.boxShadow='0 8px 32px rgba(0,0,0,0.2)'">
         <p style="color:#8B949E;font-size:0.9rem;"><i class="fas fa-image" style="font-size:3rem;display:block;margin-bottom:16px;color:#ffba1a;"></i>Print: Objetivos financeiros / processos / crescimento</p>
       </div>
