@@ -85,7 +85,7 @@ export const pageHTML = `
                     </div>
                 </div>
                 <div class="pain-answer__cta">
-                    <a href="#cta-final" class="lp-btn lp-btn--gold">QUERO SAIR DESSE CICLO <i class="fas fa-arrow-right"></i></a>
+                    <a href="#cta-final" class="lp-btn lp-btn--gold">QUERO SAIR DESSE CICLO</a>
                 </div>
             </div>
         </div>
@@ -442,7 +442,7 @@ export const pageHTML = `
                                 <div class="bm-step__scene">
                                     <div class="bm-scene-bye">
                                         <div class="bm-scene-bye__box"><i class="fas fa-box-archive"></i></div>
-                                        <div class="bm-scene-bye__arrow"><i class="fas fa-arrow-right"></i></div>
+                                        <div class="bm-scene-bye__arrow"></div>
                                         <div class="bm-scene-bye__client"><i class="fas fa-user"></i></div>
                                         <div class="bm-scene-bye__x"><i class="fas fa-link-slash"></i></div>
                                     </div>
@@ -1135,7 +1135,7 @@ export const pageHTML = `
                 <!-- Bottom CTA -->
                 <div style="text-align:center;margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.06);" data-reveal>
                     <p style="color:rgba(255,255,255,0.5);font-size:1.1rem;margin-bottom:20px;">12 especialistas. 1 coordenadora. <strong style="color:#fff;">Custo de 1 funcionário.</strong></p>
-                    <a href="#contato" class="btn btn-primary btn-lg">Quero meu time de IA <i class="fas fa-arrow-right" style="margin-left:8px;"></i></a>
+                    <a href="#contato" class="btn btn-primary btn-lg">Quero meu time de IA</a>
                 </div>
 
                 <script>

@@ -118,7 +118,7 @@ export const pageHTML = `
                                 <div class="cost-orbit-benefit"><i class="fas fa-star"></i> Operação imediata</div>
                             </div>
                             <div class="cost-cta">
-                                <a href="#planos" class="btn btn-primary btn-lg" style="border-radius:50px;width:100%;">Ver planos acima <i class="fa-solid fa-arrow-up"></i></a>
+                                <a href="#planos" class="btn btn-primary btn-lg" style="border-radius:50px;width:100%;">Ver planos acima</a>
                             </div>
                         </div>
             </div>
@@ -178,7 +178,7 @@ export const pageHTML = `
                         <li><i class="fas fa-chart-pie"></i> Dashboards básicos</li>
                         <li><i class="fas fa-envelope"></i> Suporte por email</li>
                     </ul>
-                    <a href="/#contato-form" class="price-v2__cta">Começar agora <i class="fas fa-arrow-right"></i></a>
+                    <a href="/#contato-form" class="price-v2__cta">Começar agora</a>
                 </div>
 
                 <!-- Advanced (featured) -->
@@ -204,7 +204,7 @@ export const pageHTML = `
                         <li><i class="fas fa-headset"></i> Onboarding dedicado</li>
                         <li><i class="fas fa-brain"></i> Olívia como coordenadora</li>
                     </ul>
-                    <a href="/#contato-form" class="price-v2__cta price-v2__cta--gold">Escolher Advanced <i class="fas fa-arrow-right"></i></a>
+                    <a href="/#contato-form" class="price-v2__cta price-v2__cta--gold">Escolher Advanced</a>
                     <div class="price-v2__guarantee"><i class="fas fa-shield-check"></i> Garantia 90 dias ou seu dinheiro de volta</div>
                 </div>
 
@@ -227,7 +227,7 @@ export const pageHTML = `
                         <li><i class="fas fa-user-shield"></i> Gerente de sucesso</li>
                         <li><i class="fas fa-bolt"></i> SLA prioritário</li>
                     </ul>
-                    <a href="/#contato-form" class="price-v2__cta">Escolher Pro <i class="fas fa-arrow-right"></i></a>
+                    <a href="/#contato-form" class="price-v2__cta">Escolher Pro</a>
                 </div>
             </div>
 
@@ -729,7 +729,7 @@ export const pageHTML = `
                         <li><i class="fas fa-circle-check"></i> Cancele quando quiser</li>
                     </ul>
                     <div>
-                        <a href="/#contato-form" class="btn btn-primary btn-lg">QUERO TESTAR SEM RISCO <i class="fas fa-arrow-right"></i></a>
+                        <a href="/#contato-form" class="btn btn-primary btn-lg">QUERO TESTAR SEM RISCO</a>
                     </div>
                 </div>
             </div>
@@ -998,7 +998,7 @@ export const pageHTML = `
                 <div class="channels-text">
                     <h2>Para consultores e canais</h2>
                     <p>Modelo especial de pricing para quem quer oferecer o Orbit aos seus clientes. Receita recorrente, margem alta, sem custo de tecnologia.</p>
-                    <a href="/consultores" class="btn btn-primary" style="display:inline-block;padding:14px 32px;border-radius:12px;font-weight:700;background:#ffba1a;color:#0D1117;text-decoration:none;transition:all 0.3s ease;">Conhecer o programa de canais <i class="fas fa-arrow-right"></i></a>
+                    <a href="/consultores" class="btn btn-primary" style="display:inline-block;padding:14px 32px;border-radius:12px;font-weight:700;background:#ffba1a;color:#0D1117;text-decoration:none;transition:all 0.3s ease;">Conhecer o programa de canais</a>
                 </div>
                 <div class="channels-stats">
                     <div class="channels-stat">

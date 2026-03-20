@@ -10,7 +10,7 @@ export const pageHTML = `
                 </p>
                 <div class="partner-hero__ctas">
                     <a href="#formulario" class="btn btn-primary btn-lg">
-                        <i class="fas fa-arrow-right"></i> Quero ser Parceiro
+                        Quero ser Parceiro
                     </a>
                     <a href="#niveis" class="btn btn-outline btn-lg">Ver planos</a>
                 </div>
@@ -998,7 +998,7 @@ export const pageHTML = `
                 <h2>Pronto para crescer com o Orbit?</h2>
                 <p>Junte-se a dezenas de consultores que já aumentaram sua receita com IA.</p>
                 <div class="site-cta__buttons">
-                    <a href="#formulario" class="btn btn-primary btn-lg">Quero ser Parceiro <i class="fas fa-arrow-right"></i></a>
+                    <a href="#formulario" class="btn btn-primary btn-lg">Quero ser Parceiro</a>
                     <a href="#niveis" class="btn btn-outline btn-lg">Ver Planos</a>
                 </div>
             </div>

@@ -228,7 +228,7 @@ export const pageHTML = `
                                 <li><i class="fas fa-check"></i> Tensões produtivas geram melhores decisões</li>
                                 <li><i class="fas fa-check"></i> Consultoria recorrente passiva: opera 24/7</li>
                             </ul>
-                            <a href="#olivia" class="btn btn-primary">Conhecer a Olívia <i class="fas fa-arrow-right"></i></a>
+                            <a href="#olivia" class="btn btn-primary">Conhecer a Olívia</a>
                         </div>
                         <div class="platform-panel__image">
                             <div class="platform-panel__mockup-bg">
@@ -258,7 +258,7 @@ export const pageHTML = `
                     <div class="icon-premium icon-premium--solid"><i class="fas fa-building"></i></div>
                     <h3>Empresários</h3>
                     <p style="color:#5A6069;font-size:0.95rem;line-height:1.6;margin-bottom:20px;">Ferramentas demais e gestão de menos? Um time de IA opera sua empresa 24/7.</p>
-                    <a href="/lp-empresas" class="btn btn-dark" style="width:100%;">Ver como funciona <i class="fas fa-arrow-right"></i></a>
+                    <a href="/lp-empresas" class="btn btn-dark" style="width:100%;">Ver como funciona</a>
                 </div>
 
                 <!-- ICP 2 - Consultor -->
@@ -266,7 +266,7 @@ export const pageHTML = `
                     <div class="icon-premium icon-premium--solid"><i class="fas fa-user-tie"></i></div>
                     <h3>Consultores</h3>
                     <p style="color:#5A6069;font-size:0.95rem;line-height:1.6;margin-bottom:20px;">Pare de vender projeto. Venda operação com receita recorrente e white-label.</p>
-                    <a href="/consultores" class="btn btn-dark" style="width:100%;">Modelo de canais <i class="fas fa-arrow-right"></i></a>
+                    <a href="/consultores" class="btn btn-dark" style="width:100%;">Modelo de canais</a>
                 </div>
 
                 <!-- ICP 3 - Associações -->
@@ -274,7 +274,7 @@ export const pageHTML = `
                     <div class="icon-premium icon-premium--solid"><i class="fas fa-landmark"></i></div>
                     <h3>Associações e Hubs</h3>
                     <p style="color:#5A6069;font-size:0.95rem;line-height:1.6;margin-bottom:20px;">Transforme sua associação de hub de eventos em hub de operação para cada associado.</p>
-                    <a href="#contato-form" class="btn btn-dark" style="width:100%;">Fale conosco <i class="fas fa-arrow-right"></i></a>
+                    <a href="#contato-form" class="btn btn-dark" style="width:100%;">Fale conosco</a>
                 </div>
             </div>
         </div>
@@ -384,7 +384,7 @@ export const pageHTML = `
                     </div>
                 </div>
                 <div class="pain-answer__cta">
-                    <a href="#contato-form" class="btn btn-primary btn-lg">QUERO RESOLVER ISSO <i class="fas fa-arrow-right"></i></a>
+                    <a href="#contato-form" class="btn btn-primary btn-lg">QUERO RESOLVER ISSO</a>
                 </div>
             </div>
         </div>
@@ -1100,7 +1100,7 @@ export const pageHTML = `
                 <!-- Bottom CTA -->
                 <div style="text-align:center;margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.06);" data-reveal>
                     <p style="color:rgba(255,255,255,0.5);font-size:1.1rem;margin-bottom:20px;">12 especialistas. 1 coordenadora. <strong style="color:#fff;">Custo de 1 funcionário.</strong></p>
-                    <a href="#contato" class="btn btn-primary btn-lg">Quero meu time de IA <i class="fas fa-arrow-right" style="margin-left:8px;"></i></a>
+                    <a href="#contato" class="btn btn-primary btn-lg">Quero meu time de IA</a>
                 </div>
 
                 <script>
@@ -2744,7 +2744,7 @@ export const pageHTML = `
                         <div class="cost-orbit-benefit"><i class="fas fa-star"></i> Operação imediata</div>
                     </div>
                     <div class="cost-cta">
-                        <a href="/pricing" class="btn btn-primary btn-lg" style="border-radius:50px;width:100%;">Ver planos completos <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="/pricing" class="btn btn-primary btn-lg" style="border-radius:50px;width:100%;">Ver planos completos</a>
                     </div>
                 </div>
             </div>
@@ -2955,7 +2955,7 @@ export const pageHTML = `
                         <li><i class="fas fa-chart-pie"></i> Dashboards básicos</li>
                         <li><i class="fas fa-envelope"></i> Suporte por email</li>
                     </ul>
-                    <a href="/pricing" class="price-v2__cta">Começar agora <i class="fas fa-arrow-right"></i></a>
+                    <a href="/pricing" class="price-v2__cta">Começar agora</a>
                 </div>
 
                 <!-- Advanced (featured) -->
@@ -2981,7 +2981,7 @@ export const pageHTML = `
                         <li><i class="fas fa-headset"></i> Onboarding dedicado</li>
                         <li><i class="fas fa-brain"></i> Olívia como coordenadora</li>
                     </ul>
-                    <a href="/pricing" class="price-v2__cta price-v2__cta--gold">Escolher Advanced <i class="fas fa-arrow-right"></i></a>
+                    <a href="/pricing" class="price-v2__cta price-v2__cta--gold">Escolher Advanced</a>
                     <div class="price-v2__guarantee"><i class="fas fa-shield-check"></i> Garantia 90 dias ou seu dinheiro de volta</div>
                 </div>
 
@@ -3004,7 +3004,7 @@ export const pageHTML = `
                         <li><i class="fas fa-user-shield"></i> Gerente de sucesso</li>
                         <li><i class="fas fa-bolt"></i> SLA prioritário</li>
                     </ul>
-                    <a href="/pricing" class="price-v2__cta">Escolher Pro <i class="fas fa-arrow-right"></i></a>
+                    <a href="/pricing" class="price-v2__cta">Escolher Pro</a>
                 </div>
             </div>
 
@@ -3723,7 +3723,7 @@ export const pageHTML = `
                         <li><i class="fas fa-circle-check"></i> Cancele quando quiser</li>
                     </ul>
                     <div>
-                        <a href="#contato-form" class="btn btn-primary btn-lg">QUERO TESTAR SEM RISCO <i class="fas fa-arrow-right"></i></a>
+                        <a href="#contato-form" class="btn btn-primary btn-lg">QUERO TESTAR SEM RISCO</a>
                     </div>
                 </div>
             </div>
@@ -3996,7 +3996,7 @@ export const pageHTML = `
                     <div class="consultant-banner__subtitle">Pare de vender projeto. Comece a vender operação.</div>
                     <h2 class="consultant-banner__title">Consultores, mentores e associações</h2>
                     <p class="consultant-banner__desc">Ofereça um time de IA aos seus clientes ou associados. Receita recorrente, white-label, sem investimento em tecnologia. Consultoria recorrente passiva: os agentes continuam trabalhando após o projeto.</p>
-                    <a href="/consultores" class="consultant-banner__cta">Conhecer programa de canais <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="/consultores" class="consultant-banner__cta">Conhecer programa de canais</a>
                 </div>
                 <div class="consultant-stats">
                     <div class="consultant-stat">
@@ -4189,7 +4189,7 @@ export const pageHTML = `
             </div>
 
             <div style="text-align:center;margin-top:36px;">
-                <a href="/blog" class="btn btn-dark btn-lg">Ver todos os artigos <i class="fas fa-arrow-right" style="margin-left:8px;font-size:0.8rem;"></i></a>
+                <a href="/blog" class="btn btn-dark btn-lg">Ver todos os artigos</a>
             </div>
         </div>
     </section>
@@ -4285,9 +4285,9 @@ export const pageHTML = `
 
         if (articles.length === 0) {
             grid.innerHTML =
-                '<div class="knowledge-card"><div class="knowledge-card__image"><img src="https://placehold.co/400x250/FDB73F/000000?text=Blog" alt="Blog" loading="lazy"><span class="knowledge-card__type"><i class="fas fa-file-alt"></i> Artigo</span></div><div class="knowledge-card__body"><h4>5 Passos para Transformar sua Estratégia em Ação</h4><a href="/blog" class="knowledge-card__link">Ler artigo <i class="fas fa-arrow-right"></i></a></div></div>' +
-                '<div class="knowledge-card"><div class="knowledge-card__image"><img src="https://placehold.co/400x250/000000/FDB73F?text=Blog" alt="Blog" loading="lazy"><span class="knowledge-card__type"><i class="fas fa-book"></i> Ebook</span></div><div class="knowledge-card__body"><h4>Guia Completo de Gestão Estratégica para PMEs</h4><a href="/blog" class="knowledge-card__link">Ler artigo <i class="fas fa-arrow-right"></i></a></div></div>' +
-                '<div class="knowledge-card"><div class="knowledge-card__image"><img src="https://placehold.co/400x250/FDB73F/000000?text=Blog" alt="Blog" loading="lazy"><span class="knowledge-card__type"><i class="fas fa-play-circle"></i> Webinar</span></div><div class="knowledge-card__body"><h4>Como a IA Melhora a Tomada de Decisão Empresarial</h4><a href="/blog" class="knowledge-card__link">Ler artigo <i class="fas fa-arrow-right"></i></a></div></div>';
+                '<div class="knowledge-card"><div class="knowledge-card__image"><img src="https://placehold.co/400x250/FDB73F/000000?text=Blog" alt="Blog" loading="lazy"><span class="knowledge-card__type"><i class="fas fa-file-alt"></i> Artigo</span></div><div class="knowledge-card__body"><h4>5 Passos para Transformar sua Estratégia em Ação</h4><a href="/blog" class="knowledge-card__link">Ler artigo</a></div></div>' +
+                '<div class="knowledge-card"><div class="knowledge-card__image"><img src="https://placehold.co/400x250/000000/FDB73F?text=Blog" alt="Blog" loading="lazy"><span class="knowledge-card__type"><i class="fas fa-book"></i> Ebook</span></div><div class="knowledge-card__body"><h4>Guia Completo de Gestão Estratégica para PMEs</h4><a href="/blog" class="knowledge-card__link">Ler artigo</a></div></div>' +
+                '<div class="knowledge-card"><div class="knowledge-card__image"><img src="https://placehold.co/400x250/FDB73F/000000?text=Blog" alt="Blog" loading="lazy"><span class="knowledge-card__type"><i class="fas fa-play-circle"></i> Webinar</span></div><div class="knowledge-card__body"><h4>Como a IA Melhora a Tomada de Decisão Empresarial</h4><a href="/blog" class="knowledge-card__link">Ler artigo</a></div></div>';
             return;
         }
 
@@ -4317,7 +4317,7 @@ export const pageHTML = `
                 '</div>' +
                 '<div class="knowledge-card__body">' +
                     '<h4>' + esc(a.title) + '</h4>' +
-                    '<span class="knowledge-card__link">Ler artigo <i class="fas fa-arrow-right"></i></span>' +
+                    '<span class="knowledge-card__link">Ler artigo</span>' +
                 '</div>' +
             '</a>';
         }).join('');

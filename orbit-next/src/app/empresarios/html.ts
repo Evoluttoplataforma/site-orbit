@@ -28,7 +28,7 @@ export const pageHTML = `
             </div>
 
             <div data-reveal>
-                <a href="#contato" class="btn-gold">QUERO CONHECER O TIME DE IA <i class="fas fa-arrow-right"></i></a>
+                <a href="#contato" class="btn-gold">QUERO CONHECER O TIME DE IA</a>
             </div>
             <p class="lp-hero__note" data-reveal>&#9203; 2 min &bull; 100% gratuito &bull; Sem compromisso</p>
         </div>
@@ -114,7 +114,7 @@ export const pageHTML = `
                     </div>
                 </div>
                 <div class="pain-answer__cta">
-                    <a href="#contato" class="btn btn-primary btn-lg">QUERO RESOLVER ISSO <i class="fas fa-arrow-right"></i></a>
+                    <a href="#contato" class="btn btn-primary btn-lg">QUERO RESOLVER ISSO</a>
                 </div>
             </div>
         </div>
@@ -845,7 +845,7 @@ export const pageHTML = `
                 <!-- Bottom CTA -->
                 <div style="text-align:center;margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.06);" data-reveal>
                     <p style="color:rgba(255,255,255,0.5);font-size:1.1rem;margin-bottom:20px;">12 especialistas. 1 coordenadora. <strong style="color:#fff;">Custo de 1 funcionário.</strong></p>
-                    <a href="#contato" class="btn btn-primary btn-lg">Quero meu time de IA <i class="fas fa-arrow-right" style="margin-left:8px;"></i></a>
+                    <a href="#contato" class="btn btn-primary btn-lg">Quero meu time de IA</a>
                 </div>
 
                 <script>
@@ -2567,7 +2567,7 @@ export const pageHTML = `
                                 <div class="cost-orbit-benefit"><i class="fas fa-star"></i> Operação imediata</div>
                             </div>
                             <div class="cost-cta">
-                                <a href="/preco" class="btn btn-primary btn-lg" style="border-radius:50px;width:100%;">Ver planos completos <i class="fa-solid fa-arrow-right"></i></a>
+                                <a href="/preco" class="btn btn-primary btn-lg" style="border-radius:50px;width:100%;">Ver planos completos</a>
                             </div>
                         </div>
             </div>
@@ -2710,7 +2710,7 @@ export const pageHTML = `
                         <li><i class="fas fa-circle-check"></i> Cancele quando quiser</li>
                     </ul>
                     <div>
-                        <a href="#contato" class="btn-gold">QUERO TESTAR SEM RISCO <i class="fas fa-arrow-right"></i></a>
+                        <a href="#contato" class="btn-gold">QUERO TESTAR SEM RISCO</a>
                     </div>
                 </div>
             </div>
@@ -3038,7 +3038,7 @@ export const pageHTML = `
             <h2 data-reveal>Pronto para montar seu <span class="text-gold">time de IA</span>?</h2>
             <p data-reveal>Agende uma demonstração gratuita e veja os agentes trabalhando com a SUA empresa.</p>
             <div data-reveal>
-                <a href="/#contato-form" class="btn-gold">QUERO CONHECER O TIME DE IA <i class="fas fa-arrow-right"></i></a>
+                <a href="/#contato-form" class="btn-gold">QUERO CONHECER O TIME DE IA</a>
             </div>
 
             <div class="lp-cta-final__stats" data-reveal>
