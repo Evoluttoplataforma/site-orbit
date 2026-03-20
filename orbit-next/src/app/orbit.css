@@ -14582,10 +14582,14 @@ hr.glow-divider { display: none !important; }
   background: #0D1117 !important;
 }
 
-/* Form labels - more visible */
-.cta-form label, .cta-form__label, .form-group label, .contact-form label {
+/* Form labels - more visible (only on dark backgrounds) */
+.cta-form label, .cta-form__label, .cta-form-section .form-group label, .contact-form label {
   color: #fff !important;
   font-weight: 600 !important;
+}
+/* Story form labels on light background */
+.story-form-card .form-group label {
+  color: #374151 !important;
 }
 
 /* Fix hero rotate gap on mobile */
