@@ -83,7 +83,7 @@ export const pageHTML = `
                         <div class="wa-header">
                             <i class="fas fa-arrow-left wa-header__back"></i>
                             <div class="wa-header__contact">
-                                <img src="/images/cliente-1.jpg" alt="Rodrigo" width="1024" height="1536" loading="lazy" decoding="async" class="wa-header__avatar">
+                                <img src="/images/cliente-1.jpg" alt="Rodrigo" width="800" height="1200" loading="lazy" decoding="async" class="wa-header__avatar">
                                 <div class="wa-header__online"></div>
                             </div>
                             <div class="wa-header__info">
@@ -106,7 +106,7 @@ export const pageHTML = `
                                     <p data-i18n="wa.1.s1">Sinto que sou o único que se importa com a empresa. Deleguei e tudo saiu errado.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-1.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
+                                <img src="/images/cliente-1.jpg" alt="" width="800" height="1200" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
                                 <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
@@ -121,7 +121,7 @@ export const pageHTML = `
                                     <p data-i18n="wa.1.s2">Minha equipe só apaga incêndio. Ninguém pensa estrategicamente.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-1.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
+                                <img src="/images/cliente-1.jpg" alt="" width="800" height="1200" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
                                 <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
@@ -160,7 +160,7 @@ export const pageHTML = `
                         <div class="wa-header">
                             <i class="fas fa-arrow-left wa-header__back"></i>
                             <div class="wa-header__contact">
-                                <img src="/images/cliente-2.jpg" alt="Gustavo" width="1024" height="1536" loading="lazy" decoding="async" class="wa-header__avatar">
+                                <img src="/images/cliente-2.jpg" alt="Gustavo" width="800" height="1200" loading="lazy" decoding="async" class="wa-header__avatar">
                                 <div class="wa-header__online"></div>
                             </div>
                             <div class="wa-header__info">
@@ -181,7 +181,7 @@ export const pageHTML = `
                                     <p data-i18n="wa.2.s1">Comprei ERP, implantei OKR, contratei consultoria... nada mudou de verdade.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-2.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
+                                <img src="/images/cliente-2.jpg" alt="" width="800" height="1200" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
                                 <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
@@ -196,7 +196,7 @@ export const pageHTML = `
                                     <p data-i18n="wa.2.s2">Faturamento sobe e desce todo mês. Não tenho previsibilidade nenhuma.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-2.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
+                                <img src="/images/cliente-2.jpg" alt="" width="800" height="1200" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
                                 <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
@@ -233,7 +233,7 @@ export const pageHTML = `
                         <div class="wa-header">
                             <i class="fas fa-arrow-left wa-header__back"></i>
                             <div class="wa-header__contact">
-                                <img src="/images/cliente-3.jpg" alt="Gabriel" width="1024" height="1536" loading="lazy" decoding="async" class="wa-header__avatar">
+                                <img src="/images/cliente-3.jpg" alt="Gabriel" width="800" height="1200" loading="lazy" decoding="async" class="wa-header__avatar">
                                 <div class="wa-header__online"></div>
                             </div>
                             <div class="wa-header__info">
@@ -254,7 +254,7 @@ export const pageHTML = `
                                     <p data-i18n="wa.3.s1">Ninguém veste a camisa. Processos existem só no papel.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-3.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
+                                <img src="/images/cliente-3.jpg" alt="" width="800" height="1200" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
                                 <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
@@ -269,7 +269,7 @@ export const pageHTML = `
                                     <p data-i18n="wa.3.s2">Já tentei padronizar mas ninguém segue. Não sei nem se estão fazendo certo.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-3.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
+                                <img src="/images/cliente-3.jpg" alt="" width="800" height="1200" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
                                 <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
@@ -782,7 +782,7 @@ export const pageHTML = `
                     } else {
                         el.style.alignSelf = 'flex-end';
                         el.style.flexDirection = 'row-reverse';
-                        el.innerHTML = '<img src="' + clientSrc + '" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
+                        el.innerHTML = '<img src="' + clientSrc + '" alt="" width="800" height="1200" loading="lazy" decoding="async" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
                         if (statusEl) statusEl.textContent = 'online';
                     }
                     chat.appendChild(el);
@@ -2941,7 +2941,7 @@ export const pageHTML = `
                             </div>
                         </div>
                         <div class="origin-director-card">
-                            <div class="origin-director-card__avatar"><img src="/images/diretor-dani.png" alt="Dani Albuquerque" loading="lazy" decoding="async"></div>
+                            <div class="origin-director-card__avatar"><img src="/images/diretor-dani.jpg" alt="Dani Albuquerque" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Dani Albuquerque</h3>
                                 <p>Diretora de Operações. Responsável pela entrega e qualidade — garante resultado mensurável para cada cliente.</p>
@@ -2951,7 +2951,7 @@ export const pageHTML = `
                             </div>
                         </div>
                         <div class="origin-director-card">
-                            <div class="origin-director-card__avatar"><img src="/images/diretor-chris.png" alt="Christian Hart" loading="lazy" decoding="async"></div>
+                            <div class="origin-director-card__avatar"><img src="/images/diretor-chris.jpg" alt="Christian Hart" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Christian Hart</h3>
                                 <p>Diretor de Produto. Lidera o desenvolvimento da plataforma e a evolução dos 12 agentes de IA.</p>
@@ -2961,7 +2961,7 @@ export const pageHTML = `
                             </div>
                         </div>
                         <div class="origin-director-card">
-                            <div class="origin-director-card__avatar"><img src="/images/diretor-rodrigo.png" alt="Rodrigo Furniel" loading="lazy" decoding="async"></div>
+                            <div class="origin-director-card__avatar"><img src="/images/diretor-rodrigo.jpg" alt="Rodrigo Furniel" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Rodrigo Furniel</h3>
                                 <p>Diretor de Vendas. Responsável pela expansão comercial, canais e parcerias estratégicas.</p>

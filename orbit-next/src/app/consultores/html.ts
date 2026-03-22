@@ -79,7 +79,7 @@ export const pageHTML = `
                         <div class="wa-header">
                             <i class="fas fa-arrow-left wa-header__back"></i>
                             <div class="wa-header__contact">
-                                <img src="/images/cliente-1.jpg" alt="Rodrigo" width="1024" height="1536" loading="lazy" decoding="async" class="wa-header__avatar">
+                                <img src="/images/cliente-1.jpg" alt="Rodrigo" width="800" height="1200" loading="lazy" decoding="async" class="wa-header__avatar">
                                 <div class="wa-header__online"></div>
                             </div>
                             <div class="wa-header__info">
@@ -102,7 +102,7 @@ export const pageHTML = `
                                     <p data-i18n="wa.1.s1">Entrego o projeto, o cliente agradece... e cancela no mês seguinte. Vivo nesse ciclo.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-1.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
+                                <img src="/images/cliente-1.jpg" alt="" width="800" height="1200" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
                                 <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
@@ -117,7 +117,7 @@ export const pageHTML = `
                                     <p data-i18n="wa.1.s2">Minha receita depende 100% da minha agenda. Não consigo escalar.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-1.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
+                                <img src="/images/cliente-1.jpg" alt="" width="800" height="1200" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
                                 <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
@@ -156,7 +156,7 @@ export const pageHTML = `
                         <div class="wa-header">
                             <i class="fas fa-arrow-left wa-header__back"></i>
                             <div class="wa-header__contact">
-                                <img src="/images/cliente-2.jpg" alt="Gustavo" width="1024" height="1536" loading="lazy" decoding="async" class="wa-header__avatar">
+                                <img src="/images/cliente-2.jpg" alt="Gustavo" width="800" height="1200" loading="lazy" decoding="async" class="wa-header__avatar">
                                 <div class="wa-header__online"></div>
                             </div>
                             <div class="wa-header__info">
@@ -177,7 +177,7 @@ export const pageHTML = `
                                     <p data-i18n="wa.2.s1">O mercado está comoditizando o que eu faço. Qualquer um oferece consultoria de gestão.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-2.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
+                                <img src="/images/cliente-2.jpg" alt="" width="800" height="1200" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
                                 <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
@@ -192,7 +192,7 @@ export const pageHTML = `
                                     <p data-i18n="wa.2.s2">Mas como convencer o cliente a pagar mensalidade se ele já pagou o projeto?</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-2.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
+                                <img src="/images/cliente-2.jpg" alt="" width="800" height="1200" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
                                 <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
@@ -229,7 +229,7 @@ export const pageHTML = `
                         <div class="wa-header">
                             <i class="fas fa-arrow-left wa-header__back"></i>
                             <div class="wa-header__contact">
-                                <img src="/images/cliente-3.jpg" alt="Gabriel" width="1024" height="1536" loading="lazy" decoding="async" class="wa-header__avatar">
+                                <img src="/images/cliente-3.jpg" alt="Gabriel" width="800" height="1200" loading="lazy" decoding="async" class="wa-header__avatar">
                                 <div class="wa-header__online"></div>
                             </div>
                             <div class="wa-header__info">
@@ -250,7 +250,7 @@ export const pageHTML = `
                                     <p data-i18n="wa.3.s1">Não consigo escalar sem contratar gente. E contratar aumenta custo fixo.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-3.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
+                                <img src="/images/cliente-3.jpg" alt="" width="800" height="1200" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
                                 <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
@@ -265,7 +265,7 @@ export const pageHTML = `
                                     <p data-i18n="wa.3.s2">Fico refém da próxima venda. Não tenho previsibilidade.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-3.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
+                                <img src="/images/cliente-3.jpg" alt="" width="800" height="1200" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
                                 <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
@@ -778,7 +778,7 @@ export const pageHTML = `
                     } else {
                         el.style.alignSelf = 'flex-end';
                         el.style.flexDirection = 'row-reverse';
-                        el.innerHTML = '<img src="' + clientSrc + '" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
+                        el.innerHTML = '<img src="' + clientSrc + '" alt="" width="800" height="1200" loading="lazy" decoding="async" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
                         if (statusEl) statusEl.textContent = 'online';
                     }
                     chat.appendChild(el);

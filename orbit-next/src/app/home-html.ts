@@ -391,7 +391,7 @@ export const pageHTML = `
 
             <div class="pq-grid" data-reveal-stagger>
                 <a href="/empresarios" class="pq-card">
-                    <img src="/images/pq-empresarios.png" alt="Empresários" width="1024" height="1536" loading="lazy" decoding="async">
+                    <img src="/images/pq-empresarios.png" alt="Empresários" width="800" height="1200" loading="lazy" decoding="async">
                     <div class="pq-card__content">
                         <div class="pq-card__icon"><i class="fas fa-building"></i></div>
                         <h3 data-i18n="pq.c1.title">Empresários</h3>
@@ -401,7 +401,7 @@ export const pageHTML = `
                 </a>
 
                 <a href="/consultores" class="pq-card">
-                    <img src="/images/pq-consultores.png" alt="Consultores" width="1024" height="1536" loading="lazy" decoding="async">
+                    <img src="/images/pq-consultores.png" alt="Consultores" width="800" height="1200" loading="lazy" decoding="async">
                     <div class="pq-card__content">
                         <div class="pq-card__icon"><i class="fas fa-user-tie"></i></div>
                         <h3 data-i18n="pq.c2.title">Consultores</h3>
@@ -503,7 +503,7 @@ export const pageHTML = `
                         <div class="wa-header">
                             <i class="fas fa-arrow-left wa-header__back"></i>
                             <div class="wa-header__contact">
-                                <img src="/images/cliente-1.jpg" alt="Rodrigo" width="1024" height="1536" loading="lazy" decoding="async" class="wa-header__avatar">
+                                <img src="/images/cliente-1.jpg" alt="Rodrigo" width="800" height="1200" loading="lazy" decoding="async" class="wa-header__avatar">
                                 <div class="wa-header__online"></div>
                             </div>
                             <div class="wa-header__info">
@@ -526,7 +526,7 @@ export const pageHTML = `
                                     <p data-i18n="wa.1.s1">Sinto que sou o único que se importa com a empresa. Deleguei e tudo saiu errado.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-1.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
+                                <img src="/images/cliente-1.jpg" alt="" width="800" height="1200" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
                                 <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
@@ -541,7 +541,7 @@ export const pageHTML = `
                                     <p data-i18n="wa.1.s2">Minha equipe só apaga incêndio. Ninguém pensa estrategicamente.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-1.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
+                                <img src="/images/cliente-1.jpg" alt="" width="800" height="1200" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
                                 <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
@@ -580,7 +580,7 @@ export const pageHTML = `
                         <div class="wa-header">
                             <i class="fas fa-arrow-left wa-header__back"></i>
                             <div class="wa-header__contact">
-                                <img src="/images/cliente-2.jpg" alt="Gustavo" width="1024" height="1536" loading="lazy" decoding="async" class="wa-header__avatar">
+                                <img src="/images/cliente-2.jpg" alt="Gustavo" width="800" height="1200" loading="lazy" decoding="async" class="wa-header__avatar">
                                 <div class="wa-header__online"></div>
                             </div>
                             <div class="wa-header__info">
@@ -601,7 +601,7 @@ export const pageHTML = `
                                     <p data-i18n="wa.2.s1">Comprei ERP, implantei OKR, contratei consultoria... nada mudou de verdade.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-2.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
+                                <img src="/images/cliente-2.jpg" alt="" width="800" height="1200" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
                                 <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
@@ -616,7 +616,7 @@ export const pageHTML = `
                                     <p data-i18n="wa.2.s2">Faturamento sobe e desce todo mês. Não tenho previsibilidade nenhuma.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-2.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
+                                <img src="/images/cliente-2.jpg" alt="" width="800" height="1200" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
                                 <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
@@ -653,7 +653,7 @@ export const pageHTML = `
                         <div class="wa-header">
                             <i class="fas fa-arrow-left wa-header__back"></i>
                             <div class="wa-header__contact">
-                                <img src="/images/cliente-3.jpg" alt="Gabriel" width="1024" height="1536" loading="lazy" decoding="async" class="wa-header__avatar">
+                                <img src="/images/cliente-3.jpg" alt="Gabriel" width="800" height="1200" loading="lazy" decoding="async" class="wa-header__avatar">
                                 <div class="wa-header__online"></div>
                             </div>
                             <div class="wa-header__info">
@@ -674,7 +674,7 @@ export const pageHTML = `
                                     <p data-i18n="wa.3.s1">Ninguém veste a camisa. Processos existem só no papel.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-3.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
+                                <img src="/images/cliente-3.jpg" alt="" width="800" height="1200" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
                                 <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
@@ -689,7 +689,7 @@ export const pageHTML = `
                                     <p data-i18n="wa.3.s2">Já tentei padronizar mas ninguém segue. Não sei nem se estão fazendo certo.</p>
                                     <span class="wa-bubble__meta"><i class="fas fa-check-double"></i></span>
                                 </div>
-                                <img src="/images/cliente-3.jpg" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-row__avatar">
+                                <img src="/images/cliente-3.jpg" alt="" width="800" height="1200" loading="lazy" decoding="async" class="wa-row__avatar">
                             </div>
                             <div class="wa-row wa-row--left wa-row--hidden">
                                 <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
@@ -1202,7 +1202,7 @@ export const pageHTML = `
                     } else {
                         el.style.alignSelf = 'flex-end';
                         el.style.flexDirection = 'row-reverse';
-                        el.innerHTML = '<img src="' + clientSrc + '" alt="" width="1024" height="1536" loading="lazy" decoding="async" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
+                        el.innerHTML = '<img src="' + clientSrc + '" alt="" width="800" height="1200" loading="lazy" decoding="async" class="wa-typing__pic"><div class="wa-typing__bubble"><span></span><span></span><span></span></div>';
                         if (statusEl) statusEl.textContent = 'online';
                     }
                     chat.appendChild(el);
@@ -3367,18 +3367,18 @@ export const pageHTML = `
 
             <div class="gallery3d" id="gallery3d">
                 <div class="gallery3d__track" id="gallery3d-track">
-                    <div class="gallery3d__card"><a href="/agentes/estrategista"><img src="/images/agente-estrategista.png" alt="Estrategista" width="1200" height="2152" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-chess-king"></i></div><h3>Estrategista</h3><p>SWOT, BSC e planejamento estratégico</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/processos"><img src="/images/agente-processos.jpg" alt="Processos" width="1024" height="1750" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-sitemap"></i></div><h3>Processos</h3><p>Mapeamento, playbooks e automação</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/pessoas"><img src="/images/agente-pessoas.png" alt="Pessoas" width="1024" height="1750" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-users"></i></div><h3>Pessoas</h3><p>Cargos, desempenho e PDIs</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/treinamento"><img src="/images/agente-treinamento.jpg" alt="Treinamento" width="1024" height="1750" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-graduation-cap"></i></div><h3>Treinamento</h3><p>Microlearning e trilhas via WhatsApp</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/indicadores"><img src="/images/agente-indicadores.jpg" alt="Indicadores" width="1024" height="1750" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-chart-line"></i></div><h3>Indicadores</h3><p>KPIs em tempo real e causa raiz</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/pesquisa"><img src="/images/agente-pesquisa.jpg" alt="Pesquisa" width="1024" height="1750" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-magnifying-glass-chart"></i></div><h3>Pesquisa</h3><p>Clima, formulários e insights</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/riscos"><img src="/images/agente-riscos.jpg" alt="Riscos" width="1024" height="1750" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-shield-halved"></i></div><h3>Riscos</h3><p>Mitigação e prevenção contínua</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/oportunidades"><img src="/images/agente-oportunidades.jpg" alt="Oportunidades" width="1024" height="1750" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-lightbulb"></i></div><h3>Oportunidades</h3><p>Mercado, parcerias e expansão</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/problemas"><img src="/images/agente-problemas.jpg" alt="Problemas" width="1024" height="1750" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-triangle-exclamation"></i></div><h3>Problemas</h3><p>Não-conformidades e PDCA</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/documentos"><img src="/images/agente-documentos.jpg" alt="Documentos" width="1024" height="1750" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-file-lines"></i></div><h3>Documentos</h3><p>Padronização e controle</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/vendas"><img src="/images/agente-vendas.jpg" alt="Vendas" width="1024" height="1750" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-handshake"></i></div><h3>Vendas</h3><p>CRM, funil e coaching comercial</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/reunioes"><img src="/images/agente-reunioes.jpg" alt="Reuniões" width="1024" height="1750" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-video"></i></div><h3>Reuniões</h3><p>Transcrição e planos de ação</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/estrategista"><img src="/images/agente-estrategista.png" alt="Estrategista" width="512" height="918" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-chess-king"></i></div><h3>Estrategista</h3><p>SWOT, BSC e planejamento estratégico</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/processos"><img src="/images/agente-processos.jpg" alt="Processos" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-sitemap"></i></div><h3>Processos</h3><p>Mapeamento, playbooks e automação</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/pessoas"><img src="/images/agente-pessoas.png" alt="Pessoas" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-users"></i></div><h3>Pessoas</h3><p>Cargos, desempenho e PDIs</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/treinamento"><img src="/images/agente-treinamento.jpg" alt="Treinamento" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-graduation-cap"></i></div><h3>Treinamento</h3><p>Microlearning e trilhas via WhatsApp</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/indicadores"><img src="/images/agente-indicadores.jpg" alt="Indicadores" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-chart-line"></i></div><h3>Indicadores</h3><p>KPIs em tempo real e causa raiz</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/pesquisa"><img src="/images/agente-pesquisa.jpg" alt="Pesquisa" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-magnifying-glass-chart"></i></div><h3>Pesquisa</h3><p>Clima, formulários e insights</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/riscos"><img src="/images/agente-riscos.jpg" alt="Riscos" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-shield-halved"></i></div><h3>Riscos</h3><p>Mitigação e prevenção contínua</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/oportunidades"><img src="/images/agente-oportunidades.jpg" alt="Oportunidades" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-lightbulb"></i></div><h3>Oportunidades</h3><p>Mercado, parcerias e expansão</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/problemas"><img src="/images/agente-problemas.jpg" alt="Problemas" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-triangle-exclamation"></i></div><h3>Problemas</h3><p>Não-conformidades e PDCA</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/documentos"><img src="/images/agente-documentos.jpg" alt="Documentos" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-file-lines"></i></div><h3>Documentos</h3><p>Padronização e controle</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/vendas"><img src="/images/agente-vendas.jpg" alt="Vendas" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-handshake"></i></div><h3>Vendas</h3><p>CRM, funil e coaching comercial</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="/agentes/reunioes"><img src="/images/agente-reunioes.jpg" alt="Reuniões" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-video"></i></div><h3>Reuniões</h3><p>Transcrição e planos de ação</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
                 </div>
             </div>
 

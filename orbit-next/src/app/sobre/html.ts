@@ -189,7 +189,7 @@ export const pageHTML = `
                             </div>
                         </div>
                         <div class="origin-director-card">
-                            <div class="origin-director-card__avatar"><img src="/images/diretor-dani.png" alt="Dani Albuquerque" loading="lazy" decoding="async"></div>
+                            <div class="origin-director-card__avatar"><img src="/images/diretor-dani.jpg" alt="Dani Albuquerque" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Dani Albuquerque</h3>
                                 <p>Diretora de Operações. Responsável pela entrega e qualidade — garante resultado mensurável para cada cliente.</p>
@@ -199,7 +199,7 @@ export const pageHTML = `
                             </div>
                         </div>
                         <div class="origin-director-card">
-                            <div class="origin-director-card__avatar"><img src="/images/diretor-chris.png" alt="Christian Hart" loading="lazy" decoding="async"></div>
+                            <div class="origin-director-card__avatar"><img src="/images/diretor-chris.jpg" alt="Christian Hart" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Christian Hart</h3>
                                 <p>Diretor de Produto. Lidera o desenvolvimento da plataforma e a evolução dos 12 agentes de IA.</p>
@@ -209,7 +209,7 @@ export const pageHTML = `
                             </div>
                         </div>
                         <div class="origin-director-card">
-                            <div class="origin-director-card__avatar"><img src="/images/diretor-rodrigo.png" alt="Rodrigo Furniel" loading="lazy" decoding="async"></div>
+                            <div class="origin-director-card__avatar"><img src="/images/diretor-rodrigo.jpg" alt="Rodrigo Furniel" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Rodrigo Furniel</h3>
                                 <p>Diretor de Vendas. Responsável pela expansão comercial, canais e parcerias estratégicas.</p>
