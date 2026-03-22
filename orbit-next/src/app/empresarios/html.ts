@@ -2931,7 +2931,7 @@ export const pageHTML = `
                 <div class="origin-carousel">
                     <div class="origin-carousel__track" id="originCarouselTrack">
                         <div class="origin-director-card">
-                            <div class="origin-director-card__avatar">IG</div>
+                            <div class="origin-director-card__avatar"><img src="/images/diretor-igor.jpg" alt="Igor Furniel" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Igor Furniel</h3>
                                 <p>Fundador e CEO do Grupo GSN. 30 anos liderando operações de gestão e consultoria em milhares de empresas.</p>
@@ -2941,7 +2941,7 @@ export const pageHTML = `
                             </div>
                         </div>
                         <div class="origin-director-card">
-                            <div class="origin-director-card__avatar">DA</div>
+                            <div class="origin-director-card__avatar"><img src="/images/diretor-dani.png" alt="Dani Albuquerque" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Dani Albuquerque</h3>
                                 <p>Diretora de Operações. Responsável pela entrega e qualidade — garante resultado mensurável para cada cliente.</p>
@@ -2951,7 +2951,7 @@ export const pageHTML = `
                             </div>
                         </div>
                         <div class="origin-director-card">
-                            <div class="origin-director-card__avatar">CH</div>
+                            <div class="origin-director-card__avatar"><img src="/images/diretor-chris.png" alt="Christian Hart" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Christian Hart</h3>
                                 <p>Diretor de Produto. Lidera o desenvolvimento da plataforma e a evolução dos 12 agentes de IA.</p>
@@ -2961,7 +2961,7 @@ export const pageHTML = `
                             </div>
                         </div>
                         <div class="origin-director-card">
-                            <div class="origin-director-card__avatar">RO</div>
+                            <div class="origin-director-card__avatar"><img src="/images/diretor-rodrigo.png" alt="Rodrigo Furniel" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Rodrigo Furniel</h3>
                                 <p>Diretor de Vendas. Responsável pela expansão comercial, canais e parcerias estratégicas.</p>
@@ -2971,7 +2971,7 @@ export const pageHTML = `
                             </div>
                         </div>
                         <div class="origin-director-card">
-                            <div class="origin-director-card__avatar">OM</div>
+                            <div class="origin-director-card__avatar"><img src="/images/diretor-omar.jpg" alt="Omar" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Omar</h3>
                                 <p>Diretor de Tecnologia. Arquiteto da infraestrutura que garante performance, segurança e escala.</p>
@@ -3045,23 +3045,16 @@ export const pageHTML = `
             }
             .origin-director-card__avatar {
                 width: 100%;
-                height: 240px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 72px;
-                font-weight: 900;
-                color: rgba(255,255,255,0.06);
+                height: 300px;
+                overflow: hidden;
                 background: linear-gradient(145deg, #1F2937 0%, #111827 100%);
                 position: relative;
             }
-            .origin-director-card__avatar::after {
-                content: attr(data-initials);
-                position: absolute;
-                font-size: 180px;
-                font-weight: 900;
-                color: rgba(255,255,255,0.03);
-                letter-spacing: -8px;
+            .origin-director-card__avatar img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: top center;
             }
             .origin-director-card__info {
                 padding: 28px 28px 24px;
