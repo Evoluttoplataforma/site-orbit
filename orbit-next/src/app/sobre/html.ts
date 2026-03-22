@@ -397,11 +397,19 @@ export const pageHTML = `
 
         <script>
         (function() {
-            var cards = document.querySelectorAll('.origin-director-card');
+            var track = document.getElementById('originCarouselTrack');
+            if (!track || track.dataset.init) return;
+            track.dataset.init = '1';
+
+            var cards = track.querySelectorAll('.origin-director-card');
             var dotsContainer = document.getElementById('originDots');
             var prevBtn = document.getElementById('originPrev');
             var nextBtn = document.getElementById('originNext');
             if (!cards.length || !dotsContainer) return;
+
+            // Clear any previous state
+            dotsContainer.innerHTML = '';
+            for (var j = 0; j < cards.length; j++) cards[j].classList.remove('active');
 
             var current = 0;
             var total = cards.length;
