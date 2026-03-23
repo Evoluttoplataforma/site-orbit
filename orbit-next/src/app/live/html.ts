@@ -267,12 +267,25 @@ export const pageHTML = `
     })();
     </script>
 
-    <!-- Live pulse animation + responsive -->
+    <!-- Reveal + pulse + responsive -->
     <style>
+    /* Force all content visible on this page */
+    [data-reveal], [data-reveal-stagger] {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
     @keyframes livePulse {
         0%, 100% { opacity: 1; transform: scale(1); }
         50% { opacity: 0.4; transform: scale(0.85); }
     }
+
+    /* Form card enhancements */
+    .cta-form-card {
+        border: 1px solid rgba(255,186,26,0.15) !important;
+        box-shadow: 0 0 40px rgba(255,186,26,0.05);
+    }
+
     @media (max-width: 640px) {
         #liveCountdown {
             gap: 8px !important;
