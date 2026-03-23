@@ -254,15 +254,13 @@ export const pageHTML = `
             e.preventDefault();
             var formData = new FormData(form);
             var data = {
-                name: formData.get('name'),
+                nome: formData.get('nome'),
                 email: formData.get('email'),
-                phone: formData.get('phone'),
+                telefone: formData.get('telefone'),
                 source: 'live-24-03'
             };
             console.log('Lead capturado:', data);
-            form.style.display = 'none';
-            var success = document.getElementById('liveFormSuccess');
-            if (success) success.style.display = 'block';
+            window.location.href = '/live/obrigado';
         });
     })();
     </script>
