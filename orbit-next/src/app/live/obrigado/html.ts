@@ -239,13 +239,33 @@ export const pageHTML = `
         75% { transform: translateY(-30px) translateX(5px); }
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 768px) {
+        .container { padding: 0 20px !important; }
+        #checkCircle {
+            width: 90px !important;
+            height: 90px !important;
+        }
+        #checkCircle i {
+            font-size: 36px !important;
+        }
         #miniCountdown > div {
             min-width: 60px !important;
             padding: 10px 8px !important;
         }
-        #miniCountdown span:first-child {
+        #miniCountdown > div > span:first-child {
             font-size: 1.4rem !important;
+        }
+    }
+    @media (max-width: 420px) {
+        #miniCountdown > div {
+            min-width: 52px !important;
+            padding: 8px 6px !important;
+        }
+        #miniCountdown > div > span:first-child {
+            font-size: 1.2rem !important;
+        }
+        #miniCountdown > div > span:last-child {
+            font-size: 10px !important;
         }
     }
     </style>

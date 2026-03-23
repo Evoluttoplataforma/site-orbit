@@ -284,16 +284,36 @@ export const pageHTML = `
         box-shadow: 0 0 40px rgba(255,186,26,0.05);
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 768px) {
+        .lp-hero .container { padding: 0 20px !important; }
         #liveCountdown {
             gap: 8px !important;
         }
         #liveCountdown > div {
-            min-width: 70px !important;
-            padding: 14px 10px !important;
+            min-width: 65px !important;
+            padding: 14px 8px !important;
         }
-        #liveCountdown span:first-child {
-            font-size: 1.8rem !important;
+        #liveCountdown > div > span:first-child {
+            font-size: 1.6rem !important;
+        }
+        .cta-form-card {
+            padding: 24px 20px !important;
+        }
+        .btn-lg {
+            font-size: 15px !important;
+            padding: 14px 24px !important;
+        }
+    }
+    @media (max-width: 420px) {
+        #liveCountdown > div {
+            min-width: 58px !important;
+            padding: 10px 6px !important;
+        }
+        #liveCountdown > div > span:first-child {
+            font-size: 1.3rem !important;
+        }
+        #liveCountdown > div > span:last-child {
+            font-size: 10px !important;
         }
     }
     </style>
