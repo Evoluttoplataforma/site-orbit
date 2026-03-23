@@ -80,22 +80,6 @@ export const pageHTML = `
                 </div>
             </div>
 
-            <!-- Share / CTA -->
-            <div class="fade-in fade-in-delay-5" style="display:flex;flex-direction:column;align-items:center;gap:16px;">
-                <p style="color:#8B949E;font-size:15px;">Compartilhe com quem precisa transformar a gestão:</p>
-                <div style="display:flex;gap:12px;">
-                    <a onclick="window.open('https://api.whatsapp.com/send?text='+encodeURIComponent('Live: A Nova Era da Gestão — Como resolver problemas de gestão e processos com IA. 24/03 às 13h no YouTube. Inscreva-se: '+window.location.origin+'/live'),'_blank')" style="width:48px;height:48px;background:rgba(63,185,80,0.12);border:1px solid rgba(63,185,80,0.3);border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.2s;" onmouseenter="this.style.transform='scale(1.1)'" onmouseleave="this.style.transform='scale(1)'">
-                        <i class="fa-brands fa-whatsapp" style="color:#3FB950;font-size:22px;"></i>
-                    </a>
-                    <a onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(window.location.origin+'/live'),'_blank')" style="width:48px;height:48px;background:rgba(10,102,194,0.12);border:1px solid rgba(10,102,194,0.3);border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.2s;" onmouseenter="this.style.transform='scale(1.1)'" onmouseleave="this.style.transform='scale(1)'">
-                        <i class="fa-brands fa-linkedin-in" style="color:#0A66C2;font-size:22px;"></i>
-                    </a>
-                    <a onclick="navigator.clipboard.writeText(window.location.origin+'/live');this.querySelector('i').className='fa-solid fa-check';var el=this;setTimeout(function(){el.querySelector('i').className='fa-solid fa-link'},2000)" style="width:48px;height:48px;background:rgba(255,186,26,0.12);border:1px solid rgba(255,186,26,0.3);border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform 0.2s;" onmouseenter="this.style.transform='scale(1.1)'" onmouseleave="this.style.transform='scale(1)'">
-                        <i class="fa-solid fa-link" style="color:#ffba1a;font-size:20px;"></i>
-                    </a>
-                </div>
-            </div>
-
             <!-- Back link -->
             <a href="/live" class="fade-in fade-in-delay-5" style="display:inline-block;margin-top:48px;color:#8B949E;font-size:14px;text-decoration:underline;text-underline-offset:4px;">
                 <i class="fa-solid fa-arrow-left" style="margin-right:6px;"></i>Voltar para a página da live
