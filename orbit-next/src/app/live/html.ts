@@ -177,15 +177,15 @@ export const pageHTML = `
                 <form id="liveForm" class="lead-form" novalidate>
                     <div class="form-group">
                         <label for="live-nome" style="color:#C9D1D9;">Nome completo *</label>
-                        <input type="text" id="live-nome" name="nome" placeholder="Seu nome completo" required style="color:#fff;">
+                        <input type="text" id="live-nome" name="nome" placeholder="Seu nome completo" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
                     </div>
                     <div class="form-group">
                         <label for="live-email" style="color:#C9D1D9;">E-mail *</label>
-                        <input type="email" id="live-email" name="email" placeholder="seu@email.com" required style="color:#fff;">
+                        <input type="email" id="live-email" name="email" placeholder="seu@email.com" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
                     </div>
                     <div class="form-group">
                         <label for="live-telefone" style="color:#C9D1D9;">WhatsApp *</label>
-                        <input type="tel" id="live-telefone" name="telefone" placeholder="(00) 00000-0000" required style="color:#fff;">
+                        <input type="tel" id="live-telefone" name="telefone" placeholder="(00) 00000-0000" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-submit hero-cta-glow" style="cursor:pointer;border:none;">
                         <i class="fa-brands fa-youtube" style="margin-right:8px;"></i>QUERO PARTICIPAR DA LIVE
