@@ -88,7 +88,7 @@ export const pageHTML = `
 
             <!-- CTA -->
             <div style="margin-top:8px;" data-reveal>
-                <a href="#inscreva-se" class="btn btn-primary btn-lg hero-cta-glow" style="font-size:18px;padding:18px 48px;">
+                <a onclick="document.getElementById('inscreva-se').scrollIntoView({behavior:'smooth'})" class="btn btn-primary btn-lg hero-cta-glow" style="font-size:18px;padding:18px 48px;cursor:pointer;">
                     <i class="fa-brands fa-youtube" style="margin-right:8px;"></i>QUERO PARTICIPAR DA LIVE
                 </a>
                 <p style="color:#8B949E;font-size:14px;margin-top:16px;">
