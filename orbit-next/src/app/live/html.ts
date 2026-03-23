@@ -248,10 +248,18 @@ export const pageHTML = `
     <!-- Form submit handler -->
     <script>
     (function() {
+        var SUPABASE_URL = 'https://tnpzoklepkvktbqouctf.supabase.co';
+        var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRucHpva2xlcGt2a3RicW91Y3RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2MjAxNjcsImV4cCI6MjA4NzE5NjE2N30.hXrOhbIm9DnxaItT1e9g6B6d9mhAmeoLKJ2DuHlABFU';
+
         var form = document.getElementById('liveForm');
         if (!form) return;
+
         form.addEventListener('submit', function(e) {
             e.preventDefault();
+            var btn = form.querySelector('button[type="submit"]');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="margin-right:8px;"></i>Enviando...';
+
             var formData = new FormData(form);
             var data = {
                 nome: formData.get('nome'),
@@ -259,8 +267,28 @@ export const pageHTML = `
                 telefone: formData.get('telefone'),
                 source: 'live-24-03'
             };
-            console.log('Lead capturado:', data);
-            window.location.href = '/live/obrigado';
+
+            fetch(SUPABASE_URL + '/rest/v1/live_orbit_leads', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': 'Bearer ' + SUPABASE_KEY,
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify(data)
+            }).then(function(res) {
+                if (res.ok) {
+                    window.location.href = '/live/obrigado';
+                } else {
+                    throw new Error('Erro ao salvar');
+                }
+            }).catch(function(err) {
+                console.error('Erro:', err);
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-brands fa-youtube" style="margin-right:8px;"></i>QUERO PARTICIPAR DA LIVE';
+                alert('Erro ao enviar. Tente novamente.');
+            });
         });
     })();
     </script>
