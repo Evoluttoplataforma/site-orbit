@@ -169,28 +169,28 @@ export const pageHTML = `
             </p>
 
             <div class="cta-form-card" data-reveal>
-                <div class="form-card-header" style="text-align:center;">
-                    <h3><i class="fa-brands fa-youtube" style="color:#ff0000;margin-right:8px;"></i>Inscreva-se gratuitamente</h3>
-                    <p>Preencha abaixo e receba o link da live no seu e-mail.</p>
+                <div style="text-align:center;margin-bottom:24px;">
+                    <h3 style="font-size:22px;font-weight:700;color:#fff;margin-bottom:6px;"><i class="fa-brands fa-youtube" style="color:#ff0000;margin-right:8px;"></i>Inscreva-se gratuitamente</h3>
+                    <p style="font-size:14px;color:#8B949E;">Preencha abaixo e receba o link da live no seu e-mail.</p>
                 </div>
 
                 <form id="liveForm" class="lead-form" novalidate>
                     <div class="form-group">
-                        <label for="live-nome">Nome completo *</label>
-                        <input type="text" id="live-nome" name="nome" placeholder="Seu nome completo" required>
+                        <label for="live-nome" style="color:#C9D1D9;">Nome completo *</label>
+                        <input type="text" id="live-nome" name="nome" placeholder="Seu nome completo" required style="color:#fff;">
                     </div>
                     <div class="form-group">
-                        <label for="live-email">E-mail *</label>
-                        <input type="email" id="live-email" name="email" placeholder="seu@email.com" required>
+                        <label for="live-email" style="color:#C9D1D9;">E-mail *</label>
+                        <input type="email" id="live-email" name="email" placeholder="seu@email.com" required style="color:#fff;">
                     </div>
                     <div class="form-group">
-                        <label for="live-telefone">WhatsApp *</label>
-                        <input type="tel" id="live-telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                        <label for="live-telefone" style="color:#C9D1D9;">WhatsApp *</label>
+                        <input type="tel" id="live-telefone" name="telefone" placeholder="(00) 00000-0000" required style="color:#fff;">
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-submit hero-cta-glow" style="cursor:pointer;border:none;">
                         <i class="fa-brands fa-youtube" style="margin-right:8px;"></i>QUERO PARTICIPAR DA LIVE
                     </button>
-                    <p style="color:var(--gray-500);font-size:13px;text-align:center;margin-top:8px;">
+                    <p style="color:#8B949E;font-size:13px;text-align:center;margin-top:8px;">
                         <i class="fa-solid fa-lock" style="margin-right:6px;"></i>Seus dados estão seguros. Não enviamos spam.
                     </p>
                 </form>
