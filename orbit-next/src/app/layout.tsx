@@ -12,7 +12,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Orbit - Contrate um time de IA que executa",
   description: "Gestão Operada por IA com consultoria recorrente passiva. Dezenas de agentes especializados constroem e operam a gestão da sua empresa 24/7.",
-  icons: { icon: '/images/favicon.svg' },
+  icons: { icon: '/images/favicon.png' },
 };
 
 export default function RootLayout({
