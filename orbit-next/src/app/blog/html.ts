@@ -217,8 +217,72 @@ export const pageHTML = `
         });
     });
 
+    // ── Single article view ──
+    function renderSingleArticle(article) {
+        var categoryLabel = CATEGORIES[article.category] || article.category;
+        var date = formatDate(article.published_at || article.created_at);
+        var container = document.querySelector('.blog-grid-section');
+        var filtersEl = document.querySelector('.blog-filters');
+        if (filtersEl) filtersEl.style.display = 'none';
+
+        container.innerHTML = '<div class="container" style="max-width:780px;padding:60px 20px 100px;">' +
+            '<a href="/blog" style="display:inline-flex;align-items:center;gap:8px;color:#ffba1a;font-size:14px;margin-bottom:32px;text-decoration:none;"><i class="fas fa-arrow-left"></i> Voltar ao Blog</a>' +
+            '<span style="display:inline-block;background:rgba(255,186,26,0.12);border:1px solid rgba(255,186,26,0.3);border-radius:100px;padding:6px 16px;color:#ffba1a;font-size:13px;font-weight:600;margin-bottom:20px;">' + escapeHtml(categoryLabel) + '</span>' +
+            '<h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:16px;">' + escapeHtml(article.title) + '</h1>' +
+            '<div style="display:flex;align-items:center;gap:20px;color:#8B949E;font-size:14px;flex-wrap:wrap;margin-bottom:40px;">' +
+                '<span><i class="fas fa-user" style="margin-right:6px;color:#ffba1a;"></i>' + escapeHtml(article.author) + '</span>' +
+                '<span><i class="fas fa-calendar-alt" style="margin-right:6px;color:#ffba1a;"></i>' + date + '</span>' +
+            '</div>' +
+            (article.cover_url ? '<img src="' + article.cover_url + '" alt="" style="width:100%;border-radius:16px;margin-bottom:40px;max-height:450px;object-fit:cover;">' : '') +
+            '<div class="blog-article-content" style="color:#C9D1D9;font-size:17px;line-height:1.8;">' + article.content + '</div>' +
+            '<div style="margin-top:60px;padding-top:40px;border-top:1px solid rgba(255,255,255,0.06);text-align:center;">' +
+                '<a href="/blog" class="btn btn-primary" style="padding:14px 40px;"><i class="fas fa-arrow-left" style="margin-right:8px;"></i>Voltar ao Blog</a>' +
+            '</div>' +
+        '</div>' +
+        '<style>' +
+            '.blog-article-content h2{font-size:1.5rem;font-weight:700;color:#fff;margin:40px 0 16px;}' +
+            '.blog-article-content h3{font-size:1.25rem;font-weight:700;color:#fff;margin:32px 0 12px;}' +
+            '.blog-article-content p{margin-bottom:20px;}' +
+            '.blog-article-content ul,.blog-article-content ol{margin:0 0 20px 24px;}' +
+            '.blog-article-content li{margin-bottom:8px;}' +
+            '.blog-article-content strong{color:#fff;}' +
+            '.blog-article-content a{color:#ffba1a;text-decoration:underline;}' +
+            '.blog-article-content img{border-radius:12px;margin:24px 0;}' +
+            '.blog-article-content blockquote{border-left:3px solid #ffba1a;padding:16px 24px;margin:24px 0;background:rgba(255,186,26,0.05);border-radius:0 12px 12px 0;}' +
+        '</style>';
+    }
+
+    async function fetchSingleArticle(slug) {
+        try {
+            var res = await fetch(SUPABASE_URL + '/rest/v1/blog_articles?slug=eq.' + slug + '&published=eq.true&limit=1', {
+                headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+            });
+            if (res.ok) {
+                var data = await res.json();
+                if (data[0]) {
+                    // Update hero title
+                    var heroTitle = document.querySelector('.blog-hero h1');
+                    if (heroTitle) heroTitle.innerHTML = escapeHtml(data[0].title);
+                    var heroDesc = document.querySelector('.blog-hero p');
+                    if (heroDesc) heroDesc.textContent = data[0].excerpt || '';
+                    renderSingleArticle(data[0]);
+                    return;
+                }
+            }
+        } catch(e) { console.error(e); }
+        // Fallback to blog list
+        await fetchArticles();
+        renderArticles();
+    }
+
     // ── Init ──
-    fetchArticles().then(renderArticles);
+    var pathParts = window.location.pathname.replace(/\\/$/, '').split('/');
+    var slug = pathParts.length > 2 ? pathParts.slice(2).join('/') : null;
+    if (slug) {
+        fetchSingleArticle(slug);
+    } else {
+        fetchArticles().then(renderArticles);
+    }
 
     // Mobile menu
     var toggle = document.querySelector('.menu-toggle');
