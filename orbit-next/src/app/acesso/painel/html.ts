@@ -953,10 +953,10 @@ export const pageHTML = `
     }
 
     // ── Init UI ──
-    function initUI() {
+    async function initUI() {
         if (!session) return;
 
-        const initials = session.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+        var initials = session.name.split(' ').map(function(w) { return w[0]; }).join('').toUpperCase().slice(0, 2);
         document.getElementById('userAvatar').textContent = initials;
         document.getElementById('userName').textContent = session.name;
         document.getElementById('userRole').textContent = session.role === 'admin' ? 'Admin Full' : 'Editor';
@@ -966,6 +966,9 @@ export const pageHTML = `
             document.getElementById('navUsers').style.display = 'flex';
         }
 
+        // Load data from Supabase
+        await refreshArticles();
+        await refreshUsers();
         refreshDashboard();
     }
 
@@ -1032,19 +1035,18 @@ export const pageHTML = `
 
     // ═══ DASHBOARD ═══
     function refreshDashboard() {
-        const db = getDB();
-        const articles = session.role === 'admin' ? db.articles : db.articles.filter(a => a.authorId === session.id);
-        const published = articles.filter(a => a.status === 'published');
-        const drafts = articles.filter(a => a.status === 'draft');
+        var articles = supabaseArticles || [];
+        var published = articles.filter(function(a) { return a.published; });
+        var drafts = articles.filter(function(a) { return !a.published; });
 
         document.getElementById('statTotal').textContent = articles.length;
         document.getElementById('statPublished').textContent = published.length;
         document.getElementById('statDrafts').textContent = drafts.length;
-        document.getElementById('statUsers').textContent = db.users.length;
-        document.getElementById('statPendingStories').textContent = (db.customerStories || []).filter(s => s.status === 'pending').length;
+        document.getElementById('statUsers').textContent = (supabaseUsers || []).length;
+        document.getElementById('statPendingStories').textContent = '0';
 
-        const tbody = document.getElementById('dashboardArticles');
-        const emptyEl = document.getElementById('dashboardEmpty');
+        var tbody = document.getElementById('dashboardArticles');
+        var emptyEl = document.getElementById('dashboardEmpty');
 
         if (articles.length === 0) {
             tbody.innerHTML = '';
@@ -1053,32 +1055,22 @@ export const pageHTML = `
         }
 
         emptyEl.style.display = 'none';
-        const recent = [...articles].sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)).slice(0, 5);
+        var recent = articles.slice(0, 5);
 
-        tbody.innerHTML = recent.map(a => {
-            const thumb = a.imageData || a.imageUrl || 'https://placehold.co/48x36/000/FDB73F?text=.';
-            return \`
-            <tr>
-                <td>
-                    <div class="article-title-cell">
-                        <img class="article-thumb" src="\${thumb}" alt="">
-                        <span>\${escapeHtml(a.title)}</span>
-                    </div>
-                </td>
-                <td>\${CATEGORIES[a.category] || a.category}</td>
-                <td><span class="badge badge-\${a.status}">\${a.status === 'published' ? 'Publicado' : 'Rascunho'}</span></td>
-                <td>\${formatDate(a.updatedAt)}</td>
-                <td>
-                    <div class="actions-cell">
-                        <button class="btn btn-secondary btn-icon btn-sm" onclick="viewArticle('\${a.id}')" title="Visualizar">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                        <button class="btn btn-secondary btn-icon btn-sm" onclick="editArticle('\${a.id}')" title="Editar">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                    </div>
-                </td>
-            </tr>\`;
+        tbody.innerHTML = recent.map(function(a) {
+            var thumb = a.cover_url || 'https://placehold.co/48x36/0D1117/ffba1a?text=.';
+            var statusLabel = a.published ? 'Publicado' : 'Rascunho';
+            var statusClass = a.published ? 'published' : 'draft';
+            return '<tr>' +
+                '<td><div class="article-title-cell"><img class="article-thumb" src="' + escapeHtml(thumb) + '" alt=""><span>' + escapeHtml(a.title) + '</span></div></td>' +
+                '<td>' + (CATEGORIES[a.category] || a.category) + '</td>' +
+                '<td><span class="badge badge-' + statusClass + '">' + statusLabel + '</span></td>' +
+                '<td>' + formatDate(a.updated_at) + '</td>' +
+                '<td><div class="actions-cell">' +
+                    '<button class="btn btn-secondary btn-icon btn-sm" onclick="viewArticle(' + a.id + ')" title="Visualizar"><i class="fas fa-eye"></i></button>' +
+                    '<button class="btn btn-secondary btn-icon btn-sm" onclick="editArticle(' + a.id + ')" title="Editar"><i class="fas fa-edit"></i></button>' +
+                '</div></td>' +
+            '</tr>';
         }).join('');
     }
 
@@ -1200,26 +1192,37 @@ export const pageHTML = `
         showView('editor');
     }
 
-    function duplicateArticle(id) {
-        const db = getDB();
-        const article = db.articles.find(a => a.id === id);
+    async function duplicateArticle(id) {
+        var article = supabaseArticles.find(function(a) { return a.id === id || a.id === Number(id); });
         if (!article) return;
 
-        const newArticle = {
-            ...article,
-            id: 'art_' + Date.now(),
-            title: article.title + ' (copia)',
-            slug: article.slug + '-copia',
-            status: 'draft',
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-            authorId: session.id
-        };
-
-        db.articles.push(newArticle);
-        setDB(db);
-        refreshArticles();
-        toast('Artigo duplicado como rascunho.');
+        try {
+            var res = await fetch(SUPABASE_URL + '/rest/v1/blog_articles', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': 'Bearer ' + session.access_token,
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify({
+                    title: article.title + ' (copia)',
+                    slug: article.slug + '-copia-' + Date.now(),
+                    content: article.content,
+                    excerpt: article.excerpt,
+                    cover_url: article.cover_url,
+                    category: article.category,
+                    author: article.author,
+                    published: false,
+                    published_at: null
+                })
+            });
+            if (res.ok) {
+                await refreshArticles();
+                refreshDashboard();
+                toast('Artigo duplicado como rascunho.');
+            } else { toast('Erro ao duplicar.', 'error'); }
+        } catch(e) { toast('Erro ao duplicar.', 'error'); }
     }
 
     function generateSlug() {
@@ -1659,32 +1662,30 @@ export const pageHTML = `
 
     // View article from list (opens preview modal for a saved article)
     function viewArticle(id) {
-        const db = getDB();
-        const article = db.articles.find(a => a.id === id);
+        var article = supabaseArticles.find(function(a) { return a.id === id || a.id === Number(id); });
         if (!article) return;
 
-        const imgSrc = article.imageData || article.imageUrl || '';
-        const categoryLabel = CATEGORIES[article.category] || article.category;
-        const previewHTML = \`
-            <div style="background:#000;margin:-24px -32px 0;padding:40px 32px 32px;text-align:center;border-radius:16px 16px 0 0;">
-                <span style="background:#ffba1a;color:#000;padding:4px 14px;border-radius:20px;font-size:0.7rem;font-weight:600;text-transform:uppercase;">\${escapeHtml(categoryLabel)}</span>
-                <h1 style="font-size:1.5rem;font-weight:700;color:#fff;margin:16px 0 8px;line-height:1.3;">\${escapeHtml(article.title)}</h1>
-                <p style="color:rgba(255,255,255,.5);font-size:0.82rem;">
-                    <i class="fas fa-calendar-alt"></i> \${formatDate(article.updatedAt)}
-                    &nbsp;&nbsp;<i class="fas fa-clock"></i> \${escapeHtml(article.readTime || '5 min')}
-                    &nbsp;&nbsp;<i class="fas fa-user"></i> \${escapeHtml(article.author || 'Equipe Orbit')}
-                </p>
-            </div>
-            \${imgSrc ? \`<img src="\${imgSrc}" style="width:100%;max-height:350px;object-fit:cover;border-radius:0 0 12px 12px;margin-bottom:24px;" alt="\${escapeHtml(article.title)}">\` : ''}
-            <div style="line-height:1.8;font-size:0.95rem;padding-top:\${imgSrc ? '0' : '24px'};">
-                \${article.content}
-            </div>
-            <div style="border-top:1px solid #eee;margin-top:24px;padding-top:16px;display:flex;gap:8px;flex-wrap:wrap;">
-                <span class="badge badge-\${article.status}" style="font-size:0.72rem;">\${article.status === 'published' ? 'Publicado' : 'Rascunho'}</span>
-                \${article.seoKeyword ? \`<span style="background:rgba(59,130,246,0.1);color:#3B82F6;padding:3px 10px;border-radius:20px;font-size:0.7rem;font-weight:500;">Keyword: \${escapeHtml(article.seoKeyword)}</span>\` : ''}
-                \${article.metaDesc ? \`<p style="font-size:0.78rem;color:#888;margin-top:8px;width:100%;"><strong>Meta:</strong> \${escapeHtml(article.metaDesc)}</p>\` : ''}
-            </div>
-        \`;
+        var imgSrc = article.cover_url || '';
+        var categoryLabel = CATEGORIES[article.category] || article.category;
+        var statusLabel = article.published ? 'Publicado' : 'Rascunho';
+        var statusClass = article.published ? 'published' : 'draft';
+        var previewHTML =
+            '<div style="background:#000;margin:-24px -32px 0;padding:40px 32px 32px;text-align:center;border-radius:16px 16px 0 0;">' +
+                '<span style="background:#ffba1a;color:#000;padding:4px 14px;border-radius:20px;font-size:0.7rem;font-weight:600;text-transform:uppercase;">' + escapeHtml(categoryLabel) + '</span>' +
+                '<h1 style="font-size:1.5rem;font-weight:700;color:#fff;margin:16px 0 8px;line-height:1.3;">' + escapeHtml(article.title) + '</h1>' +
+                '<p style="color:rgba(255,255,255,.5);font-size:0.82rem;">' +
+                    '<i class="fas fa-calendar-alt"></i> ' + formatDate(article.updated_at) +
+                    '&nbsp;&nbsp;<i class="fas fa-user"></i> ' + escapeHtml(article.author || 'Equipe Orbit') +
+                '</p>' +
+            '</div>' +
+            (imgSrc ? '<img src="' + imgSrc + '" style="width:100%;max-height:350px;object-fit:cover;border-radius:0 0 12px 12px;margin-bottom:24px;" alt="' + escapeHtml(article.title) + '">' : '') +
+            '<div style="line-height:1.8;font-size:0.95rem;padding-top:' + (imgSrc ? '0' : '24px') + ';">' +
+                article.content +
+            '</div>' +
+            '<div style="border-top:1px solid #eee;margin-top:24px;padding-top:16px;">' +
+                '<span class="badge badge-' + statusClass + '" style="font-size:0.72rem;">' + statusLabel + '</span>' +
+                (article.excerpt ? '<p style="font-size:0.78rem;color:#888;margin-top:8px;"><strong>Resumo:</strong> ' + escapeHtml(article.excerpt) + '</p>' : '') +
+            '</div>';
 
         document.getElementById('previewContent').innerHTML = previewHTML;
         document.getElementById('previewModal').classList.add('active');
