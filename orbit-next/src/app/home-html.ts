@@ -23,10 +23,10 @@ export const pageHTML = `
                         <span class="hero-rotate__word" data-i18n="hero.w5">nunca para.</span>
                     </span>
                 </h1>
-                <p class="hero-zoom__subtitle" data-i18n="hero.subtitle">Gestão Operada por IA: 12 agentes especializados constroem e operam a gestão da sua empresa trabalhando 24/7, mesmo quando o projeto acaba.</p>
+                <p class="hero-zoom__subtitle" data-i18n="hero.subtitle">Gestão Operada por IA: Dezenas de agentes especializados constroem e operam a gestão da sua empresa trabalhando 24/7, mesmo quando o projeto acaba.</p>
                 <div class="hero-zoom__ctas">
                     <a href="#contato-form" class="btn btn-primary btn-lg hero-cta-glow">QUERO CONHECER O TIME DE IA</a>
-                    <a href="#agentes" class="btn btn-ghost btn-lg">Ver os 12 agentes <i class="fas fa-arrow-down"></i></a>
+                    <a href="#agentes" class="btn btn-ghost btn-lg">Ver os agentes <i class="fas fa-arrow-down"></i></a>
                 </div>
                 <p class="hero-zoom__note">⏱️ 2 min • 100% gratuito • Sem compromisso</p>
                 <div class="hero-zoom__credentials">
@@ -55,8 +55,8 @@ export const pageHTML = `
     <section class="one-platform" id="plataforma">
         <div class="container">
             <div class="one-platform__header" data-reveal>
-                <h2>12 agentes. <span class="highlight">Um time completo.</span></h2>
-                <p data-i18n="platform.subtitle">12 agentes. Um cérebro que conecta tudo e traduz dados em decisão.</p>
+                <h2>Dezenas de agentes. <span class="highlight">Um time completo.</span></h2>
+                <p data-i18n="platform.subtitle">Dezenas de agentes. Um cérebro que conecta tudo e traduz dados em decisão.</p>
             </div>
 
             <!-- Dock macOS-style: 12 agents -->
@@ -395,7 +395,7 @@ export const pageHTML = `
                     <div class="pq-card__content">
                         <div class="pq-card__icon"><i class="fas fa-building"></i></div>
                         <h3 data-i18n="pq.c1.title">Empresários</h3>
-                        <p data-i18n="pq.c1.desc">Um time de IA que opera sua empresa 24/7. 12 agentes especializados.</p>
+                        <p data-i18n="pq.c1.desc">Um time de IA que opera sua empresa 24/7. Dezenas de agentes especializados.</p>
                         <span class="pq-card__link"><span data-i18n="pq.learn">Saiba mais</span> <i class="fas fa-arrow-right"></i></span>
                     </div>
                 </a>
@@ -547,7 +547,7 @@ export const pageHTML = `
                                 <img src="/images/olivia.png" alt="" width="1200" height="1801" loading="lazy" decoding="async" class="wa-row__avatar">
                                 <div class="wa-bubble wa-bubble--dark">
                                     <span class="wa-bubble__sender">Olívia - Orbit</span>
-                                    <p data-i18n="wa.1.r2">Me dá 7 dias. Vou montar o diagnóstico e colocar meus <strong>12 agentes</strong> pra trabalhar. Você vai sentir a diferença na primeira semana. ✨</p>
+                                    <p data-i18n="wa.1.r2">Me dá 7 dias. Vou montar o diagnóstico e colocar meus <strong>agentes</strong> pra trabalhar. Você vai sentir a diferença na primeira semana. ✨</p>
                                     <span class="wa-bubble__meta"></span>
                                 </div>
                             </div>
@@ -1379,7 +1379,7 @@ export const pageHTML = `
 
                         <div class="reframe-orbit-card">
                             <div class="reframe-orbit-card__text">
-                                <h4>12 agentes de IA trabalham por você</h4>
+                                <h4>Dezenas de agentes de IA trabalham por você</h4>
                                 <p>Mapeiam processos, monitoram indicadores, treinam equipes. Sem parar.</p>
                             </div>
                             <div class="reframe-orbit-card__scene">
@@ -1508,7 +1508,7 @@ export const pageHTML = `
                 <div>
                     <span class="section-badge">Conheça a líder do time</span>
                     <h2 style="font-size:2.25rem;font-weight:800;color:#fff;margin:16px 0;">Olívia, sua <span style="color:#ffba1a;">Coordenadora de IA</span></h2>
-                    <p style="color:#C9D1D9;font-size:1.1rem;line-height:1.7;margin-bottom:20px;">Olívia é a especialista em IA do Orbit e a voz do sistema para sua empresa. Ela coordena os 12 agentes, conecta dados de todos os departamentos e traduz complexidade em clareza para a tomada de decisão.</p>
+                    <p style="color:#C9D1D9;font-size:1.1rem;line-height:1.7;margin-bottom:20px;">Olívia é a especialista em IA do Orbit e a voz do sistema para sua empresa. Ela coordena dezenas de agentes, conecta dados de todos os departamentos e traduz complexidade em clareza para a tomada de decisão.</p>
                     <p style="color:#8B949E;font-size:1rem;line-height:1.7;margin-bottom:24px;">Quando o Agente de Riscos detecta uma ameaça, é a Olívia que cruza com o Agente de Oportunidades e apresenta o cenário completo. Humana o suficiente para criar vínculo. Inteligente o suficiente para gerar valor real.</p>
                     <div style="background:#1C2333;border-left:3px solid #ffba1a;padding:20px 24px;border-radius:0 12px 12px 0;">
                         <p style="color:#C9D1D9;font-style:italic;margin:0;">"Bom dia! Analisei os dados da semana. Três pontos precisam da sua atenção: margem caiu 2%, o time comercial bateu recorde, e temos uma oportunidade no segmento B que ninguém está olhando. Vamos resolver?"</p>
@@ -1520,18 +1520,18 @@ export const pageHTML = `
                     <h3 style="color:#fff;font-size:1.5rem;margin-bottom:8px;">Olívia</h3>
                     <p style="color:#ffba1a;font-size:0.95rem;margin-bottom:16px;">Coordenadora Geral de IA</p>
                     <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
-                        <span style="background:rgba(255,186,26,0.15);color:#ffba1a;padding:6px 14px;border-radius:20px;font-size:0.8rem;">Coordena 12 agentes</span>
+                        <span style="background:rgba(255,186,26,0.15);color:#ffba1a;padding:6px 14px;border-radius:20px;font-size:0.8rem;">Coordena dezenas de agentes</span>
                         <span style="background:rgba(255,186,26,0.15);color:#ffba1a;padding:6px 14px;border-radius:20px;font-size:0.8rem;">Conecta todos os dados</span>
                         <span style="background:rgba(255,186,26,0.15);color:#ffba1a;padding:6px 14px;border-radius:20px;font-size:0.8rem;">Traduz em decisão</span>
                     </div>
                 </div>
             </div>
 
-            <!-- ═══ ORBITAL: 12 agentes ao redor da Olívia ═══ -->
+            <!-- ═══ ORBITAL: dezenas de agentes ao redor da Olívia ═══ -->
             <div style="margin-top:80px;" id="agentes">
                 <!-- Section header -->
                 <div style="text-align:center;margin-bottom:24px;" data-reveal>
-                    <span class="section-badge section-badge--gold">12 agentes especializados</span>
+                    <span class="section-badge section-badge--gold">dezenas de agentes especializados</span>
                     <h3 style="color:#fff;font-size:clamp(1.5rem,3vw,2rem);font-weight:800;margin:16px 0 12px;">Seu time de IA coordenado pela <span style="color:#ffba1a;">Olívia</span></h3>
                     <p style="color:rgba(255,255,255,0.5);font-size:1rem;max-width:560px;margin:0 auto;">Cada agente domina uma área. A Olívia coordena todos, conecta os dados e entrega clareza.</p>
                 </div>
@@ -2259,7 +2259,7 @@ export const pageHTML = `
                     </div>
                     <div class="hiw-cinema__card">
                         <div class="hiw-cinema__text">
-                            <h3>12 agentes constroem tudo</h3>
+                            <h3>Dezenas de agentes constroem tudo</h3>
                             <p>O time de IA mapeia processos, cria planejamento estratégico, estrutura indicadores e muito mais - tudo ao mesmo tempo.</p>
                         </div>
                         <div class="hiw-cinema__scene hiw-scene-agents">
@@ -3308,7 +3308,7 @@ export const pageHTML = `
                         Com o Orbit
                     </div>
                     <div class="cost-item">
-                        <span class="cost-item__label">12 agentes especializados</span>
+                        <span class="cost-item__label">dezenas de agentes especializados</span>
                         <span class="cost-item__value"><i class="fa-solid fa-check"></i> Incluso</span>
                     </div>
                     <div class="cost-item">
@@ -3564,7 +3564,7 @@ export const pageHTML = `
 
                     <div class="price-v2__anchor price-v2__anchor--gold"><i class="fas fa-users"></i> Até 100 usuários</div>
                     <ul class="price-v2__features">
-                        <li><i class="fas fa-robot"></i> <strong>12 agentes de IA</strong></li>
+                        <li><i class="fas fa-robot"></i> <strong>dezenas de agentes de IA</strong></li>
                         <li><i class="fas fa-users"></i> Até 100 usuários</li>
                         <li><i class="fab fa-whatsapp"></i> Treinamento via WhatsApp</li>
                         <li><i class="fas fa-headset"></i> Onboarding dedicado</li>
@@ -3593,7 +3593,7 @@ export const pageHTML = `
 
                     <div class="price-v2__anchor"><i class="fas fa-users"></i> Até 300 usuários</div>
                     <ul class="price-v2__features">
-                        <li><i class="fas fa-robot"></i> 12 agentes + customização</li>
+                        <li><i class="fas fa-robot"></i> dezenas de agentes + customização</li>
                         <li><i class="fas fa-users"></i> Até 300 usuários</li>
                         <li><i class="fas fa-user-shield"></i> Gerente de sucesso</li>
                         <li><i class="fas fa-bolt"></i> SLA prioritário</li>
@@ -3617,7 +3617,7 @@ export const pageHTML = `
                         <i class="fas fa-robot"></i>
                         <div>
                             <strong>Orbit Pró</strong>
-                            <span>R$ 1.997/mês - 12 agentes 24/7</span>
+                            <span>R$ 1.997/mês - dezenas de agentes 24/7</span>
                         </div>
                     </div>
                 </div>
@@ -4565,7 +4565,7 @@ export const pageHTML = `
                 <details class="faq-item">
                     <summary>O que é o Orbit?</summary>
                     <div class="faq-item__answer">
-                        <p>O Orbit é uma plataforma de gestão empresarial com 12 agentes de IA especializados. Não é mais um software que você precisa alimentar - são agentes que constroem e operam a gestão da sua empresa, 24/7.</p>
+                        <p>O Orbit é uma plataforma de gestão empresarial com dezenas de agentes de IA especializados. Não é mais um software que você precisa alimentar - são agentes que constroem e operam a gestão da sua empresa, 24/7.</p>
                     </div>
                 </details>
 

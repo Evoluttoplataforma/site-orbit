@@ -159,7 +159,7 @@ export const pageHTML = `
                                     </div>
                                     <div class="hiwp-training-item hiwp-training-item--2">
                                         <div class="hiwp-training-item__check"><i class="fas fa-circle-check"></i></div>
-                                        <span>12 Agentes de IA</span>
+                                        <span>Dezenas de Agentes de IA</span>
                                         <span class="hiwp-training-item__badge hiwp-training-item__badge--done">Concluído</span>
                                     </div>
                                     <div class="hiwp-training-item hiwp-training-item--3">

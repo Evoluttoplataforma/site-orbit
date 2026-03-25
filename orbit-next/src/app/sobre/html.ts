@@ -22,7 +22,7 @@ export const pageHTML = `
                 </span>
             </h1>
 
-            <p class="hero-zoom__subtitle" data-reveal>O Orbit nasceu do Grupo GSN — o maior grupo de consultoria em gestão e ISO do Brasil. Nossa missão: transformar a gestão empresarial com <strong style="color:#ffba1a;">12 agentes de IA especializados</strong>, coordenados pela Olívia.</p>
+            <p class="hero-zoom__subtitle" data-reveal>O Orbit nasceu do Grupo GSN — o maior grupo de consultoria em gestão e ISO do Brasil. Nossa missão: transformar a gestão empresarial com <strong style="color:#ffba1a;">dezenas de agentes de IA especializados</strong>, coordenados pela Olívia.</p>
 
             <div class="hero-zoom__credentials" data-reveal>
                 <div class="hero-zoom__credential">
@@ -130,8 +130,8 @@ export const pageHTML = `
                     <div class="hiw-cinema__card">
                         <div class="hiw-cinema__info">
                             <span class="hiw-cinema__label">2026 — O Orbit</span>
-                            <h3>Nasce a Olívia e os 12 agentes</h3>
-                            <p>A IA é integrada à gestão. Olívia coordena 12 agentes especializados que operam 24/7 nas empresas. Consultoria recorrente, automatizada e acessível.</p>
+                            <h3>Nasce a Olívia e dezenas de agentes</h3>
+                            <p>A IA é integrada à gestão. Olívia coordena dezenas de agentes especializados que operam 24/7 nas empresas. Consultoria recorrente, automatizada e acessível.</p>
                         </div>
                         <div class="hist-scene hist-scene--ai">
                             <div class="hist-orbit-ring">
@@ -202,7 +202,7 @@ export const pageHTML = `
                             <div class="origin-director-card__avatar"><img src="/images/diretor-chris.jpg" alt="Christian Hart" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Christian Hart</h3>
-                                <p>Diretor de Produto. Lidera o desenvolvimento da plataforma e a evolução dos 12 agentes de IA.</p>
+                                <p>Diretor de Produto. Lidera o desenvolvimento da plataforma e a evolução dos agentes de IA.</p>
                                 <div class="origin-director-card__links">
                                     <a href="#"><i class="fab fa-linkedin"></i></a>
                                 </div>

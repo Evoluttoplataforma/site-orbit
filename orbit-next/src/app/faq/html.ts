@@ -23,7 +23,7 @@ export const pageHTML = `
                         <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
                     </button>
                     <div class="faq-answer">
-                        <div class="faq-answer-inner">O Orbit é uma plataforma de gestão empresarial com 12 agentes de IA integrados. Não é mais um software - são agentes especializados que constroem e operam a gestão da sua empresa. Planejamento, processos, treinamento, indicadores - trabalhando 24/7.</div>
+                        <div class="faq-answer-inner">O Orbit é uma plataforma de gestão empresarial com dezenas de agentes de IA integrados. Não é mais um software - são agentes especializados que constroem e operam a gestão da sua empresa. Planejamento, processos, treinamento, indicadores - trabalhando 24/7.</div>
                     </div>
                 </div>
 
@@ -63,7 +63,7 @@ export const pageHTML = `
                         <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
                     </button>
                     <div class="faq-answer">
-                        <div class="faq-answer-inner">Olívia é a Coordenadora Geral de IA do Orbit - a líder do time de 12 agentes. Ela conecta dados de todos os departamentos, coordena a atuação dos agentes e traduz a complexidade em clareza para a tomada de decisão. Dentro do produto, Olívia é a especialista no seu negócio específico e o seu ponto de contato principal com o sistema.</div>
+                        <div class="faq-answer-inner">Olívia é a Coordenadora Geral de IA do Orbit - a líder do time de dezenas de agentes. Ela conecta dados de todos os departamentos, coordena a atuação dos agentes e traduz a complexidade em clareza para a tomada de decisão. Dentro do produto, Olívia é a especialista no seu negócio específico e o seu ponto de contato principal com o sistema.</div>
                     </div>
                 </div>
 
@@ -79,7 +79,7 @@ export const pageHTML = `
 
                 <div class="faq-item">
                     <button class="faq-question">
-                        Como os 12 agentes trabalham juntos?
+                        Como dezenas de agentes trabalham juntos?
                         <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
                     </button>
                     <div class="faq-answer">

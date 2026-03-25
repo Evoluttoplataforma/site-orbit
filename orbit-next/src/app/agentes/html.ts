@@ -3,7 +3,7 @@ export const pageHTML = `
     <!-- ═══ HERO ═══ -->
     <section class="agents-hero">
         <div class="container">
-            <span class="section-badge" data-reveal>12 Agentes Especializados</span>
+            <span class="section-badge" data-reveal>Dezenas de Agentes Especializados</span>
             <h1 data-reveal>Seu time de IA. Sempre disponível.</h1>
             <p data-reveal>Cada agente é um especialista. Trabalham 24h por dia, 7 dias por semana. Não tiram férias. Não pedem aumento. E custam uma fração de um time humano.</p>
             <div class="hero-stats" data-reveal-stagger>
@@ -33,7 +33,7 @@ export const pageHTML = `
                 <div>
                     <span class="section-badge">Conheça a líder do time</span>
                     <h2 style="font-size:2.25rem;font-weight:800;color:#fff;margin:16px 0;">Olívia, sua <span style="color:#ffba1a;">Coordenadora de IA</span></h2>
-                    <p style="color:#C9D1D9;font-size:1.1rem;line-height:1.7;margin-bottom:20px;">Olívia é a especialista em IA do Orbit e a voz do sistema para sua empresa. Ela coordena os 12 agentes, conecta dados de todos os departamentos e traduz complexidade em clareza para a tomada de decisão.</p>
+                    <p style="color:#C9D1D9;font-size:1.1rem;line-height:1.7;margin-bottom:20px;">Olívia é a especialista em IA do Orbit e a voz do sistema para sua empresa. Ela coordena dezenas de agentes, conecta dados de todos os departamentos e traduz complexidade em clareza para a tomada de decisão.</p>
                     <p style="color:#8B949E;font-size:1rem;line-height:1.7;margin-bottom:24px;">Quando o Agente de Riscos detecta uma ameaça, é a Olívia que cruza com o Agente de Oportunidades e apresenta o cenário completo. Humana o suficiente para criar vínculo. Inteligente o suficiente para gerar valor real.</p>
                     <div style="background:#1C2333;border-left:3px solid #ffba1a;padding:20px 24px;border-radius:0 12px 12px 0;">
                         <p style="color:#C9D1D9;font-style:italic;margin:0;">"Bom dia! Analisei os dados da semana. Três pontos precisam da sua atenção: margem caiu 2%, o time comercial bateu recorde, e temos uma oportunidade no segmento B que ninguém está olhando. Vamos resolver?"</p>
@@ -45,18 +45,18 @@ export const pageHTML = `
                     <h3 style="color:#fff;font-size:1.5rem;margin-bottom:8px;">Olívia</h3>
                     <p style="color:#ffba1a;font-size:0.95rem;margin-bottom:16px;">Coordenadora Geral de IA</p>
                     <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
-                        <span style="background:rgba(255,186,26,0.15);color:#ffba1a;padding:6px 14px;border-radius:20px;font-size:0.8rem;">Coordena 12 agentes</span>
+                        <span style="background:rgba(255,186,26,0.15);color:#ffba1a;padding:6px 14px;border-radius:20px;font-size:0.8rem;">Coordena dezenas de agentes</span>
                         <span style="background:rgba(255,186,26,0.15);color:#ffba1a;padding:6px 14px;border-radius:20px;font-size:0.8rem;">Conecta todos os dados</span>
                         <span style="background:rgba(255,186,26,0.15);color:#ffba1a;padding:6px 14px;border-radius:20px;font-size:0.8rem;">Traduz em decisão</span>
                     </div>
                 </div>
             </div>
 
-            <!-- ═══ ORBITAL: 12 agentes ao redor da Olívia ═══ -->
+            <!-- ═══ ORBITAL: dezenas de agentes ao redor da Olívia ═══ -->
             <div style="margin-top:80px;" id="agentes">
                 <!-- Section header -->
                 <div style="text-align:center;margin-bottom:24px;" data-reveal>
-                    <span class="section-badge section-badge--gold">12 agentes especializados</span>
+                    <span class="section-badge section-badge--gold">dezenas de agentes especializados</span>
                     <h3 style="color:#fff;font-size:clamp(1.5rem,3vw,2rem);font-weight:800;margin:16px 0 12px;">Seu time de IA coordenado pela <span style="color:#ffba1a;">Olívia</span></h3>
                     <p style="color:rgba(255,255,255,0.5);font-size:1rem;max-width:560px;margin:0 auto;">Cada agente domina uma área. A Olívia coordena todos, conecta os dados e entrega clareza.</p>
                 </div>
@@ -1416,7 +1416,7 @@ export const pageHTML = `
             <div class="site-cta__card" data-reveal="scale">
                 <div class="site-cta__icon"><i class="fas fa-robot"></i></div>
                 <h2>Pronto para montar seu time de IA?</h2>
-                <p>12 agentes especializados, setup incluso, garantia de 90 dias. Trabalhando 24/7.</p>
+                <p>Dezenas de agentes especializados, setup incluso, garantia de 90 dias. Trabalhando 24/7.</p>
                 <div class="site-cta__buttons">
                     <a href="/#contato-form" class="btn btn-primary btn-lg">QUERO CONHECER O TIME DE IA</a>
                     <a href="/pricing.html" class="btn btn-outline btn-lg">Ver Planos</a>

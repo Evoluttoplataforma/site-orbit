@@ -89,7 +89,7 @@ export const pageHTML = `
                                 Com o Orbit
                             </div>
                             <div class="cost-item">
-                                <span class="cost-item__label">12 agentes especializados</span>
+                                <span class="cost-item__label">dezenas de agentes especializados</span>
                                 <span class="cost-item__value"><i class="fa-solid fa-check"></i> Incluso</span>
                             </div>
                             <div class="cost-item">
@@ -198,7 +198,7 @@ export const pageHTML = `
                     </div>
                     <div class="price-v2__anchor price-v2__anchor--gold"><i class="fas fa-user-tie"></i> Custo de 1 analista Jr. - entrega de um time inteiro</div>
                     <ul class="price-v2__features">
-                        <li><i class="fas fa-robot"></i> <strong>12 agentes de IA</strong></li>
+                        <li><i class="fas fa-robot"></i> <strong>dezenas de agentes de IA</strong></li>
                         <li><i class="fas fa-infinity"></i> Usuários ilimitados</li>
                         <li><i class="fab fa-whatsapp"></i> Treinamento via WhatsApp</li>
                         <li><i class="fas fa-headset"></i> Onboarding dedicado</li>
@@ -222,7 +222,7 @@ export const pageHTML = `
                     </div>
                     <div class="price-v2__anchor"><i class="fas fa-chart-line"></i> ROI médio em 30 dias</div>
                     <ul class="price-v2__features">
-                        <li><i class="fas fa-robot"></i> 12 agentes + customização</li>
+                        <li><i class="fas fa-robot"></i> dezenas de agentes + customização</li>
                         <li><i class="fas fa-plug"></i> API e integrações</li>
                         <li><i class="fas fa-user-shield"></i> Gerente de sucesso</li>
                         <li><i class="fas fa-bolt"></i> SLA prioritário</li>
@@ -246,7 +246,7 @@ export const pageHTML = `
                         <i class="fas fa-robot"></i>
                         <div>
                             <strong>Orbit Advanced</strong>
-                            <span>R$ 1.950/mês - 12 agentes 24/7</span>
+                            <span>R$ 1.950/mês - dezenas de agentes 24/7</span>
                         </div>
                     </div>
                 </div>
