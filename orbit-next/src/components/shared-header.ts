@@ -101,7 +101,7 @@ export const headerHTML = `
             </ul>
 
             <div class="nav-actions">
-                <a href="https://app.orbitgestao.com.br/" class="btn btn-outline" data-i18n="nav.login">Entrar</a>
+                <a href="https://app.orbitgestao.com.br/login" class="btn btn-outline" data-i18n="nav.login">Entrar</a>
                 <a href="#contato-form" class="btn btn-primary" data-i18n="nav.cta">Conhecer o Time de IA</a>
             </div>
 
