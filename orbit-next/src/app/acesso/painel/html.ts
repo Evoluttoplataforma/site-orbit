@@ -909,6 +909,8 @@ export const pageHTML = `
     // ═══════════════════════════════════════
 
     const STORAGE_KEY = 'orbit_cms';
+    const SUPABASE_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
     const CATEGORIES = {
         estrategica: 'Gestao Estrategica',
         processos: 'Processos',
@@ -2048,29 +2050,28 @@ export const pageHTML = `
     }
 
     // ═══ USERS MANAGEMENT ═══
-    function refreshUsers() {
-        const db = getDB();
-        const tbody = document.getElementById('usersTableBody');
+    var supabaseUsers = [];
 
-        tbody.innerHTML = db.users.map(u => \`
-            <tr>
-                <td><strong>\${escapeHtml(u.name)}</strong></td>
-                <td>\${escapeHtml(u.email)}</td>
-                <td><span class="badge badge-\${u.role}">\${u.role === 'admin' ? 'Admin Full' : 'Editor'}</span></td>
-                <td><span class="badge \${u.active !== false ? 'badge-published' : 'badge-draft'}">\${u.active !== false ? 'Ativo' : 'Inativo'}</span></td>
-                <td>
-                    <div class="actions-cell">
-                        <button class="btn btn-secondary btn-icon btn-sm" onclick="editUser('\${u.id}')" title="Editar">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        \${u.email !== 'rodrigoosouzaamarketing@gmail.com' ? \`
-                        <button class="btn btn-danger btn-icon btn-sm" onclick="confirmDeleteUser('\${u.id}')" title="Excluir">
-                            <i class="fas fa-trash"></i>
-                        </button>\` : ''}
-                    </div>
-                </td>
-            </tr>
-        \`).join('');
+    async function refreshUsers() {
+        try {
+            var res = await fetch(SUPABASE_URL + '/rest/v1/cms_admins?order=created_at.asc', {
+                headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + session.access_token }
+            });
+            supabaseUsers = await res.json();
+        } catch(e) { supabaseUsers = []; }
+
+        var tbody = document.getElementById('usersTableBody');
+        tbody.innerHTML = supabaseUsers.map(function(u) {
+            return '<tr>' +
+                '<td><strong>' + escapeHtml(u.name) + '</strong></td>' +
+                '<td>' + escapeHtml(u.email) + '</td>' +
+                '<td><span class="badge badge-' + u.role + '">' + (u.role === 'admin' ? 'Admin Full' : 'Editor') + '</span></td>' +
+                '<td><span class="badge badge-published">Ativo</span></td>' +
+                '<td><div class="actions-cell">' +
+                    '<button class="btn btn-secondary btn-icon btn-sm" onclick="editUser(\\\'' + u.id + '\\\')" title="Editar"><i class="fas fa-edit"></i></button>' +
+                '</div></td>' +
+            '</tr>';
+        }).join('');
     }
 
     function openUserModal(userId) {
@@ -2085,8 +2086,7 @@ export const pageHTML = `
     }
 
     function editUser(id) {
-        const db = getDB();
-        const user = db.users.find(u => u.id === id);
+        var user = supabaseUsers.find(function(u) { return u.id === id; });
         if (!user) return;
 
         document.getElementById('modalUserId').value = user.id;
@@ -2104,61 +2104,76 @@ export const pageHTML = `
     }
 
     async function saveUser() {
-        const id = document.getElementById('modalUserId').value;
-        const name = document.getElementById('modalUserName').value.trim();
-        const email = document.getElementById('modalUserEmail').value.trim().toLowerCase();
-        const password = document.getElementById('modalUserPassword').value;
-        const role = document.getElementById('modalUserRole').value;
+        var id = document.getElementById('modalUserId').value;
+        var name = document.getElementById('modalUserName').value.trim();
+        var email = document.getElementById('modalUserEmail').value.trim().toLowerCase();
+        var password = document.getElementById('modalUserPassword').value;
+        var role = document.getElementById('modalUserRole').value;
 
         if (!name || !email) {
             toast('Preencha nome e e-mail.', 'error');
             return;
         }
 
-        const db = getDB();
+        try {
+            if (id) {
+                // Update cms_admins record
+                var updateRes = await fetch(SUPABASE_URL + '/rest/v1/cms_admins?id=eq.' + id, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': 'Bearer ' + session.access_token,
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify({ name: name, role: role })
+                });
+                if (!updateRes.ok) throw new Error('Erro ao atualizar');
+                toast('Usuario atualizado!');
+            } else {
+                // Create new user via Supabase Auth signup
+                if (!password || password.length < 6) {
+                    toast('Senha deve ter pelo menos 6 caracteres.', 'error');
+                    return;
+                }
 
-        if (id) {
-            // Update
-            const idx = db.users.findIndex(u => u.id === id);
-            if (idx === -1) return;
+                var signupRes = await fetch(SUPABASE_URL + '/auth/v1/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_KEY
+                    },
+                    body: JSON.stringify({ email: email, password: password })
+                });
+                var signupData = await signupRes.json();
 
-            // Check duplicate email
-            const dup = db.users.find(u => u.email === email && u.id !== id);
-            if (dup) { toast('Ja existe um usuario com este e-mail.', 'error'); return; }
+                if (!signupRes.ok || !signupData.id) {
+                    toast(signupData.msg || signupData.error_description || 'Erro ao criar usuario.', 'error');
+                    return;
+                }
 
-            db.users[idx].name = name;
-            db.users[idx].email = email;
-            db.users[idx].role = role;
-            if (password) {
-                if (password.length < 6) { toast('Senha deve ter pelo menos 6 caracteres.', 'error'); return; }
-                db.users[idx].password = await hashPassword(password);
+                // Insert into cms_admins
+                var insertRes = await fetch(SUPABASE_URL + '/rest/v1/cms_admins', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': 'Bearer ' + session.access_token,
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify({ id: signupData.id, email: email, name: name, role: role })
+                });
+                if (!insertRes.ok) throw new Error('Erro ao salvar admin');
+                toast('Usuario criado! O usuario precisa confirmar o e-mail para acessar.');
             }
-        } else {
-            // Create
-            if (!password || password.length < 6) {
-                toast('Senha deve ter pelo menos 6 caracteres.', 'error');
-                return;
-            }
-
-            const dup = db.users.find(u => u.email === email);
-            if (dup) { toast('Ja existe um usuario com este e-mail.', 'error'); return; }
-
-            db.users.push({
-                id: 'usr_' + Date.now(),
-                email,
-                name,
-                password: await hashPassword(password),
-                role,
-                createdAt: new Date().toISOString(),
-                active: true
-            });
+        } catch(err) {
+            console.error(err);
+            toast('Erro ao salvar usuario.', 'error');
         }
 
-        setDB(db);
         closeUserModal();
         refreshUsers();
         refreshDashboard();
-        toast(id ? 'Usuario atualizado!' : 'Usuario criado!');
     }
 
     // ═══ DELETE CONFIRMATIONS ═══
