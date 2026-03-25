@@ -38,69 +38,23 @@ export const pageHTML = `
     </div>
 
     <script>
-    // ── Orbit CMS Auth ──
-    const ORBIT_STORAGE_KEY = 'orbit_cms';
-
-    function getDB() {
-        try {
-            return JSON.parse(localStorage.getItem(ORBIT_STORAGE_KEY)) || null;
-        } catch { return null; }
-    }
-
-    function setDB(data) {
-        localStorage.setItem(ORBIT_STORAGE_KEY, JSON.stringify(data));
-    }
-
-    // Hash password with SHA-256
-    async function hashPassword(password) {
-        const encoder = new TextEncoder();
-        const data = encoder.encode(password + '_orbit_salt_2024');
-        const hash = await crypto.subtle.digest('SHA-256', data);
-        return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
-    }
-
-    // Initialize DB with default admin
-    async function initDB() {
-        let db = getDB();
-        if (!db) {
-            const adminHash = await hashPassword('orbit@2024');
-            db = {
-                users: [
-                    {
-                        id: 'usr_' + Date.now(),
-                        email: 'rodrigoosouzaamarketing@gmail.com',
-                        name: 'Rodrigo Souza',
-                        password: adminHash,
-                        role: 'admin',
-                        createdAt: new Date().toISOString(),
-                        active: true
-                    }
-                ],
-                articles: [],
-                version: 1
-            };
-            setDB(db);
-        }
-        return db;
-    }
+    // ── Orbit CMS Auth (Supabase) ──
+    var SUPABASE_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
+    var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
 
     // Check if already logged in
-    function getSession() {
+    var existingSession = localStorage.getItem('orbit_supabase_session');
+    if (existingSession) {
         try {
-            return JSON.parse(sessionStorage.getItem('orbit_session')) || null;
-        } catch { return null; }
-    }
-
-    // Redirect if already logged in
-    const session = getSession();
-    if (session) {
-        window.location.href = '/acesso/painel';
+            var s = JSON.parse(existingSession);
+            if (s.access_token) window.location.href = '/acesso/painel';
+        } catch(e) {}
     }
 
     // Toggle password visibility
     function togglePassword() {
-        const input = document.getElementById('password');
-        const icon = document.getElementById('eyeIcon');
+        var input = document.getElementById('password');
+        var icon = document.getElementById('eyeIcon');
         if (input.type === 'password') {
             input.type = 'text';
             icon.className = 'fas fa-eye-slash';
@@ -110,15 +64,15 @@ export const pageHTML = `
         }
     }
 
-    // Login
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    // Login via Supabase Auth
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
         e.preventDefault();
-        const errorEl = document.getElementById('loginError');
-        const btn = document.getElementById('btnLogin');
+        var errorEl = document.getElementById('loginError');
+        var btn = document.getElementById('btnLogin');
         errorEl.style.display = 'none';
 
-        const email = document.getElementById('email').value.trim().toLowerCase();
-        const password = document.getElementById('password').value;
+        var email = document.getElementById('email').value.trim().toLowerCase();
+        var password = document.getElementById('password').value;
 
         if (!email || !password) {
             errorEl.textContent = 'Preencha todos os campos.';
@@ -127,14 +81,21 @@ export const pageHTML = `
         }
 
         btn.disabled = true;
-        btn.textContent = 'Entrando...';
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Entrando...';
 
         try {
-            const db = await initDB();
-            const hash = await hashPassword(password);
-            const user = db.users.find(u => u.email === email && u.password === hash && u.active);
+            var res = await fetch(SUPABASE_URL + '/auth/v1/token?grant_type=password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': SUPABASE_KEY
+                },
+                body: JSON.stringify({ email: email, password: password })
+            });
 
-            if (!user) {
+            var data = await res.json();
+
+            if (!res.ok || !data.access_token) {
                 errorEl.textContent = 'E-mail ou senha incorretos.';
                 errorEl.style.display = 'block';
                 btn.disabled = false;
@@ -142,25 +103,35 @@ export const pageHTML = `
                 return;
             }
 
+            // Fetch admin info
+            var adminRes = await fetch(SUPABASE_URL + '/rest/v1/cms_admins?id=eq.' + data.user.id + '&limit=1', {
+                headers: {
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': 'Bearer ' + data.access_token
+                }
+            });
+            var admins = await adminRes.json();
+            var admin = admins[0] || null;
+
             // Save session
-            sessionStorage.setItem('orbit_session', JSON.stringify({
-                id: user.id,
-                email: user.email,
-                name: user.name,
-                role: user.role,
+            localStorage.setItem('orbit_supabase_session', JSON.stringify({
+                access_token: data.access_token,
+                refresh_token: data.refresh_token,
+                user_id: data.user.id,
+                email: data.user.email,
+                name: admin ? admin.name : data.user.email.split('@')[0],
+                role: admin ? admin.role : 'editor',
                 loginAt: new Date().toISOString()
             }));
 
             window.location.href = '/acesso/painel';
         } catch (err) {
+            console.error(err);
             errorEl.textContent = 'Erro ao fazer login. Tente novamente.';
             errorEl.style.display = 'block';
             btn.disabled = false;
             btn.textContent = 'Entrar';
         }
     });
-
-    // Init DB on load
-    initDB();
     </script>
 `;

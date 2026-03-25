@@ -917,14 +917,14 @@ export const pageHTML = `
         ia: 'IA & Inovacao'
     };
 
-    // ── Auth Check ──
+    // ── Auth Check (Supabase) ──
     function getSession() {
-        try { return JSON.parse(sessionStorage.getItem('orbit_session')) || null; }
+        try { return JSON.parse(localStorage.getItem('orbit_supabase_session')) || null; }
         catch { return null; }
     }
 
     const session = getSession();
-    if (!session) {
+    if (!session || !session.access_token) {
         window.location.href = '/acesso';
     }
 
@@ -1024,7 +1024,7 @@ export const pageHTML = `
 
     // ── Logout ──
     function logout() {
-        sessionStorage.removeItem('orbit_session');
+        localStorage.removeItem('orbit_supabase_session');
         window.location.href = '/acesso';
     }
 
