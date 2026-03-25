@@ -1083,53 +1083,42 @@ export const pageHTML = `
     }
 
     // ═══ ARTICLES LIST ═══
-    function refreshArticles() {
-        const db = getDB();
-        const articles = session.role === 'admin' ? db.articles : db.articles.filter(a => a.authorId === session.id);
-        const tbody = document.getElementById('articlesTableBody');
-        const emptyEl = document.getElementById('articlesEmpty');
+    var supabaseArticles = [];
 
-        if (articles.length === 0) {
+    async function refreshArticles() {
+        try {
+            var res = await fetch(SUPABASE_URL + '/rest/v1/blog_articles?order=updated_at.desc', {
+                headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + session.access_token }
+            });
+            if (res.ok) supabaseArticles = await res.json();
+        } catch(e) { supabaseArticles = []; }
+
+        var tbody = document.getElementById('articlesTableBody');
+        var emptyEl = document.getElementById('articlesEmpty');
+
+        if (supabaseArticles.length === 0) {
             tbody.innerHTML = '';
             emptyEl.style.display = 'block';
             return;
         }
 
         emptyEl.style.display = 'none';
-        const sorted = [...articles].sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
 
-        tbody.innerHTML = sorted.map(a => {
-            const authorUser = db.users.find(u => u.id === a.authorId);
-            const thumb = a.imageData || a.imageUrl || 'https://placehold.co/48x36/000/FDB73F?text=.';
-            return \`
-            <tr>
-                <td>
-                    <div class="article-title-cell">
-                        <img class="article-thumb" src="\${thumb}" alt="">
-                        <span>\${escapeHtml(a.title)}</span>
-                    </div>
-                </td>
-                <td>\${authorUser ? authorUser.name : 'Desconhecido'}</td>
-                <td>\${CATEGORIES[a.category] || a.category}</td>
-                <td><span class="badge badge-\${a.status}">\${a.status === 'published' ? 'Publicado' : 'Rascunho'}</span></td>
-                <td>\${formatDate(a.updatedAt)}</td>
-                <td>
-                    <div class="actions-cell">
-                        <button class="btn btn-secondary btn-icon btn-sm" onclick="viewArticle('\${a.id}')" title="Visualizar">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                        <button class="btn btn-secondary btn-icon btn-sm" onclick="editArticle('\${a.id}')" title="Editar">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn btn-secondary btn-icon btn-sm" onclick="duplicateArticle('\${a.id}')" title="Duplicar">
-                            <i class="fas fa-copy"></i>
-                        </button>
-                        <button class="btn btn-danger btn-icon btn-sm" onclick="confirmDeleteArticle('\${a.id}')" title="Excluir">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                </td>
-            </tr>\`;
+        tbody.innerHTML = supabaseArticles.map(function(a) {
+            var thumb = a.cover_url || 'https://placehold.co/48x36/0D1117/ffba1a?text=.';
+            var statusLabel = a.published ? 'Publicado' : 'Rascunho';
+            var statusClass = a.published ? 'published' : 'draft';
+            return '<tr>' +
+                '<td><div class="article-title-cell"><img class="article-thumb" src="' + escapeHtml(thumb) + '" alt=""><span>' + escapeHtml(a.title) + '</span></div></td>' +
+                '<td>' + escapeHtml(a.author) + '</td>' +
+                '<td>' + (CATEGORIES[a.category] || a.category) + '</td>' +
+                '<td><span class="badge badge-' + statusClass + '">' + statusLabel + '</span></td>' +
+                '<td>' + formatDate(a.updated_at) + '</td>' +
+                '<td><div class="actions-cell">' +
+                    '<button class="btn btn-secondary btn-icon btn-sm" onclick="editArticle(' + a.id + ')" title="Editar"><i class="fas fa-edit"></i></button>' +
+                    '<button class="btn btn-danger btn-icon btn-sm" onclick="confirmDeleteArticle(' + a.id + ')" title="Excluir"><i class="fas fa-trash"></i></button>' +
+                '</div></td>' +
+            '</tr>';
         }).join('');
     }
 
@@ -1168,22 +1157,21 @@ export const pageHTML = `
     }
 
     function editArticle(id) {
-        const db = getDB();
-        const article = db.articles.find(a => a.id === id);
+        var article = supabaseArticles.find(function(a) { return a.id === id || a.id === Number(id); });
         if (!article) return;
 
         document.getElementById('articleId').value = article.id;
         document.getElementById('articleTitleInput').value = article.title;
         document.getElementById('articleSlug').value = article.slug;
         document.getElementById('slugPreview').textContent = article.slug;
-        document.getElementById('richEditor').innerHTML = article.content;
+        document.getElementById('richEditor').innerHTML = article.content || '';
         document.getElementById('articleCategory').value = article.category;
         document.getElementById('articleAuthor').value = article.author || '';
-        document.getElementById('articleReadTime').value = article.readTime || '';
-        document.getElementById('articleMetaDesc').value = article.metaDesc || '';
-        document.getElementById('metaCharCount').textContent = (article.metaDesc || '').length;
-        document.getElementById('articleImageUrl').value = article.imageUrl || '';
-        document.getElementById('articleImageData').value = article.imageData || '';
+        document.getElementById('articleReadTime').value = '';
+        document.getElementById('articleMetaDesc').value = article.excerpt || '';
+        document.getElementById('metaCharCount').textContent = (article.excerpt || '').length;
+        document.getElementById('articleImageUrl').value = article.cover_url || '';
+        document.getElementById('articleImageData').value = '';
         document.getElementById('editorTitle').textContent = 'Editar Artigo';
         // SEO fields
         document.getElementById('seoTitle').value = article.seoTitle || '';
@@ -1248,29 +1236,16 @@ export const pageHTML = `
         document.getElementById('slugPreview').textContent = slug || 'titulo-do-artigo';
     }
 
-    function saveArticle(status) {
-        const title = document.getElementById('articleTitleInput').value.trim();
-        const slug = document.getElementById('articleSlug').value.trim();
-        const content = document.getElementById('richEditor').innerHTML;
-        const category = document.getElementById('articleCategory').value;
-        const author = document.getElementById('articleAuthor').value.trim() || session.name;
-        const readTime = document.getElementById('articleReadTime').value.trim();
-        const metaDesc = document.getElementById('articleMetaDesc').value.trim();
-        const imageUrl = document.getElementById('articleImageUrl').value.trim();
-        const imageData = document.getElementById('articleImageData').value;
-        const articleId = document.getElementById('articleId').value;
-        // SEO fields
-        const seoTitle = document.getElementById('seoTitle').value.trim();
-        const seoCanonical = document.getElementById('seoCanonical').value.trim();
-        const seoKeyword = document.getElementById('seoKeyword').value.trim();
-        const seoOgImage = document.getElementById('seoOgImage').value.trim();
-        const leadMagnetId = document.getElementById('leadMagnetSelect').value;
-        const ctaBannerEnabled = document.getElementById('ctaBannerEnabled').value;
-        const ctaBannerTitle = document.getElementById('ctaBannerTitle').value.trim();
-        const ctaBannerDesc = document.getElementById('ctaBannerDesc').value.trim();
-        const ctaBannerCtaText = document.getElementById('ctaBannerCtaText').value.trim();
-        const ctaBannerCtaUrl = document.getElementById('ctaBannerCtaUrl').value.trim();
-        const ctaBannerImage = document.getElementById('ctaBannerImageData').value;
+    async function saveArticle(status) {
+        var title = document.getElementById('articleTitleInput').value.trim();
+        var slug = document.getElementById('articleSlug').value.trim();
+        var content = document.getElementById('richEditor').innerHTML;
+        var category = document.getElementById('articleCategory').value;
+        var author = document.getElementById('articleAuthor').value.trim() || session.name;
+        var metaDesc = document.getElementById('articleMetaDesc').value.trim();
+        var imageUrl = document.getElementById('articleImageUrl').value.trim();
+        var imageData = document.getElementById('articleImageData').value;
+        var articleId = document.getElementById('articleId').value;
 
         if (!title) { toast('Informe o titulo do artigo.', 'error'); return; }
         if (!category) { toast('Selecione uma categoria.', 'error'); return; }
@@ -1278,46 +1253,66 @@ export const pageHTML = `
             toast('Escreva o conteudo do artigo.', 'error'); return;
         }
 
-        const db = getDB();
-        const now = new Date().toISOString();
-        const finalImageUrl = imageData || imageUrl;
+        var now = new Date().toISOString();
+        var finalSlug = slug || generateSlugFromTitle(title);
+        var coverUrl = imageData || imageUrl || '';
+        var isPublished = status === 'published';
 
-        if (articleId) {
-            const idx = db.articles.findIndex(a => a.id === articleId);
-            if (idx === -1) { toast('Artigo nao encontrado.', 'error'); return; }
+        var articleData = {
+            title: title,
+            slug: finalSlug,
+            content: content,
+            excerpt: metaDesc || null,
+            cover_url: coverUrl || null,
+            category: category,
+            author: author,
+            published: isPublished,
+            published_at: isPublished ? now : null,
+            updated_at: now
+        };
 
-            db.articles[idx] = {
-                ...db.articles[idx],
-                title, slug, content, category, author, readTime, metaDesc,
-                imageUrl: finalImageUrl, imageData,
-                seoTitle, seoCanonical, seoKeyword, seoOgImage,
-                leadMagnetId,
-                ctaBannerEnabled, ctaBannerTitle, ctaBannerDesc, ctaBannerCtaText, ctaBannerCtaUrl, ctaBannerImage,
-                status,
-                updatedAt: now
-            };
-        } else {
-            const finalSlug = slug || generateSlugFromTitle(title);
-            db.articles.push({
-                id: 'art_' + Date.now(),
-                title, slug: finalSlug, content, category, author, readTime, metaDesc,
-                imageUrl: finalImageUrl, imageData,
-                seoTitle, seoCanonical, seoKeyword, seoOgImage,
-                leadMagnetId,
-                ctaBannerEnabled, ctaBannerTitle, ctaBannerDesc, ctaBannerCtaText, ctaBannerCtaUrl, ctaBannerImage,
-                status,
-                authorId: session.id,
-                createdAt: now,
-                updatedAt: now
-            });
+        try {
+            var res;
+            if (articleId) {
+                // Update existing
+                res = await fetch(SUPABASE_URL + '/rest/v1/blog_articles?id=eq.' + articleId, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': 'Bearer ' + session.access_token,
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify(articleData)
+                });
+            } else {
+                // Create new
+                res = await fetch(SUPABASE_URL + '/rest/v1/blog_articles', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': 'Bearer ' + session.access_token,
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify(articleData)
+                });
+            }
+
+            if (!res.ok) {
+                var err = await res.text();
+                console.error('Supabase error:', err);
+                toast('Erro ao salvar artigo.', 'error');
+                return;
+            }
+
+            toast(isPublished ? 'Artigo publicado!' : 'Rascunho salvo!');
+            clearEditor();
+            showView('articles');
+        } catch(e) {
+            console.error(e);
+            toast('Erro ao salvar artigo.', 'error');
         }
-
-        setDB(db);
-        toast(status === 'published' ? 'Artigo publicado!' : 'Rascunho salvo!');
-
-        // Reset editor
-        clearEditor();
-        showView('articles');
     }
 
     function generateSlugFromTitle(title) {
@@ -2181,14 +2176,20 @@ export const pageHTML = `
 
     function confirmDeleteArticle(id) {
         document.getElementById('deleteMessage').textContent = 'Tem certeza que deseja excluir este artigo? Esta acao nao pode ser desfeita.';
-        document.getElementById('deleteConfirmBtn').onclick = () => {
-            const db = getDB();
-            db.articles = db.articles.filter(a => a.id !== id);
-            setDB(db);
+        document.getElementById('deleteConfirmBtn').onclick = async function() {
+            try {
+                await fetch(SUPABASE_URL + '/rest/v1/blog_articles?id=eq.' + id, {
+                    method: 'DELETE',
+                    headers: {
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': 'Bearer ' + session.access_token
+                    }
+                });
+                toast('Artigo excluido.');
+            } catch(e) { toast('Erro ao excluir.', 'error'); }
             closeDeleteModal();
-            refreshArticles();
+            await refreshArticles();
             refreshDashboard();
-            toast('Artigo excluido.');
         };
         document.getElementById('deleteModal').classList.add('active');
     }
