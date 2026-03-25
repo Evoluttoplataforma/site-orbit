@@ -132,9 +132,18 @@ export const pageHTML = `
         ia: 'IA & Inovação'
     };
 
-    function getDB() {
-        try { return JSON.parse(localStorage.getItem('orbit_cms')) || { articles: [] }; }
-        catch { return { articles: [] }; }
+    const SUPABASE_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
+
+    let articlesCache = [];
+
+    async function fetchArticles() {
+        try {
+            const res = await fetch(SUPABASE_URL + '/rest/v1/blog_articles?published=eq.true&order=published_at.desc', {
+                headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+            });
+            if (res.ok) articlesCache = await res.json();
+        } catch(e) { console.error('Erro ao buscar artigos:', e); }
     }
 
     function escapeHtml(str) {
@@ -159,14 +168,9 @@ export const pageHTML = `
     let currentFilter = 'all';
 
     function renderArticles() {
-        const db = getDB();
-        const published = db.articles
-            .filter(a => a.status === 'published')
-            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
         const filtered = currentFilter === 'all'
-            ? published
-            : published.filter(a => a.category === currentFilter);
+            ? articlesCache
+            : articlesCache.filter(a => a.category === currentFilter);
 
         const grid = document.getElementById('blogGrid');
         const empty = document.getElementById('blogEmpty');
@@ -180,23 +184,20 @@ export const pageHTML = `
         empty.style.display = 'none';
 
         grid.innerHTML = filtered.map(a => {
-            const imgSrc = a.imageData || a.imageUrl || 'https://placehold.co/400x250/000/FDB73F?text=Artigo';
+            const imgSrc = a.cover_url || 'https://placehold.co/400x250/0D1117/ffba1a?text=Orbit+Blog';
             const catLabel = CATEGORIES[a.category] || a.category;
-            // Get plain text preview from content
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = a.content;
-            const preview = truncate(tempDiv.textContent, 120);
+            const preview = a.excerpt || truncate(a.content, 120);
 
             return \`
-            <a href="/blog/\${a.slug || a.id}" class="blog-card" data-category="\${a.category}">
+            <a href="/blog/\${a.slug}" class="blog-card" data-category="\${a.category}">
                 <div class="blog-card__image">
-                    <img src="\${imgSrc}" alt="\${escapeHtml(a.title)}" loading="lazy">
+                    <img src="\${escapeHtml(imgSrc)}" alt="\${escapeHtml(a.title)}" loading="lazy">
                     <span class="blog-card__tag">\${escapeHtml(catLabel)}</span>
                 </div>
                 <div class="blog-card__body">
                     <div class="blog-card__meta">
-                        <span><i class="fas fa-calendar-alt"></i> \${formatDate(a.createdAt)}</span>
-                        <span><i class="fas fa-clock"></i> \${escapeHtml(a.readTime || '5 min')}</span>
+                        <span><i class="fas fa-calendar-alt"></i> \${formatDate(a.published_at || a.created_at)}</span>
+                        <span><i class="fas fa-user"></i> \${escapeHtml(a.author)}</span>
                     </div>
                     <h3>\${escapeHtml(a.title)}</h3>
                     <p>\${escapeHtml(preview)}</p>
@@ -217,7 +218,7 @@ export const pageHTML = `
     });
 
     // ── Init ──
-    renderArticles();
+    fetchArticles().then(renderArticles);
 
     // Mobile menu
     var toggle = document.querySelector('.menu-toggle');
