@@ -433,7 +433,7 @@ export const pageHTML = `
         <div class="container" style="max-width:1100px;position:relative;z-index:1;">
             <div class="mkt-header" data-reveal>
                 <div class="mkt-badge"><i class="fas fa-bolt"></i> <span data-i18n="mkt.badge">Dados de mercado</span></div>
-                <h2 data-i18n="mkt.title">Quem está usando IA agentic<br>está <span>saindo na frente</span></h2>
+                <h2 data-i18n="mkt.title">Quem está usando Agentes de IA<br>está <span>saindo na frente</span></h2>
             </div>
             <div class="mkt-cards" data-reveal-stagger>
                 <div class="mkt-card mkt-card--highlight">
@@ -441,7 +441,7 @@ export const pageHTML = `
                         <div class="mkt-card__number">11%</div>
                         <div class="mkt-card__pulse"></div>
                     </div>
-                    <p class="mkt-card__headline" data-i18n="mkt.c1">das empresas já operam com <strong>IA agentic</strong> em produção</p>
+                    <p class="mkt-card__headline" data-i18n="mkt.c1">das empresas já operam com <strong>Agentes de IA</strong> em produção</p>
                     <div class="mkt-card__footer">
                         <div class="mkt-card__source">Deloitte</div>
                         <div class="mkt-card__date">2025</div>

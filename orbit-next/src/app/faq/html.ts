@@ -73,7 +73,7 @@ export const pageHTML = `
                         <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
                     </button>
                     <div class="faq-answer">
-                        <div class="faq-answer-inner">Gestão Operada por IA é uma nova categoria onde um time de agentes de inteligência artificial executa continuamente as funções de gestão de uma empresa. Diferente de ferramentas ou chatbots, os agentes do Orbit trabalham de forma autônoma após a configuração - isso é consultoria recorrente passiva: a gestão continua acontecendo mesmo sem intervenção humana constante. Apenas 11% das empresas utilizam IA agentic em produção (Deloitte, 2025), o que significa que quem adotar agora está na vanguarda.</div>
+                        <div class="faq-answer-inner">Gestão Operada por IA é uma nova categoria onde um time de agentes de inteligência artificial executa continuamente as funções de gestão de uma empresa. Diferente de ferramentas ou chatbots, os agentes do Orbit trabalham de forma autônoma após a configuração - isso é consultoria recorrente passiva: a gestão continua acontecendo mesmo sem intervenção humana constante. Apenas 11% das empresas utilizam Agentes de IA em produção (Deloitte, 2025), o que significa que quem adotar agora está na vanguarda.</div>
                     </div>
                 </div>
 
