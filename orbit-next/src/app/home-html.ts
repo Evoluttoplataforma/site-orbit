@@ -391,7 +391,7 @@ export const pageHTML = `
 
             <div class="pq-grid" data-reveal-stagger>
                 <a href="/empresarios" class="pq-card">
-                    <img src="/images/pq-empresarios.png" alt="Empresários" width="800" height="1200" loading="lazy" decoding="async">
+                    <img src="/images/pq-empresarios.jpg" alt="Empresários" width="800" height="1200" loading="lazy" decoding="async">
                     <div class="pq-card__content">
                         <div class="pq-card__icon"><i class="fas fa-building"></i></div>
                         <h3 data-i18n="pq.c1.title">Empresários</h3>
@@ -401,7 +401,7 @@ export const pageHTML = `
                 </a>
 
                 <a href="/consultores" class="pq-card">
-                    <img src="/images/pq-consultores.png" alt="Consultores" width="800" height="1200" loading="lazy" decoding="async">
+                    <img src="/images/pq-consultores.jpg" alt="Consultores" width="800" height="1200" loading="lazy" decoding="async">
                     <div class="pq-card__content">
                         <div class="pq-card__icon"><i class="fas fa-user-tie"></i></div>
                         <h3 data-i18n="pq.c2.title">Consultores</h3>
@@ -411,7 +411,7 @@ export const pageHTML = `
                 </a>
 
                 <a href="/#contato-form" class="pq-card">
-                    <img src="/images/pq-hubs.png" alt="Associações e Hubs" width="1200" height="2150" loading="lazy" decoding="async">
+                    <img src="/images/pq-hubs.jpg" alt="Associações e Hubs" width="1200" height="2150" loading="lazy" decoding="async">
                     <div class="pq-card__content">
                         <div class="pq-card__icon"><i class="fas fa-landmark"></i></div>
                         <h3 data-i18n="pq.c3.title">Associações e Hubs</h3>
