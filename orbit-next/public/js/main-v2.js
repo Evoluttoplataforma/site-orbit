@@ -556,6 +556,32 @@ document.addEventListener('DOMContentLoaded', () => {
         })
       }).catch(function(e) { console.error('Lead save error:', e); });
 
+      // Send to Make webhook
+      var webhookPayload = {
+        name: nome, email: email, phone: phone,
+        role: role, segment: segment, company: company,
+        revenue: revenue, employees: employees, priority: priority,
+        utm_source: tracking.utm_source || null, utm_medium: tracking.utm_medium || null,
+        utm_campaign: tracking.utm_campaign || null, utm_content: tracking.utm_content || null,
+        utm_term: tracking.utm_term || null, gclid: tracking.gclid || null,
+        gbraid: tracking.gbraid || null, wbraid: tracking.wbraid || null,
+        gad_campaignid: tracking.gad_campaignid || null, gad_source: tracking.gad_source || null,
+        fbclid: tracking.fbclid || null, fbc: tracking.fbc || null, fbp: tracking.fbp || null,
+        ttclid: tracking.ttclid || null, msclkid: tracking.msclkid || null,
+        li_fat_id: tracking.li_fat_id || null, twclid: tracking.twclid || null, sck: tracking.sck || null,
+        landing_page: tracking.landing_page || null, referrer: tracking.referrer || null,
+        user_agent: tracking.user_agent || null, first_visit: tracking.first_visit || null,
+        session_id: tracking.session_id || null,
+        session_attributes_encoded: tracking.session_attributes_encoded || null,
+        origin_page: tracking.originPage || null, ref: tracking.ref || null,
+        submitted_at: new Date().toISOString()
+      };
+      fetch('https://hook.us1.make.com/eiai1i9kp58yd5qvqxqlzw8f18amps62', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(webhookPayload)
+      }).catch(function(e) { console.error('Webhook error:', e); });
+
       // Redirect to thank you page
       setTimeout(function() {
         window.location.href = '/obrigado';
