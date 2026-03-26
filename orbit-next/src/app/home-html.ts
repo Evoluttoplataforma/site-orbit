@@ -3366,6 +3366,8 @@ export const pageHTML = `
             </div>
 
             <div class="gallery3d" id="gallery3d">
+                <button class="gallery3d__arrow gallery3d__arrow--prev" id="gallery3dPrev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+                <button class="gallery3d__arrow gallery3d__arrow--next" id="gallery3dNext" aria-label="Próximo"><i class="fas fa-chevron-right"></i></button>
                 <div class="gallery3d__track" id="gallery3d-track">
                     <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-estrategista.png" alt="Estrategista" width="512" height="918" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-chess-king"></i></div><h3>Estrategista</h3><p>SWOT, BSC e planejamento estratégico</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
                     <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-processos.jpg" alt="Processos" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-sitemap"></i></div><h3>Processos</h3><p>Mapeamento, playbooks e automação</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
@@ -3455,6 +3457,24 @@ export const pageHTML = `
                 track.addEventListener('click', function(e) {
                     if (Math.abs(dragDelta) > 8) e.preventDefault();
                 }, true);
+
+                // Arrow navigation
+                var prevBtn = document.getElementById('gallery3dPrev');
+                var nextBtn = document.getElementById('gallery3dNext');
+                if (prevBtn) prevBtn.addEventListener('click', function() { rotation += step; });
+                if (nextBtn) nextBtn.addEventListener('click', function() { rotation -= step; });
+
+                // Touch swipe
+                var touchStartX = 0;
+                gallery.addEventListener('touchstart', function(e) {
+                    touchStartX = e.touches[0].clientX;
+                }, { passive: true });
+                gallery.addEventListener('touchend', function(e) {
+                    var diff = e.changedTouches[0].clientX - touchStartX;
+                    if (Math.abs(diff) > 40) {
+                        rotation += diff > 0 ? step : -step;
+                    }
+                }, { passive: true });
 
                 animate();
             })();
