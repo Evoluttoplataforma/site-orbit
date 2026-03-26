@@ -3,6 +3,98 @@
    Carousel + Tabs + Form + Interactions
    ═══════════════════════════════════════════════════════ */
 
+// ═══ MOBILE MENU (event delegation - works on ALL pages) ═══
+(function() {
+  // Toggle menu
+  document.addEventListener('click', function(e) {
+    var toggle = e.target.closest('.menu-toggle');
+    if (!toggle) return;
+    var menu = document.querySelector('.mobile-menu');
+    var overlay = document.querySelector('.mobile-menu-overlay');
+    if (!menu) return;
+    var isOpen = menu.classList.contains('active');
+    if (isOpen) {
+      toggle.classList.remove('active'); menu.classList.remove('active');
+      if (overlay) overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    } else {
+      toggle.classList.add('active'); menu.classList.add('active');
+      if (overlay) overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  });
+
+  // Close menu functions
+  window.closeMobileMenu = function() {
+    var toggle = document.querySelector('.menu-toggle');
+    var menu = document.querySelector('.mobile-menu');
+    var overlay = document.querySelector('.mobile-menu-overlay');
+    if (toggle) toggle.classList.remove('active');
+    if (menu) menu.classList.remove('active');
+    if (overlay) overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  // Close on link click
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('.mobile-menu a')) {
+      window.closeMobileMenu();
+    }
+    if (e.target.closest('.mobile-menu-close')) {
+      window.closeMobileMenu();
+    }
+    if (e.target.classList && e.target.classList.contains('mobile-menu-overlay')) {
+      window.closeMobileMenu();
+    }
+  });
+
+  // Nav dropdown hover/touch
+  var isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  document.addEventListener(isTouch ? 'click' : 'mouseenter', function(e) {
+    var li = e.target.closest('.nav-menu > li');
+    if (!li) return;
+    var dd = li.querySelector('.dropdown');
+    if (!dd) return;
+    if (isTouch) {
+      if (dd.classList.contains('show')) return;
+      e.preventDefault();
+      document.querySelectorAll('.dropdown.show').forEach(function(d) { d.classList.remove('show'); });
+      dd.classList.add('show');
+    } else {
+      dd.classList.add('show');
+    }
+  }, true);
+
+  if (!isTouch) {
+    document.addEventListener('mouseleave', function(e) {
+      var li = e.target.closest ? e.target.closest('.nav-menu > li') : null;
+      if (li) {
+        var dd = li.querySelector('.dropdown');
+        if (dd) dd.classList.remove('show');
+      }
+    }, true);
+  } else {
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-menu > li')) {
+        document.querySelectorAll('.dropdown.show').forEach(function(d) { d.classList.remove('show'); });
+      }
+    });
+  }
+
+  // Header scroll
+  window.addEventListener('scroll', function() {
+    var h = document.querySelector('.header');
+    var btn = document.querySelector('#backToTop');
+    if (h) h.classList.toggle('scrolled', window.scrollY > 50);
+    if (btn) btn.style.display = window.scrollY > 400 ? 'flex' : 'none';
+  });
+  if (document.querySelector('#backToTop')) {
+    document.addEventListener('click', function(e) {
+      if (e.target.closest('#backToTop')) window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // Skip on CMS/admin pages — those have their own scripts
