@@ -108,52 +108,7 @@ export const pageHTML = `
     </footer>
 
     <script>
-        // Mobile menu
-        var toggle = document.querySelector('.menu-toggle');
-        var mobileMenu = document.querySelector('.mobile-menu');
-        var overlay = document.querySelector('.mobile-menu-overlay');
-        window.closeMobileMenu = function() {
-            if (toggle) toggle.classList.remove('active');
-            if (mobileMenu) mobileMenu.classList.remove('active');
-            if (overlay) overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        };
-        window.openMobileMenu = function() {
-            if (toggle) toggle.classList.add('active');
-            if (mobileMenu) mobileMenu.classList.add('active');
-            if (overlay) overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        };
-        if (toggle && mobileMenu) {
-            toggle.addEventListener('click', function() {
-                mobileMenu.classList.contains('active') ? closeMobileMenu() : openMobileMenu();
-            });
-            mobileMenu.querySelectorAll('a').forEach(function(a) {
-                a.addEventListener('click', closeMobileMenu);
-            });
-        }
-
-        // Header scroll
-        const header = document.querySelector('.header');
-        window.addEventListener('scroll', () => {
-            header.classList.toggle('scrolled', window.scrollY > 50);
-        });
-
-        // Dropdown hover
-        document.querySelectorAll('.nav-menu > li').forEach(item => {
-            const dropdown = item.querySelector('.dropdown');
-            if (!dropdown) return;
-            item.addEventListener('mouseenter', () => {
-                dropdown.style.opacity = '1';
-                dropdown.style.visibility = 'visible';
-                dropdown.style.transform = 'translateY(0)';
-            });
-            item.addEventListener('mouseleave', () => {
-                dropdown.style.opacity = '0';
-                dropdown.style.visibility = 'hidden';
-                dropdown.style.transform = 'translateY(10px)';
-            });
-        });
+        // Mobile menu, header scroll, dropdowns handled by PageLayout.tsx
     </script>
     <!-- Scroll Reveal -->
     <script>

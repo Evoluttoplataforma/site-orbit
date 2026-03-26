@@ -3020,55 +3020,7 @@ export const pageHTML = `
     (function() {
         'use strict';
 
-        /* --- Header scroll --- */
-        var header = document.querySelector('.header');
-        window.addEventListener('scroll', function() {
-            header.classList.toggle('scrolled', window.scrollY > 50);
-        });
-
-        // Mobile menu
-        var toggle = document.querySelector('.menu-toggle');
-        var mobileMenu = document.querySelector('.mobile-menu');
-        var overlay = document.querySelector('.mobile-menu-overlay');
-        window.closeMobileMenu = function() {
-            if (toggle) toggle.classList.remove('active');
-            if (mobileMenu) mobileMenu.classList.remove('active');
-            if (overlay) overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        };
-        window.openMobileMenu = function() {
-            if (toggle) toggle.classList.add('active');
-            if (mobileMenu) mobileMenu.classList.add('active');
-            if (overlay) overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        };
-        if (toggle && mobileMenu) {
-            toggle.addEventListener('click', function() {
-                mobileMenu.classList.contains('active') ? closeMobileMenu() : openMobileMenu();
-            });
-            mobileMenu.querySelectorAll('a').forEach(function(a) {
-                a.addEventListener('click', closeMobileMenu);
-            });
-        }
-
-        /* --- Dropdown hover --- */
-        document.querySelectorAll('.nav-menu > li').forEach(function(li) {
-            var dropdown = li.querySelector('.dropdown');
-            if (!dropdown) return;
-            li.addEventListener('mouseenter', function() { dropdown.style.opacity = '1'; dropdown.style.visibility = 'visible'; dropdown.style.transform = 'translateY(0)'; });
-            li.addEventListener('mouseleave', function() { dropdown.style.opacity = '0'; dropdown.style.visibility = 'hidden'; dropdown.style.transform = 'translateY(8px)'; });
-        });
-
-        /* --- Back to top --- */
-        var backBtn = document.getElementById('backToTop');
-        if (backBtn) {
-            window.addEventListener('scroll', function() {
-                backBtn.classList.toggle('visible', window.scrollY > 600);
-            });
-            backBtn.addEventListener('click', function() {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        }
+        // Mobile menu, header scroll, dropdowns handled by PageLayout.tsx
 
         /* --- Scroll Reveal --- */
         var revealObserver = new IntersectionObserver(function(entries) {

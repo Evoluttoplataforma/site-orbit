@@ -1076,45 +1076,7 @@ export const pageHTML = `
     </button>
 
     <script>
-    // Header scroll + back to top
-    window.addEventListener('scroll', () => {
-        document.querySelector('.header').classList.toggle('scrolled', window.scrollY > 50);
-        document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 400);
-    });
-
-    // Dropdown hover
-    document.querySelectorAll('.nav-menu li').forEach(li => {
-        const dd = li.querySelector('.dropdown');
-        if (dd) {
-            li.addEventListener('mouseenter', () => { dd.style.opacity='1'; dd.style.visibility='visible'; dd.style.transform='translateY(0)'; });
-            li.addEventListener('mouseleave', () => { dd.style.opacity='0'; dd.style.visibility='hidden'; dd.style.transform='translateY(10px)'; });
-        }
-    });
-
-    // Mobile menu
-    var toggle = document.querySelector('.menu-toggle');
-    var mobileMenu = document.querySelector('.mobile-menu');
-    var overlay = document.querySelector('.mobile-menu-overlay');
-    window.closeMobileMenu = function() {
-        if (toggle) toggle.classList.remove('active');
-        if (mobileMenu) mobileMenu.classList.remove('active');
-        if (overlay) overlay.classList.remove('active');
-        document.body.style.overflow = '';
-    };
-    window.openMobileMenu = function() {
-        if (toggle) toggle.classList.add('active');
-        if (mobileMenu) mobileMenu.classList.add('active');
-        if (overlay) overlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    };
-    if (toggle && mobileMenu) {
-        toggle.addEventListener('click', function() {
-            mobileMenu.classList.contains('active') ? closeMobileMenu() : openMobileMenu();
-        });
-        mobileMenu.querySelectorAll('a').forEach(function(a) {
-            a.addEventListener('click', closeMobileMenu);
-        });
-    }
+    // Mobile menu, header scroll, dropdowns handled by PageLayout.tsx
 
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(a => {

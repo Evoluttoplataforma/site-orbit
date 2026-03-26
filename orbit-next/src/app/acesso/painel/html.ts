@@ -879,30 +879,7 @@ export const pageHTML = `
     <div class="toast-container" id="toastContainer"></div>
 
     <script>
-    // Mobile menu
-    var toggle = document.querySelector('.menu-toggle');
-    var mobileMenu = document.querySelector('.mobile-menu');
-    var overlay = document.querySelector('.mobile-menu-overlay');
-    window.closeMobileMenu = function() {
-        if (toggle) toggle.classList.remove('active');
-        if (mobileMenu) mobileMenu.classList.remove('active');
-        if (overlay) overlay.classList.remove('active');
-        document.body.style.overflow = '';
-    };
-    window.openMobileMenu = function() {
-        if (toggle) toggle.classList.add('active');
-        if (mobileMenu) mobileMenu.classList.add('active');
-        if (overlay) overlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    };
-    if (toggle && mobileMenu) {
-        toggle.addEventListener('click', function() {
-            mobileMenu.classList.contains('active') ? closeMobileMenu() : openMobileMenu();
-        });
-        mobileMenu.querySelectorAll('a').forEach(function(a) {
-            a.addEventListener('click', closeMobileMenu);
-        });
-    }
+    // Mobile menu, header scroll, dropdowns handled by PageLayout.tsx
 
     // ═══════════════════════════════════════
     // ORBIT CMS - Admin Panel

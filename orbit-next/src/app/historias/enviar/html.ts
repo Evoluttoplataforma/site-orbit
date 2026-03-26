@@ -304,48 +304,7 @@ export const pageHTML = `
     </button>
 
     <script>
-    // Mobile menu
-    var toggle = document.querySelector('.menu-toggle');
-    var mobileMenu = document.querySelector('.mobile-menu');
-    var overlay = document.querySelector('.mobile-menu-overlay');
-    window.closeMobileMenu = function() {
-        if (toggle) toggle.classList.remove('active');
-        if (mobileMenu) mobileMenu.classList.remove('active');
-        if (overlay) overlay.classList.remove('active');
-        document.body.style.overflow = '';
-    };
-    window.openMobileMenu = function() {
-        if (toggle) toggle.classList.add('active');
-        if (mobileMenu) mobileMenu.classList.add('active');
-        if (overlay) overlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    };
-    if (toggle && mobileMenu) {
-        toggle.addEventListener('click', function() {
-            mobileMenu.classList.contains('active') ? closeMobileMenu() : openMobileMenu();
-        });
-        mobileMenu.querySelectorAll('a').forEach(function(a) {
-            a.addEventListener('click', closeMobileMenu);
-        });
-    }
-
-    // ========== Dropdown ==========
-    document.querySelectorAll('.nav-menu > li').forEach(item => {
-        const dropdown = item.querySelector('.dropdown');
-        if (!dropdown) return;
-        item.addEventListener('mouseenter', () => dropdown.classList.add('show'));
-        item.addEventListener('mouseleave', () => dropdown.classList.remove('show'));
-    });
-
-    // ========== Header Scroll ==========
-    window.addEventListener('scroll', () => {
-        document.querySelector('.header').classList.toggle('scrolled', window.scrollY > 50);
-        const btn = document.getElementById('backToTop');
-        btn.style.display = window.scrollY > 400 ? 'flex' : 'none';
-    });
-    document.getElementById('backToTop').addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    // Mobile menu, header scroll, dropdowns handled by PageLayout.tsx
 
     // ========== Phone Mask ==========
     const telefoneInput = document.getElementById('telefoneInput');

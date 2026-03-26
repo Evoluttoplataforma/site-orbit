@@ -229,49 +229,7 @@ export const pageHTML = `
         renderStories();
     })();
 
-    // Mobile menu
-    var toggle = document.querySelector('.menu-toggle');
-    var mobileMenu = document.querySelector('.mobile-menu');
-    var overlay = document.querySelector('.mobile-menu-overlay');
-    window.closeMobileMenu = function() {
-        if (toggle) toggle.classList.remove('active');
-        if (mobileMenu) mobileMenu.classList.remove('active');
-        if (overlay) overlay.classList.remove('active');
-        document.body.style.overflow = '';
-    };
-    window.openMobileMenu = function() {
-        if (toggle) toggle.classList.add('active');
-        if (mobileMenu) mobileMenu.classList.add('active');
-        if (overlay) overlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    };
-    if (toggle && mobileMenu) {
-        toggle.addEventListener('click', function() {
-            mobileMenu.classList.contains('active') ? closeMobileMenu() : openMobileMenu();
-        });
-        mobileMenu.querySelectorAll('a').forEach(function(a) {
-            a.addEventListener('click', closeMobileMenu);
-        });
-    }
-
-    // ── Header scroll ──
-    const header = document.querySelector('.header');
-    const backToTop = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
-        header.classList.toggle('scrolled', window.scrollY > 50);
-        if (backToTop) backToTop.style.display = window.scrollY > 400 ? 'flex' : 'none';
-    });
-    if (backToTop) {
-        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-    }
-
-    // ── Dropdown hover ──
-    document.querySelectorAll('.nav-menu > li').forEach(item => {
-        const dropdown = item.querySelector('.dropdown');
-        if (!dropdown) return;
-        item.addEventListener('mouseenter', () => dropdown.classList.add('show'));
-        item.addEventListener('mouseleave', () => dropdown.classList.remove('show'));
-    });
+    // Mobile menu, header scroll, dropdowns handled by PageLayout.tsx
     </script>
     <!-- Scroll Reveal -->
     <script>

@@ -3486,55 +3486,7 @@ export const pageHTML = `
     <!-- Header scroll + mobile menu + back to top -->
     <script>
     (function() {
-        // Header scroll
-        var header = document.querySelector('.header');
-        window.addEventListener('scroll', function() {
-            header.classList.toggle('scrolled', window.scrollY > 50);
-        });
-
-        // Mobile menu
-        var toggle = document.querySelector('.menu-toggle');
-        var mobileMenu = document.querySelector('.mobile-menu');
-        var overlay = document.querySelector('.mobile-menu-overlay');
-        window.closeMobileMenu = function() {
-            if (toggle) toggle.classList.remove('active');
-            if (mobileMenu) mobileMenu.classList.remove('active');
-            if (overlay) overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        };
-        window.openMobileMenu = function() {
-            if (toggle) toggle.classList.add('active');
-            if (mobileMenu) mobileMenu.classList.add('active');
-            if (overlay) overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        };
-        if (toggle && mobileMenu) {
-            toggle.addEventListener('click', function() {
-                mobileMenu.classList.contains('active') ? closeMobileMenu() : openMobileMenu();
-            });
-            mobileMenu.querySelectorAll('a').forEach(function(a) {
-                a.addEventListener('click', closeMobileMenu);
-            });
-        }
-
-        // Dropdown hover (desktop)
-        document.querySelectorAll('.nav-menu > li').forEach(function(li) {
-            var dd = li.querySelector('.dropdown');
-            if (!dd) return;
-            li.addEventListener('mouseenter', function() { dd.style.opacity = '1'; dd.style.visibility = 'visible'; dd.style.transform = 'translateY(0)'; });
-            li.addEventListener('mouseleave', function() { dd.style.opacity = '0'; dd.style.visibility = 'hidden'; dd.style.transform = 'translateY(12px)'; });
-        });
-
-        // Back to top
-        var btn = document.getElementById('backToTop');
-        if (btn) {
-            window.addEventListener('scroll', function() {
-                btn.classList.toggle('visible', window.scrollY > 400);
-            });
-            btn.addEventListener('click', function() {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        }
+        // Mobile menu, header scroll, dropdowns handled by PageLayout.tsx
 
     })();
     </script>
