@@ -469,7 +469,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
-        event: 'form_submit_lead',
+        event: 'form_submit_success',
         lead_name: nome,
         lead_email: email,
         lead_whatsapp: phone,
