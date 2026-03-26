@@ -1,26 +1,32 @@
 /* ORBIT - Init all interactive features */
+
+// ═══ LANG SWITCH — event delegation (works even after React re-renders) ═══
+document.addEventListener('click', function(e) {
+  if (!e.target || !e.target.closest) return;
+  var btn = e.target.closest('.lang-switch');
+  if (!btn) return;
+  e.preventDefault();
+  var cur = localStorage.getItem('orbit_lang') || 'pt';
+  var next = cur === 'pt' ? 'en' : 'pt';
+  localStorage.setItem('orbit_lang', next);
+  location.reload();
+});
+
 document.addEventListener('DOMContentLoaded', function() {
 
-  // ═══ LANGUAGE SWITCHER ═══
-  document.querySelectorAll('.lang-switch').forEach(function(btn) {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      var lang = localStorage.getItem('orbit_lang') || 'pt';
-      var next = lang === 'pt' ? 'en' : 'pt';
-      localStorage.setItem('orbit_lang', next);
-      location.reload();
-    });
-  });
-
+  // ═══ LANGUAGE SWITCHER UI ═══
   var lang = localStorage.getItem('orbit_lang') || 'pt';
 
-  // Update switcher UI
-  document.querySelectorAll('.lang-switch__label').forEach(function(el) {
-    el.textContent = lang === 'pt' ? 'EN' : 'PT';
-  });
-  document.querySelectorAll('.lang-switch__flag').forEach(function(el) {
-    el.textContent = lang === 'pt' ? '🇺🇸' : '🇧🇷';
-  });
+  function updateSwitcherUI() {
+    document.querySelectorAll('.lang-switch__label').forEach(function(el) {
+      el.textContent = lang === 'pt' ? 'EN' : 'PT';
+    });
+    document.querySelectorAll('.lang-switch__flag').forEach(function(el) {
+      el.textContent = lang === 'pt' ? '🇺🇸' : '🇧🇷';
+    });
+  }
+
+  updateSwitcherUI();
 
   if (lang === 'en') {
     applyEnglish();
