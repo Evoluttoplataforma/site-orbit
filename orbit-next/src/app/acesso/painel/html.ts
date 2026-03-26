@@ -310,15 +310,22 @@ export const pageHTML = `
                                         <i class="fas fa-wand-magic-sparkles" style="color:var(--primary);"></i> Gerar com IA
                                     </label>
                                     <div style="display:flex;gap:8px;">
-                                        <input type="text" id="aiImagePrompt" placeholder="Ex: Gestão estratégica com inteligência artificial, estilo corporativo" style="flex:1;font-size:0.85rem;">
+                                        <input type="text" id="aiImagePrompt" placeholder="Ex: CEO analyzing holographic data dashboard in dark office" style="flex:1;font-size:0.85rem;">
                                         <button class="btn btn-primary btn-sm" onclick="generateAIImage()" id="aiImageBtn" style="white-space:nowrap;">
                                             <i class="fas fa-sparkles"></i> Gerar
                                         </button>
                                     </div>
-                                    <div class="hint" style="margin-top:6px;">Descreva a imagem ou clique em "Auto" para gerar baseado no título</div>
-                                    <button class="btn btn-secondary btn-sm" onclick="autoGeneratePrompt()" style="margin-top:8px;font-size:0.75rem;">
-                                        <i class="fas fa-robot"></i> Auto (baseado no título)
-                                    </button>
+                                    <div style="display:flex;gap:8px;margin-top:8px;align-items:center;">
+                                        <button class="btn btn-secondary btn-sm" onclick="autoGeneratePrompt()" style="font-size:0.75rem;">
+                                            <i class="fas fa-robot"></i> Auto (baseado no título)
+                                        </button>
+                                        <select id="aiAspectRatio" style="font-size:0.78rem;padding:5px 10px;border-radius:6px;border:1px solid var(--gray-200);background:var(--white);cursor:pointer;">
+                                            <option value="16:9">16:9 Blog/Vídeo</option>
+                                            <option value="1:1">1:1 Feed</option>
+                                            <option value="9:16">9:16 Stories</option>
+                                        </select>
+                                    </div>
+                                    <div class="hint" style="margin-top:6px;">Descreva a cena ou clique "Auto" para gerar baseado no título</div>
                                     <div id="aiImageStatus" style="display:none;margin-top:8px;font-size:0.82rem;color:var(--gray-500);"></div>
                                 </div>
 
@@ -1807,7 +1814,35 @@ export const pageHTML = `
 
     // ══ AUTHOR AVATAR UPLOAD ══
     // ══ AI IMAGE GENERATION ══
+    // Modelo: google/gemini-2.5-flash-image via OpenRouter
+    // Prompt template: Orbit corporate cinematic style
+    // Aspect ratios: 16:9 (blog), 1:1 (feed), 9:16 (stories)
     var OPENROUTER_KEY = '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';
+
+    var AI_ASPECT_RATIOS = {
+        '16:9': { w: 1200, h: 675, label: '16:9 (Blog/Vídeo)' },
+        '1:1':  { w: 1080, h: 1080, label: '1:1 (Feed)' },
+        '9:16': { w: 675, h: 1200, label: '9:16 (Stories/Reels)' }
+    };
+
+    function buildImagePrompt(userPrompt, orientation) {
+        return orientation + ', cinematic social media image, ultra high quality, 8K render.\\n' +
+            'Scene concept: ' + userPrompt + '\\n\\n' +
+            'Style direction: Premium corporate aesthetic, dark moody background (#0D1117), ' +
+            'selective gold (#D4A017) accent lighting. Clean composition with strong focal point. ' +
+            'Depth of field, volumetric lighting, subtle lens flare. Professional color grading — ' +
+            'deep blacks, rich contrast, warm gold highlights.\\n\\n' +
+            'Technical: Shot on Sony A7IV, 35mm f/1.4 lens, shallow depth of field. ' +
+            'Studio lighting setup with key light at 45 degrees, rim light for separation. ' +
+            'Post-processed in Lightroom with cinematic LUT.\\n\\n' +
+            'CRITICAL RULES:\\n' +
+            '- ABSOLUTELY NO text, words, letters, numbers, labels, watermarks\\n' +
+            '- No stock photo look — must feel authentic and premium\\n' +
+            '- One clear subject/focal point\\n' +
+            '- Rich detail and texture\\n' +
+            '- Professional business/corporate context\\n' +
+            '- If showing people: confident, professional, diverse expressions';
+    }
 
     async function autoGeneratePrompt() {
         var title = document.getElementById('articleTitleInput').value.trim();
@@ -1816,7 +1851,7 @@ export const pageHTML = `
 
         var status = document.getElementById('aiImageStatus');
         status.style.display = 'block';
-        status.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gerando prompt...';
+        status.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gerando prompt com IA...';
 
         try {
             var res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
@@ -1829,9 +1864,9 @@ export const pageHTML = `
                     model: 'google/gemini-2.0-flash-exp:free',
                     messages: [{
                         role: 'user',
-                        content: 'Crie um prompt curto (1 frase em inglês) para gerar uma imagem de capa de blog sobre: "' + title + '" (categoria: ' + (category || 'gestão') + '). Estilo: corporativo moderno, cores escuras com dourado (#ffba1a), minimalista, profissional. Responda APENAS o prompt, nada mais.'
+                        content: 'Você é um diretor de arte. Crie uma descrição visual curta (2 frases em inglês) para uma imagem de capa de artigo de blog. O artigo é: "' + title + '" (categoria: ' + (category || 'gestão empresarial') + '). A imagem deve representar visualmente o conceito do artigo de forma metafórica e sofisticada. Foque na CENA, não em texto. Responda APENAS a descrição visual, nada mais.'
                     }],
-                    max_tokens: 100
+                    max_tokens: 150
                 })
             });
             var data = await res.json();
@@ -1850,21 +1885,24 @@ export const pageHTML = `
 
         var btn = document.getElementById('aiImageBtn');
         var status = document.getElementById('aiImageStatus');
+        var ratioSelect = document.getElementById('aiAspectRatio');
+        var ratio = ratioSelect ? ratioSelect.value : '16:9';
+        var dims = AI_ASPECT_RATIOS[ratio] || AI_ASPECT_RATIOS['16:9'];
+        var orientation = ratio === '9:16' ? 'Vertical portrait' : ratio === '1:1' ? 'Square format' : 'Horizontal landscape';
+
         btn.disabled = true;
         btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gerando...';
         status.style.display = 'block';
-        status.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gerando imagem... (pode levar 10-20s)';
+        status.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gerando imagem ' + dims.label + '... (10-20s)';
 
         try {
-            // Use Pollinations.ai for image generation (free, no key needed)
-            var encodedPrompt = encodeURIComponent(prompt + ', professional blog cover, dark background with gold accents, modern corporate, 16:9 aspect ratio');
-            var imageUrl = 'https://image.pollinations.ai/prompt/' + encodedPrompt + '?width=1200&height=630&nologo=true&seed=' + Date.now();
+            var fullPrompt = buildImagePrompt(prompt, orientation);
+            var encodedPrompt = encodeURIComponent(fullPrompt);
+            var imageUrl = 'https://image.pollinations.ai/prompt/' + encodedPrompt + '?width=' + dims.w + '&height=' + dims.h + '&nologo=true&seed=' + Date.now();
 
-            // Pre-load the image
             var img = new Image();
             img.crossOrigin = 'anonymous';
             img.onload = function() {
-                // Convert to base64
                 var canvas = document.createElement('canvas');
                 canvas.width = img.width;
                 canvas.height = img.height;
@@ -1877,7 +1915,7 @@ export const pageHTML = `
 
                 btn.disabled = false;
                 btn.innerHTML = '<i class="fas fa-sparkles"></i> Gerar';
-                status.innerHTML = '<i class="fas fa-check" style="color:var(--success);"></i> Imagem gerada!';
+                status.innerHTML = '<i class="fas fa-check" style="color:var(--success);"></i> Imagem gerada! (' + dims.w + 'x' + dims.h + ')';
                 toast('Imagem gerada com IA!');
             };
             img.onerror = function() {
