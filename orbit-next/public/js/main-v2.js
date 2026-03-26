@@ -5,6 +5,9 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // Skip on CMS/admin pages — those have their own scripts
+  if (document.querySelector('.sidebar-nav')) return;
+
   // ═══ HERO ROTATING WORDS ═══
   const heroRotate = document.getElementById('heroRotate');
   if (heroRotate) {
@@ -37,21 +40,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const header = document.querySelector('.header');
   const backToTop = document.getElementById('backToTop');
 
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    if (y > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-    if (backToTop) {
-      if (y > 400) {
-        backToTop.classList.add('visible');
-      } else {
-        backToTop.classList.remove('visible');
+  if (header || backToTop) {
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (header) {
+        if (y > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
       }
-    }
-  });
+      if (backToTop) {
+        if (y > 400) {
+          backToTop.classList.add('visible');
+        } else {
+          backToTop.classList.remove('visible');
+        }
+      }
+    });
+  }
 
   if (backToTop) {
     backToTop.addEventListener('click', () => {
