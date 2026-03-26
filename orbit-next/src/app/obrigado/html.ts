@@ -29,7 +29,7 @@ export const pageHTML = `
 
             <p class="ty-badge"><i class="fas fa-rocket"></i> Tudo certo!</p>
 
-            <h1>Seu time de IA<br>est&aacute; sendo <span>montado</span></h1>
+            <h1>Parab&eacute;ns, cadastro<br>conclu&iacute;do com <span>sucesso!</span></h1>
 
             <p class="ty-subtitle">Nosso time de consultores entrar&aacute; em contato em at&eacute; <strong>24 horas &uacute;teis</strong> para agendar sua demonstra&ccedil;&atilde;o personalizada.</p>
 
