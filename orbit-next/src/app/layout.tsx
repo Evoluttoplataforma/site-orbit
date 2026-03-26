@@ -12,7 +12,26 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Orbit - Contrate um time de IA que executa",
   description: "Gestão Operada por IA com consultoria recorrente passiva. Dezenas de agentes especializados constroem e operam a gestão da sua empresa 24/7.",
-  icons: { icon: '/images/favicon.png' },
+  icons: {
+    icon: '/images/favicon.png',
+    apple: '/images/favicon.png',
+  },
+  openGraph: {
+    title: "Orbit - Contrate um time de IA que executa",
+    description: "Gestão Operada por IA com consultoria recorrente passiva. Dezenas de agentes especializados constroem e operam a gestão da sua empresa 24/7.",
+    url: "https://orbitgestao.com.br",
+    siteName: "Orbit Gestão",
+    images: [{ url: "/images/og-image.png", width: 1080, height: 1080, alt: "Orbit Gestão" }],
+    type: "website",
+    locale: "pt_BR",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Orbit - Contrate um time de IA que executa",
+    description: "Gestão Operada por IA com consultoria recorrente passiva.",
+    images: ["/images/og-image.png"],
+  },
+  metadataBase: new URL("https://orbitgestao.com.br"),
 };
 
 export default function RootLayout({
