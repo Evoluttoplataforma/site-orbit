@@ -93,6 +93,16 @@
       if (e.target.closest('#backToTop')) window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
+
+  // Language switcher (event delegation)
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.lang-switch');
+    if (!btn) return;
+    e.preventDefault();
+    var lang = localStorage.getItem('orbit_lang') || 'pt';
+    localStorage.setItem('orbit_lang', lang === 'pt' ? 'en' : 'pt');
+    location.reload();
+  });
 })();
 
 document.addEventListener('DOMContentLoaded', () => {

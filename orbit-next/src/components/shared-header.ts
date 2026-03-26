@@ -105,7 +105,7 @@ export const headerHTML = `
                 <a href="/#contato-form" class="btn btn-primary" data-i18n="nav.cta">Conhecer o Time de IA</a>
             </div>
 
-            <button class="lang-switch" onclick="switchLang()" aria-label="Change language">
+            <button class="lang-switch" aria-label="Change language">
                 <span class="lang-switch__flag">🇺🇸</span>
                 <span class="lang-switch__label">EN</span>
             </button>
