@@ -182,6 +182,20 @@ export const pageHTML = `
         return text.length > len ? text.slice(0, len) + '...' : text;
     }
 
+    // Share functions (defined here to avoid escaping issues in inline onclick)
+    window.__shareWhatsApp = function() {
+        window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(document.title + ' ' + location.href));
+    };
+    window.__shareLinkedIn = function() {
+        window.open('https://linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(location.href));
+    };
+    window.__copyLink = function(btn) {
+        navigator.clipboard.writeText(location.href).then(function() {
+            btn.innerHTML = '<i class="fas fa-check"></i>';
+            setTimeout(function() { btn.innerHTML = '<i class="fas fa-link"></i>'; }, 1500);
+        });
+    };
+
     function readTime(content) {
         var words = (content || '').replace(/<[^>]*>/g, '').split(/\\s+/).length;
         return Math.max(1, Math.ceil(words / 200));
@@ -327,9 +341,9 @@ export const pageHTML = `
                     '<div class="blog-sidebar-card">' +
                         '<p class="blog-sidebar-card__label">Compartilhar</p>' +
                         '<div class="blog-sidebar-share">' +
-                            '<button class="blog-share-btn blog-share-btn--whatsapp" onclick="window.open(\'https://api.whatsapp.com/send?text=\'+encodeURIComponent(document.title+\' \'+location.href))" aria-label="Compartilhar no WhatsApp"><i class="fab fa-whatsapp"></i></button>' +
-                            '<button class="blog-share-btn blog-share-btn--linkedin" onclick="window.open(\'https://linkedin.com/sharing/share-offsite/?url=\'+encodeURIComponent(location.href))" aria-label="Compartilhar no LinkedIn"><i class="fab fa-linkedin-in"></i></button>' +
-                            '<button class="blog-share-btn blog-share-btn--copy" onclick="navigator.clipboard.writeText(location.href).then(function(){var b=this;b.innerHTML=\'<i class=&quot;fas fa-check&quot;></i>\';setTimeout(function(){b.innerHTML=\'<i class=&quot;fas fa-link&quot;></i>\';},1500);}.bind(this))" aria-label="Copiar link"><i class="fas fa-link"></i></button>' +
+                            '<button class="blog-share-btn blog-share-btn--whatsapp" onclick="window.__shareWhatsApp()" aria-label="Compartilhar no WhatsApp"><i class="fab fa-whatsapp"></i></button>' +
+                            '<button class="blog-share-btn blog-share-btn--linkedin" onclick="window.__shareLinkedIn()" aria-label="Compartilhar no LinkedIn"><i class="fab fa-linkedin-in"></i></button>' +
+                            '<button class="blog-share-btn blog-share-btn--copy" onclick="window.__copyLink(this)" aria-label="Copiar link"><i class="fas fa-link"></i></button>' +
                         '</div>' +
                     '</div>' +
                 '</aside>' +
