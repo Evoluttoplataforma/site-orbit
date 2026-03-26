@@ -320,6 +320,7 @@ export const pageHTML = `
 
                 // Sidebar
                 '<aside class="blog-article__sidebar">' +
+                '<div class="blog-article__sidebar-sticky">' +
                     '<div class="blog-sidebar-card">' +
                         '<p class="blog-sidebar-card__label">Escrito por</p>' +
                         '<div class="blog-sidebar-card__author">' +
@@ -346,6 +347,7 @@ export const pageHTML = `
                             '<button class="blog-share-btn blog-share-btn--copy" onclick="window.__copyLink(this)" aria-label="Copiar link"><i class="fas fa-link"></i></button>' +
                         '</div>' +
                     '</div>' +
+                '</div>' +
                 '</aside>' +
 
             '</div>' +

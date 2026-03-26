@@ -13521,6 +13521,11 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
         .blog-empty small { font-size: 0.85rem; }
 
         /* ── Single Article View ── */
+        .blog-grid-section:has(.blog-article) {
+            background: #fff;
+            max-width: 100%;
+            padding: 0;
+        }
         .blog-article {
             max-width: 1200px; margin: 0 auto; padding: 48px 24px 100px;
             background: #fff;
@@ -13533,7 +13538,7 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
         }
         .blog-article__back:hover { gap: 12px; }
         .blog-article__layout {
-            display: grid; grid-template-columns: 1fr 340px; gap: 48px; align-items: start;
+            display: grid; grid-template-columns: 1fr 340px; gap: 48px;
         }
         .blog-article__main {}
         .blog-article__cover {
@@ -13589,10 +13594,10 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
         .blog-article-content pre code { background: none; padding: 0; color: #C9D1D9; }
         .blog-article-content hr { border: none; border-top: 1px solid #E5E7EB; margin: 40px 0; }
 
-        /* Sidebar cards */
-        .blog-article__sidebar {
+        /* Sidebar - stretches full height, inner wrapper is sticky */
+        .blog-article__sidebar {}
+        .blog-article__sidebar-sticky {
             position: sticky; top: 100px;
-            align-self: start;
         }
         .blog-sidebar-card {
             background: #fff; border: 1px solid #E5E7EB; border-radius: 16px;
