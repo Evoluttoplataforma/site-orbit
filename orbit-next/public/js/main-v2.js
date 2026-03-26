@@ -60,14 +60,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ═══ MOBILE MENU ═══
+  var mobileMenuRetries = 0;
   function initMobileMenu() {
     var toggle = document.querySelector('.menu-toggle');
     var menu = document.querySelector('.mobile-menu');
     var overlay = document.querySelector('.mobile-menu-overlay');
 
     if (!toggle || !menu) {
-      // Retry after React hydration injects the HTML
-      setTimeout(initMobileMenu, 300);
+      mobileMenuRetries++;
+      if (mobileMenuRetries < 20) setTimeout(initMobileMenu, 250);
       return;
     }
 
@@ -96,12 +97,38 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
 
   // ═══ NAVBAR DROPDOWN (MEGA MENU) ═══
-  document.querySelectorAll('.nav-menu > li').forEach(item => {
-    const dropdown = item.querySelector('.dropdown');
-    if (!dropdown) return;
-    item.addEventListener('mouseenter', () => dropdown.classList.add('show'));
-    item.addEventListener('mouseleave', () => dropdown.classList.remove('show'));
-  });
+  function initDropdowns() {
+    var items = document.querySelectorAll('.nav-menu > li');
+    if (!items.length) {
+      setTimeout(initDropdowns, 300);
+      return;
+    }
+    var isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    items.forEach(function(item) {
+      var dropdown = item.querySelector('.dropdown');
+      if (!dropdown) return;
+      if (isTouch) {
+        item.addEventListener('click', function(e) {
+          var isOpen = dropdown.classList.contains('show');
+          // Close all others
+          document.querySelectorAll('.dropdown.show').forEach(function(d) { d.classList.remove('show'); });
+          if (!isOpen) {
+            e.preventDefault();
+            dropdown.classList.add('show');
+          }
+        });
+        document.addEventListener('click', function(e) {
+          if (!e.target.closest('.nav-menu > li')) {
+            document.querySelectorAll('.dropdown.show').forEach(function(d) { d.classList.remove('show'); });
+          }
+        });
+      } else {
+        item.addEventListener('mouseenter', function() { dropdown.classList.add('show'); });
+        item.addEventListener('mouseleave', function() { dropdown.classList.remove('show'); });
+      }
+    });
+  }
+  initDropdowns();
 
   // ═══ CAROUSEL (ZOOM-STYLE) ═══
   const track = document.querySelector('.carousel-track');
