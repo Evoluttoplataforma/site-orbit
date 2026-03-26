@@ -163,4 +163,38 @@ export const headerHTML = `
             <a href="#contato-form" class="btn btn-primary" onclick="closeMobileMenu()" data-i18n="nav.cta" style="flex:1;text-align:center;">Conhecer o Time</a>
         </div>
     </div>
+
+    <script>
+    (function initMenu() {
+        var toggle = document.querySelector('.menu-toggle');
+        var menu = document.querySelector('.mobile-menu');
+        var overlay = document.querySelector('.mobile-menu-overlay');
+        if (!toggle || !menu) { setTimeout(initMenu, 200); return; }
+        if (toggle.getAttribute('data-init')) return;
+        toggle.setAttribute('data-init', '1');
+        function closeMenu() { toggle.classList.remove('active'); menu.classList.remove('active'); if (overlay) overlay.classList.remove('active'); document.body.style.overflow = ''; }
+        function openMenu() { toggle.classList.add('active'); menu.classList.add('active'); if (overlay) overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+        window.closeMobileMenu = closeMenu;
+        window.openMobileMenu = openMenu;
+        toggle.addEventListener('click', function() { menu.classList.contains('active') ? closeMenu() : openMenu(); });
+        menu.querySelectorAll('a').forEach(function(link) { link.addEventListener('click', closeMenu); });
+        var isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        document.querySelectorAll('.nav-menu > li').forEach(function(item) {
+            var dd = item.querySelector('.dropdown');
+            if (!dd || item.getAttribute('data-dd-init')) return;
+            item.setAttribute('data-dd-init', '1');
+            if (isTouch) {
+                item.addEventListener('click', function(e) { var open = dd.classList.contains('show'); document.querySelectorAll('.dropdown.show').forEach(function(d) { d.classList.remove('show'); }); if (!open) { e.preventDefault(); dd.classList.add('show'); } });
+            } else {
+                item.addEventListener('mouseenter', function() { dd.classList.add('show'); });
+                item.addEventListener('mouseleave', function() { dd.classList.remove('show'); });
+            }
+        });
+        var header = document.querySelector('.header');
+        if (header && !window.__hScrollInit) {
+            window.__hScrollInit = true;
+            window.addEventListener('scroll', function() { var h = document.querySelector('.header'); var btn = document.querySelector('#backToTop'); if (h) h.classList.toggle('scrolled', window.scrollY > 50); if (btn) btn.style.display = window.scrollY > 400 ? 'flex' : 'none'; });
+        }
+    })();
+    </script>
 `;

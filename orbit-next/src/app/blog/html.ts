@@ -637,8 +637,9 @@ export const pageHTML = `
                 loadComments(data[0].id);
                 initCommentForm(data[0].id);
 
-                // Sticky sidebar via JS
+                // Sticky sidebar via JS (desktop only)
                 (function() {
+                    if (window.innerWidth <= 1024) return;
                     var el = document.querySelector('.blog-article__sidebar-sticky');
                     var aside = document.querySelector('.blog-article__sidebar');
                     if (!el || !aside) return;
