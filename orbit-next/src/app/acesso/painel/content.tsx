@@ -17,7 +17,7 @@ export function PageContent() {
         s.src = oldScript.src;
         document.body.appendChild(s);
       } else if (oldScript.textContent) {
-        try { new Function(oldScript.textContent)(); } catch (e) { console.warn('Script error:', e); }
+        try { new Function(oldScript.textContent)(); } catch (e) { console.error('CMS Script FATAL:', e); }
       }
     });
   }, [mounted]);

@@ -16,11 +16,7 @@ export const pageHTML = `
     <div class="blog-filters">
         <div class="blog-filters__inner" id="filterBar">
             <button class="filter-btn active" data-filter="all">Todos</button>
-            <button class="filter-btn" data-filter="estrategica">Gestão Estratégica</button>
-            <button class="filter-btn" data-filter="processos">Processos</button>
-            <button class="filter-btn" data-filter="indicadores">Indicadores</button>
-            <button class="filter-btn" data-filter="lideranca">Liderança</button>
-            <button class="filter-btn" data-filter="ia">IA & Inovação</button>
+            <!-- Filter buttons are generated dynamically from article categories -->
         </div>
         <button class="filter-scroll-btn filter-scroll-btn--left" id="filterScrollLeft" aria-label="Scroll esquerda"><i class="fas fa-chevron-left"></i></button>
         <button class="filter-scroll-btn filter-scroll-btn--right" id="filterScrollRight" aria-label="Scroll direita"><i class="fas fa-chevron-right"></i></button>
@@ -265,15 +261,32 @@ export const pageHTML = `
         if (slug) window.location.href = '/blog?artigo=' + encodeURIComponent(slug);
     };
 
-    // ── Filters ──
-    document.querySelectorAll('.filter-btn').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
-            btn.classList.add('active');
-            currentFilter = btn.dataset.filter;
-            renderArticles();
+    // ── Build filter buttons dynamically from article categories ──
+    function buildFilterButtons() {
+        var bar = document.getElementById('filterBar');
+        if (!bar) return;
+        // Extract unique categories from articles
+        var seen = {};
+        articlesCache.forEach(function(a) {
+            if (a.category && !seen[a.category]) seen[a.category] = true;
         });
-    });
+        // Keep "Todos" button, add category buttons
+        var html = '<button class="filter-btn active" data-filter="all">Todos</button>';
+        Object.keys(seen).forEach(function(cat) {
+            var label = CATEGORIES[cat] || cat.charAt(0).toUpperCase() + cat.slice(1);
+            html += '<button class="filter-btn" data-filter="' + cat + '">' + escapeHtml(label) + '</button>';
+        });
+        bar.innerHTML = html;
+        // Bind click events
+        bar.querySelectorAll('.filter-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                bar.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                renderArticles();
+            });
+        });
+    }
 
     // ── Single article view ──
     function injectArticleSEO(article) {
@@ -710,12 +723,12 @@ export const pageHTML = `
                     .catch(function() {});
                 }
             } else {
-                fetchArticles().then(renderArticles);
+                fetchArticles().then(function() { buildFilterButtons(); renderArticles(); });
             }
         })
         .catch(function(e) {
             console.error('Erro fetch single:', e);
-            fetchArticles().then(renderArticles);
+            fetchArticles().then(function() { buildFilterButtons(); renderArticles(); });
         });
     }
 
@@ -725,7 +738,7 @@ export const pageHTML = `
     if (slug) {
         fetchSingleArticle(slug);
     } else {
-        fetchArticles().then(renderArticles);
+        fetchArticles().then(function() { buildFilterButtons(); renderArticles(); });
     }
 
     // Filter scroll arrows
