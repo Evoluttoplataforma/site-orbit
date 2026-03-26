@@ -13551,8 +13551,9 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
             text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px;
         }
         .blog-article__title {
-            font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800;
-            color: #1A1D23; line-height: 1.25; margin-bottom: 20px;
+            font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 800;
+            color: #1A1D23; line-height: 1.2; margin-bottom: 20px;
+            letter-spacing: -0.02em;
         }
         .blog-article__meta {
             display: flex; align-items: center; gap: 20px; color: #6B7280; font-size: 14px;
@@ -13567,53 +13568,51 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
             margin-top: 48px; padding-top: 32px; border-top: 1px solid #E5E7EB; text-align: center;
         }
 
-        /* Article body content — editorial typography */
+        /* Article body content — editorial typography (large, readable) */
         .blog-article-content {
-            color: #374151; font-size: 1.125rem; line-height: 1.9;
+            color: #1A1D23; font-size: 1.25rem; line-height: 2;
             letter-spacing: -0.01em;
         }
         /* Drop cap on first paragraph */
         .blog-article-content > p:first-of-type::first-letter {
-            float: left; font-size: 3.5em; font-weight: 800; color: #1A1D23;
-            line-height: 0.8; margin: 6px 12px 0 0;
+            float: left; font-size: 4em; font-weight: 800; color: #1A1D23;
+            line-height: 0.75; margin: 8px 14px 0 -2px;
             font-family: 'Plus Jakarta Sans', Georgia, serif;
         }
         .blog-article-content > p:first-of-type {
-            font-size: 1.2rem; color: #1A1D23; line-height: 1.8;
+            font-size: 1.3rem; color: #1A1D23; line-height: 1.9;
         }
         .blog-article-content h2 {
-            font-size: 1.65rem; font-weight: 800; color: #1A1D23;
-            margin: 48px 0 20px; line-height: 1.3;
-            padding-bottom: 12px; border-bottom: 2px solid #F0F0F0;
+            font-size: clamp(1.5rem, 3vw, 1.85rem); font-weight: 800; color: #1A1D23;
+            margin: 56px 0 24px; line-height: 1.3;
         }
         .blog-article-content h3 {
-            font-size: 1.3rem; font-weight: 700; color: #1A1D23;
-            margin: 40px 0 14px; line-height: 1.35;
+            font-size: clamp(1.2rem, 2.5vw, 1.45rem); font-weight: 700; color: #1A1D23;
+            margin: 48px 0 18px; line-height: 1.35;
         }
         .blog-article-content h4 {
-            font-size: 1.1rem; font-weight: 700; color: #1A1D23;
-            margin: 32px 0 10px;
+            font-size: 1.15rem; font-weight: 700; color: #1A1D23;
+            margin: 40px 0 14px;
         }
         .blog-article-content p {
-            margin-bottom: 24px; color: #4B5563;
+            margin-bottom: 28px; color: #374151;
         }
         .blog-article-content ul, .blog-article-content ol {
-            margin: 0 0 28px 0; padding-left: 24px;
+            margin: 0 0 32px 0; padding-left: 28px;
+            color: #374151; font-size: 1.2rem; line-height: 1.9;
         }
-        .blog-article-content ul { list-style: none; padding-left: 0; }
+        .blog-article-content ul { list-style: disc; padding-left: 28px; }
         .blog-article-content ul li {
-            position: relative; padding-left: 24px; margin-bottom: 14px;
+            margin-bottom: 16px; padding-left: 6px;
         }
-        .blog-article-content ul li::before {
-            content: ''; position: absolute; left: 0; top: 10px;
-            width: 6px; height: 6px; border-radius: 50%;
-            background: #ffba1a;
+        .blog-article-content ul li::marker {
+            color: #1A1D23;
         }
         .blog-article-content ol li {
-            margin-bottom: 14px; padding-left: 4px;
+            margin-bottom: 16px; padding-left: 6px;
         }
         .blog-article-content strong { color: #1A1D23; font-weight: 700; }
-        .blog-article-content em { color: #4B5563; }
+        .blog-article-content em { color: #374151; font-style: italic; }
         .blog-article-content a {
             color: #D4960A; text-decoration: underline;
             text-underline-offset: 3px; text-decoration-color: rgba(212,150,10,0.3);
@@ -13621,31 +13620,28 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
         }
         .blog-article-content a:hover { text-decoration-color: #D4960A; }
         .blog-article-content img {
-            border-radius: 12px; margin: 32px 0; max-width: 100%;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            border-radius: 12px; margin: 36px 0; max-width: 100%;
         }
         .blog-article-content blockquote {
-            border-left: 3px solid #ffba1a; padding: 20px 28px; margin: 32px 0;
-            background: rgba(255,186,26,0.03); border-radius: 0 12px 12px 0;
-            font-style: italic; color: #6B7280; font-size: 1.1rem; line-height: 1.8;
+            border-left: 3px solid #1A1D23; padding: 20px 28px; margin: 36px 0;
+            background: transparent; border-radius: 0;
+            font-style: italic; color: #4B5563; font-size: 1.2rem; line-height: 1.9;
         }
-        .blog-article-content blockquote p { color: #6B7280; margin-bottom: 0; }
+        .blog-article-content blockquote p { color: #4B5563; margin-bottom: 0; }
         .blog-article-content blockquote p + p { margin-top: 12px; }
         .blog-article-content pre {
-            background: #0D1117; border: 1px solid #21262D; border-radius: 12px;
-            padding: 24px; overflow-x: auto; margin: 28px 0; font-size: 14px; color: #C9D1D9;
+            background: #F6F8FA; border: 1px solid #E5E7EB; border-radius: 8px;
+            padding: 24px; overflow-x: auto; margin: 32px 0; font-size: 15px; color: #1A1D23;
         }
         .blog-article-content code {
-            background: rgba(255,186,26,0.08); padding: 2px 8px; border-radius: 4px;
-            font-size: 0.88em; color: #B45309;
+            background: #F6F8FA; padding: 2px 8px; border-radius: 4px;
+            font-size: 0.9em; color: #1A1D23;
         }
-        .blog-article-content pre code { background: none; padding: 0; color: #C9D1D9; }
+        .blog-article-content pre code { background: none; padding: 0; }
         .blog-article-content hr {
-            border: none; border-top: 2px solid #F0F0F0; margin: 48px 0;
+            border: none; border-top: 1px solid #E5E7EB; margin: 48px 0;
         }
-        /* Indent for emphasis text blocks (like the reference) */
-        .blog-article-content p + p + p { }
-        .blog-article-content > div { margin-bottom: 24px; }
+        .blog-article-content > div { margin-bottom: 28px; }
 
         /* Sidebar - stretches full height, inner wrapper is sticky */
         .blog-article__sidebar {}
