@@ -391,7 +391,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ═══ LEAD FORM ═══
-  const leadForm = document.getElementById('lead-form');
   const pageStart = Date.now();
 
   // Session ID
@@ -407,26 +406,26 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch(e) { return Date.now() + '_' + Math.random().toString(36).substr(2, 9); }
   })();
 
-  // Phone mask (BR)
-  const phoneInput = document.getElementById('telefone');
-  if (phoneInput) {
-    phoneInput.addEventListener('input', function(e) {
-      let val = e.target.value.replace(/\D/g, '');
-      if (val.length > 11) val = val.slice(0, 11);
-      if (val.length > 6) {
-        val = '(' + val.slice(0,2) + ') ' + val.slice(2,7) + '-' + val.slice(7);
-      } else if (val.length > 2) {
-        val = '(' + val.slice(0,2) + ') ' + val.slice(2);
-      } else if (val.length > 0) {
-        val = '(' + val;
-      }
-      e.target.value = val;
-    });
-  }
+  // Phone mask (BR) — event delegation
+  document.addEventListener('input', function(e) {
+    if (e.target.id !== 'telefone') return;
+    let val = e.target.value.replace(/\D/g, '');
+    if (val.length > 11) val = val.slice(0, 11);
+    if (val.length > 6) {
+      val = '(' + val.slice(0,2) + ') ' + val.slice(2,7) + '-' + val.slice(7);
+    } else if (val.length > 2) {
+      val = '(' + val.slice(0,2) + ') ' + val.slice(2);
+    } else if (val.length > 0) {
+      val = '(' + val;
+    }
+    e.target.value = val;
+  });
 
-  // Form submit
-  if (leadForm) {
-    leadForm.addEventListener('submit', function(e) {
+  // Form submit — event delegation (survives React hydration)
+  document.addEventListener('submit', function(e) {
+    var leadForm = e.target.closest('#lead-form');
+    if (!leadForm) return;
+    e.preventDefault();
       e.preventDefault();
 
       const btnText = leadForm.querySelector('.btn-text');
@@ -511,8 +510,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(function() {
         window.location.href = '/obrigado';
       }, 1200);
-    });
-  }
+  });
 
   // ═══ PREMIUM ANIMATIONS (fade-in-up + stagger-children) ═══
   const animObserver = new IntersectionObserver((entries) => {
