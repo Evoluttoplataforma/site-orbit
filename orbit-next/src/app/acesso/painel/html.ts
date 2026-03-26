@@ -29,6 +29,9 @@ export const pageHTML = `
             <a href="#" data-view="comments" onclick="showView('comments')">
                 <i class="fas fa-comments"></i> Comentários
             </a>
+            <a href="#" data-view="banners" onclick="showView('banners')">
+                <i class="fas fa-bullhorn"></i> Banners
+            </a>
             <div class="nav-divider"></div>
             <a href="#" data-view="users" onclick="showView('users')" id="navUsers" style="display:none;">
                 <i class="fas fa-users-gear"></i> Usuarios
@@ -866,6 +869,154 @@ export const pageHTML = `
             </div>
         </div>
 
+        <!-- ══ BANNERS VIEW ══ -->
+        <div class="view" id="view-banners">
+            <div class="topbar">
+                <h1>Banners do Site</h1>
+                <div class="topbar-actions">
+                    <button class="btn btn-primary btn-sm" onclick="openBannerModal()">
+                        <i class="fas fa-plus"></i> Novo Banner
+                    </button>
+                </div>
+            </div>
+            <div class="content">
+                <div class="card">
+                    <div class="card-body" style="padding:0;">
+                        <div class="table-wrapper">
+                            <div class="table-responsive"><table>
+                                <thead>
+                                    <tr>
+                                        <th style="width:70px;">Ativo</th>
+                                        <th>Modo</th>
+                                        <th>Posicao</th>
+                                        <th>Titulo</th>
+                                        <th>Periodo</th>
+                                        <th style="width:100px;">Acoes</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bannersTableBody"></tbody>
+                            </table></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ BANNER MODAL ══ -->
+        <div class="modal-overlay" id="bannerModal" onclick="if(event.target===this)closeBannerModal()">
+            <div class="modal" style="max-width:600px;max-height:90vh;overflow-y:auto;">
+                <div class="modal-header">
+                    <h3 id="bannerModalTitle">Novo Banner</h3>
+                    <button class="btn btn-ghost" onclick="closeBannerModal()"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="bnId">
+
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                        <div class="form-group">
+                            <label for="bnDisplayMode">Modo de exibicao</label>
+                            <select id="bnDisplayMode" onchange="toggleBannerImageField()">
+                                <option value="bar">Barra (texto + botao)</option>
+                                <option value="image">Imagem (banner visual)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="bnPosition">Posicao no site</label>
+                            <select id="bnPosition">
+                                <option value="above-header">Acima do header (fixo)</option>
+                                <option value="below-header">Abaixo do header</option>
+                                <option value="floating-bottom">Flutuante no rodape</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bnTitle">Titulo</label>
+                        <input type="text" id="bnTitle" placeholder="Ex: Live especial hoje as 19h!">
+                    </div>
+                    <div class="form-group">
+                        <label for="bnDescription">Descricao (opcional)</label>
+                        <input type="text" id="bnDescription" placeholder="Texto complementar curto">
+                    </div>
+
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                        <div class="form-group">
+                            <label for="bnCtaText">Texto do botao</label>
+                            <input type="text" id="bnCtaText" placeholder="Ex: Assistir agora">
+                        </div>
+                        <div class="form-group">
+                            <label for="bnCtaUrl">Link do botao</label>
+                            <input type="text" id="bnCtaUrl" placeholder="https://...">
+                        </div>
+                    </div>
+
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                        <div class="form-group">
+                            <label for="bnBgColor">Cor de fundo</label>
+                            <div style="display:flex;align-items:center;gap:8px;">
+                                <input type="color" id="bnBgColor" value="#ffba1a" style="width:40px;height:36px;border:1px solid var(--gray-200);border-radius:6px;cursor:pointer;">
+                                <input type="text" id="bnBgColorText" value="#ffba1a" style="flex:1;" oninput="document.getElementById('bnBgColor').value=this.value" onchange="document.getElementById('bnBgColor').value=this.value">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="bnTextColor">Cor do texto</label>
+                            <div style="display:flex;align-items:center;gap:8px;">
+                                <input type="color" id="bnTextColor" value="#0D1117" style="width:40px;height:36px;border:1px solid var(--gray-200);border-radius:6px;cursor:pointer;">
+                                <input type="text" id="bnTextColorText" value="#0D1117" style="flex:1;" oninput="document.getElementById('bnTextColor').value=this.value" onchange="document.getElementById('bnTextColor').value=this.value">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="bnDismissible" checked style="margin-right:6px;">
+                            Visitante pode fechar o banner (X)
+                        </label>
+                    </div>
+
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                        <div class="form-group">
+                            <label for="bnStartDate">Data inicio (opcional)</label>
+                            <input type="datetime-local" id="bnStartDate">
+                            <div class="hint">Vazio = ativo imediatamente</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="bnEndDate">Data fim (opcional)</label>
+                            <input type="datetime-local" id="bnEndDate">
+                            <div class="hint">Vazio = sem expiracao</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bnPriority">Prioridade</label>
+                        <input type="number" id="bnPriority" value="0" min="0" max="100">
+                        <div class="hint">Maior numero = aparece primeiro</div>
+                    </div>
+
+                    <div class="form-group" id="bnImageGroup">
+                        <label>Imagem do banner</label>
+                        <div class="image-upload-area" id="bnImageDropZone" style="min-height:120px;">
+                            <input type="file" id="bnImageFileInput" accept="image/*" onchange="handleBnImageUpload(event)">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Arraste uma imagem ou clique para selecionar</p>
+                            <span class="upload-hint">JPG, PNG ou WebP (max 2MB)</span>
+                        </div>
+                        <div class="image-preview" id="bnImagePreview" style="margin-top:8px;"></div>
+                        <input type="hidden" id="bnImageData">
+                    </div>
+
+                    <div style="border:1px solid var(--gray-200);border-radius:8px;padding:12px;margin-top:8px;background:var(--gray-50);">
+                        <label style="font-size:0.8rem;font-weight:600;color:var(--gray-500);margin-bottom:8px;display:block;">PRE-VISUALIZACAO</label>
+                        <div id="bnPreview" style="border-radius:6px;overflow:hidden;min-height:40px;"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" onclick="closeBannerModal()">Cancelar</button>
+                    <button class="btn btn-primary" onclick="saveBanner()">Salvar</button>
+                </div>
+            </div>
+        </div>
+
         <!-- ══ USERS VIEW (ADMIN ONLY) ══ -->
         <div class="view" id="view-users">
             <div class="topbar">
@@ -1133,6 +1284,7 @@ export const pageHTML = `
         if (viewName === 'leadmagnets') refreshLeadMagnets();
         if (viewName === 'stories') refreshStories();
         if (viewName === 'comments') refreshComments();
+        if (viewName === 'banners') refreshBanners();
         if (viewName === 'storyeditor') {
             if (!document.getElementById('storyEditId').value) {
                 clearStoryEditor();
@@ -3111,6 +3263,242 @@ JSON.stringify(schemaOrg, null, 2) +
         }
     });
 
+    // ═══ BANNERS CRUD ═══
+    var supabaseBanners = [];
+    var BANNER_MODE_LABELS = { bar: 'Barra', image: 'Imagem' };
+    var BANNER_POS_LABELS = { 'above-header': 'Acima do header', 'below-header': 'Abaixo do header', 'floating-bottom': 'Rodape flutuante' };
+
+    async function refreshBanners() {
+        try {
+            var res = await supaFetch(SUPABASE_URL + '/rest/v1/site_banners?order=priority.desc,created_at.desc', {
+                headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + session.access_token }
+            });
+            supabaseBanners = res.ok ? await res.json() : [];
+        } catch(e) {
+            supabaseBanners = [];
+            console.error('Erro ao carregar banners:', e);
+        }
+        var tbody = document.getElementById('bannersTableBody');
+        if (!tbody) return;
+        if (supabaseBanners.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--gray-500);"><i class="fas fa-bullhorn" style="font-size:24px;margin-bottom:8px;display:block;opacity:0.3;"></i>Nenhum banner cadastrado.</td></tr>';
+            return;
+        }
+        tbody.innerHTML = supabaseBanners.map(function(bn) {
+            var startStr = bn.start_date ? new Date(bn.start_date).toLocaleDateString('pt-BR') : 'Sempre';
+            var endStr = bn.end_date ? new Date(bn.end_date).toLocaleDateString('pt-BR') : 'Sem fim';
+            var periodo = startStr + ' → ' + endStr;
+            var activeClass = bn.active ? 'badge-published' : 'badge-draft';
+            var activeLabel = bn.active ? 'Ativo' : 'Inativo';
+            return '<tr>' +
+                '<td><button class="badge ' + activeClass + '" style="cursor:pointer;border:none;" onclick="toggleBannerActive(\'' + bn.id + '\',' + bn.active + ')">' + activeLabel + '</button></td>' +
+                '<td>' + escapeHtml(BANNER_MODE_LABELS[bn.display_mode] || bn.display_mode) + '</td>' +
+                '<td style="font-size:0.85rem;">' + escapeHtml(BANNER_POS_LABELS[bn.position] || bn.position) + '</td>' +
+                '<td><strong>' + escapeHtml(bn.title || '(sem titulo)') + '</strong></td>' +
+                '<td style="font-size:0.82rem;color:var(--gray-500);">' + periodo + '</td>' +
+                '<td><div style="display:flex;gap:4px;">' +
+                    '<button class="btn btn-secondary btn-icon btn-sm" onclick="editBanner(\'' + bn.id + '\')" title="Editar"><i class="fas fa-pen"></i></button>' +
+                    '<button class="btn btn-danger btn-icon btn-sm" onclick="deleteBanner(\'' + bn.id + '\')" title="Excluir"><i class="fas fa-trash"></i></button>' +
+                '</div></td>' +
+            '</tr>';
+        }).join('');
+    }
+
+    function openBannerModal() {
+        document.getElementById('bnId').value = '';
+        document.getElementById('bnDisplayMode').value = 'bar';
+        document.getElementById('bnPosition').value = 'above-header';
+        document.getElementById('bnTitle').value = '';
+        document.getElementById('bnDescription').value = '';
+        document.getElementById('bnCtaText').value = '';
+        document.getElementById('bnCtaUrl').value = '';
+        document.getElementById('bnBgColor').value = '#ffba1a';
+        document.getElementById('bnBgColorText').value = '#ffba1a';
+        document.getElementById('bnTextColor').value = '#0D1117';
+        document.getElementById('bnTextColorText').value = '#0D1117';
+        document.getElementById('bnDismissible').checked = true;
+        document.getElementById('bnStartDate').value = '';
+        document.getElementById('bnEndDate').value = '';
+        document.getElementById('bnPriority').value = '0';
+        document.getElementById('bnImageData').value = '';
+        document.getElementById('bnImagePreview').innerHTML = '';
+        document.getElementById('bannerModalTitle').textContent = 'Novo Banner';
+        toggleBannerImageField();
+        updateBannerPreview();
+        document.getElementById('bannerModal').classList.add('active');
+    }
+
+    function closeBannerModal() {
+        document.getElementById('bannerModal').classList.remove('active');
+    }
+
+    function editBanner(id) {
+        var bn = supabaseBanners.find(function(b) { return b.id === id; });
+        if (!bn) return;
+        document.getElementById('bnId').value = bn.id;
+        document.getElementById('bnDisplayMode').value = bn.display_mode || 'bar';
+        document.getElementById('bnPosition').value = bn.position || 'above-header';
+        document.getElementById('bnTitle').value = bn.title || '';
+        document.getElementById('bnDescription').value = bn.description || '';
+        document.getElementById('bnCtaText').value = bn.cta_text || '';
+        document.getElementById('bnCtaUrl').value = bn.cta_url || '';
+        document.getElementById('bnBgColor').value = bn.bg_color || '#ffba1a';
+        document.getElementById('bnBgColorText').value = bn.bg_color || '#ffba1a';
+        document.getElementById('bnTextColor').value = bn.text_color || '#0D1117';
+        document.getElementById('bnTextColorText').value = bn.text_color || '#0D1117';
+        document.getElementById('bnDismissible').checked = bn.dismissible !== false;
+        document.getElementById('bnStartDate').value = bn.start_date ? bn.start_date.slice(0, 16) : '';
+        document.getElementById('bnEndDate').value = bn.end_date ? bn.end_date.slice(0, 16) : '';
+        document.getElementById('bnPriority').value = bn.priority || 0;
+        document.getElementById('bnImageData').value = bn.image_data || '';
+        document.getElementById('bnImagePreview').innerHTML = bn.image_data ? '<img src="' + bn.image_data + '" style="max-width:100%;border-radius:8px;">' : '';
+        document.getElementById('bannerModalTitle').textContent = 'Editar Banner';
+        toggleBannerImageField();
+        updateBannerPreview();
+        document.getElementById('bannerModal').classList.add('active');
+    }
+
+    function saveBanner() {
+        var title = document.getElementById('bnTitle').value.trim();
+        var mode = document.getElementById('bnDisplayMode').value;
+        if (mode === 'bar' && !title) { toast('Informe o titulo do banner.', 'error'); return; }
+        if (mode === 'image' && !document.getElementById('bnImageData').value) { toast('Selecione uma imagem para o banner.', 'error'); return; }
+
+        var id = document.getElementById('bnId').value;
+        var startDate = document.getElementById('bnStartDate').value;
+        var endDate = document.getElementById('bnEndDate').value;
+
+        var payload = {
+            title: title,
+            description: document.getElementById('bnDescription').value.trim(),
+            cta_text: document.getElementById('bnCtaText').value.trim(),
+            cta_url: document.getElementById('bnCtaUrl').value.trim(),
+            image_data: document.getElementById('bnImageData').value,
+            display_mode: mode,
+            position: document.getElementById('bnPosition').value,
+            dismissible: document.getElementById('bnDismissible').checked,
+            bg_color: document.getElementById('bnBgColor').value,
+            text_color: document.getElementById('bnTextColor').value,
+            start_date: startDate ? new Date(startDate).toISOString() : null,
+            end_date: endDate ? new Date(endDate).toISOString() : null,
+            priority: parseInt(document.getElementById('bnPriority').value) || 0,
+            updated_at: new Date().toISOString()
+        };
+
+        var url = SUPABASE_URL + '/rest/v1/site_banners';
+        var method = 'POST';
+        if (id) {
+            url = url + '?id=eq.' + id;
+            method = 'PATCH';
+        }
+
+        supaFetch(url, {
+            method: method,
+            headers: { 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+            body: JSON.stringify(payload)
+        }).then(function(res) {
+            if (!res.ok) throw new Error('Erro ao salvar');
+            closeBannerModal();
+            refreshBanners();
+            toast('Banner salvo!');
+        }).catch(function(e) {
+            toast('Erro ao salvar banner: ' + e.message, 'error');
+        });
+    }
+
+    function deleteBanner(id) {
+        if (!confirm('Excluir este banner?')) return;
+        supaFetch(SUPABASE_URL + '/rest/v1/site_banners?id=eq.' + id, {
+            method: 'DELETE',
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + session.access_token }
+        }).then(function(res) {
+            if (!res.ok) throw new Error('Erro ao excluir');
+            refreshBanners();
+            toast('Banner excluido.');
+        }).catch(function(e) {
+            toast('Erro ao excluir banner.', 'error');
+        });
+    }
+
+    function toggleBannerActive(id, current) {
+        supaFetch(SUPABASE_URL + '/rest/v1/site_banners?id=eq.' + id, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+            body: JSON.stringify({ active: !current, updated_at: new Date().toISOString() })
+        }).then(function(res) {
+            if (!res.ok) throw new Error('Erro');
+            refreshBanners();
+            toast(!current ? 'Banner ativado!' : 'Banner desativado.');
+        }).catch(function(e) {
+            toast('Erro ao alterar status.', 'error');
+        });
+    }
+
+    function toggleBannerImageField() {
+        var mode = document.getElementById('bnDisplayMode').value;
+        document.getElementById('bnImageGroup').style.display = mode === 'image' ? 'block' : 'none';
+    }
+
+    function handleBnImageUpload(event) {
+        var file = event.target.files[0];
+        if (!file) return;
+        if (file.size > 2 * 1024 * 1024) { toast('Imagem muito grande. Max 2MB.', 'error'); return; }
+        if (!file.type.startsWith('image/')) { toast('Selecione um arquivo de imagem.', 'error'); return; }
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('bnImageData').value = e.target.result;
+            document.getElementById('bnImagePreview').innerHTML = '<img src="' + e.target.result + '" style="max-width:100%;border-radius:8px;">';
+            updateBannerPreview();
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function updateBannerPreview() {
+        var mode = document.getElementById('bnDisplayMode').value;
+        var bg = document.getElementById('bnBgColor').value;
+        var color = document.getElementById('bnTextColor').value;
+        var title = document.getElementById('bnTitle').value || 'Titulo do banner';
+        var desc = document.getElementById('bnDescription').value;
+        var ctaText = document.getElementById('bnCtaText').value;
+        var imgData = document.getElementById('bnImageData').value;
+        var preview = document.getElementById('bnPreview');
+        if (!preview) return;
+
+        if (mode === 'image' && imgData) {
+            preview.innerHTML = '<div style="background:' + bg + ';border-radius:6px;overflow:hidden;"><img src="' + imgData + '" style="width:100%;display:block;"></div>';
+        } else {
+            var html = '<div style="background:' + bg + ';color:' + color + ';padding:10px 16px;border-radius:6px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;text-align:center;">';
+            html += '<strong style="font-size:13px;">' + escapeHtml(title) + '</strong>';
+            if (desc) html += '<span style="font-size:13px;opacity:0.9;">' + escapeHtml(desc) + '</span>';
+            if (ctaText) html += '<span style="background:rgba(0,0,0,0.15);padding:3px 12px;border-radius:20px;font-size:12px;font-weight:600;">' + escapeHtml(ctaText) + '</span>';
+            html += '</div>';
+            preview.innerHTML = html;
+        }
+    }
+
+    // Banner modal — sync color inputs
+    var bnBgColorPicker = document.getElementById('bnBgColor');
+    var bnTextColorPicker = document.getElementById('bnTextColor');
+    if (bnBgColorPicker) bnBgColorPicker.addEventListener('input', function() { document.getElementById('bnBgColorText').value = this.value; updateBannerPreview(); });
+    if (bnTextColorPicker) bnTextColorPicker.addEventListener('input', function() { document.getElementById('bnTextColorText').value = this.value; updateBannerPreview(); });
+    // Live preview on field changes
+    ['bnTitle','bnDescription','bnCtaText','bnDisplayMode'].forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.addEventListener('input', updateBannerPreview);
+    });
+
+    // Banner image drop zone
+    var bnDropZone = document.getElementById('bnImageDropZone');
+    if (bnDropZone) {
+        bnDropZone.addEventListener('dragover', function(e) { e.preventDefault(); bnDropZone.classList.add('dragover'); });
+        bnDropZone.addEventListener('dragleave', function() { bnDropZone.classList.remove('dragover'); });
+        bnDropZone.addEventListener('drop', function(e) {
+            e.preventDefault(); bnDropZone.classList.remove('dragover');
+            var file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) handleBnImageUpload({ target: { files: [file] } });
+        });
+    }
+
     // ═══ Expose functions to global scope (required for onclick handlers) ═══
     window.showView = showView;
     window.logout = logout;
@@ -3167,6 +3555,14 @@ JSON.stringify(schemaOrg, null, 2) +
     window.handleStoryPhotosUpload = handleStoryPhotosUpload;
     window.saveStoryFromEditor = saveStoryFromEditor;
     window.toggleSidebar = toggleSidebar;
+    window.openBannerModal = openBannerModal;
+    window.closeBannerModal = closeBannerModal;
+    window.editBanner = editBanner;
+    window.saveBanner = saveBanner;
+    window.deleteBanner = deleteBanner;
+    window.toggleBannerActive = toggleBannerActive;
+    window.handleBnImageUpload = handleBnImageUpload;
+    window.toggleBannerImageField = toggleBannerImageField;
     window.updateSeoScore = updateSeoScore;
     window.onCategoryChange = onCategoryChange;
 

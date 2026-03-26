@@ -16836,3 +16836,87 @@ hr.glow-divider { display: none !important; }
     gap: 32px !important;
   }
 }
+
+/* ═══ SITE BANNERS ═══ */
+.orbit-banner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1001;
+  overflow: hidden;
+  font-family: var(--font-sans, 'Plus Jakarta Sans', sans-serif);
+}
+.orbit-banner--above-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.orbit-banner--below-header {
+  position: relative;
+  margin-top: 100px;
+}
+.orbit-banner--floating-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+}
+.orbit-banner--bar {
+  padding: 10px 48px 10px 20px;
+  min-height: 44px;
+  gap: 12px;
+}
+.orbit-banner__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  text-align: center;
+  width: 100%;
+}
+.orbit-banner__title { font-weight: 700; font-size: 14px; }
+.orbit-banner__desc { font-size: 14px; opacity: 0.9; }
+.orbit-banner__cta {
+  display: inline-block;
+  padding: 5px 18px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  background: rgba(0,0,0,0.15);
+  color: inherit;
+  text-decoration: none;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.orbit-banner__cta:hover { background: rgba(0,0,0,0.25); }
+.orbit-banner--image { padding: 0; }
+.orbit-banner__image-link { display: block; width: 100%; }
+.orbit-banner__image-link img { width: 100%; display: block; }
+.orbit-banner__close {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 22px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  line-height: 1;
+  padding: 4px;
+}
+.orbit-banner__close:hover { opacity: 1; }
+@media (max-width: 768px) {
+  .orbit-banner--bar { padding: 8px 40px 8px 12px; }
+  .orbit-banner__content { flex-direction: column; gap: 6px; }
+  .orbit-banner__title { font-size: 13px; }
+  .orbit-banner__desc { font-size: 12px; }
+}
