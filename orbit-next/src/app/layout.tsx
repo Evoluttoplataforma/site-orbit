@@ -86,8 +86,8 @@ export default function RootLayout({
   if(stored.fbclid){var fbcVal=stored.fbc||("fb.1."+Date.now()+"."+stored.fbclid);document.cookie="_fbc="+encodeURIComponent(fbcVal)+";max-age="+(90*24*60*60)+";path=/;SameSite=Lax"}
 })();
         ` }} />
-        <script src="/js/main-v2.js?v=20260326" defer></script>
-        <script src="/js/orbit-init.js?v=20260326" defer></script>
+        <script src="/js/main-v2.js?v=20260326b" defer></script>
+        <script src="/js/orbit-init.js?v=20260326b" defer></script>
         <script dangerouslySetInnerHTML={{ __html: `(function(){var l=document.createElement('link');l.rel='stylesheet';l.href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';document.head.appendChild(l)})()` }} />
       </body>
     </html>
