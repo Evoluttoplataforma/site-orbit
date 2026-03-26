@@ -14,7 +14,7 @@ export const pageHTML = `
             <a href="#" data-view="articles" onclick="showView('articles')">
                 <i class="fas fa-file-alt"></i> Artigos
             </a>
-            <a href="#" data-view="editor" onclick="showView('editor')">
+            <a href="#" data-view="editor" onclick="newArticle()">
                 <i class="fas fa-pen-to-square"></i> Novo Artigo
             </a>
             <a href="#" data-view="leadmagnets" onclick="showView('leadmagnets')">
@@ -25,6 +25,9 @@ export const pageHTML = `
             </a>
             <a href="#" data-view="storyeditor" onclick="showView('storyeditor')">
                 <i class="fas fa-pen-fancy"></i> Nova História
+            </a>
+            <a href="#" data-view="comments" onclick="showView('comments')">
+                <i class="fas fa-comments"></i> Comentários
             </a>
             <div class="nav-divider"></div>
             <a href="#" data-view="users" onclick="showView('users')" id="navUsers" style="display:none;">
@@ -56,12 +59,12 @@ export const pageHTML = `
     <div class="main">
 
         <!-- ══ NOTIFICATION BELL (global, fixed) ══ -->
-        <div id="notifBellWrapper" style="position:fixed; top:14px; right:32px; z-index:999;">
-            <button class="notif-bell" onclick="toggleNotifDropdown()" title="Notificações">
+        <div id="notifBellWrapper" style="position:fixed; top:14px; right:32px; z-index:999; pointer-events:none;">
+            <button class="notif-bell" onclick="toggleNotifDropdown()" title="Notificações" style="pointer-events:auto;">
                 <i class="fas fa-bell"></i>
                 <span class="notif-bell__badge" id="notifBadge" data-count="0"></span>
             </button>
-            <div class="notif-dropdown" id="notifDropdown">
+            <div class="notif-dropdown" id="notifDropdown" style="pointer-events:auto;">
                 <div class="notif-dropdown__header">
                     <span>Notificações</span>
                     <span id="notifCount" style="color:var(--gray-400);font-size:0.8rem;"></span>
@@ -102,7 +105,7 @@ export const pageHTML = `
                 <div class="card">
                     <div class="card-header">
                         <h3>Artigos recentes</h3>
-                        <button class="btn btn-primary btn-sm" onclick="showView('editor')">
+                        <button class="btn btn-primary btn-sm" onclick="newArticle()">
                             <i class="fas fa-plus"></i> Novo Artigo
                         </button>
                     </div>
@@ -124,7 +127,7 @@ export const pageHTML = `
                         <div class="empty-state" id="dashboardEmpty" style="display:none;">
                             <i class="fas fa-newspaper"></i>
                             <p>Nenhum artigo criado ainda</p>
-                            <button class="btn btn-primary" onclick="showView('editor')">
+                            <button class="btn btn-primary" onclick="newArticle()">
                                 <i class="fas fa-plus"></i> Criar primeiro artigo
                             </button>
                         </div>
@@ -138,7 +141,7 @@ export const pageHTML = `
             <div class="topbar">
                 <h1>Artigos</h1>
                 <div class="topbar-actions">
-                    <button class="btn btn-primary btn-sm" onclick="showView('editor')">
+                    <button class="btn btn-primary btn-sm" onclick="newArticle()">
                         <i class="fas fa-plus"></i> Novo Artigo
                     </button>
                 </div>
@@ -164,7 +167,7 @@ export const pageHTML = `
                         <div class="empty-state" id="articlesEmpty" style="display:none;">
                             <i class="fas fa-newspaper"></i>
                             <p>Nenhum artigo encontrado</p>
-                            <button class="btn btn-primary" onclick="showView('editor')">
+                            <button class="btn btn-primary" onclick="newArticle()">
                                 <i class="fas fa-plus"></i> Criar artigo
                             </button>
                         </div>
@@ -243,14 +246,18 @@ export const pageHTML = `
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="articleCategory">Categoria *</label>
-                                    <select id="articleCategory">
+                                    <select id="articleCategory" onchange="onCategoryChange(this)">
                                         <option value="">Selecione...</option>
                                         <option value="estrategica">Gestao Estrategica</option>
                                         <option value="processos">Processos</option>
                                         <option value="indicadores">Indicadores</option>
                                         <option value="lideranca">Lideranca</option>
                                         <option value="ia">IA & Inovacao</option>
+                                        <option value="__custom__">+ Nova categoria...</option>
                                     </select>
+                                    <div id="customCategoryWrapper" style="display:none;margin-top:8px;">
+                                        <input type="text" id="customCategoryInput" placeholder="Nome da categoria">
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -259,8 +266,29 @@ export const pageHTML = `
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="articleReadTime">Tempo de leitura</label>
-                                    <input type="text" id="articleReadTime" placeholder="5 min">
+                                    <label>Foto do autor</label>
+                                    <div style="display:flex;align-items:center;gap:12px;">
+                                        <div id="authorAvatarPreview" style="width:48px;height:48px;border-radius:50%;background:var(--gray-100);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">
+                                            <i class="fas fa-user" style="color:var(--gray-400);"></i>
+                                        </div>
+                                        <div style="flex:1;">
+                                            <div class="image-upload-area" id="authorAvatarDropZone" style="min-height:auto;padding:10px;">
+                                                <input type="file" id="authorAvatarInput" accept="image/*" onchange="handleAuthorAvatarUpload(event)">
+                                                <span style="font-size:0.78rem;">Clique ou arraste (max 2MB)</span>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-ghost btn-sm" onclick="removeAuthorAvatar()" title="Remover foto" style="flex-shrink:0;"><i class="fas fa-times" style="color:var(--error);"></i></button>
+                                    </div>
+                                    <input type="hidden" id="authorAvatarData">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Tempo de leitura</label>
+                                    <div id="articleReadTimeDisplay" style="padding:10px 14px;background:var(--gray-50);border-radius:8px;font-size:0.9rem;color:var(--gray-600);">
+                                        <i class="fas fa-clock" style="color:var(--primary);margin-right:6px;"></i>
+                                        <span id="articleReadTimeValue">0 min</span>
+                                        <span style="color:var(--gray-400);margin-left:4px;">(<span id="articleWordCount">0</span> palavras)</span>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -454,7 +482,7 @@ export const pageHTML = `
         </div>
 
         <!-- ══ LEAD MAGNET MODAL ══ -->
-        <div class="modal-overlay" id="leadMagnetModal" style="display:none;" onclick="if(event.target===this)closeLeadMagnetModal()">
+        <div class="modal-overlay" id="leadMagnetModal" onclick="if(event.target===this)closeLeadMagnetModal()">
             <div class="modal" style="max-width:540px;">
                 <div class="modal-header">
                     <h3 id="leadMagnetModalTitle">Nova Isca Digital</h3>
@@ -760,7 +788,7 @@ export const pageHTML = `
         </div>
 
         <!-- ══ STORY DETAIL MODAL ══ -->
-        <div class="modal-overlay" id="storyDetailModal" style="display:none;padding:20px;" onclick="if(event.target===this)closeStoryDetail()">
+        <div class="modal-overlay" id="storyDetailModal" style="padding:20px;" onclick="if(event.target===this)closeStoryDetail()">
             <div class="modal" style="max-width:800px;max-height:90vh;overflow-y:auto;">
                 <div class="modal-header">
                     <h3 id="storyDetailTitle">Detalhes da História</h3>
@@ -768,6 +796,48 @@ export const pageHTML = `
                 </div>
                 <div class="modal-body" id="storyDetailContent" style="padding:24px 32px;"></div>
                 <div class="modal-footer" id="storyDetailFooter"></div>
+            </div>
+        </div>
+
+        <!-- ══ COMMENTS VIEW ══ -->
+        <div class="view" id="view-comments">
+            <div class="topbar">
+                <h1>Comentários</h1>
+            </div>
+            <div class="content">
+                <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+                    <div class="stat-card">
+                        <div class="stat-card__label">Pendentes</div>
+                        <div class="stat-card__value" style="color:var(--warning);" id="statCommentsPending">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__label">Aprovados</div>
+                        <div class="stat-card__value stat-card__value--primary" id="statCommentsApproved">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__label">Rejeitados</div>
+                        <div class="stat-card__value" id="statCommentsRejected">0</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body" style="padding:0;">
+                        <div class="table-wrapper">
+                            <div class="table-responsive"><table>
+                                <thead>
+                                    <tr>
+                                        <th>Autor</th>
+                                        <th>Comentário</th>
+                                        <th>Artigo</th>
+                                        <th>Status</th>
+                                        <th>Data</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="commentsTableBody"></tbody>
+                            </table></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -994,9 +1064,24 @@ export const pageHTML = `
         // Load data from Supabase
         await refreshArticles();
         await refreshUsers();
-        refreshLeadMagnets();
+        await refreshLeadMagnets();
         refreshStories();
         refreshDashboard();
+
+        // Populate category dropdown with categories from existing articles
+        var existingCats = {};
+        supabaseArticles.forEach(function(a) {
+            if (a.category && !CATEGORIES[a.category]) existingCats[a.category] = a.category;
+        });
+        var catSelect = document.getElementById('articleCategory');
+        var customOpt = catSelect ? catSelect.querySelector('option[value="__custom__"]') : null;
+        Object.keys(existingCats).forEach(function(cat) {
+            CATEGORIES[cat] = cat.charAt(0).toUpperCase() + cat.slice(1);
+            var opt = document.createElement('option');
+            opt.value = cat;
+            opt.textContent = CATEGORIES[cat];
+            if (customOpt) catSelect.insertBefore(opt, customOpt);
+        });
     }
 
     // ── Navigation ──
@@ -1022,6 +1107,7 @@ export const pageHTML = `
         if (viewName === 'users') refreshUsers();
         if (viewName === 'leadmagnets') refreshLeadMagnets();
         if (viewName === 'stories') refreshStories();
+        if (viewName === 'comments') refreshComments();
         if (viewName === 'storyeditor') {
             if (!document.getElementById('storyEditId').value) {
                 clearStoryEditor();
@@ -1144,6 +1230,12 @@ export const pageHTML = `
     }
 
     // ═══ EDITOR ═══
+    function newArticle() {
+        document.getElementById('articleId').value = '';
+        clearEditor();
+        showView('editor');
+    }
+
     function clearEditor() {
         document.getElementById('articleId').value = '';
         document.getElementById('articleTitleInput').value = '';
@@ -1152,7 +1244,9 @@ export const pageHTML = `
         document.getElementById('richEditor').innerHTML = '<p>Comece a escrever seu artigo aqui...</p>';
         document.getElementById('articleCategory').value = '';
         document.getElementById('articleAuthor').value = session.name;
-        document.getElementById('articleReadTime').value = '';
+        document.getElementById('authorAvatarData').value = '';
+        document.getElementById('authorAvatarPreview').innerHTML = '<i class="fas fa-user" style="color:var(--gray-400);"></i>';
+        updateReadTime();
         document.getElementById('articleMetaDesc').value = '';
         document.getElementById('metaCharCount').textContent = '0';
         document.getElementById('articleImageUrl').value = '';
@@ -1188,30 +1282,36 @@ export const pageHTML = `
         document.getElementById('richEditor').innerHTML = article.content || '';
         document.getElementById('articleCategory').value = article.category;
         document.getElementById('articleAuthor').value = article.author || '';
-        document.getElementById('articleReadTime').value = '';
+        document.getElementById('authorAvatarData').value = article.author_avatar || '';
+        if (article.author_avatar) {
+            document.getElementById('authorAvatarPreview').innerHTML = '<img src="' + article.author_avatar + '" style="width:100%;height:100%;object-fit:cover;">';
+        } else {
+            document.getElementById('authorAvatarPreview').innerHTML = '<i class="fas fa-user" style="color:var(--gray-400);"></i>';
+        }
+        updateReadTime();
         document.getElementById('articleMetaDesc').value = article.excerpt || '';
         document.getElementById('metaCharCount').textContent = (article.excerpt || '').length;
         document.getElementById('articleImageUrl').value = article.cover_url || '';
         document.getElementById('articleImageData').value = '';
         document.getElementById('editorTitle').textContent = 'Editar Artigo';
-        // SEO fields
-        document.getElementById('seoTitle').value = article.seoTitle || '';
-        document.getElementById('seoTitleCount').textContent = (article.seoTitle || '').length;
-        document.getElementById('seoCanonical').value = article.seoCanonical || '';
-        document.getElementById('seoKeyword').value = article.seoKeyword || '';
-        document.getElementById('seoOgImage').value = article.seoOgImage || '';
+        // SEO fields (snake_case from Supabase)
+        document.getElementById('seoTitle').value = article.seo_title || '';
+        document.getElementById('seoTitleCount').textContent = (article.seo_title || '').length;
+        document.getElementById('seoCanonical').value = article.seo_canonical || '';
+        document.getElementById('seoKeyword').value = article.seo_keyword || '';
+        document.getElementById('seoOgImage').value = article.seo_og_image || '';
         // Lead magnet dropdown
         populateLeadMagnetDropdown();
-        document.getElementById('leadMagnetSelect').value = article.leadMagnetId || '';
-        // CTA banner
-        document.getElementById('ctaBannerEnabled').value = article.ctaBannerEnabled || '0';
-        document.getElementById('ctaBannerTitle').value = article.ctaBannerTitle || '';
-        document.getElementById('ctaBannerDesc').value = article.ctaBannerDesc || '';
-        document.getElementById('ctaBannerCtaText').value = article.ctaBannerCtaText || 'Agendar demonstração';
-        document.getElementById('ctaBannerCtaUrl').value = article.ctaBannerCtaUrl || '/#contato-form';
-        document.getElementById('ctaBannerImageData').value = article.ctaBannerImage || '';
-        if (article.ctaBannerImage) {
-            document.getElementById('ctaBannerImagePreview').innerHTML = '<img src="' + article.ctaBannerImage + '" style="max-width:100%;border-radius:8px;">';
+        document.getElementById('leadMagnetSelect').value = article.lead_magnet_id || '';
+        // CTA banner (snake_case from Supabase)
+        document.getElementById('ctaBannerEnabled').value = article.cta_banner_enabled ? '1' : '0';
+        document.getElementById('ctaBannerTitle').value = article.cta_banner_title || '';
+        document.getElementById('ctaBannerDesc').value = article.cta_banner_desc || '';
+        document.getElementById('ctaBannerCtaText').value = article.cta_banner_cta_text || 'Agendar demonstração';
+        document.getElementById('ctaBannerCtaUrl').value = article.cta_banner_cta_url || '/#contato-form';
+        document.getElementById('ctaBannerImageData').value = article.cta_banner_image || '';
+        if (article.cta_banner_image) {
+            document.getElementById('ctaBannerImagePreview').innerHTML = '<img src="' + article.cta_banner_image + '" style="max-width:100%;border-radius:8px;">';
         } else {
             document.getElementById('ctaBannerImagePreview').innerHTML = '';
         }
@@ -1273,6 +1373,20 @@ export const pageHTML = `
         var slug = document.getElementById('articleSlug').value.trim();
         var content = document.getElementById('richEditor').innerHTML;
         var category = document.getElementById('articleCategory').value;
+        if (category === '__custom__') {
+            category = document.getElementById('customCategoryInput').value.trim().toLowerCase()
+                .normalize('NFD').replace(/[\\u0300-\\u036f]/g, '').replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+            if (!category) { toast('Informe o nome da categoria.', 'error'); return; }
+            // Add to CATEGORIES map and dropdown for future use
+            var label = document.getElementById('customCategoryInput').value.trim();
+            CATEGORIES[category] = label;
+            var opt = document.createElement('option');
+            opt.value = category;
+            opt.textContent = label;
+            document.getElementById('articleCategory').insertBefore(opt, document.querySelector('#articleCategory option[value="__custom__"]'));
+            document.getElementById('articleCategory').value = category;
+            document.getElementById('customCategoryWrapper').style.display = 'none';
+        }
         var author = document.getElementById('articleAuthor').value.trim() || session.name;
         var metaDesc = document.getElementById('articleMetaDesc').value.trim();
         var imageUrl = document.getElementById('articleImageUrl').value.trim();
@@ -1290,6 +1404,18 @@ export const pageHTML = `
         var coverUrl = imageData || imageUrl || '';
         var isPublished = status === 'published';
 
+        var leadMagnetId = document.getElementById('leadMagnetSelect').value || null;
+        var ctaBannerEnabled = document.getElementById('ctaBannerEnabled').value === '1';
+        var ctaBannerTitle = document.getElementById('ctaBannerTitle').value.trim();
+        var ctaBannerDesc = document.getElementById('ctaBannerDesc').value.trim();
+        var ctaBannerCtaText = document.getElementById('ctaBannerCtaText').value.trim();
+        var ctaBannerCtaUrl = document.getElementById('ctaBannerCtaUrl').value.trim();
+        var ctaBannerImage = document.getElementById('ctaBannerImageData').value;
+        var seoTitleVal = document.getElementById('seoTitle').value.trim();
+        var seoCanonical = document.getElementById('seoCanonical').value.trim();
+        var seoKeyword = document.getElementById('seoKeyword').value.trim();
+        var seoOgImage = document.getElementById('seoOgImage').value.trim();
+
         var articleData = {
             title: title,
             slug: finalSlug,
@@ -1300,7 +1426,19 @@ export const pageHTML = `
             author: author,
             published: isPublished,
             published_at: isPublished ? now : null,
-            updated_at: now
+            updated_at: now,
+            author_avatar: document.getElementById('authorAvatarData').value || null,
+            lead_magnet_id: leadMagnetId ? Number(leadMagnetId) : null,
+            cta_banner_enabled: ctaBannerEnabled,
+            cta_banner_title: ctaBannerTitle || null,
+            cta_banner_desc: ctaBannerDesc || null,
+            cta_banner_cta_text: ctaBannerCtaText || 'Agendar demonstração',
+            cta_banner_cta_url: ctaBannerCtaUrl || '/#contato-form',
+            cta_banner_image: ctaBannerImage || null,
+            seo_title: seoTitleVal || null,
+            seo_canonical: seoCanonical || null,
+            seo_keyword: seoKeyword || null,
+            seo_og_image: seoOgImage || null
         };
 
         try {
@@ -1481,38 +1619,40 @@ export const pageHTML = `
     // ══ LEAD MAGNETS CRUD ══
     const LEAD_TYPE_LABELS = { ebook: 'Ebook', checklist: 'Checklist', planilha: 'Planilha', webinar: 'Webinar', trial: 'Trial Gratuito' };
 
-    function refreshLeadMagnets() {
-        supaFetch(SUPABASE_URL + '/rest/v1/lead_magnets?order=created_at.desc', {
-            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + session.access_token }
-        }).then(function(res) {
-            if (res.ok) return res.json();
-            return [];
-        }).then(function(data) {
-            supabaseLeadMagnets = data || [];
-            var tbody = document.getElementById('leadMagnetsTableBody');
-            if (!tbody) return;
-            if (supabaseLeadMagnets.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:32px;color:var(--gray-500);">Nenhuma isca cadastrada. Clique em "Nova Isca" para criar.</td></tr>';
-                return;
-            }
-            tbody.innerHTML = supabaseLeadMagnets.map(function(lm) {
-                return '<tr>' +
-                    '<td><span style="background:rgba(255,186,26,0.15);color:var(--primary);padding:4px 10px;border-radius:20px;font-size:0.78rem;font-weight:500;">' + escapeHtml(LEAD_TYPE_LABELS[lm.type] || lm.type) + '</span></td>' +
-                    '<td><strong>' + escapeHtml(lm.title) + '</strong></td>' +
-                    '<td style="color:var(--gray-500);font-size:0.85rem;">' + escapeHtml(lm.description || '-') + '</td>' +
-                    '<td style="font-size:0.85rem;">' + escapeHtml(lm.cta_text || 'Baixar agora') + '</td>' +
-                    '<td>' +
-                        '<div style="display:flex;gap:4px;">' +
-                            '<button class="btn btn-ghost btn-sm" onclick="editLeadMagnet(' + lm.id + ')" title="Editar"><i class="fas fa-pen" style="font-size:0.75rem;"></i></button>' +
-                            '<button class="btn btn-ghost btn-sm" onclick="deleteLeadMagnet(' + lm.id + ')" title="Excluir"><i class="fas fa-trash" style="font-size:0.75rem;color:var(--error);"></i></button>' +
-                        '</div>' +
-                    '</td>' +
-                '</tr>';
-            }).join('');
-        }).catch(function(e) {
+    async function refreshLeadMagnets() {
+        try {
+            var res = await supaFetch(SUPABASE_URL + '/rest/v1/lead_magnets?order=created_at.desc', {
+                headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + session.access_token }
+            });
+            supabaseLeadMagnets = res.ok ? await res.json() : [];
+        } catch(e) {
             supabaseLeadMagnets = [];
             console.error('Erro ao carregar lead magnets:', e);
-        });
+        }
+
+        var tbody = document.getElementById('leadMagnetsTableBody');
+        if (!tbody) return;
+        if (supabaseLeadMagnets.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:32px;color:var(--gray-500);">Nenhuma isca cadastrada. Clique em "Nova Isca" para criar.</td></tr>';
+            return;
+        }
+        tbody.innerHTML = supabaseLeadMagnets.map(function(lm) {
+            return '<tr>' +
+                '<td><span style="background:rgba(255,186,26,0.15);color:var(--primary);padding:4px 10px;border-radius:20px;font-size:0.78rem;font-weight:500;">' + escapeHtml(LEAD_TYPE_LABELS[lm.type] || lm.type) + '</span></td>' +
+                '<td><strong>' + escapeHtml(lm.title) + '</strong></td>' +
+                '<td style="color:var(--gray-500);font-size:0.85rem;">' + escapeHtml(lm.description || '-') + '</td>' +
+                '<td style="font-size:0.85rem;">' + escapeHtml(lm.cta_text || 'Baixar agora') + '</td>' +
+                '<td>' +
+                    '<div style="display:flex;gap:4px;">' +
+                        '<button class="btn btn-secondary btn-icon btn-sm" onclick="editLeadMagnet(' + lm.id + ')" title="Editar"><i class="fas fa-pen"></i></button>' +
+                        '<button class="btn btn-danger btn-icon btn-sm" onclick="deleteLeadMagnet(' + lm.id + ')" title="Excluir"><i class="fas fa-trash"></i></button>' +
+                    '</div>' +
+                '</td>' +
+            '</tr>';
+        }).join('');
+
+        // Always update dropdown when lead magnets are refreshed
+        populateLeadMagnetDropdown();
     }
 
     function openLeadMagnetModal(id) {
@@ -1526,11 +1666,11 @@ export const pageHTML = `
         document.getElementById('lmImageData').value = '';
         document.getElementById('lmImagePreview').innerHTML = '';
         document.getElementById('leadMagnetModalTitle').textContent = 'Nova Isca Digital';
-        document.getElementById('leadMagnetModal').style.display = 'flex';
+        document.getElementById('leadMagnetModal').classList.add('active');
     }
 
     function closeLeadMagnetModal() {
-        document.getElementById('leadMagnetModal').style.display = 'none';
+        document.getElementById('leadMagnetModal').classList.remove('active');
     }
 
     function editLeadMagnet(id) {
@@ -1546,7 +1686,7 @@ export const pageHTML = `
         document.getElementById('lmImageData').value = lm.cover_url || '';
         document.getElementById('lmImagePreview').innerHTML = lm.cover_url ? '<img src="' + escapeHtml(lm.cover_url) + '" style="max-width:100%;border-radius:8px;">' : '';
         document.getElementById('leadMagnetModalTitle').textContent = 'Editar Isca Digital';
-        document.getElementById('leadMagnetModal').style.display = 'flex';
+        document.getElementById('leadMagnetModal').classList.add('active');
     }
 
     function saveLeadMagnet() {
@@ -1647,6 +1787,27 @@ export const pageHTML = `
         });
     }
 
+    // ══ AUTHOR AVATAR UPLOAD ══
+    function handleAuthorAvatarUpload(event) {
+        var file = event.target.files[0];
+        if (!file) return;
+        if (file.size > 2 * 1024 * 1024) { toast('Imagem muito grande. Max 2MB.', 'error'); return; }
+        if (!file.type.startsWith('image/')) { toast('Selecione uma imagem.', 'error'); return; }
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('authorAvatarData').value = e.target.result;
+            document.getElementById('authorAvatarPreview').innerHTML = '<img src="' + e.target.result + '" style="width:100%;height:100%;object-fit:cover;">';
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function removeAuthorAvatar() {
+        document.getElementById('authorAvatarData').value = '';
+        document.getElementById('authorAvatarPreview').innerHTML = '<i class="fas fa-user" style="color:var(--gray-400);"></i>';
+        var input = document.getElementById('authorAvatarInput');
+        if (input) input.value = '';
+    }
+
     // ══ CTA BANNER IMAGE UPLOAD ══
     function handleCtaBannerImageUpload(event) {
         const file = event.target.files[0];
@@ -1716,6 +1877,37 @@ export const pageHTML = `
         const fill = document.getElementById('seoScoreFill');
         fill.style.width = pct + '%';
         fill.style.background = pct >= 80 ? 'var(--success)' : pct >= 50 ? 'var(--warning)' : 'var(--error)';
+    }
+
+    // ── Auto read time ──
+    function updateReadTime() {
+        var content = document.getElementById('richEditor').innerText || '';
+        var words = content.split(/\\s+/).filter(function(w) { return w.length > 0; }).length;
+        var mins = Math.max(1, Math.ceil(words / 200));
+        var el = document.getElementById('articleReadTimeValue');
+        var wc = document.getElementById('articleWordCount');
+        if (el) el.textContent = mins + ' min';
+        if (wc) wc.textContent = words;
+    }
+
+    // Update read time on editor input
+    var richEditorEl = document.getElementById('richEditor');
+    if (richEditorEl) {
+        richEditorEl.addEventListener('input', updateReadTime);
+        // Also observe mutations (paste, formatting)
+        var readTimeObserver = new MutationObserver(updateReadTime);
+        readTimeObserver.observe(richEditorEl, { childList: true, subtree: true, characterData: true });
+    }
+
+    // ── Custom category ──
+    function onCategoryChange(sel) {
+        var wrapper = document.getElementById('customCategoryWrapper');
+        if (sel.value === '__custom__') {
+            wrapper.style.display = 'block';
+            document.getElementById('customCategoryInput').focus();
+        } else {
+            wrapper.style.display = 'none';
+        }
     }
 
     // View article from list (opens preview modal for a saved article)
@@ -2446,11 +2638,11 @@ JSON.stringify(schemaOrg, null, 2) +
             footerHtml = '<button class="btn btn-primary" onclick="updateStoryStatus(' + s.id + ',&apos;published&apos;);closeStoryDetail();">Aprovar e Publicar</button>';
         }
         document.getElementById('storyDetailFooter').innerHTML = footerHtml;
-        document.getElementById('storyDetailModal').style.display = 'flex';
+        document.getElementById('storyDetailModal').classList.add('active');
     }
 
     function closeStoryDetail() {
-        document.getElementById('storyDetailModal').style.display = 'none';
+        document.getElementById('storyDetailModal').classList.remove('active');
     }
 
     // ═══ STORY EDITOR ═══
@@ -2649,6 +2841,98 @@ JSON.stringify(schemaOrg, null, 2) +
         });
     }
 
+    // ═══ COMMENTS MANAGEMENT ═══
+    var supabaseComments = [];
+
+    async function refreshComments() {
+        try {
+            var res = await supaFetch(SUPABASE_URL + '/rest/v1/blog_comments?order=created_at.desc', {
+                headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + session.access_token }
+            });
+            supabaseComments = res.ok ? await res.json() : [];
+        } catch(e) { supabaseComments = []; }
+
+        var pending = supabaseComments.filter(function(c) { return c.status === 'pending'; });
+        var approved = supabaseComments.filter(function(c) { return c.status === 'approved'; });
+        var rejected = supabaseComments.filter(function(c) { return c.status === 'rejected'; });
+
+        var pendingEl = document.getElementById('statCommentsPending');
+        var approvedEl = document.getElementById('statCommentsApproved');
+        var rejectedEl = document.getElementById('statCommentsRejected');
+        if (pendingEl) pendingEl.textContent = pending.length;
+        if (approvedEl) approvedEl.textContent = approved.length;
+        if (rejectedEl) rejectedEl.textContent = rejected.length;
+
+        var tbody = document.getElementById('commentsTableBody');
+        if (!tbody) return;
+
+        if (supabaseComments.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--gray-500);">Nenhum comentário recebido.</td></tr>';
+            return;
+        }
+
+        var articleMap = {};
+        supabaseArticles.forEach(function(a) { articleMap[a.id] = a.title; });
+
+        var STATUS_LABELS = { pending: 'Pendente', approved: 'Aprovado', rejected: 'Rejeitado' };
+        var STATUS_COLORS = { pending: 'warning', approved: 'published', rejected: 'draft' };
+
+        tbody.innerHTML = supabaseComments.map(function(c) {
+            var statusClass = STATUS_COLORS[c.status] || 'draft';
+            var statusLabel = STATUS_LABELS[c.status] || c.status;
+            var articleTitle = articleMap[c.article_id] || 'Artigo #' + c.article_id;
+            var commentPreview = c.comment.length > 60 ? c.comment.slice(0, 60) + '...' : c.comment;
+
+            var actionBtns = '';
+            if (c.status === 'pending') {
+                actionBtns = '<button class="btn btn-primary btn-sm" onclick="updateCommentStatus(' + c.id + ',&apos;approved&apos;)" style="font-size:0.72rem;padding:4px 10px;"><i class="fas fa-check" style="margin-right:4px;"></i>Aprovar</button>' +
+                    '<button class="btn btn-danger btn-sm" onclick="updateCommentStatus(' + c.id + ',&apos;rejected&apos;)" style="font-size:0.72rem;padding:4px 10px;"><i class="fas fa-ban" style="margin-right:4px;"></i>Rejeitar</button>';
+            } else if (c.status === 'approved') {
+                actionBtns = '<button class="btn btn-secondary btn-sm" onclick="updateCommentStatus(' + c.id + ',&apos;pending&apos;)" style="font-size:0.72rem;padding:4px 10px;"><i class="fas fa-undo" style="margin-right:4px;"></i>Despublicar</button>';
+            } else {
+                actionBtns = '<button class="btn btn-primary btn-sm" onclick="updateCommentStatus(' + c.id + ',&apos;approved&apos;)" style="font-size:0.72rem;padding:4px 10px;"><i class="fas fa-check" style="margin-right:4px;"></i>Aprovar</button>';
+            }
+
+            return '<tr>' +
+                '<td><div>' +
+                    '<strong style="display:block;">' + escapeHtml(c.name) + '</strong>' +
+                    '<span style="font-size:0.78rem;color:var(--gray-500);">' + escapeHtml(c.email) + '</span>' +
+                '</div></td>' +
+                '<td style="max-width:250px;"><span style="font-size:0.85rem;">' + escapeHtml(commentPreview) + '</span></td>' +
+                '<td style="font-size:0.82rem;max-width:180px;">' + escapeHtml(articleTitle.length > 40 ? articleTitle.slice(0, 40) + '...' : articleTitle) + '</td>' +
+                '<td><span class="badge badge-' + statusClass + '">' + statusLabel + '</span></td>' +
+                '<td style="font-size:0.82rem;">' + formatDate(c.created_at) + '</td>' +
+                '<td><div style="display:flex;gap:4px;">' + actionBtns +
+                    '<button class="btn btn-danger btn-icon btn-sm" onclick="deleteComment(' + c.id + ')" title="Excluir"><i class="fas fa-trash"></i></button>' +
+                '</div></td>' +
+            '</tr>';
+        }).join('');
+    }
+
+    async function updateCommentStatus(id, newStatus) {
+        try {
+            await supaFetch(SUPABASE_URL + '/rest/v1/blog_comments?id=eq.' + id, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+                body: JSON.stringify({ status: newStatus, updated_at: new Date().toISOString() })
+            });
+            toast(newStatus === 'approved' ? 'Comentário aprovado!' : newStatus === 'rejected' ? 'Comentário rejeitado.' : 'Status atualizado.');
+            refreshComments();
+        } catch(e) { toast('Erro ao atualizar.', 'error'); }
+    }
+
+    async function deleteComment(id) {
+        if (!confirm('Excluir este comentário?')) return;
+        try {
+            await supaFetch(SUPABASE_URL + '/rest/v1/blog_comments?id=eq.' + id, {
+                method: 'DELETE',
+                headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + session.access_token }
+            });
+            toast('Comentário excluído.');
+            refreshComments();
+        } catch(e) { toast('Erro ao excluir.', 'error'); }
+    }
+
     // ═══ NOTIFICATIONS ═══
     function updateNotifications() {
         var pending = (supabaseStories || []).filter(function(s) { return s.status === 'pending'; });
@@ -2713,6 +2997,7 @@ JSON.stringify(schemaOrg, null, 2) +
     window.previewArticle = previewArticle;
     window.exportArticleHTML = exportArticleHTML;
     window.clearEditor = clearEditor;
+    window.newArticle = newArticle;
     window.generateSlug = generateSlug;
     window.openLeadMagnetModal = openLeadMagnetModal;
     window.closeLeadMagnetModal = closeLeadMagnetModal;
@@ -2720,6 +3005,8 @@ JSON.stringify(schemaOrg, null, 2) +
     window.saveLeadMagnet = saveLeadMagnet;
     window.deleteLeadMagnet = deleteLeadMagnet;
     window.handleLmImageUpload = handleLmImageUpload;
+    window.handleAuthorAvatarUpload = handleAuthorAvatarUpload;
+    window.removeAuthorAvatar = removeAuthorAvatar;
     window.handleCtaBannerImageUpload = handleCtaBannerImageUpload;
     window.openUserModal = openUserModal;
     window.editUser = editUser;
@@ -2730,6 +3017,9 @@ JSON.stringify(schemaOrg, null, 2) +
     window.refreshStories = refreshStories;
     window.updateStoryStatus = updateStoryStatus;
     window.deleteStory = deleteStory;
+    window.refreshComments = refreshComments;
+    window.updateCommentStatus = updateCommentStatus;
+    window.deleteComment = deleteComment;
     window.viewStoryDetail = viewStoryDetail;
     window.closeStoryDetail = closeStoryDetail;
     window.clearStoryEditor = clearStoryEditor;
@@ -2739,6 +3029,7 @@ JSON.stringify(schemaOrg, null, 2) +
     window.saveStoryFromEditor = saveStoryFromEditor;
     window.toggleSidebar = toggleSidebar;
     window.updateSeoScore = updateSeoScore;
+    window.onCategoryChange = onCategoryChange;
 
     // ═══ INIT ═══
     initUI();

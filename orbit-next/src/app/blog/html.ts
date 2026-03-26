@@ -247,7 +247,9 @@ export const pageHTML = `
                     '<p>' + escapeHtml(preview) + '</p>' +
                     '<div class="blog-card__footer">' +
                         '<div class="blog-card__author">' +
-                            '<div class="blog-card__avatar">' + initials + '</div>' +
+                            (a.author_avatar
+                                ? '<img src="' + escapeHtml(a.author_avatar) + '" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0;" alt="">'
+                                : '<div class="blog-card__avatar">' + initials + '</div>') +
                             '<div class="blog-card__author-info">' +
                                 '<span class="blog-card__author-name">' + escapeHtml(a.author || 'Equipe Orbit') + '</span>' +
                                 '<span class="blog-card__date">' + date + '</span>' +
@@ -277,6 +279,110 @@ export const pageHTML = `
     });
 
     // ── Single article view ──
+    function injectArticleSEO(article) {
+        var seoTitle = (article.seo_title || article.title) + ' | Blog Orbit Gestão';
+        var seoDesc = article.excerpt || (article.content || '').replace(/<[^>]*>/g, '').slice(0, 160);
+        var seoUrl = article.seo_canonical || 'https://orbitgestao.com.br/blog?artigo=' + encodeURIComponent(article.slug);
+        var seoImage = article.seo_og_image || article.cover_url || 'https://orbitgestao.com.br/images/og-image.png';
+        var seoKeyword = article.seo_keyword || '';
+        var categoryLabel = CATEGORIES[article.category] || article.category || 'Blog';
+        var author = article.author || 'Equipe Orbit';
+        var publishDate = article.published_at || article.created_at || new Date().toISOString();
+        var wordCount = (article.content || '').replace(/<[^>]*>/g, '').split(/\\s+/).length;
+        var readMins = Math.max(1, Math.ceil(wordCount / 200));
+
+        // Update document title
+        document.title = seoTitle;
+
+        // Helper to set/create meta tags
+        function setMeta(attr, attrVal, content) {
+            var sel = 'meta[' + attr + '="' + attrVal + '"]';
+            var el = document.querySelector(sel);
+            if (!el) { el = document.createElement('meta'); el.setAttribute(attr, attrVal); document.head.appendChild(el); }
+            el.setAttribute('content', content);
+        }
+
+        // Primary meta
+        setMeta('name', 'description', seoDesc);
+        setMeta('name', 'author', author);
+        setMeta('name', 'robots', 'index, follow, max-image-preview:large, max-snippet:-1');
+        if (seoKeyword) setMeta('name', 'keywords', seoKeyword + ', gestão estratégica, orbit gestão');
+
+        // Canonical
+        var canon = document.querySelector('link[rel="canonical"]');
+        if (!canon) { canon = document.createElement('link'); canon.setAttribute('rel', 'canonical'); document.head.appendChild(canon); }
+        canon.setAttribute('href', seoUrl);
+
+        // Open Graph
+        setMeta('property', 'og:type', 'article');
+        setMeta('property', 'og:url', seoUrl);
+        setMeta('property', 'og:title', seoTitle);
+        setMeta('property', 'og:description', seoDesc);
+        setMeta('property', 'og:image', seoImage);
+        setMeta('property', 'og:image:width', '1200');
+        setMeta('property', 'og:image:height', '630');
+        setMeta('property', 'og:site_name', 'Orbit Gestão');
+        setMeta('property', 'og:locale', 'pt_BR');
+        setMeta('property', 'article:published_time', publishDate);
+        setMeta('property', 'article:author', author);
+        setMeta('property', 'article:section', categoryLabel);
+        if (seoKeyword) setMeta('property', 'article:tag', seoKeyword);
+
+        // Twitter Card
+        setMeta('name', 'twitter:card', 'summary_large_image');
+        setMeta('name', 'twitter:title', seoTitle);
+        setMeta('name', 'twitter:description', seoDesc);
+        setMeta('name', 'twitter:image', seoImage);
+
+        // JSON-LD structured data (BlogPosting + BreadcrumbList)
+        var schema = {
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
+            'headline': article.seo_title || article.title,
+            'description': seoDesc,
+            'image': seoImage,
+            'author': { '@type': 'Person', 'name': author },
+            'publisher': {
+                '@type': 'Organization',
+                'name': 'Orbit Gestão',
+                'logo': { '@type': 'ImageObject', 'url': 'https://orbitgestao.com.br/images/logo-orbit-white.png' }
+            },
+            'datePublished': publishDate,
+            'dateModified': article.updated_at || publishDate,
+            'mainEntityOfPage': { '@type': 'WebPage', '@id': seoUrl },
+            'wordCount': wordCount,
+            'articleSection': categoryLabel,
+            'inLanguage': 'pt-BR',
+            'timeRequired': 'PT' + readMins + 'M'
+        };
+        if (seoKeyword) schema.keywords = seoKeyword;
+
+        var breadcrumb = {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            'itemListElement': [
+                { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://orbitgestao.com.br/' },
+                { '@type': 'ListItem', 'position': 2, 'name': 'Blog', 'item': 'https://orbitgestao.com.br/blog' },
+                { '@type': 'ListItem', 'position': 3, 'name': article.title, 'item': seoUrl }
+            ]
+        };
+
+        // Remove old LD+JSON if any
+        document.querySelectorAll('script[data-article-seo]').forEach(function(s) { s.remove(); });
+
+        var ldArticle = document.createElement('script');
+        ldArticle.type = 'application/ld+json';
+        ldArticle.setAttribute('data-article-seo', '1');
+        ldArticle.textContent = JSON.stringify(schema);
+        document.head.appendChild(ldArticle);
+
+        var ldBread = document.createElement('script');
+        ldBread.type = 'application/ld+json';
+        ldBread.setAttribute('data-article-seo', '1');
+        ldBread.textContent = JSON.stringify(breadcrumb);
+        document.head.appendChild(ldBread);
+    }
+
     function renderSingleArticle(article) {
         var categoryLabel = CATEGORIES[article.category] || article.category || 'Artigo';
         var catColor = CAT_COLORS[article.category] || CAT_COLORS.estrategica;
@@ -304,7 +410,9 @@ export const pageHTML = `
 
                     '<div class="blog-article__meta">' +
                         '<div class="blog-article__meta-author">' +
-                            '<div class="blog-card__avatar">' + initials + '</div>' +
+                            (article.author_avatar
+                                ? '<img src="' + escapeHtml(article.author_avatar) + '" style="width:32px;height:32px;border-radius:50%;object-fit:cover;" alt="">'
+                                : '<div class="blog-card__avatar">' + initials + '</div>') +
                             '<span>' + escapeHtml(article.author || 'Equipe Orbit') + '</span>' +
                         '</div>' +
                         '<span><i class="fas fa-calendar-alt"></i> ' + date + '</span>' +
@@ -312,6 +420,43 @@ export const pageHTML = `
                     '</div>' +
 
                     '<div class="blog-article-content">' + (article.content || '') + '</div>' +
+
+                    '<!-- Comments Section -->' +
+                    '<div class="blog-comments" id="commentsSection" data-article-id="' + article.id + '">' +
+                        '<h2 class="blog-comments__title"><i class="fas fa-comments" style="color:#ffba1a;margin-right:10px;"></i>Coment&aacute;rios</h2>' +
+                        '<div class="blog-comments__list" id="commentsList"></div>' +
+
+                        '<div class="blog-comments__form-wrapper">' +
+                            '<h3 class="blog-comments__form-title">Deixe seu coment&aacute;rio</h3>' +
+                            '<form id="commentForm" class="blog-comments__form">' +
+                                '<div class="blog-comments__form-row">' +
+                                    '<div class="form-group">' +
+                                        '<label for="commentName">Nome *</label>' +
+                                        '<input type="text" id="commentName" placeholder="Seu nome" required>' +
+                                    '</div>' +
+                                    '<div class="form-group">' +
+                                        '<label for="commentEmail">E-mail *</label>' +
+                                        '<input type="email" id="commentEmail" placeholder="seu@email.com" required>' +
+                                    '</div>' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                    '<label for="commentPhone">Telefone</label>' +
+                                    '<input type="tel" id="commentPhone" placeholder="(00) 00000-0000">' +
+                                '</div>' +
+                                '<div class="form-group">' +
+                                    '<label for="commentText">Coment&aacute;rio *</label>' +
+                                    '<textarea id="commentText" rows="4" placeholder="Escreva seu coment&aacute;rio..." required></textarea>' +
+                                '</div>' +
+                                '<button type="submit" class="btn btn-primary" id="commentSubmitBtn">' +
+                                    '<i class="fas fa-paper-plane" style="margin-right:6px;"></i> Enviar coment&aacute;rio' +
+                                '</button>' +
+                            '</form>' +
+                            '<div class="blog-comments__success" id="commentSuccess" style="display:none;">' +
+                                '<i class="fas fa-check-circle" style="color:#22C55E;font-size:1.5rem;"></i>' +
+                                '<p>Coment&aacute;rio enviado! Ser&aacute; exibido ap&oacute;s aprova&ccedil;&atilde;o.</p>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
 
                     '<div class="blog-article__bottom-cta">' +
                         '<a href="/blog" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Voltar ao Blog</a>' +
@@ -324,13 +469,17 @@ export const pageHTML = `
                     '<div class="blog-sidebar-card">' +
                         '<p class="blog-sidebar-card__label">Escrito por</p>' +
                         '<div class="blog-sidebar-card__author">' +
-                            '<div class="blog-card__avatar blog-card__avatar--lg">' + initials + '</div>' +
+                            (article.author_avatar
+                                ? '<img src="' + escapeHtml(article.author_avatar) + '" style="width:48px;height:48px;border-radius:50%;object-fit:cover;flex-shrink:0;" alt="' + escapeHtml(article.author || '') + '">'
+                                : '<div class="blog-card__avatar blog-card__avatar--lg">' + initials + '</div>') +
                             '<div>' +
                                 '<p class="blog-sidebar-card__name">' + escapeHtml(article.author || 'Equipe Orbit') + '</p>' +
                                 '<p class="blog-sidebar-card__role">Equipe Orbit</p>' +
                             '</div>' +
                         '</div>' +
                     '</div>' +
+
+                    '<div id="leadMagnetSidebar"></div>' +
 
                     '<div class="blog-sidebar-cta">' +
                         '<div class="blog-sidebar-cta__icon"><i class="fas fa-robot"></i></div>' +
@@ -354,6 +503,132 @@ export const pageHTML = `
         '</div>';
     }
 
+    function renderLeadMagnet(lm) {
+        var container = document.getElementById('leadMagnetSidebar');
+        if (!container || !lm) return;
+        var LEAD_ICONS = { ebook: 'fa-book', checklist: 'fa-list-check', planilha: 'fa-table', webinar: 'fa-video', trial: 'fa-rocket' };
+        var icon = LEAD_ICONS[lm.type] || 'fa-gift';
+        container.innerHTML =
+            '<div class="blog-sidebar-cta" style="background:linear-gradient(135deg,#0D1117 0%,#1a1f2e 100%);">' +
+                '<div class="blog-sidebar-cta__icon"><i class="fas ' + icon + '"></i></div>' +
+                '<h3 style="color:#fff;">' + escapeHtml(lm.title) + '</h3>' +
+                (lm.description ? '<p style="color:rgba(255,255,255,.7);">' + escapeHtml(lm.description) + '</p>' : '') +
+                '<a href="' + escapeHtml(lm.cta_url || '/#contato-form') + '" class="btn btn-primary" style="width:100%;text-align:center;">' +
+                    '<i class="fas fa-download" style="margin-right:6px;"></i>' + escapeHtml(lm.cta_text || 'Baixar agora') +
+                '</a>' +
+            '</div>';
+    }
+
+    // ══ COMMENTS ══
+    function loadComments(articleId) {
+        var list = document.getElementById('commentsList');
+        if (!list) return;
+        list.innerHTML = '<p style="color:#9CA3AF;font-size:0.9rem;text-align:center;padding:16px 0;"><i class="fas fa-spinner fa-spin"></i> Carregando...</p>';
+
+        fetch(SUPABASE_URL + '/rest/v1/blog_comments?article_id=eq.' + articleId + '&status=eq.approved&order=created_at.desc', {
+            headers: supaHeaders()
+        })
+        .then(function(res) { return res.json(); })
+        .then(function(comments) {
+            if (!comments || comments.length === 0) {
+                list.innerHTML = '<p style="color:#9CA3AF;font-size:0.9rem;text-align:center;padding:20px 0;">Nenhum coment&aacute;rio ainda. Seja o primeiro!</p>';
+                return;
+            }
+            list.innerHTML = comments.map(function(c) {
+                var initials = c.name.split(' ').map(function(w) { return w[0]; }).join('').toUpperCase().slice(0, 2);
+                var date = new Date(c.created_at).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
+                return '<div class="blog-comment">' +
+                    '<div class="blog-comment__header">' +
+                        '<div class="blog-comment__avatar">' + initials + '</div>' +
+                        '<div>' +
+                            '<p class="blog-comment__name">' + escapeHtml(c.name) + '</p>' +
+                            '<p class="blog-comment__date">' + date + '</p>' +
+                        '</div>' +
+                    '</div>' +
+                    '<p class="blog-comment__text">' + escapeHtml(c.comment) + '</p>' +
+                '</div>';
+            }).join('');
+        })
+        .catch(function() {
+            list.innerHTML = '<p style="color:#9CA3AF;font-size:0.9rem;">Erro ao carregar coment&aacute;rios.</p>';
+        });
+    }
+
+    function initCommentForm(articleId) {
+        var form = document.getElementById('commentForm');
+        if (!form) return;
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var name = document.getElementById('commentName').value.trim();
+            var email = document.getElementById('commentEmail').value.trim();
+            var phone = document.getElementById('commentPhone').value.trim();
+            var comment = document.getElementById('commentText').value.trim();
+            var btn = document.getElementById('commentSubmitBtn');
+
+            if (!name || !email || !comment) return;
+            if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {
+                alert('E-mail inv\\u00e1lido.');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+
+            fetch(SUPABASE_URL + '/rest/v1/blog_comments', {
+                method: 'POST',
+                headers: Object.assign({ 'Content-Type': 'application/json', 'Prefer': 'return=minimal' }, supaHeaders()),
+                body: JSON.stringify({
+                    article_id: articleId,
+                    name: name,
+                    email: email,
+                    phone: phone || null,
+                    comment: comment,
+                    status: 'pending'
+                })
+            })
+            .then(function(res) {
+                if (!res.ok) throw new Error('Erro');
+                document.getElementById('commentForm').style.display = 'none';
+                document.getElementById('commentSuccess').style.display = 'flex';
+            })
+            .catch(function() {
+                alert('Erro ao enviar coment\\u00e1rio. Tente novamente.');
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-paper-plane" style="margin-right:6px;"></i> Enviar coment\\u00e1rio';
+            });
+        });
+    }
+
+    function injectCtaBanner(article) {
+        if (!article.cta_banner_enabled) return;
+        var contentEl = document.querySelector('.blog-article-content');
+        if (!contentEl) return;
+
+        var ctaUrl = escapeHtml(article.cta_banner_cta_url || '/#contato-form');
+        var bannerHTML = article.cta_banner_image
+            ? '<a href="' + ctaUrl + '" style="display:block;margin:40px 0;border-radius:16px;overflow:hidden;">' +
+                '<img src="' + escapeHtml(article.cta_banner_image) + '" style="width:100%;display:block;" alt="' + escapeHtml(article.cta_banner_title || 'Banner') + '">' +
+              '</a>'
+            : '<div style="background:#0D1117;border-radius:16px;padding:36px 32px;margin:40px 0;">' +
+                (article.cta_banner_title ? '<h3 style="color:#fff;font-size:1.25rem;font-weight:700;margin-bottom:8px;">' + escapeHtml(article.cta_banner_title) + '</h3>' : '') +
+                (article.cta_banner_desc ? '<p style="color:rgba(255,255,255,.7);font-size:0.95rem;margin-bottom:16px;">' + escapeHtml(article.cta_banner_desc) + '</p>' : '') +
+                '<a href="' + ctaUrl + '" class="btn btn-primary" style="color:#fff;">' + escapeHtml(article.cta_banner_cta_text || 'Agendar demonstração') + '</a>' +
+              '</div>';
+
+        // Insert after ~50% of top-level children
+        var children = contentEl.children;
+        var midpoint = Math.max(2, Math.floor(children.length / 2));
+        var banner = document.createElement('div');
+        banner.innerHTML = bannerHTML;
+        var bannerEl = banner.firstChild;
+        if (children[midpoint]) {
+            contentEl.insertBefore(bannerEl, children[midpoint]);
+        } else {
+            contentEl.appendChild(bannerEl);
+        }
+    }
+
     function fetchSingleArticle(slug) {
         fetch(SUPABASE_URL + '/rest/v1/blog_articles?slug=eq.' + encodeURIComponent(slug) + '&published=eq.true&limit=1', {
             headers: supaHeaders()
@@ -368,6 +643,82 @@ export const pageHTML = `
                 var heroBadge = document.querySelector('.blog-hero__badge');
                 if (heroBadge) heroBadge.style.display = 'none';
                 renderSingleArticle(data[0]);
+                injectArticleSEO(data[0]);
+                injectCtaBanner(data[0]);
+                loadComments(data[0].id);
+                initCommentForm(data[0].id);
+
+                // Sticky sidebar via JS
+                (function() {
+                    var el = document.querySelector('.blog-article__sidebar-sticky');
+                    var aside = document.querySelector('.blog-article__sidebar');
+                    if (!el || !aside) return;
+                    var gap = 100;
+                    var placeholder = document.createElement('div');
+                    var isFixed = false;
+                    var isPinned = false;
+
+                    function tick() {
+                        var asideRect = aside.getBoundingClientRect();
+                        var elH = el.offsetHeight;
+                        var asideTop = asideRect.top;
+                        var asideBottom = asideRect.bottom;
+
+                        if (asideTop < gap && asideBottom > elH + gap) {
+                            // Fix to viewport
+                            if (!isFixed) {
+                                placeholder.style.width = el.offsetWidth + 'px';
+                                placeholder.style.height = elH + 'px';
+                                el.parentNode.insertBefore(placeholder, el);
+                                el.style.position = 'fixed';
+                                el.style.top = gap + 'px';
+                                el.style.width = aside.offsetWidth + 'px';
+                                el.style.zIndex = '50';
+                                isFixed = true;
+                                isPinned = false;
+                            }
+                        } else if (asideBottom <= elH + gap) {
+                            // Pin to bottom
+                            if (isFixed || !isPinned) {
+                                if (placeholder.parentNode) placeholder.parentNode.removeChild(placeholder);
+                                el.style.position = 'absolute';
+                                el.style.top = 'auto';
+                                el.style.bottom = '0';
+                                el.style.width = aside.offsetWidth + 'px';
+                                el.style.zIndex = '';
+                                aside.style.position = 'relative';
+                                isFixed = false;
+                                isPinned = true;
+                            }
+                        } else {
+                            // Normal
+                            if (isFixed || isPinned) {
+                                if (placeholder.parentNode) placeholder.parentNode.removeChild(placeholder);
+                                el.style.position = '';
+                                el.style.top = '';
+                                el.style.bottom = '';
+                                el.style.width = '';
+                                el.style.zIndex = '';
+                                isFixed = false;
+                                isPinned = false;
+                            }
+                        }
+                    }
+
+                    window.addEventListener('scroll', tick, { passive: true });
+                    window.addEventListener('resize', tick);
+                    tick();
+                })();
+
+                // Fetch lead magnet if article has one
+                if (data[0].lead_magnet_id) {
+                    fetch(SUPABASE_URL + '/rest/v1/lead_magnets?id=eq.' + data[0].lead_magnet_id + '&active=eq.true&limit=1', {
+                        headers: supaHeaders()
+                    })
+                    .then(function(r) { return r.json(); })
+                    .then(function(lms) { if (lms && lms[0]) renderLeadMagnet(lms[0]); })
+                    .catch(function() {});
+                }
             } else {
                 fetchArticles().then(renderArticles);
             }
