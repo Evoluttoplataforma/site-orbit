@@ -3,11 +3,18 @@
    are ALL handled by main-v2.js via event delegation. Do NOT duplicate here. */
 
 // ═══ LANGUAGE — apply translations & switcher UI ═══
-// Runs on DOMContentLoaded AND re-runs when React mounts late (blog, historias)
+// Runs on DOMContentLoaded AND re-runs once when React mounts late (blog, historias)
 var __orbitLang = localStorage.getItem('orbit_lang') || 'pt';
-var __orbitTranslated = false;
+var __orbitLangApplied = false;
 
 function orbitApplyLang() {
+  if (__orbitLangApplied) return;
+
+  // Need header in DOM before we can apply
+  if (!document.querySelector('.nav-menu') && !document.querySelector('.header')) return;
+
+  __orbitLangApplied = true;
+
   // Update switcher button UI
   document.querySelectorAll('.lang-switch__label').forEach(function(el) {
     el.textContent = __orbitLang === 'pt' ? 'EN' : 'PT';
@@ -17,24 +24,20 @@ function orbitApplyLang() {
   });
 
   // Apply English translations if needed
-  if (__orbitLang === 'en' && !__orbitTranslated) {
-    // Only mark translated if we found nav elements to translate
-    if (document.querySelector('.nav-menu') || document.querySelector('.header')) {
-      __orbitTranslated = true;
-      applyEnglish();
-    }
+  if (__orbitLang === 'en') {
+    applyEnglish();
   }
+
+  // Disconnect observer — no longer needed
+  if (__orbitLangObs) { __orbitLangObs.disconnect(); __orbitLangObs = null; }
 }
 
-// Run immediately if DOM is ready, otherwise on DOMContentLoaded
-document.addEventListener('DOMContentLoaded', function() { orbitApplyLang(); });
+// Run on DOMContentLoaded (works for pages where header is in static HTML)
+document.addEventListener('DOMContentLoaded', orbitApplyLang);
 
-// Re-run when React mounts content late (blog, historias use mounted state)
-new MutationObserver(function() {
-  if (!__orbitTranslated || document.querySelectorAll('.lang-switch__label').length > 0) {
-    orbitApplyLang();
-  }
-}).observe(document.body || document.documentElement, { childList: true, subtree: true });
+// MutationObserver for pages where React mounts header after DOMContentLoaded
+var __orbitLangObs = new MutationObserver(orbitApplyLang);
+__orbitLangObs.observe(document.documentElement, { childList: true, subtree: true });
 
 document.addEventListener('DOMContentLoaded', function() {
 
