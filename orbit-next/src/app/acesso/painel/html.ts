@@ -908,30 +908,33 @@ export const pageHTML = `
 
         <!-- ══ BANNER MODAL ══ -->
         <div class="modal-overlay" id="bannerModal" onclick="if(event.target===this)closeBannerModal()">
-            <div class="modal" style="max-width:600px;max-height:90vh;overflow-y:auto;">
+            <div class="modal" style="max-width:620px;max-height:90vh;overflow-y:auto;width:calc(100% - 32px);">
                 <div class="modal-header">
                     <h3 id="bannerModalTitle">Novo Banner</h3>
                     <button class="btn btn-ghost" onclick="closeBannerModal()"><i class="fas fa-times"></i></button>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="bnId">
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-                        <div class="form-group">
-                            <label for="bnDisplayMode">Modo de exibicao</label>
-                            <select id="bnDisplayMode">
-                                <option value="bar">Barra (texto + botao)</option>
-                                <option value="image">Imagem (banner visual)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="bnPosition">Posicao no site</label>
-                            <select id="bnPosition">
-                                <option value="above-header">Acima do header (fixo)</option>
-                                <option value="below-header">Abaixo do header</option>
-                                <option value="floating-bottom">Flutuante no rodape</option>
-                            </select>
-                        </div>
+
+                    <div class="form-group">
+                        <label for="bnDisplayMode">Modo de exibicao</label>
+                        <select id="bnDisplayMode">
+                            <option value="bar">Barra (texto + botao)</option>
+                            <option value="image">Imagem (banner visual)</option>
+                        </select>
                     </div>
+
+                    <div class="form-group">
+                        <label for="bnPosition">Posicao no site</label>
+                        <select id="bnPosition">
+                            <option value="above-header">Barra fixa no topo (acima do header)</option>
+                            <option value="below-header">Abaixo do header</option>
+                            <option value="floating-bottom">Barra fixa no rodape</option>
+                            <option value="popup-center">Popup no centro da tela</option>
+                            <option value="popup-side">Popup na lateral (canto inferior direito)</option>
+                        </select>
+                    </div>
+
                     <div class="form-group">
                         <label for="bnTitle">Titulo</label>
                         <input type="text" id="bnTitle" placeholder="Ex: Live especial hoje as 19h!">
@@ -940,6 +943,7 @@ export const pageHTML = `
                         <label for="bnDescription">Descricao (opcional)</label>
                         <input type="text" id="bnDescription" placeholder="Texto complementar curto">
                     </div>
+
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
                         <div class="form-group">
                             <label for="bnCtaText">Texto do botao</label>
@@ -950,36 +954,47 @@ export const pageHTML = `
                             <input type="text" id="bnCtaUrl" placeholder="https://...">
                         </div>
                     </div>
+
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
                         <div class="form-group">
                             <label for="bnBgColor">Cor de fundo</label>
-                            <input type="color" id="bnBgColor" value="#ffba1a" style="width:100%;height:36px;border:1px solid var(--gray-200);border-radius:6px;cursor:pointer;">
+                            <div style="display:flex;align-items:center;gap:8px;">
+                                <input type="color" id="bnBgColor" value="#ffba1a" style="width:48px;height:40px;border:2px solid #ccc;border-radius:8px;cursor:pointer;padding:2px;">
+                                <span id="bnBgColorHex" style="font-size:0.85rem;color:var(--gray-600);font-family:monospace;">#ffba1a</span>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="bnTextColor">Cor do texto</label>
-                            <input type="color" id="bnTextColor" value="#0D1117" style="width:100%;height:36px;border:1px solid var(--gray-200);border-radius:6px;cursor:pointer;">
+                            <div style="display:flex;align-items:center;gap:8px;">
+                                <input type="color" id="bnTextColor" value="#0D1117" style="width:48px;height:40px;border:2px solid #ccc;border-radius:8px;cursor:pointer;padding:2px;">
+                                <span id="bnTextColorHex" style="font-size:0.85rem;color:var(--gray-600);font-family:monospace;">#0D1117</span>
+                            </div>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label><input type="checkbox" id="bnDismissible" checked style="margin-right:6px;">Visitante pode fechar o banner (X)</label>
                     </div>
+
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
                         <div class="form-group">
                             <label for="bnStartDate">Data inicio (opcional)</label>
-                            <input type="datetime-local" id="bnStartDate">
+                            <input type="datetime-local" id="bnStartDate" style="color:#333;background:#fff;">
                             <div class="hint">Vazio = ativo imediatamente</div>
                         </div>
                         <div class="form-group">
                             <label for="bnEndDate">Data fim (opcional)</label>
-                            <input type="datetime-local" id="bnEndDate">
+                            <input type="datetime-local" id="bnEndDate" style="color:#333;background:#fff;">
                             <div class="hint">Vazio = sem expiracao</div>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label for="bnPriority">Prioridade</label>
                         <input type="number" id="bnPriority" value="0" min="0" max="100">
                         <div class="hint">Maior numero = aparece primeiro</div>
                     </div>
+
                     <div class="form-group" id="bnImageGroup">
                         <label>Imagem do banner</label>
                         <div class="image-upload-area" id="bnImageDropZone" style="min-height:120px;">

@@ -4,7 +4,7 @@
   var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
 
   function fetchBanners() {
-    var url = SUPABASE_URL + '/rest/v1/site_banners?active=eq.true&order=priority.desc&limit=3&select=id,title,description,cta_text,cta_url,image_data,display_mode,position,dismissible,bg_color,text_color';
+    var url = SUPABASE_URL + '/rest/v1/site_banners?active=eq.true&order=priority.desc&limit=5&select=id,title,description,cta_text,cta_url,image_data,display_mode,position,dismissible,bg_color,text_color';
     fetch(url, {
       headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
     })
@@ -23,21 +23,28 @@
   function dismissBanner(id) {
     try { sessionStorage.setItem('orbit_bn_' + id, '1'); } catch(e) {}
     var el = document.getElementById('orbit-banner-' + id);
-    if (el) {
-      el.style.transition = 'opacity 0.3s, max-height 0.3s';
-      el.style.opacity = '0';
-      el.style.maxHeight = '0';
-      el.style.overflow = 'hidden';
-      setTimeout(function() { el.remove(); adjustHeaderOffset(); }, 300);
-    }
+    if (!el) return;
+    // Remove overlay if popup
+    var overlay = document.getElementById('orbit-banner-overlay-' + id);
+    el.style.transition = 'opacity 0.3s, transform 0.3s';
+    el.style.opacity = '0';
+    el.style.transform = 'scale(0.95)';
+    if (overlay) overlay.style.transition = 'opacity 0.3s';
+    if (overlay) overlay.style.opacity = '0';
+    setTimeout(function() {
+      el.remove();
+      if (overlay) overlay.remove();
+      adjustHeaderOffset();
+    }, 300);
   }
 
   function esc(s) { var d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
 
   function renderBanner(banner) {
     if (isDismissed(banner.id)) return;
-    // One banner per position
     if (document.querySelector('.orbit-banner--' + banner.position)) return;
+
+    var isPopup = banner.position === 'popup-center' || banner.position === 'popup-side';
 
     var div = document.createElement('div');
     div.id = 'orbit-banner-' + banner.id;
@@ -63,7 +70,17 @@
     div.innerHTML = inner;
 
     // Insert based on position
-    if (banner.position === 'above-header') {
+    if (isPopup) {
+      // Dark overlay behind popup
+      var overlay = document.createElement('div');
+      overlay.id = 'orbit-banner-overlay-' + banner.id;
+      overlay.className = 'orbit-banner-overlay';
+      if (banner.dismissible) {
+        overlay.onclick = function() { window.__dismissBanner(banner.id); };
+      }
+      document.body.appendChild(overlay);
+      document.body.appendChild(div);
+    } else if (banner.position === 'above-header') {
       document.body.insertBefore(div, document.body.firstChild);
     } else if (banner.position === 'below-header') {
       var header = document.querySelector('.header');
@@ -91,10 +108,8 @@
   window.__dismissBanner = dismissBanner;
   window.addEventListener('resize', adjustHeaderOffset);
 
-  // Wait for header to exist (React may mount late)
   function init() {
     if (document.querySelector('.header') || document.querySelector('.sidebar-nav')) {
-      // Skip on CMS pages
       if (document.querySelector('.sidebar-nav')) return;
       fetchBanners();
     } else {
