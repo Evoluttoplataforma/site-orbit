@@ -188,41 +188,44 @@ export const pageHTML = `
 
         empty.style.display = 'none';
 
-        grid.innerHTML = filtered.map(a => {
-            const imgSrc = a.cover_url || 'https://placehold.co/400x250/0D1117/ffba1a?text=Orbit+Blog';
-            const catLabel = CATEGORIES[a.category] || a.category;
-            const preview = a.excerpt || truncate(a.content, 120);
+        grid.innerHTML = filtered.map(function(a) {
+            var imgSrc = a.cover_url || 'https://placehold.co/400x250/0D1117/ffba1a?text=Orbit+Blog';
+            var catLabel = CATEGORIES[a.category] || a.category;
+            var preview = a.excerpt || truncate(a.content, 120);
 
-            return \`
-            <div class="blog-card" data-category="\${a.category}" data-slug="\${a.slug}" style="cursor:pointer;">
-                <div class="blog-card__image">
-                    <img src="\${escapeHtml(imgSrc)}" alt="\${escapeHtml(a.title)}" loading="lazy">
-                    <span class="blog-card__tag">\${escapeHtml(catLabel)}</span>
-                </div>
-                <div class="blog-card__body">
-                    <div class="blog-card__meta">
-                        <span><i class="fas fa-calendar-alt"></i> \${formatDate(a.published_at || a.created_at)}</span>
-                        <span><i class="fas fa-user"></i> \${escapeHtml(a.author)}</span>
-                    </div>
-                    <h3>\${escapeHtml(a.title)}</h3>
-                    <p>\${escapeHtml(preview)}</p>
-                    <span class="blog-card__link">Leia Mais <i class="fas fa-arrow-right"></i></span>
-                </div>
-            </div>\`;
+            return '<div class="blog-card" data-category="' + a.category + '" data-slug="' + a.slug + '" style="cursor:pointer;">' +
+                '<div class="blog-card__image">' +
+                    '<img src="' + escapeHtml(imgSrc) + '" alt="' + escapeHtml(a.title) + '" loading="lazy">' +
+                    '<span class="blog-card__tag">' + escapeHtml(catLabel) + '</span>' +
+                '</div>' +
+                '<div class="blog-card__body">' +
+                    '<div class="blog-card__meta">' +
+                        '<span><i class="fas fa-calendar-alt"></i> ' + formatDate(a.published_at || a.created_at) + '</span>' +
+                        '<span><i class="fas fa-user"></i> ' + escapeHtml(a.author) + '</span>' +
+                    '</div>' +
+                    '<h3>' + escapeHtml(a.title) + '</h3>' +
+                    '<p>' + escapeHtml(preview) + '</p>' +
+                    '<span class="blog-card__link">Leia Mais <i class="fas fa-arrow-right"></i></span>' +
+                '</div>' +
+            '</div>';
         }).join('');
 
         // Force visibility after dynamic content injection
         grid.classList.add('revealed');
         var section = grid.closest('.blog-grid-section');
         if (section) section.classList.add('revealed');
-
-        // Attach click handlers for navigation
-        grid.querySelectorAll('.blog-card[data-slug]').forEach(function(card) {
-            card.addEventListener('click', function() {
-                window.location.assign('/blog/' + card.getAttribute('data-slug'));
-            });
-        });
     }
+
+    // Event delegation for blog card clicks
+    document.addEventListener('click', function(e) {
+        var card = e.target.closest('.blog-card[data-slug]');
+        if (card) {
+            e.preventDefault();
+            var slug = card.getAttribute('data-slug');
+            console.log('Navigating to article:', slug);
+            window.location.href = '/blog/' + slug;
+        }
+    });
 
     // ── Filters ──
     document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -295,7 +298,9 @@ export const pageHTML = `
     }
 
     // ── Init ──
-    var pathParts = window.location.pathname.replace(/\\/$/, '').split('/');
+    var cleanPath = window.location.pathname;
+    if (cleanPath.charAt(cleanPath.length - 1) === '/') cleanPath = cleanPath.slice(0, -1);
+    var pathParts = cleanPath.split('/');
     var slug = pathParts.length > 2 ? pathParts.slice(2).join('/') : null;
     console.log('Blog init - path:', window.location.pathname, 'slug:', slug);
     if (slug) {
