@@ -1,16 +1,6 @@
 /* ORBIT - Init all interactive features */
-
-// ═══ LANG SWITCH — event delegation (works even after React re-renders) ═══
-document.addEventListener('click', function(e) {
-  if (!e.target || !e.target.closest) return;
-  var btn = e.target.closest('.lang-switch');
-  if (!btn) return;
-  e.preventDefault();
-  var cur = localStorage.getItem('orbit_lang') || 'pt';
-  var next = cur === 'pt' ? 'en' : 'pt';
-  localStorage.setItem('orbit_lang', next);
-  location.reload();
-});
+/* NOTE: lang-switch click, mobile menu, nav dropdowns, header scroll
+   are ALL handled by main-v2.js via event delegation. Do NOT duplicate here. */
 
 document.addEventListener('DOMContentLoaded', function() {
 

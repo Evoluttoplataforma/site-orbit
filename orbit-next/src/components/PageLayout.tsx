@@ -32,16 +32,13 @@ export function PageLayout({ contentHTML }: PageLayoutProps) {
       }
     });
 
-    // Initialize header interactions
-    initMobileMenu();
-    initNavDropdowns();
-    initHeaderScroll();
+    // Mobile menu, nav dropdowns, header scroll, and lang switch
+    // are ALL handled by main-v2.js via event delegation.
+    // Do NOT add direct handlers here — they conflict with event delegation.
   }, []);
 
   useEffect(() => {
-    // Try immediately (DOM already rendered via dangerouslySetInnerHTML)
     const t1 = setTimeout(initAll, 50);
-    // Safety retry
     const t2 = setTimeout(initAll, 300);
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, [initAll]);
@@ -49,111 +46,4 @@ export function PageLayout({ contentHTML }: PageLayoutProps) {
   const fullHTML = headerHTML + '\n' + contentHTML;
 
   return <div ref={ref} dangerouslySetInnerHTML={{ __html: fullHTML }} />;
-}
-
-// ── Mobile Menu ──
-// Retry up to 20 times (matches main-v2.js behavior)
-let mobileMenuRetries = 0;
-
-function initMobileMenu() {
-  const toggle = document.querySelector('.menu-toggle') as HTMLElement;
-  const menu = document.querySelector('.mobile-menu') as HTMLElement;
-  const overlay = document.querySelector('.mobile-menu-overlay') as HTMLElement;
-
-  if (!toggle || !menu) {
-    mobileMenuRetries++;
-    if (mobileMenuRetries < 20) {
-      setTimeout(initMobileMenu, 250);
-    }
-    return;
-  }
-
-  // Avoid duplicate listeners
-  if ((toggle as any).__menuInit) return;
-  (toggle as any).__menuInit = true;
-
-  const close = () => {
-    toggle.classList.remove('active');
-    menu.classList.remove('active');
-    if (overlay) overlay.classList.remove('active');
-    document.body.style.overflow = '';
-  };
-  const open = () => {
-    toggle.classList.add('active');
-    menu.classList.add('active');
-    if (overlay) overlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  };
-
-  (window as any).closeMobileMenu = close;
-  (window as any).openMobileMenu = open;
-
-  toggle.addEventListener('click', () => {
-    menu.classList.contains('active') ? close() : open();
-  });
-
-  menu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', close);
-  });
-}
-
-// ── Nav Dropdowns ──
-function initNavDropdowns() {
-  const navItems = document.querySelectorAll('.nav-menu > li');
-  if (!navItems.length) {
-    setTimeout(initNavDropdowns, 300);
-    return;
-  }
-
-  const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-  navItems.forEach(item => {
-    const dropdown = item.querySelector('.dropdown');
-    if (!dropdown) return;
-    if ((item as any).__dropInit) return;
-    (item as any).__dropInit = true;
-
-    if (isTouch) {
-      item.addEventListener('click', (e) => {
-        const isOpen = dropdown.classList.contains('show');
-        document.querySelectorAll('.dropdown.show').forEach(d => d.classList.remove('show'));
-        if (!isOpen) {
-          e.preventDefault();
-          dropdown.classList.add('show');
-        }
-      });
-    } else {
-      item.addEventListener('mouseenter', () => dropdown.classList.add('show'));
-      item.addEventListener('mouseleave', () => dropdown.classList.remove('show'));
-    }
-  });
-
-  if (isTouch) {
-    document.addEventListener('click', (e) => {
-      if (!(e.target as HTMLElement).closest('.nav-menu > li')) {
-        document.querySelectorAll('.dropdown.show').forEach(d => d.classList.remove('show'));
-      }
-    });
-  }
-}
-
-// ── Header Scroll ──
-function initHeaderScroll() {
-  const header = document.querySelector('.header') as HTMLElement;
-  const backToTop = document.querySelector('#backToTop') as HTMLElement;
-  if (!header && !backToTop) {
-    setTimeout(initHeaderScroll, 300);
-    return;
-  }
-
-  // Avoid duplicate scroll listeners
-  if ((window as any).__headerScrollInit) return;
-  (window as any).__headerScrollInit = true;
-
-  window.addEventListener('scroll', () => {
-    if (header) header.classList.toggle('scrolled', window.scrollY > 50);
-    if (backToTop) backToTop.style.display = window.scrollY > 400 ? 'flex' : 'none';
-  });
-  if (backToTop) {
-    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-  }
 }
