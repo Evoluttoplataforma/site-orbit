@@ -735,7 +735,7 @@ export const pageHTML = `
             .wa-section {
                 position: relative;
                 padding: 120px 0 100px;
-                background: var(--black, #0D1117);
+                background: linear-gradient(180deg, #F8F9FB 0%, #EEF0F4 100%);
                 overflow: hidden;
             }
             .wa-section__bg {
@@ -753,8 +753,8 @@ export const pageHTML = `
                 background: radial-gradient(circle, rgba(255,186,26,0.06) 0%, transparent 60%);
                 border-radius: 50%;
             }
-            .wa-section .section-header h2 { color: #fff !important; }
-            .wa-section .section-header p { color: rgba(255,255,255,0.5) !important; }
+            .wa-section .section-header h2 { color: #1A1D23 !important; }
+            .wa-section .section-header p { color: #6B7280 !important; }
             .section-badge--red {
                 background: rgba(248,81,73,0.08);
                 border: 1px solid rgba(248,81,73,0.2);
