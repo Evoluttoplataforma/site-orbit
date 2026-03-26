@@ -485,6 +485,7 @@ export const pageHTML = `
             </div>
 
             <!-- Phones grid -->
+            <div class="wa-phones-wrapper">
             <div class="wa-phones" id="waPhones">
 
                 <!-- ═══ PHONE 1 — Rodrigo ═══ -->
@@ -713,6 +714,7 @@ export const pageHTML = `
                 </div>
 
             </div>
+            </div>
 
             <!-- Mobile dots -->
             <div class="wa-dots" id="waDots">
@@ -756,6 +758,9 @@ export const pageHTML = `
             }
 
             /* ═══ PHONES GRID ═══ */
+            .wa-phones-wrapper {
+                overflow: visible;
+            }
             .wa-phones {
                 display: flex;
                 gap: 40px;
@@ -1111,9 +1116,11 @@ export const pageHTML = `
 
             /* ═══ RESPONSIVE ═══ */
             @media (max-width: 1100px) {
+                .wa-phones-wrapper {
+                    overflow: hidden;
+                }
                 .wa-phones {
                     justify-content: flex-start;
-                    overflow: hidden;
                     padding: 0 calc(50% - 170px);
                 }
                 .wa-dots { display: flex; }
@@ -1244,10 +1251,11 @@ export const pageHTML = `
                 d.addEventListener('click', function() { goTo(parseInt(d.dataset.idx)); });
             });
 
-            // Swipe
+            // Swipe (listen on wrapper which has overflow:hidden)
+            var wrapper = container.parentElement;
             var sx = 0;
-            container.addEventListener('touchstart', function(e) { sx = e.touches[0].clientX; }, { passive: true });
-            container.addEventListener('touchend', function(e) {
+            wrapper.addEventListener('touchstart', function(e) { sx = e.touches[0].clientX; }, { passive: true });
+            wrapper.addEventListener('touchend', function(e) {
                 var diff = sx - e.changedTouches[0].clientX;
                 if (Math.abs(diff) > 50) {
                     diff > 0 ? goTo(current + 1) : goTo(current - 1);

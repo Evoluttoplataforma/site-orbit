@@ -13399,8 +13399,6 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
         /* Blog Grid */
         .blog-grid-section {
             max-width: 1200px; margin: 40px auto 0; padding: 0 24px 60px;
-            background: #F8F9FA;
-            border-radius: 0;
         }
         .blog-grid {
             display: grid;
@@ -13525,6 +13523,7 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
         /* ── Single Article View ── */
         .blog-article {
             max-width: 1200px; margin: 0 auto; padding: 48px 24px 100px;
+            background: #fff;
         }
         .blog-article__back {
             display: inline-flex; align-items: center; gap: 8px;
@@ -13591,7 +13590,10 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
         .blog-article-content hr { border: none; border-top: 1px solid #E5E7EB; margin: 40px 0; }
 
         /* Sidebar cards */
-        .blog-article__sidebar { position: sticky; top: 100px; }
+        .blog-article__sidebar {
+            position: sticky; top: 100px;
+            align-self: start;
+        }
         .blog-sidebar-card {
             background: #fff; border: 1px solid #E5E7EB; border-radius: 16px;
             padding: 24px; margin-bottom: 20px;
