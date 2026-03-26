@@ -50,33 +50,39 @@
 
   // Nav dropdown hover/touch
   var isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-  document.addEventListener(isTouch ? 'click' : 'mouseenter', function(e) {
-    var li = e.target.closest('.nav-menu > li');
-    if (!li) return;
-    var dd = li.querySelector('.dropdown');
-    if (!dd) return;
-    if (isTouch) {
-      if (dd.classList.contains('show')) return;
-      e.preventDefault();
-      document.querySelectorAll('.dropdown.show').forEach(function(d) { d.classList.remove('show'); });
-      dd.classList.add('show');
-    } else {
-      dd.classList.add('show');
-    }
-  }, true);
-
-  if (!isTouch) {
-    document.addEventListener('mouseleave', function(e) {
-      var li = e.target.closest ? e.target.closest('.nav-menu > li') : null;
+  if (isTouch) {
+    document.addEventListener('click', function(e) {
+      if (!e.target || !e.target.closest) return;
+      var li = e.target.closest('.nav-menu > li');
       if (li) {
         var dd = li.querySelector('.dropdown');
-        if (dd) dd.classList.remove('show');
+        if (dd && !dd.classList.contains('show')) {
+          e.preventDefault();
+          document.querySelectorAll('.dropdown.show').forEach(function(d) { d.classList.remove('show'); });
+          dd.classList.add('show');
+          return;
+        }
       }
-    }, true);
-  } else {
-    document.addEventListener('click', function(e) {
       if (!e.target.closest('.nav-menu > li')) {
         document.querySelectorAll('.dropdown.show').forEach(function(d) { d.classList.remove('show'); });
+      }
+    });
+  } else {
+    // Desktop: use mouseover/mouseout (safe, no closest issues)
+    document.addEventListener('mouseover', function(e) {
+      if (!e.target || !e.target.closest) return;
+      var li = e.target.closest('.nav-menu > li');
+      if (li) {
+        var dd = li.querySelector('.dropdown');
+        if (dd) dd.classList.add('show');
+      }
+    });
+    document.addEventListener('mouseout', function(e) {
+      if (!e.target || !e.target.closest) return;
+      var li = e.target.closest('.nav-menu > li');
+      if (li && e.relatedTarget && !li.contains(e.relatedTarget)) {
+        var dd = li.querySelector('.dropdown');
+        if (dd) dd.classList.remove('show');
       }
     });
   }
@@ -88,11 +94,11 @@
     if (h) h.classList.toggle('scrolled', window.scrollY > 50);
     if (btn) btn.style.display = window.scrollY > 400 ? 'flex' : 'none';
   });
-  if (document.querySelector('#backToTop')) {
-    document.addEventListener('click', function(e) {
-      if (e.target.closest('#backToTop')) window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
+  document.addEventListener('click', function(e) {
+    if (e.target && e.target.closest && e.target.closest('#backToTop')) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
 
   // Language switcher (event delegation)
   document.addEventListener('click', function(e) {
