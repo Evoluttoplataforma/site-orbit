@@ -1,21 +1,12 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useLocale } from '@/components/LocaleProvider';
 
 export function LanguageSwitcher() {
-  const router = useRouter();
-  const [locale, setLocale] = useState('pt');
-
-  useEffect(() => {
-    setLocale(document.cookie.match(/locale=(\w+)/)?.[1] || 'pt');
-  }, []);
+  const { locale, setLocale } = useLocale();
 
   const toggle = () => {
-    const next = locale === 'pt' ? 'en' : 'pt';
-    document.cookie = `locale=${next};path=/;max-age=31536000`;
-    setLocale(next);
-    router.refresh();
+    setLocale(locale === 'pt' ? 'en' : 'pt');
   };
 
   return (

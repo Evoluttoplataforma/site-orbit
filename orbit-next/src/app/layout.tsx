@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { LocaleProvider } from "@/components/LocaleProvider";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -50,7 +51,9 @@ export default function RootLayout({
       </head>
       <body>
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W6H3729J" height="0" width="0" style={{display:'none',visibility:'hidden'}}></iframe></noscript>
+        <LocaleProvider>
         {children}
+        </LocaleProvider>
         <script dangerouslySetInnerHTML={{ __html: `
 // ===== CAMPOS OCULTOS GTM - Captura e Preenchimento =====
 (function(){
