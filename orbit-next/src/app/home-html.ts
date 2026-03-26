@@ -4697,10 +4697,10 @@ export const pageHTML = `
                         <p>Preencha e entraremos em contato em até 24h.</p>
                     </div>
 
-                    <form id="form-lead" class="lead-form" novalidate>
+                    <form id="lead-form" class="lead-form" novalidate>
                         <div class="form-group">
                             <label for="nome">Nome completo *</label>
-                            <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+                            <input type="text" id="nome" name="name" placeholder="Seu nome completo" required>
                         </div>
                         <div class="form-group">
                             <label for="email">E-mail corporativo *</label>
@@ -4708,11 +4708,11 @@ export const pageHTML = `
                         </div>
                         <div class="form-group">
                             <label for="telefone">WhatsApp *</label>
-                            <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                            <input type="tel" id="telefone" name="phone" placeholder="(00) 00000-0000" required>
                         </div>
                         <div class="form-group">
                             <label for="cargo">Cargo *</label>
-                            <select id="cargo" name="cargo" required>
+                            <select id="cargo" name="role" required>
                                 <option value="">Selecione seu cargo</option>
                                 <option value="ceo-diretor">CEO / Diretor</option>
                                 <option value="funcionario">Funcionário</option>
@@ -4723,7 +4723,7 @@ export const pageHTML = `
                         </div>
                         <div class="form-group">
                             <label for="segmento">Segmento *</label>
-                            <select id="segmento" name="segmento" required>
+                            <select id="segmento" name="segment" required>
                                 <option value="">Selecione o segmento</option>
                                 <option value="consultoria">Consultoria</option>
                                 <option value="industria">Indústria</option>
@@ -4735,11 +4735,11 @@ export const pageHTML = `
                         </div>
                         <div class="form-group">
                             <label for="empresa">Empresa *</label>
-                            <input type="text" id="empresa" name="empresa" placeholder="Nome da sua empresa" required>
+                            <input type="text" id="empresa" name="company" placeholder="Nome da sua empresa" required>
                         </div>
                         <div class="form-group">
                             <label for="faturamento">Faturamento mensal *</label>
-                            <select id="faturamento" name="faturamento" required>
+                            <select id="faturamento" name="revenue" required>
                                 <option value="">Selecione a faixa</option>
                                 <option value="ate-50k">Até R$ 50 mil/mês</option>
                                 <option value="50k-200k">R$ 50 mil - R$ 200 mil/mês</option>
@@ -4749,7 +4749,7 @@ export const pageHTML = `
                         </div>
                         <div class="form-group">
                             <label for="funcionarios">Quantos funcionários? *</label>
-                            <select id="funcionarios" name="funcionarios" required>
+                            <select id="funcionarios" name="employees" required>
                                 <option value="">Selecione</option>
                                 <option value="1-5">1 - 5 funcionários</option>
                                 <option value="6-20">6 - 20 funcionários</option>
@@ -4760,7 +4760,7 @@ export const pageHTML = `
                         </div>
                         <div class="form-group">
                             <label for="prioridade">Qual a prioridade para implementar? *</label>
-                            <select id="prioridade" name="prioridade" required>
+                            <select id="prioridade" name="priority" required>
                                 <option value="">Selecione</option>
                                 <option value="urgente">Urgente - preciso para ontem</option>
                                 <option value="em-breve">Em breve - nos próximos 30 dias</option>

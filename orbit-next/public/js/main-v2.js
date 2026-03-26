@@ -391,7 +391,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ═══ LEAD FORM ═══
-  const leadForm = document.getElementById('form-lead');
+  const leadForm = document.getElementById('lead-form');
   const pageStart = Date.now();
 
   // Session ID
@@ -435,11 +435,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const formSuccess = document.getElementById('form-success');
       const submitBtn = leadForm.querySelector('.btn-submit');
 
-      const nome = document.getElementById('nome').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const telefone = document.getElementById('telefone').value.trim();
+      // Get all form values via name attributes (GTM-compatible)
+      var f = leadForm;
+      var getValue = function(name) { var el = f.querySelector('[name="' + name + '"]'); return el ? el.value.trim() : ''; };
 
-      if (!nome || !email || !telefone) {
+      const nome = getValue('name');
+      const email = getValue('email');
+      const phone = getValue('phone');
+      const role = getValue('role');
+      const segment = getValue('segment');
+      const company = getValue('company');
+      const revenue = getValue('revenue');
+      const employees = getValue('employees');
+      const priority = getValue('priority');
+
+      if (!nome || !email || !phone || !role || !segment || !company || !revenue || !employees || !priority) {
         formError.textContent = 'Por favor, preencha todos os campos obrigatórios.';
         formError.style.display = 'block';
         return;
@@ -457,10 +467,18 @@ document.addEventListener('DOMContentLoaded', () => {
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         event: 'form_submit_success',
+        name: nome,
         email: email,
-        phoneNumber: telefone.replace(/\D/g, ''),
+        phoneNumber: phone.replace(/\D/g, ''),
+        phone: phone,
         nome: firstName,
         sobrenome: lastName,
+        role: role,
+        segment: segment,
+        company: company,
+        revenue: revenue,
+        employees: employees,
+        priority: priority,
         apex_session_id: sessionId,
         time_on_page_at_submit: Math.round((Date.now() - pageStart) / 1000)
       });
