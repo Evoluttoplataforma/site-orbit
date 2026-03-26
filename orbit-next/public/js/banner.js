@@ -54,8 +54,9 @@
 
     var inner = '';
     if (banner.display_mode === 'image' && banner.image_data) {
+      var imgSrc = banner.image_data;
       inner = '<a href="' + esc(banner.cta_url || '#') + '" class="orbit-banner__image-link">' +
-              '<img src="' + esc(banner.image_data) + '" alt="' + esc(banner.title) + '">' +
+              '<img src="' + imgSrc + '" alt="' + esc(banner.title) + '">' +
               '</a>';
     } else {
       inner = '<div class="orbit-banner__content">' +

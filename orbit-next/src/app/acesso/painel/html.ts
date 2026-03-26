@@ -997,11 +997,16 @@ export const pageHTML = `
 
                     <div class="form-group" id="bnImageGroup">
                         <label>Imagem do banner</label>
-                        <div class="image-upload-area" id="bnImageDropZone" style="min-height:120px;">
+                        <div class="form-group" style="margin-bottom:8px;">
+                            <input type="text" id="bnImageUrl" placeholder="Cole a URL da imagem (ex: https://...)" style="font-size:0.9rem;">
+                            <div class="hint">Recomendado: use uma URL de imagem externa</div>
+                        </div>
+                        <div style="text-align:center;color:var(--gray-400);font-size:0.8rem;margin:8px 0;">ou faça upload direto</div>
+                        <div class="image-upload-area" id="bnImageDropZone" style="min-height:100px;">
                             <input type="file" id="bnImageFileInput" accept="image/*" onchange="handleBnImageUpload(event)">
                             <i class="fas fa-cloud-upload-alt"></i>
-                            <p>Arraste uma imagem ou clique para selecionar</p>
-                            <span class="upload-hint">JPG, PNG ou WebP (max 2MB)</span>
+                            <p>Arraste uma imagem ou clique</p>
+                            <span class="upload-hint">JPG, PNG ou WebP (max 500KB)</span>
                         </div>
                         <div class="image-preview" id="bnImagePreview" style="margin-top:8px;"></div>
                         <input type="hidden" id="bnImageData">
@@ -3297,6 +3302,12 @@ JSON.stringify(schemaOrg, null, 2) +
         }).join('');
     }
 
+    function getBnImage() {
+        var url = (document.getElementById('bnImageUrl').value || '').trim();
+        var data = document.getElementById('bnImageData').value || '';
+        return url || data;
+    }
+
     function openBannerModal() {
         document.getElementById('bnId').value = '';
         document.getElementById('bnDisplayMode').value = 'bar';
@@ -3311,6 +3322,7 @@ JSON.stringify(schemaOrg, null, 2) +
         document.getElementById('bnStartDate').value = '';
         document.getElementById('bnEndDate').value = '';
         document.getElementById('bnPriority').value = '0';
+        document.getElementById('bnImageUrl').value = '';
         document.getElementById('bnImageData').value = '';
         document.getElementById('bnImagePreview').innerHTML = '';
         document.getElementById('bnImageGroup').style.display = 'block';
@@ -3325,6 +3337,8 @@ JSON.stringify(schemaOrg, null, 2) +
     function editBanner(id) {
         var bn = supabaseBanners.find(function(b) { return b.id === id; });
         if (!bn) return;
+        var img = bn.image_data || '';
+        var isUrl = img.startsWith('http');
         document.getElementById('bnId').value = bn.id;
         document.getElementById('bnDisplayMode').value = bn.display_mode || 'bar';
         document.getElementById('bnPosition').value = bn.position || 'above-header';
@@ -3338,9 +3352,10 @@ JSON.stringify(schemaOrg, null, 2) +
         document.getElementById('bnStartDate').value = bn.start_date ? bn.start_date.slice(0, 16) : '';
         document.getElementById('bnEndDate').value = bn.end_date ? bn.end_date.slice(0, 16) : '';
         document.getElementById('bnPriority').value = bn.priority || 0;
-        document.getElementById('bnImageData').value = bn.image_data || '';
-        document.getElementById('bnImagePreview').innerHTML = bn.image_data ? '<img src="' + bn.image_data + '" style="max-width:100%;border-radius:8px;">' : '';
-        document.getElementById('bnImageGroup').style.display = bn.display_mode === 'image' ? 'block' : 'block';
+        document.getElementById('bnImageUrl').value = isUrl ? img : '';
+        document.getElementById('bnImageData').value = isUrl ? '' : img;
+        document.getElementById('bnImagePreview').innerHTML = img ? '<img src="' + escapeHtml(img) + '" style="max-width:100%;border-radius:8px;">' : '';
+        document.getElementById('bnImageGroup').style.display = 'block';
         document.getElementById('bannerModalTitle').textContent = 'Editar Banner';
         document.getElementById('bannerModal').classList.add('active');
     }
@@ -3348,8 +3363,9 @@ JSON.stringify(schemaOrg, null, 2) +
     function saveBanner() {
         var mode = document.getElementById('bnDisplayMode').value;
         var title = document.getElementById('bnTitle').value.trim();
+        var imgVal = getBnImage();
         if (mode === 'bar' && !title) { toast('Informe o titulo do banner.', 'error'); return; }
-        if (mode === 'image' && !document.getElementById('bnImageData').value) { toast('Selecione uma imagem para o banner.', 'error'); return; }
+        if (mode === 'image' && !imgVal) { toast('Informe a URL ou faca upload de uma imagem.', 'error'); return; }
         var id = document.getElementById('bnId').value;
         var sd = document.getElementById('bnStartDate').value;
         var ed = document.getElementById('bnEndDate').value;
@@ -3358,7 +3374,7 @@ JSON.stringify(schemaOrg, null, 2) +
             description: document.getElementById('bnDescription').value.trim(),
             cta_text: document.getElementById('bnCtaText').value.trim(),
             cta_url: document.getElementById('bnCtaUrl').value.trim(),
-            image_data: document.getElementById('bnImageData').value,
+            image_data: imgVal,
             display_mode: mode,
             position: document.getElementById('bnPosition').value,
             dismissible: document.getElementById('bnDismissible').checked,
@@ -3377,9 +3393,9 @@ JSON.stringify(schemaOrg, null, 2) +
             headers: { 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
             body: JSON.stringify(payload)
         }).then(function(res) {
-            if (!res.ok) throw new Error('Erro ao salvar');
+            if (!res.ok) return res.text().then(function(t) { throw new Error(t || 'Erro ' + res.status); });
             closeBannerModal(); refreshBanners(); toast('Banner salvo!');
-        }).catch(function(err) { toast('Erro ao salvar banner: ' + err.message, 'error'); });
+        }).catch(function(err) { toast('Erro ao salvar: ' + err.message, 'error'); });
     }
 
     function deleteBanner(id) {
@@ -3405,11 +3421,12 @@ JSON.stringify(schemaOrg, null, 2) +
     function handleBnImageUpload(event) {
         var file = event.target.files[0];
         if (!file) return;
-        if (file.size > 2 * 1024 * 1024) { toast('Imagem muito grande. Max 2MB.', 'error'); return; }
+        if (file.size > 500 * 1024) { toast('Imagem muito grande. Max 500KB. Use URL para imagens maiores.', 'error'); return; }
         if (!file.type.startsWith('image/')) { toast('Selecione um arquivo de imagem.', 'error'); return; }
         var reader = new FileReader();
         reader.onload = function(e) {
             document.getElementById('bnImageData').value = e.target.result;
+            document.getElementById('bnImageUrl').value = '';
             document.getElementById('bnImagePreview').innerHTML = '<img src="' + e.target.result + '" style="max-width:100%;border-radius:8px;">';
         };
         reader.readAsDataURL(file);
