@@ -3322,6 +3322,7 @@ ul { list-style: none; }
   color: var(--gray-500);
   margin-bottom: 6px;
 }
+.lead-form select,
 .lead-form input[type="text"],
 .lead-form input[type="email"],
 .lead-form input[type="tel"] {
@@ -3335,11 +3336,24 @@ ul { list-style: none; }
   font-size: 14px;
   transition: var(--transition-fast);
 }
-.lead-form input:focus {
+.lead-form input:focus,
+.lead-form select:focus {
   outline: none;
   border-color: var(--primary);
   background: var(--black);
   box-shadow: 0 0 0 3px rgba(255,186,26,0.12);
+}
+.lead-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffba1a' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+.lead-form select option {
+  background: #111; color: #fff;
 }
 .lead-form input::placeholder {
   color: var(--gray-600);
@@ -13777,8 +13791,7 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
             cursor: pointer; border: none; font-size: 18px; transition: transform 0.2s;
         }
         .blog-share-btn:hover { transform: scale(1.1); }
-        .blog-share-btn--whatsapp { background: rgba(63,185,80,0.1); border: 1px solid rgba(63,185,80,0.2); color: #3FB950; }
-        .blog-share-btn--linkedin { background: rgba(10,102,194,0.1); border: 1px solid rgba(10,102,194,0.2); color: #0A66C2; }
+        .blog-share-btn--instagram { background: rgba(225,48,108,0.1); border: 1px solid rgba(225,48,108,0.2); color: #E1306C; text-decoration: none; }
         .blog-share-btn--copy { background: rgba(139,148,158,0.1); border: 1px solid rgba(139,148,158,0.2); color: #6B7280; }
 
         /* Dropdown fix for blog page */

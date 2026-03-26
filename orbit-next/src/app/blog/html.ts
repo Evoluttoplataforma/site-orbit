@@ -183,11 +183,8 @@ export const pageHTML = `
     }
 
     // Share functions (defined here to avoid escaping issues in inline onclick)
-    window.__shareWhatsApp = function() {
-        window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(document.title + ' ' + location.href));
-    };
-    window.__shareLinkedIn = function() {
-        window.open('https://linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(location.href));
+    window.__shareInstagram = function() {
+        window.open('https://www.instagram.com/orbitgestao/');
     };
     window.__copyLink = function(btn) {
         navigator.clipboard.writeText(location.href).then(function() {
@@ -491,8 +488,7 @@ export const pageHTML = `
                     '<div class="blog-sidebar-card">' +
                         '<p class="blog-sidebar-card__label">Compartilhar</p>' +
                         '<div class="blog-sidebar-share">' +
-                            '<button class="blog-share-btn blog-share-btn--whatsapp" onclick="window.__shareWhatsApp()" aria-label="Compartilhar no WhatsApp"><i class="fab fa-whatsapp"></i></button>' +
-                            '<button class="blog-share-btn blog-share-btn--linkedin" onclick="window.__shareLinkedIn()" aria-label="Compartilhar no LinkedIn"><i class="fab fa-linkedin-in"></i></button>' +
+                            '<a href="https://www.instagram.com/orbitgestao/" target="_blank" class="blog-share-btn blog-share-btn--instagram" aria-label="Seguir no Instagram"><i class="fab fa-instagram"></i></a>' +
                             '<button class="blog-share-btn blog-share-btn--copy" onclick="window.__copyLink(this)" aria-label="Copiar link"><i class="fas fa-link"></i></button>' +
                         '</div>' +
                     '</div>' +
@@ -616,17 +612,10 @@ export const pageHTML = `
                 '<a href="' + ctaUrl + '" class="btn btn-primary" style="color:#fff;">' + escapeHtml(article.cta_banner_cta_text || 'Agendar demonstração') + '</a>' +
               '</div>';
 
-        // Insert after ~50% of top-level children
-        var children = contentEl.children;
-        var midpoint = Math.max(2, Math.floor(children.length / 2));
+        // Insert at the end of article content
         var banner = document.createElement('div');
         banner.innerHTML = bannerHTML;
-        var bannerEl = banner.firstChild;
-        if (children[midpoint]) {
-            contentEl.insertBefore(bannerEl, children[midpoint]);
-        } else {
-            contentEl.appendChild(bannerEl);
-        }
+        contentEl.appendChild(banner.firstChild);
     }
 
     function fetchSingleArticle(slug) {

@@ -4711,12 +4711,62 @@ export const pageHTML = `
                             <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
                         </div>
                         <div class="form-group">
-                            <label for="empresa">Empresa</label>
-                            <input type="text" id="empresa" name="empresa" placeholder="Nome da sua empresa">
+                            <label for="cargo">Cargo *</label>
+                            <select id="cargo" name="cargo" required>
+                                <option value="">Selecione seu cargo</option>
+                                <option value="ceo-diretor">CEO / Diretor</option>
+                                <option value="funcionario">Funcionário</option>
+                                <option value="qualidade">Responsável pela Qualidade</option>
+                                <option value="consultor">Consultor</option>
+                                <option value="outro">Outro</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="cargo">Cargo</label>
-                            <input type="text" id="cargo" name="cargo" placeholder="Seu cargo">
+                            <label for="segmento">Segmento *</label>
+                            <select id="segmento" name="segmento" required>
+                                <option value="">Selecione o segmento</option>
+                                <option value="consultoria">Consultoria</option>
+                                <option value="industria">Indústria</option>
+                                <option value="servicos">Serviços</option>
+                                <option value="comercio-varejo">Comércio / Varejo</option>
+                                <option value="governo">Governo</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="empresa">Empresa *</label>
+                            <input type="text" id="empresa" name="empresa" placeholder="Nome da sua empresa" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="faturamento">Faturamento mensal *</label>
+                            <select id="faturamento" name="faturamento" required>
+                                <option value="">Selecione a faixa</option>
+                                <option value="ate-50k">Até R$ 50 mil/mês</option>
+                                <option value="50k-200k">R$ 50 mil - R$ 200 mil/mês</option>
+                                <option value="200k-1m">R$ 200 mil - R$ 1 milhão/mês</option>
+                                <option value="acima-1m">Acima de R$ 1 milhão/mês</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="funcionarios">Quantos funcionários? *</label>
+                            <select id="funcionarios" name="funcionarios" required>
+                                <option value="">Selecione</option>
+                                <option value="1-5">1 - 5 funcionários</option>
+                                <option value="6-20">6 - 20 funcionários</option>
+                                <option value="21-50">21 - 50 funcionários</option>
+                                <option value="51-100">51 - 100 funcionários</option>
+                                <option value="100+">Mais de 100 funcionários</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="prioridade">Qual a prioridade para implementar? *</label>
+                            <select id="prioridade" name="prioridade" required>
+                                <option value="">Selecione</option>
+                                <option value="urgente">Urgente - preciso para ontem</option>
+                                <option value="em-breve">Em breve - nos próximos 30 dias</option>
+                                <option value="pesquisando">Estou pesquisando ainda</option>
+                                <option value="conhecer">Só quero conhecer</option>
+                            </select>
                         </div>
 
                         <!-- Hidden UTM fields -->
