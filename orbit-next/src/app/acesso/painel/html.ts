@@ -1215,7 +1215,7 @@ export const pageHTML = `
             .replace(/\\s+/g, '-')
             .replace(/-+/g, '-')
             .replace(/^-|-$/g, '')
-            .slice(0, 80);
+            .slice(0, 200);
         document.getElementById('articleSlug').value = slug;
         document.getElementById('slugPreview').textContent = slug || 'titulo-do-artigo';
     }
@@ -1257,36 +1257,40 @@ export const pageHTML = `
 
         try {
             var res;
+            // Use session token if available, fallback to anon key
+            var authToken = (session && session.access_token) ? session.access_token : SUPABASE_KEY;
+            var headers = {
+                'Content-Type': 'application/json',
+                'apikey': SUPABASE_KEY,
+                'Authorization': 'Bearer ' + authToken,
+                'Prefer': 'return=minimal'
+            };
+
             if (articleId) {
                 // Update existing
                 res = await fetch(SUPABASE_URL + '/rest/v1/blog_articles?id=eq.' + articleId, {
                     method: 'PATCH',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'apikey': SUPABASE_KEY,
-                        'Authorization': 'Bearer ' + session.access_token,
-                        'Prefer': 'return=minimal'
-                    },
+                    headers: headers,
                     body: JSON.stringify(articleData)
                 });
             } else {
                 // Create new
                 res = await fetch(SUPABASE_URL + '/rest/v1/blog_articles', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'apikey': SUPABASE_KEY,
-                        'Authorization': 'Bearer ' + session.access_token,
-                        'Prefer': 'return=minimal'
-                    },
+                    headers: headers,
                     body: JSON.stringify(articleData)
                 });
             }
 
             if (!res.ok) {
                 var err = await res.text();
-                console.error('Supabase error:', err);
-                toast('Erro ao salvar artigo.', 'error');
+                console.error('Supabase error:', res.status, err);
+                if (res.status === 401 || res.status === 403) {
+                    toast('Sessao expirada. Faca login novamente.', 'error');
+                    setTimeout(function() { window.location.href = '/acesso'; }, 2000);
+                } else {
+                    toast('Erro ao salvar: ' + (err || res.status), 'error');
+                }
                 return;
             }
 
@@ -1307,7 +1311,7 @@ export const pageHTML = `
             .replace(/\\s+/g, '-')
             .replace(/-+/g, '-')
             .replace(/^-|-$/g, '')
-            .slice(0, 80);
+            .slice(0, 200);
     }
 
     // Rich text commands
