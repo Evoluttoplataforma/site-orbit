@@ -423,10 +423,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Form submit — event delegation (survives React hydration)
   document.addEventListener('submit', function(e) {
-    var leadForm = e.target.closest('#lead-form');
-    if (!leadForm) return;
+    if (!e.target || e.target.id !== 'lead-form') return;
     e.preventDefault();
-      e.preventDefault();
+    var leadForm = e.target;
 
       const btnText = leadForm.querySelector('.btn-text');
       const btnLoading = leadForm.querySelector('.btn-loading');
