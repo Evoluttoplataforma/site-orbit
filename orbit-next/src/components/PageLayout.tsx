@@ -33,6 +33,65 @@ export function PageLayout({ contentHTML }: PageLayoutProps) {
           }
         }
       });
+
+      // Initialize mobile menu after HTML is injected
+      const toggle = ref.current?.querySelector('.menu-toggle') as HTMLElement;
+      const menu = ref.current?.querySelector('.mobile-menu') as HTMLElement;
+      const overlay = ref.current?.querySelector('.mobile-menu-overlay') as HTMLElement;
+
+      if (toggle && menu) {
+        const close = () => {
+          toggle.classList.remove('active');
+          menu.classList.remove('active');
+          if (overlay) overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        };
+        const open = () => {
+          toggle.classList.add('active');
+          menu.classList.add('active');
+          if (overlay) overlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        };
+
+        (window as any).closeMobileMenu = close;
+        (window as any).openMobileMenu = open;
+
+        toggle.addEventListener('click', () => {
+          menu.classList.contains('active') ? close() : open();
+        });
+
+        menu.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', close);
+        });
+      }
+
+      // Initialize nav dropdowns (touch + hover)
+      const navItems = ref.current?.querySelectorAll('.nav-menu > li');
+      const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      navItems?.forEach(item => {
+        const dropdown = item.querySelector('.dropdown');
+        if (!dropdown) return;
+        if (isTouch) {
+          item.addEventListener('click', (e) => {
+            const isOpen = dropdown.classList.contains('show');
+            ref.current?.querySelectorAll('.dropdown.show').forEach(d => d.classList.remove('show'));
+            if (!isOpen) {
+              e.preventDefault();
+              dropdown.classList.add('show');
+            }
+          });
+        } else {
+          item.addEventListener('mouseenter', () => dropdown.classList.add('show'));
+          item.addEventListener('mouseleave', () => dropdown.classList.remove('show'));
+        }
+      });
+      if (isTouch) {
+        document.addEventListener('click', (e) => {
+          if (!(e.target as HTMLElement).closest('.nav-menu > li')) {
+            ref.current?.querySelectorAll('.dropdown.show').forEach(d => d.classList.remove('show'));
+          }
+        });
+      }
     }, 150);
 
     return () => clearTimeout(timer);
