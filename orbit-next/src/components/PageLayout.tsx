@@ -92,6 +92,19 @@ export function PageLayout({ contentHTML }: PageLayoutProps) {
           }
         });
       }
+
+      // Header scroll effect + back to top
+      const header = ref.current?.querySelector('.header') as HTMLElement;
+      const backToTop = ref.current?.querySelector('#backToTop') as HTMLElement;
+      if (header || backToTop) {
+        window.addEventListener('scroll', () => {
+          if (header) header.classList.toggle('scrolled', window.scrollY > 50);
+          if (backToTop) backToTop.style.display = window.scrollY > 400 ? 'flex' : 'none';
+        });
+        if (backToTop) {
+          backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        }
+      }
     }, 150);
 
     return () => clearTimeout(timer);

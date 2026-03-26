@@ -216,10 +216,10 @@ export const pageHTML = `
         if (section) section.classList.add('revealed');
     }
 
-    // Global function for article navigation
+    // Global function for article navigation (use query param to avoid routing issues)
     window.__goToArticle = function(el) {
         var slug = el.getAttribute('data-slug');
-        if (slug) window.location.href = '/blog/' + slug;
+        if (slug) window.location.href = '/blog?artigo=' + encodeURIComponent(slug);
     };
 
     // ── Filters ──
@@ -293,11 +293,9 @@ export const pageHTML = `
     }
 
     // ── Init ──
-    var cleanPath = window.location.pathname;
-    if (cleanPath.charAt(cleanPath.length - 1) === '/') cleanPath = cleanPath.slice(0, -1);
-    var pathParts = cleanPath.split('/');
-    var slug = pathParts.length > 2 ? pathParts.slice(2).join('/') : null;
-    console.log('Blog init - path:', window.location.pathname, 'slug:', slug);
+    var params = new URLSearchParams(window.location.search);
+    var slug = params.get('artigo');
+    console.log('Blog init - slug:', slug);
     if (slug) {
         fetchSingleArticle(slug);
     } else {

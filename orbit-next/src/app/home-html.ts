@@ -4822,7 +4822,7 @@ export const pageHTML = `
             // Attach click handlers
             grid.querySelectorAll('.knowledge-card[data-slug]').forEach(function(card) {
                 card.addEventListener('click', function() {
-                    window.location.assign('/blog/' + card.getAttribute('data-slug'));
+                    window.location.href = '/blog?artigo=' + encodeURIComponent(card.getAttribute('data-slug'));
                 });
             });
         })
