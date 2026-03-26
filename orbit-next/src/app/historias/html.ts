@@ -200,25 +200,24 @@ export const pageHTML = `
             const segmentLabel = SEGMENTS[story.segmento] || SEGMENTS[story.segment] || story.segmento || story.segment || '';
 
             // Company logo
-            let logoHtml;
+            var logoHtml;
             if (story.companyLogo || story.logoData) {
-                const logoSrc = story.companyLogo || story.logoData;
-                logoHtml = \`<img src="\${logoSrc}" alt="\${escapeHtml(story.empresa)}" loading="lazy">\`;
+                var logoSrc = story.companyLogo || story.logoData;
+                logoHtml = '<img src="' + logoSrc + '" alt="' + escapeHtml(story.empresa) + '" loading="lazy">';
             } else {
-                logoHtml = \`<div class="story-card__logo-placeholder"><i class="fas fa-building"></i></div>\`;
+                logoHtml = '<div class="story-card__logo-placeholder"><i class="fas fa-building"></i></div>';
             }
 
-            const autorCargo = [story.nome, story.cargo].filter(Boolean).join(' - ');
+            var autorCargo = [story.nome, story.cargo].filter(Boolean).join(' - ');
 
-            return \`
-            <a href="/historias/\${encodeURIComponent(story.slug || story.id)}" class="story-card">
-                \${segmentLabel ? \`<span class="story-card__segment">\${escapeHtml(segmentLabel)}</span>\` : ''}
-                <div class="story-card__logo">\${logoHtml}</div>
-                <div class="story-card__company">\${escapeHtml(story.empresa)}</div>
-                \${autorCargo ? \`<div class="story-card__author">\${escapeHtml(autorCargo)}</div>\` : ''}
-                <div class="story-card__title">\${escapeHtml(story.titulo)}</div>
-                <span class="story-card__link">Leia a história &rarr;</span>
-            </a>\`;
+            return '<a href="/historias/' + encodeURIComponent(story.slug || story.id) + '" class="story-card">' +
+                (segmentLabel ? '<span class="story-card__segment">' + escapeHtml(segmentLabel) + '</span>' : '') +
+                '<div class="story-card__logo">' + logoHtml + '</div>' +
+                '<div class="story-card__company">' + escapeHtml(story.empresa) + '</div>' +
+                (autorCargo ? '<div class="story-card__author">' + escapeHtml(autorCargo) + '</div>' : '') +
+                '<div class="story-card__title">' + escapeHtml(story.titulo) + '</div>' +
+                '<span class="story-card__link">Leia a hist&oacute;ria &rarr;</span>' +
+            '</a>';
         }).join('');
     }
 

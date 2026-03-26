@@ -965,7 +965,7 @@ export const pageHTML = `
         const view = document.getElementById('view-' + viewName);
         if (view) view.classList.add('active');
 
-        const navLink = document.querySelector(\`.sidebar-nav a[data-view="\${viewName}"]\`);
+        const navLink = document.querySelector('.sidebar-nav a[data-view="' + viewName + '"]');
         if (navLink) navLink.classList.add('active');
 
         // Refresh data
@@ -999,9 +999,9 @@ export const pageHTML = `
     function toast(message, type = 'success') {
         const container = document.getElementById('toastContainer');
         const el = document.createElement('div');
-        el.className = \`toast toast--\${type}\`;
+        el.className = 'toast toast--' + type;
         const icon = type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
-        el.innerHTML = \`<i class="fas \${icon}" style="color:var(--\${type})"></i> \${message}\`;
+        el.innerHTML = '<i class="fas ' + icon + '" style="color:var(--' + type + ')"></i> ' + message;
         container.appendChild(el);
         setTimeout(() => { el.remove(); }, 3500);
     }
@@ -1163,7 +1163,7 @@ export const pageHTML = `
         document.getElementById('ctaBannerCtaUrl').value = article.ctaBannerCtaUrl || '/#contato-form';
         document.getElementById('ctaBannerImageData').value = article.ctaBannerImage || '';
         if (article.ctaBannerImage) {
-            document.getElementById('ctaBannerImagePreview').innerHTML = \`<img src="\${article.ctaBannerImage}" style="max-width:100%;border-radius:8px;">\`;
+            document.getElementById('ctaBannerImagePreview').innerHTML = '<img src="' + article.ctaBannerImage + '" style="max-width:100%;border-radius:8px;">';
         } else {
             document.getElementById('ctaBannerImagePreview').innerHTML = '';
         }
@@ -1408,12 +1408,10 @@ export const pageHTML = `
 
     function showImagePreview(src) {
         const container = document.getElementById('featuredImagePreview');
-        container.innerHTML = \`
-            <img src="\${src}" alt="Preview">
-            <button class="remove-image" onclick="removeImage()" title="Remover imagem">
-                <i class="fas fa-times"></i>
-            </button>
-        \`;
+        container.innerHTML = '<img src="' + src + '" alt="Preview">' +
+            '<button class="remove-image" onclick="removeImage()" title="Remover imagem">' +
+                '<i class="fas fa-times"></i>' +
+            '</button>';
     }
 
     function removeImage() {
@@ -1589,7 +1587,7 @@ export const pageHTML = `
         const reader = new FileReader();
         reader.onload = (e) => {
             document.getElementById('lmImageData').value = e.target.result;
-            document.getElementById('lmImagePreview').innerHTML = \`<img src="\${e.target.result}" style="max-width:100%;border-radius:8px;">\`;
+            document.getElementById('lmImagePreview').innerHTML = '<img src="' + e.target.result + '" style="max-width:100%;border-radius:8px;">';
         };
         reader.readAsDataURL(file);
     }
@@ -1615,7 +1613,7 @@ export const pageHTML = `
         const reader = new FileReader();
         reader.onload = (e) => {
             document.getElementById('ctaBannerImageData').value = e.target.result;
-            document.getElementById('ctaBannerImagePreview').innerHTML = \`<img src="\${e.target.result}" style="max-width:100%;border-radius:8px;">\`;
+            document.getElementById('ctaBannerImagePreview').innerHTML = '<img src="' + e.target.result + '" style="max-width:100%;border-radius:8px;">';
         };
         reader.readAsDataURL(file);
     }
@@ -1716,15 +1714,13 @@ export const pageHTML = `
         const author = document.getElementById('articleAuthor').value || session.name;
         const imgSrc = document.getElementById('articleImageData').value || document.getElementById('articleImageUrl').value;
 
-        const previewHTML = \`
-            <div style="background:#000;margin:-24px -32px 0;padding:40px 32px 32px;text-align:center;border-radius:16px 16px 0 0;">
-                <span style="background:#ffba1a;color:#000;padding:4px 14px;border-radius:20px;font-size:0.7rem;font-weight:600;text-transform:uppercase;">\${CATEGORIES[category] || 'Categoria'}</span>
-                <h1 style="font-size:1.5rem;font-weight:700;color:#fff;margin:16px 0 8px;line-height:1.3;">\${escapeHtml(title)}</h1>
-                <p style="color:rgba(255,255,255,.5);font-size:0.82rem;">Por \${escapeHtml(author)}</p>
-            </div>
-            \${imgSrc ? \`<img src="\${imgSrc}" style="width:100%;max-height:350px;object-fit:cover;border-radius:0 0 12px 12px;margin-bottom:24px;" alt="Destaque">\` : ''}
-            <div style="line-height:1.8;font-size:0.95rem;padding-top:\${imgSrc ? '0' : '24px'};">\${content}</div>
-        \`;
+        const previewHTML = '<div style="background:#000;margin:-24px -32px 0;padding:40px 32px 32px;text-align:center;border-radius:16px 16px 0 0;">' +
+                '<span style="background:#ffba1a;color:#000;padding:4px 14px;border-radius:20px;font-size:0.7rem;font-weight:600;text-transform:uppercase;">' + (CATEGORIES[category] || 'Categoria') + '</span>' +
+                '<h1 style="font-size:1.5rem;font-weight:700;color:#fff;margin:16px 0 8px;line-height:1.3;">' + escapeHtml(title) + '</h1>' +
+                '<p style="color:rgba(255,255,255,.5);font-size:0.82rem;">Por ' + escapeHtml(author) + '</p>' +
+            '</div>' +
+            (imgSrc ? '<img src="' + imgSrc + '" style="width:100%;max-height:350px;object-fit:cover;border-radius:0 0 12px 12px;margin-bottom:24px;" alt="Destaque">' : '') +
+            '<div style="line-height:1.8;font-size:0.95rem;padding-top:' + (imgSrc ? '0' : '24px') + ';">' + content + '</div>';
 
         document.getElementById('previewContent').innerHTML = previewHTML;
         document.getElementById('previewModal').classList.add('active');
@@ -1824,233 +1820,233 @@ export const pageHTML = `
             }
         };
 
-        const html = \`<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- SEO Primary Meta Tags -->
-    <title>\${escapeHtml(seoTitle)} | Blog Orbit Gestao</title>
-    <meta name="title" content="\${escapeHtml(seoTitle)} | Blog Orbit Gestao">
-    <meta name="description" content="\${escapeHtml(metaDesc)}">
-    \${seoKeyword ? \`<meta name="keywords" content="\${escapeHtml(seoKeyword)}, gestao estrategica, orbit gestao, gestao empresarial">\` : ''}
-    <meta name="author" content="\${escapeHtml(author)}">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <link rel="canonical" href="\${escapeHtml(seoCanonical)}">
-    <meta name="language" content="pt-BR">
-    <meta name="revisit-after" content="7 days">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="\${escapeHtml(seoCanonical)}">
-    <meta property="og:title" content="\${escapeHtml(seoTitle)}">
-    <meta property="og:description" content="\${escapeHtml(metaDesc)}">
-    <meta property="og:image" content="\${escapeHtml(seoOgImage)}">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="\${escapeHtml(title)}">
-    <meta property="og:site_name" content="Orbit Gestao">
-    <meta property="og:locale" content="pt_BR">
-    <meta property="article:published_time" content="\${isoDate}">
-    <meta property="article:modified_time" content="\${isoDate}">
-    <meta property="article:author" content="\${escapeHtml(author)}">
-    <meta property="article:section" content="\${escapeHtml(categoryLabel)}">
-    \${seoKeyword ? \`<meta property="article:tag" content="\${escapeHtml(seoKeyword)}">\` : ''}
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="\${escapeHtml(seoCanonical)}">
-    <meta name="twitter:title" content="\${escapeHtml(seoTitle)}">
-    <meta name="twitter:description" content="\${escapeHtml(metaDesc)}">
-    <meta name="twitter:image" content="\${escapeHtml(seoOgImage)}">
-    <meta name="twitter:image:alt" content="\${escapeHtml(title)}">
-
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-\${JSON.stringify(schemaArticle, null, 2)}
-    <\\/script>
-    <script type="application/ld+json">
-\${JSON.stringify(schemaBreadcrumb, null, 2)}
-    <\\/script>
-    <script type="application/ld+json">
-\${JSON.stringify(schemaOrg, null, 2)}
-    <\\/script>
-
-    <!-- Preconnect & Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/css/styles-v2.css?v=4fbbda1e">
-    <style>
-        .article-hero{background:#000;padding:140px 24px 80px;text-align:center;position:relative;overflow:hidden}
-        .article-hero__bg{position:absolute;inset:0;pointer-events:none}
-        .article-hero__glow{position:absolute;width:400px;height:400px;border-radius:50%;background:#ffba1a;filter:blur(150px);opacity:.1;top:-100px;right:-100px}
-        .article-hero .container{position:relative;z-index:1;max-width:800px;margin:0 auto}
-        .article-hero__tag{display:inline-block;background:#ffba1a;color:#000;padding:6px 18px;border-radius:50px;font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:24px}
-        .article-hero h1{font-size:clamp(1.75rem,4vw,2.75rem);font-weight:700;color:#fff;line-height:1.25;margin-bottom:20px}
-        .article-hero__meta{display:flex;align-items:center;justify-content:center;gap:24px;color:rgba(255,255,255,.5);font-size:.9rem}
-        .article-hero__meta i{margin-right:6px}
-        .article-featured-image{max-width:900px;margin:-40px auto 0;padding:0 24px;position:relative;z-index:2}
-        .article-featured-image img{width:100%;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.15)}
-        .article-body{max-width:760px;margin:0 auto;padding:60px 24px 80px}
-        .article-body h2{font-size:1.5rem;font-weight:700;color:#000;margin:48px 0 16px;line-height:1.3}
-        .article-body h3{font-size:1.2rem;font-weight:600;color:#000;margin:36px 0 12px}
-        .article-body p{font-size:1.05rem;line-height:1.8;color:#444;margin-bottom:20px}
-        .article-body ul,.article-body ol{margin:16px 0 24px 24px;color:#444;line-height:1.8;font-size:1.05rem}
-        .article-body li{margin-bottom:8px;list-style:disc}
-        .article-body ol li{list-style:decimal}
-        .article-body blockquote{border-left:4px solid #ffba1a;margin:32px 0;padding:16px 24px;background:#fdf8ee;border-radius:0 12px 12px 0;font-style:italic;color:#333}
-        .article-body img{max-width:100%;border-radius:12px;margin:32px 0}
-        .article-body a{color:#E5A235;font-weight:500;text-decoration:underline}
-        .article-cta{background:#000;padding:60px 24px;text-align:center;margin-top:40px}
-        .article-cta .container{max-width:640px;margin:0 auto}
-        .article-cta h3{font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:12px}
-        .article-cta p{color:rgba(255,255,255,.6);margin-bottom:24px;font-size:1rem}
-        nav.breadcrumb{max-width:760px;margin:24px auto 0;padding:0 24px;font-size:.82rem}
-        nav.breadcrumb a{color:#E5A235;text-decoration:none}
-        nav.breadcrumb a:hover{text-decoration:underline}
-        nav.breadcrumb span{color:#999;margin:0 8px}
-        @media(max-width:768px){.article-hero{padding:120px 20px 60px}.article-hero__meta{flex-direction:column;gap:8px}.article-body{padding:40px 20px 60px}}
-    </style>
-</head>
-<body>
-    <header class="header">
-        <div class="container">
-            <div class="logo"><a href="/"><img src="/images/logo-orbit-white.png" alt="Orbit Gestao" height="40"></a></div>
-            <ul class="nav-menu">
-                <li><a href="/">Inicio</a></li>
-                <li><a href="/#plataforma">Solucoes <i class="fas fa-chevron-down dropdown-arrow"></i></a>
-                    <div class="dropdown">
-                        <a href="/processos"><i class="fas fa-sitemap"></i> Processos</a>
-                        <a href="/indicadores"><i class="fas fa-chart-line"></i> Indicadores</a>
-                        <a href="/tarefas"><i class="fas fa-tasks"></i> Tarefas</a>
-                        <a href="/competencias"><i class="fas fa-users"></i> Competencias</a>
-                        <a href="/auditorias"><i class="fas fa-clipboard-check"></i> Auditorias</a>
-                    </div>
-                </li>
-                <li><a href="/blog">Conhecimento</a></li>
-                <li><a href="/parcerias" data-i18n="footer.partners">Seja Parceiro</a></li>
-                <li><a href="/#contato-form">Fale Conosco</a></li>
-            </ul>
-            <div class="nav-actions">
-                <a href="#" class="btn btn-outline" data-i18n="nav.login">Entrar</a>
-                <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>
-            </div>
-            <button class="lang-switch" onclick="switchLang()" aria-label="Change language">
-                <span class="lang-switch__flag">🇺🇸</span>
-                <span class="lang-switch__label">EN</span>
-            </button>
-
-            <button class="menu-toggle">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </header>
-    <!-- Mobile Menu -->
-    <div class="mobile-menu-overlay" onclick="closeMobileMenu()"></div>
-    <div class="mobile-menu">
-        <div class="mobile-menu__header">
-            <span class="mobile-menu__header-title" data-i18n="mobile.title">Menu</span>
-            <button class="mobile-menu-close" onclick="closeMobileMenu()">&times;</button>
-        </div>
-        <div class="mobile-menu__body">
-            <a href="/">Home</a>
-            <a href="/processos">Processos</a>
-            <a href="/indicadores">Indicadores</a>
-            <a href="/tarefas">Tarefas</a>
-            <a href="/competencias">Competencias</a>
-            <a href="/auditorias">Auditorias</a>
-            <a href="/blog">Conhecimento</a>
-            <a href="/parcerias" data-i18n="footer.partners">Seja Parceiro</a>
-        </div>
-        <div class="mobile-menu__footer">
-            <button class="lang-switch" onclick="switchLang()" aria-label="Change language">
-                <span class="lang-switch__flag">🇺🇸</span>
-                <span class="lang-switch__label">EN</span>
-            </button>
-            <a href="/#contato-form" class="btn btn-primary" onclick="closeMobileMenu()">Fale Conosco</a>
-        </div>
-    </div>
-    <section class="article-hero">
-        <div class="article-hero__bg"><div class="article-hero__glow"></div></div>
-        <div class="container">
-            <span class="article-hero__tag">\${escapeHtml(categoryLabel)}</span>
-            <h1>\${escapeHtml(title)}</h1>
-            <div class="article-hero__meta">
-                <span><i class="fas fa-calendar-alt"></i> <time datetime="\${isoDate}">\${today}</time></span>
-                <span><i class="fas fa-clock"></i> \${escapeHtml(readTime)} de leitura</span>
-                <span><i class="fas fa-user"></i> \${escapeHtml(author)}</span>
-            </div>
-        </div>
-    </section>
-    <div class="article-featured-image">
-        <img src="\${escapeHtml(imageUrl)}" alt="\${escapeHtml(title)}" loading="eager" width="900" height="450">
-    </div>
-    <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Home</a><span>/</span>
-        <a href="/blog">Blog</a><span>/</span>
-        \${escapeHtml(title)}
-    </nav>
-    <article class="article-body" itemscope itemtype="https://schema.org/BlogPosting">
-        <meta itemprop="headline" content="\${escapeHtml(title)}">
-        <meta itemprop="author" content="\${escapeHtml(author)}">
-        <meta itemprop="datePublished" content="\${isoDate}">
-        <meta itemprop="image" content="\${escapeHtml(imageUrl)}">
-        \${content}
-    </article>
-    <section class="article-cta">
-        <div class="container">
-            <h3>Pronto para transformar sua gestao?</h3>
-            <p>Veja como a Orbit pode ajudar sua empresa a executar a estrategia com mais eficiencia.</p>
-            <a href="/#contato-form" class="btn btn-primary btn-lg">Agendar demonstracao</a>
-        </div>
-    </section>
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <div class="footer-logo"><img src="/images/logo-orbit-white.png" alt="Orbit Gestao" height="36"></div>
-                    <p>Transformando estrategia em execucao para empresas de medio porte.</p>
-                    <div class="social-hover">
-                        <a href="#" class="social-hover__item" data-name="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                            <span class="social-hover__label">LinkedIn</span>
-                        </a>
-                        <a href="#" class="social-hover__item" data-name="Facebook">
-                            <i class="fab fa-facebook"></i>
-                            <span class="social-hover__label">Facebook</span>
-                        </a>
-                        <a href="#" class="social-hover__item" data-name="Instagram">
-                            <i class="fab fa-instagram"></i>
-                            <span class="social-hover__label">Instagram</span>
-                        </a>
-                        <a href="#" class="social-hover__item" data-name="YouTube">
-                            <i class="fab fa-youtube"></i>
-                            <span class="social-hover__label">YouTube</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="footer-column"><h5 data-i18n="footer.contact">Contato</h5><ul class="footer-contact"><li><i class="fas fa-phone"></i> +55 (11) 9999-9999</li><li><i class="fas fa-envelope"></i> contato@orbit.com</li></ul></div>
-                <div class="footer-column"><h5>Solucoes</h5><ul><li><a href="/processos">Processos</a></li><li><a href="/indicadores">Indicadores</a></li><li><a href="/tarefas">Tarefas</a></li><li><a href="/competencias">Competencias</a></li><li><a href="/auditorias">Auditorias</a></li></ul></div>
-                <div class="footer-column"><h5 data-i18n="footer.knowledge">Conhecimento</h5><ul><li><a href="/blog">Blog</a></li><li><a href="#">Documentacao</a></li><li><a href="#">FAQ</a></li></ul></div>
-            </div>
-            <div class="footer-bottom"><p>&copy; 2024 Orbit Gestao. Todos os direitos reservados.</p></div>
-        </div>
-    </footer>
-    <script>
-        const header = document.querySelector('.header');
-        window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 50); });
-        document.querySelectorAll('.nav-menu > li').forEach(item => {
-            const dropdown = item.querySelector('.dropdown');
-            if (!dropdown) return;
-            item.addEventListener('mouseenter', () => { dropdown.style.opacity='1'; dropdown.style.visibility='visible'; dropdown.style.transform='translateY(0)'; });
-            item.addEventListener('mouseleave', () => { dropdown.style.opacity='0'; dropdown.style.visibility='hidden'; dropdown.style.transform='translateY(10px)'; });
-        });
-    <\\/script>
-</body>
-</html>\`;
+        const html = '<!DOCTYPE html>' +
+'<html lang="pt-BR">' +
+'<head>' +
+'    <meta charset="UTF-8">' +
+'    <meta name="viewport" content="width=device-width, initial-scale=1.0">' +
+'' +
+'    <!-- SEO Primary Meta Tags -->' +
+'    <title>' + escapeHtml(seoTitle) + ' | Blog Orbit Gestao</title>' +
+'    <meta name="title" content="' + escapeHtml(seoTitle) + ' | Blog Orbit Gestao">' +
+'    <meta name="description" content="' + escapeHtml(metaDesc) + '">' +
+    (seoKeyword ? '<meta name="keywords" content="' + escapeHtml(seoKeyword) + ', gestao estrategica, orbit gestao, gestao empresarial">' : '') +
+'    <meta name="author" content="' + escapeHtml(author) + '">' +
+'    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">' +
+'    <link rel="canonical" href="' + escapeHtml(seoCanonical) + '">' +
+'    <meta name="language" content="pt-BR">' +
+'    <meta name="revisit-after" content="7 days">' +
+'' +
+'    <!-- Open Graph / Facebook -->' +
+'    <meta property="og:type" content="article">' +
+'    <meta property="og:url" content="' + escapeHtml(seoCanonical) + '">' +
+'    <meta property="og:title" content="' + escapeHtml(seoTitle) + '">' +
+'    <meta property="og:description" content="' + escapeHtml(metaDesc) + '">' +
+'    <meta property="og:image" content="' + escapeHtml(seoOgImage) + '">' +
+'    <meta property="og:image:width" content="1200">' +
+'    <meta property="og:image:height" content="630">' +
+'    <meta property="og:image:alt" content="' + escapeHtml(title) + '">' +
+'    <meta property="og:site_name" content="Orbit Gestao">' +
+'    <meta property="og:locale" content="pt_BR">' +
+'    <meta property="article:published_time" content="' + isoDate + '">' +
+'    <meta property="article:modified_time" content="' + isoDate + '">' +
+'    <meta property="article:author" content="' + escapeHtml(author) + '">' +
+'    <meta property="article:section" content="' + escapeHtml(categoryLabel) + '">' +
+    (seoKeyword ? '<meta property="article:tag" content="' + escapeHtml(seoKeyword) + '">' : '') +
+'' +
+'    <!-- Twitter Card -->' +
+'    <meta name="twitter:card" content="summary_large_image">' +
+'    <meta name="twitter:url" content="' + escapeHtml(seoCanonical) + '">' +
+'    <meta name="twitter:title" content="' + escapeHtml(seoTitle) + '">' +
+'    <meta name="twitter:description" content="' + escapeHtml(metaDesc) + '">' +
+'    <meta name="twitter:image" content="' + escapeHtml(seoOgImage) + '">' +
+'    <meta name="twitter:image:alt" content="' + escapeHtml(title) + '">' +
+'' +
+'    <!-- JSON-LD Structured Data -->' +
+'    <script type="application/ld+json">' +
+JSON.stringify(schemaArticle, null, 2) +
+'    <\\/script>' +
+'    <script type="application/ld+json">' +
+JSON.stringify(schemaBreadcrumb, null, 2) +
+'    <\\/script>' +
+'    <script type="application/ld+json">' +
+JSON.stringify(schemaOrg, null, 2) +
+'    <\\/script>' +
+'' +
+'    <!-- Preconnect & Fonts -->' +
+'    <link rel="preconnect" href="https://fonts.googleapis.com">' +
+'    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' +
+'    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">' +
+'    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">' +
+'    <link rel="stylesheet" href="/css/styles-v2.css?v=4fbbda1e">' +
+'    <style>' +
+'        .article-hero{background:#000;padding:140px 24px 80px;text-align:center;position:relative;overflow:hidden}' +
+'        .article-hero__bg{position:absolute;inset:0;pointer-events:none}' +
+'        .article-hero__glow{position:absolute;width:400px;height:400px;border-radius:50%;background:#ffba1a;filter:blur(150px);opacity:.1;top:-100px;right:-100px}' +
+'        .article-hero .container{position:relative;z-index:1;max-width:800px;margin:0 auto}' +
+'        .article-hero__tag{display:inline-block;background:#ffba1a;color:#000;padding:6px 18px;border-radius:50px;font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:24px}' +
+'        .article-hero h1{font-size:clamp(1.75rem,4vw,2.75rem);font-weight:700;color:#fff;line-height:1.25;margin-bottom:20px}' +
+'        .article-hero__meta{display:flex;align-items:center;justify-content:center;gap:24px;color:rgba(255,255,255,.5);font-size:.9rem}' +
+'        .article-hero__meta i{margin-right:6px}' +
+'        .article-featured-image{max-width:900px;margin:-40px auto 0;padding:0 24px;position:relative;z-index:2}' +
+'        .article-featured-image img{width:100%;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.15)}' +
+'        .article-body{max-width:760px;margin:0 auto;padding:60px 24px 80px}' +
+'        .article-body h2{font-size:1.5rem;font-weight:700;color:#000;margin:48px 0 16px;line-height:1.3}' +
+'        .article-body h3{font-size:1.2rem;font-weight:600;color:#000;margin:36px 0 12px}' +
+'        .article-body p{font-size:1.05rem;line-height:1.8;color:#444;margin-bottom:20px}' +
+'        .article-body ul,.article-body ol{margin:16px 0 24px 24px;color:#444;line-height:1.8;font-size:1.05rem}' +
+'        .article-body li{margin-bottom:8px;list-style:disc}' +
+'        .article-body ol li{list-style:decimal}' +
+'        .article-body blockquote{border-left:4px solid #ffba1a;margin:32px 0;padding:16px 24px;background:#fdf8ee;border-radius:0 12px 12px 0;font-style:italic;color:#333}' +
+'        .article-body img{max-width:100%;border-radius:12px;margin:32px 0}' +
+'        .article-body a{color:#E5A235;font-weight:500;text-decoration:underline}' +
+'        .article-cta{background:#000;padding:60px 24px;text-align:center;margin-top:40px}' +
+'        .article-cta .container{max-width:640px;margin:0 auto}' +
+'        .article-cta h3{font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:12px}' +
+'        .article-cta p{color:rgba(255,255,255,.6);margin-bottom:24px;font-size:1rem}' +
+'        nav.breadcrumb{max-width:760px;margin:24px auto 0;padding:0 24px;font-size:.82rem}' +
+'        nav.breadcrumb a{color:#E5A235;text-decoration:none}' +
+'        nav.breadcrumb a:hover{text-decoration:underline}' +
+'        nav.breadcrumb span{color:#999;margin:0 8px}' +
+'        @media(max-width:768px){.article-hero{padding:120px 20px 60px}.article-hero__meta{flex-direction:column;gap:8px}.article-body{padding:40px 20px 60px}}' +
+'    </style>' +
+'</head>' +
+'<body>' +
+'    <header class="header">' +
+'        <div class="container">' +
+'            <div class="logo"><a href="/"><img src="/images/logo-orbit-white.png" alt="Orbit Gestao" height="40"></a></div>' +
+'            <ul class="nav-menu">' +
+'                <li><a href="/">Inicio</a></li>' +
+'                <li><a href="/#plataforma">Solucoes <i class="fas fa-chevron-down dropdown-arrow"></i></a>' +
+'                    <div class="dropdown">' +
+'                        <a href="/processos"><i class="fas fa-sitemap"></i> Processos</a>' +
+'                        <a href="/indicadores"><i class="fas fa-chart-line"></i> Indicadores</a>' +
+'                        <a href="/tarefas"><i class="fas fa-tasks"></i> Tarefas</a>' +
+'                        <a href="/competencias"><i class="fas fa-users"></i> Competencias</a>' +
+'                        <a href="/auditorias"><i class="fas fa-clipboard-check"></i> Auditorias</a>' +
+'                    </div>' +
+'                </li>' +
+'                <li><a href="/blog">Conhecimento</a></li>' +
+'                <li><a href="/parcerias" data-i18n="footer.partners">Seja Parceiro</a></li>' +
+'                <li><a href="/#contato-form">Fale Conosco</a></li>' +
+'            </ul>' +
+'            <div class="nav-actions">' +
+'                <a href="#" class="btn btn-outline" data-i18n="nav.login">Entrar</a>' +
+'                <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>' +
+'            </div>' +
+'            <button class="lang-switch" onclick="switchLang()" aria-label="Change language">' +
+'                <span class="lang-switch__flag">\ud83c\uddfa\ud83c\uddf8</span>' +
+'                <span class="lang-switch__label">EN</span>' +
+'            </button>' +
+'' +
+'            <button class="menu-toggle">' +
+'                <span></span><span></span><span></span>' +
+'            </button>' +
+'        </div>' +
+'    </header>' +
+'    <!-- Mobile Menu -->' +
+'    <div class="mobile-menu-overlay" onclick="closeMobileMenu()"></div>' +
+'    <div class="mobile-menu">' +
+'        <div class="mobile-menu__header">' +
+'            <span class="mobile-menu__header-title" data-i18n="mobile.title">Menu</span>' +
+'            <button class="mobile-menu-close" onclick="closeMobileMenu()">&times;</button>' +
+'        </div>' +
+'        <div class="mobile-menu__body">' +
+'            <a href="/">Home</a>' +
+'            <a href="/processos">Processos</a>' +
+'            <a href="/indicadores">Indicadores</a>' +
+'            <a href="/tarefas">Tarefas</a>' +
+'            <a href="/competencias">Competencias</a>' +
+'            <a href="/auditorias">Auditorias</a>' +
+'            <a href="/blog">Conhecimento</a>' +
+'            <a href="/parcerias" data-i18n="footer.partners">Seja Parceiro</a>' +
+'        </div>' +
+'        <div class="mobile-menu__footer">' +
+'            <button class="lang-switch" onclick="switchLang()" aria-label="Change language">' +
+'                <span class="lang-switch__flag">\ud83c\uddfa\ud83c\uddf8</span>' +
+'                <span class="lang-switch__label">EN</span>' +
+'            </button>' +
+'            <a href="/#contato-form" class="btn btn-primary" onclick="closeMobileMenu()">Fale Conosco</a>' +
+'        </div>' +
+'    </div>' +
+'    <section class="article-hero">' +
+'        <div class="article-hero__bg"><div class="article-hero__glow"></div></div>' +
+'        <div class="container">' +
+'            <span class="article-hero__tag">' + escapeHtml(categoryLabel) + '</span>' +
+'            <h1>' + escapeHtml(title) + '</h1>' +
+'            <div class="article-hero__meta">' +
+'                <span><i class="fas fa-calendar-alt"></i> <time datetime="' + isoDate + '">' + today + '</time></span>' +
+'                <span><i class="fas fa-clock"></i> ' + escapeHtml(readTime) + ' de leitura</span>' +
+'                <span><i class="fas fa-user"></i> ' + escapeHtml(author) + '</span>' +
+'            </div>' +
+'        </div>' +
+'    </section>' +
+'    <div class="article-featured-image">' +
+'        <img src="' + escapeHtml(imageUrl) + '" alt="' + escapeHtml(title) + '" loading="eager" width="900" height="450">' +
+'    </div>' +
+'    <nav class="breadcrumb" aria-label="Breadcrumb">' +
+'        <a href="/">Home</a><span>/</span>' +
+'        <a href="/blog">Blog</a><span>/</span>' +
+        escapeHtml(title) +
+'    </nav>' +
+'    <article class="article-body" itemscope itemtype="https://schema.org/BlogPosting">' +
+'        <meta itemprop="headline" content="' + escapeHtml(title) + '">' +
+'        <meta itemprop="author" content="' + escapeHtml(author) + '">' +
+'        <meta itemprop="datePublished" content="' + isoDate + '">' +
+'        <meta itemprop="image" content="' + escapeHtml(imageUrl) + '">' +
+        content +
+'    </article>' +
+'    <section class="article-cta">' +
+'        <div class="container">' +
+'            <h3>Pronto para transformar sua gestao?</h3>' +
+'            <p>Veja como a Orbit pode ajudar sua empresa a executar a estrategia com mais eficiencia.</p>' +
+'            <a href="/#contato-form" class="btn btn-primary btn-lg">Agendar demonstracao</a>' +
+'        </div>' +
+'    </section>' +
+'    <footer class="footer">' +
+'        <div class="container">' +
+'            <div class="footer-grid">' +
+'                <div class="footer-brand">' +
+'                    <div class="footer-logo"><img src="/images/logo-orbit-white.png" alt="Orbit Gestao" height="36"></div>' +
+'                    <p>Transformando estrategia em execucao para empresas de medio porte.</p>' +
+'                    <div class="social-hover">' +
+'                        <a href="#" class="social-hover__item" data-name="LinkedIn">' +
+'                            <i class="fab fa-linkedin"></i>' +
+'                            <span class="social-hover__label">LinkedIn</span>' +
+'                        </a>' +
+'                        <a href="#" class="social-hover__item" data-name="Facebook">' +
+'                            <i class="fab fa-facebook"></i>' +
+'                            <span class="social-hover__label">Facebook</span>' +
+'                        </a>' +
+'                        <a href="#" class="social-hover__item" data-name="Instagram">' +
+'                            <i class="fab fa-instagram"></i>' +
+'                            <span class="social-hover__label">Instagram</span>' +
+'                        </a>' +
+'                        <a href="#" class="social-hover__item" data-name="YouTube">' +
+'                            <i class="fab fa-youtube"></i>' +
+'                            <span class="social-hover__label">YouTube</span>' +
+'                        </a>' +
+'                    </div>' +
+'                </div>' +
+'                <div class="footer-column"><h5 data-i18n="footer.contact">Contato</h5><ul class="footer-contact"><li><i class="fas fa-phone"></i> +55 (11) 9999-9999</li><li><i class="fas fa-envelope"></i> contato@orbit.com</li></ul></div>' +
+'                <div class="footer-column"><h5>Solucoes</h5><ul><li><a href="/processos">Processos</a></li><li><a href="/indicadores">Indicadores</a></li><li><a href="/tarefas">Tarefas</a></li><li><a href="/competencias">Competencias</a></li><li><a href="/auditorias">Auditorias</a></li></ul></div>' +
+'                <div class="footer-column"><h5 data-i18n="footer.knowledge">Conhecimento</h5><ul><li><a href="/blog">Blog</a></li><li><a href="#">Documentacao</a></li><li><a href="#">FAQ</a></li></ul></div>' +
+'            </div>' +
+'            <div class="footer-bottom"><p>&copy; 2024 Orbit Gestao. Todos os direitos reservados.</p></div>' +
+'        </div>' +
+'    </footer>' +
+'    <script>' +
+"        const header = document.querySelector('.header');" +
+"        window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 50); });" +
+"        document.querySelectorAll('.nav-menu > li').forEach(item => {" +
+"            const dropdown = item.querySelector('.dropdown');" +
+'            if (!dropdown) return;' +
+"            item.addEventListener('mouseenter', () => { dropdown.style.opacity='1'; dropdown.style.visibility='visible'; dropdown.style.transform='translateY(0)'; });" +
+"            item.addEventListener('mouseleave', () => { dropdown.style.opacity='0'; dropdown.style.visibility='hidden'; dropdown.style.transform='translateY(10px)'; });" +
+'        });' +
+'    <\\/script>' +
+'</body>' +
+'</html>';
 
         const blob = new Blob([html], { type: 'text/html' });
         const url = URL.createObjectURL(blob);
@@ -2487,7 +2483,7 @@ export const pageHTML = `
         const reader = new FileReader();
         reader.onload = (e) => {
             document.getElementById('seLogoData').value = e.target.result;
-            document.getElementById('seLogoPreview').innerHTML = \`<img src="\${e.target.result}" style="max-width:100%;border-radius:8px;"><button class="remove-image" onclick="document.getElementById('seLogoData').value='';document.getElementById('seLogoPreview').innerHTML=''" title="Remover"><i class="fas fa-times"></i></button>\`;
+            document.getElementById('seLogoPreview').innerHTML = '<img src="' + e.target.result + '" style="max-width:100%;border-radius:8px;"><button class="remove-image" onclick="document.getElementById(\'seLogoData\').value=\'\';document.getElementById(\'seLogoPreview\').innerHTML=\'\'" title="Remover"><i class="fas fa-times"></i></button>';
         };
         reader.readAsDataURL(file);
     }
@@ -2499,7 +2495,7 @@ export const pageHTML = `
             return;
         }
         files.forEach(file => {
-            if (file.size > 2 * 1024 * 1024) { toast(\`\${file.name} muito grande. Max 2MB.\`, 'error'); return; }
+            if (file.size > 2 * 1024 * 1024) { toast(file.name + ' muito grande. Max 2MB.', 'error'); return; }
             if (!file.type.startsWith('image/')) return;
             const reader = new FileReader();
             reader.onload = (e) => {
@@ -2514,12 +2510,12 @@ export const pageHTML = `
     function renderStoryPhotoPreviews() {
         const container = document.getElementById('sePhotosPreview');
         if (!container) return;
-        container.innerHTML = storyPhotos.map((p, i) => \`
-            <div style="position:relative;display:inline-block;">
-                <img src="\${p}" style="width:80px;height:60px;object-fit:cover;border-radius:6px;">
-                <button onclick="storyPhotos.splice(\${i},1);renderStoryPhotoPreviews()" style="position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:var(--error);color:#fff;border:none;cursor:pointer;font-size:0.6rem;display:flex;align-items:center;justify-content:center;"><i class="fas fa-times"></i></button>
-            </div>
-        \`).join('');
+        container.innerHTML = storyPhotos.map(function(p, i) {
+            return '<div style="position:relative;display:inline-block;">' +
+                '<img src="' + p + '" style="width:80px;height:60px;object-fit:cover;border-radius:6px;">' +
+                '<button onclick="storyPhotos.splice(' + i + ',1);renderStoryPhotoPreviews()" style="position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:var(--error);color:#fff;border:none;cursor:pointer;font-size:0.6rem;display:flex;align-items:center;justify-content:center;"><i class="fas fa-times"></i></button>' +
+            '</div>';
+        }).join('');
     }
 
     // Story editor drag & drop
@@ -2629,7 +2625,7 @@ export const pageHTML = `
         list.innerHTML = pending.map(function(s) {
             var date = s.created_at ? new Date(s.created_at).toLocaleDateString('pt-BR') : '';
             var challenge = s.challenge || '';
-            return '<div class="notif-dropdown__item" onclick="showView(\\'stories\\');closeNotifDropdown();">' +
+            return '<div class="notif-dropdown__item" onclick="showView(\'stories\');closeNotifDropdown();">' +
                 '<div class="notif-dropdown__title"><i class="fas fa-clock" style="color:#F59E0B;margin-right:6px;"></i>' + escapeHtml(s.company_name || 'Empresa') + ' enviou uma história</div>' +
                 '<div class="notif-dropdown__meta">"' + escapeHtml(challenge.slice(0, 50)) + (challenge.length > 50 ? '...' : '') + '" · ' + date + '</div>' +
             '</div>';
