@@ -1817,7 +1817,7 @@ export const pageHTML = `
     // Modelo: google/gemini-2.5-flash-image via OpenRouter
     // Prompt template: Orbit corporate cinematic style
     // Aspect ratios: 16:9 (blog), 1:1 (feed), 9:16 (stories)
-    var OPENROUTER_KEY = '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';
+    var OPENROUTER_KEY = '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';
 
     var AI_ASPECT_RATIOS = {
         '16:9': { w: 1200, h: 675, label: '16:9 (Blog/Vídeo)' },
@@ -1843,10 +1843,11 @@ export const pageHTML = `
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + OPENROUTER_KEY
+                    'Authorization': 'Bearer ' + OPENROUTER_KEY,
+                    'HTTP-Referer': 'https://orbitgestao.com.br'
                 },
                 body: JSON.stringify({
-                    model: 'google/gemini-2.0-flash-exp:free',
+                    model: 'google/gemini-2.0-flash-001',
                     messages: [{
                         role: 'user',
                         content: 'Você é um diretor de arte. Crie uma descrição visual curta (2 frases em inglês) para uma imagem de capa de artigo de blog. O artigo é: "' + title + '" (categoria: ' + (category || 'gestão empresarial') + '). A imagem deve representar visualmente o conceito do artigo de forma metafórica e sofisticada. Foque na CENA, não em texto. Responda APENAS a descrição visual, nada mais.'
@@ -1878,43 +1879,49 @@ export const pageHTML = `
         btn.disabled = true;
         btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gerando...';
         status.style.display = 'block';
-        status.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gerando imagem ' + dims.label + '... (10-20s)';
+        status.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gerando imagem com Gemini... (15-30s)';
 
         try {
             var fullPrompt = buildImagePrompt(prompt, orientation);
-            var encodedPrompt = encodeURIComponent(fullPrompt);
-            var imageUrl = 'https://image.pollinations.ai/prompt/' + encodedPrompt + '?width=' + dims.w + '&height=' + dims.h + '&nologo=true&seed=' + Date.now();
 
-            var img = new Image();
-            img.crossOrigin = 'anonymous';
-            img.onload = function() {
-                var canvas = document.createElement('canvas');
-                canvas.width = img.width;
-                canvas.height = img.height;
-                canvas.getContext('2d').drawImage(img, 0, 0);
-                var base64 = canvas.toDataURL('image/jpeg', 0.85);
+            var res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + OPENROUTER_KEY,
+                    'HTTP-Referer': 'https://orbitgestao.com.br'
+                },
+                body: JSON.stringify({
+                    model: 'google/gemini-2.5-flash-image',
+                    messages: [{ role: 'user', content: 'Generate this image: ' + fullPrompt }],
+                    max_tokens: 1000
+                })
+            });
 
+            var data = await res.json();
+            if (data.error) throw new Error(data.error.message || 'Erro API');
+
+            var msg = data.choices[0].message;
+            var images = msg.images || [];
+
+            if (images.length > 0 && images[0].image_url && images[0].image_url.url) {
+                var base64 = images[0].image_url.url;
                 document.getElementById('articleImageData').value = base64;
                 showImagePreview(base64);
                 updateSeoScore();
-
-                btn.disabled = false;
-                btn.innerHTML = '<i class="fas fa-sparkles"></i> Gerar';
-                status.innerHTML = '<i class="fas fa-check" style="color:var(--success);"></i> Imagem gerada! (' + dims.w + 'x' + dims.h + ')';
+                status.innerHTML = '<i class="fas fa-check" style="color:var(--success);"></i> Imagem gerada com Gemini!';
                 toast('Imagem gerada com IA!');
-            };
-            img.onerror = function() {
-                btn.disabled = false;
-                btn.innerHTML = '<i class="fas fa-sparkles"></i> Gerar';
-                status.innerHTML = '<i class="fas fa-exclamation-circle" style="color:var(--error);"></i> Erro ao gerar. Tente outro prompt.';
-                toast('Erro ao gerar imagem.', 'error');
-            };
-            img.src = imageUrl;
+            } else {
+                throw new Error('Nenhuma imagem retornada');
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-sparkles"></i> Gerar';
         } catch(e) {
             btn.disabled = false;
             btn.innerHTML = '<i class="fas fa-sparkles"></i> Gerar';
-            status.innerHTML = '<i class="fas fa-exclamation-circle" style="color:var(--error);"></i> Erro: ' + e.message;
-            console.error(e);
+            status.innerHTML = '<i class="fas fa-exclamation-circle" style="color:var(--error);"></i> ' + (e.message || 'Erro ao gerar');
+            console.error('AI Image error:', e);
         }
     }
 
