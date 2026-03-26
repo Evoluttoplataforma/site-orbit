@@ -16897,23 +16897,36 @@ hr.glow-divider { display: none !important; }
 .orbit-banner__cta:hover { background: rgba(0,0,0,0.25); }
 .orbit-banner--image { padding: 0; }
 .orbit-banner__image-link { display: block; width: 100%; }
-.orbit-banner__image-link img { width: 100%; display: block; }
+.orbit-banner__image-link img { width: 100%; display: block; max-height: 120px; object-fit: cover; }
 .orbit-banner__close {
   position: absolute;
-  right: 12px;
+  right: 10px;
+  top: 10px;
+  transform: none;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: opacity 0.2s, background 0.2s;
+  line-height: 1;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  z-index: 2;
+}
+.orbit-banner__close:hover { opacity: 1; background: rgba(0,0,0,0.8); }
+/* Bar mode: close centered vertically */
+.orbit-banner--bar .orbit-banner__close {
   top: 50%;
   transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: inherit;
-  font-size: 22px;
-  cursor: pointer;
-  opacity: 0.6;
-  transition: opacity 0.2s;
-  line-height: 1;
-  padding: 4px;
 }
-.orbit-banner__close:hover { opacity: 1; }
 
 /* Popup overlay */
 .orbit-banner-overlay {
