@@ -4808,7 +4808,7 @@ export const pageHTML = `
             grid.innerHTML = articles.map(function(a) {
                 var imgSrc = a.cover_url || 'https://placehold.co/400x250/0D1117/ffba1a?text=Orbit+Blog';
                 var cat = CATS[a.category] || a.category || 'Artigo';
-                return '<a href="/blog/' + encodeURIComponent(a.slug) + '" class="knowledge-card" style="text-decoration:none;color:inherit;" onclick="event.preventDefault();window.location.assign(\'/blog/' + a.slug + '\')">' +
+                return '<div class="knowledge-card" data-slug="' + a.slug + '" style="cursor:pointer;">' +
                     '<div class="knowledge-card__image">' +
                         '<img src="' + esc(imgSrc) + '" alt="' + esc(a.title) + '" width="400" height="250" loading="lazy" decoding="async">' +
                         '<span class="knowledge-card__type"><i class="fas fa-file-alt"></i> ' + esc(cat) + '</span>' +
@@ -4817,8 +4817,14 @@ export const pageHTML = `
                         '<h4>' + esc(a.title) + '</h4>' +
                         '<span class="knowledge-card__link">Ler artigo</span>' +
                     '</div>' +
-                '</a>';
+                '</div>';
             }).join('');
+            // Attach click handlers
+            grid.querySelectorAll('.knowledge-card[data-slug]').forEach(function(card) {
+                card.addEventListener('click', function() {
+                    window.location.assign('/blog/' + card.getAttribute('data-slug'));
+                });
+            });
         })
         .catch(function(e) { console.error('Erro artigos home:', e); });
     })();

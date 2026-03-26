@@ -159,8 +159,8 @@ export const headerHTML = `
             <a href="/sobre"><i class="fas fa-building"></i> Sobre Nós</a>
         </div>
         <div class="mobile-menu__footer">
-            <a href="https://app.orbitgestao.com.br/login" class="btn btn-outline" style="flex:1;text-align:center;">Entrar</a>
-            <a href="#contato-form" class="btn btn-primary" onclick="closeMobileMenu()" data-i18n="nav.cta" style="flex:1;text-align:center;">Conhecer o Time de IA</a>
+            <a href="https://app.orbitgestao.com.br/login" class="btn btn-outline" style="flex:1;text-align:center;color:#fff;border-color:rgba(255,255,255,0.4);">Entrar</a>
+            <a href="#contato-form" class="btn btn-primary" onclick="closeMobileMenu()" data-i18n="nav.cta" style="flex:1;text-align:center;">Conhecer o Time</a>
         </div>
     </div>
 `;

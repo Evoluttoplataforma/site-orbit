@@ -194,7 +194,7 @@ export const pageHTML = `
             const preview = a.excerpt || truncate(a.content, 120);
 
             return \`
-            <a href="/blog/\${a.slug}" class="blog-card" data-category="\${a.category}" onclick="event.preventDefault();window.location.assign('/blog/\${a.slug}')">
+            <div class="blog-card" data-category="\${a.category}" data-slug="\${a.slug}" style="cursor:pointer;">
                 <div class="blog-card__image">
                     <img src="\${escapeHtml(imgSrc)}" alt="\${escapeHtml(a.title)}" loading="lazy">
                     <span class="blog-card__tag">\${escapeHtml(catLabel)}</span>
@@ -208,13 +208,20 @@ export const pageHTML = `
                     <p>\${escapeHtml(preview)}</p>
                     <span class="blog-card__link">Leia Mais <i class="fas fa-arrow-right"></i></span>
                 </div>
-            </a>\`;
+            </div>\`;
         }).join('');
 
         // Force visibility after dynamic content injection
         grid.classList.add('revealed');
         var section = grid.closest('.blog-grid-section');
         if (section) section.classList.add('revealed');
+
+        // Attach click handlers for navigation
+        grid.querySelectorAll('.blog-card[data-slug]').forEach(function(card) {
+            card.addEventListener('click', function() {
+                window.location.assign('/blog/' + card.getAttribute('data-slug'));
+            });
+        });
     }
 
     // ── Filters ──
@@ -262,32 +269,35 @@ export const pageHTML = `
         '</style>';
     }
 
-    async function fetchSingleArticle(slug) {
-        try {
-            var res = await fetch(SUPABASE_URL + '/rest/v1/blog_articles?slug=eq.' + slug + '&published=eq.true&limit=1', {
-                headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
-            });
-            if (res.ok) {
-                var data = await res.json();
-                if (data[0]) {
-                    // Update hero title
-                    var heroTitle = document.querySelector('.blog-hero h1');
-                    if (heroTitle) heroTitle.innerHTML = escapeHtml(data[0].title);
-                    var heroDesc = document.querySelector('.blog-hero p');
-                    if (heroDesc) heroDesc.textContent = data[0].excerpt || '';
-                    renderSingleArticle(data[0]);
-                    return;
-                }
+    function fetchSingleArticle(slug) {
+        fetch(SUPABASE_URL + '/rest/v1/blog_articles?slug=eq.' + encodeURIComponent(slug) + '&published=eq.true&limit=1', {
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+        })
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+            console.log('Single article data:', data);
+            if (data && data[0]) {
+                var heroTitle = document.querySelector('.blog-hero h1');
+                if (heroTitle) heroTitle.innerHTML = escapeHtml(data[0].title);
+                var heroDesc = document.querySelector('.blog-hero p');
+                if (heroDesc) heroDesc.textContent = data[0].excerpt || '';
+                var heroBadge = document.querySelector('.blog-hero__badge');
+                if (heroBadge) heroBadge.style.display = 'none';
+                renderSingleArticle(data[0]);
+            } else {
+                fetchArticles().then(renderArticles);
             }
-        } catch(e) { console.error(e); }
-        // Fallback to blog list
-        await fetchArticles();
-        renderArticles();
+        })
+        .catch(function(e) {
+            console.error('Erro fetch single:', e);
+            fetchArticles().then(renderArticles);
+        });
     }
 
     // ── Init ──
     var pathParts = window.location.pathname.replace(/\\/$/, '').split('/');
     var slug = pathParts.length > 2 ? pathParts.slice(2).join('/') : null;
+    console.log('Blog init - path:', window.location.pathname, 'slug:', slug);
     if (slug) {
         fetchSingleArticle(slug);
     } else {
