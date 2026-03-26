@@ -194,7 +194,7 @@ export const pageHTML = `
             const preview = a.excerpt || truncate(a.content, 120);
 
             return \`
-            <a href="/blog/\${a.slug}" class="blog-card" data-category="\${a.category}">
+            <a href="/blog/\${a.slug}" class="blog-card" data-category="\${a.category}" onclick="event.preventDefault();window.location.assign('/blog/\${a.slug}')">
                 <div class="blog-card__image">
                     <img src="\${escapeHtml(imgSrc)}" alt="\${escapeHtml(a.title)}" loading="lazy">
                     <span class="blog-card__tag">\${escapeHtml(catLabel)}</span>
