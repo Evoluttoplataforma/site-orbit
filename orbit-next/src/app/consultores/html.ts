@@ -61,6 +61,9 @@ export const pageHTML = `
             </div>
 
             <!-- Phones grid -->
+            <div class="wa-phones-wrapper" id="waPhonesWrapper">
+            <button class="wa-arrow wa-arrow--left" id="waArrowLeft"><i class="fas fa-chevron-left"></i></button>
+            <button class="wa-arrow wa-arrow--right" id="waArrowRight"><i class="fas fa-chevron-right"></i></button>
             <div class="wa-phones" id="waPhones">
 
                 <!-- ═══ PHONE 1 — Rodrigo ═══ -->
@@ -289,6 +292,7 @@ export const pageHTML = `
                 </div>
 
             </div>
+            </div><!-- /wa-phones-wrapper -->
 
             <!-- Mobile dots -->
             <div class="wa-dots" id="waDots">
@@ -820,10 +824,17 @@ export const pageHTML = `
                 d.addEventListener('click', function() { goTo(parseInt(d.dataset.idx)); });
             });
 
+            // Arrows
+            var arrowLeft = document.getElementById('waArrowLeft');
+            var arrowRight = document.getElementById('waArrowRight');
+            if (arrowLeft) arrowLeft.addEventListener('click', function() { goTo(current - 1); });
+            if (arrowRight) arrowRight.addEventListener('click', function() { goTo(current + 1); });
+
             // Swipe
+            var wrapper = document.getElementById('waPhonesWrapper') || container;
             var sx = 0;
-            container.addEventListener('touchstart', function(e) { sx = e.touches[0].clientX; }, { passive: true });
-            container.addEventListener('touchend', function(e) {
+            wrapper.addEventListener('touchstart', function(e) { sx = e.touches[0].clientX; }, { passive: true });
+            wrapper.addEventListener('touchend', function(e) {
                 var diff = sx - e.changedTouches[0].clientX;
                 if (Math.abs(diff) > 50) {
                     diff > 0 ? goTo(current + 1) : goTo(current - 1);
