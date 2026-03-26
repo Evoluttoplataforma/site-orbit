@@ -125,18 +125,26 @@ export const pageHTML = `
     <script>
     var CATEGORIES = {
         estrategica: 'Gestão Estratégica',
+        'planejamento-estrategico': 'Planejamento Estratégico',
         processos: 'Processos',
         indicadores: 'Indicadores',
         lideranca: 'Liderança',
-        ia: 'IA & Inovação'
+        ia: 'IA & Inovação',
+        marketing: 'Marketing',
+        growth: 'Growth',
+        outros: 'Outros'
     };
 
     var CAT_COLORS = {
-        estrategica: { bg: 'rgba(255,186,26,0.12)', text: '#D4960A', border: 'rgba(255,186,26,0.25)' },
-        processos:   { bg: 'rgba(59,130,246,0.10)', text: '#3B82F6', border: 'rgba(59,130,246,0.25)' },
-        indicadores: { bg: 'rgba(34,197,94,0.10)',  text: '#16A34A', border: 'rgba(34,197,94,0.25)' },
-        lideranca:   { bg: 'rgba(168,85,247,0.10)', text: '#9333EA', border: 'rgba(168,85,247,0.25)' },
-        ia:          { bg: 'rgba(236,72,153,0.10)', text: '#DB2777', border: 'rgba(236,72,153,0.25)' }
+        estrategica:                { bg: 'rgba(255,186,26,0.12)', text: '#D4960A', border: 'rgba(255,186,26,0.25)' },
+        'planejamento-estrategico': { bg: 'rgba(255,186,26,0.12)', text: '#D4960A', border: 'rgba(255,186,26,0.25)' },
+        processos:                  { bg: 'rgba(59,130,246,0.10)', text: '#3B82F6', border: 'rgba(59,130,246,0.25)' },
+        indicadores:                { bg: 'rgba(34,197,94,0.10)',  text: '#16A34A', border: 'rgba(34,197,94,0.25)' },
+        lideranca:                  { bg: 'rgba(168,85,247,0.10)', text: '#9333EA', border: 'rgba(168,85,247,0.25)' },
+        ia:                         { bg: 'rgba(236,72,153,0.10)', text: '#DB2777', border: 'rgba(236,72,153,0.25)' },
+        marketing:                  { bg: 'rgba(249,115,22,0.10)', text: '#EA580C', border: 'rgba(249,115,22,0.25)' },
+        growth:                     { bg: 'rgba(6,182,212,0.10)',  text: '#0891B2', border: 'rgba(6,182,212,0.25)' },
+        outros:                     { bg: 'rgba(107,114,128,0.10)', text: '#6B7280', border: 'rgba(107,114,128,0.25)' }
     };
 
     var SUPABASE_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
