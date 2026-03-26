@@ -1,6 +1,6 @@
-// Auto-generated
+// Blog page - redesigned
 export const pageHTML = `
-    <section class="blog-hero" data-reveal>
+    <section class="blog-hero">
         <div class="blog-hero__bg">
             <div class="blog-hero__glow blog-hero__glow--1"></div>
             <div class="blog-hero__glow blog-hero__glow--2"></div>
@@ -26,10 +26,13 @@ export const pageHTML = `
         <button class="filter-scroll-btn filter-scroll-btn--right" id="filterScrollRight" aria-label="Scroll direita"><i class="fas fa-chevron-right"></i></button>
     </div>
 
-    <!-- Blog Grid -->
-    <section class="blog-grid-section" data-reveal>
-        <div class="blog-grid" id="blogGrid" data-reveal-stagger>
-            <!-- Dynamic articles injected here -->
+    <!-- Blog Grid — NO data-reveal to avoid opacity:0 on async content -->
+    <section class="blog-grid-section">
+        <div class="blog-grid" id="blogGrid">
+            <!-- Loading skeleton -->
+            <div class="blog-card blog-card--skeleton"><div class="blog-card__image"></div><div class="blog-card__body"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line"></div><div class="skeleton-line skeleton-line--medium"></div></div></div>
+            <div class="blog-card blog-card--skeleton"><div class="blog-card__image"></div><div class="blog-card__body"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line"></div><div class="skeleton-line skeleton-line--medium"></div></div></div>
+            <div class="blog-card blog-card--skeleton"><div class="blog-card__image"></div><div class="blog-card__body"><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line"></div><div class="skeleton-line skeleton-line--medium"></div></div></div>
         </div>
         <div class="blog-empty" id="blogEmpty" style="display:none;">
             <i class="fas fa-newspaper"></i>
@@ -124,7 +127,7 @@ export const pageHTML = `
     </button>
 
     <script>
-    const CATEGORIES = {
+    var CATEGORIES = {
         estrategica: 'Gestão Estratégica',
         processos: 'Processos',
         indicadores: 'Indicadores',
@@ -132,100 +135,127 @@ export const pageHTML = `
         ia: 'IA & Inovação'
     };
 
-    const SUPABASE_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
+    var CAT_COLORS = {
+        estrategica: { bg: 'rgba(255,186,26,0.12)', text: '#D4960A', border: 'rgba(255,186,26,0.25)' },
+        processos:   { bg: 'rgba(59,130,246,0.10)', text: '#3B82F6', border: 'rgba(59,130,246,0.25)' },
+        indicadores: { bg: 'rgba(34,197,94,0.10)',  text: '#16A34A', border: 'rgba(34,197,94,0.25)' },
+        lideranca:   { bg: 'rgba(168,85,247,0.10)', text: '#9333EA', border: 'rgba(168,85,247,0.25)' },
+        ia:          { bg: 'rgba(236,72,153,0.10)', text: '#DB2777', border: 'rgba(236,72,153,0.25)' }
+    };
 
-    let articlesCache = [];
+    var SUPABASE_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
+    var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
 
-    async function fetchArticles() {
-        try {
-            var url = SUPABASE_URL + '/rest/v1/blog_articles?published=eq.true&order=published_at.desc&select=*';
-            console.log('Fetching articles from:', url);
-            const res = await fetch(url, {
-                headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
-            });
-            console.log('Response status:', res.status);
-            var data = await res.json();
-            console.log('Articles fetched:', data.length, data);
-            if (res.ok && Array.isArray(data)) articlesCache = data;
-        } catch(e) { console.error('Erro ao buscar artigos:', e); }
+    var articlesCache = [];
+
+    function supaHeaders() {
+        return { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY };
+    }
+
+    function fetchArticles() {
+        var url = SUPABASE_URL + '/rest/v1/blog_articles?published=eq.true&order=published_at.desc&select=*';
+        return fetch(url, { headers: supaHeaders() })
+            .then(function(res) { return res.json().then(function(data) { return { ok: res.ok, data: data }; }); })
+            .then(function(result) {
+                if (result.ok && Array.isArray(result.data)) {
+                    articlesCache = result.data;
+                }
+            })
+            .catch(function(e) { console.error('Erro ao buscar artigos:', e); });
     }
 
     function escapeHtml(str) {
         if (!str) return '';
-        const div = document.createElement('div');
+        var div = document.createElement('div');
         div.textContent = str;
         return div.innerHTML;
     }
 
     function formatDate(d) {
         try { return new Date(d).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' }); }
-        catch { return d; }
+        catch(err) { return d; }
     }
 
     function truncate(str, len) {
         if (!str) return '';
-        const text = str.replace(/<[^>]*>/g, '');
+        var text = str.replace(/<[^>]*>/g, '');
         return text.length > len ? text.slice(0, len) + '...' : text;
     }
 
-    // ── Render articles ──
-    let currentFilter = 'all';
+    function readTime(content) {
+        var words = (content || '').replace(/<[^>]*>/g, '').split(/\\s+/).length;
+        return Math.max(1, Math.ceil(words / 200));
+    }
+
+    function getInitials(name) {
+        if (!name) return 'O';
+        var parts = name.trim().split(/\\s+/);
+        if (parts.length >= 2) return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+        return parts[0][0].toUpperCase();
+    }
+
+    // ── Render articles grid ──
+    var currentFilter = 'all';
 
     function renderArticles() {
-        const filtered = currentFilter === 'all'
+        var filtered = currentFilter === 'all'
             ? articlesCache
-            : articlesCache.filter(a => a.category === currentFilter);
+            : articlesCache.filter(function(a) { return a.category === currentFilter; });
 
-        const grid = document.getElementById('blogGrid');
-        const empty = document.getElementById('blogEmpty');
+        var grid = document.getElementById('blogGrid');
+        var empty = document.getElementById('blogEmpty');
+        if (!grid) return;
 
         if (filtered.length === 0) {
             grid.innerHTML = '';
-            empty.style.display = 'block';
+            if (empty) empty.style.display = 'block';
             return;
         }
 
-        empty.style.display = 'none';
+        if (empty) empty.style.display = 'none';
 
-        grid.innerHTML = filtered.map(function(a) {
-            var imgSrc = a.cover_url || 'https://placehold.co/400x250/0D1117/ffba1a?text=Orbit+Blog';
-            var catLabel = CATEGORIES[a.category] || a.category;
-            var preview = a.excerpt || truncate(a.content, 120);
+        grid.innerHTML = filtered.map(function(a, i) {
+            var imgSrc = a.cover_url || 'https://placehold.co/600x340/0D1117/ffba1a?text=Orbit+Blog';
+            var catLabel = CATEGORIES[a.category] || a.category || 'Artigo';
+            var catColor = CAT_COLORS[a.category] || CAT_COLORS.estrategica;
+            var preview = a.excerpt || truncate(a.content, 140);
+            var date = formatDate(a.published_at || a.created_at);
+            var mins = readTime(a.content);
+            var initials = getInitials(a.author);
 
-            return '<div class="blog-card" data-category="' + a.category + '" data-slug="' + a.slug + '" style="cursor:pointer;" onclick="window.__goToArticle(this)">' +
+            return '<article class="blog-card blog-card--animate" style="animation-delay:' + (i * 80) + 'ms" data-category="' + (a.category || '') + '" data-slug="' + a.slug + '" onclick="window.__goToArticle(this)">' +
                 '<div class="blog-card__image">' +
                     '<img src="' + escapeHtml(imgSrc) + '" alt="' + escapeHtml(a.title) + '" loading="lazy">' +
-                    '<span class="blog-card__tag">' + escapeHtml(catLabel) + '</span>' +
+                    '<span class="blog-card__tag" style="background:' + catColor.bg + ';color:' + catColor.text + ';border:1px solid ' + catColor.border + ';">' + escapeHtml(catLabel) + '</span>' +
                 '</div>' +
                 '<div class="blog-card__body">' +
-                    '<div class="blog-card__meta">' +
-                        '<span><i class="fas fa-calendar-alt"></i> ' + formatDate(a.published_at || a.created_at) + '</span>' +
-                        '<span><i class="fas fa-user"></i> ' + escapeHtml(a.author) + '</span>' +
-                    '</div>' +
                     '<h3>' + escapeHtml(a.title) + '</h3>' +
                     '<p>' + escapeHtml(preview) + '</p>' +
-                    '<span class="blog-card__link">Leia Mais <i class="fas fa-arrow-right"></i></span>' +
+                    '<div class="blog-card__footer">' +
+                        '<div class="blog-card__author">' +
+                            '<div class="blog-card__avatar">' + initials + '</div>' +
+                            '<div class="blog-card__author-info">' +
+                                '<span class="blog-card__author-name">' + escapeHtml(a.author || 'Equipe Orbit') + '</span>' +
+                                '<span class="blog-card__date">' + date + '</span>' +
+                            '</div>' +
+                        '</div>' +
+                        '<span class="blog-card__read-time"><i class="fas fa-clock"></i> ' + mins + ' min</span>' +
+                    '</div>' +
                 '</div>' +
-            '</div>';
+            '</article>';
         }).join('');
-
-        // Force visibility after dynamic content injection
-        grid.classList.add('revealed');
-        var section = grid.closest('.blog-grid-section');
-        if (section) section.classList.add('revealed');
     }
 
-    // Global function for article navigation (use query param to avoid routing issues)
+    // Navigate to article
     window.__goToArticle = function(el) {
         var slug = el.getAttribute('data-slug');
         if (slug) window.location.href = '/blog?artigo=' + encodeURIComponent(slug);
     };
 
     // ── Filters ──
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.filter-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
             btn.classList.add('active');
             currentFilter = btn.dataset.filter;
             renderArticles();
@@ -234,115 +264,86 @@ export const pageHTML = `
 
     // ── Single article view ──
     function renderSingleArticle(article) {
-        var categoryLabel = CATEGORIES[article.category] || article.category;
+        var categoryLabel = CATEGORIES[article.category] || article.category || 'Artigo';
+        var catColor = CAT_COLORS[article.category] || CAT_COLORS.estrategica;
         var date = formatDate(article.published_at || article.created_at);
         var container = document.querySelector('.blog-grid-section');
         var filtersEl = document.querySelector('.blog-filters');
         if (filtersEl) filtersEl.style.display = 'none';
 
-        // Estimate reading time
-        var wordCount = (article.content || '').replace(/<[^>]*>/g, '').split(/\s+/).length;
-        var readTime = Math.max(1, Math.ceil(wordCount / 200));
+        var wordCount = (article.content || '').replace(/<[^>]*>/g, '').split(/\\s+/).length;
+        var mins = Math.max(1, Math.ceil(wordCount / 200));
+        var initials = getInitials(article.author);
 
         container.innerHTML =
-        '<div class="container" style="max-width:1200px;padding:48px 20px 100px;">' +
-            '<a href="/blog" style="display:inline-flex;align-items:center;gap:8px;color:#ffba1a;font-size:14px;margin-bottom:24px;text-decoration:none;"><i class="fas fa-arrow-left"></i> Voltar ao Blog</a>' +
+        '<div class="blog-article">' +
+            '<a href="/blog" class="blog-article__back"><i class="fas fa-arrow-left"></i> Voltar ao Blog</a>' +
 
-            // Two-column layout
-            '<div style="display:grid;grid-template-columns:1fr 340px;gap:48px;align-items:start;" class="article-layout">' +
+            '<div class="blog-article__layout">' +
 
                 // Main content
-                '<article>' +
-                    // Cover image
-                    (article.cover_url ? '<img src="' + escapeHtml(article.cover_url) + '" alt="' + escapeHtml(article.title) + '" style="width:100%;border-radius:16px;margin-bottom:32px;max-height:480px;object-fit:cover;">' : '') +
+                '<article class="blog-article__main">' +
+                    (article.cover_url ? '<img class="blog-article__cover" src="' + escapeHtml(article.cover_url) + '" alt="' + escapeHtml(article.title) + '">' : '') +
 
-                    // Category + title
-                    '<span style="display:inline-block;background:rgba(255,186,26,0.12);border:1px solid rgba(255,186,26,0.3);border-radius:100px;padding:5px 14px;color:#ffba1a;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:16px;">' + escapeHtml(categoryLabel) + '</span>' +
-                    '<h1 style="font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:800;color:#fff;line-height:1.25;margin-bottom:20px;">' + escapeHtml(article.title) + '</h1>' +
+                    '<span class="blog-article__category" style="background:' + catColor.bg + ';color:' + catColor.text + ';border:1px solid ' + catColor.border + ';">' + escapeHtml(categoryLabel) + '</span>' +
+                    '<h1 class="blog-article__title">' + escapeHtml(article.title) + '</h1>' +
 
-                    // Meta
-                    '<div style="display:flex;align-items:center;gap:20px;color:#8B949E;font-size:14px;flex-wrap:wrap;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,0.06);">' +
-                        '<span><i class="fas fa-user" style="margin-right:6px;color:#ffba1a;"></i>' + escapeHtml(article.author) + '</span>' +
-                        '<span><i class="fas fa-calendar-alt" style="margin-right:6px;color:#ffba1a;"></i>' + date + '</span>' +
-                        '<span><i class="fas fa-clock" style="margin-right:6px;color:#ffba1a;"></i>' + readTime + ' min de leitura</span>' +
+                    '<div class="blog-article__meta">' +
+                        '<div class="blog-article__meta-author">' +
+                            '<div class="blog-card__avatar">' + initials + '</div>' +
+                            '<span>' + escapeHtml(article.author || 'Equipe Orbit') + '</span>' +
+                        '</div>' +
+                        '<span><i class="fas fa-calendar-alt"></i> ' + date + '</span>' +
+                        '<span><i class="fas fa-clock"></i> ' + mins + ' min de leitura</span>' +
                     '</div>' +
 
-                    // Article body
-                    '<div class="blog-article-content">' + article.content + '</div>' +
+                    '<div class="blog-article-content">' + (article.content || '') + '</div>' +
 
-                    // Bottom CTA
-                    '<div style="margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.06);text-align:center;">' +
-                        '<a href="/blog" class="btn btn-primary" style="padding:14px 40px;"><i class="fas fa-arrow-left" style="margin-right:8px;"></i>Voltar ao Blog</a>' +
+                    '<div class="blog-article__bottom-cta">' +
+                        '<a href="/blog" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Voltar ao Blog</a>' +
                     '</div>' +
                 '</article>' +
 
                 // Sidebar
-                '<aside class="article-sidebar">' +
-                    // Author card
-                    '<div style="background:var(--black-card,#1C2333);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:24px;margin-bottom:24px;">' +
-                        '<p style="color:#8B949E;font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Escrito por</p>' +
-                        '<div style="display:flex;align-items:center;gap:12px;">' +
-                            '<div style="width:48px;height:48px;background:rgba(255,186,26,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">' +
-                                '<i class="fas fa-user" style="color:#ffba1a;font-size:18px;"></i>' +
-                            '</div>' +
+                '<aside class="blog-article__sidebar">' +
+                    '<div class="blog-sidebar-card">' +
+                        '<p class="blog-sidebar-card__label">Escrito por</p>' +
+                        '<div class="blog-sidebar-card__author">' +
+                            '<div class="blog-card__avatar blog-card__avatar--lg">' + initials + '</div>' +
                             '<div>' +
-                                '<p style="color:#fff;font-weight:700;font-size:15px;margin:0;">' + escapeHtml(article.author) + '</p>' +
-                                '<p style="color:#8B949E;font-size:13px;margin:0;">Equipe Orbit</p>' +
+                                '<p class="blog-sidebar-card__name">' + escapeHtml(article.author || 'Equipe Orbit') + '</p>' +
+                                '<p class="blog-sidebar-card__role">Equipe Orbit</p>' +
                             '</div>' +
                         '</div>' +
                     '</div>' +
 
-                    // CTA Card
-                    '<div style="background:linear-gradient(135deg,rgba(255,186,26,0.08),rgba(255,186,26,0.02));border:1px solid rgba(255,186,26,0.2);border-radius:16px;padding:28px;margin-bottom:24px;position:sticky;top:100px;">' +
-                        '<div style="width:48px;height:48px;background:rgba(255,186,26,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">' +
-                            '<i class="fas fa-robot" style="color:#ffba1a;font-size:20px;"></i>' +
-                        '</div>' +
-                        '<h3 style="color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:8px;">Conhe&ccedil;a o Time de IA</h3>' +
-                        '<p style="color:#8B949E;font-size:14px;line-height:1.6;margin-bottom:20px;">Dezenas de agentes especializados que operam a gest&atilde;o da sua empresa 24/7.</p>' +
-                        '<a href="/#contato-form" class="btn btn-primary" style="width:100%;text-align:center;padding:12px;font-size:14px;">Agendar demonstra&ccedil;&atilde;o</a>' +
+                    '<div class="blog-sidebar-cta">' +
+                        '<div class="blog-sidebar-cta__icon"><i class="fas fa-robot"></i></div>' +
+                        '<h3>Conhe&ccedil;a o Time de IA</h3>' +
+                        '<p>Dezenas de agentes especializados que operam a gest&atilde;o da sua empresa 24/7.</p>' +
+                        '<a href="/#contato-form" class="btn btn-primary" style="width:100%;text-align:center;">Agendar demonstra&ccedil;&atilde;o</a>' +
                     '</div>' +
 
-                    // Share
-                    '<div style="background:var(--black-card,#1C2333);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:24px;">' +
-                        '<p style="color:#8B949E;font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Compartilhar</p>' +
-                        '<div style="display:flex;gap:10px;">' +
-                            '<div style="width:40px;height:40px;background:rgba(63,185,80,0.1);border:1px solid rgba(63,185,80,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;" onclick="window.open(\'https://api.whatsapp.com/send?text=\'+encodeURIComponent(document.title+\' \'+location.href))"><i class="fab fa-whatsapp" style="color:#3FB950;font-size:18px;"></i></div>' +
-                            '<div style="width:40px;height:40px;background:rgba(10,102,194,0.1);border:1px solid rgba(10,102,194,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;" onclick="window.open(\'https://linkedin.com/sharing/share-offsite/?url=\'+encodeURIComponent(location.href))"><i class="fab fa-linkedin-in" style="color:#0A66C2;font-size:18px;"></i></div>' +
+                    '<div class="blog-sidebar-card">' +
+                        '<p class="blog-sidebar-card__label">Compartilhar</p>' +
+                        '<div class="blog-sidebar-share">' +
+                            '<button class="blog-share-btn blog-share-btn--whatsapp" onclick="window.open(\'https://api.whatsapp.com/send?text=\'+encodeURIComponent(document.title+\' \'+location.href))" aria-label="Compartilhar no WhatsApp"><i class="fab fa-whatsapp"></i></button>' +
+                            '<button class="blog-share-btn blog-share-btn--linkedin" onclick="window.open(\'https://linkedin.com/sharing/share-offsite/?url=\'+encodeURIComponent(location.href))" aria-label="Compartilhar no LinkedIn"><i class="fab fa-linkedin-in"></i></button>' +
+                            '<button class="blog-share-btn blog-share-btn--copy" onclick="navigator.clipboard.writeText(location.href).then(function(){var b=this;b.innerHTML=\'<i class=&quot;fas fa-check&quot;></i>\';setTimeout(function(){b.innerHTML=\'<i class=&quot;fas fa-link&quot;></i>\';},1500);}.bind(this))" aria-label="Copiar link"><i class="fas fa-link"></i></button>' +
                         '</div>' +
                     '</div>' +
                 '</aside>' +
 
             '</div>' +
-        '</div>' +
-
-        // Styles
-        '<style>' +
-            '.blog-article-content{color:#C9D1D9;font-size:17px;line-height:1.85;}' +
-            '.blog-article-content h2{font-size:1.5rem;font-weight:700;color:#fff;margin:40px 0 16px;line-height:1.3;}' +
-            '.blog-article-content h3{font-size:1.25rem;font-weight:700;color:#fff;margin:32px 0 12px;line-height:1.3;}' +
-            '.blog-article-content h4{font-size:1.1rem;font-weight:700;color:#fff;margin:24px 0 10px;}' +
-            '.blog-article-content p{margin-bottom:20px;}' +
-            '.blog-article-content ul,.blog-article-content ol{margin:0 0 24px 24px;}' +
-            '.blog-article-content li{margin-bottom:10px;}' +
-            '.blog-article-content strong{color:#fff;}' +
-            '.blog-article-content a{color:#ffba1a;text-decoration:underline;text-underline-offset:3px;}' +
-            '.blog-article-content img{border-radius:12px;margin:28px 0;max-width:100%;}' +
-            '.blog-article-content blockquote{border-left:3px solid #ffba1a;padding:16px 24px;margin:28px 0;background:rgba(255,186,26,0.04);border-radius:0 12px 12px 0;font-style:italic;color:#C9D1D9;}' +
-            '.blog-article-content pre{background:var(--black-card,#1C2333);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:20px;overflow-x:auto;margin:24px 0;font-size:14px;}' +
-            '.blog-article-content code{background:rgba(255,186,26,0.08);padding:2px 6px;border-radius:4px;font-size:0.9em;color:#ffba1a;}' +
-            '.blog-article-content pre code{background:none;padding:0;color:#C9D1D9;}' +
-            '.blog-article-content hr{border:none;border-top:1px solid rgba(255,255,255,0.06);margin:40px 0;}' +
-            '@media(max-width:900px){.article-layout{grid-template-columns:1fr!important;gap:32px!important;}.article-sidebar{position:static!important;order:2;}}' +
-        '</style>';
+        '</div>';
     }
 
     function fetchSingleArticle(slug) {
         fetch(SUPABASE_URL + '/rest/v1/blog_articles?slug=eq.' + encodeURIComponent(slug) + '&published=eq.true&limit=1', {
-            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+            headers: supaHeaders()
         })
         .then(function(res) { return res.json(); })
         .then(function(data) {
-            console.log('Single article data:', data);
             if (data && data[0]) {
                 var heroTitle = document.querySelector('.blog-hero h1');
                 if (heroTitle) heroTitle.innerHTML = escapeHtml(data[0].title);
@@ -364,37 +365,34 @@ export const pageHTML = `
     // ── Init ──
     var params = new URLSearchParams(window.location.search);
     var slug = params.get('artigo');
-    console.log('Blog init - slug:', slug);
     if (slug) {
         fetchSingleArticle(slug);
     } else {
         fetchArticles().then(renderArticles);
     }
 
-    // Mobile menu, header scroll, dropdowns handled by PageLayout.tsx
-
     // Filter scroll arrows
-    (() => {
-        const bar = document.getElementById('filterBar');
-        const btnL = document.getElementById('filterScrollLeft');
-        const btnR = document.getElementById('filterScrollRight');
+    (function() {
+        var bar = document.getElementById('filterBar');
+        var btnL = document.getElementById('filterScrollLeft');
+        var btnR = document.getElementById('filterScrollRight');
         if (!bar || !btnL || !btnR) return;
-        const step = 200;
+        var step = 200;
         function updateArrows() {
             btnL.style.opacity = bar.scrollLeft > 4 ? '1' : '0';
             btnL.style.pointerEvents = bar.scrollLeft > 4 ? 'auto' : 'none';
-            const maxScroll = bar.scrollWidth - bar.clientWidth;
+            var maxScroll = bar.scrollWidth - bar.clientWidth;
             btnR.style.opacity = bar.scrollLeft < maxScroll - 4 ? '1' : '0';
             btnR.style.pointerEvents = bar.scrollLeft < maxScroll - 4 ? 'auto' : 'none';
         }
-        btnL.addEventListener('click', () => { bar.scrollBy({ left: -step, behavior: 'smooth' }); });
-        btnR.addEventListener('click', () => { bar.scrollBy({ left: step, behavior: 'smooth' }); });
+        btnL.addEventListener('click', function() { bar.scrollBy({ left: -step, behavior: 'smooth' }); });
+        btnR.addEventListener('click', function() { bar.scrollBy({ left: step, behavior: 'smooth' }); });
         bar.addEventListener('scroll', updateArrows);
         window.addEventListener('resize', updateArrows);
         setTimeout(updateArrows, 100);
     })();
     </script>
-    <!-- Scroll Reveal -->
+    <!-- Scroll Reveal (only for CTA, NOT for blog grid) -->
     <script>
     (function() {
         var io = new IntersectionObserver(function(entries) {
