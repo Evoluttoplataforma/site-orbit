@@ -2077,7 +2077,7 @@ JSON.stringify(schemaOrg, null, 2) +
                 '<td><span class="badge badge-' + u.role + '">' + (u.role === 'admin' ? 'Admin Full' : 'Editor') + '</span></td>' +
                 '<td><span class="badge badge-published">Ativo</span></td>' +
                 '<td><div class="actions-cell">' +
-                    '<button class="btn btn-secondary btn-icon btn-sm" onclick="editUser(\\\'' + u.id + '\\\')" title="Editar"><i class="fas fa-edit"></i></button>' +
+                    '<button class="btn btn-secondary btn-icon btn-sm" onclick="editUser(&apos;' + u.id + '&apos;)" title="Editar"><i class="fas fa-edit"></i></button>' +
                 '</div></td>' +
             '</tr>';
         }).join('');
@@ -2279,10 +2279,10 @@ JSON.stringify(schemaOrg, null, 2) +
                 var logo = s.logo_url ? '<img src="' + escapeHtml(s.logo_url) + '" style="width:32px;height:32px;border-radius:6px;object-fit:cover;margin-right:8px;vertical-align:middle;">' : '<span style="display:inline-flex;width:32px;height:32px;border-radius:6px;background:var(--gray-100);align-items:center;justify-content:center;margin-right:8px;vertical-align:middle;font-size:0.7rem;color:var(--gray-500);"><i class="fas fa-building"></i></span>';
                 var statusClass = STORY_STATUS_COLORS[s.status] || 'draft';
                 var statusLabel = STORY_STATUS_LABELS[s.status] || s.status;
-                var pendingBtns = '<button class="btn btn-primary btn-icon btn-sm" onclick="updateStoryStatus(' + s.id + ',\'published\')" title="Aprovar"><i class="fas fa-check"></i></button>' +
-                    '<button class="btn btn-danger btn-icon btn-sm" onclick="updateStoryStatus(' + s.id + ',\'rejected\')" title="Rejeitar"><i class="fas fa-ban"></i></button>';
-                var publishedBtns = '<button class="btn btn-secondary btn-icon btn-sm" onclick="updateStoryStatus(' + s.id + ',\'pending\')" title="Despublicar"><i class="fas fa-undo"></i></button>';
-                var rejectedBtns = '<button class="btn btn-primary btn-icon btn-sm" onclick="updateStoryStatus(' + s.id + ',\'published\')" title="Aprovar"><i class="fas fa-check"></i></button>';
+                var pendingBtns = '<button class="btn btn-primary btn-icon btn-sm" onclick="updateStoryStatus(' + s.id + ',&apos;published&apos;)" title="Aprovar"><i class="fas fa-check"></i></button>' +
+                    '<button class="btn btn-danger btn-icon btn-sm" onclick="updateStoryStatus(' + s.id + ',&apos;rejected&apos;)" title="Rejeitar"><i class="fas fa-ban"></i></button>';
+                var publishedBtns = '<button class="btn btn-secondary btn-icon btn-sm" onclick="updateStoryStatus(' + s.id + ',&apos;pending&apos;)" title="Despublicar"><i class="fas fa-undo"></i></button>';
+                var rejectedBtns = '<button class="btn btn-primary btn-icon btn-sm" onclick="updateStoryStatus(' + s.id + ',&apos;published&apos;)" title="Aprovar"><i class="fas fa-check"></i></button>';
                 var actionBtns = s.status === 'pending' ? pendingBtns : (s.status === 'published' ? publishedBtns : rejectedBtns);
 
                 return '<tr>' +
@@ -2394,13 +2394,13 @@ JSON.stringify(schemaOrg, null, 2) +
 
         var footerHtml = '';
         if (s.status === 'pending') {
-            footerHtml = '<button class="btn btn-danger" onclick="updateStoryStatus(' + s.id + ',\'rejected\');closeStoryDetail();">Rejeitar</button>' +
-                '<button class="btn btn-primary" onclick="updateStoryStatus(' + s.id + ',\'published\');closeStoryDetail();">Aprovar e Publicar</button>';
+            footerHtml = '<button class="btn btn-danger" onclick="updateStoryStatus(' + s.id + ',&apos;rejected&apos;);closeStoryDetail();">Rejeitar</button>' +
+                '<button class="btn btn-primary" onclick="updateStoryStatus(' + s.id + ',&apos;published&apos;);closeStoryDetail();">Aprovar e Publicar</button>';
         } else if (s.status === 'published') {
-            footerHtml = '<button class="btn btn-secondary" onclick="updateStoryStatus(' + s.id + ',\'pending\');closeStoryDetail();">Despublicar</button>' +
+            footerHtml = '<button class="btn btn-secondary" onclick="updateStoryStatus(' + s.id + ',&apos;pending&apos;);closeStoryDetail();">Despublicar</button>' +
                 '<a href="/historias/' + (s.slug || s.id) + '" target="_blank" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Ver no site</a>';
         } else {
-            footerHtml = '<button class="btn btn-primary" onclick="updateStoryStatus(' + s.id + ',\'published\');closeStoryDetail();">Aprovar e Publicar</button>';
+            footerHtml = '<button class="btn btn-primary" onclick="updateStoryStatus(' + s.id + ',&apos;published&apos;);closeStoryDetail();">Aprovar e Publicar</button>';
         }
         document.getElementById('storyDetailFooter').innerHTML = footerHtml;
         document.getElementById('storyDetailModal').style.display = 'flex';
@@ -2459,7 +2459,7 @@ JSON.stringify(schemaOrg, null, 2) +
         document.getElementById('seWebsite').value = '';
         document.getElementById('seVideoUrl').value = '';
         document.getElementById('seLogoData').value = s.logo_url || '';
-        document.getElementById('seLogoPreview').innerHTML = s.logo_url ? '<img src="' + escapeHtml(s.logo_url) + '" alt="Logo" style="max-width:100%;border-radius:8px;"><button class="remove-image" onclick="document.getElementById(\'seLogoData\').value=\'\';document.getElementById(\'seLogoPreview\').innerHTML=\'\'" title="Remover"><i class="fas fa-times"></i></button>' : '';
+        document.getElementById('seLogoPreview').innerHTML = s.logo_url ? '<img src="' + escapeHtml(s.logo_url) + '" alt="Logo" style="max-width:100%;border-radius:8px;"><button class="remove-image" onclick="document.getElementById(&apos;seLogoData&apos;).value=&apos;&apos;;document.getElementById(&apos;seLogoPreview&apos;).innerHTML=&apos;&apos;" title="Remover"><i class="fas fa-times"></i></button>' : '';
 
         // Modules
         const mods = s.modulos || [];
@@ -2483,7 +2483,7 @@ JSON.stringify(schemaOrg, null, 2) +
         const reader = new FileReader();
         reader.onload = (e) => {
             document.getElementById('seLogoData').value = e.target.result;
-            document.getElementById('seLogoPreview').innerHTML = '<img src="' + e.target.result + '" style="max-width:100%;border-radius:8px;"><button class="remove-image" onclick="document.getElementById(\'seLogoData\').value=\'\';document.getElementById(\'seLogoPreview\').innerHTML=\'\'" title="Remover"><i class="fas fa-times"></i></button>';
+            document.getElementById('seLogoPreview').innerHTML = '<img src="' + e.target.result + '" style="max-width:100%;border-radius:8px;"><button class="remove-image" onclick="document.getElementById(&apos;seLogoData&apos;).value=&apos;&apos;;document.getElementById(&apos;seLogoPreview&apos;).innerHTML=&apos;&apos;" title="Remover"><i class="fas fa-times"></i></button>';
         };
         reader.readAsDataURL(file);
     }
@@ -2625,7 +2625,7 @@ JSON.stringify(schemaOrg, null, 2) +
         list.innerHTML = pending.map(function(s) {
             var date = s.created_at ? new Date(s.created_at).toLocaleDateString('pt-BR') : '';
             var challenge = s.challenge || '';
-            return '<div class="notif-dropdown__item" onclick="showView(\'stories\');closeNotifDropdown();">' +
+            return '<div class="notif-dropdown__item" onclick="showView(&apos;stories&apos;);closeNotifDropdown();">' +
                 '<div class="notif-dropdown__title"><i class="fas fa-clock" style="color:#F59E0B;margin-right:6px;"></i>' + escapeHtml(s.company_name || 'Empresa') + ' enviou uma história</div>' +
                 '<div class="notif-dropdown__meta">"' + escapeHtml(challenge.slice(0, 50)) + (challenge.length > 50 ? '...' : '') + '" · ' + date + '</div>' +
             '</div>';
