@@ -485,7 +485,9 @@ export const pageHTML = `
             </div>
 
             <!-- Phones grid -->
-            <div class="wa-phones-wrapper">
+            <div class="wa-phones-wrapper" id="waPhonesWrapper">
+            <button class="wa-arrow wa-arrow--left" id="waArrowLeft" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+            <button class="wa-arrow wa-arrow--right" id="waArrowRight" aria-label="Próximo"><i class="fas fa-chevron-right"></i></button>
             <div class="wa-phones" id="waPhones">
 
                 <!-- ═══ PHONE 1 — Rodrigo ═══ -->
@@ -733,7 +735,7 @@ export const pageHTML = `
             .wa-section {
                 position: relative;
                 padding: 120px 0 100px;
-                background: linear-gradient(180deg, #F8F9FB 0%, #EEF0F4 100%);
+                background: var(--black, #0D1117);
                 overflow: hidden;
             }
             .wa-section__bg {
@@ -751,6 +753,8 @@ export const pageHTML = `
                 background: radial-gradient(circle, rgba(255,186,26,0.06) 0%, transparent 60%);
                 border-radius: 50%;
             }
+            .wa-section .section-header h2 { color: #fff !important; }
+            .wa-section .section-header p { color: rgba(255,255,255,0.5) !important; }
             .section-badge--red {
                 background: rgba(248,81,73,0.08);
                 border: 1px solid rgba(248,81,73,0.2);
@@ -760,7 +764,30 @@ export const pageHTML = `
             /* ═══ PHONES GRID ═══ */
             .wa-phones-wrapper {
                 overflow: visible;
+                position: relative;
             }
+            /* Navigation arrows */
+            .wa-arrow {
+                display: none;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 44px; height: 44px;
+                border-radius: 50%;
+                background: rgba(255,186,26,0.9);
+                color: #000;
+                border: none;
+                cursor: pointer;
+                font-size: 16px;
+                z-index: 10;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+                transition: transform 0.2s, background 0.2s;
+            }
+            .wa-arrow:hover { background: #ffba1a; transform: translateY(-50%) scale(1.1); }
+            .wa-arrow--left { left: 8px; }
+            .wa-arrow--right { right: 8px; }
             .wa-phones {
                 display: flex;
                 gap: 40px;
@@ -1124,12 +1151,16 @@ export const pageHTML = `
                     padding: 0 calc(50% - 170px);
                 }
                 .wa-dots { display: flex; }
+                .wa-arrow { display: flex; }
             }
             @media (max-width: 768px) {
                 .wa-section { padding: 80px 0 60px; }
                 .wa-device__frame { width: 310px; }
                 .wa-chat { min-height: 380px; }
                 .wa-phones { padding: 0 calc(50% - 155px); gap: 32px; }
+                .wa-arrow { width: 38px; height: 38px; font-size: 14px; }
+                .wa-arrow--left { left: 4px; }
+                .wa-arrow--right { right: 4px; }
             }
             @media (max-width: 380px) {
                 .wa-device__frame { width: 290px; }
@@ -1244,23 +1275,37 @@ export const pageHTML = `
                 dots.forEach(function(d, i) {
                     d.classList.toggle('wa-dot--active', i === idx);
                 });
+                // Update arrow visibility
+                var arrowL = document.getElementById('waArrowLeft');
+                var arrowR = document.getElementById('waArrowRight');
+                if (arrowL) arrowL.style.opacity = idx === 0 ? '0.3' : '1';
+                if (arrowR) arrowR.style.opacity = idx === devices.length - 1 ? '0.3' : '1';
                 animateChat(idx);
             }
 
+            // Dots navigation
             dots.forEach(function(d) {
                 d.addEventListener('click', function() { goTo(parseInt(d.dataset.idx)); });
             });
 
+            // Arrow navigation
+            var arrowLeft = document.getElementById('waArrowLeft');
+            var arrowRight = document.getElementById('waArrowRight');
+            if (arrowLeft) arrowLeft.addEventListener('click', function() { goTo(current - 1); });
+            if (arrowRight) arrowRight.addEventListener('click', function() { goTo(current + 1); });
+
             // Swipe (listen on wrapper which has overflow:hidden)
-            var wrapper = container.parentElement;
+            var wrapper = document.getElementById('waPhonesWrapper');
             var sx = 0;
-            wrapper.addEventListener('touchstart', function(e) { sx = e.touches[0].clientX; }, { passive: true });
-            wrapper.addEventListener('touchend', function(e) {
-                var diff = sx - e.changedTouches[0].clientX;
-                if (Math.abs(diff) > 50) {
-                    diff > 0 ? goTo(current + 1) : goTo(current - 1);
-                }
-            }, { passive: true });
+            if (wrapper) {
+                wrapper.addEventListener('touchstart', function(e) { sx = e.touches[0].clientX; }, { passive: true });
+                wrapper.addEventListener('touchend', function(e) {
+                    var diff = sx - e.changedTouches[0].clientX;
+                    if (Math.abs(diff) > 50) {
+                        diff > 0 ? goTo(current + 1) : goTo(current - 1);
+                    }
+                }, { passive: true });
+            }
 
             // Intersection observer
             var obs = new IntersectionObserver(function(entries) {
