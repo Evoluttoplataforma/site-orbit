@@ -1108,7 +1108,7 @@ export const pageHTML = `
 
     async function refreshArticles() {
         try {
-            var res = await fetch(SUPABASE_URL + '/rest/v1/blog_articles?order=updated_at.desc', {
+            var res = await supaFetch(SUPABASE_URL + '/rest/v1/blog_articles?order=updated_at.desc', {
                 headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + session.access_token }
             });
             if (res.ok) supabaseArticles = await res.json();
@@ -1226,7 +1226,7 @@ export const pageHTML = `
         if (!article) return;
 
         try {
-            var res = await fetch(SUPABASE_URL + '/rest/v1/blog_articles', {
+            var res = await supaFetch(SUPABASE_URL + '/rest/v1/blog_articles', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -1482,7 +1482,7 @@ export const pageHTML = `
     const LEAD_TYPE_LABELS = { ebook: 'Ebook', checklist: 'Checklist', planilha: 'Planilha', webinar: 'Webinar', trial: 'Trial Gratuito' };
 
     function refreshLeadMagnets() {
-        fetch(SUPABASE_URL + '/rest/v1/lead_magnets?order=created_at.desc', {
+        supaFetch(SUPABASE_URL + '/rest/v1/lead_magnets?order=created_at.desc', {
             headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + session.access_token }
         }).then(function(res) {
             if (res.ok) return res.json();
@@ -1579,9 +1579,9 @@ export const pageHTML = `
             method = 'PATCH';
         }
 
-        fetch(url, {
+        supaFetch(url, {
             method: method,
-            headers: headers,
+            headers: { 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
             body: JSON.stringify(payload)
         }).then(function(res) {
             if (!res.ok) throw new Error('Erro ao salvar');
@@ -1595,7 +1595,7 @@ export const pageHTML = `
 
     function deleteLeadMagnet(id) {
         if (!confirm('Excluir esta isca digital?')) return;
-        fetch(SUPABASE_URL + '/rest/v1/lead_magnets?id=eq.' + id, {
+        supaFetch(SUPABASE_URL + '/rest/v1/lead_magnets?id=eq.' + id, {
             method: 'DELETE',
             headers: {
                 'apikey': SUPABASE_KEY,
@@ -2106,7 +2106,7 @@ JSON.stringify(schemaOrg, null, 2) +
 
     async function refreshUsers() {
         try {
-            var res = await fetch(SUPABASE_URL + '/rest/v1/cms_admins?order=created_at.asc', {
+            var res = await supaFetch(SUPABASE_URL + '/rest/v1/cms_admins?order=created_at.asc', {
                 headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + session.access_token }
             });
             supabaseUsers = await res.json();
@@ -2170,7 +2170,7 @@ JSON.stringify(schemaOrg, null, 2) +
         try {
             if (id) {
                 // Update cms_admins record
-                var updateRes = await fetch(SUPABASE_URL + '/rest/v1/cms_admins?id=eq.' + id, {
+                var updateRes = await supaFetch(SUPABASE_URL + '/rest/v1/cms_admins?id=eq.' + id, {
                     method: 'PATCH',
                     headers: {
                         'Content-Type': 'application/json',
@@ -2205,7 +2205,7 @@ JSON.stringify(schemaOrg, null, 2) +
                 }
 
                 // Insert into cms_admins
-                var insertRes = await fetch(SUPABASE_URL + '/rest/v1/cms_admins', {
+                var insertRes = await supaFetch(SUPABASE_URL + '/rest/v1/cms_admins', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -2235,7 +2235,7 @@ JSON.stringify(schemaOrg, null, 2) +
         document.getElementById('deleteMessage').textContent = 'Tem certeza que deseja excluir este artigo? Esta acao nao pode ser desfeita.';
         document.getElementById('deleteConfirmBtn').onclick = async function() {
             try {
-                await fetch(SUPABASE_URL + '/rest/v1/blog_articles?id=eq.' + id, {
+                await supaFetch(SUPABASE_URL + '/rest/v1/blog_articles?id=eq.' + id, {
                     method: 'DELETE',
                     headers: {
                         'apikey': SUPABASE_KEY,
@@ -2294,7 +2294,7 @@ JSON.stringify(schemaOrg, null, 2) +
     const STORY_STATUS_COLORS = { pending: 'warning', published: 'published', rejected: 'draft' };
 
     function refreshStories() {
-        fetch(SUPABASE_URL + '/rest/v1/customer_stories?order=created_at.desc', {
+        supaFetch(SUPABASE_URL + '/rest/v1/customer_stories?order=created_at.desc', {
             headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + session.access_token }
         }).then(function(res) {
             if (res.ok) return res.json();
@@ -2361,7 +2361,7 @@ JSON.stringify(schemaOrg, null, 2) +
                 payload.slug = generateSlugFromTitle(story.company_name);
             }
         }
-        fetch(SUPABASE_URL + '/rest/v1/customer_stories?id=eq.' + id, {
+        supaFetch(SUPABASE_URL + '/rest/v1/customer_stories?id=eq.' + id, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -2381,7 +2381,7 @@ JSON.stringify(schemaOrg, null, 2) +
 
     function deleteStory(id) {
         if (!confirm('Excluir esta história de cliente?')) return;
-        fetch(SUPABASE_URL + '/rest/v1/customer_stories?id=eq.' + id, {
+        supaFetch(SUPABASE_URL + '/rest/v1/customer_stories?id=eq.' + id, {
             method: 'DELETE',
             headers: {
                 'apikey': SUPABASE_KEY,
@@ -2635,9 +2635,9 @@ JSON.stringify(schemaOrg, null, 2) +
             payload.published_at = status === 'published' ? new Date().toISOString() : null;
         }
 
-        fetch(url, {
+        supaFetch(url, {
             method: method,
-            headers: headers,
+            headers: { 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
             body: JSON.stringify(payload)
         }).then(function(res) {
             if (!res.ok) throw new Error('Erro ao salvar');
