@@ -1826,22 +1826,7 @@ export const pageHTML = `
     };
 
     function buildImagePrompt(userPrompt, orientation) {
-        return orientation + ', cinematic social media image, ultra high quality, 8K render.\\n' +
-            'Scene concept: ' + userPrompt + '\\n\\n' +
-            'Style direction: Premium corporate aesthetic, dark moody background (#0D1117), ' +
-            'selective gold (#D4A017) accent lighting. Clean composition with strong focal point. ' +
-            'Depth of field, volumetric lighting, subtle lens flare. Professional color grading — ' +
-            'deep blacks, rich contrast, warm gold highlights.\\n\\n' +
-            'Technical: Shot on Sony A7IV, 35mm f/1.4 lens, shallow depth of field. ' +
-            'Studio lighting setup with key light at 45 degrees, rim light for separation. ' +
-            'Post-processed in Lightroom with cinematic LUT.\\n\\n' +
-            'CRITICAL RULES:\\n' +
-            '- ABSOLUTELY NO text, words, letters, numbers, labels, watermarks\\n' +
-            '- No stock photo look — must feel authentic and premium\\n' +
-            '- One clear subject/focal point\\n' +
-            '- Rich detail and texture\\n' +
-            '- Professional business/corporate context\\n' +
-            '- If showing people: confident, professional, diverse expressions';
+        return userPrompt + ', ' + orientation + ', cinematic 8K, dark background #0D1117, gold #D4A017 accent light, depth of field, volumetric lighting, Sony A7IV 35mm f1.4, corporate premium, no text no watermark, rich detail texture';
     }
 
     async function autoGeneratePrompt() {
