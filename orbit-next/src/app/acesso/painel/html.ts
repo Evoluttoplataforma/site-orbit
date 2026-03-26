@@ -902,9 +902,57 @@ export const pageHTML = `
         catch(e) { return null; }
     }
 
-    const session = getSession();
+    function saveSession(s) {
+        localStorage.setItem('orbit_supabase_session', JSON.stringify(s));
+    }
+
+    // Auto-refresh token if expired (Supabase JWT lasts 1h)
+    async function refreshToken() {
+        if (!session || !session.refresh_token) return false;
+        try {
+            var res = await fetch(SUPABASE_URL + '/auth/v1/token?grant_type=refresh_token', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY },
+                body: JSON.stringify({ refresh_token: session.refresh_token })
+            });
+            if (!res.ok) return false;
+            var data = await res.json();
+            if (data.access_token) {
+                session.access_token = data.access_token;
+                session.refresh_token = data.refresh_token || session.refresh_token;
+                saveSession(session);
+                return true;
+            }
+        } catch(e) { console.error('Token refresh failed:', e); }
+        return false;
+    }
+
+    // Helper: make authenticated Supabase request with auto-refresh
+    async function supaFetch(url, options) {
+        var opts = Object.assign({}, options);
+        opts.headers = Object.assign({}, opts.headers, {
+            'apikey': SUPABASE_KEY,
+            'Authorization': 'Bearer ' + session.access_token
+        });
+        var res = await fetch(url, opts);
+        if (res.status === 401 && session.refresh_token) {
+            var refreshed = await refreshToken();
+            if (refreshed) {
+                opts.headers['Authorization'] = 'Bearer ' + session.access_token;
+                res = await fetch(url, opts);
+            }
+        }
+        return res;
+    }
+
+    var session = getSession();
     if (!session || !session.access_token) {
         window.location.href = '/acesso';
+    }
+
+    // Refresh token on load (proactive)
+    if (session && session.refresh_token) {
+        refreshToken();
     }
 
     // ── DB ──
@@ -1257,27 +1305,18 @@ export const pageHTML = `
 
         try {
             var res;
-            // Use session token if available, fallback to anon key
-            var authToken = (session && session.access_token) ? session.access_token : SUPABASE_KEY;
-            var headers = {
-                'Content-Type': 'application/json',
-                'apikey': SUPABASE_KEY,
-                'Authorization': 'Bearer ' + authToken,
-                'Prefer': 'return=minimal'
-            };
-
             if (articleId) {
                 // Update existing
-                res = await fetch(SUPABASE_URL + '/rest/v1/blog_articles?id=eq.' + articleId, {
+                res = await supaFetch(SUPABASE_URL + '/rest/v1/blog_articles?id=eq.' + articleId, {
                     method: 'PATCH',
-                    headers: headers,
+                    headers: { 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
                     body: JSON.stringify(articleData)
                 });
             } else {
                 // Create new
-                res = await fetch(SUPABASE_URL + '/rest/v1/blog_articles', {
+                res = await supaFetch(SUPABASE_URL + '/rest/v1/blog_articles', {
                     method: 'POST',
-                    headers: headers,
+                    headers: { 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
                     body: JSON.stringify(articleData)
                 });
             }
