@@ -141,106 +141,10 @@ document.addEventListener('DOMContentLoaded', () => {
     mockupObs.observe(costMockup);
   }
 
-  // ═══ HEADER SCROLL ═══
-  const header = document.querySelector('.header');
-  const backToTop = document.getElementById('backToTop');
+  // Header scroll and backToTop are handled by event delegation in the IIFE above.
 
-  if (header || backToTop) {
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      if (header) {
-        if (y > 50) {
-          header.classList.add('scrolled');
-        } else {
-          header.classList.remove('scrolled');
-        }
-      }
-      if (backToTop) {
-        if (y > 400) {
-          backToTop.classList.add('visible');
-        } else {
-          backToTop.classList.remove('visible');
-        }
-      }
-    });
-  }
-
-  if (backToTop) {
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-
-  // ═══ MOBILE MENU ═══
-  var mobileMenuRetries = 0;
-  function initMobileMenu() {
-    var toggle = document.querySelector('.menu-toggle');
-    var menu = document.querySelector('.mobile-menu');
-    var overlay = document.querySelector('.mobile-menu-overlay');
-
-    if (!toggle || !menu) {
-      mobileMenuRetries++;
-      if (mobileMenuRetries < 20) setTimeout(initMobileMenu, 250);
-      return;
-    }
-
-    window.closeMobileMenu = function() {
-      toggle.classList.remove('active');
-      menu.classList.remove('active');
-      if (overlay) overlay.classList.remove('active');
-      document.body.style.overflow = '';
-    };
-
-    window.openMobileMenu = function() {
-      toggle.classList.add('active');
-      menu.classList.add('active');
-      if (overlay) overlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    };
-
-    toggle.addEventListener('click', function() {
-      menu.classList.contains('active') ? closeMobileMenu() : openMobileMenu();
-    });
-
-    menu.querySelectorAll('a').forEach(function(link) {
-      link.addEventListener('click', closeMobileMenu);
-    });
-  }
-  initMobileMenu();
-
-  // ═══ NAVBAR DROPDOWN (MEGA MENU) ═══
-  function initDropdowns() {
-    var items = document.querySelectorAll('.nav-menu > li');
-    if (!items.length) {
-      setTimeout(initDropdowns, 300);
-      return;
-    }
-    var isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    items.forEach(function(item) {
-      var dropdown = item.querySelector('.dropdown');
-      if (!dropdown) return;
-      if (isTouch) {
-        item.addEventListener('click', function(e) {
-          var isOpen = dropdown.classList.contains('show');
-          // Close all others
-          document.querySelectorAll('.dropdown.show').forEach(function(d) { d.classList.remove('show'); });
-          if (!isOpen) {
-            e.preventDefault();
-            dropdown.classList.add('show');
-          }
-        });
-        document.addEventListener('click', function(e) {
-          if (!e.target.closest('.nav-menu > li')) {
-            document.querySelectorAll('.dropdown.show').forEach(function(d) { d.classList.remove('show'); });
-          }
-        });
-      } else {
-        item.addEventListener('mouseenter', function() { dropdown.classList.add('show'); });
-        item.addEventListener('mouseleave', function() { dropdown.classList.remove('show'); });
-      }
-    });
-  }
-  initDropdowns();
+  // Mobile menu, nav dropdowns, and lang switch are handled by
+  // event delegation in the IIFE above. Do NOT duplicate here.
 
   // ═══ CAROUSEL (ZOOM-STYLE) ═══
   const track = document.querySelector('.carousel-track');
