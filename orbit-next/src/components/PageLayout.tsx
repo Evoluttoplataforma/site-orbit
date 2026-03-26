@@ -1,8 +1,7 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { headerHTML } from './shared-header';
-import { oliviaHTML } from './shared-olivia';
 
 interface PageLayoutProps {
   contentHTML: string;
@@ -10,43 +9,51 @@ interface PageLayoutProps {
 
 export function PageLayout({ contentHTML }: PageLayoutProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const initialized = useRef(false);
+
+  const initAll = useCallback(() => {
+    if (!ref.current || initialized.current) return;
+    initialized.current = true;
+
+    // Execute inline scripts
+    const scripts = ref.current.querySelectorAll('script');
+    scripts.forEach(oldScript => {
+      if (oldScript.src) {
+        const newScript = document.createElement('script');
+        newScript.src = oldScript.src;
+        document.body.appendChild(newScript);
+      } else if (oldScript.textContent) {
+        try {
+          const fn = new Function(oldScript.textContent);
+          fn();
+        } catch (e) {
+          console.warn('Script execution error:', e);
+        }
+      }
+    });
+
+    // Initialize header interactions
+    initMobileMenu();
+    initNavDropdowns();
+    initHeaderScroll();
+  }, []);
 
   useEffect(() => {
-    if (!ref.current) return;
-
-    const timer = setTimeout(() => {
-      // Execute inline scripts
-      const scripts = ref.current?.querySelectorAll('script');
-      if (scripts) {
-        scripts.forEach(oldScript => {
-          if (oldScript.src) {
-            const newScript = document.createElement('script');
-            newScript.src = oldScript.src;
-            document.body.appendChild(newScript);
-          } else if (oldScript.textContent) {
-            try {
-              const fn = new Function(oldScript.textContent);
-              fn();
-            } catch (e) {
-              console.warn('Script execution error:', e);
-            }
-          }
-        });
-      }
-
-      // Use document.querySelector (global) to find elements reliably
-      initMobileMenu();
-      initNavDropdowns();
-      initHeaderScroll();
-    }, 200);
-
-    return () => clearTimeout(timer);
-  }, []);
+    // Try immediately (DOM already rendered via dangerouslySetInnerHTML)
+    const t1 = setTimeout(initAll, 50);
+    // Safety retry
+    const t2 = setTimeout(initAll, 300);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, [initAll]);
 
   const fullHTML = headerHTML + '\n' + contentHTML;
 
   return <div ref={ref} dangerouslySetInnerHTML={{ __html: fullHTML }} />;
 }
+
+// ── Mobile Menu ──
+// Retry up to 20 times (matches main-v2.js behavior)
+let mobileMenuRetries = 0;
 
 function initMobileMenu() {
   const toggle = document.querySelector('.menu-toggle') as HTMLElement;
@@ -54,8 +61,10 @@ function initMobileMenu() {
   const overlay = document.querySelector('.mobile-menu-overlay') as HTMLElement;
 
   if (!toggle || !menu) {
-    console.warn('Mobile menu elements not found, retrying...');
-    setTimeout(initMobileMenu, 300);
+    mobileMenuRetries++;
+    if (mobileMenuRetries < 20) {
+      setTimeout(initMobileMenu, 250);
+    }
     return;
   }
 
@@ -88,6 +97,7 @@ function initMobileMenu() {
   });
 }
 
+// ── Nav Dropdowns ──
 function initNavDropdowns() {
   const navItems = document.querySelectorAll('.nav-menu > li');
   if (!navItems.length) {
@@ -126,6 +136,7 @@ function initNavDropdowns() {
   }
 }
 
+// ── Header Scroll ──
 function initHeaderScroll() {
   const header = document.querySelector('.header') as HTMLElement;
   const backToTop = document.querySelector('#backToTop') as HTMLElement;
@@ -133,6 +144,10 @@ function initHeaderScroll() {
     setTimeout(initHeaderScroll, 300);
     return;
   }
+
+  // Avoid duplicate scroll listeners
+  if ((window as any).__headerScrollInit) return;
+  (window as any).__headerScrollInit = true;
 
   window.addEventListener('scroll', () => {
     if (header) header.classList.toggle('scrolled', window.scrollY > 50);
