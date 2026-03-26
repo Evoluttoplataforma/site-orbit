@@ -15,6 +15,13 @@ function BlogInner() {
 
   const initScripts = useCallback(() => {
     if (!ref.current) return;
+
+    // Reset init flags so header re-initializes on new DOM
+    const toggle = document.querySelector('.menu-toggle') as any;
+    if (toggle) toggle.__menuInit = false;
+    document.querySelectorAll('.nav-menu > li').forEach((item: any) => { item.__dropInit = false; });
+    (window as any).__headerScrollInit = false;
+
     ref.current.querySelectorAll('script').forEach(oldScript => {
       if (oldScript.src) {
         const s = document.createElement('script');
@@ -25,7 +32,6 @@ function BlogInner() {
       }
     });
 
-    // Init header interactions
     initMobileMenu();
     initNavDropdowns();
     initHeaderScroll();
@@ -51,7 +57,7 @@ export function PageContent() {
   );
 }
 
-// ── Header helpers (from PageLayout) ──
+// ── Header helpers ──
 function initMobileMenu() {
   const toggle = document.querySelector('.menu-toggle') as HTMLElement;
   const menu = document.querySelector('.mobile-menu') as HTMLElement;
@@ -59,8 +65,20 @@ function initMobileMenu() {
   if (!toggle || !menu) { setTimeout(initMobileMenu, 250); return; }
   if ((toggle as any).__menuInit) return;
   (toggle as any).__menuInit = true;
-  const close = () => { toggle.classList.remove('active'); menu.classList.remove('active'); if (overlay) overlay.classList.remove('active'); document.body.style.overflow = ''; };
-  const open = () => { toggle.classList.add('active'); menu.classList.add('active'); if (overlay) overlay.classList.add('active'); document.body.style.overflow = 'hidden'; };
+
+  const close = () => {
+    toggle.classList.remove('active');
+    menu.classList.remove('active');
+    if (overlay) overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+  const open = () => {
+    toggle.classList.add('active');
+    menu.classList.add('active');
+    if (overlay) overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+
   (window as any).closeMobileMenu = close;
   (window as any).openMobileMenu = open;
   toggle.addEventListener('click', () => { menu.classList.contains('active') ? close() : open(); });
