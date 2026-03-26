@@ -946,6 +946,8 @@ export const pageHTML = `
         // Load data from Supabase
         await refreshArticles();
         await refreshUsers();
+        refreshLeadMagnets();
+        refreshStories();
         refreshDashboard();
     }
 
@@ -1020,7 +1022,7 @@ export const pageHTML = `
         document.getElementById('statPublished').textContent = published.length;
         document.getElementById('statDrafts').textContent = drafts.length;
         document.getElementById('statUsers').textContent = (supabaseUsers || []).length;
-        document.getElementById('statPendingStories').textContent = '0';
+        document.getElementById('statPendingStories').textContent = (supabaseStories || []).filter(function(s) { return s.status === 'pending'; }).length;
 
         var tbody = document.getElementById('dashboardArticles');
         var emptyEl = document.getElementById('dashboardEmpty');
@@ -1053,6 +1055,8 @@ export const pageHTML = `
 
     // ═══ ARTICLES LIST ═══
     var supabaseArticles = [];
+    var supabaseLeadMagnets = [];
+    var supabaseStories = [];
 
     async function refreshArticles() {
         try {
@@ -1437,27 +1441,37 @@ export const pageHTML = `
     const LEAD_TYPE_LABELS = { ebook: 'Ebook', checklist: 'Checklist', planilha: 'Planilha', webinar: 'Webinar', trial: 'Trial Gratuito' };
 
     function refreshLeadMagnets() {
-        const db = getDB();
-        const tbody = document.getElementById('leadMagnetsTableBody');
-        if (!tbody) return;
-        if (!db.leadMagnets.length) {
-            tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:32px;color:var(--gray-500);">Nenhuma isca cadastrada. Clique em "Nova Isca" para criar.</td></tr>';
-            return;
-        }
-        tbody.innerHTML = db.leadMagnets.map(lm => \`
-            <tr>
-                <td><span style="background:rgba(255,186,26,0.15);color:var(--primary);padding:4px 10px;border-radius:20px;font-size:0.78rem;font-weight:500;">\${LEAD_TYPE_LABELS[lm.type] || lm.type}</span></td>
-                <td><strong>\${escapeHtml(lm.title)}</strong></td>
-                <td style="color:var(--gray-500);font-size:0.85rem;">\${escapeHtml(lm.desc || '-')}</td>
-                <td style="font-size:0.85rem;">\${escapeHtml(lm.cta || 'Baixar agora')}</td>
-                <td>
-                    <div style="display:flex;gap:4px;">
-                        <button class="btn btn-ghost btn-sm" onclick="editLeadMagnet('\${lm.id}')" title="Editar"><i class="fas fa-pen" style="font-size:0.75rem;"></i></button>
-                        <button class="btn btn-ghost btn-sm" onclick="deleteLeadMagnet('\${lm.id}')" title="Excluir"><i class="fas fa-trash" style="font-size:0.75rem;color:var(--error);"></i></button>
-                    </div>
-                </td>
-            </tr>
-        \`).join('');
+        fetch(SUPABASE_URL + '/rest/v1/lead_magnets?order=created_at.desc', {
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + session.access_token }
+        }).then(function(res) {
+            if (res.ok) return res.json();
+            return [];
+        }).then(function(data) {
+            supabaseLeadMagnets = data || [];
+            var tbody = document.getElementById('leadMagnetsTableBody');
+            if (!tbody) return;
+            if (supabaseLeadMagnets.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:32px;color:var(--gray-500);">Nenhuma isca cadastrada. Clique em "Nova Isca" para criar.</td></tr>';
+                return;
+            }
+            tbody.innerHTML = supabaseLeadMagnets.map(function(lm) {
+                return '<tr>' +
+                    '<td><span style="background:rgba(255,186,26,0.15);color:var(--primary);padding:4px 10px;border-radius:20px;font-size:0.78rem;font-weight:500;">' + escapeHtml(LEAD_TYPE_LABELS[lm.type] || lm.type) + '</span></td>' +
+                    '<td><strong>' + escapeHtml(lm.title) + '</strong></td>' +
+                    '<td style="color:var(--gray-500);font-size:0.85rem;">' + escapeHtml(lm.description || '-') + '</td>' +
+                    '<td style="font-size:0.85rem;">' + escapeHtml(lm.cta_text || 'Baixar agora') + '</td>' +
+                    '<td>' +
+                        '<div style="display:flex;gap:4px;">' +
+                            '<button class="btn btn-ghost btn-sm" onclick="editLeadMagnet(' + lm.id + ')" title="Editar"><i class="fas fa-pen" style="font-size:0.75rem;"></i></button>' +
+                            '<button class="btn btn-ghost btn-sm" onclick="deleteLeadMagnet(' + lm.id + ')" title="Excluir"><i class="fas fa-trash" style="font-size:0.75rem;color:var(--error);"></i></button>' +
+                        '</div>' +
+                    '</td>' +
+                '</tr>';
+            }).join('');
+        }).catch(function(e) {
+            supabaseLeadMagnets = [];
+            console.error('Erro ao carregar lead magnets:', e);
+        });
     }
 
     function openLeadMagnetModal(id) {
@@ -1479,64 +1493,90 @@ export const pageHTML = `
     }
 
     function editLeadMagnet(id) {
-        const db = getDB();
-        const lm = db.leadMagnets.find(l => l.id === id);
+        var lm = supabaseLeadMagnets.find(function(l) { return l.id === id || l.id === Number(id); });
         if (!lm) return;
         document.getElementById('lmId').value = lm.id;
         document.getElementById('lmType').value = lm.type || 'ebook';
         document.getElementById('lmTitle').value = lm.title || '';
-        document.getElementById('lmDesc').value = lm.desc || '';
-        document.getElementById('lmCta').value = lm.cta || 'Baixar agora';
-        document.getElementById('lmUrl').value = lm.url || '';
-        document.getElementById('lmEvent').value = lm.event || '';
-        document.getElementById('lmImageData').value = lm.image || '';
-        document.getElementById('lmImagePreview').innerHTML = lm.image ? \`<img src="\${lm.image}" style="max-width:100%;border-radius:8px;">\` : '';
+        document.getElementById('lmDesc').value = lm.description || '';
+        document.getElementById('lmCta').value = lm.cta_text || 'Baixar agora';
+        document.getElementById('lmUrl').value = lm.cta_url || '';
+        document.getElementById('lmEvent').value = lm.file_url || '';
+        document.getElementById('lmImageData').value = lm.cover_url || '';
+        document.getElementById('lmImagePreview').innerHTML = lm.cover_url ? '<img src="' + escapeHtml(lm.cover_url) + '" style="max-width:100%;border-radius:8px;">' : '';
         document.getElementById('leadMagnetModalTitle').textContent = 'Editar Isca Digital';
         document.getElementById('leadMagnetModal').style.display = 'flex';
     }
 
     function saveLeadMagnet() {
-        const title = document.getElementById('lmTitle').value.trim();
+        var title = document.getElementById('lmTitle').value.trim();
         if (!title) { toast('Informe o titulo da isca.', 'error'); return; }
-        const db = getDB();
-        const id = document.getElementById('lmId').value;
-        const data = {
+        var id = document.getElementById('lmId').value;
+        var payload = {
             type: document.getElementById('lmType').value,
-            title,
-            desc: document.getElementById('lmDesc').value.trim(),
-            cta: document.getElementById('lmCta').value.trim() || 'Baixar agora',
-            url: document.getElementById('lmUrl').value.trim(),
-            event: document.getElementById('lmEvent').value.trim(),
-            image: document.getElementById('lmImageData').value
+            title: title,
+            description: document.getElementById('lmDesc').value.trim(),
+            cta_text: document.getElementById('lmCta').value.trim() || 'Baixar agora',
+            cta_url: document.getElementById('lmUrl').value.trim(),
+            file_url: document.getElementById('lmEvent').value.trim(),
+            cover_url: document.getElementById('lmImageData').value,
+            active: true,
+            updated_at: new Date().toISOString()
         };
+
+        var url = SUPABASE_URL + '/rest/v1/lead_magnets';
+        var method = 'POST';
+        var headers = {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_KEY,
+            'Authorization': 'Bearer ' + session.access_token,
+            'Prefer': 'return=minimal'
+        };
+
         if (id) {
-            const idx = db.leadMagnets.findIndex(l => l.id === id);
-            if (idx !== -1) db.leadMagnets[idx] = { ...db.leadMagnets[idx], ...data };
-        } else {
-            db.leadMagnets.push({ id: 'lm_' + Date.now(), ...data });
+            url = url + '?id=eq.' + id;
+            method = 'PATCH';
         }
-        setDB(db);
-        closeLeadMagnetModal();
-        refreshLeadMagnets();
-        toast('Isca salva!');
+
+        fetch(url, {
+            method: method,
+            headers: headers,
+            body: JSON.stringify(payload)
+        }).then(function(res) {
+            if (!res.ok) throw new Error('Erro ao salvar');
+            closeLeadMagnetModal();
+            refreshLeadMagnets();
+            toast('Isca salva!');
+        }).catch(function(e) {
+            toast('Erro ao salvar isca: ' + e.message, 'error');
+        });
     }
 
     function deleteLeadMagnet(id) {
         if (!confirm('Excluir esta isca digital?')) return;
-        const db = getDB();
-        db.leadMagnets = db.leadMagnets.filter(l => l.id !== id);
-        setDB(db);
-        refreshLeadMagnets();
-        toast('Isca excluida.');
+        fetch(SUPABASE_URL + '/rest/v1/lead_magnets?id=eq.' + id, {
+            method: 'DELETE',
+            headers: {
+                'apikey': SUPABASE_KEY,
+                'Authorization': 'Bearer ' + session.access_token
+            }
+        }).then(function(res) {
+            if (!res.ok) throw new Error('Erro ao excluir');
+            refreshLeadMagnets();
+            toast('Isca excluida.');
+        }).catch(function(e) {
+            toast('Erro ao excluir isca.', 'error');
+        });
     }
 
     function populateLeadMagnetDropdown() {
-        const db = getDB();
-        const select = document.getElementById('leadMagnetSelect');
+        var select = document.getElementById('leadMagnetSelect');
         if (!select) return;
-        const currentVal = select.value;
+        var currentVal = select.value;
         select.innerHTML = '<option value="">Nenhuma (desativado)</option>' +
-            db.leadMagnets.map(lm => \`<option value="\${lm.id}">\${LEAD_TYPE_LABELS[lm.type] || lm.type} - \${escapeHtml(lm.title)}</option>\`).join('');
+            supabaseLeadMagnets.map(function(lm) {
+                return '<option value="' + lm.id + '">' + escapeHtml(LEAD_TYPE_LABELS[lm.type] || lm.type) + ' - ' + escapeHtml(lm.title) + '</option>';
+            }).join('');
         select.value = currentVal;
     }
 
@@ -2215,155 +2255,156 @@ export const pageHTML = `
     const STORY_STATUS_COLORS = { pending: 'warning', published: 'published', rejected: 'draft' };
 
     function refreshStories() {
-        updateNotifications();
-        const db = getDB();
-        const stories = db.customerStories || [];
-        const tbody = document.getElementById('storiesTableBody');
-        const emptyEl = document.getElementById('storiesEmpty');
+        fetch(SUPABASE_URL + '/rest/v1/customer_stories?order=created_at.desc', {
+            headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + session.access_token }
+        }).then(function(res) {
+            if (res.ok) return res.json();
+            return [];
+        }).then(function(data) {
+            supabaseStories = data || [];
+            updateNotifications();
+            var stories = supabaseStories;
+            var tbody = document.getElementById('storiesTableBody');
+            var emptyEl = document.getElementById('storiesEmpty');
 
-        document.getElementById('statStoriesTotal').textContent = stories.length;
-        document.getElementById('statStoriesPending').textContent = stories.filter(s => s.status === 'pending').length;
-        document.getElementById('statStoriesPublished').textContent = stories.filter(s => s.status === 'published').length;
+            document.getElementById('statStoriesTotal').textContent = stories.length;
+            document.getElementById('statStoriesPending').textContent = stories.filter(function(s) { return s.status === 'pending'; }).length;
+            document.getElementById('statStoriesPublished').textContent = stories.filter(function(s) { return s.status === 'published'; }).length;
 
-        if (stories.length === 0) {
-            tbody.innerHTML = '';
-            emptyEl.style.display = 'block';
-            return;
-        }
+            if (stories.length === 0) {
+                tbody.innerHTML = '';
+                emptyEl.style.display = 'block';
+                return;
+            }
 
-        emptyEl.style.display = 'none';
-        const sorted = [...stories].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            emptyEl.style.display = 'none';
 
-        tbody.innerHTML = sorted.map(s => {
-            const logo = s.companyLogo ? \`<img src="\${s.companyLogo}" style="width:32px;height:32px;border-radius:6px;object-fit:cover;margin-right:8px;vertical-align:middle;">\` : \`<span style="display:inline-flex;width:32px;height:32px;border-radius:6px;background:var(--gray-100);align-items:center;justify-content:center;margin-right:8px;vertical-align:middle;font-size:0.7rem;color:var(--gray-500);"><i class="fas fa-building"></i></span>\`;
-            const statusClass = STORY_STATUS_COLORS[s.status] || 'draft';
-            const statusLabel = STORY_STATUS_LABELS[s.status] || s.status;
-            return \`
-            <tr>
-                <td><div style="display:flex;align-items:center;">\${logo}<strong>\${escapeHtml(s.empresa)}</strong></div></td>
-                <td><span style="font-size:0.85rem;">\${escapeHtml(s.nome)}</span><br><span style="font-size:0.75rem;color:var(--gray-400);">\${escapeHtml(s.email)}</span></td>
-                <td style="max-width:200px;"><span style="font-size:0.85rem;">\${escapeHtml(s.titulo || '-')}</span></td>
-                <td><span style="background:rgba(255,186,26,0.15);color:var(--primary);padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:500;">\${escapeHtml(SEGMENT_LABELS[s.segmento] || s.segmento || '-')}</span></td>
-                <td><span class="badge badge-\${statusClass}">\${statusLabel}</span></td>
-                <td style="font-size:0.82rem;">\${formatDate(s.createdAt)}</td>
-                <td>
-                    <div style="display:flex;gap:4px;">
-                        <button class="btn btn-secondary btn-icon btn-sm" onclick="viewStoryDetail('\${s.id}')" title="Ver detalhes"><i class="fas fa-eye"></i></button>
-                        <button class="btn btn-secondary btn-icon btn-sm" onclick="editStoryInEditor('\${s.id}')" title="Editar"><i class="fas fa-edit"></i></button>
-                        \${s.status === 'pending' ? \`
-                        <button class="btn btn-primary btn-icon btn-sm" onclick="updateStoryStatus('\${s.id}','published')" title="Aprovar"><i class="fas fa-check"></i></button>
-                        <button class="btn btn-danger btn-icon btn-sm" onclick="updateStoryStatus('\${s.id}','rejected')" title="Rejeitar"><i class="fas fa-ban"></i></button>
-                        \` : s.status === 'published' ? \`
-                        <button class="btn btn-secondary btn-icon btn-sm" onclick="updateStoryStatus('\${s.id}','pending')" title="Despublicar"><i class="fas fa-undo"></i></button>
-                        \` : \`
-                        <button class="btn btn-primary btn-icon btn-sm" onclick="updateStoryStatus('\${s.id}','published')" title="Aprovar"><i class="fas fa-check"></i></button>
-                        \`}
-                        <button class="btn btn-danger btn-icon btn-sm" onclick="deleteStory('\${s.id}')" title="Excluir"><i class="fas fa-trash"></i></button>
-                    </div>
-                </td>
-            </tr>\`;
-        }).join('');
+            tbody.innerHTML = stories.map(function(s) {
+                var logo = s.logo_url ? '<img src="' + escapeHtml(s.logo_url) + '" style="width:32px;height:32px;border-radius:6px;object-fit:cover;margin-right:8px;vertical-align:middle;">' : '<span style="display:inline-flex;width:32px;height:32px;border-radius:6px;background:var(--gray-100);align-items:center;justify-content:center;margin-right:8px;vertical-align:middle;font-size:0.7rem;color:var(--gray-500);"><i class="fas fa-building"></i></span>';
+                var statusClass = STORY_STATUS_COLORS[s.status] || 'draft';
+                var statusLabel = STORY_STATUS_LABELS[s.status] || s.status;
+                var pendingBtns = '<button class="btn btn-primary btn-icon btn-sm" onclick="updateStoryStatus(' + s.id + ',\'published\')" title="Aprovar"><i class="fas fa-check"></i></button>' +
+                    '<button class="btn btn-danger btn-icon btn-sm" onclick="updateStoryStatus(' + s.id + ',\'rejected\')" title="Rejeitar"><i class="fas fa-ban"></i></button>';
+                var publishedBtns = '<button class="btn btn-secondary btn-icon btn-sm" onclick="updateStoryStatus(' + s.id + ',\'pending\')" title="Despublicar"><i class="fas fa-undo"></i></button>';
+                var rejectedBtns = '<button class="btn btn-primary btn-icon btn-sm" onclick="updateStoryStatus(' + s.id + ',\'published\')" title="Aprovar"><i class="fas fa-check"></i></button>';
+                var actionBtns = s.status === 'pending' ? pendingBtns : (s.status === 'published' ? publishedBtns : rejectedBtns);
+
+                return '<tr>' +
+                    '<td><div style="display:flex;align-items:center;">' + logo + '<strong>' + escapeHtml(s.company_name) + '</strong></div></td>' +
+                    '<td><span style="font-size:0.85rem;">' + escapeHtml(s.contact_name) + '</span></td>' +
+                    '<td style="max-width:200px;"><span style="font-size:0.85rem;">' + escapeHtml(s.challenge ? s.challenge.slice(0, 60) + (s.challenge.length > 60 ? '...' : '') : '-') + '</span></td>' +
+                    '<td><span style="background:rgba(255,186,26,0.15);color:var(--primary);padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:500;">' + escapeHtml(SEGMENT_LABELS[s.segment] || s.segment || '-') + '</span></td>' +
+                    '<td><span class="badge badge-' + statusClass + '">' + statusLabel + '</span></td>' +
+                    '<td style="font-size:0.82rem;">' + formatDate(s.created_at) + '</td>' +
+                    '<td>' +
+                        '<div style="display:flex;gap:4px;">' +
+                            '<button class="btn btn-secondary btn-icon btn-sm" onclick="viewStoryDetail(' + s.id + ')" title="Ver detalhes"><i class="fas fa-eye"></i></button>' +
+                            '<button class="btn btn-secondary btn-icon btn-sm" onclick="editStoryInEditor(' + s.id + ')" title="Editar"><i class="fas fa-edit"></i></button>' +
+                            actionBtns +
+                            '<button class="btn btn-danger btn-icon btn-sm" onclick="deleteStory(' + s.id + ')" title="Excluir"><i class="fas fa-trash"></i></button>' +
+                        '</div>' +
+                    '</td>' +
+                '</tr>';
+            }).join('');
+        }).catch(function(e) {
+            supabaseStories = [];
+            console.error('Erro ao carregar stories:', e);
+        });
     }
 
     function updateStoryStatus(id, newStatus) {
-        const db = getDB();
-        const idx = db.customerStories.findIndex(s => s.id === id);
-        if (idx === -1) return;
-        db.customerStories[idx].status = newStatus;
-        // Generate slug if missing
-        if (!db.customerStories[idx].slug && db.customerStories[idx].titulo) {
-            db.customerStories[idx].slug = generateSlugFromTitle(db.customerStories[idx].titulo);
+        var payload = { status: newStatus, updated_at: new Date().toISOString() };
+        if (newStatus === 'published') {
+            payload.published_at = new Date().toISOString();
+            // Generate slug if missing
+            var story = supabaseStories.find(function(s) { return s.id === id || s.id === Number(id); });
+            if (story && !story.slug && story.company_name) {
+                payload.slug = generateSlugFromTitle(story.company_name);
+            }
         }
-        setDB(db);
-        refreshStories();
-        toast(newStatus === 'published' ? 'História publicada!' : newStatus === 'rejected' ? 'História rejeitada.' : 'Status atualizado.');
+        fetch(SUPABASE_URL + '/rest/v1/customer_stories?id=eq.' + id, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'apikey': SUPABASE_KEY,
+                'Authorization': 'Bearer ' + session.access_token,
+                'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify(payload)
+        }).then(function(res) {
+            if (!res.ok) throw new Error('Erro ao atualizar');
+            refreshStories();
+            toast(newStatus === 'published' ? 'História publicada!' : newStatus === 'rejected' ? 'História rejeitada.' : 'Status atualizado.');
+        }).catch(function(e) {
+            toast('Erro ao atualizar status.', 'error');
+        });
     }
 
     function deleteStory(id) {
         if (!confirm('Excluir esta história de cliente?')) return;
-        const db = getDB();
-        db.customerStories = db.customerStories.filter(s => s.id !== id);
-        setDB(db);
-        refreshStories();
-        toast('História excluída.');
+        fetch(SUPABASE_URL + '/rest/v1/customer_stories?id=eq.' + id, {
+            method: 'DELETE',
+            headers: {
+                'apikey': SUPABASE_KEY,
+                'Authorization': 'Bearer ' + session.access_token
+            }
+        }).then(function(res) {
+            if (!res.ok) throw new Error('Erro ao excluir');
+            refreshStories();
+            toast('História excluída.');
+        }).catch(function(e) {
+            toast('Erro ao excluir história.', 'error');
+        });
     }
 
     function viewStoryDetail(id) {
-        const db = getDB();
-        const s = db.customerStories.find(st => st.id === id);
+        var s = supabaseStories.find(function(st) { return st.id === id || st.id === Number(id); });
         if (!s) return;
 
-        const logo = s.companyLogo ? \`<img src="\${s.companyLogo}" style="width:64px;height:64px;border-radius:12px;object-fit:cover;">\` : \`<div style="width:64px;height:64px;border-radius:12px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--gray-400);"><i class="fas fa-building"></i></div>\`;
+        var logo = s.logo_url ? '<img src="' + escapeHtml(s.logo_url) + '" style="width:64px;height:64px;border-radius:12px;object-fit:cover;">' : '<div style="width:64px;height:64px;border-radius:12px;background:var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--gray-400);"><i class="fas fa-building"></i></div>';
 
-        const modules = (s.modulos || []).map(m => \`<span style="background:rgba(255,186,26,0.15);color:var(--primary-dark);padding:3px 12px;border-radius:20px;font-size:0.75rem;font-weight:500;">\${escapeHtml(m)}</span>\`).join(' ');
+        var html = '<div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--gray-200);">' +
+            logo +
+            '<div>' +
+                '<h3 style="font-size:1.1rem;font-weight:700;margin-bottom:2px;">' + escapeHtml(s.company_name) + '</h3>' +
+                '<span style="font-size:0.82rem;color:var(--gray-500);">' + escapeHtml(s.contact_name) + ' - ' + escapeHtml(s.contact_role || '') + '</span>' +
+            '</div>' +
+            '<span class="badge badge-' + (STORY_STATUS_COLORS[s.status] || 'draft') + '" style="margin-left:auto;">' + (STORY_STATUS_LABELS[s.status] || s.status) + '</span>' +
+        '</div>';
 
-        const photos = (s.photos || []).map(p => \`<img src="\${p}" style="width:120px;height:90px;object-fit:cover;border-radius:8px;cursor:pointer;" onclick="window.open(this.src)">\`).join('');
+        html += '<div style="margin-bottom:20px;">' +
+            '<h5 style="font-size:0.82rem;font-weight:600;color:var(--primary-dark);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;"><i class="fas fa-exclamation-triangle" style="margin-right:6px;"></i>O Desafio</h5>' +
+            '<p style="font-size:0.9rem;line-height:1.7;color:var(--gray-700);white-space:pre-line;">' + escapeHtml(s.challenge || '-') + '</p>' +
+        '</div>';
 
-        const socialLinks = [];
-        if (s.linkedin) socialLinks.push(\`<a href="\${escapeHtml(s.linkedin)}" target="_blank" style="color:#0077B5;font-size:0.85rem;"><i class="fab fa-linkedin"></i> LinkedIn</a>\`);
-        if (s.instagram) socialLinks.push(\`<a href="\${escapeHtml(s.instagram)}" target="_blank" style="color:#E4405F;font-size:0.85rem;"><i class="fab fa-instagram"></i> Instagram</a>\`);
-        if (s.website) socialLinks.push(\`<a href="\${escapeHtml(s.website)}" target="_blank" style="color:var(--info);font-size:0.85rem;"><i class="fas fa-globe"></i> Website</a>\`);
+        html += '<div style="margin-bottom:20px;">' +
+            '<h5 style="font-size:0.82rem;font-weight:600;color:var(--primary-dark);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;"><i class="fas fa-lightbulb" style="margin-right:6px;"></i>A Solução</h5>' +
+            '<p style="font-size:0.9rem;line-height:1.7;color:var(--gray-700);white-space:pre-line;">' + escapeHtml(s.solution || '-') + '</p>' +
+        '</div>';
 
-        let html = \`
-            <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--gray-200);">
-                \${logo}
-                <div>
-                    <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:2px;">\${escapeHtml(s.empresa)}</h3>
-                    <span style="font-size:0.82rem;color:var(--gray-500);">\${escapeHtml(s.nome)} - \${escapeHtml(s.cargo || '')}</span><br>
-                    <span style="font-size:0.78rem;color:var(--gray-400);">\${escapeHtml(s.email)} | \${escapeHtml(s.telefone || '')}</span>
-                </div>
-                <span class="badge badge-\${STORY_STATUS_COLORS[s.status]}" style="margin-left:auto;">\${STORY_STATUS_LABELS[s.status]}</span>
-            </div>
+        html += '<div style="margin-bottom:20px;">' +
+            '<h5 style="font-size:0.82rem;font-weight:600;color:var(--primary-dark);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;"><i class="fas fa-chart-line" style="margin-right:6px;"></i>Os Resultados</h5>' +
+            '<p style="font-size:0.9rem;line-height:1.7;color:var(--gray-700);white-space:pre-line;">' + escapeHtml(s.results || '-') + '</p>' +
+        '</div>';
 
-            \${s.titulo ? \`<h4 style="font-size:1rem;font-weight:600;margin-bottom:16px;color:var(--gray-900);">\${escapeHtml(s.titulo)}</h4>\` : ''}
-
-            \${modules ? \`<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;">\${modules}</div>\` : ''}
-
-            <div style="margin-bottom:20px;">
-                <h5 style="font-size:0.82rem;font-weight:600;color:var(--primary-dark);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;"><i class="fas fa-exclamation-triangle" style="margin-right:6px;"></i>O Desafio</h5>
-                <p style="font-size:0.9rem;line-height:1.7;color:var(--gray-700);white-space:pre-line;">\${escapeHtml(s.desafio || '-')}</p>
-            </div>
-
-            <div style="margin-bottom:20px;">
-                <h5 style="font-size:0.82rem;font-weight:600;color:var(--primary-dark);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;"><i class="fas fa-lightbulb" style="margin-right:6px;"></i>A Solução</h5>
-                <p style="font-size:0.9rem;line-height:1.7;color:var(--gray-700);white-space:pre-line;">\${escapeHtml(s.solucao || '-')}</p>
-            </div>
-
-            <div style="margin-bottom:20px;">
-                <h5 style="font-size:0.82rem;font-weight:600;color:var(--primary-dark);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;"><i class="fas fa-chart-line" style="margin-right:6px;"></i>Os Resultados</h5>
-                <p style="font-size:0.9rem;line-height:1.7;color:var(--gray-700);white-space:pre-line;">\${escapeHtml(s.resultados || '-')}</p>
-            </div>
-
-            \${s.depoimento ? \`
-            <div style="border-left:4px solid var(--primary);padding:16px 20px;background:rgba(255,186,26,0.05);border-radius:0 12px 12px 0;margin-bottom:20px;">
-                <p style="font-style:italic;font-size:0.9rem;line-height:1.7;color:var(--gray-700);">"\${escapeHtml(s.depoimento)}"</p>
-                <span style="font-size:0.78rem;color:var(--gray-500);margin-top:8px;display:block;">- \${escapeHtml(s.nome)}, \${escapeHtml(s.cargo || '')} na \${escapeHtml(s.empresa)}</span>
-            </div>\` : ''}
-
-            \${photos ? \`<div style="margin-bottom:20px;"><h5 style="font-size:0.82rem;font-weight:600;color:var(--gray-600);margin-bottom:8px;">Fotos</h5><div style="display:flex;gap:8px;flex-wrap:wrap;">\${photos}</div></div>\` : ''}
-
-            \${s.videoUrl ? \`<div style="margin-bottom:20px;"><h5 style="font-size:0.82rem;font-weight:600;color:var(--gray-600);margin-bottom:8px;">Vídeo</h5><a href="\${escapeHtml(s.videoUrl)}" target="_blank" style="color:var(--info);font-size:0.85rem;"><i class="fas fa-play-circle"></i> \${escapeHtml(s.videoUrl)}</a></div>\` : ''}
-
-            \${socialLinks.length ? \`<div style="display:flex;gap:16px;padding-top:16px;border-top:1px solid var(--gray-200);">\${socialLinks.join('')}</div>\` : ''}
-        \`;
+        if (s.testimonial) {
+            html += '<div style="border-left:4px solid var(--primary);padding:16px 20px;background:rgba(255,186,26,0.05);border-radius:0 12px 12px 0;margin-bottom:20px;">' +
+                '<p style="font-style:italic;font-size:0.9rem;line-height:1.7;color:var(--gray-700);">"' + escapeHtml(s.testimonial) + '"</p>' +
+                '<span style="font-size:0.78rem;color:var(--gray-500);margin-top:8px;display:block;">- ' + escapeHtml(s.contact_name) + ', ' + escapeHtml(s.contact_role || '') + ' na ' + escapeHtml(s.company_name) + '</span>' +
+            '</div>';
+        }
 
         document.getElementById('storyDetailContent').innerHTML = html;
 
-        let footerHtml = '';
+        var footerHtml = '';
         if (s.status === 'pending') {
-            footerHtml = \`
-                <button class="btn btn-danger" onclick="updateStoryStatus('\${s.id}','rejected');closeStoryDetail();">Rejeitar</button>
-                <button class="btn btn-primary" onclick="updateStoryStatus('\${s.id}','published');closeStoryDetail();">Aprovar e Publicar</button>
-            \`;
+            footerHtml = '<button class="btn btn-danger" onclick="updateStoryStatus(' + s.id + ',\'rejected\');closeStoryDetail();">Rejeitar</button>' +
+                '<button class="btn btn-primary" onclick="updateStoryStatus(' + s.id + ',\'published\');closeStoryDetail();">Aprovar e Publicar</button>';
         } else if (s.status === 'published') {
-            footerHtml = \`
-                <button class="btn btn-secondary" onclick="updateStoryStatus('\${s.id}','pending');closeStoryDetail();">Despublicar</button>
-                <a href="/historias/\${s.id}" target="_blank" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Ver no site</a>
-            \`;
+            footerHtml = '<button class="btn btn-secondary" onclick="updateStoryStatus(' + s.id + ',\'pending\');closeStoryDetail();">Despublicar</button>' +
+                '<a href="/historias/' + (s.slug || s.id) + '" target="_blank" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Ver no site</a>';
         } else {
-            footerHtml = \`
-                <button class="btn btn-primary" onclick="updateStoryStatus('\${s.id}','published');closeStoryDetail();">Aprovar e Publicar</button>
-            \`;
+            footerHtml = '<button class="btn btn-primary" onclick="updateStoryStatus(' + s.id + ',\'published\');closeStoryDetail();">Aprovar e Publicar</button>';
         }
         document.getElementById('storyDetailFooter').innerHTML = footerHtml;
         document.getElementById('storyDetailModal').style.display = 'flex';
@@ -2402,28 +2443,27 @@ export const pageHTML = `
     }
 
     function editStoryInEditor(id) {
-        const db = getDB();
-        const s = db.customerStories.find(st => st.id === id);
+        var s = supabaseStories.find(function(st) { return st.id === id || st.id === Number(id); });
         if (!s) return;
 
         document.getElementById('storyEditId').value = s.id;
-        document.getElementById('seEmpresa').value = s.empresa || '';
-        document.getElementById('seSegmento').value = s.segmento || '';
-        document.getElementById('seNome').value = s.nome || '';
-        document.getElementById('seEmail').value = s.email || '';
-        document.getElementById('seCargo').value = s.cargo || '';
-        document.getElementById('seTelefone').value = s.telefone || '';
-        document.getElementById('seTitulo').value = s.titulo || '';
-        document.getElementById('seDesafio').value = s.desafio || '';
-        document.getElementById('seSolucao').value = s.solucao || '';
-        document.getElementById('seResultados').value = s.resultados || '';
-        document.getElementById('seDepoimento').value = s.depoimento || '';
-        document.getElementById('seLinkedin').value = s.linkedin || '';
-        document.getElementById('seInstagram').value = s.instagram || '';
-        document.getElementById('seWebsite').value = s.website || '';
-        document.getElementById('seVideoUrl').value = s.videoUrl || '';
-        document.getElementById('seLogoData').value = s.companyLogo || '';
-        document.getElementById('seLogoPreview').innerHTML = s.companyLogo ? \`<img src="\${s.companyLogo}" alt="Logo" style="max-width:100%;border-radius:8px;"><button class="remove-image" onclick="document.getElementById('seLogoData').value='';document.getElementById('seLogoPreview').innerHTML=''" title="Remover"><i class="fas fa-times"></i></button>\` : '';
+        document.getElementById('seEmpresa').value = s.company_name || '';
+        document.getElementById('seSegmento').value = s.segment || '';
+        document.getElementById('seNome').value = s.contact_name || '';
+        document.getElementById('seEmail').value = '';
+        document.getElementById('seCargo').value = s.contact_role || '';
+        document.getElementById('seTelefone').value = '';
+        document.getElementById('seTitulo').value = s.challenge ? s.company_name : '';
+        document.getElementById('seDesafio').value = s.challenge || '';
+        document.getElementById('seSolucao').value = s.solution || '';
+        document.getElementById('seResultados').value = s.results || '';
+        document.getElementById('seDepoimento').value = s.testimonial || '';
+        document.getElementById('seLinkedin').value = '';
+        document.getElementById('seInstagram').value = '';
+        document.getElementById('seWebsite').value = '';
+        document.getElementById('seVideoUrl').value = '';
+        document.getElementById('seLogoData').value = s.logo_url || '';
+        document.getElementById('seLogoPreview').innerHTML = s.logo_url ? '<img src="' + escapeHtml(s.logo_url) + '" alt="Logo" style="max-width:100%;border-radius:8px;"><button class="remove-image" onclick="document.getElementById(\'seLogoData\').value=\'\';document.getElementById(\'seLogoPreview\').innerHTML=\'\'" title="Remover"><i class="fas fa-times"></i></button>' : '';
 
         // Modules
         const mods = s.modulos || [];
@@ -2505,13 +2545,13 @@ export const pageHTML = `
     }
 
     function saveStoryFromEditor(status) {
-        const empresa = document.getElementById('seEmpresa').value.trim();
-        const segmento = document.getElementById('seSegmento').value;
-        const nome = document.getElementById('seNome').value.trim();
-        const titulo = document.getElementById('seTitulo').value.trim();
-        const desafio = document.getElementById('seDesafio').value.trim();
-        const solucao = document.getElementById('seSolucao').value.trim();
-        const resultados = document.getElementById('seResultados').value.trim();
+        var empresa = document.getElementById('seEmpresa').value.trim();
+        var segmento = document.getElementById('seSegmento').value;
+        var nome = document.getElementById('seNome').value.trim();
+        var titulo = document.getElementById('seTitulo').value.trim();
+        var desafio = document.getElementById('seDesafio').value.trim();
+        var solucao = document.getElementById('seSolucao').value.trim();
+        var resultados = document.getElementById('seResultados').value.trim();
 
         if (!empresa) { toast('Informe o nome da empresa.', 'error'); return; }
         if (!segmento) { toast('Selecione o segmento.', 'error'); return; }
@@ -2521,58 +2561,61 @@ export const pageHTML = `
         if (!solucao) { toast('Descreva a solução.', 'error'); return; }
         if (!resultados) { toast('Descreva os resultados.', 'error'); return; }
 
-        const modulos = [];
-        document.querySelectorAll('.se-modulo:checked').forEach(cb => modulos.push(cb.value));
+        var slug = generateSlugFromTitle(titulo);
 
-        const slug = generateSlugFromTitle(titulo);
-
-        const storyData = {
-            empresa, segmento, nome, slug,
-            email: document.getElementById('seEmail').value.trim(),
-            telefone: document.getElementById('seTelefone').value.trim(),
-            cargo: document.getElementById('seCargo').value.trim(),
-            titulo, desafio, solucao, resultados,
-            depoimento: document.getElementById('seDepoimento').value.trim(),
-            linkedin: document.getElementById('seLinkedin').value.trim(),
-            instagram: document.getElementById('seInstagram').value.trim(),
-            website: document.getElementById('seWebsite').value.trim(),
-            videoUrl: document.getElementById('seVideoUrl').value.trim(),
-            companyLogo: document.getElementById('seLogoData').value,
-            modulos,
-            photos: storyPhotos.slice(),
-            status
+        var payload = {
+            company_name: empresa,
+            segment: segmento,
+            contact_name: nome,
+            contact_role: document.getElementById('seCargo').value.trim(),
+            challenge: desafio,
+            solution: solucao,
+            results: resultados,
+            testimonial: document.getElementById('seDepoimento').value.trim(),
+            logo_url: document.getElementById('seLogoData').value,
+            cover_url: '',
+            slug: slug,
+            status: status,
+            updated_at: new Date().toISOString()
         };
 
-        const db = getDB();
-        const editId = document.getElementById('storyEditId').value;
+        var editId = document.getElementById('storyEditId').value;
+        var url = SUPABASE_URL + '/rest/v1/customer_stories';
+        var method = 'POST';
+        var headers = {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_KEY,
+            'Authorization': 'Bearer ' + session.access_token,
+            'Prefer': 'return=minimal'
+        };
 
         if (editId) {
-            const idx = db.customerStories.findIndex(s => s.id === editId);
-            if (idx !== -1) {
-                db.customerStories[idx] = { ...db.customerStories[idx], ...storyData, updatedAt: new Date().toISOString() };
-            }
+            url = url + '?id=eq.' + editId;
+            method = 'PATCH';
         } else {
-            db.customerStories.push({
-                id: 'cs_' + Date.now(),
-                ...storyData,
-                createdAt: new Date().toISOString(),
-                updatedAt: new Date().toISOString()
-            });
+            payload.published_at = status === 'published' ? new Date().toISOString() : null;
         }
 
-        setDB(db);
-        toast(status === 'published' ? 'História publicada!' : 'Rascunho salvo!');
-        clearStoryEditor();
-        showView('stories');
+        fetch(url, {
+            method: method,
+            headers: headers,
+            body: JSON.stringify(payload)
+        }).then(function(res) {
+            if (!res.ok) throw new Error('Erro ao salvar');
+            toast(status === 'published' ? 'História publicada!' : 'Rascunho salvo!');
+            clearStoryEditor();
+            showView('stories');
+        }).catch(function(e) {
+            toast('Erro ao salvar história: ' + e.message, 'error');
+        });
     }
 
     // ═══ NOTIFICATIONS ═══
     function updateNotifications() {
-        const db = getDB();
-        const pending = (db.customerStories || []).filter(s => s.status === 'pending');
-        const badge = document.getElementById('notifBadge');
-        const countEl = document.getElementById('notifCount');
-        const list = document.getElementById('notifList');
+        var pending = (supabaseStories || []).filter(function(s) { return s.status === 'pending'; });
+        var badge = document.getElementById('notifBadge');
+        var countEl = document.getElementById('notifCount');
+        var list = document.getElementById('notifList');
 
         badge.textContent = pending.length;
         badge.setAttribute('data-count', pending.length);
@@ -2584,10 +2627,11 @@ export const pageHTML = `
         }
 
         list.innerHTML = pending.map(function(s) {
-            const date = s.createdAt ? new Date(s.createdAt).toLocaleDateString('pt-BR') : '';
+            var date = s.created_at ? new Date(s.created_at).toLocaleDateString('pt-BR') : '';
+            var challenge = s.challenge || '';
             return '<div class="notif-dropdown__item" onclick="showView(\\'stories\\');closeNotifDropdown();">' +
-                '<div class="notif-dropdown__title"><i class="fas fa-clock" style="color:#F59E0B;margin-right:6px;"></i>' + escapeHtml(s.empresa || 'Empresa') + ' enviou uma história</div>' +
-                '<div class="notif-dropdown__meta">"' + escapeHtml((s.titulo || '').slice(0, 50)) + (s.titulo && s.titulo.length > 50 ? '...' : '') + '" · ' + date + '</div>' +
+                '<div class="notif-dropdown__title"><i class="fas fa-clock" style="color:#F59E0B;margin-right:6px;"></i>' + escapeHtml(s.company_name || 'Empresa') + ' enviou uma história</div>' +
+                '<div class="notif-dropdown__meta">"' + escapeHtml(challenge.slice(0, 50)) + (challenge.length > 50 ? '...' : '') + '" · ' + date + '</div>' +
             '</div>';
         }).join('');
     }
