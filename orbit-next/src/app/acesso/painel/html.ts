@@ -899,7 +899,7 @@ export const pageHTML = `
     // ── Auth Check (Supabase) ──
     function getSession() {
         try { return JSON.parse(localStorage.getItem('orbit_supabase_session')) || null; }
-        catch { return null; }
+        catch(e) { return null; }
     }
 
     const session = getSession();
@@ -915,7 +915,7 @@ export const pageHTML = `
             if (!db.customerStories) db.customerStories = [];
             return db;
         }
-        catch { return { users: [], articles: [], leadMagnets: [], customerStories: [], version: 1 }; }
+        catch(e) { return { users: [], articles: [], leadMagnets: [], customerStories: [], version: 1 }; }
     }
 
     function setDB(db) {
@@ -2237,7 +2237,7 @@ JSON.stringify(schemaOrg, null, 2) +
     function formatDate(dateStr) {
         try {
             return new Date(dateStr).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
-        } catch { return dateStr; }
+        } catch(e) { return dateStr; }
     }
 
     // ═══ CUSTOMER STORIES ═══
@@ -2646,6 +2646,56 @@ JSON.stringify(schemaOrg, null, 2) +
             closeNotifDropdown();
         }
     });
+
+    // ═══ Expose functions to global scope (required for onclick handlers) ═══
+    window.showView = showView;
+    window.logout = logout;
+    window.toggleNotifDropdown = toggleNotifDropdown;
+    window.closeNotifDropdown = closeNotifDropdown;
+    window.saveArticle = saveArticle;
+    window.execCmd = execCmd;
+    window.insertBlockquote = insertBlockquote;
+    window.insertLink = insertLink;
+    window.insertImage = insertImage;
+    window.insertImageFromFile = insertImageFromFile;
+    window.switchImageTab = switchImageTab;
+    window.handleImageUpload = handleImageUpload;
+    window.showImagePreview = showImagePreview;
+    window.removeImage = removeImage;
+    window.previewFeaturedImage = previewFeaturedImage;
+    window.editArticle = editArticle;
+    window.duplicateArticle = duplicateArticle;
+    window.confirmDeleteArticle = confirmDeleteArticle;
+    window.viewArticle = viewArticle;
+    window.previewArticle = previewArticle;
+    window.exportArticleHTML = exportArticleHTML;
+    window.clearEditor = clearEditor;
+    window.generateSlug = generateSlug;
+    window.openLeadMagnetModal = openLeadMagnetModal;
+    window.closeLeadMagnetModal = closeLeadMagnetModal;
+    window.editLeadMagnet = editLeadMagnet;
+    window.saveLeadMagnet = saveLeadMagnet;
+    window.deleteLeadMagnet = deleteLeadMagnet;
+    window.handleLmImageUpload = handleLmImageUpload;
+    window.handleCtaBannerImageUpload = handleCtaBannerImageUpload;
+    window.openUserModal = openUserModal;
+    window.editUser = editUser;
+    window.closeUserModal = closeUserModal;
+    window.saveUser = saveUser;
+    window.confirmDeleteUser = confirmDeleteUser;
+    window.closeDeleteModal = closeDeleteModal;
+    window.refreshStories = refreshStories;
+    window.updateStoryStatus = updateStoryStatus;
+    window.deleteStory = deleteStory;
+    window.viewStoryDetail = viewStoryDetail;
+    window.closeStoryDetail = closeStoryDetail;
+    window.clearStoryEditor = clearStoryEditor;
+    window.editStoryInEditor = editStoryInEditor;
+    window.handleStoryLogoUpload = handleStoryLogoUpload;
+    window.handleStoryPhotosUpload = handleStoryPhotosUpload;
+    window.saveStoryFromEditor = saveStoryFromEditor;
+    window.toggleSidebar = toggleSidebar;
+    window.updateSeoScore = updateSeoScore;
 
     // ═══ INIT ═══
     initUI();
