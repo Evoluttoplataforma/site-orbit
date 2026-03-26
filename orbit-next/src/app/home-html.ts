@@ -3367,18 +3367,18 @@ export const pageHTML = `
 
             <div class="gallery3d" id="gallery3d">
                 <div class="gallery3d__track" id="gallery3d-track">
-                    <div class="gallery3d__card"><a href="/agentes/estrategista"><img src="/images/agente-estrategista.png" alt="Estrategista" width="512" height="918" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-chess-king"></i></div><h3>Estrategista</h3><p>SWOT, BSC e planejamento estratégico</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/processos"><img src="/images/agente-processos.jpg" alt="Processos" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-sitemap"></i></div><h3>Processos</h3><p>Mapeamento, playbooks e automação</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/pessoas"><img src="/images/agente-pessoas.png" alt="Pessoas" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-users"></i></div><h3>Pessoas</h3><p>Cargos, desempenho e PDIs</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/treinamento"><img src="/images/agente-treinamento.jpg" alt="Treinamento" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-graduation-cap"></i></div><h3>Treinamento</h3><p>Microlearning e trilhas via WhatsApp</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/indicadores"><img src="/images/agente-indicadores.jpg" alt="Indicadores" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-chart-line"></i></div><h3>Indicadores</h3><p>KPIs em tempo real e causa raiz</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/pesquisa"><img src="/images/agente-pesquisa.jpg" alt="Pesquisa" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-magnifying-glass-chart"></i></div><h3>Pesquisa</h3><p>Clima, formulários e insights</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/riscos"><img src="/images/agente-riscos.jpg" alt="Riscos" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-shield-halved"></i></div><h3>Riscos</h3><p>Mitigação e prevenção contínua</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/oportunidades"><img src="/images/agente-oportunidades.jpg" alt="Oportunidades" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-lightbulb"></i></div><h3>Oportunidades</h3><p>Mercado, parcerias e expansão</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/problemas"><img src="/images/agente-problemas.jpg" alt="Problemas" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-triangle-exclamation"></i></div><h3>Problemas</h3><p>Não-conformidades e PDCA</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/documentos"><img src="/images/agente-documentos.jpg" alt="Documentos" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-file-lines"></i></div><h3>Documentos</h3><p>Padronização e controle</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/vendas"><img src="/images/agente-vendas.jpg" alt="Vendas" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-handshake"></i></div><h3>Vendas</h3><p>CRM, funil e coaching comercial</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="/agentes/reunioes"><img src="/images/agente-reunioes.jpg" alt="Reuniões" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-video"></i></div><h3>Reuniões</h3><p>Transcrição e planos de ação</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-estrategista.png" alt="Estrategista" width="512" height="918" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-chess-king"></i></div><h3>Estrategista</h3><p>SWOT, BSC e planejamento estratégico</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-processos.jpg" alt="Processos" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-sitemap"></i></div><h3>Processos</h3><p>Mapeamento, playbooks e automação</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-pessoas.png" alt="Pessoas" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-users"></i></div><h3>Pessoas</h3><p>Cargos, desempenho e PDIs</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-treinamento.jpg" alt="Treinamento" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-graduation-cap"></i></div><h3>Treinamento</h3><p>Microlearning e trilhas via WhatsApp</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-indicadores.jpg" alt="Indicadores" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-chart-line"></i></div><h3>Indicadores</h3><p>KPIs em tempo real e causa raiz</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-pesquisa.jpg" alt="Pesquisa" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-magnifying-glass-chart"></i></div><h3>Pesquisa</h3><p>Clima, formulários e insights</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-riscos.jpg" alt="Riscos" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-shield-halved"></i></div><h3>Riscos</h3><p>Mitigação e prevenção contínua</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-oportunidades.jpg" alt="Oportunidades" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-lightbulb"></i></div><h3>Oportunidades</h3><p>Mercado, parcerias e expansão</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-problemas.jpg" alt="Problemas" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-triangle-exclamation"></i></div><h3>Problemas</h3><p>Não-conformidades e PDCA</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-documentos.jpg" alt="Documentos" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-file-lines"></i></div><h3>Documentos</h3><p>Padronização e controle</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-vendas.jpg" alt="Vendas" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-handshake"></i></div><h3>Vendas</h3><p>CRM, funil e coaching comercial</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-reunioes.jpg" alt="Reuniões" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-video"></i></div><h3>Reuniões</h3><p>Transcrição e planos de ação</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
                 </div>
             </div>
 
@@ -4772,33 +4772,14 @@ export const pageHTML = `
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Recent Articles -->
+    <!-- Recent Articles (Supabase) -->
     <script>
     (function() {
         var grid = document.getElementById('knowledgeGrid');
         if (!grid) return;
 
-        var db;
-        try { db = JSON.parse(localStorage.getItem('orbit_cms')) || {}; } catch(e) { db = {}; }
-        var articles = (db.articles || [])
-            .filter(function(a) { return a.status === 'published'; })
-            .sort(function(a, b) { return new Date(b.createdAt) - new Date(a.createdAt); })
-            .slice(0, 3);
-
-        if (articles.length === 0) {
-            grid.innerHTML =
-                '<div class="knowledge-card"><div class="knowledge-card__image"><img src="https://placehold.co/400x250/FDB73F/000000?text=Blog" alt="Blog" width="400" height="250" loading="lazy" decoding="async"><span class="knowledge-card__type"><i class="fas fa-file-alt"></i> Artigo</span></div><div class="knowledge-card__body"><h4>5 Passos para Transformar sua Estratégia em Ação</h4><a href="/blog" class="knowledge-card__link">Ler artigo</a></div></div>' +
-                '<div class="knowledge-card"><div class="knowledge-card__image"><img src="https://placehold.co/400x250/000000/FDB73F?text=Blog" alt="Blog" width="400" height="250" loading="lazy" decoding="async"><span class="knowledge-card__type"><i class="fas fa-book"></i> Ebook</span></div><div class="knowledge-card__body"><h4>Guia Completo de Gestão Estratégica para PMEs</h4><a href="/blog" class="knowledge-card__link">Ler artigo</a></div></div>' +
-                '<div class="knowledge-card"><div class="knowledge-card__image"><img src="https://placehold.co/400x250/FDB73F/000000?text=Blog" alt="Blog" width="400" height="250" loading="lazy" decoding="async"><span class="knowledge-card__type"><i class="fas fa-play-circle"></i> Webinar</span></div><div class="knowledge-card__body"><h4>Como a IA Melhora a Tomada de Decisão Empresarial</h4><a href="/blog" class="knowledge-card__link">Ler artigo</a></div></div>';
-            return;
-        }
-
-        function esc(s) {
-            if (!s) return '';
-            var d = document.createElement('div');
-            d.textContent = s;
-            return d.innerHTML;
-        }
+        var SB_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
+        var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
 
         var CATS = {
             estrategica: 'Gestão Estratégica',
@@ -4808,21 +4789,38 @@ export const pageHTML = `
             ia: 'IA & Inovação'
         };
 
-        grid.innerHTML = articles.map(function(a) {
-            var imgSrc = a.imageData || a.imageUrl || 'https://placehold.co/400x250/111/FDB73F?text=Blog';
-            var slug = a.slug || a.id;
-            var cat = CATS[a.category] || a.category || 'Artigo';
-            return '<a href="/blog/' + encodeURIComponent(slug) + '" class="knowledge-card" style="text-decoration:none;color:inherit;">' +
-                '<div class="knowledge-card__image">' +
-                    '<img src="' + imgSrc + '" alt="' + esc(a.title) + '" width="400" height="250" loading="lazy" decoding="async">' +
-                    '<span class="knowledge-card__type"><i class="fas fa-file-alt"></i> ' + esc(cat) + '</span>' +
-                '</div>' +
-                '<div class="knowledge-card__body">' +
-                    '<h4>' + esc(a.title) + '</h4>' +
-                    '<span class="knowledge-card__link">Ler artigo</span>' +
-                '</div>' +
-            '</a>';
-        }).join('');
+        function esc(s) {
+            if (!s) return '';
+            var d = document.createElement('div');
+            d.textContent = s;
+            return d.innerHTML;
+        }
+
+        fetch(SB_URL + '/rest/v1/blog_articles?published=eq.true&order=published_at.desc&limit=3&select=title,slug,cover_url,category', {
+            headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(articles) {
+            if (!articles || !articles.length) {
+                grid.innerHTML = '<p style="color:var(--gray-400);text-align:center;width:100%;">Em breve novos artigos serão publicados.</p>';
+                return;
+            }
+            grid.innerHTML = articles.map(function(a) {
+                var imgSrc = a.cover_url || 'https://placehold.co/400x250/0D1117/ffba1a?text=Orbit+Blog';
+                var cat = CATS[a.category] || a.category || 'Artigo';
+                return '<a href="/blog/' + encodeURIComponent(a.slug) + '" class="knowledge-card" style="text-decoration:none;color:inherit;" onclick="event.preventDefault();window.location.assign(\'/blog/' + a.slug + '\')">' +
+                    '<div class="knowledge-card__image">' +
+                        '<img src="' + esc(imgSrc) + '" alt="' + esc(a.title) + '" width="400" height="250" loading="lazy" decoding="async">' +
+                        '<span class="knowledge-card__type"><i class="fas fa-file-alt"></i> ' + esc(cat) + '</span>' +
+                    '</div>' +
+                    '<div class="knowledge-card__body">' +
+                        '<h4>' + esc(a.title) + '</h4>' +
+                        '<span class="knowledge-card__link">Ler artigo</span>' +
+                    '</div>' +
+                '</a>';
+            }).join('');
+        })
+        .catch(function(e) { console.error('Erro artigos home:', e); });
     })();
     </script>
 
