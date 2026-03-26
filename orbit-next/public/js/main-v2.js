@@ -7,6 +7,7 @@
 (function() {
   // Toggle menu
   document.addEventListener('click', function(e) {
+    if (!e.target || !e.target.closest) return;
     var toggle = e.target.closest('.menu-toggle');
     if (!toggle) return;
     var menu = document.querySelector('.mobile-menu');
@@ -37,15 +38,10 @@
 
   // Close on link click
   document.addEventListener('click', function(e) {
-    if (e.target.closest('.mobile-menu a')) {
-      window.closeMobileMenu();
-    }
-    if (e.target.closest('.mobile-menu-close')) {
-      window.closeMobileMenu();
-    }
-    if (e.target.classList && e.target.classList.contains('mobile-menu-overlay')) {
-      window.closeMobileMenu();
-    }
+    if (!e.target || !e.target.closest) return;
+    if (e.target.closest('.mobile-menu a')) window.closeMobileMenu();
+    if (e.target.closest('.mobile-menu-close')) window.closeMobileMenu();
+    if (e.target.classList && e.target.classList.contains('mobile-menu-overlay')) window.closeMobileMenu();
   });
 
   // Nav dropdown hover/touch
@@ -102,6 +98,7 @@
 
   // Language switcher (event delegation)
   document.addEventListener('click', function(e) {
+    if (!e.target || !e.target.closest) return;
     var btn = e.target.closest('.lang-switch');
     if (!btn) return;
     e.preventDefault();
