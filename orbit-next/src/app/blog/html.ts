@@ -139,10 +139,15 @@ export const pageHTML = `
 
     async function fetchArticles() {
         try {
-            const res = await fetch(SUPABASE_URL + '/rest/v1/blog_articles?published=eq.true&order=published_at.desc', {
+            var url = SUPABASE_URL + '/rest/v1/blog_articles?published=eq.true&order=published_at.desc&select=*';
+            console.log('Fetching articles from:', url);
+            const res = await fetch(url, {
                 headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
             });
-            if (res.ok) articlesCache = await res.json();
+            console.log('Response status:', res.status);
+            var data = await res.json();
+            console.log('Articles fetched:', data.length, data);
+            if (res.ok && Array.isArray(data)) articlesCache = data;
         } catch(e) { console.error('Erro ao buscar artigos:', e); }
     }
 
@@ -205,6 +210,11 @@ export const pageHTML = `
                 </div>
             </a>\`;
         }).join('');
+
+        // Force visibility after dynamic content injection
+        grid.classList.add('revealed');
+        var section = grid.closest('.blog-grid-section');
+        if (section) section.classList.add('revealed');
     }
 
     // ── Filters ──

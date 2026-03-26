@@ -60,33 +60,40 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ═══ MOBILE MENU ═══
-  const menuToggle = document.querySelector('.menu-toggle');
-  const mobileMenu = document.querySelector('.mobile-menu');
-  const mobileOverlay = document.querySelector('.mobile-menu-overlay');
+  function initMobileMenu() {
+    var toggle = document.querySelector('.menu-toggle');
+    var menu = document.querySelector('.mobile-menu');
+    var overlay = document.querySelector('.mobile-menu-overlay');
 
-  window.closeMobileMenu = function() {
-    if (menuToggle) menuToggle.classList.remove('active');
-    if (mobileMenu) mobileMenu.classList.remove('active');
-    if (mobileOverlay) mobileOverlay.classList.remove('active');
-    document.body.style.overflow = '';
-  };
+    if (!toggle || !menu) {
+      // Retry after React hydration injects the HTML
+      setTimeout(initMobileMenu, 300);
+      return;
+    }
 
-  window.openMobileMenu = function() {
-    if (menuToggle) menuToggle.classList.add('active');
-    if (mobileMenu) mobileMenu.classList.add('active');
-    if (mobileOverlay) mobileOverlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  };
+    window.closeMobileMenu = function() {
+      toggle.classList.remove('active');
+      menu.classList.remove('active');
+      if (overlay) overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    };
 
-  if (menuToggle && mobileMenu) {
-    menuToggle.addEventListener('click', () => {
-      mobileMenu.classList.contains('active') ? closeMobileMenu() : openMobileMenu();
+    window.openMobileMenu = function() {
+      toggle.classList.add('active');
+      menu.classList.add('active');
+      if (overlay) overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    };
+
+    toggle.addEventListener('click', function() {
+      menu.classList.contains('active') ? closeMobileMenu() : openMobileMenu();
     });
 
-    mobileMenu.querySelectorAll('a').forEach(link => {
+    menu.querySelectorAll('a').forEach(function(link) {
       link.addEventListener('click', closeMobileMenu);
     });
   }
+  initMobileMenu();
 
   // ═══ NAVBAR DROPDOWN (MEGA MENU) ═══
   document.querySelectorAll('.nav-menu > li').forEach(item => {
