@@ -240,30 +240,99 @@ export const pageHTML = `
         var filtersEl = document.querySelector('.blog-filters');
         if (filtersEl) filtersEl.style.display = 'none';
 
-        container.innerHTML = '<div class="container" style="max-width:780px;padding:60px 20px 100px;">' +
-            '<a href="/blog" style="display:inline-flex;align-items:center;gap:8px;color:#ffba1a;font-size:14px;margin-bottom:32px;text-decoration:none;"><i class="fas fa-arrow-left"></i> Voltar ao Blog</a>' +
-            '<span style="display:inline-block;background:rgba(255,186,26,0.12);border:1px solid rgba(255,186,26,0.3);border-radius:100px;padding:6px 16px;color:#ffba1a;font-size:13px;font-weight:600;margin-bottom:20px;">' + escapeHtml(categoryLabel) + '</span>' +
-            '<h1 style="font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:16px;">' + escapeHtml(article.title) + '</h1>' +
-            '<div style="display:flex;align-items:center;gap:20px;color:#8B949E;font-size:14px;flex-wrap:wrap;margin-bottom:40px;">' +
-                '<span><i class="fas fa-user" style="margin-right:6px;color:#ffba1a;"></i>' + escapeHtml(article.author) + '</span>' +
-                '<span><i class="fas fa-calendar-alt" style="margin-right:6px;color:#ffba1a;"></i>' + date + '</span>' +
-            '</div>' +
-            (article.cover_url ? '<img src="' + article.cover_url + '" alt="" style="width:100%;border-radius:16px;margin-bottom:40px;max-height:450px;object-fit:cover;">' : '') +
-            '<div class="blog-article-content" style="color:#C9D1D9;font-size:17px;line-height:1.8;">' + article.content + '</div>' +
-            '<div style="margin-top:60px;padding-top:40px;border-top:1px solid rgba(255,255,255,0.06);text-align:center;">' +
-                '<a href="/blog" class="btn btn-primary" style="padding:14px 40px;"><i class="fas fa-arrow-left" style="margin-right:8px;"></i>Voltar ao Blog</a>' +
+        // Estimate reading time
+        var wordCount = (article.content || '').replace(/<[^>]*>/g, '').split(/\s+/).length;
+        var readTime = Math.max(1, Math.ceil(wordCount / 200));
+
+        container.innerHTML =
+        '<div class="container" style="max-width:1200px;padding:48px 20px 100px;">' +
+            '<a href="/blog" style="display:inline-flex;align-items:center;gap:8px;color:#ffba1a;font-size:14px;margin-bottom:24px;text-decoration:none;"><i class="fas fa-arrow-left"></i> Voltar ao Blog</a>' +
+
+            // Two-column layout
+            '<div style="display:grid;grid-template-columns:1fr 340px;gap:48px;align-items:start;" class="article-layout">' +
+
+                // Main content
+                '<article>' +
+                    // Cover image
+                    (article.cover_url ? '<img src="' + escapeHtml(article.cover_url) + '" alt="' + escapeHtml(article.title) + '" style="width:100%;border-radius:16px;margin-bottom:32px;max-height:480px;object-fit:cover;">' : '') +
+
+                    // Category + title
+                    '<span style="display:inline-block;background:rgba(255,186,26,0.12);border:1px solid rgba(255,186,26,0.3);border-radius:100px;padding:5px 14px;color:#ffba1a;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:16px;">' + escapeHtml(categoryLabel) + '</span>' +
+                    '<h1 style="font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:800;color:#fff;line-height:1.25;margin-bottom:20px;">' + escapeHtml(article.title) + '</h1>' +
+
+                    // Meta
+                    '<div style="display:flex;align-items:center;gap:20px;color:#8B949E;font-size:14px;flex-wrap:wrap;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,0.06);">' +
+                        '<span><i class="fas fa-user" style="margin-right:6px;color:#ffba1a;"></i>' + escapeHtml(article.author) + '</span>' +
+                        '<span><i class="fas fa-calendar-alt" style="margin-right:6px;color:#ffba1a;"></i>' + date + '</span>' +
+                        '<span><i class="fas fa-clock" style="margin-right:6px;color:#ffba1a;"></i>' + readTime + ' min de leitura</span>' +
+                    '</div>' +
+
+                    // Article body
+                    '<div class="blog-article-content">' + article.content + '</div>' +
+
+                    // Bottom CTA
+                    '<div style="margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.06);text-align:center;">' +
+                        '<a href="/blog" class="btn btn-primary" style="padding:14px 40px;"><i class="fas fa-arrow-left" style="margin-right:8px;"></i>Voltar ao Blog</a>' +
+                    '</div>' +
+                '</article>' +
+
+                // Sidebar
+                '<aside class="article-sidebar">' +
+                    // Author card
+                    '<div style="background:var(--black-card,#1C2333);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:24px;margin-bottom:24px;">' +
+                        '<p style="color:#8B949E;font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Escrito por</p>' +
+                        '<div style="display:flex;align-items:center;gap:12px;">' +
+                            '<div style="width:48px;height:48px;background:rgba(255,186,26,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">' +
+                                '<i class="fas fa-user" style="color:#ffba1a;font-size:18px;"></i>' +
+                            '</div>' +
+                            '<div>' +
+                                '<p style="color:#fff;font-weight:700;font-size:15px;margin:0;">' + escapeHtml(article.author) + '</p>' +
+                                '<p style="color:#8B949E;font-size:13px;margin:0;">Equipe Orbit</p>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+
+                    // CTA Card
+                    '<div style="background:linear-gradient(135deg,rgba(255,186,26,0.08),rgba(255,186,26,0.02));border:1px solid rgba(255,186,26,0.2);border-radius:16px;padding:28px;margin-bottom:24px;position:sticky;top:100px;">' +
+                        '<div style="width:48px;height:48px;background:rgba(255,186,26,0.15);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">' +
+                            '<i class="fas fa-robot" style="color:#ffba1a;font-size:20px;"></i>' +
+                        '</div>' +
+                        '<h3 style="color:#fff;font-size:1.1rem;font-weight:700;margin-bottom:8px;">Conhe&ccedil;a o Time de IA</h3>' +
+                        '<p style="color:#8B949E;font-size:14px;line-height:1.6;margin-bottom:20px;">Dezenas de agentes especializados que operam a gest&atilde;o da sua empresa 24/7.</p>' +
+                        '<a href="/#contato-form" class="btn btn-primary" style="width:100%;text-align:center;padding:12px;font-size:14px;">Agendar demonstra&ccedil;&atilde;o</a>' +
+                    '</div>' +
+
+                    // Share
+                    '<div style="background:var(--black-card,#1C2333);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:24px;">' +
+                        '<p style="color:#8B949E;font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Compartilhar</p>' +
+                        '<div style="display:flex;gap:10px;">' +
+                            '<div style="width:40px;height:40px;background:rgba(63,185,80,0.1);border:1px solid rgba(63,185,80,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;" onclick="window.open(\'https://api.whatsapp.com/send?text=\'+encodeURIComponent(document.title+\' \'+location.href))"><i class="fab fa-whatsapp" style="color:#3FB950;font-size:18px;"></i></div>' +
+                            '<div style="width:40px;height:40px;background:rgba(10,102,194,0.1);border:1px solid rgba(10,102,194,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;" onclick="window.open(\'https://linkedin.com/sharing/share-offsite/?url=\'+encodeURIComponent(location.href))"><i class="fab fa-linkedin-in" style="color:#0A66C2;font-size:18px;"></i></div>' +
+                        '</div>' +
+                    '</div>' +
+                '</aside>' +
+
             '</div>' +
         '</div>' +
+
+        // Styles
         '<style>' +
-            '.blog-article-content h2{font-size:1.5rem;font-weight:700;color:#fff;margin:40px 0 16px;}' +
-            '.blog-article-content h3{font-size:1.25rem;font-weight:700;color:#fff;margin:32px 0 12px;}' +
+            '.blog-article-content{color:#C9D1D9;font-size:17px;line-height:1.85;}' +
+            '.blog-article-content h2{font-size:1.5rem;font-weight:700;color:#fff;margin:40px 0 16px;line-height:1.3;}' +
+            '.blog-article-content h3{font-size:1.25rem;font-weight:700;color:#fff;margin:32px 0 12px;line-height:1.3;}' +
+            '.blog-article-content h4{font-size:1.1rem;font-weight:700;color:#fff;margin:24px 0 10px;}' +
             '.blog-article-content p{margin-bottom:20px;}' +
-            '.blog-article-content ul,.blog-article-content ol{margin:0 0 20px 24px;}' +
-            '.blog-article-content li{margin-bottom:8px;}' +
+            '.blog-article-content ul,.blog-article-content ol{margin:0 0 24px 24px;}' +
+            '.blog-article-content li{margin-bottom:10px;}' +
             '.blog-article-content strong{color:#fff;}' +
-            '.blog-article-content a{color:#ffba1a;text-decoration:underline;}' +
-            '.blog-article-content img{border-radius:12px;margin:24px 0;}' +
-            '.blog-article-content blockquote{border-left:3px solid #ffba1a;padding:16px 24px;margin:24px 0;background:rgba(255,186,26,0.05);border-radius:0 12px 12px 0;}' +
+            '.blog-article-content a{color:#ffba1a;text-decoration:underline;text-underline-offset:3px;}' +
+            '.blog-article-content img{border-radius:12px;margin:28px 0;max-width:100%;}' +
+            '.blog-article-content blockquote{border-left:3px solid #ffba1a;padding:16px 24px;margin:28px 0;background:rgba(255,186,26,0.04);border-radius:0 12px 12px 0;font-style:italic;color:#C9D1D9;}' +
+            '.blog-article-content pre{background:var(--black-card,#1C2333);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:20px;overflow-x:auto;margin:24px 0;font-size:14px;}' +
+            '.blog-article-content code{background:rgba(255,186,26,0.08);padding:2px 6px;border-radius:4px;font-size:0.9em;color:#ffba1a;}' +
+            '.blog-article-content pre code{background:none;padding:0;color:#C9D1D9;}' +
+            '.blog-article-content hr{border:none;border-top:1px solid rgba(255,255,255,0.06);margin:40px 0;}' +
+            '@media(max-width:900px){.article-layout{grid-template-columns:1fr!important;gap:32px!important;}.article-sidebar{position:static!important;order:2;}}' +
         '</style>';
     }
 
