@@ -129,19 +129,29 @@ export const headerHTML = `
             <div class="mobile-menu__label" data-i18n="mobile.nav">Navegação</div>
             <a href="/"><i class="fas fa-home"></i> <span data-i18n="nav.home">Início</span></a>
             <a href="#contato-form" onclick="closeMobileMenu()"><i class="fas fa-envelope"></i> <span data-i18n="mobile.contact">Fale Conosco</span></a>
-            <div class="mobile-menu__label">Agentes de IA</div>
-            <span style="opacity:0.7;padding:12px 0;display:flex;align-items:center;gap:10px;"><i class="fas fa-chess-king"></i> Estrategista</span>
-            <span style="opacity:0.7;padding:12px 0;display:flex;align-items:center;gap:10px;"><i class="fas fa-sitemap"></i> Processos</span>
-            <span style="opacity:0.7;padding:12px 0;display:flex;align-items:center;gap:10px;"><i class="fas fa-users"></i> Pessoas</span>
-            <span style="opacity:0.7;padding:12px 0;display:flex;align-items:center;gap:10px;"><i class="fas fa-graduation-cap"></i> Treinamento</span>
-            <span style="opacity:0.7;padding:12px 0;display:flex;align-items:center;gap:10px;"><i class="fas fa-chart-line"></i> Indicadores</span>
-            <span style="opacity:0.7;padding:12px 0;display:flex;align-items:center;gap:10px;"><i class="fas fa-magnifying-glass-chart"></i> Pesquisa</span>
-            <span style="opacity:0.7;padding:12px 0;display:flex;align-items:center;gap:10px;"><i class="fas fa-shield-halved"></i> Riscos</span>
-            <span style="opacity:0.7;padding:12px 0;display:flex;align-items:center;gap:10px;"><i class="fas fa-lightbulb"></i> Oportunidades</span>
-            <span style="opacity:0.7;padding:12px 0;display:flex;align-items:center;gap:10px;"><i class="fas fa-triangle-exclamation"></i> Problemas</span>
-            <span style="opacity:0.7;padding:12px 0;display:flex;align-items:center;gap:10px;"><i class="fas fa-file-lines"></i> Documentos</span>
-            <span style="opacity:0.7;padding:12px 0;display:flex;align-items:center;gap:10px;"><i class="fas fa-handshake"></i> Vendas</span>
-            <span style="opacity:0.7;padding:12px 0;display:flex;align-items:center;gap:10px;"><i class="fas fa-video"></i> Reuniões</span>
+
+            <!-- Agentes dropdown -->
+            <div class="mobile-menu__dropdown">
+                <button class="mobile-menu__dropdown-toggle" onclick="this.parentElement.classList.toggle('open')">
+                    <span><i class="fas fa-robot"></i> Agentes de IA</span>
+                    <i class="fas fa-chevron-down mobile-menu__dropdown-arrow"></i>
+                </button>
+                <div class="mobile-menu__dropdown-items">
+                    <span><i class="fas fa-chess-king"></i> Estrategista</span>
+                    <span><i class="fas fa-sitemap"></i> Processos</span>
+                    <span><i class="fas fa-users"></i> Pessoas</span>
+                    <span><i class="fas fa-graduation-cap"></i> Treinamento</span>
+                    <span><i class="fas fa-chart-line"></i> Indicadores</span>
+                    <span><i class="fas fa-magnifying-glass-chart"></i> Pesquisa</span>
+                    <span><i class="fas fa-shield-halved"></i> Riscos</span>
+                    <span><i class="fas fa-lightbulb"></i> Oportunidades</span>
+                    <span><i class="fas fa-triangle-exclamation"></i> Problemas</span>
+                    <span><i class="fas fa-file-lines"></i> Documentos</span>
+                    <span><i class="fas fa-handshake"></i> Vendas</span>
+                    <span><i class="fas fa-video"></i> Reuniões</span>
+                </div>
+            </div>
+
             <div class="mobile-menu__label" data-i18n="mobile.content">Conteúdo</div>
             <a href="/blog"><i class="fas fa-newspaper"></i> Blog</a>
             <a href="/historias"><i class="fas fa-star"></i> Histórias de Clientes</a>
@@ -149,11 +159,8 @@ export const headerHTML = `
             <a href="/sobre"><i class="fas fa-building"></i> Sobre Nós</a>
         </div>
         <div class="mobile-menu__footer">
-            <button class="lang-switch" onclick="switchLang()" aria-label="Change language">
-                <span class="lang-switch__flag">🇺🇸</span>
-                <span class="lang-switch__label">EN</span>
-            </button>
-            <a href="#contato-form" class="btn btn-primary" onclick="closeMobileMenu()" data-i18n="nav.cta">Conhecer o Time de IA</a>
+            <a href="https://app.orbitgestao.com.br/login" class="btn btn-outline" style="flex:1;text-align:center;">Entrar</a>
+            <a href="#contato-form" class="btn btn-primary" onclick="closeMobileMenu()" data-i18n="nav.cta" style="flex:1;text-align:center;">Conhecer o Time de IA</a>
         </div>
     </div>
 `;
