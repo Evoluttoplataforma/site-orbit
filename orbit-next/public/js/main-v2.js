@@ -464,23 +464,47 @@ document.addEventListener('DOMContentLoaded', () => {
       const firstName = parts[0];
       const lastName = parts.slice(1).join(' ');
 
+      // Tracking data from hidden fields
+      var tracking = window.__wlTracking || {};
+
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
-        event: 'form_submit_success',
-        name: nome,
-        email: email,
-        phoneNumber: phone.replace(/\D/g, ''),
-        phone: phone,
-        nome: firstName,
-        sobrenome: lastName,
+        event: 'form_submit_lead',
+        lead_name: nome,
+        lead_email: email,
+        lead_whatsapp: phone,
         role: role,
         segment: segment,
         company: company,
         revenue: revenue,
         employees: employees,
         priority: priority,
-        apex_session_id: sessionId,
-        time_on_page_at_submit: Math.round((Date.now() - pageStart) / 1000)
+        utm_source: tracking.utm_source || null,
+        utm_medium: tracking.utm_medium || null,
+        utm_campaign: tracking.utm_campaign || null,
+        utm_content: tracking.utm_content || null,
+        utm_term: tracking.utm_term || null,
+        gclid: tracking.gclid || null,
+        gbraid: tracking.gbraid || null,
+        wbraid: tracking.wbraid || null,
+        gad_campaignid: tracking.gad_campaignid || null,
+        gad_source: tracking.gad_source || null,
+        fbclid: tracking.fbclid || null,
+        fbc: tracking.fbc || null,
+        fbp: tracking.fbp || null,
+        ttclid: tracking.ttclid || null,
+        msclkid: tracking.msclkid || null,
+        li_fat_id: tracking.li_fat_id || null,
+        twclid: tracking.twclid || null,
+        sck: tracking.sck || null,
+        landing_page: tracking.landing_page || null,
+        referrer: tracking.referrer || null,
+        user_agent: tracking.user_agent || null,
+        first_visit: tracking.first_visit || null,
+        session_id: tracking.session_id || null,
+        session_attributes_encoded: tracking.session_attributes_encoded || null,
+        origin_page: tracking.originPage || null,
+        ref: tracking.ref || null
       });
 
       // Redirect to thank you page after dataLayer push

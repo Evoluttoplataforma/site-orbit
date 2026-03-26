@@ -4769,21 +4769,38 @@ export const pageHTML = `
                             </select>
                         </div>
 
-                        <!-- Hidden UTM fields -->
-                        <input type="hidden" name="utm_source" data-field-id="utm_source">
-                        <input type="hidden" name="utm_medium" data-field-id="utm_medium">
-                        <input type="hidden" name="utm_campaign" data-field-id="utm_campaign">
-                        <input type="hidden" name="utm_content" data-field-id="utm_content">
-                        <input type="hidden" name="utm_term" data-field-id="utm_term">
-                        <input type="hidden" name="gclid" data-field-id="gclid">
-                        <input type="hidden" name="fbclid" data-field-id="fbclid">
-                        <input type="hidden" name="gbraid" data-field-id="gbraid">
-                        <input type="hidden" name="wbraid" data-field-id="wbraid">
-                        <input type="hidden" name="ttclid" data-field-id="ttclid">
-                        <input type="hidden" name="msclkid" data-field-id="msclkid">
-                        <input type="hidden" name="session_id" id="hidden_session_id">
-                        <input type="hidden" name="landing_page" data-field-id="landing_page">
-                        <input type="hidden" name="session_attributes_encoded" data-field-id="session_attributes_encoded">
+                        <!-- ===== CAMPOS OCULTOS PADRAO GTM ===== -->
+                        <!-- UTM Parameters -->
+                        <input type="hidden" name="utm_source" id="h_utm_source">
+                        <input type="hidden" name="utm_medium" id="h_utm_medium">
+                        <input type="hidden" name="utm_campaign" id="h_utm_campaign">
+                        <input type="hidden" name="utm_content" id="h_utm_content">
+                        <input type="hidden" name="utm_term" id="h_utm_term">
+                        <!-- Google Ads -->
+                        <input type="hidden" name="gclid" id="h_gclid">
+                        <input type="hidden" name="gbraid" id="h_gbraid">
+                        <input type="hidden" name="wbraid" id="h_wbraid">
+                        <input type="hidden" name="gad_campaignid" id="h_gad_campaignid">
+                        <input type="hidden" name="gad_source" id="h_gad_source">
+                        <!-- Meta / Facebook -->
+                        <input type="hidden" name="fbclid" id="h_fbclid">
+                        <input type="hidden" name="fbc" id="h_fbc">
+                        <input type="hidden" name="fbp" id="h_fbp">
+                        <!-- Outras Plataformas -->
+                        <input type="hidden" name="ttclid" id="h_ttclid">
+                        <input type="hidden" name="msclkid" id="h_msclkid">
+                        <input type="hidden" name="li_fat_id" id="h_li_fat_id">
+                        <input type="hidden" name="twclid" id="h_twclid">
+                        <input type="hidden" name="sck" id="h_sck">
+                        <!-- Sessao / Atribuicao -->
+                        <input type="hidden" name="landing_page" id="h_landing_page">
+                        <input type="hidden" name="referrer" id="h_referrer">
+                        <input type="hidden" name="user_agent" id="h_user_agent">
+                        <input type="hidden" name="first_visit" id="h_first_visit">
+                        <input type="hidden" name="session_id" id="h_session_id">
+                        <input type="hidden" name="session_attributes_encoded" id="h_session_attributes_encoded">
+                        <input type="hidden" name="originPage" id="h_originPage">
+                        <input type="hidden" name="ref" id="h_ref">
 
                         <button type="submit" class="btn btn-primary btn-submit">
                             <span class="btn-text">QUERO CONHECER O TIME DE IA</span>
