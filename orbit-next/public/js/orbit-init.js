@@ -201,6 +201,18 @@ function applyEnglish() {
     'no Orbit': 'on Orbit',
 
     // === PLATFORM ===
+    'Dezenas de agentes.': 'Dozens of agents.',
+    'Um time completo.': 'One complete team.',
+    'Planejamento estratégico em uma tarde': 'Strategic planning in one afternoon',
+    'Mapeamento e padronização automática': 'Automatic mapping and standardization',
+    'Gestão de pessoas com inteligência': 'People management with intelligence',
+    'Microlearning diário via WhatsApp': 'Daily microlearning via WhatsApp',
+    'KPIs em tempo real com causa raiz': 'Real-time KPIs with root cause',
+    'Clima, NPS e insights acionáveis': 'Climate, NPS and actionable insights',
+    'Prevenção antes que vire crise': 'Prevention before it becomes a crisis',
+    'PDCA automático e causa raiz': 'Automatic PDCA and root cause',
+    'Padronização e controle de versões': 'Standardization and version control',
+    'Coordena dezenas de agentes': 'Coordinates dozens of agents',
     'Uma plataforma.': 'One platform.',
     'Tudo conectado.': 'Everything connected.',
     '5 módulos. 12 agentes. Uma Olívia que conecta tudo - e traduz dados em decisão.': '5 modules. 12 agents. One Olívia who connects it all - and turns data into decisions.',
@@ -323,10 +335,11 @@ function applyEnglish() {
     'Coordenadora Geral': 'General Coordinator',
     'Seu time de IA coordenado pela': 'Your AI team coordinated by',
     'Cada agente domina uma área. A Olívia coordena todos, conecta os dados e entrega clareza.': 'Each agent masters an area. Olívia coordinates all, connects the data, and delivers clarity.',
+    'Dezenas de especialistas. 1 coordenadora.': 'Dozens of specialists. 1 coordinator.',
     '12 especialistas. 1 coordenadora.': '12 specialists. 1 coordinator.',
     'Custo de 1 funcionário.': 'Cost of 1 employee.',
     'Quero meu time de IA': 'I want my AI team',
-    'Olívia é a especialista em IA do Orbit e a voz do sistema para sua empresa. Ela coordena os 12 agentes, conecta dados de todos os departamentos e traduz complexidade em clareza para a tomada de decisão.': "Olívia is Orbit's AI expert and the system's voice for your company. She coordinates the 12 agents, connects data from all departments, and translates complexity into clarity for decision-making.",
+    'Olívia é a especialista em IA do Orbit e a voz do sistema para sua empresa. Ela coordena dezenas de agentes, conecta dados de todos os departamentos e traduz complexidade em clareza para a tomada de decisão.': "Olívia is Orbit's AI expert and the system's voice for your company. She coordinates dozens of agents, connects data from all departments, and translates complexity into clarity for decision-making.",
     'Quando o Agente de Riscos detecta uma ameaça, é a Olívia que cruza com o Agente de Oportunidades e apresenta o cenário completo. Humana o suficiente para criar vínculo. Inteligente o suficiente para gerar valor real.': 'When the Risk Agent detects a threat, Olívia crosses it with the Opportunities Agent and presents the complete picture. Human enough to create connection. Smart enough to generate real value.',
     '"Bom dia! Analisei os dados da semana. Três pontos precisam da sua atenção: margem caiu 2%, o time comercial bateu recorde, e temos uma oportunidade no segmento B que ninguém está olhando. Vamos resolver?"': '"Good morning! I analyzed this week\'s data. Three points need your attention: margin dropped 2%, the sales team hit a record, and we have an opportunity in segment B that nobody\'s looking at. Shall we solve it?"',
     '- Olívia, Coordenadora Geral': '- Olívia, General Coordinator',
@@ -395,7 +408,7 @@ function applyEnglish() {
     'Objetivo': 'Objective',
     'Escalar operações': 'Scale operations',
     '1 tarde': '1 afternoon',
-    '12 agentes constroem tudo': '12 agents build everything',
+    'Dezenas de agentes constroem tudo': 'Dozens of agents build everything',
     'O time de IA mapeia processos, cria planejamento estratégico, estrutura indicadores e muito mais - tudo ao mesmo tempo.': "The AI team maps processes, creates strategic planning, structures indicators and much more-all at the same time.",
     'Mapeamento de 14 processos concluído': '14 processes mapping completed',
     '23 indicadores estruturados': '23 structured indicators',
@@ -1772,12 +1785,40 @@ function applyEnglish() {
     'nav.about': 'About Us', 'nav.about.sub': '30 years of history',
     'nav.partners': 'Become a Partner', 'nav.partners.sub': 'Channel program',
     'nav.channels': 'B2B2B Channels', 'nav.channels.sub': 'For consultants & mentors',
-    'hero.subtitle': 'AI-Operated Management: 12 specialized agents build and operate your company\'s management working 24/7, even after the project ends.',
-    'platform.subtitle': '5 modules. 12 agents. A brain that connects everything and translates data into decisions.',
+    'hero.subtitle': 'AI-Operated Management: dozens of specialized agents build and operate your company\'s management working 24/7, even after the project ends.',
+    'platform.subtitle': 'Dozens of agents. A brain that connects everything and translates data into decisions.',
+    // Para quem
+    'pq.title': 'Who is Orbit for',
+    'pq.subtitle': 'Three models. One result: management that runs itself.',
+    'pq.c1.title': 'Business Owners',
+    'pq.c1.desc': 'An AI team that runs your company 24/7. Dozens of specialized agents.',
+    'pq.c2.title': 'Consultants',
+    'pq.c2.desc': 'From project to recurring operation. White-label with 60% margin.',
+    'pq.c3.title': 'Associations & Hubs',
+    'pq.c3.desc': 'From event hub to operations hub. Management for each member.',
+    'pq.learn': 'Learn more',
+    // Market data
+    'mkt.badge': 'Market data',
+    'mkt.title': 'Those using AI Agents<br>are <span>getting ahead</span>',
+    'mkt.c1': 'of companies already run <strong>AI Agents</strong> in production',
+    'mkt.c2': 'are <strong>experimenting</strong> with AI agents in processes',
+    'mkt.c3': '<strong>more quality</strong> in deliverables with AI support',
+    'mkt.tag': 'Orbit is in this group',
+    // WhatsApp / Pain points
+    'wa.badge': 'Does this sound familiar?',
+    'wa.title': 'Let me guess:',
+    'wa.subtitle': "This is Olívia's WhatsApp in real time, answering questions from our future clients.",
   };
   document.querySelectorAll('[data-i18n]').forEach(function(el) {
     var key = el.getAttribute('data-i18n');
-    if (key && i18nMap[key]) el.textContent = i18nMap[key];
+    if (key && i18nMap[key]) {
+      // Use innerHTML for values containing HTML tags, textContent otherwise
+      if (/<[a-z][\s\S]*>/i.test(i18nMap[key])) {
+        el.innerHTML = i18nMap[key];
+      } else {
+        el.textContent = i18nMap[key];
+      }
+    }
   });
 
   // Update page title and lang
