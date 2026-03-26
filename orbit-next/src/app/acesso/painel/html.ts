@@ -304,6 +304,24 @@ export const pageHTML = `
                                 <h3>Imagem destaque</h3>
                             </div>
                             <div class="card-body">
+                                <!-- AI Image Generation -->
+                                <div style="margin-bottom:16px;padding:16px;background:rgba(255,186,26,0.06);border:1px solid rgba(255,186,26,0.15);border-radius:10px;">
+                                    <label style="font-size:0.82rem;font-weight:600;color:var(--gray-700);margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+                                        <i class="fas fa-wand-magic-sparkles" style="color:var(--primary);"></i> Gerar com IA
+                                    </label>
+                                    <div style="display:flex;gap:8px;">
+                                        <input type="text" id="aiImagePrompt" placeholder="Ex: Gestão estratégica com inteligência artificial, estilo corporativo" style="flex:1;font-size:0.85rem;">
+                                        <button class="btn btn-primary btn-sm" onclick="generateAIImage()" id="aiImageBtn" style="white-space:nowrap;">
+                                            <i class="fas fa-sparkles"></i> Gerar
+                                        </button>
+                                    </div>
+                                    <div class="hint" style="margin-top:6px;">Descreva a imagem ou clique em "Auto" para gerar baseado no título</div>
+                                    <button class="btn btn-secondary btn-sm" onclick="autoGeneratePrompt()" style="margin-top:8px;font-size:0.75rem;">
+                                        <i class="fas fa-robot"></i> Auto (baseado no título)
+                                    </button>
+                                    <div id="aiImageStatus" style="display:none;margin-top:8px;font-size:0.82rem;color:var(--gray-500);"></div>
+                                </div>
+
                                 <div class="image-tabs">
                                     <button class="image-tab active" onclick="switchImageTab('upload')">
                                         <i class="fas fa-upload"></i> Upload
@@ -1788,6 +1806,95 @@ export const pageHTML = `
     }
 
     // ══ AUTHOR AVATAR UPLOAD ══
+    // ══ AI IMAGE GENERATION ══
+    var OPENROUTER_KEY = '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';
+
+    async function autoGeneratePrompt() {
+        var title = document.getElementById('articleTitleInput').value.trim();
+        var category = document.getElementById('articleCategory').value;
+        if (!title) { toast('Preencha o título primeiro.', 'error'); return; }
+
+        var status = document.getElementById('aiImageStatus');
+        status.style.display = 'block';
+        status.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gerando prompt...';
+
+        try {
+            var res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + OPENROUTER_KEY
+                },
+                body: JSON.stringify({
+                    model: 'google/gemini-2.0-flash-exp:free',
+                    messages: [{
+                        role: 'user',
+                        content: 'Crie um prompt curto (1 frase em inglês) para gerar uma imagem de capa de blog sobre: "' + title + '" (categoria: ' + (category || 'gestão') + '). Estilo: corporativo moderno, cores escuras com dourado (#ffba1a), minimalista, profissional. Responda APENAS o prompt, nada mais.'
+                    }],
+                    max_tokens: 100
+                })
+            });
+            var data = await res.json();
+            var prompt = data.choices[0].message.content.trim().replace(/^["']|["']$/g, '');
+            document.getElementById('aiImagePrompt').value = prompt;
+            status.innerHTML = '<i class="fas fa-check" style="color:var(--success);"></i> Prompt gerado! Clique em "Gerar"';
+        } catch(e) {
+            status.innerHTML = '<i class="fas fa-exclamation-circle" style="color:var(--error);"></i> Erro ao gerar prompt';
+            console.error(e);
+        }
+    }
+
+    async function generateAIImage() {
+        var prompt = document.getElementById('aiImagePrompt').value.trim();
+        if (!prompt) { toast('Digite ou gere um prompt primeiro.', 'error'); return; }
+
+        var btn = document.getElementById('aiImageBtn');
+        var status = document.getElementById('aiImageStatus');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gerando...';
+        status.style.display = 'block';
+        status.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Gerando imagem... (pode levar 10-20s)';
+
+        try {
+            // Use Pollinations.ai for image generation (free, no key needed)
+            var encodedPrompt = encodeURIComponent(prompt + ', professional blog cover, dark background with gold accents, modern corporate, 16:9 aspect ratio');
+            var imageUrl = 'https://image.pollinations.ai/prompt/' + encodedPrompt + '?width=1200&height=630&nologo=true&seed=' + Date.now();
+
+            // Pre-load the image
+            var img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = function() {
+                // Convert to base64
+                var canvas = document.createElement('canvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                canvas.getContext('2d').drawImage(img, 0, 0);
+                var base64 = canvas.toDataURL('image/jpeg', 0.85);
+
+                document.getElementById('articleImageData').value = base64;
+                showImagePreview(base64);
+                updateSeoScore();
+
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-sparkles"></i> Gerar';
+                status.innerHTML = '<i class="fas fa-check" style="color:var(--success);"></i> Imagem gerada!';
+                toast('Imagem gerada com IA!');
+            };
+            img.onerror = function() {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-sparkles"></i> Gerar';
+                status.innerHTML = '<i class="fas fa-exclamation-circle" style="color:var(--error);"></i> Erro ao gerar. Tente outro prompt.';
+                toast('Erro ao gerar imagem.', 'error');
+            };
+            img.src = imageUrl;
+        } catch(e) {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-sparkles"></i> Gerar';
+            status.innerHTML = '<i class="fas fa-exclamation-circle" style="color:var(--error);"></i> Erro: ' + e.message;
+            console.error(e);
+        }
+    }
+
     function handleAuthorAvatarUpload(event) {
         var file = event.target.files[0];
         if (!file) return;
@@ -3005,6 +3112,8 @@ JSON.stringify(schemaOrg, null, 2) +
     window.saveLeadMagnet = saveLeadMagnet;
     window.deleteLeadMagnet = deleteLeadMagnet;
     window.handleLmImageUpload = handleLmImageUpload;
+    window.generateAIImage = generateAIImage;
+    window.autoGeneratePrompt = autoGeneratePrompt;
     window.handleAuthorAvatarUpload = handleAuthorAvatarUpload;
     window.removeAuthorAvatar = removeAuthorAvatar;
     window.handleCtaBannerImageUpload = handleCtaBannerImageUpload;
