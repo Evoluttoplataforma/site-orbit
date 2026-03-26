@@ -467,7 +467,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Redirect to thank you page after dataLayer push
       setTimeout(function() {
-        window.location.href = 'pages/obrigado.html';
+        window.location.href = '/obrigado';
       }, 1200);
     });
   }
