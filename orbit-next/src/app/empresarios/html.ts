@@ -2946,9 +2946,6 @@ export const pageHTML = `
                             <div class="origin-director-card__info">
                                 <h3>Igor Furniel</h3>
                                 <p>Fundador e CEO do Grupo GSN. 30 anos liderando operações de gestão e consultoria em milhares de empresas.</p>
-                                <div class="origin-director-card__links">
-                                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                                </div>
                             </div>
                         </div>
                         <div class="origin-director-card">
@@ -2956,9 +2953,6 @@ export const pageHTML = `
                             <div class="origin-director-card__info">
                                 <h3>Dani Albuquerque</h3>
                                 <p>Diretora de Operações. Responsável pela entrega e qualidade — garante resultado mensurável para cada cliente.</p>
-                                <div class="origin-director-card__links">
-                                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                                </div>
                             </div>
                         </div>
                         <div class="origin-director-card">
@@ -2966,9 +2960,6 @@ export const pageHTML = `
                             <div class="origin-director-card__info">
                                 <h3>Christian Hart</h3>
                                 <p>Diretor de Produto. Lidera o desenvolvimento da plataforma e a evolução dos agentes de IA.</p>
-                                <div class="origin-director-card__links">
-                                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                                </div>
                             </div>
                         </div>
                         <div class="origin-director-card">
@@ -2976,9 +2967,6 @@ export const pageHTML = `
                             <div class="origin-director-card__info">
                                 <h3>Rodrigo Furniel</h3>
                                 <p>Diretor de Vendas. Responsável pela expansão comercial, canais e parcerias estratégicas.</p>
-                                <div class="origin-director-card__links">
-                                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                                </div>
                             </div>
                         </div>
                         <div class="origin-director-card">
@@ -2986,9 +2974,6 @@ export const pageHTML = `
                             <div class="origin-director-card__info">
                                 <h3>Omar</h3>
                                 <p>Diretor de Tecnologia. Arquiteto da infraestrutura que garante performance, segurança e escala.</p>
-                                <div class="origin-director-card__links">
-                                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                                </div>
                             </div>
                         </div>
                     </div>
