@@ -9,11 +9,11 @@ export const footerHTML = `
                     </div>
                     <p data-i18n="footer.tagline">Plataforma de gestão com IA. Contrate um time que executa.</p>
                     <div class="social-hover">
-                        <a href="#" class="social-hover__item" data-name="Instagram">
+                        <a href="https://www.instagram.com/orbitgestao/" target="_blank" rel="noopener" class="social-hover__item" data-name="Instagram">
                             <i class="fab fa-instagram"></i>
                             <span class="social-hover__label">Instagram</span>
                         </a>
-                        <a href="#" class="social-hover__item" data-name="YouTube">
+                        <a href="https://www.youtube.com/@Orbit.Gest%C3%A3o" target="_blank" rel="noopener" class="social-hover__item" data-name="YouTube">
                             <i class="fab fa-youtube"></i>
                             <span class="social-hover__label">YouTube</span>
                         </a>
