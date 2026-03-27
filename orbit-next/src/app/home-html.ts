@@ -3606,10 +3606,7 @@ export const pageHTML = `
 
                     <div class="price-v2__anchor"><i class="fas fa-users"></i> Até 50 usuários</div>
                     <ul class="price-v2__features">
-                        <li><i class="fas fa-robot"></i> Agentes de IA</li>
                         <li><i class="fas fa-users"></i> Até 50 usuários</li>
-                        <li><i class="fas fa-chart-pie"></i> Dashboards</li>
-                        <li><i class="fas fa-envelope"></i> Suporte</li>
                     </ul>
                     <a href="#contato-form" class="price-v2__cta">COMECE AGORA <i class="fas fa-chevron-right"></i></a>
                 </div>
@@ -3637,11 +3634,7 @@ export const pageHTML = `
 
                     <div class="price-v2__anchor price-v2__anchor--gold"><i class="fas fa-users"></i> Até 100 usuários</div>
                     <ul class="price-v2__features">
-                        <li><i class="fas fa-robot"></i> <strong>dezenas de agentes de IA</strong></li>
                         <li><i class="fas fa-users"></i> Até 100 usuários</li>
-                        <li><i class="fab fa-whatsapp"></i> Treinamento via WhatsApp</li>
-                        <li><i class="fas fa-headset"></i> Onboarding dedicado</li>
-                        <li><i class="fas fa-brain"></i> Olívia como coordenadora</li>
                     </ul>
                     <a href="#contato-form" class="price-v2__cta price-v2__cta--gold">COMECE AGORA <i class="fas fa-chevron-right"></i></a>
                 </div>
@@ -3666,10 +3659,7 @@ export const pageHTML = `
 
                     <div class="price-v2__anchor"><i class="fas fa-users"></i> Até 300 usuários</div>
                     <ul class="price-v2__features">
-                        <li><i class="fas fa-robot"></i> dezenas de agentes + customização</li>
                         <li><i class="fas fa-users"></i> Até 300 usuários</li>
-                        <li><i class="fas fa-user-shield"></i> Gerente de sucesso</li>
-                        <li><i class="fas fa-bolt"></i> SLA prioritário</li>
                     </ul>
                     <a href="#contato-form" class="price-v2__cta">COMECE AGORA <i class="fas fa-chevron-right"></i></a>
                 </div>
