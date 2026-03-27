@@ -9,14 +9,6 @@ export const footerHTML = `
                     </div>
                     <p data-i18n="footer.tagline">Plataforma de gestão com IA. Contrate um time que executa.</p>
                     <div class="social-hover">
-                        <a href="#" class="social-hover__item" data-name="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                            <span class="social-hover__label">LinkedIn</span>
-                        </a>
-                        <a href="#" class="social-hover__item" data-name="Facebook">
-                            <i class="fab fa-facebook"></i>
-                            <span class="social-hover__label">Facebook</span>
-                        </a>
                         <a href="#" class="social-hover__item" data-name="Instagram">
                             <i class="fab fa-instagram"></i>
                             <span class="social-hover__label">Instagram</span>
