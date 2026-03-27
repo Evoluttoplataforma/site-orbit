@@ -173,10 +173,7 @@ export const pageHTML = `
                     </div>
                     <div class="price-v2__anchor"><i class="fas fa-calculator"></i> Equivale a R$ 33/dia - menos que um almoço</div>
                     <ul class="price-v2__features">
-                        <li><i class="fas fa-robot"></i> 3 agentes de IA</li>
                         <li><i class="fas fa-users"></i> Até 30 usuários</li>
-                        <li><i class="fas fa-chart-pie"></i> Dashboards básicos</li>
-                        <li><i class="fas fa-envelope"></i> Suporte por email</li>
                     </ul>
                     <a href="/#contato-form" class="price-v2__cta">Começar agora</a>
                 </div>
@@ -198,11 +195,7 @@ export const pageHTML = `
                     </div>
                     <div class="price-v2__anchor price-v2__anchor--gold"><i class="fas fa-user-tie"></i> Custo de 1 analista Jr. - entrega de um time inteiro</div>
                     <ul class="price-v2__features">
-                        <li><i class="fas fa-robot"></i> <strong>dezenas de agentes de IA</strong></li>
                         <li><i class="fas fa-infinity"></i> Usuários ilimitados</li>
-                        <li><i class="fab fa-whatsapp"></i> Treinamento via WhatsApp</li>
-                        <li><i class="fas fa-headset"></i> Onboarding dedicado</li>
-                        <li><i class="fas fa-brain"></i> Olívia como coordenadora</li>
                     </ul>
                     <a href="/#contato-form" class="price-v2__cta price-v2__cta--gold">Escolher Advanced</a>
                     <div class="price-v2__guarantee"><i class="fas fa-shield-check"></i> Garantia 90 dias ou seu dinheiro de volta</div>
@@ -222,10 +215,7 @@ export const pageHTML = `
                     </div>
                     <div class="price-v2__anchor"><i class="fas fa-chart-line"></i> ROI médio em 30 dias</div>
                     <ul class="price-v2__features">
-                        <li><i class="fas fa-robot"></i> dezenas de agentes + customização</li>
-                        <li><i class="fas fa-plug"></i> API e integrações</li>
-                        <li><i class="fas fa-user-shield"></i> Gerente de sucesso</li>
-                        <li><i class="fas fa-bolt"></i> SLA prioritário</li>
+                        <li><i class="fas fa-infinity"></i> Usuários ilimitados</li>
                     </ul>
                     <a href="/#contato-form" class="price-v2__cta">Escolher Pro</a>
                 </div>
