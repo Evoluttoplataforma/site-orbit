@@ -892,9 +892,12 @@ export const pageHTML = `
     <script>
     (function() {
         function getNextSession() {
+            var startDate = new Date('2026-04-06T16:00:00');
             var now = new Date();
+            // Before launch date: count down to April 6
+            if (now < startDate) return startDate;
+            // After launch: find next Monday or Wednesday at 16h
             var day = now.getDay();
-            // Monday=1, Wednesday=3
             var targets = [1, 3];
             var daysUntil = 7;
             for (var i = 0; i < targets.length; i++) {
