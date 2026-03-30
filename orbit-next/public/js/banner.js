@@ -136,12 +136,11 @@
     // Skip on live page itself and CMS
     if (window.location.pathname.indexOf('/live') === 0) return;
     if (window.location.pathname.indexOf('/acesso') === 0) return;
-    // Check if dismissed this session
-    try { if (sessionStorage.getItem('orbit_live_popup') === '1') return; } catch(e) {}
+    // Check if dismissed on this page load (prevent duplicate)
+    if (window.__livePopupShown) return;
+    window.__livePopupShown = true;
 
     setTimeout(function() {
-      // Double check not dismissed during wait
-      try { if (sessionStorage.getItem('orbit_live_popup') === '1') return; } catch(e) {}
 
       var overlay = document.createElement('div');
       overlay.id = 'livePopupOverlay';
@@ -160,7 +159,6 @@
       img.style.cssText = 'width:100%;display:block;';
 
       function dismiss() {
-        try { sessionStorage.setItem('orbit_live_popup', '1'); } catch(e) {}
         overlay.style.opacity = '0';
         card.style.transform = 'scale(0.9)';
         setTimeout(function() { overlay.remove(); }, 300);
