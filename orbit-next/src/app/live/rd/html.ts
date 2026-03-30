@@ -117,8 +117,8 @@ export const pageHTML = `
                 </div>
                 <div style="background:var(--black-card);border:1px solid var(--gray-200);border-radius:16px;padding:32px;" data-reveal>
                     <div style="width:48px;height:48px;background:rgba(255,186,26,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;"><i class="fas fa-chart-line" style="color:#ffba1a;font-size:20px;"></i></div>
-                    <h3 style="color:#fff;font-size:1.15rem;font-weight:700;margin-bottom:10px;">Profissionais RD Station</h3>
-                    <p style="color:#8B949E;font-size:15px;line-height:1.6;">Voc&ecirc; j&aacute; usa RD para marketing e quer conectar a gera&ccedil;&atilde;o de leads com a gest&atilde;o real da empresa do cliente.</p>
+                    <h3 style="color:#fff;font-size:1.15rem;font-weight:700;margin-bottom:10px;">Representantes da Dire&ccedil;&atilde;o</h3>
+                    <p style="color:#8B949E;font-size:15px;line-height:1.6;">Voc&ecirc; &eacute; RD e quer ferramentas para operar a gest&atilde;o com mais efici&ecirc;ncia, automatizando processos e indicadores.</p>
                 </div>
             </div>
         </div>
