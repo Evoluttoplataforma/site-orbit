@@ -203,7 +203,7 @@ export const oliviaHTML = `
                 <!-- Bottom CTA -->
                 <div style="text-align:center;margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.06);" data-reveal>
                     <p style="color:rgba(255,255,255,0.5);font-size:1.1rem;margin-bottom:20px;">12 especialistas. 1 coordenadora. <strong style="color:#fff;">Custo de 1 funcionário.</strong></p>
-                    <a href="#contato" class="btn btn-primary btn-lg">Quero meu time de IA</a>
+                    <a href="/#contato-form" class="btn btn-primary btn-lg">Quero meu time de IA</a>
                 </div>
 
                 <script>

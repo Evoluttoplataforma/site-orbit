@@ -3375,7 +3375,7 @@ export const pageHTML = `
     <!-- ═══════════════════════════════════════════════════════
          SECTION 12 - CTA FINAL
          ═══════════════════════════════════════════════════════ -->
-    <section class="lp-cta-final" id="contato">
+    <section class="lp-cta-final" id="contato-form">
         <div class="lp-cta-final__glow"></div>
         <div class="container">
             <h2 data-reveal>Pronto para montar seu <span class="text-gold">time de IA</span>?</h2>

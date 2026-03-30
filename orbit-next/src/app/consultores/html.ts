@@ -2924,7 +2924,7 @@ export const pageHTML = `
 
 
     <!-- ═══ 9. CTA FINAL ═══ -->
-    <section class="lp-cta-final lp-section--dark" id="cta-final">
+    <section class="lp-cta-final lp-section--dark" id="contato-form">
         <div class="lp-container">
             <div data-reveal>
                 <h2>Pronto para ter receita recorrente?</h2>
