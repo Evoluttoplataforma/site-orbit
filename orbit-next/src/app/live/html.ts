@@ -105,32 +105,50 @@ export const pageHTML = `
         </div>
     </section>
 
-    <!-- ═══ O QUE VOCE VAI APRENDER ═══ -->
-    <section style="padding:100px 0;background:#0D1117;">
+    <!-- ═══ OLIVIA + AGENTES ═══ -->
+    <section style="padding:100px 0;background:#0D1117;position:relative;overflow:hidden;">
+        <div style="position:absolute;width:500px;height:500px;top:-150px;right:-100px;background:radial-gradient(circle,rgba(255,186,26,0.06) 0%,transparent 70%);border-radius:50%;pointer-events:none;"></div>
         <div class="container" style="max-width:1000px;">
-            <h2 style="font-size:clamp(1.5rem,3vw,2.25rem);font-weight:800;color:#fff;text-align:center;margin-bottom:16px;" data-reveal>
-                O que voce vai aprender
-            </h2>
-            <p style="color:#8B949E;text-align:center;max-width:600px;margin:0 auto 56px;font-size:1.1rem;" data-reveal>
-                Em menos de 1 hora, voce vai entender como a IA pode resolver gargalos reais de gestao e processos na sua empresa.
-            </p>
+            <div style="text-align:center;margin-bottom:56px;" data-reveal>
+                <span style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,186,26,0.1);border:1px solid rgba(255,186,26,0.25);border-radius:100px;padding:6px 18px;font-size:13px;color:#ffba1a;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">
+                    <i class="fas fa-brain"></i> Veja ao vivo
+                </span>
+                <h2 style="font-size:clamp(1.5rem,3vw,2.25rem);font-weight:800;color:#fff;margin-bottom:16px;">
+                    Conheca a <span style="color:#ffba1a;">Olivia</span> e seu time de agentes
+                </h2>
+                <p style="color:#8B949E;max-width:650px;margin:0 auto;font-size:1.1rem;line-height:1.6;">
+                    Na live, voce vai ver a Olivia — nossa coordenadora de IA — orquestrando dezenas de agentes especializados em tempo real. Cada um com cargo, personalidade e funcao na sua empresa.
+                </p>
+            </div>
 
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
                 <div style="background:var(--black-card);border:1px solid var(--gray-200);border-radius:16px;padding:32px;" data-reveal>
-                    <div class="roda__card-icon" style="margin:0 0 20px;"><i class="fas fa-gears"></i></div>
-                    <h3 style="color:#fff;font-size:1.15rem;font-weight:700;margin-bottom:10px;">Problemas Reais de Gestao</h3>
-                    <p style="color:#8B949E;font-size:15px;line-height:1.6;">Os gargalos mais comuns em processos, pessoas e decisoes — e como a IA resolve cada um deles.</p>
+                    <div style="width:48px;height:48px;background:rgba(255,186,26,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;"><i class="fas fa-brain" style="color:#ffba1a;font-size:20px;"></i></div>
+                    <h3 style="color:#fff;font-size:1.15rem;font-weight:700;margin-bottom:10px;">Olivia em Acao</h3>
+                    <p style="color:#8B949E;font-size:15px;line-height:1.6;">Veja como a Olivia coordena os agentes, prioriza acoes e traduz dados em decisoes — tudo automaticamente.</p>
                 </div>
                 <div style="background:var(--black-card);border:1px solid var(--gray-200);border-radius:16px;padding:32px;" data-reveal>
-                    <div class="roda__card-icon" style="margin:0 0 20px;"><i class="fas fa-robot"></i></div>
-                    <h3 style="color:#fff;font-size:1.15rem;font-weight:700;margin-bottom:10px;">IA Aplicada a Processos</h3>
-                    <p style="color:#8B949E;font-size:15px;line-height:1.6;">Como agentes de IA podem operar a gestao da sua empresa de forma continua — nao apenas gerar textos.</p>
+                    <div style="width:48px;height:48px;background:rgba(255,186,26,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;"><i class="fas fa-robot" style="color:#ffba1a;font-size:20px;"></i></div>
+                    <h3 style="color:#fff;font-size:1.15rem;font-weight:700;margin-bottom:10px;">Dezenas de Agentes</h3>
+                    <p style="color:#8B949E;font-size:15px;line-height:1.6;">Estrategista, Processos, Pessoas, Indicadores, Riscos, Vendas — cada agente tem uma funcao real. Mostramos todos.</p>
                 </div>
                 <div style="background:var(--black-card);border:1px solid var(--gray-200);border-radius:16px;padding:32px;" data-reveal>
-                    <div class="roda__card-icon" style="margin:0 0 20px;"><i class="fas fa-play"></i></div>
-                    <h3 style="color:#fff;font-size:1.15rem;font-weight:700;margin-bottom:10px;">Demonstracao ao Vivo</h3>
-                    <p style="color:#8B949E;font-size:15px;line-height:1.6;">Veja na pratica como funciona e tire suas duvidas em tempo real com Igor e Daniela.</p>
+                    <div style="width:48px;height:48px;background:rgba(255,186,26,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;"><i class="fas fa-play" style="color:#ffba1a;font-size:20px;"></i></div>
+                    <h3 style="color:#fff;font-size:1.15rem;font-weight:700;margin-bottom:10px;">Demonstracao Real</h3>
+                    <p style="color:#8B949E;font-size:15px;line-height:1.6;">Nao e slide. Abrimos a plataforma ao vivo, mostramos os agentes operando e respondemos suas duvidas.</p>
                 </div>
+            </div>
+
+            <!-- Agent pills -->
+            <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:48px;" data-reveal>
+                <span style="background:rgba(255,186,26,0.08);border:1px solid rgba(255,186,26,0.2);border-radius:100px;padding:8px 18px;color:#C9D1D9;font-size:13px;font-weight:500;"><i class="fas fa-chess-king" style="color:#ffba1a;margin-right:6px;"></i>Estrategista</span>
+                <span style="background:rgba(255,186,26,0.08);border:1px solid rgba(255,186,26,0.2);border-radius:100px;padding:8px 18px;color:#C9D1D9;font-size:13px;font-weight:500;"><i class="fas fa-sitemap" style="color:#ffba1a;margin-right:6px;"></i>Processos</span>
+                <span style="background:rgba(255,186,26,0.08);border:1px solid rgba(255,186,26,0.2);border-radius:100px;padding:8px 18px;color:#C9D1D9;font-size:13px;font-weight:500;"><i class="fas fa-users" style="color:#ffba1a;margin-right:6px;"></i>Pessoas</span>
+                <span style="background:rgba(255,186,26,0.08);border:1px solid rgba(255,186,26,0.2);border-radius:100px;padding:8px 18px;color:#C9D1D9;font-size:13px;font-weight:500;"><i class="fas fa-chart-line" style="color:#ffba1a;margin-right:6px;"></i>Indicadores</span>
+                <span style="background:rgba(255,186,26,0.08);border:1px solid rgba(255,186,26,0.2);border-radius:100px;padding:8px 18px;color:#C9D1D9;font-size:13px;font-weight:500;"><i class="fas fa-shield-halved" style="color:#ffba1a;margin-right:6px;"></i>Riscos</span>
+                <span style="background:rgba(255,186,26,0.08);border:1px solid rgba(255,186,26,0.2);border-radius:100px;padding:8px 18px;color:#C9D1D9;font-size:13px;font-weight:500;"><i class="fas fa-handshake" style="color:#ffba1a;margin-right:6px;"></i>Vendas</span>
+                <span style="background:rgba(255,186,26,0.08);border:1px solid rgba(255,186,26,0.2);border-radius:100px;padding:8px 18px;color:#C9D1D9;font-size:13px;font-weight:500;"><i class="fas fa-graduation-cap" style="color:#ffba1a;margin-right:6px;"></i>Treinamento</span>
+                <span style="background:rgba(255,186,26,0.08);border:1px solid rgba(255,186,26,0.2);border-radius:100px;padding:8px 18px;color:#C9D1D9;font-size:13px;font-weight:500;"><i class="fas fa-video" style="color:#ffba1a;margin-right:6px;"></i>Reunioes</span>
             </div>
         </div>
     </section>
@@ -144,11 +162,11 @@ export const pageHTML = `
             <div style="display:flex;flex-direction:column;gap:16px;margin-top:40px;text-align:left;max-width:600px;margin-left:auto;margin-right:auto;">
                 <div style="display:flex;align-items:flex-start;gap:14px;" data-reveal>
                     <i class="fa-solid fa-check-circle" style="color:#ffba1a;font-size:20px;margin-top:3px;flex-shrink:0;"></i>
-                    <span style="color:#C9D1D9;font-size:17px;line-height:1.6;">E empresario ou gestor de uma empresa de <strong style="color:#fff;">R$ 5M a R$ 100M/ano</strong></span>
+                    <span style="color:#C9D1D9;font-size:17px;line-height:1.6;">E empresario ou gestor e quer ver <strong style="color:#fff;">IA operando gestao de verdade</strong></span>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:14px;" data-reveal>
                     <i class="fa-solid fa-check-circle" style="color:#ffba1a;font-size:20px;margin-top:3px;flex-shrink:0;"></i>
-                    <span style="color:#C9D1D9;font-size:17px;line-height:1.6;">Quer entender como IA pode <strong style="color:#fff;">operar a gestao</strong> (e nao so gerar texto)</span>
+                    <span style="color:#C9D1D9;font-size:17px;line-height:1.6;">Quer conhecer a <strong style="color:#ffba1a;">Olivia</strong> e os agentes antes de contratar</span>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:14px;" data-reveal>
                     <i class="fa-solid fa-check-circle" style="color:#ffba1a;font-size:20px;margin-top:3px;flex-shrink:0;"></i>
@@ -156,7 +174,7 @@ export const pageHTML = `
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:14px;" data-reveal>
                     <i class="fa-solid fa-check-circle" style="color:#ffba1a;font-size:20px;margin-top:3px;flex-shrink:0;"></i>
-                    <span style="color:#C9D1D9;font-size:17px;line-height:1.6;">Quer ver como funciona <strong style="color:#fff;">na pratica</strong> antes de investir</span>
+                    <span style="color:#C9D1D9;font-size:17px;line-height:1.6;">Quer tirar duvidas <strong style="color:#fff;">ao vivo</strong> com quem criou a plataforma</span>
                 </div>
             </div>
         </div>
@@ -299,6 +317,7 @@ export const pageHTML = `
                 source: 'live-semanal'
             };
 
+            // Save lead to Supabase
             fetch(SUPABASE_URL + '/rest/v1/live_orbit_leads', {
                 method: 'POST',
                 headers: {
@@ -309,11 +328,14 @@ export const pageHTML = `
                 },
                 body: JSON.stringify(data)
             }).then(function(res) {
-                if (res.ok) {
-                    window.location.href = '/live/obrigado';
-                } else {
-                    throw new Error('Erro ao salvar');
-                }
+                if (!res.ok) throw new Error('Erro ao salvar');
+                // Send confirmation email via Edge Function (fire and forget)
+                fetch(SUPABASE_URL + '/functions/v1/send-live-confirmation', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nome: data.nome, email: data.email })
+                }).catch(function() {});
+                window.location.href = '/live/obrigado';
             }).catch(function(err) {
                 console.error('Erro:', err);
                 btn.disabled = false;
