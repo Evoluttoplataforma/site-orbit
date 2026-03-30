@@ -23,12 +23,12 @@ export const pageHTML = `
 
             <!-- Title -->
             <h1 style="font-size:clamp(1.8rem,4.5vw,3.2rem);font-weight:800;color:#fff;line-height:1.15;margin-bottom:20px;" data-reveal>
-                Como transformar sua <span style="color:#ffba1a;">consultoria</span> com gest&atilde;o operada por IA
+                Como transformar a <span style="color:#ffba1a;">gest&atilde;o da sua empresa</span> com IA
             </h1>
 
             <!-- Subtitle -->
             <p style="font-size:clamp(1rem,2.5vw,1.3rem);color:#8B949E;max-width:700px;margin:0 auto 16px;line-height:1.6;" data-reveal>
-                Voc&ecirc; j&aacute; entrega resultados para seus clientes. Agora imagine fazer isso com <strong style="color:#ffba1a;">dezenas de agentes de IA</strong> trabalhando 24/7 ao seu lado &mdash; mapeando processos, monitorando indicadores e gerando relat&oacute;rios automaticamente.
+                Voc&ecirc; &eacute; Representante da Dire&ccedil;&atilde;o e precisa garantir que processos, indicadores e conformidade estejam em dia. Agora imagine ter <strong style="color:#ffba1a;">dezenas de agentes de IA</strong> trabalhando 24/7 ao seu lado &mdash; mapeando, monitorando e gerando relat&oacute;rios automaticamente.
             </p>
 
             <!-- Apresentadora -->
@@ -107,18 +107,18 @@ export const pageHTML = `
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
                 <div style="background:var(--black-card);border:1px solid var(--gray-200);border-radius:16px;padding:32px;" data-reveal>
                     <div style="width:48px;height:48px;background:rgba(255,186,26,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;"><i class="fas fa-user-tie" style="color:#ffba1a;font-size:20px;"></i></div>
-                    <h3 style="color:#fff;font-size:1.15rem;font-weight:700;margin-bottom:10px;">Consultores de Gest&atilde;o</h3>
-                    <p style="color:#8B949E;font-size:15px;line-height:1.6;">Voc&ecirc; entrega projetos de processos, qualidade ou estrat&eacute;gia e quer escalar sem aumentar equipe.</p>
+                    <h3 style="color:#fff;font-size:1.15rem;font-weight:700;margin-bottom:10px;">RDs (Representantes da Dire&ccedil;&atilde;o)</h3>
+                    <p style="color:#8B949E;font-size:15px;line-height:1.6;">Voc&ecirc; &eacute; respons&aacute;vel por garantir que processos, indicadores e conformidade estejam funcionando na empresa.</p>
                 </div>
                 <div style="background:var(--black-card);border:1px solid var(--gray-200);border-radius:16px;padding:32px;" data-reveal>
                     <div style="width:48px;height:48px;background:rgba(255,186,26,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;"><i class="fas fa-building" style="color:#ffba1a;font-size:20px;"></i></div>
-                    <h3 style="color:#fff;font-size:1.15rem;font-weight:700;margin-bottom:10px;">Donos de Consultoria</h3>
-                    <p style="color:#8B949E;font-size:15px;line-height:1.6;">Quer oferecer um servi&ccedil;o recorrente para seus clientes com IA operando a gest&atilde;o continuamente.</p>
+                    <h3 style="color:#fff;font-size:1.15rem;font-weight:700;margin-bottom:10px;">Gestores e Diretores</h3>
+                    <p style="color:#8B949E;font-size:15px;line-height:1.6;">Precisa de mais controle sobre a opera&ccedil;&atilde;o sem depender de planilhas e cobran&ccedil;as manuais.</p>
                 </div>
                 <div style="background:var(--black-card);border:1px solid var(--gray-200);border-radius:16px;padding:32px;" data-reveal>
                     <div style="width:48px;height:48px;background:rgba(255,186,26,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;"><i class="fas fa-chart-line" style="color:#ffba1a;font-size:20px;"></i></div>
-                    <h3 style="color:#fff;font-size:1.15rem;font-weight:700;margin-bottom:10px;">Representantes da Dire&ccedil;&atilde;o</h3>
-                    <p style="color:#8B949E;font-size:15px;line-height:1.6;">Voc&ecirc; &eacute; RD e quer ferramentas para operar a gest&atilde;o com mais efici&ecirc;ncia, automatizando processos e indicadores.</p>
+                    <h3 style="color:#fff;font-size:1.15rem;font-weight:700;margin-bottom:10px;">Respons&aacute;veis pela Qualidade</h3>
+                    <p style="color:#8B949E;font-size:15px;line-height:1.6;">Quer automatizar auditorias, manter documenta&ccedil;&atilde;o em dia e ter indicadores de conformidade em tempo real.</p>
                 </div>
             </div>
         </div>
@@ -148,8 +148,8 @@ export const pageHTML = `
                 <div style="display:flex;align-items:flex-start;gap:16px;background:rgba(255,186,26,0.04);border:1px solid rgba(255,186,26,0.1);border-radius:14px;padding:20px 24px;" data-reveal>
                     <div style="width:40px;height:40px;background:rgba(255,186,26,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="fas fa-handshake" style="color:#ffba1a;"></i></div>
                     <div>
-                        <strong style="color:#fff;font-size:16px;">Modelo de receita recorrente</strong>
-                        <p style="color:#8B949E;font-size:14px;margin:6px 0 0;line-height:1.5;">Como consultores est&atilde;o gerando renda passiva oferecendo Orbit como servi&ccedil;o cont&iacute;nuo aos clientes.</p>
+                        <strong style="color:#fff;font-size:16px;">Gest&atilde;o cont&iacute;nua sem depender de pessoas</strong>
+                        <p style="color:#8B949E;font-size:14px;margin:6px 0 0;line-height:1.5;">Como empresas est&atilde;o mantendo a gest&atilde;o operando 24/7 com agentes de IA, sem depender de cobran&ccedil;as manuais.</p>
                     </div>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:16px;background:rgba(255,186,26,0.04);border:1px solid rgba(255,186,26,0.1);border-radius:14px;padding:20px 24px;" data-reveal>
@@ -866,8 +866,8 @@ export const pageHTML = `
                         <input type="tel" id="rd-telefone" name="telefone" placeholder="(00) 00000-0000" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
                     </div>
                     <div class="form-group">
-                        <label for="rd-empresa" style="color:#C9D1D9;">Nome da consultoria (opcional)</label>
-                        <input type="text" id="rd-empresa" name="empresa" placeholder="Sua empresa ou consultoria" style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
+                        <label for="rd-empresa" style="color:#C9D1D9;">Nome da empresa (opcional)</label>
+                        <input type="text" id="rd-empresa" name="empresa" placeholder="Sua empresa" style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-submit hero-cta-glow" style="cursor:pointer;border:none;">
                         QUERO PARTICIPAR
