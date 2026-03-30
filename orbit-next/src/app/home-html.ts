@@ -25,7 +25,7 @@ export const pageHTML = `
                 </h1>
                 <p class="hero-zoom__subtitle" data-i18n="hero.subtitle">Gestão Operada por IA: Dezenas de agentes especializados constroem e operam a gestão da sua empresa trabalhando 24/7, mesmo quando o projeto acaba.</p>
                 <div class="hero-zoom__ctas">
-                    <a href="#contato-form" class="btn btn-primary btn-lg hero-cta-glow">QUERO CONHECER O TIME DE IA</a>
+                    <a onclick="document.getElementById('contato-form').scrollIntoView({behavior:'smooth'})" class="btn btn-primary btn-lg hero-cta-glow" style="cursor:pointer;">QUERO CONHECER O TIME DE IA</a>
                     <a href="#agentes" class="btn btn-ghost btn-lg">Ver os agentes <i class="fas fa-arrow-down"></i></a>
                 </div>
                 <p class="hero-zoom__note">⏱️ 2 min • 100% gratuito • Sem compromisso</p>
