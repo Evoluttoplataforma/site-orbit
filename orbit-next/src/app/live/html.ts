@@ -28,7 +28,7 @@ export const pageHTML = `
 
             <!-- Subtitle -->
             <p style="font-size:clamp(1rem,2.5vw,1.35rem);color:#8B949E;max-width:700px;margin:0 auto 16px;line-height:1.6;" data-reveal>
-                Como resolver problemas de <strong style="color:#ffba1a;">gestao e processos com IA</strong>. Uma conversa pratica sobre o que ja e possivel fazer hoje — e como aplicar na sua empresa.
+                Como resolver problemas de <strong style="color:#ffba1a;">gest&atilde;o e processos com IA</strong>. Uma conversa pr&aacute;tica sobre o que j&aacute; &eacute; poss&iacute;vel fazer hoje &mdash; e como aplicar na sua empresa.
             </p>
 
             <!-- Apresentadores -->
@@ -57,7 +57,7 @@ export const pageHTML = `
                 </div>
                 <div style="display:flex;align-items:center;gap:10px;color:#C9D1D9;">
                     <i class="fa-solid fa-clock" style="color:#ffba1a;font-size:18px;"></i>
-                    <span style="font-size:18px;font-weight:600;">13h (horario de Brasilia)</span>
+                    <span style="font-size:18px;font-weight:600;">13h (hor&aacute;rio de Bras&iacute;lia)</span>
                 </div>
                 <div style="display:flex;align-items:center;gap:10px;color:#C9D1D9;">
                     <i class="fa-brands fa-youtube" style="color:#ff0000;font-size:20px;"></i>
@@ -781,7 +781,7 @@ export const pageHTML = `
     <section style="padding:100px 0;background:var(--black-soft);">
         <div class="container" style="max-width:800px;text-align:center;">
             <h2 style="font-size:clamp(1.5rem,3vw,2.25rem);font-weight:800;color:#fff;margin-bottom:16px;" data-reveal>
-                Essa live e para voce que...
+                Essa live &eacute; para voc&ecirc; que...
             </h2>
             <div style="display:flex;flex-direction:column;gap:16px;margin-top:40px;text-align:left;max-width:600px;margin-left:auto;margin-right:auto;">
                 <div style="display:flex;align-items:flex-start;gap:14px;" data-reveal>
@@ -794,7 +794,7 @@ export const pageHTML = `
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:14px;" data-reveal>
                     <i class="fa-solid fa-check-circle" style="color:#ffba1a;font-size:20px;margin-top:3px;flex-shrink:0;"></i>
-                    <span style="color:#C9D1D9;font-size:17px;line-height:1.6;">Busca uma <strong style="color:#fff;">solucao completa</strong>, nao so mais uma ferramenta</span>
+                    <span style="color:#C9D1D9;font-size:17px;line-height:1.6;">Busca uma <strong style="color:#fff;">solu&ccedil;&atilde;o completa</strong>, n&atilde;o s&oacute; mais uma ferramenta</span>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:14px;" data-reveal>
                     <i class="fa-solid fa-check-circle" style="color:#ffba1a;font-size:20px;margin-top:3px;flex-shrink:0;"></i>
@@ -845,7 +845,7 @@ export const pageHTML = `
                     <div style="width:64px;height:64px;background:rgba(63,185,80,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
                         <i class="fa-solid fa-check" style="color:#3FB950;font-size:28px;"></i>
                     </div>
-                    <h3 style="color:#fff;font-size:1.5rem;font-weight:700;margin-bottom:12px;">Inscricao confirmada!</h3>
+                    <h3 style="color:#fff;font-size:1.5rem;font-weight:700;margin-bottom:12px;">Inscri&ccedil;&atilde;o confirmada!</h3>
                     <p style="color:var(--gray-500);font-size:16px;">Voce recebera o link da live no seu e-mail e WhatsApp antes do inicio.</p>
                 </div>
             </div>
@@ -871,7 +871,7 @@ export const pageHTML = `
         }
 
         function formatDateBR(d) {
-            var months = ['Janeiro','Fevereiro','Marco','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+            var months = ['Janeiro','Fevereiro','Mar\u00e7o','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
             return d.getDate() + ' de ' + months[d.getMonth()] + ', ' + d.getFullYear();
         }
 
