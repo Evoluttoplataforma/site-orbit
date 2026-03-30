@@ -106,10 +106,10 @@ export const pageHTML = `
     </section>
 
     <!-- ═══ OLIVIA + AGENTES (Orbit Hub) ═══ -->
-    <section style="padding:100px 0;background:#0D1117;">
+    <section style="padding:100px 0;background:#0D1117;overflow:hidden;">
         <div class="container">
             <!-- ═══ ORBITAL: dezenas de agentes ao redor da Olívia ═══ -->
-            <div style="margin-top:80px;" id="agentes">
+            <div style="margin-top:0;" id="agentes">
                 <!-- Section header -->
                 <div style="text-align:center;margin-bottom:24px;" data-reveal>
                     <span class="section-badge section-badge--gold">dezenas de agentes especializados</span>
@@ -973,6 +973,8 @@ export const pageHTML = `
     </script>
 
     <style>
+    body { overflow-x: hidden !important; }
+
     [data-reveal], [data-reveal-stagger] {
         opacity: 1 !important;
         transform: none !important;
