@@ -98,8 +98,28 @@ export const headerHTML = `
                 <li>
                     <a href="/live" style="position:relative;">
                         <span style="display:inline-block;width:8px;height:8px;background:#ff4444;border-radius:50%;margin-right:6px;animation:livePulse 1.5s ease-in-out infinite;vertical-align:middle;"></span>
-                        <span>Eventos</span>
+                        <span>Eventos</span> <i class="fas fa-chevron-down dropdown-arrow"></i>
                     </a>
+                    <div class="dropdown dropdown--sm">
+                        <div class="dropdown__links">
+                            <a href="/live">
+                                <div class="dd-icon"><i class="fas fa-play-circle" style="color:#ff0000;"></i></div>
+                                <div class="dd-text"><span>Live Semanal</span><small>Toda terca 13h com Igor</small></div>
+                            </a>
+                            <a href="https://demonstracao.orbitgestao.com.br/salas/tira-duvidas" target="_blank">
+                                <div class="dd-icon"><i class="fas fa-comments" style="color:#ffba1a;"></i></div>
+                                <div class="dd-text"><span>Tira Duvidas</span><small>Ter 11h (empresas) &bull; Qui 11h (consultores)</small></div>
+                            </a>
+                            <a href="https://demonstracao.orbitgestao.com.br/salas/onboarding" target="_blank">
+                                <div class="dd-icon"><i class="fas fa-graduation-cap" style="color:#3FB950;"></i></div>
+                                <div class="dd-text"><span>Onboarding</span><small>Qua 9h/17h &bull; Sex 14h</small></div>
+                            </a>
+                            <a href="https://templum.com.br/treinamento-fase-a-fase" target="_blank">
+                                <div class="dd-icon"><i class="fas fa-chalkboard-teacher" style="color:#8B5CF6;"></i></div>
+                                <div class="dd-text"><span>Treinamento Consultores</span><small>Toda semana (Templum)</small></div>
+                            </a>
+                        </div>
+                    </div>
                 </li>
                 <li>
                     <a href="/sobre"><span data-i18n="nav.company">Empresa</span></a>
@@ -161,10 +181,14 @@ export const headerHTML = `
             <div class="mobile-menu__label" data-i18n="mobile.content">Conteúdo</div>
             <a href="/blog"><i class="fas fa-newspaper"></i> Blog</a>
             <a href="/historias"><i class="fas fa-star"></i> Histórias de Clientes</a>
-            <a href="/live" style="color:#ffba1a !important;font-weight:700;">
+            <div class="mobile-menu__label" style="color:#ffba1a;">
                 <span style="display:inline-block;width:8px;height:8px;background:#ff4444;border-radius:50%;margin-right:6px;animation:livePulse 1.5s ease-in-out infinite;"></span>
-                Live Semanal
-            </a>
+                Eventos
+            </div>
+            <a href="/live"><i class="fas fa-play-circle" style="color:#ff0000;"></i> Live Semanal (Ter 13h)</a>
+            <a href="https://demonstracao.orbitgestao.com.br/salas/tira-duvidas" target="_blank"><i class="fas fa-comments" style="color:#ffba1a;"></i> Tira Duvidas</a>
+            <a href="https://demonstracao.orbitgestao.com.br/salas/onboarding" target="_blank"><i class="fas fa-graduation-cap" style="color:#3FB950;"></i> Onboarding</a>
+            <a href="https://templum.com.br/treinamento-fase-a-fase" target="_blank"><i class="fas fa-chalkboard-teacher" style="color:#8B5CF6;"></i> Treinamento</a>
             <div class="mobile-menu__label" data-i18n="mobile.company">Empresa</div>
             <a href="/sobre"><i class="fas fa-building"></i> Sobre Nós</a>
         </div>
