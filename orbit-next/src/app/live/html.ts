@@ -921,6 +921,9 @@ export const pageHTML = `
     <!-- Form submit handler -->
     <script>
     (function() {
+        if (window.__liveFormInit) return;
+        window.__liveFormInit = true;
+
         var SUPABASE_URL = 'https://tnpzoklepkvktbqouctf.supabase.co';
         var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRucHpva2xlcGt2a3RicW91Y3RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2MjAxNjcsImV4cCI6MjA4NzE5NjE2N30.hXrOhbIm9DnxaItT1e9g6B6d9mhAmeoLKJ2DuHlABFU';
 
