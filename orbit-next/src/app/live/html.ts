@@ -32,20 +32,11 @@ export const pageHTML = `
             </p>
 
             <!-- Apresentadores -->
-            <div style="display:flex;align-items:center;justify-content:center;gap:32px;flex-wrap:wrap;margin:24px 0 8px;" data-reveal>
-                <div style="display:flex;align-items:center;gap:12px;">
-                    <img src="/images/diretor-igor.jpg" alt="Igor Furniel" width="56" height="56" style="width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,186,26,0.4);">
-                    <div style="text-align:left;">
-                        <span style="color:#fff;font-weight:700;font-size:16px;display:block;line-height:1.3;">Igor Furniel</span>
-                        <span style="color:#8B949E;font-size:13px;">CEO Templum & Evolutto</span>
-                    </div>
-                </div>
-                <div style="display:flex;align-items:center;gap:12px;">
-                    <img src="/images/diretor-dani.jpg" alt="Daniela Albuquerque" width="56" height="56" style="width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,186,26,0.4);">
-                    <div style="text-align:left;">
-                        <span style="color:#fff;font-weight:700;font-size:16px;display:block;line-height:1.3;">Daniela Albuquerque</span>
-                        <span style="color:#8B949E;font-size:13px;">Especialista em Processos e Qualidade</span>
-                    </div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin:24px 0 8px;" data-reveal>
+                <img src="/images/diretor-igor.jpg" alt="Igor Furniel" width="64" height="64" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,186,26,0.4);">
+                <div style="text-align:left;">
+                    <span style="color:#fff;font-weight:700;font-size:17px;display:block;line-height:1.3;">Igor Furniel</span>
+                    <span style="color:#8B949E;font-size:14px;">CEO Templum & Evolutto</span>
                 </div>
             </div>
 
