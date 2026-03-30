@@ -57,27 +57,11 @@ export const pageHTML = `
                 </div>
             </div>
 
-            <!-- Countdown mini -->
+            <!-- Info -->
             <div class="fade-in fade-in-delay-4" style="margin-bottom:40px;">
-                <p style="color:#8B949E;font-size:14px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;">A live começa em</p>
-                <div id="miniCountdown" style="display:flex;justify-content:center;gap:12px;">
-                    <div style="background:rgba(255,186,26,0.08);border:1px solid rgba(255,186,26,0.2);border-radius:12px;padding:14px 18px;min-width:72px;text-align:center;">
-                        <span id="cDays" style="font-size:1.8rem;font-weight:800;color:#ffba1a;display:block;line-height:1;">00</span>
-                        <span style="font-size:11px;color:#8B949E;text-transform:uppercase;letter-spacing:1px;">Dias</span>
-                    </div>
-                    <div style="background:rgba(255,186,26,0.08);border:1px solid rgba(255,186,26,0.2);border-radius:12px;padding:14px 18px;min-width:72px;text-align:center;">
-                        <span id="cHours" style="font-size:1.8rem;font-weight:800;color:#ffba1a;display:block;line-height:1;">00</span>
-                        <span style="font-size:11px;color:#8B949E;text-transform:uppercase;letter-spacing:1px;">Horas</span>
-                    </div>
-                    <div style="background:rgba(255,186,26,0.08);border:1px solid rgba(255,186,26,0.2);border-radius:12px;padding:14px 18px;min-width:72px;text-align:center;">
-                        <span id="cMin" style="font-size:1.8rem;font-weight:800;color:#ffba1a;display:block;line-height:1;">00</span>
-                        <span style="font-size:11px;color:#8B949E;text-transform:uppercase;letter-spacing:1px;">Min</span>
-                    </div>
-                    <div style="background:rgba(255,186,26,0.08);border:1px solid rgba(255,186,26,0.2);border-radius:12px;padding:14px 18px;min-width:72px;text-align:center;">
-                        <span id="cSec" style="font-size:1.8rem;font-weight:800;color:#ffba1a;display:block;line-height:1;">00</span>
-                        <span style="font-size:11px;color:#8B949E;text-transform:uppercase;letter-spacing:1px;">Seg</span>
-                    </div>
-                </div>
+                <p style="color:#ffba1a;font-size:16px;font-weight:700;">
+                    <i class="fa-solid fa-calendar-check" style="margin-right:8px;"></i>Toda terca-feira as 13h no YouTube
+                </p>
             </div>
 
             <!-- Back link -->
@@ -89,23 +73,6 @@ export const pageHTML = `
 
     <!-- ═══ SCRIPTS ═══ -->
 
-    <!-- Countdown -->
-    <script>
-    (function() {
-        var target = new Date('2026-03-24T13:00:00-03:00').getTime();
-        function tick() {
-            var diff = target - Date.now();
-            if (diff <= 0) { document.getElementById('miniCountdown').innerHTML = '<p style="color:#3FB950;font-size:1.2rem;font-weight:700;"><i class="fa-solid fa-circle" style="font-size:10px;animation:livePulse 1.5s ease-in-out infinite;margin-right:8px;"></i>A live está acontecendo agora!</p>'; return; }
-            var d = Math.floor(diff/864e5), h = Math.floor(diff%864e5/36e5), m = Math.floor(diff%36e5/6e4), s = Math.floor(diff%6e4/1e3);
-            var p = function(n){ return n.toString().padStart(2,'0'); };
-            document.getElementById('cDays').textContent = p(d);
-            document.getElementById('cHours').textContent = p(h);
-            document.getElementById('cMin').textContent = p(m);
-            document.getElementById('cSec').textContent = p(s);
-        }
-        tick(); setInterval(tick, 1000);
-    })();
-    </script>
 
     <!-- Confetti -->
     <script>
