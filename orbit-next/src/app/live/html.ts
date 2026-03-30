@@ -776,10 +776,7 @@ export const pageHTML = `
         </div>
     </section>
 
-        </div>
-    </section>
-
-        <!-- ═══ QUEM DEVE PARTICIPAR ═══ -->
+    <!-- ═══ QUEM DEVE PARTICIPAR ═══ -->
     <section style="padding:100px 0;background:var(--black-soft);">
         <div class="container" style="max-width:800px;text-align:center;">
             <h2 style="font-size:clamp(1.5rem,3vw,2.25rem);font-weight:800;color:#fff;margin-bottom:16px;" data-reveal>
