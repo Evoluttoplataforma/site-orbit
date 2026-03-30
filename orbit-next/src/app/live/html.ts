@@ -124,7 +124,7 @@ export const pageHTML = `
             <div style="text-align:center;margin-bottom:48px;" data-reveal>
                 <div style="width:120px;height:120px;margin:0 auto 16px;position:relative;">
                     <div style="position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(255,186,26,0.3);animation:livePulse 3s ease-in-out infinite;"></div>
-                    <img src="/images/olivia-orbit.png" alt="Ol&iacute;via" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,186,26,0.5);">
+                    <img src="/images/olivia.png" alt="Olivia" style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:center 20%;border:3px solid rgba(255,186,26,0.5);">
                 </div>
                 <div style="color:#ffba1a;font-weight:800;font-size:18px;">OL&Iacute;VIA</div>
                 <div style="color:#8B949E;font-size:14px;">Coordenadora Geral dos Agentes</div>
