@@ -23,7 +23,7 @@ export const pageHTML = `
 
             <!-- Title -->
             <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:800;color:#fff;line-height:1.15;margin-bottom:20px;" data-reveal>
-                A Nova Era da Gestao
+                A Nova Era da Gest&atilde;o com Time de IA
             </h1>
 
             <!-- Subtitle -->
