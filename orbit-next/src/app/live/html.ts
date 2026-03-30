@@ -772,27 +772,6 @@ export const pageHTML = `
                     .orbit-hub__node-icon i { font-size: 12px; }
                     .orbit-hub__node-label { font-size: 9px; }
                 }
-            /* Override orbit-hub sizing for live page */
-            .orbit-hub {
-                max-width: 760px !important;
-                height: 760px !important;
-            }
-            @media (max-width: 900px) {
-                .orbit-hub {
-                    max-width: 100% !important;
-                    height: 600px !important;
-                }
-            }
-            @media (max-width: 600px) {
-                .orbit-hub {
-                    height: 500px !important;
-                }
-            }
-            @media (max-width: 420px) {
-                .orbit-hub {
-                    height: 420px !important;
-                }
-            }
             </style>
         </div>
     </section>
