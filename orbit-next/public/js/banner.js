@@ -130,4 +130,64 @@
   } else {
     init();
   }
+
+  // ═══ LIVE POPUP — appears after 3s on all pages ═══
+  function showLivePopup() {
+    // Skip on live page itself and CMS
+    if (window.location.pathname.indexOf('/live') === 0) return;
+    if (window.location.pathname.indexOf('/acesso') === 0) return;
+    // Check if dismissed this session
+    try { if (sessionStorage.getItem('orbit_live_popup') === '1') return; } catch(e) {}
+
+    setTimeout(function() {
+      // Double check not dismissed during wait
+      try { if (sessionStorage.getItem('orbit_live_popup') === '1') return; } catch(e) {}
+
+      var overlay = document.createElement('div');
+      overlay.id = 'livePopupOverlay';
+      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);z-index:3000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity 0.3s;cursor:pointer;';
+
+      var card = document.createElement('div');
+      card.style.cssText = 'position:relative;max-width:480px;width:100%;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5);transform:scale(0.9);transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);cursor:pointer;';
+
+      var closeBtn = document.createElement('button');
+      closeBtn.innerHTML = '&times;';
+      closeBtn.style.cssText = 'position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,0.6);color:#fff;border:none;font-size:20px;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;line-height:1;backdrop-filter:blur(4px);';
+
+      var img = document.createElement('img');
+      img.src = '/images/banner-live.jpg';
+      img.alt = 'Live - A Nova Era da Gestao';
+      img.style.cssText = 'width:100%;display:block;';
+
+      function dismiss() {
+        try { sessionStorage.setItem('orbit_live_popup', '1'); } catch(e) {}
+        overlay.style.opacity = '0';
+        card.style.transform = 'scale(0.9)';
+        setTimeout(function() { overlay.remove(); }, 300);
+      }
+
+      closeBtn.onclick = function(e) { e.stopPropagation(); dismiss(); };
+      overlay.onclick = dismiss;
+      card.onclick = function(e) { e.stopPropagation(); dismiss(); window.location.href = '/live#inscreva-se'; };
+
+      card.appendChild(closeBtn);
+      card.appendChild(img);
+      overlay.appendChild(card);
+      document.body.appendChild(overlay);
+
+      // Animate in
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          overlay.style.opacity = '1';
+          card.style.transform = 'scale(1)';
+        });
+      });
+    }, 3000);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', showLivePopup);
+  } else {
+    showLivePopup();
+  }
 })();
