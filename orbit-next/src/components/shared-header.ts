@@ -106,6 +106,10 @@ export const headerHTML = `
                                 <div class="dd-icon"><i class="fas fa-play-circle" style="color:#ff0000;"></i></div>
                                 <div class="dd-text"><span>Live Semanal</span><small>Toda terca 13h com Igor</small></div>
                             </a>
+                            <a href="/live/rd">
+                                <div class="dd-icon"><i class="fas fa-chalkboard-user" style="color:#ffba1a;"></i></div>
+                                <div class="dd-text"><span>Masterclass Consultores</span><small>Seg e Qua 16h com Dani</small></div>
+                            </a>
                             <a href="https://demonstracao.orbitgestao.com.br/salas/tira-duvidas" target="_blank">
                                 <div class="dd-icon"><i class="fas fa-comments" style="color:#ffba1a;"></i></div>
                                 <div class="dd-text"><span>Tira Duvidas</span><small>Ter 11h (empresas) &bull; Qui 11h (consultores)</small></div>
@@ -186,6 +190,7 @@ export const headerHTML = `
                 Eventos
             </div>
             <a href="/live"><i class="fas fa-play-circle" style="color:#ff0000;"></i> Live Semanal (Ter 13h)</a>
+            <a href="/live/rd"><i class="fas fa-chalkboard-user" style="color:#ffba1a;"></i> Masterclass Consultores (Seg/Qua 16h)</a>
             <a href="https://demonstracao.orbitgestao.com.br/salas/tira-duvidas" target="_blank"><i class="fas fa-comments" style="color:#ffba1a;"></i> Tira Duvidas</a>
             <a href="https://demonstracao.orbitgestao.com.br/salas/onboarding" target="_blank"><i class="fas fa-graduation-cap" style="color:#3FB950;"></i> Onboarding</a>
             <a href="https://templum.com.br/treinamento-fase-a-fase" target="_blank"><i class="fas fa-chalkboard-teacher" style="color:#8B5CF6;"></i> Treinamento</a>
