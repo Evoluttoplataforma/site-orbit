@@ -48,6 +48,50 @@ export default function RootLayout({
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" crossOrigin="anonymous" />
         <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" /></noscript>
         <script dangerouslySetInnerHTML={{ __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-W6H3729J');` }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Orbit Gestão",
+          "description": "Plataforma de gestão operada por IA com consultoria recorrente passiva. Dezenas de agentes de IA especializados constroem e operam a gestão da sua empresa 24/7.",
+          "url": "https://orbitgestao.com.br",
+          "logo": "https://orbitgestao.com.br/images/logo-orbit-white.png",
+          "image": "https://orbitgestao.com.br/images/og-image.png",
+          "foundingDate": "1996",
+          "sameAs": [
+            "https://www.instagram.com/orbitgestao/",
+            "https://www.youtube.com/@Orbit.Gest%C3%A3o"
+          ],
+          "parentOrganization": {
+            "@type": "Organization",
+            "name": "Grupo GSN",
+            "description": "30 anos de experiência em gestão e consultoria empresarial, mais de 8.000 empresas atendidas."
+          },
+          "knowsAbout": [
+            "Gestão Empresarial com IA",
+            "Agentes de IA para gestão",
+            "Mapeamento de processos",
+            "Indicadores e KPIs",
+            "Consultoria recorrente passiva",
+            "Planejamento estratégico",
+            "Gestão de pessoas",
+            "Auditorias e conformidade"
+          ],
+          "offers": {
+            "@type": "AggregateOffer",
+            "priceCurrency": "BRL",
+            "lowPrice": "1200",
+            "highPrice": "4500",
+            "offerCount": "3"
+          }
+        }) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": "Orbit Gestão",
+          "url": "https://orbitgestao.com.br",
+          "description": "Plataforma de gestão operada por IA. Contrate um time de agentes de IA que executa.",
+          "inLanguage": ["pt-BR", "en"]
+        }) }} />
       </head>
       <body>
         <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W6H3729J" height="0" width="0" style={{display:'none',visibility:'hidden'}}></iframe></noscript>

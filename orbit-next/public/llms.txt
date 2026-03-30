@@ -1,0 +1,35 @@
+# Orbit Gestão
+> Plataforma de gestão operada por IA com consultoria recorrente passiva. Dezenas de agentes de IA especializados constroem e operam a gestão da sua empresa 24/7.
+
+## Sobre
+Orbit é uma plataforma de gestão empresarial operada por inteligência artificial, desenvolvida pelo Grupo GSN (30 anos de experiência em gestão e consultoria empresarial, mais de 8.000 empresas atendidas). A plataforma utiliza dezenas de agentes de IA especializados — coordenados pela Olívia, a coordenadora geral de IA — para automatizar e operar processos de gestão, indicadores, pessoas, treinamento, auditorias, riscos e vendas.
+
+O diferencial do Orbit é o conceito de "consultoria recorrente passiva": em vez de depender de consultores humanos pontuais, os agentes de IA trabalham continuamente 24/7, mapeando processos, monitorando KPIs, identificando causa raiz de problemas e gerando planos de ação automaticamente.
+
+O público-alvo são empresas de médio porte (R$ 5M a R$ 100M/ano de faturamento) e consultores de gestão que querem escalar sua entrega com IA.
+
+## Páginas Principais
+- [Home](https://orbitgestao.com.br/): Visão geral da plataforma e proposta de valor
+- [Para Empresários](https://orbitgestao.com.br/empresarios): Landing page para donos de empresa
+- [Para Consultores](https://orbitgestao.com.br/consultores): Modelo de canais B2B2B para consultores
+- [Agentes de IA](https://orbitgestao.com.br/agentes): Os dezenas de agentes especializados
+- [Preços](https://orbitgestao.com.br/preco): Planos Smart, Pró e Ultra
+- [Sobre](https://orbitgestao.com.br/sobre): História do Grupo GSN e equipe de diretores
+- [Blog](https://orbitgestao.com.br/blog): Artigos sobre gestão estratégica, processos, indicadores, IA e inovação
+- [FAQ](https://orbitgestao.com.br/faq): Perguntas frequentes sobre a plataforma
+- [Histórias de Clientes](https://orbitgestao.com.br/historias): Cases de sucesso
+- [Parcerias](https://orbitgestao.com.br/parcerias): Programa de canais para consultores e mentores
+- [Live Semanal](https://orbitgestao.com.br/live): Live toda terça-feira às 13h no YouTube
+- [Masterclass Consultores](https://orbitgestao.com.br/live/rd): Masterclass toda segunda e quarta às 16h
+
+## Agentes de IA
+O Orbit possui dezenas de agentes especializados, incluindo: Estrategista (SWOT, BSC, planejamento), Processos (mapeamento e automação), Pessoas (cargos, avaliação, PDIs), Treinamento (microlearning via WhatsApp), Indicadores (KPIs em tempo real), Pesquisa (clima, NPS), Riscos (prevenção e mitigação), Oportunidades (mercado e expansão), Problemas (PDCA e causa raiz), Documentos (controle e versões), Vendas (CRM, funil e coaching) e Reuniões (transcrição e planos de ação). Todos coordenados pela Olívia.
+
+## Ecossistema
+Orbit faz parte do ecossistema do Grupo GSN que inclui a Templum (consultoria em gestão e qualidade) e o SCE (Sistema de Capacitação Empresarial). O ecossistema atende mais de 8.000 empresas com 30 anos de experiência.
+
+## Contato
+- Site: https://orbitgestao.com.br
+- Instagram: https://www.instagram.com/orbitgestao/
+- YouTube: https://www.youtube.com/@Orbit.Gestão
+- Plataforma: https://app.orbitgestao.com.br
