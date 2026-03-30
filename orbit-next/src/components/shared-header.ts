@@ -96,6 +96,12 @@ export const headerHTML = `
                     </div>
                 </li>
                 <li>
+                    <a href="/live" style="position:relative;">
+                        <span style="display:inline-block;width:8px;height:8px;background:#ff4444;border-radius:50%;margin-right:6px;animation:livePulse 1.5s ease-in-out infinite;vertical-align:middle;"></span>
+                        <span>Eventos</span>
+                    </a>
+                </li>
+                <li>
                     <a href="/sobre"><span data-i18n="nav.company">Empresa</span></a>
                 </li>
             </ul>
@@ -155,6 +161,10 @@ export const headerHTML = `
             <div class="mobile-menu__label" data-i18n="mobile.content">Conteúdo</div>
             <a href="/blog"><i class="fas fa-newspaper"></i> Blog</a>
             <a href="/historias"><i class="fas fa-star"></i> Histórias de Clientes</a>
+            <a href="/live" style="color:#ffba1a !important;font-weight:700;">
+                <span style="display:inline-block;width:8px;height:8px;background:#ff4444;border-radius:50%;margin-right:6px;animation:livePulse 1.5s ease-in-out infinite;"></span>
+                Live Semanal
+            </a>
             <div class="mobile-menu__label" data-i18n="mobile.company">Empresa</div>
             <a href="/sobre"><i class="fas fa-building"></i> Sobre Nós</a>
         </div>
