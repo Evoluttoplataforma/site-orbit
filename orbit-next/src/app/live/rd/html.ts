@@ -22,13 +22,19 @@ export const pageHTML = `
             </div>
 
             <!-- Title -->
-            <h1 style="font-size:clamp(1.8rem,4.5vw,3.2rem);font-weight:800;color:#fff;line-height:1.15;margin-bottom:20px;" data-reveal>
-                Como transformar a <span style="color:#ffba1a;">gest&atilde;o da sua empresa</span> com IA
+            <h1 style="font-size:clamp(1.8rem,4.5vw,3.2rem);font-weight:800;color:#fff;line-height:1.15;margin-bottom:24px;" data-reveal>
+                Cansado de sistemas da qualidade que te d&atilde;o <span style="color:#ffba1a;">mais trabalho?</span>
             </h1>
 
             <!-- Subtitle -->
-            <p style="font-size:clamp(1rem,2.5vw,1.3rem);color:#8B949E;max-width:700px;margin:0 auto 16px;line-height:1.6;" data-reveal>
-                Voc&ecirc; &eacute; Representante da Dire&ccedil;&atilde;o e precisa garantir que processos, indicadores e conformidade estejam em dia. Agora imagine ter <strong style="color:#ffba1a;">dezenas de agentes de IA</strong> trabalhando 24/7 ao seu lado &mdash; mapeando, monitorando e gerando relat&oacute;rios automaticamente.
+            <p style="font-size:clamp(1.05rem,2.5vw,1.35rem);color:#C9D1D9;max-width:700px;margin:0 auto 12px;line-height:1.6;" data-reveal>
+                Quem vive a Qualidade sabe o peso de usar um sistema ruim.
+            </p>
+            <p style="font-size:clamp(0.95rem,2vw,1.15rem);color:#8B949E;max-width:650px;margin:0 auto 16px;line-height:1.6;" data-reveal>
+                Travado, confuso, pouco intuitivo&hellip; No fim, sobra para voc&ecirc; cobrar prazo, buscar evid&ecirc;ncia e fazer tudo no bra&ccedil;o.
+            </p>
+            <p style="font-size:clamp(1rem,2.5vw,1.25rem);color:#fff;max-width:700px;margin:0 auto 16px;line-height:1.6;font-weight:600;" data-reveal>
+                O <span style="color:#ffba1a;">Orbit</span> transforma a Qualidade em algo mais simples, visual, organizado e execut&aacute;vel.
             </p>
 
             <!-- Apresentadora -->
