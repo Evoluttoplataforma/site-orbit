@@ -840,6 +840,17 @@ export const pageHTML = `
 
                         <form id="liveForm" class="lead-form" novalidate>
                             <input type="hidden" id="live-chosen-date" name="chosen_date">
+                            <input type="hidden" name="utm_source" id="h_utm_source">
+                            <input type="hidden" name="utm_medium" id="h_utm_medium">
+                            <input type="hidden" name="utm_campaign" id="h_utm_campaign">
+                            <input type="hidden" name="utm_content" id="h_utm_content">
+                            <input type="hidden" name="utm_term" id="h_utm_term">
+                            <input type="hidden" name="gclid" id="h_gclid">
+                            <input type="hidden" name="fbclid" id="h_fbclid">
+                            <input type="hidden" name="landing_page" id="h_landing_page">
+                            <input type="hidden" name="referrer" id="h_referrer">
+                            <input type="hidden" name="session_id" id="h_session_id">
+                            <input type="hidden" name="originPage" id="h_originPage">
                             <div class="form-group">
                                 <label for="live-nome" style="color:#C9D1D9;">Nome completo *</label>
                                 <input type="text" id="live-nome" name="nome" placeholder="Seu nome completo" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
@@ -1055,12 +1066,24 @@ export const pageHTML = `
 
             var formData = new FormData(form);
             var chosenDate = document.getElementById('live-chosen-date');
+            var g = function(id) { var el = document.getElementById(id); return el ? el.value : ''; };
             var data = {
                 nome: formData.get('nome'),
                 email: formData.get('email'),
                 telefone: formData.get('telefone'),
                 source: 'live-semanal',
-                chosen_date: chosenDate ? chosenDate.value : null
+                chosen_date: chosenDate ? chosenDate.value : null,
+                utm_source: g('h_utm_source') || null,
+                utm_medium: g('h_utm_medium') || null,
+                utm_campaign: g('h_utm_campaign') || null,
+                utm_content: g('h_utm_content') || null,
+                utm_term: g('h_utm_term') || null,
+                gclid: g('h_gclid') || null,
+                fbclid: g('h_fbclid') || null,
+                landing_page: g('h_landing_page') || null,
+                referrer: g('h_referrer') || null,
+                session_id: g('h_session_id') || null,
+                originPage: g('h_originPage') || null
             };
 
             // Save lead to Supabase
