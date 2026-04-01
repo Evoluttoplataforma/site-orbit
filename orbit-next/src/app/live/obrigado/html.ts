@@ -36,8 +36,8 @@ export const pageHTML = `
                         <i class="fa-solid fa-calendar-check" style="color:#ffba1a;font-size:18px;"></i>
                     </div>
                     <div>
-                        <span style="color:#fff;font-weight:700;font-size:16px;display:block;">Terça, 24 de Março de 2026</span>
-                        <span style="color:#8B949E;font-size:14px;">13h (horário de São Paulo) — YouTube</span>
+                        <span style="color:#fff;font-weight:700;font-size:16px;display:block;">Toda ter&ccedil;a-feira &agrave;s 13h</span>
+                        <span style="color:#8B949E;font-size:14px;">Hor&aacute;rio de Bras&iacute;lia &mdash; YouTube</span>
                     </div>
                 </div>
 
@@ -52,7 +52,7 @@ export const pageHTML = `
                     </div>
                     <div style="display:flex;align-items:center;gap:12px;">
                         <i class="fa-solid fa-users" style="color:#ffba1a;font-size:16px;width:20px;text-align:center;"></i>
-                        <span style="color:#C9D1D9;font-size:15px;">Com <strong style="color:#fff;">Igor Furniel</strong> e <strong style="color:#fff;">Daniela Albuquerque</strong></span>
+                        <span style="color:#C9D1D9;font-size:15px;">Com <strong style="color:#fff;">Igor Furniel</strong></span>
                     </div>
                 </div>
             </div>

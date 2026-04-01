@@ -1178,9 +1178,8 @@ export const pageHTML = `
                 body: JSON.stringify({ nome: data.nome, email: data.email })
             }).catch(function() {});
 
-            // 4. Show success
-            form.style.display = 'none';
-            document.getElementById('rdFormSuccess').style.display = 'block';
+            // 4. Redirect to thank you page
+            window.location.href = '/live/rd/obrigado';
             }).catch(function(err) {
                 console.error('Erro:', err);
                 btn.disabled = false;
