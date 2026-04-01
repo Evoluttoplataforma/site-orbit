@@ -842,57 +842,174 @@ export const pageHTML = `
 
 
 
-        <!-- ═══ FORMULARIO ═══ -->
+        <!-- ═══ AGENDA + FORMULARIO ═══ -->
     <section id="inscreva-se" style="padding:100px 0;background:#0D1117;text-align:center;">
-        <div class="container" style="max-width:520px;">
-            <h2 style="font-size:clamp(1.5rem,3vw,2.25rem);font-weight:800;color:#fff;margin-bottom:16px;" data-reveal>
-                Garanta sua vaga
+        <div class="container" style="max-width:700px;">
+            <h2 style="font-size:clamp(1.5rem,3vw,2.25rem);font-weight:800;color:#fff;margin-bottom:8px;" data-reveal>
+                Escolha a data e garanta sua vaga
             </h2>
             <p style="color:#8B949E;font-size:1.1rem;margin-bottom:40px;" data-reveal>
-                Toda segunda e quarta &agrave;s 16h. Preencha abaixo para receber o link da sala.
+                Toda segunda e quarta &agrave;s 16h. Selecione o dia que deseja participar.
             </p>
 
-            <div class="cta-form-card" data-reveal>
-                <div style="text-align:center;margin-bottom:24px;">
-                    <h3 style="font-size:22px;font-weight:700;color:#fff;margin-bottom:6px;">Inscreva-se gratuitamente</h3>
-                    <p style="font-size:14px;color:#8B949E;">Preencha e receba o link no seu e-mail.</p>
+            <!-- Calendar -->
+            <div style="background:#161B22;border:1px solid rgba(255,186,26,0.15);border-radius:16px;padding:28px 24px;margin-bottom:32px;" data-reveal>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+                    <button id="rdCalPrev" style="background:none;border:none;color:#ffba1a;font-size:20px;cursor:pointer;padding:8px;"><i class="fas fa-chevron-left"></i></button>
+                    <span id="rdCalMonthLabel" style="color:#fff;font-size:18px;font-weight:700;text-transform:capitalize;"></span>
+                    <button id="rdCalNext" style="background:none;border:none;color:#ffba1a;font-size:20px;cursor:pointer;padding:8px;"><i class="fas fa-chevron-right"></i></button>
                 </div>
+                <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:8px;">
+                    <span style="color:#8B949E;font-size:12px;font-weight:600;text-align:center;padding:8px 0;">DOM</span>
+                    <span style="color:#8B949E;font-size:12px;font-weight:600;text-align:center;padding:8px 0;">SEG</span>
+                    <span style="color:#8B949E;font-size:12px;font-weight:600;text-align:center;padding:8px 0;">TER</span>
+                    <span style="color:#8B949E;font-size:12px;font-weight:600;text-align:center;padding:8px 0;">QUA</span>
+                    <span style="color:#8B949E;font-size:12px;font-weight:600;text-align:center;padding:8px 0;">QUI</span>
+                    <span style="color:#8B949E;font-size:12px;font-weight:600;text-align:center;padding:8px 0;">SEX</span>
+                    <span style="color:#8B949E;font-size:12px;font-weight:600;text-align:center;padding:8px 0;">S&Aacute;B</span>
+                </div>
+                <div id="rdCalGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;"></div>
+                <div id="rdCalSelected" style="margin-top:16px;display:none;">
+                    <p style="color:#ffba1a;font-size:15px;font-weight:600;"><i class="fas fa-calendar-check" style="margin-right:8px;"></i>Voc&ecirc; escolheu: <span id="rdCalSelectedDate"></span></p>
+                </div>
+            </div>
 
-                <form id="rdLiveForm" class="lead-form" novalidate>
-                    <div class="form-group">
-                        <label for="rd-nome" style="color:#C9D1D9;">Nome completo *</label>
-                        <input type="text" id="rd-nome" name="nome" placeholder="Seu nome completo" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
+            <!-- Form (hidden until date selected) -->
+            <div id="rdFormWrapper" style="display:none;">
+                <div class="cta-form-card" data-reveal>
+                    <div style="text-align:center;margin-bottom:24px;">
+                        <h3 style="font-size:22px;font-weight:700;color:#fff;margin-bottom:6px;">Inscreva-se gratuitamente</h3>
+                        <p style="font-size:14px;color:#8B949E;">Preencha e receba o link no seu e-mail.</p>
                     </div>
-                    <div class="form-group">
-                        <label for="rd-email" style="color:#C9D1D9;">E-mail *</label>
-                        <input type="email" id="rd-email" name="email" placeholder="seu@email.com" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
-                    </div>
-                    <div class="form-group">
-                        <label for="rd-telefone" style="color:#C9D1D9;">WhatsApp *</label>
-                        <input type="tel" id="rd-telefone" name="telefone" placeholder="(00) 00000-0000" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
-                    </div>
-                    <div class="form-group">
-                        <label for="rd-empresa" style="color:#C9D1D9;">Nome da empresa (opcional)</label>
-                        <input type="text" id="rd-empresa" name="empresa" placeholder="Sua empresa" style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-lg btn-submit hero-cta-glow" style="cursor:pointer;border:none;">
-                        QUERO PARTICIPAR
-                    </button>
-                    <p style="color:#8B949E;font-size:13px;text-align:center;margin-top:8px;">
-                        <i class="fa-solid fa-lock" style="margin-right:6px;"></i>Seus dados est&atilde;o seguros. N&atilde;o enviamos spam.
-                    </p>
-                </form>
 
-                <div id="rdFormSuccess" style="display:none;text-align:center;padding:20px 0;">
-                    <div style="width:64px;height:64px;background:rgba(63,185,80,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
-                        <i class="fa-solid fa-check" style="color:#3FB950;font-size:28px;"></i>
+                    <form id="rdLiveForm" class="lead-form" novalidate>
+                        <input type="hidden" id="rd-chosen-date" name="chosen_date">
+                        <div class="form-group">
+                            <label for="rd-nome" style="color:#C9D1D9;">Nome completo *</label>
+                            <input type="text" id="rd-nome" name="nome" placeholder="Seu nome completo" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
+                        </div>
+                        <div class="form-group">
+                            <label for="rd-email" style="color:#C9D1D9;">E-mail *</label>
+                            <input type="email" id="rd-email" name="email" placeholder="seu@email.com" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
+                        </div>
+                        <div class="form-group">
+                            <label for="rd-telefone" style="color:#C9D1D9;">WhatsApp *</label>
+                            <input type="tel" id="rd-telefone" name="telefone" placeholder="(00) 00000-0000" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
+                        </div>
+                        <div class="form-group">
+                            <label for="rd-empresa" style="color:#C9D1D9;">Nome da empresa (opcional)</label>
+                            <input type="text" id="rd-empresa" name="empresa" placeholder="Sua empresa" style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg btn-submit hero-cta-glow" style="cursor:pointer;border:none;">
+                            QUERO PARTICIPAR
+                        </button>
+                        <p style="color:#8B949E;font-size:13px;text-align:center;margin-top:8px;">
+                            <i class="fa-solid fa-lock" style="margin-right:6px;"></i>Seus dados est&atilde;o seguros. N&atilde;o enviamos spam.
+                        </p>
+                    </form>
+
+                    <div id="rdFormSuccess" style="display:none;text-align:center;padding:20px 0;">
+                        <div style="width:64px;height:64px;background:rgba(63,185,80,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+                            <i class="fa-solid fa-check" style="color:#3FB950;font-size:28px;"></i>
+                        </div>
+                        <h3 style="color:#fff;font-size:1.5rem;font-weight:700;margin-bottom:12px;">Inscri&ccedil;&atilde;o confirmada!</h3>
+                        <p style="color:var(--gray-500);font-size:16px;">Voc&ecirc; receber&aacute; o link da sala no seu e-mail.</p>
                     </div>
-                    <h3 style="color:#fff;font-size:1.5rem;font-weight:700;margin-bottom:12px;">Inscri&ccedil;&atilde;o confirmada!</h3>
-                    <p style="color:var(--gray-500);font-size:16px;">Voc&ecirc; receber&aacute; o link da sala no seu e-mail.</p>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- RD Calendar JS -->
+    <script>
+    (function() {
+        if (window.__rdCalInit) return;
+        window.__rdCalInit = true;
+
+        var eventDays = [1, 3]; // Monday=1, Wednesday=3
+        var startDate = new Date('2026-04-06');
+        var currentMonth = new Date().getMonth();
+        var currentYear = new Date().getFullYear();
+        var selectedDate = null;
+
+        var months = ['Janeiro','Fevereiro','Mar\u00e7o','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+
+        function renderCalendar() {
+            var grid = document.getElementById('rdCalGrid');
+            var label = document.getElementById('rdCalMonthLabel');
+            if (!grid || !label) return;
+
+            label.textContent = months[currentMonth] + ' ' + currentYear;
+
+            var firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            var today = new Date();
+            today.setHours(0,0,0,0);
+
+            var html = '';
+            for (var i = 0; i < firstDay; i++) html += '<div></div>';
+
+            for (var d = 1; d <= daysInMonth; d++) {
+                var date = new Date(currentYear, currentMonth, d);
+                var dayOfWeek = date.getDay();
+                var isEvent = eventDays.indexOf(dayOfWeek) !== -1;
+                var isPast = date < today;
+                var isBeforeStart = date < startDate;
+                var isSelected = selectedDate && date.getTime() === selectedDate.getTime();
+                var dateStr = currentYear + '-' + String(currentMonth+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+
+                if (isEvent && !isPast && !isBeforeStart) {
+                    html += '<button onclick=\"window.__selectRDDate(\\'' + dateStr + '\\')\" style=\"' +
+                        'background:' + (isSelected ? '#ffba1a' : 'rgba(255,186,26,0.12)') + ';' +
+                        'color:' + (isSelected ? '#0D1117' : '#ffba1a') + ';' +
+                        'border:2px solid ' + (isSelected ? '#ffba1a' : 'rgba(255,186,26,0.3)') + ';' +
+                        'border-radius:10px;padding:10px 0;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;' +
+                        '\">' + d + '</button>';
+                } else {
+                    html += '<div style=\"color:' + (isPast || isBeforeStart ? '#30363D' : '#484F58') + ';padding:10px 0;font-size:14px;\">' + d + '</div>';
+                }
+            }
+            grid.innerHTML = html;
+        }
+
+        window.__selectRDDate = function(dateStr) {
+            var parts = dateStr.split('-');
+            selectedDate = new Date(parseInt(parts[0]), parseInt(parts[1])-1, parseInt(parts[2]));
+
+            var display = document.getElementById('rdCalSelected');
+            var dateLabel = document.getElementById('rdCalSelectedDate');
+            var formWrapper = document.getElementById('rdFormWrapper');
+            var hiddenInput = document.getElementById('rd-chosen-date');
+
+            if (display) display.style.display = 'block';
+            if (dateLabel) {
+                var dias = ['Domingo','Segunda-feira','Ter\u00e7a-feira','Quarta-feira','Quinta-feira','Sexta-feira','S\u00e1bado'];
+                dateLabel.textContent = dias[selectedDate.getDay()] + ', ' + selectedDate.getDate() + ' de ' + months[selectedDate.getMonth()] + ' de ' + selectedDate.getFullYear() + ' \u00e0s 16h';
+            }
+            if (hiddenInput) hiddenInput.value = dateStr;
+            if (formWrapper) {
+                formWrapper.style.display = 'block';
+                setTimeout(function() { formWrapper.scrollIntoView({behavior:'smooth', block:'center'}); }, 100);
+            }
+            renderCalendar();
+        };
+
+        var prevBtn = document.getElementById('rdCalPrev');
+        var nextBtn = document.getElementById('rdCalNext');
+        if (prevBtn) prevBtn.addEventListener('click', function() {
+            currentMonth--;
+            if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+            renderCalendar();
+        });
+        if (nextBtn) nextBtn.addEventListener('click', function() {
+            currentMonth++;
+            if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+            renderCalendar();
+        });
+
+        renderCalendar();
+    })();
+    </script>
 
     <!-- Countdown: next Monday or Wednesday at 16h BRT -->
     <script>
@@ -994,11 +1111,13 @@ export const pageHTML = `
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="margin-right:8px;"></i>Enviando...';
 
             var formData = new FormData(form);
+            var chosenDate = document.getElementById('rd-chosen-date');
             var data = {
                 nome: formData.get('nome'),
                 email: formData.get('email'),
                 telefone: formData.get('telefone'),
-                source: 'live-rd-consultores'
+                source: 'live-rd-consultores',
+                chosen_date: chosenDate ? chosenDate.value : null
             };
 
             fetch(SUPABASE_URL + '/rest/v1/live_orbit_leads', {
