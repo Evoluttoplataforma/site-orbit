@@ -874,46 +874,50 @@ export const pageHTML = `
                 </div>
             </div>
 
-            <!-- Form (hidden until date selected) -->
-            <div id="rdFormWrapper" style="display:none;">
-                <div class="cta-form-card" data-reveal>
-                    <div style="text-align:center;margin-bottom:24px;">
-                        <h3 style="font-size:22px;font-weight:700;color:#fff;margin-bottom:6px;">Inscreva-se gratuitamente</h3>
-                        <p style="font-size:14px;color:#8B949E;">Preencha e receba o link no seu e-mail.</p>
-                    </div>
+            <!-- Form Popup -->
+            <div id="rdFormWrapper" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);z-index:3000;padding:20px;overflow-y:auto;" onclick="if(event.target===this){this.style.display='none';}">
+                <div style="max-width:480px;margin:60px auto;position:relative;animation:bannerPopIn 0.3s ease-out;">
+                    <button onclick="document.getElementById('rdFormWrapper').style.display='none'" style="position:absolute;top:-12px;right:-12px;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.6);border:none;color:#fff;font-size:20px;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);">&times;</button>
+                    <div class="cta-form-card" style="border:1px solid rgba(255,186,26,0.2) !important;">
+                        <div style="text-align:center;margin-bottom:8px;">
+                            <p id="rdFormDate" style="color:#ffba1a;font-size:14px;font-weight:700;margin:0 0 12px;"><i class="fas fa-calendar-check" style="margin-right:6px;"></i></p>
+                            <h3 style="font-size:22px;font-weight:700;color:#fff;margin-bottom:6px;">Inscreva-se gratuitamente</h3>
+                            <p style="font-size:14px;color:#8B949E;">Preencha e receba o link no seu e-mail.</p>
+                        </div>
 
-                    <form id="rdLiveForm" class="lead-form" novalidate>
-                        <input type="hidden" id="rd-chosen-date" name="chosen_date">
-                        <div class="form-group">
-                            <label for="rd-nome" style="color:#C9D1D9;">Nome completo *</label>
-                            <input type="text" id="rd-nome" name="nome" placeholder="Seu nome completo" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
-                        </div>
-                        <div class="form-group">
-                            <label for="rd-email" style="color:#C9D1D9;">E-mail *</label>
-                            <input type="email" id="rd-email" name="email" placeholder="seu@email.com" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
-                        </div>
-                        <div class="form-group">
-                            <label for="rd-telefone" style="color:#C9D1D9;">WhatsApp *</label>
-                            <input type="tel" id="rd-telefone" name="telefone" placeholder="(00) 00000-0000" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
-                        </div>
-                        <div class="form-group">
-                            <label for="rd-empresa" style="color:#C9D1D9;">Nome da empresa (opcional)</label>
-                            <input type="text" id="rd-empresa" name="empresa" placeholder="Sua empresa" style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-lg btn-submit hero-cta-glow" style="cursor:pointer;border:none;">
-                            QUERO PARTICIPAR
-                        </button>
-                        <p style="color:#8B949E;font-size:13px;text-align:center;margin-top:8px;">
-                            <i class="fa-solid fa-lock" style="margin-right:6px;"></i>Seus dados est&atilde;o seguros. N&atilde;o enviamos spam.
-                        </p>
-                    </form>
+                        <form id="rdLiveForm" class="lead-form" novalidate>
+                            <input type="hidden" id="rd-chosen-date" name="chosen_date">
+                            <div class="form-group">
+                                <label for="rd-nome" style="color:#C9D1D9;">Nome completo *</label>
+                                <input type="text" id="rd-nome" name="nome" placeholder="Seu nome completo" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
+                            </div>
+                            <div class="form-group">
+                                <label for="rd-email" style="color:#C9D1D9;">E-mail *</label>
+                                <input type="email" id="rd-email" name="email" placeholder="seu@email.com" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
+                            </div>
+                            <div class="form-group">
+                                <label for="rd-telefone" style="color:#C9D1D9;">WhatsApp *</label>
+                                <input type="tel" id="rd-telefone" name="telefone" placeholder="(00) 00000-0000" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
+                            </div>
+                            <div class="form-group">
+                                <label for="rd-empresa" style="color:#C9D1D9;">Nome da empresa (opcional)</label>
+                                <input type="text" id="rd-empresa" name="empresa" placeholder="Sua empresa" style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg btn-submit hero-cta-glow" style="cursor:pointer;border:none;width:100%;">
+                                QUERO PARTICIPAR
+                            </button>
+                            <p style="color:#8B949E;font-size:13px;text-align:center;margin-top:8px;">
+                                <i class="fa-solid fa-lock" style="margin-right:6px;"></i>Seus dados est&atilde;o seguros.
+                            </p>
+                        </form>
 
-                    <div id="rdFormSuccess" style="display:none;text-align:center;padding:20px 0;">
-                        <div style="width:64px;height:64px;background:rgba(63,185,80,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
-                            <i class="fa-solid fa-check" style="color:#3FB950;font-size:28px;"></i>
+                        <div id="rdFormSuccess" style="display:none;text-align:center;padding:20px 0;">
+                            <div style="width:64px;height:64px;background:rgba(63,185,80,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+                                <i class="fa-solid fa-check" style="color:#3FB950;font-size:28px;"></i>
+                            </div>
+                            <h3 style="color:#fff;font-size:1.5rem;font-weight:700;margin-bottom:12px;">Inscri&ccedil;&atilde;o confirmada!</h3>
+                            <p style="color:var(--gray-500);font-size:16px;">Voc&ecirc; receber&aacute; o link da sala no seu e-mail.</p>
                         </div>
-                        <h3 style="color:#fff;font-size:1.5rem;font-weight:700;margin-bottom:12px;">Inscri&ccedil;&atilde;o confirmada!</h3>
-                        <p style="color:var(--gray-500);font-size:16px;">Voc&ecirc; receber&aacute; o link da sala no seu e-mail.</p>
                     </div>
                 </div>
             </div>
@@ -987,10 +991,9 @@ export const pageHTML = `
                 dateLabel.textContent = dias[selectedDate.getDay()] + ', ' + selectedDate.getDate() + ' de ' + months[selectedDate.getMonth()] + ' de ' + selectedDate.getFullYear() + ' \u00e0s 16h';
             }
             if (hiddenInput) hiddenInput.value = dateStr;
-            if (formWrapper) {
-                formWrapper.style.display = 'block';
-                setTimeout(function() { formWrapper.scrollIntoView({behavior:'smooth', block:'center'}); }, 100);
-            }
+            var formDate = document.getElementById('rdFormDate');
+            if (formDate) formDate.innerHTML = '<i class="fas fa-calendar-check" style="margin-right:6px;"></i>' + dateLabel.textContent;
+            if (formWrapper) formWrapper.style.display = 'flex';
             renderCalendar();
         };
 
