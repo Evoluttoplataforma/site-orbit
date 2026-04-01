@@ -875,15 +875,13 @@ export const pageHTML = `
             </div>
 
             <!-- Form Popup -->
-            <div id="rdFormWrapper" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);z-index:3000;padding:20px;overflow-y:auto;" onclick="if(event.target===this){this.style.display='none';}">
-                <div style="max-width:480px;margin:60px auto;position:relative;animation:bannerPopIn 0.3s ease-out;">
+            <div id="rdFormWrapper" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);z-index:3000;padding:20px;overflow-y:auto;align-items:center;justify-content:center;" onclick="if(event.target===this){this.style.display='none';}">
+                <div style="max-width:460px;width:100%;margin:40px auto;position:relative;animation:bannerPopIn 0.3s ease-out;">
                     <button onclick="document.getElementById('rdFormWrapper').style.display='none'" style="position:absolute;top:-12px;right:-12px;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,0.6);border:none;color:#fff;font-size:20px;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);">&times;</button>
-                    <div class="cta-form-card" style="border:1px solid rgba(255,186,26,0.2) !important;">
-                        <div style="text-align:center;margin-bottom:8px;">
-                            <p id="rdFormDate" style="color:#ffba1a;font-size:14px;font-weight:700;margin:0 0 12px;"><i class="fas fa-calendar-check" style="margin-right:6px;"></i></p>
-                            <h3 style="font-size:22px;font-weight:700;color:#fff;margin-bottom:6px;">Reuni&atilde;o em Grupo</h3>
-                            <p style="font-size:14px;color:#8B949E;">Preencha para garantir sua vaga e receber o link.</p>
-                        </div>
+                    <div class="cta-form-card" style="border:1px solid rgba(255,186,26,0.2) !important;padding:32px 28px !important;">
+                        <p id="rdFormDate" style="color:#ffba1a;font-size:13px;font-weight:700;margin:0 0 16px;text-align:center;"><i class="fas fa-calendar-check" style="margin-right:6px;"></i></p>
+                        <h3 style="font-size:20px;font-weight:700;color:#fff;margin:0 0 4px;text-align:center;">Reuni&atilde;o em Grupo</h3>
+                        <p style="font-size:13px;color:#8B949E;margin:0 0 24px;text-align:center;">Preencha para garantir sua vaga.</p>
 
                         <form id="rdLiveForm" class="lead-form" novalidate>
                             <input type="hidden" id="rd-chosen-date" name="chosen_date">
@@ -899,40 +897,42 @@ export const pageHTML = `
                             <input type="hidden" name="session_id" id="h_session_id">
                             <input type="hidden" name="originPage" id="h_originPage">
                             <div class="form-group">
-                                <label for="rd-nome" style="color:#C9D1D9;">Nome completo *</label>
+                                <label for="rd-nome" style="color:#C9D1D9;font-size:13px;">Nome completo *</label>
                                 <input type="text" id="rd-nome" name="nome" placeholder="Seu nome completo" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
                             </div>
                             <div class="form-group">
-                                <label for="rd-email" style="color:#C9D1D9;">E-mail *</label>
-                                <input type="email" id="rd-email" name="email" placeholder="seu@email.com" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
+                                <label for="rd-email" style="color:#C9D1D9;font-size:13px;">E-mail corporativo *</label>
+                                <input type="email" id="rd-email" name="email" placeholder="seu@empresa.com" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
                             </div>
                             <div class="form-group">
-                                <label for="rd-telefone" style="color:#C9D1D9;">WhatsApp *</label>
+                                <label for="rd-telefone" style="color:#C9D1D9;font-size:13px;">WhatsApp *</label>
                                 <input type="tel" id="rd-telefone" name="telefone" placeholder="(00) 00000-0000" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
                             </div>
                             <div class="form-group">
-                                <label for="rd-empresa" style="color:#C9D1D9;">Empresa *</label>
+                                <label for="rd-empresa" style="color:#C9D1D9;font-size:13px;">Empresa *</label>
                                 <input type="text" id="rd-empresa" name="empresa" placeholder="Nome da sua empresa" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
                             </div>
                             <div class="form-group">
-                                <label for="rd-cargo" style="color:#C9D1D9;">Cargo *</label>
-                                <input type="text" id="rd-cargo" name="cargo" placeholder="Ex: RD, Gerente da Qualidade" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
+                                <label for="rd-cargo" style="color:#C9D1D9;font-size:13px;">Cargo *</label>
+                                <select id="rd-cargo" name="cargo" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;padding:10px 12px;border-radius:8px;width:100%;font-size:15px;">
+                                    <option value="">Selecione seu cargo</option>
+                                    <option value="RD (Representante da Direcao)">RD (Representante da Dire&ccedil;&atilde;o)</option>
+                                    <option value="Gerente da Qualidade">Gerente da Qualidade</option>
+                                    <option value="Coordenador da Qualidade">Coordenador da Qualidade</option>
+                                    <option value="Analista da Qualidade">Analista da Qualidade</option>
+                                    <option value="Diretor/Gerente de Operacoes">Diretor/Gerente de Opera&ccedil;&otilde;es</option>
+                                    <option value="Diretor/CEO">Diretor/CEO</option>
+                                    <option value="Consultor">Consultor</option>
+                                    <option value="Outro">Outro</option>
+                                </select>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-lg btn-submit hero-cta-glow" style="cursor:pointer;border:none;width:100%;">
-                                QUERO PARTICIPAR
+                            <button type="submit" class="btn btn-primary btn-lg btn-submit hero-cta-glow" style="cursor:pointer;border:none;width:100%;margin-top:8px;">
+                                GARANTIR MINHA VAGA
                             </button>
-                            <p style="color:#8B949E;font-size:13px;text-align:center;margin-top:8px;">
-                                <i class="fa-solid fa-lock" style="margin-right:6px;"></i>Seus dados est&atilde;o seguros.
+                            <p style="color:#8B949E;font-size:12px;text-align:center;margin-top:8px;">
+                                <i class="fa-solid fa-lock" style="margin-right:4px;"></i>Dados seguros. N&atilde;o enviamos spam.
                             </p>
                         </form>
-
-                        <div id="rdFormSuccess" style="display:none;text-align:center;padding:20px 0;">
-                            <div style="width:64px;height:64px;background:rgba(63,185,80,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
-                                <i class="fa-solid fa-check" style="color:#3FB950;font-size:28px;"></i>
-                            </div>
-                            <h3 style="color:#fff;font-size:1.5rem;font-weight:700;margin-bottom:12px;">Inscri&ccedil;&atilde;o confirmada!</h3>
-                            <p style="color:var(--gray-500);font-size:16px;">Voc&ecirc; receber&aacute; o link da sala no seu e-mail.</p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1152,39 +1152,30 @@ export const pageHTML = `
                 originPage: g('h_originPage') || null
             };
 
-            // 1. Save to Supabase
-            fetch(SUPABASE_URL + '/rest/v1/live_orbit_leads', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'apikey': SUPABASE_KEY,
-                    'Authorization': 'Bearer ' + SUPABASE_KEY,
-                    'Prefer': 'return=minimal'
-                },
-                body: JSON.stringify(data)
-            }).catch(function() {});
-
-            // 2. Send to Pipedrive
-            fetch(SUPABASE_URL + '/functions/v1/pipedrive-create-deal', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            }).catch(function() {});
-
-            // 3. Send confirmation email
-            fetch(SUPABASE_URL + '/functions/v1/send-rd-confirmation', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ nome: data.nome, email: data.email })
-            }).catch(function() {});
-
-            // 4. Redirect to thank you page
-            window.location.href = '/live/rd/obrigado';
-            }).catch(function(err) {
-                console.error('Erro:', err);
-                btn.disabled = false;
-                btn.innerHTML = 'QUERO PARTICIPAR';
-                alert('Erro ao enviar. Tente novamente.');
+            // Send all 3 in parallel, wait for Pipedrive, then redirect
+            Promise.all([
+                // 1. Supabase
+                fetch(SUPABASE_URL + '/rest/v1/live_orbit_leads', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Prefer': 'return=minimal' },
+                    body: JSON.stringify(data)
+                }).catch(function() {}),
+                // 2. Pipedrive
+                fetch(SUPABASE_URL + '/functions/v1/pipedrive-create-deal', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                }).catch(function() {}),
+                // 3. Email
+                fetch(SUPABASE_URL + '/functions/v1/send-rd-confirmation', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nome: data.nome, email: data.email })
+                }).catch(function() {})
+            ]).then(function() {
+                window.location.href = '/live/rd/obrigado';
+            }).catch(function() {
+                window.location.href = '/live/rd/obrigado';
             });
         });
     })();
