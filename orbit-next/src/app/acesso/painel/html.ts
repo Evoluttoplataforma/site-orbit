@@ -3539,7 +3539,7 @@ JSON.stringify(schemaOrg, null, 2) +
     async function refreshEmailMkt() {
         try {
             var res = await fetch(EMKT_SUPABASE_URL + '/rest/v1/live_orbit_leads?order=created_at.desc&select=*', {
-                headers: { 'apikey': EMKT_SUPABASE_KEY, 'Authorization': 'Bearer ' + session.access_token }
+                headers: { 'apikey': EMKT_SUPABASE_KEY, 'Authorization': 'Bearer ' + EMKT_SUPABASE_KEY }
             });
             emktLeads = res.ok ? await res.json() : [];
         } catch(e) { emktLeads = []; }
