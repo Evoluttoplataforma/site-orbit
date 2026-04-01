@@ -64,7 +64,7 @@ export const pageHTML = `
     <!-- MAIN -->
     <div class="main">
 
-        <!-- ══ NOTIFICATION BELL (global, fixed) ══ -->
+        <!-- == NOTIFICATION BELL (global, fixed) == -->
         <div id="notifBellWrapper" style="position:fixed; top:14px; right:32px; z-index:999; pointer-events:none;">
             <button class="notif-bell" onclick="toggleNotifDropdown()" title="Notificações" style="pointer-events:auto;">
                 <i class="fas fa-bell"></i>
@@ -79,7 +79,7 @@ export const pageHTML = `
             </div>
         </div>
 
-        <!-- ══ DASHBOARD VIEW ══ -->
+        <!-- == DASHBOARD VIEW == -->
         <div class="view active" id="view-dashboard">
             <div class="topbar">
                 <h1>Dashboard</h1>
@@ -142,7 +142,7 @@ export const pageHTML = `
             </div>
         </div>
 
-        <!-- ══ ARTICLES LIST VIEW ══ -->
+        <!-- == ARTICLES LIST VIEW == -->
         <div class="view" id="view-articles">
             <div class="topbar">
                 <h1>Artigos</h1>
@@ -182,7 +182,7 @@ export const pageHTML = `
             </div>
         </div>
 
-        <!-- ══ EDITOR VIEW ══ -->
+        <!-- == EDITOR VIEW == -->
         <div class="view" id="view-editor">
             <div class="topbar">
                 <h1 id="editorTitle">Novo Artigo</h1>
@@ -484,7 +484,7 @@ export const pageHTML = `
             </div>
         </div>
 
-        <!-- ══ LEAD MAGNETS VIEW ══ -->
+        <!-- == LEAD MAGNETS VIEW == -->
         <div class="view" id="view-leadmagnets">
             <div class="topbar">
                 <h1>Iscas Digitais</h1>
@@ -516,7 +516,7 @@ export const pageHTML = `
             </div>
         </div>
 
-        <!-- ══ LEAD MAGNET MODAL ══ -->
+        <!-- == LEAD MAGNET MODAL == -->
         <div class="modal-overlay" id="leadMagnetModal" onclick="if(event.target===this)closeLeadMagnetModal()">
             <div class="modal" style="max-width:540px;">
                 <div class="modal-header">
@@ -575,7 +575,7 @@ export const pageHTML = `
             </div>
         </div>
 
-        <!-- ══ CUSTOMER STORIES VIEW ══ -->
+        <!-- == CUSTOMER STORIES VIEW == -->
         <div class="view" id="view-stories">
             <div class="topbar">
                 <h1>Histórias de Clientes</h1>
@@ -631,7 +631,7 @@ export const pageHTML = `
             </div>
         </div>
 
-        <!-- ══ STORY EDITOR VIEW ══ -->
+        <!-- == STORY EDITOR VIEW == -->
         <div class="view" id="view-storyeditor">
             <div class="topbar">
                 <h1 id="storyEditorTitle">Nova História</h1>
@@ -822,7 +822,7 @@ export const pageHTML = `
             </div>
         </div>
 
-        <!-- ══ STORY DETAIL MODAL ══ -->
+        <!-- == STORY DETAIL MODAL == -->
         <div class="modal-overlay" id="storyDetailModal" style="padding:20px;" onclick="if(event.target===this)closeStoryDetail()">
             <div class="modal" style="max-width:800px;max-height:90vh;overflow-y:auto;">
                 <div class="modal-header">
@@ -834,7 +834,7 @@ export const pageHTML = `
             </div>
         </div>
 
-        <!-- ══ COMMENTS VIEW ══ -->
+        <!-- == COMMENTS VIEW == -->
         <div class="view" id="view-comments">
             <div class="topbar">
                 <h1>Comentários</h1>
@@ -876,7 +876,7 @@ export const pageHTML = `
             </div>
         </div>
 
-        <!-- ══ BANNERS VIEW ══ -->
+        <!-- == BANNERS VIEW == -->
         <div class="view" id="view-banners">
             <div class="topbar">
                 <h1>Banners do Site</h1>
@@ -909,7 +909,7 @@ export const pageHTML = `
             </div>
         </div>
 
-        <!-- ══ BANNER MODAL ══ -->
+        <!-- == BANNER MODAL == -->
         <div class="modal-overlay" id="bannerModal" onclick="if(event.target===this)closeBannerModal()">
             <div class="modal" style="max-width:620px;max-height:90vh;overflow-y:auto;width:calc(100% - 32px);">
                 <div class="modal-header">
@@ -1022,7 +1022,7 @@ export const pageHTML = `
             </div>
         </div>
 
-        <!-- ══ EMAIL MARKETING VIEW ══ -->
+        <!-- == EMAIL MARKETING VIEW == -->
         <div class="view" id="view-emailmkt">
             <div class="topbar">
                 <h1>Email Marketing</h1>
@@ -1110,7 +1110,7 @@ export const pageHTML = `
             </div>
         </div>
 
-        <!-- ══ USERS VIEW (ADMIN ONLY) ══ -->
+        <!-- == USERS VIEW (ADMIN ONLY) == -->
         <div class="view" id="view-users">
             <div class="topbar">
                 <h1>Usuarios</h1>
@@ -1220,9 +1220,9 @@ export const pageHTML = `
     <script>
     // Mobile menu, header scroll, dropdowns handled by PageLayout.tsx
 
-    // ═══════════════════════════════════════
+    // =======================================
     // ORBIT CMS - Admin Panel
-    // ═══════════════════════════════════════
+    // =======================================
 
     const STORAGE_KEY = 'orbit_cms';
     const SUPABASE_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
@@ -1239,7 +1239,7 @@ export const pageHTML = `
         outros: 'Outros'
     };
 
-    // ── Auth Check (Supabase) ──
+    // -- Auth Check (Supabase) --
     function getSession() {
         try { return JSON.parse(localStorage.getItem('orbit_supabase_session')) || null; }
         catch(e) { return null; }
@@ -1298,7 +1298,7 @@ export const pageHTML = `
         refreshToken();
     }
 
-    // ── DB ──
+    // -- DB --
     function getDB() {
         try {
             const db = JSON.parse(localStorage.getItem(STORAGE_KEY)) || { users: [], articles: [], leadMagnets: [], customerStories: [], version: 1 };
@@ -1320,7 +1320,7 @@ export const pageHTML = `
         return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
     }
 
-    // ── Init UI ──
+    // -- Init UI --
     async function initUI() {
         if (!session) return;
 
@@ -1357,7 +1357,7 @@ export const pageHTML = `
         });
     }
 
-    // ── Navigation ──
+    // -- Navigation --
     function showView(viewName) {
         // Check permission
         if (viewName === 'users' && session.role !== 'admin') {
@@ -1404,7 +1404,7 @@ export const pageHTML = `
         document.getElementById('sidebar').classList.toggle('open');
     }
 
-    // ── Toast ──
+    // -- Toast --
     function toast(message, type = 'success') {
         const container = document.getElementById('toastContainer');
         const el = document.createElement('div');
@@ -1415,13 +1415,13 @@ export const pageHTML = `
         setTimeout(() => { el.remove(); }, 3500);
     }
 
-    // ── Logout ──
+    // -- Logout --
     function logout() {
         localStorage.removeItem('orbit_supabase_session');
         window.location.href = '/acesso';
     }
 
-    // ═══ DASHBOARD ═══
+    // === DASHBOARD ===
     function refreshDashboard() {
         var articles = supabaseArticles || [];
         var published = articles.filter(function(a) { return a.published; });
@@ -1462,7 +1462,7 @@ export const pageHTML = `
         }).join('');
     }
 
-    // ═══ ARTICLES LIST ═══
+    // === ARTICLES LIST ===
     var supabaseArticles = [];
     var supabaseLeadMagnets = [];
     var supabaseStories = [];
@@ -1504,7 +1504,7 @@ export const pageHTML = `
         }).join('');
     }
 
-    // ═══ EDITOR ═══
+    // === EDITOR ===
     function newArticle() {
         document.getElementById('articleId').value = '';
         clearEditor();
@@ -1808,7 +1808,7 @@ export const pageHTML = `
         input.click();
     }
 
-    // ── Image Upload ──
+    // -- Image Upload --
     function switchImageTab(tab) {
         document.querySelectorAll('.image-tab').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.image-tab-content').forEach(c => c.classList.remove('active'));
@@ -1891,7 +1891,7 @@ export const pageHTML = `
         updateSeoScore();
     }
 
-    // ══ LEAD MAGNETS CRUD ══
+    // == LEAD MAGNETS CRUD ==
     const LEAD_TYPE_LABELS = { ebook: 'Ebook', checklist: 'Checklist', planilha: 'Planilha', webinar: 'Webinar', trial: 'Trial Gratuito' };
 
     async function refreshLeadMagnets() {
@@ -2062,8 +2062,8 @@ export const pageHTML = `
         });
     }
 
-    // ══ AUTHOR AVATAR UPLOAD ══
-    // ══ AI IMAGE GENERATION ══
+    // == AUTHOR AVATAR UPLOAD ==
+    // == AI IMAGE GENERATION ==
     // Modelo: google/gemini-2.5-flash-image via OpenRouter
     // Prompt template: Orbit corporate cinematic style
     // Aspect ratios: 16:9 (blog), 1:1 (feed), 9:16 (stories)
@@ -2195,7 +2195,7 @@ export const pageHTML = `
         if (input) input.value = '';
     }
 
-    // ══ CTA BANNER IMAGE UPLOAD ══
+    // == CTA BANNER IMAGE UPLOAD ==
     function handleCtaBannerImageUpload(event) {
         const file = event.target.files[0];
         if (!file) return;
@@ -2231,7 +2231,7 @@ export const pageHTML = `
         document.getElementById('seoTitleCount').textContent = this.value.length;
     });
 
-    // ── SEO Score ──
+    // -- SEO Score --
     function updateSeoScore() {
         const title = document.getElementById('seoTitle').value.trim();
         const desc = document.getElementById('articleMetaDesc').value.trim();
@@ -2266,7 +2266,7 @@ export const pageHTML = `
         fill.style.background = pct >= 80 ? 'var(--success)' : pct >= 50 ? 'var(--warning)' : 'var(--error)';
     }
 
-    // ── Auto read time ──
+    // -- Auto read time --
     function updateReadTime() {
         var content = document.getElementById('richEditor').innerText || '';
         var words = content.split(/\\s+/).filter(function(w) { return w.length > 0; }).length;
@@ -2286,7 +2286,7 @@ export const pageHTML = `
         readTimeObserver.observe(richEditorEl, { childList: true, subtree: true, characterData: true });
     }
 
-    // ── Custom category ──
+    // -- Custom category --
     function onCategoryChange(sel) {
         var wrapper = document.getElementById('customCategoryWrapper');
         if (sel.value === '__custom__') {
@@ -2680,7 +2680,7 @@ JSON.stringify(schemaOrg, null, 2) +
         toast('HTML exportado com SEO + Schema! Coloque na pasta blog/');
     }
 
-    // ═══ USERS MANAGEMENT ═══
+    // === USERS MANAGEMENT ===
     var supabaseUsers = [];
 
     async function refreshUsers() {
@@ -2807,7 +2807,7 @@ JSON.stringify(schemaOrg, null, 2) +
         refreshDashboard();
     }
 
-    // ═══ DELETE CONFIRMATIONS ═══
+    // === DELETE CONFIRMATIONS ===
     let pendingDeleteFn = null;
 
     function confirmDeleteArticle(id) {
@@ -2848,7 +2848,7 @@ JSON.stringify(schemaOrg, null, 2) +
         document.getElementById('deleteModal').classList.remove('active');
     }
 
-    // ═══ HELPERS ═══
+    // === HELPERS ===
     function escapeHtml(str) {
         if (!str) return '';
         const div = document.createElement('div');
@@ -2862,7 +2862,7 @@ JSON.stringify(schemaOrg, null, 2) +
         } catch(e) { return dateStr; }
     }
 
-    // ═══ CUSTOMER STORIES ═══
+    // === CUSTOMER STORIES ===
     const SEGMENT_LABELS = {
         industria: 'Indústria', servicos: 'Serviços', tecnologia: 'Tecnologia',
         saude: 'Saúde', educacao: 'Educação', varejo: 'Varejo',
@@ -3032,7 +3032,7 @@ JSON.stringify(schemaOrg, null, 2) +
         document.getElementById('storyDetailModal').classList.remove('active');
     }
 
-    // ═══ STORY EDITOR ═══
+    // === STORY EDITOR ===
     let storyPhotos = []; // base64 array for current editor
 
     function clearStoryEditor() {
@@ -3228,7 +3228,7 @@ JSON.stringify(schemaOrg, null, 2) +
         });
     }
 
-    // ═══ COMMENTS MANAGEMENT ═══
+    // === COMMENTS MANAGEMENT ===
     var supabaseComments = [];
 
     async function refreshComments() {
@@ -3320,7 +3320,7 @@ JSON.stringify(schemaOrg, null, 2) +
         } catch(e) { toast('Erro ao excluir.', 'error'); }
     }
 
-    // ═══ NOTIFICATIONS ═══
+    // === NOTIFICATIONS ===
     function updateNotifications() {
         var pending = (supabaseStories || []).filter(function(s) { return s.status === 'pending'; });
         var badge = document.getElementById('notifBadge');
@@ -3361,7 +3361,7 @@ JSON.stringify(schemaOrg, null, 2) +
         }
     });
 
-    // ═══ BANNERS CRUD ═══
+    // === BANNERS CRUD ===
     var supabaseBanners = [];
 
     async function refreshBanners() {
@@ -3381,14 +3381,14 @@ JSON.stringify(schemaOrg, null, 2) +
             var s = bn.start_date ? new Date(bn.start_date).toLocaleDateString('pt-BR') : 'Sempre';
             var e = bn.end_date ? new Date(bn.end_date).toLocaleDateString('pt-BR') : 'Sem fim';
             return '<tr>' +
-                '<td><button class="badge ' + (bn.active ? 'badge-published' : 'badge-draft') + '" style="cursor:pointer;border:none;" onclick="toggleBannerActive(\\'' + bn.id + '\\',' + bn.active + ')">' + (bn.active ? 'Ativo' : 'Inativo') + '</button></td>' +
+                '<td><button class="badge ' + (bn.active ? 'badge-published' : 'badge-draft') + '" style="cursor:pointer;border:none;" onclick="toggleBannerActive(&apos;' + bn.id + '&apos;,' + bn.active + ')">' + (bn.active ? 'Ativo' : 'Inativo') + '</button></td>' +
                 '<td>' + escapeHtml(modeLabels[bn.display_mode] || bn.display_mode) + '</td>' +
                 '<td style="font-size:0.85rem;">' + escapeHtml(posLabels[bn.position] || bn.position) + '</td>' +
                 '<td><strong>' + escapeHtml(bn.title || '(sem titulo)') + '</strong></td>' +
                 '<td style="font-size:0.82rem;color:var(--gray-500);">' + s + ' - ' + e + '</td>' +
                 '<td><div style="display:flex;gap:4px;">' +
-                    '<button class="btn btn-secondary btn-icon btn-sm" onclick="editBanner(\\'' + bn.id + '\\')" title="Editar"><i class="fas fa-pen"></i></button>' +
-                    '<button class="btn btn-danger btn-icon btn-sm" onclick="deleteBanner(\\'' + bn.id + '\\')" title="Excluir"><i class="fas fa-trash"></i></button>' +
+                    '<button class="btn btn-secondary btn-icon btn-sm" onclick="editBanner(&apos;' + bn.id + '&apos;)" title="Editar"><i class="fas fa-pen"></i></button>' +
+                    '<button class="btn btn-danger btn-icon btn-sm" onclick="deleteBanner(&apos;' + bn.id + '&apos;)" title="Excluir"><i class="fas fa-trash"></i></button>' +
                 '</div></td>' +
             '</tr>';
         }).join('');
@@ -3524,7 +3524,7 @@ JSON.stringify(schemaOrg, null, 2) +
         reader.readAsDataURL(file);
     }
 
-    // ═══ EMAIL MARKETING ═══
+    // === EMAIL MARKETING ===
     var emktLeads = [];
     var EMKT_SUPABASE_URL = 'https://tnpzoklepkvktbqouctf.supabase.co';
     var EMKT_SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRucHpva2xlcGt2a3RicW91Y3RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2MjAxNjcsImV4cCI6MjA4NzE5NjE2N30.hXrOhbIm9DnxaItT1e9g6B6d9mhAmeoLKJ2DuHlABFU';
@@ -3628,7 +3628,7 @@ JSON.stringify(schemaOrg, null, 2) +
         toast('CSV exportado!');
     }
 
-    // ═══ Expose functions to global scope (required for onclick handlers) ═══
+    // === Expose functions to global scope (required for onclick handlers) ===
     window.showView = showView;
     window.logout = logout;
     window.toggleNotifDropdown = toggleNotifDropdown;
@@ -3696,7 +3696,7 @@ JSON.stringify(schemaOrg, null, 2) +
     window.updateSeoScore = updateSeoScore;
     window.onCategoryChange = onCategoryChange;
 
-    // ═══ INIT ═══
+    // === INIT ===
     initUI();
     updateNotifications();
     </script>
