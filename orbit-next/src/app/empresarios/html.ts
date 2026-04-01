@@ -3191,10 +3191,8 @@ export const pageHTML = `
         </script>
     </section>
 
-    <!-- ═══════════════════════════════════════════════════════
-         SECTION 9 - COST COMPARISON
-         ═══════════════════════════════════════════════════════ -->
-    <section class="cost-section" id="investimento">
+    <!-- SECTION 9 - COST COMPARISON removido -->
+    <section style="display:none;">
         <div class="container">
             <div class="cost-header" data-reveal>
                 <h2>Quanto custa <em>não</em> ter um time estratégico?</h2>
