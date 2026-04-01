@@ -32,6 +32,9 @@ export const pageHTML = `
             <a href="#" data-view="banners" onclick="showView('banners')">
                 <i class="fas fa-bullhorn"></i> Banners
             </a>
+            <a href="#" data-view="emailmkt" onclick="showView('emailmkt')">
+                <i class="fas fa-envelope-open-text"></i> Email Marketing
+            </a>
             <div class="nav-divider"></div>
             <a href="#" data-view="users" onclick="showView('users')" id="navUsers" style="display:none;">
                 <i class="fas fa-users-gear"></i> Usuarios
@@ -1019,6 +1022,94 @@ export const pageHTML = `
             </div>
         </div>
 
+        <!-- ══ EMAIL MARKETING VIEW ══ -->
+        <div class="view" id="view-emailmkt">
+            <div class="topbar">
+                <h1>Email Marketing</h1>
+                <div class="topbar-actions">
+                    <select id="emktFilter" onchange="refreshEmailMkt()" style="padding:6px 12px;border-radius:8px;border:1px solid var(--gray-200);font-size:0.85rem;background:#fff;">
+                        <option value="all">Todos os eventos</option>
+                        <option value="live-semanal">Live Semanal (Ter 13h)</option>
+                        <option value="live-rd-consultores">Masterclass RDs (Seg/Qua 16h)</option>
+                        <option value="live-24-03">Live 24/03 (antigo)</option>
+                    </select>
+                    <button class="btn btn-secondary btn-sm" onclick="exportLeadsCsv()">
+                        <i class="fas fa-download"></i> Exportar CSV
+                    </button>
+                </div>
+            </div>
+            <div class="content">
+                <!-- Stats -->
+                <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+                    <div class="stat-card">
+                        <div class="stat-card__label">Total Leads</div>
+                        <div class="stat-card__value stat-card__value--primary" id="emktTotal">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__label">Live Semanal</div>
+                        <div class="stat-card__value" id="emktLive">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__label">Masterclass RDs</div>
+                        <div class="stat-card__value" id="emktRd">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__label">Com Data Escolhida</div>
+                        <div class="stat-card__value" style="color:var(--primary);" id="emktWithDate">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__label">Hoje</div>
+                        <div class="stat-card__value" style="color:var(--warning);" id="emktToday">0</div>
+                    </div>
+                </div>
+
+                <!-- Leads with chosen_date (upcoming) -->
+                <div class="card" style="margin-bottom:24px;">
+                    <div class="card-header" style="display:flex;align-items:center;justify-content:space-between;">
+                        <h3 style="margin:0;font-size:1rem;"><i class="fas fa-calendar-check" style="color:var(--primary);margin-right:8px;"></i>Proximas Participacoes</h3>
+                    </div>
+                    <div class="card-body" style="padding:0;">
+                        <div class="table-wrapper">
+                            <div class="table-responsive"><table>
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Evento</th>
+                                        <th>Leads</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="emktUpcomingBody"></tbody>
+                            </table></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- All leads table -->
+                <div class="card">
+                    <div class="card-header" style="display:flex;align-items:center;justify-content:space-between;">
+                        <h3 style="margin:0;font-size:1rem;"><i class="fas fa-users" style="color:var(--primary);margin-right:8px;"></i>Leads Cadastrados</h3>
+                    </div>
+                    <div class="card-body" style="padding:0;">
+                        <div class="table-wrapper">
+                            <div class="table-responsive"><table>
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Email</th>
+                                        <th>Telefone</th>
+                                        <th>Evento</th>
+                                        <th>Data Escolhida</th>
+                                        <th>Cadastro</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="emktLeadsBody"></tbody>
+                            </table></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- ══ USERS VIEW (ADMIN ONLY) ══ -->
         <div class="view" id="view-users">
             <div class="topbar">
@@ -1291,6 +1382,7 @@ export const pageHTML = `
         if (viewName === 'stories') refreshStories();
         if (viewName === 'comments') refreshComments();
         if (viewName === 'banners') refreshBanners();
+        if (viewName === 'emailmkt') refreshEmailMkt();
         if (viewName === 'storyeditor') {
             if (!document.getElementById('storyEditId').value) {
                 clearStoryEditor();
@@ -3432,6 +3524,110 @@ JSON.stringify(schemaOrg, null, 2) +
         reader.readAsDataURL(file);
     }
 
+    // ═══ EMAIL MARKETING ═══
+    var emktLeads = [];
+    var EMKT_SUPABASE_URL = 'https://tnpzoklepkvktbqouctf.supabase.co';
+    var EMKT_SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRucHpva2xlcGt2a3RicW91Y3RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2MjAxNjcsImV4cCI6MjA4NzE5NjE2N30.hXrOhbIm9DnxaItT1e9g6B6d9mhAmeoLKJ2DuHlABFU';
+
+    var EMKT_SOURCE_LABELS = {
+        'live-semanal': 'Live Semanal',
+        'live-rd-consultores': 'Masterclass RDs',
+        'live-24-03': 'Live 24/03',
+        'live-teste-individual': 'Teste'
+    };
+
+    async function refreshEmailMkt() {
+        try {
+            var res = await fetch(EMKT_SUPABASE_URL + '/rest/v1/live_orbit_leads?order=created_at.desc&select=*', {
+                headers: { 'apikey': EMKT_SUPABASE_KEY, 'Authorization': 'Bearer ' + session.access_token }
+            });
+            emktLeads = res.ok ? await res.json() : [];
+        } catch(e) { emktLeads = []; }
+
+        var filter = document.getElementById('emktFilter').value;
+        var filtered = filter === 'all' ? emktLeads : emktLeads.filter(function(l) { return l.source === filter; });
+
+        // Stats
+        var liveCt = emktLeads.filter(function(l) { return l.source === 'live-semanal'; }).length;
+        var rdCt = emktLeads.filter(function(l) { return l.source === 'live-rd-consultores'; }).length;
+        var withDate = emktLeads.filter(function(l) { return l.chosen_date; }).length;
+        var today = new Date().toISOString().split('T')[0];
+        var todayCt = emktLeads.filter(function(l) { return l.created_at && l.created_at.startsWith(today); }).length;
+
+        var el = function(id, val) { var e = document.getElementById(id); if (e) e.textContent = val; };
+        el('emktTotal', emktLeads.length);
+        el('emktLive', liveCt);
+        el('emktRd', rdCt);
+        el('emktWithDate', withDate);
+        el('emktToday', todayCt);
+
+        // Upcoming dates
+        var upcoming = {};
+        emktLeads.forEach(function(l) {
+            if (l.chosen_date && l.chosen_date >= today) {
+                var key = l.chosen_date + '|' + (l.source || '');
+                if (!upcoming[key]) upcoming[key] = { date: l.chosen_date, source: l.source, count: 0 };
+                upcoming[key].count++;
+            }
+        });
+        var upcomingArr = Object.values(upcoming).sort(function(a, b) { return a.date.localeCompare(b.date); });
+        var upBody = document.getElementById('emktUpcomingBody');
+        if (upBody) {
+            if (upcomingArr.length === 0) {
+                upBody.innerHTML = '<tr><td colspan="3" style="text-align:center;padding:24px;color:var(--gray-500);">Nenhuma participacao agendada.</td></tr>';
+            } else {
+                upBody.innerHTML = upcomingArr.map(function(u) {
+                    var d = new Date(u.date + 'T12:00:00');
+                    var dias = ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'];
+                    var dateStr = dias[d.getDay()] + ', ' + d.getDate() + '/' + (d.getMonth()+1);
+                    return '<tr>' +
+                        '<td><strong>' + dateStr + '</strong></td>' +
+                        '<td>' + escapeHtml(EMKT_SOURCE_LABELS[u.source] || u.source) + '</td>' +
+                        '<td><span class="badge badge-published">' + u.count + ' leads</span></td>' +
+                    '</tr>';
+                }).join('');
+            }
+        }
+
+        // Leads table
+        var tbody = document.getElementById('emktLeadsBody');
+        if (!tbody) return;
+        if (filtered.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--gray-500);">Nenhum lead encontrado.</td></tr>';
+            return;
+        }
+        tbody.innerHTML = filtered.slice(0, 200).map(function(l) {
+            var sourceLabel = EMKT_SOURCE_LABELS[l.source] || l.source || '-';
+            var chosenStr = l.chosen_date ? l.chosen_date.split('-').reverse().join('/') : '-';
+            var createdStr = l.created_at ? formatDate(l.created_at) : '-';
+            return '<tr>' +
+                '<td><strong>' + escapeHtml(l.nome || '-') + '</strong></td>' +
+                '<td style="font-size:0.85rem;">' + escapeHtml(l.email || '-') + '</td>' +
+                '<td style="font-size:0.85rem;">' + escapeHtml(l.telefone || '-') + '</td>' +
+                '<td><span style="background:rgba(255,186,26,0.12);color:var(--primary);padding:3px 10px;border-radius:20px;font-size:0.75rem;font-weight:500;">' + escapeHtml(sourceLabel) + '</span></td>' +
+                '<td style="font-size:0.85rem;">' + chosenStr + '</td>' +
+                '<td style="font-size:0.82rem;color:var(--gray-500);">' + createdStr + '</td>' +
+            '</tr>';
+        }).join('');
+    }
+
+    function exportLeadsCsv() {
+        var filter = document.getElementById('emktFilter').value;
+        var data = filter === 'all' ? emktLeads : emktLeads.filter(function(l) { return l.source === filter; });
+        var csv = 'Nome,Email,Telefone,Evento,Data Escolhida,Cadastro\n';
+        data.forEach(function(l) {
+            csv += '"' + (l.nome||'').replace(/"/g,'""') + '","' + (l.email||'') + '","' + (l.telefone||'') + '","' + (l.source||'') + '","' + (l.chosen_date||'') + '","' + (l.created_at||'') + '"\n';
+        });
+        var blob = new Blob([csv], { type: 'text/csv' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'leads-email-marketing-' + new Date().toISOString().split('T')[0] + '.csv';
+        a.click();
+        URL.revokeObjectURL(url);
+        toast('CSV exportado!');
+    }
+
     // ═══ Expose functions to global scope (required for onclick handlers) ═══
     window.showView = showView;
     window.logout = logout;
@@ -3488,6 +3684,8 @@ JSON.stringify(schemaOrg, null, 2) +
     window.handleStoryPhotosUpload = handleStoryPhotosUpload;
     window.saveStoryFromEditor = saveStoryFromEditor;
     window.toggleSidebar = toggleSidebar;
+    window.refreshEmailMkt = refreshEmailMkt;
+    window.exportLeadsCsv = exportLeadsCsv;
     window.openBannerModal = openBannerModal;
     window.closeBannerModal = closeBannerModal;
     window.editBanner = editBanner;
