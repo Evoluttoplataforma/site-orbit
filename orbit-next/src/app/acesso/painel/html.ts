@@ -3614,9 +3614,9 @@ JSON.stringify(schemaOrg, null, 2) +
     function exportLeadsCsv() {
         var filter = document.getElementById('emktFilter').value;
         var data = filter === 'all' ? emktLeads : emktLeads.filter(function(l) { return l.source === filter; });
-        var csv = 'Nome,Email,Telefone,Evento,Data Escolhida,Cadastro\n';
+        var csv = 'Nome,Email,Telefone,Evento,Data Escolhida,Cadastro' + String.fromCharCode(10);
         data.forEach(function(l) {
-            csv += '"' + (l.nome||'').replace(/"/g,'""') + '","' + (l.email||'') + '","' + (l.telefone||'') + '","' + (l.source||'') + '","' + (l.chosen_date||'') + '","' + (l.created_at||'') + '"\n';
+            csv += '"' + (l.nome||'').replace(/"/g,'""') + '","' + (l.email||'') + '","' + (l.telefone||'') + '","' + (l.source||'') + '","' + (l.chosen_date||'') + '","' + (l.created_at||'') + '"' + String.fromCharCode(10);
         });
         var blob = new Blob([csv], { type: 'text/csv' });
         var url = URL.createObjectURL(blob);
