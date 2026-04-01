@@ -11,7 +11,7 @@ export const pageHTML = `
             <!-- Badge -->
             <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,186,26,0.12);border:1px solid rgba(255,186,26,0.3);border-radius:100px;padding:8px 20px;margin-bottom:24px;" data-reveal>
                 <span style="width:10px;height:10px;background:#ff4444;border-radius:50%;display:inline-block;animation:livePulse 1.5s ease-in-out infinite;"></span>
-                <span style="color:#ffba1a;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:1.5px;">MASTERCLASS AO VIVO</span>
+                <span style="color:#ffba1a;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:1.5px;">REUNI&Atilde;O EM GRUPO</span>
             </div>
 
             <!-- Schedule -->
@@ -103,7 +103,7 @@ export const pageHTML = `
         <div class="container" style="max-width:1000px;">
             <div style="text-align:center;margin-bottom:56px;" data-reveal>
                 <span style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,186,26,0.1);border:1px solid rgba(255,186,26,0.25);border-radius:100px;padding:6px 18px;font-size:13px;color:#ffba1a;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">
-                    <i class="fas fa-bullseye"></i> Para quem &eacute; essa masterclass
+                    <i class="fas fa-bullseye"></i> Para quem &eacute; essa reuni&atilde;o
                 </span>
                 <h2 style="font-size:clamp(1.5rem,3vw,2.25rem);font-weight:800;color:#fff;margin-bottom:16px;">
                     Se voc&ecirc; se identifica, essa live &eacute; <span style="color:#ffba1a;">para voc&ecirc;</span>
@@ -881,8 +881,8 @@ export const pageHTML = `
                     <div class="cta-form-card" style="border:1px solid rgba(255,186,26,0.2) !important;">
                         <div style="text-align:center;margin-bottom:8px;">
                             <p id="rdFormDate" style="color:#ffba1a;font-size:14px;font-weight:700;margin:0 0 12px;"><i class="fas fa-calendar-check" style="margin-right:6px;"></i></p>
-                            <h3 style="font-size:22px;font-weight:700;color:#fff;margin-bottom:6px;">Inscreva-se gratuitamente</h3>
-                            <p style="font-size:14px;color:#8B949E;">Preencha e receba o link no seu e-mail.</p>
+                            <h3 style="font-size:22px;font-weight:700;color:#fff;margin-bottom:6px;">Reuni&atilde;o em Grupo</h3>
+                            <p style="font-size:14px;color:#8B949E;">Preencha para garantir sua vaga e receber o link.</p>
                         </div>
 
                         <form id="rdLiveForm" class="lead-form" novalidate>
@@ -911,8 +911,12 @@ export const pageHTML = `
                                 <input type="tel" id="rd-telefone" name="telefone" placeholder="(00) 00000-0000" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
                             </div>
                             <div class="form-group">
-                                <label for="rd-empresa" style="color:#C9D1D9;">Nome da empresa (opcional)</label>
-                                <input type="text" id="rd-empresa" name="empresa" placeholder="Sua empresa" style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
+                                <label for="rd-empresa" style="color:#C9D1D9;">Empresa *</label>
+                                <input type="text" id="rd-empresa" name="empresa" placeholder="Nome da sua empresa" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
+                            </div>
+                            <div class="form-group">
+                                <label for="rd-cargo" style="color:#C9D1D9;">Cargo *</label>
+                                <input type="text" id="rd-cargo" name="cargo" placeholder="Ex: RD, Gerente da Qualidade" required style="color:#000 !important;background:#fff !important;border:1px solid #30363D;">
                             </div>
                             <button type="submit" class="btn btn-primary btn-lg btn-submit hero-cta-glow" style="cursor:pointer;border:none;width:100%;">
                                 QUERO PARTICIPAR
@@ -1131,6 +1135,8 @@ export const pageHTML = `
                 nome: formData.get('nome'),
                 email: formData.get('email'),
                 telefone: formData.get('telefone'),
+                empresa: formData.get('empresa'),
+                cargo: formData.get('cargo'),
                 source: 'live-rd-consultores',
                 chosen_date: chosenDate ? chosenDate.value : null,
                 utm_source: g('h_utm_source') || null,
@@ -1146,6 +1152,7 @@ export const pageHTML = `
                 originPage: g('h_originPage') || null
             };
 
+            // 1. Save to Supabase
             fetch(SUPABASE_URL + '/rest/v1/live_orbit_leads', {
                 method: 'POST',
                 headers: {
@@ -1155,17 +1162,25 @@ export const pageHTML = `
                     'Prefer': 'return=minimal'
                 },
                 body: JSON.stringify(data)
-            }).then(function(res) {
-                if (!res.ok) throw new Error('Erro ao salvar');
-                // Send confirmation email
-                fetch(SUPABASE_URL + '/functions/v1/send-rd-confirmation', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ nome: data.nome, email: data.email })
-                }).catch(function() {});
-                // Show success
-                form.style.display = 'none';
-                document.getElementById('rdFormSuccess').style.display = 'block';
+            }).catch(function() {});
+
+            // 2. Send to Pipedrive
+            fetch(SUPABASE_URL + '/functions/v1/pipedrive-create-deal', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).catch(function() {});
+
+            // 3. Send confirmation email
+            fetch(SUPABASE_URL + '/functions/v1/send-rd-confirmation', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nome: data.nome, email: data.email })
+            }).catch(function() {});
+
+            // 4. Show success
+            form.style.display = 'none';
+            document.getElementById('rdFormSuccess').style.display = 'block';
             }).catch(function(err) {
                 console.error('Erro:', err);
                 btn.disabled = false;
