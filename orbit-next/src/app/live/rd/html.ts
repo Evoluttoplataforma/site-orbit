@@ -348,8 +348,8 @@ export const pageHTML = `
 
                 <!-- Bottom CTA -->
                 <div style="text-align:center;margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.06);" data-reveal>
-                    <p style="color:rgba(255,255,255,0.5);font-size:1.1rem;margin-bottom:20px;">Veja tudo isso funcionando <strong style="color:#fff;">ao vivo na live.</strong></p>
-                    <a onclick="document.getElementById('inscreva-se').scrollIntoView({behavior:'smooth'})" class="btn btn-primary btn-lg" style="cursor:pointer;"><i class="fa-brands fa-youtube" style="margin-right:8px;"></i>QUERO PARTICIPAR DA LIVE</a>
+                    <p style="color:rgba(255,255,255,0.5);font-size:1.1rem;margin-bottom:20px;">Veja tudo isso funcionando <strong style="color:#fff;">ao vivo.</strong></p>
+                    <a onclick="document.getElementById('inscreva-se').scrollIntoView({behavior:'smooth'})" class="btn btn-primary btn-lg" style="cursor:pointer;">QUERO PARTICIPAR</a>
                 </div>
 
                 <script>
@@ -945,13 +945,26 @@ export const pageHTML = `
         if (window.__rdCalInit) return;
         window.__rdCalInit = true;
 
-        var eventDays = [1, 3]; // Monday=1, Wednesday=3
+        var eventDays = [1, 3];
         var startDate = new Date('2026-04-06');
         var currentMonth = new Date().getMonth();
         var currentYear = new Date().getFullYear();
         var selectedDate = null;
+        var MAX_SPOTS = 15;
+        var spotCounts = {};
 
         var months = ['Janeiro','Fevereiro','Mar\u00e7o','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+
+        function loadSpots() {
+            fetch('https://tnpzoklepkvktbqouctf.supabase.co/functions/v1/get-event-spots', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ source: 'live-rd-consultores' })
+            }).then(function(r) { return r.json(); }).then(function(data) {
+                if (data.counts) spotCounts = data.counts;
+                renderCalendar();
+            }).catch(function() {});
+        }
 
         function renderCalendar() {
             var grid = document.getElementById('rdCalGrid');
@@ -978,14 +991,23 @@ export const pageHTML = `
                 var dateStr = currentYear + '-' + String(currentMonth+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
 
                 if (isEvent && !isPast && !isBeforeStart) {
-                    html += '<button onclick=\"window.__selectRDDate(\\'' + dateStr + '\\')\" style=\"' +
-                        'background:' + (isSelected ? '#ffba1a' : 'rgba(255,186,26,0.12)') + ';' +
-                        'color:' + (isSelected ? '#0D1117' : '#ffba1a') + ';' +
-                        'border:2px solid ' + (isSelected ? '#ffba1a' : 'rgba(255,186,26,0.3)') + ';' +
-                        'border-radius:10px;padding:10px 0;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;' +
-                        '\">' + d + '</button>';
+                    var taken = spotCounts[dateStr] || 0;
+                    var remaining = Math.max(0, MAX_SPOTS - taken);
+                    var isFull = remaining === 0;
+                    var spotColor = remaining <= 3 ? '#ff4444' : remaining <= 7 ? '#F59E0B' : '#3FB950';
+
+                    if (isFull) {
+                        html += '<div style="background:rgba(255,255,255,0.03);border:2px solid rgba(255,255,255,0.06);border-radius:10px;padding:6px 0;text-align:center;"><span style="font-size:14px;color:#484F58;font-weight:700;">' + d + '</span><br><span style="font-size:9px;color:#ff4444;font-weight:600;">ESGOTADO</span></div>';
+                    } else {
+                        html += '<button onclick="window.__selectRDDate(' + "'" + dateStr + "'" + ')" style="' +
+                            'background:' + (isSelected ? '#ffba1a' : 'rgba(255,186,26,0.12)') + ';' +
+                            'color:' + (isSelected ? '#0D1117' : '#ffba1a') + ';' +
+                            'border:2px solid ' + (isSelected ? '#ffba1a' : 'rgba(255,186,26,0.3)') + ';' +
+                            'border-radius:10px;padding:6px 0;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;text-align:center;' +
+                            '">' + d + '<br><span style="font-size:9px;color:' + (isSelected ? '#0D1117' : spotColor) + ';font-weight:600;">' + remaining + ' vagas</span></button>';
+                    }
                 } else {
-                    html += '<div style=\"color:' + (isPast || isBeforeStart ? '#30363D' : '#484F58') + ';padding:10px 0;font-size:14px;\">' + d + '</div>';
+                    html += '<div style="color:' + (isPast || isBeforeStart ? '#30363D' : '#484F58') + ';padding:10px 0;font-size:14px;">' + d + '</div>';
                 }
             }
             grid.innerHTML = html;
@@ -1025,7 +1047,7 @@ export const pageHTML = `
             renderCalendar();
         });
 
-        renderCalendar();
+        loadSpots();
     })();
     </script>
 
