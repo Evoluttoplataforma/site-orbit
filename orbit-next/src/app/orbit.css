@@ -2236,7 +2236,6 @@ ul { list-style: none; }
 .rfm-rocket-flame span {
   width: 4px;
   border-radius: 0 0 50% 50%;
-  animation: rfm-flame 0.5s alternate infinite;
 }
 .rfm-rocket-flame span:nth-child(1) { height: 14px; background: #F59E0B; animation-delay: 0s; }
 .rfm-rocket-flame span:nth-child(2) { height: 20px; background: #EF4444; animation-delay: 0.1s; }
