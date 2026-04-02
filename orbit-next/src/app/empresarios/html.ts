@@ -3433,18 +3433,7 @@ export const pageHTML = `
                     </ul>
                 </div>
 
-                <div class="footer-column">
-                    <h5 data-i18n="footer.platform">Plataforma</h5>
-                    <ul>
-                        <li><a href="/agentes" data-i18n="footer.agents">Agentes de IA</a></li>
-                        <li><a href="/processos">Processos</a></li>
-                        <li><a href="/indicadores">Indicadores</a></li>
-                        <li><a href="/tarefas">Tarefas</a></li>
-                        <li><a href="/competencias">Competências</a></li>
-                        <li><a href="/auditorias">Auditorias</a></li>
-                        <li><a href="/preco" data-i18n="footer.plans">Planos e Preços</a></li>
-                    </ul>
-                </div>
+                
 
                 <div class="footer-column">
                     <h5 data-i18n="footer.content">Conteúdo</h5>
