@@ -67,7 +67,7 @@ export const pageHTML = `
                 <div class="footer-column">
                     <h5 data-i18n="footer.contact">Contato</h5>
                     <ul class="footer-contact">
-                        <li><i class="fas fa-phone"></i> (48) 99120-6282</li>
+                        <li><i class="fas fa-phone"></i> (48) 9814-9776</li>
                         <li><i class="fas fa-map-marker-alt"></i> Square SC, Florianópolis - SC</li>
                     </ul>
                 </div>
