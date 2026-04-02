@@ -783,6 +783,7 @@ export const pageHTML = `
                     <h5 data-i18n="footer.contact">Contato</h5>
                     <ul class="footer-contact">
                         <li><i class="fas fa-phone"></i> (48) 9814-9776</li>
+                        <li><a href="mailto:contato@orbitgestao.com.br" style="color:inherit;text-decoration:none;"><i class="fas fa-envelope"></i> contato@orbitgestao.com.br</a></li>
                         <li><i class="fas fa-map-marker-alt"></i> Square SC, Florianópolis - SC</li>
                     </ul>
                 </div>
