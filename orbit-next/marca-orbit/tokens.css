@@ -1,0 +1,149 @@
+/* ═══════════════════════════════════════════
+   Orbit Gestão — Design Tokens
+   Importar em qualquer projeto para herdar
+   a identidade visual completa.
+   ═══════════════════════════════════════════ */
+
+:root {
+  /* ── Cores Primárias ── */
+  --primary: #ffba1a;
+  --primary-dark: #e6a200;
+  --primary-light: #ffca4a;
+  --primary-glow: rgba(255, 186, 26, 0.3);
+
+  /* ── Escuros ── */
+  --black: #0D1117;
+  --black-soft: #161B22;
+  --black-card: #1C2333;
+  --white: #ffffff;
+
+  /* ── Cinzas ── */
+  --gray-50: #161B22;
+  --gray-100: #1C2333;
+  --gray-200: #30363D;
+  --gray-300: #484F58;
+  --gray-400: #8B949E;
+  --gray-500: #8B949E;
+  --gray-600: #C9D1D9;
+  --gray-700: #C9D1D9;
+  --gray-800: #E6EDF3;
+  --gray-900: #E6EDF3;
+
+  /* ── Light Mode ── */
+  --light-bg: #FAFBFC;
+  --light-bg-alt: #F0F2F5;
+  --light-card: #FFFFFF;
+  --light-border: rgba(0, 0, 0, 0.06);
+  --light-text: #1A1D23;
+  --light-text-secondary: #5A6069;
+  --light-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  --light-shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.08);
+
+  /* ── Status ── */
+  --success: #3FB950;
+  --error: #F85149;
+
+  /* ── Sombras ── */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px var(--primary-glow);
+
+  /* ── Layout ── */
+  --max-width: 1200px;
+  --container-px: 24px;
+  --section-py: 140px;
+
+  /* ── Border Radius ── */
+  --radius-sm: 8px;
+  --radius: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 50px;
+  --card-radius: 14px;
+
+  /* ── Transições ── */
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: all 0.15s ease;
+  --ease-snap: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ── Tipografia ── */
+  --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  --text-hero: clamp(36px, 5vw, 64px);
+  --text-h2: clamp(28px, 4vw, 44px);
+  --text-h2-lg: clamp(36px, 6vw, 64px);
+  --text-h3: clamp(24px, 3vw, 34px);
+  --text-body-lg: 18px;
+  --text-body: 16px;
+  --text-button: 15px;
+  --text-caption: 14px;
+  --text-label: 0.85rem;
+  --text-tag: 0.6rem;
+
+  --leading-tight: 1.1;
+  --leading-heading: 1.15;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.7;
+
+  /* ── Gradientes (use com background:) ── */
+  --gradient-gold: linear-gradient(135deg, #ffba1a, #ffca4a);
+  --gradient-gold-subtle: linear-gradient(135deg, rgba(255,186,26,0.1), rgba(255,186,26,0.05));
+  --gradient-dark: linear-gradient(135deg, #1C2333 0%, #13161D 100%);
+  --gradient-dark-alt: linear-gradient(160deg, #0D1117 0%, #161B22 100%);
+  --gradient-overlay: linear-gradient(180deg, rgba(13,17,23,0.3) 0%, rgba(13,17,23,0.85) 100%);
+  --gradient-text-fade: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.55) 100%);
+
+  /* ── Bordas ── */
+  --border-dark: 1px solid rgba(255, 255, 255, 0.08);
+  --border-dark-hover: 1px solid rgba(255, 186, 26, 0.2);
+  --border-light: 1px solid rgba(0, 0, 0, 0.06);
+
+  /* ── Blur ── */
+  --blur-header: blur(24px);
+  --blur-header-scroll: blur(30px);
+  --blur-card: blur(15px);
+}
+
+/* ── Animações Reutilizáveis ── */
+
+@keyframes ctaGlow {
+  0%, 100% { box-shadow: 0 0 10px rgba(255, 186, 26, 0.3); }
+  50%      { box-shadow: 0 0 25px rgba(255, 186, 26, 0.3); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.7; }
+  50%      { opacity: 1; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.2; }
+}

@@ -1134,6 +1134,8 @@ export const pageHTML = `
 
         var SUPABASE_URL = 'https://tnpzoklepkvktbqouctf.supabase.co';
         var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRucHpva2xlcGt2a3RicW91Y3RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2MjAxNjcsImV4cCI6MjA4NzE5NjE2N30.hXrOhbIm9DnxaItT1e9g6B6d9mhAmeoLKJ2DuHlABFU';
+        var ORBIT_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
+        var ORBIT_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
 
         var form = document.getElementById('rdLiveForm');
         if (!form) return;
@@ -1167,12 +1169,18 @@ export const pageHTML = `
                 session_id: g('h_session_id') || null
             };
 
-            // Send all 3 in parallel, wait for Pipedrive, then redirect
+            // Send em paralelo: Templum + MKT ORBIT (dual-write) + Pipedrive + Email
             Promise.all([
-                // 1. Supabase
+                // 1a. Supabase Templum
                 fetch(SUPABASE_URL + '/rest/v1/live_orbit_leads', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Prefer': 'return=minimal' },
+                    body: JSON.stringify(data)
+                }).catch(function() {}),
+                // 1b. Supabase MKT ORBIT
+                fetch(ORBIT_URL + '/rest/v1/live_orbit_leads', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'apikey': ORBIT_KEY, 'Authorization': 'Bearer ' + ORBIT_KEY, 'Prefer': 'return=minimal' },
                     body: JSON.stringify(data)
                 }).catch(function() {}),
                 // 2. Pipedrive

@@ -41,34 +41,45 @@ function buildTestPayload(keys) {
   return payload;
 }
 
-const SUPABASE_URL = 'https://tnpzoklepkvktbqouctf.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRucHpva2xlcGt2a3RicW91Y3RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2MjAxNjcsImV4cCI6MjA4NzE5NjE2N30.hXrOhbIm9DnxaItT1e9g6B6d9mhAmeoLKJ2DuHlABFU';
+const TARGETS = [
+  {
+    label: 'Templum',
+    url: 'https://tnpzoklepkvktbqouctf.supabase.co',
+    key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRucHpva2xlcGt2a3RicW91Y3RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2MjAxNjcsImV4cCI6MjA4NzE5NjE2N30.hXrOhbIm9DnxaItT1e9g6B6d9mhAmeoLKJ2DuHlABFU',
+  },
+  {
+    label: 'MKT ORBIT',
+    url: 'https://yfpdrckyuxltvznqfqgh.supabase.co',
+    key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g',
+  },
+];
 
 async function testForm({ name, path }) {
   const source = readFileSync(path, 'utf8');
   const keys = extractPayloadKeys(source);
   const payload = buildTestPayload(keys);
 
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/live_orbit_leads`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      apikey: SUPABASE_KEY,
-      Authorization: `Bearer ${SUPABASE_KEY}`,
-      Prefer: 'return=minimal',
-    },
-    body: JSON.stringify(payload),
-  });
+  for (const target of TARGETS) {
+    const res = await fetch(`${target.url}/rest/v1/live_orbit_leads`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        apikey: target.key,
+        Authorization: `Bearer ${target.key}`,
+        Prefer: 'return=minimal',
+      },
+      body: JSON.stringify(payload),
+    });
 
-  if (!res.ok) {
-    const body = await res.text();
-    throw new Error(
-      `Form ${name} REJEITADO pelo Supabase (HTTP ${res.status}):\n  ${body}\n  Campos enviados: ${keys.join(', ')}`
-    );
+    if (!res.ok) {
+      const body = await res.text();
+      throw new Error(
+        `Form ${name} REJEITADO em ${target.label} (HTTP ${res.status}):\n  ${body}\n  Campos enviados: ${keys.join(', ')}`
+      );
+    }
+    console.log(`  OK ${name} -> ${target.label}`);
   }
-  // Rows ficam marcados com source='smoke-test' para limpeza posterior
-
-  console.log(`OK ${name} (${keys.length} campos validados)`);
+  console.log(`PASS ${name} (${keys.length} campos x ${TARGETS.length} destinos)`);
 }
 
 let failed = false;

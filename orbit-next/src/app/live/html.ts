@@ -1054,6 +1054,8 @@ export const pageHTML = `
 
         var SUPABASE_URL = 'https://tnpzoklepkvktbqouctf.supabase.co';
         var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRucHpva2xlcGt2a3RicW91Y3RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2MjAxNjcsImV4cCI6MjA4NzE5NjE2N30.hXrOhbIm9DnxaItT1e9g6B6d9mhAmeoLKJ2DuHlABFU';
+        var ORBIT_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
+        var ORBIT_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
 
         var form = document.getElementById('liveForm');
         if (!form) return;
@@ -1085,18 +1087,30 @@ export const pageHTML = `
                 session_id: g('h_session_id') || null
             };
 
-            // Save lead to Supabase
-            fetch(SUPABASE_URL + '/rest/v1/live_orbit_leads', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'apikey': SUPABASE_KEY,
-                    'Authorization': 'Bearer ' + SUPABASE_KEY,
-                    'Prefer': 'return=minimal'
-                },
-                body: JSON.stringify(data)
-            }).then(function(res) {
-                if (!res.ok) throw new Error('Erro ao salvar');
+            // Save lead nos dois Supabases em paralelo (Templum + MKT ORBIT)
+            var saveTo = function(url, key) {
+                return fetch(url + '/rest/v1/live_orbit_leads', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': key,
+                        'Authorization': 'Bearer ' + key,
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify(data)
+                });
+            };
+            Promise.allSettled([
+                saveTo(SUPABASE_URL, SUPABASE_KEY),
+                saveTo(ORBIT_URL, ORBIT_KEY)
+            ]).then(function(results) {
+                var anyOk = results.some(function(r) { return r.status === 'fulfilled' && r.value.ok; });
+                if (!anyOk) throw new Error('Erro ao salvar');
+                results.forEach(function(r, i) {
+                    if (r.status === 'rejected' || !r.value.ok) {
+                        console.warn('Save falhou no destino', i, r);
+                    }
+                });
                 // Send confirmation email via Edge Function (fire and forget)
                 fetch(SUPABASE_URL + '/functions/v1/send-live-confirmation', {
                     method: 'POST',
