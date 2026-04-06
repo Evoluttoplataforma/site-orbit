@@ -137,41 +137,108 @@ export default function CalendarPicker({ onSelect }: CalendarPickerProps) {
   const past = isTimePast(SLOT_TIME);
   const disabled = past || full;
 
+  // Tokens
+  const T = {
+    bg: '#0d1117',
+    border: 'rgba(255,255,255,0.1)',
+    text: '#e6edf3',
+    textMuted: '#8b949e',
+    textDim: 'rgba(139,148,158,0.4)',
+    primary: '#ffba1a',
+  };
+
   return (
-    <div className="animate-fade-in-up space-y-6">
-      <div className="bg-secondary rounded-xl p-4 border border-border">
-        <div className="flex items-center gap-2 mb-1">
-          <span className="text-lg">📅</span>
-          <span className="font-bold text-foreground">Agenda hoje</span>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', animation: 'fade-in-up 0.4s ease-out' }}>
+      {/* "Agenda hoje" pill */}
+      <div
+        style={{
+          background: 'rgba(255,255,255,0.04)',
+          borderRadius: '14px',
+          padding: '14px 18px',
+          border: `1px solid ${T.border}`,
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+          <span style={{ fontSize: '18px' }}>📅</span>
+          <span style={{ fontWeight: 700, color: T.text, fontSize: '15px' }}>Agenda hoje</span>
         </div>
-        <p className="text-muted-foreground text-sm">Para sua demonstração gratuita</p>
+        <p style={{ color: T.textMuted, fontSize: '13px', margin: 0 }}>Para sua demonstração gratuita</p>
       </div>
 
-      <div className="flex justify-center">
-        <div className="flex items-center gap-2 bg-secondary rounded-full px-4 py-2 text-sm text-muted-foreground border border-border">
-          <MapPin className="w-3.5 h-3.5" />
+      {/* Hoje é ... pill */}
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            background: 'rgba(255,255,255,0.04)',
+            borderRadius: '999px',
+            padding: '8px 16px',
+            fontSize: '13px',
+            color: T.textMuted,
+            border: `1px solid ${T.border}`,
+          }}
+        >
+          <MapPin size={13} />
           Hoje é {todayWeekday}, {nowStr}
         </div>
       </div>
 
-      <div className="flex items-center justify-between">
-        <button onClick={prevMonth} className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-muted transition-colors">
-          <ChevronLeft className="w-4 h-4" />
+      {/* Month nav */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 4px' }}>
+        <button
+          onClick={prevMonth}
+          style={{
+            width: '36px',
+            height: '36px',
+            borderRadius: '50%',
+            border: `1px solid ${T.border}`,
+            background: 'transparent',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            color: T.text,
+          }}
+        >
+          <ChevronLeft size={16} />
         </button>
-        <h3 className="font-semibold text-lg text-foreground">{monthNames[currentMonth]} {currentYear}</h3>
-        <button onClick={nextMonth} className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-muted transition-colors">
-          <ChevronRight className="w-4 h-4" />
+        <h3 style={{ fontWeight: 600, fontSize: '17px', color: T.text, margin: 0 }}>
+          {monthNames[currentMonth]} {currentYear}
+        </h3>
+        <button
+          onClick={nextMonth}
+          style={{
+            width: '36px',
+            height: '36px',
+            borderRadius: '50%',
+            border: `1px solid ${T.border}`,
+            background: 'transparent',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            color: T.text,
+          }}
+        >
+          <ChevronRight size={16} />
         </button>
       </div>
 
-      <div className="border border-border rounded-xl p-4">
-        <div className="grid grid-cols-7 gap-1 mb-2">
+      {/* Calendar grid */}
+      <div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '4px', marginBottom: '8px' }}>
           {WEEKDAYS.map((d, i) => (
-            <div key={i} className="text-center text-xs text-muted-foreground font-medium py-1">{d}</div>
+            <div key={i} style={{ textAlign: 'center', fontSize: '12px', color: T.textMuted, fontWeight: 500, padding: '6px 0' }}>
+              {d}
+            </div>
           ))}
         </div>
-        <div className="grid grid-cols-7 gap-1">
-          {Array.from({ length: firstDayOfMonth }).map((_, i) => <div key={`empty-${i}`} />)}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '4px' }}>
+          {Array.from({ length: firstDayOfMonth }).map((_, i) => (
+            <div key={`empty-${i}`} />
+          ))}
           {Array.from({ length: daysInMonth }).map((_, i) => {
             const day = i + 1;
             const dPast = isPast(day);
@@ -187,23 +254,54 @@ export default function CalendarPicker({ onSelect }: CalendarPickerProps) {
             })();
             const isDisabled = dPast || weekend || beyondLimit || !!holidayName;
             const selected = selectedDay === day;
-            const todayDay = isToday(day);
+
+            const dayStyle: React.CSSProperties = {
+              height: '44px',
+              width: '100%',
+              borderRadius: '999px',
+              border: 'none',
+              fontSize: '14px',
+              fontFamily: 'inherit',
+              cursor: isDisabled ? 'not-allowed' : 'pointer',
+              transition: 'all 0.15s',
+              position: 'relative',
+              background: selected ? '#ffffff' : 'transparent',
+              color: selected ? '#0d1117' : isDisabled ? T.textDim : T.textMuted,
+              fontWeight: selected ? 700 : 400,
+            };
+
             return (
               <button
                 key={day}
                 disabled={isDisabled}
                 title={holidayName || undefined}
-                onClick={() => { setSelectedDay(day); setSelectedTime(null); setTimeout(() => timeSlotsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 300); }}
-                className={`h-10 w-full rounded-full text-sm transition-all duration-200 relative ${
-                  selected ? 'bg-foreground text-background font-bold'
-                  : todayDay ? 'bg-muted text-foreground font-medium'
-                  : isDisabled ? 'text-muted-foreground/30 cursor-not-allowed'
-                  : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-                }`}
+                onClick={() => {
+                  setSelectedDay(day);
+                  setSelectedTime(null);
+                  setTimeout(() => timeSlotsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 300);
+                }}
+                style={dayStyle}
+                onMouseEnter={(e) => {
+                  if (!isDisabled && !selected) e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+                }}
+                onMouseLeave={(e) => {
+                  if (!selected) e.currentTarget.style.background = 'transparent';
+                }}
               >
                 {day}
                 {holidayName && !dPast && (
-                  <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-destructive" />
+                  <span
+                    style={{
+                      position: 'absolute',
+                      bottom: '4px',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      width: '4px',
+                      height: '4px',
+                      borderRadius: '50%',
+                      background: '#f85149',
+                    }}
+                  />
                 )}
               </button>
             );
@@ -211,49 +309,68 @@ export default function CalendarPicker({ onSelect }: CalendarPickerProps) {
         </div>
       </div>
 
+      {/* Time slots */}
       {selectedDay && (
-        <div ref={timeSlotsRef} className="animate-fade-in-up">
-          <h4 className="text-sm font-medium text-muted-foreground mb-3">
+        <div ref={timeSlotsRef} style={{ animation: 'fade-in-up 0.4s ease-out' }}>
+          <h4 style={{ fontSize: '13px', fontWeight: 500, color: T.textMuted, marginBottom: '12px', margin: '0 0 12px' }}>
             Horários para {selectedDay} de {monthNames[currentMonth].toLowerCase()}
           </h4>
           {loadingSlots ? (
-            <div className="flex justify-center py-4">
-              <Loader2 className="w-5 h-5 animate-spin text-muted-foreground" />
+            <div style={{ display: 'flex', justifyContent: 'center', padding: '16px' }}>
+              <Loader2 size={20} style={{ animation: 'spin 1s linear infinite', color: T.textMuted }} />
             </div>
           ) : (
-            <div className="flex flex-col gap-2">
-              <button
-                disabled={disabled}
-                onClick={() => handleTimeSelect(SLOT_TIME)}
-                className={`py-3 px-4 rounded-xl border text-sm font-medium transition-all duration-200 ${
-                  disabled ? 'border-border bg-secondary text-muted-foreground/30 cursor-not-allowed'
-                  : selectedTime === SLOT_TIME ? 'border-primary bg-primary/10 text-primary'
-                  : `border-border bg-secondary text-foreground hover:border-primary/50 ${getScarcityBorder(remaining)}`
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <span>{SLOT_TIME}</span>
-                  <div className="flex items-center gap-2">
-                    {full ? (
-                      <span className="text-xs text-muted-foreground/50">Esgotado</span>
-                    ) : (
-                      <div className="flex items-center gap-1">
-                        {remaining <= 4 && <AlertTriangle className="w-3 h-3 text-orange-500" />}
-                        <Users className="w-3 h-3 text-muted-foreground" />
-                        <span className={`text-xs ${getScarcityColor(remaining)}`}>
-                          {remaining === 1 ? 'Última vaga!' : `${remaining} vagas`}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-                {slotCount > 0 && !full && (
-                  <div className="text-[10px] text-muted-foreground mt-1 text-right">
-                    {slotCount} {slotCount === 1 ? 'inscrito' : 'inscritos'}
-                  </div>
+            <button
+              disabled={disabled}
+              onClick={() => handleTimeSelect(SLOT_TIME)}
+              style={{
+                width: '100%',
+                padding: '14px 20px',
+                borderRadius: '14px',
+                border: `1px solid ${
+                  disabled
+                    ? T.border
+                    : selectedTime === SLOT_TIME
+                    ? T.primary
+                    : remaining <= 2
+                    ? 'rgba(248,81,73,0.5)'
+                    : remaining <= 4
+                    ? 'rgba(251,146,60,0.5)'
+                    : T.border
+                }`,
+                background: selectedTime === SLOT_TIME ? 'rgba(255,186,26,0.1)' : 'rgba(255,255,255,0.04)',
+                fontFamily: 'inherit',
+                fontSize: '14px',
+                cursor: disabled ? 'not-allowed' : 'pointer',
+                transition: 'all 0.15s',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}
+            >
+              <span style={{ color: disabled ? T.textDim : selectedTime === SLOT_TIME ? T.primary : T.text, fontWeight: 500 }}>
+                {SLOT_TIME}
+              </span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                {full ? (
+                  <span style={{ fontSize: '12px', color: T.textDim }}>Esgotado</span>
+                ) : (
+                  <>
+                    {remaining <= 4 && <AlertTriangle size={12} color="#fb923c" />}
+                    <Users size={12} color={T.textMuted} />
+                    <span
+                      style={{
+                        fontSize: '12px',
+                        color: remaining <= 2 ? '#f85149' : remaining <= 4 ? '#fb923c' : T.textMuted,
+                        fontWeight: remaining <= 4 ? 600 : 400,
+                      }}
+                    >
+                      {remaining === 1 ? 'Última vaga!' : `${remaining} vagas`}
+                    </span>
+                  </>
                 )}
-              </button>
-            </div>
+              </div>
+            </button>
           )}
         </div>
       )}

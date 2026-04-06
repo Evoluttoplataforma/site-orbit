@@ -15,13 +15,11 @@ export default function ChatHeader({ currentStep, totalSteps }: ChatHeaderProps)
       <div
         style={{
           width: '100%',
-          maxWidth: '720px',
-          margin: '0 auto',
-          padding: '14px 20px',
+          padding: '14px 28px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: '16px',
+          gap: '24px',
         }}
       >
         {/* Logo + nome */}
