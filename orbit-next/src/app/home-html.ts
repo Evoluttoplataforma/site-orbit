@@ -3608,7 +3608,7 @@ export const pageHTML = `
                     <ul class="price-v2__features">
                         <li><i class="fas fa-users"></i> Até 50 usuários</li>
                     </ul>
-                    <a href="https://app.orbitgestao.com.br/checkout?plan=f4c12fc1-1f7c-42ec-8591-af84bbae26ed&cycle=monthly" data-checkout-monthly="https://app.orbitgestao.com.br/checkout?plan=f4c12fc1-1f7c-42ec-8591-af84bbae26ed&cycle=monthly" data-checkout-yearly="https://app.orbitgestao.com.br/checkout?plan=f4c12fc1-1f7c-42ec-8591-af84bbae26ed&cycle=yearly" target="_blank" rel="noopener" class="price-v2__cta">COMECE AGORA <i class="fas fa-chevron-right"></i></a>
+                    <a href="https://app.orbitgestao.com.br/checkout?plan=f4c12fc1-1f7c-42ec-8591-af84bbae26ed&cycle=monthly" data-popup-target="https://app.orbitgestao.com.br/checkout?plan=f4c12fc1-1f7c-42ec-8591-af84bbae26ed&cycle=monthly" data-popup-plan="Smart" data-checkout-monthly="https://app.orbitgestao.com.br/checkout?plan=f4c12fc1-1f7c-42ec-8591-af84bbae26ed&cycle=monthly" data-checkout-yearly="https://app.orbitgestao.com.br/checkout?plan=f4c12fc1-1f7c-42ec-8591-af84bbae26ed&cycle=yearly" rel="noopener" class="price-v2__cta">COMECE AGORA <i class="fas fa-chevron-right"></i></a>
                 </div>
 
                 <!-- Pró (featured) -->
@@ -3636,7 +3636,7 @@ export const pageHTML = `
                     <ul class="price-v2__features">
                         <li><i class="fas fa-users"></i> Até 100 usuários</li>
                     </ul>
-                    <a href="https://app.orbitgestao.com.br/checkout?plan=91a1cca0-acc3-4eb8-ba32-e705d7d7970d&cycle=monthly" data-checkout-monthly="https://app.orbitgestao.com.br/checkout?plan=91a1cca0-acc3-4eb8-ba32-e705d7d7970d&cycle=monthly" data-checkout-yearly="https://app.orbitgestao.com.br/checkout?plan=91a1cca0-acc3-4eb8-ba32-e705d7d7970d&cycle=yearly" target="_blank" rel="noopener" class="price-v2__cta price-v2__cta--gold">COMECE AGORA <i class="fas fa-chevron-right"></i></a>
+                    <a href="https://app.orbitgestao.com.br/checkout?plan=91a1cca0-acc3-4eb8-ba32-e705d7d7970d&cycle=monthly" data-popup-target="https://app.orbitgestao.com.br/checkout?plan=91a1cca0-acc3-4eb8-ba32-e705d7d7970d&cycle=monthly" data-popup-plan="Pró" data-checkout-monthly="https://app.orbitgestao.com.br/checkout?plan=91a1cca0-acc3-4eb8-ba32-e705d7d7970d&cycle=monthly" data-checkout-yearly="https://app.orbitgestao.com.br/checkout?plan=91a1cca0-acc3-4eb8-ba32-e705d7d7970d&cycle=yearly" rel="noopener" class="price-v2__cta price-v2__cta--gold">COMECE AGORA <i class="fas fa-chevron-right"></i></a>
                 </div>
 
                 <!-- Ultra -->
@@ -3661,7 +3661,7 @@ export const pageHTML = `
                     <ul class="price-v2__features">
                         <li><i class="fas fa-users"></i> Até 300 usuários</li>
                     </ul>
-                    <a href="https://app.orbitgestao.com.br/checkout?plan=5033269b-89e4-46e9-9c7e-7f2634df0cd2&cycle=monthly" data-checkout-monthly="https://app.orbitgestao.com.br/checkout?plan=5033269b-89e4-46e9-9c7e-7f2634df0cd2&cycle=monthly" data-checkout-yearly="https://app.orbitgestao.com.br/checkout?plan=5033269b-89e4-46e9-9c7e-7f2634df0cd2&cycle=yearly" target="_blank" rel="noopener" class="price-v2__cta">COMECE AGORA <i class="fas fa-chevron-right"></i></a>
+                    <a href="https://app.orbitgestao.com.br/checkout?plan=5033269b-89e4-46e9-9c7e-7f2634df0cd2&cycle=monthly" data-popup-target="https://app.orbitgestao.com.br/checkout?plan=5033269b-89e4-46e9-9c7e-7f2634df0cd2&cycle=monthly" data-popup-plan="Ultra" data-checkout-monthly="https://app.orbitgestao.com.br/checkout?plan=5033269b-89e4-46e9-9c7e-7f2634df0cd2&cycle=monthly" data-checkout-yearly="https://app.orbitgestao.com.br/checkout?plan=5033269b-89e4-46e9-9c7e-7f2634df0cd2&cycle=yearly" rel="noopener" class="price-v2__cta">COMECE AGORA <i class="fas fa-chevron-right"></i></a>
                 </div>
             </div>
 
@@ -4123,7 +4123,10 @@ export const pageHTML = `
                         equiv.textContent = 'Equivalente a: R$ ' + card.dataset.planAnnualEq + '/mês';
                         equiv.style.display = 'block';
                         if (offBadge) offBadge.style.display = 'inline-block';
-                        if (cta && cta.dataset.checkoutYearly) cta.setAttribute('href', cta.dataset.checkoutYearly);
+                        if (cta && cta.dataset.checkoutYearly) {
+                            cta.setAttribute('href', cta.dataset.checkoutYearly);
+                            cta.setAttribute('data-popup-target', cta.dataset.checkoutYearly);
+                        }
                     } else {
                         // Show monthly
                         amount.textContent = card.dataset.planMonthly;
@@ -4131,7 +4134,10 @@ export const pageHTML = `
                         original.style.display = 'none';
                         equiv.style.display = 'none';
                         if (offBadge) offBadge.style.display = 'none';
-                        if (cta && cta.dataset.checkoutMonthly) cta.setAttribute('href', cta.dataset.checkoutMonthly);
+                        if (cta && cta.dataset.checkoutMonthly) {
+                            cta.setAttribute('href', cta.dataset.checkoutMonthly);
+                            cta.setAttribute('data-popup-target', cta.dataset.checkoutMonthly);
+                        }
                     }
                 });
             }

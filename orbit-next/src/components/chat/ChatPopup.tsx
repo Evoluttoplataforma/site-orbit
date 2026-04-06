@@ -52,8 +52,13 @@ const inputEl: React.CSSProperties = {
   padding: 0,
 };
 
+type PopupMode = 'chat' | 'checkout';
+
 export default function ChatPopup() {
   const [open, setOpen] = useState(false);
+  const [mode, setMode] = useState<PopupMode>('chat');
+  const [redirectUrl, setRedirectUrl] = useState<string>('/chat');
+  const [planLabel, setPlanLabel] = useState<string>('');
   const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [country, setCountry] = useState(COUNTRIES[0]);
@@ -69,11 +74,27 @@ export default function ChatPopup() {
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      const link = target.closest('a');
+      const link = target.closest('a') as HTMLAnchorElement | null;
       if (!link) return;
       const href = link.getAttribute('href');
+
+      // Modo checkout: link tem data-popup-target com URL externa
+      const popupTarget = link.getAttribute('data-popup-target');
+      if (popupTarget) {
+        e.preventDefault();
+        setMode('checkout');
+        setRedirectUrl(popupTarget);
+        setPlanLabel(link.getAttribute('data-popup-plan') || '');
+        setOpen(true);
+        return;
+      }
+
+      // Modo chat: link aponta pra /chat
       if (href === '/chat' || href === '/chat/') {
         e.preventDefault();
+        setMode('chat');
+        setRedirectUrl('/chat');
+        setPlanLabel('');
         setOpen(true);
       }
     };
@@ -189,6 +210,10 @@ export default function ChatPopup() {
           whatsapp: normalizedPhone,
           email: email.trim().toLowerCase(),
           empresa: company.trim(),
+          // Pré-checkout: marca o plano escolhido na origem do deal
+          ...(mode === 'checkout' && planLabel
+            ? { oqueFaz: `Pré-checkout - Plano ${planLabel}` }
+            : {}),
           leadId,
           utmData,
         },
@@ -204,22 +229,26 @@ export default function ChatPopup() {
       console.warn('Pipedrive create from popup failed:', err);
     }
 
-    try {
-      sessionStorage.setItem('orbit_lp_data', JSON.stringify({
-        nome: firstName,
-        sobrenome: lastName,
-        name: name.trim(),
-        email: email.trim().toLowerCase(),
-        phone: normalizedPhone,
-        company: company.trim(),
-        leadId,
-        pipedriveIds,
-      }));
-    } catch (err) {
-      console.error('SessionStorage failed:', err);
+    // Modo chat: salva LP data pra continuar na rota /chat
+    if (mode === 'chat') {
+      try {
+        sessionStorage.setItem('orbit_lp_data', JSON.stringify({
+          nome: firstName,
+          sobrenome: lastName,
+          name: name.trim(),
+          email: email.trim().toLowerCase(),
+          phone: normalizedPhone,
+          company: company.trim(),
+          leadId,
+          pipedriveIds,
+        }));
+      } catch (err) {
+        console.error('SessionStorage failed:', err);
+      }
     }
 
-    window.location.href = '/chat';
+    // Redireciona pro destino certo (chat ou checkout externo)
+    window.location.href = redirectUrl;
   };
 
   if (!open) return null;
@@ -284,10 +313,16 @@ export default function ChatPopup() {
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '28px' }}>
           <h2 style={{ fontSize: '24px', fontWeight: 800, color: C.primary, margin: '0 0 6px', lineHeight: 1.2 }}>
-            Preencha para iniciar:
+            {mode === 'checkout'
+              ? planLabel
+                ? `Plano ${planLabel} — confirme seus dados`
+                : 'Confirme seus dados'
+              : 'Preencha para iniciar:'}
           </h2>
           <p style={{ fontSize: '13px', color: C.textMuted, margin: 0 }}>
-            100% gratuito • Sem compromisso
+            {mode === 'checkout'
+              ? 'Você será redirecionado para o checkout em seguida'
+              : '100% gratuito • Sem compromisso'}
           </p>
         </div>
 
@@ -476,7 +511,11 @@ export default function ChatPopup() {
             onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; }}
           >
             {submitting ? <Loader2 size={18} className="animate-spin" /> : <MessageCircle size={18} />}
-            {submitting ? 'ENVIANDO...' : 'INICIAR CONVERSA'}
+            {submitting
+              ? 'ENVIANDO...'
+              : mode === 'checkout'
+              ? 'IR PARA O CHECKOUT'
+              : 'INICIAR CONVERSA'}
           </button>
         </div>
       </div>
