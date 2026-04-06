@@ -61,7 +61,7 @@ export default function WhatsAppWidget() {
 
   const validate = () => {
     const errs: Record<string, string> = {};
-    if (!name.trim() || name.trim().split(' ').length < 2) errs.name = 'Nome completo';
+    if (!name.trim()) errs.name = 'Informe seu nome';
     const emailResult = validateEmail(email);
     if (!emailResult.valid) errs.email = emailResult.error || 'Email inválido';
     if (phone.replace(/\D/g, '').length < 10) errs.phone = 'Telefone incompleto';
