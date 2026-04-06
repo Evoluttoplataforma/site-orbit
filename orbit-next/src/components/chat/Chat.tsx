@@ -375,8 +375,22 @@ export default function Chat() {
     // 1. Salva no banco como completo + link da reunião
     await updateLead(updated, 'completo');
 
-    // 2. Update Pipedrive com data/hora
-    updatePipedriveDeal({ date, time, utmData: getUtmData() });
+    // 2. Update Pipedrive com TUDO (nota completa precisa de name/whatsapp/email/empresa + todos os campos)
+    updatePipedriveDeal({
+      name: leadData.name || `${leadData.nome} ${leadData.sobrenome}`.trim(),
+      whatsapp: normalizePhone(leadData.whatsapp),
+      email: leadData.email,
+      empresa: leadData.empresa,
+      oqueFaz: leadData.oqueFaz,
+      cargo: leadData.cargo,
+      softwareGestao: leadData.softwareGestao || undefined,
+      faturamento: leadData.faturamento,
+      funcionarios: leadData.funcionarios,
+      prioridade: leadData.prioridade,
+      date,
+      time,
+      utmData: getUtmData(),
+    });
 
     // 3. Atribui owner via round-robin (move pra "Reunião Agendada")
     if (pipedriveIdsRef.current.deal_id) {
