@@ -28,7 +28,7 @@ export function Footer() {
           <div>
             <h5 className="text-sm font-semibold text-white mb-4">{t('contact')}</h5>
             <ul className="space-y-3 text-sm">
-              <li className="flex items-center gap-2">📞 (48) 99120-6282</li>
+              <li className="flex items-center gap-2">📞 (48) 9814-9776</li>
               <li className="flex items-center gap-2">📍 Square SC, Florianópolis - SC</li>
             </ul>
           </div>

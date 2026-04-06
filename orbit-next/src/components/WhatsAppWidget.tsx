@@ -5,7 +5,7 @@ import { supabaseMkt } from '@/lib/supabase-mkt';
 import { normalizePhone } from '@/lib/phone';
 import { validateEmail } from '@/lib/email-validation';
 
-const PHONE = '5548991206282';
+const PHONE = '554898149776';
 
 const C = {
   green: '#25D366',
