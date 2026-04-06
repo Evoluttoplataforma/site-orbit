@@ -1084,7 +1084,8 @@ export const pageHTML = `
                 fbclid: g('h_fbclid') || null,
                 landing_page: g('h_landing_page') || null,
                 referrer: g('h_referrer') || null,
-                session_id: g('h_session_id') || null
+                session_id: g('h_session_id') || null,
+                live_title: 'A Nova Era da Gestão com Time de IA'
             };
 
             // Save lead nos dois Supabases em paralelo (Templum + MKT ORBIT)

@@ -1166,7 +1166,8 @@ export const pageHTML = `
                 fbclid: g('h_fbclid') || null,
                 landing_page: g('h_landing_page') || null,
                 referrer: g('h_referrer') || null,
-                session_id: g('h_session_id') || null
+                session_id: g('h_session_id') || null,
+                live_title: 'Sistemas da Qualidade: pare de ter mais trabalho'
             };
 
             // Send em paralelo: Templum + MKT ORBIT (dual-write) + Pipedrive + Email
