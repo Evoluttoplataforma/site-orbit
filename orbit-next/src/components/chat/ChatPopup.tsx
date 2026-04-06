@@ -144,12 +144,12 @@ export default function ChatPopup() {
 
   return (
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 animate-fade-in"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 animate-fade-in overflow-y-auto"
       style={{ background: 'rgba(0, 0, 0, 0.75)', backdropFilter: 'blur(8px)' }}
       onClick={(e) => { if (e.target === e.currentTarget) setOpen(false); }}
     >
       <div
-        className="w-full max-w-md rounded-3xl border border-border p-8 relative animate-fade-in-up shadow-2xl"
+        className="w-full max-w-md my-auto rounded-3xl border border-border p-6 sm:p-8 relative animate-fade-in-up shadow-2xl"
         style={{ background: 'linear-gradient(135deg, #161B22 0%, #0D1117 100%)' }}
       >
         <button

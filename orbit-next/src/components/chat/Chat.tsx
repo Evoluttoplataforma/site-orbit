@@ -342,14 +342,18 @@ export default function Chat() {
   };
 
   // Background gradient compartilhado
-  const pageBg = {
+  const pageBg: React.CSSProperties = {
     background: 'radial-gradient(circle at 20% 0%, rgba(255,186,26,0.08) 0%, transparent 50%), radial-gradient(circle at 80% 100%, rgba(255,186,26,0.05) 0%, transparent 50%), #0D1117',
   };
 
+  // Card: full-screen no mobile, centralizado com max-w em telas maiores
+  const cardClass =
+    'w-full h-full sm:h-auto sm:max-h-[90dvh] sm:max-w-2xl bg-secondary/40 sm:border sm:border-border sm:rounded-3xl overflow-hidden sm:shadow-2xl backdrop-blur-sm flex flex-col';
+
   if (currentStep === 'confirmation') {
     return (
-      <div className="min-h-dvh flex items-center justify-center p-4" style={pageBg}>
-        <div className="w-full max-w-2xl bg-secondary/30 border border-border rounded-3xl overflow-hidden shadow-2xl backdrop-blur-sm flex flex-col" style={{ height: 'min(90dvh, 800px)' }}>
+      <div className="fixed inset-0 flex items-center justify-center sm:p-4 overflow-y-auto" style={pageBg}>
+        <div className={cardClass}>
           <ChatHeader currentStep={progressSteps} totalSteps={progressSteps} />
           <div className="flex-1 overflow-y-auto flex items-center justify-center px-4">
             <div className="w-full max-w-md">
@@ -368,8 +372,8 @@ export default function Chat() {
   }
 
   return (
-    <div className="min-h-dvh flex items-center justify-center p-4" style={pageBg}>
-      <div className="w-full max-w-2xl bg-secondary/30 border border-border rounded-3xl overflow-hidden shadow-2xl backdrop-blur-sm flex flex-col" style={{ height: 'min(90dvh, 800px)' }}>
+    <div className="fixed inset-0 flex items-center justify-center sm:p-4 overflow-y-auto" style={pageBg}>
+      <div className={cardClass} style={{ minHeight: '100dvh' }}>
         <ChatHeader currentStep={currentProgress} totalSteps={progressSteps} />
         <div ref={scrollRef} className="flex-1 overflow-y-auto">
           <div className="px-4 sm:px-6 py-6 space-y-4">
