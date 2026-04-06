@@ -1,20 +1,49 @@
+'use client';
+import { useState } from 'react';
+
 interface ChatOptionsProps {
   options: string[];
   onSelect: (value: string) => void;
 }
 
 export default function ChatOptions({ options, onSelect }: ChatOptionsProps) {
+  const [hovered, setHovered] = useState<string | null>(null);
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 animate-fade-in-up">
-      {options.map((option) => (
-        <button
-          key={option}
-          onClick={() => onSelect(option)}
-          className="bg-secondary text-secondary-foreground border border-border rounded-xl px-5 py-4 text-left hover:border-primary hover:bg-primary/10 active:scale-[0.98] transition-all duration-200 text-sm font-medium"
-        >
-          {option}
-        </button>
-      ))}
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(2, 1fr)',
+        gap: '12px',
+        animation: 'fade-in-up 0.4s ease-out',
+      }}
+    >
+      {options.map((option) => {
+        const isHovered = hovered === option;
+        return (
+          <button
+            key={option}
+            onClick={() => onSelect(option)}
+            onMouseEnter={() => setHovered(option)}
+            onMouseLeave={() => setHovered(null)}
+            style={{
+              background: isHovered ? 'rgba(255,186,26,0.08)' : 'transparent',
+              color: '#e6edf3',
+              border: `1.5px solid ${isHovered ? '#ffba1a' : 'rgba(255,255,255,0.12)'}`,
+              borderRadius: '999px',
+              padding: '14px 22px',
+              textAlign: 'center',
+              fontSize: '14px',
+              fontWeight: 500,
+              cursor: 'pointer',
+              transition: 'all 0.15s ease',
+              fontFamily: 'inherit',
+            }}
+          >
+            {option}
+          </button>
+        );
+      })}
     </div>
   );
 }
