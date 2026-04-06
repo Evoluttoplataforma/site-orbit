@@ -112,9 +112,82 @@ export default function RootLayout({
   var urlParams=["utm_source","utm_medium","utm_campaign","utm_content","utm_term","gclid","gbraid","wbraid","gad_campaignid","gad_source","fbclid","ttclid","msclkid","li_fat_id","twclid","sck","ref"];
   var stored=null;
   try{stored=JSON.parse(sessionStorage.getItem(STORAGE_KEY))}catch(e){}
+  // Mapeia referrer (quando lead chega sem UTM na URL) → utm_source/medium sintéticos
+  var REFERRER_MAP={
+    "google.":{utm_source:"google",utm_medium:"organic"},
+    "bing.":{utm_source:"bing",utm_medium:"organic"},
+    "yahoo.":{utm_source:"yahoo",utm_medium:"organic"},
+    "duckduckgo.":{utm_source:"duckduckgo",utm_medium:"organic"},
+    "yandex.":{utm_source:"yandex",utm_medium:"organic"},
+    "ecosia.":{utm_source:"ecosia",utm_medium:"organic"},
+    "instagram.":{utm_source:"instagram",utm_medium:"social"},
+    "facebook.":{utm_source:"facebook",utm_medium:"social"},
+    "fb.":{utm_source:"facebook",utm_medium:"social"},
+    "l.facebook.":{utm_source:"facebook",utm_medium:"social"},
+    "lm.facebook.":{utm_source:"facebook",utm_medium:"social"},
+    "youtube.":{utm_source:"youtube",utm_medium:"social"},
+    "youtu.be":{utm_source:"youtube",utm_medium:"social"},
+    "twitter.":{utm_source:"twitter",utm_medium:"social"},
+    "x.com":{utm_source:"twitter",utm_medium:"social"},
+    "t.co":{utm_source:"twitter",utm_medium:"social"},
+    "linkedin.":{utm_source:"linkedin",utm_medium:"social"},
+    "lnkd.in":{utm_source:"linkedin",utm_medium:"social"},
+    "tiktok.":{utm_source:"tiktok",utm_medium:"social"},
+    "pinterest.":{utm_source:"pinterest",utm_medium:"social"},
+    "reddit.":{utm_source:"reddit",utm_medium:"social"},
+    "whatsapp.":{utm_source:"whatsapp",utm_medium:"social"},
+    "wa.me":{utm_source:"whatsapp",utm_medium:"social"},
+    "api.whatsapp.":{utm_source:"whatsapp",utm_medium:"social"},
+    "telegram.":{utm_source:"telegram",utm_medium:"social"},
+    "t.me":{utm_source:"telegram",utm_medium:"social"},
+    "chatgpt.":{utm_source:"chatgpt",utm_medium:"ai"},
+    "chat.openai.":{utm_source:"chatgpt",utm_medium:"ai"},
+    "openai.":{utm_source:"chatgpt",utm_medium:"ai"},
+    "gemini.google":{utm_source:"gemini",utm_medium:"ai"},
+    "perplexity.":{utm_source:"perplexity",utm_medium:"ai"},
+    "claude.":{utm_source:"claude",utm_medium:"ai"},
+    "poe.":{utm_source:"poe",utm_medium:"ai"},
+    "copilot.microsoft":{utm_source:"copilot",utm_medium:"ai"},
+    "bing.com/chat":{utm_source:"bingchat",utm_medium:"ai"},
+    "wikipedia.":{utm_source:"wikipedia",utm_medium:"referral"},
+    "github.":{utm_source:"github",utm_medium:"referral"},
+    "medium.":{utm_source:"medium",utm_medium:"referral"},
+    "quora.":{utm_source:"quora",utm_medium:"referral"}
+  };
+  function detectReferrerSource(){
+    var ref=document.referrer||"";
+    if(!ref) return null;
+    try{
+      var refHost=new URL(ref).hostname.toLowerCase();
+      var curHost=window.location.hostname.toLowerCase().replace(/^www\\./,"");
+      // Internal referrer (mesmo site) — ignora
+      if(refHost===curHost||refHost.endsWith("."+curHost)||curHost.endsWith("."+refHost)) return null;
+      // Procura match no map
+      for(var key in REFERRER_MAP){
+        if(refHost.indexOf(key)!==-1) return REFERRER_MAP[key];
+      }
+      // Referrer desconhecido → marca como referral genérico com o domínio
+      return {utm_source:refHost.replace(/^www\\./,""),utm_medium:"referral"};
+    }catch(e){return null;}
+  }
   if(!stored){
     stored={};
     urlParams.forEach(function(p){var v=getParam(p);if(v)stored[p]=v});
+    // Fallback 1: detecta UTM via referrer (Google orgânico, Instagram, ChatGPT, etc)
+    if(!stored.utm_source){
+      var detected=detectReferrerSource();
+      if(detected){
+        stored.utm_source=detected.utm_source;
+        stored.utm_medium=detected.utm_medium;
+        if(!stored.utm_campaign) stored.utm_campaign="(referral)";
+      }
+    }
+    // Fallback 2: tráfego direto (sem referrer e sem UTM)
+    if(!stored.utm_source){
+      stored.utm_source="(direct)";
+      stored.utm_medium="(none)";
+      stored.utm_campaign="(direct)";
+    }
     var fbc=getCookie("_fbc"),fbp=getCookie("_fbp");
     if(fbc)stored.fbc=fbc;if(fbp)stored.fbp=fbp;
     if(stored.fbclid&&!stored.fbc){stored.fbc="fb.1."+Date.now()+"."+stored.fbclid}
