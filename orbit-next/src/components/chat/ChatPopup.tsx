@@ -13,6 +13,45 @@ const COUNTRIES = [
   { code: 'ES', ddi: '34', flag: '🇪🇸', name: 'Espanha', maxDigits: 9 },
 ];
 
+// Tokens inline para escapar do reset agressivo do orbit.css
+const C = {
+  cardBg: '#0d1117',
+  inputBg: '#1c2230',
+  inputBgFocus: '#242b3a',
+  border: 'rgba(255,255,255,0.1)',
+  borderFocus: '#ffba1a',
+  borderError: '#f85149',
+  text: '#ffffff',
+  textMuted: '#8b949e',
+  textPlaceholder: 'rgba(139,148,158,0.6)',
+  primary: '#ffba1a',
+  primaryDark: '#0d1117',
+  destructive: '#f85149',
+};
+
+const inputBox = (focused: boolean, error: boolean): React.CSSProperties => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '12px',
+  background: focused ? C.inputBgFocus : C.inputBg,
+  borderRadius: '14px',
+  padding: '14px 18px',
+  border: `1.5px solid ${error ? C.borderError : focused ? C.borderFocus : C.border}`,
+  transition: 'all 0.15s ease',
+});
+
+const inputEl: React.CSSProperties = {
+  flex: 1,
+  minWidth: 0,
+  background: 'transparent',
+  outline: 'none',
+  border: 'none',
+  color: C.text,
+  fontSize: '15px',
+  fontFamily: 'inherit',
+  padding: 0,
+};
+
 export default function ChatPopup() {
   const [open, setOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -24,9 +63,9 @@ export default function ChatPopup() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [company, setCompany] = useState('');
+  const [focusedField, setFocusedField] = useState<string | null>(null);
   const countryRef = useRef<HTMLDivElement>(null);
 
-  // Intercepta clicks em links que apontam para /chat (em qualquer página)
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -42,7 +81,6 @@ export default function ChatPopup() {
     return () => document.removeEventListener('click', handler);
   }, []);
 
-  // Fecha dropdown ao clicar fora
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (countryRef.current && !countryRef.current.contains(e.target as Node)) setCountryOpen(false);
@@ -51,7 +89,6 @@ export default function ChatPopup() {
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
-  // ESC fecha o popup
   useEffect(() => {
     if (!open) return;
     const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false); };
@@ -80,14 +117,12 @@ export default function ChatPopup() {
 
   const validate = (): boolean => {
     const errs: Record<string, string> = {};
-    if (!name.trim() || name.trim().split(' ').length < 2) {
-      errs.name = 'Digite seu nome completo (nome e sobrenome)';
-    }
+    if (!name.trim() || name.trim().split(' ').length < 2) errs.name = 'Digite seu nome completo';
     const emailResult = validateEmail(email);
     if (!emailResult.valid) errs.email = emailResult.error || 'Email inválido';
     const phoneDigits = phone.replace(/\D/g, '');
     if (phoneDigits.length < 8) errs.phone = 'Telefone incompleto';
-    if (!company.trim()) errs.company = 'Informe o nome da empresa';
+    if (!company.trim()) errs.company = 'Informe a empresa';
     if (!consent) errs.consent = 'Aceite os termos para continuar';
     setErrors(errs);
     return Object.keys(errs).length === 0;
@@ -101,8 +136,8 @@ export default function ChatPopup() {
     const firstName = parts[0];
     const lastName = parts.slice(1).join(' ');
     const fullPhone = `+${country.ddi}${phone.replace(/\D/g, '')}`;
+    const normalizedPhone = country.code === 'BR' ? normalizePhone(fullPhone) : fullPhone;
 
-    // Salva lead parcial no Supabase
     let leadId: number | null = null;
     try {
       const { data, error } = await supabaseMkt
@@ -110,7 +145,7 @@ export default function ChatPopup() {
         .insert({
           name: name.trim(),
           email: email.trim().toLowerCase(),
-          phone: country.code === 'BR' ? normalizePhone(fullPhone) : fullPhone,
+          phone: normalizedPhone,
           company: company.trim(),
           status: 'parcial',
         })
@@ -122,14 +157,13 @@ export default function ChatPopup() {
       console.error('Save lead failed:', err);
     }
 
-    // Salva no sessionStorage para o /chat continuar
     try {
       sessionStorage.setItem('orbit_lp_data', JSON.stringify({
         nome: firstName,
         sobrenome: lastName,
         name: name.trim(),
         email: email.trim().toLowerCase(),
-        phone: country.code === 'BR' ? normalizePhone(fullPhone) : fullPhone,
+        phone: normalizedPhone,
         company: company.trim(),
         leadId,
       }));
@@ -144,144 +178,257 @@ export default function ChatPopup() {
 
   return (
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 animate-fade-in overflow-y-auto"
-      style={{ background: 'rgba(0, 0, 0, 0.75)', backdropFilter: 'blur(8px)' }}
+      style={{
+        position: 'fixed',
+        inset: 0,
+        zIndex: 9999,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '16px',
+        background: 'rgba(0, 0, 0, 0.8)',
+        backdropFilter: 'blur(8px)',
+        WebkitBackdropFilter: 'blur(8px)',
+        overflowY: 'auto',
+      }}
       onClick={(e) => { if (e.target === e.currentTarget) setOpen(false); }}
     >
       <div
-        className="w-full my-auto rounded-3xl border border-border p-6 sm:p-8 relative animate-fade-in-up shadow-2xl"
         style={{
-          maxWidth: '28rem',
-          background: 'linear-gradient(135deg, #161B22 0%, #0D1117 100%)',
+          width: '100%',
+          maxWidth: '460px',
+          margin: 'auto',
+          background: C.cardBg,
+          border: `1px solid ${C.border}`,
+          borderRadius: '24px',
+          padding: '36px 32px 32px',
+          position: 'relative',
+          boxShadow: '0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,186,26,0.08)',
+          fontFamily: 'inherit',
         }}
       >
+        {/* Close */}
         <button
           onClick={() => setOpen(false)}
           aria-label="Fechar"
-          className="absolute top-4 right-4 w-10 h-10 rounded-full bg-secondary/80 hover:bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+          style={{
+            position: 'absolute',
+            top: '16px',
+            right: '16px',
+            width: '36px',
+            height: '36px',
+            borderRadius: '50%',
+            background: 'rgba(255,255,255,0.06)',
+            border: `1px solid ${C.border}`,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: C.textMuted,
+            cursor: 'pointer',
+            transition: 'all 0.15s',
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.12)'; e.currentTarget.style.color = C.text; }}
+          onMouseLeave={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = C.textMuted; }}
         >
-          <X className="w-5 h-5" />
+          <X size={18} />
         </button>
 
-        <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold text-primary mb-1">Preencha para iniciar:</h2>
-          <p className="text-sm text-muted-foreground">100% gratuito • Sem compromisso</p>
+        {/* Header */}
+        <div style={{ textAlign: 'center', marginBottom: '28px' }}>
+          <h2 style={{ fontSize: '24px', fontWeight: 800, color: C.primary, margin: '0 0 6px', lineHeight: 1.2 }}>
+            Preencha para iniciar:
+          </h2>
+          <p style={{ fontSize: '13px', color: C.textMuted, margin: 0 }}>
+            100% gratuito • Sem compromisso
+          </p>
         </div>
 
-        <div className="space-y-4">
+        {/* Form */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
           {/* Nome */}
           <div>
-            <div className={`flex items-center gap-3 bg-secondary/60 rounded-2xl px-5 py-4 border transition-colors ${errors.name ? 'border-destructive' : 'border-border focus-within:border-primary'}`}>
+            <div style={inputBox(focusedField === 'name', !!errors.name)}>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => { setName(e.target.value); if (errors.name) setErrors({ ...errors, name: '' }); }}
+                onFocus={() => setFocusedField('name')}
+                onBlur={() => setFocusedField(null)}
                 placeholder="Nome Completo *"
-                className="flex-1 bg-transparent outline-none text-foreground placeholder:text-muted-foreground/60"
+                style={{ ...inputEl, '::placeholder': { color: C.textPlaceholder } } as React.CSSProperties}
               />
-              <User className="w-5 h-5 text-muted-foreground/60" />
+              <User size={18} color={C.textMuted} style={{ flexShrink: 0 }} />
             </div>
-            {errors.name && <p className="text-destructive text-xs mt-1 ml-2">{errors.name}</p>}
+            {errors.name && <p style={{ color: C.destructive, fontSize: '12px', margin: '6px 0 0 8px' }}>{errors.name}</p>}
           </div>
 
           {/* Email */}
           <div>
-            <div className={`flex items-center gap-3 bg-secondary/60 rounded-2xl px-5 py-4 border transition-colors ${errors.email ? 'border-destructive' : 'border-border focus-within:border-primary'}`}>
+            <div style={inputBox(focusedField === 'email', !!errors.email)}>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => { setEmail(e.target.value); if (errors.email) setErrors({ ...errors, email: '' }); }}
+                onFocus={() => setFocusedField('email')}
+                onBlur={() => setFocusedField(null)}
                 placeholder="Email *"
-                className="flex-1 bg-transparent outline-none text-foreground placeholder:text-muted-foreground/60"
+                style={inputEl}
               />
-              <Mail className="w-5 h-5 text-muted-foreground/60" />
+              <Mail size={18} color={C.textMuted} style={{ flexShrink: 0 }} />
             </div>
-            {errors.email && <p className="text-destructive text-xs mt-1 ml-2">{errors.email}</p>}
+            {errors.email && <p style={{ color: C.destructive, fontSize: '12px', margin: '6px 0 0 8px' }}>{errors.email}</p>}
           </div>
 
-          {/* Telefone com DDI */}
+          {/* Telefone */}
           <div>
-            <div className="flex items-center gap-2">
-              <div className="relative" ref={countryRef}>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <div style={{ position: 'relative' }} ref={countryRef}>
                 <button
                   type="button"
                   onClick={() => setCountryOpen(!countryOpen)}
-                  className="flex items-center gap-2 bg-secondary/60 rounded-2xl px-4 py-4 border border-border hover:border-primary/40 transition-colors"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    background: C.inputBg,
+                    border: `1.5px solid ${C.border}`,
+                    borderRadius: '14px',
+                    padding: '14px 14px',
+                    color: C.text,
+                    cursor: 'pointer',
+                    fontSize: '14px',
+                    fontFamily: 'inherit',
+                    flexShrink: 0,
+                  }}
                 >
-                  <span className="text-base">{country.flag}</span>
-                  <span className="text-sm text-foreground">+{country.ddi}</span>
-                  <ChevronDown className="w-3 h-3 text-muted-foreground" />
+                  <span style={{ fontSize: '16px' }}>{country.flag}</span>
+                  <span>+{country.ddi}</span>
+                  <ChevronDown size={12} color={C.textMuted} />
                 </button>
                 {countryOpen && (
-                  <div className="absolute top-full left-0 mt-1 z-50 bg-popover border border-border rounded-xl shadow-xl max-h-52 overflow-y-auto w-52">
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: 'calc(100% + 4px)',
+                      left: 0,
+                      zIndex: 50,
+                      background: C.cardBg,
+                      border: `1px solid ${C.border}`,
+                      borderRadius: '12px',
+                      boxShadow: '0 10px 40px rgba(0,0,0,0.5)',
+                      maxHeight: '208px',
+                      overflowY: 'auto',
+                      width: '208px',
+                    }}
+                  >
                     {COUNTRIES.map((c) => (
                       <button
                         key={c.code}
                         type="button"
                         onClick={() => { setCountry(c); setPhone(''); setCountryOpen(false); }}
-                        className="w-full flex items-center gap-2 px-3 py-2 text-left hover:bg-accent transition-colors text-sm"
+                        style={{
+                          width: '100%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '8px',
+                          padding: '10px 14px',
+                          background: 'transparent',
+                          border: 'none',
+                          cursor: 'pointer',
+                          color: C.text,
+                          fontSize: '13px',
+                          textAlign: 'left',
+                          fontFamily: 'inherit',
+                        }}
+                        onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.05)')}
+                        onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
                       >
-                        <span className="text-base">{c.flag}</span>
-                        <span className="text-foreground flex-1 text-xs">{c.name}</span>
-                        <span className="text-muted-foreground text-xs">+{c.ddi}</span>
+                        <span>{c.flag}</span>
+                        <span style={{ flex: 1 }}>{c.name}</span>
+                        <span style={{ color: C.textMuted }}>+{c.ddi}</span>
                       </button>
                     ))}
                   </div>
                 )}
               </div>
-              <div className={`flex-1 bg-secondary/60 rounded-2xl px-5 py-4 border transition-colors ${errors.phone ? 'border-destructive' : 'border-border focus-within:border-primary'}`}>
+              <div style={{ ...inputBox(focusedField === 'phone', !!errors.phone), flex: 1 }}>
                 <input
                   type="tel"
                   inputMode="numeric"
                   value={phone}
                   onChange={(e) => { handlePhoneChange(e.target.value); if (errors.phone) setErrors({ ...errors, phone: '' }); }}
+                  onFocus={() => setFocusedField('phone')}
+                  onBlur={() => setFocusedField(null)}
                   placeholder={country.code === 'BR' ? '(11) 99999-9999' : 'Número'}
-                  className="w-full bg-transparent outline-none text-foreground placeholder:text-muted-foreground/60"
+                  style={inputEl}
                 />
               </div>
             </div>
-            {errors.phone && <p className="text-destructive text-xs mt-1 ml-2">{errors.phone}</p>}
+            {errors.phone && <p style={{ color: C.destructive, fontSize: '12px', margin: '6px 0 0 8px' }}>{errors.phone}</p>}
           </div>
 
           {/* Empresa */}
           <div>
-            <div className={`flex items-center gap-3 bg-secondary/60 rounded-2xl px-5 py-4 border transition-colors ${errors.company ? 'border-destructive' : 'border-border focus-within:border-primary'}`}>
+            <div style={inputBox(focusedField === 'company', !!errors.company)}>
               <input
                 type="text"
                 value={company}
                 onChange={(e) => { setCompany(e.target.value); if (errors.company) setErrors({ ...errors, company: '' }); }}
+                onFocus={() => setFocusedField('company')}
+                onBlur={() => setFocusedField(null)}
                 placeholder="Nome da Empresa *"
-                className="flex-1 bg-transparent outline-none text-foreground placeholder:text-muted-foreground/60"
+                style={inputEl}
               />
-              <Building2 className="w-5 h-5 text-muted-foreground/60" />
+              <Building2 size={18} color={C.textMuted} style={{ flexShrink: 0 }} />
             </div>
-            {errors.company && <p className="text-destructive text-xs mt-1 ml-2">{errors.company}</p>}
+            {errors.company && <p style={{ color: C.destructive, fontSize: '12px', margin: '6px 0 0 8px' }}>{errors.company}</p>}
           </div>
 
           {/* Consent */}
-          <label className="flex items-start gap-3 cursor-pointer pt-2">
+          <label style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', cursor: 'pointer', marginTop: '8px' }}>
             <input
               type="checkbox"
               checked={consent}
               onChange={(e) => { setConsent(e.target.checked); if (errors.consent) setErrors({ ...errors, consent: '' }); }}
-              className="mt-1 w-4 h-4 accent-primary"
+              style={{ marginTop: '3px', width: '16px', height: '16px', accentColor: C.primary, flexShrink: 0, cursor: 'pointer' }}
             />
-            <span className="text-xs text-muted-foreground leading-relaxed">
+            <span style={{ fontSize: '12px', color: C.textMuted, lineHeight: 1.55 }}>
               Ao preencher este formulário, concordo em compartilhar meus dados com a Orbit para fins de contato e demonstração, conforme a{' '}
-              <a href="/politica-privacidade" target="_blank" className="text-primary underline">Política de Privacidade</a>.
+              <a href="/politica-privacidade" target="_blank" style={{ color: C.primary, textDecoration: 'underline' }}>Política de Privacidade</a>.
             </span>
           </label>
-          {errors.consent && <p className="text-destructive text-xs ml-7">{errors.consent}</p>}
+          {errors.consent && <p style={{ color: C.destructive, fontSize: '12px', marginLeft: '26px' }}>{errors.consent}</p>}
 
           {/* Submit */}
           <button
             onClick={handleSubmit}
             disabled={submitting}
-            className="w-full mt-2 flex items-center justify-center gap-3 bg-primary hover:bg-primary/90 disabled:opacity-60 text-primary-foreground font-bold text-base py-4 rounded-2xl transition-colors"
-            style={{ boxShadow: '0 4px 24px rgba(255,186,26,0.25)' }}
+            style={{
+              marginTop: '8px',
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '12px',
+              background: C.primary,
+              color: C.primaryDark,
+              fontWeight: 800,
+              fontSize: '15px',
+              padding: '16px',
+              borderRadius: '14px',
+              border: 'none',
+              cursor: submitting ? 'not-allowed' : 'pointer',
+              opacity: submitting ? 0.6 : 1,
+              boxShadow: '0 6px 24px rgba(255,186,26,0.3)',
+              fontFamily: 'inherit',
+              letterSpacing: '0.5px',
+              transition: 'all 0.15s',
+            }}
+            onMouseEnter={(e) => { if (!submitting) e.currentTarget.style.transform = 'translateY(-1px)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; }}
           >
-            {submitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <MessageCircle className="w-5 h-5" />}
-            {submitting ? 'Enviando...' : 'INICIAR CONVERSA'}
+            {submitting ? <Loader2 size={18} className="animate-spin" /> : <MessageCircle size={18} />}
+            {submitting ? 'ENVIANDO...' : 'INICIAR CONVERSA'}
           </button>
         </div>
       </div>
