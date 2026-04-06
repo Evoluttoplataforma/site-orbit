@@ -158,6 +158,33 @@ export default function ChatPopup() {
       console.error('Save lead failed:', err);
     }
 
+    // Cria deal no Pipedrive (paralelo, não bloqueia)
+    let pipedriveIds: { person_id?: number; org_id?: number; deal_id?: number } = {};
+    try {
+      const utmRaw = sessionStorage.getItem('__wl_tracking');
+      const utmData = utmRaw ? JSON.parse(utmRaw) : {};
+      const { data: pdResult } = await supabaseMkt.functions.invoke('create-pipedrive-lead', {
+        body: {
+          action: 'create',
+          name: name.trim(),
+          whatsapp: normalizedPhone,
+          email: email.trim().toLowerCase(),
+          empresa: company.trim(),
+          leadId,
+          utmData,
+        },
+      });
+      if (pdResult?.success) {
+        pipedriveIds = {
+          person_id: pdResult.person_id,
+          org_id: pdResult.org_id,
+          deal_id: pdResult.deal_id,
+        };
+      }
+    } catch (err) {
+      console.warn('Pipedrive create from popup failed:', err);
+    }
+
     try {
       sessionStorage.setItem('orbit_lp_data', JSON.stringify({
         nome: firstName,
@@ -167,6 +194,7 @@ export default function ChatPopup() {
         phone: normalizedPhone,
         company: company.trim(),
         leadId,
+        pipedriveIds,
       }));
     } catch (err) {
       console.error('SessionStorage failed:', err);

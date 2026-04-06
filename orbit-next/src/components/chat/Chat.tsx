@@ -96,6 +96,65 @@ export default function Chat() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const leadIdRef = useRef<number | null>(null);
   const savingLeadRef = useRef(false);
+  const pipedriveIdsRef = useRef<{ person_id?: number; org_id?: number; deal_id?: number }>({});
+
+  // Coleta UTM/tracking do sessionStorage (populado pelo script global)
+  const getUtmData = () => {
+    try {
+      const raw = sessionStorage.getItem('__wl_tracking');
+      return raw ? JSON.parse(raw) : {};
+    } catch { return {}; }
+  };
+
+  // Cria deal no Pipedrive
+  const createPipedriveLead = async (data: LeadData) => {
+    try {
+      const { data: result, error } = await supabaseMkt.functions.invoke('create-pipedrive-lead', {
+        body: {
+          action: 'create',
+          name: data.name || `${data.nome} ${data.sobrenome}`.trim(),
+          whatsapp: normalizePhone(data.whatsapp),
+          email: data.email,
+          empresa: data.empresa,
+          oqueFaz: data.oqueFaz,
+          cargo: data.cargo,
+          leadId: leadIdRef.current,
+          utmData: getUtmData(),
+        },
+      });
+      if (error) { console.error('[Chat] Pipedrive create error:', error); return; }
+      if (result?.success) {
+        pipedriveIdsRef.current = {
+          person_id: result.person_id,
+          org_id: result.org_id,
+          deal_id: result.deal_id,
+        };
+        console.log('[Chat] Pipedrive deal created:', pipedriveIdsRef.current);
+      }
+    } catch (err) {
+      console.error('[Chat] Pipedrive create exception:', err);
+    }
+  };
+
+  // Update deal no Pipedrive
+  const updatePipedriveDeal = async (extra: Record<string, unknown>) => {
+    if (!pipedriveIdsRef.current.deal_id) return;
+    try {
+      await supabaseMkt.functions.invoke('create-pipedrive-lead', {
+        body: { action: 'update', ...pipedriveIdsRef.current, ...extra },
+      });
+    } catch (err) {
+      console.error('[Chat] Pipedrive update failed:', err);
+    }
+  };
+
+  // Sync Make + ManyChat
+  const syncToMake = async () => {
+    if (!leadIdRef.current) return;
+    try {
+      await supabaseMkt.functions.invoke('sync-lead-make', { body: { lead_id: leadIdRef.current } });
+    } catch (err) { console.warn('[Chat] Make sync failed:', err); }
+  };
 
   const scrollToBottom = () => {
     setTimeout(() => {
@@ -169,6 +228,7 @@ export default function Chat() {
           }));
 
           if (lp.leadId) leadIdRef.current = lp.leadId;
+          if (lp.pipedriveIds) pipedriveIdsRef.current = lp.pipedriveIds;
 
           // Limpa pra não reusar
           sessionStorage.removeItem('orbit_lp_data');
@@ -231,6 +291,8 @@ export default function Chat() {
         const updated = { ...leadData, empresa: value };
         setLeadData((p) => ({ ...p, empresa: value }));
         updateLead(updated);
+        // Cria deal no Pipedrive (se não veio da LP com IDs)
+        if (!pipedriveIdsRef.current.deal_id) createPipedriveLead(updated);
         setTimeout(() => { addBotMessage('Legal! O que a sua empresa faz?'); setCurrentStep('oqueFaz'); }, 400);
         break;
       }
@@ -238,6 +300,7 @@ export default function Chat() {
         const updated = { ...leadData, oqueFaz: value };
         setLeadData((p) => ({ ...p, oqueFaz: value }));
         updateLead(updated);
+        updatePipedriveDeal({ oqueFaz: value });
         setTimeout(() => { addBotMessage('Entendi! E o que você faz na empresa?'); setCurrentStep('cargo'); }, 400);
         break;
       }
@@ -245,6 +308,7 @@ export default function Chat() {
         const updated = { ...leadData, cargo: value };
         setLeadData((p) => ({ ...p, cargo: value }));
         updateLead(updated);
+        updatePipedriveDeal({ cargo: value });
         if (value.toLowerCase().includes('qualidade')) {
           setTimeout(() => { addBotMessage('Você utiliza algum software de gestão?'); setCurrentStep('softwareGestaoConfirm'); }, 400);
         } else {
@@ -259,6 +323,7 @@ export default function Chat() {
           const updated = { ...leadData, softwareGestao: 'Não utiliza' };
           setLeadData((p) => ({ ...p, softwareGestao: 'Não utiliza' }));
           updateLead(updated);
+          updatePipedriveDeal({ softwareGestao: 'Não utiliza' });
           setTimeout(() => { addBotMessage('Qual o faturamento mensal da empresa?'); setCurrentStep('faturamento'); }, 400);
         }
         break;
@@ -266,6 +331,7 @@ export default function Chat() {
         const updated = { ...leadData, softwareGestao: value };
         setLeadData((p) => ({ ...p, softwareGestao: value }));
         updateLead(updated);
+        updatePipedriveDeal({ softwareGestao: value });
         setTimeout(() => { addBotMessage('Qual o faturamento mensal da empresa?'); setCurrentStep('faturamento'); }, 400);
         break;
       }
@@ -273,6 +339,7 @@ export default function Chat() {
         const updated = { ...leadData, faturamento: value };
         setLeadData((p) => ({ ...p, faturamento: value }));
         updateLead(updated);
+        updatePipedriveDeal({ faturamento: value });
         setTimeout(() => { addBotMessage('Quantos funcionários a empresa tem?'); setCurrentStep('funcionarios'); }, 400);
         break;
       }
@@ -280,6 +347,7 @@ export default function Chat() {
         const updated = { ...leadData, funcionarios: value };
         setLeadData((p) => ({ ...p, funcionarios: value }));
         updateLead(updated);
+        updatePipedriveDeal({ funcionarios: value });
         setTimeout(() => { addBotMessage('Qual a prioridade para você implementar um sistema de gestão?'); setCurrentStep('prioridade'); }, 400);
         break;
       }
@@ -287,6 +355,7 @@ export default function Chat() {
         const updated = { ...leadData, prioridade: value };
         setLeadData((p) => ({ ...p, prioridade: value }));
         updateLead(updated);
+        updatePipedriveDeal({ prioridade: value });
         setTimeout(() => {
           addBotMessage('Perfeito! Agora escolha o melhor dia e horário para a sua demonstração gratuita com nosso time:');
           setCurrentStep('calendar');
@@ -302,7 +371,78 @@ export default function Chat() {
     addUserMessage(`${date} às ${time}`);
     const meetLink = getMeetingLink(leadData.faturamento, leadData.cargo, leadData.oqueFaz);
     setResolvedMeetLink(meetLink);
+
+    // 1. Salva no banco como completo + link da reunião
     await updateLead(updated, 'completo');
+
+    // 2. Update Pipedrive com data/hora
+    updatePipedriveDeal({ date, time, utmData: getUtmData() });
+
+    // 3. Atribui owner via round-robin (move pra "Reunião Agendada")
+    if (pipedriveIdsRef.current.deal_id) {
+      supabaseMkt.functions.invoke('assign-pipedrive-owner', {
+        body: { deal_id: pipedriveIdsRef.current.deal_id, flow: 'sala' },
+      }).catch((e) => console.warn('[Chat] assign-owner failed:', e));
+    }
+
+    // 4. Email de confirmação (Resend)
+    supabaseMkt.functions.invoke('send-calendar-invite', {
+      body: {
+        email: leadData.email,
+        name: `${leadData.nome} ${leadData.sobrenome}`.trim(),
+        date,
+        time,
+        meetingLink: meetLink,
+      },
+    }).catch((e) => console.warn('[Chat] send-invite failed:', e));
+
+    // 5. Sync para Make
+    syncToMake();
+
+    // 6. Tag ManyChat agendou-reuniao
+    supabaseMkt.functions.invoke('tag-manychat', {
+      body: {
+        action: 'tag',
+        whatsapp: leadData.whatsapp,
+        tag_name: 'agendou-reuniao',
+        lead_data: {
+          nome: leadData.nome,
+          sobrenome: leadData.sobrenome,
+          email: leadData.email,
+          empresa: leadData.empresa,
+          oque_faz: leadData.oqueFaz,
+          cargo: leadData.cargo,
+          faturamento: leadData.faturamento,
+          funcionarios: leadData.funcionarios,
+          prioridade: leadData.prioridade,
+          data_reuniao: date,
+          horario_reuniao: time,
+          software_gestao: leadData.softwareGestao,
+          link_reuniao: meetLink,
+        },
+      },
+    }).catch((e) => console.warn('[Chat] tag-manychat failed:', e));
+
+    // 7. Dispara ligação n8n
+    try {
+      const [dd, mm, yyyy] = date.split('/');
+      const callDatetime = `${yyyy}-${mm.padStart(2, '0')}-${dd.padStart(2, '0')}T${time}:00-03:00`;
+      const phone = leadData.whatsapp.startsWith('+')
+        ? leadData.whatsapp
+        : `+55${leadData.whatsapp.replace(/\D/g, '')}`;
+      supabaseMkt.functions.invoke('trigger-n8n-call', {
+        body: {
+          lead_name: `${leadData.nome} ${leadData.sobrenome}`.trim(),
+          lead_phone: phone,
+          call_datetime: callDatetime,
+          subscriber_id: null,
+          deal_id: pipedriveIdsRef.current.deal_id || null,
+        },
+      }).catch((e) => console.warn('[Chat] n8n failed:', e));
+    } catch (e) {
+      console.warn('[Chat] n8n exception:', e);
+    }
+
     setTimeout(() => setCurrentStep('confirmation'), 500);
   };
 
