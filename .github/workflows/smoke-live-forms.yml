@@ -1,0 +1,26 @@
+name: Smoke test - live forms
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'orbit-next/src/app/live/**'
+      - 'orbit-next/scripts/smoke-test-live-forms.mjs'
+      - '.github/workflows/smoke-live-forms.yml'
+  pull_request:
+    paths:
+      - 'orbit-next/src/app/live/**'
+      - 'orbit-next/scripts/smoke-test-live-forms.mjs'
+  workflow_dispatch:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Validar payload dos forms /live e /live/rd contra schema do Supabase
+        run: node scripts/smoke-test-live-forms.mjs
+        working-directory: orbit-next
