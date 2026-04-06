@@ -18,13 +18,13 @@ export function CTASection() {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
-            href="#contato-form"
+            href="/chat"
             className="group relative px-7 py-3.5 pr-14 bg-gold text-black font-bold rounded-full overflow-hidden transition-all duration-500 hover:pl-14 hover:pr-7"
           >
             <span className="relative z-10">{t('primary')}</span>
             <span className="absolute right-1.5 top-1/2 -translate-y-1/2 w-9 h-9 bg-black text-gold rounded-full flex items-center justify-center transition-all duration-500 group-hover:right-[calc(100%-40px)] group-hover:rotate-45 text-xs">→</span>
           </Link>
-          <Link href="#contato-form" className="px-7 py-3.5 text-light-text font-semibold border border-[#D1D5DB] rounded-full hover:border-light-text hover:bg-black/[0.04] transition-all">
+          <Link href="/chat" className="px-7 py-3.5 text-light-text font-semibold border border-[#D1D5DB] rounded-full hover:border-light-text hover:bg-black/[0.04] transition-all">
             {t('secondary')}
           </Link>
         </div>

@@ -12,7 +12,7 @@ export function ClosingSection() {
           <span className="block mt-2">{t('title2')}</span>
         </h2>
         <Link
-          href="#contato-form"
+          href="/chat"
           className="inline-block mt-6 px-8 py-3.5 bg-black text-white font-bold rounded-full hover:bg-[#1A1D23] transition-colors"
         >
           {t('btn')}

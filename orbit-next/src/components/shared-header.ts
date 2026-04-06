@@ -132,7 +132,7 @@ export const headerHTML = `
 
             <div class="nav-actions">
                 <a href="https://app.orbitgestao.com.br/login" class="btn btn-outline" data-i18n="nav.login">Entrar</a>
-                <a href="/#contato-form" class="btn btn-primary" data-i18n="nav.cta">Conhecer o Time de IA</a>
+                <a href="/chat" class="btn btn-primary" data-i18n="nav.cta">Conhecer o Time de IA</a>
             </div>
 
             <button class="lang-switch" aria-label="Change language">
@@ -158,7 +158,7 @@ export const headerHTML = `
         <div class="mobile-menu__body">
             <div class="mobile-menu__label" data-i18n="mobile.nav">Navegação</div>
             <a href="/"><i class="fas fa-home"></i> <span data-i18n="nav.home">Início</span></a>
-            <a href="/#contato-form" onclick="closeMobileMenu()"><i class="fas fa-envelope"></i> <span data-i18n="mobile.contact">Fale Conosco</span></a>
+            <a href="/chat" onclick="closeMobileMenu()"><i class="fas fa-envelope"></i> <span data-i18n="mobile.contact">Fale Conosco</span></a>
 
             <!-- Agentes dropdown -->
             <div class="mobile-menu__dropdown">
@@ -199,7 +199,7 @@ export const headerHTML = `
         </div>
         <div class="mobile-menu__footer">
             <a href="https://app.orbitgestao.com.br/login" class="btn btn-outline" style="flex:1;text-align:center;color:#fff;border-color:rgba(255,255,255,0.4);">Entrar</a>
-            <a href="/#contato-form" class="btn btn-primary" onclick="closeMobileMenu()" data-i18n="nav.cta" style="flex:1;text-align:center;">Conhecer o Time</a>
+            <a href="/chat" class="btn btn-primary" onclick="closeMobileMenu()" data-i18n="nav.cta" style="flex:1;text-align:center;">Conhecer o Time</a>
         </div>
     </div>
 

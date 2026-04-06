@@ -442,7 +442,7 @@ export default function ChatPopup() {
             />
             <span style={{ fontSize: '12px', color: C.textMuted, lineHeight: 1.55 }}>
               Ao preencher este formulário, concordo em compartilhar meus dados com a Orbit para fins de contato e demonstração, conforme a{' '}
-              <a href="/politica-privacidade" target="_blank" style={{ color: C.primary, textDecoration: 'underline' }}>Política de Privacidade</a>.
+              <a href="https://demonstracao.orbitgestao.com.br/privacidade" target="_blank" rel="noopener noreferrer" style={{ color: C.primary, textDecoration: 'underline' }}>Política de Privacidade</a>.
             </span>
           </label>
           {errors.consent && <p style={{ color: C.destructive, fontSize: '12px', marginLeft: '26px' }}>{errors.consent}</p>}

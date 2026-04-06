@@ -410,7 +410,7 @@ export const pageHTML = `
                     </div>
                 </a>
 
-                <a href="/#contato-form" class="pq-card">
+                <a href="/chat" class="pq-card">
                     <img src="/images/pq-hubs.jpg" alt="Associações e Hubs" width="1200" height="2150" loading="lazy" decoding="async">
                     <div class="pq-card__content">
                         <div class="pq-card__icon"><i class="fas fa-landmark"></i></div>

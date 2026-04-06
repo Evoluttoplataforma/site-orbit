@@ -516,7 +516,7 @@ export const pageHTML = `
                 '<div class="blog-sidebar-cta__icon"><i class="fas ' + icon + '"></i></div>' +
                 '<h3 style="color:#fff;">' + escapeHtml(lm.title) + '</h3>' +
                 (lm.description ? '<p style="color:rgba(255,255,255,.7);">' + escapeHtml(lm.description) + '</p>' : '') +
-                '<a href="' + escapeHtml(lm.cta_url || '/#contato-form') + '" class="btn btn-primary" style="width:100%;text-align:center;">' +
+                '<a href="' + escapeHtml(lm.cta_url || '/chat') + '" class="btn btn-primary" style="width:100%;text-align:center;">' +
                     '<i class="fas fa-download" style="margin-right:6px;"></i>' + escapeHtml(lm.cta_text || 'Baixar agora') +
                 '</a>' +
             '</div>';
@@ -608,7 +608,7 @@ export const pageHTML = `
         var contentEl = document.querySelector('.blog-article-content');
         if (!contentEl) return;
 
-        var ctaUrl = escapeHtml(article.cta_banner_cta_url || '/#contato-form');
+        var ctaUrl = escapeHtml(article.cta_banner_cta_url || '/chat');
         var bannerHTML = article.cta_banner_image
             ? '<a href="' + ctaUrl + '" style="display:block;margin:40px 0;border-radius:16px;overflow:hidden;">' +
                 '<img src="' + escapeHtml(article.cta_banner_image) + '" style="width:100%;display:block;" alt="' + escapeHtml(article.cta_banner_title || 'Banner') + '">' +
