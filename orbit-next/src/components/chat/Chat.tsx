@@ -96,14 +96,6 @@ export default function Chat() {
   const leadIdRef = useRef<number | null>(null);
   const savingLeadRef = useRef(false);
 
-  const [isDesktop, setIsDesktop] = useState(false);
-  useEffect(() => {
-    const check = () => setIsDesktop(window.innerWidth >= 640);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
-
   const scrollToBottom = () => {
     setTimeout(() => {
       scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
@@ -349,72 +341,58 @@ export default function Chat() {
     }
   };
 
-  // Estilos inline pra escapar do reset agressivo do orbit.css
-  const overlayStyle: React.CSSProperties = {
+  // Shell full-screen com conteúdo interno centralizado (max-width ~720px)
+  const shellStyle: React.CSSProperties = {
     position: 'fixed',
     inset: 0,
     zIndex: 50,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '0',
-    background:
-      'radial-gradient(circle at 20% 0%, rgba(255,186,26,0.08) 0%, transparent 50%), radial-gradient(circle at 80% 100%, rgba(255,186,26,0.05) 0%, transparent 50%), #0d1117',
-    overflowY: 'auto',
-  };
-
-  const cardStyle: React.CSSProperties = {
-    width: '100%',
-    maxWidth: '720px',
-    height: '100dvh',
     background: '#0d1117',
-    border: '1px solid rgba(255,255,255,0.08)',
-    borderRadius: 0,
-    boxShadow: '0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,186,26,0.06)',
     display: 'flex',
     flexDirection: 'column',
     overflow: 'hidden',
-    margin: 0,
   };
 
-  // Em telas sm+: card com bordas arredondadas e altura limitada
-  const cardStyleDesktop: React.CSSProperties = {
-    ...cardStyle,
-    height: 'min(92dvh, 820px)',
-    borderRadius: '24px',
-    margin: '16px',
-  };
-
-  const finalCardStyle = isDesktop ? cardStyleDesktop : cardStyle;
-
-  const messagesAreaStyle: React.CSSProperties = {
+  const messagesScrollStyle: React.CSSProperties = {
     flex: 1,
     overflowY: 'auto',
-    padding: '24px 20px',
   };
 
-  const inputAreaStyle: React.CSSProperties = {
+  const innerContainerStyle: React.CSSProperties = {
+    width: '100%',
+    maxWidth: '720px',
+    margin: '0 auto',
+    padding: '24px 20px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px',
+  };
+
+  const inputBarStyle: React.CSSProperties = {
     flexShrink: 0,
+    borderTop: '1px solid rgba(255,255,255,0.08)',
+    background: '#0d1117',
+  };
+
+  const inputInnerStyle: React.CSSProperties = {
+    width: '100%',
+    maxWidth: '720px',
+    margin: '0 auto',
     padding: '16px 20px 20px',
-    borderTop: '1px solid rgba(255,255,255,0.06)',
-    background: 'rgba(0,0,0,0.2)',
   };
 
   if (currentStep === 'confirmation') {
     return (
-      <div style={overlayStyle}>
-        <div style={finalCardStyle}>
-          <ChatHeader currentStep={progressSteps} totalSteps={progressSteps} />
-          <div style={{ flex: 1, overflowY: 'auto', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
-            <div style={{ width: '100%', maxWidth: '440px' }}>
-              <ConfirmationScreen
-                name={leadData.name}
-                date={leadData.date}
-                time={leadData.time}
-                segmento={leadData.oqueFaz}
-                meetingLink={resolvedMeetLink}
-              />
-            </div>
+      <div style={shellStyle}>
+        <ChatHeader currentStep={progressSteps} totalSteps={progressSteps} />
+        <div style={{ ...messagesScrollStyle, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
+          <div style={{ width: '100%', maxWidth: '480px' }}>
+            <ConfirmationScreen
+              name={leadData.name}
+              date={leadData.date}
+              time={leadData.time}
+              segmento={leadData.oqueFaz}
+              meetingLink={resolvedMeetLink}
+            />
           </div>
         </div>
       </div>
@@ -422,21 +400,21 @@ export default function Chat() {
   }
 
   return (
-    <div style={overlayStyle}>
-      <div style={finalCardStyle}>
-        <ChatHeader currentStep={currentProgress} totalSteps={progressSteps} />
-        <div ref={scrollRef} style={messagesAreaStyle}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            {messages.map((msg, i) => (
-              <ChatBubble key={i} message={msg.text} isUser={msg.isUser} boldName={msg.boldName} />
-            ))}
-            {isTyping && <TypingIndicator />}
-            {currentStep === 'calendar' && !isTyping && (
-              <CalendarPicker onSelect={handleCalendarSelect} />
-            )}
-          </div>
+    <div style={shellStyle}>
+      <ChatHeader currentStep={currentProgress} totalSteps={progressSteps} />
+      <div ref={scrollRef} style={messagesScrollStyle}>
+        <div style={innerContainerStyle}>
+          {messages.map((msg, i) => (
+            <ChatBubble key={i} message={msg.text} isUser={msg.isUser} boldName={msg.boldName} />
+          ))}
+          {isTyping && <TypingIndicator />}
+          {currentStep === 'calendar' && !isTyping && (
+            <CalendarPicker onSelect={handleCalendarSelect} />
+          )}
         </div>
-        <div style={inputAreaStyle}>
+      </div>
+      <div style={inputBarStyle}>
+        <div style={inputInnerStyle}>
           {renderInput()}
         </div>
       </div>
