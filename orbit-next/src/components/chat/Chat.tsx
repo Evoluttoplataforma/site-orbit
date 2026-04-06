@@ -96,6 +96,14 @@ export default function Chat() {
   const leadIdRef = useRef<number | null>(null);
   const savingLeadRef = useRef(false);
 
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const check = () => setIsDesktop(window.innerWidth >= 640);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
   const scrollToBottom = () => {
     setTimeout(() => {
       scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' });
@@ -341,24 +349,64 @@ export default function Chat() {
     }
   };
 
-  // Background gradient compartilhado
-  const pageBg: React.CSSProperties = {
-    background: 'radial-gradient(circle at 20% 0%, rgba(255,186,26,0.08) 0%, transparent 50%), radial-gradient(circle at 80% 100%, rgba(255,186,26,0.05) 0%, transparent 50%), #0D1117',
+  // Estilos inline pra escapar do reset agressivo do orbit.css
+  const overlayStyle: React.CSSProperties = {
+    position: 'fixed',
+    inset: 0,
+    zIndex: 50,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '0',
+    background:
+      'radial-gradient(circle at 20% 0%, rgba(255,186,26,0.08) 0%, transparent 50%), radial-gradient(circle at 80% 100%, rgba(255,186,26,0.05) 0%, transparent 50%), #0d1117',
+    overflowY: 'auto',
   };
 
-  // Card: full-screen no mobile, centralizado com max-w em telas maiores.
-  // maxWidth inline pra escapar da regra hostil em orbit.css que força max-width:100% nos primeiros 3 níveis de divs.
-  const cardClass =
-    'w-full h-full sm:h-auto sm:max-h-[90dvh] bg-secondary/40 sm:border sm:border-border sm:rounded-3xl overflow-hidden sm:shadow-2xl backdrop-blur-sm flex flex-col';
-  const cardStyle: React.CSSProperties = { maxWidth: '42rem' };
+  const cardStyle: React.CSSProperties = {
+    width: '100%',
+    maxWidth: '720px',
+    height: '100dvh',
+    background: '#0d1117',
+    border: '1px solid rgba(255,255,255,0.08)',
+    borderRadius: 0,
+    boxShadow: '0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,186,26,0.06)',
+    display: 'flex',
+    flexDirection: 'column',
+    overflow: 'hidden',
+    margin: 0,
+  };
+
+  // Em telas sm+: card com bordas arredondadas e altura limitada
+  const cardStyleDesktop: React.CSSProperties = {
+    ...cardStyle,
+    height: 'min(92dvh, 820px)',
+    borderRadius: '24px',
+    margin: '16px',
+  };
+
+  const finalCardStyle = isDesktop ? cardStyleDesktop : cardStyle;
+
+  const messagesAreaStyle: React.CSSProperties = {
+    flex: 1,
+    overflowY: 'auto',
+    padding: '24px 20px',
+  };
+
+  const inputAreaStyle: React.CSSProperties = {
+    flexShrink: 0,
+    padding: '16px 20px 20px',
+    borderTop: '1px solid rgba(255,255,255,0.06)',
+    background: 'rgba(0,0,0,0.2)',
+  };
 
   if (currentStep === 'confirmation') {
     return (
-      <div className="fixed inset-0 flex items-center justify-center sm:p-4 overflow-y-auto" style={pageBg}>
-        <div className={cardClass} style={cardStyle}>
+      <div style={overlayStyle}>
+        <div style={finalCardStyle}>
           <ChatHeader currentStep={progressSteps} totalSteps={progressSteps} />
-          <div className="flex-1 overflow-y-auto flex items-center justify-center px-4">
-            <div className="w-full max-w-md">
+          <div style={{ flex: 1, overflowY: 'auto', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
+            <div style={{ width: '100%', maxWidth: '440px' }}>
               <ConfirmationScreen
                 name={leadData.name}
                 date={leadData.date}
@@ -374,11 +422,11 @@ export default function Chat() {
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center sm:p-4 overflow-y-auto" style={pageBg}>
-      <div className={cardClass} style={{ minHeight: '100dvh' }}>
+    <div style={overlayStyle}>
+      <div style={finalCardStyle}>
         <ChatHeader currentStep={currentProgress} totalSteps={progressSteps} />
-        <div ref={scrollRef} className="flex-1 overflow-y-auto">
-          <div className="px-4 sm:px-6 py-6 space-y-4">
+        <div ref={scrollRef} style={messagesAreaStyle}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {messages.map((msg, i) => (
               <ChatBubble key={i} message={msg.text} isUser={msg.isUser} boldName={msg.boldName} />
             ))}
@@ -388,7 +436,7 @@ export default function Chat() {
             )}
           </div>
         </div>
-        <div className="border-t border-border shrink-0 px-4 sm:px-6 py-4 bg-background/40">
+        <div style={inputAreaStyle}>
           {renderInput()}
         </div>
       </div>
