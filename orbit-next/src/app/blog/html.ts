@@ -46,7 +46,7 @@ export const pageHTML = `
                 <h2>Pronto para transformar sua gestão?</h2>
                 <p>Conheça o time de IA que executa a estratégia da sua empresa.</p>
                 <div class="site-cta__buttons">
-                    <a href="/#contato-form" class="btn btn-primary btn-lg">Conhecer o Time de IA</a>
+                    <a href="/chat" class="btn btn-primary btn-lg">Conhecer o Time de IA</a>
                 </div>
             </div>
         </div>
@@ -489,7 +489,7 @@ export const pageHTML = `
                         '<div class="blog-sidebar-cta__icon"><i class="fas fa-robot"></i></div>' +
                         '<h3>Conhe&ccedil;a o Time de IA</h3>' +
                         '<p>Dezenas de agentes especializados que operam a gest&atilde;o da sua empresa 24/7.</p>' +
-                        '<a href="/#contato-form" class="btn btn-primary" style="width:100%;text-align:center;">Agendar demonstra&ccedil;&atilde;o</a>' +
+                        '<a href="/chat" class="btn btn-primary" style="width:100%;text-align:center;">Agendar demonstra&ccedil;&atilde;o</a>' +
                     '</div>' +
 
                     '<div class="blog-sidebar-card">' +

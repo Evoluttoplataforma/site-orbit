@@ -44,7 +44,7 @@ export const pageHTML = `
             </div>
 
             <div class="hero-zoom__ctas" data-reveal style="margin-top:40px;">
-                <a href="/#contato-form" class="btn btn-primary btn-lg hero-cta-glow">QUERO CONHECER O TIME DE IA</a>
+                <a href="/chat" class="btn btn-primary btn-lg hero-cta-glow">QUERO CONHECER O TIME DE IA</a>
             </div>
             <p class="hero-zoom__note" data-reveal>⏱️ 2 min • 100% gratuito • Sem compromisso</p>
         </div>
@@ -306,7 +306,7 @@ export const pageHTML = `
             </div>
 
             <div style="text-align:center;margin-top:56px;" data-reveal>
-                <a href="/#contato-form" class="btn btn-primary btn-lg">QUERO RESOLVER ISSO</a>
+                <a href="/chat" class="btn btn-primary btn-lg">QUERO RESOLVER ISSO</a>
             </div>
         </div>
 
@@ -1307,7 +1307,7 @@ export const pageHTML = `
                 <!-- Bottom CTA -->
                 <div style="text-align:center;margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.06);" data-reveal>
                     <p style="color:rgba(255,255,255,0.5);font-size:1.1rem;margin-bottom:20px;">12 especialistas. 1 coordenadora. <strong style="color:#fff;">Custo de 1 funcionário.</strong></p>
-                    <a href="/#contato-form" class="btn btn-primary btn-lg">Quero meu time de IA</a>
+                    <a href="/chat" class="btn btn-primary btn-lg">Quero meu time de IA</a>
                 </div>
 
                 <script>
@@ -3379,7 +3379,7 @@ export const pageHTML = `
             <h2 data-reveal>Pronto para montar seu <span class="text-gold">time de IA</span>?</h2>
             <p data-reveal>Agende uma demonstração gratuita e veja os agentes trabalhando com a SUA empresa.</p>
             <div data-reveal>
-                <a href="/#contato-form" class="btn-gold">QUERO CONHECER O TIME DE IA</a>
+                <a href="/chat" class="btn-gold">QUERO CONHECER O TIME DE IA</a>
             </div>
 
             <div class="lp-cta-final__stats" data-reveal>

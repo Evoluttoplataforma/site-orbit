@@ -447,7 +447,7 @@ export const pageHTML = `
                                 </div>
                                 <div class="form-group">
                                     <label for="ctaBannerCtaUrl">Link do botao</label>
-                                    <input type="text" id="ctaBannerCtaUrl" placeholder="URL destino" value="/#contato-form">
+                                    <input type="text" id="ctaBannerCtaUrl" placeholder="URL destino" value="/chat">
                                 </div>
                                 <div class="form-group">
                                     <label>Imagem do banner</label>
@@ -1540,7 +1540,7 @@ export const pageHTML = `
         document.getElementById('ctaBannerTitle').value = '';
         document.getElementById('ctaBannerDesc').value = '';
         document.getElementById('ctaBannerCtaText').value = 'Agendar demonstração';
-        document.getElementById('ctaBannerCtaUrl').value = '/#contato-form';
+        document.getElementById('ctaBannerCtaUrl').value = '/chat';
         document.getElementById('ctaBannerImageData').value = '';
         document.getElementById('ctaBannerImagePreview').innerHTML = '';
         updateSeoScore();
@@ -1583,7 +1583,7 @@ export const pageHTML = `
         document.getElementById('ctaBannerTitle').value = article.cta_banner_title || '';
         document.getElementById('ctaBannerDesc').value = article.cta_banner_desc || '';
         document.getElementById('ctaBannerCtaText').value = article.cta_banner_cta_text || 'Agendar demonstração';
-        document.getElementById('ctaBannerCtaUrl').value = article.cta_banner_cta_url || '/#contato-form';
+        document.getElementById('ctaBannerCtaUrl').value = article.cta_banner_cta_url || '/chat';
         document.getElementById('ctaBannerImageData').value = article.cta_banner_image || '';
         if (article.cta_banner_image) {
             document.getElementById('ctaBannerImagePreview').innerHTML = '<img src="' + article.cta_banner_image + '" style="max-width:100%;border-radius:8px;">';
@@ -1708,7 +1708,7 @@ export const pageHTML = `
             cta_banner_title: ctaBannerTitle || null,
             cta_banner_desc: ctaBannerDesc || null,
             cta_banner_cta_text: ctaBannerCtaText || 'Agendar demonstração',
-            cta_banner_cta_url: ctaBannerCtaUrl || '/#contato-form',
+            cta_banner_cta_url: ctaBannerCtaUrl || '/chat',
             cta_banner_image: ctaBannerImage || null,
             seo_title: seoTitleVal || null,
             seo_canonical: seoCanonical || null,
@@ -2550,11 +2550,11 @@ JSON.stringify(schemaOrg, null, 2) +
 '                </li>' +
 '                <li><a href="/blog">Conhecimento</a></li>' +
 '                <li><a href="/parcerias" data-i18n="footer.partners">Seja Parceiro</a></li>' +
-'                <li><a href="/#contato-form">Fale Conosco</a></li>' +
+'                <li><a href="/chat">Fale Conosco</a></li>' +
 '            </ul>' +
 '            <div class="nav-actions">' +
 '                <a href="#" class="btn btn-outline" data-i18n="nav.login">Entrar</a>' +
-'                <a href="/#contato-form" class="btn btn-primary">Agendar Demo</a>' +
+'                <a href="/chat" class="btn btn-primary">Agendar Demo</a>' +
 '            </div>' +
 '            <button class="lang-switch" onclick="switchLang()" aria-label="Change language">' +
 '                <span class="lang-switch__flag">\ud83c\uddfa\ud83c\uddf8</span>' +
@@ -2588,7 +2588,7 @@ JSON.stringify(schemaOrg, null, 2) +
 '                <span class="lang-switch__flag">\ud83c\uddfa\ud83c\uddf8</span>' +
 '                <span class="lang-switch__label">EN</span>' +
 '            </button>' +
-'            <a href="/#contato-form" class="btn btn-primary" onclick="closeMobileMenu()">Fale Conosco</a>' +
+'            <a href="/chat" class="btn btn-primary" onclick="closeMobileMenu()">Fale Conosco</a>' +
 '        </div>' +
 '    </div>' +
 '    <section class="article-hero">' +
@@ -2622,7 +2622,7 @@ JSON.stringify(schemaOrg, null, 2) +
 '        <div class="container">' +
 '            <h3>Pronto para transformar sua gestao?</h3>' +
 '            <p>Veja como a Orbit pode ajudar sua empresa a executar a estrategia com mais eficiencia.</p>' +
-'            <a href="/#contato-form" class="btn btn-primary btn-lg">Agendar demonstracao</a>' +
+'            <a href="/chat" class="btn btn-primary btn-lg">Agendar demonstracao</a>' +
 '        </div>' +
 '    </section>' +
 '    <footer class="footer">' +

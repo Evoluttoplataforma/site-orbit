@@ -31,7 +31,7 @@ const html = `
         </div>
       </div>
       <div class="hero-zoom__ctas">
-        <a href="#contato-form" class="btn btn-primary btn-lg">Ver demonstração</a>
+        <a href="/chat" class="btn btn-primary btn-lg">Ver demonstração</a>
       </div>
       <p class="hero-zoom__note">Veja como isso funcionaria na sua empresa.</p>
     </div>
@@ -271,7 +271,7 @@ const html = `
       Veja sua estratégia sendo <span style="color:#ffba1a;">executada</span>
     </h2>
     <p style="color:#8B949E;font-size:1.1rem;margin-bottom:36px;">Em poucos minutos você entende como isso se aplica à sua empresa.</p>
-    <a href="#contato-form" class="btn btn-primary btn-lg" style="font-size:1.1rem;padding:18px 40px;">Quero ver o Orbit funcionando</a>
+    <a href="/chat" class="btn btn-primary btn-lg" style="font-size:1.1rem;padding:18px 40px;">Quero ver o Orbit funcionando</a>
   </div>
 </section>
 `;

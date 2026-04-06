@@ -1,1 +1,39 @@
+@import "tailwindcss";
 @import "./orbit.css";
+
+@theme {
+  --color-background: #0D1117;
+  --color-foreground: #C9D1D9;
+  --color-primary: #ffba1a;
+  --color-primary-foreground: #0D1117;
+  --color-secondary: #161B22;
+  --color-secondary-foreground: #C9D1D9;
+  --color-muted: #21262D;
+  --color-muted-foreground: #8B949E;
+  --color-border: #30363D;
+  --color-destructive: #F85149;
+  --color-success: #56D364;
+  --color-popover: #161B22;
+  --color-accent: #21262D;
+  --color-accent-foreground: #C9D1D9;
+  --color-chat-bubble: #161B22;
+  --color-chat-bubble-foreground: #C9D1D9;
+  --color-gold: #ffba1a;
+
+  --animate-fade-in: fade-in 0.3s ease-out;
+  --animate-fade-in-up: fade-in-up 0.4s ease-out;
+  --animate-typing-dot: typing-dot 1.4s infinite ease-in-out;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes typing-dot {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-3px); }
+}

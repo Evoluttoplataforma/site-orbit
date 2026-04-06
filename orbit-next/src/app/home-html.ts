@@ -726,7 +726,7 @@ export const pageHTML = `
             </div>
 
             <div style="text-align:center;margin-top:56px;" data-reveal>
-                <a href="#contato-form" class="btn btn-primary btn-lg">QUERO RESOLVER ISSO</a>
+                <a href="/chat" class="btn btn-primary btn-lg">QUERO RESOLVER ISSO</a>
             </div>
         </div>
 
@@ -1757,7 +1757,7 @@ export const pageHTML = `
                 <!-- Bottom CTA -->
                 <div style="text-align:center;margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.06);" data-reveal>
                     <p style="color:rgba(255,255,255,0.5);font-size:1.1rem;margin-bottom:20px;">12 especialistas. 1 coordenadora. <strong style="color:#fff;">Custo de 1 funcionário.</strong></p>
-                    <a href="#contato-form" class="btn btn-primary btn-lg">Quero meu time de IA</a>
+                    <a href="/chat" class="btn btn-primary btn-lg">Quero meu time de IA</a>
                 </div>
 
                 <script>
@@ -3390,7 +3390,7 @@ export const pageHTML = `
                         <div class="cost-orbit-benefit"><i class="fas fa-star"></i> Operação imediata</div>
                     </div>
                     <div class="cost-cta">
-                        <a href="#contato-form" class="btn btn-primary btn-lg" style="border-radius:50px;width:100%;">Ver planos completos</a>
+                        <a href="/chat" class="btn btn-primary btn-lg" style="border-radius:50px;width:100%;">Ver planos completos</a>
                     </div>
                 </div>
             </div>
@@ -3608,7 +3608,7 @@ export const pageHTML = `
                     <ul class="price-v2__features">
                         <li><i class="fas fa-users"></i> Até 50 usuários</li>
                     </ul>
-                    <a href="#contato-form" class="price-v2__cta">COMECE AGORA <i class="fas fa-chevron-right"></i></a>
+                    <a href="/chat" class="price-v2__cta">COMECE AGORA <i class="fas fa-chevron-right"></i></a>
                 </div>
 
                 <!-- Pró (featured) -->
@@ -3636,7 +3636,7 @@ export const pageHTML = `
                     <ul class="price-v2__features">
                         <li><i class="fas fa-users"></i> Até 100 usuários</li>
                     </ul>
-                    <a href="#contato-form" class="price-v2__cta price-v2__cta--gold">COMECE AGORA <i class="fas fa-chevron-right"></i></a>
+                    <a href="/chat" class="price-v2__cta price-v2__cta--gold">COMECE AGORA <i class="fas fa-chevron-right"></i></a>
                 </div>
 
                 <!-- Ultra -->
@@ -3661,7 +3661,7 @@ export const pageHTML = `
                     <ul class="price-v2__features">
                         <li><i class="fas fa-users"></i> Até 300 usuários</li>
                     </ul>
-                    <a href="#contato-form" class="price-v2__cta">COMECE AGORA <i class="fas fa-chevron-right"></i></a>
+                    <a href="/chat" class="price-v2__cta">COMECE AGORA <i class="fas fa-chevron-right"></i></a>
                 </div>
             </div>
 
@@ -4664,151 +4664,8 @@ export const pageHTML = `
         </div>
     </section>
 
-    <hr class="glow-divider">
+    <!-- Form removido — CTAs agora apontam para /chat -->
 
-    <!-- ═══ CONTACT FORM ═══ -->
-    <section class="cta-form-section" id="contato-form">
-        <div class="container">
-            <div class="cta-form-grid">
-                <div class="cta-form-text">
-                    <h2>Pronto para montar seu <span class="highlight">time de IA</span>?</h2>
-                    <p>Agende uma demonstração gratuita e veja os agentes trabalhando com a SUA empresa.</p>
-                    <ul class="cta-benefits">
-                        <li><i class="fas fa-circle-check"></i> Demonstração com dados da sua empresa</li>
-                        <li><i class="fas fa-circle-check"></i> Setup + onboarding guiado incluso</li>
-                        <li><i class="fas fa-circle-check"></i> Garantia de 90 dias - risco zero</li>
-                        <li><i class="fas fa-circle-check"></i> Plano anual com 20% de economia</li>
-                    </ul>
-                </div>
-
-                <div class="cta-form-card">
-                    <div class="form-card-header">
-                        <h3>Conheça o time de IA</h3>
-                        <p>Preencha e entraremos em contato em até 24h.</p>
-                    </div>
-
-                    <form id="lead-form" class="lead-form" novalidate>
-                        <div class="form-group">
-                            <label for="nome">Nome completo *</label>
-                            <input type="text" id="nome" name="name" placeholder="Seu nome completo" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">E-mail corporativo *</label>
-                            <input type="email" id="email" name="email" placeholder="seu@empresa.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="telefone">WhatsApp *</label>
-                            <input type="tel" id="telefone" name="phone" placeholder="(00) 00000-0000" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="cargo">Cargo *</label>
-                            <select id="cargo" name="role" required>
-                                <option value="">Selecione seu cargo</option>
-                                <option value="ceo-diretor">CEO / Diretor</option>
-                                <option value="funcionario">Funcionário</option>
-                                <option value="qualidade">Responsável pela Qualidade</option>
-                                <option value="consultor">Consultor</option>
-                                <option value="outro">Outro</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="segmento">Segmento *</label>
-                            <select id="segmento" name="segment" required>
-                                <option value="">Selecione o segmento</option>
-                                <option value="consultoria">Consultoria</option>
-                                <option value="industria">Indústria</option>
-                                <option value="servicos">Serviços</option>
-                                <option value="comercio-varejo">Comércio / Varejo</option>
-                                <option value="governo">Governo</option>
-                                <option value="outro">Outro</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="empresa">Empresa *</label>
-                            <input type="text" id="empresa" name="company" placeholder="Nome da sua empresa" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="faturamento">Faturamento mensal *</label>
-                            <select id="faturamento" name="revenue" required>
-                                <option value="">Selecione a faixa</option>
-                                <option value="ate-50k">Até R$ 50 mil/mês</option>
-                                <option value="50k-200k">R$ 50 mil - R$ 200 mil/mês</option>
-                                <option value="200k-1m">R$ 200 mil - R$ 1 milhão/mês</option>
-                                <option value="acima-1m">Acima de R$ 1 milhão/mês</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="funcionarios">Quantos funcionários? *</label>
-                            <select id="funcionarios" name="employees" required>
-                                <option value="">Selecione</option>
-                                <option value="1-5">1 - 5 funcionários</option>
-                                <option value="6-20">6 - 20 funcionários</option>
-                                <option value="21-50">21 - 50 funcionários</option>
-                                <option value="51-100">51 - 100 funcionários</option>
-                                <option value="100+">Mais de 100 funcionários</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="prioridade">Qual a prioridade para implementar? *</label>
-                            <select id="prioridade" name="priority" required>
-                                <option value="">Selecione</option>
-                                <option value="urgente">Urgente - preciso para ontem</option>
-                                <option value="em-breve">Em breve - nos próximos 30 dias</option>
-                                <option value="pesquisando">Estou pesquisando ainda</option>
-                                <option value="conhecer">Só quero conhecer</option>
-                            </select>
-                        </div>
-
-                        <!-- ===== CAMPOS OCULTOS PADRAO GTM ===== -->
-                        <!-- UTM Parameters -->
-                        <input type="hidden" name="utm_source" id="h_utm_source">
-                        <input type="hidden" name="utm_medium" id="h_utm_medium">
-                        <input type="hidden" name="utm_campaign" id="h_utm_campaign">
-                        <input type="hidden" name="utm_content" id="h_utm_content">
-                        <input type="hidden" name="utm_term" id="h_utm_term">
-                        <!-- Google Ads -->
-                        <input type="hidden" name="gclid" id="h_gclid">
-                        <input type="hidden" name="gbraid" id="h_gbraid">
-                        <input type="hidden" name="wbraid" id="h_wbraid">
-                        <input type="hidden" name="gad_campaignid" id="h_gad_campaignid">
-                        <input type="hidden" name="gad_source" id="h_gad_source">
-                        <!-- Meta / Facebook -->
-                        <input type="hidden" name="fbclid" id="h_fbclid">
-                        <input type="hidden" name="fbc" id="h_fbc">
-                        <input type="hidden" name="fbp" id="h_fbp">
-                        <!-- Outras Plataformas -->
-                        <input type="hidden" name="ttclid" id="h_ttclid">
-                        <input type="hidden" name="msclkid" id="h_msclkid">
-                        <input type="hidden" name="li_fat_id" id="h_li_fat_id">
-                        <input type="hidden" name="twclid" id="h_twclid">
-                        <input type="hidden" name="sck" id="h_sck">
-                        <!-- Sessao / Atribuicao -->
-                        <input type="hidden" name="landing_page" id="h_landing_page">
-                        <input type="hidden" name="referrer" id="h_referrer">
-                        <input type="hidden" name="user_agent" id="h_user_agent">
-                        <input type="hidden" name="first_visit" id="h_first_visit">
-                        <input type="hidden" name="session_id" id="h_session_id">
-                        <input type="hidden" name="session_attributes_encoded" id="h_session_attributes_encoded">
-                        <input type="hidden" name="originPage" id="h_originPage">
-                        <input type="hidden" name="ref" id="h_ref">
-
-                        <button type="submit" class="btn btn-primary btn-submit">
-                            <span class="btn-text">QUERO CONHECER O TIME DE IA</span>
-                            <span class="btn-loading" style="display:none;"><i class="fas fa-spinner fa-spin"></i> Enviando...</span>
-                        </button>
-
-                        <div class="form-error" id="form-error" style="display:none;"></div>
-                    </form>
-
-                    <div class="form-success" id="form-success" style="display:none;">
-                        <div class="form-success-icon"><i class="fas fa-check"></i></div>
-                        <h4>Recebemos seu contato!</h4>
-                        <p>Nosso time entrará em contato em até 24 horas úteis.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- ═══ KNOWLEDGE / BLOG ═══ -->
     <section class="knowledge-section section--light" id="conhecimento">

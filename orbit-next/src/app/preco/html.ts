@@ -175,7 +175,7 @@ export const pageHTML = `
                     <ul class="price-v2__features">
                         <li><i class="fas fa-users"></i> Até 30 usuários</li>
                     </ul>
-                    <a href="/#contato-form" class="price-v2__cta">Começar agora</a>
+                    <a href="/chat" class="price-v2__cta">Começar agora</a>
                 </div>
 
                 <!-- Advanced (featured) -->
@@ -197,7 +197,7 @@ export const pageHTML = `
                     <ul class="price-v2__features">
                         <li><i class="fas fa-infinity"></i> Usuários ilimitados</li>
                     </ul>
-                    <a href="/#contato-form" class="price-v2__cta price-v2__cta--gold">Escolher Advanced</a>
+                    <a href="/chat" class="price-v2__cta price-v2__cta--gold">Escolher Advanced</a>
                     <div class="price-v2__guarantee"><i class="fas fa-shield-check"></i> Garantia 90 dias ou seu dinheiro de volta</div>
                 </div>
 
@@ -217,7 +217,7 @@ export const pageHTML = `
                     <ul class="price-v2__features">
                         <li><i class="fas fa-infinity"></i> Usuários ilimitados</li>
                     </ul>
-                    <a href="/#contato-form" class="price-v2__cta">Escolher Pro</a>
+                    <a href="/chat" class="price-v2__cta">Escolher Pro</a>
                 </div>
             </div>
 
@@ -751,7 +751,7 @@ export const pageHTML = `
                 <h2>Pronto para montar seu time de IA?</h2>
                 <p>Agende uma demonstração gratuita e veja os agentes trabalhando com a SUA empresa.</p>
                 <div class="site-cta__buttons">
-                    <a href="/#contato-form" class="btn btn-primary btn-lg">QUERO CONHECER O TIME DE IA</a>
+                    <a href="/chat" class="btn btn-primary btn-lg">QUERO CONHECER O TIME DE IA</a>
                 </div>
                 <p class="cta-note">2 min &bull; Sem compromisso</p>
             </div>

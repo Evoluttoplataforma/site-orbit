@@ -42,7 +42,7 @@ export const pageHTML = `
             </div>
 
             <div class="hero-zoom__ctas" data-reveal style="margin-top:40px;">
-                <a href="/#contato-form" class="btn btn-primary btn-lg hero-cta-glow">QUERO CONHECER O TIME DE IA</a>
+                <a href="/chat" class="btn btn-primary btn-lg hero-cta-glow">QUERO CONHECER O TIME DE IA</a>
             </div>
             <p class="hero-zoom__note" data-reveal>⏱️ 2 min • 100% gratuito • Sem compromisso</p>
         </div>
@@ -439,7 +439,7 @@ export const pageHTML = `
         <div class="container" style="position:relative;z-index:1;text-align:center;">
             <h2 style="font-size:clamp(28px,4vw,42px);font-weight:800;color:#fff;margin-bottom:16px;">Pronto para conhecer o Orbit?</h2>
             <p style="color:rgba(255,255,255,0.6);font-size:18px;font-weight:400;margin-bottom:40px;max-width:500px;margin-left:auto;margin-right:auto;letter-spacing:0;">Agende uma demonstração e veja os agentes trabalhando com a sua empresa.</p>
-            <a href="/#contato-form" class="btn btn-primary btn-lg hero-cta-glow">Conhecer o Time de IA</a>
+            <a href="/chat" class="btn btn-primary btn-lg hero-cta-glow">Conhecer o Time de IA</a>
         </div>
     </section>
 

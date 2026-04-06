@@ -41,7 +41,7 @@ export const pageHTML = `
             <p>Compartilhe sua experiência com a Orbit Gestão e inspire outras empresas a transformarem sua gestão.</p>
             <div class="stories-cta__buttons">
                 <a href="/historias/enviar" class="btn btn-primary btn-lg">Conte sua história</a>
-                <a href="/#contato-form" class="btn btn-outline btn-lg">Agendar demonstração</a>
+                <a href="/chat" class="btn btn-outline btn-lg">Agendar demonstração</a>
             </div>
         </div>
     </section>
