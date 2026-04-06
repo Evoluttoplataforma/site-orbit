@@ -143,10 +143,11 @@ export default function ChatPopup() {
       const { data, error } = await supabaseMkt
         .from('leads')
         .insert({
-          name: name.trim(),
+          nome: firstName,
+          sobrenome: lastName,
+          whatsapp: normalizedPhone,
           email: email.trim().toLowerCase(),
-          phone: normalizedPhone,
-          company: company.trim(),
+          empresa: company.trim(),
           status: 'parcial',
         })
         .select('id')

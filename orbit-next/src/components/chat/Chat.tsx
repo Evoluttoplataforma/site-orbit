@@ -59,21 +59,22 @@ function getMeetingLink(faturamento: string, cargo: string, segmento: string) {
   return fat.includes('até') && fat.includes('100 mil') ? MEET_LINKS.pequeno : MEET_LINKS.grande;
 }
 
-// Mapeia campos do chat (PT) → schema da tabela leads no MKT ORBIT (EN)
+// Schema PT compatível com edge functions do Lovable
 function toDbPayload(data: LeadData, status: 'parcial' | 'completo') {
   return {
-    name: data.name || `${data.nome} ${data.sobrenome}`.trim(),
+    nome: data.nome || (data.name || '').split(' ')[0] || '',
+    sobrenome: data.sobrenome || (data.name || '').split(' ').slice(1).join(' '),
+    whatsapp: normalizePhone(data.whatsapp),
     email: data.email,
-    phone: normalizePhone(data.whatsapp),
-    company: data.empresa || null,
-    segment: data.oqueFaz || null,
-    role: data.cargo || null,
-    revenue: data.faturamento || null,
-    employees: data.funcionarios || null,
-    priority: data.prioridade || null,
+    empresa: data.empresa || '',
+    oque_faz: data.oqueFaz || '',
+    cargo: data.cargo || '',
+    faturamento: data.faturamento || '',
+    funcionarios: data.funcionarios || '',
+    prioridade: data.prioridade || '',
     software_gestao: data.softwareGestao || null,
-    data_reuniao: data.date || null,
-    horario_reuniao: data.time || null,
+    data_reuniao: data.date || '',
+    horario_reuniao: data.time || '',
     link_reuniao: data.date && data.time ? getMeetingLink(data.faturamento, data.cargo, data.oqueFaz) : null,
     status,
   };
