@@ -61,6 +61,27 @@ function getMeetingLink(faturamento: string, cargo: string, segmento: string) {
 
 // Schema PT compatível com edge functions do Lovable
 function toDbPayload(data: LeadData, status: 'parcial' | 'completo') {
+  // Pega UTMs/tracking do sessionStorage e mistura no payload
+  let tracking: Record<string, string> = {};
+  if (typeof window !== 'undefined') {
+    try {
+      const raw = sessionStorage.getItem('__wl_tracking');
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed.originPage && !parsed.origin_page) parsed.origin_page = parsed.originPage;
+        const trackingFields = [
+          'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
+          'gclid', 'gbraid', 'wbraid', 'gad_campaignid', 'gad_source',
+          'fbclid', 'ttclid', 'msclkid', 'li_fat_id', 'sck',
+          'landing_page', 'origin_page', 'session_attributes_encoded',
+          'apex_session_id',
+        ];
+        for (const f of trackingFields) {
+          if (parsed[f]) tracking[f] = parsed[f];
+        }
+      }
+    } catch {}
+  }
   return {
     nome: data.nome || (data.name || '').split(' ')[0] || '',
     sobrenome: data.sobrenome || (data.name || '').split(' ').slice(1).join(' '),
@@ -77,6 +98,7 @@ function toDbPayload(data: LeadData, status: 'parcial' | 'completo') {
     horario_reuniao: data.time || '',
     link_reuniao: data.date && data.time ? getMeetingLink(data.faturamento, data.cargo, data.oqueFaz) : null,
     status,
+    ...tracking,
   };
 }
 
@@ -99,10 +121,16 @@ export default function Chat() {
   const pipedriveIdsRef = useRef<{ person_id?: number; org_id?: number; deal_id?: number }>({});
 
   // Coleta UTM/tracking do sessionStorage (populado pelo script global)
+  // Normaliza originPage (camelCase) → origin_page (snake_case) que é o que as edge functions esperam
   const getUtmData = () => {
     try {
       const raw = sessionStorage.getItem('__wl_tracking');
-      return raw ? JSON.parse(raw) : {};
+      if (!raw) return {};
+      const parsed = JSON.parse(raw);
+      if (parsed.originPage && !parsed.origin_page) {
+        parsed.origin_page = parsed.originPage;
+      }
+      return parsed;
     } catch { return {}; }
   };
 

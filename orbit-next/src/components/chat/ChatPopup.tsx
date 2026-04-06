@@ -138,6 +138,26 @@ export default function ChatPopup() {
     const fullPhone = `+${country.ddi}${phone.replace(/\D/g, '')}`;
     const normalizedPhone = country.code === 'BR' ? normalizePhone(fullPhone) : fullPhone;
 
+    // Lê tracking/UTMs do sessionStorage (populado pelo script global no layout.tsx)
+    let tracking: Record<string, string> = {};
+    let utmData: Record<string, string> = {};
+    try {
+      const utmRaw = sessionStorage.getItem('__wl_tracking');
+      if (utmRaw) {
+        utmData = JSON.parse(utmRaw);
+        // Normaliza originPage → origin_page
+        if (utmData.originPage && !utmData.origin_page) utmData.origin_page = utmData.originPage;
+        const trackingFields = [
+          'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
+          'gclid', 'gbraid', 'wbraid', 'gad_campaignid', 'gad_source',
+          'fbclid', 'ttclid', 'msclkid', 'li_fat_id', 'sck',
+          'landing_page', 'origin_page', 'session_attributes_encoded',
+          'apex_session_id',
+        ];
+        for (const f of trackingFields) if (utmData[f]) tracking[f] = utmData[f];
+      }
+    } catch {}
+
     let leadId: number | null = null;
     try {
       const { data, error } = await supabaseMkt
@@ -149,6 +169,7 @@ export default function ChatPopup() {
           email: email.trim().toLowerCase(),
           empresa: company.trim(),
           status: 'parcial',
+          ...tracking,
         })
         .select('id')
         .single();
@@ -161,8 +182,6 @@ export default function ChatPopup() {
     // Cria deal no Pipedrive (paralelo, não bloqueia)
     let pipedriveIds: { person_id?: number; org_id?: number; deal_id?: number } = {};
     try {
-      const utmRaw = sessionStorage.getItem('__wl_tracking');
-      const utmData = utmRaw ? JSON.parse(utmRaw) : {};
       const { data: pdResult } = await supabaseMkt.functions.invoke('create-pipedrive-lead', {
         body: {
           action: 'create',
