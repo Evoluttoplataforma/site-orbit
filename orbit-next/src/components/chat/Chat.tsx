@@ -147,6 +147,47 @@ export default function Chat() {
   };
 
   useEffect(() => {
+    // LP handoff: se o popup salvou dados em sessionStorage, pula direto para oqueFaz
+    try {
+      const lpRaw = sessionStorage.getItem('orbit_lp_data');
+      if (lpRaw) {
+        const lp = JSON.parse(lpRaw);
+        if (lp.nome && lp.email && lp.phone && lp.company) {
+          const parts = (lp.name || '').trim().split(' ');
+          const firstName = parts[0] || lp.nome;
+          const lastName = parts.slice(1).join(' ') || lp.sobrenome || '';
+
+          setLeadData((p) => ({
+            ...p,
+            name: lp.name || `${lp.nome} ${lp.sobrenome || ''}`.trim(),
+            nome: lp.nome || firstName,
+            sobrenome: lp.sobrenome || lastName,
+            whatsapp: lp.phone,
+            email: lp.email,
+            empresa: lp.company,
+          }));
+
+          if (lp.leadId) leadIdRef.current = lp.leadId;
+
+          // Limpa pra não reusar
+          sessionStorage.removeItem('orbit_lp_data');
+
+          const nome = lp.nome || firstName;
+          setTimeout(() => {
+            setMessages([{ text: `Olá, ${nome}! Prazer em te conhecer! 😊` }]);
+            setTimeout(() => {
+              addBotMessage(`Já tenho seus dados. Agora me conta: o que a ${lp.company} faz?`);
+              setCurrentStep('oqueFaz');
+            }, 1200);
+          }, 500);
+          return;
+        }
+      }
+    } catch {
+      // LP data inválido, segue fluxo normal
+    }
+
+    // Fluxo normal (sem dados do popup)
     setTimeout(() => {
       setMessages([{ text: 'Reduza custos e aumente a produtividade com o Orbit. Vamos agendar uma conversa?' }]);
       setTimeout(() => {
