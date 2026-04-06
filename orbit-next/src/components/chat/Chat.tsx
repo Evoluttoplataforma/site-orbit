@@ -341,19 +341,26 @@ export default function Chat() {
     }
   };
 
+  // Background gradient compartilhado
+  const pageBg = {
+    background: 'radial-gradient(circle at 20% 0%, rgba(255,186,26,0.08) 0%, transparent 50%), radial-gradient(circle at 80% 100%, rgba(255,186,26,0.05) 0%, transparent 50%), #0D1117',
+  };
+
   if (currentStep === 'confirmation') {
     return (
-      <div className="h-dvh bg-background flex flex-col overflow-hidden">
-        <ChatHeader currentStep={progressSteps} totalSteps={progressSteps} />
-        <div className="flex-1 overflow-y-auto flex items-center justify-center px-4">
-          <div className="w-full max-w-md">
-            <ConfirmationScreen
-              name={leadData.name}
-              date={leadData.date}
-              time={leadData.time}
-              segmento={leadData.oqueFaz}
-              meetingLink={resolvedMeetLink}
-            />
+      <div className="min-h-dvh flex items-center justify-center p-4" style={pageBg}>
+        <div className="w-full max-w-2xl bg-secondary/30 border border-border rounded-3xl overflow-hidden shadow-2xl backdrop-blur-sm flex flex-col" style={{ height: 'min(90dvh, 800px)' }}>
+          <ChatHeader currentStep={progressSteps} totalSteps={progressSteps} />
+          <div className="flex-1 overflow-y-auto flex items-center justify-center px-4">
+            <div className="w-full max-w-md">
+              <ConfirmationScreen
+                name={leadData.name}
+                date={leadData.date}
+                time={leadData.time}
+                segmento={leadData.oqueFaz}
+                meetingLink={resolvedMeetLink}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -361,21 +368,23 @@ export default function Chat() {
   }
 
   return (
-    <div className="h-dvh bg-background flex flex-col overflow-hidden">
-      <ChatHeader currentStep={currentProgress} totalSteps={progressSteps} />
-      <div ref={scrollRef} className="flex-1 overflow-y-auto">
-        <div className="max-w-2xl mx-auto px-4 py-4 space-y-4">
-          {messages.map((msg, i) => (
-            <ChatBubble key={i} message={msg.text} isUser={msg.isUser} boldName={msg.boldName} />
-          ))}
-          {isTyping && <TypingIndicator />}
-          {currentStep === 'calendar' && !isTyping && (
-            <CalendarPicker onSelect={handleCalendarSelect} />
-          )}
+    <div className="min-h-dvh flex items-center justify-center p-4" style={pageBg}>
+      <div className="w-full max-w-2xl bg-secondary/30 border border-border rounded-3xl overflow-hidden shadow-2xl backdrop-blur-sm flex flex-col" style={{ height: 'min(90dvh, 800px)' }}>
+        <ChatHeader currentStep={currentProgress} totalSteps={progressSteps} />
+        <div ref={scrollRef} className="flex-1 overflow-y-auto">
+          <div className="px-4 sm:px-6 py-6 space-y-4">
+            {messages.map((msg, i) => (
+              <ChatBubble key={i} message={msg.text} isUser={msg.isUser} boldName={msg.boldName} />
+            ))}
+            {isTyping && <TypingIndicator />}
+            {currentStep === 'calendar' && !isTyping && (
+              <CalendarPicker onSelect={handleCalendarSelect} />
+            )}
+          </div>
         </div>
-      </div>
-      <div className="border-t border-border shrink-0">
-        <div className="max-w-2xl mx-auto px-4 py-3">{renderInput()}</div>
+        <div className="border-t border-border shrink-0 px-4 sm:px-6 py-4 bg-background/40">
+          {renderInput()}
+        </div>
       </div>
     </div>
   );
