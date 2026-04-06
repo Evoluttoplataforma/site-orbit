@@ -31,9 +31,11 @@ export default function ChatBubble({ message, isUser = false, boldName }: ChatBu
 
   return (
     <div className="flex items-start gap-3 animate-fade-in-up">
-      <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-        <span className="text-primary-foreground font-bold text-lg">O</span>
-      </div>
+      <img
+        src="/images/olivia.png"
+        alt="Olívia - Atendente Orbit"
+        className="w-12 h-12 rounded-full object-cover flex-shrink-0 border-2 border-primary/30"
+      />
       <div className="bg-chat-bubble text-chat-bubble-foreground px-5 py-4 rounded-2xl max-w-md leading-relaxed">
         {renderMessage()}
       </div>
