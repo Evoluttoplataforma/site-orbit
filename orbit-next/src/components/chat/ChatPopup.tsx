@@ -149,8 +149,11 @@ export default function ChatPopup() {
       onClick={(e) => { if (e.target === e.currentTarget) setOpen(false); }}
     >
       <div
-        className="w-full max-w-md my-auto rounded-3xl border border-border p-6 sm:p-8 relative animate-fade-in-up shadow-2xl"
-        style={{ background: 'linear-gradient(135deg, #161B22 0%, #0D1117 100%)' }}
+        className="w-full my-auto rounded-3xl border border-border p-6 sm:p-8 relative animate-fade-in-up shadow-2xl"
+        style={{
+          maxWidth: '28rem',
+          background: 'linear-gradient(135deg, #161B22 0%, #0D1117 100%)',
+        }}
       >
         <button
           onClick={() => setOpen(false)}

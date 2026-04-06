@@ -346,14 +346,16 @@ export default function Chat() {
     background: 'radial-gradient(circle at 20% 0%, rgba(255,186,26,0.08) 0%, transparent 50%), radial-gradient(circle at 80% 100%, rgba(255,186,26,0.05) 0%, transparent 50%), #0D1117',
   };
 
-  // Card: full-screen no mobile, centralizado com max-w em telas maiores
+  // Card: full-screen no mobile, centralizado com max-w em telas maiores.
+  // maxWidth inline pra escapar da regra hostil em orbit.css que força max-width:100% nos primeiros 3 níveis de divs.
   const cardClass =
-    'w-full h-full sm:h-auto sm:max-h-[90dvh] sm:max-w-2xl bg-secondary/40 sm:border sm:border-border sm:rounded-3xl overflow-hidden sm:shadow-2xl backdrop-blur-sm flex flex-col';
+    'w-full h-full sm:h-auto sm:max-h-[90dvh] bg-secondary/40 sm:border sm:border-border sm:rounded-3xl overflow-hidden sm:shadow-2xl backdrop-blur-sm flex flex-col';
+  const cardStyle: React.CSSProperties = { maxWidth: '42rem' };
 
   if (currentStep === 'confirmation') {
     return (
       <div className="fixed inset-0 flex items-center justify-center sm:p-4 overflow-y-auto" style={pageBg}>
-        <div className={cardClass}>
+        <div className={cardClass} style={cardStyle}>
           <ChatHeader currentStep={progressSteps} totalSteps={progressSteps} />
           <div className="flex-1 overflow-y-auto flex items-center justify-center px-4">
             <div className="w-full max-w-md">
