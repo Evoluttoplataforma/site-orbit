@@ -133,9 +133,10 @@
 
   // ═══ LIVE POPUP — appears after 3s on all pages ═══
   function showLivePopup() {
-    // Skip on live page itself and CMS
+    // Skip on live page itself, CMS e chat
     if (window.location.pathname.indexOf('/live') === 0) return;
     if (window.location.pathname.indexOf('/acesso') === 0) return;
+    if (window.location.pathname.indexOf('/chat') === 0) return;
     // Check if dismissed on this page load (prevent duplicate)
     if (window.__livePopupShown) return;
     window.__livePopupShown = true;
