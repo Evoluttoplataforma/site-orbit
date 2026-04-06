@@ -1082,8 +1082,7 @@ export const pageHTML = `
                 fbclid: g('h_fbclid') || null,
                 landing_page: g('h_landing_page') || null,
                 referrer: g('h_referrer') || null,
-                session_id: g('h_session_id') || null,
-                originPage: g('h_originPage') || null
+                session_id: g('h_session_id') || null
             };
 
             // Save lead to Supabase
