@@ -248,7 +248,25 @@ export default function ChatPopup() {
     }
 
     // Redireciona pro destino certo (chat ou checkout externo)
-    window.location.href = redirectUrl;
+    if (mode === 'checkout') {
+      // Anexa os dados do lead como query params no checkout
+      try {
+        const url = new URL(redirectUrl);
+        url.searchParams.set('name', name.trim());
+        url.searchParams.set('nome', name.trim());
+        url.searchParams.set('email', email.trim().toLowerCase());
+        url.searchParams.set('phone', normalizedPhone);
+        url.searchParams.set('telefone', normalizedPhone);
+        url.searchParams.set('company', company.trim());
+        url.searchParams.set('empresa', company.trim());
+        if (leadId) url.searchParams.set('lead_id', String(leadId));
+        window.location.href = url.toString();
+      } catch {
+        window.location.href = redirectUrl;
+      }
+    } else {
+      window.location.href = redirectUrl;
+    }
   };
 
   if (!open) return null;
