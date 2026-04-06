@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect, useMemo } from 'react';
-import { CheckCircle, Copy, CalendarPlus, Download, MessageCircle, Monitor, Users, Lightbulb, Share2 } from 'lucide-react';
+import { CheckCircle, Copy, CalendarPlus, Download, MessageCircle, Monitor, Users, Lightbulb, Share2, Check } from 'lucide-react';
 
 interface ConfirmationScreenProps {
   name: string;
@@ -11,6 +11,20 @@ interface ConfirmationScreenProps {
 }
 
 const LEGACY_LINK = 'https://meet.google.com/qpy-himp-cxj';
+
+const C = {
+  text: '#ffffff',
+  textMuted: '#8b949e',
+  textDim: '#6b7280',
+  card: '#1c2230',
+  cardLight: '#242b3a',
+  border: 'rgba(255,255,255,0.1)',
+  primary: '#ffba1a',
+  primaryDark: '#0d1117',
+  success: '#22c55e',
+  successBg: 'rgba(34,197,94,0.15)',
+  whatsapp: '#22c55e',
+};
 
 export default function ConfirmationScreen({ name, date, time, segmento, meetingLink }: ConfirmationScreenProps) {
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, min: 0, seg: 0 });
@@ -110,86 +124,296 @@ export default function ConfirmationScreen({ name, date, time, segmento, meeting
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const buttonBase: React.CSSProperties = {
+    width: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '12px',
+    padding: '16px 20px',
+    borderRadius: '14px',
+    border: 'none',
+    fontWeight: 600,
+    fontSize: '15px',
+    cursor: 'pointer',
+    fontFamily: 'inherit',
+    textDecoration: 'none',
+    transition: 'all 0.15s ease',
+    boxSizing: 'border-box',
+  };
+
   return (
-    <div className="flex flex-col items-center text-center py-8 animate-fade-in-up space-y-6">
-      <div className="w-16 h-16 rounded-full bg-success/20 flex items-center justify-center">
-        <CheckCircle className="w-10 h-10 text-success" />
+    <div
+      style={{
+        width: '100%',
+        maxWidth: '460px',
+        margin: '0 auto',
+        padding: '32px 24px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+        gap: '24px',
+        animation: 'fade-in-up 0.5s ease-out',
+      }}
+    >
+      {/* Check icon */}
+      <div
+        style={{
+          width: '72px',
+          height: '72px',
+          borderRadius: '50%',
+          background: C.successBg,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexShrink: 0,
+        }}
+      >
+        <CheckCircle size={40} color={C.success} strokeWidth={2.5} />
       </div>
+
+      {/* Title */}
       <div>
-        <h2 className="text-3xl font-bold text-foreground">Prontinho, {name}!</h2>
-        <p className="text-muted-foreground mt-1">Sua demonstração está confirmada. Faltam</p>
+        <h2 style={{ fontSize: '28px', fontWeight: 800, color: C.text, margin: '0 0 8px', lineHeight: 1.2 }}>
+          Prontinho, {name}!
+        </h2>
+        <p style={{ color: C.textMuted, fontSize: '14px', margin: 0 }}>
+          Sua demonstração está confirmada. Faltam:
+        </p>
       </div>
-      <div className="flex items-center gap-2">
+
+      {/* Countdown */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
         {[
           { value: countdown.days, label: 'DIAS' },
           { value: countdown.hours, label: 'HORAS' },
           { value: countdown.min, label: 'MIN' },
           { value: countdown.seg, label: 'SEG' },
         ].map((item, i) => (
-          <div key={item.label} className="flex items-center gap-2">
-            {i > 0 && <span className="text-muted-foreground text-xl font-light">:</span>}
-            <div className="flex flex-col items-center">
-              <div className="bg-secondary border border-border rounded-xl w-16 h-16 flex items-center justify-center">
-                <span className="text-2xl font-bold text-foreground">{pad(item.value)}</span>
+          <div key={item.label} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            {i > 0 && <span style={{ color: C.textDim, fontSize: '20px', fontWeight: 300 }}>:</span>}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+              <div
+                style={{
+                  background: C.card,
+                  border: `1px solid ${C.border}`,
+                  borderRadius: '14px',
+                  width: '64px',
+                  height: '64px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <span style={{ fontSize: '24px', fontWeight: 800, color: C.text, fontVariantNumeric: 'tabular-nums' }}>
+                  {pad(item.value)}
+                </span>
               </div>
-              <span className="text-[10px] tracking-wider text-muted-foreground mt-1">{item.label}</span>
+              <span style={{ fontSize: '10px', color: C.textMuted, letterSpacing: '1px', fontWeight: 600 }}>
+                {item.label}
+              </span>
             </div>
           </div>
         ))}
       </div>
-      <a href={googleCalendarUrl} target="_blank" rel="noopener noreferrer"
-        className="flex items-center justify-center gap-3 bg-primary text-primary-foreground rounded-full px-6 py-3 font-medium hover:bg-primary/90 transition-colors w-full max-w-sm">
-        <CalendarPlus className="w-5 h-5" />Adicionar ao Google Agenda
-      </a>
-      <button onClick={handleDownloadICS}
-        className="flex items-center justify-center gap-3 bg-secondary text-foreground border border-border rounded-full px-6 py-3 font-medium hover:bg-muted transition-colors w-full max-w-sm">
-        <Download className="w-5 h-5" />Baixar para outro calendário
-      </button>
-      <a href={whatsappGroupLink} target="_blank" rel="noopener noreferrer"
-        className="flex items-center justify-center gap-3 bg-[hsl(142,70%,45%)] text-white rounded-full px-6 py-3 font-medium hover:bg-[hsl(142,70%,40%)] transition-colors w-full max-w-sm">
-        <MessageCircle className="w-5 h-5" />Entrar no grupo do WhatsApp
-      </a>
-      <p className="text-xs text-muted-foreground max-w-sm">
+
+      {/* Buttons */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }}>
+        <a
+          href={googleCalendarUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            ...buttonBase,
+            background: C.primary,
+            color: C.primaryDark,
+            boxShadow: '0 6px 24px rgba(255,186,26,0.3)',
+          }}
+        >
+          <CalendarPlus size={18} />
+          Adicionar ao Google Agenda
+        </a>
+
+        <button
+          onClick={handleDownloadICS}
+          style={{
+            ...buttonBase,
+            background: C.card,
+            color: C.text,
+            border: `1px solid ${C.border}`,
+          }}
+        >
+          <Download size={18} />
+          Baixar para outro calendário
+        </button>
+
+        <a
+          href={whatsappGroupLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            ...buttonBase,
+            background: C.whatsapp,
+            color: '#ffffff',
+            boxShadow: '0 6px 24px rgba(34,197,94,0.25)',
+          }}
+        >
+          <MessageCircle size={18} />
+          Entrar no grupo do WhatsApp
+        </a>
+      </div>
+
+      <p style={{ fontSize: '12px', color: C.textMuted, margin: 0, maxWidth: '380px', lineHeight: 1.5 }}>
         Acompanhe novidades, dicas e conteúdos exclusivos sobre gestão e IA no nosso grupo.
       </p>
-      <div className="flex items-center bg-secondary rounded-xl px-4 py-3 border border-border w-full max-w-sm">
-        <span className="flex-1 text-sm text-muted-foreground truncate text-left">{resolvedLink}</span>
-        <button onClick={handleCopy} className="ml-2 p-1.5 rounded-lg bg-muted hover:bg-muted/80 transition-colors">
-          <Copy className="w-4 h-4 text-foreground" />
+
+      {/* Meeting link */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          background: C.card,
+          border: `1px solid ${C.border}`,
+          borderRadius: '12px',
+          padding: '12px 14px',
+          width: '100%',
+        }}
+      >
+        <span
+          style={{
+            flex: 1,
+            fontSize: '13px',
+            color: C.textMuted,
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+            textAlign: 'left',
+          }}
+        >
+          {resolvedLink}
+        </span>
+        <button
+          onClick={handleCopy}
+          style={{
+            padding: '8px',
+            borderRadius: '8px',
+            background: copied ? C.successBg : 'rgba(255,255,255,0.06)',
+            border: 'none',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'all 0.15s',
+          }}
+        >
+          {copied ? <Check size={16} color={C.success} /> : <Copy size={16} color={C.text} />}
         </button>
       </div>
-      {copied && <span className="text-xs text-success">Copiado!</span>}
-      <div className="w-full max-w-sm mt-4 pt-6 border-t border-border space-y-4">
-        <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider">📋 Prepare-se para a melhor demonstração</h3>
-        <div className="flex items-start gap-3 text-left">
-          <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
-            <Monitor className="w-4 h-4 text-primary" />
+
+      {/* Tips section */}
+      <div
+        style={{
+          width: '100%',
+          marginTop: '16px',
+          paddingTop: '24px',
+          borderTop: `1px solid ${C.border}`,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '20px',
+        }}
+      >
+        <h3 style={{ fontSize: '12px', fontWeight: 700, color: C.text, letterSpacing: '1px', margin: 0, textTransform: 'uppercase' }}>
+          📋 Prepare-se para a melhor demonstração
+        </h3>
+
+        {/* Tip 1 */}
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', textAlign: 'left' }}>
+          <div
+            style={{
+              width: '36px',
+              height: '36px',
+              borderRadius: '10px',
+              background: 'rgba(255,186,26,0.12)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+            }}
+          >
+            <Monitor size={16} color={C.primary} />
           </div>
-          <div>
-            <p className="text-sm font-medium text-foreground">Use o computador</p>
-            <p className="text-xs text-muted-foreground">A experiência é muito melhor em tela grande — você vai ver dashboards, processos e indicadores com clareza.</p>
+          <div style={{ flex: 1 }}>
+            <p style={{ fontSize: '14px', fontWeight: 600, color: C.text, margin: '0 0 4px' }}>Use o computador</p>
+            <p style={{ fontSize: '12px', color: C.textMuted, margin: 0, lineHeight: 1.5 }}>
+              A experiência é muito melhor em tela grande — você vai ver dashboards, processos e indicadores com clareza.
+            </p>
           </div>
         </div>
-        <div className="flex items-start gap-3 text-left">
-          <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
-            <Users className="w-4 h-4 text-primary" />
+
+        {/* Tip 2 */}
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', textAlign: 'left' }}>
+          <div
+            style={{
+              width: '36px',
+              height: '36px',
+              borderRadius: '10px',
+              background: 'rgba(255,186,26,0.12)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+            }}
+          >
+            <Users size={16} color={C.primary} />
           </div>
-          <div>
-            <p className="text-sm font-medium text-foreground">Convide seus sócios e líderes</p>
-            <p className="text-xs text-muted-foreground">Decisões estratégicas são melhores em equipe.</p>
-            <button onClick={() => { navigator.clipboard.writeText(resolvedLink); setCopied(true); setTimeout(() => setCopied(false), 2000); }}
-              className="mt-1.5 inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:text-primary/80 transition-colors">
-              <Share2 className="w-3 h-3" />Copiar link para compartilhar
+          <div style={{ flex: 1 }}>
+            <p style={{ fontSize: '14px', fontWeight: 600, color: C.text, margin: '0 0 4px' }}>Convide seus sócios e líderes</p>
+            <p style={{ fontSize: '12px', color: C.textMuted, margin: '0 0 8px', lineHeight: 1.5 }}>
+              Decisões estratégicas são melhores em equipe.
+            </p>
+            <button
+              onClick={handleCopy}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                fontSize: '12px',
+                fontWeight: 600,
+                color: C.primary,
+                background: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                padding: 0,
+                fontFamily: 'inherit',
+              }}
+            >
+              <Share2 size={12} />
+              Copiar link para compartilhar
             </button>
           </div>
         </div>
-        <div className="flex items-start gap-3 text-left">
-          <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
-            <Lightbulb className="w-4 h-4 text-primary" />
+
+        {/* Tip 3 */}
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '14px', textAlign: 'left' }}>
+          <div
+            style={{
+              width: '36px',
+              height: '36px',
+              borderRadius: '10px',
+              background: 'rgba(255,186,26,0.12)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+            }}
+          >
+            <Lightbulb size={16} color={C.primary} />
           </div>
-          <div>
-            <p className="text-sm font-medium text-foreground">Dicas para aproveitar ao máximo</p>
-            <ul className="text-xs text-muted-foreground space-y-1 mt-1 list-none">
+          <div style={{ flex: 1 }}>
+            <p style={{ fontSize: '14px', fontWeight: 600, color: C.text, margin: '0 0 6px' }}>Dicas para aproveitar ao máximo</p>
+            <ul style={{ fontSize: '12px', color: C.textMuted, margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '4px', lineHeight: 1.5 }}>
               <li>✓ Anote suas maiores dores de gestão antes</li>
               <li>✓ Pense em 2-3 processos que mais travam sua operação</li>
               <li>✓ Tenha em mente seus indicadores atuais</li>
