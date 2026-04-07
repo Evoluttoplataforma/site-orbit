@@ -7,6 +7,18 @@ import { validateEmail } from '@/lib/email-validation';
 
 const PHONE = '554898149776';
 
+// Pipedrive labels por página de origem
+const PIPE_LABELS: Record<string, number> = {
+  '/empresarios': 498, // DIRETO ORBIT B2B
+  '/consultores': 497, // CANAL ORBIT
+};
+function detectLabelFromPath(path: string): number | null {
+  for (const key in PIPE_LABELS) {
+    if (path === key || path.startsWith(key + '/')) return PIPE_LABELS[key];
+  }
+  return null;
+}
+
 const C = {
   green: '#25D366',
   greenDark: '#128C7E',
@@ -121,7 +133,8 @@ export default function WhatsAppWidget() {
       console.error('[WA Widget] Save lead failed:', err);
     }
 
-    // 2. Cria deal no Pipedrive com nota indicando origem
+    // 2. Cria deal no Pipedrive com nota indicando origem + label da página
+    const labelId = typeof window !== 'undefined' ? detectLabelFromPath(window.location.pathname) : null;
     try {
       await supabaseMkt.functions.invoke('create-pipedrive-lead', {
         body: {
@@ -131,6 +144,7 @@ export default function WhatsAppWidget() {
           email: email.trim().toLowerCase(),
           empresa: company.trim(),
           oqueFaz: 'Widget WhatsApp',
+          ...(labelId ? { label: labelId } : {}),
           leadId,
           utmData,
           noteExtra: '🟢 Lead via Widget WhatsApp do site',
