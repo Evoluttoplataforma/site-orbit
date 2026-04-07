@@ -1195,6 +1195,12 @@ export const pageHTML = `
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ nome: data.nome, email: data.email })
+                }).catch(function() {}),
+                // 4. ManyChat WhatsApp - cria subscriber + tag
+                fetch(SUPABASE_URL + '/functions/v1/subscribe-manychat-live', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nome: data.nome, email: data.email, telefone: data.telefone, source: 'live-rd-consultores' })
                 }).catch(function() {})
             ]).then(function() {
                 window.location.href = '/live/rd/obrigado';

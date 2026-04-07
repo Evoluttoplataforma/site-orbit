@@ -1118,6 +1118,12 @@ export const pageHTML = `
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ nome: data.nome, email: data.email })
                 }).catch(function() {});
+                // Cria subscriber no ManyChat WhatsApp + aplica tag (fire and forget)
+                fetch(SUPABASE_URL + '/functions/v1/subscribe-manychat-live', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nome: data.nome, email: data.email, telefone: data.telefone, source: 'live-semanal' })
+                }).catch(function() {});
                 window.location.href = '/live/obrigado';
             }).catch(function(err) {
                 console.error('Erro:', err);
