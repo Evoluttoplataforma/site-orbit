@@ -15,6 +15,7 @@ Documentação completa do CMS construído pra gerenciar blog, lead magnets, his
 | `06-recreation-prompt.md` | Prompt pronto pra colar no Claude Code recriar tudo |
 | `07-styles-and-ui.md` | Padrões visuais (CSS classes reutilizáveis) |
 | `08-rich-editor.md` | Editor de texto rico (toolbar + formatação) |
+| `09-source-reference.md` | Trechos verbatim do `painel/html.ts` original (auth, supaFetch, saveArticle, slug, image upload, etc) |
 
 ## 🎯 Para que serve esta documentação
 
