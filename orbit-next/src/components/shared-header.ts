@@ -129,7 +129,7 @@ export const headerHTML = `
                     <a href="/sobre"><span data-i18n="nav.company">Empresa</span></a>
                 </li>
                 <li>
-                    <a href="/seguranca-ia">Segurança & IA</a>
+                    <a href="/seguranca-ia">Segurança</a>
                 </li>
             </ul>
 
