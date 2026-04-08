@@ -155,7 +155,7 @@
       closeBtn.style.cssText = 'position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,0.6);color:#fff;border:none;font-size:20px;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;line-height:1;backdrop-filter:blur(4px);';
 
       var img = document.createElement('img');
-      img.src = '/images/banner-live.jpg';
+      img.src = '/images/banner-live.jpg?v=20260408';
       img.alt = 'Live - A Nova Era da Gestao';
       img.style.cssText = 'width:100%;display:block;';
 
