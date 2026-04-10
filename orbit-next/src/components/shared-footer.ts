@@ -5,7 +5,7 @@ export const footerHTML = `
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="footer-logo">
-                        <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" height="36">
+                        <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" width="92" height="36">
                     </div>
                     <p data-i18n="footer.tagline">Plataforma de gestão com IA. Contrate um time que executa.</p>
                     <div class="social-hover">

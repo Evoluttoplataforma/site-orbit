@@ -5,7 +5,7 @@ export const headerHTML = `
         <div class="container">
             <div class="logo">
                 <a href="/">
-                    <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" height="40">
+                    <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" width="102" height="40">
                 </a>
             </div>
 

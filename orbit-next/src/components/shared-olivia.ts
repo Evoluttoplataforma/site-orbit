@@ -41,7 +41,7 @@ export const oliviaHTML = `
                     <div class="orbit-hub__center">
                         <div class="orbit-hub__glow"></div>
                         <div class="orbit-hub__photo">
-                            <img src="/images/olivia.png" alt="Olívia">
+                            <img src="/images/olivia.png" alt="Olívia" width="800" height="1200">
                         </div>
                         <div class="orbit-hub__name">Olívia</div>
                         <div class="orbit-hub__role">Coordenadora Geral</div>

@@ -7,7 +7,7 @@ export const pageHTML = `
 
     <div class="login-card">
         <div class="login-logo">
-            <img src="/images/logo-orbit-white.png" alt="Orbit Gestão">
+            <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" width="102" height="40">
             <p>Painel de Conteudo</p>
         </div>
 

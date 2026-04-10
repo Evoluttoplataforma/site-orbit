@@ -179,35 +179,35 @@ export const pageHTML = `
                 <div class="origin-carousel">
                     <div class="origin-carousel__track" id="originCarouselTrack">
                         <div class="origin-director-card">
-                            <div class="origin-director-card__avatar"><img src="/images/diretor-igor.jpg" alt="Igor Furniel" loading="lazy" decoding="async"></div>
+                            <div class="origin-director-card__avatar"><img src="/images/diretor-igor.jpg" alt="Igor Furniel" width="600" height="586" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Igor Furniel</h3>
                                 <p>Fundador e CEO do Grupo GSN. 30 anos liderando operações de gestão e consultoria em milhares de empresas.</p>
                             </div>
                         </div>
                         <div class="origin-director-card">
-                            <div class="origin-director-card__avatar"><img src="/images/diretor-dani.jpg" alt="Dani Albuquerque" loading="lazy" decoding="async"></div>
+                            <div class="origin-director-card__avatar"><img src="/images/diretor-dani.jpg" alt="Dani Albuquerque" width="600" height="617" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Dani Albuquerque</h3>
                                 <p>Diretora de Operações. Responsável pela entrega e qualidade — garante resultado mensurável para cada cliente.</p>
                             </div>
                         </div>
                         <div class="origin-director-card">
-                            <div class="origin-director-card__avatar"><img src="/images/diretor-chris.jpg" alt="Christian Hart" loading="lazy" decoding="async"></div>
+                            <div class="origin-director-card__avatar"><img src="/images/diretor-chris.jpg" alt="Christian Hart" width="600" height="669" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Christian Hart</h3>
                                 <p>Diretor de Produto. Lidera o desenvolvimento da plataforma e a evolução dos agentes de IA.</p>
                             </div>
                         </div>
                         <div class="origin-director-card">
-                            <div class="origin-director-card__avatar"><img src="/images/diretor-rodrigo.jpg" alt="Rodrigo Furniel" loading="lazy" decoding="async"></div>
+                            <div class="origin-director-card__avatar"><img src="/images/diretor-rodrigo.jpg" alt="Rodrigo Furniel" width="600" height="474" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Rodrigo Furniel</h3>
                                 <p>Diretor de Vendas. Responsável pela expansão comercial, canais e parcerias estratégicas.</p>
                             </div>
                         </div>
                         <div class="origin-director-card">
-                            <div class="origin-director-card__avatar"><img src="/images/diretor-omar.jpg" alt="Omar" loading="lazy" decoding="async"></div>
+                            <div class="origin-director-card__avatar"><img src="/images/diretor-omar.jpg" alt="Omar" width="600" height="552" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Omar</h3>
                                 <p>Diretor de Tecnologia. Arquiteto da infraestrutura que garante performance, segurança e escala.</p>
