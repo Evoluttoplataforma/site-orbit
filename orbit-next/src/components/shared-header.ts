@@ -5,7 +5,7 @@ export const headerHTML = `
         <div class="container">
             <div class="logo">
                 <a href="/">
-                    <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" width="102" height="40">
+                    <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" height="40">
                 </a>
             </div>
 
@@ -128,9 +128,6 @@ export const headerHTML = `
                 <li>
                     <a href="/sobre"><span data-i18n="nav.company">Empresa</span></a>
                 </li>
-                <li>
-                    <a href="/seguranca-ia">Segurança</a>
-                </li>
             </ul>
 
             <div class="nav-actions">
@@ -199,7 +196,6 @@ export const headerHTML = `
             <a href="https://templum.com.br/treinamento-fase-a-fase" target="_blank"><i class="fas fa-chalkboard-teacher" style="color:#8B5CF6;"></i> Treinamento</a>
             <div class="mobile-menu__label" data-i18n="mobile.company">Empresa</div>
             <a href="/sobre"><i class="fas fa-building"></i> Sobre Nós</a>
-            <a href="/seguranca-ia"><i class="fas fa-shield-halved"></i> Segurança & IA</a>
         </div>
         <div class="mobile-menu__footer">
             <a href="https://app.orbitgestao.com.br/login" class="btn btn-outline" style="flex:1;text-align:center;color:#fff;border-color:rgba(255,255,255,0.4);">Entrar</a>
