@@ -252,7 +252,7 @@ export const pageHTML = `
     // Navigate to article
     window.__goToArticle = function(el) {
         var slug = el.getAttribute('data-slug');
-        if (slug) window.location.href = '/blog?artigo=' + encodeURIComponent(slug);
+        if (slug) window.location.href = '/blog/' + encodeURIComponent(slug);
     };
 
     // ── Build filter buttons dynamically from article categories ──
@@ -286,7 +286,7 @@ export const pageHTML = `
     function injectArticleSEO(article) {
         var seoTitle = (article.seo_title || article.title) + ' | Blog Orbit Gestão';
         var seoDesc = article.excerpt || (article.content || '').replace(/<[^>]*>/g, '').slice(0, 160);
-        var seoUrl = article.seo_canonical || 'https://orbitgestao.com.br/blog?artigo=' + encodeURIComponent(article.slug);
+        var seoUrl = article.seo_canonical || 'https://orbitgestao.com.br/blog/' + encodeURIComponent(article.slug);
         var seoImage = article.seo_og_image || article.cover_url || 'https://orbitgestao.com.br/images/og-image.png';
         var seoKeyword = article.seo_keyword || '';
         var categoryLabel = CATEGORIES[article.category] || article.category || 'Blog';
@@ -727,8 +727,19 @@ export const pageHTML = `
     }
 
     // ── Init ──
+    // Suporta /blog/slug (clean URL) e /blog?artigo=slug (legado)
     var params = new URLSearchParams(window.location.search);
     var slug = params.get('artigo');
+    if (!slug) {
+        var pathParts = window.location.pathname.replace(/\\/+$/,'').split('/');
+        if (pathParts.length >= 3 && pathParts[1] === 'blog' && pathParts[2]) {
+            slug = decodeURIComponent(pathParts[2]);
+        }
+    }
+    // Redirect legado ?artigo= para clean URL
+    if (params.get('artigo') && slug) {
+        history.replaceState(null, '', '/blog/' + encodeURIComponent(slug));
+    }
     if (slug) {
         fetchSingleArticle(slug);
     } else {
