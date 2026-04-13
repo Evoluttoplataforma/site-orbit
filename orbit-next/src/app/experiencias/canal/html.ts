@@ -14,10 +14,14 @@ body.version-b .cl-vb-inline { display: inline !important; }
 .cl-wrap .lp-section-header h2 { color: #fff !important; }
 .cl-wrap .math-number-card { background: #161b22; border: 1px solid #21262d; color: #C9D1D9; }
 .cl-wrap .big-label { color: #8B949E; }
-.cl-wrap .faq-question { color: #fff !important; background: transparent !important; }
+.cl-wrap .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; }
+.cl-wrap .faq-item { background: linear-gradient(135deg, #1C2333 0%, #13161D 100%) !important; border: 1px solid rgba(255,255,255,0.06) !important; border-radius: 12px !important; overflow: hidden; box-shadow: none !important; }
+.cl-wrap .faq-question { color: #fff !important; background: none !important; border: none !important; width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; cursor: pointer; font-size: 1rem; font-weight: 600; }
+.cl-wrap .faq-question span { color: #fff !important; }
 .cl-wrap .faq-question i { color: #ffba1a !important; }
-.cl-wrap .faq-answer__inner { color: #8B949E !important; }
-.cl-wrap .faq-item { border-color: #21262d !important; }
+.cl-wrap .faq-answer { overflow: hidden; max-height: 0; transition: max-height .3s ease; }
+.cl-wrap .faq-item.active .faq-answer { max-height: 300px; }
+.cl-wrap .faq-answer__inner, .cl-wrap .faq-answer .faq-answer__inner { color: #8B949E !important; padding: 0 24px 20px !important; font-size: 0.95rem; line-height: 1.7; }
 .cl-wrap .section-badge { background: rgba(255,186,26,0.1); color: #ffba1a; border: 1px solid rgba(255,186,26,0.2); }
 .cl-wrap .section-badge--red { background: rgba(220,38,38,0.1); color: #DC2626; border: 1px solid rgba(220,38,38,0.2); }
 
@@ -420,6 +424,18 @@ body.version-b .cl-vb-inline { display: inline !important; }
 
     // Aplica a classe no body
     document.body.classList.add(v === 'b' ? 'version-b' : 'version-a');
+
+    // FAQ toggle
+    document.querySelectorAll('.cl-wrap .faq-question').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var item = this.closest('.faq-item');
+            var wasActive = item.classList.contains('active');
+            // Fecha todos
+            document.querySelectorAll('.cl-wrap .faq-item').forEach(function(i) { i.classList.remove('active'); });
+            // Abre o clicado (se não estava aberto)
+            if (!wasActive) item.classList.add('active');
+        });
+    });
 
     // Smooth scroll para links com #
     document.querySelectorAll('a[href^="#"]').forEach(function(a) {
