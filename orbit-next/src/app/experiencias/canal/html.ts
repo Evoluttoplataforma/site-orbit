@@ -36,14 +36,6 @@ body.version-b .cl-vb-inline { display: inline !important; }
 
 <div class="cl-wrap">
 
-<!-- ═══ NAV MINIMAL ═══ -->
-<nav class="cl-nav">
-    <div class="container">
-        <a href="/"><img src="/images/logo-orbit-white.png" alt="Orbit Gestão" height="36"></a>
-        <a href="#ctaFinal" class="btn btn-primary" style="padding:10px 24px;font-size:14px;">AGENDAR CONVERSA</a>
-    </div>
-</nav>
-
 <!-- ═══ HERO ═══ -->
 <section class="lp-hero" id="hero">
     <div class="lp-hero__glow lp-hero__glow--1"></div>
