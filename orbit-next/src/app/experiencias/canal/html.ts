@@ -25,6 +25,13 @@ body.version-b .cl-vb-inline { display: inline !important; }
 .cl-wrap .section-badge { background: rgba(255,186,26,0.1); color: #ffba1a; border: 1px solid rgba(255,186,26,0.2); }
 .cl-wrap .section-badge--red { background: rgba(220,38,38,0.1); color: #DC2626; border: 1px solid rgba(220,38,38,0.2); }
 
+/* Ícone circular estilo dock */
+.cl-wrap .cl-icon { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 22px; }
+.cl-wrap .cl-icon--gold { background: rgba(255,186,26,0.12); color: #ffba1a; border: 1px solid rgba(255,186,26,0.2); }
+.cl-wrap .cl-icon--red { background: rgba(220,38,38,0.12); color: #DC2626; border: 1px solid rgba(220,38,38,0.2); }
+.cl-wrap .cl-icon--green { background: rgba(34,197,94,0.12); color: #22C55E; border: 1px solid rgba(34,197,94,0.2); }
+.cl-wrap .cl-icon--blue { background: rgba(59,130,246,0.12); color: #3B82F6; border: 1px solid rgba(59,130,246,0.2); }
+
 /* Nav minimalista */
 .cl-nav { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06); background: #0D1117; }
 .cl-nav .container { display: flex; align-items: center; justify-content: space-between; }
@@ -79,6 +86,7 @@ body.version-b .cl-vb-inline { display: inline !important; }
     </div>
 </section>
 
+<hr class="glow-divider">
 
 <!-- ═══ PROBLEMA (A) / OPORTUNIDADE (B) ═══ -->
 <section class="lp-section lp-section--alt">
@@ -93,17 +101,17 @@ body.version-b .cl-vb-inline { display: inline !important; }
 
             <div class="math-numbers">
                 <div class="math-number-card" style="background:#161b22;border:1px solid #21262d;">
-                    <div style="font-size:36px;margin-bottom:12px;">✅</div>
+                    <div class="cl-icon cl-icon--gold"><i class="fas fa-check-circle"></i></div>
                     <div class="big-number big-number--gold" style="font-size:20px;">Você entrega o projeto</div>
                     <div class="big-label" style="color:#8B949E;margin-top:8px;">Diagnóstico, plano, indicadores. Tudo redondo. O cliente sai satisfeito.</div>
                 </div>
                 <div class="math-number-card" style="background:#161b22;border:1px solid #21262d;">
-                    <div style="font-size:36px;margin-bottom:12px;">📉</div>
+                    <div class="cl-icon cl-icon--red"><i class="fas fa-chart-line-down"></i></div>
                     <div class="big-number big-number--gold" style="font-size:20px;">O cliente não mantém</div>
                     <div class="big-label" style="color:#8B949E;margin-top:8px;">Sem equipe, sem tempo, sem disciplina. Em 3 meses, tudo volta ao estado anterior.</div>
                 </div>
                 <div class="math-number-card" style="background:#161b22;border:1px solid #21262d;">
-                    <div style="font-size:36px;margin-bottom:12px;">🔄</div>
+                    <div class="cl-icon cl-icon--red"><i class="fas fa-arrows-rotate"></i></div>
                     <div class="big-number big-number--gold" style="font-size:20px;">Você caça novo cliente</div>
                     <div class="big-label" style="color:#8B949E;margin-top:8px;">E o ciclo recomeça. Receita instável. Resultado que se perde.</div>
                 </div>
@@ -124,16 +132,19 @@ body.version-b .cl-vb-inline { display: inline !important; }
 
             <div class="math-numbers">
                 <div class="math-number-card" style="background:#161b22;border:1px solid #21262d;">
+                    <div class="cl-icon cl-icon--gold"><i class="fas fa-robot"></i></div>
                     <div class="big-number big-number--gold">94%</div>
                     <div class="big-label">das funções administrativas podem ser cobertas por IA. Só 33% estão.</div>
                     <div style="margin-top:8px;font-size:12px;color:#484F58;">— Anthropic</div>
                 </div>
                 <div class="math-number-card" style="background:#161b22;border:1px solid #21262d;">
+                    <div class="cl-icon cl-icon--blue"><i class="fas fa-rocket"></i></div>
                     <div class="big-number big-number--gold">11%</div>
                     <div class="big-label">usam IA agêntica em produção. 38% estão em piloto.</div>
                     <div style="margin-top:8px;font-size:12px;color:#484F58;">— Deloitte</div>
                 </div>
                 <div class="math-number-card" style="background:#161b22;border:1px solid #21262d;">
+                    <div class="cl-icon cl-icon--green"><i class="fas fa-bolt"></i></div>
                     <div class="big-number big-number--green">Janela aberta</div>
                     <div class="big-label">Quem ocupar esse espaço agora define o padrão do mercado.</div>
                 </div>
@@ -142,6 +153,7 @@ body.version-b .cl-vb-inline { display: inline !important; }
     </div>
 </section>
 
+<hr class="glow-divider">
 
 <!-- ═══ SOLUÇÃO (A) / COMO FUNCIONA (B) ═══ -->
 <section class="lp-section">
@@ -155,16 +167,19 @@ body.version-b .cl-vb-inline { display: inline !important; }
 
             <div class="math-numbers">
                 <div class="math-number-card">
+                    <div class="cl-icon cl-icon--gold"><i class="fas fa-handshake"></i></div>
                     <div style="font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#ffba1a;margin-bottom:8px;">DURANTE</div>
                     <div class="big-number big-number--gold" style="font-size:18px;">Agentes trabalham com você</div>
                     <div class="big-label" style="margin-top:8px;">Organizam dados, estruturam indicadores, aceleram entregas. Você foca no que importa.</div>
                 </div>
                 <div class="math-number-card">
+                    <div class="cl-icon cl-icon--blue"><i class="fas fa-clock"></i></div>
                     <div style="font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#C9D1D9;margin-bottom:8px;">DEPOIS</div>
                     <div class="big-number big-number--gold" style="font-size:18px;">O projeto termina. Os agentes não param.</div>
                     <div class="big-label" style="margin-top:8px;">Monitoram, cobram, alertam. 24/7. Sem você precisar estar lá.</div>
                 </div>
                 <div class="math-number-card">
+                    <div class="cl-icon cl-icon--green"><i class="fas fa-coins"></i></div>
                     <div style="font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#22C55E;margin-bottom:8px;">RESULTADO</div>
                     <div class="big-number big-number--green" style="font-size:18px;">Recorrência real</div>
                     <div class="big-label" style="margin-top:8px;">O cliente paga pela operação contínua. Você ganha na recorrência. Sem entregar mais horas.</div>
@@ -180,14 +195,17 @@ body.version-b .cl-vb-inline { display: inline !important; }
 
             <div class="math-numbers">
                 <div class="math-number-card">
+                    <div class="cl-icon cl-icon--gold"><i class="fas fa-sliders"></i></div>
                     <div class="big-number big-number--gold">1</div>
                     <div class="big-label"><strong style="color:#fff;">Configure com sua metodologia.</strong> White-label completo — sua marca, sua URL.</div>
                 </div>
                 <div class="math-number-card">
+                    <div class="cl-icon cl-icon--blue"><i class="fas fa-gears"></i></div>
                     <div class="big-number big-number--gold">2</div>
                     <div class="big-label"><strong style="color:#fff;">Agentes trabalham durante e depois.</strong> O projeto termina, os agentes continuam operando.</div>
                 </div>
                 <div class="math-number-card">
+                    <div class="cl-icon cl-icon--green"><i class="fas fa-chart-line"></i></div>
                     <div class="big-number big-number--green">3</div>
                     <div class="big-label"><strong style="color:#fff;">Recorrência real.</strong> O cliente paga mensalidade. Você retém a margem.</div>
                 </div>
@@ -196,6 +214,7 @@ body.version-b .cl-vb-inline { display: inline !important; }
     </div>
 </section>
 
+<hr class="glow-divider">
 
 <!-- ═══ MATEMÁTICA ═══ -->
 <section class="lp-section lp-section--alt">
@@ -217,14 +236,17 @@ body.version-b .cl-vb-inline { display: inline !important; }
 
         <div class="math-numbers">
             <div class="math-number-card" style="background:#161b22;border:1px solid #21262d;">
+                <div class="cl-icon cl-icon--gold"><i class="fas fa-tag"></i></div>
                 <div class="big-number" style="color:#C9D1D9;">R$600</div>
                 <div class="big-label">seu custo/mês por cliente</div>
             </div>
             <div class="math-number-card" style="background:#161b22;border:1px solid #21262d;">
+                <div class="cl-icon cl-icon--green"><i class="fas fa-money-bill-trend-up"></i></div>
                 <div class="big-number big-number--gold">R$3.000</div>
                 <div class="big-label">sua venda/mês (média)</div>
             </div>
             <div class="math-number-card" style="background:#161b22;border:1px solid #21262d;">
+                <div class="cl-icon cl-icon--green"><i class="fas fa-percent"></i></div>
                 <div class="big-number big-number--green">80%</div>
                 <div class="big-label">margem líquida</div>
             </div>
@@ -256,6 +278,7 @@ body.version-b .cl-vb-inline { display: inline !important; }
     </div>
 </section>
 
+<hr class="glow-divider">
 
 <!-- ═══ PROVA SOCIAL ═══ -->
 <section class="lp-section">
@@ -289,6 +312,7 @@ body.version-b .cl-vb-inline { display: inline !important; }
     </div>
 </section>
 
+<hr class="glow-divider">
 
 <!-- ═══ FAQ ═══ -->
 <section class="lp-section lp-section--alt">
