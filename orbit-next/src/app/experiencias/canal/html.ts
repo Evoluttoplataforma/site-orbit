@@ -45,29 +45,29 @@ body.version-b .cl-vb-inline { display: inline !important; }
     <div class="lp-hero__glow lp-hero__glow--1"></div>
     <div class="lp-hero__glow lp-hero__glow--2"></div>
     <div class="container">
-        <span class="hero-zoom__badge" data-reveal><i class="fas fa-rocket" style="margin-right:6px;"></i> Programa de Canais Orbit</span>
+        <span class="hero-zoom__badge"><i class="fas fa-rocket" style="margin-right:6px;"></i> Programa de Canais Orbit</span>
 
         <!-- COPY A Hero -->
         <div class="cl-va">
-            <h1 class="hero-zoom__title" data-reveal>
+            <h1 class="hero-zoom__title">
                 Você entrega. O cliente não mantém.<br>
                 O resultado se perde. <span class="hero-zoom__title-highlight">Até agora.</span>
             </h1>
-            <p class="hero-zoom__subtitle" data-reveal>Agentes de IA que trabalham com você durante o projeto e continuam executando no cliente depois. O ciclo se quebra. A recorrência começa.</p>
+            <p class="hero-zoom__subtitle">Agentes de IA que trabalham com você durante o projeto e continuam executando no cliente depois. O ciclo se quebra. A recorrência começa.</p>
         </div>
 
         <!-- COPY B Hero -->
         <div class="cl-vb">
-            <h1 class="hero-zoom__title" data-reveal>
+            <h1 class="hero-zoom__title">
                 <span class="hero-zoom__title-highlight">R$600</span> de custo.
                 <span class="hero-zoom__title-highlight">R$3.000</span> de receita.
                 <span class="hero-zoom__title-highlight">80%</span> de margem. Todo mês.
             </h1>
-            <p class="hero-zoom__subtitle" data-reveal>Agentes de IA que operam a gestão no cliente com a sua marca. Você vende consultoria recorrente sem entregar mais horas.</p>
+            <p class="hero-zoom__subtitle">Agentes de IA que operam a gestão no cliente com a sua marca. Você vende consultoria recorrente sem entregar mais horas.</p>
         </div>
 
         <!-- Video -->
-        <div data-reveal style="max-width:720px;margin:32px auto;border-radius:16px;overflow:hidden;background:#161b22;aspect-ratio:16/9;position:relative;cursor:pointer;" id="videoWrapper">
+        <div style="max-width:720px;margin:32px auto;border-radius:16px;overflow:hidden;background:#161b22;aspect-ratio:16/9;position:relative;cursor:pointer;" id="videoWrapper">
             <div style="width:100%;height:100%;background:#161b22;display:flex;align-items:center;justify-content:center;">
                 <div style="width:72px;height:72px;background:rgba(255,186,26,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;">
                     <i class="fas fa-play" style="color:#0D1117;font-size:24px;margin-left:4px;"></i>
@@ -75,11 +75,11 @@ body.version-b .cl-vb-inline { display: inline !important; }
             </div>
         </div>
 
-        <div class="hero-zoom__ctas" data-reveal style="margin-top:32px;">
+        <div class="hero-zoom__ctas" style="margin-top:32px;">
             <div class="cl-va"><a href="#ctaFinal" class="btn btn-primary btn-lg hero-cta-glow">QUERO QUEBRAR ESSE CICLO</a></div>
             <div class="cl-vb"><a href="#ctaFinal" class="btn btn-primary btn-lg hero-cta-glow">QUERO ENTENDER O MODELO</a></div>
         </div>
-        <p class="hero-zoom__note" data-reveal>Sem compromisso • 15 minutos • 100% gratuito</p>
+        <p class="hero-zoom__note">Sem compromisso • 15 minutos • 100% gratuito</p>
     </div>
 </section>
 
@@ -90,12 +90,12 @@ body.version-b .cl-vb-inline { display: inline !important; }
 
         <!-- COPY A — O ciclo -->
         <div class="cl-va">
-            <div class="lp-section-header" data-reveal>
+            <div class="lp-section-header">
                 <span class="section-badge section-badge--red">Isso te parece familiar?</span>
                 <h2>O ciclo que <span style="color:#ffba1a;">todo consultor</span> conhece</h2>
             </div>
 
-            <div class="math-numbers" data-reveal-stagger>
+            <div class="math-numbers">
                 <div class="math-number-card" style="background:#161b22;border:1px solid #21262d;">
                     <div style="font-size:36px;margin-bottom:12px;">✅</div>
                     <div class="big-number big-number--gold" style="font-size:20px;">Você entrega o projeto</div>
@@ -113,7 +113,7 @@ body.version-b .cl-vb-inline { display: inline !important; }
                 </div>
             </div>
 
-            <div data-reveal style="max-width:700px;margin:0 auto;background:rgba(255,186,26,0.06);border:1px solid rgba(255,186,26,0.15);border-radius:16px;padding:24px 32px;text-align:center;">
+            <div style="max-width:700px;margin:0 auto;background:rgba(255,186,26,0.06);border:1px solid rgba(255,186,26,0.15);border-radius:16px;padding:24px 32px;text-align:center;">
                 <p style="font-size:17px;color:#C9D1D9;"><strong style="color:#ffba1a;">70% dos projetos de consultoria não sustentam resultados em 12 meses.</strong></p>
                 <p style="font-size:13px;color:#8B949E;margin-top:8px;">— McKinsey & Company</p>
             </div>
@@ -121,12 +121,12 @@ body.version-b .cl-vb-inline { display: inline !important; }
 
         <!-- COPY B — Oportunidade -->
         <div class="cl-vb">
-            <div class="lp-section-header" data-reveal>
+            <div class="lp-section-header">
                 <span class="section-badge">Dados de mercado</span>
                 <h2>O mercado está se movendo. <span style="color:#ffba1a;">Você está posicionado?</span></h2>
             </div>
 
-            <div class="math-numbers" data-reveal-stagger>
+            <div class="math-numbers">
                 <div class="math-number-card" style="background:#161b22;border:1px solid #21262d;">
                     <div class="big-number big-number--gold">94%</div>
                     <div class="big-label">das funções administrativas podem ser cobertas por IA. Só 33% estão.</div>
@@ -153,11 +153,11 @@ body.version-b .cl-vb-inline { display: inline !important; }
 
         <!-- COPY A — E se continuassem executando? -->
         <div class="cl-va">
-            <div class="lp-section-header" data-reveal>
+            <div class="lp-section-header">
                 <h2>E se os agentes de IA <span style="color:#ffba1a;">continuassem executando?</span></h2>
             </div>
 
-            <div class="math-numbers" data-reveal-stagger>
+            <div class="math-numbers">
                 <div class="math-number-card">
                     <div style="font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#ffba1a;margin-bottom:8px;">DURANTE</div>
                     <div class="big-number big-number--gold" style="font-size:18px;">Agentes trabalham com você</div>
@@ -178,11 +178,11 @@ body.version-b .cl-vb-inline { display: inline !important; }
 
         <!-- COPY B — 3 Passos -->
         <div class="cl-vb">
-            <div class="lp-section-header" data-reveal>
+            <div class="lp-section-header">
                 <h2>O modelo em <span style="color:#ffba1a;">3 passos</span></h2>
             </div>
 
-            <div class="math-numbers" data-reveal-stagger>
+            <div class="math-numbers">
                 <div class="math-number-card">
                     <div class="big-number big-number--gold">1</div>
                     <div class="big-label"><strong style="color:#fff;">Configure com sua metodologia.</strong> White-label completo — sua marca, sua URL.</div>
@@ -207,19 +207,19 @@ body.version-b .cl-vb-inline { display: inline !important; }
 
         <!-- COPY A -->
         <div class="cl-va">
-            <div class="lp-section-header" data-reveal>
+            <div class="lp-section-header">
                 <h2>A conta que <span style="color:#ffba1a;">muda o modelo</span></h2>
             </div>
         </div>
 
         <!-- COPY B -->
         <div class="cl-vb">
-            <div class="lp-section-header" data-reveal>
+            <div class="lp-section-header">
                 <h2>A matemática é <span style="color:#ffba1a;">simples</span></h2>
             </div>
         </div>
 
-        <div class="math-numbers" data-reveal-stagger>
+        <div class="math-numbers">
             <div class="math-number-card" style="background:#161b22;border:1px solid #21262d;">
                 <div class="big-number" style="color:#C9D1D9;">R$600</div>
                 <div class="big-label">seu custo/mês por cliente</div>
@@ -236,7 +236,7 @@ body.version-b .cl-vb-inline { display: inline !important; }
 
         <!-- Copy B: números extras -->
         <div class="cl-vb">
-            <div class="math-numbers" data-reveal-stagger style="margin-top:24px;">
+            <div class="math-numbers" style="margin-top:24px;">
                 <div class="math-number-card" style="background:#161b22;border:1px solid #21262d;">
                     <div class="big-number big-number--green">R$24k</div>
                     <div class="big-label">com 10 clientes/mês</div>
@@ -250,13 +250,13 @@ body.version-b .cl-vb-inline { display: inline !important; }
 
         <!-- Copy A: resultado -->
         <div class="cl-va">
-            <div data-reveal style="max-width:500px;margin:32px auto 0;background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.15);border-radius:16px;padding:24px 32px;text-align:center;">
+            <div style="max-width:500px;margin:32px auto 0;background:rgba(34,197,94,0.06);border:1px solid rgba(34,197,94,0.15);border-radius:16px;padding:24px 32px;text-align:center;">
                 <p style="font-size:15px;color:#8B949E;">Com 10 clientes ativos</p>
                 <p style="font-size:32px;font-weight:800;color:#22C55E;margin:8px 0;">R$ 24.000/mês</p>
             </div>
         </div>
 
-        <p data-reveal style="text-align:center;font-size:16px;color:#8B949E;margin-top:24px;">Sem entregar mais horas. Os agentes fazem o trabalho pesado.</p>
+        <p style="text-align:center;font-size:16px;color:#8B949E;margin-top:24px;">Sem entregar mais horas. Os agentes fazem o trabalho pesado.</p>
     </div>
 </section>
 
@@ -266,17 +266,17 @@ body.version-b .cl-vb-inline { display: inline !important; }
     <div class="lp-container">
 
         <div class="cl-va">
-            <div class="lp-section-header" data-reveal>
+            <div class="lp-section-header">
                 <h2>Você faz parte dessa história. <span style="color:#ffba1a;">O próximo capítulo começa agora.</span></h2>
             </div>
         </div>
         <div class="cl-vb">
-            <div class="lp-section-header" data-reveal>
+            <div class="lp-section-header">
                 <h2><span style="color:#ffba1a;">30 anos</span> de consultoria. 2.000+ empresas. Agora com IA.</h2>
             </div>
         </div>
 
-        <div class="math-numbers" data-reveal-stagger>
+        <div class="math-numbers">
             <div class="math-number-card">
                 <div class="big-number big-number--gold">30+</div>
                 <div class="big-label">anos no mercado de gestão</div>
@@ -297,11 +297,11 @@ body.version-b .cl-vb-inline { display: inline !important; }
 <!-- ═══ FAQ ═══ -->
 <section class="lp-section lp-section--alt">
     <div class="lp-container">
-        <div class="lp-section-header" data-reveal>
+        <div class="lp-section-header">
             <h2>Perguntas frequentes</h2>
         </div>
 
-        <div class="faq-list" data-reveal>
+        <div class="faq-list">
             <div class="faq-item">
                 <button class="faq-question">
                     <span>Preciso ter experiência com IA?</span>
@@ -366,7 +366,7 @@ body.version-b .cl-vb-inline { display: inline !important; }
 <section class="site-cta" id="ctaFinal">
     <div class="site-cta__particles"><span></span><span></span><span></span><span></span></div>
     <div class="container">
-        <div class="site-cta__card" data-reveal="scale">
+        <div class="site-cta__card">
             <div class="site-cta__icon"><i class="fas fa-rocket"></i></div>
 
             <div class="cl-va">
