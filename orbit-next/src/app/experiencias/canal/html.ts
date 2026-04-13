@@ -106,7 +106,7 @@ body.version-b .cl-vb-inline { display: inline !important; }
                     <div class="big-label" style="color:#8B949E;margin-top:8px;">Diagnóstico, plano, indicadores. Tudo redondo. O cliente sai satisfeito.</div>
                 </div>
                 <div class="math-number-card" style="background:#161b22;border:1px solid #21262d;">
-                    <div class="cl-icon cl-icon--red"><i class="fas fa-chart-line-down"></i></div>
+                    <div class="cl-icon cl-icon--red"><i class="fas fa-arrow-trend-down"></i></div>
                     <div class="big-number big-number--gold" style="font-size:20px;">O cliente não mantém</div>
                     <div class="big-label" style="color:#8B949E;margin-top:8px;">Sem equipe, sem tempo, sem disciplina. Em 3 meses, tudo volta ao estado anterior.</div>
                 </div>
