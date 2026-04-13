@@ -3,8 +3,6 @@
 import { Suspense, useEffect, useRef, useState, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { pageHTML } from './html';
-import { headerHTML } from '@/components/shared-header';
-import { footerHTML } from '@/components/shared-footer';
 
 function CanalInner() {
   const searchParams = useSearchParams();
@@ -30,8 +28,7 @@ function CanalInner() {
 
   if (!mounted) return <div style={{ minHeight: '100vh', background: '#0D1117' }} />;
 
-  const fullHTML = headerHTML + '\n' + pageHTML + '\n' + footerHTML;
-  return <div ref={ref} dangerouslySetInnerHTML={{ __html: fullHTML }} />;
+  return <div ref={ref} dangerouslySetInnerHTML={{ __html: pageHTML }} />;
 }
 
 export function PageContent() {

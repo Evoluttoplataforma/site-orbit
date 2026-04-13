@@ -6,7 +6,39 @@ body.version-a .cl-va { display: block; }
 body.version-b .cl-vb { display: block; }
 body.version-a .cl-va-inline { display: inline !important; }
 body.version-b .cl-vb-inline { display: inline !important; }
+
+/* ═══ LP Canal — override dark em todas as seções ═══ */
+.cl-wrap { background: #0D1117; color: #C9D1D9; min-height: 100vh; }
+.cl-wrap .lp-section { background: #0D1117 !important; color: #C9D1D9; }
+.cl-wrap .lp-section--alt { background: #161b22 !important; }
+.cl-wrap .lp-section-header h2 { color: #fff !important; }
+.cl-wrap .math-number-card { background: #161b22; border: 1px solid #21262d; color: #C9D1D9; }
+.cl-wrap .big-label { color: #8B949E; }
+.cl-wrap .faq-question { color: #fff !important; background: transparent !important; }
+.cl-wrap .faq-question i { color: #ffba1a !important; }
+.cl-wrap .faq-answer__inner { color: #8B949E !important; }
+.cl-wrap .faq-item { border-color: #21262d !important; }
+.cl-wrap .section-badge { background: rgba(255,186,26,0.1); color: #ffba1a; border: 1px solid rgba(255,186,26,0.2); }
+.cl-wrap .section-badge--red { background: rgba(220,38,38,0.1); color: #DC2626; border: 1px solid rgba(220,38,38,0.2); }
+
+/* Nav minimalista */
+.cl-nav { padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06); background: #0D1117; }
+.cl-nav .container { display: flex; align-items: center; justify-content: space-between; }
+.cl-nav img { height: 36px; }
+
+/* Footer minimalista */
+.cl-footer { padding: 24px 0; border-top: 1px solid #21262d; text-align: center; font-size: 13px; color: #484F58; background: #0D1117; }
 </style>
+
+<div class="cl-wrap">
+
+<!-- ═══ NAV MINIMAL ═══ -->
+<nav class="cl-nav">
+    <div class="container">
+        <a href="/"><img src="/images/logo-orbit-white.png" alt="Orbit Gestão" height="36"></a>
+        <a href="#ctaFinal" class="btn btn-primary" style="padding:10px 24px;font-size:14px;">AGENDAR CONVERSA</a>
+    </div>
+</nav>
 
 <!-- ═══ HERO ═══ -->
 <section class="lp-hero" id="hero">
@@ -53,7 +85,7 @@ body.version-b .cl-vb-inline { display: inline !important; }
 
 
 <!-- ═══ PROBLEMA (A) / OPORTUNIDADE (B) ═══ -->
-<section class="lp-section lp-section--dark">
+<section class="lp-section lp-section--alt">
     <div class="lp-container">
 
         <!-- COPY A — O ciclo -->
@@ -170,7 +202,7 @@ body.version-b .cl-vb-inline { display: inline !important; }
 
 
 <!-- ═══ MATEMÁTICA ═══ -->
-<section class="lp-section lp-section--dark">
+<section class="lp-section lp-section--alt">
     <div class="lp-container">
 
         <!-- COPY A -->
@@ -263,7 +295,7 @@ body.version-b .cl-vb-inline { display: inline !important; }
 
 
 <!-- ═══ FAQ ═══ -->
-<section class="lp-section lp-section--dark">
+<section class="lp-section lp-section--alt">
     <div class="lp-container">
         <div class="lp-section-header" data-reveal>
             <h2>Perguntas frequentes</h2>
@@ -354,6 +386,14 @@ body.version-b .cl-vb-inline { display: inline !important; }
     </div>
 </section>
 
+<!-- ═══ FOOTER MINIMAL ═══ -->
+<footer class="cl-footer">
+    <div class="container">
+        <p>Orbit Gestão — Gestão Operada por IA &copy; 2026</p>
+    </div>
+</footer>
+
+</div><!-- /cl-wrap -->
 
 <script>
 (function() {
