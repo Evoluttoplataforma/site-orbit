@@ -33,6 +33,7 @@ const C = {
 };
 
 export default function WhatsAppWidget() {
+  const [isExperiment, setIsExperiment] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -50,6 +51,7 @@ export default function WhatsAppWidget() {
     const path = window.location.pathname;
     if (path.startsWith('/chat')) return;
     if (path.startsWith('/acesso')) return;
+    if (path.startsWith('/experiencias/')) { setIsExperiment(true); return; }
     setMounted(true);
   }, []);
 

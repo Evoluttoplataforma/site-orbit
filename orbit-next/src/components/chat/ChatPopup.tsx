@@ -68,6 +68,10 @@ function detectLabelFromPath(path: string): number | null {
 }
 
 export default function ChatPopup() {
+  const [isExperiment, setIsExperiment] = useState(false);
+  useEffect(() => {
+    if (window.location.pathname.startsWith('/experiencias/')) setIsExperiment(true);
+  }, []);
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<PopupMode>('chat');
   const [redirectUrl, setRedirectUrl] = useState<string>('/chat');
@@ -292,7 +296,7 @@ export default function ChatPopup() {
     }
   };
 
-  if (!open) return null;
+  if (isExperiment || !open) return null;
 
   return (
     <div
