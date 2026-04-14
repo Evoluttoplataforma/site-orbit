@@ -16,3 +16,5 @@ orbit-chat-pack*/
 orbit-backend-export-completo.md
 orbit-edge-functions-export.md
 orbit-chat-context-claude-code.md
+*.csv
+/base*
