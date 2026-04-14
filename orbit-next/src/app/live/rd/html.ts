@@ -926,11 +926,17 @@ export const pageHTML = `
                                     <option value="Outro">Outro</option>
                                 </select>
                             </div>
+                            <div class="form-group" style="margin:16px 0;">
+                                <label for="rd-consent" style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;color:#C9D1D9;font-size:13px;line-height:1.5;font-weight:400;">
+                                    <input type="checkbox" id="rd-consent" name="consent" required style="margin-top:3px;flex-shrink:0;width:16px;height:16px;accent-color:#ffba1a;cursor:pointer;">
+                                    <span>Concordo em receber comunica&ccedil;&otilde;es da Orbit Gest&atilde;o por <strong>e-mail e WhatsApp</strong> sobre a live, lembretes, conte&uacute;dos e novidades, conforme nossa <a href="/politica-privacidade" target="_blank" style="color:#ffba1a;text-decoration:underline;">Pol&iacute;tica de Privacidade</a>. Posso cancelar a qualquer momento.</span>
+                                </label>
+                            </div>
                             <button type="submit" class="btn btn-primary btn-lg btn-submit hero-cta-glow" style="cursor:pointer;border:none;width:100%;margin-top:8px;">
                                 GARANTIR MINHA VAGA
                             </button>
                             <p style="color:#8B949E;font-size:12px;text-align:center;margin-top:8px;">
-                                <i class="fa-solid fa-lock" style="margin-right:4px;"></i>Dados seguros. N&atilde;o enviamos spam.
+                                <i class="fa-solid fa-lock" style="margin-right:4px;"></i>Dados seguros (LGPD). N&atilde;o enviamos spam.
                             </p>
                         </form>
                     </div>

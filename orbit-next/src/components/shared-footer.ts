@@ -50,7 +50,7 @@ export const footerHTML = `
             </div>
 
             <div class="footer-bottom">
-                <p data-i18n="footer.rights">&copy; 2026 Orbit - Grupo GSN. Todos os direitos reservados.</p>
+                <p data-i18n="footer.rights">&copy; 2026 Orbit - Grupo GSN. Todos os direitos reservados. <a href="/politica-privacidade" style="color:#8B949E;text-decoration:underline;margin-left:8px;">Pol&iacute;tica de Privacidade</a></p>
             </div>
         </div>
     </footer>
