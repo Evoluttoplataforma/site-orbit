@@ -2762,40 +2762,28 @@ JSON.stringify(schemaOrg, null, 2) +
                 if (!updateRes.ok) throw new Error('Erro ao atualizar');
                 toast('Usuario atualizado!');
             } else {
-                // Create new user via Supabase Auth signup
+                // Create new user via Edge Function (email já confirmado, sem precisar clicar em link)
                 if (!password || password.length < 6) {
                     toast('Senha deve ter pelo menos 6 caracteres.', 'error');
                     return;
                 }
 
-                var signupRes = await fetch(SUPABASE_URL + '/auth/v1/signup', {
+                var createRes = await fetch('https://tnpzoklepkvktbqouctf.supabase.co/functions/v1/create-cms-admin', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'apikey': SUPABASE_KEY
+                        'Authorization': 'Bearer ' + session.access_token
                     },
-                    body: JSON.stringify({ email: email, password: password })
+                    body: JSON.stringify({ email: email, password: password, name: name, role: role })
                 });
-                var signupData = await signupRes.json();
+                var createData = await createRes.json();
 
-                if (!signupRes.ok || !signupData.id) {
-                    toast(signupData.msg || signupData.error_description || 'Erro ao criar usuario.', 'error');
+                if (!createRes.ok || !createData.success) {
+                    toast(createData.error || 'Erro ao criar usuario.', 'error');
                     return;
                 }
 
-                // Insert into cms_admins
-                var insertRes = await supaFetch(SUPABASE_URL + '/rest/v1/cms_admins', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'apikey': SUPABASE_KEY,
-                        'Authorization': 'Bearer ' + session.access_token,
-                        'Prefer': 'return=minimal'
-                    },
-                    body: JSON.stringify({ id: signupData.id, email: email, name: name, role: role })
-                });
-                if (!insertRes.ok) throw new Error('Erro ao salvar admin');
-                toast('Usuario criado! O usuario precisa confirmar o e-mail para acessar.');
+                toast('Usuario criado com sucesso! Ja pode fazer login.');
             }
         } catch(err) {
             console.error(err);
