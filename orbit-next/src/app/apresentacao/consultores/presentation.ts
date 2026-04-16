@@ -212,6 +212,21 @@ body {
   display: none !important;
 }
 
+/* Bloqueio TOTAL de popups/banners/widgets no modo apresentação */
+body:has(.presentation-mode) .orbit-banner,
+body:has(.presentation-mode) .orbit-banner-overlay,
+body:has(.presentation-mode) [id^="orbit-banner-"],
+body:has(.presentation-mode) [id^="orbit-banner-overlay-"],
+.presentation-mode ~ * [id^="orbit-banner-"],
+.presentation-mode ~ * .orbit-banner,
+[id^="orbit-banner-"],
+.orbit-banner,
+.orbit-banner-overlay {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 /* Responsivo */
 @media (max-width: 768px) {
   .pres-hint { display: none; }
@@ -311,11 +326,25 @@ export const presentationJS = `
   var currentEl = document.getElementById('presCurrent');
   var progressEl = progressBar.querySelector('.presentation-progress__bar');
 
+  function revealAll(slide) {
+    // Força reveal de todos os elementos com data-reveal no slide ativo
+    slide.querySelectorAll('[data-reveal], [data-reveal-stagger]').forEach(function(el) {
+      el.classList.add('revealed');
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+      el.style.visibility = 'visible';
+    });
+  }
+
   function updateUI() {
     slides.forEach(function(s, i) {
       s.classList.remove('slide-active', 'slide-prev');
-      if (i === currentSlide) s.classList.add('slide-active');
-      else if (i < currentSlide) s.classList.add('slide-prev');
+      if (i === currentSlide) {
+        s.classList.add('slide-active');
+        revealAll(s);
+      } else if (i < currentSlide) {
+        s.classList.add('slide-prev');
+      }
       // Reset scroll do slide ao navegar
       if (i === currentSlide) s.scrollTop = 0;
     });
