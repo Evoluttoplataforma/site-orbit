@@ -258,11 +258,55 @@ export const presentationJS = `
   if (window.__presInit) return;
   window.__presInit = true;
 
+  // HTML do slide customizado de "3 Pilares" (injetado após detectar slides originais)
+  var pilaresHTML =
+    '<section class="pres-custom-slide" id="slide-pilares">' +
+    '<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:60px 24px;background:#0D1117;">' +
+      '<div style="max-width:1200px;width:100%;">' +
+        '<div style="text-align:center;margin-bottom:56px;">' +
+          '<span style="display:inline-block;background:rgba(255,186,26,0.12);color:#ffba1a;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 16px;border-radius:20px;border:1px solid rgba(255,186,26,0.25);margin-bottom:20px;">3 Pilares</span>' +
+          '<h2 style="color:#fff;font-size:clamp(32px,5vw,48px);font-weight:800;line-height:1.15;margin:0 0 16px;">Três caminhos de <span style="color:#ffba1a;">recorrência real</span></h2>' +
+          '<p style="color:#8B949E;font-size:18px;max-width:640px;margin:0 auto;line-height:1.6;">Você escolhe — ou combina os três. Todos conversam entre si.</p>' +
+        '</div>' +
+        '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">' +
+          // Card 1 — Multinível
+          '<div class="pilar-card" style="background:linear-gradient(135deg,#1C2333 0%,#13161D 100%);border:1px solid rgba(255,186,26,0.2);border-radius:20px;padding:32px;position:relative;overflow:hidden;">' +
+            '<span style="position:absolute;top:20px;right:20px;background:#ffba1a;color:#0D1117;font-size:11px;font-weight:800;letter-spacing:1.2px;padding:4px 10px;border-radius:6px;">DESTAQUE</span>' +
+            '<div style="width:72px;height:72px;background:rgba(255,186,26,0.1);border:1px solid rgba(255,186,26,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:24px;">' +
+              '<i class="fas fa-network-wired" style="color:#ffba1a;font-size:28px;"></i>' +
+            '</div>' +
+            '<h3 style="color:#ffba1a;font-size:22px;font-weight:800;margin:0 0 12px;">Multinível</h3>' +
+            '<p style="color:#C9D1D9;font-size:16px;line-height:1.6;margin:0;">Ganho recorrente com rede. Cada consultor que você trouxer gera receita passiva pra você, mês a mês.</p>' +
+          '</div>' +
+          // Card 2 — Leadbid
+          '<div class="pilar-card" style="background:linear-gradient(135deg,#1C2333 0%,#13161D 100%);border:1px solid rgba(255,186,26,0.2);border-radius:20px;padding:32px;position:relative;overflow:hidden;">' +
+            '<span style="position:absolute;top:20px;right:20px;background:#ffba1a;color:#0D1117;font-size:11px;font-weight:800;letter-spacing:1.2px;padding:4px 10px;border-radius:6px;">DESTAQUE</span>' +
+            '<div style="width:72px;height:72px;background:rgba(255,186,26,0.1);border:1px solid rgba(255,186,26,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:24px;">' +
+              '<i class="fas fa-gavel" style="color:#ffba1a;font-size:28px;"></i>' +
+            '</div>' +
+            '<h3 style="color:#ffba1a;font-size:22px;font-weight:800;margin:0 0 12px;">Leadbid</h3>' +
+            '<p style="color:#C9D1D9;font-size:16px;line-height:1.6;margin:0;">Leilão de leads qualificados. Compre só os leads certos pro seu perfil, sem desperdiçar dinheiro em tráfego.</p>' +
+          '</div>' +
+          // Card 3 — Consultoria de recorrência passiva
+          '<div class="pilar-card" style="background:linear-gradient(135deg,#1C2333 0%,#13161D 100%);border:1px solid rgba(255,186,26,0.2);border-radius:20px;padding:32px;position:relative;overflow:hidden;">' +
+            '<span style="position:absolute;top:20px;right:20px;background:#ffba1a;color:#0D1117;font-size:11px;font-weight:800;letter-spacing:1.2px;padding:4px 10px;border-radius:6px;">DESTAQUE</span>' +
+            '<div style="width:72px;height:72px;background:rgba(255,186,26,0.1);border:1px solid rgba(255,186,26,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:24px;">' +
+              '<i class="fas fa-arrows-spin" style="color:#ffba1a;font-size:28px;"></i>' +
+            '</div>' +
+            '<h3 style="color:#ffba1a;font-size:22px;font-weight:800;margin:0 0 12px;">Consultoria de recorrência passiva</h3>' +
+            '<p style="color:#C9D1D9;font-size:16px;line-height:1.6;margin:0;">Estratégia contínua que gera resultados. Os agentes de IA operam a gestão enquanto você escala clientes.</p>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+    '</section>';
+
   // Títulos amigáveis pra cada slide (nomes curtos)
   var TITLES = [
     'Abertura',
     'Dores',
     'Novo Modelo',
+    '3 Pilares',
     'Matemática',
     'Agentes de IA',
     'O que você ganha',
@@ -289,6 +333,15 @@ export const presentationJS = `
   });
 
   if (slides.length === 0) return;
+
+  // Injetar slide "3 Pilares" depois do slide 3 (Novo Modelo)
+  if (slides.length >= 3) {
+    var tmpDiv = document.createElement('div');
+    tmpDiv.innerHTML = pilaresHTML;
+    var newSlide = tmpDiv.firstElementChild;
+    slides[2].parentNode.insertBefore(newSlide, slides[2].nextSibling);
+    slides.splice(3, 0, newSlide);
+  }
 
   var currentSlide = 0;
 
