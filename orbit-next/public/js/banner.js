@@ -1,7 +1,8 @@
 /* ═══ ORBIT — Site-wide Banner System ═══ */
 (function() {
-  // Não exibir banners/popups em LPs de experimento
-  if (window.location.pathname.indexOf('/experiencias/') === 0) return;
+  // Não exibir banners/popups em LPs de experimento ou apresentações
+  var _p = window.location.pathname;
+  if (_p.indexOf('/experiencias/') === 0 || _p.indexOf('/apresentacao/') === 0) return;
 
   var SUPABASE_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
   var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';

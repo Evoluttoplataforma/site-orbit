@@ -70,7 +70,8 @@ function detectLabelFromPath(path: string): number | null {
 export default function ChatPopup() {
   const [isExperiment, setIsExperiment] = useState(false);
   useEffect(() => {
-    if (window.location.pathname.startsWith('/experiencias/')) setIsExperiment(true);
+    const p = window.location.pathname;
+    if (p.startsWith('/experiencias/') || p.startsWith('/apresentacao/')) setIsExperiment(true);
   }, []);
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<PopupMode>('chat');

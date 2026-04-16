@@ -51,7 +51,7 @@ export default function WhatsAppWidget() {
     const path = window.location.pathname;
     if (path.startsWith('/chat')) return;
     if (path.startsWith('/acesso')) return;
-    if (path.startsWith('/experiencias/')) { setIsExperiment(true); return; }
+    if (path.startsWith('/experiencias/') || path.startsWith('/apresentacao/')) { setIsExperiment(true); return; }
     setMounted(true);
   }, []);
 
