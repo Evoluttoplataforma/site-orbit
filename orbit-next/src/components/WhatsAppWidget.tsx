@@ -7,16 +7,10 @@ import { validateEmail } from '@/lib/email-validation';
 
 const PHONE = '554898149776';
 
-// Pipedrive labels por página de origem
-const PIPE_LABELS: Record<string, number> = {
-  '/empresarios': 498, // DIRETO ORBIT B2B
-  '/consultores': 497, // CANAL ORBIT
-};
-function detectLabelFromPath(path: string): number | null {
-  for (const key in PIPE_LABELS) {
-    if (path === key || path.startsWith(key + '/')) return PIPE_LABELS[key];
-  }
-  return null;
+// Pipedrive — TODOS os leads do Orbit vão com etiqueta CANAL ORBIT (id 598)
+const DEFAULT_PIPE_LABEL = 598; // CANAL ORBIT
+function detectLabelFromPath(): number {
+  return DEFAULT_PIPE_LABEL;
 }
 
 const C = {
@@ -136,7 +130,7 @@ export default function WhatsAppWidget() {
     }
 
     // 2. Cria deal no Pipedrive com nota indicando origem + label da página
-    const labelId = typeof window !== 'undefined' ? detectLabelFromPath(window.location.pathname) : null;
+    const labelId = DEFAULT_PIPE_LABEL;
     try {
       await supabaseMkt.functions.invoke('create-pipedrive-lead', {
         body: {

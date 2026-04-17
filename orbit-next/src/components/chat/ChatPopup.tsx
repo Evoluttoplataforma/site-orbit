@@ -56,15 +56,18 @@ type PopupMode = 'chat' | 'checkout';
 
 // Pipedrive labels por página de origem
 const PIPE_LABELS: Record<string, { id: number; name: string }> = {
-  '/empresarios': { id: 498, name: 'DIRETO ORBIT B2B' },
-  '/consultores': { id: 497, name: 'CANAL ORBIT' },
+  '/empresarios': { id: 598, name: 'CANAL ORBIT' },
+  '/consultores': { id: 598, name: 'CANAL ORBIT' },
+  '/experiencias': { id: 598, name: 'CANAL ORBIT' },
+  '/apresentacao': { id: 598, name: 'CANAL ORBIT' },
 };
+const DEFAULT_PIPE_LABEL = 598; // CANAL ORBIT — usado quando nenhum path específico bate
 
-function detectLabelFromPath(path: string): number | null {
+function detectLabelFromPath(path: string): number {
   for (const key in PIPE_LABELS) {
     if (path === key || path.startsWith(key + '/')) return PIPE_LABELS[key].id;
   }
-  return null;
+  return DEFAULT_PIPE_LABEL;
 }
 
 export default function ChatPopup() {
