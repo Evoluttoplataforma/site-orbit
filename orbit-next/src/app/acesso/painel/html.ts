@@ -1469,7 +1469,7 @@ export const pageHTML = `
 
     async function refreshArticles() {
         try {
-            var res = await supaFetch(SUPABASE_URL + '/rest/v1/blog_articles?order=updated_at.desc', {
+            var res = await supaFetch(SUPABASE_URL + '/rest/v1/blog_articles?order=updated_at.desc&select=id,title,slug,excerpt,category,author,published,published_at,updated_at', {
                 headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + session.access_token }
             });
             if (res.ok) supabaseArticles = await res.json();
@@ -1546,9 +1546,16 @@ export const pageHTML = `
         updateSeoScore();
     }
 
-    function editArticle(id) {
-        var article = supabaseArticles.find(function(a) { return a.id === id || a.id === Number(id); });
-        if (!article) return;
+    async function editArticle(id) {
+        // Busca artigo completo (com conteúdo e imagens) só quando abre o editor
+        var article = null;
+        try {
+            var res = await supaFetch(SUPABASE_URL + '/rest/v1/blog_articles?id=eq.' + id, {
+                headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + session.access_token }
+            });
+            if (res.ok) { var data = await res.json(); article = data[0]; }
+        } catch(e) {}
+        if (!article) { toast('Erro ao carregar artigo.', 'error'); return; }
 
         document.getElementById('articleId').value = article.id;
         document.getElementById('articleTitleInput').value = article.title;
@@ -1597,7 +1604,13 @@ export const pageHTML = `
     }
 
     async function duplicateArticle(id) {
-        var article = supabaseArticles.find(function(a) { return a.id === id || a.id === Number(id); });
+        var article = null;
+        try {
+            var res = await supaFetch(SUPABASE_URL + '/rest/v1/blog_articles?id=eq.' + id, {
+                headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + session.access_token }
+            });
+            if (res.ok) { var data = await res.json(); article = data[0]; }
+        } catch(e) {}
         if (!article) return;
 
         try {
