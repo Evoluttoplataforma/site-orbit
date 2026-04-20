@@ -1,3 +1,0 @@
-# Blog: redirect legado (query string não funciona no Cloudflare Pages _redirects)
-# Removido: /blog?artigo=:slug causava redirect errado
-# Agora cada artigo tem sua página estática em /blog/[slug]
