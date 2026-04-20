@@ -1,7 +1,0 @@
-{
-  "cleanUrls": true,
-  "rewrites": [
-    { "source": "/blog/:slug", "destination": "/blog/leitor" },
-    { "source": "/historias/:id", "destination": "/historias/historia" }
-  ]
-}
