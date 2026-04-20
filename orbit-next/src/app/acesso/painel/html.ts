@@ -1747,6 +1747,12 @@ export const pageHTML = `
             }
 
             toast(isPublished ? 'Artigo publicado!' : 'Rascunho salvo!');
+            // Dispara rebuild do site pra gerar HTML estático do artigo
+            if (isPublished) {
+                fetch('https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/50517139-964e-48ff-9e11-7428fb500a89', { method: 'POST' })
+                    .then(function() { toast('Site atualizando... (2 min)', 'info'); })
+                    .catch(function() {});
+            }
             clearEditor();
             showView('articles');
         } catch(e) {
@@ -2810,6 +2816,7 @@ JSON.stringify(schemaOrg, null, 2) +
                     }
                 });
                 toast('Artigo excluido.');
+                fetch('https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/50517139-964e-48ff-9e11-7428fb500a89', { method: 'POST' }).catch(function() {});
             } catch(e) { toast('Erro ao excluir.', 'error'); }
             closeDeleteModal();
             await refreshArticles();
