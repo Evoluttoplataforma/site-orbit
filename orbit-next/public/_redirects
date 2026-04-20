@@ -1,2 +1,2 @@
-# Blog: clean URLs — /blog/slug reescreve para /blog (JS lê slug do path)
-/blog/:slug /blog 200
+# Redirect legado: /blog?artigo=slug → /blog/slug
+/blog?artigo=:slug /blog/:slug 301
