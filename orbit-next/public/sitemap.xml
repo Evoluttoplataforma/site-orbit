@@ -91,6 +91,12 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://orbitgestao.com.br/blog/cerebro-agora-atende-pelo-whatsapp</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://orbitgestao.com.br/blog/proximo-nivel-da-gestao-como-usar-ia-para-estruturar-e-escalar-sua-empresa</loc>
     <lastmod>2026-04-17</lastmod>
     <changefreq>monthly</changefreq>
@@ -116,12 +122,6 @@
   </url>
   <url>
     <loc>https://orbitgestao.com.br/blog/o-que-tem-de-novo-por-aqui-tudo-que-melhorou-nessa-ultima-rodada-de-atualizacoes-104-124</loc>
-    <lastmod>2026-04-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://orbitgestao.com.br/blog/cerebro-agora-atende-pelo-whatsapp</loc>
     <lastmod>2026-04-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
