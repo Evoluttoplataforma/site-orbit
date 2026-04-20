@@ -45,7 +45,7 @@ export function Header() {
               <DropdownLink href="/lp-empresas" icon="🏢" title={t('businesses')} sub={t('businessesSub')} />
               <DropdownLink href="/consultores" icon="👔" title={t('consultants')} sub={t('consultantsSub')} />
             </NavDropdown>
-            <li><Link href="/pricing" className="px-4 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/[0.08] rounded-lg transition-all">{t('plans')}</Link></li>
+            <li><Link href="/chat" className="px-4 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/[0.08] rounded-lg transition-all">{t('plans')}</Link></li>
             <NavDropdown label={t('content')}>
               <DropdownLink href="/blog" icon="📰" title={t('blog')} sub={t('blogSub')} />
               <DropdownLink href="/historias" icon="⭐" title={t('stories')} sub={t('storiesSub')} />
@@ -53,7 +53,7 @@ export function Header() {
             </NavDropdown>
             <NavDropdown label={t('company')}>
               <DropdownLink href="/sobre" icon="🏛️" title={t('about')} sub={t('aboutSub')} />
-              <DropdownLink href="/parcerias" icon="🤝" title={t('partners')} sub={t('partnersSub')} />
+              <DropdownLink href="/consultores" icon="🤝" title={t('partners')} sub={t('partnersSub')} />
               <DropdownLink href="/consultores" icon="🌐" title={t('channels')} sub={t('channelsSub')} />
             </NavDropdown>
           </ul>
@@ -91,7 +91,7 @@ export function Header() {
             </div>
             <div className="flex-1 p-4 space-y-1">
               <MobileLink href="/" icon="🏠" onClick={() => setMobileOpen(false)}>{t('home')}</MobileLink>
-              <MobileLink href="/pricing" icon="🏷️" onClick={() => setMobileOpen(false)}>{t('plans')}</MobileLink>
+              <MobileLink href="/chat" icon="🏷️" onClick={() => setMobileOpen(false)}>{t('plans')}</MobileLink>
               <MobileLink href="/agentes" icon="🤖" onClick={() => setMobileOpen(false)}>{t('agents')}</MobileLink>
               <MobileLink href="/processos" icon="🔄" onClick={() => setMobileOpen(false)}>{t('processes')}</MobileLink>
               <MobileLink href="/indicadores" icon="📊" onClick={() => setMobileOpen(false)}>{t('indicators')}</MobileLink>

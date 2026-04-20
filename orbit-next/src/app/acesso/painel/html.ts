@@ -2568,7 +2568,7 @@ JSON.stringify(schemaOrg, null, 2) +
 '                    </div>' +
 '                </li>' +
 '                <li><a href="/blog">Conhecimento</a></li>' +
-'                <li><a href="/parcerias" data-i18n="footer.partners">Seja Parceiro</a></li>' +
+'                <li><a href="/consultores" data-i18n="footer.partners">Seja Parceiro</a></li>' +
 '                <li><a href="/chat">Fale Conosco</a></li>' +
 '            </ul>' +
 '            <div class="nav-actions">' +
@@ -2600,7 +2600,7 @@ JSON.stringify(schemaOrg, null, 2) +
 '            <a href="/competencias">Competencias</a>' +
 '            <a href="/auditorias">Auditorias</a>' +
 '            <a href="/blog">Conhecimento</a>' +
-'            <a href="/parcerias" data-i18n="footer.partners">Seja Parceiro</a>' +
+'            <a href="/consultores" data-i18n="footer.partners">Seja Parceiro</a>' +
 '        </div>' +
 '        <div class="mobile-menu__footer">' +
 '            <button class="lang-switch" onclick="switchLang()" aria-label="Change language">' +

@@ -274,7 +274,7 @@ export const pageHTML = `
                     <h5 style="margin-top: 20px;" data-i18n="footer.company">Empresa</h5>
                     <ul>
                         <li><a href="/sobre" data-i18n="footer.about">Sobre Nós</a></li>
-                        <li><a href="/parcerias" data-i18n="footer.partners">Seja Parceiro</a></li>
+                        <li><a href="/consultores" data-i18n="footer.partners">Seja Parceiro</a></li>
                     </ul>
                 </div>
             </div>

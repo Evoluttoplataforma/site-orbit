@@ -43,7 +43,7 @@ export function Footer() {
               <li><Link href="/tarefas" className="hover:text-white transition-colors">{nav('tasks')}</Link></li>
               <li><Link href="/competencias" className="hover:text-white transition-colors">{nav('skills')}</Link></li>
               <li><Link href="/auditorias" className="hover:text-white transition-colors">{nav('audits')}</Link></li>
-              <li><Link href="/pricing" className="hover:text-white transition-colors">{t('plans')}</Link></li>
+              <li><Link href="/chat" className="hover:text-white transition-colors">{t('plans')}</Link></li>
             </ul>
           </div>
 
@@ -58,7 +58,7 @@ export function Footer() {
             <h5 className="text-sm font-semibold text-white mb-4 mt-6">{t('company')}</h5>
             <ul className="space-y-2.5 text-sm">
               <li><Link href="/sobre" className="hover:text-white transition-colors">{t('about')}</Link></li>
-              <li><Link href="/parcerias" className="hover:text-white transition-colors">{t('partners')}</Link></li>
+              <li><Link href="/consultores" className="hover:text-white transition-colors">{t('partners')}</Link></li>
               <li><Link href="/consultores" className="hover:text-white transition-colors">{t('channels')}</Link></li>
             </ul>
           </div>

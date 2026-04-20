@@ -1419,7 +1419,7 @@ export const pageHTML = `
                 <p>Dezenas de agentes especializados, setup incluso, garantia de 90 dias. Trabalhando 24/7.</p>
                 <div class="site-cta__buttons">
                     <a href="/chat" class="btn btn-primary btn-lg">QUERO CONHECER O TIME DE IA</a>
-                    <a href="/pricing.html" class="btn btn-outline btn-lg">Ver Planos</a>
+                    <a href="/chat" class="btn btn-outline btn-lg">Ver Planos</a>
                 </div>
                 <p class="cta-note">O time humano equivalente: R$ 80-180k/mês</p>
             </div>
@@ -1482,7 +1482,7 @@ export const pageHTML = `
                     </ul>
                     <h5 style="margin-top: 20px;" data-i18n="footer.orbit">Orbit</h5>
                     <ul>
-                        <li><a href="/parcerias" data-i18n="footer.partners">Seja Parceiro</a></li>
+                        <li><a href="/consultores" data-i18n="footer.partners">Seja Parceiro</a></li>
                         <li><a href="#" data-i18n="footer.about">Sobre Nós</a></li>
                     </ul>
                 </div>
