@@ -105,10 +105,8 @@ export const pageHTML = `
 
     <script>
     // ── Helpers ──
-    function getDB() {
-        try { return JSON.parse(localStorage.getItem('orbit_cms')) || { customerStories: [] }; }
-        catch(e) { return { customerStories: [] }; }
-    }
+    var SB_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
+    var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
 
     function escapeHtml(str) {
         if (!str) return '';
@@ -130,13 +128,38 @@ export const pageHTML = `
         outro: 'Outro'
     };
 
-    // ── Get published stories ──
-    function getPublishedStories() {
-        const db = getDB();
-        const stories = db.customerStories || [];
-        return stories
-            .filter(s => s.status === 'published')
-            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    // ── Get published stories from Supabase ──
+    var cachedStories = null;
+    async function getPublishedStories() {
+        if (cachedStories) return cachedStories;
+        try {
+            var res = await fetch(SB_URL + '/rest/v1/customer_stories?status=eq.published&order=created_at.desc&select=*', {
+                headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
+            });
+            if (res.ok) {
+                var data = await res.json();
+                cachedStories = data.map(function(s) {
+                    return {
+                        id: s.id,
+                        slug: s.slug,
+                        empresa: s.company_name,
+                        nome: s.contact_name,
+                        cargo: s.contact_role,
+                        segmento: s.segment,
+                        desafio: s.challenge,
+                        solucao: s.solution,
+                        resultados: s.results,
+                        depoimento: s.testimonial,
+                        companyLogo: s.logo_url,
+                        coverUrl: s.cover_url,
+                        createdAt: s.created_at,
+                        status: s.status
+                    };
+                });
+                return cachedStories;
+            }
+        } catch(e) { console.warn('Erro ao buscar historias:', e); }
+        return [];
     }
 
     // ── Build dynamic filters ──
@@ -165,8 +188,8 @@ export const pageHTML = `
     // ── Render stories ──
     let currentFilter = 'all';
 
-    function renderStories() {
-        const stories = getPublishedStories();
+    async function renderStories() {
+        const stories = await getPublishedStories();
         const filtered = currentFilter === 'all'
             ? stories
             : stories.filter(s => (s.segmento || s.segment) === currentFilter);
@@ -208,10 +231,10 @@ export const pageHTML = `
     }
 
     // ── Init ──
-    (function init() {
-        const stories = getPublishedStories();
+    (async function init() {
+        const stories = await getPublishedStories();
         buildFilters(stories);
-        renderStories();
+        await renderStories();
     })();
 
     // Mobile menu, header scroll, dropdowns handled by PageLayout.tsx
