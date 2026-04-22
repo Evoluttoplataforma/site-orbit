@@ -174,7 +174,7 @@ export function PageContent() {
           const initials = s.empresa ? s.empresa.split(' ').map((w: string) => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase() : 'O';
 
           // Esconde o grid e filtros, mostra o artigo no mesmo layout do blog
-          const gridSection = document.querySelector('.blog-grid-section') || grid.parentElement;
+          const gridSection = document.querySelector('.blog-grid-section') || grid?.parentElement;
           const filtersEl = document.querySelector('.stories-filters');
           const heroEl = document.querySelector('.stories-hero');
           const ctaEl = document.querySelector('.stories-cta');
