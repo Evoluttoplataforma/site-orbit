@@ -413,7 +413,8 @@ export const pageHTML = `
         const modulos = Array.from(form.querySelectorAll('input[name="modulos"]:checked')).map(c => c.value);
 
         const titulo = fd.get('titulo');
-        const slug = titulo
+        const empresa = fd.get('empresa');
+        const slug = (empresa || titulo)
             .toLowerCase()
             .normalize('NFD').replace(/[\\u0300-\\u036f]/g, '')
             .replace(/[^a-z0-9\\s-]/g, '')

@@ -159,7 +159,7 @@ export function PageContent() {
             .join('');
 
           // Click handlers
-          grid.querySelectorAll('.story-card[data-story-id]').forEach((card) => {
+          grid.querySelectorAll('[data-story-id]').forEach((card) => {
             card.addEventListener('click', () => {
               const id = Number((card as HTMLElement).dataset.storyId);
               showDetail(id);
