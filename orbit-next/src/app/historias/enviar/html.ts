@@ -448,13 +448,31 @@ export const pageHTML = `
             createdAt: new Date().toISOString()
         };
 
-        // Save to localStorage
-        let db;
-        try { db = JSON.parse(localStorage.getItem('orbit_cms')) || {}; }
-        catch(e) { db = {}; }
-        if (!Array.isArray(db.customerStories)) db.customerStories = [];
-        db.customerStories.push(story);
-        localStorage.setItem('orbit_cms', JSON.stringify(db));
+        // Save to Supabase
+        var SB_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
+        var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
+        fetch(SB_URL + '/rest/v1/customer_stories', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'apikey': SB_KEY,
+                'Authorization': 'Bearer ' + SB_KEY,
+                'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify({
+                company_name: story.empresa,
+                contact_name: story.nome + (story.email ? ' | ' + story.email : '') + (story.telefone ? ' | ' + story.telefone : ''),
+                contact_role: story.cargo,
+                segment: story.segmento,
+                slug: story.slug,
+                challenge: story.desafio,
+                solution: story.solucao,
+                results: story.resultados,
+                testimonial: story.depoimento + (story.modulos && story.modulos.length ? '\\n\\nMódulos: ' + story.modulos.join(', ') : '') + (story.videoUrl ? '\\n\\nVídeo: ' + story.videoUrl : '') + (story.linkedin ? '\\nLinkedIn: ' + story.linkedin : '') + (story.instagram ? '\\nInstagram: ' + story.instagram : '') + (story.website ? '\\nSite: ' + story.website : ''),
+                logo_url: story.companyLogo || null,
+                status: 'pending'
+            })
+        }).catch(function(e) { console.warn('Erro ao salvar historia:', e); });
 
         // DataLayer push
         window.dataLayer = window.dataLayer || [];
