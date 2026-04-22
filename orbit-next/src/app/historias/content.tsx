@@ -4,9 +4,47 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { pageHTML } from './html';
 import { headerHTML } from '@/components/shared-header';
 
+const SB_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
+
+const SEGMENTS: Record<string, string> = {
+  industria: 'Indústria',
+  servicos: 'Serviços',
+  tecnologia: 'Tecnologia',
+  saude: 'Saúde',
+  educacao: 'Educação',
+  varejo: 'Varejo',
+  financeiro: 'Financeiro',
+  agronegocio: 'Agronegócio',
+  outro: 'Outro',
+};
+
+function escapeHtml(str: string) {
+  if (!str) return '';
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+interface Story {
+  id: number;
+  slug: string;
+  empresa: string;
+  nome: string;
+  cargo: string;
+  segmento: string;
+  desafio: string;
+  solucao: string;
+  resultados: string;
+  depoimento: string;
+  companyLogo: string;
+  createdAt: string;
+}
+
 export function PageContent() {
   const ref = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
+  const storiesRef = useRef<Story[]>([]);
 
   useEffect(() => { setMounted(true); }, []);
 
@@ -23,11 +61,136 @@ export function PageContent() {
     });
   }, []);
 
+  const fetchAndRenderStories = useCallback(() => {
+    fetch(`${SB_URL}/rest/v1/customer_stories?status=eq.published&order=created_at.desc&select=*`, {
+      headers: { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}` },
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        if (!Array.isArray(data)) return;
+        const stories: Story[] = data.map((s: Record<string, string>) => ({
+          id: s.id,
+          slug: s.slug,
+          empresa: s.company_name,
+          nome: (s.contact_name || '').split('|')[0].trim(),
+          cargo: s.contact_role,
+          segmento: s.segment,
+          desafio: s.challenge,
+          solucao: s.solution,
+          resultados: s.results,
+          depoimento: s.testimonial,
+          companyLogo: s.logo_url,
+          createdAt: s.created_at,
+        }));
+        storiesRef.current = stories;
+
+        // Render grid
+        const grid = document.getElementById('storiesGrid');
+        const empty = document.getElementById('storiesEmpty');
+        if (!grid) return;
+
+        if (stories.length === 0) {
+          grid.innerHTML = '';
+          if (empty) empty.style.display = 'block';
+          return;
+        }
+        if (empty) empty.style.display = 'none';
+
+        // Build filter buttons
+        const filterBar = document.getElementById('filterBar');
+        if (filterBar) {
+          const segments = [...new Set(stories.map((s) => s.segmento).filter(Boolean))];
+          segments.forEach((seg) => {
+            const btn = document.createElement('button');
+            btn.className = 'filter-btn';
+            btn.dataset.filter = seg;
+            btn.textContent = SEGMENTS[seg] || seg;
+            filterBar.appendChild(btn);
+          });
+          filterBar.querySelectorAll('.filter-btn').forEach((btn) => {
+            (btn as HTMLElement).addEventListener('click', () => {
+              filterBar.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
+              btn.classList.add('active');
+              renderGrid((btn as HTMLElement).dataset.filter || 'all');
+            });
+          });
+        }
+
+        function renderGrid(filter: string) {
+          const filtered = filter === 'all' ? stories : stories.filter((s) => s.segmento === filter);
+          if (!grid) return;
+          if (filtered.length === 0) {
+            grid.innerHTML = '';
+            if (empty) empty.style.display = 'block';
+            return;
+          }
+          if (empty) empty.style.display = 'none';
+
+          grid.innerHTML = filtered
+            .map((story) => {
+              const segLabel = SEGMENTS[story.segmento] || story.segmento || '';
+              const logoHtml = story.companyLogo
+                ? `<img src="${story.companyLogo}" alt="${escapeHtml(story.empresa)}" loading="lazy">`
+                : '<div class="story-card__logo-placeholder"><i class="fas fa-building"></i></div>';
+              return `<div class="story-card" data-story-id="${story.id}" style="cursor:pointer;">
+                ${segLabel ? `<span class="story-card__segment">${escapeHtml(segLabel)}</span>` : ''}
+                <div class="story-card__logo">${logoHtml}</div>
+                <div class="story-card__company">${escapeHtml(story.empresa)}</div>
+                ${story.nome ? `<div class="story-card__author">${escapeHtml(story.nome)}${story.cargo ? ' - ' + escapeHtml(story.cargo) : ''}</div>` : ''}
+                <span class="story-card__link">Leia a história →</span>
+              </div>`;
+            })
+            .join('');
+
+          // Click handlers
+          grid.querySelectorAll('.story-card[data-story-id]').forEach((card) => {
+            card.addEventListener('click', () => {
+              const id = Number((card as HTMLElement).dataset.storyId);
+              showDetail(id);
+            });
+          });
+        }
+
+        function showDetail(id: number) {
+          const s = storiesRef.current.find((st) => st.id === id);
+          if (!s) return;
+          const segLabel = SEGMENTS[s.segmento] || s.segmento || '';
+
+          const overlay = document.createElement('div');
+          overlay.id = 'storyDetailOverlay';
+          overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);z-index:5000;display:flex;align-items:center;justify-content:center;padding:24px;overflow-y:auto;';
+          overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
+
+          overlay.innerHTML = `<div style="background:#fff;border-radius:16px;max-width:720px;width:100%;max-height:90vh;overflow-y:auto;padding:40px;position:relative;">
+            <button onclick="this.closest('#storyDetailOverlay').remove()" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:24px;cursor:pointer;color:#666;">&times;</button>
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:32px;">
+              ${s.companyLogo ? `<img src="${s.companyLogo}" style="width:56px;height:56px;border-radius:12px;object-fit:cover;">` : '<div style="width:56px;height:56px;border-radius:12px;background:#f3f4f6;display:flex;align-items:center;justify-content:center;"><i class="fas fa-building" style="color:#9CA3AF;font-size:20px;"></i></div>'}
+              <div>
+                <h2 style="margin:0;font-size:22px;color:#1a1a1a;">${escapeHtml(s.empresa)}</h2>
+                <p style="margin:4px 0 0;color:#6B7280;font-size:14px;">${escapeHtml(s.nome)}${s.cargo ? ' — ' + escapeHtml(s.cargo) : ''}</p>
+              </div>
+              ${segLabel ? `<span style="margin-left:auto;background:rgba(255,186,26,0.15);color:#b8860b;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;">${escapeHtml(segLabel)}</span>` : ''}
+            </div>
+            ${s.desafio ? `<div style="margin-bottom:24px;"><h3 style="color:#ffba1a;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;"><i class="fas fa-triangle-exclamation" style="margin-right:6px;"></i>O Desafio</h3><p style="color:#374151;line-height:1.7;margin:0;">${escapeHtml(s.desafio)}</p></div>` : ''}
+            ${s.solucao ? `<div style="margin-bottom:24px;"><h3 style="color:#ffba1a;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;"><i class="fas fa-lightbulb" style="margin-right:6px;"></i>A Solução</h3><p style="color:#374151;line-height:1.7;margin:0;">${escapeHtml(s.solucao)}</p></div>` : ''}
+            ${s.resultados ? `<div style="margin-bottom:24px;"><h3 style="color:#22C55E;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;"><i class="fas fa-chart-line" style="margin-right:6px;"></i>Os Resultados</h3><p style="color:#374151;line-height:1.7;margin:0;">${escapeHtml(s.resultados)}</p></div>` : ''}
+            ${s.depoimento ? `<blockquote style="border-left:3px solid #ffba1a;padding:16px 20px;margin:24px 0;background:#fefce8;border-radius:0 8px 8px 0;"><p style="color:#374151;font-style:italic;line-height:1.7;margin:0;">"${escapeHtml(s.depoimento)}"</p></blockquote>` : ''}
+          </div>`;
+
+          document.body.appendChild(overlay);
+        }
+
+        renderGrid('all');
+      })
+      .catch((e) => console.warn('Erro ao buscar histórias:', e));
+  }, []);
+
   useEffect(() => {
     if (!mounted) return;
-    const t = setTimeout(initScripts, 50);
-    return () => clearTimeout(t);
-  }, [mounted, initScripts]);
+    const t1 = setTimeout(initScripts, 50);
+    const t2 = setTimeout(fetchAndRenderStories, 100);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, [mounted, initScripts, fetchAndRenderStories]);
 
   if (!mounted) return <div style={{ minHeight: '100vh', background: '#0D1117' }} />;
 
