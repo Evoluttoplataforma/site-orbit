@@ -135,13 +135,15 @@
     init();
   }
 
-  // ═══ LIVE POPUP — appears after 3s on all pages ═══
+  // ═══ LIVE POPUP — appears once per session ═══
   function showLivePopup() {
     // Skip on live page itself, CMS e chat
     if (window.location.pathname.indexOf('/live') === 0) return;
     if (window.location.pathname.indexOf('/acesso') === 0) return;
     if (window.location.pathname.indexOf('/chat') === 0) return;
-    // Check if dismissed on this page load (prevent duplicate)
+    // Só mostra 1 vez por sessão do browser
+    try { if (sessionStorage.getItem('orbit_live_popup_shown') === '1') return; } catch(e) {}
+    try { sessionStorage.setItem('orbit_live_popup_shown', '1'); } catch(e) {}
     if (window.__livePopupShown) return;
     window.__livePopupShown = true;
 
