@@ -188,7 +188,7 @@ export function PageContent() {
           if (!detailContainer) {
             detailContainer = document.createElement('div');
             detailContainer.id = 'storyDetailPage';
-            (gridSection || grid).parentElement?.appendChild(detailContainer);
+            (gridSection || grid)?.parentElement?.appendChild(detailContainer);
           }
 
           window.scrollTo({ top: 0 });
