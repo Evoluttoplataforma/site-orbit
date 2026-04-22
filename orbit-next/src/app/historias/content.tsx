@@ -171,29 +171,79 @@ export function PageContent() {
           const s = storiesRef.current.find((st) => st.id === id);
           if (!s) return;
           const segLabel = SEGMENTS[s.segmento] || s.segmento || '';
+          const initials = s.empresa ? s.empresa.split(' ').map((w: string) => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase() : 'O';
 
-          const overlay = document.createElement('div');
-          overlay.id = 'storyDetailOverlay';
-          overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);z-index:5000;display:flex;align-items:center;justify-content:center;padding:24px;overflow-y:auto;';
-          overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
+          // Esconde o grid e filtros, mostra o artigo no mesmo layout do blog
+          const gridSection = document.querySelector('.blog-grid-section') || grid.parentElement;
+          const filtersEl = document.querySelector('.stories-filters');
+          const heroEl = document.querySelector('.stories-hero');
+          const ctaEl = document.querySelector('.stories-cta');
+          if (gridSection) (gridSection as HTMLElement).style.display = 'none';
+          if (filtersEl) (filtersEl as HTMLElement).style.display = 'none';
+          if (heroEl) (heroEl as HTMLElement).style.display = 'none';
+          if (ctaEl) (ctaEl as HTMLElement).style.display = 'none';
 
-          overlay.innerHTML = `<div style="background:#fff;border-radius:16px;max-width:720px;width:100%;max-height:90vh;overflow-y:auto;padding:40px;position:relative;">
-            <button onclick="this.closest('#storyDetailOverlay').remove()" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:24px;cursor:pointer;color:#666;">&times;</button>
-            <div style="display:flex;align-items:center;gap:16px;margin-bottom:32px;">
-              ${s.companyLogo ? `<img src="${s.companyLogo}" style="width:56px;height:56px;border-radius:12px;object-fit:cover;">` : '<div style="width:56px;height:56px;border-radius:12px;background:#f3f4f6;display:flex;align-items:center;justify-content:center;"><i class="fas fa-building" style="color:#9CA3AF;font-size:20px;"></i></div>'}
-              <div>
-                <h2 style="margin:0;font-size:22px;color:#1a1a1a;">${escapeHtml(s.empresa)}</h2>
-                <p style="margin:4px 0 0;color:#6B7280;font-size:14px;">${escapeHtml(s.nome)}${s.cargo ? ' — ' + escapeHtml(s.cargo) : ''}</p>
+          // Cria container do artigo
+          let detailContainer = document.getElementById('storyDetailPage');
+          if (!detailContainer) {
+            detailContainer = document.createElement('div');
+            detailContainer.id = 'storyDetailPage';
+            (gridSection || grid).parentElement?.appendChild(detailContainer);
+          }
+
+          window.scrollTo({ top: 0 });
+
+          detailContainer.innerHTML = `
+            <div class="blog-article" style="padding-top:100px;">
+              <a href="/historias" class="blog-article__back" onclick="event.preventDefault();document.getElementById('storyDetailPage').remove();document.querySelector('.stories-hero').style.display='';document.querySelector('.stories-filters').style.display='';document.querySelector('.blog-grid-section,.stories-section').style.display='';var cta=document.querySelector('.stories-cta');if(cta)cta.style.display='';"><i class="fas fa-arrow-left"></i> Voltar às Histórias</a>
+              <div class="blog-article__layout">
+                <article class="blog-article__main">
+                  <span class="blog-article__category">${escapeHtml(segLabel || 'História de Sucesso')}</span>
+                  <h1 class="blog-article__title">${escapeHtml(s.empresa)}</h1>
+                  <div class="blog-article__meta">
+                    <div class="blog-article__meta-author">
+                      <div class="blog-card__avatar">${initials}</div>
+                      <span>${escapeHtml(s.nome)}${s.cargo ? ' — ' + escapeHtml(s.cargo) : ''}</span>
+                    </div>
+                  </div>
+
+                  <div class="blog-article-content">
+                    ${s.desafio ? `<h2 style="color:#ffba1a;"><i class="fas fa-triangle-exclamation" style="margin-right:8px;"></i>O Desafio</h2><p>${escapeHtml(s.desafio)}</p>` : ''}
+                    ${s.solucao ? `<h2 style="color:#ffba1a;"><i class="fas fa-lightbulb" style="margin-right:8px;"></i>A Solução</h2><p>${escapeHtml(s.solucao)}</p>` : ''}
+                    ${s.resultados ? `<h2 style="color:#22C55E;"><i class="fas fa-chart-line" style="margin-right:8px;"></i>Os Resultados</h2><p>${escapeHtml(s.resultados)}</p>` : ''}
+                    ${s.depoimento ? `<blockquote style="border-left:3px solid #ffba1a;padding:16px 20px;margin:32px 0;background:rgba(255,186,26,0.05);border-radius:0 12px 12px 0;"><p style="font-style:italic;line-height:1.8;font-size:1.1rem;">"${escapeHtml(s.depoimento)}"</p><footer style="margin-top:12px;font-size:0.9rem;color:#8B949E;">— ${escapeHtml(s.nome)}${s.cargo ? ', ' + escapeHtml(s.cargo) : ''}${s.empresa ? ' na ' + escapeHtml(s.empresa) : ''}</footer></blockquote>` : ''}
+                  </div>
+
+                  <div class="blog-article__bottom-cta">
+                    <a href="/historias" class="btn btn-primary" onclick="event.preventDefault();document.getElementById('storyDetailPage').remove();document.querySelector('.stories-hero').style.display='';document.querySelector('.stories-filters').style.display='';document.querySelector('.blog-grid-section,.stories-section').style.display='';var cta=document.querySelector('.stories-cta');if(cta)cta.style.display='';"><i class="fas fa-arrow-left"></i> Voltar às Histórias</a>
+                    <a href="/historias/enviar" class="btn btn-primary" style="margin-left:12px;"><i class="fas fa-pen"></i> Conte sua história</a>
+                  </div>
+                </article>
+
+                <aside class="blog-article__sidebar">
+                  <div class="blog-article__sidebar-sticky">
+                    <div class="blog-sidebar-card">
+                      <p class="blog-sidebar-card__label">Empresa</p>
+                      <div class="blog-sidebar-card__author">
+                        ${s.companyLogo
+                          ? `<img src="${s.companyLogo}" style="width:48px;height:48px;border-radius:12px;object-fit:cover;" alt="${escapeHtml(s.empresa)}">`
+                          : `<div class="blog-card__avatar blog-card__avatar--lg">${initials}</div>`}
+                        <div>
+                          <p class="blog-sidebar-card__name">${escapeHtml(s.empresa)}</p>
+                          <p class="blog-sidebar-card__role">${escapeHtml(segLabel)}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="blog-sidebar-cta">
+                      <div class="blog-sidebar-cta__icon"><i class="fas fa-star"></i></div>
+                      <h3>Sua empresa também pode ser destaque</h3>
+                      <p>Compartilhe sua experiência com a Orbit e inspire outros empresários.</p>
+                      <a href="/historias/enviar" class="btn btn-primary" style="width:100%;text-align:center;">Contar minha história</a>
+                    </div>
+                  </div>
+                </aside>
               </div>
-              ${segLabel ? `<span style="margin-left:auto;background:rgba(255,186,26,0.15);color:#b8860b;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;">${escapeHtml(segLabel)}</span>` : ''}
-            </div>
-            ${s.desafio ? `<div style="margin-bottom:24px;"><h3 style="color:#ffba1a;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;"><i class="fas fa-triangle-exclamation" style="margin-right:6px;"></i>O Desafio</h3><p style="color:#374151;line-height:1.7;margin:0;">${escapeHtml(s.desafio)}</p></div>` : ''}
-            ${s.solucao ? `<div style="margin-bottom:24px;"><h3 style="color:#ffba1a;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;"><i class="fas fa-lightbulb" style="margin-right:6px;"></i>A Solução</h3><p style="color:#374151;line-height:1.7;margin:0;">${escapeHtml(s.solucao)}</p></div>` : ''}
-            ${s.resultados ? `<div style="margin-bottom:24px;"><h3 style="color:#22C55E;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;"><i class="fas fa-chart-line" style="margin-right:6px;"></i>Os Resultados</h3><p style="color:#374151;line-height:1.7;margin:0;">${escapeHtml(s.resultados)}</p></div>` : ''}
-            ${s.depoimento ? `<blockquote style="border-left:3px solid #ffba1a;padding:16px 20px;margin:24px 0;background:#fefce8;border-radius:0 8px 8px 0;"><p style="color:#374151;font-style:italic;line-height:1.7;margin:0;">"${escapeHtml(s.depoimento)}"</p></blockquote>` : ''}
-          </div>`;
-
-          document.body.appendChild(overlay);
+            </div>`;
         }
 
         renderGrid('all');
