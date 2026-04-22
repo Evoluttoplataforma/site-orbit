@@ -68,19 +68,20 @@ export function PageContent() {
       .then((r) => r.json())
       .then((data) => {
         if (!Array.isArray(data)) return;
-        const stories: Story[] = data.map((s: Record<string, string>) => ({
-          id: s.id,
-          slug: s.slug,
-          empresa: s.company_name,
-          nome: (s.contact_name || '').split('|')[0].trim(),
-          cargo: s.contact_role,
-          segmento: s.segment,
-          desafio: s.challenge,
-          solucao: s.solution,
-          resultados: s.results,
-          depoimento: s.testimonial,
-          companyLogo: s.logo_url,
-          createdAt: s.created_at,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const stories: Story[] = data.map((s: any) => ({
+          id: Number(s.id),
+          slug: String(s.slug || ''),
+          empresa: String(s.company_name || ''),
+          nome: String(s.contact_name || '').split('|')[0].trim(),
+          cargo: String(s.contact_role || ''),
+          segmento: String(s.segment || ''),
+          desafio: String(s.challenge || ''),
+          solucao: String(s.solution || ''),
+          resultados: String(s.results || ''),
+          depoimento: String(s.testimonial || ''),
+          companyLogo: String(s.logo_url || ''),
+          createdAt: String(s.created_at || ''),
         }));
         storiesRef.current = stories;
 
