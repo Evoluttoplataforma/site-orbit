@@ -2909,10 +2909,10 @@ JSON.stringify(schemaOrg, null, 2) +
                 var logo = s.logo_url ? '<img src="' + escapeHtml(s.logo_url) + '" style="width:32px;height:32px;border-radius:6px;object-fit:cover;margin-right:8px;vertical-align:middle;">' : '<span style="display:inline-flex;width:32px;height:32px;border-radius:6px;background:var(--gray-100);align-items:center;justify-content:center;margin-right:8px;vertical-align:middle;font-size:0.7rem;color:var(--gray-500);"><i class="fas fa-building"></i></span>';
                 var statusClass = STORY_STATUS_COLORS[s.status] || 'draft';
                 var statusLabel = STORY_STATUS_LABELS[s.status] || s.status;
-                var pendingBtns = '<button class="btn btn-primary btn-icon btn-sm" onclick="updateStoryStatus(' + s.id + ',&apos;published&apos;)" title="Aprovar"><i class="fas fa-check"></i></button>' +
-                    '<button class="btn btn-danger btn-icon btn-sm" onclick="updateStoryStatus(' + s.id + ',&apos;rejected&apos;)" title="Rejeitar"><i class="fas fa-ban"></i></button>';
+                var pendingBtns = '<button class="btn btn-icon btn-sm" style="background:#22C55E;color:#fff;" onclick="updateStoryStatus(' + s.id + ',&apos;published&apos;)" title="Aprovar"><i class="fas fa-check"></i></button>' +
+                    '<button class="btn btn-icon btn-sm" style="background:#EF4444;color:#fff;" onclick="updateStoryStatus(' + s.id + ',&apos;rejected&apos;)" title="Rejeitar"><i class="fas fa-ban"></i></button>';
                 var publishedBtns = '<button class="btn btn-secondary btn-icon btn-sm" onclick="updateStoryStatus(' + s.id + ',&apos;pending&apos;)" title="Despublicar"><i class="fas fa-undo"></i></button>';
-                var rejectedBtns = '<button class="btn btn-primary btn-icon btn-sm" onclick="updateStoryStatus(' + s.id + ',&apos;published&apos;)" title="Aprovar"><i class="fas fa-check"></i></button>';
+                var rejectedBtns = '<button class="btn btn-icon btn-sm" style="background:#22C55E;color:#fff;" onclick="updateStoryStatus(' + s.id + ',&apos;published&apos;)" title="Aprovar"><i class="fas fa-check"></i></button>';
                 var actionBtns = s.status === 'pending' ? pendingBtns : (s.status === 'published' ? publishedBtns : rejectedBtns);
 
                 return '<tr>' +
