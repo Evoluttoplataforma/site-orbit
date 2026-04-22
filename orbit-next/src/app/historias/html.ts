@@ -129,38 +129,39 @@ export const pageHTML = `
     };
 
     // ── Get published stories from Supabase ──
-    var cachedStories = null;
-    async function getPublishedStories() {
-        if (cachedStories) return cachedStories;
-        try {
-            var res = await fetch(SB_URL + '/rest/v1/customer_stories?status=eq.published&order=created_at.desc&select=*', {
-                headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
+    function fetchStories(callback) {
+        fetch(SB_URL + '/rest/v1/customer_stories?status=eq.published&order=created_at.desc&select=*', {
+            headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
+        })
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+            if (!Array.isArray(data)) { callback([]); return; }
+            var stories = data.map(function(s) {
+                return {
+                    id: s.id,
+                    slug: s.slug,
+                    empresa: s.company_name,
+                    nome: s.contact_name,
+                    cargo: s.contact_role,
+                    segmento: s.segment,
+                    desafio: s.challenge,
+                    solucao: s.solution,
+                    resultados: s.results,
+                    depoimento: s.testimonial,
+                    companyLogo: s.logo_url,
+                    coverUrl: s.cover_url,
+                    createdAt: s.created_at,
+                    status: s.status
+                };
             });
-            if (res.ok) {
-                var data = await res.json();
-                cachedStories = data.map(function(s) {
-                    return {
-                        id: s.id,
-                        slug: s.slug,
-                        empresa: s.company_name,
-                        nome: s.contact_name,
-                        cargo: s.contact_role,
-                        segmento: s.segment,
-                        desafio: s.challenge,
-                        solucao: s.solution,
-                        resultados: s.results,
-                        depoimento: s.testimonial,
-                        companyLogo: s.logo_url,
-                        coverUrl: s.cover_url,
-                        createdAt: s.created_at,
-                        status: s.status
-                    };
-                });
-                return cachedStories;
-            }
-        } catch(e) { console.warn('Erro ao buscar historias:', e); }
-        return [];
+            callback(stories);
+        })
+        .catch(function(e) {
+            console.warn('Erro ao buscar historias:', e);
+            callback([]);
+        });
     }
+    var allStories = [];
 
     // ── Build dynamic filters ──
     function buildFilters(stories) {
@@ -188,8 +189,8 @@ export const pageHTML = `
     // ── Render stories ──
     let currentFilter = 'all';
 
-    async function renderStories() {
-        const stories = await getPublishedStories();
+    function renderStories() {
+        var stories = allStories;
         const filtered = currentFilter === 'all'
             ? stories
             : stories.filter(s => (s.segmento || s.segment) === currentFilter);
@@ -234,8 +235,8 @@ export const pageHTML = `
     }
 
     // ── Story detail modal ──
-    window.showStoryDetail = async function(id) {
-        var stories = await getPublishedStories();
+    window.showStoryDetail = function(id) {
+        var stories = allStories;
         var s = stories.find(function(st) { return st.id === id; });
         if (!s) return;
 
@@ -268,11 +269,11 @@ export const pageHTML = `
     };
 
     // ── Init ──
-    (async function init() {
-        const stories = await getPublishedStories();
+    fetchStories(function(stories) {
+        allStories = stories;
         buildFilters(stories);
-        await renderStories();
-    })();
+        renderStories();
+    });
 
     // Mobile menu, header scroll, dropdowns handled by PageLayout.tsx
     </script>
