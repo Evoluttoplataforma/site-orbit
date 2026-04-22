@@ -219,16 +219,53 @@ export const pageHTML = `
 
             var autorCargo = [story.nome, story.cargo].filter(Boolean).join(' - ');
 
-            return '<a href="/historias/' + encodeURIComponent(story.slug || story.id) + '" class="story-card">' +
+            // Separa nome do email/telefone (campo contact_name pode ter "Nome | email | tel")
+            var nomeDisplay = (story.nome || '').split('|')[0].trim();
+            var cargoDisplay = story.cargo || '';
+
+            return '<div class="story-card" onclick="showStoryDetail(' + story.id + ')" style="cursor:pointer;">' +
                 (segmentLabel ? '<span class="story-card__segment">' + escapeHtml(segmentLabel) + '</span>' : '') +
                 '<div class="story-card__logo">' + logoHtml + '</div>' +
                 '<div class="story-card__company">' + escapeHtml(story.empresa) + '</div>' +
-                (autorCargo ? '<div class="story-card__author">' + escapeHtml(autorCargo) + '</div>' : '') +
-                '<div class="story-card__title">' + escapeHtml(story.titulo) + '</div>' +
+                (nomeDisplay ? '<div class="story-card__author">' + escapeHtml(nomeDisplay) + (cargoDisplay ? ' - ' + escapeHtml(cargoDisplay) : '') + '</div>' : '') +
                 '<span class="story-card__link">Leia a hist&oacute;ria &rarr;</span>' +
-            '</a>';
+            '</div>';
         }).join('');
     }
+
+    // ── Story detail modal ──
+    window.showStoryDetail = async function(id) {
+        var stories = await getPublishedStories();
+        var s = stories.find(function(st) { return st.id === id; });
+        if (!s) return;
+
+        var nomeDisplay = (s.nome || '').split('|')[0].trim();
+        var segLabel = SEGMENTS[s.segmento] || s.segmento || '';
+
+        var overlay = document.createElement('div');
+        overlay.id = 'storyDetailOverlay';
+        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);z-index:5000;display:flex;align-items:center;justify-content:center;padding:24px;overflow-y:auto;';
+        overlay.onclick = function(e) { if (e.target === overlay) overlay.remove(); };
+
+        overlay.innerHTML =
+            '<div style="background:#fff;border-radius:16px;max-width:720px;width:100%;max-height:90vh;overflow-y:auto;padding:40px;position:relative;">' +
+                '<button onclick="this.closest(\'#storyDetailOverlay\').remove()" style="position:absolute;top:16px;right:16px;background:none;border:none;font-size:24px;cursor:pointer;color:#666;">&times;</button>' +
+                '<div style="display:flex;align-items:center;gap:16px;margin-bottom:32px;">' +
+                    (s.companyLogo ? '<img src="' + s.companyLogo + '" style="width:56px;height:56px;border-radius:12px;object-fit:cover;">' : '<div style="width:56px;height:56px;border-radius:12px;background:#f3f4f6;display:flex;align-items:center;justify-content:center;"><i class="fas fa-building" style="color:#9CA3AF;font-size:20px;"></i></div>') +
+                    '<div>' +
+                        '<h2 style="margin:0;font-size:22px;color:#1a1a1a;">' + escapeHtml(s.empresa) + '</h2>' +
+                        '<p style="margin:4px 0 0;color:#6B7280;font-size:14px;">' + escapeHtml(nomeDisplay) + (s.cargo ? ' — ' + escapeHtml(s.cargo) : '') + '</p>' +
+                    '</div>' +
+                    (segLabel ? '<span style="margin-left:auto;background:rgba(255,186,26,0.15);color:#b8860b;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;">' + escapeHtml(segLabel) + '</span>' : '') +
+                '</div>' +
+                (s.desafio ? '<div style="margin-bottom:24px;"><h3 style="color:#ffba1a;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;"><i class="fas fa-triangle-exclamation" style="margin-right:6px;"></i>O Desafio</h3><p style="color:#374151;line-height:1.7;margin:0;">' + escapeHtml(s.desafio) + '</p></div>' : '') +
+                (s.solucao ? '<div style="margin-bottom:24px;"><h3 style="color:#ffba1a;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;"><i class="fas fa-lightbulb" style="margin-right:6px;"></i>A Solução</h3><p style="color:#374151;line-height:1.7;margin:0;">' + escapeHtml(s.solucao) + '</p></div>' : '') +
+                (s.resultados ? '<div style="margin-bottom:24px;"><h3 style="color:#22C55E;font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px;"><i class="fas fa-chart-line" style="margin-right:6px;"></i>Os Resultados</h3><p style="color:#374151;line-height:1.7;margin:0;">' + escapeHtml(s.resultados) + '</p></div>' : '') +
+                (s.depoimento ? '<blockquote style="border-left:3px solid #ffba1a;padding:16px 20px;margin:24px 0;background:#fefce8;border-radius:0 8px 8px 0;"><p style="color:#374151;font-style:italic;line-height:1.7;margin:0;">"' + escapeHtml(s.depoimento) + '"</p></blockquote>' : '') +
+            '</div>';
+
+        document.body.appendChild(overlay);
+    };
 
     // ── Init ──
     (async function init() {
