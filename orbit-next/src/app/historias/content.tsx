@@ -128,18 +128,33 @@ export function PageContent() {
           if (empty) empty.style.display = 'none';
 
           grid.innerHTML = filtered
-            .map((story) => {
+            .map((story, i) => {
               const segLabel = SEGMENTS[story.segmento] || story.segmento || '';
-              const logoHtml = story.companyLogo
-                ? `<img src="${story.companyLogo}" alt="${escapeHtml(story.empresa)}" loading="lazy">`
-                : '<div class="story-card__logo-placeholder"><i class="fas fa-building"></i></div>';
-              return `<div class="story-card" data-story-id="${story.id}" style="cursor:pointer;">
-                ${segLabel ? `<span class="story-card__segment">${escapeHtml(segLabel)}</span>` : ''}
-                <div class="story-card__logo">${logoHtml}</div>
-                <div class="story-card__company">${escapeHtml(story.empresa)}</div>
-                ${story.nome ? `<div class="story-card__author">${escapeHtml(story.nome)}${story.cargo ? ' - ' + escapeHtml(story.cargo) : ''}</div>` : ''}
-                <span class="story-card__link">Leia a história →</span>
-              </div>`;
+              const preview = story.desafio ? story.desafio.slice(0, 140) + (story.desafio.length > 140 ? '...' : '') : '';
+              const initials = story.empresa ? story.empresa.split(' ').map(w => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase() : 'O';
+
+              return `<article class="blog-card blog-card--animate" data-story-id="${story.id}" style="animation-delay:${i * 80}ms;cursor:pointer;">
+                <div class="blog-card__image" style="background:linear-gradient(135deg,#0D1117 0%,#1a1f2e 100%);display:flex;align-items:center;justify-content:center;min-height:180px;">
+                  ${story.companyLogo
+                    ? `<img src="${story.companyLogo}" alt="${escapeHtml(story.empresa)}" style="max-width:120px;max-height:80px;object-fit:contain;" loading="lazy">`
+                    : `<div style="width:80px;height:80px;border-radius:50%;background:rgba(255,186,26,0.15);display:flex;align-items:center;justify-content:center;"><i class="fas fa-building" style="color:#ffba1a;font-size:32px;"></i></div>`}
+                  ${segLabel ? `<span class="blog-card__tag" style="background:rgba(255,186,26,0.15);color:#ffba1a;border:1px solid rgba(255,186,26,0.3);">${escapeHtml(segLabel)}</span>` : ''}
+                </div>
+                <div class="blog-card__body">
+                  <h3>${escapeHtml(story.empresa)}</h3>
+                  ${preview ? `<p>${escapeHtml(preview)}</p>` : ''}
+                  <div class="blog-card__footer">
+                    <div class="blog-card__author">
+                      <div class="blog-card__avatar">${initials}</div>
+                      <div class="blog-card__author-info">
+                        <span class="blog-card__author-name">${escapeHtml(story.nome || 'Equipe')}</span>
+                        <span class="blog-card__date">${story.cargo ? escapeHtml(story.cargo) : ''}</span>
+                      </div>
+                    </div>
+                    <span class="blog-card__read-time"><i class="fas fa-arrow-right"></i> Ver história</span>
+                  </div>
+                </div>
+              </article>`;
             })
             .join('');
 

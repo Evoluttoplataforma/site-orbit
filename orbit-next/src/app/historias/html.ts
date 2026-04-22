@@ -21,7 +21,7 @@ export const pageHTML = `
             </div>
 
             <!-- Grid -->
-            <div class="stories-grid" id="storiesGrid"></div>
+            <div class="blog-grid" id="storiesGrid"></div>
 
             <!-- Empty State -->
             <div class="stories-empty" id="storiesEmpty" style="display:none;">
