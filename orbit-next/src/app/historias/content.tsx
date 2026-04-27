@@ -258,8 +258,7 @@ export function PageContent() {
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, [mounted, initScripts, fetchAndRenderStories]);
 
-  if (!mounted) return <div style={{ minHeight: '100vh', background: '#0D1117' }} />;
-
+  // Sempre renderiza o HTML estático (com H1) no SSR/SSG — scripts e fetch só rodam após mount
   const fullHTML = headerHTML + '\n' + pageHTML;
   return <div ref={ref} dangerouslySetInnerHTML={{ __html: fullHTML }} />;
 }

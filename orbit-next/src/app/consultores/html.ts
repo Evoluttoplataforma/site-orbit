@@ -2929,7 +2929,7 @@ export const pageHTML = `
             <div data-reveal>
                 <h2>Pronto para ter receita recorrente?</h2>
                 <p>30+ consultorias já estão ganhando com IA. Sua vez.</p>
-                <a href="https://wa.me/554898149776?text=Quero%20ser%20uma%20plataforma%20de%20IA%20para%20meus%20clientes" target="_blank" class="lp-btn lp-btn--gold">QUERO SER UMA PLATAFORMA DE IA PARA MEUS CLIENTES</a>
+                <a href="https://wa.me/554898149776?text=Quero%20ser%20uma%20plataforma%20de%20IA%20para%20meus%20clientes" target="_blank" rel="nofollow noopener" class="lp-btn lp-btn--gold">QUERO SER UMA PLATAFORMA DE IA PARA MEUS CLIENTES</a>
 
                 <div class="cta-stats">
                     <div class="cta-stats__item">
@@ -2959,7 +2959,7 @@ export const pageHTML = `
                     </div>
                     <p data-i18n="footer.tagline">Plataforma de gestão com IA. Contrate um time que executa.</p>
                     <div class="social-hover">
-                        <a href="https://wa.me/554898149776" target="_blank" rel="noopener" class="social-hover__item" data-name="WhatsApp">
+                        <a href="https://wa.me/554898149776" target="_blank" rel="noopener nofollow" class="social-hover__item" data-name="WhatsApp">
                             <i class="fab fa-whatsapp"></i>
                             <span class="social-hover__label">WhatsApp</span>
                         </a>
@@ -2978,7 +2978,7 @@ export const pageHTML = `
                     <h5 data-i18n="footer.contact">Contato</h5>
                     <ul class="footer-contact">
                         <li><a href="mailto:contato@orbitgestao.com.br" style="color:inherit;text-decoration:none;"><i class="fas fa-envelope"></i> contato@orbitgestao.com.br</a></li>
-                        <li><a href="https://wa.me/554898149776" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;"><i class="fab fa-whatsapp"></i> (48) 9814-9776</a></li>
+                        <li><a href="https://wa.me/554898149776" target="_blank" rel="noopener nofollow" style="color:inherit;text-decoration:none;"><i class="fab fa-whatsapp"></i> (48) 9814-9776</a></li>
                         <li><i class="fas fa-map-marker-alt"></i> Square SC, Florianópolis - SC</li>
                     </ul>
                 </div>
