@@ -67,7 +67,7 @@ export default function Page() {
             <li>Revogar o consentimento e cancelar o recebimento de mensagens</li>
             <li>Solicitar portabilidade dos dados</li>
           </ul>
-          <p style={{ lineHeight: 1.7, marginTop: 12 }}>Para exercer qualquer direito, envie um e-mail para <a href="mailto:contato@orbitgestao.com.br" style={{ color: '#ffba1a' }}>contato@orbitgestao.com.br</a>.</p>
+          <p style={{ lineHeight: 1.7, marginTop: 12 }}>Para exercer qualquer direito, envie um e-mail para <span style={{ color: '#ffba1a' }}>contato@orbitgestao.com.br</span>.</p>
         </section>
 
         <section style={{ marginBottom: 32 }}>
@@ -92,7 +92,7 @@ export default function Page() {
         <section style={{ marginBottom: 32 }}>
           <h2 style={{ fontSize: 22, fontWeight: 700, color: '#fff', marginBottom: 12 }}>10. Encarregado de Dados (DPO)</h2>
           <p style={{ lineHeight: 1.7 }}>Para questões relacionadas ao tratamento de dados pessoais, entre em contato com nosso Encarregado de Dados:</p>
-          <p style={{ lineHeight: 1.7, marginTop: 8 }}><strong style={{ color: '#fff' }}>E-mail:</strong> <a href="mailto:contato@orbitgestao.com.br" style={{ color: '#ffba1a' }}>contato@orbitgestao.com.br</a></p>
+          <p style={{ lineHeight: 1.7, marginTop: 8 }}><strong style={{ color: '#fff' }}>E-mail:</strong> <span style={{ color: '#ffba1a' }}>contato@orbitgestao.com.br</span></p>
         </section>
 
         <section style={{ marginBottom: 32 }}>
