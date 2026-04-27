@@ -57,10 +57,69 @@ async function ensureCustomField(token: string, entity: 'dealFields' | 'personFi
 }
 
 // ============================================================
-// Pipedrive label management (v1 API — usa pipedriveFetch existente)
+// Pipedrive label management (v2 API — PATCH label_ids array)
 // Auto-cria etiquetas, merge com existentes, exclusão mútua de canal
 // ============================================================
 const CANAL_LABELS = ['CANAL ORBIT', 'ORBIT B2B'];
+
+function isConsultorLead(oqueFaz?: string, cargo?: string): boolean {
+  return (oqueFaz || '').toLowerCase().includes('consultoria')
+    || (cargo || '').toLowerCase().includes('consultor');
+}
+
+function resolveCanalLabel(oqueFaz?: string, cargo?: string): 'CANAL ORBIT' | 'ORBIT B2B' {
+  return isConsultorLead(oqueFaz, cargo) ? 'CANAL ORBIT' : 'ORBIT B2B';
+}
+
+function resolveNicheLabel(originPage?: string): string | null {
+  if (!originPage) return null;
+  const path = originPage.toLowerCase().replace(/^\//, '').split('/')[0];
+  const map: Record<string, string> = {
+    consultoria: 'CONSULTORIA',
+    agencia: 'AGÊNCIA',
+    contabilidade: 'CONTABILIDADE',
+    contador: 'CONTABILIDADE',
+    clinicas: 'CLÍNICAS',
+    imobiliaria: 'IMOBILIÁRIA',
+    engenharia: 'ENGENHARIA',
+    advocacia: 'ADVOCACIA',
+    franquias: 'FRANQUIAS',
+    ecommerce: 'E-COMMERCE',
+    educacao: 'EDUCAÇÃO',
+  };
+  return map[path] || null;
+}
+
+async function applyAutoLabels(
+  token: string,
+  dealId: number,
+  oqueFaz?: string,
+  cargo?: string,
+  originPage?: string,
+) {
+  // Niche label (path-based) tem prioridade — se houver, ignora canal
+  const niche = resolveNicheLabel(originPage);
+  if (niche) {
+    try {
+      await setDealLabel(token, dealId, niche, 'blue');
+      console.log(`[applyAutoLabels] niche="${niche}" applied`);
+      return;
+    } catch (e) {
+      console.error('[applyAutoLabels] niche failed:', e);
+    }
+  }
+  if (oqueFaz || cargo) {
+    const canal = resolveCanalLabel(oqueFaz, cargo);
+    try {
+      await setDealLabel(token, dealId, canal);
+      console.log(`[applyAutoLabels] canal="${canal}" applied`);
+    } catch (e) {
+      console.error('[applyAutoLabels] canal failed:', e);
+    }
+  } else {
+    console.log('[applyAutoLabels] sem oqueFaz/cargo/origin_page — pulando canal/niche');
+  }
+}
 
 function normalizeLabelIds(value: unknown): number[] {
   if (Array.isArray(value)) return value.map(Number).filter(Number.isFinite);
@@ -230,7 +289,10 @@ serve(async (req) => {
         const dealData = await pipedriveFetch('/deals', 'POST', PIPEDRIVE_API_TOKEN, dealBody);
         const dealId = dealData.data.id;
 
-        // Apply label with merge + mutual exclusion + auto-create
+        // Auto labels (niche por path OU canal por oqueFaz/cargo)
+        await applyAutoLabels(PIPEDRIVE_API_TOKEN, dealId, oqueFaz, cargo, utmData?.origin_page);
+
+        // Label explícita do payload (ex: CHAT1)
         if (label) {
           try {
             await setDealLabel(PIPEDRIVE_API_TOKEN, dealId, label, payload.labelColor || 'blue');
@@ -430,7 +492,10 @@ serve(async (req) => {
       const dealData = await pipedriveFetch('/deals', 'POST', PIPEDRIVE_API_TOKEN, dealBody);
       const dealId = dealData.data.id;
 
-      // Apply label with merge + mutual exclusion + auto-create
+      // Auto labels (niche por path OU canal por oqueFaz/cargo)
+      await applyAutoLabels(PIPEDRIVE_API_TOKEN, dealId, oqueFaz, cargo, utmData?.origin_page);
+
+      // Label explícita do payload (ex: CHAT1)
       if (label) {
         try {
           await setDealLabel(PIPEDRIVE_API_TOKEN, dealId, label, payload.labelColor || 'blue');
@@ -629,6 +694,11 @@ serve(async (req) => {
       }
       if (Object.keys(dealUpdate).length > 0 && deal_id) {
         await pipedriveFetch(`/deals/${deal_id}`, 'PUT', PIPEDRIVE_API_TOKEN, dealUpdate);
+      }
+
+      // Auto labels — chat envia oqueFaz/cargo aos poucos via update; reaplica canal/niche
+      if (deal_id && (oqueFaz || cargo || utmData?.origin_page)) {
+        await applyAutoLabels(PIPEDRIVE_API_TOKEN, deal_id, oqueFaz, cargo, utmData?.origin_page);
       }
 
       // If scheduling is complete: move stage, create activity, update note
