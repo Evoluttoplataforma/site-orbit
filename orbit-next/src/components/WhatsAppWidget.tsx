@@ -7,12 +7,6 @@ import { validateEmail } from '@/lib/email-validation';
 
 const PHONE = '554898149776';
 
-// Pipedrive — TODOS os leads do Orbit vão com etiqueta CANAL ORBIT (id 598)
-const DEFAULT_PIPE_LABEL = 598; // CANAL ORBIT
-function detectLabelFromPath(): number {
-  return DEFAULT_PIPE_LABEL;
-}
-
 const C = {
   green: '#25D366',
   greenDark: '#128C7E',
@@ -129,8 +123,7 @@ export default function WhatsAppWidget() {
       console.error('[WA Widget] Save lead failed:', err);
     }
 
-    // 2. Cria deal no Pipedrive com nota indicando origem + label da página
-    const labelId = DEFAULT_PIPE_LABEL;
+    // 2. Cria deal no Pipedrive com nota indicando origem + etiqueta CHAT1
     try {
       await supabaseMkt.functions.invoke('create-pipedrive-lead', {
         body: {
@@ -140,7 +133,8 @@ export default function WhatsAppWidget() {
           email: email.trim().toLowerCase(),
           empresa: company.trim(),
           oqueFaz: 'Widget WhatsApp',
-          ...(labelId ? { label: labelId } : {}),
+          label: 'CHAT1',
+          labelColor: 'blue',
           leadId,
           utmData,
           noteExtra: '🟢 Lead via Widget WhatsApp do site',

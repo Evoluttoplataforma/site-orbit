@@ -4043,25 +4043,69 @@
                     </div>
 
                     <form id="form-lead" class="lead-form" novalidate>
-                        <div class="form-group">
-                            <label for="nome">Nome completo *</label>
-                            <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+                        <div class="form-progress" id="form-progress" aria-hidden="true">
+                            <div class="form-progress__step form-progress__step--active" data-progress-step="1">1</div>
+                            <div class="form-progress__bar"></div>
+                            <div class="form-progress__step" data-progress-step="2">2</div>
                         </div>
-                        <div class="form-group">
-                            <label for="email">E-mail corporativo *</label>
-                            <input type="email" id="email" name="email" placeholder="seu@empresa.com" required>
+
+                        <!-- Etapa 1 — Contato -->
+                        <div class="form-step" data-step="1">
+                            <div class="form-group">
+                                <label for="nome">Nome completo *</label>
+                                <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">E-mail corporativo *</label>
+                                <input type="email" id="email" name="email" placeholder="seu@empresa.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefone">WhatsApp *</label>
+                                <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="empresa">Empresa</label>
+                                <input type="text" id="empresa" name="empresa" placeholder="Nome da sua empresa">
+                            </div>
+                            <button type="button" class="btn btn-primary btn-next" data-goto-step="2">
+                                <span class="btn-text">CONTINUAR</span>
+                            </button>
                         </div>
-                        <div class="form-group">
-                            <label for="telefone">WhatsApp *</label>
-                            <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="empresa">Empresa</label>
-                            <input type="text" id="empresa" name="empresa" placeholder="Nome da sua empresa">
-                        </div>
-                        <div class="form-group">
-                            <label for="cargo">Cargo</label>
-                            <input type="text" id="cargo" name="cargo" placeholder="Seu cargo">
+
+                        <!-- Etapa 2 — Qualificação -->
+                        <div class="form-step" data-step="2" hidden>
+                            <div class="form-group">
+                                <label for="cargo">Cargo</label>
+                                <input type="text" id="cargo" name="cargo" placeholder="Seu cargo">
+                            </div>
+                            <div class="form-group">
+                                <label for="faturamento">Faturamento mensal *</label>
+                                <select id="faturamento" name="faturamento" required>
+                                    <option value="">Selecione</option>
+                                    <option value="Até R$ 100 mil/mês">Até R$ 100 mil/mês</option>
+                                    <option value="R$ 100 mil - R$ 500 mil/mês">R$ 100 mil - R$ 500 mil/mês</option>
+                                    <option value="R$ 500 mil - R$ 1 milhão/mês">R$ 500 mil - R$ 1 milhão/mês</option>
+                                    <option value="Acima de R$ 1 milhão/mês">Acima de R$ 1 milhão/mês</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="funcionarios">Nº de funcionários *</label>
+                                <select id="funcionarios" name="funcionarios" required>
+                                    <option value="">Selecione</option>
+                                    <option value="1-5 funcionários">1-5 funcionários</option>
+                                    <option value="6-20 funcionários">6-20 funcionários</option>
+                                    <option value="21-50 funcionários">21-50 funcionários</option>
+                                    <option value="51-100 funcionários">51-100 funcionários</option>
+                                    <option value="Mais de 100 funcionários">Mais de 100 funcionários</option>
+                                </select>
+                            </div>
+                            <div class="form-step-actions">
+                                <button type="button" class="btn-back" data-goto-step="1">VOLTAR</button>
+                                <button type="submit" class="btn btn-primary btn-submit">
+                                    <span class="btn-text">QUERO CONHECER O TIME DE IA</span>
+                                    <span class="btn-loading" style="display:none;"><i class="fas fa-spinner fa-spin"></i> Enviando...</span>
+                                </button>
+                            </div>
                         </div>
 
                         <!-- Hidden UTM fields -->
@@ -4079,11 +4123,6 @@
                         <input type="hidden" name="session_id" id="hidden_session_id">
                         <input type="hidden" name="landing_page" data-field-id="landing_page">
                         <input type="hidden" name="session_attributes_encoded" data-field-id="session_attributes_encoded">
-
-                        <button type="submit" class="btn btn-primary btn-submit">
-                            <span class="btn-text">QUERO CONHECER O TIME DE IA</span>
-                            <span class="btn-loading" style="display:none;"><i class="fas fa-spinner fa-spin"></i> Enviando...</span>
-                        </button>
 
                         <div class="form-error" id="form-error" style="display:none;"></div>
                     </form>

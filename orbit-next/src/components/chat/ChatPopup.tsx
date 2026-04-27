@@ -54,22 +54,6 @@ const inputEl: React.CSSProperties = {
 
 type PopupMode = 'chat' | 'checkout';
 
-// Pipedrive labels por página de origem
-const PIPE_LABELS: Record<string, { id: number; name: string }> = {
-  '/empresarios': { id: 598, name: 'CANAL ORBIT' },
-  '/consultores': { id: 598, name: 'CANAL ORBIT' },
-  '/experiencias': { id: 598, name: 'CANAL ORBIT' },
-  '/apresentacao': { id: 598, name: 'CANAL ORBIT' },
-};
-const DEFAULT_PIPE_LABEL = 598; // CANAL ORBIT — usado quando nenhum path específico bate
-
-function detectLabelFromPath(path: string): number {
-  for (const key in PIPE_LABELS) {
-    if (path === key || path.startsWith(key + '/')) return PIPE_LABELS[key].id;
-  }
-  return DEFAULT_PIPE_LABEL;
-}
-
 export default function ChatPopup() {
   const [isExperiment, setIsExperiment] = useState(false);
   useEffect(() => {
@@ -80,7 +64,6 @@ export default function ChatPopup() {
   const [mode, setMode] = useState<PopupMode>('chat');
   const [redirectUrl, setRedirectUrl] = useState<string>('/chat');
   const [planLabel, setPlanLabel] = useState<string>('');
-  const [originPath, setOriginPath] = useState<string>('');
   const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [country, setCountry] = useState(COUNTRIES[0]);
@@ -100,9 +83,6 @@ export default function ChatPopup() {
       if (!link) return;
       const href = link.getAttribute('href');
 
-      // Captura path atual pra mapear label do Pipedrive
-      const currentPath = window.location.pathname;
-
       // Modo checkout: link tem data-popup-target com URL externa
       const popupTarget = link.getAttribute('data-popup-target');
       if (popupTarget) {
@@ -110,7 +90,6 @@ export default function ChatPopup() {
         setMode('checkout');
         setRedirectUrl(popupTarget);
         setPlanLabel(link.getAttribute('data-popup-plan') || '');
-        setOriginPath(currentPath);
         setOpen(true);
         return;
       }
@@ -121,7 +100,6 @@ export default function ChatPopup() {
         setMode('chat');
         setRedirectUrl('/chat');
         setPlanLabel('');
-        setOriginPath(currentPath);
         setOpen(true);
       }
     };
@@ -227,9 +205,6 @@ export default function ChatPopup() {
       console.error('Save lead failed:', err);
     }
 
-    // Determina label do Pipedrive baseado no path de origem
-    const labelId = detectLabelFromPath(originPath);
-
     // Cria deal no Pipedrive (paralelo, não bloqueia)
     let pipedriveIds: { person_id?: number; org_id?: number; deal_id?: number } = {};
     try {
@@ -244,7 +219,8 @@ export default function ChatPopup() {
           ...(mode === 'checkout' && planLabel
             ? { oqueFaz: `Pré-checkout - Plano ${planLabel}` }
             : {}),
-          ...(labelId ? { label: labelId } : {}),
+          label: 'CHAT1',
+          labelColor: 'blue',
           leadId,
           utmData,
         },

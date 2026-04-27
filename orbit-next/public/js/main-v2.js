@@ -430,34 +430,72 @@ document.addEventListener('DOMContentLoaded', () => {
     e.target.value = val;
   });
 
+  // Step navigation (CONTINUAR / VOLTAR) — event delegation
+  document.addEventListener('click', function(e) {
+    var trigger = e.target.closest('[data-goto-step]');
+    if (!trigger) return;
+    var leadForm = trigger.closest('#form-lead');
+    if (!leadForm) return;
+    e.preventDefault();
+
+    var targetStep = trigger.getAttribute('data-goto-step');
+    var formError = document.getElementById('form-error');
+
+    // Ao avançar pro step 2, valida step 1
+    if (targetStep === '2') {
+      var getVal = function(name) { var el = leadForm.querySelector('[name="' + name + '"]'); return el ? el.value.trim() : ''; };
+      if (!getVal('nome') || !getVal('email') || !getVal('telefone')) {
+        if (formError) {
+          formError.textContent = 'Preencha nome, e-mail e WhatsApp para continuar.';
+          formError.style.display = 'block';
+        }
+        return;
+      }
+    }
+    if (formError) formError.style.display = 'none';
+
+    leadForm.querySelectorAll('.form-step').forEach(function(s) {
+      s.hidden = s.getAttribute('data-step') !== targetStep;
+    });
+    leadForm.querySelectorAll('.form-progress__step').forEach(function(p) {
+      var n = p.getAttribute('data-progress-step');
+      p.classList.toggle('form-progress__step--active', n === targetStep);
+      p.classList.toggle('form-progress__step--done', n < targetStep);
+    });
+    var progress = leadForm.querySelector('.form-progress');
+    if (progress) progress.classList.toggle('form-progress--step2', targetStep === '2');
+  });
+
   // Form submit — event delegation (survives React hydration)
   document.addEventListener('submit', function(e) {
-    if (!e.target || e.target.id !== 'lead-form') return;
+    if (!e.target || e.target.id !== 'form-lead') return;
     e.preventDefault();
     var leadForm = e.target;
 
-      const btnText = leadForm.querySelector('.btn-text');
-      const btnLoading = leadForm.querySelector('.btn-loading');
+      const btnText = leadForm.querySelector('.btn-submit .btn-text');
+      const btnLoading = leadForm.querySelector('.btn-submit .btn-loading');
       const formError = document.getElementById('form-error');
       const formSuccess = document.getElementById('form-success');
       const submitBtn = leadForm.querySelector('.btn-submit');
 
-      // Get all form values via name attributes (GTM-compatible)
       var f = leadForm;
       var getValue = function(name) { var el = f.querySelector('[name="' + name + '"]'); return el ? el.value.trim() : ''; };
 
-      const nome = getValue('name');
+      const nome = getValue('nome');
       const email = getValue('email');
-      const phone = getValue('phone');
-      const role = getValue('role');
-      const segment = getValue('segment');
-      const company = getValue('company');
-      const revenue = getValue('revenue');
-      const employees = getValue('employees');
-      const priority = getValue('priority');
+      const phone = getValue('telefone');
+      const empresa = getValue('empresa');
+      const cargo = getValue('cargo');
+      const faturamento = getValue('faturamento');
+      const funcionarios = getValue('funcionarios');
 
-      if (!nome || !email || !phone || !role || !segment || !company || !revenue || !employees || !priority) {
-        formError.textContent = 'Por favor, preencha todos os campos obrigatórios.';
+      if (!nome || !email || !phone) {
+        formError.textContent = 'Preencha nome, e-mail e WhatsApp.';
+        formError.style.display = 'block';
+        return;
+      }
+      if (!faturamento || !funcionarios) {
+        formError.textContent = 'Selecione faturamento e nº de funcionários.';
         formError.style.display = 'block';
         return;
       }
@@ -467,11 +505,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (btnLoading) btnLoading.style.display = 'inline-flex';
       submitBtn.disabled = true;
 
-      const parts = nome.split(' ');
-      const firstName = parts[0];
-      const lastName = parts.slice(1).join(' ');
-
-      // Tracking data from hidden fields
       var tracking = window.__wlTracking || {};
 
       window.dataLayer = window.dataLayer || [];
@@ -480,12 +513,10 @@ document.addEventListener('DOMContentLoaded', () => {
         lead_name: nome,
         lead_email: email,
         lead_whatsapp: phone,
-        role: role,
-        segment: segment,
-        company: company,
-        revenue: revenue,
-        employees: employees,
-        priority: priority,
+        company: empresa,
+        role: cargo,
+        faturamento: faturamento,
+        funcionarios: funcionarios,
         utm_source: tracking.utm_source || null,
         utm_medium: tracking.utm_medium || null,
         utm_campaign: tracking.utm_campaign || null,
@@ -514,84 +545,110 @@ document.addEventListener('DOMContentLoaded', () => {
         ref: tracking.ref || null
       });
 
-      // Save lead to Supabase
       var SUPA_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
       var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
 
+      var leadPayload = {
+        name: nome,
+        email: email,
+        phone: phone,
+        company: empresa || null,
+        role: cargo || null,
+        faturamento: faturamento || null,
+        funcionarios: funcionarios || null,
+        utm_source: tracking.utm_source || null,
+        utm_medium: tracking.utm_medium || null,
+        utm_campaign: tracking.utm_campaign || null,
+        utm_content: tracking.utm_content || null,
+        utm_term: tracking.utm_term || null,
+        gclid: tracking.gclid || null,
+        gbraid: tracking.gbraid || null,
+        wbraid: tracking.wbraid || null,
+        gad_campaignid: tracking.gad_campaignid || null,
+        gad_source: tracking.gad_source || null,
+        fbclid: tracking.fbclid || null,
+        fbc: tracking.fbc || null,
+        fbp: tracking.fbp || null,
+        ttclid: tracking.ttclid || null,
+        msclkid: tracking.msclkid || null,
+        li_fat_id: tracking.li_fat_id || null,
+        twclid: tracking.twclid || null,
+        sck: tracking.sck || null,
+        landing_page: tracking.landing_page || null,
+        referrer: tracking.referrer || null,
+        user_agent: tracking.user_agent || null,
+        first_visit: tracking.first_visit || null,
+        session_id: tracking.session_id || null,
+        session_attributes_encoded: tracking.session_attributes_encoded || null,
+        origin_page: tracking.originPage || null,
+        ref: tracking.ref || null
+      };
+
+      // Insere lead no Supabase, pega o ID, e dispara Pipedrive em paralelo com Make
       fetch(SUPA_URL + '/rest/v1/leads', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'apikey': SUPA_KEY,
           'Authorization': 'Bearer ' + SUPA_KEY,
-          'Prefer': 'return=minimal'
+          'Prefer': 'return=representation'
         },
-        body: JSON.stringify({
-          name: nome,
-          email: email,
-          phone: phone,
-          role: role,
-          segment: segment,
-          company: company,
-          revenue: revenue,
-          employees: employees,
-          priority: priority,
-          utm_source: tracking.utm_source || null,
-          utm_medium: tracking.utm_medium || null,
-          utm_campaign: tracking.utm_campaign || null,
-          utm_content: tracking.utm_content || null,
-          utm_term: tracking.utm_term || null,
-          gclid: tracking.gclid || null,
-          gbraid: tracking.gbraid || null,
-          wbraid: tracking.wbraid || null,
-          gad_campaignid: tracking.gad_campaignid || null,
-          gad_source: tracking.gad_source || null,
-          fbclid: tracking.fbclid || null,
-          fbc: tracking.fbc || null,
-          fbp: tracking.fbp || null,
-          ttclid: tracking.ttclid || null,
-          msclkid: tracking.msclkid || null,
-          li_fat_id: tracking.li_fat_id || null,
-          twclid: tracking.twclid || null,
-          sck: tracking.sck || null,
-          landing_page: tracking.landing_page || null,
-          referrer: tracking.referrer || null,
-          user_agent: tracking.user_agent || null,
-          first_visit: tracking.first_visit || null,
-          session_id: tracking.session_id || null,
-          session_attributes_encoded: tracking.session_attributes_encoded || null,
-          origin_page: tracking.originPage || null,
-          ref: tracking.ref || null
+        body: JSON.stringify(leadPayload)
+      })
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(rows) {
+          var leadId = (rows && rows[0] && rows[0].id) || null;
+          // 1) Cria deal no Pipedrive — funil Orbit, etiqueta CHAT1
+          return fetch(SUPA_URL + '/functions/v1/create-pipedrive-lead', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + SUPA_KEY
+            },
+            body: JSON.stringify({
+              action: 'create',
+              name: nome,
+              whatsapp: phone,
+              email: email,
+              empresa: empresa,
+              cargo: cargo,
+              label: 'CHAT1',
+              labelColor: 'blue',
+              leadId: leadId,
+              utmData: tracking
+            })
+          }).then(function(r) { return r.ok ? r.json() : null; });
         })
-      }).catch(function(e) { console.error('Lead save error:', e); });
+        .then(function(result) {
+          // 2) Update com faturamento/funcionarios (custom fields do deal)
+          if (!result || !result.success || !result.deal_id) return;
+          return fetch(SUPA_URL + '/functions/v1/create-pipedrive-lead', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + SUPA_KEY
+            },
+            body: JSON.stringify({
+              action: 'update',
+              person_id: result.person_id,
+              org_id: result.org_id,
+              deal_id: result.deal_id,
+              faturamento: faturamento,
+              funcionarios: funcionarios,
+              cargo: cargo,
+              utmData: tracking
+            })
+          });
+        })
+        .catch(function(err) { console.error('Pipedrive flow error:', err); });
 
-      // Send to Make webhook
-      var webhookPayload = {
-        name: nome, email: email, phone: phone,
-        role: role, segment: segment, company: company,
-        revenue: revenue, employees: employees, priority: priority,
-        utm_source: tracking.utm_source || null, utm_medium: tracking.utm_medium || null,
-        utm_campaign: tracking.utm_campaign || null, utm_content: tracking.utm_content || null,
-        utm_term: tracking.utm_term || null, gclid: tracking.gclid || null,
-        gbraid: tracking.gbraid || null, wbraid: tracking.wbraid || null,
-        gad_campaignid: tracking.gad_campaignid || null, gad_source: tracking.gad_source || null,
-        fbclid: tracking.fbclid || null, fbc: tracking.fbc || null, fbp: tracking.fbp || null,
-        ttclid: tracking.ttclid || null, msclkid: tracking.msclkid || null,
-        li_fat_id: tracking.li_fat_id || null, twclid: tracking.twclid || null, sck: tracking.sck || null,
-        landing_page: tracking.landing_page || null, referrer: tracking.referrer || null,
-        user_agent: tracking.user_agent || null, first_visit: tracking.first_visit || null,
-        session_id: tracking.session_id || null,
-        session_attributes_encoded: tracking.session_attributes_encoded || null,
-        origin_page: tracking.originPage || null, ref: tracking.ref || null,
-        submitted_at: new Date().toISOString()
-      };
+      var webhookPayload = Object.assign({}, leadPayload, { submitted_at: new Date().toISOString() });
       fetch('https://hook.us1.make.com/eiai1i9kp58yd5qvqxqlzw8f18amps62', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(webhookPayload)
       }).catch(function(e) { console.error('Webhook error:', e); });
 
-      // Redirect to thank you page
       setTimeout(function() {
         window.location.href = '/obrigado';
       }, 1200);

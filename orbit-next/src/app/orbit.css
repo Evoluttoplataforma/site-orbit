@@ -3357,13 +3357,84 @@ ul { list-style: none; }
 .lead-form input::placeholder {
   color: var(--gray-600);
 }
-.lead-form .btn-submit {
+.lead-form .btn-submit,
+.lead-form .btn-next {
   width: 100%;
   justify-content: center;
   margin-top: 8px;
   padding: 14px;
   font-size: 15px;
 }
+.lead-form .form-step[hidden] { display: none; }
+.lead-form .form-step-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+.lead-form .form-step-actions .btn-submit { margin-top: 0; flex: 1; }
+.lead-form .btn-back {
+  background: transparent;
+  border: 1px solid rgba(139,148,158,0.24);
+  color: var(--gray-400);
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+.lead-form .btn-back:hover {
+  border-color: rgba(255,186,26,0.4);
+  color: var(--white);
+}
+.form-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.form-progress__step {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--black-soft);
+  border: 1px solid rgba(139,148,158,0.2);
+  color: var(--gray-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  transition: var(--transition-fast);
+}
+.form-progress__step--active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--black);
+}
+.form-progress__step--done {
+  background: rgba(255,186,26,0.15);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+.form-progress__bar {
+  flex: 1;
+  height: 2px;
+  background: rgba(139,148,158,0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+.form-progress__bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.form-progress--step2 .form-progress__bar::after { transform: scaleX(1); }
 
 .form-error {
   background: rgba(239,68,68,0.1);

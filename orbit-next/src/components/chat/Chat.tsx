@@ -146,7 +146,8 @@ export default function Chat() {
           empresa: data.empresa,
           oqueFaz: data.oqueFaz,
           cargo: data.cargo,
-          label: 598, // CANAL ORBIT
+          label: 'CHAT1',
+          labelColor: 'blue',
           leadId: leadIdRef.current,
           utmData: getUtmData(),
         },
