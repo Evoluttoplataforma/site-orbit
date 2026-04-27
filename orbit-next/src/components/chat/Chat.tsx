@@ -14,11 +14,17 @@ import TypingIndicator from './TypingIndicator';
 type StepType =
   | 'welcome' | 'name' | 'whatsapp' | 'email' | 'empresa'
   | 'oqueFaz' | 'cargo' | 'softwareGestaoConfirm' | 'softwareGestao'
-  | 'faturamento' | 'funcionarios' | 'prioridade' | 'calendar' | 'confirmation';
+  | 'faturamento' | 'faturamentoConsultor' | 'clientesAtivosConsultor'
+  | 'funcionarios' | 'prioridade'
+  | 'budget_validation' | 'farewell'
+  | 'calendar' | 'confirmation';
 
 const STEPS: StepType[] = [
   'welcome','name','whatsapp','email','empresa','oqueFaz','cargo',
-  'softwareGestaoConfirm','softwareGestao','faturamento','funcionarios','prioridade','calendar','confirmation',
+  'softwareGestaoConfirm','softwareGestao',
+  'faturamento','faturamentoConsultor','clientesAtivosConsultor',
+  'funcionarios','prioridade','budget_validation','farewell',
+  'calendar','confirmation',
 ];
 
 const FATURAMENTO_OPTIONS = [
@@ -27,8 +33,27 @@ const FATURAMENTO_OPTIONS = [
   'R$ 500 mil - R$ 1 milhão/mês',
   'Acima de R$ 1 milhão/mês',
 ];
+const FATURAMENTO_CONSULTOR_OPTIONS = [
+  'Até R$ 30 mil/mês',
+  'R$ 30 mil - R$ 100 mil/mês',
+  'R$ 100 mil - R$ 500 mil/mês',
+  'R$ 500 mil - R$ 1 milhão/mês',
+  'Acima de R$ 1 milhão/mês',
+];
+const CLIENTES_ATIVOS_OPTIONS = [
+  'Ainda não tenho clientes ativos',
+  '1 a 3 clientes',
+  '4 a 8 clientes',
+  '9 a 15 clientes',
+  '16 a 30 clientes',
+  'Mais de 30 clientes',
+];
 const FUNCIONARIOS_OPTIONS = [
   '1-5 funcionários','6-20 funcionários','21-50 funcionários','51-100 funcionários','Mais de 100 funcionários',
+];
+const BUDGET_VALIDATION_OPTIONS = [
+  'Sim, quero participar',
+  'Quero testar o Orbit',
 ];
 const SEGMENTO_OPTIONS = ['Consultoria','Indústria','Serviços','Comércio / Varejo','Governo','Outro'];
 const CARGO_OPTIONS = ['CEO / Diretor','Funcionário','Responsável pela Qualidade','Consultor','Outro'];
@@ -176,6 +201,24 @@ export default function Chat() {
     } catch (err) {
       console.error('[Chat] Pipedrive update failed:', err);
     }
+  };
+
+  // Adiciona label adicional no deal (DESQUALIFICADO ORBIT, CLICOU TESTE, etc.)
+  const addPipedriveLabel = (label_name: string, label_color: string) => {
+    const deal_id = pipedriveIdsRef.current.deal_id;
+    if (!deal_id) return;
+    supabaseMkt.functions.invoke('create-pipedrive-lead', {
+      body: { action: 'add_label', deal_id, label_name, label_color },
+    }).catch((err) => console.error(`[Chat] Failed to add label ${label_name}:`, err));
+  };
+
+  // Atribui owner direto (Gabriel) para desqualificados
+  const assignGabrielDireto = () => {
+    const deal_id = pipedriveIdsRef.current.deal_id;
+    if (!deal_id) return;
+    supabaseMkt.functions.invoke('assign-pipedrive-owner', {
+      body: { deal_id, flow: 'gabriel_direto' },
+    }).catch((err) => console.error('[Chat] Failed to assign Gabriel:', err));
   };
 
   // Sync Make + ManyChat
@@ -339,8 +382,13 @@ export default function Chat() {
         setLeadData((p) => ({ ...p, cargo: value }));
         updateLead(updated);
         updatePipedriveDeal({ cargo: value });
+        const isConsultorCargo =
+          leadData.oqueFaz.toLowerCase().includes('consultoria') ||
+          value.toLowerCase().includes('consultor');
         if (value.toLowerCase().includes('qualidade')) {
           setTimeout(() => { addBotMessage('Você utiliza algum software de gestão?'); setCurrentStep('softwareGestaoConfirm'); }, 400);
+        } else if (isConsultorCargo) {
+          setTimeout(() => { addBotMessage('Qual o faturamento mensal da sua consultoria?'); setCurrentStep('faturamentoConsultor'); }, 400);
         } else {
           setTimeout(() => { addBotMessage('Qual o faturamento mensal da empresa?'); setCurrentStep('faturamento'); }, 400);
         }
@@ -378,7 +426,53 @@ export default function Chat() {
         setLeadData((p) => ({ ...p, funcionarios: value }));
         updateLead(updated);
         updatePipedriveDeal({ funcionarios: value });
-        setTimeout(() => { addBotMessage('Qual a prioridade para você implementar um sistema de gestão?'); setCurrentStep('prioridade'); }, 400);
+        const fatB2b = leadData.faturamento.toLowerCase();
+        const isConsultorFunc =
+          leadData.oqueFaz.toLowerCase().includes('consultoria') ||
+          leadData.cargo.toLowerCase().includes('consultor');
+        const isLowRevenueB2b = fatB2b.includes('até') && fatB2b.includes('100 mil');
+        const isLowHeadcount = value.toLowerCase().includes('1-5') || value.toLowerCase().includes('1 a 5');
+        const isB2bDesqualificado = !isConsultorFunc && isLowRevenueB2b && isLowHeadcount;
+        if (isB2bDesqualificado) {
+          addPipedriveLabel('DESQUALIFICADO ORBIT', 'red');
+          assignGabrielDireto();
+          setTimeout(() => {
+            addBotMessage(
+              `${leadData.nome}, importante: o investimento inicial do Orbit é a partir de R$ 1.200/mês. Considerando seu momento atual, gostaria de participar de uma demonstração em grupo para conhecer melhor a plataforma?`,
+            );
+            setCurrentStep('budget_validation');
+          }, 400);
+        } else {
+          setTimeout(() => { addBotMessage('Qual a prioridade para você implementar um sistema de gestão?'); setCurrentStep('prioridade'); }, 400);
+        }
+        break;
+      }
+      case 'faturamentoConsultor': {
+        const updated = { ...leadData, faturamento: value };
+        setLeadData((p) => ({ ...p, faturamento: value }));
+        updateLead(updated);
+        updatePipedriveDeal({ faturamento: value });
+        const lower = value.toLowerCase();
+        const isDesq = lower.includes('até') && lower.includes('30 mil');
+        if (isDesq) {
+          addPipedriveLabel('DESQUALIFICADO ORBIT', 'red');
+          assignGabrielDireto();
+        }
+        setTimeout(() => {
+          addBotMessage('Quantos clientes ativos você atende simultaneamente?');
+          setCurrentStep('clientesAtivosConsultor');
+        }, 400);
+        break;
+      }
+      case 'clientesAtivosConsultor': {
+        const updated = { ...leadData, funcionarios: value };
+        setLeadData((p) => ({ ...p, funcionarios: value }));
+        updateLead(updated);
+        updatePipedriveDeal({ funcionarios: value });
+        setTimeout(() => {
+          addBotMessage('Qual a prioridade para você agregar tecnologia ao seu portfólio?');
+          setCurrentStep('prioridade');
+        }, 400);
         break;
       }
       case 'prioridade': {
@@ -386,10 +480,39 @@ export default function Chat() {
         setLeadData((p) => ({ ...p, prioridade: value }));
         updateLead(updated);
         updatePipedriveDeal({ prioridade: value });
-        setTimeout(() => {
-          addBotMessage('Perfeito! Agora escolha o melhor dia e horário para a sua demonstração gratuita com nosso time:');
-          setCurrentStep('calendar');
-        }, 400);
+        const fat = leadData.faturamento.toLowerCase();
+        const isConsultorPrior =
+          leadData.oqueFaz.toLowerCase().includes('consultoria') ||
+          leadData.cargo.toLowerCase().includes('consultor');
+        const isDesqConsultor = isConsultorPrior && fat.includes('até') && fat.includes('30 mil');
+        if (isDesqConsultor) {
+          setTimeout(() => {
+            addBotMessage(
+              `${leadData.nome}, importante: o investimento mínimo para se tornar um canal Orbit é de R$ 1.800/mês. Considerando seu momento atual, gostaria de participar de uma demonstração em grupo para conhecer melhor a plataforma?`,
+            );
+            setCurrentStep('budget_validation');
+          }, 400);
+        } else {
+          setTimeout(() => {
+            addBotMessage('Perfeito! Agora escolha o melhor dia e horário para a sua demonstração gratuita com nosso time:');
+            setCurrentStep('calendar');
+          }, 400);
+        }
+        break;
+      }
+      case 'budget_validation': {
+        if (value === 'Sim, quero participar') {
+          setTimeout(() => {
+            addBotMessage('Ótimo! Vamos agendar sua demonstração em grupo. Escolha o melhor dia e horário:');
+            setCurrentStep('calendar');
+          }, 400);
+        } else {
+          addPipedriveLabel('CLICOU TESTE', 'yellow');
+          setTimeout(() => {
+            addBotMessage(`${leadData.nome}, ótima escolha! 🚀 Você pode começar a testar o Orbit agora mesmo — qualquer dúvida, estamos aqui! Boa jornada! 💪`);
+            setCurrentStep('farewell');
+          }, 400);
+        }
         break;
       }
     }
@@ -513,6 +636,10 @@ export default function Chat() {
         return <ChatOptions options={CARGO_OPTIONS} onSelect={(v) => v === 'Outro' ? setShowOutroCargo(true) : handleAnswer('cargo', v)} />;
       case 'faturamento':
         return <ChatOptions options={FATURAMENTO_OPTIONS} onSelect={(v) => handleAnswer('faturamento', v)} />;
+      case 'faturamentoConsultor':
+        return <ChatOptions options={FATURAMENTO_CONSULTOR_OPTIONS} onSelect={(v) => handleAnswer('faturamentoConsultor', v)} />;
+      case 'clientesAtivosConsultor':
+        return <ChatOptions options={CLIENTES_ATIVOS_OPTIONS} onSelect={(v) => handleAnswer('clientesAtivosConsultor', v)} />;
       case 'funcionarios':
         return <ChatOptions options={FUNCIONARIOS_OPTIONS} onSelect={(v) => handleAnswer('funcionarios', v)} />;
       case 'softwareGestaoConfirm':
@@ -521,6 +648,28 @@ export default function Chat() {
         return <ChatInput label="SOFTWARE DE GESTÃO" placeholder="Ex: Totvs, SAP..." onSubmit={(v) => handleAnswer('softwareGestao', v)} />;
       case 'prioridade':
         return <ChatOptions options={PRIORIDADE_OPTIONS} onSelect={(v) => handleAnswer('prioridade', v)} />;
+      case 'budget_validation':
+        return <ChatOptions options={BUDGET_VALIDATION_OPTIONS} onSelect={(v) => handleAnswer('budget_validation', v)} />;
+      case 'farewell':
+        return (
+          <a
+            href="https://app.orbitgestao.com.br/register"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-block',
+              background: '#ffba1a',
+              color: '#0d1117',
+              padding: '14px 28px',
+              borderRadius: '12px',
+              fontSize: '15px',
+              fontWeight: 700,
+              textDecoration: 'none',
+            }}
+          >
+            🚀 Acessar o Orbit
+          </a>
+        );
       default:
         return null;
     }

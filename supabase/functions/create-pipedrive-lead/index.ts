@@ -1385,6 +1385,20 @@ serve(async (req) => {
       });
     }
 
+    // ACTION: ADD_LABEL — apply a label to existing deal by name (creates if missing)
+    if (action === 'add_label') {
+      const { deal_id, label_name, label_color } = payload;
+      if (!deal_id || !label_name) {
+        return new Response(JSON.stringify({ success: false, error: 'deal_id and label_name are required' }), {
+          status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+      await setDealLabel(PIPEDRIVE_API_TOKEN, deal_id, label_name, label_color || 'blue');
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
     throw new Error(`Unknown action: ${action}`);
 
   } catch (error: unknown) {
