@@ -1463,11 +1463,11 @@ export const pageHTML = `
                 <div class="footer-column">
                     <h5 data-i18n="footer.solutions">Soluções</h5>
                     <ul>
-                        <li><a href="/processos">Processos</a></li>
-                        <li><a href="/indicadores">Indicadores</a></li>
-                        <li><a href="/tarefas">Tarefas</a></li>
-                        <li><a href="/competencias">Competências</a></li>
-                        <li><a href="/auditorias">Auditorias</a></li>
+                        <li>Processos</li>
+                        <li>Indicadores</li>
+                        <li>Tarefas</li>
+                        <li>Competências</li>
+                        <li>Auditorias</li>
                     </ul>
                 </div>
 

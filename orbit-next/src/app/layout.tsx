@@ -81,14 +81,7 @@ export default function RootLayout({
             "Planejamento estratégico",
             "Gestão de pessoas",
             "Auditorias e conformidade"
-          ],
-          "offers": {
-            "@type": "AggregateOffer",
-            "priceCurrency": "BRL",
-            "lowPrice": "1200",
-            "highPrice": "4500",
-            "offerCount": "3"
-          }
+          ]
         }) }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
