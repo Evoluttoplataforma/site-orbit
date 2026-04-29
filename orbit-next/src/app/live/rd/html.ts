@@ -1047,6 +1047,21 @@ export const pageHTML = `
             renderCalendar();
         });
 
+        function hasFutureEventDay(year, month) {
+            var todayD = new Date();
+            todayD.setHours(0,0,0,0);
+            var daysInMonth = new Date(year, month + 1, 0).getDate();
+            for (var d = 1; d <= daysInMonth; d++) {
+                var date = new Date(year, month, d);
+                if (eventDays.indexOf(date.getDay()) !== -1 && date >= todayD && date >= startDate) return true;
+            }
+            return false;
+        }
+        for (var __i = 0; __i < 12 && !hasFutureEventDay(currentYear, currentMonth); __i++) {
+            currentMonth++;
+            if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+        }
+
         loadSpots();
     })();
     </script>
