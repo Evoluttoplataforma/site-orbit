@@ -800,9 +800,7 @@ serve(async (req) => {
         const isLowRevenue = (faturamento || '').toLowerCase().includes('até') && (faturamento || '').toLowerCase().includes('100 mil');
         let leadType = 'Grande';
         let salaName = 'Orbit Grande';
-        // FIXME: a colagem do código original truncou esta URL. Confirme o link real
-        // da sala "Orbit Grande" no Dashboard antes de Deploy.
-        let salaLink = 'https://meet.google.com/ycz-dosc';
+        let salaLink = 'https://meet.google.com/ycz-dosc-znk';
         if (isConsultor) {
           leadType = 'Consultor';
           salaName = 'Orbit Consultor';
