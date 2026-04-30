@@ -236,6 +236,42 @@ export default function ChatPopup() {
       console.warn('Pipedrive create from popup failed:', err);
     }
 
+    // GTM: dispara form_submit_success com dados do lead + tracking
+    try {
+      const w = window as Window & { dataLayer?: Record<string, unknown>[] };
+      w.dataLayer = w.dataLayer || [];
+      w.dataLayer.push({
+        event: 'form_submit_success',
+        form_id: 'chat_popup',
+        form_mode: mode,
+        lead_id: leadId,
+        lead_name: name.trim(),
+        lead_email: email.trim().toLowerCase(),
+        lead_whatsapp: normalizedPhone,
+        company: company.trim(),
+        utm_source: utmData.utm_source || null,
+        utm_medium: utmData.utm_medium || null,
+        utm_campaign: utmData.utm_campaign || null,
+        utm_content: utmData.utm_content || null,
+        utm_term: utmData.utm_term || null,
+        gclid: utmData.gclid || null,
+        gbraid: utmData.gbraid || null,
+        wbraid: utmData.wbraid || null,
+        fbclid: utmData.fbclid || null,
+        fbc: utmData.fbc || null,
+        fbp: utmData.fbp || null,
+        ttclid: utmData.ttclid || null,
+        msclkid: utmData.msclkid || null,
+        li_fat_id: utmData.li_fat_id || null,
+        sck: utmData.sck || null,
+        landing_page: utmData.landing_page || null,
+        origin_page: utmData.origin_page || utmData.originPage || null,
+        referrer: utmData.referrer || null,
+      });
+    } catch (err) {
+      console.warn('[ChatPopup] dataLayer push failed:', err);
+    }
+
     // Modo chat: salva LP data pra continuar na rota /chat
     if (mode === 'chat') {
       try {
