@@ -388,12 +388,13 @@ export default function ChatPopup() {
         </div>
 
         {/* Form */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+        <div id="lead-form" style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
           {/* Nome */}
           <div>
             <div style={inputBox(focusedField === 'name', !!errors.name)}>
               <input
                 type="text"
+                name="name"
                 value={name}
                 onChange={(e) => { setName(e.target.value); if (errors.name) setErrors({ ...errors, name: '' }); }}
                 onFocus={() => setFocusedField('name')}
@@ -411,6 +412,7 @@ export default function ChatPopup() {
             <div style={inputBox(focusedField === 'email', !!errors.email)}>
               <input
                 type="email"
+                name="email"
                 value={email}
                 onChange={(e) => { setEmail(e.target.value); if (errors.email) setErrors({ ...errors, email: '' }); }}
                 onFocus={() => setFocusedField('email')}
@@ -499,6 +501,8 @@ export default function ChatPopup() {
                 <input
                   type="tel"
                   inputMode="numeric"
+                  name="phone"
+                  data-gtm="phone"
                   value={phone}
                   onChange={(e) => { handlePhoneChange(e.target.value); if (errors.phone) setErrors({ ...errors, phone: '' }); }}
                   onFocus={() => setFocusedField('phone')}
