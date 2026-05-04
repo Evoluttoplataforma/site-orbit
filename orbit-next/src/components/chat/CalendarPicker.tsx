@@ -5,6 +5,7 @@ import { supabaseMkt } from '@/lib/supabase-mkt';
 
 interface CalendarPickerProps {
   onSelect: (date: string, time: string) => void;
+  onRequestExecutive?: () => void;
 }
 
 const WEEKDAYS = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
@@ -41,7 +42,7 @@ function getScarcityBorder(remaining: number) {
   return '';
 }
 
-export default function CalendarPicker({ onSelect }: CalendarPickerProps) {
+export default function CalendarPicker({ onSelect, onRequestExecutive }: CalendarPickerProps) {
   const today = new Date();
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
@@ -379,6 +380,31 @@ export default function CalendarPicker({ onSelect }: CalendarPickerProps) {
           <Loader2 className="w-8 h-8 text-primary animate-spin" />
           <p className="text-sm font-medium text-foreground">Agendando sua demonstração...</p>
           <p className="text-xs text-muted-foreground">Só um instante, estamos confirmando tudo para você!</p>
+        </div>
+      )}
+
+      {onRequestExecutive && !isSubmitting && (
+        <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '4px' }}>
+          <button
+            type="button"
+            onClick={onRequestExecutive}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              color: T.textMuted,
+              fontSize: '13px',
+              fontFamily: 'inherit',
+              cursor: 'pointer',
+              padding: '8px 12px',
+              textDecoration: 'underline',
+              textUnderlineOffset: '3px',
+              transition: 'color 0.15s',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = T.primary; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = T.textMuted; }}
+          >
+            Não encontrou uma data? Fale com o executivo agora 💼
+          </button>
         </div>
       )}
     </div>

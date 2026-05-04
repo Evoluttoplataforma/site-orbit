@@ -9,25 +9,98 @@ const corsHeaders = {
 const BASE_URL = 'https://api.pipedrive.com/v1';
 const BASE_URL_V2 = 'https://api.pipedrive.com/api/v2';
 
-async function pipedriveFetch(endpoint: string, method: string, token: string, body?: unknown, baseUrl: string = BASE_URL) {
+async function pipedriveFetch(
+  endpoint: string,
+  method: string,
+  token: string,
+  body?: unknown,
+  baseUrl: string = BASE_URL,
+  retries = 3,
+): Promise<any> {
   const url = `${baseUrl}${endpoint}${endpoint.includes('?') ? '&' : '?'}api_token=${token}`;
-  const res = await fetch(url, {
-    method,
-    headers: { 'Content-Type': 'application/json' },
-    ...(body ? { body: JSON.stringify(body) } : {}),
-  });
-  const data = await res.json();
-  // v2 endpoints don't return a `success` flag — only check HTTP status
-  const isV2 = baseUrl === BASE_URL_V2;
-  if (!res.ok || (!isV2 && !data.success)) {
-    throw new Error(`Pipedrive ${endpoint} failed: ${JSON.stringify(data)}`);
+  for (let attempt = 0; attempt < retries; attempt++) {
+    const res = await fetch(url, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      ...(body ? { body: JSON.stringify(body) } : {}),
+    });
+
+    if (res.status === 429) {
+      const waitSec = Math.min(2 ** (attempt + 1), 10);
+      console.warn(`[Pipedrive] Rate limited on ${endpoint}, waiting ${waitSec}s (attempt ${attempt + 1}/${retries})`);
+      await new Promise(r => setTimeout(r, waitSec * 1000));
+      continue;
+    }
+
+    const text = await res.text();
+    let data: any;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      throw new Error(`Pipedrive ${endpoint} returned non-JSON (${res.status}): ${text.slice(0, 200)}`);
+    }
+
+    if (!res.ok || !data.success) {
+      // If the deal was deleted, return a soft error instead of crashing
+      if (data.code === "ERR_DEAL_DELETED" || data.code === "ERR_FORBIDDEN" && String(data.error).includes("deleted")) {
+        console.warn(`[Pipedrive] Deal deleted on ${endpoint}, skipping: ${data.error}`);
+        return { success: false, deleted: true, data: null };
+      }
+      throw new Error(`Pipedrive ${endpoint} failed: ${JSON.stringify(data)}`);
+    }
+    return data;
   }
-  return data;
+  throw new Error(`Pipedrive ${endpoint} failed after ${retries} retries (rate limited)`);
+}
+
+function normalizeLabelIds(value: unknown): number[] {
+  if (Array.isArray(value)) {
+    return value
+      .map((item) => Number(item))
+      .filter((item) => Number.isFinite(item));
+  }
+
+  if (typeof value === 'string') {
+    return value
+      .split(',')
+      .map((item) => Number(item.trim()))
+      .filter((item) => Number.isFinite(item));
+  }
+
+  return [];
+}
+
+function isConsultorLead(oqueFaz?: string, cargo?: string): boolean {
+  return (oqueFaz || '').toLowerCase().includes('consultoria') || (cargo || '').toLowerCase().includes('consultor');
+}
+
+function resolveDealLabel(oqueFaz?: string, cargo?: string): 'CANAL ORBIT' | 'ORBIT B2B' {
+  return isConsultorLead(oqueFaz, cargo) ? 'CANAL ORBIT' : 'ORBIT B2B';
+}
+
+// Map origin_page path to a niche label name
+function resolveNicheLabel(originPage?: string): string | null {
+  if (!originPage) return null;
+  const path = originPage.toLowerCase().replace(/^\//, '');
+  const nicheMap: Record<string, string> = {
+    'consultoria': 'CONSULTORIA',
+    'agencia': 'AGÊNCIA',
+    'contabilidade': 'CONTABILIDADE',
+    'contador': 'CONTABILIDADE',
+    'clinicas': 'CLÍNICAS',
+    'imobiliaria': 'IMOBILIÁRIA',
+    'engenharia': 'ENGENHARIA',
+    'advocacia': 'ADVOCACIA',
+    'franquias': 'FRANQUIAS',
+    'ecommerce': 'E-COMMERCE',
+    'educacao': 'EDUCAÇÃO',
+  };
+  return nicheMap[path] || null;
 }
 
 async function findPipelineByName(token: string, name: string) {
   const data = await pipedriveFetch('/pipelines', 'GET', token);
-  const pipeline = data.data?.find((p: { name: string }) =>
+  const pipeline = data.data?.find((p: { name: string }) => 
     p.name.toLowerCase() === name.toLowerCase()
   );
   return pipeline || null;
@@ -44,7 +117,7 @@ async function getFirstStage(token: string, pipelineId: number) {
 
 async function ensureCustomField(token: string, entity: 'dealFields' | 'personFields', fieldName: string, fieldType: string) {
   const data = await pipedriveFetch(`/${entity}`, 'GET', token);
-  const existing = data.data?.find((f: { name: string }) =>
+  const existing = data.data?.find((f: { name: string }) => 
     f.name.toLowerCase() === fieldName.toLowerCase()
   );
   if (existing) return existing.key;
@@ -56,148 +129,98 @@ async function ensureCustomField(token: string, entity: 'dealFields' | 'personFi
   return created.data.key;
 }
 
-// ============================================================
-// Pipedrive label management (v2 API — PATCH label_ids array)
-// Auto-cria etiquetas, merge com existentes, exclusão mútua de canal
-// ============================================================
+// Find the deal label field and get/create a label option by name, then return its ID
+async function ensureDealLabel(token: string, labelName: string, color?: string): Promise<number> {
+  const fieldsData = await pipedriveFetch('/dealFields', 'GET', token);
+  const labelField = fieldsData.data?.find((f: { key: string }) => f.key === 'label');
+  if (!labelField) throw new Error('Label field not found in dealFields');
+  
+  const existingOption = labelField.options?.find((o: { label: string }) =>
+    o.label.toLowerCase() === labelName.toLowerCase()
+  );
+  if (existingOption) return existingOption.id;
+
+  // Create the label option by updating the label field with the new option added
+  const currentOptions = (labelField.options || []).map((o: { id: number; label: string; color?: string }) => ({
+    id: o.id,
+    label: o.label,
+    ...(o.color ? { color: o.color } : {}),
+  }));
+  currentOptions.push({ label: labelName, ...(color ? { color } : {}) } as any);
+
+  const updated = await pipedriveFetch(`/dealFields/${labelField.id}`, 'PUT', token, {
+    options: currentOptions,
+  });
+  const newOption = updated.data?.options?.find((o: { label: string }) =>
+    o.label.toLowerCase() === labelName.toLowerCase()
+  );
+  if (!newOption) throw new Error(`Failed to create label "${labelName}"`);
+  return newOption.id;
+}
+
+async function getValidLabelIds(token: string): Promise<Set<number>> {
+  const fieldsData = await pipedriveFetch('/dealFields', 'GET', token);
+  const labelField = fieldsData.data?.find((f: { key: string }) => f.key === 'label');
+  if (!labelField?.options) return new Set();
+  return new Set(labelField.options.map((o: { id: number }) => o.id));
+}
+
+// Mutually exclusive canal labels — setting one should remove the other
 const CANAL_LABELS = ['CANAL ORBIT', 'ORBIT B2B'];
 
-function isConsultorLead(oqueFaz?: string, cargo?: string): boolean {
-  return (oqueFaz || '').toLowerCase().includes('consultoria')
-    || (cargo || '').toLowerCase().includes('consultor');
-}
+async function setDealLabel(token: string, dealId: number, labelName: string, color?: string) {
+  const labelId = await ensureDealLabel(token, labelName, color);
+  const currentDeal = await pipedriveFetch(`/deals/${dealId}`, 'GET', token, undefined, BASE_URL_V2);
+  if (currentDeal.deleted) {
+    console.warn(`[Label] Deal ${dealId} is deleted, skipping label "${labelName}"`);
+    return;
+  }
+  const currentLabelIds = normalizeLabelIds(currentDeal.data?.label_ids);
+  
+  // Filter out any invalid/deleted label IDs before merging
+  const validIds = await getValidLabelIds(token);
+  let cleanCurrentIds = currentLabelIds.filter(id => validIds.has(id));
 
-function resolveCanalLabel(oqueFaz?: string, cargo?: string): 'CANAL ORBIT' | 'ORBIT B2B' {
-  return isConsultorLead(oqueFaz, cargo) ? 'CANAL ORBIT' : 'ORBIT B2B';
-}
-
-function resolveNicheLabel(originPage?: string): string | null {
-  if (!originPage) return null;
-  const path = originPage.toLowerCase().replace(/^\//, '').split('/')[0];
-  const map: Record<string, string> = {
-    consultoria: 'CONSULTORIA',
-    agencia: 'AGÊNCIA',
-    contabilidade: 'CONTABILIDADE',
-    contador: 'CONTABILIDADE',
-    clinicas: 'CLÍNICAS',
-    imobiliaria: 'IMOBILIÁRIA',
-    engenharia: 'ENGENHARIA',
-    advocacia: 'ADVOCACIA',
-    franquias: 'FRANQUIAS',
-    ecommerce: 'E-COMMERCE',
-    educacao: 'EDUCAÇÃO',
-  };
-  return map[path] || null;
-}
-
-async function applyAutoLabels(
-  token: string,
-  dealId: number,
-  oqueFaz?: string,
-  cargo?: string,
-  originPage?: string,
-) {
-  // Niche label (path-based) tem prioridade — se houver, ignora canal
-  const niche = resolveNicheLabel(originPage);
-  if (niche) {
-    try {
-      await setDealLabel(token, dealId, niche, 'blue');
-      console.log(`[applyAutoLabels] niche="${niche}" applied`);
-      return;
-    } catch (e) {
-      console.error('[applyAutoLabels] niche failed:', e);
+  // If the new label is a canal label, remove the other canal label to avoid duplicates
+  if (CANAL_LABELS.includes(labelName.toUpperCase()) || CANAL_LABELS.includes(labelName)) {
+    const otherCanalName = CANAL_LABELS.find(l => l !== labelName);
+    if (otherCanalName) {
+      try {
+        const otherCanalId = await ensureDealLabel(token, otherCanalName);
+        cleanCurrentIds = cleanCurrentIds.filter(id => id !== otherCanalId);
+        console.log(`[Label] Removing mutually exclusive label "${otherCanalName}" (${otherCanalId}) from deal ${dealId}`);
+      } catch (_) {
+        // Other canal label doesn't exist yet, nothing to remove
+      }
     }
   }
-  if (oqueFaz || cargo) {
-    const canal = resolveCanalLabel(oqueFaz, cargo);
+
+  const mergedLabelIds = Array.from(new Set([...cleanCurrentIds, labelId]));
+
+  console.log(`[Label] Deal ${dealId}: current=${JSON.stringify(currentLabelIds)} clean=${JSON.stringify(cleanCurrentIds)} merged=${JSON.stringify(mergedLabelIds)} adding="${labelName}" (${labelId})`);
+
+  if (cleanCurrentIds.includes(labelId) && cleanCurrentIds.length === mergedLabelIds.length) {
+    console.log(`[Label] Deal ${dealId} already has "${labelName}"`);
+    return;
+  }
+
+  try {
+    await pipedriveFetch(`/deals/${dealId}`, 'PATCH', token, {
+      label_ids: mergedLabelIds,
+    }, BASE_URL_V2);
+    console.log(`[Label] Deal ${dealId} labels updated: ${JSON.stringify(mergedLabelIds)}`);
+  } catch (err) {
+    console.error(`[Label] Failed to set merged labels on deal ${dealId}:`, err);
+    // Fallback: try with just the new label alone
     try {
-      await setDealLabel(token, dealId, canal);
-      console.log(`[applyAutoLabels] canal="${canal}" applied`);
-    } catch (e) {
-      console.error('[applyAutoLabels] canal failed:', e);
+      await pipedriveFetch(`/deals/${dealId}`, 'PATCH', token, {
+        label_ids: [labelId],
+      }, BASE_URL_V2);
+      console.log(`[Label] Fallback: set only "${labelName}" on deal ${dealId}`);
+    } catch (err2) {
+      console.error(`[Label] Fallback also failed for deal ${dealId}:`, err2);
     }
-  } else {
-    console.log('[applyAutoLabels] sem oqueFaz/cargo/origin_page — pulando canal/niche');
   }
-}
-
-function normalizeLabelIds(value: unknown): number[] {
-  if (Array.isArray(value)) return value.map(Number).filter(Number.isFinite);
-  if (typeof value === 'string') return value.split(',').map(s => Number(s.trim())).filter(Number.isFinite);
-  if (typeof value === 'number' && Number.isFinite(value)) return [value];
-  return [];
-}
-
-async function getDealLabelField(token: string): Promise<{ id: number; options: Array<{ id: number; label: string; color?: string }> }> {
-  const data = await pipedriveFetch('/dealFields', 'GET', token);
-  const labelField = (data.data || []).find((f: { key: string }) => f.key === 'label');
-  if (!labelField) throw new Error('Pipedrive label field not found');
-  return { id: labelField.id, options: labelField.options || [] };
-}
-
-async function ensureDealLabelId(token: string, name: string, color = 'blue'): Promise<number> {
-  const field = await getDealLabelField(token);
-  const found = field.options.find(o => String(o.label).toLowerCase() === name.toLowerCase());
-  if (found) return found.id;
-  const newOptions = [...field.options, { label: name, color }];
-  const updated = await pipedriveFetch(`/dealFields/${field.id}`, 'PUT', token, { options: newOptions });
-  const created = (updated.data?.options || []).find((o: { label: string }) => String(o.label).toLowerCase() === name.toLowerCase());
-  if (!created) throw new Error(`Created label '${name}' not found in response`);
-  return created.id;
-}
-
-async function getDealLabelIds(token: string, dealId: number): Promise<number[]> {
-  // Use v2: returns label_ids as array reliably
-  const data = await pipedriveFetch(`/deals/${dealId}`, 'GET', token, undefined, BASE_URL_V2);
-  return normalizeLabelIds(data.data?.label_ids ?? data.data?.label);
-}
-
-/**
- * Aplica etiqueta a um deal preservando as existentes.
- * - Aceita nome (string) ou ID (number).
- * - Cria a etiqueta se não existir (quando passada por nome).
- * - Filtra IDs inválidos/deletados antes de merge.
- * - CANAL ORBIT / ORBIT B2B: mutuamente exclusivas.
- */
-async function setDealLabel(token: string, dealId: number, label: string | number, color = 'blue') {
-  console.log(`[setDealLabel] start dealId=${dealId} label=${JSON.stringify(label)}`);
-  const field = await getDealLabelField(token);
-  console.log(`[setDealLabel] dealField id=${field.id} options=${field.options.length}`);
-  const validIds = new Set(field.options.map(o => o.id));
-
-  let labelId: number;
-  let labelName: string;
-  if (typeof label === 'number' || (typeof label === 'string' && /^\d+$/.test(label))) {
-    labelId = Number(label);
-    labelName = field.options.find(o => o.id === labelId)?.label || '';
-    console.log(`[setDealLabel] resolved by ID: labelId=${labelId} labelName=${labelName}`);
-  } else {
-    labelName = String(label).trim();
-    labelId = await ensureDealLabelId(token, labelName, color);
-    validIds.add(labelId);
-    console.log(`[setDealLabel] resolved by name: labelId=${labelId} labelName=${labelName}`);
-  }
-
-  const currentIds = await getDealLabelIds(token, dealId);
-  console.log(`[setDealLabel] currentIds=${JSON.stringify(currentIds)}`);
-
-  let cleanIds = currentIds.filter(id => validIds.has(id));
-
-  if (labelName && CANAL_LABELS.some(l => l.toLowerCase() === labelName.toLowerCase())) {
-    const otherCanals = CANAL_LABELS.filter(l => l.toLowerCase() !== labelName.toLowerCase());
-    const otherIds = field.options
-      .filter(o => otherCanals.some(n => n.toLowerCase() === String(o.label).toLowerCase()))
-      .map(o => o.id);
-    cleanIds = cleanIds.filter(id => !otherIds.includes(id));
-    console.log(`[setDealLabel] removed canal otherIds=${JSON.stringify(otherIds)}`);
-  }
-
-  const mergedIds = Array.from(new Set([...cleanIds, labelId]));
-  console.log(`[setDealLabel] applying mergedIds=${JSON.stringify(mergedIds)} to deal ${dealId}`);
-
-  // Pipedrive v2 PATCH com label_ids array — v1 PUT { label: "..." } falha silenciosamente em contas multi-label
-  await pipedriveFetch(`/deals/${dealId}`, 'PATCH', token, { label_ids: mergedIds }, BASE_URL_V2);
-  console.log(`[setDealLabel] success: label_ids=${JSON.stringify(mergedIds)}`);
 }
 
 serve(async (req) => {
@@ -216,7 +239,7 @@ serve(async (req) => {
 
     // ACTION: CREATE — initial lead with basic info (name, email, whatsapp, empresa)
     if (action === 'create') {
-      const { name, whatsapp, email, empresa, oqueFaz, cargo, leadId, utmData, copyVariant, noteExtra, label } = payload;
+      const { name, whatsapp, email, empresa, oqueFaz, cargo, leadId, utmData, copyVariant } = payload;
 
       // IDEMPOTENCY: Check if person already exists by email to avoid duplicates
       const searchRes = await fetch(
@@ -272,7 +295,6 @@ serve(async (req) => {
           ...(orgId ? { org_id: orgId } : {}),
           pipeline_id: pipelineId,
           ...(stageId ? { stage_id: stageId } : {}),
-          // label aplicada via setDealLabel() após criação do deal
         };
         if (utmData) {
           if (utmData.utm_source) dealBody[utmSourceKey] = utmData.utm_source;
@@ -289,32 +311,43 @@ serve(async (req) => {
         const dealData = await pipedriveFetch('/deals', 'POST', PIPEDRIVE_API_TOKEN, dealBody);
         const dealId = dealData.data.id;
 
-        // Auto labels (niche por path OU canal por oqueFaz/cargo)
-        await applyAutoLabels(PIPEDRIVE_API_TOKEN, dealId, oqueFaz, cargo, utmData?.origin_page);
-
-        // Label explícita do payload (ex: CHAT1)
-        if (label) {
-          try {
-            await setDealLabel(PIPEDRIVE_API_TOKEN, dealId, label, payload.labelColor || 'blue');
-          } catch (e) {
-            console.error('[setDealLabel] Failed (existing person):', e);
-          }
-        }
-
         // Add initial note
+        const isConsultorExisting = isConsultorLead(oqueFaz, cargo);
         const noteLines = [
-          ...(noteExtra ? [String(noteExtra), ''] : []),
           `📋 Novo lead capturado (pessoa existente no Pipedrive)`,
           `👤 Nome: ${name}`,
           `📱 WhatsApp: ${whatsapp}`,
           `📧 E-mail: ${email}`,
           `🏢 Empresa: ${empresa || 'Não informado'}`,
+          ...(oqueFaz ? [`💼 Segmento: ${oqueFaz}`] : []),
+          ...(cargo ? [`🎯 Cargo: ${cargo}`] : []),
+          ...(isConsultorExisting ? [`🏷️ Tipo: Consultor`] : []),
         ];
         await pipedriveFetch('/notes', 'POST', PIPEDRIVE_API_TOKEN, {
           content: noteLines.join('\n'),
           deal_id: dealId,
           pinned_to_deal_flag: 0,
         });
+
+        // Apply niche label OR canal label (niche takes priority)
+        const nicheLabel = resolveNicheLabel(utmData?.origin_page);
+        if (nicheLabel) {
+          try {
+            await setDealLabel(PIPEDRIVE_API_TOKEN, dealId, nicheLabel, 'blue');
+            console.log(`[Create-Existing] Applied niche label "${nicheLabel}" — skipping canal label`);
+          } catch (e) {
+            console.error('[Create-Existing] Failed to set niche label:', e);
+          }
+        } else if (oqueFaz || cargo) {
+          const canalLabelExisting = resolveDealLabel(oqueFaz, cargo);
+          try {
+            await setDealLabel(PIPEDRIVE_API_TOKEN, dealId, canalLabelExisting);
+          } catch (e) {
+            console.error('[Create-Existing] Failed to set deal label:', e);
+          }
+        } else {
+          console.log('[Create-Existing] Skipping label — no niche or oqueFaz/cargo available');
+        }
 
         console.log('Created new deal for existing person:', { personId, orgId, dealId });
 
@@ -345,7 +378,7 @@ serve(async (req) => {
                 .order('created_at', { ascending: false })
                 .limit(1)
                 .maybeSingle();
-
+              
               if (existingLead) {
                 console.log('[Fallback-Existing] Found existing lead, updating:', existingLead.id);
                 await sb.from('leads').update({
@@ -407,9 +440,9 @@ serve(async (req) => {
           console.warn('[create-pipedrive-lead] ManyChat tag error:', e);
         }
 
-        return new Response(JSON.stringify({
-          success: true,
-          person_id: personId,
+        return new Response(JSON.stringify({ 
+          success: true, 
+          person_id: personId, 
           org_id: orgId,
           deal_id: dealId,
           deduplicated: true,
@@ -474,7 +507,6 @@ serve(async (req) => {
         org_id: orgId,
         pipeline_id: pipelineId,
         ...(stageId ? { stage_id: stageId } : {}),
-        // label aplicada via setDealLabel() após criação do deal
       };
       // Populate UTM custom fields on the deal
       if (utmData) {
@@ -492,18 +524,6 @@ serve(async (req) => {
       const dealData = await pipedriveFetch('/deals', 'POST', PIPEDRIVE_API_TOKEN, dealBody);
       const dealId = dealData.data.id;
 
-      // Auto labels (niche por path OU canal por oqueFaz/cargo)
-      await applyAutoLabels(PIPEDRIVE_API_TOKEN, dealId, oqueFaz, cargo, utmData?.origin_page);
-
-      // Label explícita do payload (ex: CHAT1)
-      if (label) {
-        try {
-          await setDealLabel(PIPEDRIVE_API_TOKEN, dealId, label, payload.labelColor || 'blue');
-        } catch (e) {
-          console.error('[setDealLabel] Failed (new person):', e);
-        }
-      }
-
       // Add initial note with UTM data
       const utmLines: string[] = [];
       if (utmData) {
@@ -517,13 +537,16 @@ serve(async (req) => {
         if (utmData.landing_page) utmLines.push(`🌐 LP: ${utmData.landing_page}`);
         if (utmData.origin_page) utmLines.push(`↩️ Origem: ${utmData.origin_page}`);
       }
+      const isConsultorNew = isConsultorLead(oqueFaz, cargo);
       const dealNote = [
-        ...(noteExtra ? [String(noteExtra), ''] : []),
         `📋 Lead parcial capturado`,
         `👤 Nome: ${name}`,
         `📱 WhatsApp: ${whatsapp}`,
         `📧 E-mail: ${email}`,
         `🏢 Empresa: ${empresa || 'Não informado'}`,
+        ...(oqueFaz ? [`💼 Segmento: ${oqueFaz}`] : []),
+        ...(cargo ? [`🎯 Cargo: ${cargo}`] : []),
+        ...(isConsultorNew ? [`🏷️ Tipo: Consultor`] : []),
         ...(utmLines.length > 0 ? ['', '--- Tracking ---', ...utmLines] : []),
       ].join('\n');
 
@@ -532,6 +555,26 @@ serve(async (req) => {
         deal_id: dealId,
         pinned_to_deal_flag: 0,
       });
+
+      // Apply niche label OR canal label (niche takes priority)
+      const nicheLabelNew = resolveNicheLabel(utmData?.origin_page);
+      if (nicheLabelNew) {
+        try {
+          await setDealLabel(PIPEDRIVE_API_TOKEN, dealId, nicheLabelNew, 'blue');
+          console.log(`[Create-New] Applied niche label "${nicheLabelNew}" — skipping canal label`);
+        } catch (e) {
+          console.error('[Create-New] Failed to set niche label:', e);
+        }
+      } else if (oqueFaz || cargo) {
+        const canalLabelNew = resolveDealLabel(oqueFaz, cargo);
+        try {
+          await setDealLabel(PIPEDRIVE_API_TOKEN, dealId, canalLabelNew);
+        } catch (e) {
+          console.error('[Create-New] Failed to set deal label:', e);
+        }
+      } else {
+        console.log('[Create-New] Skipping label — no niche or oqueFaz/cargo available');
+      }
 
       // Ensure lead exists in DB (fallback if client-side insert failed)
       {
@@ -561,7 +604,7 @@ serve(async (req) => {
               .order('created_at', { ascending: false })
               .limit(1)
               .maybeSingle();
-
+            
             if (existingLead) {
               console.log('[Fallback] Found existing lead, updating:', existingLead.id);
               await sb.from('leads').update({
@@ -601,7 +644,6 @@ serve(async (req) => {
             console.error('[Fallback] Exception inserting lead:', e);
           }
         }
-      }
 
       // Check if lead already completed before applying fallback tag
       try {
@@ -632,9 +674,9 @@ serve(async (req) => {
         console.warn('[create-pipedrive-lead] ManyChat tag error:', e);
       }
 
-      return new Response(JSON.stringify({
-        success: true,
-        person_id: personId,
+      return new Response(JSON.stringify({ 
+        success: true, 
+        person_id: personId, 
         org_id: orgId,
         deal_id: dealId,
         pipeline_id: pipelineId,
@@ -643,10 +685,96 @@ serve(async (req) => {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
+    }
 
     // ACTION: UPDATE — update existing deal/person with new data
     if (action === 'update') {
-      const { person_id, org_id, deal_id, oqueFaz, cargo, softwareGestao, faturamento, funcionarios, prioridade, date, time, utmData } = payload;
+      let { person_id, org_id, deal_id, oqueFaz: rawOqueFaz, cargo: rawCargo, softwareGestao, faturamento, funcionarios, prioridade, date, time, utmData } = payload;
+
+      // Fetch existing lead data from DB to merge with partial updates
+      let oqueFaz = rawOqueFaz;
+      let cargo = rawCargo;
+      if (deal_id && (!oqueFaz || !cargo)) {
+        try {
+          const supabaseUrlUpdate = Deno.env.get('SUPABASE_URL')!;
+          const supabaseKeyUpdate = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+          const sb = createClient(supabaseUrlUpdate, supabaseKeyUpdate);
+          const { data: existingLead } = await sb.from('leads')
+            .select('oque_faz, cargo')
+            .eq('pipedrive_deal_id', deal_id)
+            .limit(1)
+            .maybeSingle();
+          if (existingLead) {
+            oqueFaz = oqueFaz || existingLead.oque_faz || '';
+            cargo = cargo || existingLead.cargo || '';
+            console.log(`[Update] Merged from DB: oqueFaz="${oqueFaz}", cargo="${cargo}"`);
+          }
+        } catch (e) {
+          console.warn('[Update] Failed to fetch existing lead for merge:', e);
+        }
+      }
+
+      // Check if the deal was deleted in Pipedrive — if so, recreate it
+      if (deal_id) {
+        const checkDeal = await pipedriveFetch(`/deals/${deal_id}`, 'GET', PIPEDRIVE_API_TOKEN);
+        const isDealDeleted = checkDeal.deleted || checkDeal.data?.active_flag === false || checkDeal.data?.deleted === true || checkDeal.data?.status === 'deleted';
+        console.log(`[Update] Deal ${deal_id} check: active_flag=${checkDeal.data?.active_flag}, deleted=${checkDeal.data?.deleted}, status=${checkDeal.data?.status}, isDealDeleted=${isDealDeleted}`);
+        if (isDealDeleted) {
+          console.log(`[Update] Deal ${deal_id} is deleted in Pipedrive, recreating...`);
+          try {
+            const supabaseUrlRec = Deno.env.get('SUPABASE_URL')!;
+            const supabaseKeyRec = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+            const sbRec = createClient(supabaseUrlRec, supabaseKeyRec);
+
+            // Fetch full lead data from DB
+            const { data: leadForRecreate } = await sbRec.from('leads')
+              .select('*')
+              .eq('pipedrive_deal_id', deal_id)
+              .order('created_at', { ascending: false })
+              .limit(1)
+              .maybeSingle();
+
+            if (leadForRecreate) {
+              const fullName = `${leadForRecreate.nome} ${leadForRecreate.sobrenome || ''}`.trim();
+
+              // Find Orbit pipeline
+              const pipeline = await findPipelineByName(PIPEDRIVE_API_TOKEN, 'Orbit');
+              const pipelineId = pipeline?.id;
+              let stageId: number | null = null;
+              if (pipelineId) stageId = await getFirstStage(PIPEDRIVE_API_TOKEN, pipelineId);
+
+              // Create new deal linked to existing person/org
+              const newDealBody: Record<string, unknown> = {
+                title: `${fullName} - ${leadForRecreate.empresa || 'Sem empresa'} | Orbit`,
+                person_id: person_id,
+                org_id: org_id,
+                ...(pipelineId ? { pipeline_id: pipelineId } : {}),
+                ...(stageId ? { stage_id: stageId } : {}),
+              };
+              const newDealData = await pipedriveFetch('/deals', 'POST', PIPEDRIVE_API_TOKEN, newDealBody);
+              const newDealId = newDealData.data.id;
+              console.log(`[Update] New deal created: ${newDealId} (replacing deleted ${deal_id})`);
+
+              // Update DB with new deal_id
+              await sbRec.from('leads')
+                .update({ pipedrive_deal_id: newDealId })
+                .eq('id', leadForRecreate.id);
+
+              // Add note explaining recreation
+              await pipedriveFetch('/notes', 'POST', PIPEDRIVE_API_TOKEN, {
+                content: `⚠️ Negócio recriado automaticamente.\nO deal anterior (${deal_id}) havia sido deletado no Pipedrive.\n\n👤 ${fullName}\n📧 ${leadForRecreate.email}\n🏢 ${leadForRecreate.empresa}`,
+                deal_id: newDealId,
+                pinned_to_deal_flag: 0,
+              });
+
+              // Use the new deal_id for all subsequent operations
+              deal_id = newDealId;
+            }
+          } catch (e) {
+            console.error(`[Update] Failed to recreate deal for deleted ${deal_id}:`, e);
+          }
+        }
+      }
 
       const [cargoKey, segmentoPersonKey, faturamentoKey, funcionariosKey, prioridadeKey, reuniaoKey, utmSourceKey, utmMediumKey, utmCampaignKey, utmContentKey, utmTermKey, gclidKey, fbclidKey, landingPageKey, originPageKey] = await Promise.all([
         ensureCustomField(PIPEDRIVE_API_TOKEN, 'personFields', 'Cargo', 'varchar'),
@@ -696,9 +824,24 @@ serve(async (req) => {
         await pipedriveFetch(`/deals/${deal_id}`, 'PUT', PIPEDRIVE_API_TOKEN, dealUpdate);
       }
 
-      // Auto labels — chat envia oqueFaz/cargo aos poucos via update; reaplica canal/niche
-      if (deal_id && (oqueFaz || cargo || utmData?.origin_page)) {
-        await applyAutoLabels(PIPEDRIVE_API_TOKEN, deal_id, oqueFaz, cargo, utmData?.origin_page);
+      // Apply niche label OR canal label (niche takes priority)
+      if (deal_id) {
+        const nicheLabelUpdate = resolveNicheLabel(utmData?.origin_page);
+        if (nicheLabelUpdate) {
+          try {
+            await setDealLabel(PIPEDRIVE_API_TOKEN, deal_id, nicheLabelUpdate, 'blue');
+            console.log(`[Update] Applied niche label "${nicheLabelUpdate}" — skipping canal label`);
+          } catch (e) {
+            console.error('[Update] Failed to set niche label:', e);
+          }
+        } else if (oqueFaz || cargo) {
+          const canalLabelEarly = resolveDealLabel(oqueFaz, cargo);
+          try {
+            await setDealLabel(PIPEDRIVE_API_TOKEN, deal_id, canalLabelEarly);
+          } catch (e) {
+            console.error('[Update] Failed to set deal label:', e);
+          }
+        }
       }
 
       // If scheduling is complete: move stage, create activity, update note
@@ -796,7 +939,7 @@ serve(async (req) => {
         const { name, whatsapp, email, empresa } = payload;
 
         // Classify lead type
-        const isConsultor = (oqueFaz || '').toLowerCase().includes('consultoria') || (cargo || '').toLowerCase().includes('consultor');
+        const isConsultor = isConsultorLead(oqueFaz, cargo);
         const isLowRevenue = (faturamento || '').toLowerCase().includes('até') && (faturamento || '').toLowerCase().includes('100 mil');
         let leadType = 'Grande';
         let salaName = 'Orbit Grande';
@@ -809,6 +952,14 @@ serve(async (req) => {
           leadType = 'Pequeno';
           salaName = 'Orbit Pequeno';
           salaLink = 'https://meet.google.com/efd-bbnc-zfc';
+        }
+
+        // Set Pipedrive deal label based on lead type
+        const canalLabel = resolveDealLabel(oqueFaz, cargo);
+        try {
+          await setDealLabel(PIPEDRIVE_API_TOKEN, deal_id, canalLabel);
+        } catch (e) {
+          console.error('[Update] Failed to set deal label:', e);
         }
 
         const noteLines = [
@@ -905,7 +1056,7 @@ serve(async (req) => {
         try {
           const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
           const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-
+          
           // Get lead info for phone number
           const sbN8n = createClient(supabaseUrl, supabaseKey);
           let leadPhone = payload.whatsapp || '';
@@ -946,7 +1097,7 @@ serve(async (req) => {
         }
       }
 
-      return new Response(JSON.stringify({ success: true }), {
+      return new Response(JSON.stringify({ success: true, ...(deal_id !== payload.deal_id ? { new_deal_id: deal_id } : {}) }), {
         status: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
@@ -1149,7 +1300,7 @@ serve(async (req) => {
         let horarioReuniao = '';
         try {
           const notesRes = await pipedriveFetch(`/deals/${deal.id}/notes`, 'GET', PIPEDRIVE_API_TOKEN);
-          const mainNote = notesRes.data?.find((n: { content?: string }) => n.content?.includes('Reunião:')) || notesRes.data?.[0];
+          const mainNote = notesRes.data?.find((n: any) => n.content?.includes('Reunião:')) || notesRes.data?.[0];
           if (mainNote?.content) {
             const reuniaoMatch = mainNote.content.match(/Reunião:\s*(\d{2}\/\d{2}\/\d{4})\s*às\s*(\d{2}:\d{2})/);
             if (reuniaoMatch) {
@@ -1189,8 +1340,8 @@ serve(async (req) => {
         }
       }
 
-      return new Response(JSON.stringify({
-        success: true,
+      return new Response(JSON.stringify({ 
+        success: true, 
         total_deals: deals.length,
         synced: synced.length,
         skipped: skipped.length,
@@ -1213,7 +1364,7 @@ serve(async (req) => {
       );
       const searchData = await searchRes.json();
       const items = searchData?.data?.items || [];
-
+      
       const results: unknown[] = [];
       const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
       const supabaseKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
@@ -1242,9 +1393,9 @@ serve(async (req) => {
             let horarioReuniao = '';
             try {
               const notesRes = await pipedriveFetch(`/deals/${deal.id}/notes`, 'GET', PIPEDRIVE_API_TOKEN);
-              const mainNote = notesRes.data?.find((n: { content?: string }) => n.content?.includes('Reunião:')) || notesRes.data?.[0];
+              const mainNote = notesRes.data?.find((n: any) => n.content?.includes('Reunião:')) || notesRes.data?.[0];
               if (mainNote?.content) {
-                const m = mainNote.content.match(/Reunião:\s*(\d{2}\/\d{2}\/\d{4})\s*às\s*(\d{2}:\d{2})/);
+                const m = pinnedNote.content.match(/Reunião:\s*(\d{2}\/\d{2}\/\d{4})\s*às\s*(\d{2}:\d{2})/);
                 if (m) { dataReuniao = m[1]; horarioReuniao = m[2]; }
               }
             } catch { /* skip */ }
@@ -1266,8 +1417,8 @@ serve(async (req) => {
               pipedrive_deal_id: deal.id,
             });
 
-            results.push({
-              deal_id: deal.id, title: deal.title,
+            results.push({ 
+              deal_id: deal.id, title: deal.title, 
               status: insertErr ? `error: ${insertErr.message}` : 'synced',
               dataReuniao, horarioReuniao,
             });
@@ -1295,7 +1446,7 @@ serve(async (req) => {
         .not('pipedrive_deal_id', 'is', null)
         .or('data_reuniao.is.null,data_reuniao.eq.')
         .limit(limit);
-
+      
       // Optional: filter by specific deal_id
       if (payload.deal_id) {
         query = sb.from('leads')
@@ -1336,9 +1487,9 @@ serve(async (req) => {
           if (!dataReuniao) {
             try {
               const notesRes = await pipedriveFetch(`/deals/${lead.pipedrive_deal_id}/notes`, 'GET', PIPEDRIVE_API_TOKEN);
-              const mainNote = notesRes.data?.find((n: { content?: string }) => n.content?.includes('Reunião:')) || notesRes.data?.[0];
+              const mainNote = notesRes.data?.find((n: any) => n.content?.includes('Reunião:')) || notesRes.data?.[0];
               if (mainNote?.content) {
-                const m = mainNote.content.match(/Reunião:\s*(\d{2}\/\d{2}\/\d{4})\s*às\s*(\d{2}:\d{2})/);
+                const m = pinnedNote.content.match(/Reunião:\s*(\d{2}\/\d{2}\/\d{4})\s*às\s*(\d{2}:\d{2})/);
                 if (m) { dataReuniao = m[1]; horarioReuniao = m[2]; }
               }
             } catch { /* skip */ }
@@ -1348,7 +1499,7 @@ serve(async (req) => {
           let oqueFaz = '', cargo = '', faturamento = '', funcionarios = '', prioridade = '';
           try {
             const notesRes = await pipedriveFetch(`/deals/${lead.pipedrive_deal_id}/notes`, 'GET', PIPEDRIVE_API_TOKEN);
-            const mainNote = notesRes.data?.find((n: { content?: string }) => n.content?.includes('Segmento') || n.content?.includes('Cargo')) || notesRes.data?.[0];
+            const mainNote = notesRes.data?.find((n: any) => n.content?.includes('Segmento') || n.content?.includes('Cargo')) || notesRes.data?.[0];
             if (mainNote?.content) {
               const c = mainNote.content;
               const seg = c.match(/Segmento.*?:\s*(.+)/); if (seg) oqueFaz = seg[1].trim();
@@ -1383,7 +1534,7 @@ serve(async (req) => {
       });
     }
 
-    // ACTION: ADD_LABEL — apply a label to existing deal by name (creates if missing)
+    // ACTION: ADD_LABEL — add a label to an existing deal (merge, don't overwrite)
     if (action === 'add_label') {
       const { deal_id, label_name, label_color } = payload;
       if (!deal_id || !label_name) {
@@ -1391,7 +1542,44 @@ serve(async (req) => {
           status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         });
       }
-      await setDealLabel(PIPEDRIVE_API_TOKEN, deal_id, label_name, label_color || 'blue');
+      await setDealLabel(PIPEDRIVE_API_TOKEN, deal_id, label_name, label_color);
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    // ACTION: ARCHIVE_DEAL — mark deal as lost in Pipedrive
+    if (action === 'archive_deal') {
+      const { deal_id, lost_reason } = payload;
+      if (!deal_id) {
+        return new Response(JSON.stringify({ success: false, error: 'deal_id is required' }), {
+          status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+      await pipedriveFetch(`/deals/${deal_id}`, 'PUT', PIPEDRIVE_API_TOKEN, {
+        status: 'lost',
+        lost_reason: lost_reason || 'Faturamento abaixo do mínimo (< R$ 30 mil)',
+      });
+      console.log(`[Archive] Deal ${deal_id} marked as lost`);
+      return new Response(JSON.stringify({ success: true }), {
+        status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    // ACTION: ADD_NOTE — add a note to a deal
+    if (action === 'add_note') {
+      const { deal_id, note_content } = payload;
+      if (!deal_id || !note_content) {
+        return new Response(JSON.stringify({ success: false, error: 'deal_id and note_content are required' }), {
+          status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+      await pipedriveFetch('/notes', 'POST', PIPEDRIVE_API_TOKEN, {
+        content: note_content,
+        deal_id,
+        pinned_to_deal_flag: 0,
+      });
+      console.log(`[AddNote] Note added to deal ${deal_id}`);
       return new Response(JSON.stringify({ success: true }), {
         status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });

@@ -15,17 +15,33 @@ type StepType =
   | 'welcome' | 'name' | 'whatsapp' | 'email' | 'empresa'
   | 'oqueFaz' | 'cargo' | 'softwareGestaoConfirm' | 'softwareGestao'
   | 'faturamento' | 'faturamentoConsultor' | 'clientesAtivosConsultor'
-  | 'funcionarios' | 'prioridade'
+  | 'funcionarios' | 'prioridade' | 'preferencia'
   | 'budget_validation' | 'farewell'
-  | 'calendar' | 'confirmation';
+  | 'calendar' | 'confirmationVendedor' | 'confirmation';
 
 const STEPS: StepType[] = [
   'welcome','name','whatsapp','email','empresa','oqueFaz','cargo',
   'softwareGestaoConfirm','softwareGestao',
   'faturamento','faturamentoConsultor','clientesAtivosConsultor',
-  'funcionarios','prioridade','budget_validation','farewell',
-  'calendar','confirmation',
+  'funcionarios','prioridade','preferencia','budget_validation','farewell',
+  'calendar','confirmationVendedor','confirmation',
 ];
+
+interface Executive { nome: string; foto: string; whatsapp: string; }
+const EXECUTIVES: Record<string, Executive> = {
+  gabriel: { nome: 'Gabriel Carvente', foto: '/images/executivos/gabriel.png', whatsapp: '5511971999192' },
+  gisele:  { nome: 'Gisele Ferrarezi', foto: '/images/executivos/gisele.png',  whatsapp: '5548991206282' },
+  pedro:   { nome: 'Pedro',            foto: '/images/executivos/pedro.png',   whatsapp: '5548996934524' },
+  thayane: { nome: 'Thayane Torbis',   foto: '/images/executivos/thayane.png', whatsapp: '5548996934515' },
+};
+
+function matchExecutive(ownerName: string): Executive | null {
+  const lower = ownerName.toLowerCase();
+  for (const [key, exec] of Object.entries(EXECUTIVES)) {
+    if (lower.includes(key)) return exec;
+  }
+  return null;
+}
 
 const FATURAMENTO_OPTIONS = [
   'Até R$ 100 mil/mês',
@@ -88,6 +104,7 @@ function getMeetingLink(faturamento: string, cargo: string, segmento: string) {
 function toDbPayload(data: LeadData, status: 'parcial' | 'completo') {
   // Pega UTMs/tracking do sessionStorage e mistura no payload
   let tracking: Record<string, string> = {};
+  let copyVariant: string | null = null;
   if (typeof window !== 'undefined') {
     try {
       const raw = sessionStorage.getItem('__wl_tracking');
@@ -106,7 +123,13 @@ function toDbPayload(data: LeadData, status: 'parcial' | 'completo') {
         }
       }
     } catch {}
+    try {
+      const lpRaw = sessionStorage.getItem('orbit_lp_data');
+      if (lpRaw) copyVariant = JSON.parse(lpRaw)?.copyVariant || null;
+      if (!copyVariant) copyVariant = sessionStorage.getItem('hero_copy_variant');
+    } catch {}
   }
+  const hasSchedule = !!(data.date && data.time);
   return {
     nome: data.nome || (data.name || '').split(' ')[0] || '',
     sobrenome: data.sobrenome || (data.name || '').split(' ').slice(1).join(' '),
@@ -121,7 +144,9 @@ function toDbPayload(data: LeadData, status: 'parcial' | 'completo') {
     software_gestao: data.softwareGestao || null,
     data_reuniao: data.date || '',
     horario_reuniao: data.time || '',
-    link_reuniao: data.date && data.time ? getMeetingLink(data.faturamento, data.cargo, data.oqueFaz) : null,
+    link_reuniao: hasSchedule ? getMeetingLink(data.faturamento, data.cargo, data.oqueFaz) : null,
+    ligacao_agendada: hasSchedule ? true : null,
+    copy_variant: copyVariant,
     status,
     ...tracking,
   };
@@ -134,6 +159,8 @@ export default function Chat() {
   const [showOutroSegmento, setShowOutroSegmento] = useState(false);
   const [showOutroCargo, setShowOutroCargo] = useState(false);
   const [resolvedMeetLink, setResolvedMeetLink] = useState('');
+  const [matchedExec, setMatchedExec] = useState<Executive | null>(null);
+  const [loadingExec, setLoadingExec] = useState(false);
   const [leadData, setLeadData] = useState<LeadData>({
     name: '', nome: '', sobrenome: '', whatsapp: '', email: '', empresa: '',
     oqueFaz: '', cargo: '', softwareGestao: '', faturamento: '', funcionarios: '',
@@ -221,6 +248,75 @@ export default function Chat() {
     }).catch((err) => console.error('[Chat] Failed to assign Gabriel:', err));
   };
 
+  // Branch executivo: roleta vendedor + label + nota + tag manychat → confirmationVendedor
+  const requestExecutivo = (origin: 'preferencia' | 'calendar') => {
+    // Marca preferência por contato vendedor (best-effort, depende da coluna existir no schema)
+    if (leadIdRef.current) {
+      supabaseMkt.from('leads')
+        .update({ deseja_contato_vendedor: true })
+        .eq('id', leadIdRef.current)
+        .then(() => {}, () => {});
+    }
+    addPipedriveLabel('DIRETO EXECUTIVO', 'green');
+    setLoadingExec(true);
+
+    const deal_id = pipedriveIdsRef.current.deal_id;
+    const noteContent = origin === 'calendar'
+      ? `<b>📞 Lead solicitou contato com executivo (a partir do calendário)</b><br>O lead não encontrou um horário adequado e prefere ser contatado diretamente.`
+      : `<b>📞 Lead solicitou contato com executivo</b><br>${leadData.nome} optou por falar com um executivo comercial em vez de agendar uma demonstração em grupo.`;
+
+    (async () => {
+      try {
+        if (deal_id) {
+          const { data: assignResult } = await supabaseMkt.functions.invoke('assign-pipedrive-owner', {
+            body: { deal_id, flow: 'vendedor' },
+          });
+          if (assignResult?.assigned_user?.name) {
+            const exec = matchExecutive(assignResult.assigned_user.name);
+            if (exec) setMatchedExec(exec);
+          }
+          // Posta nota no deal via get-pipedrive-owners (dupla função)
+          supabaseMkt.functions.invoke('get-pipedrive-owners', {
+            body: { leads: [], add_note: { deal_id, content: noteContent } },
+          }).catch((e) => console.warn('[Chat] add note failed:', e));
+        }
+        // Tag ManyChat: foi-falar-com-vendedor
+        supabaseMkt.functions.invoke('tag-manychat', {
+          body: {
+            action: 'tag',
+            whatsapp: leadData.whatsapp,
+            tag_name: 'foi-falar-com-vendedor',
+            lead_data: {
+              nome: leadData.nome,
+              sobrenome: leadData.sobrenome,
+              email: leadData.email,
+              empresa: leadData.empresa,
+              oque_faz: leadData.oqueFaz,
+              cargo: leadData.cargo,
+              faturamento: leadData.faturamento,
+              funcionarios: leadData.funcionarios,
+              prioridade: leadData.prioridade,
+            },
+          },
+        }).catch((e) => console.warn('[Chat] tag-manychat failed:', e));
+        // Sync Make
+        if (leadIdRef.current) {
+          supabaseMkt.functions.invoke('sync-lead-make', { body: { lead_id: leadIdRef.current } })
+            .catch((e) => console.warn('[Chat] sync-make failed:', e));
+        }
+      } catch (e) {
+        console.error('[Chat] requestExecutivo failed:', e);
+      } finally {
+        setLoadingExec(false);
+      }
+    })();
+
+    setTimeout(() => setCurrentStep('confirmationVendedor'), 400);
+  };
+
+  // Disparado pelo CalendarPicker quando lead escolhe "Falar com executivo" a partir do calendário
+  const handleRequestExecutiveFromCalendar = () => requestExecutivo('calendar');
+
   // Sync Make + ManyChat
   const syncToMake = async () => {
     if (!leadIdRef.current) return;
@@ -250,7 +346,7 @@ export default function Chat() {
     scrollToBottom();
   };
 
-  // Salva lead parcial (após email)
+  // Salva lead parcial (após email) — com deduplicação por email/whatsapp (alinhado com Lovable)
   const savePartialLead = async (data: LeadData) => {
     if (savingLeadRef.current) return;
     if (leadIdRef.current) {
@@ -261,13 +357,47 @@ export default function Chat() {
     }
     savingLeadRef.current = true;
     try {
-      const { data: inserted, error } = await supabaseMkt
-        .from('leads')
-        .insert(toDbPayload(data, 'parcial'))
+      const phoneDigits = data.whatsapp.replace(/\D/g, '');
+      const payload = toDbPayload(data, 'parcial');
+
+      // Procura lead existente por email OU whatsapp (mais recente)
+      const { data: existingLead } = await supabaseMkt.from('leads')
         .select('id')
-        .single();
-      if (error) { console.error('Insert lead failed:', error); return; }
-      leadIdRef.current = inserted.id;
+        .or(`email.eq.${data.email},whatsapp.ilike.%${phoneDigits}%`)
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      if (existingLead) {
+        const { error } = await supabaseMkt.from('leads').update(payload).eq('id', existingLead.id);
+        if (error) { console.error('Failed to update existing lead:', error); return; }
+        leadIdRef.current = existingLead.id;
+        console.log('[Chat] Lead atualizado (existente):', existingLead.id);
+      } else {
+        const { data: inserted, error } = await supabaseMkt
+          .from('leads')
+          .insert(payload)
+          .select('id')
+          .single();
+        if (error) { console.error('Insert lead failed:', error); return; }
+        leadIdRef.current = inserted.id;
+        console.log('[Chat] Lead inserido (novo):', inserted.id);
+      }
+
+      // Sync Make.com (fire-and-forget)
+      supabaseMkt.functions.invoke('sync-lead-make', {
+        body: { lead_id: leadIdRef.current },
+      }).catch((e) => console.warn('[Chat] sync-lead-make failed:', e));
+
+      // Sync CRM externo (fire-and-forget)
+      supabaseMkt.functions.invoke('sync-lead-crm', {
+        body: {
+          nome: data.nome + (data.sobrenome ? ` ${data.sobrenome}` : ''),
+          email: data.email,
+          whatsapp: normalizePhone(data.whatsapp),
+          empresa: data.empresa || '',
+        },
+      }).catch((e) => console.warn('[Chat] sync-lead-crm failed:', e));
     } catch (err) { console.error('Save partial lead failed:', err); }
     finally { savingLeadRef.current = false; }
   };
@@ -494,9 +624,20 @@ export default function Chat() {
           }, 400);
         } else {
           setTimeout(() => {
+            addBotMessage(`${leadData.nome}, como você prefere seguir?`);
+            setCurrentStep('preferencia');
+          }, 400);
+        }
+        break;
+      }
+      case 'preferencia': {
+        if (value === 'Demonstração em grupo') {
+          setTimeout(() => {
             addBotMessage('Perfeito! Agora escolha o melhor dia e horário para a sua demonstração gratuita com nosso time:');
             setCurrentStep('calendar');
           }, 400);
+        } else if (value === 'Falar com executivo comercial') {
+          requestExecutivo('preferencia');
         }
         break;
       }
@@ -519,16 +660,37 @@ export default function Chat() {
   };
 
   const handleCalendarSelect = async (date: string, time: string) => {
+    // Fallback: se pipedriveIds estiver vazio, busca da tabela leads (alinhado com Lovable)
+    if (!pipedriveIdsRef.current.deal_id && leadIdRef.current) {
+      try {
+        const { data: fresh } = await supabaseMkt.from('leads')
+          .select('pipedrive_deal_id, pipedrive_person_id, pipedrive_org_id')
+          .eq('id', leadIdRef.current)
+          .maybeSingle();
+        if (fresh?.pipedrive_deal_id) {
+          pipedriveIdsRef.current = {
+            deal_id: fresh.pipedrive_deal_id,
+            person_id: fresh.pipedrive_person_id,
+            org_id: fresh.pipedrive_org_id,
+          };
+          console.log('[Chat] Pipedrive IDs fetched at calendar select:', pipedriveIdsRef.current);
+        }
+      } catch (err) { console.warn('[Chat] Fallback fetch pipedrive IDs failed:', err); }
+    }
+
     const updated = { ...leadData, date, time };
     setLeadData(updated);
     addUserMessage(`${date} às ${time}`);
     const meetLink = getMeetingLink(leadData.faturamento, leadData.cargo, leadData.oqueFaz);
     setResolvedMeetLink(meetLink);
 
-    // 1. Salva no banco como completo + link da reunião
+    // 1. Aplica label "EM GRUPO" sempre, antes de tudo (alinhado com Lovable)
+    addPipedriveLabel('EM GRUPO', 'blue');
+
+    // 2. Salva no banco como completo + link da reunião
     await updateLead(updated, 'completo');
 
-    // 2. Update Pipedrive com TUDO (nota completa precisa de name/whatsapp/email/empresa + todos os campos)
+    // 3. Update Pipedrive com TUDO (nota completa precisa de name/whatsapp/email/empresa + todos os campos)
     updatePipedriveDeal({
       name: leadData.name || `${leadData.nome} ${leadData.sobrenome}`.trim(),
       whatsapp: normalizePhone(leadData.whatsapp),
@@ -545,8 +707,14 @@ export default function Chat() {
       utmData: getUtmData(),
     });
 
-    // 3. Atribui owner via round-robin (move pra "Reunião Agendada")
-    if (pipedriveIdsRef.current.deal_id) {
+    // 4. Atribui owner via round-robin (move pra "Reunião Agendada") — APENAS se não for desqualificado
+    // (desqualificados consultor/B2B já foram atribuídos a Gabriel direto via gabriel_direto)
+    const fatCal = leadData.faturamento.toLowerCase();
+    const funcCal = leadData.funcionarios.toLowerCase();
+    const isConsultorCal = leadData.oqueFaz.toLowerCase().includes('consultoria') || leadData.cargo.toLowerCase().includes('consultor');
+    const isDesqConsultor = isConsultorCal && fatCal.includes('até') && fatCal.includes('30 mil');
+    const isDesqB2b = !isConsultorCal && fatCal.includes('até') && fatCal.includes('100 mil') && (funcCal.includes('1-5') || funcCal.includes('1 a 5'));
+    if (pipedriveIdsRef.current.deal_id && !isDesqConsultor && !isDesqB2b) {
       supabaseMkt.functions.invoke('assign-pipedrive-owner', {
         body: { deal_id: pipedriveIdsRef.current.deal_id, flow: 'sala' },
       }).catch((e) => console.warn('[Chat] assign-owner failed:', e));
@@ -648,6 +816,20 @@ export default function Chat() {
         return <ChatInput label="SOFTWARE DE GESTÃO" placeholder="Ex: Totvs, SAP..." onSubmit={(v) => handleAnswer('softwareGestao', v)} />;
       case 'prioridade':
         return <ChatOptions options={PRIORIDADE_OPTIONS} onSelect={(v) => handleAnswer('prioridade', v)} />;
+      case 'preferencia': {
+        // Demonstração em grupo SEMPRE aparece. Falar com executivo só se NÃO for low-revenue B2B
+        // (low-revenue B2B já cai em budget_validation antes de chegar aqui — mas dupla checagem)
+        const fatPref = leadData.faturamento.toLowerCase();
+        const isLowRevPref = fatPref.includes('até') && fatPref.includes('100 mil');
+        const isConsultorPref =
+          leadData.oqueFaz.toLowerCase().includes('consultoria') ||
+          leadData.cargo.toLowerCase().includes('consultor');
+        const showExecPref = !isLowRevPref || isConsultorPref;
+        const options = showExecPref
+          ? ['Demonstração em grupo', 'Falar com executivo comercial']
+          : ['Demonstração em grupo'];
+        return <ChatOptions options={options} onSelect={(v) => handleAnswer('preferencia', v)} />;
+      }
       case 'budget_validation':
         return <ChatOptions options={BUDGET_VALIDATION_OPTIONS} onSelect={(v) => handleAnswer('budget_validation', v)} />;
       case 'farewell':
@@ -733,6 +915,60 @@ export default function Chat() {
     );
   }
 
+  if (currentStep === 'confirmationVendedor') {
+    return (
+      <div style={shellStyle}>
+        <ChatHeader currentStep={progressSteps} totalSteps={progressSteps} />
+        <div style={{ ...messagesScrollStyle, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}>
+          <div style={{ width: '100%', maxWidth: '460px', textAlign: 'center', color: '#fff' }}>
+            {loadingExec ? (
+              <p style={{ color: 'rgba(255,255,255,0.5)' }}>Localizando seu executivo…</p>
+            ) : matchedExec ? (
+              <>
+                <img
+                  src={matchedExec.foto}
+                  alt={matchedExec.nome}
+                  style={{
+                    width: 128, height: 128, borderRadius: '50%', objectFit: 'cover', objectPosition: 'top',
+                    margin: '0 auto 24px', border: '4px solid rgba(255,186,26,0.3)',
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
+                  }}
+                />
+                <h2 style={{ fontSize: 24, fontWeight: 700, margin: '0 0 8px' }}>
+                  Você falará com <span style={{ color: '#ffba1a' }}>{matchedExec.nome}</span>
+                </h2>
+                <p style={{ color: 'rgba(255,255,255,0.6)', margin: '0 0 24px', fontSize: 15, lineHeight: 1.6 }}>
+                  Nosso executivo entrará em contato com você em breve via WhatsApp.
+                </p>
+                <a
+                  href={`https://wa.me/${matchedExec.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'inline-flex', alignItems: 'center', gap: 8,
+                    background: '#25D366', color: '#fff', padding: '14px 28px',
+                    borderRadius: 12, fontSize: 15, fontWeight: 700, textDecoration: 'none',
+                  }}
+                >
+                  💬 Conversar no WhatsApp
+                </a>
+              </>
+            ) : (
+              <>
+                <h2 style={{ fontSize: 22, fontWeight: 700, margin: '0 0 12px' }}>
+                  Pedido recebido!
+                </h2>
+                <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: 15, lineHeight: 1.6 }}>
+                  Um executivo comercial entrará em contato com você em breve via WhatsApp.
+                </p>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div style={shellStyle}>
       <ChatHeader currentStep={currentProgress} totalSteps={progressSteps} />
@@ -743,7 +979,7 @@ export default function Chat() {
           ))}
           {isTyping && <TypingIndicator />}
           {currentStep === 'calendar' && !isTyping && (
-            <CalendarPicker onSelect={handleCalendarSelect} />
+            <CalendarPicker onSelect={handleCalendarSelect} onRequestExecutive={handleRequestExecutiveFromCalendar} />
           )}
         </div>
       </div>
