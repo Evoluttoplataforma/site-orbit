@@ -32,6 +32,10 @@ const STEPS: StepType[] = [
   'calendar','confirmationVendedor','confirmation',
 ];
 
+// Phase 5 — Diagnóstico Inline IA. Deixar `false` enquanto não houver provider de LLM
+// configurado e a tabela `diagnostic_responses` criada no Supabase.
+const ENABLE_DIAGNOSTIC_FLOW = false;
+
 interface Executive { nome: string; foto: string; whatsapp: string; }
 const EXECUTIVES: Record<string, Executive> = {
   gabriel: { nome: 'Gabriel Carvente', foto: '/images/executivos/gabriel.png', whatsapp: '5511971999192' },
@@ -868,9 +872,10 @@ export default function Chat() {
           leadData.cargo.toLowerCase().includes('consultor');
         const showExecPref = !isLowRevPref || isConsultorPref;
         const diagLabel = isConsultorPref ? 'Diagnóstico de canal' : 'Diagnóstico de maturidade';
-        const options = showExecPref
-          ? ['Demonstração em grupo', 'Falar com executivo comercial', diagLabel]
-          : ['Demonstração em grupo', diagLabel];
+        const baseOptions = showExecPref
+          ? ['Demonstração em grupo', 'Falar com executivo comercial']
+          : ['Demonstração em grupo'];
+        const options = ENABLE_DIAGNOSTIC_FLOW ? [...baseOptions, diagLabel] : baseOptions;
         return <ChatOptions options={options} onSelect={(v) => handleAnswer('preferencia', v)} />;
       }
       case 'preferencia_pos_diagnostico': {
