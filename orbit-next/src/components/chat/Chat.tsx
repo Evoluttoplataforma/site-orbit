@@ -8,6 +8,8 @@ import ChatInput from './ChatInput';
 import ChatOptions from './ChatOptions';
 import WhatsAppInput from './WhatsAppInput';
 import CalendarPicker from './CalendarPicker';
+import DiagnosticInlineFlow from './DiagnosticInlineFlow';
+import { getSessionVariant } from './copyVariants';
 import ConfirmationScreen from './ConfirmationScreen';
 import TypingIndicator from './TypingIndicator';
 
@@ -16,14 +18,17 @@ type StepType =
   | 'oqueFaz' | 'cargo' | 'softwareGestaoConfirm' | 'softwareGestao'
   | 'faturamento' | 'faturamentoConsultor' | 'clientesAtivosConsultor'
   | 'funcionarios' | 'prioridade' | 'preferencia'
-  | 'budget_validation' | 'farewell'
+  | 'diagnostico_inline' | 'preferencia_pos_diagnostico'
+  | 'budget_validation' | 'budget_validation_pos' | 'farewell'
   | 'calendar' | 'confirmationVendedor' | 'confirmation';
 
 const STEPS: StepType[] = [
   'welcome','name','whatsapp','email','empresa','oqueFaz','cargo',
   'softwareGestaoConfirm','softwareGestao',
   'faturamento','faturamentoConsultor','clientesAtivosConsultor',
-  'funcionarios','prioridade','preferencia','budget_validation','farewell',
+  'funcionarios','prioridade','preferencia',
+  'diagnostico_inline','preferencia_pos_diagnostico',
+  'budget_validation','budget_validation_pos','farewell',
   'calendar','confirmationVendedor','confirmation',
 ];
 
@@ -127,6 +132,7 @@ function toDbPayload(data: LeadData, status: 'parcial' | 'completo') {
       const lpRaw = sessionStorage.getItem('orbit_lp_data');
       if (lpRaw) copyVariant = JSON.parse(lpRaw)?.copyVariant || null;
       if (!copyVariant) copyVariant = sessionStorage.getItem('hero_copy_variant');
+      if (!copyVariant) copyVariant = getSessionVariant().id;
     } catch {}
   }
   const hasSchedule = !!(data.date && data.time);
@@ -638,10 +644,30 @@ export default function Chat() {
           }, 400);
         } else if (value === 'Falar com executivo comercial') {
           requestExecutivo('preferencia');
+        } else if (value === 'Diagnóstico de maturidade' || value === 'Diagnóstico de canal') {
+          const isConsultorDiag = leadData.oqueFaz.toLowerCase().includes('consultoria') || leadData.cargo.toLowerCase().includes('consultor');
+          setTimeout(() => {
+            addBotMessage(isConsultorDiag
+              ? 'Excelente escolha! Vamos avaliar o potencial do seu negócio como canal Orbit. 🚀'
+              : 'Excelente escolha! Vamos descobrir o nível de maturidade da sua empresa em Gestão e IA. 🧠');
+            setCurrentStep('diagnostico_inline');
+          }, 400);
         }
         break;
       }
-      case 'budget_validation': {
+      case 'preferencia_pos_diagnostico': {
+        if (value === 'Demonstração em grupo') {
+          setTimeout(() => {
+            addBotMessage('Perfeito! Agora escolha o melhor dia e horário para a sua demonstração gratuita com nosso time:');
+            setCurrentStep('calendar');
+          }, 400);
+        } else if (value === 'Falar com executivo comercial') {
+          requestExecutivo('preferencia');
+        }
+        break;
+      }
+      case 'budget_validation':
+      case 'budget_validation_pos': {
         if (value === 'Sim, quero participar') {
           setTimeout(() => {
             addBotMessage('Ótimo! Vamos agendar sua demonstração em grupo. Escolha o melhor dia e horário:');
@@ -656,6 +682,24 @@ export default function Chat() {
         }
         break;
       }
+    }
+  };
+
+  // Disparado quando DiagnosticInlineFlow termina — roteamento espelhado do Lovable Index.tsx
+  const handleDiagnosticComplete = () => {
+    const fat = leadData.faturamento.toLowerCase();
+    const isLowRev = fat.includes('até') && fat.includes('100 mil');
+    const isConsultorDiag = leadData.oqueFaz.toLowerCase().includes('consultoria') || leadData.cargo.toLowerCase().includes('consultor');
+    const isDesqDiag = isConsultorDiag && fat.includes('até') && fat.includes('30 mil');
+    if (isDesqDiag) {
+      addBotMessage(`${leadData.nome}, importante: o investimento mínimo para se tornar um canal Orbit é de **R$ 1.800/mês**. Considerando seu momento atual, gostaria de participar de uma demonstração em grupo para conhecer melhor a plataforma?`);
+      setCurrentStep('budget_validation_pos');
+    } else if (isLowRev && !isConsultorDiag) {
+      addBotMessage('Perfeito! Agora escolha o melhor dia e horário para a sua demonstração gratuita com nosso time:');
+      setCurrentStep('calendar');
+    } else {
+      addBotMessage(`${leadData.nome}, agora que você conhece seu nível de maturidade, como prefere seguir?`);
+      setCurrentStep('preferencia_pos_diagnostico');
     }
   };
 
@@ -817,21 +861,50 @@ export default function Chat() {
       case 'prioridade':
         return <ChatOptions options={PRIORIDADE_OPTIONS} onSelect={(v) => handleAnswer('prioridade', v)} />;
       case 'preferencia': {
-        // Demonstração em grupo SEMPRE aparece. Falar com executivo só se NÃO for low-revenue B2B
-        // (low-revenue B2B já cai em budget_validation antes de chegar aqui — mas dupla checagem)
         const fatPref = leadData.faturamento.toLowerCase();
         const isLowRevPref = fatPref.includes('até') && fatPref.includes('100 mil');
         const isConsultorPref =
           leadData.oqueFaz.toLowerCase().includes('consultoria') ||
           leadData.cargo.toLowerCase().includes('consultor');
         const showExecPref = !isLowRevPref || isConsultorPref;
+        const diagLabel = isConsultorPref ? 'Diagnóstico de canal' : 'Diagnóstico de maturidade';
         const options = showExecPref
-          ? ['Demonstração em grupo', 'Falar com executivo comercial']
-          : ['Demonstração em grupo'];
+          ? ['Demonstração em grupo', 'Falar com executivo comercial', diagLabel]
+          : ['Demonstração em grupo', diagLabel];
         return <ChatOptions options={options} onSelect={(v) => handleAnswer('preferencia', v)} />;
       }
+      case 'preferencia_pos_diagnostico': {
+        const fatPos = leadData.faturamento.toLowerCase();
+        const isLowRevPos = fatPos.includes('até') && fatPos.includes('100 mil');
+        const isConsultorPos =
+          leadData.oqueFaz.toLowerCase().includes('consultoria') ||
+          leadData.cargo.toLowerCase().includes('consultor');
+        const showExecPos = !isLowRevPos || isConsultorPos;
+        const options = showExecPos
+          ? ['Demonstração em grupo', 'Falar com executivo comercial']
+          : ['Demonstração em grupo'];
+        return <ChatOptions options={options} onSelect={(v) => handleAnswer('preferencia_pos_diagnostico', v)} />;
+      }
+      case 'diagnostico_inline':
+        return (
+          <DiagnosticInlineFlow
+            leadNome={leadData.nome}
+            leadEmail={leadData.email}
+            leadCelular={leadData.whatsapp}
+            leadEmpresa={leadData.empresa}
+            leadId={leadIdRef.current ? String(leadIdRef.current) : undefined}
+            prefilledSetor={
+              leadData.oqueFaz.toLowerCase().includes('consultoria') || leadData.cargo.toLowerCase().includes('consultor')
+                ? 'Consultoria'
+                : undefined
+            }
+            onComplete={handleDiagnosticComplete}
+          />
+        );
       case 'budget_validation':
         return <ChatOptions options={BUDGET_VALIDATION_OPTIONS} onSelect={(v) => handleAnswer('budget_validation', v)} />;
+      case 'budget_validation_pos':
+        return <ChatOptions options={BUDGET_VALIDATION_OPTIONS} onSelect={(v) => handleAnswer('budget_validation_pos', v)} />;
       case 'farewell':
         return (
           <a
