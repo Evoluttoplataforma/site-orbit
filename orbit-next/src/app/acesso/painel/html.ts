@@ -2787,7 +2787,7 @@ JSON.stringify(schemaOrg, null, 2) +
                     return;
                 }
 
-                var createRes = await fetch('https://tnpzoklepkvktbqouctf.supabase.co/functions/v1/create-cms-admin', {
+                var createRes = await fetch('https://yfpdrckyuxltvznqfqgh.supabase.co/functions/v1/create-cms-admin', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -3534,8 +3534,8 @@ JSON.stringify(schemaOrg, null, 2) +
 
     // === EMAIL MARKETING ===
     var emktLeads = [];
-    var EMKT_SUPABASE_URL = 'https://tnpzoklepkvktbqouctf.supabase.co';
-    var EMKT_SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRucHpva2xlcGt2a3RicW91Y3RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2MjAxNjcsImV4cCI6MjA4NzE5NjE2N30.hXrOhbIm9DnxaItT1e9g6B6d9mhAmeoLKJ2DuHlABFU';
+    var EMKT_SUPABASE_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
+    var EMKT_SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
 
     var EMKT_SOURCE_LABELS = {
         'live-semanal': 'Live Semanal',

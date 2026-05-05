@@ -25,7 +25,7 @@ Sistema automático de e-mails para a live semanal da Orbit Gestão usando **Mai
 
 ## Edge Functions (Supabase)
 
-### Projeto: Templum Consultoria (`tnpzoklepkvktbqouctf`)
+### Projeto: MKT Orbit (`yfpdrckyuxltvznqfqgh`)
 
 ### 1. `send-live-confirmation`
 - **Trigger**: Chamada pelo frontend quando lead se cadastra
@@ -44,17 +44,17 @@ Sistema automático de e-mails para a live semanal da Orbit Gestão usando **Mai
 #### Exemplo: Disparo manual do convite
 ```bash
 # Ver quantos leads tem
-curl -X POST 'https://tnpzoklepkvktbqouctf.supabase.co/functions/v1/send-live-reminders' \
+curl -X POST 'https://yfpdrckyuxltvznqfqgh.supabase.co/functions/v1/send-live-reminders' \
   -H 'Content-Type: application/json' \
   -d '{"type": "convite", "test": true}'
 
 # Enviar para os primeiros 50
-curl -X POST 'https://tnpzoklepkvktbqouctf.supabase.co/functions/v1/send-live-reminders' \
+curl -X POST 'https://yfpdrckyuxltvznqfqgh.supabase.co/functions/v1/send-live-reminders' \
   -H 'Content-Type: application/json' \
   -d '{"type": "convite", "offset": 0, "limit": 50}'
 
 # Enviar os próximos 50
-curl -X POST 'https://tnpzoklepkvktbqouctf.supabase.co/functions/v1/send-live-reminders' \
+curl -X POST 'https://yfpdrckyuxltvznqfqgh.supabase.co/functions/v1/send-live-reminders' \
   -H 'Content-Type: application/json' \
   -d '{"type": "convite", "offset": 50, "limit": 50}'
 ```
@@ -85,7 +85,7 @@ SELECT cron.schedule(
   'live-reminder-15min',
   '45 15 * * 2',
   $$SELECT net.http_post(
-    'https://tnpzoklepkvktbqouctf.supabase.co/functions/v1/send-live-reminders',
+    'https://yfpdrckyuxltvznqfqgh.supabase.co/functions/v1/send-live-reminders',
     '{"type": "reminder_15min", "limit": 500}'::jsonb,
     headers := '{"Content-Type": "application/json"}'::jsonb
   )$$
@@ -96,7 +96,7 @@ SELECT cron.schedule(
   'live-ao-vivo',
   '0 16 * * 2',
   $$SELECT net.http_post(
-    'https://tnpzoklepkvktbqouctf.supabase.co/functions/v1/send-live-reminders',
+    'https://yfpdrckyuxltvznqfqgh.supabase.co/functions/v1/send-live-reminders',
     '{"type": "ao_vivo", "limit": 500}'::jsonb,
     headers := '{"Content-Type": "application/json"}'::jsonb
   )$$
@@ -107,7 +107,7 @@ SELECT cron.schedule(
   'live-proxima',
   '0 20 * * 2',
   $$SELECT net.http_post(
-    'https://tnpzoklepkvktbqouctf.supabase.co/functions/v1/send-live-reminders',
+    'https://yfpdrckyuxltvznqfqgh.supabase.co/functions/v1/send-live-reminders',
     '{"type": "proxima_live", "limit": 500}'::jsonb,
     headers := '{"Content-Type": "application/json"}'::jsonb
   )$$
@@ -118,7 +118,7 @@ SELECT cron.schedule(
   'live-convite-vespera',
   '0 13 * * 1',
   $$SELECT net.http_post(
-    'https://tnpzoklepkvktbqouctf.supabase.co/functions/v1/send-live-reminders',
+    'https://yfpdrckyuxltvznqfqgh.supabase.co/functions/v1/send-live-reminders',
     '{"type": "convite", "limit": 500}'::jsonb,
     headers := '{"Content-Type": "application/json"}'::jsonb
   )$$

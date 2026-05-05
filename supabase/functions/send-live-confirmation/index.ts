@@ -9,16 +9,20 @@ const FROM_NAME = "Orbit Gestão";
 type LiveSource = "live-chris" | "live-semanal";
 
 interface LiveConfig {
-  title: string;
+  title: string;        // título completo (header)
+  kind: string;         // "Live" | "Masterclass" (usado nas frases)
+  titleShort: string;   // título curto que vem depois do kind nas frases
   subtitle: string;
   schedule: string;
   description: string;
-  channel: string; // onde acontece (YouTube, grupo fechado, etc.)
+  channel: string;
 }
 
 const CONFIGS: Record<LiveSource, LiveConfig> = {
   "live-chris": {
     title: "Masterclass Consultores",
+    kind: "Masterclass",
+    titleShort: "Consultores",
     subtitle: "Toda quarta-feira às 18h",
     schedule: "quarta-feira às 18h",
     description:
@@ -27,6 +31,8 @@ const CONFIGS: Record<LiveSource, LiveConfig> = {
   },
   "live-semanal": {
     title: "A Nova Era da Gestão com Time de IA",
+    kind: "Live",
+    titleShort: "A Nova Era da Gestão com Time de IA",
     subtitle: "Toda terça-feira às 13h",
     schedule: "terça-feira às 13h",
     description:
@@ -46,8 +52,8 @@ function confirmationHTML(nome: string, source: LiveSource): string {
 </div>
 <div style="padding:32px;">
 <p style="font-size:16px;line-height:1.7;color:#C9D1D9;">Olá <strong style="color:#fff;">${first}</strong>,</p>
-<p style="font-size:16px;line-height:1.7;color:#C9D1D9;">Sua inscrição para a aula <strong style="color:#fff;">${cfg.title}</strong> está confirmada!</p>
-<p style="font-size:16px;line-height:1.7;color:#C9D1D9;">A aula acontece toda <strong style="color:#ffba1a;">${cfg.schedule}</strong>. ${cfg.description}</p>
+<p style="font-size:16px;line-height:1.7;color:#C9D1D9;">Sua inscrição para a ${cfg.kind} <strong style="color:#fff;">${cfg.titleShort}</strong> está confirmada!</p>
+<p style="font-size:16px;line-height:1.7;color:#C9D1D9;">A ${cfg.kind} acontece toda <strong style="color:#ffba1a;">${cfg.schedule}</strong>. ${cfg.description}</p>
 <p style="font-size:16px;line-height:1.7;color:#C9D1D9;">Você vai receber o link de acesso ${cfg.channel} antes do início.</p>
 <p style="font-size:16px;line-height:1.7;color:#C9D1D9;">Enviaremos lembretes para você não perder.</p>
 </div>

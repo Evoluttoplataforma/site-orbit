@@ -1153,8 +1153,6 @@ export const pageHTML = `
         if (window.__rdFormInit) return;
         window.__rdFormInit = true;
 
-        var SUPABASE_URL = 'https://tnpzoklepkvktbqouctf.supabase.co';
-        var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRucHpva2xlcGt2a3RicW91Y3RmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2MjAxNjcsImV4cCI6MjA4NzE5NjE2N30.hXrOhbIm9DnxaItT1e9g6B6d9mhAmeoLKJ2DuHlABFU';
         var ORBIT_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
         var ORBIT_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
 
@@ -1191,39 +1189,12 @@ export const pageHTML = `
                 live_title: 'Sistemas da Qualidade: pare de ter mais trabalho'
             };
 
-            // Send em paralelo: Templum + MKT ORBIT (dual-write) + Pipedrive + Email
-            Promise.all([
-                // 1a. Supabase Templum
-                fetch(SUPABASE_URL + '/rest/v1/live_orbit_leads', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Prefer': 'return=minimal' },
-                    body: JSON.stringify(data)
-                }).catch(function() {}),
-                // 1b. Supabase MKT ORBIT
-                fetch(ORBIT_URL + '/rest/v1/live_orbit_leads', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json', 'apikey': ORBIT_KEY, 'Authorization': 'Bearer ' + ORBIT_KEY, 'Prefer': 'return=minimal' },
-                    body: JSON.stringify(data)
-                }).catch(function() {}),
-                // 2. Pipedrive
-                fetch(SUPABASE_URL + '/functions/v1/pipedrive-create-deal', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                }).catch(function() {}),
-                // 3. Email
-                fetch(SUPABASE_URL + '/functions/v1/send-rd-confirmation', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ nome: data.nome, email: data.email })
-                }).catch(function() {}),
-                // 4. ManyChat WhatsApp - cria subscriber + tag
-                fetch(SUPABASE_URL + '/functions/v1/subscribe-manychat-live', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ nome: data.nome, email: data.email, telefone: data.telefone, source: 'live-rd-consultores' })
-                }).catch(function() {})
-            ]).then(function() {
+            // Página oculta (noindex): só salva o lead em MKT Orbit, sem email/Pipedrive/ManyChat
+            fetch(ORBIT_URL + '/rest/v1/live_orbit_leads', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'apikey': ORBIT_KEY, 'Authorization': 'Bearer ' + ORBIT_KEY, 'Prefer': 'return=minimal' },
+                body: JSON.stringify(data)
+            }).then(function() {
                 window.location.href = '/live/rd/obrigado';
             }).catch(function() {
                 window.location.href = '/live/rd/obrigado';
