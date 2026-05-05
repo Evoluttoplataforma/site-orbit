@@ -206,6 +206,29 @@ export default function RootLayout({
   window.__wlTracking=stored;
   if(stored.fbclid){var fbcVal=stored.fbc||("fb.1."+Date.now()+"."+stored.fbclid);document.cookie="_fbc="+encodeURIComponent(fbcVal)+";max-age="+(90*24*60*60)+";path=/;SameSite=Lax"}
 })();
+
+// ===== Propaga UTMs/tracking pro chat externo (demonstracao.orbitgestao.com.br) =====
+(function(){
+  var EXTERNAL_HOST="demonstracao.orbitgestao.com.br";
+  var FORWARD=["utm_source","utm_medium","utm_campaign","utm_content","utm_term","gclid","gbraid","wbraid","gad_campaignid","gad_source","fbclid","fbc","fbp","ttclid","msclkid","li_fat_id","twclid","sck","ref"];
+  function getTracking(){try{return JSON.parse(sessionStorage.getItem("__wl_tracking")||"null")}catch(e){return null}}
+  function appendUtms(url){
+    try{
+      var u=new URL(url,window.location.href);
+      if(u.hostname.indexOf(EXTERNAL_HOST)===-1) return url;
+      var t=getTracking();if(!t) return url;
+      FORWARD.forEach(function(p){if(t[p]&&!u.searchParams.has(p))u.searchParams.set(p,t[p])});
+      return u.toString();
+    }catch(e){return url}
+  }
+  document.addEventListener("click",function(e){
+    var el=e.target;while(el&&el.tagName!=="A"){el=el.parentElement}
+    if(!el||!el.href) return;
+    if(el.href.indexOf(EXTERNAL_HOST)===-1) return;
+    var newHref=appendUtms(el.href);
+    if(newHref!==el.href) el.href=newHref;
+  },true);
+})();
         ` }} />
         <script src="/js/main-v2.js?v=2" defer></script>
         <script src="/js/orbit-init.js?v=2" defer></script>
