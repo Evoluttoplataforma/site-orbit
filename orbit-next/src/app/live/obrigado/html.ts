@@ -57,11 +57,13 @@ export const pageHTML = `
                 </div>
             </div>
 
-            <!-- Info -->
+            <!-- Adicionar ao calendário -->
             <div class="fade-in fade-in-delay-4" style="margin-bottom:40px;">
-                <p style="color:#ffba1a;font-size:16px;font-weight:700;">
-                    <i class="fa-solid fa-calendar-check" style="margin-right:8px;"></i>Toda terca-feira as 13h no YouTube
+                <p style="color:#fff;font-size:15px;font-weight:700;margin-bottom:16px;">
+                    <i class="fa-solid fa-calendar-plus" style="color:#ffba1a;margin-right:8px;"></i>Adicione na sua agenda
                 </p>
+                <div id="calBtns" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;"></div>
+                <p style="color:#8B949E;font-size:12px;margin-top:14px;">Lembrete automático 1h antes do início</p>
             </div>
 
             <!-- Back link -->
@@ -128,6 +130,134 @@ export const pageHTML = `
             requestAnimationFrame(draw);
         }
         draw();
+    })();
+    </script>
+
+    <!-- Add to calendar -->
+    <script>
+    (function() {
+        var EVENT = {
+            title: 'Live Orbit — A Nova Era da Gestão com Time de IA',
+            description: 'Live semanal da Orbit Gestão. Acesse pelo YouTube: https://www.youtube.com/@orbitgestao/live',
+            location: 'https://www.youtube.com/@orbitgestao/live',
+            durationHours: 1,
+            dayOfWeek: 2,
+            hourBRT: 13
+        };
+
+        function nextOccurrence() {
+            var now = new Date();
+            var nowUtc = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes()));
+            var target = new Date(Date.UTC(nowUtc.getUTCFullYear(), nowUtc.getUTCMonth(), nowUtc.getUTCDate(), EVENT.hourBRT + 3, 0, 0));
+            var diff = (EVENT.dayOfWeek - target.getUTCDay() + 7) % 7;
+            target.setUTCDate(target.getUTCDate() + diff);
+            if (target.getTime() <= nowUtc.getTime()) {
+                target.setUTCDate(target.getUTCDate() + 7);
+            }
+            return target;
+        }
+
+        function fmtUTC(d) {
+            var pad = function(n) { return String(n).padStart(2, '0'); };
+            return d.getUTCFullYear() + pad(d.getUTCMonth()+1) + pad(d.getUTCDate()) + 'T' + pad(d.getUTCHours()) + pad(d.getUTCMinutes()) + '00Z';
+        }
+        function fmtISO(d) {
+            var pad = function(n) { return String(n).padStart(2, '0'); };
+            return d.getUTCFullYear() + '-' + pad(d.getUTCMonth()+1) + '-' + pad(d.getUTCDate()) + 'T' + pad(d.getUTCHours()) + ':' + pad(d.getUTCMinutes()) + ':00';
+        }
+
+        var start = nextOccurrence();
+        var end = new Date(start.getTime() + EVENT.durationHours * 3600000);
+        var startStr = fmtUTC(start);
+        var endStr = fmtUTC(end);
+
+        var google = 'https://www.google.com/calendar/render?action=TEMPLATE'
+            + '&text=' + encodeURIComponent(EVENT.title)
+            + '&dates=' + startStr + '/' + endStr
+            + '&details=' + encodeURIComponent(EVENT.description)
+            + '&location=' + encodeURIComponent(EVENT.location);
+
+        var yahoo = 'https://calendar.yahoo.com/?v=60'
+            + '&title=' + encodeURIComponent(EVENT.title)
+            + '&st=' + startStr
+            + '&et=' + endStr
+            + '&desc=' + encodeURIComponent(EVENT.description)
+            + '&in_loc=' + encodeURIComponent(EVENT.location);
+
+        var office365 = 'https://outlook.office.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent'
+            + '&subject=' + encodeURIComponent(EVENT.title)
+            + '&startdt=' + encodeURIComponent(fmtISO(start) + 'Z')
+            + '&enddt=' + encodeURIComponent(fmtISO(end) + 'Z')
+            + '&body=' + encodeURIComponent(EVENT.description)
+            + '&location=' + encodeURIComponent(EVENT.location);
+
+        var outlook = office365.replace('outlook.office.com', 'outlook.live.com');
+
+        var ics = [
+            'BEGIN:VCALENDAR',
+            'VERSION:2.0',
+            'PRODID:-//Orbit Gestao//Live//PT',
+            'CALSCALE:GREGORIAN',
+            'BEGIN:VEVENT',
+            'UID:live-semanal-' + start.getTime() + '@orbitgestao.com.br',
+            'DTSTAMP:' + fmtUTC(new Date()),
+            'DTSTART:' + startStr,
+            'DTEND:' + endStr,
+            'SUMMARY:' + EVENT.title,
+            'DESCRIPTION:' + EVENT.description,
+            'LOCATION:' + EVENT.location,
+            'BEGIN:VALARM',
+            'TRIGGER:-PT1H',
+            'ACTION:DISPLAY',
+            'DESCRIPTION:Live Orbit começa em 1h',
+            'END:VALARM',
+            'END:VEVENT',
+            'END:VCALENDAR'
+        ].join('\\r\\n');
+
+        function downloadIcs() {
+            var blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'live-orbit.ics';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        var btnStyle = 'display:inline-flex;align-items:center;gap:8px;padding:10px 16px;background:#1C2333;border:1px solid rgba(255,186,26,0.25);border-radius:10px;color:#fff;font-size:13px;font-weight:600;text-decoration:none;cursor:pointer;transition:all 0.2s;font-family:inherit;';
+
+        var container = document.getElementById('calBtns');
+        if (!container) return;
+
+        var buttons = [
+            { label: 'Google', icon: 'fa-brands fa-google', color: '#4285F4', href: google, target: '_blank' },
+            { label: 'Apple', icon: 'fa-brands fa-apple', color: '#fff', onClick: downloadIcs },
+            { label: 'Outlook', icon: 'fa-brands fa-microsoft', color: '#0078D4', href: outlook, target: '_blank' },
+            { label: 'Office 365', icon: 'fa-solid fa-briefcase', color: '#EA3E23', href: office365, target: '_blank' },
+            { label: 'Yahoo', icon: 'fa-brands fa-yahoo', color: '#6001D2', href: yahoo, target: '_blank' }
+        ];
+
+        buttons.forEach(function(b) {
+            var el;
+            if (b.onClick) {
+                el = document.createElement('button');
+                el.type = 'button';
+                el.addEventListener('click', b.onClick);
+            } else {
+                el = document.createElement('a');
+                el.href = b.href;
+                el.target = b.target || '_self';
+                el.rel = 'noopener';
+            }
+            el.style.cssText = btnStyle;
+            el.innerHTML = '<i class="' + b.icon + '" style="color:' + b.color + ';font-size:16px;"></i><span>' + b.label + '</span>';
+            el.addEventListener('mouseenter', function() { el.style.borderColor = '#ffba1a'; el.style.transform = 'translateY(-1px)'; });
+            el.addEventListener('mouseleave', function() { el.style.borderColor = 'rgba(255,186,26,0.25)'; el.style.transform = 'translateY(0)'; });
+            container.appendChild(el);
+        });
     })();
     </script>
 
