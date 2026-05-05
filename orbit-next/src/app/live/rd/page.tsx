@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: 'Live Especial RD Station | Orbit Gestão',
   description: 'Live exclusiva para canais RD Station: gestão com agentes de IA aplicada à operação.',
   alternates: { canonical: 'https://orbitgestao.com.br/live/rd' },
+  robots: { index: false, follow: false },
   openGraph: {
     title: 'Live Especial RD Station | Orbit Gestão',
     description: 'Live para canais RD: gestão operada por IA.',
