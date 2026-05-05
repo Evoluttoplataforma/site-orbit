@@ -214,7 +214,7 @@ export const pageHTML = `
                 <h2>Não encontrou sua resposta?</h2>
                 <p>Fale com nosso time e tire todas as suas dúvidas.</p>
                 <div class="site-cta__buttons">
-                    <a href="/chat" class="btn btn-primary btn-lg">Falar com o Time</a>
+                    <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary btn-lg">Falar com o Time</a>
                 </div>
             </div>
         </div>

@@ -25,7 +25,7 @@ export const pageHTML = `
                 </h1>
                 <p class="hero-zoom__subtitle" data-i18n="hero.subtitle">Gestão Operada por IA: Dezenas de agentes especializados constroem e operam a gestão da sua empresa trabalhando 24/7, mesmo quando o projeto acaba.</p>
                 <div class="hero-zoom__ctas">
-                    <a href="/chat" class="btn btn-primary btn-lg hero-cta-glow">QUERO CONHECER O TIME DE IA</a>
+                    <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary btn-lg hero-cta-glow">QUERO CONHECER O TIME DE IA</a>
                     <a href="#agentes" class="btn btn-ghost btn-lg">Ver os agentes <i class="fas fa-arrow-down"></i></a>
                 </div>
                 <p class="hero-zoom__note">⏱️ 2 min • 100% gratuito • Sem compromisso</p>
@@ -410,7 +410,7 @@ export const pageHTML = `
                     </div>
                 </a>
 
-                <a href="/chat" class="pq-card">
+                <a href="https://demonstracao.orbitgestao.com.br/chat" class="pq-card">
                     <img src="/images/pq-hubs.jpg" alt="Associações e Hubs" width="1200" height="2150" loading="lazy" decoding="async">
                     <div class="pq-card__content">
                         <div class="pq-card__icon"><i class="fas fa-landmark"></i></div>
@@ -726,7 +726,7 @@ export const pageHTML = `
             </div>
 
             <div style="text-align:center;margin-top:56px;" data-reveal>
-                <a href="/chat" class="btn btn-primary btn-lg">QUERO RESOLVER ISSO</a>
+                <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary btn-lg">QUERO RESOLVER ISSO</a>
             </div>
         </div>
 
@@ -1757,7 +1757,7 @@ export const pageHTML = `
                 <!-- Bottom CTA -->
                 <div style="text-align:center;margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.06);" data-reveal>
                     <p style="color:rgba(255,255,255,0.5);font-size:1.1rem;margin-bottom:20px;">12 especialistas. 1 coordenadora. <strong style="color:#fff;">Custo de 1 funcionário.</strong></p>
-                    <a href="/chat" class="btn btn-primary btn-lg">Quero meu time de IA</a>
+                    <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary btn-lg">Quero meu time de IA</a>
                 </div>
 
                 <script>
@@ -3390,7 +3390,7 @@ export const pageHTML = `
                         <div class="cost-orbit-benefit"><i class="fas fa-star"></i> Operação imediata</div>
                     </div>
                     <div class="cost-cta">
-                        <a href="/chat" class="btn btn-primary btn-lg" style="border-radius:50px;width:100%;">Ver planos completos</a>
+                        <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary btn-lg" style="border-radius:50px;width:100%;">Ver planos completos</a>
                     </div>
                 </div>
             </div>

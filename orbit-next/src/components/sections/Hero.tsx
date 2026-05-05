@@ -60,7 +60,7 @@ export function HeroSection() {
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
           <Link
-            href="/chat"
+            href="https://demonstracao.orbitgestao.com.br/chat"
             className="group relative px-7 py-4 pr-14 bg-gold text-black font-bold text-base rounded-full overflow-hidden transition-all duration-500 hover:pl-14 hover:pr-7"
           >
             <span className="relative z-10">{t('ctaPrimary')}</span>

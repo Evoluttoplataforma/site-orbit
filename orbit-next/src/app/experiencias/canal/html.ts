@@ -399,7 +399,7 @@ body.version-b .cl-vb-inline { display: inline !important; }
             </div>
 
             <div class="site-cta__buttons">
-                <a href="/chat" class="btn btn-primary btn-lg">AGENDAR MINHA CONVERSA</a>
+                <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary btn-lg">AGENDAR MINHA CONVERSA</a>
             </div>
             <p style="font-size:14px;color:#8B949E;margin-top:12px;">Sem compromisso. 100% gratuito.</p>
         </div>

@@ -45,7 +45,7 @@ export function Header() {
               <DropdownLink href="/lp-empresas" icon="🏢" title={t('businesses')} sub={t('businessesSub')} />
               <DropdownLink href="/consultores" icon="👔" title={t('consultants')} sub={t('consultantsSub')} />
             </NavDropdown>
-            <li><Link href="/chat" className="px-4 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/[0.08] rounded-lg transition-all">{t('plans')}</Link></li>
+            <li><Link href="https://demonstracao.orbitgestao.com.br/chat" className="px-4 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/[0.08] rounded-lg transition-all">{t('plans')}</Link></li>
             <NavDropdown label={t('content')}>
               <DropdownLink href="/blog" icon="📰" title={t('blog')} sub={t('blogSub')} />
               <DropdownLink href="/historias" icon="⭐" title={t('stories')} sub={t('storiesSub')} />
@@ -61,7 +61,7 @@ export function Header() {
           {/* Actions */}
           <div className="hidden lg:flex items-center gap-3">
             <a href="https://app.orbitgestao.com.br/login" className="px-5 py-2 text-sm font-semibold text-white border border-white/20 rounded-full hover:border-white/40 transition-all">{t('login')}</a>
-            <Link href="/chat" className="group relative px-5 py-2 pr-12 text-sm font-semibold bg-gold text-black rounded-full overflow-hidden transition-all duration-500 hover:pl-12 hover:pr-5">
+            <Link href="https://demonstracao.orbitgestao.com.br/chat" className="group relative px-5 py-2 pr-12 text-sm font-semibold bg-gold text-black rounded-full overflow-hidden transition-all duration-500 hover:pl-12 hover:pr-5">
               <span className="relative z-10">{t('cta')}</span>
               <span className="absolute right-1 top-1/2 -translate-y-1/2 w-8 h-8 bg-black text-gold rounded-full flex items-center justify-center transition-all duration-500 group-hover:right-[calc(100%-36px)] group-hover:rotate-45 text-xs">→</span>
             </Link>
@@ -91,7 +91,7 @@ export function Header() {
             </div>
             <div className="flex-1 p-4 space-y-1">
               <MobileLink href="/" icon="🏠" onClick={() => setMobileOpen(false)}>{t('home')}</MobileLink>
-              <MobileLink href="/chat" icon="🏷️" onClick={() => setMobileOpen(false)}>{t('plans')}</MobileLink>
+              <MobileLink href="https://demonstracao.orbitgestao.com.br/chat" icon="🏷️" onClick={() => setMobileOpen(false)}>{t('plans')}</MobileLink>
               <MobileLink href="/agentes" icon="🤖" onClick={() => setMobileOpen(false)}>{t('agents')}</MobileLink>
               <MobileLink href="/processos" icon="🔄" onClick={() => setMobileOpen(false)}>{t('processes')}</MobileLink>
               <MobileLink href="/indicadores" icon="📊" onClick={() => setMobileOpen(false)}>{t('indicators')}</MobileLink>
@@ -100,7 +100,7 @@ export function Header() {
               <MobileLink href="/faq" icon="❓" onClick={() => setMobileOpen(false)}>{t('faq')}</MobileLink>
             </div>
             <div className="p-4 border-t border-white/[0.06]">
-              <Link href="/chat" onClick={() => setMobileOpen(false)} className="block w-full text-center py-3.5 bg-gold text-black font-bold rounded-full">{t('cta')}</Link>
+              <Link href="https://demonstracao.orbitgestao.com.br/chat" onClick={() => setMobileOpen(false)} className="block w-full text-center py-3.5 bg-gold text-black font-bold rounded-full">{t('cta')}</Link>
             </div>
           </div>
         </>

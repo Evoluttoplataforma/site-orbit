@@ -42,7 +42,7 @@ export const pageHTML = `
             </div>
 
             <div class="hero-zoom__ctas" data-reveal style="margin-top:40px;">
-                <a href="/chat" class="btn btn-primary btn-lg hero-cta-glow">QUERO SER UMA PLATAFORMA DE IA</a>
+                <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary btn-lg hero-cta-glow">QUERO SER UMA PLATAFORMA DE IA</a>
             </div>
             <p class="hero-zoom__note" data-reveal>⏱️ 2 min • 100% gratuito • Sem compromisso</p>
         </div>
@@ -302,7 +302,7 @@ export const pageHTML = `
             </div>
 
             <div style="text-align:center;margin-top:56px;" data-reveal>
-                <a href="/chat" class="btn btn-primary btn-lg">QUERO SAIR DESSE CICLO</a>
+                <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary btn-lg">QUERO SAIR DESSE CICLO</a>
             </div>
         </div>
 
@@ -1970,7 +1970,7 @@ export const pageHTML = `
                 <!-- Bottom CTA -->
                 <div style="text-align:center;margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.06);" data-reveal>
                     <p style="color:rgba(255,255,255,0.5);font-size:1.1rem;margin-bottom:20px;">12 especialistas. 1 coordenadora. <strong style="color:#fff;">Custo de 1 funcionário.</strong></p>
-                    <a href="/chat" class="btn btn-primary btn-lg">Quero meu time de IA</a>
+                    <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary btn-lg">Quero meu time de IA</a>
                 </div>
 
                 <script>

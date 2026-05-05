@@ -148,7 +148,7 @@ export default function BlogPage() {
           <h2>Pronto para transformar sua gestão?</h2>
           <p>Conheça o time de IA que executa a estratégia da sua empresa.</p>
           <div class="site-cta__buttons">
-            <a href="/chat" class="btn btn-primary btn-lg">Conhecer o Time de IA</a>
+            <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary btn-lg">Conhecer o Time de IA</a>
           </div>
         </div>
       </div>

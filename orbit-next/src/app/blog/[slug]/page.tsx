@@ -180,7 +180,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               <div class="blog-sidebar-cta__icon"><i class="fas fa-robot"></i></div>
               <h3>Conheça o Time de IA</h3>
               <p>Dezenas de agentes especializados que operam a gestão da sua empresa 24/7.</p>
-              <a href="/chat" class="btn btn-primary" style="width:100%;text-align:center;">Agendar demonstração</a>
+              <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary" style="width:100%;text-align:center;">Agendar demonstração</a>
             </div>
             <div class="blog-sidebar-card">
               <p class="blog-sidebar-card__label">Compartilhar</p>

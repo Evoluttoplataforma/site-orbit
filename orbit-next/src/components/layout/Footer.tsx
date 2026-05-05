@@ -43,7 +43,7 @@ export function Footer() {
               <li><Link href="/tarefas" className="hover:text-white transition-colors">{nav('tasks')}</Link></li>
               <li><Link href="/competencias" className="hover:text-white transition-colors">{nav('skills')}</Link></li>
               <li><Link href="/auditorias" className="hover:text-white transition-colors">{nav('audits')}</Link></li>
-              <li><Link href="/chat" className="hover:text-white transition-colors">{t('plans')}</Link></li>
+              <li><Link href="https://demonstracao.orbitgestao.com.br/chat" className="hover:text-white transition-colors">{t('plans')}</Link></li>
             </ul>
           </div>
 

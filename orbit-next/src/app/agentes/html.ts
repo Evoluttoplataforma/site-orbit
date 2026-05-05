@@ -229,7 +229,7 @@ export const pageHTML = `
                 <!-- Bottom CTA -->
                 <div style="text-align:center;margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.06);" data-reveal>
                     <p style="color:rgba(255,255,255,0.5);font-size:1.1rem;margin-bottom:20px;">12 especialistas. 1 coordenadora. <strong style="color:#fff;">Custo de 1 funcionário.</strong></p>
-                    <a href="/chat" class="btn btn-primary btn-lg">Quero meu time de IA</a>
+                    <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary btn-lg">Quero meu time de IA</a>
                 </div>
 
                 <script>
@@ -1418,8 +1418,8 @@ export const pageHTML = `
                 <h2>Pronto para montar seu time de IA?</h2>
                 <p>Dezenas de agentes especializados, setup incluso, garantia de 90 dias. Trabalhando 24/7.</p>
                 <div class="site-cta__buttons">
-                    <a href="/chat" class="btn btn-primary btn-lg">QUERO CONHECER O TIME DE IA</a>
-                    <a href="/chat" class="btn btn-outline btn-lg">Ver Planos</a>
+                    <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary btn-lg">QUERO CONHECER O TIME DE IA</a>
+                    <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-outline btn-lg">Ver Planos</a>
                 </div>
                 <p class="cta-note">O time humano equivalente: R$ 80-180k/mês</p>
             </div>
