@@ -1137,7 +1137,7 @@ export const pageHTML = `
                 fetch(SUPABASE_URL + '/functions/v1/send-live-confirmation', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ nome: data.nome, email: data.email })
+                    body: JSON.stringify({ nome: data.nome, email: data.email, source: 'live-semanal' })
                 }).catch(function() {});
                 // Cria subscriber no ManyChat WhatsApp + aplica tag (fire and forget)
                 fetch(SUPABASE_URL + '/functions/v1/subscribe-manychat-live', {

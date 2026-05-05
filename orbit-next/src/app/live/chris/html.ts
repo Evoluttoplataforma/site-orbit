@@ -633,7 +633,7 @@ export const pageHTML = `
                 fetch(SUPABASE_URL + '/functions/v1/send-live-confirmation', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ nome: data.nome, email: data.email })
+                    body: JSON.stringify({ nome: data.nome, email: data.email, source: 'live-chris' })
                 }).catch(function() {});
                 fetch(SUPABASE_URL + '/functions/v1/subscribe-manychat-live', {
                     method: 'POST',
