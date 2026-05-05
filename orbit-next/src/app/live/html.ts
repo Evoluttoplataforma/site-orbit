@@ -1134,9 +1134,13 @@ export const pageHTML = `
                     }
                 });
                 // Send confirmation email via Edge Function (fire and forget)
-                fetch(SUPABASE_URL + '/functions/v1/send-live-confirmation', {
+                fetch(ORBIT_URL + '/functions/v1/send-live-confirmation', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': ORBIT_KEY,
+                        'Authorization': 'Bearer ' + ORBIT_KEY
+                    },
                     body: JSON.stringify({ nome: data.nome, email: data.email, source: 'live-semanal' })
                 }).catch(function() {});
                 // Cria subscriber no ManyChat WhatsApp + aplica tag (fire and forget)

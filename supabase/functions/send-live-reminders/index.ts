@@ -3,8 +3,6 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 const MAILERSEND_KEY = Deno.env.get("MAILERSEND_API_KEY")!;
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-const ORBIT_URL = "https://yfpdrckyuxltvznqfqgh.supabase.co";
-const ORBIT_KEY = Deno.env.get("ORBIT_SERVICE_KEY") || Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const FROM_EMAIL = "noreply@orbtgestao.com.br";
 const FROM_NAME = "Orbit Gestão";
 
@@ -153,12 +151,12 @@ function getHTML(type: EmailType, nome: string, source: LiveSource): string {
 }
 
 async function fetchLeads(source: LiveSource): Promise<Array<{ nome: string; email: string }>> {
-  // Filtra leads por source no Supabase MKT
-  const url = `${ORBIT_URL}/rest/v1/live_orbit_leads?select=nome,email&source=eq.${encodeURIComponent(source)}&order=created_at.desc&limit=5000`;
+  // Filtra leads por source no próprio Supabase (espera-se rodar no MKT Orbit)
+  const url = `${SUPABASE_URL}/rest/v1/live_orbit_leads?select=nome,email&source=eq.${encodeURIComponent(source)}&order=created_at.desc&limit=5000`;
   const resp = await fetch(url, {
     headers: {
-      apikey: ORBIT_KEY,
-      Authorization: `Bearer ${ORBIT_KEY}`,
+      apikey: SUPABASE_SERVICE_KEY,
+      Authorization: `Bearer ${SUPABASE_SERVICE_KEY}`,
     },
   });
   const leads = await resp.json();
