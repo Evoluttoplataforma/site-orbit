@@ -144,21 +144,21 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
     : `<div style="width:80px;height:80px;border-radius:50%;background:rgba(255,186,26,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;"><span style="color:#ffba1a;font-weight:800;font-size:1.5rem;">${initials}</span></div>`;
 
   const subtitleHTML = story.subtitle
-    ? `<p style="font-size:1.15rem;line-height:1.6;color:#8B949E;max-width:720px;margin:24px auto 0;text-align:center;">${escapeHtml(story.subtitle)}</p>`
+    ? `<p style="font-size:1.15rem;line-height:1.6;color:#5A6069;max-width:720px;margin:24px auto 0;text-align:center;">${escapeHtml(story.subtitle)}</p>`
     : '';
 
   const contactLine =
     story.contact_name || story.contact_role
-      ? `<p style="margin-top:32px;font-size:0.95rem;color:#8B949E;text-align:center;">${escapeHtml(story.contact_name)}${story.contact_role ? ' — ' + escapeHtml(story.contact_role) : ''}</p>`
+      ? `<p style="margin-top:32px;font-size:0.95rem;color:#6B7280;text-align:center;">${escapeHtml(story.contact_name)}${story.contact_role ? ' — ' + escapeHtml(story.contact_role) : ''}</p>`
       : '';
 
   const breadcrumbHTML = `
-    <nav style="max-width:920px;margin:32px auto 0;padding:0 24px;font-size:0.9rem;color:#8B949E;" aria-label="Breadcrumb">
-      <a href="/" style="color:#8B949E;text-decoration:none;">Home</a>
+    <nav style="max-width:920px;margin:32px auto 0;padding:0 24px;font-size:0.9rem;color:#6B7280;" aria-label="Breadcrumb">
+      <a href="/" style="color:#6B7280;text-decoration:none;">Home</a>
       <span style="margin:0 8px;">/</span>
-      <a href="/historias" style="color:#8B949E;text-decoration:none;">Histórias</a>
+      <a href="/historias" style="color:#6B7280;text-decoration:none;">Histórias</a>
       <span style="margin:0 8px;">/</span>
-      <span style="color:#fff;">${escapeHtml(story.company_name)}</span>
+      <span style="color:#1A1D23;">${escapeHtml(story.company_name)}</span>
     </nav>`;
 
   const articleHTML = `
@@ -168,8 +168,8 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
 
       <header style="max-width:920px;margin:48px auto 0;padding:0 24px;text-align:center;">
         ${heroLogo}
-        <h1 style="font-size:clamp(2rem,4.5vw,3.2rem);line-height:1.15;font-weight:800;color:#fff;margin:0;letter-spacing:-0.02em;">${escapeHtml(headline)}</h1>
-        ${segLabel ? `<div style="margin-top:20px;"><span style="display:inline-block;padding:8px 18px;border-radius:999px;background:rgba(255,186,26,0.12);color:#ffba1a;font-size:0.85rem;font-weight:600;border:1px solid rgba(255,186,26,0.3);">${escapeHtml(segLabel)}</span></div>` : ''}
+        <h1 style="font-size:clamp(2rem,4.5vw,3.2rem);line-height:1.15;font-weight:800;color:#1A1D23;margin:0;letter-spacing:-0.02em;">${escapeHtml(headline)}</h1>
+        ${segLabel ? `<div style="margin-top:20px;"><span style="display:inline-block;padding:8px 18px;border-radius:999px;background:rgba(255,186,26,0.12);color:#b8860b;font-size:0.85rem;font-weight:600;border:1px solid rgba(255,186,26,0.4);">${escapeHtml(segLabel)}</span></div>` : ''}
         ${subtitleHTML}
         ${contactLine}
       </header>

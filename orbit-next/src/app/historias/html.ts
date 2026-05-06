@@ -36,12 +36,12 @@ export const pageHTML = `
     <!-- CTA -->
     <section class="stories-cta" data-reveal>
         <div class="container">
-            <div class="stories-cta__badge"><i class="fas fa-star"></i> Conte sua história</div>
-            <h3>Sua empresa também pode ser destaque</h3>
-            <p>Compartilhe sua experiência com a Orbit Gestão e inspire outras empresas a transformarem sua gestão.</p>
+            <div class="stories-cta__badge"><i class="fas fa-rocket"></i> Veja a Orbit em ação</div>
+            <h3>Quer transformar a gestão da sua empresa?</h3>
+            <p>Agende uma demonstração e veja como a Orbit pode ajudar você a alcançar os mesmos resultados.</p>
             <div class="stories-cta__buttons">
-                <a href="/historias/enviar" class="btn btn-primary btn-lg">Conte sua história</a>
-                <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-outline btn-lg">Agendar demonstração</a>
+                <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary btn-lg">Agende uma demonstração</a>
+                <a href="/historias/enviar" class="btn btn-outline btn-lg">Conte sua história</a>
             </div>
         </div>
     </section>
