@@ -13,7 +13,9 @@ const DATA_DIR = path.join(ROOT, 'src', 'data');
 const IMG_DIR = path.join(ROOT, 'public', 'images', 'blog');
 
 const SUPABASE_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
-const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDQ1NjAwNiwiZXhwIjoyMDkwMDMyMDA2fQ.LTZYTuBXAf7cFJrGbo9J_F80VzA_8kbcHiwsTZXRM5Q';
+const RAW_KEY = process.env.SUPABASE_SERVICE_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDQ1NjAwNiwiZXhwIjoyMDkwMDMyMDA2fQ.LTZYTuBXAf7cFJrGbo9J_F80VzA_8kbcHiwsTZXRM5Q';
+// Strip qualquer whitespace (env vars no Cloudflare podem vir com \n se coladas com quebra de linha)
+const SUPABASE_KEY = RAW_KEY.replace(/\s+/g, '');
 
 async function fetchArticles() {
   console.log('📥 Buscando artigos do Supabase...');
