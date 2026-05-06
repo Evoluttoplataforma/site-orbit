@@ -186,8 +186,8 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
           </div>
 
           <div class="blog-article__bottom-cta">
-            <a href="/historias" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Voltar às Histórias</a>
-            <a href="/historias/enviar" class="btn btn-primary" style="margin-left:12px;"><i class="fas fa-pen"></i> Conte sua história</a>
+            <a href="/historias" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Voltar às Histórias</a>
+            <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary" style="margin-left:12px;"><i class="fas fa-rocket"></i> Agende uma demonstração</a>
           </div>
         </article>
 
@@ -206,10 +206,10 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
               </div>
             </div>
             <div class="blog-sidebar-cta">
-              <div class="blog-sidebar-cta__icon"><i class="fas fa-star"></i></div>
-              <h3>Sua empresa também pode ser destaque</h3>
-              <p>Compartilhe sua experiência com a Orbit e inspire outros empresários.</p>
-              <a href="/historias/enviar" class="btn btn-primary" style="width:100%;text-align:center;">Contar minha história</a>
+              <div class="blog-sidebar-cta__icon"><i class="fas fa-rocket"></i></div>
+              <h3>Quer transformar a gestão da sua empresa?</h3>
+              <p>Agende uma demonstração e veja como a Orbit pode ajudar você a alcançar os mesmos resultados.</p>
+              <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary" style="width:100%;text-align:center;">Agende uma demonstração</a>
             </div>
           </div>
         </aside>
