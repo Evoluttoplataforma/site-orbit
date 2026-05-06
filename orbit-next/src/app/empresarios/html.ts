@@ -3290,10 +3290,6 @@ export const pageHTML = `
                                 <span class="cost-item__label">Monitoramento 24/7</span>
                                 <span class="cost-item__value"><i class="fa-solid fa-check"></i> Incluso</span>
                             </div>
-                            <div class="cost-total">
-                                <span class="cost-total__label">A partir de</span>
-                                <span class="cost-total__value">R$ 1.200/mês</span>
-                            </div>
                             <div class="cost-orbit-benefits">
                                 <div class="cost-orbit-benefit"><i class="fas fa-star"></i> Coordenado pela Olívia (IA)</div>
                                 <div class="cost-orbit-benefit"><i class="fas fa-star"></i> Sem contratação CLT</div>
