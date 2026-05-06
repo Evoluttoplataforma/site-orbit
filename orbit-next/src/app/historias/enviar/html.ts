@@ -464,6 +464,7 @@ export const pageHTML = `
                 contact_role: story.cargo,
                 segment: story.segmento,
                 slug: story.slug,
+                title: story.titulo,
                 challenge: story.desafio,
                 solution: story.solucao,
                 results: story.resultados,

@@ -29,6 +29,7 @@ function escapeHtml(str: string) {
 interface Story {
   id: number;
   slug: string;
+  titulo: string;
   empresa: string;
   nome: string;
   cargo: string;
@@ -72,6 +73,7 @@ export function PageContent() {
         const stories: Story[] = data.map((s: any) => ({
           id: Number(s.id),
           slug: String(s.slug || ''),
+          titulo: String(s.title || ''),
           empresa: String(s.company_name || ''),
           nome: String(s.contact_name || '').split('|')[0].trim(),
           cargo: String(s.contact_role || ''),
@@ -199,7 +201,8 @@ export function PageContent() {
               <div class="blog-article__layout">
                 <article class="blog-article__main">
                   <span class="blog-article__category">${escapeHtml(segLabel || 'História de Sucesso')}</span>
-                  <h1 class="blog-article__title">${escapeHtml(s.empresa)}</h1>
+                  <h1 class="blog-article__title">${escapeHtml(s.titulo || s.empresa)}</h1>
+                  ${s.titulo && s.empresa ? `<p class="blog-article__subtitle" style="font-size:1.05rem;color:#8B949E;margin:8px 0 16px;">${escapeHtml(s.empresa)}</p>` : ''}
                   <div class="blog-article__meta">
                     <div class="blog-article__meta-author">
                       <div class="blog-card__avatar">${initials}</div>

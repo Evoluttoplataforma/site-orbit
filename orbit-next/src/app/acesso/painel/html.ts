@@ -3079,7 +3079,7 @@ JSON.stringify(schemaOrg, null, 2) +
         document.getElementById('seEmail').value = '';
         document.getElementById('seCargo').value = s.contact_role || '';
         document.getElementById('seTelefone').value = '';
-        document.getElementById('seTitulo').value = s.challenge ? s.company_name : '';
+        document.getElementById('seTitulo').value = s.title || '';
         document.getElementById('seDesafio').value = s.challenge || '';
         document.getElementById('seSolucao').value = s.solution || '';
         document.getElementById('seResultados').value = s.results || '';
@@ -3194,6 +3194,7 @@ JSON.stringify(schemaOrg, null, 2) +
             segment: segmento,
             contact_name: nome,
             contact_role: document.getElementById('seCargo').value.trim(),
+            title: titulo,
             challenge: desafio,
             solution: solucao,
             results: resultados,
