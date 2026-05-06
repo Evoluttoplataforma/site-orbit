@@ -30,22 +30,18 @@ interface Story {
   id: number;
   slug: string;
   titulo: string;
+  subtitulo: string;
   empresa: string;
   nome: string;
   cargo: string;
   segmento: string;
   desafio: string;
-  solucao: string;
-  resultados: string;
-  depoimento: string;
   companyLogo: string;
-  createdAt: string;
 }
 
 export function PageContent() {
   const ref = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
-  const storiesRef = useRef<Story[]>([]);
 
   useEffect(() => { setMounted(true); }, []);
 
@@ -63,7 +59,7 @@ export function PageContent() {
   }, []);
 
   const fetchAndRenderStories = useCallback(() => {
-    fetch(`${SB_URL}/rest/v1/customer_stories?status=eq.published&order=created_at.desc&select=*`, {
+    fetch(`${SB_URL}/rest/v1/customer_stories?status=eq.published&order=created_at.desc&select=id,slug,title,subtitle,company_name,segment,contact_name,contact_role,challenge,logo_url`, {
       headers: { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}` },
     })
       .then((r) => r.json())
@@ -74,20 +70,15 @@ export function PageContent() {
           id: Number(s.id),
           slug: String(s.slug || ''),
           titulo: String(s.title || ''),
+          subtitulo: String(s.subtitle || ''),
           empresa: String(s.company_name || ''),
           nome: String(s.contact_name || '').split('|')[0].trim(),
           cargo: String(s.contact_role || ''),
           segmento: String(s.segment || ''),
           desafio: String(s.challenge || ''),
-          solucao: String(s.solution || ''),
-          resultados: String(s.results || ''),
-          depoimento: String(s.testimonial || ''),
           companyLogo: String(s.logo_url || ''),
-          createdAt: String(s.created_at || ''),
         }));
-        storiesRef.current = stories;
 
-        // Render grid
         const grid = document.getElementById('storiesGrid');
         const empty = document.getElementById('storiesEmpty');
         if (!grid) return;
@@ -99,7 +90,6 @@ export function PageContent() {
         }
         if (empty) empty.style.display = 'none';
 
-        // Build filter buttons
         const filterBar = document.getElementById('filterBar');
         if (filterBar) {
           const segments = [...new Set(stories.map((s) => s.segmento).filter(Boolean))];
@@ -132,10 +122,12 @@ export function PageContent() {
           grid.innerHTML = filtered
             .map((story, i) => {
               const segLabel = SEGMENTS[story.segmento] || story.segmento || '';
-              const preview = story.desafio ? story.desafio.slice(0, 140) + (story.desafio.length > 140 ? '...' : '') : '';
+              const headline = story.titulo || story.empresa;
+              const preview = story.subtitulo || (story.desafio ? story.desafio.slice(0, 140) + (story.desafio.length > 140 ? '...' : '') : '');
               const initials = story.empresa ? story.empresa.split(' ').map(w => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase() : 'O';
+              const href = story.slug ? `/historias/${story.slug}` : `/historias`;
 
-              return `<article class="blog-card blog-card--animate" data-story-id="${story.id}" style="animation-delay:${i * 80}ms;cursor:pointer;">
+              return `<a href="${href}" class="blog-card blog-card--animate" style="animation-delay:${i * 80}ms;text-decoration:none;color:inherit;display:block;">
                 <div class="blog-card__image" style="background:linear-gradient(135deg,#0D1117 0%,#1a1f2e 100%);display:flex;align-items:center;justify-content:center;min-height:180px;">
                   ${story.companyLogo
                     ? `<img src="${story.companyLogo}" alt="${escapeHtml(story.empresa)}" style="max-width:120px;max-height:80px;object-fit:contain;" loading="lazy">`
@@ -143,7 +135,7 @@ export function PageContent() {
                   ${segLabel ? `<span class="blog-card__tag" style="background:rgba(255,186,26,0.15);color:#ffba1a;border:1px solid rgba(255,186,26,0.3);">${escapeHtml(segLabel)}</span>` : ''}
                 </div>
                 <div class="blog-card__body">
-                  <h3>${escapeHtml(story.empresa)}</h3>
+                  <h3>${escapeHtml(headline)}</h3>
                   ${preview ? `<p>${escapeHtml(preview)}</p>` : ''}
                   <div class="blog-card__footer">
                     <div class="blog-card__author">
@@ -156,97 +148,9 @@ export function PageContent() {
                     <span class="blog-card__read-time"><i class="fas fa-arrow-right"></i> Ver história</span>
                   </div>
                 </div>
-              </article>`;
+              </a>`;
             })
             .join('');
-
-          // Click handlers
-          grid.querySelectorAll('[data-story-id]').forEach((card) => {
-            card.addEventListener('click', () => {
-              const id = Number((card as HTMLElement).dataset.storyId);
-              showDetail(id);
-            });
-          });
-        }
-
-        function showDetail(id: number) {
-          const s = storiesRef.current.find((st) => st.id === id);
-          if (!s) return;
-          const segLabel = SEGMENTS[s.segmento] || s.segmento || '';
-          const initials = s.empresa ? s.empresa.split(' ').map((w: string) => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase() : 'O';
-
-          // Esconde o grid e filtros, mostra o artigo no mesmo layout do blog
-          const gridSection = document.querySelector('.blog-grid-section') || grid?.parentElement;
-          const filtersEl = document.querySelector('.stories-filters');
-          const heroEl = document.querySelector('.stories-hero');
-          const ctaEl = document.querySelector('.stories-cta');
-          if (gridSection) (gridSection as HTMLElement).style.display = 'none';
-          if (filtersEl) (filtersEl as HTMLElement).style.display = 'none';
-          if (heroEl) (heroEl as HTMLElement).style.display = 'none';
-          if (ctaEl) (ctaEl as HTMLElement).style.display = 'none';
-
-          // Cria container do artigo
-          let detailContainer = document.getElementById('storyDetailPage');
-          if (!detailContainer) {
-            detailContainer = document.createElement('div');
-            detailContainer.id = 'storyDetailPage';
-            (gridSection || grid)?.parentElement?.appendChild(detailContainer);
-          }
-
-          window.scrollTo({ top: 0 });
-
-          detailContainer.innerHTML = `
-            <div class="blog-article" style="padding-top:100px;">
-              <a href="/historias" class="blog-article__back" onclick="event.preventDefault();document.getElementById('storyDetailPage').remove();document.querySelector('.stories-hero').style.display='';document.querySelector('.stories-filters').style.display='';document.querySelector('.blog-grid-section,.stories-section').style.display='';var cta=document.querySelector('.stories-cta');if(cta)cta.style.display='';"><i class="fas fa-arrow-left"></i> Voltar às Histórias</a>
-              <div class="blog-article__layout">
-                <article class="blog-article__main">
-                  <span class="blog-article__category">${escapeHtml(segLabel || 'História de Sucesso')}</span>
-                  <h1 class="blog-article__title">${escapeHtml(s.titulo || s.empresa)}</h1>
-                  ${s.titulo && s.empresa ? `<p class="blog-article__subtitle" style="font-size:1.05rem;color:#8B949E;margin:8px 0 16px;">${escapeHtml(s.empresa)}</p>` : ''}
-                  <div class="blog-article__meta">
-                    <div class="blog-article__meta-author">
-                      <div class="blog-card__avatar">${initials}</div>
-                      <span>${escapeHtml(s.nome)}${s.cargo ? ' — ' + escapeHtml(s.cargo) : ''}</span>
-                    </div>
-                  </div>
-
-                  <div class="blog-article-content">
-                    ${s.desafio ? `<h2 style="color:#ffba1a;"><i class="fas fa-triangle-exclamation" style="margin-right:8px;"></i>O Desafio</h2><p>${escapeHtml(s.desafio)}</p>` : ''}
-                    ${s.solucao ? `<h2 style="color:#ffba1a;"><i class="fas fa-lightbulb" style="margin-right:8px;"></i>A Solução</h2><p>${escapeHtml(s.solucao)}</p>` : ''}
-                    ${s.resultados ? `<h2 style="color:#22C55E;"><i class="fas fa-chart-line" style="margin-right:8px;"></i>Os Resultados</h2><p>${escapeHtml(s.resultados)}</p>` : ''}
-                    ${s.depoimento ? `<blockquote style="border-left:3px solid #ffba1a;padding:16px 20px;margin:32px 0;background:rgba(255,186,26,0.05);border-radius:0 12px 12px 0;"><p style="font-style:italic;line-height:1.8;font-size:1.1rem;">"${escapeHtml(s.depoimento)}"</p><footer style="margin-top:12px;font-size:0.9rem;color:#8B949E;">— ${escapeHtml(s.nome)}${s.cargo ? ', ' + escapeHtml(s.cargo) : ''}${s.empresa ? ' na ' + escapeHtml(s.empresa) : ''}</footer></blockquote>` : ''}
-                  </div>
-
-                  <div class="blog-article__bottom-cta">
-                    <a href="/historias" class="btn btn-primary" onclick="event.preventDefault();document.getElementById('storyDetailPage').remove();document.querySelector('.stories-hero').style.display='';document.querySelector('.stories-filters').style.display='';document.querySelector('.blog-grid-section,.stories-section').style.display='';var cta=document.querySelector('.stories-cta');if(cta)cta.style.display='';"><i class="fas fa-arrow-left"></i> Voltar às Histórias</a>
-                    <a href="/historias/enviar" class="btn btn-primary" style="margin-left:12px;"><i class="fas fa-pen"></i> Conte sua história</a>
-                  </div>
-                </article>
-
-                <aside class="blog-article__sidebar">
-                  <div class="blog-article__sidebar-sticky">
-                    <div class="blog-sidebar-card">
-                      <p class="blog-sidebar-card__label">Empresa</p>
-                      <div class="blog-sidebar-card__author">
-                        ${s.companyLogo
-                          ? `<img src="${s.companyLogo}" style="width:48px;height:48px;border-radius:12px;object-fit:cover;" alt="${escapeHtml(s.empresa)}">`
-                          : `<div class="blog-card__avatar blog-card__avatar--lg">${initials}</div>`}
-                        <div>
-                          <p class="blog-sidebar-card__name">${escapeHtml(s.empresa)}</p>
-                          <p class="blog-sidebar-card__role">${escapeHtml(segLabel)}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="blog-sidebar-cta">
-                      <div class="blog-sidebar-cta__icon"><i class="fas fa-star"></i></div>
-                      <h3>Sua empresa também pode ser destaque</h3>
-                      <p>Compartilhe sua experiência com a Orbit e inspire outros empresários.</p>
-                      <a href="/historias/enviar" class="btn btn-primary" style="width:100%;text-align:center;">Contar minha história</a>
-                    </div>
-                  </div>
-                </aside>
-              </div>
-            </div>`;
         }
 
         renderGrid('all');
@@ -261,7 +165,6 @@ export function PageContent() {
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, [mounted, initScripts, fetchAndRenderStories]);
 
-  // Sempre renderiza o HTML estático (com H1) no SSR/SSG — scripts e fetch só rodam após mount
   const fullHTML = headerHTML + '\n' + pageHTML;
   return <div ref={ref} dangerouslySetInnerHTML={{ __html: fullHTML }} />;
 }

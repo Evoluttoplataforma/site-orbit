@@ -107,8 +107,12 @@ export const pageHTML = `
                 <div class="form-grid">
                     <div class="form-group full-width">
                         <label>Título da sua história <span class="required">*</span></label>
-                        <input type="text" name="titulo" required placeholder="Ex: Como reduzimos 40% dos retrabalhos com a Orbit">
+                        <input type="text" name="titulo" required placeholder="Ex: Empresa X: 40% Menos Retrabalho">
                         <span class="error-msg">Campo obrigatório</span>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Subtítulo</label>
+                        <input type="text" name="subtitulo" placeholder="Ex: Como utilizamos automação para otimizar processos manuais">
                     </div>
                     <div class="form-group full-width">
                         <label>Qual era o desafio antes da Orbit? <span class="required">*</span></label>
@@ -435,6 +439,7 @@ export const pageHTML = `
             instagram: fd.get('instagram'),
             website: fd.get('website'),
             titulo: fd.get('titulo'),
+            subtitulo: fd.get('subtitulo'),
             desafio: fd.get('desafio'),
             solucao: fd.get('solucao'),
             resultados: fd.get('resultados'),
@@ -465,6 +470,7 @@ export const pageHTML = `
                 segment: story.segmento,
                 slug: story.slug,
                 title: story.titulo,
+                subtitle: story.subtitulo || null,
                 challenge: story.desafio,
                 solution: story.solucao,
                 results: story.resultados,

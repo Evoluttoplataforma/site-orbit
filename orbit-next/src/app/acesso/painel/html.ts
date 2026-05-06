@@ -700,7 +700,11 @@ export const pageHTML = `
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="seTitulo">Título da história *</label>
-                                    <input type="text" id="seTitulo" placeholder="Ex: Como a Empresa X triplicou sua produtividade">
+                                    <input type="text" id="seTitulo" placeholder="Ex: Empresa X: 1 Semana de Trabalho Economizada Mensalmente">
+                                </div>
+                                <div class="form-group">
+                                    <label for="seSubtitulo">Subtítulo</label>
+                                    <input type="text" id="seSubtitulo" placeholder="Ex: Como a Empresa X utilizou automação para otimizar processos manuais">
                                 </div>
                                 <div class="form-group">
                                     <label for="seDesafio">Qual era o desafio antes da Orbit? *</label>
@@ -3052,6 +3056,7 @@ JSON.stringify(schemaOrg, null, 2) +
         document.getElementById('seCargo').value = '';
         document.getElementById('seTelefone').value = '';
         document.getElementById('seTitulo').value = '';
+        document.getElementById('seSubtitulo').value = '';
         document.getElementById('seDesafio').value = '';
         document.getElementById('seSolucao').value = '';
         document.getElementById('seResultados').value = '';
@@ -3080,6 +3085,7 @@ JSON.stringify(schemaOrg, null, 2) +
         document.getElementById('seCargo').value = s.contact_role || '';
         document.getElementById('seTelefone').value = '';
         document.getElementById('seTitulo').value = s.title || '';
+        document.getElementById('seSubtitulo').value = s.subtitle || '';
         document.getElementById('seDesafio').value = s.challenge || '';
         document.getElementById('seSolucao').value = s.solution || '';
         document.getElementById('seResultados').value = s.results || '';
@@ -3187,7 +3193,7 @@ JSON.stringify(schemaOrg, null, 2) +
         if (!solucao) { toast('Descreva a solução.', 'error'); return; }
         if (!resultados) { toast('Descreva os resultados.', 'error'); return; }
 
-        var slug = generateSlugFromTitle(titulo);
+        var slug = generateSlugFromTitle(empresa);
 
         var payload = {
             company_name: empresa,
@@ -3195,6 +3201,7 @@ JSON.stringify(schemaOrg, null, 2) +
             contact_name: nome,
             contact_role: document.getElementById('seCargo').value.trim(),
             title: titulo,
+            subtitle: document.getElementById('seSubtitulo').value.trim(),
             challenge: desafio,
             solution: solucao,
             results: resultados,

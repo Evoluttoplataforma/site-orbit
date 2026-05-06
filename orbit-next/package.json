@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/fetch-articles.mjs",
+    "prebuild": "node scripts/fetch-articles.mjs && node scripts/fetch-stories.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
