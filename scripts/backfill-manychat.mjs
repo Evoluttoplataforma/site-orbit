@@ -13,7 +13,7 @@ const BATCH_SIZE = 5;
 
 async function fetchLeads() {
   const sources = SOURCES.map(s => `"${s}"`).join(',');
-  const url = `${SB_URL}/rest/v1/live_orbit_leads?source=in.(${sources})&select=id,nome,email,telefone,source&order=created_at.asc`;
+  const url = `${SB_URL}/rest/v1/live_orbit_leads?source=in.(${sources})&select=id,nome,email,telefone,source,chosen_date&order=created_at.asc`;
   const resp = await fetch(url, {
     headers: { apikey: SB_KEY_SVC, Authorization: `Bearer ${SB_KEY_SVC}` },
   });
@@ -33,6 +33,7 @@ async function sendOne(lead) {
       email: lead.email,
       telefone: lead.telefone,
       source: lead.source,
+      chosen_date: lead.chosen_date,
     }),
   });
   const data = await resp.json().catch(() => null);

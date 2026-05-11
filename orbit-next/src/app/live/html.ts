@@ -1137,7 +1137,7 @@ export const pageHTML = `
                         'apikey': ORBIT_KEY,
                         'Authorization': 'Bearer ' + ORBIT_KEY
                     },
-                    body: JSON.stringify({ nome: data.nome, email: data.email, telefone: data.telefone, source: 'live-semanal' })
+                    body: JSON.stringify({ nome: data.nome, email: data.email, telefone: data.telefone, source: 'live-semanal', chosen_date: data.chosen_date })
                 }).catch(function() {});
                 window.location.href = '/live/obrigado';
             }).catch(function(err) {

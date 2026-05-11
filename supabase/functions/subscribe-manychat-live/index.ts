@@ -9,6 +9,22 @@ const TAGS: Record<string, string> = {
   'live-chris': 'evento-live-chris',
 };
 
+// Horário fixo por evento (BRT, -03:00). Combinado com chosen_date pra montar
+// o campo custom 'data-e-horario-da-live' (tipo datetime) no ManyChat.
+const TIME_BY_SOURCE: Record<string, string> = {
+  'live-semanal': '13:00',
+  'live-chris': '18:00',
+};
+
+const CUF_DATETIME = 'data-e-horario-da-live';
+
+function buildLiveDateTime(chosenDate: string | undefined, source: string): string | null {
+  const time = TIME_BY_SOURCE[source];
+  if (!chosenDate || !time) return null;
+  // Ex: "2026-05-12T13:00:00-03:00"
+  return `${chosenDate}T${time}:00-03:00`;
+}
+
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
@@ -49,7 +65,7 @@ Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
   try {
     const body = await req.json();
-    const { nome, email, telefone, source } = body;
+    const { nome, email, telefone, source, chosen_date } = body;
     if (!nome || !telefone) {
       return new Response(JSON.stringify({ error: 'nome e telefone obrigatórios' }), {
         status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -115,11 +131,24 @@ Deno.serve(async (req: Request) => {
       tag_name: tag,
     });
 
+    // 4. Seta o campo custom data-e-horario-da-live se tivermos chosen_date
+    let cufRes: { status: number; data: any } | null = null;
+    const liveDateTime = buildLiveDateTime(chosen_date, source);
+    if (liveDateTime) {
+      cufRes = await mcRequest('POST', 'subscriber/setCustomFieldByName', {
+        subscriber_id: subscriberId,
+        field_name: CUF_DATETIME,
+        field_value: liveDateTime,
+      });
+    }
+
     return new Response(JSON.stringify({
       success: tagRes.status === 200 && tagRes.data?.status === 'success',
       subscriber_id: subscriberId,
       tag,
       tag_result: tagRes.data,
+      live_datetime: liveDateTime,
+      cuf_result: cufRes?.data ?? null,
     }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
   } catch (err) {
     return new Response(JSON.stringify({ error: 'interno', details: String(err) }), {

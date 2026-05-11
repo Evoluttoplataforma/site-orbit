@@ -632,7 +632,7 @@ export const pageHTML = `
                         'apikey': ORBIT_KEY,
                         'Authorization': 'Bearer ' + ORBIT_KEY
                     },
-                    body: JSON.stringify({ nome: data.nome, email: data.email, telefone: data.telefone, source: 'live-chris' })
+                    body: JSON.stringify({ nome: data.nome, email: data.email, telefone: data.telefone, source: 'live-chris', chosen_date: data.chosen_date })
                 }).catch(function() {});
                 window.location.href = '/live/chris/obrigado';
             }).catch(function(err) {
