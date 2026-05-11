@@ -17,12 +17,29 @@ const TIME_BY_SOURCE: Record<string, string> = {
 };
 
 const CUF_DATETIME = 'data-e-horario-da-live';
+const CUF_DATA = 'data-live';
+const CUF_HORARIO = 'horario-live';
 
 function buildLiveDateTime(chosenDate: string | undefined, source: string): string | null {
   const time = TIME_BY_SOURCE[source];
   if (!chosenDate || !time) return null;
   // Ex: "2026-05-12T13:00:00-03:00"
   return `${chosenDate}T${time}:00-03:00`;
+}
+
+// "2026-05-12" -> "12/05/2026"
+function formatDataBR(chosenDate: string | undefined): string | null {
+  if (!chosenDate) return null;
+  const m = chosenDate.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (!m) return null;
+  return `${m[3]}/${m[2]}/${m[1]}`;
+}
+
+// "13:00" -> "13h"
+function formatHorarioBR(source: string): string | null {
+  const time = TIME_BY_SOURCE[source];
+  if (!time) return null;
+  return time.split(':')[0] + 'h';
 }
 
 const corsHeaders = {
@@ -131,15 +148,29 @@ Deno.serve(async (req: Request) => {
       tag_name: tag,
     });
 
-    // 4. Seta o campo custom data-e-horario-da-live se tivermos chosen_date
-    let cufRes: { status: number; data: any } | null = null;
+    // 4. Seta os 3 campos custom (datetime pro trigger + text pra exibição)
     const liveDateTime = buildLiveDateTime(chosen_date, source);
+    const dataBR = formatDataBR(chosen_date);
+    const horarioBR = formatHorarioBR(source);
+
+    const cufResults: Record<string, unknown> = {};
     if (liveDateTime) {
-      cufRes = await mcRequest('POST', 'subscriber/setCustomFieldByName', {
-        subscriber_id: subscriberId,
-        field_name: CUF_DATETIME,
-        field_value: liveDateTime,
+      const r = await mcRequest('POST', 'subscriber/setCustomFieldByName', {
+        subscriber_id: subscriberId, field_name: CUF_DATETIME, field_value: liveDateTime,
       });
+      cufResults[CUF_DATETIME] = r.data?.status;
+    }
+    if (dataBR) {
+      const r = await mcRequest('POST', 'subscriber/setCustomFieldByName', {
+        subscriber_id: subscriberId, field_name: CUF_DATA, field_value: dataBR,
+      });
+      cufResults[CUF_DATA] = r.data?.status;
+    }
+    if (horarioBR) {
+      const r = await mcRequest('POST', 'subscriber/setCustomFieldByName', {
+        subscriber_id: subscriberId, field_name: CUF_HORARIO, field_value: horarioBR,
+      });
+      cufResults[CUF_HORARIO] = r.data?.status;
     }
 
     return new Response(JSON.stringify({
@@ -148,7 +179,9 @@ Deno.serve(async (req: Request) => {
       tag,
       tag_result: tagRes.data,
       live_datetime: liveDateTime,
-      cuf_result: cufRes?.data ?? null,
+      data_live: dataBR,
+      horario_live: horarioBR,
+      cuf_results: cufResults,
     }), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
   } catch (err) {
     return new Response(JSON.stringify({ error: 'interno', details: String(err) }), {
