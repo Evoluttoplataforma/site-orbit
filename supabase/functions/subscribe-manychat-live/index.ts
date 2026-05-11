@@ -1,13 +1,12 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
-// Hardcoded server-side - não exposto no browser
-const MC = '4423653:9c0401d0a5f3ffee38883c2746df1331';
+// API key vem de secret (não commitar no Git)
+const MC = Deno.env.get('MANYCHAT_API_KEY') || '';
 const MC_API = 'https://api.manychat.com/fb';
 
 const TAGS: Record<string, string> = {
-  'live-semanal': 'inscrito-live-semanal',
-  'live-rd-consultores': 'inscrito-masterclass-qualidade',
-  'live-chris': 'inscrito-masterclass-consultores',
+  'live-semanal': 'evento-live-igor',
+  'live-chris': 'evento-live-chris',
 };
 
 const corsHeaders = {
@@ -64,7 +63,17 @@ Deno.serve(async (req: Request) => {
       });
     }
 
-    const tag = TAGS[source] || 'inscrito-live-semanal';
+    const tag = TAGS[source];
+    if (!tag) {
+      return new Response(JSON.stringify({ error: 'source sem tag mapeada', source }), {
+        status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+    if (!MC) {
+      return new Response(JSON.stringify({ error: 'MANYCHAT_API_KEY não configurada' }), {
+        status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
     const parts = String(nome).trim().split(' ');
     const firstName = parts[0];
     const lastName = parts.slice(1).join(' ');
