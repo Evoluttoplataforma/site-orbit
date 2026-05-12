@@ -16,6 +16,10 @@ interface LiveConfig {
   schedule: string;
   description: string;
   channel: string;
+  // Para o .ics
+  icsTitle: string;     // nome do evento no calendário
+  icsHour: number;      // hora local BRT (UTC-3)
+  icsDurationMin: number;
 }
 
 const CONFIGS: Record<LiveSource, LiveConfig> = {
@@ -25,9 +29,11 @@ const CONFIGS: Record<LiveSource, LiveConfig> = {
     titleShort: "Consultores",
     subtitle: "Toda quarta-feira às 18h",
     schedule: "quarta-feira às 18h",
-    description:
-      "Você vai entender como consultores estão criando recorrência passiva e escalando com agentes de IA, conduzido por Christian Hart (Diretor de Canais — Grupo GSN).",
+    description: `Como consultores estão criando recorrência passiva e escalando com agentes de IA. Conduzido por Christian Hart (Grupo GSN).`,
     channel: "no grupo fechado de avisos no WhatsApp",
+    icsTitle: "Masterclass Consultores - Orbit",
+    icsHour: 18,
+    icsDurationMin: 60,
   },
   "live-semanal": {
     title: "A Nova Era da Gestão com Time de IA",
@@ -35,11 +41,70 @@ const CONFIGS: Record<LiveSource, LiveConfig> = {
     titleShort: "A Nova Era da Gestão com Time de IA",
     subtitle: "Toda terça-feira às 13h",
     schedule: "terça-feira às 13h",
-    description:
-      "Você vai ver na prática como dezenas de agentes de IA operam a gestão de empresas 24/7.",
+    description: `Veja na prática como dezenas de agentes de IA operam a gestão de empresas 24/7.`,
     channel: "no YouTube",
+    icsTitle: "Live Orbit - A Nova Era da Gestão com IA",
+    icsHour: 13,
+    icsDurationMin: 60,
   },
 };
+
+// Gera arquivo .ics (iCalendar) pra um evento.
+// chosenDate no formato "YYYY-MM-DD". Hora local BRT (-03:00) convertida pra UTC.
+function buildICS(chosenDate: string, source: LiveSource): string {
+  const cfg = CONFIGS[source];
+  const [y, m, d] = chosenDate.split("-").map(Number);
+  // Hora local BRT -> UTC: soma 3h
+  const startUTC = new Date(Date.UTC(y, m - 1, d, cfg.icsHour + 3, 0, 0));
+  const endUTC = new Date(startUTC.getTime() + cfg.icsDurationMin * 60 * 1000);
+  const fmt = (dt: Date) =>
+    dt.getUTCFullYear().toString() +
+    String(dt.getUTCMonth() + 1).padStart(2, "0") +
+    String(dt.getUTCDate()).padStart(2, "0") +
+    "T" +
+    String(dt.getUTCHours()).padStart(2, "0") +
+    String(dt.getUTCMinutes()).padStart(2, "0") +
+    "00Z";
+  const dtStart = fmt(startUTC);
+  const dtEnd = fmt(endUTC);
+  const dtStamp = fmt(new Date());
+  const uid = `${source}-${chosenDate.replace(/-/g, "")}-${Math.random().toString(36).slice(2, 10)}@orbitgestao.com.br`;
+  // Escape para ICS: vírgulas, ponto-e-vírgulas e quebras de linha
+  const esc = (s: string) =>
+    s.replace(/\\/g, "\\\\").replace(/,/g, "\\,").replace(/;/g, "\\;").replace(/\n/g, "\\n");
+  // CRLF é o separador oficial do RFC 5545
+  return [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//Orbit Gestão//Live//PT",
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
+    "BEGIN:VEVENT",
+    `UID:${uid}`,
+    `DTSTAMP:${dtStamp}`,
+    `DTSTART:${dtStart}`,
+    `DTEND:${dtEnd}`,
+    `SUMMARY:${esc(cfg.icsTitle)}`,
+    `DESCRIPTION:${esc(cfg.description)}`,
+    `ORGANIZER;CN=Orbit Gestão:MAILTO:${FROM_EMAIL}`,
+    "STATUS:CONFIRMED",
+    "TRANSP:OPAQUE",
+    "BEGIN:VALARM",
+    "TRIGGER:-PT30M",
+    "ACTION:DISPLAY",
+    `DESCRIPTION:Lembrete: ${esc(cfg.icsTitle)} começa em 30 minutos`,
+    "END:VALARM",
+    "END:VEVENT",
+    "END:VCALENDAR",
+  ].join("\r\n");
+}
+
+function toBase64(s: string): string {
+  const bytes = new TextEncoder().encode(s);
+  let bin = "";
+  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i]);
+  return btoa(bin);
+}
 
 function confirmationHTML(nome: string, source: LiveSource): string {
   const cfg = CONFIGS[source];
@@ -58,15 +123,15 @@ function confirmationHTML(nome: string, source: LiveSource): string {
 <p style="font-size:16px;line-height:1.7;color:#C9D1D9;">Enviaremos lembretes para você não perder.</p>
 </div>
 <div style="padding:20px 32px;border-top:1px solid #21262d;text-align:center;">
-<p style="font-size:12px;color:#484F58;margin:0;">Orbit Gestão — Gestão Operada por IA</p>
+<p style="font-size:12px;color:#484F58;margin:0;">Orbit Gestão - Gestão Operada por IA</p>
 </div>
 </div>`;
 }
 
 function getSubject(source: LiveSource): string {
   return source === "live-chris"
-    ? "Inscrição confirmada — Masterclass Consultores"
-    : "Inscrição Confirmada — Live Orbit Gestão";
+    ? "Inscrição confirmada - Masterclass Consultores"
+    : "Inscrição Confirmada - Live Orbit Gestão";
 }
 
 serve(async (req) => {
@@ -81,7 +146,7 @@ serve(async (req) => {
 
   try {
     const body = await req.json();
-    const { nome, email } = body;
+    const { nome, email, chosen_date } = body;
     const sourceRaw = (body.source as string) || "live-semanal";
     const source: LiveSource = sourceRaw === "live-chris" ? "live-chris" : "live-semanal";
 
@@ -89,6 +154,17 @@ serve(async (req) => {
       return new Response(JSON.stringify({ error: "email required" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    // Monta attachments: se tiver chosen_date no formato YYYY-MM-DD, gera ICS
+    const attachments: Array<Record<string, string>> = [];
+    if (typeof chosen_date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(chosen_date)) {
+      const ics = buildICS(chosen_date, source);
+      attachments.push({
+        content: toBase64(ics),
+        filename: `live-orbit-${chosen_date}.ics`,
+        disposition: "attachment",
       });
     }
 
@@ -103,6 +179,7 @@ serve(async (req) => {
         to: [{ email, name: nome || "" }],
         subject: getSubject(source),
         html: confirmationHTML(nome, source),
+        ...(attachments.length ? { attachments } : {}),
       }),
     });
 

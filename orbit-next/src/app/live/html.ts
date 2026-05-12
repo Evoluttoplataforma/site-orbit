@@ -1127,7 +1127,7 @@ export const pageHTML = `
                         'apikey': ORBIT_KEY,
                         'Authorization': 'Bearer ' + ORBIT_KEY
                     },
-                    body: JSON.stringify({ nome: data.nome, email: data.email, source: 'live-semanal' })
+                    body: JSON.stringify({ nome: data.nome, email: data.email, source: 'live-semanal', chosen_date: data.chosen_date })
                 }).catch(function() {});
                 // Cria subscriber no ManyChat WhatsApp + aplica tag (fire and forget)
                 fetch(ORBIT_URL + '/functions/v1/subscribe-manychat-live', {
