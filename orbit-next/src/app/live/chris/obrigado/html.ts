@@ -39,6 +39,20 @@ export const pageHTML = `
                 </div>
             </div>
 
+            <!-- WhatsApp group CTA (acesso obrigatório) -->
+            <div style="background:linear-gradient(135deg,rgba(37,211,102,0.12) 0%,rgba(37,211,102,0.04) 100%);border:1px solid rgba(37,211,102,0.35);border-radius:16px;padding:24px 24px 26px;margin-bottom:24px;text-align:center;">
+                <div style="width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;">
+                    <i class="fa-brands fa-whatsapp" style="color:#fff;font-size:28px;"></i>
+                </div>
+                <h2 style="color:#fff;font-size:18px;font-weight:800;margin:0 0 8px;">Entre no grupo do WhatsApp</h2>
+                <p style="color:#C9D1D9;font-size:14px;line-height:1.6;margin:0 0 18px;">
+                    O link da Masterclass &eacute; enviado <strong style="color:#fff;">somente</strong> dentro do grupo fechado, momentos antes de come&ccedil;ar.
+                </p>
+                <a href="https://chat.whatsapp.com/JnvD7U2BpdI0Tr4oWNMyuu?mode=gi_t" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:14px 28px;background:#25D366;border-radius:50px;color:#fff;font-size:15px;font-weight:700;text-decoration:none;box-shadow:0 6px 20px rgba(37,211,102,0.35);transition:transform 0.2s;">
+                    <i class="fa-brands fa-whatsapp" style="font-size:20px;"></i>Entrar no grupo agora
+                </a>
+            </div>
+
             <!-- Adicionar ao calendário -->
             <div style="margin-bottom:32px;">
                 <p style="color:#fff;font-size:15px;font-weight:700;margin-bottom:16px;">
