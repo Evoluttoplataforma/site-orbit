@@ -17,7 +17,7 @@ export const pageHTML = `
             <!-- Schedule -->
             <div style="display:inline-block;background:linear-gradient(135deg,rgba(255,186,26,0.15),rgba(255,186,26,0.05));border:2px solid rgba(255,186,26,0.4);border-radius:16px;padding:16px 36px;margin-bottom:32px;" data-reveal>
                 <span style="color:#ffba1a;font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:800;letter-spacing:0.5px;">
-                    <i class="fa-solid fa-calendar-check" style="margin-right:10px;"></i>TODA QUARTA-FEIRA &Agrave;S 18H
+                    <i class="fa-solid fa-calendar-check" style="margin-right:10px;"></i>TODA QUINTA-FEIRA &Agrave;S 18H
                 </span>
             </div>
 
@@ -28,7 +28,7 @@ export const pageHTML = `
 
             <!-- Subheadline -->
             <p style="font-size:clamp(1rem,2.5vw,1.25rem);color:#C9D1D9;max-width:760px;margin:0 auto 24px;line-height:1.6;" data-reveal>
-                Toda quarta &agrave;s 18h, <strong style="color:#fff;">Christian Hart</strong> mostra como os consultores est&atilde;o criando novas receitas, escalando com agentes de IA e transformando a consultoria em um modelo recorrente.
+                Toda quinta &agrave;s 18h, <strong style="color:#fff;">Christian Hart</strong> mostra como os consultores est&atilde;o criando novas receitas, escalando com agentes de IA e transformando a consultoria em um modelo recorrente.
             </p>
 
             <!-- Apresentador -->
@@ -44,7 +44,7 @@ export const pageHTML = `
             <div style="display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;margin:32px 0;" data-reveal>
                 <div style="display:flex;align-items:center;gap:10px;color:#C9D1D9;">
                     <i class="fa-solid fa-calendar-day" style="color:#ffba1a;font-size:18px;"></i>
-                    <span id="nextLiveDate" style="font-size:18px;font-weight:600;">Pr&oacute;xima quarta-feira</span>
+                    <span id="nextLiveDate" style="font-size:18px;font-weight:600;">Pr&oacute;xima quinta-feira</span>
                 </div>
                 <div style="display:flex;align-items:center;gap:10px;color:#C9D1D9;">
                     <i class="fa-solid fa-clock" style="color:#ffba1a;font-size:18px;"></i>
@@ -73,6 +73,22 @@ export const pageHTML = `
                 <div style="background:rgba(255,186,26,0.08);border:1px solid rgba(255,186,26,0.2);border-radius:16px;padding:20px 24px;min-width:90px;text-align:center;">
                     <span id="countSeconds" style="font-size:2.5rem;font-weight:800;color:#ffba1a;display:block;line-height:1;">00</span>
                     <span style="font-size:12px;color:#8B949E;text-transform:uppercase;letter-spacing:1px;">Segundos</span>
+                </div>
+            </div>
+
+            <!-- Convidado especial — Sandro Magaldi -->
+            <div style="background:linear-gradient(135deg,rgba(255,186,26,0.10) 0%,rgba(255,186,26,0.02) 100%);border:1px solid rgba(255,186,26,0.35);border-radius:20px;padding:28px 24px;margin:40px auto 0;max-width:680px;" data-reveal>
+                <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(255,186,26,0.15);border-radius:50px;color:#ffba1a;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:18px;">
+                    <i class="fa-solid fa-star" style="font-size:11px;"></i>Convidado especial nesta quinta
+                </div>
+                <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center;">
+                    <img src="/images/sandro-magaldi.png" alt="Sandro Magaldi" width="120" height="120" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,186,26,0.5);flex-shrink:0;">
+                    <div style="flex:1;min-width:240px;text-align:left;">
+                        <h3 style="color:#fff;font-size:1.4rem;font-weight:800;margin:0 0 6px;">Sandro Magaldi</h3>
+                        <p style="color:#C9D1D9;font-size:14px;line-height:1.6;margin:0;">
+                            Um dos maiores especialistas em gest&atilde;o estrat&eacute;gica, vendas e transforma&ccedil;&atilde;o empresarial do Brasil. Mais de 30 anos de experi&ecirc;ncia, autor de best-sellers de neg&oacute;cios, palestrante renomado e mentor de l&iacute;deres organizacionais.
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -232,7 +248,7 @@ export const pageHTML = `
     <section id="inscreva-se" style="padding:100px 0;background:#0D1117;text-align:center;">
         <div class="container" style="max-width:700px;">
             <h2 style="font-size:clamp(1.5rem,3vw,2.25rem);font-weight:800;color:#fff;margin-bottom:8px;" data-reveal>
-                Toda quarta &agrave;s 18h.
+                Toda quinta &agrave;s 18h.
             </h2>
             <p style="color:#C9D1D9;font-size:1.1rem;margin-bottom:8px;" data-reveal>
                 Entre para a pr&oacute;xima aula ao vivo e entenda como aplicar isso na sua consultoria.
@@ -390,13 +406,13 @@ export const pageHTML = `
         </div>
     </section>
 
-    <!-- Calendar JS — quartas -->
+    <!-- Calendar JS — quintas -->
     <script>
     (function() {
         if (window.__liveCalInit) return;
         window.__liveCalInit = true;
 
-        var eventDays = [3]; // Wednesday = 3
+        var eventDays = [4]; // Thursday = 4
         var currentMonth = new Date().getMonth();
         var currentYear = new Date().getFullYear();
         var selectedDate = null;
@@ -499,20 +515,20 @@ export const pageHTML = `
     })();
     </script>
 
-    <!-- Dynamic countdown to next Wednesday 18h BRT -->
+    <!-- Dynamic countdown to next Thursday 18h BRT -->
     <script>
     (function() {
-        function getNextWednesday() {
+        function getNextThursday() {
             var now = new Date();
             var day = now.getDay();
-            var daysUntilWednesday = (3 - day + 7) % 7;
-            if (daysUntilWednesday === 0) {
+            var daysUntilThursday = (4 - day + 7) % 7;
+            if (daysUntilThursday === 0) {
                 var todayAt19 = new Date(now);
                 todayAt19.setHours(19, 0, 0, 0);
-                if (now >= todayAt19) daysUntilWednesday = 7;
+                if (now >= todayAt19) daysUntilThursday = 7;
             }
             var next = new Date(now);
-            next.setDate(now.getDate() + daysUntilWednesday);
+            next.setDate(now.getDate() + daysUntilThursday);
             next.setHours(18, 0, 0, 0);
             return next;
         }
@@ -522,7 +538,7 @@ export const pageHTML = `
             return d.getDate() + ' de ' + months[d.getMonth()] + ', ' + d.getFullYear();
         }
 
-        var target = getNextWednesday();
+        var target = getNextThursday();
 
         var dateEl = document.getElementById('nextLiveDate');
         if (dateEl) dateEl.textContent = formatDateBR(target);
@@ -540,7 +556,7 @@ export const pageHTML = `
             }
 
             if (diff <= 0) {
-                target = getNextWednesday();
+                target = getNextThursday();
                 if (dateEl) dateEl.textContent = formatDateBR(target);
                 diff = target.getTime() - now;
             }

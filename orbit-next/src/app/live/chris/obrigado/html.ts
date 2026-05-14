@@ -34,7 +34,7 @@ export const pageHTML = `
                     </div>
                     <div>
                         <strong style="color:#fff;font-size:15px;">Masterclass com Christian Hart</strong>
-                        <p style="color:#8B949E;font-size:13px;margin:2px 0 0;">Toda quarta-feira &agrave;s 18h.</p>
+                        <p style="color:#8B949E;font-size:13px;margin:2px 0 0;">Toda quinta-feira &agrave;s 18h.</p>
                     </div>
                 </div>
             </div>
@@ -81,7 +81,7 @@ export const pageHTML = `
             description: 'Masterclass quinzenal com Christian Hart (Diretor de Canais — Grupo GSN). O link de acesso é enviado pelo grupo fechado de WhatsApp.',
             location: 'Grupo fechado de WhatsApp da Masterclass',
             durationHours: 1,
-            dayOfWeek: 3,
+            dayOfWeek: 4,
             hourBRT: 18
         };
 

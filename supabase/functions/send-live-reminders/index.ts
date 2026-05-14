@@ -12,7 +12,7 @@ type LiveSource = "live-chris" | "live-semanal";
 interface LiveConfig {
   title: string;
   schedule: string; // "terça-feira às 13h"
-  weekday: string;  // "terça" | "quarta"
+  weekday: string;  // "terça" | "quinta"
   time: string;     // "13h" | "18h"
   description: string;
   page: string;
@@ -24,8 +24,8 @@ interface LiveConfig {
 const CONFIGS: Record<LiveSource, LiveConfig> = {
   "live-chris": {
     title: "Masterclass Consultores",
-    schedule: "quarta-feira às 18h",
-    weekday: "quarta",
+    schedule: "quinta-feira às 18h",
+    weekday: "quinta",
     time: "18h",
     description:
       "Você vai entender como consultores estão criando recorrência passiva e escalando com agentes de IA, conduzido por Christian Hart (Diretor de Canais — Grupo GSN).",
