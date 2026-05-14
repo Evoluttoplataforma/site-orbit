@@ -413,6 +413,9 @@ export const pageHTML = `
         window.__liveCalInit = true;
 
         var eventDays = [4]; // Thursday = 4
+        // Primeira edição com convidado especial Sandro Magaldi — não há live antes
+        var minLiveDate = new Date(2026, 4, 21); // 21/05/2026
+        minLiveDate.setHours(0,0,0,0);
         var currentMonth = new Date().getMonth();
         var currentYear = new Date().getFullYear();
         var selectedDate = null;
@@ -430,6 +433,8 @@ export const pageHTML = `
             var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
             var today = new Date();
             today.setHours(0,0,0,0);
+            // Bloqueia datas anteriores à primeira edição confirmada
+            if (today < minLiveDate) today = minLiveDate;
 
             var html = '';
 
@@ -518,6 +523,9 @@ export const pageHTML = `
     <!-- Dynamic countdown to next Thursday 18h BRT -->
     <script>
     (function() {
+        // Primeira edição confirmada com Sandro Magaldi — nada antes dela
+        var minLiveStart = new Date(2026, 4, 21, 18, 0, 0); // 21/05/2026 18h
+
         function getNextThursday() {
             var now = new Date();
             var day = now.getDay();
@@ -530,6 +538,7 @@ export const pageHTML = `
             var next = new Date(now);
             next.setDate(now.getDate() + daysUntilThursday);
             next.setHours(18, 0, 0, 0);
+            if (next < minLiveStart) next = new Date(minLiveStart);
             return next;
         }
 

@@ -85,6 +85,9 @@ export const pageHTML = `
             hourBRT: 18
         };
 
+        // Primeira edição confirmada — 21/05/2026 às 18h BRT (21h UTC)
+        var MIN_START_UTC = new Date(Date.UTC(2026, 4, 21, 21, 0, 0));
+
         function nextOccurrence() {
             var now = new Date();
             var nowUtc = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes()));
@@ -93,6 +96,9 @@ export const pageHTML = `
             target.setUTCDate(target.getUTCDate() + diff);
             if (target.getTime() <= nowUtc.getTime()) {
                 target.setUTCDate(target.getUTCDate() + 7);
+            }
+            if (target.getTime() < MIN_START_UTC.getTime()) {
+                target = new Date(MIN_START_UTC.getTime());
             }
             return target;
         }
