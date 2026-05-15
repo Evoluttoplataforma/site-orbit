@@ -69,11 +69,31 @@ async function mcRequest(method: string, endpoint: string, body?: unknown) {
   return { status: res.status, data };
 }
 
-async function findByName(name: string): Promise<string | null> {
-  const enc = encodeURIComponent(name);
-  const { status, data } = await mcRequest('GET', `subscriber/findByName?name=${enc}`);
-  if (status === 200 && data?.status === 'success' && Array.isArray(data.data) && data.data.length > 0) {
-    return String(data.data[0].id);
+// Procura por nome MAS retorna apenas se o whatsapp_phone bater com o telefone do lead
+// (sem isso, qualquer 'Rodrigo' qualquer recebia a tag de outro Rodrigo)
+async function findByNameAndPhone(name: string, phone: string): Promise<string | null> {
+  const phoneDigits = phone.replace(/\D/g, '');
+
+  async function tryQuery(q: string): Promise<string | null> {
+    const enc = encodeURIComponent(q);
+    const { status, data } = await mcRequest('GET', `subscriber/findByName?name=${enc}`);
+    if (status !== 200 || data?.status !== 'success' || !Array.isArray(data.data)) return null;
+    for (const s of data.data) {
+      const sPhone = String(s.whatsapp_phone || '').replace(/\D/g, '');
+      if (sPhone && sPhone === phoneDigits) return String(s.id);
+    }
+    return null;
+  }
+
+  // 1. Tenta com nome completo
+  let id = await tryQuery(name);
+  if (id) return id;
+
+  // 2. Tenta com primeiro nome (cobre case onde lead salvou só nome curto)
+  const first = name.trim().split(/\s+/)[0];
+  if (first && first !== name) {
+    id = await tryQuery(first);
+    if (id) return id;
   }
   return null;
 }
@@ -128,10 +148,10 @@ Deno.serve(async (req: Request) => {
     if (createRes.status === 200 && createRes.data?.status === 'success') {
       subscriberId = String(createRes.data.data.id);
     } else {
-      // 2. Se 'already exists' tenta achar pelo nome
+      // 2. Se 'already exists' tenta achar pelo nome MAS exigindo match de telefone
       const errStr = JSON.stringify(createRes.data);
       if (errStr.includes('already exists')) {
-        subscriberId = await findByName(nome);
+        subscriberId = await findByNameAndPhone(nome, phone);
       }
       if (!subscriberId) {
         return new Response(JSON.stringify({

@@ -5,6 +5,7 @@ const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const FROM_EMAIL = "noreply@orbtgestao.com.br";
 const FROM_NAME = "Orbit Gestão";
+const LIVE_URL = "https://www.youtube.com/@orbitgestao/live";
 
 type LiveSource = "live-chris" | "live-semanal";
 
@@ -85,7 +86,9 @@ function buildICS(chosenDate: string, source: LiveSource): string {
     `DTSTART:${dtStart}`,
     `DTEND:${dtEnd}`,
     `SUMMARY:${esc(cfg.icsTitle)}`,
-    `DESCRIPTION:${esc(cfg.description)}`,
+    `DESCRIPTION:${esc(cfg.description + ' Link da live: ' + LIVE_URL)}`,
+    `LOCATION:${esc(LIVE_URL)}`,
+    `URL:${LIVE_URL}`,
     `ORGANIZER;CN=Orbit Gestão:MAILTO:${FROM_EMAIL}`,
     "STATUS:CONFIRMED",
     "TRANSP:OPAQUE",
