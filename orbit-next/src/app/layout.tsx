@@ -232,6 +232,49 @@ export default function RootLayout({
   },true);
 })();
         ` }} />
+        <script dangerouslySetInnerHTML={{ __html: `
+// ===== AUTOFILL DE FORMULÁRIOS VIA QUERY STRING =====
+// Permite que outro projeto da Evolutto envie dados pré-preenchidos via URL.
+// Ex: /live/chris?firstname=Joao&email=joao@x.com&whatsapp=11999999999
+(function () {
+  var params = new URLSearchParams(location.search);
+  if (!params.toString()) return;
+
+  var MAP = {
+    firstname:    ['[name="firstname"]', '[name="first_name"]', '[name="nome"]', '#firstname'],
+    lastname:     ['[name="lastname"]',  '[name="last_name"]',  '[name="sobrenome"]', '#lastname'],
+    name:         ['[name="name"]',      '[name="nome_completo"]', '#name'],
+    email:        ['[name="email"]',     '[name="e-mail"]', 'input[type="email"]', '#email'],
+    whatsapp:     ['[name="whatsapp"]',  '[name="phone"]', '[name="telefone"]', '[name="celular"]', 'input[type="tel"]'],
+    empresa:      ['[name="empresa"]',   '[name="company"]', '[name="organizacao"]'],
+    funcionarios: ['[name="funcionarios"]', '[name="employees"]'],
+    faturamento:  ['[name="faturamento"]', '[name="revenue"]']
+  };
+
+  function setVal(selectors, value) {
+    if (!value) return;
+    for (var i = 0; i < selectors.length; i++) {
+      var el = document.querySelector(selectors[i]);
+      if (el && !el.value) {
+        el.value = value;
+        el.dispatchEvent(new Event('input', { bubbles: true }));
+        el.dispatchEvent(new Event('change', { bubbles: true }));
+        break;
+      }
+    }
+  }
+
+  function applyAll() {
+    Object.keys(MAP).forEach(function (key) {
+      setVal(MAP[key], params.get(key));
+    });
+  }
+
+  applyAll();
+  setTimeout(applyAll, 600);
+  setTimeout(applyAll, 1800);
+})();
+        ` }} />
         <script src="/js/main-v2.js?v=2" defer></script>
         <script src="/js/orbit-init.js?v=2" defer></script>
         <script src="/js/banner.js?v=4" defer></script>
