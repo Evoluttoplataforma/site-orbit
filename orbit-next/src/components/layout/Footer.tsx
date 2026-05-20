@@ -61,11 +61,21 @@ export function Footer() {
               <li><Link href="/consultores" className="hover:text-white transition-colors">{t('partners')}</Link></li>
               <li><Link href="/consultores" className="hover:text-white transition-colors">{t('channels')}</Link></li>
             </ul>
+            <h5 className="text-sm font-semibold text-white mb-4 mt-6">Legal</h5>
+            <ul className="space-y-2.5 text-sm">
+              <li><Link href="/politica-privacidade" className="hover:text-white transition-colors">Política de Privacidade</Link></li>
+              <li><Link href="/termos-de-servico" className="hover:text-white transition-colors">Termos de Serviço</Link></li>
+            </ul>
           </div>
         </div>
 
-        <div className="py-6 text-center text-sm">
+        <div className="py-6 text-center text-sm space-y-2">
           <p>{t('rights')}</p>
+          <p className="text-white/40 text-xs">
+            <Link href="/politica-privacidade" className="hover:text-white transition-colors">Política de Privacidade</Link>
+            <span className="mx-2">·</span>
+            <Link href="/termos-de-servico" className="hover:text-white transition-colors">Termos de Serviço</Link>
+          </p>
         </div>
       </div>
     </footer>
