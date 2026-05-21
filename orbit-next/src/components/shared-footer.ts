@@ -48,12 +48,13 @@ export const footerHTML = `
                     <ul>
                         <li><a href="/politica-privacidade">Pol&iacute;tica de Privacidade</a></li>
                         <li><a href="/termos-de-servico">Termos de Servi&ccedil;o</a></li>
+                        <li><a href="/seguranca-ia">Seguran&ccedil;a &amp; IA</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <p data-i18n="footer.rights">&copy; 2026 Orbit - Grupo GSN. Todos os direitos reservados. <a href="/politica-privacidade" style="color:#8B949E;text-decoration:underline;margin-left:8px;">Pol&iacute;tica de Privacidade</a> <a href="/termos-de-servico" style="color:#8B949E;text-decoration:underline;margin-left:8px;">Termos de Servi&ccedil;o</a></p>
+                <p data-i18n="footer.rights">&copy; 2026 Orbit - Grupo GSN. Todos os direitos reservados. <a href="/politica-privacidade" style="color:#8B949E;text-decoration:underline;margin-left:8px;">Pol&iacute;tica de Privacidade</a> <a href="/termos-de-servico" style="color:#8B949E;text-decoration:underline;margin-left:8px;">Termos de Servi&ccedil;o</a> <a href="/seguranca-ia" style="color:#8B949E;text-decoration:underline;margin-left:8px;">Seguran&ccedil;a &amp; IA</a></p>
             </div>
         </div>
     </footer>

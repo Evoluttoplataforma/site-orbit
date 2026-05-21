@@ -65,6 +65,7 @@ export function Footer() {
             <ul className="space-y-2.5 text-sm">
               <li><Link href="/politica-privacidade" className="hover:text-white transition-colors">Política de Privacidade</Link></li>
               <li><Link href="/termos-de-servico" className="hover:text-white transition-colors">Termos de Serviço</Link></li>
+              <li><Link href="/seguranca-ia" className="hover:text-white transition-colors">Segurança &amp; IA</Link></li>
             </ul>
           </div>
         </div>
@@ -75,6 +76,8 @@ export function Footer() {
             <Link href="/politica-privacidade" className="hover:text-white transition-colors">Política de Privacidade</Link>
             <span className="mx-2">·</span>
             <Link href="/termos-de-servico" className="hover:text-white transition-colors">Termos de Serviço</Link>
+            <span className="mx-2">·</span>
+            <Link href="/seguranca-ia" className="hover:text-white transition-colors">Segurança &amp; IA</Link>
           </p>
         </div>
       </div>
