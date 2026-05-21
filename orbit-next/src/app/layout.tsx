@@ -113,12 +113,12 @@ export default function RootLayout({
   try{stored=JSON.parse(sessionStorage.getItem(STORAGE_KEY))}catch(e){}
   // Mapeia referrer (quando lead chega sem UTM na URL) → utm_source/medium sintéticos
   var REFERRER_MAP={
-    "google.":{utm_source:"google",utm_medium:"organic"},
-    "bing.":{utm_source:"bing",utm_medium:"organic"},
-    "yahoo.":{utm_source:"yahoo",utm_medium:"organic"},
-    "duckduckgo.":{utm_source:"duckduckgo",utm_medium:"organic"},
-    "yandex.":{utm_source:"yandex",utm_medium:"organic"},
-    "ecosia.":{utm_source:"ecosia",utm_medium:"organic"},
+    "google.":{utm_source:"google",utm_medium:"organico"},
+    "bing.":{utm_source:"bing",utm_medium:"organico"},
+    "yahoo.":{utm_source:"yahoo",utm_medium:"organico"},
+    "duckduckgo.":{utm_source:"duckduckgo",utm_medium:"organico"},
+    "yandex.":{utm_source:"yandex",utm_medium:"organico"},
+    "ecosia.":{utm_source:"ecosia",utm_medium:"organico"},
     "instagram.":{utm_source:"instagram",utm_medium:"social"},
     "facebook.":{utm_source:"facebook",utm_medium:"social"},
     "fb.":{utm_source:"facebook",utm_medium:"social"},
