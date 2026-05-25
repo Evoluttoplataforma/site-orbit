@@ -110,9 +110,9 @@ export const headerHTML = `
                                 <div class="dd-icon"><i class="fas fa-chalkboard-user" style="color:#ffba1a;"></i></div>
                                 <div class="dd-text"><span>Masterclass Consultores</span><small>Quinta 18h com Christian Hart</small></div>
                             </a>
-                            <a href="https://demonstracao.orbitgestao.com.br/salas/tira-duvidas" target="_blank">
-                                <div class="dd-icon"><i class="fas fa-comments" style="color:#ffba1a;"></i></div>
-                                <div class="dd-text"><span>Tira Duvidas</span><small>Ter 11h (empresas) &bull; Qui 11h (consultores)</small></div>
+                            <a href="/treinamentos">
+                                <div class="dd-icon"><i class="fas fa-chalkboard-teacher" style="color:#ffba1a;"></i></div>
+                                <div class="dd-text"><span>Treinamentos</span><small>10 m&oacute;dulos semanais &middot; Seg a Sex</small></div>
                             </a>
                             <a href="https://demonstracao.orbitgestao.com.br/salas/onboarding" target="_blank">
                                 <div class="dd-icon"><i class="fas fa-graduation-cap" style="color:#3FB950;"></i></div>
@@ -191,7 +191,7 @@ export const headerHTML = `
             </div>
             <a href="/live"><i class="fas fa-play-circle" style="color:#ff0000;"></i> Live Semanal (Ter 13h)</a>
             <a href="/live/chris"><i class="fas fa-chalkboard-user" style="color:#ffba1a;"></i> Masterclass Consultores (Quinta 18h)</a>
-            <a href="https://demonstracao.orbitgestao.com.br/salas/tira-duvidas" target="_blank"><i class="fas fa-comments" style="color:#ffba1a;"></i> Tira Duvidas</a>
+            <a href="/treinamentos"><i class="fas fa-chalkboard-teacher" style="color:#ffba1a;"></i> Treinamentos</a>
             <a href="https://demonstracao.orbitgestao.com.br/salas/onboarding" target="_blank"><i class="fas fa-graduation-cap" style="color:#3FB950;"></i> Onboarding</a>
             <a href="https://templum.com.br/treinamento-fase-a-fase" target="_blank"><i class="fas fa-chalkboard-teacher" style="color:#8B5CF6;"></i> Treinamento</a>
             <div class="mobile-menu__label" data-i18n="mobile.company">Empresa</div>
