@@ -3,9 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { pageHTML } from './html';
 import { headerHTML } from '@/components/shared-header';
-
-const SB_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
-const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
+import staticStories from '@/data/stories.json';
 
 const SEGMENTS: Record<string, string> = {
   industria: 'Indústria',
@@ -59,12 +57,13 @@ export function PageContent() {
   }, []);
 
   const fetchAndRenderStories = useCallback(() => {
-    fetch(`${SB_URL}/rest/v1/customer_stories?status=eq.published&order=created_at.desc&select=id,slug,title,subtitle,company_name,segment,contact_name,contact_role,challenge,logo_url`, {
-      headers: { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}` },
-    })
-      .then((r) => r.json())
-      .then((data) => {
-        if (!Array.isArray(data)) return;
+    // Usa stories.json estatico (gerado no build via fetch-stories.mjs).
+    // Antes fazia fetch live no Supabase, mas isso quebra a pagina toda
+    // quando o Supabase esta indisponivel ou rate-limited.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const data = staticStories as any[];
+    {
+      {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const stories: Story[] = data.map((s: any) => ({
           id: Number(s.id),
@@ -154,8 +153,8 @@ export function PageContent() {
         }
 
         renderGrid('all');
-      })
-      .catch((e) => console.warn('Erro ao buscar histórias:', e));
+      }
+    }
   }, []);
 
   useEffect(() => {

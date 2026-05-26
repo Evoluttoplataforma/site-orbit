@@ -26,7 +26,7 @@ export const pageHTML = `
                 <p class="hero-zoom__subtitle" data-i18n="hero.subtitle">Gestão Operada por IA: Dezenas de agentes especializados constroem e operam a gestão da sua empresa trabalhando 24/7, mesmo quando o projeto acaba.</p>
                 <div class="hero-zoom__ctas">
                     <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary btn-lg hero-cta-glow">QUERO CONHECER O TIME DE IA</a>
-                    <a href="#agentes" class="btn btn-ghost btn-lg">Ver os agentes <i class="fas fa-arrow-down"></i></a>
+                    <a href="#gallery3d" class="btn btn-ghost btn-lg">Ver os agentes <i class="fas fa-arrow-down"></i></a>
                 </div>
                 <p class="hero-zoom__note">⏱️ 2 min • 100% gratuito • Sem compromisso</p>
                 <div class="hero-zoom__credentials">
@@ -3418,18 +3418,18 @@ export const pageHTML = `
                 <button class="gallery3d__arrow gallery3d__arrow--prev" id="gallery3dPrev" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
                 <button class="gallery3d__arrow gallery3d__arrow--next" id="gallery3dNext" aria-label="Próximo"><i class="fas fa-chevron-right"></i></button>
                 <div class="gallery3d__track" id="gallery3d-track">
-                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-estrategista.png" alt="Estrategista" width="512" height="918" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-chess-king"></i></div><h3>Estrategista</h3><p>SWOT, BSC e planejamento estratégico</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-processos.jpg" alt="Processos" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-sitemap"></i></div><h3>Processos</h3><p>Mapeamento, playbooks e automação</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-pessoas.png" alt="Pessoas" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-users"></i></div><h3>Pessoas</h3><p>Cargos, desempenho e PDIs</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-treinamento.jpg" alt="Treinamento" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-graduation-cap"></i></div><h3>Treinamento</h3><p>Microlearning e trilhas via WhatsApp</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-indicadores.jpg" alt="Indicadores" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-chart-line"></i></div><h3>Indicadores</h3><p>KPIs em tempo real e causa raiz</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-pesquisa.jpg" alt="Pesquisa" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-magnifying-glass-chart"></i></div><h3>Pesquisa</h3><p>Clima, formulários e insights</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-riscos.jpg" alt="Riscos" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-shield-halved"></i></div><h3>Riscos</h3><p>Mitigação e prevenção contínua</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-oportunidades.jpg" alt="Oportunidades" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-lightbulb"></i></div><h3>Oportunidades</h3><p>Mercado, parcerias e expansão</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-problemas.jpg" alt="Problemas" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-triangle-exclamation"></i></div><h3>Problemas</h3><p>Não-conformidades e PDCA</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-documentos.jpg" alt="Documentos" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-file-lines"></i></div><h3>Documentos</h3><p>Padronização e controle</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-vendas.jpg" alt="Vendas" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-handshake"></i></div><h3>Vendas</h3><p>CRM, funil e coaching comercial</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
-                    <div class="gallery3d__card"><a href="#agentes" onclick="event.preventDefault()"><img src="/images/agente-reunioes.jpg" alt="Reuniões" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-video"></i></div><h3>Reuniões</h3><p>Transcrição e planos de ação</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="https://demonstracao.orbitgestao.com.br/chat"><img src="/images/agente-estrategista.png" alt="Estrategista" width="512" height="918" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-chess-king"></i></div><h3>Estrategista</h3><p>SWOT, BSC e planejamento estratégico</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="https://demonstracao.orbitgestao.com.br/chat"><img src="/images/agente-processos.jpg" alt="Processos" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-sitemap"></i></div><h3>Processos</h3><p>Mapeamento, playbooks e automação</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="https://demonstracao.orbitgestao.com.br/chat"><img src="/images/agente-pessoas.png" alt="Pessoas" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-users"></i></div><h3>Pessoas</h3><p>Cargos, desempenho e PDIs</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="https://demonstracao.orbitgestao.com.br/chat"><img src="/images/agente-treinamento.jpg" alt="Treinamento" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-graduation-cap"></i></div><h3>Treinamento</h3><p>Microlearning e trilhas via WhatsApp</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="https://demonstracao.orbitgestao.com.br/chat"><img src="/images/agente-indicadores.jpg" alt="Indicadores" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-chart-line"></i></div><h3>Indicadores</h3><p>KPIs em tempo real e causa raiz</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="https://demonstracao.orbitgestao.com.br/chat"><img src="/images/agente-pesquisa.jpg" alt="Pesquisa" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-magnifying-glass-chart"></i></div><h3>Pesquisa</h3><p>Clima, formulários e insights</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="https://demonstracao.orbitgestao.com.br/chat"><img src="/images/agente-riscos.jpg" alt="Riscos" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-shield-halved"></i></div><h3>Riscos</h3><p>Mitigação e prevenção contínua</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="https://demonstracao.orbitgestao.com.br/chat"><img src="/images/agente-oportunidades.jpg" alt="Oportunidades" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-lightbulb"></i></div><h3>Oportunidades</h3><p>Mercado, parcerias e expansão</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="https://demonstracao.orbitgestao.com.br/chat"><img src="/images/agente-problemas.jpg" alt="Problemas" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-triangle-exclamation"></i></div><h3>Problemas</h3><p>Não-conformidades e PDCA</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="https://demonstracao.orbitgestao.com.br/chat"><img src="/images/agente-documentos.jpg" alt="Documentos" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-file-lines"></i></div><h3>Documentos</h3><p>Padronização e controle</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="https://demonstracao.orbitgestao.com.br/chat"><img src="/images/agente-vendas.jpg" alt="Vendas" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-handshake"></i></div><h3>Vendas</h3><p>CRM, funil e coaching comercial</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
+                    <div class="gallery3d__card"><a href="https://demonstracao.orbitgestao.com.br/chat"><img src="/images/agente-reunioes.jpg" alt="Reuniões" width="512" height="686" loading="lazy" decoding="async"><div class="gallery3d__info"><div class="gallery3d__icon"><i class="fas fa-video"></i></div><h3>Reuniões</h3><p>Transcrição e planos de ação</p><span class="gallery3d__link">Saiba mais <i class="fas fa-arrow-right"></i></span></div></a></div>
                 </div>
             </div>
 
@@ -4156,63 +4156,9 @@ export const pageHTML = `
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Recent Articles (Supabase) -->
-    <script>
-    (function() {
-        var grid = document.getElementById('knowledgeGrid');
-        if (!grid) return;
+    <!-- Recent Articles: agora pre-renderizados server-side em HomeContent.tsx
+         (lia do articles.json gerado no build, sem fetch live pro Supabase) -->
 
-        var SB_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
-        var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
-
-        var CATS = {
-            estrategica: 'Gestão Estratégica',
-            processos: 'Processos',
-            indicadores: 'Indicadores',
-            lideranca: 'Liderança',
-            ia: 'IA & Inovação'
-        };
-
-        function esc(s) {
-            if (!s) return '';
-            var d = document.createElement('div');
-            d.textContent = s;
-            return d.innerHTML;
-        }
-
-        fetch(SB_URL + '/rest/v1/blog_articles?published=eq.true&order=published_at.desc&limit=3&select=title,slug,cover_url,category', {
-            headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
-        })
-        .then(function(r) { return r.json(); })
-        .then(function(articles) {
-            if (!articles || !articles.length) {
-                grid.innerHTML = '<p style="color:var(--gray-400);text-align:center;width:100%;">Em breve novos artigos serão publicados.</p>';
-                return;
-            }
-            grid.innerHTML = articles.map(function(a) {
-                var imgSrc = a.cover_url || 'https://placehold.co/400x250/0D1117/ffba1a?text=Orbit+Blog';
-                var cat = CATS[a.category] || a.category || 'Artigo';
-                return '<div class="knowledge-card" data-slug="' + a.slug + '" style="cursor:pointer;">' +
-                    '<div class="knowledge-card__image">' +
-                        '<img src="' + esc(imgSrc) + '" alt="' + esc(a.title) + '" width="400" height="250" loading="lazy" decoding="async">' +
-                        '<span class="knowledge-card__type"><i class="fas fa-file-alt"></i> ' + esc(cat) + '</span>' +
-                    '</div>' +
-                    '<div class="knowledge-card__body">' +
-                        '<h4>' + esc(a.title) + '</h4>' +
-                        '<span class="knowledge-card__link">Ler artigo</span>' +
-                    '</div>' +
-                '</div>';
-            }).join('');
-            // Attach click handlers
-            grid.querySelectorAll('.knowledge-card[data-slug]').forEach(function(card) {
-                card.addEventListener('click', function() {
-                    window.location.href = '/blog/' + encodeURIComponent(card.getAttribute('data-slug'));
-                });
-            });
-        })
-        .catch(function(e) { console.error('Erro artigos home:', e); });
-    })();
-    </script>
 
     <!-- Scroll Reveal -->
     <script>
