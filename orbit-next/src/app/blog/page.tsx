@@ -112,6 +112,22 @@ export default function BlogPage() {
     </div>
   `;
 
+  const RECENT_COUNT = 6;
+  const sectionHeaderHTML = `
+    <div class="blog-section-head" id="blogSectionHead">
+      <h2><i class="fas fa-bolt"></i> Artigos recentes</h2>
+      <p>O que postamos ultimamente — atualizado toda vez que sai conteúdo novo.</p>
+    </div>
+  `;
+  const moreButtonHTML = sorted.length > RECENT_COUNT ? `
+    <div class="blog-more-wrap" id="blogMoreWrap">
+      <button type="button" id="blogMoreBtn" class="blog-more-btn">
+        <i class="fas fa-arrow-down"></i>
+        Ver mais ${sorted.length - RECENT_COUNT} artigo${sorted.length - RECENT_COUNT > 1 ? 's' : ''}
+      </button>
+    </div>
+  ` : '';
+
   const cardsHTML = sorted
     .map((a, i) => {
       const cat = a.category || 'sem-categoria';
@@ -124,7 +140,9 @@ export default function BlogPage() {
       const ts = a.published_at ? new Date(a.published_at).getTime() : 0;
       const titleLower = a.title.toLowerCase();
 
-      return `<a href="/blog/${escapeHtml(a.slug)}" class="blog-card blog-card--animate" data-category="${escapeHtml(cat)}" data-title-lower="${escapeHtml(titleLower)}" data-date-ts="${ts}" data-title-az="${escapeHtml(titleLower)}" style="animation-delay:${i * 80}ms;text-decoration:none;color:inherit;display:block;">
+      const hiddenMore = i >= RECENT_COUNT ? '1' : '0';
+      const hiddenStyle = i >= RECENT_COUNT ? 'display:none;' : 'display:block;';
+      return `<a href="/blog/${escapeHtml(a.slug)}" class="blog-card blog-card--animate" data-category="${escapeHtml(cat)}" data-title-lower="${escapeHtml(titleLower)}" data-date-ts="${ts}" data-title-az="${escapeHtml(titleLower)}" data-hidden-more="${hiddenMore}" style="animation-delay:${i * 80}ms;text-decoration:none;color:inherit;${hiddenStyle}">
         <div class="blog-card__image">
           <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(a.title)}" loading="lazy" width="600" height="340">
           <span class="blog-card__tag">${escapeHtml(catLabel)}</span>
@@ -160,28 +178,37 @@ export default function BlogPage() {
 
   const filterStylesHTML = `
     <style>
-      .blog-filters { max-width: 1200px; margin: 0 auto 32px; padding: 0 20px; }
-      .blog-filters__row { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+      .blog-filters { max-width: 1200px; margin: 0 auto 28px; padding: 0 20px; }
+      .blog-filters__row { display: flex; gap: 12px; margin-bottom: 18px; flex-wrap: wrap; }
       .blog-search { flex: 1; min-width: 240px; position: relative; }
-      .blog-search i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #8B949E; font-size: 14px; pointer-events: none; }
-      .blog-search input { width: 100%; padding: 14px 18px 14px 44px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); border-radius: 50px; color: #fff; font-size: 14px; font-family: inherit; transition: all 0.2s; box-sizing: border-box; }
-      .blog-search input::placeholder { color: #6B7280; }
-      .blog-search input:focus { outline: none; border-color: rgba(255,186,26,0.45); background: rgba(255,255,255,0.06); }
+      .blog-search i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #6B7280; font-size: 14px; pointer-events: none; }
+      .blog-search input { width: 100%; padding: 14px 18px 14px 44px; background: #fff; border: 1px solid #E5E7EB; border-radius: 50px; color: #0D1117; font-size: 14px; font-family: inherit; transition: all 0.2s; box-sizing: border-box; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+      .blog-search input::placeholder { color: #9CA3AF; }
+      .blog-search input:focus { outline: none; border-color: #ffba1a; box-shadow: 0 0 0 3px rgba(255,186,26,0.15); }
       .blog-sort-wrap { position: relative; min-width: 180px; }
-      .blog-sort-wrap i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #ffba1a; font-size: 13px; pointer-events: none; z-index: 1; }
-      .blog-sort-wrap select { width: 100%; padding: 14px 36px 14px 42px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); border-radius: 50px; color: #fff; font-size: 14px; font-family: inherit; font-weight: 600; cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%238B949E' d='M5 6L0 0h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 18px center; }
-      .blog-sort-wrap select:focus { outline: none; border-color: rgba(255,186,26,0.45); }
-      .blog-sort-wrap select option { background: #161B22; color: #fff; }
+      .blog-sort-wrap i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #ff8c00; font-size: 13px; pointer-events: none; z-index: 1; }
+      .blog-sort-wrap select { width: 100%; padding: 14px 36px 14px 42px; background: #fff; border: 1px solid #E5E7EB; border-radius: 50px; color: #0D1117; font-size: 14px; font-family: inherit; font-weight: 600; cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%236B7280' d='M5 6L0 0h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 18px center; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+      .blog-sort-wrap select:focus { outline: none; border-color: #ffba1a; box-shadow: 0 0 0 3px rgba(255,186,26,0.15); }
+      .blog-sort-wrap select option { background: #fff; color: #0D1117; }
       .blog-cats { display: flex; flex-wrap: wrap; gap: 8px; }
-      .blog-cat-chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.10); border-radius: 50px; color: #C9D1D9; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: inherit; }
-      .blog-cat-chip:hover { border-color: rgba(255,186,26,0.35); color: #fff; }
-      .blog-cat-chip span { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; padding: 0 7px; background: rgba(255,255,255,0.06); border-radius: 50px; font-size: 11px; font-weight: 700; color: #8B949E; }
+      .blog-cat-chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: #fff; border: 1px solid #E5E7EB; border-radius: 50px; color: #374151; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: inherit; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+      .blog-cat-chip:hover { border-color: #ffba1a; color: #0D1117; transform: translateY(-1px); }
+      .blog-cat-chip span { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; padding: 0 7px; background: #F3F4F6; border-radius: 50px; font-size: 11px; font-weight: 700; color: #6B7280; }
       .blog-cat-chip.is-active { background: linear-gradient(135deg, #ffba1a 0%, #ff8c00 100%); border-color: transparent; color: #0D1117; box-shadow: 0 6px 18px rgba(255,186,26,0.28); }
       .blog-cat-chip.is-active span { background: rgba(13,17,23,0.18); color: #0D1117; }
-      .blog-empty { max-width: 480px; margin: 60px auto; padding: 40px 24px; text-align: center; background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.10); border-radius: 20px; }
-      .blog-empty i { font-size: 38px; color: #6B7280; margin-bottom: 16px; display: block; }
-      .blog-empty h3 { color: #fff; font-size: 18px; margin: 0 0 6px; }
-      .blog-empty p { color: #8B949E; font-size: 14px; margin: 0 0 18px; }
+      .blog-section-head { max-width: 1200px; margin: 0 auto 22px; padding: 0 20px; }
+      .blog-section-head h2 { display: flex; align-items: center; gap: 10px; color: #0D1117; font-size: 1.5rem; font-weight: 800; margin: 0 0 4px; letter-spacing: -0.01em; }
+      .blog-section-head h2 i { color: #ffba1a; font-size: 1.1rem; }
+      .blog-section-head p { color: #6B7280; font-size: 0.95rem; margin: 0; }
+      .blog-more-wrap { max-width: 1200px; margin: 36px auto 0; padding: 0 20px; text-align: center; }
+      .blog-more-btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 32px; background: #0D1117; color: #fff; border: none; border-radius: 50px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.25s; font-family: inherit; box-shadow: 0 8px 22px rgba(13,17,23,0.18); }
+      .blog-more-btn:hover { background: linear-gradient(135deg, #ffba1a 0%, #ff8c00 100%); color: #0D1117; transform: translateY(-2px); box-shadow: 0 12px 28px rgba(255,186,26,0.32); }
+      .blog-more-btn i { transition: transform 0.2s; }
+      .blog-more-btn:hover i { transform: translateY(3px); }
+      .blog-empty { max-width: 480px; margin: 60px auto; padding: 40px 24px; text-align: center; background: #fff; border: 1px dashed #E5E7EB; border-radius: 20px; }
+      .blog-empty i { font-size: 38px; color: #9CA3AF; margin-bottom: 16px; display: block; }
+      .blog-empty h3 { color: #0D1117; font-size: 18px; margin: 0 0 6px; }
+      .blog-empty p { color: #6B7280; font-size: 14px; margin: 0 0 18px; }
       @media (max-width: 600px) {
         .blog-filters__row { flex-direction: column; }
         .blog-search, .blog-sort-wrap { min-width: 0; width: 100%; }
@@ -197,25 +224,46 @@ export default function BlogPage() {
         var sortSel = document.getElementById('blogSort');
         var empty = document.getElementById('blogEmpty');
         var clearBtn = document.getElementById('blogClearFilters');
+        var moreWrap = document.getElementById('blogMoreWrap');
+        var moreBtn = document.getElementById('blogMoreBtn');
+        var sectionHead = document.getElementById('blogSectionHead');
         var chips = document.querySelectorAll('.blog-cat-chip');
         if (!grid || !search || !sortSel) return;
 
         var cards = Array.prototype.slice.call(grid.querySelectorAll('.blog-card'));
-        var state = { cat: 'all', q: '' };
+        var state = { cat: 'all', q: '', expanded: false };
+
+        function isFiltering() {
+          return state.cat !== 'all' || state.q.trim().length > 0;
+        }
 
         function applyFilters() {
           var q = state.q.trim().toLowerCase();
+          var filtering = isFiltering();
           var visible = 0;
           cards.forEach(function(c) {
             var cat = c.getAttribute('data-category') || '';
             var title = c.getAttribute('data-title-lower') || '';
+            var hiddenMore = c.getAttribute('data-hidden-more') === '1';
             var matchCat = state.cat === 'all' || cat === state.cat;
             var matchQ = !q || title.indexOf(q) !== -1;
-            var show = matchCat && matchQ;
-            c.style.display = show ? '' : 'none';
+            var matchSearch = matchCat && matchQ;
+            // Quando filtrando, revela TODOS os que casam (ignora hidden-more).
+            // Sem filtro: respeita hidden-more, a menos que o usuario tenha expandido.
+            var show = matchSearch && (filtering || state.expanded || !hiddenMore);
+            c.style.display = show ? 'block' : 'none';
             if (show) visible++;
           });
-          if (empty) empty.style.display = visible === 0 ? '' : 'none';
+          if (empty) empty.style.display = visible === 0 ? 'block' : 'none';
+
+          // Header "Artigos recentes" so faz sentido sem filtros ativos
+          if (sectionHead) sectionHead.style.display = filtering ? 'none' : 'block';
+
+          // Botao "Ver mais" so aparece quando: sem filtros + nao expandido + ha cards escondidos
+          if (moreWrap) {
+            var showMore = !filtering && !state.expanded && cards.some(function(c) { return c.getAttribute('data-hidden-more') === '1'; });
+            moreWrap.style.display = showMore ? 'block' : 'none';
+          }
         }
 
         function applySort() {
@@ -229,6 +277,9 @@ export default function BlogPage() {
             return mode === 'oldest' ? ta - tb : tb - ta;
           });
           sorted.forEach(function(c) { grid.appendChild(c); });
+          // Ordenacao manual = considera expandido para evitar mostrar so 6 fora de ordem
+          if (sortSel.value !== 'recent') state.expanded = true;
+          applyFilters();
         }
 
         chips.forEach(function(chip) {
@@ -248,16 +299,22 @@ export default function BlogPage() {
 
         sortSel.addEventListener('change', applySort);
 
+        if (moreBtn) {
+          moreBtn.addEventListener('click', function() {
+            state.expanded = true;
+            applyFilters();
+          });
+        }
+
         if (clearBtn) {
           clearBtn.addEventListener('click', function() {
-            state.cat = 'all'; state.q = '';
+            state.cat = 'all'; state.q = ''; state.expanded = false;
             search.value = '';
             sortSel.value = 'recent';
             chips.forEach(function(c) {
               c.classList.toggle('is-active', c.getAttribute('data-cat') === 'all');
             });
             applySort();
-            applyFilters();
           });
         }
       })();
@@ -301,8 +358,10 @@ export default function BlogPage() {
     </section>
     <section class="blog-grid-section">
       ${filterBarHTML}
+      ${sectionHeaderHTML}
       <div class="blog-grid">${cardsHTML}</div>
       ${emptyStateHTML}
+      ${moreButtonHTML}
     </section>
     ${filterScriptHTML}
     <section class="site-cta">
