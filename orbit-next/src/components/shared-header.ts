@@ -11,61 +11,6 @@ export const headerHTML = `
 
             <ul class="nav-menu">
                 <li>
-                    <a href="#plataforma"><span data-i18n="nav.agents_menu">Agentes de IA</span> <i class="fas fa-chevron-down dropdown-arrow"></i></a>
-                    <div class="dropdown dropdown--lg">
-                        <div class="dropdown__links">
-                            <a href="/agentes" style="cursor:default;pointer-events:none;opacity:0.7;">
-                                <div class="dd-icon"><i class="fas fa-chess-king"></i></div>
-                                <div class="dd-text"><span>Estrategista</span><small>Planejamento estratégico</small></div>
-                            </a>
-                            <a href="/agentes" style="cursor:default;pointer-events:none;opacity:0.7;">
-                                <div class="dd-icon"><i class="fas fa-sitemap"></i></div>
-                                <div class="dd-text"><span>Processos</span><small>Mapeamento e padronização</small></div>
-                            </a>
-                            <a href="/agentes" style="cursor:default;pointer-events:none;opacity:0.7;">
-                                <div class="dd-icon"><i class="fas fa-users"></i></div>
-                                <div class="dd-text"><span>Pessoas</span><small>Cargos, avaliação e PDIs</small></div>
-                            </a>
-                            <a href="/agentes" style="cursor:default;pointer-events:none;opacity:0.7;">
-                                <div class="dd-icon"><i class="fas fa-graduation-cap"></i></div>
-                                <div class="dd-text"><span>Treinamento</span><small>Microlearning via WhatsApp</small></div>
-                            </a>
-                            <a href="/agentes" style="cursor:default;pointer-events:none;opacity:0.7;">
-                                <div class="dd-icon"><i class="fas fa-chart-line"></i></div>
-                                <div class="dd-text"><span>Indicadores</span><small>KPIs e causa raiz</small></div>
-                            </a>
-                            <a href="/agentes" style="cursor:default;pointer-events:none;opacity:0.7;">
-                                <div class="dd-icon"><i class="fas fa-magnifying-glass-chart"></i></div>
-                                <div class="dd-text"><span>Pesquisa</span><small>Clima, NPS e insights</small></div>
-                            </a>
-                            <a href="/agentes" style="cursor:default;pointer-events:none;opacity:0.7;">
-                                <div class="dd-icon"><i class="fas fa-shield-halved"></i></div>
-                                <div class="dd-text"><span>Riscos</span><small>Prevenção e mitigação</small></div>
-                            </a>
-                            <a href="/agentes" style="cursor:default;pointer-events:none;opacity:0.7;">
-                                <div class="dd-icon"><i class="fas fa-lightbulb"></i></div>
-                                <div class="dd-text"><span>Oportunidades</span><small>Mercado e expansão</small></div>
-                            </a>
-                            <a href="/agentes" style="cursor:default;pointer-events:none;opacity:0.7;">
-                                <div class="dd-icon"><i class="fas fa-triangle-exclamation"></i></div>
-                                <div class="dd-text"><span>Problemas</span><small>PDCA e causa raiz</small></div>
-                            </a>
-                            <a href="/agentes" style="cursor:default;pointer-events:none;opacity:0.7;">
-                                <div class="dd-icon"><i class="fas fa-file-lines"></i></div>
-                                <div class="dd-text"><span>Documentos</span><small>Controle e versões</small></div>
-                            </a>
-                            <a href="/agentes" style="cursor:default;pointer-events:none;opacity:0.7;">
-                                <div class="dd-icon"><i class="fas fa-handshake"></i></div>
-                                <div class="dd-text"><span>Vendas</span><small>CRM, funil e coaching</small></div>
-                            </a>
-                            <a href="/agentes" style="cursor:default;pointer-events:none;opacity:0.7;">
-                                <div class="dd-icon"><i class="fas fa-video"></i></div>
-                                <div class="dd-text"><span>Reuniões</span><small>Transcrição e atas</small></div>
-                            </a>
-                        </div>
-                    </div>
-                </li>
-                <li>
                     <a href="#para-quem"><span data-i18n="nav.for_who">Para quem</span> <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown dropdown--sm">
                         <div class="dropdown__links">

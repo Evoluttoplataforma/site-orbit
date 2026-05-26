@@ -59,11 +59,25 @@ export default function RootLayout({
           "@context": "https://schema.org",
           "@type": "Organization",
           "name": "Orbit Gestão",
+          "alternateName": ["Orbit", "Orbit Gestao"],
           "description": "Plataforma de gestão operada por IA com consultoria recorrente passiva. Dezenas de agentes de IA especializados constroem e operam a gestão da sua empresa 24/7.",
           "url": "https://orbitgestao.com.br",
           "logo": "https://orbitgestao.com.br/images/logo-orbit-white.png",
           "image": "https://orbitgestao.com.br/images/og-image.png",
           "foundingDate": "1996",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Florianópolis",
+            "addressRegion": "SC",
+            "addressCountry": "BR"
+          },
+          "contactPoint": [{
+            "@type": "ContactPoint",
+            "telephone": "+55-48-98149-776",
+            "contactType": "customer service",
+            "areaServed": "BR",
+            "availableLanguage": ["Portuguese"]
+          }],
           "sameAs": [
             "https://www.instagram.com/orbitgestao/",
             "https://www.youtube.com/@Orbit.Gest%C3%A3o"
@@ -88,9 +102,19 @@ export default function RootLayout({
           "@context": "https://schema.org",
           "@type": "WebSite",
           "name": "Orbit Gestão",
+          "alternateName": "Orbit",
           "url": "https://orbitgestao.com.br",
           "description": "Plataforma de gestão operada por IA. Contrate um time de agentes de IA que executa.",
-          "inLanguage": ["pt-BR", "en"]
+          "inLanguage": ["pt-BR", "en"],
+          "publisher": { "@id": "https://orbitgestao.com.br/#organization" },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://orbitgestao.com.br/blog?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
         }) }} />
       </head>
       <body>

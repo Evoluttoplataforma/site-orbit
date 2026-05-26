@@ -334,6 +334,26 @@ export default function BlogPage() {
             applySort();
           });
         }
+
+        // Le ?q= e ?cat= da URL pra integrar com SearchAction (Google sitelinks searchbox)
+        try {
+          var params = new URLSearchParams(window.location.search);
+          var qParam = params.get('q');
+          var catParam = params.get('cat');
+          var changed = false;
+          if (qParam) { search.value = qParam; state.q = qParam; changed = true; }
+          if (catParam) {
+            var matchChip = null;
+            chips.forEach(function(c) { if (c.getAttribute('data-cat') === catParam) matchChip = c; });
+            if (matchChip) {
+              chips.forEach(function(c) { c.classList.remove('is-active'); });
+              matchChip.classList.add('is-active');
+              state.cat = catParam;
+              changed = true;
+            }
+          }
+          if (changed) applyFilters();
+        } catch (e) {}
       })();
     </script>
   `;

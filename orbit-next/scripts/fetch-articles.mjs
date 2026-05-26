@@ -102,18 +102,16 @@ function generateSitemap(articles) {
     ['/', '1.0', 'weekly'],
     ['/empresarios', '1.0', 'weekly'],
     ['/consultores', '1.0', 'weekly'],
-    ['/agentes', '0.9', 'monthly'],
-    ['/agentes/estrategista', '0.8', 'monthly'],
-    ['/preco', '0.9', 'monthly'],
     ['/sobre', '0.8', 'monthly'],
     ['/faq', '0.7', 'monthly'],
-    ['/parcerias', '0.8', 'monthly'],
     ['/blog', '0.9', 'weekly'],
     ['/historias', '0.7', 'weekly'],
     ['/historias/enviar', '0.5', 'monthly'],
     ['/seguranca-ia', '0.6', 'monthly'],
     ['/live', '0.8', 'weekly'],
+    ['/treinamentos', '0.8', 'weekly'],
     ['/politica-privacidade', '0.3', 'yearly'],
+    ['/termos-de-servico', '0.3', 'yearly'],
   ];
 
   const urls = pages.map(

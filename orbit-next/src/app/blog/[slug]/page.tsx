@@ -94,6 +94,26 @@ function getInitials(name: string | null): string {
   return name.split(' ').map((n) => n[0]).filter(Boolean).slice(0, 2).join('').toUpperCase();
 }
 
+function escapeHtml(str: string): string {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// Seleciona 3 artigos relacionados: mesma categoria primeiro, depois mais recentes
+function getRelatedArticles(current: Article, count = 3): Article[] {
+  const all = articles as Article[];
+  const others = all.filter((a) => a.slug !== current.slug);
+  const sameCategory = others.filter((a) => a.category && a.category === current.category);
+  const sortByDate = (arr: Article[]) =>
+    [...arr].sort((a, b) => new Date(b.published_at || '').getTime() - new Date(a.published_at || '').getTime());
+
+  const picked: Article[] = sortByDate(sameCategory).slice(0, count);
+  if (picked.length < count) {
+    const remaining = sortByDate(others.filter((a) => !picked.includes(a)));
+    picked.push(...remaining.slice(0, count - picked.length));
+  }
+  return picked;
+}
+
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const article = getArticle(slug);
@@ -138,6 +158,59 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     ],
   };
 
+  const related = getRelatedArticles(article, 3);
+  const relatedHTML = related.length > 0 ? `
+    <section class="blog-related" aria-label="Artigos relacionados">
+      <div class="blog-related__head">
+        <h2><i class="fas fa-newspaper"></i> Continue lendo</h2>
+        <a href="/blog" class="blog-related__see-all">Ver todos <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="blog-related__grid">
+        ${related.map((r) => {
+          const rCat = CATEGORIES[r.category || ''] || r.category || 'Artigo';
+          const rImg = r.cover_url || '/images/og-image.png';
+          const rDate = formatDate(r.published_at);
+          const rIso = r.published_at || '';
+          const rMins = readTime(r.content);
+          return `<a href="/blog/${escapeHtml(r.slug)}" class="blog-related__card" role="article">
+            <div class="blog-related__img"><img src="${escapeHtml(rImg)}" alt="${escapeHtml(r.title)}" loading="lazy" width="400" height="220"></div>
+            <div class="blog-related__body">
+              <span class="blog-related__tag">${escapeHtml(rCat)}</span>
+              <h3>${escapeHtml(r.title)}</h3>
+              <div class="blog-related__meta">
+                <time datetime="${escapeHtml(rIso)}">${rDate}</time>
+                <span>&middot;</span>
+                <span><i class="fas fa-clock"></i> ${rMins} min</span>
+              </div>
+            </div>
+          </a>`;
+        }).join('')}
+      </div>
+    </section>
+    <style>
+      .blog-related { max-width: 1100px; margin: 56px auto 24px; padding: 0 20px; }
+      .blog-related__head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 22px; flex-wrap: wrap; }
+      .blog-related__head h2 { display: flex; align-items: center; gap: 10px; color: #0D1117; font-size: 1.5rem; font-weight: 800; margin: 0; letter-spacing: -0.01em; }
+      .blog-related__head h2 i { color: #ffba1a; font-size: 1.1rem; }
+      .blog-related__see-all { display: inline-flex; align-items: center; gap: 6px; color: #ffba1a; font-size: 14px; font-weight: 700; text-decoration: none; }
+      .blog-related__see-all:hover { color: #ff8c00; }
+      .blog-related__see-all i { font-size: 11px; transition: transform 0.2s; }
+      .blog-related__see-all:hover i { transform: translateX(3px); }
+      .blog-related__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+      @media (max-width: 900px) { .blog-related__grid { grid-template-columns: 1fr; } }
+      .blog-related__card { display: flex; flex-direction: column; background: #fff; border: 1px solid #E5E7EB; border-radius: 16px; overflow: hidden; text-decoration: none; color: inherit; transition: all 0.25s; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+      .blog-related__card:hover { transform: translateY(-3px); border-color: #ffba1a; box-shadow: 0 14px 30px rgba(0,0,0,0.10); }
+      .blog-related__img { aspect-ratio: 16/9; overflow: hidden; background: #F3F4F6; }
+      .blog-related__img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
+      .blog-related__card:hover .blog-related__img img { transform: scale(1.04); }
+      .blog-related__body { padding: 18px 18px 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+      .blog-related__tag { display: inline-block; align-self: flex-start; padding: 4px 10px; background: rgba(255,186,26,0.12); border: 1px solid rgba(255,186,26,0.30); border-radius: 50px; color: #b87a00; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+      .blog-related__body h3 { color: #0D1117; font-size: 1rem; font-weight: 700; line-height: 1.35; margin: 0; letter-spacing: -0.01em; }
+      .blog-related__meta { display: flex; align-items: center; gap: 8px; color: #6B7280; font-size: 12px; margin-top: auto; }
+      .blog-related__meta i { font-size: 10px; }
+    </style>
+  ` : '';
+
   const articleHTML = `
     ${headerHTML}
     <div class="blog-article" style="padding-top:100px;">
@@ -158,6 +231,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             <span><i class="fas fa-clock"></i> ${mins} min de leitura</span>
           </div>
           <div class="blog-article-content">${article.content}</div>
+          ${relatedHTML}
           <div class="blog-article__bottom-cta">
             <a href="/blog" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Voltar ao Blog</a>
           </div>
