@@ -141,8 +141,8 @@ export default function BlogPage() {
       const titleLower = a.title.toLowerCase();
 
       const hiddenMore = i >= RECENT_COUNT ? '1' : '0';
-      const hiddenStyle = i >= RECENT_COUNT ? 'display:none;' : 'display:block;';
-      return `<a href="/blog/${escapeHtml(a.slug)}" class="blog-card blog-card--animate" data-category="${escapeHtml(cat)}" data-title-lower="${escapeHtml(titleLower)}" data-date-ts="${ts}" data-title-az="${escapeHtml(titleLower)}" data-hidden-more="${hiddenMore}" style="animation-delay:${i * 80}ms;text-decoration:none;color:inherit;${hiddenStyle}">
+      const isoDate = a.published_at || '';
+      return `<a href="/blog/${escapeHtml(a.slug)}" class="blog-card blog-card--animate" role="article" data-category="${escapeHtml(cat)}" data-title-lower="${escapeHtml(titleLower)}" data-date-ts="${ts}" data-title-az="${escapeHtml(titleLower)}" data-hidden-more="${hiddenMore}" style="animation-delay:${i * 80}ms;text-decoration:none;color:inherit;display:block;">
         <div class="blog-card__image">
           <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(a.title)}" loading="lazy" width="600" height="340">
           <span class="blog-card__tag">${escapeHtml(catLabel)}</span>
@@ -157,7 +157,7 @@ export default function BlogPage() {
                 : `<div class="blog-card__avatar">${initials}</div>`}
               <div class="blog-card__author-info">
                 <span class="blog-card__author-name">${escapeHtml(a.author || 'Equipe Orbit')}</span>
-                <span class="blog-card__date">${date}</span>
+                <time class="blog-card__date" datetime="${escapeHtml(isoDate)}">${date}</time>
               </div>
             </div>
             <span class="blog-card__read-time"><i class="fas fa-clock"></i> ${mins} min</span>
@@ -205,6 +205,9 @@ export default function BlogPage() {
       .blog-more-btn:hover { background: linear-gradient(135deg, #ffba1a 0%, #ff8c00 100%); color: #0D1117; transform: translateY(-2px); box-shadow: 0 12px 28px rgba(255,186,26,0.32); }
       .blog-more-btn i { transition: transform 0.2s; }
       .blog-more-btn:hover i { transform: translateY(3px); }
+      /* Cards alem do RECENT_COUNT ficam ocultos visualmente quando o grid esta colapsado,
+         mas ainda presentes no HTML para crawlers (Google/GPTBot/ClaudeBot/PerplexityBot). */
+      .blog-grid.is-collapsed .blog-card[data-hidden-more="1"] { display: none !important; }
       .blog-empty { max-width: 480px; margin: 60px auto; padding: 40px 24px; text-align: center; background: #fff; border: 1px dashed #E5E7EB; border-radius: 20px; }
       .blog-empty i { font-size: 38px; color: #9CA3AF; margin-bottom: 16px; display: block; }
       .blog-empty h3 { color: #0D1117; font-size: 18px; margin: 0 0 6px; }
@@ -241,6 +244,15 @@ export default function BlogPage() {
           var q = state.q.trim().toLowerCase();
           var filtering = isFiltering();
           var visible = 0;
+
+          // Quando filtra ou expande, tira o is-collapsed (libera todos pra filtragem visual)
+          var shouldCollapse = !filtering && !state.expanded;
+          if (shouldCollapse) {
+            grid.classList.add('is-collapsed');
+          } else {
+            grid.classList.remove('is-collapsed');
+          }
+
           cards.forEach(function(c) {
             var cat = c.getAttribute('data-category') || '';
             var title = c.getAttribute('data-title-lower') || '';
@@ -248,11 +260,16 @@ export default function BlogPage() {
             var matchCat = state.cat === 'all' || cat === state.cat;
             var matchQ = !q || title.indexOf(q) !== -1;
             var matchSearch = matchCat && matchQ;
-            // Quando filtrando, revela TODOS os que casam (ignora hidden-more).
-            // Sem filtro: respeita hidden-more, a menos que o usuario tenha expandido.
-            var show = matchSearch && (filtering || state.expanded || !hiddenMore);
-            c.style.display = show ? 'block' : 'none';
-            if (show) visible++;
+
+            if (shouldCollapse) {
+              // Modo coleted: CSS .is-collapsed esconde data-hidden-more. Limpa inline.
+              c.style.display = '';
+              if (!hiddenMore) visible++;
+            } else {
+              // Modo aberto/filtrando: per-card display baseado em match
+              c.style.display = matchSearch ? 'block' : 'none';
+              if (matchSearch) visible++;
+            }
           });
           if (empty) empty.style.display = visible === 0 ? 'block' : 'none';
 
@@ -359,7 +376,7 @@ export default function BlogPage() {
     <section class="blog-grid-section">
       ${filterBarHTML}
       ${sectionHeaderHTML}
-      <div class="blog-grid">${cardsHTML}</div>
+      <div class="blog-grid${sorted.length > RECENT_COUNT ? ' is-collapsed' : ''}">${cardsHTML}</div>
       ${emptyStateHTML}
       ${moreButtonHTML}
     </section>
