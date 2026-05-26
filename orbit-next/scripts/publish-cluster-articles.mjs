@@ -133,19 +133,26 @@ function removeFirstH1(body) {
   return body.replace(/^#\s+.+?\n/, '');
 }
 
+// CTA primario padrao do site — todo "Agendar demonstração" do blog aponta pra ca
+const DEMO_CTA_URL = 'https://demonstracao.orbitgestao.com.br/chat';
+
 function substituteInternalLinks(markdown) {
-  // Substitui [Texto](#) por [Texto](URL_REAL) quando texto bate com INTERNAL_LINK_MAP
-  return markdown.replace(/\[([^\]]+)\]\(#\)/g, (match, label) => {
-    // Trim e normaliza espacos pra comparacao mais robusta
+  // 1. CTAs de demo: substitui (#demo-form), (#form-demo), (#agendar), etc por URL real do chat
+  let out = markdown.replace(/\]\(#(?:demo[-_]?form|form[-_]?demo|agendar|chat|demo)\)/gi, `](${DEMO_CTA_URL})`);
+
+  // 2. Internal links de outros artigos: [Texto](#) por [Texto](URL_REAL) quando bate
+  out = out.replace(/\[([^\]]+)\]\(#\)/g, (match, label) => {
     const labelNorm = label.replace(/\s+/g, ' ').trim();
     for (const [key, url] of Object.entries(INTERNAL_LINK_MAP)) {
       if (labelNorm === key || labelNorm.startsWith(key.slice(0, 50))) {
         return `[${label}](${url})`;
       }
     }
-    // Nao bateu — mantém placeholder (artigo futuro nao publicado)
+    // Nao bateu — mantem placeholder (artigo futuro nao publicado)
     return match;
   });
+
+  return out;
 }
 
 function markdownToHtml(markdown) {
