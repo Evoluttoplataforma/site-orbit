@@ -82,14 +82,10 @@ export function PageContent() {
       const items = (byDay[day] || []).sort((a, b) => a.hour - b.hour);
       const slots = items.map(t => `
         <div class="tr-slot" data-slug="${t.slug}">
-          <span class="tr-slot__time"><i class="fa-solid fa-clock"></i>${String(t.hour).padStart(2,'0')}:00</span>
-          <div class="tr-slot__icon-wrap">
-            <div class="tr-slot__icon"><i class="fa-solid ${t.icon}"></i></div>
-            <div>
-              <div class="tr-slot__title">${t.title}</div>
-              ${t.subtitle ? `<div class="tr-slot__sub">${t.subtitle}</div>` : ''}
-            </div>
-          </div>
+          <span class="tr-slot__time"><i class="fa-solid fa-clock"></i>${String(t.hour).padStart(2,'0')}h</span>
+          <div class="tr-slot__icon"><i class="fa-solid ${t.icon}"></i></div>
+          <div class="tr-slot__title">${t.title}</div>
+          ${t.subtitle ? `<div class="tr-slot__sub">${t.subtitle}</div>` : ''}
           <p class="tr-slot__desc">${t.description}</p>
           <span class="tr-slot__cta">Quero participar <i class="fa-solid fa-arrow-right"></i></span>
         </div>
