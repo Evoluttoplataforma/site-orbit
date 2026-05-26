@@ -14,8 +14,17 @@ export const pageHTML = `
             Voc&ecirc; vai receber o e-mail de confirma&ccedil;&atilde;o com o arquivo .ics pra adicionar na sua agenda.
         </p>
 
-        <div style="background:#161B22;border:1px solid rgba(255,186,26,0.15);border-radius:16px;padding:24px;margin-bottom:28px;text-align:left;">
+        <div style="background:#161B22;border:1px solid rgba(255,186,26,0.15);border-radius:16px;padding:24px;margin-bottom:24px;text-align:left;">
             <div id="trainingObrigadoDetails"></div>
+        </div>
+
+        <div id="trainingCalendarBlock" style="background:#161B22;border:1px solid rgba(255,186,26,0.15);border-radius:16px;padding:24px;margin-bottom:28px;text-align:left;display:none;">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+                <i class="fa-solid fa-calendar-plus" style="color:#ffba1a;font-size:18px;"></i>
+                <strong style="color:#fff;font-size:15px;">Salvar na agenda</strong>
+            </div>
+            <p style="color:#8B949E;font-size:13px;line-height:1.5;margin:0 0 16px;">Escolha sua agenda preferida — vamos te lembrar 30 minutos antes.</p>
+            <div id="trainingCalendarBtns" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;"></div>
         </div>
 
         <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
@@ -28,6 +37,16 @@ export const pageHTML = `
         </div>
     </div>
 </section>
+
+<style>
+    .ty-cal-btn { display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:14px 10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;color:#C9D1D9;text-decoration:none;font-size:12px;font-weight:600;transition:all 0.2s;cursor:pointer;font-family:inherit; }
+    .ty-cal-btn:hover { border-color:rgba(255,186,26,0.45);background:rgba(255,186,26,0.06);color:#fff;transform:translateY(-2px); }
+    .ty-cal-btn i { font-size:22px; }
+    .ty-cal-btn .ty-cal-google { color:#4285F4; }
+    .ty-cal-btn .ty-cal-outlook { color:#0078D4; }
+    .ty-cal-btn .ty-cal-apple { color:#ffffff; }
+    @media (max-width: 480px) { #trainingCalendarBtns { grid-template-columns:1fr !important; } }
+</style>
 
 <style>
 @keyframes tyBounce { 0% { transform: scale(0); } 100% { transform: scale(1); } }

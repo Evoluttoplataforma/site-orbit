@@ -172,6 +172,7 @@ export const pageHTML = `
 
                 <label class="tr-modal__label" style="margin-top:8px;">Seus dados</label>
                 <input class="tr-modal__input" type="text" name="nome" required placeholder="Nome completo">
+                <input class="tr-modal__input" type="text" name="empresa" required placeholder="Nome da empresa">
                 <input class="tr-modal__input" type="email" name="email" required placeholder="E-mail">
                 <input class="tr-modal__input" type="tel" name="telefone" required placeholder="WhatsApp com DDD">
 

@@ -177,6 +177,7 @@ export function PageContent() {
       const fd = new FormData(form);
       const payload = {
         nome: String(fd.get('nome') || ''),
+        empresa: String(fd.get('empresa') || ''),
         email: String(fd.get('email') || ''),
         telefone: String(fd.get('telefone') || ''),
         source: 'treinamento-' + String(fd.get('training_slug') || ''),
@@ -195,13 +196,13 @@ export function PageContent() {
         fetch(`${SB_URL}/functions/v1/send-training-confirmation`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}` },
-          body: JSON.stringify({ nome: payload.nome, email: payload.email, training_slug: String(fd.get('training_slug') || ''), chosen_date: payload.chosen_date }),
+          body: JSON.stringify({ nome: payload.nome, empresa: payload.empresa, email: payload.email, training_slug: String(fd.get('training_slug') || ''), chosen_date: payload.chosen_date }),
         }).catch(() => {});
 
         fetch(`${SB_URL}/functions/v1/subscribe-manychat-training`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}` },
-          body: JSON.stringify({ nome: payload.nome, email: payload.email, telefone: payload.telefone, training_slug: String(fd.get('training_slug') || ''), chosen_date: payload.chosen_date }),
+          body: JSON.stringify({ nome: payload.nome, empresa: payload.empresa, email: payload.email, telefone: payload.telefone, training_slug: String(fd.get('training_slug') || ''), chosen_date: payload.chosen_date }),
         }).catch(() => {});
 
         window.location.href = '/treinamentos/obrigado?t=' + encodeURIComponent(String(fd.get('training_slug') || '')) + '&d=' + encodeURIComponent(payload.chosen_date);

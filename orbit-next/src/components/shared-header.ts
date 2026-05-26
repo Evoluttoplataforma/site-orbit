@@ -118,10 +118,6 @@ export const headerHTML = `
                                 <div class="dd-icon"><i class="fas fa-graduation-cap" style="color:#3FB950;"></i></div>
                                 <div class="dd-text"><span>Onboarding</span><small>Qua 9h/17h &bull; Sex 14h</small></div>
                             </a>
-                            <a href="https://templum.com.br/treinamento-fase-a-fase" target="_blank">
-                                <div class="dd-icon"><i class="fas fa-chalkboard-teacher" style="color:#8B5CF6;"></i></div>
-                                <div class="dd-text"><span>Treinamento Consultores</span><small>Toda semana (Templum)</small></div>
-                            </a>
                         </div>
                     </div>
                 </li>
@@ -193,7 +189,6 @@ export const headerHTML = `
             <a href="/live/chris"><i class="fas fa-chalkboard-user" style="color:#ffba1a;"></i> Masterclass Consultores (Quinta 18h)</a>
             <a href="/treinamentos"><i class="fas fa-chalkboard-teacher" style="color:#ffba1a;"></i> Treinamentos</a>
             <a href="https://demonstracao.orbitgestao.com.br/salas/onboarding" target="_blank"><i class="fas fa-graduation-cap" style="color:#3FB950;"></i> Onboarding</a>
-            <a href="https://templum.com.br/treinamento-fase-a-fase" target="_blank"><i class="fas fa-chalkboard-teacher" style="color:#8B5CF6;"></i> Treinamento</a>
             <div class="mobile-menu__label" data-i18n="mobile.company">Empresa</div>
             <a href="/sobre"><i class="fas fa-building"></i> Sobre Nós</a>
         </div>

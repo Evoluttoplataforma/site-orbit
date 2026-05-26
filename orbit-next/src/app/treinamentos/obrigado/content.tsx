@@ -19,6 +19,86 @@ const TRAININGS_LOOKUP: Record<string, { title: string; day: number; hour: numbe
 };
 
 const DAY_LABELS: Record<number, string> = { 1: 'Segunda-feira', 2: 'Terça-feira', 3: 'Quarta-feira', 4: 'Quinta-feira', 5: 'Sexta-feira' };
+const LIVE_URL = 'https://www.youtube.com/@orbitgestao/live';
+const DURATION_MIN = 60;
+
+function pad(n: number) { return String(n).padStart(2, '0'); }
+
+// Formata datetime em UTC para o padrão ICS / Google (YYYYMMDDTHHMMSSZ)
+function toUTCStamp(y: number, m: number, d: number, hour: number, min: number): string {
+  // Horário BRT (-03) — convertemos pra UTC somando 3h
+  const dt = new Date(Date.UTC(y, m - 1, d, hour + 3, min, 0));
+  return (
+    dt.getUTCFullYear().toString() +
+    pad(dt.getUTCMonth() + 1) +
+    pad(dt.getUTCDate()) +
+    'T' +
+    pad(dt.getUTCHours()) +
+    pad(dt.getUTCMinutes()) +
+    '00Z'
+  );
+}
+
+function buildGoogleUrl(title: string, startUTC: string, endUTC: string, details: string): string {
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: title,
+    dates: `${startUTC}/${endUTC}`,
+    details,
+    location: LIVE_URL,
+  });
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
+
+function buildOutlookUrl(title: string, y: number, m: number, d: number, hour: number, durMin: number, details: string): string {
+  // Outlook usa ISO local com offset
+  const startISO = `${y}-${pad(m)}-${pad(d)}T${pad(hour)}:00:00-03:00`;
+  const endMin = hour * 60 + durMin;
+  const endHour = Math.floor(endMin / 60);
+  const endMm = endMin % 60;
+  const endISO = `${y}-${pad(m)}-${pad(d)}T${pad(endHour)}:${pad(endMm)}:00-03:00`;
+  const params = new URLSearchParams({
+    path: '/calendar/action/compose',
+    rru: 'addevent',
+    subject: title,
+    startdt: startISO,
+    enddt: endISO,
+    body: details,
+    location: LIVE_URL,
+  });
+  return `https://outlook.live.com/calendar/0/deeplink/compose?${params.toString()}`;
+}
+
+function buildICS(title: string, startUTC: string, endUTC: string, details: string, slug: string, dateStr: string): string {
+  const dtStamp = toUTCStamp(new Date().getUTCFullYear(), new Date().getUTCMonth() + 1, new Date().getUTCDate(), new Date().getUTCHours() - 3, new Date().getUTCMinutes());
+  const uid = `treinamento-${slug}-${dateStr.replace(/-/g, '')}-${Math.random().toString(36).slice(2, 10)}@orbitgestao.com.br`;
+  const esc = (s: string) => s.replace(/\\/g, '\\\\').replace(/,/g, '\\,').replace(/;/g, '\\;').replace(/\n/g, '\\n');
+  return [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Orbit Gestao//Treinamentos//PT',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    'BEGIN:VEVENT',
+    `UID:${uid}`,
+    `DTSTAMP:${dtStamp}`,
+    `DTSTART:${startUTC}`,
+    `DTEND:${endUTC}`,
+    `SUMMARY:${esc(title)}`,
+    `DESCRIPTION:${esc(details)}`,
+    `LOCATION:${esc(LIVE_URL)}`,
+    `URL:${LIVE_URL}`,
+    'STATUS:CONFIRMED',
+    'TRANSP:OPAQUE',
+    'BEGIN:VALARM',
+    'TRIGGER:-PT30M',
+    'ACTION:DISPLAY',
+    `DESCRIPTION:${esc(title)} comeca em 30 minutos`,
+    'END:VALARM',
+    'END:VEVENT',
+    'END:VCALENDAR',
+  ].join('\r\n');
+}
 
 export function PageContent() {
   const ref = useRef<HTMLDivElement>(null);
@@ -62,6 +142,42 @@ export function PageContent() {
           <span style="color:#8B949E;font-size:13px;">youtube.com/@orbitgestao/live</span>
         </div>
       </div>`;
+
+    // ===== Calendar buttons =====
+    if (dateStr && /^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+      const [y, mo, d] = dateStr.split('-').map(Number);
+      const startUTC = toUTCStamp(y, mo, d, t.hour, 0);
+      const endMin = t.hour * 60 + DURATION_MIN;
+      const endUTC = toUTCStamp(y, mo, d, Math.floor(endMin / 60), endMin % 60);
+      const title = `Treinamento Orbit: ${t.title}`;
+      const description = `Treinamento da plataforma Orbit. Link da live: ${LIVE_URL}`;
+
+      const googleUrl = buildGoogleUrl(title, startUTC, endUTC, description);
+      const outlookUrl = buildOutlookUrl(title, y, mo, d, t.hour, DURATION_MIN, description);
+      const icsContent = buildICS(title, startUTC, endUTC, description, slug, dateStr);
+      const icsDataUrl = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(icsContent);
+      const icsFilename = `treinamento-${slug}-${dateStr}.ics`;
+
+      const calBlock = ref.current.querySelector('#trainingCalendarBlock') as HTMLElement | null;
+      const calBtns = ref.current.querySelector('#trainingCalendarBtns') as HTMLElement | null;
+      if (calBlock && calBtns) {
+        calBtns.innerHTML = `
+          <a class="ty-cal-btn" href="${googleUrl}" target="_blank" rel="noopener">
+            <i class="fa-brands fa-google" style="color:#4285F4;"></i>
+            <span>Google Calendar</span>
+          </a>
+          <a class="ty-cal-btn" href="${outlookUrl}" target="_blank" rel="noopener">
+            <i class="fa-brands fa-microsoft" style="color:#0078D4;"></i>
+            <span>Outlook</span>
+          </a>
+          <a class="ty-cal-btn" href="${icsDataUrl}" download="${icsFilename}">
+            <i class="fa-brands fa-apple" style="color:#fff;"></i>
+            <span>Apple / iCal</span>
+          </a>
+        `;
+        calBlock.style.display = 'block';
+      }
+    }
   }, [mounted]);
 
   const fullHTML = headerHTML + '\n' + pageHTML + '\n' + footerHTML;
