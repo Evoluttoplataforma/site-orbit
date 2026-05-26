@@ -98,6 +98,44 @@ function escapeHtml(str: string): string {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+// Extrai pares pergunta/resposta de uma seção FAQ no fim do artigo.
+// 1) Itera todos os <h2> do artigo
+// 2) Acha o ULTIMO h2 cujo texto contem "Perguntas", "FAQ", "Dúvidas", "Frequentes"
+// 3) Captura H3+P seguintes ate o proximo h2 (ou ate o fim)
+const FAQ_HEADING_RE = /(perguntas|faq|d[úu]vidas|frequentes)/i;
+function extractFaqs(html: string): { q: string; a: string }[] {
+  if (!html) return [];
+
+  // Acha todos h2 com posicao e texto
+  const h2Re = /<h2\b[^>]*>([\s\S]*?)<\/h2>/gi;
+  const h2s: { end: number; text: string }[] = [];
+  let hm: RegExpExecArray | null;
+  while ((hm = h2Re.exec(html)) !== null) {
+    h2s.push({ end: hm.index + hm[0].length, text: hm[1].replace(/<[^>]+>/g, '') });
+  }
+
+  // Filtra h2s com keywords de FAQ (pega o ULTIMO — geralmente a secao final)
+  const faqH2s = h2s.filter((h) => FAQ_HEADING_RE.test(h.text));
+  if (faqH2s.length === 0) return [];
+  const startIdx = faqH2s[faqH2s.length - 1].end;
+
+  // Acha proximo h2 apos a secao FAQ pra delimitar o fim
+  const nextH2 = h2s.find((h) => h.end > startIdx + 1);
+  const endIdx = nextH2 ? html.indexOf('<h2', startIdx + 1) : html.length;
+  const faqArea = html.slice(startIdx, endIdx);
+
+  const pairs: { q: string; a: string }[] = [];
+  const pairRe = /<h3[^>]*>([\s\S]*?)<\/h3>\s*(?:<p[^>]*>([\s\S]*?)<\/p>|<div[^>]*>([\s\S]*?)<\/div>)/gi;
+  let m: RegExpExecArray | null;
+  while ((m = pairRe.exec(faqArea)) !== null) {
+    const q = m[1].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+    const a = (m[2] || m[3] || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+    if (q && a && q.length < 250 && a.length >= 20) pairs.push({ q, a });
+    if (pairs.length >= 30) break;
+  }
+  return pairs;
+}
+
 // Seleciona 3 artigos relacionados: mesma categoria primeiro, depois mais recentes
 function getRelatedArticles(current: Article, count = 3): Article[] {
   const all = articles as Article[];
@@ -157,6 +195,20 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       { '@type': 'ListItem', position: 3, name: article.title, item: seoUrl },
     ],
   };
+
+  // FAQPage schema — gerado automaticamente quando o artigo tem secao
+  // "Perguntas frequentes" ou similar com pares <h3>+<p>. Google mostra
+  // rich snippets de Q&A direto na SERP.
+  const faqs = extractFaqs(article.content);
+  const faqJsonLd = faqs.length >= 2 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  } : null;
 
   const related = getRelatedArticles(article, 3);
   const relatedHTML = related.length > 0 ? `
@@ -274,6 +326,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      {faqJsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />}
       <div dangerouslySetInnerHTML={{ __html: articleHTML }} />
     </>
   );
