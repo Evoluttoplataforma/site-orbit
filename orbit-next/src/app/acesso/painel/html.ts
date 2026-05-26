@@ -3248,8 +3248,9 @@ JSON.stringify(schemaOrg, null, 2) +
     var supabaseComments = [];
 
     async function refreshComments() {
+        // Limit 500 pra evitar puxar tabela inteira em cada refresh do CMS
         try {
-            var res = await supaFetch(SUPABASE_URL + '/rest/v1/blog_comments?order=created_at.desc', {
+            var res = await supaFetch(SUPABASE_URL + '/rest/v1/blog_comments?order=created_at.desc&limit=500', {
                 headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + session.access_token }
             });
             supabaseComments = res.ok ? await res.json() : [];
@@ -3553,8 +3554,11 @@ JSON.stringify(schemaOrg, null, 2) +
     };
 
     async function refreshEmailMkt() {
+        // Limit 500 — antes era SELECT * sem limite, puxando a tabela inteira a cada
+        // abertura do CMS. Principal causa de drain de compute do Supabase.
+        // 500 cobre 99% dos casos (leads recentes); pra ver mais antigos, exportar.
         try {
-            var res = await fetch(EMKT_SUPABASE_URL + '/rest/v1/live_orbit_leads?order=created_at.desc&select=*', {
+            var res = await fetch(EMKT_SUPABASE_URL + '/rest/v1/live_orbit_leads?order=created_at.desc&limit=500&select=*', {
                 headers: { 'apikey': EMKT_SUPABASE_KEY, 'Authorization': 'Bearer ' + EMKT_SUPABASE_KEY }
             });
             emktLeads = res.ok ? await res.json() : [];

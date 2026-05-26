@@ -4,19 +4,18 @@
   var _p = window.location.pathname;
   if (_p.indexOf('/experiencias/') === 0 || _p.indexOf('/apresentacao/') === 0) return;
 
-  var SUPABASE_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
-  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
-
+  // Banners agora servidos como JSON estático gerado no build (scripts/fetch-banners.mjs).
+  // Cada page view ANTES: 1 fetch ao Supabase (rate-limited, conta no compute).
+  // Cada page view AGORA: 1 fetch ao Cloudflare (CDN edge cache, ~free).
+  // Atualizacao: o webhook Supabase ao publicar banner no CMS dispara rebuild.
   function fetchBanners() {
-    var url = SUPABASE_URL + '/rest/v1/site_banners?active=eq.true&order=priority.desc&limit=5&select=id,title,description,cta_text,cta_url,image_data,display_mode,position,dismissible,bg_color,text_color';
-    fetch(url, {
-      headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
-    })
-    .then(function(r) { return r.json(); })
-    .then(function(banners) {
-      if (Array.isArray(banners)) banners.forEach(renderBanner);
-    })
-    .catch(function(e) { console.warn('Banner fetch error:', e); });
+    var url = '/data/banners.json?v=' + Math.floor(Date.now() / 60000); // cache-bust por minuto
+    fetch(url)
+      .then(function(r) { return r.ok ? r.json() : []; })
+      .then(function(banners) {
+        if (Array.isArray(banners)) banners.forEach(renderBanner);
+      })
+      .catch(function(e) { console.warn('Banner JSON load error:', e); });
   }
 
   function isDismissed(id) {
