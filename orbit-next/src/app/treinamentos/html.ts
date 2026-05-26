@@ -16,11 +16,14 @@ export const pageHTML = `
   .tr-hero__stat strong { color: #fff; }
 
   /* ===== TIMETABLE ===== */
-  .tr-section { padding: 80px 20px; background: #0D1117; }
+  .tr-section { padding: 80px 20px; }
   .tr-section__head { max-width: 920px; margin: 0 auto 48px; text-align: center; }
   .tr-section__eyebrow { display: inline-block; color: #ffba1a; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 14px; }
-  .tr-section__title { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 800; color: #fff; margin: 0 0 16px; letter-spacing: -0.02em; }
-  .tr-section__sub { color: #8B949E; font-size: 1.05rem; line-height: 1.6; max-width: 620px; margin: 0 auto; }
+  .tr-section__title { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 800; color: #0D1117; margin: 0 0 16px; letter-spacing: -0.02em; }
+  .tr-section__sub { color: #4B5563; font-size: 1.05rem; line-height: 1.6; max-width: 620px; margin: 0 auto; }
+  /* Section dark variant (Como funciona) — texto claro sobre fundo escuro */
+  .tr-how .tr-section__title { color: #fff; }
+  .tr-how .tr-section__sub { color: #8B949E; }
 
   .tr-week { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; align-items: stretch; }
   @media (max-width: 1024px) { .tr-week { grid-template-columns: repeat(2, 1fr); } }
@@ -30,7 +33,7 @@ export const pageHTML = `
   .tr-day__header { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0 0 4px; text-align: center; }
   .tr-day__name { display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px; background: rgba(255,186,26,0.10); border: 1px solid rgba(255,186,26,0.25); border-radius: 50px; color: #ffba1a; font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
   .tr-day__name::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #ffba1a; box-shadow: 0 0 8px rgba(255,186,26,0.6); }
-  .tr-day__count { color: #C9D1D9; font-size: 12px; font-weight: 600; }
+  .tr-day__count { color: #6B7280; font-size: 12px; font-weight: 600; }
   .tr-day__slots { display: flex; flex-direction: column; gap: 14px; flex: 1; }
 
   .tr-slot { display: flex; flex-direction: column; background: linear-gradient(180deg, #161B22 0%, #0D1117 100%); border: 1px solid rgba(255,255,255,0.10); border-radius: 16px; padding: 18px 18px 16px; cursor: pointer; transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; position: relative; overflow: hidden; flex: 1; min-height: 260px; }
