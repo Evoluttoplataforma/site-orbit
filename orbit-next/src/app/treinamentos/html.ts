@@ -16,7 +16,7 @@ export const pageHTML = `
   .tr-hero__stat strong { color: #fff; }
 
   /* ===== TIMETABLE ===== */
-  .tr-section { padding: 80px 20px; }
+  .tr-section { padding: 80px 20px; background: #0D1117; }
   .tr-section__head { max-width: 920px; margin: 0 auto 48px; text-align: center; }
   .tr-section__eyebrow { display: inline-block; color: #ffba1a; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 14px; }
   .tr-section__title { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 800; color: #fff; margin: 0 0 16px; letter-spacing: -0.02em; }
