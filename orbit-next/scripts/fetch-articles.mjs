@@ -61,26 +61,63 @@ function extractBase64Image(base64Str, filename) {
 }
 
 /**
- * Aplica <strong> em ocorrencias da seo_keyword no conteudo.
+ * Aplica <strong> em ocorrencias da seo_keyword (e variacoes de plural) no conteudo.
  * REGRA DE OURO: nao apaga, nao acrescenta nada — so envelopa palavras
  * que JA existem com <strong>...</strong>. Source no Supabase fica intacto.
  *
  * Conservador por design:
- * - Maximo MAX_BOLD_ADDITIONS negritos novos por artigo (evita stuffing)
+ * - Maximo MAX_BOLD_TOTAL negritos novos por artigo (soma keyword + variacoes)
  * - Skip se artigo ja tem >= SKIP_THRESHOLD_STRONG <strong> no original
  * - Lookbehind/lookahead garantem que so pega palavra isolada (nao dentro de tag/href/class)
- * - Verifica context-window pra confirmar que nao esta dentro de <a>, <strong>, <h*>
+ * - Filtra ocorrencias dentro de <a>, <strong>, <b>, <em>, <i>, <h1-6>, <code>, <pre>
+ * - Variacoes de plural geradas por regras simples e seguras de portugues
  */
-const MAX_BOLD_ADDITIONS = 2;
+const MAX_BOLD_TOTAL = 3;       // total de negritos novos por artigo (keyword + variacoes)
 const SKIP_THRESHOLD_STRONG = 8;
 
 function escapeRegex(s) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+// Gera variacoes seguras da keyword (so plural, com regras simples PT)
+// Ex: "consultoria recorrente passiva" → ["consultoria recorrente passiva", "consultoria recorrente passivas"]
+function generateKeywordVariations(keyword) {
+  const out = new Set();
+  const trimmed = (keyword || '').trim();
+  if (!trimmed) return [];
+  out.add(trimmed);
+
+  const words = trimmed.split(/\s+/);
+  const lastWord = words[words.length - 1];
+  const lastLower = lastWord.toLowerCase();
+
+  // Skip palavras muito curtas ou ja plurais
+  if (lastWord.length >= 4 && !lastLower.endsWith('s')) {
+    let pluralLast = null;
+    if (/[aeiouãéíóú]$/i.test(lastLower)) {
+      // Termina em vogal → +s (consultoria→consultorias, agente→agentes)
+      pluralLast = lastWord + 's';
+    } else if (/[rz]$/i.test(lastLower)) {
+      // Termina em r ou z → +es (gestor→gestores, raiz→raizes)
+      pluralLast = lastWord + 'es';
+    }
+    // Outras terminacoes (m, l, ão) tem regras complexas → skip por seguranca
+    if (pluralLast) {
+      out.add([...words.slice(0, -1), pluralLast].join(' '));
+    }
+  }
+
+  // Singular se a keyword ja for plural (caso simples: termina em 's' precedida de vogal)
+  if (lastWord.length >= 5 && /[aeiou]s$/i.test(lastLower) && !/ss$/i.test(lastLower)) {
+    const singularLast = lastWord.slice(0, -1);
+    out.add([...words.slice(0, -1), singularLast].join(' '));
+  }
+
+  return Array.from(out);
+}
+
 // Retorna true se a posicao 'pos' no html esta dentro de uma das tags listadas
 function isInsideTag(html, pos, tagNames) {
-  // Olha pra tras procurando a tag mais recente nao-fechada
   const before = html.slice(0, pos);
   for (const tag of tagNames) {
     const openRe = new RegExp(`<${tag}\\b[^>]*>`, 'gi');
@@ -100,41 +137,43 @@ function applySeoBolding(article) {
   const existingStrongOpens = (article.content.match(/<strong\b/gi) || []).length;
   if (existingStrongOpens >= SKIP_THRESHOLD_STRONG) return 0;
 
-  // Skip se keyword nao aparece no texto (case insensitive)
-  if (!article.content.toLowerCase().includes(keyword.toLowerCase())) return 0;
-
-  // Regex: keyword precedida e seguida por borda "limpa" (espaco, pontuacao ou inicio/fim)
-  // Lookbehind exclui chars que indicariam interior de tag/atributo
-  const re = new RegExp(
-    `(?<=^|[\\s>(\\["'])(${escapeRegex(keyword)})(?=$|[\\s<(),.!?;:\\]'"])`,
-    'gi'
-  );
-
-  let additions = 0;
+  const variations = generateKeywordVariations(keyword);
   const protectedTags = ['a', 'strong', 'b', 'em', 'i', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'code', 'pre'];
 
-  // Acumula matches primeiro pra poder verificar contexto sem afetar posicoes
-  const matches = [];
-  let m;
-  while ((m = re.exec(article.content)) !== null) {
-    matches.push({ index: m.index, length: m[1].length, text: m[1] });
-    if (matches.length >= 20) break; // sanity cap
-  }
-
-  // Filtra matches que estao dentro de tags protegidas
-  const safeMatches = matches.filter((mm) => !isInsideTag(article.content, mm.index, protectedTags));
-
-  if (safeMatches.length === 0) return 0;
-
-  // Aplica de tras pra frente (preserva indices durante substituicao)
-  const toApply = safeMatches.slice(0, MAX_BOLD_ADDITIONS);
-  toApply.sort((a, b) => b.index - a.index);
-
+  let additions = 0;
   let html = article.content;
-  for (const mm of toApply) {
-    html = html.slice(0, mm.index) + `<strong>${mm.text}</strong>` + html.slice(mm.index + mm.length);
-    additions++;
+
+  // Itera variacoes em ordem (keyword principal primeiro, depois plural/singular)
+  for (const variant of variations) {
+    if (additions >= MAX_BOLD_TOTAL) break;
+    if (!html.toLowerCase().includes(variant.toLowerCase())) continue;
+
+    const re = new RegExp(
+      `(?<=^|[\\s>(\\["'])(${escapeRegex(variant)})(?=$|[\\s<(),.!?;:\\]'"])`,
+      'gi'
+    );
+
+    const matches = [];
+    let m;
+    while ((m = re.exec(html)) !== null) {
+      matches.push({ index: m.index, length: m[1].length, text: m[1] });
+      if (matches.length >= 20) break;
+    }
+
+    // Filtra matches em regioes protegidas e ja-boldadas (apos passagens anteriores)
+    const safeMatches = matches.filter((mm) => !isInsideTag(html, mm.index, protectedTags));
+    if (safeMatches.length === 0) continue;
+
+    // Quota desta variacao: pelo menos 1, ate sobrar espaco no total
+    const quota = Math.min(safeMatches.length, MAX_BOLD_TOTAL - additions);
+    const toApply = safeMatches.slice(0, quota).sort((a, b) => b.index - a.index);
+
+    for (const mm of toApply) {
+      html = html.slice(0, mm.index) + `<strong>${mm.text}</strong>` + html.slice(mm.index + mm.length);
+      additions++;
+    }
   }
+
   article.content = html;
   return additions;
 }
