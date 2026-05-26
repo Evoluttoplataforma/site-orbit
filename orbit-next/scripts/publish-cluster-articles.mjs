@@ -80,9 +80,26 @@ function parseFrontmatter(text) {
 }
 
 function stripJsonBlocks(body) {
-  // Remove blocos ```json``` (schemas vão pro Supabase como string separada se quisermos,
-  // mas o page.tsx ja gera Article + FAQPage automaticamente, entao podemos descartar)
-  return body.replace(/```json\s*\n[\s\S]*?\n```/g, '').trim();
+  // Remove a secao "## Schema markup..." inteira (heading + blocos ```json``` ate
+  // o proximo H2 ou fim). Schemas Article+FAQPage sao gerados automaticamente
+  // pelo blog/[slug]/page.tsx via extractFaqs().
+  let out = body.replace(/##\s+Schema\s+markup[\s\S]*$/i, '').trim();
+  // Defesa extra: remove blocos ```json``` orfaos que tenham sobrado
+  out = out.replace(/```json\s*\n[\s\S]*?\n```/g, '').trim();
+  return out;
+}
+
+// Remove travessoes (em-dash —, en-dash –) — sinal de texto-IA.
+// Substitui por equivalentes humanos: ", " no meio de frase, "-" como conector.
+function humanizeText(body) {
+  // Em-dash com espacos (uso aposto-like) → virgulas
+  let out = body.replace(/\s—\s/g, ', ');
+  // En-dash com espacos → virgulas
+  out = out.replace(/\s–\s/g, ', ');
+  // Em-dash colado (raros, mas casos como "30—40") → hifen
+  out = out.replace(/—/g, '-');
+  out = out.replace(/–/g, '-');
+  return out;
 }
 
 function removeFirstH1(body) {
@@ -128,20 +145,21 @@ async function upsertArticle(art) {
 
   let markdown = stripJsonBlocks(body);
   markdown = removeFirstH1(markdown);
+  markdown = humanizeText(markdown);
   markdown = substituteInternalLinks(markdown);
   const contentHtml = markdownToHtml(markdown);
 
   const payload = {
-    title: meta.title,
+    title: humanizeText(meta.title || ''),
     slug: meta.slug,
-    excerpt: meta.meta_description,
+    excerpt: humanizeText(meta.meta_description || ''),
     content: contentHtml,
     category: art.category,
     author: meta.author || 'Equipe Orbit',
     published: true,
     published_at: meta.published_at ? `${meta.published_at}T12:00:00.000Z` : new Date().toISOString(),
     updated_at: meta.updated_at ? `${meta.updated_at}T12:00:00.000Z` : new Date().toISOString(),
-    seo_title: meta.meta_title,
+    seo_title: humanizeText(meta.meta_title || ''),
     seo_canonical: meta.canonical ? meta.canonical.replace('https://orbitgestao.com.br/blog/', '') : meta.slug,
     seo_keyword: art.seo_keyword,
     cover_url: art.cover_url,
