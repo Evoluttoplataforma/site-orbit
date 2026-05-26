@@ -99,7 +99,7 @@ export const pageHTML = `
 <section class="tr-hero">
     <div class="tr-hero__inner">
         <span class="tr-hero__badge"><i class="fa-solid fa-graduation-cap"></i>Treinamentos Orbit</span>
-        <h1>Domine a Orbit em <span class="accent">10 sess&otilde;es semanais</span> ao vivo</h1>
+        <h1>Domine o Orbit em <span class="accent">10 sess&otilde;es semanais</span> ao vivo</h1>
         <p class="lead">Toda semana, de segunda a sexta, dois treinamentos por dia. Aprenda direto com nosso time, ao vivo no YouTube, sem custo.</p>
         <div class="tr-hero__stats">
             <div class="tr-hero__stat"><i class="fa-solid fa-layer-group"></i><span><strong>10 m&oacute;dulos</strong> por semana</span></div>
@@ -131,7 +131,7 @@ export const pageHTML = `
             <div class="tr-step__num">01</div>
             <div class="tr-step__icon"><i class="fa-solid fa-hand-pointer"></i></div>
             <h3>Escolha o m&oacute;dulo</h3>
-            <p>Selecione um dos 10 treinamentos da grade. Cada um foca em uma &aacute;rea diferente da Orbit.</p>
+            <p>Selecione um dos 10 treinamentos da grade. Cada um foca em uma &aacute;rea diferente do Orbit.</p>
         </div>
         <div class="tr-step">
             <div class="tr-step__num">02</div>

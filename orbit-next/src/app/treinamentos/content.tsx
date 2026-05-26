@@ -20,7 +20,7 @@ interface Training {
 
 const TRAININGS: Training[] = [
   { slug: 'pessoas-1', title: 'Pessoas 1', subtitle: 'Cargos / PDI / Treinamentos', description: 'Estruture o organograma, defina PDIs e organize a trilha de treinamentos.', day: 1, hour: 10, icon: 'fa-users' },
-  { slug: 'estrategia-mercado', title: 'Estratégia e Mercado', description: 'Mapa estratégico, concorrentes e radar de mercado da Orbit.', day: 1, hour: 16, icon: 'fa-chess-knight' },
+  { slug: 'estrategia-mercado', title: 'Estratégia e Mercado', description: 'Mapa estratégico, concorrentes e radar de mercado do Orbit.', day: 1, hour: 16, icon: 'fa-chess-knight' },
   { slug: 'pessoas-2', title: 'Pessoas 2', subtitle: 'Documentos dos Colaboradores', description: 'Contratos, certificados e documentos obrigatórios da equipe.', day: 2, hour: 10, icon: 'fa-id-card' },
   { slug: 'processos', title: 'Processos', description: 'Mapeie e documente processos com versionamento e responsáveis.', day: 2, hour: 16, icon: 'fa-diagram-project' },
   { slug: 'indicadores', title: 'Indicadores', description: 'KPIs por área, metas e desempenho operacional em tempo real.', day: 3, hour: 10, icon: 'fa-chart-line' },
