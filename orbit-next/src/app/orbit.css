@@ -13957,8 +13957,45 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
             .blog-article-content ul, .blog-article-content ol {
                 padding-left: 20px; font-size: 1rem;
             }
-            /* Tabela rola horizontalmente em vez de vazar */
-            .blog-article-content table {
+            /* Tabela: wrapper com hint visual "← arraste pra ver mais →" */
+            .blog-article-content .table-wrap {
+                position: relative;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                margin: 28px 0;
+                border: 1px solid #E5E7EB;
+                border-radius: 8px;
+            }
+            .blog-article-content .table-wrap::before {
+                content: "← arraste para ver toda a tabela →";
+                display: block;
+                position: sticky;
+                left: 0;
+                text-align: center;
+                font-size: 0.78rem;
+                color: #b87a00;
+                background: linear-gradient(180deg, rgba(255,186,26,0.12), rgba(255,186,26,0.06));
+                border-bottom: 1px solid rgba(255,186,26,0.25);
+                padding: 8px 12px;
+                font-weight: 700;
+                letter-spacing: 0.3px;
+                text-transform: uppercase;
+            }
+            .blog-article-content .table-wrap table {
+                display: table;
+                width: max-content;
+                min-width: 100%;
+                font-size: 0.9rem;
+                margin: 0;
+                border: none;
+            }
+            .blog-article-content .table-wrap table th,
+            .blog-article-content .table-wrap table td {
+                white-space: normal;
+                padding: 10px 14px;
+            }
+            /* Fallback: <table> sem wrapper (artigos antigos) */
+            .blog-article-content table:not(.table-wrap table) {
                 display: block;
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;

@@ -156,14 +156,18 @@ function substituteInternalLinks(markdown) {
 }
 
 function markdownToHtml(markdown) {
-  // Configura marked: GFM tables, breaks moderate
   marked.setOptions({
     gfm: true,
     breaks: false,
     mangle: false,
     headerIds: false,
   });
-  return marked.parse(markdown);
+  let html = marked.parse(markdown);
+  // Wrappa <table> em .table-wrap pra adicionar hint visual de scroll mobile.
+  // CSS .table-wrap::before mostra "← arraste pra ver mais →" em viewport pequeno.
+  html = html.replace(/<table([^>]*)>/g, '<div class="table-wrap"><table$1>');
+  html = html.replace(/<\/table>/g, '</table></div>');
+  return html;
 }
 
 async function upsertArticle(art) {
