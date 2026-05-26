@@ -299,19 +299,35 @@ export default function BlogPage() {
           applyFilters();
         }
 
+        // Atualiza URL com state atual (history.pushState) — filtros viram shareable URLs.
+        // Sem reload, sem nova navegacao Next; so o querystring muda.
+        function syncUrl() {
+          try {
+            var params = new URLSearchParams();
+            if (state.cat && state.cat !== 'all') params.set('cat', state.cat);
+            if (state.q && state.q.trim()) params.set('q', state.q.trim());
+            var qs = params.toString();
+            var newUrl = window.location.pathname + (qs ? '?' + qs : '');
+            if (newUrl !== window.location.pathname + window.location.search) {
+              window.history.replaceState(null, '', newUrl);
+            }
+          } catch (e) {}
+        }
+
         chips.forEach(function(chip) {
           chip.addEventListener('click', function() {
             chips.forEach(function(c) { c.classList.remove('is-active'); });
             chip.classList.add('is-active');
             state.cat = chip.getAttribute('data-cat') || 'all';
             applyFilters();
+            syncUrl();
           });
         });
 
         var t;
         search.addEventListener('input', function() {
           clearTimeout(t);
-          t = setTimeout(function() { state.q = search.value; applyFilters(); }, 120);
+          t = setTimeout(function() { state.q = search.value; applyFilters(); syncUrl(); }, 120);
         });
 
         sortSel.addEventListener('change', applySort);
@@ -332,6 +348,7 @@ export default function BlogPage() {
               c.classList.toggle('is-active', c.getAttribute('data-cat') === 'all');
             });
             applySort();
+            syncUrl();
           });
         }
 

@@ -12,4 +12,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Page() { return <PageContent />; }
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://orbitgestao.com.br/' },
+    { '@type': 'ListItem', position: 2, name: 'Histórias de Clientes', item: 'https://orbitgestao.com.br/historias' },
+  ],
+};
+
+export default function Page() {
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <PageContent />
+    </>
+  );
+}

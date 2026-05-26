@@ -126,7 +126,7 @@ export const pageHTML = `
                                 <li><i class="fas fa-check"></i> Planos de ação estruturados</li>
                                 <li><i class="fas fa-check"></i> Análise SWOT automatizada</li>
                             </ul>
-                            <a href="/agentes/estrategista" class="btn btn-primary">Saiba mais</a>
+                            <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary">Agendar demonstração</a>
                         </div>
                         <div class="platform-panel__image">
                             <div class="platform-panel__mockup-main">
@@ -148,7 +148,7 @@ export const pageHTML = `
                                 <li><i class="fas fa-check"></i> Playbooks operacionais</li>
                                 <li><i class="fas fa-check"></i> Padronização ISO</li>
                             </ul>
-                            <a href="/agentes" class="btn btn-primary">Saiba mais</a>
+                            <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary">Agendar demonstração</a>
                         </div>
                         <div class="platform-panel__image">
                             <div class="platform-panel__mockup-main">
@@ -170,7 +170,7 @@ export const pageHTML = `
                                 <li><i class="fas fa-check"></i> PDIs personalizados</li>
                                 <li><i class="fas fa-check"></i> Matriz de competências</li>
                             </ul>
-                            <a href="/agentes" class="btn btn-primary">Saiba mais</a>
+                            <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary">Agendar demonstração</a>
                         </div>
                         <div class="platform-panel__image">
                             <div class="platform-panel__mockup-main">
@@ -192,7 +192,7 @@ export const pageHTML = `
                                 <li><i class="fas fa-check"></i> Quizzes e avaliações</li>
                                 <li><i class="fas fa-check"></i> Trilhas de aprendizagem</li>
                             </ul>
-                            <a href="/agentes" class="btn btn-primary">Saiba mais</a>
+                            <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary">Agendar demonstração</a>
                         </div>
                         <div class="platform-panel__image">
                             <div class="platform-panel__mockup-main">
@@ -214,7 +214,7 @@ export const pageHTML = `
                                 <li><i class="fas fa-check"></i> Dashboards inteligentes</li>
                                 <li><i class="fas fa-check"></i> Alertas automáticos</li>
                             </ul>
-                            <a href="/agentes" class="btn btn-primary">Saiba mais</a>
+                            <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary">Agendar demonstração</a>
                         </div>
                         <div class="platform-panel__image">
                             <div class="platform-panel__mockup-main">
@@ -236,7 +236,7 @@ export const pageHTML = `
                                 <li><i class="fas fa-check"></i> Insights acionáveis</li>
                                 <li><i class="fas fa-check"></i> Relatórios automatizados</li>
                             </ul>
-                            <a href="/agentes" class="btn btn-primary">Saiba mais</a>
+                            <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary">Agendar demonstração</a>
                         </div>
                         <div class="platform-panel__image">
                             <div class="platform-panel__mockup-main">
@@ -258,7 +258,7 @@ export const pageHTML = `
                                 <li><i class="fas fa-check"></i> Planos de mitigação automáticos</li>
                                 <li><i class="fas fa-check"></i> Monitoramento contínuo</li>
                             </ul>
-                            <a href="/agentes" class="btn btn-primary">Saiba mais</a>
+                            <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary">Agendar demonstração</a>
                         </div>
                         <div class="platform-panel__image">
                             <div class="platform-panel__mockup-main">
@@ -280,7 +280,7 @@ export const pageHTML = `
                                 <li><i class="fas fa-check"></i> Parcerias estratégicas</li>
                                 <li><i class="fas fa-check"></i> Relatórios de oportunidades</li>
                             </ul>
-                            <a href="/agentes" class="btn btn-primary">Saiba mais</a>
+                            <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary">Agendar demonstração</a>
                         </div>
                         <div class="platform-panel__image">
                             <div class="platform-panel__mockup-main">
@@ -302,7 +302,7 @@ export const pageHTML = `
                                 <li><i class="fas fa-check"></i> Planos de ação corretiva</li>
                                 <li><i class="fas fa-check"></i> Acompanhamento de eficácia</li>
                             </ul>
-                            <a href="/agentes" class="btn btn-primary">Saiba mais</a>
+                            <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary">Agendar demonstração</a>
                         </div>
                         <div class="platform-panel__image">
                             <div class="platform-panel__mockup-main">
@@ -324,7 +324,7 @@ export const pageHTML = `
                                 <li><i class="fas fa-check"></i> Conexão entre documentos</li>
                                 <li><i class="fas fa-check"></i> Templates padronizados</li>
                             </ul>
-                            <a href="/agentes" class="btn btn-primary">Saiba mais</a>
+                            <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary">Agendar demonstração</a>
                         </div>
                         <div class="platform-panel__image">
                             <div class="platform-panel__mockup-main">
@@ -346,7 +346,7 @@ export const pageHTML = `
                                 <li><i class="fas fa-check"></i> Coaching comercial com IA</li>
                                 <li><i class="fas fa-check"></i> Previsão de receita</li>
                             </ul>
-                            <a href="/agentes" class="btn btn-primary">Saiba mais</a>
+                            <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary">Agendar demonstração</a>
                         </div>
                         <div class="platform-panel__image">
                             <div class="platform-panel__mockup-main">
@@ -368,7 +368,7 @@ export const pageHTML = `
                                 <li><i class="fas fa-check"></i> Atas e resumos</li>
                                 <li><i class="fas fa-check"></i> Follow-up automático</li>
                             </ul>
-                            <a href="/agentes" class="btn btn-primary">Saiba mais</a>
+                            <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary">Agendar demonstração</a>
                         </div>
                         <div class="platform-panel__image">
                             <div class="platform-panel__mockup-main">
