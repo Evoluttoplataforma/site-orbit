@@ -60,12 +60,92 @@ function extractBase64Image(base64Str, filename) {
   return `/images/blog/${fname}`;
 }
 
+/**
+ * Aplica <strong> em ocorrencias da seo_keyword no conteudo.
+ * REGRA DE OURO: nao apaga, nao acrescenta nada — so envelopa palavras
+ * que JA existem com <strong>...</strong>. Source no Supabase fica intacto.
+ *
+ * Conservador por design:
+ * - Maximo MAX_BOLD_ADDITIONS negritos novos por artigo (evita stuffing)
+ * - Skip se artigo ja tem >= SKIP_THRESHOLD_STRONG <strong> no original
+ * - Lookbehind/lookahead garantem que so pega palavra isolada (nao dentro de tag/href/class)
+ * - Verifica context-window pra confirmar que nao esta dentro de <a>, <strong>, <h*>
+ */
+const MAX_BOLD_ADDITIONS = 2;
+const SKIP_THRESHOLD_STRONG = 8;
+
+function escapeRegex(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// Retorna true se a posicao 'pos' no html esta dentro de uma das tags listadas
+function isInsideTag(html, pos, tagNames) {
+  // Olha pra tras procurando a tag mais recente nao-fechada
+  const before = html.slice(0, pos);
+  for (const tag of tagNames) {
+    const openRe = new RegExp(`<${tag}\\b[^>]*>`, 'gi');
+    const closeRe = new RegExp(`<\\/${tag}\\s*>`, 'gi');
+    const opens = (before.match(openRe) || []).length;
+    const closes = (before.match(closeRe) || []).length;
+    if (opens > closes) return true;
+  }
+  return false;
+}
+
+function applySeoBolding(article) {
+  const keyword = (article.seo_keyword || '').trim();
+  if (!keyword || !article.content) return 0;
+
+  // Skip se ja tem suficiente negrito
+  const existingStrongOpens = (article.content.match(/<strong\b/gi) || []).length;
+  if (existingStrongOpens >= SKIP_THRESHOLD_STRONG) return 0;
+
+  // Skip se keyword nao aparece no texto (case insensitive)
+  if (!article.content.toLowerCase().includes(keyword.toLowerCase())) return 0;
+
+  // Regex: keyword precedida e seguida por borda "limpa" (espaco, pontuacao ou inicio/fim)
+  // Lookbehind exclui chars que indicariam interior de tag/atributo
+  const re = new RegExp(
+    `(?<=^|[\\s>(\\["'])(${escapeRegex(keyword)})(?=$|[\\s<(),.!?;:\\]'"])`,
+    'gi'
+  );
+
+  let additions = 0;
+  const protectedTags = ['a', 'strong', 'b', 'em', 'i', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'code', 'pre'];
+
+  // Acumula matches primeiro pra poder verificar contexto sem afetar posicoes
+  const matches = [];
+  let m;
+  while ((m = re.exec(article.content)) !== null) {
+    matches.push({ index: m.index, length: m[1].length, text: m[1] });
+    if (matches.length >= 20) break; // sanity cap
+  }
+
+  // Filtra matches que estao dentro de tags protegidas
+  const safeMatches = matches.filter((mm) => !isInsideTag(article.content, mm.index, protectedTags));
+
+  if (safeMatches.length === 0) return 0;
+
+  // Aplica de tras pra frente (preserva indices durante substituicao)
+  const toApply = safeMatches.slice(0, MAX_BOLD_ADDITIONS);
+  toApply.sort((a, b) => b.index - a.index);
+
+  let html = article.content;
+  for (const mm of toApply) {
+    html = html.slice(0, mm.index) + `<strong>${mm.text}</strong>` + html.slice(mm.index + mm.length);
+    additions++;
+  }
+  article.content = html;
+  return additions;
+}
+
 function processArticles(articles) {
   console.log(`📝 Processando ${articles.length} artigos...`);
 
   fs.mkdirSync(IMG_DIR, { recursive: true });
   fs.mkdirSync(DATA_DIR, { recursive: true });
 
+  let totalBolded = 0;
   for (const a of articles) {
     // Cover
     if (a.cover_url && a.cover_url.startsWith('data:image')) {
@@ -89,7 +169,15 @@ function processArticles(articles) {
         return url || match;
       }
     );
+
+    // SEO: aplica <strong> na keyword principal (max 2 por artigo)
+    const bolded = applySeoBolding(a);
+    if (bolded > 0) {
+      totalBolded += bolded;
+      console.log(`   🔤 #${a.id}: +${bolded} <strong> na keyword "${a.seo_keyword}"`);
+    }
   }
+  console.log(`   ✨ ${totalBolded} negritos SEO aplicados no total`);
 
   return articles;
 }
