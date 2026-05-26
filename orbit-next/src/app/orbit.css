@@ -13880,18 +13880,24 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
             .blog-article__main { max-width: 100%; }
             .blog-article__sidebar { position: static; order: 2; }
         }
-        /* ═══ Quebra de palavras longas (todos os tamanhos de tela) ═══ */
-        /* SÓ no conteudo e titulo — NUNCA no .blog-article container,
-           senao sobrescreve o max-width: 1200px e estica o layout desktop */
-        .blog-article-content {
-            overflow-wrap: break-word;
+        /* ═══ Quebra de palavras longas (escopo: só conteudo e titulo do artigo) ═══ */
+        /* NUNCA mexer no .blog-article container — quebraria max-width 1200px desktop */
+        /* min-width: 0 é truque pra grid/flex children encolherem ate o limite */
+        .blog-article__main {
+            min-width: 0;
+            overflow: hidden;
+        }
+        .blog-article-content,
+        .blog-article__title {
+            min-width: 0;
+            overflow-wrap: anywhere;
             word-wrap: break-word;
+            word-break: break-word;
             hyphens: auto;
         }
-        .blog-article__title {
-            overflow-wrap: break-word;
-            word-wrap: break-word;
-            hyphens: auto;
+        .blog-article-content > * {
+            max-width: 100%;
+            min-width: 0;
         }
         /* Cover image: NUNCA estoura o container */
         .blog-article__cover {
