@@ -39,6 +39,9 @@ function fmtDateISO(d: Date): string {
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
 
+// Treinamentos comecam na semana de 01/06/2026 — pode ser removido depois dessa data
+const TRAINING_START_FLOOR = new Date(2026, 5, 1);
+
 function getNextOccurrences(dayOfWeek: number, count = 4): Date[] {
   const out: Date[] = [];
   const now = new Date();
@@ -51,7 +54,10 @@ function getNextOccurrences(dayOfWeek: number, count = 4): Date[] {
   }
   const first = new Date(now);
   first.setDate(now.getDate() + diff);
-  out.push(first);
+  while (first < TRAINING_START_FLOOR) {
+    first.setDate(first.getDate() + 7);
+  }
+  out.push(new Date(first));
   for (let i = 1; i < count; i++) {
     const next = new Date(first);
     next.setDate(first.getDate() + 7 * i);
