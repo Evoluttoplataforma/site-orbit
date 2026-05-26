@@ -48,6 +48,25 @@ const ARTICLES = [
     seo_keyword: 'automatizar processos',
     cover_url: '/images/blog/cover-25.svg',
   },
+  // ─── Cluster Dor 7 (Indicadores) ───
+  {
+    file: 'como-criar-indicadores-empresa.md',
+    category: 'indicadores',                 // PILLAR B
+    seo_keyword: 'criar indicadores',
+    cover_url: '/images/blog/cover-26.svg',
+  },
+  {
+    file: 'indicadores-nao-refletem-realidade.md',
+    category: 'indicadores',                 // MOFU diagnostico
+    seo_keyword: 'indicadores não refletem realidade',
+    cover_url: '/images/blog/cover-27.svg',
+  },
+  {
+    file: 'dashboard-gestao-empresarial.md',
+    category: 'indicadores',                 // BOFU A
+    seo_keyword: 'dashboard de gestão empresarial',
+    cover_url: '/images/blog/cover-28.svg',
+  },
 ];
 
 // URLs reais dos artigos do cluster (pra substituir placeholders `(#)` por links internos reais).
@@ -61,6 +80,13 @@ const INTERNAL_LINK_MAP = {
   'Como automatizar processos da empresa: o guia completo': '/blog/como-automatizar-processos-empresa',
   'Como automatizar processos da empresa: o guia decisivo': '/blog/como-automatizar-processos-empresa',
   'Como automatizar processos da empresa': '/blog/como-automatizar-processos-empresa',
+  // ─── Cluster Dor 7 (Indicadores) ───
+  'Como criar indicadores que conectam com a operação (e não viram planilha esquecida)': '/blog/como-criar-indicadores-empresa',
+  'Como criar indicadores que conectam com a operação': '/blog/como-criar-indicadores-empresa',
+  'Por que seus indicadores não mostram a realidade da empresa (e o que fazer)': '/blog/indicadores-nao-refletem-realidade',
+  'Por que seus indicadores não mostram a realidade da empresa': '/blog/indicadores-nao-refletem-realidade',
+  'Dashboard de gestão empresarial: como escolher e implementar em 2026': '/blog/dashboard-gestao-empresarial',
+  'Dashboard de gestão empresarial': '/blog/dashboard-gestao-empresarial',
 };
 
 function parseFrontmatter(text) {
