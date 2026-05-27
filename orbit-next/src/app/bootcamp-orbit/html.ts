@@ -144,6 +144,8 @@ export const pageHTML = `
     text-transform: uppercase;
   }
   .bc-stamp--right { right: 20px; transform: rotate(12deg); }
+  /* Mobile: esconde carimbos (ficavam sobre o titulo) */
+  @media (max-width: 768px) { .bc-stamp { display: none; } }
 
   /* Pulse animation pra CTA */
   @keyframes bc-pulse-cta {
@@ -162,6 +164,14 @@ export const pageHTML = `
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
+
+  /* Esconde widgets globais do site nessa LP de evento (foco em conversao) */
+  .whatsapp-widget,
+  [class*="whatsapp"],
+  #livePopupOverlay,
+  .orbit-banner--popup-center,
+  .orbit-banner--popup-side,
+  .orbit-banner--floating-bottom { display: none !important; }
 
   /* ═══ HERO — full impact ═══ */
   .bc-hero { position: relative; padding: 110px 24px 90px; background: #0A0E13; overflow: hidden; min-height: 820px; display: flex; align-items: center; justify-content: center; }
@@ -258,9 +268,16 @@ export const pageHTML = `
   .bc-count::after { content: ''; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); width: 8px; height: 8px; border-radius: 50%; background: #0A0E13; border: 1px solid #6B7339; }
   .bc-count__num { font-family: 'Black Ops One', impact, sans-serif; font-size: 2.6rem; color: #ffba1a; line-height: 1; font-variant-numeric: tabular-nums; margin-top: 16px; text-shadow: 2px 2px 0 #000; }
   .bc-count__lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8B7355; font-weight: 700; text-transform: uppercase; letter-spacing: 2.5px; margin-top: 8px; }
+  /* Mobile: 4 colunas estreitas (todos juntos numa linha) */
   @media (max-width: 600px) {
-    .bc-count { min-width: 72px; padding: 12px 8px 10px; }
-    .bc-count__num { font-size: 1.9rem; margin-top: 12px; }
+    .bc-countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px; max-width: none; padding: 0 4px;
+    }
+    .bc-count { min-width: 0; padding: 10px 4px 8px; }
+    .bc-count__num { font-size: 1.4rem; margin-top: 10px; }
+    .bc-count__lbl { font-size: 8px; letter-spacing: 1.5px; }
   }
 
   /* CTAs com mira */
@@ -449,6 +466,14 @@ export const pageHTML = `
     font-size: 10px; letter-spacing: 2px;
     padding: 4px 12px; text-align: center;
   }
+  /* Mobile: host vira coluna (foto em cima centralizada, texto embaixo) */
+  @media (max-width: 600px) {
+    .bc-host { flex-direction: column; align-items: center; text-align: center; padding: 40px 24px 28px; }
+    .bc-host__photo { margin-top: 8px; width: 160px; height: 200px; }
+    .bc-host__content { margin-top: 8px; }
+    .bc-host__role { font-size: 10px; }
+    .bc-host__rank { justify-content: center; }
+  }
   .bc-host__photo {
     width: 140px; height: 180px;
     background: linear-gradient(135deg, #4B5320, #2F3318);
@@ -495,7 +520,28 @@ export const pageHTML = `
   .bc-testi__head { text-align: center; max-width: 800px; margin: 0 auto 40px; position: relative; z-index: 1; }
   .bc-testi__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
   @media (max-width: 1024px) { .bc-testi__grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 560px) { .bc-testi__grid { grid-template-columns: 1fr; } }
+  /* Mobile: carrossel horizontal com snap (em vez de stack) */
+  @media (max-width: 700px) {
+    .bc-testi__grid {
+      display: flex;
+      grid-template-columns: none;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 14px;
+      padding: 4px 20px 20px;
+      margin: 0 -20px;
+      scrollbar-width: none;
+    }
+    .bc-testi__grid::-webkit-scrollbar { display: none; }
+    .bc-testi-card {
+      flex: 0 0 78%;
+      scroll-snap-align: center;
+    }
+  }
+  /* Hint visual: setinha "deslize →" no mobile */
+  .bc-testi__hint { display: none; text-align: center; color: #ffba1a; font-family: 'JetBrains Mono', monospace; font-size: 11px; margin-top: 14px; letter-spacing: 2px; opacity: 0.7; }
+  @media (max-width: 700px) { .bc-testi__hint { display: block; } }
   .bc-testi-card {
     background: linear-gradient(180deg, rgba(75,83,32,0.20), rgba(13,17,23,0.95));
     border: 2px solid #4B5320;
@@ -588,6 +634,12 @@ export const pageHTML = `
     background: repeating-linear-gradient(45deg, #C73E1D 0 18px, #0A0E13 18px 36px);
   }
   .bc-prereq__content { padding: 26px 32px; display: flex; gap: 22px; align-items: flex-start; }
+  /* Mobile: ícone em cima, texto abaixo alinhado */
+  @media (max-width: 600px) {
+    .bc-prereq__content { flex-direction: column; align-items: center; text-align: center; padding: 24px 22px; }
+    .bc-prereq__stamp { margin: 0 auto 8px; }
+    .bc-prereq__title { text-align: center; }
+  }
   .bc-prereq__stamp {
     width: 76px; height: 76px;
     background: #C73E1D;
@@ -982,6 +1034,7 @@ export const pageHTML = `
       <div class="bc-testi-card__info"><h3 class="bc-testi-card__name">Rogério Menossi</h3><p class="bc-testi-card__company">Time Produtivo</p></div>
     </div>
   </div>
+  <p class="bc-testi__hint">◂ arraste para ver mais ▸</p>
 </section>
 
 <div class="bc-warning-stripes"></div>
