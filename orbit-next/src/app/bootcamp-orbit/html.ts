@@ -673,25 +673,8 @@ export const pageHTML = `
 
     <div class="bc-hero__coord">LAT -27.5954 · LON -48.5480 · SQUARE SC · ZULU-03</div>
 
-    <!-- Insígnia central GIGANTE com patente -->
-    <div class="bc-hero__insignia" style="width:140px;height:140px;">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <!-- Anel externo -->
-        <circle cx="50" cy="50" r="48" fill="none" stroke="#ffba1a" stroke-width="2"/>
-        <circle cx="50" cy="50" r="44" fill="none" stroke="#ffba1a" stroke-width="0.5" stroke-dasharray="2 3" opacity="0.6"/>
-        <!-- 5 estrelas pequenas ao redor (patente máxima) -->
-        <g fill="#ffba1a">
-          <polygon points="50,3 51.5,7 55.5,7 52.3,9.5 53.6,13.5 50,11 46.4,13.5 47.7,9.5 44.5,7 48.5,7" />
-          <polygon points="84.7,21 86.2,25 90.2,25 87,27.5 88.3,31.5 84.7,29 81.1,31.5 82.4,27.5 79.2,25 83.2,25" />
-          <polygon points="84.7,71 86.2,75 90.2,75 87,77.5 88.3,81.5 84.7,79 81.1,81.5 82.4,77.5 79.2,75 83.2,75" />
-          <polygon points="15.3,21 16.8,25 20.8,25 17.6,27.5 18.9,31.5 15.3,29 11.7,31.5 13,27.5 9.8,25 13.8,25" />
-          <polygon points="15.3,71 16.8,75 20.8,75 17.6,77.5 18.9,81.5 15.3,79 11.7,81.5 13,77.5 9.8,75 13.8,75" />
-        </g>
-        <!-- Estrela grande central com glow -->
-        <polygon points="50,22 57,42 78,42 61,54 68,74 50,62 32,74 39,54 22,42 43,42" fill="#ffba1a" stroke="#0A0E13" stroke-width="1.5" filter="drop-shadow(0 0 3px rgba(255,186,26,0.6))"/>
-        <text x="50" y="94" text-anchor="middle" font-family="Black Ops One, impact" font-size="5.5" fill="#ffba1a" letter-spacing="1.5">BOOTCAMP ORBIT</text>
-      </svg>
-    </div>
+    <!-- Carimbo MISSAO APROVADA (substitui insignia da estrela) -->
+    <img src="/images/bootcamp/missao-aprovada.webp" alt="Missão Aprovada" style="display:block;max-width:340px;width:80%;height:auto;margin:0 auto;filter:drop-shadow(6px 6px 0 rgba(0,0,0,0.5));transform:rotate(-4deg);" loading="eager">
 
     <!-- Badge VOCE FOI CONVOCADO -->
     <div style="display:inline-block;background:#0A0E13;border:3px dashed #ffba1a;color:#ffba1a;font-family:'Black Ops One',impact,sans-serif;font-size:14px;letter-spacing:4px;padding:10px 24px;margin:14px 0 18px;text-transform:uppercase;transform:rotate(-1deg);">★ VOCÊ FOI CONVOCADO ★</div>
