@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { pageHTML } from './html';
-import { headerHTML } from '@/components/shared-header';
 import { footerHTML } from '@/components/shared-footer';
 
 const SB_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
@@ -140,6 +139,7 @@ export function PageContent() {
     return () => clearInterval(cdInterval);
   }, [mounted]);
 
-  const fullHTML = headerHTML + '\n' + pageHTML + '\n' + footerHTML;
+  // LP de evento: sem nav menu pra focar na conversao
+  const fullHTML = pageHTML + '\n' + footerHTML;
   return <div ref={ref} dangerouslySetInnerHTML={{ __html: fullHTML }} />;
 }
