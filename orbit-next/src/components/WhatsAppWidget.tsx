@@ -40,6 +40,7 @@ export default function WhatsAppWidget() {
     if (path.startsWith('/chat')) return;
     if (path.startsWith('/acesso')) return;
     if (path.startsWith('/live')) return;
+    if (path.startsWith('/bootcamp-orbit')) return;
     if (path.startsWith('/experiencias/') || path.startsWith('/apresentacao/')) { setIsExperiment(true); return; }
     setMounted(true);
   }, []);

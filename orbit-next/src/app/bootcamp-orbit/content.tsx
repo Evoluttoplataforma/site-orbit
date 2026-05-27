@@ -65,6 +65,12 @@ export function PageContent() {
     // ═══ Marca body com data-bc pra ativar cursor mira global ═══
     document.body.setAttribute('data-bc', '1');
 
+    // ═══ Trava overflow horizontal (SVGs, tickers, decorativos podem estourar) ═══
+    const prevHtmlOX = document.documentElement.style.overflowX;
+    const prevBodyOX = document.body.style.overflowX;
+    document.documentElement.style.overflowX = 'hidden';
+    document.body.style.overflowX = 'hidden';
+
     // ═══ Countdown ═══
     const daysEl = root.querySelector('#bcDays') as HTMLElement | null;
     const hoursEl = root.querySelector('#bcHours') as HTMLElement | null;
@@ -187,7 +193,7 @@ export function PageContent() {
         ? `<div class="bc-msg__avatar">EU</div><div class="bc-msg__bubble">${escapeHtml(text)}</div>`
         : `<div class="bc-msg__avatar"><img src="${IGOR_AVATAR}" alt="Igor"></div><div class="bc-msg__bubble">${escapeHtml(text)}</div>`;
       chatBody.appendChild(div);
-      chatBody.scrollTop = chatBody.scrollHeight;
+      requestAnimationFrame(() => div.scrollIntoView({ behavior: 'smooth', block: 'center' }));
     }
     function escapeHtml(s: string) {
       return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -197,7 +203,7 @@ export function PageContent() {
       div.className = 'bc-msg';
       div.innerHTML = `<div class="bc-msg__avatar"><img src="${IGOR_AVATAR}" alt="Igor"></div><div class="bc-msg__bubble"><span class="bc-typing"><span></span><span></span><span></span></span></div>`;
       chatBody?.appendChild(div);
-      if (chatBody) chatBody.scrollTop = chatBody.scrollHeight;
+      requestAnimationFrame(() => div.scrollIntoView({ behavior: 'smooth', block: 'center' }));
       return div;
     }
     function updateProgress() {
@@ -323,15 +329,17 @@ export function PageContent() {
           empresa: answers.empresa,
         });
 
-        // Mostra success
-        const successEl = root.querySelector('#bcSuccess') as HTMLElement | null;
-        const chatEl = root.querySelector('#bcChat') as HTMLElement | null;
-        if (chatEl) chatEl.style.display = 'none';
-        if (successEl) successEl.style.display = 'block';
+        // Beep de confirmação + redirect pra página de obrigado militar
         beep(1200, 0.15, 0.10);
         setTimeout(() => beep(1500, 0.20, 0.10), 180);
+        const params = new URLSearchParams({
+          modo: answers.modalidade || 'online',
+          nome: (answers.nome || '').split(' ')[0] || '',
+        });
+        setTimeout(() => { window.location.href = `/bootcamp-orbit/obrigado?${params.toString()}`; }, 600);
       } catch {
-        appendMsg('⚠️ Falha na transmissão. Tente recarregar a página.');
+        submitted = false;
+        appendMsg('⚠️ Falha na transmissão. Tente de novo em alguns segundos.');
       }
     }
 
@@ -343,6 +351,8 @@ export function PageContent() {
       window.clearTimeout(firstToastTo);
       window.clearInterval(toastInterval);
       document.body.removeAttribute('data-bc');
+      document.documentElement.style.overflowX = prevHtmlOX;
+      document.body.style.overflowX = prevBodyOX;
       // remove toasts vivos
       document.querySelectorAll('.bc-toast').forEach((t) => t.remove());
     };
