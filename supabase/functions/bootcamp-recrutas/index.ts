@@ -111,12 +111,30 @@ serve(async (req) => {
     if (body.debug) {
       const configured = !!STRIPE_SECRET_KEY;
       const plink = configured ? await findPaymentLinkId() : null;
+      const porStatus: Record<string, number> = {};
+      let totalSessions = 0;
+      if (plink) {
+        let after = "";
+        for (let p = 0; p < 10; p++) {
+          const d = await stripeGet(`checkout/sessions?payment_link=${plink}&limit=100${after ? `&starting_after=${after}` : ""}`);
+          const list = (d?.data as Array<Record<string, unknown>>) || [];
+          for (const s of list) {
+            totalSessions++;
+            const st = (s.payment_status as string) || "?";
+            porStatus[st] = (porStatus[st] || 0) + 1;
+          }
+          if (!d?.has_more || !list.length) break;
+          after = list[list.length - 1].id as string;
+        }
+      }
       const paid = configured ? await fetchPaidEmailsStripe() : new Set<string>();
       return new Response(
         JSON.stringify({
           stripe_configured: configured,
           payment_link_encontrado: !!plink,
           payment_link_id: plink,
+          sessoes_total: totalSessions,
+          sessoes_por_status: porStatus,
           pagamentos_confirmados: paid.size,
         }),
         { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }

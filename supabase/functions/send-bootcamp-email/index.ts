@@ -17,8 +17,55 @@ const WHATSAPP_GROUP = "https://chat.whatsapp.com/CHANGE_ME";
 const HAS_WHATSAPP = !WHATSAPP_GROUP.includes("CHANGE_ME");
 const PAGE_URL = "https://orbitgestao.com.br/bootcamp-orbit";
 
+// ═══ STRIPE (pagamento do presencial) ═══
+const STRIPE_LINK = "https://buy.stripe.com/3cIfZgbnr7gRfL5dS3aAw01";
+const STRIPE_LINK_SLUG = "3cIfZgbnr7gRfL5dS3aAw01";
+const STRIPE_SECRET_KEY = Deno.env.get("STRIPE_SECRET_KEY") || "";
+
 type EmailType = "confirmacao" | "lembrete_d1" | "dia_evento" | "ao_vivo";
 type Modo = "online" | "presencial";
+
+async function stripeGet(path: string): Promise<Record<string, unknown> | null> {
+  try {
+    const r = await fetch(`https://api.stripe.com/v1/${path}`, { headers: { Authorization: `Bearer ${STRIPE_SECRET_KEY}` } });
+    return r.ok ? ((await r.json()) as Record<string, unknown>) : null;
+  } catch {
+    return null;
+  }
+}
+async function findPaymentLinkId(): Promise<string | null> {
+  let after = "";
+  for (let p = 0; p < 5; p++) {
+    const d = await stripeGet(`payment_links?limit=100${after ? `&starting_after=${after}` : ""}`);
+    const list = (d?.data as Array<Record<string, unknown>>) || [];
+    for (const pl of list) if (((pl.url as string) || "").includes(STRIPE_LINK_SLUG)) return pl.id as string;
+    if (!d?.has_more || !list.length) break;
+    after = list[list.length - 1].id as string;
+  }
+  return null;
+}
+// Emails que pagaram o presencial (consulta a Stripe ao vivo). Vazio se sem key.
+async function fetchPaidEmails(): Promise<Set<string>> {
+  const out = new Set<string>();
+  if (!STRIPE_SECRET_KEY) return out;
+  const plink = await findPaymentLinkId();
+  if (!plink) return out;
+  let after = "";
+  for (let p = 0; p < 10; p++) {
+    const d = await stripeGet(`checkout/sessions?payment_link=${plink}&limit=100${after ? `&starting_after=${after}` : ""}`);
+    const list = (d?.data as Array<Record<string, unknown>>) || [];
+    for (const s of list) {
+      if (s.payment_status === "paid") {
+        const det = (s.customer_details || {}) as Record<string, unknown>;
+        const e = ((det.email as string) || (s.customer_email as string) || "").toLowerCase().trim();
+        if (e) out.add(e);
+      }
+    }
+    if (!d?.has_more || !list.length) break;
+    after = list[list.length - 1].id as string;
+  }
+  return out;
+}
 
 // ═══ .ICS (convite de calendário) ═══
 function buildICS(modo: Modo): string {
@@ -115,6 +162,17 @@ function btn(href: string, label: string): string {
   return `<div style="text-align:center;margin:30px 0;"><a href="${href}" style="display:inline-block;background:#ffba1a;color:#0A0E13;font-weight:800;font-size:16px;padding:16px 40px;border-radius:6px;text-decoration:none;text-transform:uppercase;letter-spacing:1px;">${label}</a></div>`;
 }
 
+// Bloco de pagamento Stripe (presencial não pago). prefilled_email agiliza o checkout.
+function payBlock(email: string): string {
+  const url = STRIPE_LINK + (email ? `?prefilled_email=${encodeURIComponent(email)}` : "");
+  return `<div style="background:linear-gradient(135deg,rgba(255,186,26,0.12),rgba(199,62,29,0.10));border:1px solid #ffba1a;border-radius:10px;padding:20px;margin:18px 0;text-align:center;">
+<p style="${GOLD}font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 6px;">⚠ Sua vaga presencial só é confirmada após o pagamento</p>
+<p style="${P}margin:0 0 14px;">Conclua o pagamento de <strong style="${GOLD}">R$150</strong> pra travar sua vaga em Florianópolis.</p>
+<a href="${url}" style="display:inline-block;background:#ffba1a;color:#0A0E13;font-weight:800;font-size:16px;padding:15px 38px;border-radius:6px;text-decoration:none;text-transform:uppercase;letter-spacing:1px;">🔒 Pagar R$150 e confirmar vaga</a>
+<p style="font-size:11px;color:#8B7355;margin:12px 0 0;">Pagamento seguro via Stripe</p>
+</div>`;
+}
+
 function localBlock(modo: Modo): string {
   if (modo === "presencial") {
     return `<div style="background:#0F1410;border:1px solid #4B5320;border-radius:8px;padding:18px 20px;margin:0 0 14px;">
@@ -128,8 +186,10 @@ function localBlock(modo: Modo): string {
 </div>`;
 }
 
-function getHTML(type: EmailType, nome: string, modo: Modo): string {
+function getHTML(type: EmailType, nome: string, modo: Modo, email = "", pago = false): string {
   const first = (nome || "").split(" ")[0] || "Recruta";
+  // Botão de pagamento só pro presencial que ainda NÃO pagou
+  const pay = modo === "presencial" && !pago ? payBlock(email) : "";
 
   if (type === "confirmacao") {
     const acesso =
@@ -143,6 +203,7 @@ function getHTML(type: EmailType, nome: string, modo: Modo): string {
       `<p style="${P}">Recruta <strong style="${STRONG}">${first}</strong>,</p>
 <p style="${P}">Seu alistamento no <strong style="${STRONG}">Bootcamp Orbit</strong> está <strong style="${GOLD}">CONFIRMADO</strong>. Missão: blindar sua operação pro 2º semestre — atração, conversão, produtização, precificação e atendimento.</p>
 ${localBlock(modo)}
+${pay}
 ${acesso}
 ${HAS_WHATSAPP ? `<p style="${P}">Entre no grupo de avisos pra não perder nenhuma ordem:</p>${btn(WHATSAPP_GROUP, "Entrar no grupo de avisos")}` : ""}
 <p style="font-size:13px;color:#6B7339;text-align:center;margin:0;">Dúvidas? Responda este e-mail. Câmbio, desligo.</p>`
@@ -157,6 +218,7 @@ ${HAS_WHATSAPP ? `<p style="${P}">Entre no grupo de avisos pra não perder nenhu
       `<p style="${P}">Recruta <strong style="${STRONG}">${first}</strong>,</p>
 <p style="${P}">Amanhã, <strong style="${GOLD}">13/06 às 09h BRT</strong>, começa a operação Bootcamp Orbit. Prepare o terreno: bloqueie a agenda, separe caderno e deixe o pré-requisito (Agente de Ativação) concluído.</p>
 ${localBlock(modo)}
+${pay}
 ${btn(PAGE_URL, "Ver detalhes da operação")}
 <p style="font-size:13px;color:#6B7339;text-align:center;margin:0;">Confirme presença no grupo de avisos. Câmbio.</p>`
     );
@@ -174,6 +236,7 @@ ${btn(PAGE_URL, "Ver detalhes da operação")}
       `<p style="${P}">Recruta <strong style="${STRONG}">${first}</strong>,</p>
 <p style="${P}">A operação começa <strong style="${GOLD}">hoje às 09h BRT</strong>. Não atrase — formação não espera retardatário.</p>
 ${localBlock(modo)}
+${pay}
 ${cta}
 <p style="font-size:13px;color:#6B7339;text-align:center;margin:0;">Fique de olho no grupo de avisos. Câmbio, desligo.</p>`
     );
@@ -196,7 +259,7 @@ ${cta}
 }
 
 // ═══ ENVIO ═══
-async function sendEmail(email: string, nome: string, type: EmailType, modo: Modo): Promise<boolean> {
+async function sendEmail(email: string, nome: string, type: EmailType, modo: Modo, pago = false): Promise<boolean> {
   const attachments: Array<Record<string, string>> = [];
   if (type === "confirmacao") {
     attachments.push({
@@ -213,7 +276,7 @@ async function sendEmail(email: string, nome: string, type: EmailType, modo: Mod
       from: { email: FROM_EMAIL, name: FROM_NAME },
       to: [{ email, name: nome || "" }],
       subject: getSubject(type, modo),
-      html: getHTML(type, nome, modo),
+      html: getHTML(type, nome, modo, email, pago),
       ...(attachments.length ? { attachments } : {}),
     }),
   });
@@ -291,8 +354,11 @@ serve(async (req) => {
     // MODO 1 — envio único (confirmação na inscrição, ou teste)
     if (body.email) {
       const modo: Modo = body.modo === "presencial" ? "presencial" : "online";
-      const ok = await sendEmail(body.email, body.nome || "", type, modo);
-      return new Response(JSON.stringify({ success: ok, mode: "single", modo }), {
+      // Na inscrição ainda não pagou; mas se for re-envio e já tiver pago, omite o botão.
+      const paid = modo === "presencial" ? await fetchPaidEmails() : new Set<string>();
+      const pago = paid.has(body.email.toLowerCase().trim());
+      const ok = await sendEmail(body.email, body.nome || "", type, modo, pago);
+      return new Response(JSON.stringify({ success: ok, mode: "single", modo, pago }), {
         status: ok ? 200 : 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -300,10 +366,12 @@ serve(async (req) => {
 
     // MODO 2 — disparo em massa (cron): varre os leads do bootcamp
     const leads = await fetchLeads(body.modo);
+    const paidSet = await fetchPaidEmails(); // quem já pagou o presencial (não recebe botão)
     let sent = 0;
     let failed = 0;
     for (const lead of leads) {
-      const ok = await sendEmail(lead.email, lead.nome, type, lead.modo);
+      const pago = lead.modo === "presencial" && paidSet.has(lead.email.toLowerCase().trim());
+      const ok = await sendEmail(lead.email, lead.nome, type, lead.modo, pago);
       ok ? sent++ : failed++;
       // pequeno respiro pra não estourar rate limit do MailerSend
       await new Promise((r) => setTimeout(r, 120));
