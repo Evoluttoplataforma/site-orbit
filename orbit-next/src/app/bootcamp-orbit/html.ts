@@ -292,28 +292,30 @@ export const pageHTML = `
     pointer-events: none;
   }
   .bc-testi__head { text-align: center; max-width: 800px; margin: 0 auto 40px; position: relative; z-index: 1; }
-  .bc-testi__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
-  @media (max-width: 900px) { .bc-testi__grid { grid-template-columns: 1fr; } }
-  .bc-video {
-    aspect-ratio: 9/16;
-    background: linear-gradient(180deg, rgba(75,83,32,0.30), rgba(13,17,23,0.95));
+  .bc-testi__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+  @media (max-width: 1024px) { .bc-testi__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .bc-testi__grid { grid-template-columns: 1fr; } }
+  .bc-testi-card {
+    background: linear-gradient(180deg, rgba(75,83,32,0.20), rgba(13,17,23,0.95));
     border: 2px solid #4B5320;
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 12px;
-    color: #6B7339; font-size: 0.95rem;
-    font-family: 'JetBrains Mono', monospace;
     position: relative;
+    transition: all 0.25s;
+    overflow: hidden;
   }
-  .bc-video::before {
+  .bc-testi-card:hover { border-color: #ffba1a; transform: translateY(-3px); }
+  .bc-testi-card::before {
     content: 'COMUNICADO';
-    position: absolute; top: -1px; left: -1px;
+    position: absolute; top: 0; left: 0;
     background: #6B7339; color: #0A0E13;
     font-family: 'Black Ops One', impact, sans-serif;
     font-size: 9px; letter-spacing: 1.5px;
-    padding: 3px 10px;
+    padding: 4px 10px; z-index: 2;
   }
-  .bc-video i { font-size: 2.5rem; color: rgba(255,186,26,0.35); }
-  .bc-video__num { font-family: 'Black Ops One', impact, sans-serif; font-size: 1.4rem; color: #ffba1a; text-transform: uppercase; letter-spacing: 1.5px; }
+  .bc-testi-card__video { aspect-ratio: 9/16; width: 100%; background: #000; display: block; }
+  .bc-testi-card__video iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .bc-testi-card__info { padding: 14px 16px 16px; border-top: 1px solid #4B5320; }
+  .bc-testi-card__name { color: #fff; font-family: 'Black Ops One', impact, sans-serif; font-size: 1rem; margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.8px; }
+  .bc-testi-card__company { color: #ffba1a; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
 
   /* ═══ FORMATO — Posto de Combate vs Quartel Remoto ═══ */
   .bc-format { padding: 90px 24px; background: linear-gradient(180deg, #0A0E13 0%, #0F1410 100%); }
@@ -560,7 +562,7 @@ export const pageHTML = `
   </div>
   <div class="bc-hosts__grid">
     <div class="bc-host">
-      <div class="bc-host__photo">IF</div>
+      <div class="bc-host__photo bc-host__photo--img"><img src="/images/blog/host-igor.webp" alt="Igor Furniel"></div>
       <div class="bc-host__content">
         <h3 class="bc-host__name">Igor Furniel</h3>
         <p class="bc-host__role">CEO &amp; Founder · Orbit Gestão</p>
@@ -569,7 +571,7 @@ export const pageHTML = `
       </div>
     </div>
     <div class="bc-host">
-      <div class="bc-host__photo">CH</div>
+      <div class="bc-host__photo bc-host__photo--img"><img src="/images/blog/host-chris.webp" alt="Christian Hart"></div>
       <div class="bc-host__content">
         <h3 class="bc-host__name">Christian Hart</h3>
         <p class="bc-host__role">Co-Founder &amp; Head de Canais · Orbit Gestão</p>
@@ -588,9 +590,22 @@ export const pageHTML = `
     <p class="bc-lead">Depoimentos dos consultores que participaram de edições passadas e voltaram com a operação transformada.</p>
   </div>
   <div class="bc-testi__grid">
-    <div class="bc-video"><i class="fa-solid fa-circle-play"></i><span class="bc-video__num">DEPOIMENTO 01</span><small style="color:#484F58;">Vídeo em breve</small></div>
-    <div class="bc-video"><i class="fa-solid fa-circle-play"></i><span class="bc-video__num">DEPOIMENTO 02</span><small style="color:#484F58;">Vídeo em breve</small></div>
-    <div class="bc-video"><i class="fa-solid fa-circle-play"></i><span class="bc-video__num">DEPOIMENTO 03</span><small style="color:#484F58;">Vídeo em breve</small></div>
+    <div class="bc-testi-card">
+      <div class="bc-testi-card__video"><iframe src="https://player.vimeo.com/video/1194123078?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+      <div class="bc-testi-card__info"><h3 class="bc-testi-card__name">Lucineia Pedrosa</h3><p class="bc-testi-card__company">Econtech Consultoria</p></div>
+    </div>
+    <div class="bc-testi-card">
+      <div class="bc-testi-card__video"><iframe src="https://player.vimeo.com/video/1194124564?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+      <div class="bc-testi-card__info"><h3 class="bc-testi-card__name">Hygor Limar</h3><p class="bc-testi-card__company">Potencialize Resultados</p></div>
+    </div>
+    <div class="bc-testi-card">
+      <div class="bc-testi-card__video"><iframe src="https://player.vimeo.com/video/1194125389?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+      <div class="bc-testi-card__info"><h3 class="bc-testi-card__name">Bruno Lozano</h3><p class="bc-testi-card__company">Ritual de Gestão</p></div>
+    </div>
+    <div class="bc-testi-card">
+      <div class="bc-testi-card__video"><iframe src="https://player.vimeo.com/video/1194126879?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+      <div class="bc-testi-card__info"><h3 class="bc-testi-card__name">Rogério Menossi</h3><p class="bc-testi-card__company">Time Produtivo</p></div>
+    </div>
   </div>
 </section>
 
