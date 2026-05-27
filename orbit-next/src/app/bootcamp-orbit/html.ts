@@ -815,20 +815,49 @@ export const pageHTML = `
     height: 100%; background: linear-gradient(90deg, #ffba1a, #ff8c00);
     transition: width 0.5s ease;
   }
-  /* Chat mobile — trava largura e impede overflow */
+  /* Chat mobile — trava largura, impede overflow do input row */
   @media (max-width: 600px) {
-    .bc-form-sec { padding: 50px 14px; }
-    .bc-chat { max-width: 100%; min-height: 380px; }
-    .bc-chat__body { padding: 16px 12px; }
+    .bc-form-sec { padding: 50px 12px; box-sizing: border-box; }
+    .bc-form-sec__head { padding-left: 4px; padding-right: 4px; }
+    .bc-chat {
+      max-width: 100%;
+      width: 100%;
+      min-width: 0;
+      min-height: 380px;
+      box-sizing: border-box;
+    }
+    .bc-chat__body { padding: 14px 10px; min-width: 0; box-sizing: border-box; }
     .bc-chat__head { font-size: 10px; padding: 10px 12px; }
-    .bc-msg { gap: 6px; }
+    .bc-msg { gap: 6px; min-width: 0; max-width: 100%; }
     .bc-msg__avatar { width: 28px; height: 28px; border-width: 1.5px; }
-    .bc-msg__bubble { padding: 10px 12px; font-size: 13px; max-width: 80%; word-wrap: break-word; overflow-wrap: anywhere; }
-    .bc-chat__input-area { padding: 10px 12px; gap: 6px; }
-    .bc-chat__input { font-size: 14px; padding: 10px 12px; min-width: 0; }
-    .bc-chat__send { padding: 10px 14px; font-size: 11px; }
-    .bc-chat__choices { padding: 10px 12px 0; gap: 6px; }
-    .bc-chat__choice { font-size: 11px; padding: 8px 12px; min-width: 0; flex: 1 1 auto; }
+    .bc-msg__bubble {
+      padding: 9px 11px; font-size: 13px;
+      max-width: calc(100% - 36px); /* desconta avatar + gap */
+      min-width: 0;
+      word-break: break-word; overflow-wrap: anywhere;
+    }
+    /* Linha do input — trava em 100% e força ENVIAR a não crescer */
+    .bc-chat__input-area {
+      padding: 10px; gap: 6px;
+      width: 100%; max-width: 100%; min-width: 0;
+      box-sizing: border-box; align-items: stretch;
+    }
+    .bc-chat__input {
+      flex: 1 1 0; min-width: 0; width: 100%;
+      font-size: 14px; padding: 10px 10px;
+      box-sizing: border-box;
+    }
+    .bc-chat__send {
+      flex: 0 0 auto;
+      padding: 10px 12px; font-size: 11px;
+      white-space: nowrap;
+    }
+    .bc-chat__choices { padding: 10px; gap: 6px; }
+    .bc-chat__choice {
+      font-size: 11px; padding: 8px 10px;
+      min-width: 0; flex: 1 1 calc(50% - 6px);
+      word-break: break-word;
+    }
   }
 
   /* ═══ FORM — RECRUTAMENTO (FORM TRADICIONAL — fallback escondido) ═══ */
