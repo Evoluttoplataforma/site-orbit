@@ -12,6 +12,21 @@ interface Lead {
   empresa: string | null;
   source: string | null;
   created_at: string | null;
+  pago?: boolean;
+}
+
+async function fetchPaidEmails(): Promise<Set<string>> {
+  try {
+    const resp = await fetch(
+      `${SUPABASE_URL}/rest/v1/bootcamp_pagamentos?select=email&status=eq.paid&limit=10000`,
+      { headers: { apikey: SUPABASE_SERVICE_KEY, Authorization: `Bearer ${SUPABASE_SERVICE_KEY}` } }
+    );
+    if (!resp.ok) return new Set();
+    const rows = (await resp.json()) as Array<{ email: string }>;
+    return new Set(rows.map((r) => (r.email || "").toLowerCase().trim()).filter(Boolean));
+  } catch {
+    return new Set();
+  }
 }
 
 serve(async (req) => {
@@ -46,6 +61,7 @@ serve(async (req) => {
       });
     }
     const rows = (await resp.json()) as Lead[];
+    const paid = await fetchPaidEmails();
 
     // dedup por email (mantém o mais recente, que já vem primeiro pelo order desc)
     const seen = new Set<string>();
@@ -55,9 +71,11 @@ serve(async (req) => {
       const key = (r.email || "").toLowerCase().trim();
       if (key && seen.has(key)) continue;
       if (key) seen.add(key);
+      r.pago = key ? paid.has(key) : false;
       if ((r.source || "").includes("presencial")) presencial.push(r);
       else online.push(r);
     }
+    const total_pagos = presencial.filter((l) => l.pago).length;
 
     return new Response(
       JSON.stringify({
@@ -65,6 +83,7 @@ serve(async (req) => {
         presencial,
         total_online: online.length,
         total_presencial: presencial.length,
+        total_pagos,
         total: online.length + presencial.length,
       }),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }

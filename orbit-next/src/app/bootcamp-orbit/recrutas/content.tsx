@@ -15,12 +15,14 @@ interface Lead {
   empresa: string | null;
   source: string | null;
   created_at: string | null;
+  pago?: boolean;
 }
 interface Data {
   online: Lead[];
   presencial: Lead[];
   total_online: number;
   total_presencial: number;
+  total_pagos?: number;
   total: number;
 }
 
@@ -93,12 +95,14 @@ export function PageContent() {
       [l.nome, l.email, l.empresa, l.telefone].some((v) => (v || '').toLowerCase().includes(term));
     const online = clean(data.online);
     const presencial = clean(data.presencial);
+    const pagos = presencial.filter((l) => l.pago).length;
     return {
       online: online.filter(match),
       presencial: presencial.filter(match),
       total_online: online.length,
       total_presencial: presencial.length,
-      receita: presencial.length * PRECO_PRESENCIAL,
+      pagos,
+      receita: pagos * PRECO_PRESENCIAL,
     };
   }, [data, q]);
 
@@ -138,6 +142,9 @@ export function PageContent() {
     .rec-recruta__nome { font-weight: 600; line-height: 1.2; }
     .rec-recruta__mail { font-size: 12px; color: #7C8794; }
     .rec-wa { color: #C9D1D9; font-family: 'JetBrains Mono', monospace; font-size: 13px; }
+    .rec-badge { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
+    .rec-badge--pago { background: rgba(63,185,80,0.15); color: #3FB950; border: 1px solid rgba(63,185,80,0.4); }
+    .rec-badge--pend { background: rgba(255,186,26,0.12); color: #ffba1a; border: 1px solid rgba(255,186,26,0.35); }
     .rec-empty { text-align: center; color: #5C6672; padding: 26px 12px; font-size: 14px; }
     @media (max-width: 760px) {
       .rec-stats { grid-template-columns: repeat(2, 1fr); }
@@ -193,10 +200,10 @@ export function PageContent() {
         </div>
 
         <div className="rec-stats">
-          <StatCard ico="👥" bg="rgba(255,255,255,0.06)" fg="#fff" n={view.total_online + view.total_presencial} label="Total inscritos" />
           <StatCard ico="📡" bg="rgba(63,185,80,0.14)" fg="#3FB950" n={view.total_online} label="Online (grátis)" />
-          <StatCard ico="🪖" bg="rgba(255,186,26,0.14)" fg="#ffba1a" n={view.total_presencial} label="Presencial" />
-          <StatCard ico="💰" bg="rgba(255,186,26,0.14)" fg="#ffba1a" n={`R$ ${view.receita.toLocaleString('pt-BR')}`} label="Receita presencial" />
+          <StatCard ico="🪖" bg="rgba(255,186,26,0.14)" fg="#ffba1a" n={view.total_presencial} label="Presencial (inscritos)" />
+          <StatCard ico="✅" bg="rgba(63,185,80,0.14)" fg="#3FB950" n={`${view.pagos}/${view.total_presencial}`} label="Presencial pagos" />
+          <StatCard ico="💰" bg="rgba(255,186,26,0.14)" fg="#ffba1a" n={`R$ ${view.receita.toLocaleString('pt-BR')}`} label="Receita confirmada" />
         </div>
 
         <div className="rec-search">
@@ -205,7 +212,7 @@ export function PageContent() {
         </div>
 
         <Painel titulo="Online ao vivo" sub="grátis" ico="📡" cor="#3FB950" leads={view.online} onCSV={() => download('bootcamp-online.csv', toCSV(view.online, 'Online'))} />
-        <Painel titulo="Presencial · Floripa" sub="R$150" ico="🪖" cor="#ffba1a" leads={view.presencial} onCSV={() => download('bootcamp-presencial.csv', toCSV(view.presencial, 'Presencial'))} />
+        <Painel titulo="Presencial · Floripa" sub="R$150" ico="🪖" cor="#ffba1a" status leads={view.presencial} onCSV={() => download('bootcamp-presencial.csv', toCSV(view.presencial, 'Presencial'))} />
       </div>
     </div>
   );
@@ -221,7 +228,8 @@ function StatCard({ ico, bg, fg, n, label }: { ico: string; bg: string; fg: stri
   );
 }
 
-function Painel({ titulo, sub, ico, cor, leads, onCSV }: { titulo: string; sub: string; ico: string; cor: string; leads: Lead[]; onCSV: () => void }) {
+function Painel({ titulo, sub, ico, cor, leads, onCSV, status }: { titulo: string; sub: string; ico: string; cor: string; leads: Lead[]; onCSV: () => void; status?: boolean }) {
+  const cols = status ? 6 : 5;
   return (
     <div className="rec-panel">
       <div className="rec-phead">
@@ -234,11 +242,11 @@ function Painel({ titulo, sub, ico, cor, leads, onCSV }: { titulo: string; sub: 
       </div>
       <table className="rec-table">
         <thead>
-          <tr><th>#</th><th>Recruta</th><th>WhatsApp</th><th>Consultoria</th><th>Inscrição</th></tr>
+          <tr><th>#</th><th>Recruta</th>{status && <th>Pagamento</th>}<th>WhatsApp</th><th>Consultoria</th><th>Inscrição</th></tr>
         </thead>
         <tbody>
           {leads.length === 0 ? (
-            <tr><td data-label="" className="rec-empty" colSpan={5}>Nenhum inscrito {sub === 'R$150' ? 'no presencial' : ''} ainda.</td></tr>
+            <tr><td data-label="" className="rec-empty" colSpan={cols}>Nenhum inscrito {sub === 'R$150' ? 'no presencial' : ''} ainda.</td></tr>
           ) : (
             leads.map((l, i) => (
               <tr key={(l.email || '') + i}>
@@ -252,6 +260,13 @@ function Painel({ titulo, sub, ico, cor, leads, onCSV }: { titulo: string; sub: 
                     </div>
                   </div>
                 </td>
+                {status && (
+                  <td data-label="Pagamento">
+                    {l.pago
+                      ? <span className="rec-badge rec-badge--pago">✅ Pago</span>
+                      : <span className="rec-badge rec-badge--pend">⏳ Pendente</span>}
+                  </td>
+                )}
                 <td data-label="WhatsApp"><span className="rec-wa">{l.telefone || '—'}</span></td>
                 <td data-label="Consultoria">{l.empresa || '—'}</td>
                 <td data-label="Inscrição" style={{ color: '#8B949E', whiteSpace: 'nowrap' }}>{fmtDate(l.created_at)}</td>
