@@ -4077,6 +4077,47 @@ export const pageHTML = `
 
     <!-- Form removido — CTAs agora apontam para /chat -->
 
+    <!-- ═══ DEPOIMENTOS DE CLIENTES (vídeos verticais) ═══ -->
+    <section class="depo-section" style="padding:80px 20px;background:linear-gradient(180deg,#0D1117 0%,#161B22 100%);position:relative;overflow:hidden;">
+      <div class="container" style="text-align:center;margin-bottom:48px;">
+        <span class="section-badge" style="display:inline-block;padding:6px 14px;background:rgba(255,186,26,0.10);border:1px solid rgba(255,186,26,0.25);border-radius:50px;color:#ffba1a;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:2px;margin-bottom:18px;">Quem já usa</span>
+        <h2 style="font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;color:#fff;line-height:1.15;letter-spacing:-0.02em;margin:0 0 14px;">Empresários que viram o <span style="color:#ffba1a;">Orbit transformar</span> a operação</h2>
+        <p style="color:#C9D1D9;font-size:1.05rem;line-height:1.6;max-width:680px;margin:0 auto;">Quatro consultorias brasileiras contam, em primeira pessoa, o que mudou depois de implantar a Orbit.</p>
+      </div>
+      <div class="depo-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1200px;margin:0 auto;">
+        <div class="depo-card">
+          <div class="depo-card__video"><iframe src="https://player.vimeo.com/video/1194123078?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+          <div class="depo-card__info"><h3>Lucineia Pedrosa</h3><p>Econtech Consultoria</p></div>
+        </div>
+        <div class="depo-card">
+          <div class="depo-card__video"><iframe src="https://player.vimeo.com/video/1194124564?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+          <div class="depo-card__info"><h3>Hygor Limar</h3><p>Potencialize Resultados</p></div>
+        </div>
+        <div class="depo-card">
+          <div class="depo-card__video"><iframe src="https://player.vimeo.com/video/1194125389?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+          <div class="depo-card__info"><h3>Bruno Lozano</h3><p>Ritual de Gestão</p></div>
+        </div>
+        <div class="depo-card">
+          <div class="depo-card__video"><iframe src="https://player.vimeo.com/video/1194126879?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+          <div class="depo-card__info"><h3>Rogério Menossi</h3><p>Time Produtivo</p></div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:36px;">
+        <a href="/historias" style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:rgba(255,186,26,0.10);border:1px solid rgba(255,186,26,0.30);color:#ffba1a;border-radius:50px;font-weight:700;font-size:14px;text-decoration:none;transition:all 0.2s;">Ver todas as histórias de clientes <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <style>
+        .depo-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:14px; overflow:hidden; transition:all 0.25s; }
+        .depo-card:hover { border-color:rgba(255,186,26,0.45); transform:translateY(-3px); box-shadow:0 12px 28px rgba(0,0,0,0.40); }
+        .depo-card__video { aspect-ratio:9/16; width:100%; background:#000; display:block; }
+        .depo-card__video iframe { width:100%; height:100%; border:0; display:block; }
+        .depo-card__info { padding:14px 16px 16px; border-top:1px solid rgba(255,255,255,0.08); }
+        .depo-card__info h3 { color:#fff; font-size:0.95rem; font-weight:700; margin:0 0 3px; letter-spacing:-0.005em; }
+        .depo-card__info p { color:#ffba1a; font-size:12px; font-weight:600; margin:0; letter-spacing:0.3px; }
+        @media (max-width:1024px) { .depo-grid { grid-template-columns:repeat(2,1fr) !important; } }
+        @media (max-width:560px) { .depo-grid { grid-template-columns:1fr !important; max-width:340px; } }
+      </style>
+    </section>
+
 
     <!-- ═══ KNOWLEDGE / BLOG ═══ -->
     <section class="knowledge-section section--light" id="conhecimento">
