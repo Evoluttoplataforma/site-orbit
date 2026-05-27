@@ -241,12 +241,15 @@ export const pageHTML = `
   .bc-chip strong { color: #fff; font-weight: 700; }
 
   /* ═══ PROMESSA — 5 missões ═══ */
-  .bc-promise { padding: 90px 24px; background: #0A0E13; position: relative; }
+  .bc-promise { padding: 90px 24px; background: #0A0E13; position: relative; overflow: hidden; }
   .bc-promise::before {
     content: ''; position: absolute; inset: 0;
-    background-image: radial-gradient(circle at 50% 0%, rgba(75,83,32,0.25) 0%, transparent 60%);
+    background-image: url('/images/bootcamp/camuflagem.webp');
+    background-size: cover; background-position: center;
+    opacity: 0.18;
     pointer-events: none;
   }
+  .bc-promise > * { position: relative; z-index: 1; }
   .bc-promise__head { text-align: center; max-width: 820px; margin: 0 auto 56px; position: relative; z-index: 1; }
   .bc-eyebrow {
     display: inline-flex; align-items: center; gap: 12px;
@@ -313,7 +316,15 @@ export const pageHTML = `
   .bc-mission__desc { color: #C9D1D9; font-size: 0.92rem; line-height: 1.55; margin: 0; }
 
   /* ═══ HOSTS — Oficiais Comandantes ═══ */
-  .bc-hosts { padding: 90px 24px; background: linear-gradient(180deg, #0F1410 0%, #0A0E13 100%); border-top: 4px double #4B5320; border-bottom: 4px double #4B5320; position: relative; }
+  .bc-hosts { padding: 90px 24px; background: linear-gradient(180deg, #0F1410 0%, #0A0E13 100%); border-top: 4px double #4B5320; border-bottom: 4px double #4B5320; position: relative; overflow: hidden; }
+  .bc-hosts::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: url('/images/bootcamp/bg-hero.webp');
+    background-size: cover; background-position: center;
+    opacity: 0.12;
+    pointer-events: none;
+  }
+  .bc-hosts > * { position: relative; z-index: 1; }
   .bc-hosts__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; max-width: 1100px; margin: 40px auto 0; }
   @media (max-width: 800px) { .bc-hosts__grid { grid-template-columns: 1fr; } }
   .bc-host {
@@ -366,14 +377,15 @@ export const pageHTML = `
   .bc-host__rank { display: inline-flex; gap: 4px; color: #ffba1a; font-size: 14px; margin-top: 12px; }
 
   /* ═══ DEPOIMENTOS — comunicados de campo ═══ */
-  .bc-testi { padding: 90px 24px; background: #0A0E13; position: relative; }
+  .bc-testi { padding: 90px 24px; background: #0A0E13; position: relative; overflow: hidden; }
   .bc-testi::before {
     content: ''; position: absolute; inset: 0;
-    background-image:
-      repeating-linear-gradient(0deg, transparent 0 80px, rgba(75,83,32,0.10) 80px 81px),
-      repeating-linear-gradient(90deg, transparent 0 80px, rgba(75,83,32,0.10) 80px 81px);
+    background-image: url('/images/bootcamp/camuflagem.webp');
+    background-size: cover; background-position: center;
+    opacity: 0.15;
     pointer-events: none;
   }
+  .bc-testi > * { position: relative; z-index: 1; }
   .bc-testi__head { text-align: center; max-width: 800px; margin: 0 auto 40px; position: relative; z-index: 1; }
   .bc-testi__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
   @media (max-width: 1024px) { .bc-testi__grid { grid-template-columns: repeat(2, 1fr); } }
@@ -401,7 +413,15 @@ export const pageHTML = `
   .bc-testi-card__company { color: #ffba1a; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
 
   /* ═══ FORMATO — Posto de Combate vs Quartel Remoto ═══ */
-  .bc-format { padding: 90px 24px; background: linear-gradient(180deg, #0A0E13 0%, #0F1410 100%); }
+  .bc-format { padding: 90px 24px; background: linear-gradient(180deg, #0A0E13 0%, #0F1410 100%); position: relative; overflow: hidden; }
+  .bc-format::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: url('/images/bootcamp/bg-hero.webp');
+    background-size: cover; background-position: center;
+    opacity: 0.10;
+    pointer-events: none;
+  }
+  .bc-format > * { position: relative; z-index: 1; }
   .bc-format__head { text-align: center; max-width: 800px; margin: 0 auto 40px; }
   .bc-format__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1000px; margin: 0 auto; }
   @media (max-width: 800px) { .bc-format__grid { grid-template-columns: 1fr; } }
@@ -636,15 +656,6 @@ export const pageHTML = `
     <rect x="38" y="32" width="6" height="8" rx="1"/>
   </svg>
 
-  <!-- Soldado SVG (canto inferior direito) -->
-  <svg style="position:absolute;right:5%;bottom:50px;width:140px;height:auto;opacity:0.28;pointer-events:none;z-index:1;" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
-    <circle cx="30" cy="12" r="8"/>
-    <rect x="22" y="20" width="16" height="4"/>
-    <path d="M22 26 L18 32 L18 60 L22 60 L24 86 L20 116 L26 116 L28 90 L32 90 L34 116 L40 116 L36 86 L38 60 L42 60 L42 32 L38 26 Z"/>
-    <rect x="10" y="36" width="12" height="6"/>
-    <rect x="38" y="36" width="12" height="6"/>
-    <line x1="48" y1="36" x2="58" y2="32" stroke="#ffba1a" stroke-width="3"/>
-  </svg>
 
   <!-- Estrelas militares espalhadas -->
   <svg style="position:absolute;right:18%;top:38%;width:60px;height:60px;opacity:0.22;pointer-events:none;z-index:1;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
