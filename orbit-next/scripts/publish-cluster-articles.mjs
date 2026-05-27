@@ -1,16 +1,14 @@
 /**
- * Publica artigos do cluster da Dor 1 (Processos) no Supabase.
+ * Publica TODOS os artigos da pasta `ideias de artigos pci/` no Supabase.
  *
- * Lê .md de `ideias de artigos pci/`, converte markdown → HTML,
- * extrai frontmatter + schemas JSON-LD, faz upsert por slug.
+ * Lê .md, converte markdown → HTML, extrai frontmatter, faz upsert por slug.
+ * Auto-detecta category e cross-linking. Auto-gera cover SVG por artigo
+ * baseado no slug → /public/images/blog/cover-{slug}.svg.
  *
  * Idempotente: rodar várias vezes não duplica. Slugs novos = INSERT;
  * slugs existentes = PATCH (atualiza content/metadados).
  *
- * Uso:  node supabase/scripts/publish-cluster-articles.mjs
- *
- * NÃO altera nada se o Supabase não responder. Build local depois
- * puxa de articles.json e renderiza estaticamente.
+ * Uso:  cd orbit-next && node scripts/publish-cluster-articles.mjs
  */
 
 import fs from 'fs';
@@ -21,74 +19,159 @@ import { marked } from 'marked';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
 const MD_DIR = path.join(REPO_ROOT, 'ideias de artigos pci');
+const COVERS_DIR = path.join(__dirname, '..', 'public', 'images', 'blog');
 
 const SUPABASE_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
 const SUPABASE_KEY = (process.env.SUPABASE_SERVICE_KEY ||
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDQ1NjAwNiwiZXhwIjoyMDkwMDMyMDA2fQ.LTZYTuBXAf7cFJrGbo9J_F80VzA_8kbcHiwsTZXRM5Q'
 ).replace(/\s+/g, '');
 
-// Configura cada artigo: arquivo .md + metadados Supabase que nao vem no frontmatter
-// (category/keyword sao MAPEADOS aqui pra mantermos consistencia com taxonomy do CMS)
-const ARTICLES = [
-  {
-    file: 'como-organizar-processos-empresa-cresceu-rapido.md',
-    category: 'estrategica',                 // PILLAR B (ja no ar, este script faz PATCH)
-    seo_keyword: 'organizar processos',
-    cover_url: '/images/blog/cover-23.svg',
-  },
-  {
-    file: 'processos-manuais-empresa.md',
-    category: 'estrategica',                 // TOFU C
-    seo_keyword: 'processos manuais',
-    cover_url: '/images/blog/cover-24.svg',
-  },
-  {
-    file: 'como-automatizar-processos-empresa.md',
-    category: 'estrategica',                 // BOFU A
-    seo_keyword: 'automatizar processos',
-    cover_url: '/images/blog/cover-25.svg',
-  },
-  // ─── Cluster Dor 7 (Indicadores) ───
-  {
-    file: 'como-criar-indicadores-empresa.md',
-    category: 'indicadores',                 // PILLAR B
-    seo_keyword: 'criar indicadores',
-    cover_url: '/images/blog/cover-26.svg',
-  },
-  {
-    file: 'indicadores-nao-refletem-realidade.md',
-    category: 'indicadores',                 // MOFU diagnostico
-    seo_keyword: 'indicadores não refletem realidade',
-    cover_url: '/images/blog/cover-27.svg',
-  },
-  {
-    file: 'dashboard-gestao-empresarial.md',
-    category: 'indicadores',                 // BOFU A
-    seo_keyword: 'dashboard de gestão empresarial',
-    cover_url: '/images/blog/cover-28.svg',
-  },
-];
+const DEMO_CTA_URL = 'https://demonstracao.orbitgestao.com.br/chat';
 
-// URLs reais dos artigos do cluster (pra substituir placeholders `(#)` por links internos reais).
-// Quando outras dores virarem artigo, adicionar aqui.
-const INTERNAL_LINK_MAP = {
-  // Variacoes de texto → URL final
-  'Como organizar os processos de uma empresa que cresceu rápido (sem virar caos)': '/blog/como-organizar-processos-empresa-cresceu-rapido',
-  'Como organizar os processos de uma empresa que cresceu rápido': '/blog/como-organizar-processos-empresa-cresceu-rapido',
-  'Por que processos manuais estão travando o crescimento da sua empresa (e como sair desse ciclo)': '/blog/processos-manuais-empresa',
-  'Por que processos manuais estão travando o crescimento da sua empresa': '/blog/processos-manuais-empresa',
-  'Como automatizar processos da empresa: o guia completo': '/blog/como-automatizar-processos-empresa',
-  'Como automatizar processos da empresa: o guia decisivo': '/blog/como-automatizar-processos-empresa',
-  'Como automatizar processos da empresa': '/blog/como-automatizar-processos-empresa',
-  // ─── Cluster Dor 7 (Indicadores) ───
-  'Como criar indicadores que conectam com a operação (e não viram planilha esquecida)': '/blog/como-criar-indicadores-empresa',
-  'Como criar indicadores que conectam com a operação': '/blog/como-criar-indicadores-empresa',
-  'Por que seus indicadores não mostram a realidade da empresa (e o que fazer)': '/blog/indicadores-nao-refletem-realidade',
-  'Por que seus indicadores não mostram a realidade da empresa': '/blog/indicadores-nao-refletem-realidade',
-  'Dashboard de gestão empresarial: como escolher e implementar em 2026': '/blog/dashboard-gestao-empresarial',
-  'Dashboard de gestão empresarial': '/blog/dashboard-gestao-empresarial',
+// Detecta category baseado em keywords do slug/titulo (mapeia pras 6 do CMS)
+function detectCategory(slug, title) {
+  const s = (slug + ' ' + title).toLowerCase();
+  if (/indicador|kpi|dashboard|metricas|metrica/.test(s)) return 'indicadores';
+  if (/planejamento[- ]estrategico|estrategia/.test(s)) return 'planejamento-estrategico';
+  if (/marketing|prospec(c|ç)/.test(s)) return 'marketing';
+  if (/(\bia\b|inteligencia artificial|olivia|agente)/.test(s)) return 'ia';
+  return 'estrategica'; // default
+}
+
+// Auto-gera seo_keyword a partir do slug (limpando palavras genéricas)
+function autoKeyword(slug) {
+  return slug.replace(/-/g, ' ').replace(/\b(como|por|que|para|empresa|de|em|do|da|no|na|os|as)\b/gi, ' ').replace(/\s+/g, ' ').trim();
+}
+
+// Gera um SVG cover bonito pra um artigo a partir do titulo + tag categoria
+function generateCoverSvg(title, categoryLabel) {
+  // Quebra titulo em até 4 linhas com ~22 chars max sem cortar palavras
+  const words = title.split(' ');
+  const lines = [];
+  let curr = '';
+  const MAX = 22;
+  for (const w of words) {
+    if ((curr + ' ' + w).trim().length <= MAX) {
+      curr = (curr + ' ' + w).trim();
+    } else {
+      if (curr) lines.push(curr);
+      curr = w;
+    }
+    if (lines.length === 3) break;
+  }
+  if (curr && lines.length < 4) lines.push(curr);
+  // Se sobrou texto, adiciona "..." na ultima linha
+  const consumed = lines.join(' ').length;
+  if (consumed < title.length - 2 && lines.length === 4) {
+    lines[3] = lines[3].slice(0, MAX - 1) + '…';
+  }
+  // Destaca 1 palavra-chave em dourado (a 2ª linha geralmente é o termo central)
+  const goldLineIdx = Math.min(1, lines.length - 1);
+
+  const tagWidth = Math.max(120, categoryLabel.length * 11 + 30);
+  const tagX = (tagWidth - 18) / 2; // approx center
+
+  const escape = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+  const linesSvg = lines.map((line, i) => {
+    const y = 240 + i * 66;
+    const fill = i === goldLineIdx ? 'url(#gold)' : '#ffffff';
+    return `  <text x="80" y="${y}" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="56" font-weight="800" fill="${fill}" letter-spacing="-1">${escape(line)}</text>`;
+  }).join('\n');
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="${escape(title)}">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0D1117"/>
+      <stop offset="1" stop-color="#161B22"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.85" cy="0.15" r="0.7">
+      <stop offset="0" stop-color="#ffba1a" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#ffba1a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffba1a"/>
+      <stop offset="1" stop-color="#ff8c00"/>
+    </linearGradient>
+    <pattern id="dots" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#ffffff" fill-opacity="0.04"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g transform="translate(80, 100)">
+    <rect rx="22" ry="22" width="${tagWidth}" height="44" fill="#ffba1a" fill-opacity="0.12" stroke="#ffba1a" stroke-opacity="0.35"/>
+    <text x="${tagWidth / 2}" y="29" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="800" fill="#ffba1a" text-anchor="middle" letter-spacing="2">${escape(categoryLabel.toUpperCase())}</text>
+  </g>
+${linesSvg}
+  <g transform="translate(80, 552)">
+    <circle cx="14" cy="14" r="14" fill="url(#gold)"/>
+    <circle cx="14" cy="14" r="6" fill="#0D1117"/>
+    <text x="42" y="20" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="20" font-weight="800" fill="#ffffff" letter-spacing="-0.5">Orbit Gestão</text>
+  </g>
+  <rect x="0" y="624" width="1200" height="6" fill="url(#gold)"/>
+</svg>
+`;
+}
+
+const CATEGORY_LABELS = {
+  estrategica: 'Estratégia',
+  indicadores: 'Indicadores',
+  marketing: 'Marketing',
+  ia: 'IA',
+  'planejamento-estrategico': 'Planejamento',
+  novidades: 'Novidades',
 };
 
+// ───────────── Auto-carrega TODOS os .md da pasta ─────────────
+function loadAllArticles() {
+  const files = fs.readdirSync(MD_DIR)
+    .filter((f) => f.endsWith('.md') && f !== 'BLOG_PLAYBOOK.md')
+    .sort();
+  return files.map((file) => {
+    const txt = fs.readFileSync(path.join(MD_DIR, file), 'utf-8');
+    const m = txt.match(/^---\n([\s\S]*?)\n---/);
+    const meta = {};
+    if (m) {
+      for (const line of m[1].split('\n')) {
+        const kv = line.match(/^([a-z_]+):\s*(.*)$/i);
+        if (!kv) continue;
+        meta[kv[1].trim()] = kv[2].trim().replace(/^["'](.*)["']$/, '$1');
+      }
+    }
+    const slug = meta.slug || file.replace(/\.md$/, '');
+    const title = meta.title || slug;
+    const category = detectCategory(slug, title);
+    return {
+      file,
+      slug,
+      title,
+      category,
+      seo_keyword: autoKeyword(slug),
+      cover_url: `/images/blog/cover-${slug}.svg`,
+      _meta: meta,
+    };
+  });
+}
+
+const ARTICLES = loadAllArticles();
+console.log(`📚 ${ARTICLES.length} artigos detectados em ${MD_DIR}\n`);
+
+// ───────────── Internal links: auto-popula com todos os titulos ─────────────
+const INTERNAL_LINK_MAP = {};
+for (const art of ARTICLES) {
+  const url = `/blog/${art.slug}`;
+  // Título completo + variantes (sem subtitulo após ":") + sem "(...)"
+  INTERNAL_LINK_MAP[art.title] = url;
+  const noParen = art.title.replace(/\s*\([^)]*\)\s*$/, '').trim();
+  if (noParen !== art.title) INTERNAL_LINK_MAP[noParen] = url;
+  const beforeColon = art.title.split(':')[0].trim();
+  if (beforeColon !== art.title && beforeColon.length > 15) INTERNAL_LINK_MAP[beforeColon] = url;
+}
+
+// ───────────── Markdown helpers ─────────────
 function parseFrontmatter(text) {
   const m = text.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   if (!m) return { meta: {}, body: text };
@@ -97,85 +180,66 @@ function parseFrontmatter(text) {
     const kv = line.match(/^([a-z_]+):\s*(.*)$/i);
     if (!kv) continue;
     const key = kv[1].trim();
-    let val = kv[2].trim();
-    // Remove aspas
-    val = val.replace(/^["'](.*)["']$/, '$1');
+    let val = kv[2].trim().replace(/^["'](.*)["']$/, '$1');
     meta[key] = val;
   }
   return { meta, body: m[2] };
 }
 
 function stripJsonBlocks(body) {
-  // Remove a secao "## Schema markup..." inteira (heading + blocos ```json``` ate
-  // o proximo H2 ou fim). Schemas Article+FAQPage sao gerados automaticamente
-  // pelo blog/[slug]/page.tsx via extractFaqs().
   let out = body.replace(/##\s+Schema\s+markup[\s\S]*$/i, '').trim();
-  // Defesa extra: remove blocos ```json``` orfaos que tenham sobrado
   out = out.replace(/```json\s*\n[\s\S]*?\n```/g, '').trim();
   return out;
 }
 
-// Remove travessoes (em-dash —, en-dash –) — sinal de texto-IA.
-// Substitui por equivalentes humanos: ", " no meio de frase, "-" como conector.
 function humanizeText(body) {
-  // Em-dash com espacos (uso aposto-like) → virgulas
   let out = body.replace(/\s—\s/g, ', ');
-  // En-dash com espacos → virgulas
   out = out.replace(/\s–\s/g, ', ');
-  // Em-dash colado (raros, mas casos como "30—40") → hifen
   out = out.replace(/—/g, '-');
   out = out.replace(/–/g, '-');
   return out;
 }
 
 function removeFirstH1(body) {
-  // Frontmatter title já vai como title; remove primeiro # heading do markdown
   return body.replace(/^#\s+.+?\n/, '');
 }
 
-// CTA primario padrao do site — todo "Agendar demonstração" do blog aponta pra ca
-const DEMO_CTA_URL = 'https://demonstracao.orbitgestao.com.br/chat';
-
 function substituteInternalLinks(markdown) {
-  // 1. CTAs de demo: substitui (#demo-form), (#form-demo), (#agendar), etc por URL real do chat
   let out = markdown.replace(/\]\(#(?:demo[-_]?form|form[-_]?demo|agendar|chat|demo)\)/gi, `](${DEMO_CTA_URL})`);
-
-  // 2. Internal links de outros artigos: [Texto](#) por [Texto](URL_REAL) quando bate
   out = out.replace(/\[([^\]]+)\]\(#\)/g, (match, label) => {
     const labelNorm = label.replace(/\s+/g, ' ').trim();
     for (const [key, url] of Object.entries(INTERNAL_LINK_MAP)) {
-      if (labelNorm === key || labelNorm.startsWith(key.slice(0, 50))) {
+      if (labelNorm === key || (key.length > 20 && labelNorm.startsWith(key.slice(0, 50)))) {
         return `[${label}](${url})`;
       }
     }
-    // Nao bateu — mantem placeholder (artigo futuro nao publicado)
     return match;
   });
-
   return out;
 }
 
 function markdownToHtml(markdown) {
-  marked.setOptions({
-    gfm: true,
-    breaks: false,
-    mangle: false,
-    headerIds: false,
-  });
+  marked.setOptions({ gfm: true, breaks: false, mangle: false, headerIds: false });
   let html = marked.parse(markdown);
-  // Wrappa <table> em .table-wrap pra adicionar hint visual de scroll mobile.
-  // CSS .table-wrap::before mostra "← arraste pra ver mais →" em viewport pequeno.
   html = html.replace(/<table([^>]*)>/g, '<div class="table-wrap"><table$1>');
   html = html.replace(/<\/table>/g, '</table></div>');
   return html;
 }
 
+// ───────────── Cover SVG generation ─────────────
+function ensureCoverExists(art) {
+  const filePath = path.join(COVERS_DIR, `cover-${art.slug}.svg`);
+  if (fs.existsSync(filePath)) return;
+  const label = CATEGORY_LABELS[art.category] || 'Gestão';
+  const svg = generateCoverSvg(art.title, label);
+  fs.mkdirSync(COVERS_DIR, { recursive: true });
+  fs.writeFileSync(filePath, svg, 'utf-8');
+}
+
+// ───────────── Upsert no Supabase ─────────────
 async function upsertArticle(art) {
   const filePath = path.join(MD_DIR, art.file);
-  if (!fs.existsSync(filePath)) {
-    console.log(`   ⚠️  ${art.file}: arquivo nao encontrado, pulando.`);
-    return null;
-  }
+  if (!fs.existsSync(filePath)) return null;
 
   const raw = fs.readFileSync(filePath, 'utf-8');
   const { meta, body } = parseFrontmatter(raw);
@@ -186,9 +250,11 @@ async function upsertArticle(art) {
   markdown = substituteInternalLinks(markdown);
   const contentHtml = markdownToHtml(markdown);
 
+  ensureCoverExists(art);
+
   const payload = {
-    title: humanizeText(meta.title || ''),
-    slug: meta.slug,
+    title: humanizeText(meta.title || art.title),
+    slug: meta.slug || art.slug,
     excerpt: humanizeText(meta.meta_description || ''),
     content: contentHtml,
     category: art.category,
@@ -197,12 +263,11 @@ async function upsertArticle(art) {
     published_at: meta.published_at ? `${meta.published_at}T12:00:00.000Z` : new Date().toISOString(),
     updated_at: meta.updated_at ? `${meta.updated_at}T12:00:00.000Z` : new Date().toISOString(),
     seo_title: humanizeText(meta.meta_title || ''),
-    seo_canonical: meta.canonical ? meta.canonical.replace('https://orbitgestao.com.br/blog/', '') : meta.slug,
+    seo_canonical: meta.canonical ? meta.canonical.replace('https://orbitgestao.com.br/blog/', '') : (meta.slug || art.slug),
     seo_keyword: art.seo_keyword,
     cover_url: art.cover_url,
   };
 
-  // Checa se existe
   const checkResp = await fetch(
     `${SUPABASE_URL}/rest/v1/blog_articles?slug=eq.${encodeURIComponent(payload.slug)}&select=id`,
     { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` } }
@@ -211,63 +276,46 @@ async function upsertArticle(art) {
   const existing = await checkResp.json();
   const existingId = existing.length > 0 ? existing[0].id : null;
 
-  let resp;
-  if (existingId) {
-    console.log(`   📝 ${art.file} → PATCH (id=${existingId})`);
-    resp = await fetch(`${SUPABASE_URL}/rest/v1/blog_articles?id=eq.${existingId}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        apikey: SUPABASE_KEY,
-        Authorization: `Bearer ${SUPABASE_KEY}`,
-        Prefer: 'return=representation',
-      },
-      body: JSON.stringify(payload),
-    });
-  } else {
-    console.log(`   ✨ ${art.file} → INSERT`);
-    resp = await fetch(`${SUPABASE_URL}/rest/v1/blog_articles`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        apikey: SUPABASE_KEY,
-        Authorization: `Bearer ${SUPABASE_KEY}`,
-        Prefer: 'return=representation',
-      },
-      body: JSON.stringify(payload),
-    });
-  }
+  const action = existingId ? 'PATCH' : 'INSERT';
+  const resp = existingId
+    ? await fetch(`${SUPABASE_URL}/rest/v1/blog_articles?id=eq.${existingId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json', apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, Prefer: 'return=representation' },
+        body: JSON.stringify(payload),
+      })
+    : await fetch(`${SUPABASE_URL}/rest/v1/blog_articles`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, Prefer: 'return=representation' },
+        body: JSON.stringify(payload),
+      });
 
   if (!resp.ok) {
     const err = await resp.text();
-    throw new Error(`Upsert failed: HTTP ${resp.status} — ${err.slice(0, 300)}`);
+    throw new Error(`Upsert failed: HTTP ${resp.status} — ${err.slice(0, 200)}`);
   }
   const result = await resp.json();
   const id = result[0].id;
-  const wordCount = contentHtml.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
-  console.log(`      ✅ id=${id}, slug=${payload.slug}, ~${wordCount} palavras HTML`);
+  console.log(`   ${action === 'PATCH' ? '📝' : '✨'} ${art.slug} → ${action} (id=${id})`);
   return result[0];
 }
 
 async function main() {
-  console.log('🚀 Publicando cluster Dor 1 (Processos) no Supabase...\n');
-  const results = [];
+  console.log('🚀 Publicando artigos no Supabase...\n');
+  let success = 0;
+  let failed = 0;
   for (const art of ARTICLES) {
     try {
       const r = await upsertArticle(art);
-      if (r) results.push(r);
+      if (r) success++;
     } catch (err) {
       console.error(`   ❌ ${art.file}: ${err.message}`);
+      failed++;
     }
   }
-  console.log(`\n🎉 ${results.length}/${ARTICLES.length} artigos publicados.`);
-  console.log('\nURLs:');
-  for (const r of results) {
-    console.log(`  https://orbitgestao.com.br/blog/${r.slug}`);
-  }
+  console.log(`\n🎉 ${success}/${ARTICLES.length} artigos publicados. ${failed > 0 ? `❌ ${failed} falhas.` : ''}`);
   console.log('\nProximos passos:');
   console.log('  1. npm run build       # puxa do Supabase + gera HTML estatico');
-  console.log('  2. git commit + push   # Cloudflare rebuilda em ~2 min');
+  console.log('  2. git commit + push   # Cloudflare rebuilda');
 }
 
 main().catch((err) => {
