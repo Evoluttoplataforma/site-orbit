@@ -99,12 +99,28 @@ serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
   try {
-    const body = (await req.json().catch(() => ({}))) as { senha?: string };
+    const body = (await req.json().catch(() => ({}))) as { senha?: string; debug?: boolean };
     if (!body.senha || body.senha !== PANEL_PASS) {
       return new Response(JSON.stringify({ error: "Senha incorreta" }), {
         status: 401,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
+    }
+
+    // Modo diagnóstico: confirma conexão com a Stripe sem precisar de pagamento
+    if (body.debug) {
+      const configured = !!STRIPE_SECRET_KEY;
+      const plink = configured ? await findPaymentLinkId() : null;
+      const paid = configured ? await fetchPaidEmailsStripe() : new Set<string>();
+      return new Response(
+        JSON.stringify({
+          stripe_configured: configured,
+          payment_link_encontrado: !!plink,
+          payment_link_id: plink,
+          pagamentos_confirmados: paid.size,
+        }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
     }
 
     // Lê os leads do bootcamp com a chave de serviço (RLS bypassed)
