@@ -1088,10 +1088,6 @@ export const pageHTML = `
 
   <div class="bc-hero__inner">
 
-    <div class="bc-hero__tarja">CLASSIFICADO · OPERAÇÃO BC-260613</div>
-
-    <div class="bc-hero__coord">LAT -27.5954 · LON -48.5480 · SQUARE SC · ZULU-03</div>
-
     <!-- Carimbo MISSAO APROVADA (substitui insignia da estrela) -->
     <img src="/images/bootcamp/missao-aprovada.webp" alt="Missão Aprovada" style="display:block;max-width:340px;width:80%;height:auto;margin:0 auto;filter:drop-shadow(6px 6px 0 rgba(0,0,0,0.5));transform:rotate(-4deg);" loading="eager">
 
@@ -1330,30 +1326,6 @@ export const pageHTML = `
         <h3 class="bc-prereq__title">ACESSO RESTRITO · <span class="accent">Agente de Ativação obrigatório</span></h3>
         <p class="bc-prereq__text">A participação é exclusiva para consultorias que seguiram e executaram todo o conteúdo do <strong>Agente de Ativação de Canal</strong>, disponível no ambiente de cada consultoria dentro do Orbit Gestão. Isso garante que toda a sala esteja no mesmo nível para o trabalho mão na massa.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ FORM ═══ -->
-<section class="bc-form-sec" id="inscricao">
-  <div class="bc-form-sec__head" style="padding-top:14px;">
-    <div class="bc-eyebrow"><i class="fa-solid fa-id-card"></i>Recrutamento</div>
-    <h2 class="bc-h2">Confirme seu <span class="accent">alistamento</span></h2>
-    <p class="bc-lead">Vagas limitadas. Confirme abaixo seus dados e a modalidade de participação.</p>
-  </div>
-  <!-- Trigger: abre a entrevista em popup centralizado (overlay vive fora da section) -->
-  <div style="text-align:center;margin-top:20px;">
-    <button type="button" class="bc-chat-trigger" id="bcChatTrigger">
-      <span class="live-dot"></span> Iniciar alistamento · Entrevista com o General Igor →
-    </button>
-    <p class="bc-form__foot">[ EXCLUSIVO PARA CANAIS E CONSULTORIAS CLIENTES ATIVAS · ORBIT GESTÃO ]</p>
-  </div>
-
-  <div class="bc-form" id="bcSuccess" style="display:none;max-width:640px;margin:0 auto;border-color:#3FB950;">
-    <div class="bc-form__inner" style="text-align:center;padding:40px 30px;">
-      <img src="/images/bootcamp/missao-aprovada.webp" alt="Missão Aprovada" style="max-width:340px;width:80%;height:auto;margin:0 auto 24px;display:block;filter:drop-shadow(4px 4px 0 rgba(0,0,0,0.4));transform:rotate(-3deg);" loading="lazy">
-      <h3 style="color:#fff;font-family:'Black Ops One',impact,sans-serif;font-size:1.6rem;margin:0 0 12px;text-transform:uppercase;letter-spacing:2px;">Alistamento confirmado!</h3>
-      <p style="color:#C9D1D9;margin:0;font-family:'JetBrains Mono',monospace;font-size:0.95rem;line-height:1.6;">Vamos enviar todos os detalhes da operação para seu e-mail e WhatsApp.</p>
     </div>
   </div>
 </section>

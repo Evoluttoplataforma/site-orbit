@@ -382,8 +382,7 @@ export function PageContent() {
       setTimeout(() => { window.location.href = `/bootcamp-orbit/obrigado?${params.toString()}`; }, 600);
     }
 
-    // ═══ Overlay: abre/fecha o chat (takeover mobile / modal desktop) ═══
-    const chatTrigger = root.querySelector('#bcChatTrigger') as HTMLButtonElement | null;
+    // ═══ Overlay: abre/fecha o chat (popup centralizado) ═══
     const chatOverlay = root.querySelector('#bcChatOverlay') as HTMLElement | null;
     const chatClose = root.querySelector('#bcChatClose') as HTMLButtonElement | null;
     const chatBackdrop = root.querySelector('#bcChatBackdrop') as HTMLElement | null;
@@ -408,13 +407,21 @@ export function PageContent() {
       chatOverlay.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = prevBodyOverflow;
     }
-    chatTrigger?.addEventListener('click', openChat);
+    // Qualquer CTA da página (links pra #inscricao ou [data-open-chat]) abre o popup direto
+    const onCtaOpen = (e: Event) => {
+      const el = (e.target as HTMLElement | null)?.closest('a[href="#inscricao"], [data-open-chat]');
+      if (!el) return;
+      e.preventDefault();
+      openChat();
+    };
+    root.addEventListener('click', onCtaOpen);
     chatClose?.addEventListener('click', closeChat);
     chatBackdrop?.addEventListener('click', closeChat);
     const onEsc = (e: KeyboardEvent) => { if (e.key === 'Escape') closeChat(); };
     document.addEventListener('keydown', onEsc);
 
     return () => {
+      root.removeEventListener('click', onCtaOpen);
       document.removeEventListener('keydown', onEsc);
       document.body.style.overflow = prevBodyOverflow;
       clearInterval(cdInterval);
