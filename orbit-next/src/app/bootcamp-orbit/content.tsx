@@ -185,6 +185,18 @@ export function PageContent() {
     const answers: Record<string, string> = {};
     let stepIdx = 0;
     let submitted = false;
+    // Só auto-rola depois que o usuário interagiu — evita arrastar a página pro form no load
+    let userInteracted = false;
+
+    function maybeScrollTo(el: HTMLElement) {
+      if (!userInteracted) return;
+      // só rola se a mensagem está fora da viewport
+      const rect = el.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      if (rect.top < 0 || rect.bottom > vh) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
 
     function appendMsg(text: string, isUser = false) {
       if (!chatBody) return;
@@ -194,7 +206,7 @@ export function PageContent() {
         ? `<div class="bc-msg__avatar">EU</div><div class="bc-msg__bubble">${escapeHtml(text)}</div>`
         : `<div class="bc-msg__avatar"><img src="${IGOR_AVATAR}" alt="Igor"></div><div class="bc-msg__bubble">${escapeHtml(text)}</div>`;
       chatBody.appendChild(div);
-      requestAnimationFrame(() => div.scrollIntoView({ behavior: 'smooth', block: 'center' }));
+      requestAnimationFrame(() => maybeScrollTo(div));
     }
     function escapeHtml(s: string) {
       return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -204,7 +216,7 @@ export function PageContent() {
       div.className = 'bc-msg';
       div.innerHTML = `<div class="bc-msg__avatar"><img src="${IGOR_AVATAR}" alt="Igor"></div><div class="bc-msg__bubble"><span class="bc-typing"><span></span><span></span><span></span></span></div>`;
       chatBody?.appendChild(div);
-      requestAnimationFrame(() => div.scrollIntoView({ behavior: 'smooth', block: 'center' }));
+      requestAnimationFrame(() => maybeScrollTo(div));
       return div;
     }
     function updateProgress() {
@@ -235,7 +247,8 @@ export function PageContent() {
           chatInput.value = '';
           chatInput.placeholder = step.placeholder;
           chatInput.type = step.type || 'text';
-          chatInput.focus();
+          // preventScroll evita que o focus arraste a página pro form no load
+          try { chatInput.focus({ preventScroll: true }); } catch { /* noop */ }
         }
       } else if (step.kind === 'choices') {
         if (inputArea) inputArea.style.display = 'none';
@@ -246,6 +259,7 @@ export function PageContent() {
           ).join('');
           chatChoices.querySelectorAll('.bc-chat__choice').forEach((btn) => {
             btn.addEventListener('click', () => {
+              userInteracted = true;
               const v = (btn as HTMLElement).dataset.value || '';
               const label = btn.textContent || v;
               beepSend();
@@ -272,9 +286,10 @@ export function PageContent() {
         chatInput.style.borderColor = '#C73E1D';
         beep(220, 0.18, 0.10);
         setTimeout(() => { if (chatInput) chatInput.style.borderColor = ''; }, 1200);
-        chatInput.focus();
+        try { chatInput.focus({ preventScroll: true }); } catch { /* noop */ }
         return;
       }
+      userInteracted = true;
       beepSend();
       answers[step.field] = value;
       appendMsg(value, true);
