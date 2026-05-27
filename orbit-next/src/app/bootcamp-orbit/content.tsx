@@ -66,10 +66,11 @@ export function PageContent() {
     document.body.setAttribute('data-bc', '1');
 
     // ═══ Trava overflow horizontal (SVGs, tickers, decorativos podem estourar) ═══
+    // overflow-x: clip (não hidden) — clip não cria contexto de scroll, então `position: sticky` continua funcionando
     const prevHtmlOX = document.documentElement.style.overflowX;
     const prevBodyOX = document.body.style.overflowX;
-    document.documentElement.style.overflowX = 'hidden';
-    document.body.style.overflowX = 'hidden';
+    document.documentElement.style.overflowX = 'clip';
+    document.body.style.overflowX = 'clip';
 
     // ═══ Countdown ═══
     const daysEl = root.querySelector('#bcDays') as HTMLElement | null;

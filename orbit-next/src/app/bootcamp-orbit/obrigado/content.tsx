@@ -15,8 +15,8 @@ export function PageContent() {
     // Trava overflow horizontal igual à página principal
     const prevHtmlOX = document.documentElement.style.overflowX;
     const prevBodyOX = document.body.style.overflowX;
-    document.documentElement.style.overflowX = 'hidden';
-    document.body.style.overflowX = 'hidden';
+    document.documentElement.style.overflowX = 'clip';
+    document.body.style.overflowX = 'clip';
     document.body.setAttribute('data-bc', '1');
 
     const params = new URLSearchParams(window.location.search);

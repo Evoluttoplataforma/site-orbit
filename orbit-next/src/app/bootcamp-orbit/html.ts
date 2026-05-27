@@ -13,10 +13,11 @@ export const pageHTML = `
   /* Dourado Orbit: #ffba1a (mantém brand) */
   /* Base dark: #0A0E13 */
 
-  .bc-page { background: #0A0E13; color: #E6E8EB; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; overflow-x: hidden; width: 100%; max-width: 100vw; position: relative; }
+  .bc-page { background: #0A0E13; color: #E6E8EB; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; overflow-x: clip; width: 100%; max-width: 100vw; position: relative; }
   .bc-page * { box-sizing: border-box; }
-  /* Trava overflow horizontal causado por SVGs decorativos, tickers e backgrounds expandidos */
-  html:has(body[data-bc="1"]), body[data-bc="1"] { overflow-x: hidden !important; max-width: 100vw; }
+  /* overflow-x: clip não cria contexto de scroll → sticky continua funcionando.
+     overflow-x: hidden quebraria os elementos sticky abaixo. */
+  html:has(body[data-bc="1"]), body[data-bc="1"] { overflow-x: clip !important; max-width: 100vw; }
   .bc-page section, .bc-page > div { max-width: 100vw; overflow-x: clip; }
 
   /* ═══ CURSOR MIRA — aplicado via body[data-bc] (do content.tsx) ═══ */
@@ -106,13 +107,17 @@ export const pageHTML = `
   .bc-alert-bar__siren { animation: bc-blink 1s steps(2) infinite; }
   @keyframes bc-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0.2; } }
 
-  /* ═══ NEWS TICKER rolando ═══ */
+  /* ═══ NEWS TICKER rolando — sticky logo abaixo do alert-bar ═══ */
   .bc-ticker {
     background: #000;
     border-top: 1px solid #4B5320; border-bottom: 1px solid #4B5320;
     overflow: hidden;
     padding: 10px 0;
-    position: relative;
+    position: sticky; top: 40px; z-index: 99;
+  }
+  /* Mobile: alert-bar é mais alta (texto quebra), ajusta top do ticker */
+  @media (max-width: 600px) {
+    .bc-ticker { top: 60px; }
   }
   .bc-ticker::before, .bc-ticker::after {
     content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2;
