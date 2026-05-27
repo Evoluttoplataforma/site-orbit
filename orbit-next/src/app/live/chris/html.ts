@@ -76,22 +76,6 @@ export const pageHTML = `
                 </div>
             </div>
 
-            <!-- Convidado especial — Sandro Magaldi -->
-            <div style="background:linear-gradient(135deg,rgba(255,186,26,0.10) 0%,rgba(255,186,26,0.02) 100%);border:1px solid rgba(255,186,26,0.35);border-radius:20px;padding:28px 24px;margin:40px auto 0;max-width:680px;" data-reveal>
-                <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(255,186,26,0.15);border-radius:50px;color:#ffba1a;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:18px;">
-                    <i class="fa-solid fa-star" style="font-size:11px;"></i>Convidado especial nesta quinta
-                </div>
-                <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center;">
-                    <img src="/images/sandro-magaldi.png" alt="Sandro Magaldi" width="120" height="120" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,186,26,0.5);flex-shrink:0;">
-                    <div style="flex:1;min-width:240px;text-align:left;">
-                        <h3 style="color:#fff;font-size:1.4rem;font-weight:800;margin:0 0 6px;">Sandro Magaldi</h3>
-                        <p style="color:#C9D1D9;font-size:14px;line-height:1.6;margin:0;">
-                            Um dos maiores especialistas em gest&atilde;o estrat&eacute;gica, vendas e transforma&ccedil;&atilde;o empresarial do Brasil. Mais de 30 anos de experi&ecirc;ncia, autor de best-sellers de neg&oacute;cios, palestrante renomado e mentor de l&iacute;deres organizacionais.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
             <!-- Live now message (hidden until live) -->
             <div id="liveNow" style="display:none;margin:40px 0;">
                 <p style="font-size:1.5rem;font-weight:700;color:#3FB950;">
@@ -413,7 +397,7 @@ export const pageHTML = `
         window.__liveCalInit = true;
 
         var eventDays = [4]; // Thursday = 4
-        // Primeira edição com convidado especial Sandro Magaldi — não há live antes
+        // Primeira edição da masterclass — não há live antes desta data
         var minLiveDate = new Date(2026, 4, 21); // 21/05/2026
         minLiveDate.setHours(0,0,0,0);
         var currentMonth = new Date().getMonth();
@@ -523,7 +507,7 @@ export const pageHTML = `
     <!-- Dynamic countdown to next Thursday 18h BRT -->
     <script>
     (function() {
-        // Primeira edição confirmada com Sandro Magaldi — nada antes dela
+        // Primeira edição confirmada da masterclass — nada antes dela
         var minLiveStart = new Date(2026, 4, 21, 18, 0, 0); // 21/05/2026 18h
 
         function getNextThursday() {
