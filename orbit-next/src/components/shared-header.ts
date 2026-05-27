@@ -69,6 +69,9 @@ export const headerHTML = `
                 <li>
                     <a href="/sobre"><span data-i18n="nav.company">Empresa</span></a>
                 </li>
+                <li class="nav-bootcamp" id="navBootcamp">
+                    <a href="/bootcamp-orbit" style="color:#ffba1a;font-weight:700;border:1px solid rgba(255,186,26,0.45);border-radius:8px;padding:6px 14px;">🎖️ Bootcamp</a>
+                </li>
             </ul>
 
             <div class="nav-actions">
@@ -98,6 +101,7 @@ export const headerHTML = `
         </div>
         <div class="mobile-menu__body">
             <div class="mobile-menu__label" data-i18n="mobile.nav">Navegação</div>
+            <a href="/bootcamp-orbit" id="navBootcampMobile" style="color:#ffba1a;font-weight:700;border:1px solid rgba(255,186,26,0.45);border-radius:8px;"><i class="fas fa-medal" style="color:#ffba1a;"></i> Bootcamp Orbit</a>
             <a href="/"><i class="fas fa-home"></i> <span data-i18n="nav.home">Início</span></a>
             <a href="https://demonstracao.orbitgestao.com.br/chat" onclick="closeMobileMenu()"><i class="fas fa-envelope"></i> <span data-i18n="mobile.contact">Fale Conosco</span></a>
 
@@ -143,4 +147,16 @@ export const headerHTML = `
         </div>
     </div>
 
+    <!-- Auto-hide do link Bootcamp após o fim do dia 13/06/2026 (BRT) -->
+    <script>
+    (function(){
+      var ENDS = Date.UTC(2026, 5, 14, 2, 59, 59);
+      if (Date.now() > ENDS) {
+        ['navBootcamp','navBootcampMobile'].forEach(function(id){
+          var el = document.getElementById(id);
+          if (el) el.remove();
+        });
+      }
+    })();
+    </script>
 `;
