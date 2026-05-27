@@ -12,8 +12,7 @@ const EVENT_HOUR_BRT = 9;                   // 09h BRT
 const EVENT_DURATION_MIN = 240;             // 4 horas
 const ONLINE_LINK = "https://www.youtube.com/@orbitgestao/live";
 const PRESENCIAL_LOCAL = "Square SC — Rod. José Carlos Daux, 5500 — Saco Grande, Florianópolis/SC, 88032-005";
-// TODO: trocar pelo link real do grupo de avisos (enquanto for CHANGE_ME, o botão é omitido)
-const WHATSAPP_GROUP = "https://chat.whatsapp.com/CHANGE_ME";
+const WHATSAPP_GROUP = "https://chat.whatsapp.com/JDzmJ9WTutLJPYSnqQTd4y";
 const HAS_WHATSAPP = !WHATSAPP_GROUP.includes("CHANGE_ME");
 const PAGE_URL = "https://orbitgestao.com.br/bootcamp-orbit";
 

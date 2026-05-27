@@ -251,7 +251,7 @@ export const pageHTML = `
 
     <!-- CTAs -->
     <div class="bco-ctas">
-      <a href="https://chat.whatsapp.com/CHANGE_ME" target="_blank" rel="noopener" class="bco-btn bco-btn--wa">
+      <a href="https://chat.whatsapp.com/JDzmJ9WTutLJPYSnqQTd4y" target="_blank" rel="noopener" class="bco-btn bco-btn--wa">
         <i class="fa-brands fa-whatsapp" style="font-size:18px;"></i>
         Entrar no grupo dos recrutas
       </a>
