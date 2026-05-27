@@ -187,10 +187,17 @@ function parseFrontmatter(text) {
 }
 
 function stripJsonBlocks(body) {
-  let out = body.replace(/##\s+Schema\s+markup[\s\S]*$/i, '').trim();
+  // Pega "## Schema markup", "## Schema", "## Markup" — qualquer header no fim
+  // seguido de blocos json. Cobre variacoes do playbook.
+  let out = body.replace(/##\s+Schema(\s+markup)?[\s\S]*$/i, '').trim();
+  // Tambem pega ```json``` orfaos no meio do documento
   out = out.replace(/```json\s*\n[\s\S]*?\n```/g, '').trim();
   return out;
 }
+
+// Autor default e avatar pros artigos sem author especifico no frontmatter
+const DEFAULT_AUTHOR = 'Rodrigo Souza';
+const DEFAULT_AUTHOR_AVATAR = '/images/blog/avatar-rodrigo.jpg';
 
 function humanizeText(body) {
   let out = body.replace(/\s—\s/g, ', ');
@@ -252,13 +259,21 @@ async function upsertArticle(art) {
 
   ensureCoverExists(art);
 
+  // Author: usa o do frontmatter SO SE nao for "Equipe Orbit" (placeholder generico)
+  // Caso contrario, usa Rodrigo Souza + avatar dele
+  const frontmatterAuthor = (meta.author || '').trim();
+  const isGenericAuthor = !frontmatterAuthor || /equipe orbit/i.test(frontmatterAuthor);
+  const finalAuthor = isGenericAuthor ? DEFAULT_AUTHOR : frontmatterAuthor;
+  const finalAvatar = isGenericAuthor ? DEFAULT_AUTHOR_AVATAR : null;
+
   const payload = {
     title: humanizeText(meta.title || art.title),
     slug: meta.slug || art.slug,
     excerpt: humanizeText(meta.meta_description || ''),
     content: contentHtml,
     category: art.category,
-    author: meta.author || 'Equipe Orbit',
+    author: finalAuthor,
+    ...(finalAvatar ? { author_avatar: finalAvatar } : {}),
     published: true,
     published_at: meta.published_at ? `${meta.published_at}T12:00:00.000Z` : new Date().toISOString(),
     updated_at: meta.updated_at ? `${meta.updated_at}T12:00:00.000Z` : new Date().toISOString(),
