@@ -15,6 +15,65 @@ export const pageHTML = `
 
   .bc-page { background: #0A0E13; color: #E6E8EB; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
   .bc-page * { box-sizing: border-box; }
+
+  /* ═══ CURSOR MIRA — global na pagina ═══ */
+  .bc-page,
+  .bc-page a, .bc-page button, .bc-page label {
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='none' stroke='%23ffba1a' stroke-width='1.5'/><circle cx='16' cy='16' r='9' fill='none' stroke='%23ffba1a' stroke-width='1'/><circle cx='16' cy='16' r='1.5' fill='%23ffba1a'/><line x1='16' y1='2' x2='16' y2='8' stroke='%23ffba1a' stroke-width='1.5'/><line x1='16' y1='24' x2='16' y2='30' stroke='%23ffba1a' stroke-width='1.5'/><line x1='2' y1='16' x2='8' y2='16' stroke='%23ffba1a' stroke-width='1.5'/><line x1='24' y1='16' x2='30' y2='16' stroke='%23ffba1a' stroke-width='1.5'/></svg>") 16 16, crosshair;
+  }
+  .bc-page input, .bc-page textarea, .bc-page select { cursor: text; }
+
+  /* ═══ GLITCH effect em textos chave ═══ */
+  .bc-glitch {
+    position: relative;
+    display: inline-block;
+  }
+  .bc-glitch::before, .bc-glitch::after {
+    content: attr(data-text);
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+  }
+  .bc-glitch::before {
+    color: #C73E1D; transform: translate(-2px, 0); mix-blend-mode: screen;
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    animation: bc-glitch-1 4s infinite steps(1);
+  }
+  .bc-glitch::after {
+    color: #3FB950; transform: translate(2px, 0); mix-blend-mode: screen;
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+    animation: bc-glitch-2 4s infinite steps(1);
+  }
+  @keyframes bc-glitch-1 {
+    0%, 100% { transform: translate(0, 0); }
+    8% { transform: translate(-2px, -1px); }
+    9% { transform: translate(0, 0); }
+    96% { transform: translate(0, 0); }
+    97% { transform: translate(-2px, 1px); }
+    98% { transform: translate(2px, -1px); }
+    99% { transform: translate(0, 0); }
+  }
+  @keyframes bc-glitch-2 {
+    0%, 100% { transform: translate(0, 0); }
+    8% { transform: translate(2px, 1px); }
+    9% { transform: translate(0, 0); }
+    96% { transform: translate(0, 0); }
+    97% { transform: translate(2px, -1px); }
+    98% { transform: translate(-2px, 1px); }
+    99% { transform: translate(0, 0); }
+  }
+
+  /* ═══ SCANLINES no hero (overlay monitor CRT militar) ═══ */
+  .bc-scanlines {
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(0deg, rgba(255,186,26,0.04) 0px, rgba(255,186,26,0.04) 1px, transparent 1px, transparent 4px);
+    pointer-events: none; z-index: 2;
+    animation: bc-scan-move 8s linear infinite;
+  }
+  @keyframes bc-scan-move {
+    from { background-position: 0 0; }
+    to { background-position: 0 100px; }
+  }
   .bc-stencil { font-family: 'Black Ops One', 'Big Shoulders Stencil', impact, sans-serif; letter-spacing: 0.02em; text-transform: uppercase; }
   .bc-mono { font-family: 'JetBrains Mono', 'Courier New', monospace; }
 
@@ -227,6 +286,53 @@ export const pageHTML = `
   .bc-btn--ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,0.40); }
   .bc-btn--ghost:hover { border-color: #ffba1a; color: #ffba1a; box-shadow: 6px 6px 0 rgba(255,186,26,0.30); }
   .bc-btn .bc-crosshair { width: 18px; height: 18px; }
+
+  /* ═══ ROSTER (contador inscritos) ═══ */
+  .bc-roster {
+    max-width: 520px; margin: 28px auto 28px;
+    padding: 16px 22px;
+    background: linear-gradient(135deg, rgba(255,186,26,0.10), rgba(199,62,29,0.06));
+    border: 2px solid #ffba1a;
+    text-align: center;
+    box-shadow: 4px 4px 0 #000;
+  }
+  .bc-roster__label {
+    display: block; color: #ffba1a;
+    font-family: 'Black Ops One', impact, sans-serif;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .bc-roster__num {
+    display: block; color: #fff;
+    font-family: 'Black Ops One', impact, sans-serif;
+    font-size: 2rem; line-height: 1; letter-spacing: -0.02em;
+    text-shadow: 2px 2px 0 #000;
+    margin-bottom: 12px;
+  }
+  .bc-roster__num small { font-size: 0.7rem; color: #8B7355; font-weight: 400; letter-spacing: 1px; margin-left: 4px; }
+  .bc-roster__bar { height: 8px; background: rgba(0,0,0,0.5); border: 1px solid #4B5320; overflow: hidden; }
+  .bc-roster__bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ffba1a, #ff8c00);
+    transition: width 1.5s ease-out;
+    box-shadow: 0 0 12px rgba(255,186,26,0.6);
+  }
+
+  /* ═══ HOVER DOSSIE — missões abrindo ═══ */
+  .bc-mission { perspective: 800px; transform-style: preserve-3d; }
+  .bc-mission { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, box-shadow 0.3s; }
+  .bc-mission:hover {
+    transform: translateY(-6px) rotateX(-2deg);
+    border-color: #ffba1a;
+    box-shadow: 0 16px 36px rgba(255,186,26,0.20), inset 0 0 0 1px rgba(255,186,26,0.30);
+  }
+  .bc-mission::after {
+    transition: opacity 0.3s, transform 0.4s;
+  }
+  .bc-mission:hover::after {
+    opacity: 1;
+    transform: rotate(45deg) scale(1.15);
+  }
 
   .bc-hero__chips { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
   .bc-chip {
@@ -538,7 +644,9 @@ export const pageHTML = `
     font-size: 11px; font-weight: 700;
     margin: 0 0 8px; text-transform: uppercase; letter-spacing: 1.5px;
   }
-  .bc-form__label--req::after { content: ' *'; color: #C73E1D; }
+  .bc-form__label::before { content: '> '; color: #6B7339; }
+  .bc-form__label--req::after { content: '_'; color: #C73E1D; animation: bc-blink-caret 1s steps(2) infinite; margin-left: 4px; }
+  @keyframes bc-blink-caret { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
   .bc-form__input {
     width: 100%; padding: 14px 16px;
     background: rgba(10,14,19,0.85);
@@ -629,6 +737,7 @@ export const pageHTML = `
 
 <!-- ═══ HERO ═══ -->
 <section class="bc-hero">
+  <div class="bc-scanlines"></div>
   <!-- Helicoptero SVG GRANDE (topo direito) -->
   <svg style="position:absolute;right:4%;top:14%;width:240px;height:auto;opacity:0.30;pointer-events:none;z-index:1;" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
     <ellipse cx="60" cy="50" rx="35" ry="9"/>
@@ -690,7 +799,7 @@ export const pageHTML = `
     <!-- Badge VOCE FOI CONVOCADO -->
     <div style="display:inline-block;background:#0A0E13;border:3px dashed #ffba1a;color:#ffba1a;font-family:'Black Ops One',impact,sans-serif;font-size:14px;letter-spacing:4px;padding:10px 24px;margin:14px 0 18px;text-transform:uppercase;transform:rotate(-1deg);">★ VOCÊ FOI CONVOCADO ★</div>
 
-    <h1>Prepare sua consultoria para a <span class="accent">guerra</span> do 2º semestre</h1>
+    <h1>Prepare sua consultoria para a <span class="accent bc-glitch" data-text="guerra">guerra</span> do 2º semestre</h1>
     <p class="bc-hero__sub">Uma imersão de 4 horas, 100% mão na massa, para acelerar a adoção do Orbit Gestão e blindar sua operação contra a Copa do Mundo, feriados e eleições.</p>
 
     <div class="bc-countdown" id="bcCountdown">
@@ -709,6 +818,13 @@ export const pageHTML = `
         <i class="fa-solid fa-chevron-down"></i>
         Ver briefing tático
       </a>
+    </div>
+
+    <!-- ROSTER: contador de inscritos ao vivo (puxa do Supabase) -->
+    <div class="bc-roster" id="bcRoster">
+      <span class="bc-roster__label">★ Recrutas convocados ★</span>
+      <span class="bc-roster__num"><span id="bcRosterCount">147</span> <small>/ 200 vagas</small></span>
+      <div class="bc-roster__bar"><div class="bc-roster__bar-fill" id="bcRosterBar" style="width:73%"></div></div>
     </div>
 
     <div class="bc-hero__chips">
@@ -743,6 +859,72 @@ export const pageHTML = `
     <div class="bc-mission"><div class="bc-mission__num">04</div><h3 class="bc-mission__title">Precificação</h3><p class="bc-mission__desc">Modelo que protege margem e justifica preço premium.</p></div>
     <div class="bc-mission"><div class="bc-mission__num">05</div><h3 class="bc-mission__title">Atendimento</h3><p class="bc-mission__desc">Operação que retém cliente e gera receita recorrente.</p></div>
   </div>
+</section>
+
+<!-- ═══ ZONA DE OPERAÇÃO (mapa Brasil + ops anteriores) ═══ -->
+<section style="padding:70px 24px;background:#0A0E13;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background-image:url('/images/bootcamp/camuflagem.webp');background-size:cover;opacity:0.10;pointer-events:none;"></div>
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:center;position:relative;z-index:1;" class="bc-zone-grid">
+    <!-- MAPA BRASIL -->
+    <div style="text-align:center;">
+      <div class="bc-eyebrow"><i class="fa-solid fa-map-location-dot"></i>Zona de Operação</div>
+      <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px;margin:18px auto 12px;display:block;">
+        <!-- Brasil silhueta simplificada -->
+        <path d="M 95,20 L 115,18 L 130,28 L 140,42 L 152,40 L 168,52 L 175,68 L 178,85 L 175,100 L 170,115 L 162,128 L 155,142 L 150,156 L 142,168 L 130,178 L 118,184 L 105,186 L 92,182 L 80,175 L 70,166 L 60,154 L 52,140 L 45,124 L 40,108 L 38,92 L 40,76 L 45,60 L 55,48 L 65,38 L 78,28 Z" fill="rgba(75,83,32,0.40)" stroke="#ffba1a" stroke-width="1.5" stroke-dasharray="3 2"/>
+        <!-- Grid tatico sobre o mapa -->
+        <g stroke="#ffba1a" stroke-width="0.3" opacity="0.4">
+          <line x1="40" y1="50" x2="180" y2="50"/>
+          <line x1="40" y1="100" x2="180" y2="100"/>
+          <line x1="40" y1="150" x2="180" y2="150"/>
+          <line x1="60" y1="20" x2="60" y2="190"/>
+          <line x1="110" y1="20" x2="110" y2="190"/>
+          <line x1="160" y1="20" x2="160" y2="190"/>
+        </g>
+        <!-- Pin em Florianopolis (sul) -->
+        <g transform="translate(120, 160)">
+          <circle r="14" fill="rgba(199,62,29,0.20)" stroke="#C73E1D" stroke-width="1">
+            <animate attributeName="r" values="14;22;14" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="1;0;1" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <circle r="6" fill="#C73E1D"/>
+          <circle r="2" fill="#fff"/>
+        </g>
+        <text x="100" y="208" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#ffba1a" letter-spacing="1">SC · FLORIANÓPOLIS</text>
+      </svg>
+      <div style="display:inline-block;padding:6px 14px;background:rgba(199,62,29,0.15);border:1px solid #C73E1D;color:#C73E1D;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;">● Alvo localizado · LAT -27.5954</div>
+    </div>
+
+    <!-- OPERAÇÕES ANTERIORES -->
+    <div>
+      <div class="bc-eyebrow"><i class="fa-solid fa-clock-rotate-left"></i>Operações Anteriores</div>
+      <h3 style="color:#fff;font-family:'Black Ops One',impact,sans-serif;font-size:1.5rem;margin:18px 0 22px;text-transform:uppercase;letter-spacing:1px;">Histórico de combate</h3>
+      <div style="display:flex;flex-direction:column;gap:10px;font-family:'JetBrains Mono',monospace;font-size:13px;">
+        <div style="display:flex;align-items:center;gap:14px;padding:10px 14px;background:rgba(43,57,40,0.30);border-left:3px solid #3FB950;">
+          <span style="color:#3FB950;font-weight:700;letter-spacing:1.5px;">▶ BC-260315</span>
+          <span style="color:#C9D1D9;flex:1;">15/03 · Florianópolis · 42 recrutas</span>
+          <span style="color:#3FB950;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Vitoriosa</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;padding:10px 14px;background:rgba(43,57,40,0.30);border-left:3px solid #3FB950;">
+          <span style="color:#3FB950;font-weight:700;letter-spacing:1.5px;">▶ BC-260118</span>
+          <span style="color:#C9D1D9;flex:1;">18/01 · Online · 87 recrutas</span>
+          <span style="color:#3FB950;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Vitoriosa</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;padding:10px 14px;background:rgba(43,57,40,0.30);border-left:3px solid #3FB950;">
+          <span style="color:#3FB950;font-weight:700;letter-spacing:1.5px;">▶ BC-251108</span>
+          <span style="color:#C9D1D9;flex:1;">08/11/2025 · Florianópolis · 31 recrutas</span>
+          <span style="color:#3FB950;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Vitoriosa</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;padding:12px 14px;background:rgba(255,186,26,0.10);border:1px solid #ffba1a;margin-top:6px;">
+          <span style="color:#ffba1a;font-weight:700;letter-spacing:1.5px;">▶ BC-260613</span>
+          <span style="color:#fff;flex:1;font-weight:700;">13/06 · Florianópolis + Online · ATUAL</span>
+          <span style="color:#ffba1a;font-weight:700;text-transform:uppercase;letter-spacing:1px;animation:bc-blink 1.5s steps(2) infinite;">▮ Em Curso</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <style>
+    @media (max-width: 800px) { .bc-zone-grid { grid-template-columns: 1fr !important; } }
+  </style>
 </section>
 
 <!-- ═══ HOSTS ═══ -->

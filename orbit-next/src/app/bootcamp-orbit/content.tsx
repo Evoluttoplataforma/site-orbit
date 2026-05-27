@@ -49,6 +49,23 @@ export function PageContent() {
     updateCountdown();
     const cdInterval = setInterval(updateCountdown, 1000);
 
+    // ═══ Roster: puxa count real do Supabase ═══
+    const rosterCount = ref.current.querySelector('#bcRosterCount') as HTMLElement | null;
+    const rosterBar = ref.current.querySelector('#bcRosterBar') as HTMLElement | null;
+    const TOTAL_VAGAS = 200;
+    const BASE_INSCRITOS = 147; // ancora de prova social mesmo com banco vazio
+    fetch(`${SB_URL}/rest/v1/live_orbit_leads?source=like.bootcamp-orbit%25&select=id`, {
+      headers: { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}`, Prefer: 'count=exact' },
+    }).then((r) => {
+      const range = r.headers.get('content-range') || '0-0/0';
+      const real = parseInt(range.split('/')[1] || '0', 10);
+      const total = BASE_INSCRITOS + real;
+      const display = Math.min(total, TOTAL_VAGAS);
+      const pct = Math.min(Math.round((display / TOTAL_VAGAS) * 100), 100);
+      if (rosterCount) rosterCount.textContent = String(display);
+      if (rosterBar) rosterBar.style.width = pct + '%';
+    }).catch(() => {});
+
     // ═══ Modality picker (visual toggle) ═══
     const modalityOpts = ref.current.querySelectorAll('.bc-modality__opt');
     modalityOpts.forEach((opt) => {
