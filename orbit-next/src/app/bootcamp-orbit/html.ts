@@ -127,22 +127,8 @@ export const pageHTML = `
 
   .bc-hero__inner { position: relative; max-width: 1080px; margin: 0 auto; text-align: center; z-index: 2; }
 
-  /* Soldados fardados nas laterais do hero (Igor + Chris corpo inteiro) */
-  .bc-hero__soldier {
-    position: absolute; bottom: 0;
-    height: 92%; width: auto;
-    z-index: 1;
-    filter: drop-shadow(0 0 30px rgba(0,0,0,0.6));
-    pointer-events: none;
-  }
-  .bc-hero__soldier--left { left: 2%; }
-  .bc-hero__soldier--right { right: 2%; }
-  @media (max-width: 1100px) {
-    .bc-hero__soldier { height: 75%; opacity: 0.5; }
-  }
-  @media (max-width: 768px) {
-    .bc-hero__soldier { display: none; }
-  }
+  /* Hero soldiers laterais removidos — soldados fullbody com fundo branco
+     cobriam a camuflagem. Hero agora tem apenas camuflagem + SVG decorativos. */
 
   /* Tarja "OPERAÇÃO CLASSIFICADA" topo */
   .bc-hero__tarja {
@@ -618,8 +604,8 @@ export const pageHTML = `
 
 <!-- ═══ HERO ═══ -->
 <section class="bc-hero">
-  <!-- Helicoptero SVG (topo direito, sutil sobre camuflagem) -->
-  <svg style="position:absolute;right:6%;top:12%;width:160px;height:auto;opacity:0.20;pointer-events:none;z-index:1;" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
+  <!-- Helicoptero SVG GRANDE (topo direito) -->
+  <svg style="position:absolute;right:4%;top:14%;width:240px;height:auto;opacity:0.30;pointer-events:none;z-index:1;" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
     <ellipse cx="60" cy="50" rx="35" ry="9"/>
     <rect x="55" y="58" width="10" height="14"/>
     <rect x="95" y="48" width="20" height="4"/>
@@ -629,8 +615,8 @@ export const pageHTML = `
     <line x1="100" y1="22" x2="100" y2="32" stroke="#ffba1a" stroke-width="2"/>
   </svg>
 
-  <!-- Mira / crosshair pulsante (topo esquerdo) -->
-  <svg style="position:absolute;left:7%;top:15%;width:80px;height:80px;opacity:0.25;pointer-events:none;z-index:1;animation:bc-pulse-mira 3s ease-in-out infinite;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#ffba1a" stroke-width="2">
+  <!-- Mira / crosshair pulsante GRANDE (topo esquerdo) -->
+  <svg style="position:absolute;left:4%;top:18%;width:140px;height:140px;opacity:0.35;pointer-events:none;z-index:1;animation:bc-pulse-mira 3s ease-in-out infinite;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#ffba1a" stroke-width="2">
     <circle cx="50" cy="50" r="45"/>
     <circle cx="50" cy="50" r="30"/>
     <circle cx="50" cy="50" r="3" fill="#ffba1a"/>
@@ -640,13 +626,8 @@ export const pageHTML = `
     <line x1="80" y1="50" x2="98" y2="50"/>
   </svg>
 
-  <!-- Estrela militar grande decorativa (canto superior direito) -->
-  <svg style="position:absolute;right:18%;top:32%;width:60px;height:60px;opacity:0.18;pointer-events:none;z-index:1;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
-    <polygon points="50,5 61,38 96,38 67,58 78,92 50,72 22,92 33,58 4,38 39,38"/>
-  </svg>
-
-  <!-- Tanque SVG (canto inferior central, sob a camuflagem) -->
-  <svg style="position:absolute;left:50%;bottom:30px;transform:translateX(-50%);width:240px;height:auto;opacity:0.10;pointer-events:none;z-index:1;" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
+  <!-- Tanque SVG GRANDE (canto inferior esquerdo) -->
+  <svg style="position:absolute;left:3%;bottom:50px;width:280px;height:auto;opacity:0.28;pointer-events:none;z-index:1;" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
     <rect x="10" y="50" width="100" height="18" rx="2"/>
     <rect x="20" y="38" width="60" height="16" rx="2"/>
     <rect x="78" y="42" width="40" height="6"/>
@@ -658,10 +639,36 @@ export const pageHTML = `
     <rect x="38" y="32" width="6" height="8" rx="1"/>
   </svg>
 
-  <!-- Igor corpo inteiro fardado (lateral esquerda) -->
-  <img src="/images/bootcamp/igor-fullbody.webp" alt="Igor Furniel fardado" class="bc-hero__soldier bc-hero__soldier--left" loading="eager">
-  <!-- Chris corpo inteiro fardado (lateral direita) -->
-  <img src="/images/bootcamp/chris-fullbody.webp" alt="Christian Hart fardado" class="bc-hero__soldier bc-hero__soldier--right" loading="eager">
+  <!-- Soldado SVG (canto inferior direito) -->
+  <svg style="position:absolute;right:5%;bottom:50px;width:140px;height:auto;opacity:0.28;pointer-events:none;z-index:1;" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
+    <circle cx="30" cy="12" r="8"/>
+    <rect x="22" y="20" width="16" height="4"/>
+    <path d="M22 26 L18 32 L18 60 L22 60 L24 86 L20 116 L26 116 L28 90 L32 90 L34 116 L40 116 L36 86 L38 60 L42 60 L42 32 L38 26 Z"/>
+    <rect x="10" y="36" width="12" height="6"/>
+    <rect x="38" y="36" width="12" height="6"/>
+    <line x1="48" y1="36" x2="58" y2="32" stroke="#ffba1a" stroke-width="3"/>
+  </svg>
+
+  <!-- Estrelas militares espalhadas -->
+  <svg style="position:absolute;right:18%;top:38%;width:60px;height:60px;opacity:0.22;pointer-events:none;z-index:1;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
+    <polygon points="50,5 61,38 96,38 67,58 78,92 50,72 22,92 33,58 4,38 39,38"/>
+  </svg>
+  <svg style="position:absolute;left:20%;top:42%;width:42px;height:42px;opacity:0.18;pointer-events:none;z-index:1;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
+    <polygon points="50,5 61,38 96,38 67,58 78,92 50,72 22,92 33,58 4,38 39,38"/>
+  </svg>
+  <svg style="position:absolute;right:30%;bottom:90px;width:36px;height:36px;opacity:0.16;pointer-events:none;z-index:1;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
+    <polygon points="50,5 61,38 96,38 67,58 78,92 50,72 22,92 33,58 4,38 39,38"/>
+  </svg>
+
+  <!-- Granada SVG (decoracao extra topo central) -->
+  <svg style="position:absolute;left:50%;top:30%;transform:translateX(-50%);width:34px;height:auto;opacity:0;pointer-events:none;z-index:1;" viewBox="0 0 40 60" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
+    <ellipse cx="20" cy="36" rx="14" ry="18"/>
+    <rect x="16" y="10" width="8" height="12"/>
+    <rect x="12" y="6" width="16" height="4"/>
+  </svg>
+
+<!-- Igor e Chris fullbody REMOVIDOS do hero (fundo branco cobria a camuflagem).
+       Eles continuam na secao Alto Comando com foto meio corpo fardado. -->
 
   <div class="bc-hero__inner">
 
