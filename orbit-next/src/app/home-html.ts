@@ -51,6 +51,50 @@ export const pageHTML = `
 
     <hr class="glow-divider">
 
+    <!-- ═══ BOOTCAMP ORBIT — banner tema militar (auto-some após 13/06/2026) ═══ -->
+    <section id="bootcampHomeBanner" style="display:none;position:relative;padding:54px 24px;background:#0A0E13;border-top:3px solid #C73E1D;border-bottom:3px solid #C73E1D;overflow:hidden;">
+      <!-- camuflagem decorativa -->
+      <div aria-hidden="true" style="position:absolute;inset:0;opacity:0.18;pointer-events:none;background:
+        radial-gradient(circle at 12% 30%, #3D4127 0 90px, transparent 91px),
+        radial-gradient(circle at 78% 65%, #4B5320 0 130px, transparent 131px),
+        radial-gradient(circle at 45% 85%, #6B7339 0 70px, transparent 71px),
+        radial-gradient(circle at 90% 15%, #3D4127 0 60px, transparent 61px);"></div>
+      <!-- listras de alerta no topo -->
+      <div aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:8px;background:repeating-linear-gradient(45deg,#F5C518 0 18px,#0A0E13 18px 36px);"></div>
+
+      <div style="position:relative;max-width:1040px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px;">
+        <div style="flex:1 1 460px;min-width:280px;">
+          <span style="display:inline-block;background:#C73E1D;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:12px;letter-spacing:3px;padding:6px 14px;border-radius:4px;text-transform:uppercase;">🚨 Convocação aberta · Exclusivo canais Orbit</span>
+          <h2 style="color:#fff;font-size:clamp(26px,4vw,42px);font-weight:800;line-height:1.08;margin:18px 0 10px;text-transform:uppercase;letter-spacing:1px;">Bootcamp Orbit — <span style="color:#ffba1a;">Imersão de Guerra</span></h2>
+          <p style="color:#C9D1D9;font-size:16px;line-height:1.6;margin:0 0 8px;max-width:560px;">4 horas, 100% mão na massa, pra blindar sua operação no 2º semestre: atração, conversão, produtização, precificação e atendimento. Florianópolis + online ao vivo.</p>
+          <p style="color:#8B7355;font-family:monospace;font-size:13px;letter-spacing:2px;margin:0;">▶ 13 JUN 2026 · 09H BRT · <span id="bootcampHomeDays" style="color:#ffba1a;font-weight:700;">--</span> DIAS RESTANTES</p>
+        </div>
+        <div style="flex:0 0 auto;">
+          <a href="/bootcamp-orbit" style="display:inline-block;background:#ffba1a;color:#0A0E13;font-weight:800;font-size:16px;letter-spacing:1px;padding:18px 38px;border-radius:6px;text-decoration:none;text-transform:uppercase;box-shadow:0 6px 24px rgba(255,186,26,0.3);">Quero me alistar →</a>
+        </div>
+      </div>
+
+      <script>
+      (function(){
+        var el = document.getElementById('bootcampHomeBanner');
+        if(!el) return;
+        // Some automaticamente após o fim do dia 13/06/2026 (BRT) — 14/06 02:59:59 UTC
+        var ENDS = Date.UTC(2026, 5, 14, 2, 59, 59);
+        var EVENT = Date.UTC(2026, 5, 13, 12, 0, 0); // 09h BRT
+        var now = Date.now();
+        if (now > ENDS) { el.remove(); return; }
+        el.style.display = 'block';
+        var daysEl = document.getElementById('bootcampHomeDays');
+        if (daysEl) {
+          var d = Math.max(0, Math.ceil((EVENT - now) / 86400000));
+          daysEl.textContent = d;
+        }
+      })();
+      </script>
+    </section>
+
+    <hr class="glow-divider">
+
     <!-- ═══ 12 AGENTES ═══ -->
     <section class="one-platform" id="plataforma">
         <div class="container">

@@ -72,6 +72,18 @@ export function PageContent() {
     document.documentElement.style.overflowX = 'clip';
     document.body.style.overflowX = 'clip';
 
+    // ═══ Topbar fixa: mede altura e dimensiona o spacer (evita cobrir o hero) ═══
+    const topbar = root.querySelector('.bc-topbar') as HTMLElement | null;
+    const spacer = root.querySelector('.bc-topbar-spacer') as HTMLElement | null;
+    function syncTopbarSpacer() {
+      if (topbar && spacer) spacer.style.height = topbar.offsetHeight + 'px';
+    }
+    syncTopbarSpacer();
+    window.addEventListener('resize', syncTopbarSpacer);
+    // Re-mede após fontes/layout assentarem
+    const topbarT1 = window.setTimeout(syncTopbarSpacer, 300);
+    const topbarT2 = window.setTimeout(syncTopbarSpacer, 1200);
+
     // ═══ Countdown ═══
     const daysEl = root.querySelector('#bcDays') as HTMLElement | null;
     const hoursEl = root.querySelector('#bcHours') as HTMLElement | null;
@@ -312,51 +324,66 @@ export function PageContent() {
 
     async function submitForm() {
       submitted = true;
+      const modo = answers.modalidade === 'presencial' ? 'presencial' : 'online';
+
+      // Só colunas que existem em live_orbit_leads (whitelist) — spread do __wlTracking
+      // inteiro estourava 400 (PGRST204: coluna inexistente, ex. originPage/user_agent).
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const tracking = (typeof window !== 'undefined' && (window as unknown as { __wlTracking?: Record<string, unknown> }).__wlTracking) || {};
+      const tk = (typeof window !== 'undefined' && (window as unknown as { __wlTracking?: Record<string, unknown> }).__wlTracking) || {};
+      const pick = (k: string) => (tk[k] != null && tk[k] !== '' ? tk[k] : null);
       const payload: Record<string, unknown> = {
         nome: answers.nome,
         email: answers.email,
         telefone: answers.telefone,
         empresa: answers.empresa,
-        source: `bootcamp-orbit-${answers.modalidade || 'online'}`,
+        source: `bootcamp-orbit-${modo}`,
         chosen_date: '2026-06-13',
         landing_page: window.location.href,
         referrer: document.referrer || null,
-        ...tracking,
+        utm_source: pick('utm_source'),
+        utm_medium: pick('utm_medium'),
+        utm_campaign: pick('utm_campaign'),
+        utm_content: pick('utm_content'),
+        utm_term: pick('utm_term'),
+        gclid: pick('gclid'),
+        fbclid: pick('fbclid'),
+        session_id: pick('session_id'),
       };
+
+      // Salva o lead — best-effort. Falha aqui NÃO bloqueia o fluxo: a inscrição
+      // tem que seguir pra /obrigado de qualquer jeito.
       try {
-        const resp = await fetch(`${SB_URL}/rest/v1/live_orbit_leads`, {
+        await fetch(`${SB_URL}/rest/v1/live_orbit_leads`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}`, Prefer: 'return=minimal' },
           body: JSON.stringify(payload),
         });
-        if (!resp.ok && resp.status !== 201 && resp.status !== 204) throw new Error(`HTTP ${resp.status}`);
+      } catch { /* segue mesmo se o save falhar */ }
 
-        // GTM
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const w = window as any;
-        w.dataLayer = w.dataLayer || [];
-        w.dataLayer.push({
-          event: 'bootcamp_inscricao',
-          modalidade: answers.modalidade,
-          lead_email: answers.email,
-          lead_name: answers.nome,
-          empresa: answers.empresa,
-        });
+      // Email de confirmação (tema guerra) — fire-and-forget
+      fetch(`${SB_URL}/functions/v1/send-bootcamp-email`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}` },
+        body: JSON.stringify({ type: 'confirmacao', nome: answers.nome, email: answers.email, modo }),
+      }).catch(() => {});
 
-        // Beep de confirmação + redirect pra página de obrigado militar
-        beep(1200, 0.15, 0.10);
-        setTimeout(() => beep(1500, 0.20, 0.10), 180);
-        const params = new URLSearchParams({
-          modo: answers.modalidade || 'online',
-          nome: (answers.nome || '').split(' ')[0] || '',
-        });
-        setTimeout(() => { window.location.href = `/bootcamp-orbit/obrigado?${params.toString()}`; }, 600);
-      } catch {
-        submitted = false;
-        appendMsg('⚠️ Falha na transmissão. Tente de novo em alguns segundos.');
-      }
+      // GTM
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const w = window as any;
+      w.dataLayer = w.dataLayer || [];
+      w.dataLayer.push({
+        event: 'bootcamp_inscricao',
+        modalidade: answers.modalidade,
+        lead_email: answers.email,
+        lead_name: answers.nome,
+        empresa: answers.empresa,
+      });
+
+      // Beep de confirmação + redirect pra página de obrigado militar (sempre)
+      beep(1200, 0.15, 0.10);
+      setTimeout(() => beep(1500, 0.20, 0.10), 180);
+      const params = new URLSearchParams({ modo, nome: (answers.nome || '').split(' ')[0] || '' });
+      setTimeout(() => { window.location.href = `/bootcamp-orbit/obrigado?${params.toString()}`; }, 600);
     }
 
     // Inicia a conversa
@@ -366,6 +393,9 @@ export function PageContent() {
       clearInterval(cdInterval);
       window.clearTimeout(firstToastTo);
       window.clearInterval(toastInterval);
+      window.removeEventListener('resize', syncTopbarSpacer);
+      window.clearTimeout(topbarT1);
+      window.clearTimeout(topbarT2);
       document.body.removeAttribute('data-bc');
       document.documentElement.style.overflowX = prevHtmlOX;
       document.body.style.overflowX = prevBodyOX;

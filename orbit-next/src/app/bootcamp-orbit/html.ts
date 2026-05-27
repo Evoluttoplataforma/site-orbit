@@ -87,9 +87,11 @@ export const pageHTML = `
   .bc-warning-stripes { height: 14px; background: repeating-linear-gradient(45deg, #F5C518 0 24px, #0A0E13 24px 48px); position: relative; overflow: hidden; }
   .bc-warning-stripes::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent 0 24px, rgba(0,0,0,0.15) 24px 48px); }
 
-  /* ═══ TOP BAR sticky — convocação piscando ═══ */
+  /* ═══ TOP BAR fixa — alert + ticker grudados no topo ═══ */
+  /* position: fixed é imune a overflow:clip/hidden em ancestrais (que quebram sticky).
+     O .bc-topbar-spacer (altura medida via JS) compensa a altura pra não cobrir conteúdo. */
+  .bc-topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
   .bc-alert-bar {
-    position: sticky; top: 0; z-index: 100;
     background: #C73E1D;
     color: #fff;
     padding: 10px 20px;
@@ -107,17 +109,13 @@ export const pageHTML = `
   .bc-alert-bar__siren { animation: bc-blink 1s steps(2) infinite; }
   @keyframes bc-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0.2; } }
 
-  /* ═══ NEWS TICKER rolando — sticky logo abaixo do alert-bar ═══ */
+  /* ═══ NEWS TICKER rolando — logo abaixo do alert-bar, dentro da topbar fixa ═══ */
   .bc-ticker {
     background: #000;
     border-top: 1px solid #4B5320; border-bottom: 1px solid #4B5320;
     overflow: hidden;
     padding: 10px 0;
-    position: sticky; top: 40px; z-index: 99;
-  }
-  /* Mobile: alert-bar é mais alta (texto quebra), ajusta top do ticker */
-  @media (max-width: 600px) {
-    .bc-ticker { top: 60px; }
+    position: relative; z-index: 1;
   }
   .bc-ticker::before, .bc-ticker::after {
     content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2;
@@ -960,7 +958,9 @@ export const pageHTML = `
   .bc-form__foot { text-align: center; color: #8B7355; font-family: 'JetBrains Mono', monospace; font-size: 11px; margin: 20px 0 0; letter-spacing: 1px; }
 </style>
 
-<!-- ═══ ALERT BAR sticky ═══ -->
+<!-- ═══ TOP BAR FIXA (alert + ticker) ═══ -->
+<div class="bc-topbar">
+<!-- ═══ ALERT BAR ═══ -->
 <div class="bc-alert-bar">
   <span class="bc-alert-bar__siren">🚨</span>
   <span>ALISTAMENTO ABERTO · <span id="bcAlertDays">--</span> DIAS RESTANTES · VAGAS LIMITADAS</span>
@@ -987,6 +987,9 @@ export const pageHTML = `
     <span>▶ <span class="bc-tick-hi">PRÉ-REQUISITO</span> AGENTE DE ATIVAÇÃO CONCLUÍDO</span>
   </div>
 </div>
+</div>
+<!-- Spacer: compensa a altura da topbar fixa (medido via JS no content.tsx) -->
+<div class="bc-topbar-spacer" aria-hidden="true"></div>
 
 <!-- ═══ HERO ═══ -->
 <section class="bc-hero">

@@ -10,11 +10,18 @@ export function Header() {
   const t = useTranslations('nav');
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  // Link do Bootcamp some automaticamente após o fim do dia 13/06/2026 (BRT)
+  const [showBootcamp, setShowBootcamp] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    // 14/06/2026 02:59:59 UTC = fim do dia 13/06 no horário de Brasília
+    setShowBootcamp(Date.now() < Date.UTC(2026, 5, 14, 2, 59, 59));
   }, []);
 
   useEffect(() => {
@@ -33,6 +40,9 @@ export function Header() {
           {/* Desktop Nav */}
           <ul className="hidden lg:flex gap-1">
             <li><Link href="/" className="px-4 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/[0.08] rounded-lg transition-all">{t('home')}</Link></li>
+            {showBootcamp && (
+              <li><Link href="/bootcamp-orbit" className="px-4 py-2 text-sm font-bold text-[#ffba1a] hover:text-black hover:bg-[#ffba1a] rounded-lg transition-all border border-[#ffba1a]/40 flex items-center gap-1.5">🎖️ Bootcamp</Link></li>
+            )}
             <NavDropdown label={t('platform')}>
               <DropdownLink href="/agentes" icon="🤖" title={t('agents')} sub={t('agentsSub')} />
               <DropdownLink href="/processos" icon="🔄" title={t('processes')} sub={t('processesSub')} />
@@ -91,6 +101,11 @@ export function Header() {
             </div>
             <div className="flex-1 p-4 space-y-1">
               <MobileLink href="/" icon="🏠" onClick={() => setMobileOpen(false)}>{t('home')}</MobileLink>
+              {showBootcamp && (
+                <Link href="/bootcamp-orbit" onClick={() => setMobileOpen(false)} className="flex items-center gap-3 px-3 py-3 text-[#ffba1a] text-[0.9rem] font-bold rounded-lg border border-[#ffba1a]/40 hover:bg-[#ffba1a]/10 transition-all">
+                  <span className="text-lg leading-none">🎖️</span>Bootcamp Orbit
+                </Link>
+              )}
               <MobileLink href="https://demonstracao.orbitgestao.com.br/chat" icon="🏷️" onClick={() => setMobileOpen(false)}>{t('plans')}</MobileLink>
               <MobileLink href="/agentes" icon="🤖" onClick={() => setMobileOpen(false)}>{t('agents')}</MobileLink>
               <MobileLink href="/processos" icon="🔄" onClick={() => setMobileOpen(false)}>{t('processes')}</MobileLink>
