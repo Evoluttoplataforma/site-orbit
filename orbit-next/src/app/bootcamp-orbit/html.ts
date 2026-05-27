@@ -93,28 +93,34 @@ export const pageHTML = `
   }
   .bc-btn--pulse { animation: bc-pulse-cta 2.5s ease-out infinite; }
 
+  /* Mira decorativa pulsando no hero */
+  @keyframes bc-pulse-mira {
+    0%, 100% { opacity: 0.20; transform: scale(1); }
+    50% { opacity: 0.40; transform: scale(1.08); }
+  }
+
   /* ═══ HERO — full impact ═══ */
   .bc-hero { position: relative; padding: 110px 24px 90px; background: #0A0E13; overflow: hidden; min-height: 820px; display: flex; align-items: center; justify-content: center; }
 
-  /* Background: foto bg-hero.webp (moldura camuflagem amarela) */
+  /* Background: camuflagem amarelo/preto esticada cover (fundo para header.png) */
   .bc-hero::before {
     content: '';
     position: absolute; inset: 0;
-    background-image: url('/images/bootcamp/bg-hero.webp');
+    background-image: url('/images/bootcamp/camuflagem.webp');
     background-size: cover;
     background-position: center;
-    opacity: 0.45;
+    background-repeat: no-repeat;
     pointer-events: none;
   }
 
-  /* Overlay escuro vinheta + grid tatico */
+  /* Overlay escuro FORTE + vinheta + grid tatico — pra valorizar as letras */
   .bc-hero::after {
     content: '';
     position: absolute; inset: 0;
     background:
-      radial-gradient(ellipse at center, transparent 0%, rgba(10,14,19,0.85) 100%),
-      linear-gradient(rgba(245,197,24,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(245,197,24,0.03) 1px, transparent 1px);
+      radial-gradient(ellipse at center, rgba(10,14,19,0.55) 0%, rgba(10,14,19,0.92) 100%),
+      linear-gradient(rgba(245,197,24,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245,197,24,0.04) 1px, transparent 1px);
     background-size: 100% 100%, 60px 60px, 60px 60px;
     pointer-events: none;
   }
@@ -612,6 +618,46 @@ export const pageHTML = `
 
 <!-- ═══ HERO ═══ -->
 <section class="bc-hero">
+  <!-- Helicoptero SVG (topo direito, sutil sobre camuflagem) -->
+  <svg style="position:absolute;right:6%;top:12%;width:160px;height:auto;opacity:0.20;pointer-events:none;z-index:1;" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
+    <ellipse cx="60" cy="50" rx="35" ry="9"/>
+    <rect x="55" y="58" width="10" height="14"/>
+    <rect x="95" y="48" width="20" height="4"/>
+    <rect x="20" y="22" width="80" height="3"/>
+    <rect x="58" y="20" width="4" height="30"/>
+    <line x1="20" y1="22" x2="20" y2="32" stroke="#ffba1a" stroke-width="2"/>
+    <line x1="100" y1="22" x2="100" y2="32" stroke="#ffba1a" stroke-width="2"/>
+  </svg>
+
+  <!-- Mira / crosshair pulsante (topo esquerdo) -->
+  <svg style="position:absolute;left:7%;top:15%;width:80px;height:80px;opacity:0.25;pointer-events:none;z-index:1;animation:bc-pulse-mira 3s ease-in-out infinite;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#ffba1a" stroke-width="2">
+    <circle cx="50" cy="50" r="45"/>
+    <circle cx="50" cy="50" r="30"/>
+    <circle cx="50" cy="50" r="3" fill="#ffba1a"/>
+    <line x1="50" y1="2" x2="50" y2="20"/>
+    <line x1="50" y1="80" x2="50" y2="98"/>
+    <line x1="2" y1="50" x2="20" y2="50"/>
+    <line x1="80" y1="50" x2="98" y2="50"/>
+  </svg>
+
+  <!-- Estrela militar grande decorativa (canto superior direito) -->
+  <svg style="position:absolute;right:18%;top:32%;width:60px;height:60px;opacity:0.18;pointer-events:none;z-index:1;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
+    <polygon points="50,5 61,38 96,38 67,58 78,92 50,72 22,92 33,58 4,38 39,38"/>
+  </svg>
+
+  <!-- Tanque SVG (canto inferior central, sob a camuflagem) -->
+  <svg style="position:absolute;left:50%;bottom:30px;transform:translateX(-50%);width:240px;height:auto;opacity:0.10;pointer-events:none;z-index:1;" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
+    <rect x="10" y="50" width="100" height="18" rx="2"/>
+    <rect x="20" y="38" width="60" height="16" rx="2"/>
+    <rect x="78" y="42" width="40" height="6"/>
+    <circle cx="20" cy="70" r="6"/>
+    <circle cx="40" cy="70" r="6"/>
+    <circle cx="60" cy="70" r="6"/>
+    <circle cx="80" cy="70" r="6"/>
+    <circle cx="100" cy="70" r="6"/>
+    <rect x="38" y="32" width="6" height="8" rx="1"/>
+  </svg>
+
   <!-- Igor corpo inteiro fardado (lateral esquerda) -->
   <img src="/images/bootcamp/igor-fullbody.webp" alt="Igor Furniel fardado" class="bc-hero__soldier bc-hero__soldier--left" loading="eager">
   <!-- Chris corpo inteiro fardado (lateral direita) -->
