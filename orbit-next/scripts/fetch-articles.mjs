@@ -232,6 +232,7 @@ function generateSitemap(articles) {
     ['/sobre', '0.8', 'monthly'],
     ['/faq', '0.7', 'monthly'],
     ['/blog', '0.9', 'weekly'],
+    ['/glossario', '0.7', 'monthly'],
     ['/historias', '0.7', 'weekly'],
     ['/historias/enviar', '0.5', 'monthly'],
     ['/seguranca-ia', '0.6', 'monthly'],
@@ -257,6 +258,22 @@ function generateSitemap(articles) {
     <lastmod>${pubDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>`);
+  }
+
+  // 13 hub pages por cluster (uma por dor do playbook)
+  const clusterSlugs = [
+    'processos-manuais', 'processos-bpmn', 'estrategia-execucao', 'comunicacao-entre-setores',
+    'sistemas-integracao', 'rh-talentos', 'indicadores', 'vendas-crm',
+    'gestao-pessoas-capacitacao', 'consultoria-accountability', 'documentacao',
+    'operacao-escalavel', 'financeiro-integrado',
+  ];
+  for (const cs of clusterSlugs) {
+    urls.push(`  <url>
+    <loc>https://orbitgestao.com.br/blog/cluster/${cs}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>`);
   }
 

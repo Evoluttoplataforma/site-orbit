@@ -136,20 +136,47 @@ function extractFaqs(html: string): { q: string; a: string }[] {
   return pairs;
 }
 
-// Seleciona 3 artigos relacionados: mesma categoria primeiro, depois mais recentes
+// Seleciona artigos relacionados via SCORING de similaridade (não só "mais recentes").
+// Score = palavras significativas em comum no slug/titulo + boost de mesma categoria.
+// Stop-words PT removidas pra evitar match falso em "de/da/do/para/empresa/como".
+const STOPWORDS_PT = new Set([
+  'a','o','e','de','da','do','das','dos','em','na','no','nas','nos','para','por','com','sem','sob','sobre',
+  'que','qual','quais','quem','quando','como','onde','porque','pois','mas','ou','se','sim','nao','não',
+  'um','uma','uns','umas','os','as','seu','sua','seus','suas','sao','são','foi','tem','ja','já','ele','ela',
+  'isso','este','esta','isto','esse','essa','aquele','aquela','aquilo','tudo','nada','muito','pouco',
+  'empresa','empresas','negocio','negocios','negócio','negócios',
+]);
+
+function tokenize(s: string): Set<string> {
+  return new Set(
+    s.toLowerCase()
+      .replace(/[^a-zà-ú0-9\s-]/gi, ' ')
+      .replace(/-/g, ' ')
+      .split(/\s+/)
+      .filter((w) => w.length >= 3 && !STOPWORDS_PT.has(w))
+  );
+}
+
+function similarityScore(a: Article, b: Article): number {
+  const tA = tokenize((a.slug || '') + ' ' + (a.title || ''));
+  const tB = tokenize((b.slug || '') + ' ' + (b.title || ''));
+  let overlap = 0;
+  for (const t of tA) if (tB.has(t)) overlap++;
+  const sameCategory = a.category && a.category === b.category ? 2 : 0;
+  return overlap * 3 + sameCategory;
+}
+
 function getRelatedArticles(current: Article, count = 3): Article[] {
   const all = articles as Article[];
-  const others = all.filter((a) => a.slug !== current.slug);
-  const sameCategory = others.filter((a) => a.category && a.category === current.category);
-  const sortByDate = (arr: Article[]) =>
-    [...arr].sort((a, b) => new Date(b.published_at || '').getTime() - new Date(a.published_at || '').getTime());
-
-  const picked: Article[] = sortByDate(sameCategory).slice(0, count);
-  if (picked.length < count) {
-    const remaining = sortByDate(others.filter((a) => !picked.includes(a)));
-    picked.push(...remaining.slice(0, count - picked.length));
-  }
-  return picked;
+  const scored = all
+    .filter((a) => a.slug !== current.slug)
+    .map((a) => ({ art: a, score: similarityScore(current, a) }))
+    // Desempate por data desc pra preferir recentes em caso de score igual
+    .sort((x, y) => {
+      if (y.score !== x.score) return y.score - x.score;
+      return new Date(y.art.published_at || '').getTime() - new Date(x.art.published_at || '').getTime();
+    });
+  return scored.slice(0, count).map((s) => s.art);
 }
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
