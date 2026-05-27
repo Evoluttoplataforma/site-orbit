@@ -818,9 +818,46 @@ export const pageHTML = `
     height: 100%; background: linear-gradient(90deg, #ffba1a, #ff8c00);
     transition: width 0.5s ease;
   }
+  /* ═══ TRIGGER + OVERLAY (chat vira modal/takeover acionado por botão) ═══ */
+  .bc-chat-trigger {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #ffba1a; color: #0A0E13;
+    font-family: 'Black Ops One', impact, sans-serif;
+    font-size: 15px; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 18px 34px; border: none; border-radius: 9px; cursor: pointer;
+    box-shadow: 0 8px 26px rgba(255,186,26,0.32);
+    animation: bc-pulse-bg 2.4s ease-in-out infinite;
+  }
+  .bc-chat-trigger .live-dot { width: 9px; height: 9px; background: #C73E1D; border-radius: 50%; box-shadow: 0 0 8px #C73E1D; }
+  .bc-chat-trigger:hover { background: #fff; }
+
+  .bc-chat-overlay { display: none; position: fixed; inset: 0; z-index: 1000; align-items: center; justify-content: center; padding: 28px; }
+  .bc-chat-overlay.open { display: flex; }
+  .bc-chat-overlay__backdrop { position: absolute; inset: 0; background: rgba(3,5,8,0.9); backdrop-filter: blur(5px); }
+  .bc-chat-overlay .bc-chat {
+    position: relative; z-index: 1; margin: 0;
+    width: 100%; max-width: 620px;
+    height: min(680px, calc(100vh - 56px)); min-height: 0;
+    box-shadow: 0 30px 90px rgba(0,0,0,0.7);
+  }
+  .bc-chat-overlay .bc-chat__body { flex: 1; overflow-y: auto; }
+  .bc-chat__close {
+    position: absolute; top: 10px; right: 10px; z-index: 6;
+    width: 34px; height: 34px; border-radius: 50%;
+    background: rgba(0,0,0,0.55); border: 1px solid #4B5320; color: #ffba1a;
+    font-size: 15px; line-height: 1; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .bc-chat__close:hover { background: #C73E1D; color: #fff; border-color: #C73E1D; }
+
   /* Chat mobile — trava largura, impede overflow do input row.
      Breakpoint 768px (cobre a faixa 600–768 onde o chat de 640px estourava). */
   @media (max-width: 768px) {
+    /* Mobile: overlay vira tela cheia */
+    .bc-chat-overlay { padding: 0; }
+    .bc-chat-overlay .bc-chat { max-width: 100%; height: 100dvh; max-height: 100dvh; border-left: none; border-right: none; }
+    .bc-chat-trigger { width: 100%; justify-content: center; font-size: 13px; padding: 16px 16px; letter-spacing: 1px; }
     .bc-form-sec { padding: 50px 12px; box-sizing: border-box; max-width: 100vw; overflow-x: clip; }
     .bc-form-sec__head { padding-left: 4px; padding-right: 4px; }
     .bc-chat {
@@ -1304,21 +1341,32 @@ export const pageHTML = `
     <h2 class="bc-h2">Confirme seu <span class="accent">alistamento</span></h2>
     <p class="bc-lead">Vagas limitadas. Confirme abaixo seus dados e a modalidade de participação.</p>
   </div>
-  <!-- CHAT conversacional: Igor entrevista o recruta -->
-  <div class="bc-chat" id="bcChat">
-    <div class="bc-chat__head">
-      <span class="live-dot"></span>
-      ★ Entrevista Tática · General Igor Furniel ★
-    </div>
-    <div class="bc-chat__progress"><div class="bc-chat__progress-bar" id="bcChatBar" style="width:0%"></div></div>
-    <div class="bc-chat__body" id="bcChatBody"></div>
-    <div class="bc-chat__input-area" id="bcChatInputArea" style="display:none;">
-      <input class="bc-chat__input" id="bcChatInput" type="text" placeholder="Digite e pressione Enter..." autocomplete="off">
-      <button class="bc-chat__send" id="bcChatSend">Enviar</button>
-    </div>
-    <div class="bc-chat__choices" id="bcChatChoices" style="display:none;"></div>
+  <!-- Trigger: abre a entrevista em overlay (tela cheia no mobile, modal no desktop) -->
+  <div style="text-align:center;margin-top:20px;">
+    <button type="button" class="bc-chat-trigger" id="bcChatTrigger">
+      <span class="live-dot"></span> Iniciar alistamento · Entrevista com o General Igor →
+    </button>
+    <p class="bc-form__foot">[ EXCLUSIVO PARA CANAIS E CONSULTORIAS CLIENTES ATIVAS · ORBIT GESTÃO ]</p>
   </div>
-  <p class="bc-form__foot">[ EXCLUSIVO PARA CANAIS E CONSULTORIAS CLIENTES ATIVAS · ORBIT GESTÃO ]</p>
+
+  <!-- OVERLAY do chat conversacional -->
+  <div class="bc-chat-overlay" id="bcChatOverlay" aria-hidden="true">
+    <div class="bc-chat-overlay__backdrop" id="bcChatBackdrop"></div>
+    <div class="bc-chat" id="bcChat">
+      <button type="button" class="bc-chat__close" id="bcChatClose" aria-label="Fechar entrevista">✕</button>
+      <div class="bc-chat__head">
+        <span class="live-dot"></span>
+        ★ Entrevista Tática · General Igor Furniel ★
+      </div>
+      <div class="bc-chat__progress"><div class="bc-chat__progress-bar" id="bcChatBar" style="width:0%"></div></div>
+      <div class="bc-chat__body" id="bcChatBody"></div>
+      <div class="bc-chat__input-area" id="bcChatInputArea" style="display:none;">
+        <input class="bc-chat__input" id="bcChatInput" type="text" placeholder="Digite e pressione Enter..." autocomplete="off">
+        <button class="bc-chat__send" id="bcChatSend">Enviar</button>
+      </div>
+      <div class="bc-chat__choices" id="bcChatChoices" style="display:none;"></div>
+    </div>
+  </div>
   <div class="bc-form" id="bcSuccess" style="display:none;max-width:640px;margin:0 auto;border-color:#3FB950;">
     <div class="bc-form__inner" style="text-align:center;padding:40px 30px;">
       <img src="/images/bootcamp/missao-aprovada.webp" alt="Missão Aprovada" style="max-width:340px;width:80%;height:auto;margin:0 auto 24px;display:block;filter:drop-shadow(4px 4px 0 rgba(0,0,0,0.4));transform:rotate(-3deg);" loading="lazy">

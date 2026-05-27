@@ -200,14 +200,10 @@ export function PageContent() {
     // Só auto-rola depois que o usuário interagiu — evita arrastar a página pro form no load
     let userInteracted = false;
 
-    function maybeScrollTo(el: HTMLElement) {
-      if (!userInteracted) return;
-      // só rola se a mensagem está fora da viewport
-      const rect = el.getBoundingClientRect();
-      const vh = window.innerHeight || document.documentElement.clientHeight;
-      if (rect.top < 0 || rect.bottom > vh) {
-        el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
+    function maybeScrollTo(_el: HTMLElement) {
+      if (!userInteracted || !chatBody) return;
+      // chat agora vive num overlay com scroll próprio — rola o container, não a página
+      chatBody.scrollTop = chatBody.scrollHeight;
     }
 
     function appendMsg(text: string, isUser = false) {
@@ -386,10 +382,41 @@ export function PageContent() {
       setTimeout(() => { window.location.href = `/bootcamp-orbit/obrigado?${params.toString()}`; }, 600);
     }
 
-    // Inicia a conversa
-    setTimeout(runStep, 600);
+    // ═══ Overlay: abre/fecha o chat (takeover mobile / modal desktop) ═══
+    const chatTrigger = root.querySelector('#bcChatTrigger') as HTMLButtonElement | null;
+    const chatOverlay = root.querySelector('#bcChatOverlay') as HTMLElement | null;
+    const chatClose = root.querySelector('#bcChatClose') as HTMLButtonElement | null;
+    const chatBackdrop = root.querySelector('#bcChatBackdrop') as HTMLElement | null;
+    let chatStarted = false;
+    let prevBodyOverflow = '';
+
+    function openChat() {
+      if (!chatOverlay) return;
+      userInteracted = true; // libera o auto-scroll do container
+      chatOverlay.classList.add('open');
+      chatOverlay.setAttribute('aria-hidden', 'false');
+      prevBodyOverflow = document.body.style.overflow;
+      document.body.style.overflow = 'hidden'; // trava scroll da página atrás do modal
+      if (!chatStarted) { chatStarted = true; setTimeout(runStep, 450); }
+      else if (chatInput && inputArea && inputArea.style.display !== 'none') {
+        try { chatInput.focus({ preventScroll: true }); } catch { /* noop */ }
+      }
+    }
+    function closeChat() {
+      if (!chatOverlay) return;
+      chatOverlay.classList.remove('open');
+      chatOverlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = prevBodyOverflow;
+    }
+    chatTrigger?.addEventListener('click', openChat);
+    chatClose?.addEventListener('click', closeChat);
+    chatBackdrop?.addEventListener('click', closeChat);
+    const onEsc = (e: KeyboardEvent) => { if (e.key === 'Escape') closeChat(); };
+    document.addEventListener('keydown', onEsc);
 
     return () => {
+      document.removeEventListener('keydown', onEsc);
+      document.body.style.overflow = prevBodyOverflow;
       clearInterval(cdInterval);
       window.clearTimeout(firstToastTo);
       window.clearInterval(toastInterval);
