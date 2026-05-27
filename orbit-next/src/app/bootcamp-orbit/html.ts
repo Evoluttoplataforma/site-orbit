@@ -854,9 +854,9 @@ export const pageHTML = `
   /* Chat mobile — trava largura, impede overflow do input row.
      Breakpoint 768px (cobre a faixa 600–768 onde o chat de 640px estourava). */
   @media (max-width: 768px) {
-    /* Mobile: overlay vira tela cheia */
-    .bc-chat-overlay { padding: 0; }
-    .bc-chat-overlay .bc-chat { max-width: 100%; height: 100dvh; max-height: 100dvh; border-left: none; border-right: none; }
+    /* Mobile: popup centralizado com margem (não edge-to-edge) */
+    .bc-chat-overlay { padding: 14px; }
+    .bc-chat-overlay .bc-chat { max-width: 100%; width: 100%; height: min(640px, calc(100dvh - 28px)); }
     .bc-chat-trigger { width: 100%; justify-content: center; font-size: 13px; padding: 16px 16px; letter-spacing: 1px; }
     .bc-form-sec { padding: 50px 12px; box-sizing: border-box; max-width: 100vw; overflow-x: clip; }
     .bc-form-sec__head { padding-left: 4px; padding-right: 4px; }
@@ -1341,7 +1341,7 @@ export const pageHTML = `
     <h2 class="bc-h2">Confirme seu <span class="accent">alistamento</span></h2>
     <p class="bc-lead">Vagas limitadas. Confirme abaixo seus dados e a modalidade de participação.</p>
   </div>
-  <!-- Trigger: abre a entrevista em overlay (tela cheia no mobile, modal no desktop) -->
+  <!-- Trigger: abre a entrevista em popup centralizado (overlay vive fora da section) -->
   <div style="text-align:center;margin-top:20px;">
     <button type="button" class="bc-chat-trigger" id="bcChatTrigger">
       <span class="live-dot"></span> Iniciar alistamento · Entrevista com o General Igor →
@@ -1349,24 +1349,6 @@ export const pageHTML = `
     <p class="bc-form__foot">[ EXCLUSIVO PARA CANAIS E CONSULTORIAS CLIENTES ATIVAS · ORBIT GESTÃO ]</p>
   </div>
 
-  <!-- OVERLAY do chat conversacional -->
-  <div class="bc-chat-overlay" id="bcChatOverlay" aria-hidden="true">
-    <div class="bc-chat-overlay__backdrop" id="bcChatBackdrop"></div>
-    <div class="bc-chat" id="bcChat">
-      <button type="button" class="bc-chat__close" id="bcChatClose" aria-label="Fechar entrevista">✕</button>
-      <div class="bc-chat__head">
-        <span class="live-dot"></span>
-        ★ Entrevista Tática · General Igor Furniel ★
-      </div>
-      <div class="bc-chat__progress"><div class="bc-chat__progress-bar" id="bcChatBar" style="width:0%"></div></div>
-      <div class="bc-chat__body" id="bcChatBody"></div>
-      <div class="bc-chat__input-area" id="bcChatInputArea" style="display:none;">
-        <input class="bc-chat__input" id="bcChatInput" type="text" placeholder="Digite e pressione Enter..." autocomplete="off">
-        <button class="bc-chat__send" id="bcChatSend">Enviar</button>
-      </div>
-      <div class="bc-chat__choices" id="bcChatChoices" style="display:none;"></div>
-    </div>
-  </div>
   <div class="bc-form" id="bcSuccess" style="display:none;max-width:640px;margin:0 auto;border-color:#3FB950;">
     <div class="bc-form__inner" style="text-align:center;padding:40px 30px;">
       <img src="/images/bootcamp/missao-aprovada.webp" alt="Missão Aprovada" style="max-width:340px;width:80%;height:auto;margin:0 auto 24px;display:block;filter:drop-shadow(4px 4px 0 rgba(0,0,0,0.4));transform:rotate(-3deg);" loading="lazy">
@@ -1377,4 +1359,23 @@ export const pageHTML = `
 </section>
 
 <div class="bc-warning-stripes"></div>
+
+<!-- ═══ OVERLAY do chat (fora de qualquer section pra não ser clipado/contido) ═══ -->
+<div class="bc-chat-overlay" id="bcChatOverlay" aria-hidden="true">
+  <div class="bc-chat-overlay__backdrop" id="bcChatBackdrop"></div>
+  <div class="bc-chat" id="bcChat">
+    <button type="button" class="bc-chat__close" id="bcChatClose" aria-label="Fechar entrevista">✕</button>
+    <div class="bc-chat__head">
+      <span class="live-dot"></span>
+      ★ Entrevista Tática · General Igor Furniel ★
+    </div>
+    <div class="bc-chat__progress"><div class="bc-chat__progress-bar" id="bcChatBar" style="width:0%"></div></div>
+    <div class="bc-chat__body" id="bcChatBody"></div>
+    <div class="bc-chat__input-area" id="bcChatInputArea" style="display:none;">
+      <input class="bc-chat__input" id="bcChatInput" type="text" placeholder="Digite e pressione Enter..." autocomplete="off">
+      <button class="bc-chat__send" id="bcChatSend">Enviar</button>
+    </div>
+    <div class="bc-chat__choices" id="bcChatChoices" style="display:none;"></div>
+  </div>
+</div>
 `;
