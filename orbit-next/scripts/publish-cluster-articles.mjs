@@ -197,7 +197,7 @@ function stripJsonBlocks(body) {
 
 // Autor default e avatar pros artigos sem author especifico no frontmatter
 const DEFAULT_AUTHOR = 'Rodrigo Souza';
-const DEFAULT_AUTHOR_AVATAR = '/images/blog/avatar-rodrigo.jpg';
+const DEFAULT_AUTHOR_AVATAR = '/images/blog/avatar-rodrigo.webp';
 
 function humanizeText(body) {
   let out = body.replace(/\s—\s/g, ', ');

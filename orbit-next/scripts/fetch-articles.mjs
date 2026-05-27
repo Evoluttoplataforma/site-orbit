@@ -6,6 +6,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import sharp from 'sharp';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -42,22 +43,90 @@ async function fetchArticles() {
   return await resp.json();
 }
 
-function extractBase64Image(base64Str, filename) {
-  const match = base64Str.match(/^data:image\/(\w+);base64,(.+)/s);
-  if (!match) return null;
+// ═══════════════════════════════════════════════════════════════
+// OTIMIZACAO DE IMAGEM (Sharp): redimensiona + converte pra WebP
+// ═══════════════════════════════════════════════════════════════
+// Inputs: base64 (data:image/...) OU buffer
+// Outputs: WebP otimizado em /images/blog/{filename}.webp
+// - Max width 1200px (preserva aspect ratio)
+// - Quality 80 (sweet spot tamanho × qualidade)
+// - SVG passa direto (vetorial, ja otimo)
+// - GIF preservado (animacao)
+// - Cache: nao reprocessa se .webp ja existe e tamanho do source nao mudou
+const MAX_IMAGE_WIDTH = 1200;
+const WEBP_QUALITY = 80;
 
-  const ext = match[1].replace('jpeg', 'jpg');
-  const data = Buffer.from(match[2], 'base64');
-  const fname = `${filename}.${ext}`;
-  const fpath = path.join(IMG_DIR, fname);
-
-  // Só reescreve se o arquivo não existe ou mudou de tamanho
-  if (!fs.existsSync(fpath) || fs.statSync(fpath).size !== data.length) {
-    fs.writeFileSync(fpath, data);
-    console.log(`   📸 ${fname} (${Math.round(data.length / 1024)}KB)`);
+async function optimizeAndSaveImage(buffer, filename, sourceType) {
+  // SVG: salva direto sem processar
+  if (sourceType === 'svg' || sourceType === 'svg+xml') {
+    const fname = `${filename}.svg`;
+    const fpath = path.join(IMG_DIR, fname);
+    if (!fs.existsSync(fpath) || fs.statSync(fpath).size !== buffer.length) {
+      fs.writeFileSync(fpath, buffer);
+      console.log(`   🎨 ${fname} (${Math.round(buffer.length / 1024)}KB, SVG)`);
+    }
+    return `/images/blog/${fname}`;
   }
 
-  return `/images/blog/${fname}`;
+  // GIF: preserva (Sharp perde animacao)
+  if (sourceType === 'gif') {
+    const fname = `${filename}.gif`;
+    const fpath = path.join(IMG_DIR, fname);
+    if (!fs.existsSync(fpath) || fs.statSync(fpath).size !== buffer.length) {
+      fs.writeFileSync(fpath, buffer);
+      console.log(`   🎬 ${fname} (${Math.round(buffer.length / 1024)}KB, GIF preservado)`);
+    }
+    return `/images/blog/${fname}`;
+  }
+
+  // PNG/JPG/WEBP/etc → otimiza pra WebP
+  const fname = `${filename}.webp`;
+  const fpath = path.join(IMG_DIR, fname);
+  const sizeMarker = path.join(IMG_DIR, `.${filename}.size`);
+  const sourceSize = buffer.length;
+
+  // Cache: skip se ja processado mesma origem
+  if (fs.existsSync(fpath) && fs.existsSync(sizeMarker)) {
+    const cached = parseInt(fs.readFileSync(sizeMarker, 'utf-8'), 10);
+    if (cached === sourceSize) {
+      return `/images/blog/${fname}`;
+    }
+  }
+
+  try {
+    const meta = await sharp(buffer).metadata();
+    const needsResize = (meta.width || 0) > MAX_IMAGE_WIDTH;
+
+    let pipeline = sharp(buffer).rotate(); // auto-orient via EXIF
+    if (needsResize) {
+      pipeline = pipeline.resize({ width: MAX_IMAGE_WIDTH, withoutEnlargement: true });
+    }
+    const optimized = await pipeline.webp({ quality: WEBP_QUALITY, effort: 6 }).toBuffer();
+
+    fs.writeFileSync(fpath, optimized);
+    fs.writeFileSync(sizeMarker, String(sourceSize));
+
+    const reduction = Math.round((1 - optimized.length / sourceSize) * 100);
+    console.log(`   📸 ${fname} (${Math.round(sourceSize / 1024)}KB → ${Math.round(optimized.length / 1024)}KB, -${reduction}%${needsResize ? `, resized to ${MAX_IMAGE_WIDTH}px` : ''})`);
+    return `/images/blog/${fname}`;
+  } catch (err) {
+    // Fallback: se sharp falhar (formato exotico, corrompido, etc), salva original
+    console.warn(`   ⚠️  ${filename}: sharp falhou (${err.message.slice(0, 60)}), salvando original`);
+    const ext = sourceType === 'jpeg' ? 'jpg' : sourceType;
+    const fbFname = `${filename}.${ext}`;
+    fs.writeFileSync(path.join(IMG_DIR, fbFname), buffer);
+    return `/images/blog/${fbFname}`;
+  }
+}
+
+// Compat wrapper: API legada (sincrona) → async optimized
+// Retorna Promise — chamadores precisam usar await
+async function extractBase64Image(base64Str, filename) {
+  const match = base64Str.match(/^data:image\/([a-z+]+);base64,(.+)/is);
+  if (!match) return null;
+  const sourceType = match[1].toLowerCase();
+  const buffer = Buffer.from(match[2], 'base64');
+  return await optimizeAndSaveImage(buffer, filename, sourceType);
 }
 
 /**
@@ -178,7 +247,7 @@ function applySeoBolding(article) {
   return additions;
 }
 
-function processArticles(articles) {
+async function processArticles(articles) {
   console.log(`📝 Processando ${articles.length} artigos...`);
 
   fs.mkdirSync(IMG_DIR, { recursive: true });
@@ -186,30 +255,38 @@ function processArticles(articles) {
 
   let totalBolded = 0;
   for (const a of articles) {
-    // Cover
+    // Cover (base64 → WebP otimizado)
     if (a.cover_url && a.cover_url.startsWith('data:image')) {
-      const url = extractBase64Image(a.cover_url, `cover-${a.id}`);
+      const url = await extractBase64Image(a.cover_url, `cover-${a.id}`);
       if (url) a.cover_url = url;
     }
 
-    // Avatar
+    // Avatar (base64 → WebP otimizado)
     if (a.author_avatar && a.author_avatar.startsWith('data:image')) {
-      const url = extractBase64Image(a.author_avatar, `avatar-${a.id}`);
+      const url = await extractBase64Image(a.author_avatar, `avatar-${a.id}`);
       if (url) a.author_avatar = url;
     }
 
-    // Inline images in content
-    let imgCount = 0;
-    a.content = (a.content || '').replace(
-      /data:image\/(\w+);base64,([A-Za-z0-9+/=]+)/g,
-      (match) => {
+    // Inline images in content: precisa coletar todos primeiro (replace nao suporta async)
+    // depois fazer replace sync usando o mapa pre-computado
+    const inlineMatches = [...(a.content || '').matchAll(/data:image\/[a-z+]+;base64,[A-Za-z0-9+/=]+/g)];
+    if (inlineMatches.length > 0) {
+      const replacements = new Map();
+      let imgCount = 0;
+      for (const m of inlineMatches) {
+        if (replacements.has(m[0])) continue; // dedupe — mesmo base64 = mesma imagem
         imgCount++;
-        const url = extractBase64Image(match, `inline-${a.id}-${imgCount}`);
-        return url || match;
+        const url = await extractBase64Image(m[0], `inline-${a.id}-${imgCount}`);
+        replacements.set(m[0], url || m[0]);
       }
-    );
+      // Aplica todas as substituicoes (sem async dentro do replace)
+      a.content = a.content.replace(
+        /data:image\/[a-z+]+;base64,[A-Za-z0-9+/=]+/g,
+        (match) => replacements.get(match) || match
+      );
+    }
 
-    // SEO: aplica <strong> na keyword principal (max 2 por artigo)
+    // SEO: aplica <strong> na keyword principal (max 3 por artigo)
     const bolded = applySeoBolding(a);
     if (bolded > 0) {
       totalBolded += bolded;
@@ -297,7 +374,7 @@ async function main() {
     return;
   }
 
-  const processed = processArticles(articles);
+  const processed = await processArticles(articles);
 
   // Salvar JSON
   fs.writeFileSync(
