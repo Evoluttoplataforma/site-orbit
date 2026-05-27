@@ -16,12 +16,14 @@ export const pageHTML = `
   .bc-page { background: #0A0E13; color: #E6E8EB; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
   .bc-page * { box-sizing: border-box; }
 
-  /* ═══ CURSOR MIRA — global na pagina ═══ */
-  .bc-page,
-  .bc-page a, .bc-page button, .bc-page label {
-    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='none' stroke='%23ffba1a' stroke-width='1.5'/><circle cx='16' cy='16' r='9' fill='none' stroke='%23ffba1a' stroke-width='1'/><circle cx='16' cy='16' r='1.5' fill='%23ffba1a'/><line x1='16' y1='2' x2='16' y2='8' stroke='%23ffba1a' stroke-width='1.5'/><line x1='16' y1='24' x2='16' y2='30' stroke='%23ffba1a' stroke-width='1.5'/><line x1='2' y1='16' x2='8' y2='16' stroke='%23ffba1a' stroke-width='1.5'/><line x1='24' y1='16' x2='30' y2='16' stroke='%23ffba1a' stroke-width='1.5'/></svg>") 16 16, crosshair;
-  }
-  .bc-page input, .bc-page textarea, .bc-page select { cursor: text; }
+  /* ═══ CURSOR MIRA — aplicado via body[data-bc] (do content.tsx) ═══ */
+  body[data-bc="1"],
+  body[data-bc="1"] * { cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><circle cx='20' cy='20' r='18' fill='none' stroke='%23ffba1a' stroke-width='2'/><circle cx='20' cy='20' r='10' fill='none' stroke='%23ffba1a' stroke-width='1.5'/><circle cx='20' cy='20' r='2' fill='%23ffba1a'/><line x1='20' y1='2' x2='20' y2='10' stroke='%23ffba1a' stroke-width='2'/><line x1='20' y1='30' x2='20' y2='38' stroke='%23ffba1a' stroke-width='2'/><line x1='2' y1='20' x2='10' y2='20' stroke='%23ffba1a' stroke-width='2'/><line x1='30' y1='20' x2='38' y2='20' stroke='%23ffba1a' stroke-width='2'/></svg>") 20 20, crosshair !important; }
+  body[data-bc="1"] input,
+  body[data-bc="1"] textarea,
+  body[data-bc="1"] select { cursor: text !important; }
+  body[data-bc="1"] a,
+  body[data-bc="1"] button { cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><circle cx='20' cy='20' r='18' fill='%23ffba1a' fill-opacity='0.15' stroke='%23ffba1a' stroke-width='2.5'/><circle cx='20' cy='20' r='10' fill='none' stroke='%23ffba1a' stroke-width='2'/><circle cx='20' cy='20' r='3' fill='%23ffba1a'/><line x1='20' y1='2' x2='20' y2='10' stroke='%23ffba1a' stroke-width='2.5'/><line x1='20' y1='30' x2='20' y2='38' stroke='%23ffba1a' stroke-width='2.5'/><line x1='2' y1='20' x2='10' y2='20' stroke='%23ffba1a' stroke-width='2.5'/><line x1='30' y1='20' x2='38' y2='20' stroke='%23ffba1a' stroke-width='2.5'/></svg>") 20 20, pointer !important; }
 
   /* ═══ GLITCH effect em textos chave ═══ */
   .bc-glitch {
@@ -172,6 +174,39 @@ export const pageHTML = `
   .orbit-banner--popup-center,
   .orbit-banner--popup-side,
   .orbit-banner--floating-bottom { display: none !important; }
+
+  /* ═══ TOAST de alistamentos fakes (canto inferior esquerdo) ═══ */
+  .bc-toast {
+    position: fixed; left: 16px; bottom: 16px;
+    background: linear-gradient(135deg, rgba(43,57,40,0.96), rgba(13,17,23,0.96));
+    border: 2px solid #ffba1a;
+    box-shadow: 4px 4px 0 #000, 0 0 40px rgba(255,186,26,0.15);
+    padding: 14px 18px 14px 14px;
+    display: flex; align-items: center; gap: 12px;
+    max-width: 320px;
+    z-index: 200;
+    transform: translateX(-120%);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .bc-toast.is-visible { transform: translateX(0); }
+  .bc-toast__icon {
+    width: 38px; height: 38px;
+    background: #ffba1a; color: #0A0E13;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 18px;
+    box-shadow: 2px 2px 0 #000;
+  }
+  .bc-toast__body { line-height: 1.35; }
+  .bc-toast__title {
+    color: #ffba1a;
+    font-family: 'Black Ops One', impact, sans-serif;
+    font-size: 11px; letter-spacing: 1.5px;
+    text-transform: uppercase; margin: 0 0 2px;
+  }
+  .bc-toast__text { color: #fff; font-size: 13px; margin: 0; font-weight: 600; }
+  .bc-toast__text small { display: block; color: #8B7355; font-size: 10px; font-weight: 400; margin-top: 2px; }
+  @media (max-width: 600px) { .bc-toast { max-width: calc(100% - 32px); left: 16px; right: 16px; bottom: 12px; } }
 
   /* ═══ HERO — full impact ═══ */
   .bc-hero { position: relative; padding: 110px 24px 90px; background: #0A0E13; overflow: hidden; min-height: 820px; display: flex; align-items: center; justify-content: center; }
@@ -659,7 +694,122 @@ export const pageHTML = `
   .bc-prereq__text { color: #C9D1D9; font-size: 0.95rem; line-height: 1.6; margin: 0; }
   .bc-prereq__text strong { color: #fff; }
 
-  /* ═══ FORM — RECRUTAMENTO ═══ */
+  /* ═══ TOAST CONTAINER ═══ */
+  .bc-toast-anchor { position: fixed; left: 16px; bottom: 16px; z-index: 200; }
+
+  /* ═══ FORM CHAT — Igor entrevista o recruta ═══ */
+  .bc-chat {
+    max-width: 640px; margin: 0 auto;
+    background: linear-gradient(180deg, rgba(43,57,40,0.40) 0%, rgba(13,17,23,0.95) 100%);
+    border: 2px solid #4B5320;
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    min-height: 540px;
+  }
+  .bc-chat__head {
+    background: #4B5320;
+    color: #ffba1a;
+    padding: 12px 18px;
+    font-family: 'Black Ops One', impact, sans-serif;
+    font-size: 11px; letter-spacing: 2px;
+    text-align: center; text-transform: uppercase;
+    border-bottom: 2px solid #0A0E13;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .bc-chat__head .live-dot { width: 8px; height: 8px; background: #3FB950; border-radius: 50%; box-shadow: 0 0 8px #3FB950; animation: bc-blink 1.5s steps(2) infinite; }
+  .bc-chat__body {
+    flex: 1;
+    padding: 24px 20px;
+    display: flex; flex-direction: column; gap: 14px;
+    overflow-y: auto;
+    max-height: 460px;
+  }
+  .bc-msg { display: flex; gap: 10px; align-items: flex-end; opacity: 0; transform: translateY(8px); animation: bc-msg-in 0.4s ease-out forwards; }
+  @keyframes bc-msg-in { to { opacity: 1; transform: translateY(0); } }
+  .bc-msg__avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, #4B5320, #2F3318);
+    overflow: hidden; flex-shrink: 0;
+    border: 2px solid #ffba1a;
+  }
+  .bc-msg__avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+  .bc-msg__bubble {
+    background: #161B22;
+    color: #fff; padding: 12px 16px;
+    max-width: 78%;
+    border-radius: 4px 14px 14px 14px;
+    font-size: 14px; line-height: 1.5;
+    border-left: 3px solid #ffba1a;
+  }
+  .bc-msg--user { flex-direction: row-reverse; }
+  .bc-msg--user .bc-msg__bubble {
+    background: rgba(255,186,26,0.12);
+    color: #ffba1a; font-weight: 700;
+    border-radius: 14px 4px 14px 14px;
+    border-left: none; border-right: 3px solid #ffba1a;
+  }
+  .bc-msg--user .bc-msg__avatar {
+    background: #ffba1a; border-color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    color: #0A0E13; font-family: 'Black Ops One', impact, sans-serif; font-size: 14px;
+  }
+  .bc-typing {
+    display: inline-flex; gap: 4px;
+  }
+  .bc-typing span { width: 6px; height: 6px; background: #ffba1a; border-radius: 50%; animation: bc-typing 1.2s ease-in-out infinite; }
+  .bc-typing span:nth-child(2) { animation-delay: 0.2s; }
+  .bc-typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bc-typing { 0%, 100% { opacity: 0.3; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-3px); } }
+
+  .bc-chat__input-area {
+    border-top: 2px solid #4B5320;
+    padding: 14px 16px;
+    background: rgba(10,14,19,0.85);
+    display: flex; gap: 10px;
+  }
+  .bc-chat__input {
+    flex: 1; padding: 12px 14px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid #4B5320;
+    color: #fff; font-size: 15px;
+    font-family: 'JetBrains Mono', monospace;
+    outline: none; transition: border 0.2s;
+  }
+  .bc-chat__input:focus { border-color: #ffba1a; }
+  .bc-chat__input::placeholder { color: #4B5320; }
+  .bc-chat__send {
+    padding: 12px 20px;
+    background: #ffba1a; color: #0A0E13;
+    border: 2px solid #ffba1a;
+    font-family: 'Black Ops One', impact, sans-serif;
+    font-size: 12px; letter-spacing: 1.5px;
+    text-transform: uppercase; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .bc-chat__send:hover { background: #ff8c00; }
+  .bc-chat__send:disabled { opacity: 0.5; cursor: not-allowed; }
+  .bc-chat__choices { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 16px 0; }
+  .bc-chat__choice {
+    padding: 10px 16px;
+    background: rgba(255,186,26,0.10);
+    border: 2px solid #ffba1a;
+    color: #ffba1a;
+    font-family: 'Black Ops One', impact, sans-serif;
+    font-size: 12px; letter-spacing: 1px;
+    text-transform: uppercase; cursor: pointer;
+    transition: all 0.2s; flex: 1; min-width: 140px;
+  }
+  .bc-chat__choice:hover { background: #ffba1a; color: #0A0E13; }
+  .bc-chat__progress {
+    height: 4px; background: rgba(255,255,255,0.05);
+    overflow: hidden;
+  }
+  .bc-chat__progress-bar {
+    height: 100%; background: linear-gradient(90deg, #ffba1a, #ff8c00);
+    transition: width 0.5s ease;
+  }
+
+  /* ═══ FORM — RECRUTAMENTO (FORM TRADICIONAL — fallback escondido) ═══ */
   .bc-form-sec { padding: 90px 24px; background: linear-gradient(180deg, #0F1410 0%, #0A0E13 100%); position: relative; overflow: hidden; }
   .bc-form-sec::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0; height: 14px;
@@ -897,8 +1047,6 @@ export const pageHTML = `
 
 <!-- ═══ PROMESSA ═══ -->
 <section class="bc-promise" id="promessa" style="position:relative;">
-  <div class="bc-stamp" style="top:30px;left:30px;">URGENTE</div>
-  <div class="bc-stamp bc-stamp--right" style="top:30px;">AUTORIZADO</div>
   <div class="bc-promise__head">
     <div class="bc-eyebrow"><i class="fa-solid fa-flag"></i>Briefing Tático · 5 objetivos</div>
     <h2 class="bc-h2">Vamos abrir a caixa-preta da <span class="accent">consultoria recorrente</span></h2>
@@ -1096,44 +1244,21 @@ export const pageHTML = `
     <h2 class="bc-h2">Confirme seu <span class="accent">alistamento</span></h2>
     <p class="bc-lead">Vagas limitadas. Confirme abaixo seus dados e a modalidade de participação.</p>
   </div>
-  <form class="bc-form" id="bcForm">
-    <div class="bc-form__inner">
-      <label class="bc-form__label bc-form__label--req">Nome completo</label>
-      <input class="bc-form__input" type="text" name="nome" required placeholder="Seu nome">
-
-      <label class="bc-form__label bc-form__label--req">E-mail</label>
-      <input class="bc-form__input" type="email" name="email" required placeholder="voce@empresa.com">
-
-      <label class="bc-form__label bc-form__label--req">Telefone (WhatsApp)</label>
-      <input class="bc-form__input" type="tel" name="telefone" required placeholder="(00) 00000-0000">
-
-      <label class="bc-form__label bc-form__label--req">Empresa</label>
-      <input class="bc-form__input" type="text" name="empresa" required placeholder="Nome da sua consultoria">
-
-      <label class="bc-form__label bc-form__label--req">Posto de combate</label>
-      <div class="bc-modality">
-        <label class="bc-modality__opt is-selected" data-modality="presencial">
-          <input type="radio" name="modalidade" value="presencial" checked>
-          <div class="bc-modality__title"><i class="fa-solid fa-helmet-safety"></i>Presencial</div>
-          <div class="bc-modality__sub">Florianópolis · R$150 (almoço + mentoria)</div>
-        </label>
-        <label class="bc-modality__opt" data-modality="online">
-          <input type="radio" name="modalidade" value="online">
-          <div class="bc-modality__title"><i class="fa-solid fa-satellite-dish"></i>Online ao vivo</div>
-          <div class="bc-modality__sub">Transmissão exclusiva · Gratuito</div>
-        </label>
-      </div>
-
-      <label class="bc-form__label">Briefing tático <small style="color:#8B7355;font-weight:500;text-transform:none;letter-spacing:0;">(opcional · o que espera levar do evento)</small></label>
-      <textarea class="bc-form__input bc-form__textarea" name="expectativas" placeholder="Conte-nos seus principais desafios..."></textarea>
-
-      <p class="bc-form__error" id="bcError"></p>
-      <button type="submit" class="bc-form__submit" id="bcSubmit">
-        ★ Alistar agora ★
-      </button>
-      <p class="bc-form__foot">[ EXCLUSIVO PARA CANAIS E CONSULTORIAS CLIENTES ATIVAS · ORBIT GESTÃO ]</p>
+  <!-- CHAT conversacional: Igor entrevista o recruta -->
+  <div class="bc-chat" id="bcChat">
+    <div class="bc-chat__head">
+      <span class="live-dot"></span>
+      ★ Entrevista Tática · General Igor Furniel ★
     </div>
-  </form>
+    <div class="bc-chat__progress"><div class="bc-chat__progress-bar" id="bcChatBar" style="width:0%"></div></div>
+    <div class="bc-chat__body" id="bcChatBody"></div>
+    <div class="bc-chat__input-area" id="bcChatInputArea" style="display:none;">
+      <input class="bc-chat__input" id="bcChatInput" type="text" placeholder="Digite e pressione Enter..." autocomplete="off">
+      <button class="bc-chat__send" id="bcChatSend">Enviar</button>
+    </div>
+    <div class="bc-chat__choices" id="bcChatChoices" style="display:none;"></div>
+  </div>
+  <p class="bc-form__foot">[ EXCLUSIVO PARA CANAIS E CONSULTORIAS CLIENTES ATIVAS · ORBIT GESTÃO ]</p>
   <div class="bc-form" id="bcSuccess" style="display:none;max-width:640px;margin:0 auto;border-color:#3FB950;">
     <div class="bc-form__inner" style="text-align:center;padding:40px 30px;">
       <img src="/images/bootcamp/missao-aprovada.webp" alt="Missão Aprovada" style="max-width:340px;width:80%;height:auto;margin:0 auto 24px;display:block;filter:drop-shadow(4px 4px 0 rgba(0,0,0,0.4));transform:rotate(-3deg);" loading="lazy">
