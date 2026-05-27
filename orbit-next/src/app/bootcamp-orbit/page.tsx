@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     siteName: 'Orbit Gestão',
     locale: 'pt_BR',
     type: 'website',
-    images: [{ url: '/images/og-image.png', width: 1200, height: 630, alt: 'Bootcamp Orbit' }],
+    images: [{ url: '/images/bootcamp/og-bootcamp.webp', width: 1200, height: 1500, alt: 'Bootcamp Orbit — Imersão Canais 13/06' }],
   },
   twitter: {
     card: 'summary_large_image',

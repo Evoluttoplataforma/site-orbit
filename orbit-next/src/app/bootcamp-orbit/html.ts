@@ -98,6 +98,11 @@ export const pageHTML = `
     0%, 100% { opacity: 0.20; transform: scale(1); }
     50% { opacity: 0.40; transform: scale(1.08); }
   }
+  /* Bussola rotaciona lentamente */
+  @keyframes bc-rotate-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
 
   /* ═══ HERO — full impact ═══ */
   .bc-hero { position: relative; padding: 110px 24px 90px; background: #0A0E13; overflow: hidden; min-height: 820px; display: flex; align-items: center; justify-content: center; }
@@ -615,16 +620,8 @@ export const pageHTML = `
     <line x1="100" y1="22" x2="100" y2="32" stroke="#ffba1a" stroke-width="2"/>
   </svg>
 
-  <!-- Mira / crosshair pulsante GRANDE (topo esquerdo) -->
-  <svg style="position:absolute;left:4%;top:18%;width:140px;height:140px;opacity:0.35;pointer-events:none;z-index:1;animation:bc-pulse-mira 3s ease-in-out infinite;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#ffba1a" stroke-width="2">
-    <circle cx="50" cy="50" r="45"/>
-    <circle cx="50" cy="50" r="30"/>
-    <circle cx="50" cy="50" r="3" fill="#ffba1a"/>
-    <line x1="50" y1="2" x2="50" y2="20"/>
-    <line x1="50" y1="80" x2="50" y2="98"/>
-    <line x1="2" y1="50" x2="20" y2="50"/>
-    <line x1="80" y1="50" x2="98" y2="50"/>
-  </svg>
+  <!-- Bussola militar (topo esquerdo, sutil rotacao) -->
+  <img src="/images/bootcamp/bussola.webp" alt="" style="position:absolute;left:4%;top:18%;width:180px;height:auto;opacity:0.55;pointer-events:none;z-index:1;animation:bc-rotate-slow 60s linear infinite;" loading="eager">
 
   <!-- Tanque SVG GRANDE (canto inferior esquerdo) -->
   <svg style="position:absolute;left:3%;bottom:50px;width:280px;height:auto;opacity:0.28;pointer-events:none;z-index:1;" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
@@ -730,6 +727,11 @@ export const pageHTML = `
 </section>
 
 <div class="bc-warning-stripes"></div>
+
+<!-- ═══ CARD DE MISSAO (detalhes da operacao) ═══ -->
+<section style="padding:60px 24px 40px;background:#0A0E13;text-align:center;">
+  <img src="/images/bootcamp/missao-card.webp" alt="Missão Bootcamp Orbit · Data: 13 de junho · Hora: 9h às 13h · Local: Square SC Florianópolis · Formato: Presencial + Online · Investimento: Gratuito" style="max-width:880px;width:100%;height:auto;margin:0 auto;display:block;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.6));" loading="lazy">
+</section>
 
 <!-- ═══ PROMESSA ═══ -->
 <section class="bc-promise" id="promessa" style="position:relative;">
@@ -903,11 +905,11 @@ export const pageHTML = `
       <p class="bc-form__foot">[ EXCLUSIVO PARA CANAIS E CONSULTORIAS CLIENTES ATIVAS · ORBIT GESTÃO ]</p>
     </div>
   </form>
-  <div class="bc-form" id="bcSuccess" style="display:none;max-width:640px;margin:0 auto;">
-    <div class="bc-form__inner" style="text-align:center;">
-      <i class="fa-solid fa-circle-check" style="font-size:3.5rem;color:#3FB950;margin-bottom:18px;"></i>
-      <h3 style="color:#fff;font-family:'Black Ops One',impact,sans-serif;font-size:1.5rem;margin:0 0 8px;text-transform:uppercase;letter-spacing:1.5px;">Alistamento confirmado!</h3>
-      <p style="color:#C9D1D9;margin:0;font-family:'JetBrains Mono',monospace;font-size:0.95rem;">Vamos enviar todos os detalhes do Bootcamp Orbit para seu e-mail e WhatsApp.</p>
+  <div class="bc-form" id="bcSuccess" style="display:none;max-width:640px;margin:0 auto;border-color:#3FB950;">
+    <div class="bc-form__inner" style="text-align:center;padding:40px 30px;">
+      <img src="/images/bootcamp/missao-aprovada.webp" alt="Missão Aprovada" style="max-width:340px;width:80%;height:auto;margin:0 auto 24px;display:block;filter:drop-shadow(4px 4px 0 rgba(0,0,0,0.4));transform:rotate(-3deg);" loading="lazy">
+      <h3 style="color:#fff;font-family:'Black Ops One',impact,sans-serif;font-size:1.6rem;margin:0 0 12px;text-transform:uppercase;letter-spacing:2px;">Alistamento confirmado!</h3>
+      <p style="color:#C9D1D9;margin:0;font-family:'JetBrains Mono',monospace;font-size:0.95rem;line-height:1.6;">Vamos enviar todos os detalhes da operação para seu e-mail e WhatsApp.</p>
     </div>
   </div>
 </section>
