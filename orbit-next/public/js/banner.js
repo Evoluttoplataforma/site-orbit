@@ -1,8 +1,8 @@
 /* ═══ ORBIT — Site-wide Banner System ═══ */
 (function() {
-  // Não exibir banners/popups em LPs de experimento ou apresentações
+  // Não exibir banners/popups em LPs de experimento, apresentações ou no bootcamp
   var _p = window.location.pathname;
-  if (_p.indexOf('/experiencias/') === 0 || _p.indexOf('/apresentacao/') === 0) return;
+  if (_p.indexOf('/experiencias/') === 0 || _p.indexOf('/apresentacao/') === 0 || _p.indexOf('/bootcamp-orbit') === 0) return;
 
   // Banners agora servidos como JSON estático gerado no build (scripts/fetch-banners.mjs).
   // Cada page view ANTES: 1 fetch ao Supabase (rate-limited, conta no compute).

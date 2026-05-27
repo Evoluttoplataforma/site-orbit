@@ -108,6 +108,25 @@ export function PageContent() {
 
   return (
     <div style={wrap}>
+      <style>{`
+        .rec-tablewrap { border: 1px solid #21262d; border-radius: 10px; overflow-x: auto; }
+        .rec-table { width: 100%; border-collapse: collapse; min-width: 640px; }
+        .rec-table th { text-align: left; padding: 10px 12px; font-size: 11px; color: #8B7355; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #21262d; white-space: nowrap; background: transparent; }
+        .rec-table tbody tr { background: transparent !important; }
+        .rec-table td { padding: 11px 12px; font-size: 14px; border-bottom: 1px solid #161B22; background: transparent !important; }
+        @media (max-width: 720px) {
+          .rec-tablewrap { border: none; overflow-x: visible; }
+          .rec-table { min-width: 0; display: block; }
+          .rec-table thead { display: none; }
+          .rec-table tbody { display: block; }
+          .rec-table tbody tr { display: block; background: #0F1410 !important; border: 1px solid #21262d; border-radius: 10px; margin-bottom: 10px; }
+          .rec-table td { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; border: none; border-bottom: 1px solid #161B22; padding: 9px 14px; font-size: 13.5px; text-align: right; }
+          .rec-table tr td:last-child { border-bottom: none; }
+          .rec-table td::before { content: attr(data-label); color: #8B7355; font-size: 10.5px; text-transform: uppercase; letter-spacing: 1px; text-align: left; flex: 0 0 auto; }
+          .rec-table td[data-label="#"] { display: none; }
+          .rec-table td[data-label=""]::before { content: none; }
+        }
+      `}</style>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
           <h1 style={{ fontSize: 24, fontWeight: 800, margin: 0, textTransform: 'uppercase', letterSpacing: 1 }}>🎖️ Recrutas · Bootcamp Orbit</h1>
@@ -146,8 +165,6 @@ function Stat({ label, value, color }: { label: string; value: number; color: st
 }
 
 function Tabela({ titulo, cor, leads, onCSV }: { titulo: string; cor: string; leads: Lead[]; onCSV: () => void }) {
-  const th: React.CSSProperties = { textAlign: 'left', padding: '10px 12px', fontSize: 11, color: '#8B7355', textTransform: 'uppercase', letterSpacing: 1, borderBottom: '1px solid #21262d', whiteSpace: 'nowrap' };
-  const td: React.CSSProperties = { padding: '11px 12px', fontSize: 14, borderBottom: '1px solid #161B22' };
   return (
     <div>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
@@ -156,30 +173,30 @@ function Tabela({ titulo, cor, leads, onCSV }: { titulo: string; cor: string; le
           ⬇ Exportar CSV
         </button>
       </div>
-      <div style={{ overflowX: 'auto', border: '1px solid #21262d', borderRadius: 10 }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: 640 }}>
+      <div className="rec-tablewrap">
+        <table className="rec-table">
           <thead>
             <tr>
-              <th style={th}>#</th>
-              <th style={th}>Nome</th>
-              <th style={th}>Email</th>
-              <th style={th}>WhatsApp</th>
-              <th style={th}>Consultoria</th>
-              <th style={th}>Inscrição</th>
+              <th>#</th>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>WhatsApp</th>
+              <th>Consultoria</th>
+              <th>Inscrição</th>
             </tr>
           </thead>
           <tbody>
             {leads.length === 0 ? (
-              <tr><td style={{ ...td, color: '#6B7339', textAlign: 'center' }} colSpan={6}>Nenhum inscrito ainda.</td></tr>
+              <tr><td data-label="" style={{ color: '#6B7339', textAlign: 'center' }} colSpan={6}>Nenhum inscrito ainda.</td></tr>
             ) : (
               leads.map((l, i) => (
                 <tr key={(l.email || '') + i}>
-                  <td style={{ ...td, color: '#6B7339' }}>{i + 1}</td>
-                  <td style={{ ...td, fontWeight: 600 }}>{l.nome || '—'}</td>
-                  <td style={td}>{l.email || '—'}</td>
-                  <td style={td}>{l.telefone || '—'}</td>
-                  <td style={td}>{l.empresa || '—'}</td>
-                  <td style={{ ...td, color: '#8B949E', whiteSpace: 'nowrap' }}>{fmtDate(l.created_at)}</td>
+                  <td data-label="#" style={{ color: '#6B7339' }}>{i + 1}</td>
+                  <td data-label="Nome" style={{ fontWeight: 600 }}>{l.nome || '—'}</td>
+                  <td data-label="Email" style={{ wordBreak: 'break-all' }}>{l.email || '—'}</td>
+                  <td data-label="WhatsApp">{l.telefone || '—'}</td>
+                  <td data-label="Consultoria">{l.empresa || '—'}</td>
+                  <td data-label="Inscrição" style={{ color: '#8B949E' }}>{fmtDate(l.created_at)}</td>
                 </tr>
               ))
             )}
