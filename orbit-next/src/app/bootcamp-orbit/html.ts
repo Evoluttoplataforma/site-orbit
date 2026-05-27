@@ -94,35 +94,49 @@ export const pageHTML = `
   .bc-btn--pulse { animation: bc-pulse-cta 2.5s ease-out infinite; }
 
   /* ═══ HERO — full impact ═══ */
-  .bc-hero { position: relative; padding: 110px 24px 90px; background: #0A0E13; overflow: hidden; min-height: 760px; display: flex; align-items: center; justify-content: center; }
+  .bc-hero { position: relative; padding: 110px 24px 90px; background: #0A0E13; overflow: hidden; min-height: 820px; display: flex; align-items: center; justify-content: center; }
 
-  /* Camuflagem multi-camada de fundo */
+  /* Background: foto bg-hero.webp (moldura camuflagem amarela) */
   .bc-hero::before {
     content: '';
     position: absolute; inset: 0;
-    background-image:
-      radial-gradient(ellipse 50% 40% at 18% 30%, #4B5320 0%, transparent 60%),
-      radial-gradient(ellipse 45% 35% at 78% 20%, #3D4127 0%, transparent 55%),
-      radial-gradient(ellipse 40% 35% at 50% 75%, #2F3318 0%, transparent 55%),
-      radial-gradient(ellipse 30% 25% at 88% 75%, #6B7339 0%, transparent 50%),
-      radial-gradient(ellipse 25% 20% at 8% 85%, #4B5320 0%, transparent 50%),
-      linear-gradient(180deg, #0A0E13 0%, #0F1410 100%);
-    opacity: 0.55;
+    background-image: url('/images/bootcamp/bg-hero.webp');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.45;
     pointer-events: none;
   }
 
-  /* Grid tático coordenadas */
+  /* Overlay escuro vinheta + grid tatico */
   .bc-hero::after {
     content: '';
     position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(245,197,24,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(245,197,24,0.04) 1px, transparent 1px);
-    background-size: 60px 60px;
+    background:
+      radial-gradient(ellipse at center, transparent 0%, rgba(10,14,19,0.85) 100%),
+      linear-gradient(rgba(245,197,24,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245,197,24,0.03) 1px, transparent 1px);
+    background-size: 100% 100%, 60px 60px, 60px 60px;
     pointer-events: none;
   }
 
   .bc-hero__inner { position: relative; max-width: 1080px; margin: 0 auto; text-align: center; z-index: 2; }
+
+  /* Soldados fardados nas laterais do hero (Igor + Chris corpo inteiro) */
+  .bc-hero__soldier {
+    position: absolute; bottom: 0;
+    height: 92%; width: auto;
+    z-index: 1;
+    filter: drop-shadow(0 0 30px rgba(0,0,0,0.6));
+    pointer-events: none;
+  }
+  .bc-hero__soldier--left { left: 2%; }
+  .bc-hero__soldier--right { right: 2%; }
+  @media (max-width: 1100px) {
+    .bc-hero__soldier { height: 75%; opacity: 0.5; }
+  }
+  @media (max-width: 768px) {
+    .bc-hero__soldier { display: none; }
+  }
 
   /* Tarja "OPERAÇÃO CLASSIFICADA" topo */
   .bc-hero__tarja {
@@ -322,7 +336,7 @@ export const pageHTML = `
     padding: 4px 12px; text-align: center;
   }
   .bc-host__photo {
-    width: 96px; height: 96px;
+    width: 140px; height: 180px;
     background: linear-gradient(135deg, #4B5320, #2F3318);
     border: 3px solid #ffba1a;
     display: flex; align-items: center; justify-content: center;
@@ -331,9 +345,10 @@ export const pageHTML = `
     font-size: 2rem; flex-shrink: 0;
     box-shadow: 4px 4px 0 #000;
     margin-top: 18px;
+    overflow: hidden;
   }
-  .bc-host__photo--img { padding: 0; overflow: hidden; }
-  .bc-host__photo--img img { width: 100%; height: 100%; object-fit: cover; }
+  .bc-host__photo--img { padding: 0; }
+  .bc-host__photo--img img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
   .bc-host__content { margin-top: 18px; }
   .bc-host__name {
     color: #fff;
@@ -470,11 +485,19 @@ export const pageHTML = `
   .bc-prereq__text strong { color: #fff; }
 
   /* ═══ FORM — RECRUTAMENTO ═══ */
-  .bc-form-sec { padding: 90px 24px; background: linear-gradient(180deg, #0F1410 0%, #0A0E13 100%); position: relative; }
+  .bc-form-sec { padding: 90px 24px; background: linear-gradient(180deg, #0F1410 0%, #0A0E13 100%); position: relative; overflow: hidden; }
   .bc-form-sec::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0; height: 14px;
     background: repeating-linear-gradient(45deg, #F5C518 0 24px, #0A0E13 24px 48px);
   }
+  /* Mapa tatico decorativo atras */
+  .bc-form-sec::after {
+    content: ''; position: absolute; inset: 14px 0 0 0;
+    background-image: url('/images/bootcamp/mapa-tatico.webp');
+    background-size: cover; background-position: center;
+    opacity: 0.10; pointer-events: none;
+  }
+  .bc-form-sec > * { position: relative; z-index: 1; }
   .bc-form-sec__head { text-align: center; max-width: 760px; margin: 0 auto 36px; }
   .bc-form {
     max-width: 640px; margin: 0 auto;
@@ -589,29 +612,10 @@ export const pageHTML = `
 
 <!-- ═══ HERO ═══ -->
 <section class="bc-hero">
-  <!-- Silhuetas SVG no fundo (decorativas) -->
-  <svg style="position:absolute;left:3%;bottom:0;width:180px;height:auto;opacity:0.12;pointer-events:none;" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
-    <path d="M50 8c-6 0-10 4-10 10s4 10 10 10 10-4 10-10-4-10-10-10zm-2 22l-6 4-8-2-4 6 4 8-2 12h6l4 18 8 4 4 18h12l-4-22 4-12-2-12 4-8-4-6-8 2-6-4h-2zm-22 70l-4 6 2 8h12l-2-8-8-6zm44 0l-8 6-2 8h12l2-8-4-6z"/>
-  </svg>
-  <svg style="position:absolute;right:5%;bottom:0;width:200px;height:auto;opacity:0.10;pointer-events:none;" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
-    <!-- Tanque silhueta -->
-    <rect x="10" y="50" width="100" height="18" rx="2"/>
-    <rect x="20" y="40" width="60" height="14" rx="2"/>
-    <rect x="78" y="42" width="35" height="6"/>
-    <circle cx="20" cy="70" r="6"/>
-    <circle cx="40" cy="70" r="6"/>
-    <circle cx="60" cy="70" r="6"/>
-    <circle cx="80" cy="70" r="6"/>
-    <circle cx="100" cy="70" r="6"/>
-  </svg>
-  <svg style="position:absolute;left:8%;top:18%;width:140px;height:auto;opacity:0.10;pointer-events:none;" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
-    <!-- Helicoptero silhueta -->
-    <ellipse cx="60" cy="50" rx="35" ry="10"/>
-    <rect x="55" y="60" width="10" height="14"/>
-    <rect x="95" y="48" width="20" height="4"/>
-    <rect x="20" y="20" width="80" height="3"/>
-    <rect x="58" y="20" width="4" height="30"/>
-  </svg>
+  <!-- Igor corpo inteiro fardado (lateral esquerda) -->
+  <img src="/images/bootcamp/igor-fullbody.webp" alt="Igor Furniel fardado" class="bc-hero__soldier bc-hero__soldier--left" loading="eager">
+  <!-- Chris corpo inteiro fardado (lateral direita) -->
+  <img src="/images/bootcamp/chris-fullbody.webp" alt="Christian Hart fardado" class="bc-hero__soldier bc-hero__soldier--right" loading="eager">
 
   <div class="bc-hero__inner">
 
@@ -700,7 +704,7 @@ export const pageHTML = `
   </div>
   <div class="bc-hosts__grid">
     <div class="bc-host">
-      <div class="bc-host__photo bc-host__photo--img"><img src="/images/blog/host-igor.webp" alt="Igor Furniel"></div>
+      <div class="bc-host__photo bc-host__photo--img"><img src="/images/bootcamp/igor-fardado.webp" alt="Igor Furniel"></div>
       <div class="bc-host__content">
         <div style="display:inline-block;background:linear-gradient(135deg,#ffba1a,#ff8c00);color:#0A0E13;font-family:'Black Ops One',impact,sans-serif;font-size:10px;letter-spacing:2px;padding:3px 10px;margin-bottom:8px;text-transform:uppercase;">GENERAL · ALTO COMANDO</div>
         <h3 class="bc-host__name">Igor Furniel</h3>
@@ -710,7 +714,7 @@ export const pageHTML = `
       </div>
     </div>
     <div class="bc-host">
-      <div class="bc-host__photo bc-host__photo--img"><img src="/images/blog/host-chris.webp" alt="Christian Hart"></div>
+      <div class="bc-host__photo bc-host__photo--img"><img src="/images/bootcamp/chris-fardado.webp" alt="Christian Hart"></div>
       <div class="bc-host__content">
         <div style="display:inline-block;background:linear-gradient(135deg,#ffba1a,#ff8c00);color:#0A0E13;font-family:'Black Ops One',impact,sans-serif;font-size:10px;letter-spacing:2px;padding:3px 10px;margin-bottom:8px;text-transform:uppercase;">CORONEL · LINHA DE FRENTE</div>
         <h3 class="bc-host__name">Christian Hart</h3>
