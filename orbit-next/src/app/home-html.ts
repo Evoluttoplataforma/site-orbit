@@ -52,25 +52,73 @@ export const pageHTML = `
     <hr class="glow-divider">
 
     <!-- ═══ BOOTCAMP ORBIT — banner tema militar (auto-some após 13/06/2026) ═══ -->
-    <section id="bootcampHomeBanner" style="display:none;position:relative;padding:54px 24px;background:#0A0E13;border-top:3px solid #C73E1D;border-bottom:3px solid #C73E1D;overflow:hidden;">
-      <!-- camuflagem decorativa -->
-      <div aria-hidden="true" style="position:absolute;inset:0;opacity:0.18;pointer-events:none;background:
-        radial-gradient(circle at 12% 30%, #3D4127 0 90px, transparent 91px),
-        radial-gradient(circle at 78% 65%, #4B5320 0 130px, transparent 131px),
-        radial-gradient(circle at 45% 85%, #6B7339 0 70px, transparent 71px),
-        radial-gradient(circle at 90% 15%, #3D4127 0 60px, transparent 61px);"></div>
-      <!-- listras de alerta no topo -->
-      <div aria-hidden="true" style="position:absolute;top:0;left:0;right:0;height:8px;background:repeating-linear-gradient(45deg,#F5C518 0 18px,#0A0E13 18px 36px);"></div>
+    <section id="bootcampHomeBanner" style="display:none;position:relative;padding:48px 24px;background:#06080B;">
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap');
+        #bootcampHomeBanner *{box-sizing:border-box;}
+        .bch-card{position:relative;max-width:1180px;margin:0 auto;border-radius:22px;overflow:hidden;border:1px solid rgba(255,186,26,0.28);box-shadow:0 30px 90px rgba(0,0,0,0.6),0 0 0 1px rgba(0,0,0,0.4) inset;}
+        .bch-bg{position:absolute;inset:0;background:url('/images/bootcamp/bg-hero.webp') center/cover no-repeat;transform:scale(1.05);}
+        .bch-overlay{position:absolute;inset:0;background:linear-gradient(95deg,rgba(6,8,11,0.97) 0%,rgba(6,8,11,0.92) 38%,rgba(6,8,11,0.62) 70%,rgba(6,8,11,0.45) 100%);}
+        .bch-stripe{position:absolute;top:0;left:0;right:0;height:7px;background:repeating-linear-gradient(45deg,#F5C518 0 16px,#0A0E13 16px 32px);z-index:3;}
+        .bch-stripe--bot{top:auto;bottom:0;}
+        .bch-grid{position:relative;z-index:2;display:flex;flex-wrap:wrap;align-items:center;gap:40px;padding:54px 50px;}
+        .bch-left{flex:1 1 480px;min-width:280px;}
+        .bch-badge{display:inline-flex;align-items:center;gap:8px;background:#C73E1D;color:#fff;font-weight:800;font-size:12px;letter-spacing:2.5px;padding:7px 15px;border-radius:5px;text-transform:uppercase;box-shadow:0 0 0 1px rgba(0,0,0,0.3),0 6px 18px rgba(199,62,29,0.35);}
+        .bch-badge i{animation:bchBlink 1.1s steps(2) infinite;}
+        @keyframes bchBlink{0%,50%{opacity:1}50.01%,100%{opacity:0.25}}
+        .bch-title{font-family:'Black Ops One','Big Shoulders Stencil',Impact,sans-serif;color:#fff;font-size:clamp(30px,4.6vw,54px);line-height:1.02;margin:20px 0 14px;text-transform:uppercase;letter-spacing:1px;text-shadow:0 4px 24px rgba(0,0,0,0.6);}
+        .bch-title b{color:#ffba1a;font-weight:inherit;display:block;}
+        .bch-sub{color:#D7DCE2;font-size:16.5px;line-height:1.6;margin:0 0 18px;max-width:560px;}
+        .bch-meta{display:flex;flex-wrap:wrap;gap:10px;}
+        .bch-pill{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,186,26,0.25);color:#E6E8EB;font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:1px;padding:8px 13px;border-radius:7px;}
+        .bch-pill i{color:#ffba1a;}
+        .bch-panel{flex:0 0 320px;min-width:280px;background:rgba(10,14,19,0.72);border:1px solid rgba(255,186,26,0.3);border-radius:16px;padding:24px 24px 26px;backdrop-filter:blur(6px);}
+        .bch-panel__label{color:#8B7355;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;margin:0 0 12px;text-align:center;}
+        .bch-cd{display:flex;gap:8px;justify-content:center;margin:0 0 8px;}
+        .bch-cd__box{flex:1;background:#0A0E13;border:1px solid #4B5320;border-radius:9px;padding:12px 4px 8px;text-align:center;}
+        .bch-cd__n{font-family:'Black Ops One',Impact,monospace;color:#ffba1a;font-size:30px;line-height:1;letter-spacing:1px;}
+        .bch-cd__l{display:block;color:#6B7339;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:2px;margin-top:6px;text-transform:uppercase;}
+        .bch-date{color:#C9D1D9;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:1px;text-align:center;margin:14px 0 18px;}
+        .bch-date b{color:#fff;}
+        .bch-cta{display:block;text-align:center;background:#ffba1a;color:#0A0E13;font-weight:800;font-size:16px;letter-spacing:1px;padding:16px 20px;border-radius:9px;text-decoration:none;text-transform:uppercase;animation:bchPulse 2.2s ease-in-out infinite;}
+        @keyframes bchPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,186,26,0.5),0 8px 22px rgba(255,186,26,0.25)}50%{box-shadow:0 0 0 10px rgba(255,186,26,0),0 8px 28px rgba(255,186,26,0.4)}}
+        .bch-cta:hover{background:#fff;}
+        .bch-vagas{display:block;text-align:center;color:#C73E1D;font-weight:700;font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;margin-top:12px;}
+        @media (max-width:720px){
+          .bch-grid{padding:40px 24px;gap:28px;}
+          .bch-overlay{background:linear-gradient(180deg,rgba(6,8,11,0.9) 0%,rgba(6,8,11,0.95) 100%);}
+          .bch-panel{flex:1 1 100%;}
+        }
+      </style>
 
-      <div style="position:relative;max-width:1040px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:32px;">
-        <div style="flex:1 1 460px;min-width:280px;">
-          <span style="display:inline-block;background:#C73E1D;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:12px;letter-spacing:3px;padding:6px 14px;border-radius:4px;text-transform:uppercase;">🚨 Convocação aberta · Exclusivo canais Orbit</span>
-          <h2 style="color:#fff;font-size:clamp(26px,4vw,42px);font-weight:800;line-height:1.08;margin:18px 0 10px;text-transform:uppercase;letter-spacing:1px;">Bootcamp Orbit — <span style="color:#ffba1a;">Imersão de Guerra</span></h2>
-          <p style="color:#C9D1D9;font-size:16px;line-height:1.6;margin:0 0 8px;max-width:560px;">4 horas, 100% mão na massa, pra blindar sua operação no 2º semestre: atração, conversão, produtização, precificação e atendimento. Florianópolis + online ao vivo.</p>
-          <p style="color:#8B7355;font-family:monospace;font-size:13px;letter-spacing:2px;margin:0;">▶ 13 JUN 2026 · 09H BRT · <span id="bootcampHomeDays" style="color:#ffba1a;font-weight:700;">--</span> DIAS RESTANTES</p>
-        </div>
-        <div style="flex:0 0 auto;">
-          <a href="/bootcamp-orbit" style="display:inline-block;background:#ffba1a;color:#0A0E13;font-weight:800;font-size:16px;letter-spacing:1px;padding:18px 38px;border-radius:6px;text-decoration:none;text-transform:uppercase;box-shadow:0 6px 24px rgba(255,186,26,0.3);">Quero me alistar →</a>
+      <div class="bch-card">
+        <div class="bch-bg" aria-hidden="true"></div>
+        <div class="bch-overlay" aria-hidden="true"></div>
+        <div class="bch-stripe" aria-hidden="true"></div>
+        <div class="bch-stripe bch-stripe--bot" aria-hidden="true"></div>
+
+        <div class="bch-grid">
+          <div class="bch-left">
+            <span class="bch-badge"><i class="fa-solid fa-tower-broadcast"></i> Convocação aberta · Exclusivo canais Orbit</span>
+            <h2 class="bch-title">Bootcamp Orbit<b>Imersão de Guerra</b></h2>
+            <p class="bch-sub">4 horas, 100% mão na massa, pra blindar sua operação no 2º semestre: atração, conversão, produtização, precificação e atendimento.</p>
+            <div class="bch-meta">
+              <span class="bch-pill"><i class="fa-solid fa-location-dot"></i> Florianópolis + Online ao vivo</span>
+              <span class="bch-pill"><i class="fa-solid fa-bolt"></i> Pré-requisito: Agente de Ativação</span>
+            </div>
+          </div>
+
+          <div class="bch-panel">
+            <p class="bch-panel__label">▶ Operação inicia em</p>
+            <div class="bch-cd">
+              <div class="bch-cd__box"><span class="bch-cd__n" id="bchDD">--</span><span class="bch-cd__l">Dias</span></div>
+              <div class="bch-cd__box"><span class="bch-cd__n" id="bchHH">--</span><span class="bch-cd__l">Horas</span></div>
+              <div class="bch-cd__box"><span class="bch-cd__n" id="bchMM">--</span><span class="bch-cd__l">Min</span></div>
+            </div>
+            <p class="bch-date">🗓️ <b>13 JUN 2026</b> · 09H BRT</p>
+            <a href="/bootcamp-orbit" class="bch-cta">Quero me alistar →</a>
+            <span class="bch-vagas">⚠ Vagas limitadas</span>
+          </div>
         </div>
       </div>
 
@@ -81,14 +129,22 @@ export const pageHTML = `
         // Some automaticamente após o fim do dia 13/06/2026 (BRT) — 14/06 02:59:59 UTC
         var ENDS = Date.UTC(2026, 5, 14, 2, 59, 59);
         var EVENT = Date.UTC(2026, 5, 13, 12, 0, 0); // 09h BRT
-        var now = Date.now();
-        if (now > ENDS) { el.remove(); return; }
+        if (Date.now() > ENDS) { el.remove(); return; }
         el.style.display = 'block';
-        var daysEl = document.getElementById('bootcampHomeDays');
-        if (daysEl) {
-          var d = Math.max(0, Math.ceil((EVENT - now) / 86400000));
-          daysEl.textContent = d;
+        var dd = document.getElementById('bchDD'), hh = document.getElementById('bchHH'), mm = document.getElementById('bchMM');
+        function pad(n){ return (n < 10 ? '0' : '') + n; }
+        function tick(){
+          var diff = EVENT - Date.now();
+          if (diff < 0) diff = 0;
+          var d = Math.floor(diff / 86400000);
+          var h = Math.floor((diff % 86400000) / 3600000);
+          var m = Math.floor((diff % 3600000) / 60000);
+          if (dd) dd.textContent = pad(d);
+          if (hh) hh.textContent = pad(h);
+          if (mm) mm.textContent = pad(m);
         }
+        tick();
+        setInterval(tick, 30000);
       })();
       </script>
     </section>

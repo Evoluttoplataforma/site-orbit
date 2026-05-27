@@ -91,6 +91,11 @@ export const pageHTML = `
   /* position: fixed é imune a overflow:clip/hidden em ancestrais (que quebram sticky).
      O .bc-topbar-spacer (altura medida via JS) compensa a altura pra não cobrir conteúdo. */
   .bc-topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 200; }
+  /* Mobile: NÃO fixa — a topbar rola junto com a página e o spacer some. */
+  @media (max-width: 720px) {
+    .bc-topbar { position: relative; }
+    .bc-topbar-spacer { display: none !important; }
+  }
   .bc-alert-bar {
     background: #C73E1D;
     color: #fff;
