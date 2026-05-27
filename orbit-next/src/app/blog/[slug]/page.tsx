@@ -270,7 +270,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       </div>
     </section>
     <style>
-      .blog-related { max-width: 1200px; margin: 72px auto 40px; padding: 0 24px; }
+      .blog-related { margin: 72px 0 40px; padding: 0; }
       .blog-related__head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 28px; padding-bottom: 18px; border-bottom: 2px solid #F3F4F6; flex-wrap: wrap; }
       .blog-related__head h2 { display: flex; align-items: center; gap: 12px; color: #0D1117; font-size: clamp(1.4rem, 2.5vw, 1.7rem); font-weight: 800; margin: 0; letter-spacing: -0.02em; }
       .blog-related__head h2 i { color: #ffba1a; font-size: 1.2rem; }
@@ -324,7 +324,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             <span><i class="fas fa-clock"></i> ${mins} min de leitura</span>
           </div>
           <div class="blog-article-content">${article.content}</div>
-          ${relatedHTML}
           <div class="blog-article__bottom-cta">
             <a href="/blog" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Voltar ao Blog</a>
           </div>
@@ -359,6 +358,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           </div>
         </aside>
       </div>
+      ${relatedHTML}
     </div>
     ${footerHTML}
   `;
