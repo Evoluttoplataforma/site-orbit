@@ -258,6 +258,7 @@ async function fetchLeads(modo?: Modo): Promise<Array<{ nome: string; email: str
   const out: Array<{ nome: string; email: string; modo: Modo }> = [];
   for (const r of rows) {
     if (!r.email || seen.has(r.email)) continue;
+    if (/@example\.com$/i.test(r.email.trim())) continue; // ignora endereços de teste
     seen.add(r.email);
     out.push({ nome: r.nome, email: r.email, modo: r.source.includes("presencial") ? "presencial" : "online" });
   }
