@@ -818,9 +818,10 @@ export const pageHTML = `
     height: 100%; background: linear-gradient(90deg, #ffba1a, #ff8c00);
     transition: width 0.5s ease;
   }
-  /* Chat mobile — trava largura, impede overflow do input row */
-  @media (max-width: 600px) {
-    .bc-form-sec { padding: 50px 12px; box-sizing: border-box; }
+  /* Chat mobile — trava largura, impede overflow do input row.
+     Breakpoint 768px (cobre a faixa 600–768 onde o chat de 640px estourava). */
+  @media (max-width: 768px) {
+    .bc-form-sec { padding: 50px 12px; box-sizing: border-box; max-width: 100vw; overflow-x: clip; }
     .bc-form-sec__head { padding-left: 4px; padding-right: 4px; }
     .bc-chat {
       max-width: 100%;
