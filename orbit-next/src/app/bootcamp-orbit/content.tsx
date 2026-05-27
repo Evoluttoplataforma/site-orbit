@@ -378,7 +378,7 @@ export function PageContent() {
       // Beep de confirmação + redirect pra página de obrigado militar (sempre)
       beep(1200, 0.15, 0.10);
       setTimeout(() => beep(1500, 0.20, 0.10), 180);
-      const params = new URLSearchParams({ modo, nome: (answers.nome || '').split(' ')[0] || '' });
+      const params = new URLSearchParams({ modo, nome: (answers.nome || '').split(' ')[0] || '', email: answers.email || '' });
       setTimeout(() => { window.location.href = `/bootcamp-orbit/obrigado?${params.toString()}`; }, 600);
     }
 

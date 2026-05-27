@@ -200,6 +200,18 @@ export const pageHTML = `
       </div>
     </div>
 
+    <!-- PAGAMENTO (só presencial) -->
+    <div id="bcoPagamento" style="display:none;margin:0 0 28px;background:linear-gradient(135deg,rgba(255,186,26,0.12),rgba(199,62,29,0.10));border:1px solid #ffba1a;border-radius:14px;padding:24px;text-align:center;">
+      <div style="font-family:'Black Ops One',impact,sans-serif;color:#ffba1a;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">⚠ Falta 1 passo pra garantir sua vaga</div>
+      <h3 style="color:#fff;font-family:'Black Ops One',impact,sans-serif;font-size:1.4rem;margin:0 0 6px;text-transform:uppercase;">Pagamento do presencial · R$150</h3>
+      <p style="color:#C9D1D9;font-size:14px;line-height:1.6;margin:0 0 18px;">As vagas presenciais em Florianópolis só são confirmadas após o pagamento. Conclua agora pra travar a sua.</p>
+      <a id="bcoPagarBtn" href="https://buy.stripe.com/3cIfZgbnr7gRfL5dS3aAw01" target="_blank" rel="noopener"
+         style="display:inline-flex;align-items:center;gap:10px;background:#ffba1a;color:#0A0E13;font-family:'Black Ops One',impact,sans-serif;font-size:16px;letter-spacing:1px;text-transform:uppercase;padding:16px 38px;border-radius:9px;text-decoration:none;box-shadow:0 8px 26px rgba(255,186,26,0.32);">
+        <i class="fa-solid fa-lock"></i> Pagar R$150 e confirmar vaga
+      </a>
+      <p style="color:#8B7355;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;margin:14px 0 0;">🔒 Pagamento seguro via Stripe</p>
+    </div>
+
     <!-- PRÓXIMOS PASSOS -->
     <div class="bco-steps">
       <h2 class="bco-steps__title">Próximos passos · ordem do comando</h2>
