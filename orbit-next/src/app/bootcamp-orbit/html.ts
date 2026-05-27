@@ -18,9 +18,80 @@ export const pageHTML = `
   .bc-stencil { font-family: 'Black Ops One', 'Big Shoulders Stencil', impact, sans-serif; letter-spacing: 0.02em; text-transform: uppercase; }
   .bc-mono { font-family: 'JetBrains Mono', 'Courier New', monospace; }
 
-  /* Listras de perigo amarelo/preto — animada */
+  /* Listras de perigo amarelo/preto */
   .bc-warning-stripes { height: 14px; background: repeating-linear-gradient(45deg, #F5C518 0 24px, #0A0E13 24px 48px); position: relative; overflow: hidden; }
   .bc-warning-stripes::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent 0 24px, rgba(0,0,0,0.15) 24px 48px); }
+
+  /* ═══ TOP BAR sticky — convocação piscando ═══ */
+  .bc-alert-bar {
+    position: sticky; top: 0; z-index: 100;
+    background: #C73E1D;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    font-family: 'Black Ops One', impact, sans-serif;
+    font-size: 13px; letter-spacing: 2px;
+    border-bottom: 2px solid #000;
+    display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap;
+    animation: bc-pulse-bg 2s ease-in-out infinite;
+  }
+  @keyframes bc-pulse-bg {
+    0%, 100% { background: #C73E1D; }
+    50% { background: #8B0000; }
+  }
+  .bc-alert-bar__siren { animation: bc-blink 1s steps(2) infinite; }
+  @keyframes bc-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0.2; } }
+
+  /* ═══ NEWS TICKER rolando ═══ */
+  .bc-ticker {
+    background: #000;
+    border-top: 1px solid #4B5320; border-bottom: 1px solid #4B5320;
+    overflow: hidden;
+    padding: 10px 0;
+    position: relative;
+  }
+  .bc-ticker::before, .bc-ticker::after {
+    content: ''; position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2;
+  }
+  .bc-ticker::before { left: 0; background: linear-gradient(90deg, #000, transparent); }
+  .bc-ticker::after { right: 0; background: linear-gradient(-90deg, #000, transparent); }
+  .bc-ticker__track {
+    display: inline-block; white-space: nowrap;
+    animation: bc-ticker-scroll 40s linear infinite;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: #6B7339;
+    letter-spacing: 2px;
+  }
+  .bc-ticker__track span { margin: 0 30px; }
+  .bc-ticker__track .bc-tick-hi { color: #ffba1a; font-weight: 700; }
+  @keyframes bc-ticker-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ═══ Carimbo rotacionado URGENTE ═══ */
+  .bc-stamp {
+    position: absolute;
+    font-family: 'Black Ops One', impact, sans-serif;
+    color: #C73E1D;
+    border: 3px solid #C73E1D;
+    padding: 6px 14px;
+    font-size: 14px;
+    letter-spacing: 3px;
+    transform: rotate(-15deg);
+    opacity: 0.85;
+    pointer-events: none;
+    background: rgba(199,62,29,0.05);
+    text-transform: uppercase;
+  }
+  .bc-stamp--right { right: 20px; transform: rotate(12deg); }
+
+  /* Pulse animation pra CTA */
+  @keyframes bc-pulse-cta {
+    0%, 100% { box-shadow: 6px 6px 0 #000, 0 0 0 0 rgba(255,186,26,0.7); }
+    50% { box-shadow: 6px 6px 0 #000, 0 0 0 14px rgba(255,186,26,0); }
+  }
+  .bc-btn--pulse { animation: bc-pulse-cta 2.5s ease-out infinite; }
 
   /* ═══ HERO — full impact ═══ */
   .bc-hero { position: relative; padding: 110px 24px 90px; background: #0A0E13; overflow: hidden; min-height: 760px; display: flex; align-items: center; justify-content: center; }
@@ -488,23 +559,88 @@ export const pageHTML = `
   .bc-form__foot { text-align: center; color: #8B7355; font-family: 'JetBrains Mono', monospace; font-size: 11px; margin: 20px 0 0; letter-spacing: 1px; }
 </style>
 
+<!-- ═══ ALERT BAR sticky ═══ -->
+<div class="bc-alert-bar">
+  <span class="bc-alert-bar__siren">🚨</span>
+  <span>ALISTAMENTO ABERTO · <span id="bcAlertDays">--</span> DIAS RESTANTES · VAGAS LIMITADAS</span>
+  <span class="bc-alert-bar__siren">🚨</span>
+</div>
+
+<!-- ═══ NEWS TICKER ═══ -->
+<div class="bc-ticker">
+  <div class="bc-ticker__track">
+    <span>▶ <span class="bc-tick-hi">TRANSMISSÃO TÁTICA</span> · COORDENADAS CONFIRMADAS LAT -27.5954 LON -48.5480</span>
+    <span>▶ <span class="bc-tick-hi">ZONA DE OPERAÇÃO</span> SQUARE SC · ZULU-03</span>
+    <span>▶ <span class="bc-tick-hi">CONVOCAÇÃO ATIVA</span> EXCLUSIVA PARA CANAIS ORBIT</span>
+    <span>▶ DATA: <span class="bc-tick-hi">13 JUN 2026 · 09H BRT</span></span>
+    <span>▶ MISSÃO: <span class="bc-tick-hi">BLINDAR OPERAÇÃO 2º SEMESTRE</span></span>
+    <span>▶ <span class="bc-tick-hi">5 OBJETIVOS TÁTICOS</span> · ATRAÇÃO · CONVERSÃO · PRODUTIZAÇÃO · PRECIFICAÇÃO · ATENDIMENTO</span>
+    <span>▶ <span class="bc-tick-hi">PRÉ-REQUISITO</span> AGENTE DE ATIVAÇÃO CONCLUÍDO</span>
+    <!-- Duplica pra loop infinito -->
+    <span>▶ <span class="bc-tick-hi">TRANSMISSÃO TÁTICA</span> · COORDENADAS CONFIRMADAS LAT -27.5954 LON -48.5480</span>
+    <span>▶ <span class="bc-tick-hi">ZONA DE OPERAÇÃO</span> SQUARE SC · ZULU-03</span>
+    <span>▶ <span class="bc-tick-hi">CONVOCAÇÃO ATIVA</span> EXCLUSIVA PARA CANAIS ORBIT</span>
+    <span>▶ DATA: <span class="bc-tick-hi">13 JUN 2026 · 09H BRT</span></span>
+    <span>▶ MISSÃO: <span class="bc-tick-hi">BLINDAR OPERAÇÃO 2º SEMESTRE</span></span>
+    <span>▶ <span class="bc-tick-hi">5 OBJETIVOS TÁTICOS</span> · ATRAÇÃO · CONVERSÃO · PRODUTIZAÇÃO · PRECIFICAÇÃO · ATENDIMENTO</span>
+    <span>▶ <span class="bc-tick-hi">PRÉ-REQUISITO</span> AGENTE DE ATIVAÇÃO CONCLUÍDO</span>
+  </div>
+</div>
+
 <!-- ═══ HERO ═══ -->
 <section class="bc-hero">
+  <!-- Silhuetas SVG no fundo (decorativas) -->
+  <svg style="position:absolute;left:3%;bottom:0;width:180px;height:auto;opacity:0.12;pointer-events:none;" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
+    <path d="M50 8c-6 0-10 4-10 10s4 10 10 10 10-4 10-10-4-10-10-10zm-2 22l-6 4-8-2-4 6 4 8-2 12h6l4 18 8 4 4 18h12l-4-22 4-12-2-12 4-8-4-6-8 2-6-4h-2zm-22 70l-4 6 2 8h12l-2-8-8-6zm44 0l-8 6-2 8h12l2-8-4-6z"/>
+  </svg>
+  <svg style="position:absolute;right:5%;bottom:0;width:200px;height:auto;opacity:0.10;pointer-events:none;" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
+    <!-- Tanque silhueta -->
+    <rect x="10" y="50" width="100" height="18" rx="2"/>
+    <rect x="20" y="40" width="60" height="14" rx="2"/>
+    <rect x="78" y="42" width="35" height="6"/>
+    <circle cx="20" cy="70" r="6"/>
+    <circle cx="40" cy="70" r="6"/>
+    <circle cx="60" cy="70" r="6"/>
+    <circle cx="80" cy="70" r="6"/>
+    <circle cx="100" cy="70" r="6"/>
+  </svg>
+  <svg style="position:absolute;left:8%;top:18%;width:140px;height:auto;opacity:0.10;pointer-events:none;" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" fill="#ffba1a">
+    <!-- Helicoptero silhueta -->
+    <ellipse cx="60" cy="50" rx="35" ry="10"/>
+    <rect x="55" y="60" width="10" height="14"/>
+    <rect x="95" y="48" width="20" height="4"/>
+    <rect x="20" y="20" width="80" height="3"/>
+    <rect x="58" y="20" width="4" height="30"/>
+  </svg>
+
   <div class="bc-hero__inner">
 
     <div class="bc-hero__tarja">CLASSIFICADO · OPERAÇÃO BC-260613</div>
 
     <div class="bc-hero__coord">LAT -27.5954 · LON -48.5480 · SQUARE SC · ZULU-03</div>
 
-    <!-- Insígnia central: estrela + ring -->
-    <div class="bc-hero__insignia">
+    <!-- Insígnia central GIGANTE com patente -->
+    <div class="bc-hero__insignia" style="width:140px;height:140px;">
       <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="46" fill="none" stroke="#ffba1a" stroke-width="2"/>
-        <circle cx="50" cy="50" r="38" fill="none" stroke="#ffba1a" stroke-width="1" stroke-dasharray="2 4" opacity="0.6"/>
-        <polygon points="50,18 57,40 80,40 61,54 68,76 50,62 32,76 39,54 20,40 43,40" fill="#ffba1a" stroke="#0A0E13" stroke-width="1"/>
-        <text x="50" y="92" text-anchor="middle" font-family="Black Ops One, impact" font-size="6" fill="#ffba1a" letter-spacing="1.5">BOOTCAMP ORBIT</text>
+        <!-- Anel externo -->
+        <circle cx="50" cy="50" r="48" fill="none" stroke="#ffba1a" stroke-width="2"/>
+        <circle cx="50" cy="50" r="44" fill="none" stroke="#ffba1a" stroke-width="0.5" stroke-dasharray="2 3" opacity="0.6"/>
+        <!-- 5 estrelas pequenas ao redor (patente máxima) -->
+        <g fill="#ffba1a">
+          <polygon points="50,3 51.5,7 55.5,7 52.3,9.5 53.6,13.5 50,11 46.4,13.5 47.7,9.5 44.5,7 48.5,7" />
+          <polygon points="84.7,21 86.2,25 90.2,25 87,27.5 88.3,31.5 84.7,29 81.1,31.5 82.4,27.5 79.2,25 83.2,25" />
+          <polygon points="84.7,71 86.2,75 90.2,75 87,77.5 88.3,81.5 84.7,79 81.1,81.5 82.4,77.5 79.2,75 83.2,75" />
+          <polygon points="15.3,21 16.8,25 20.8,25 17.6,27.5 18.9,31.5 15.3,29 11.7,31.5 13,27.5 9.8,25 13.8,25" />
+          <polygon points="15.3,71 16.8,75 20.8,75 17.6,77.5 18.9,81.5 15.3,79 11.7,81.5 13,77.5 9.8,75 13.8,75" />
+        </g>
+        <!-- Estrela grande central com glow -->
+        <polygon points="50,22 57,42 78,42 61,54 68,74 50,62 32,74 39,54 22,42 43,42" fill="#ffba1a" stroke="#0A0E13" stroke-width="1.5" filter="drop-shadow(0 0 3px rgba(255,186,26,0.6))"/>
+        <text x="50" y="94" text-anchor="middle" font-family="Black Ops One, impact" font-size="5.5" fill="#ffba1a" letter-spacing="1.5">BOOTCAMP ORBIT</text>
       </svg>
     </div>
+
+    <!-- Badge VOCE FOI CONVOCADO -->
+    <div style="display:inline-block;background:#0A0E13;border:3px dashed #ffba1a;color:#ffba1a;font-family:'Black Ops One',impact,sans-serif;font-size:14px;letter-spacing:4px;padding:10px 24px;margin:14px 0 18px;text-transform:uppercase;transform:rotate(-1deg);">★ VOCÊ FOI CONVOCADO ★</div>
 
     <h1>Prepare sua consultoria para a <span class="accent">guerra</span> do 2º semestre</h1>
     <p class="bc-hero__sub">Uma imersão de 4 horas, 100% mão na massa, para acelerar a adoção do Orbit Gestão e blindar sua operação contra a Copa do Mundo, feriados e eleições.</p>
@@ -517,13 +653,13 @@ export const pageHTML = `
     </div>
 
     <div class="bc-hero__ctas">
-      <a href="#inscricao" class="bc-btn bc-btn--primary">
+      <a href="#inscricao" class="bc-btn bc-btn--primary bc-btn--pulse">
         <svg class="bc-crosshair" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
-        Garantir minha vaga
+        ★ Convocar-se agora ★
       </a>
       <a href="#promessa" class="bc-btn bc-btn--ghost">
         <i class="fa-solid fa-chevron-down"></i>
-        Ver o que vamos destravar
+        Ver briefing tático
       </a>
     </div>
 
@@ -539,9 +675,11 @@ export const pageHTML = `
 <div class="bc-warning-stripes"></div>
 
 <!-- ═══ PROMESSA ═══ -->
-<section class="bc-promise" id="promessa">
+<section class="bc-promise" id="promessa" style="position:relative;">
+  <div class="bc-stamp" style="top:30px;left:30px;">URGENTE</div>
+  <div class="bc-stamp bc-stamp--right" style="top:30px;">AUTORIZADO</div>
   <div class="bc-promise__head">
-    <div class="bc-eyebrow"><i class="fa-solid fa-flag"></i>A Promessa</div>
+    <div class="bc-eyebrow"><i class="fa-solid fa-flag"></i>Briefing Tático · 5 objetivos</div>
     <h2 class="bc-h2">Vamos abrir a caixa-preta da <span class="accent">consultoria recorrente</span></h2>
     <p class="bc-lead">4 horas intensas onde cada bloco vira ação prática dentro da sua operação Orbit. Você sai com playbooks, scripts e ativações rodando no mesmo dia.</p>
   </div>
@@ -564,6 +702,7 @@ export const pageHTML = `
     <div class="bc-host">
       <div class="bc-host__photo bc-host__photo--img"><img src="/images/blog/host-igor.webp" alt="Igor Furniel"></div>
       <div class="bc-host__content">
+        <div style="display:inline-block;background:linear-gradient(135deg,#ffba1a,#ff8c00);color:#0A0E13;font-family:'Black Ops One',impact,sans-serif;font-size:10px;letter-spacing:2px;padding:3px 10px;margin-bottom:8px;text-transform:uppercase;">GENERAL · ALTO COMANDO</div>
         <h3 class="bc-host__name">Igor Furniel</h3>
         <p class="bc-host__role">CEO &amp; Founder · Orbit Gestão</p>
         <p class="bc-host__bio">25 anos como empresário de consultoria e mentor. Fundador do grupo que conta com Templum Consultoria e Evolutto Plataforma — empresas referência no mercado.</p>
@@ -573,6 +712,7 @@ export const pageHTML = `
     <div class="bc-host">
       <div class="bc-host__photo bc-host__photo--img"><img src="/images/blog/host-chris.webp" alt="Christian Hart"></div>
       <div class="bc-host__content">
+        <div style="display:inline-block;background:linear-gradient(135deg,#ffba1a,#ff8c00);color:#0A0E13;font-family:'Black Ops One',impact,sans-serif;font-size:10px;letter-spacing:2px;padding:3px 10px;margin-bottom:8px;text-transform:uppercase;">CORONEL · LINHA DE FRENTE</div>
         <h3 class="bc-host__name">Christian Hart</h3>
         <p class="bc-host__role">Co-Founder &amp; Head de Canais · Orbit Gestão</p>
         <p class="bc-host__bio">15 anos como empresário de consultoria, executivo e mentor de empresários. Especialista em estruturar canais e operações de alta performance.</p>

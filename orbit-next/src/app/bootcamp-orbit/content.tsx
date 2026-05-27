@@ -25,6 +25,7 @@ export function PageContent() {
     const hoursEl = ref.current.querySelector('#bcHours') as HTMLElement | null;
     const minsEl = ref.current.querySelector('#bcMins') as HTMLElement | null;
     const secsEl = ref.current.querySelector('#bcSecs') as HTMLElement | null;
+    const alertDaysEl = ref.current.querySelector('#bcAlertDays') as HTMLElement | null;
 
     function updateCountdown() {
       const now = new Date();
@@ -44,6 +45,7 @@ export function PageContent() {
       if (hoursEl) hoursEl.textContent = String(h).padStart(2, '0');
       if (minsEl) minsEl.textContent = String(m).padStart(2, '0');
       if (secsEl) secsEl.textContent = String(s).padStart(2, '0');
+      if (alertDaysEl) alertDaysEl.textContent = String(d);
     }
     updateCountdown();
     const cdInterval = setInterval(updateCountdown, 1000);
