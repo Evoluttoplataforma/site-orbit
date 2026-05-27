@@ -19,6 +19,24 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://orbitgestao.com.br/agentes</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://orbitgestao.com.br/agentes/estrategista</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://orbitgestao.com.br/preco</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://orbitgestao.com.br/sobre</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
@@ -31,16 +49,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://orbitgestao.com.br/parcerias</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://orbitgestao.com.br/blog</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://orbitgestao.com.br/glossario</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://orbitgestao.com.br/historias</loc>
@@ -67,19 +85,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/treinamentos</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://orbitgestao.com.br/politica-privacidade</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://orbitgestao.com.br/termos-de-servico</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -91,7 +97,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/planejamento-estrategico-morre-terceiro-mes</loc>
+    <loc>https://orbitgestao.com.br/blog/erp-vs-plataforma-all-in-one</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -103,13 +109,19 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/plataforma-gestao-escalavel</loc>
+    <loc>https://orbitgestao.com.br/blog/gestao-financeira-integrada-empresa</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/plataforma-gestao-ia-agentic-alternativa-consultoria</loc>
+    <loc>https://orbitgestao.com.br/blog/imersao-mentoria-consultoria-resultado</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://orbitgestao.com.br/blog/knowledge-base-corporativo-como-escolher</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -169,13 +181,19 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/como-criar-indicadores-empresa</loc>
+    <loc>https://orbitgestao.com.br/blog/como-organizar-prospeccao-vendas-b2b</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://orbitgestao.com.br/blog/como-automatizar-processos-empresa</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://orbitgestao.com.br/blog/como-criar-indicadores-empresa</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -193,43 +211,19 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/indicadores-nao-refletem-realidade</loc>
+    <loc>https://orbitgestao.com.br/blog/plataforma-gestao-escalavel</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://orbitgestao.com.br/blog/dre-tempo-real</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://orbitgestao.com.br/blog/como-centralizar-documentacao-empresa</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://orbitgestao.com.br/blog/como-escalar-empresa-sem-dobrar-equipe</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://orbitgestao.com.br/blog/como-integrar-sistemas-empresa</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://orbitgestao.com.br/blog/como-mapear-processos-empresa-bpmn</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://orbitgestao.com.br/blog/como-organizar-prospeccao-vendas-b2b</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://orbitgestao.com.br/blog/como-reter-talentos-empresa</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -259,37 +253,13 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/dre-tempo-real</loc>
+    <loc>https://orbitgestao.com.br/blog/indicadores-nao-refletem-realidade</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/encontrar-documento-empresa</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://orbitgestao.com.br/blog/erp-vs-plataforma-all-in-one</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://orbitgestao.com.br/blog/gestao-financeira-integrada-empresa</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://orbitgestao.com.br/blog/imersao-mentoria-consultoria-resultado</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://orbitgestao.com.br/blog/knowledge-base-corporativo-como-escolher</loc>
+    <loc>https://orbitgestao.com.br/blog/plataforma-gestao-ia-agentic-alternativa-consultoria</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -314,6 +284,42 @@
   </url>
   <url>
     <loc>https://orbitgestao.com.br/blog/perder-talentos-para-concorrentes</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://orbitgestao.com.br/blog/planejamento-estrategico-morre-terceiro-mes</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://orbitgestao.com.br/blog/como-escalar-empresa-sem-dobrar-equipe</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://orbitgestao.com.br/blog/como-integrar-sistemas-empresa</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://orbitgestao.com.br/blog/como-mapear-processos-empresa-bpmn</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://orbitgestao.com.br/blog/como-reter-talentos-empresa</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://orbitgestao.com.br/blog/encontrar-documento-empresa</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -397,80 +403,50 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/cluster/processos-manuais</loc>
+    <loc>https://orbitgestao.com.br/historias/time-produtivo</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/cluster/processos-bpmn</loc>
+    <loc>https://orbitgestao.com.br/historias/templum-consultoria</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/cluster/estrategia-execucao</loc>
+    <loc>https://orbitgestao.com.br/historias/joaps-consultoria</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/cluster/comunicacao-entre-setores</loc>
-    <lastmod>2026-05-27</lastmod>
+    <loc>https://orbitgestao.com.br/historias/crs-residuos</loc>
+    <lastmod>2026-05-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/cluster/sistemas-integracao</loc>
-    <lastmod>2026-05-27</lastmod>
+    <loc>https://orbitgestao.com.br/historias/potencialize-resultados</loc>
+    <lastmod>2026-05-22</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/cluster/rh-talentos</loc>
-    <lastmod>2026-05-27</lastmod>
+    <loc>https://orbitgestao.com.br/historias/weagle-ai</loc>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/cluster/indicadores</loc>
-    <lastmod>2026-05-27</lastmod>
+    <loc>https://orbitgestao.com.br/historias/ritual-de-gestao</loc>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/cluster/vendas-crm</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://orbitgestao.com.br/blog/cluster/gestao-pessoas-capacitacao</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://orbitgestao.com.br/blog/cluster/consultoria-accountability</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://orbitgestao.com.br/blog/cluster/documentacao</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://orbitgestao.com.br/blog/cluster/operacao-escalavel</loc>
-    <lastmod>2026-05-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://orbitgestao.com.br/blog/cluster/financeiro-integrado</loc>
-    <lastmod>2026-05-27</lastmod>
+    <loc>https://orbitgestao.com.br/historias/econtech-consultoria</loc>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

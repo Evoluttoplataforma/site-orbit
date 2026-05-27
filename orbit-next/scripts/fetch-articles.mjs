@@ -315,6 +315,7 @@ function generateSitemap(articles) {
     ['/seguranca-ia', '0.6', 'monthly'],
     ['/live', '0.8', 'weekly'],
     ['/treinamentos', '0.8', 'weekly'],
+    ['/bootcamp-orbit', '0.9', 'weekly'],
     ['/politica-privacidade', '0.3', 'yearly'],
     ['/termos-de-servico', '0.3', 'yearly'],
   ];
