@@ -3296,10 +3296,19 @@ JSON.stringify(schemaOrg, null, 2) +
             } else {
                 actionBtns = '<button class="btn btn-primary btn-sm" onclick="updateCommentStatus(' + c.id + ',&apos;approved&apos;)" style="font-size:0.72rem;padding:4px 10px;"><i class="fas fa-check" style="margin-right:4px;"></i>Aprovar</button>';
             }
+            // Botão Responder — só pra comentários do leitor (não-reply)
+            if (!c.is_admin_reply) {
+                actionBtns = '<button class="btn btn-secondary btn-sm" onclick="replyComment(' + c.id + ')" style="font-size:0.72rem;padding:4px 10px;background:#ffba1a;color:#0D1117;border-color:#ffba1a;"><i class="fas fa-reply" style="margin-right:4px;"></i>Responder</button>' + actionBtns;
+            }
 
-            return '<tr>' +
+            // Badge "↳ resposta" pra replies do admin
+            var replyTag = c.is_admin_reply
+                ? '<span style="display:inline-block;background:rgba(255,186,26,0.16);color:#ffba1a;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:2px 8px;border-radius:4px;margin-left:6px;">↳ Resposta</span>'
+                : '';
+
+            return '<tr' + (c.is_admin_reply ? ' style="background:rgba(255,186,26,0.03);"' : '') + '>' +
                 '<td><div>' +
-                    '<strong style="display:block;">' + escapeHtml(c.name) + '</strong>' +
+                    '<strong style="display:block;">' + escapeHtml(c.name) + replyTag + '</strong>' +
                     '<span style="font-size:0.78rem;color:var(--gray-500);">' + escapeHtml(c.email) + '</span>' +
                 '</div></td>' +
                 '<td style="max-width:250px;"><span style="font-size:0.85rem;">' + escapeHtml(commentPreview) + '</span></td>' +
@@ -3335,6 +3344,41 @@ JSON.stringify(schemaOrg, null, 2) +
             toast('Comentário excluído.');
             refreshComments();
         } catch(e) { toast('Erro ao excluir.', 'error'); }
+    }
+
+    async function replyComment(parentId) {
+        // Acha o comentário pai pra puxar article_id/article_slug
+        var parent = (supabaseComments || []).find(function(c) { return c.id === parentId; });
+        if (!parent) { toast('Comentário não encontrado.', 'error'); return; }
+        var texto = prompt('Sua resposta (vai aparecer como Equipe Orbit, já aprovada):');
+        if (!texto || !texto.trim()) return;
+        var clean = texto.trim();
+        if (clean.length < 2 || clean.length > 5000) { toast('Resposta deve ter entre 2 e 5000 caracteres.', 'error'); return; }
+        try {
+            var reply = {
+                article_id:     parent.article_id,
+                article_slug:   parent.article_slug || null,
+                parent_id:      parentId,
+                is_admin_reply: true,
+                name:           'Equipe Orbit',
+                email:          session.email || 'contato@orbitgestao.com.br',
+                comment:        clean,
+                status:         'approved'
+            };
+            var res = await supaFetch(SUPABASE_URL + '/rest/v1/blog_comments', {
+                method: 'POST',
+                headers: {
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': 'Bearer ' + session.access_token,
+                    'Content-Type': 'application/json',
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify(reply)
+            });
+            if (!res.ok) throw new Error('HTTP ' + res.status);
+            toast('Resposta publicada.');
+            refreshComments();
+        } catch(e) { toast('Erro ao responder.', 'error'); }
     }
 
     // === NOTIFICATIONS ===
@@ -3696,6 +3740,7 @@ JSON.stringify(schemaOrg, null, 2) +
     window.refreshComments = refreshComments;
     window.updateCommentStatus = updateCommentStatus;
     window.deleteComment = deleteComment;
+    window.replyComment = replyComment;
     window.viewStoryDetail = viewStoryDetail;
     window.closeStoryDetail = closeStoryDetail;
     window.clearStoryEditor = clearStoryEditor;

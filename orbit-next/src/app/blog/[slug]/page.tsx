@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import articles from '@/data/articles.json';
 import { headerHTML } from '@/components/shared-header';
 import { footerHTML } from '@/components/shared-footer';
+import BlogComments from '@/components/blog/BlogComments';
 
 interface Article {
   id: number;
@@ -360,7 +361,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       </div>
       ${relatedHTML}
     </div>
-    ${footerHTML}
   `;
 
   return (
@@ -369,6 +369,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       {faqJsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />}
       <div dangerouslySetInnerHTML={{ __html: articleHTML }} />
+      <BlogComments slug={article.slug} />
+      <div dangerouslySetInnerHTML={{ __html: footerHTML }} />
     </>
   );
 }
