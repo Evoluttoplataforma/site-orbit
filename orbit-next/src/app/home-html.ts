@@ -1668,7 +1668,7 @@ export const pageHTML = `
             <div class="olivia-intro" data-reveal>
                 <div>
                     <span class="section-badge">Conheça a líder do time</span>
-                    <h2 style="font-size:2.25rem;font-weight:800;color:#fff;margin:16px 0;">Olívia, sua <span style="color:#ffba1a;">Coordenadora de IA</span></h2>
+                    <h2 style="font-size:2.25rem;font-weight:800;color:#fff;margin:16px 0;line-height:1.15;">Conheça a <span style="color:#ffba1a;">Olívia</span>.<br>Ela coordena o <span style="color:#ffba1a;">time de IA</span> que opera a sua gestão.</h2>
                     <p style="color:#C9D1D9;font-size:1.1rem;line-height:1.7;margin-bottom:20px;">Olívia é a especialista em IA do Orbit e a voz do sistema para sua empresa. Ela coordena dezenas de agentes, conecta dados de todos os departamentos e traduz complexidade em clareza para a tomada de decisão.</p>
                     <p style="color:#8B949E;font-size:1rem;line-height:1.7;margin-bottom:24px;">Quando o Agente de Riscos detecta uma ameaça, é a Olívia que cruza com o Agente de Oportunidades e apresenta o cenário completo. Humana o suficiente para criar vínculo. Inteligente o suficiente para gerar valor real.</p>
                     <div style="background:#1C2333;border-left:3px solid #ffba1a;padding:20px 24px;border-radius:0 12px 12px 0;">
