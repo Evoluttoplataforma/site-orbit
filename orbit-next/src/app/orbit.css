@@ -14689,6 +14689,9 @@ html[lang="en"] .pricing-card--featured::before { content: "RECOMMENDED" !import
             gap: 24px;
             align-items: start;
         }
+        /* Crítico: sem min-width:0 nas colunas 1fr, conteúdo wide (tabela/long word)
+           expande além do viewport e empurra o painel de Configurações pra fora da tela. */
+        .editor-grid > * { min-width: 0; max-width: 100%; }
         .form-group {
             margin-bottom: 20px;
         }
@@ -14782,7 +14785,17 @@ html[lang="en"] .pricing-card--featured::before { content: "RECOMMENDED" !import
             font-size: 1rem;
             line-height: 1.8;
             color: var(--gray-800);
+            /* Responsivo: cabe na largura disponível mesmo com tabelas/strings longas */
+            max-width: 100%;
+            min-width: 0;
+            overflow-x: auto;
+            word-wrap: break-word;
+            overflow-wrap: anywhere;
         }
+        /* Tabelas dentro do editor ganham scroll horizontal próprio em vez de
+           empurrar o layout. Imagens nunca passam da largura do editor. */
+        .rich-editor table { display: block; max-width: 100%; overflow-x: auto; }
+        .rich-editor img, .rich-editor pre, .rich-editor iframe { max-width: 100%; height: auto; }
         .rich-editor:focus {
             border-color: var(--primary);
         }
@@ -14925,7 +14938,8 @@ html[lang="en"] .pricing-card--featured::before { content: "RECOMMENDED" !import
         .main { overflow-x: hidden; }
         .content { overflow-x: hidden; }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 1280px) {
+            /* Notebook normal (≤1280px): painel de Configurações empilha embaixo do editor. */
             .editor-grid {
                 grid-template-columns: 1fr;
             }
