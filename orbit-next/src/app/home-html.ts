@@ -39,7 +39,6 @@ export const pageHTML = `
                 </div>
                 <!-- ═══ INTEGRAÇÕES GOOGLE (logo abaixo dos credentials — visível pro crawler) ═══ -->
                 <p aria-label="Integrações com produtos Google" style="margin:28px auto 0;max-width:760px;text-align:center;color:#8B949E;font-size:0.95rem;line-height:1.65;">
-                    <i class="fab fa-google" style="color:#ffba1a;margin-right:6px;"></i>
                     O <strong style="color:#C9D1D9;">Orbit</strong> se integra com
                     <strong style="color:#ffba1a;">Google Calendar</strong>,
                     <strong style="color:#ffba1a;">Google Drive</strong>,
