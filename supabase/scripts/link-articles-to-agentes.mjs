@@ -98,24 +98,32 @@ async function fetchArticles() {
   return await resp.json();
 }
 
-async function updateArticle(id, content) {
-  const resp = await fetch(`${SUPABASE_URL}/rest/v1/blog_articles?id=eq.${id}`, {
-    method: 'PATCH',
+// SILENT BULK UPDATE — usa a RPC bulk_update_blog_articles_silent
+// pra pausar o webhook do Cloudflare durante o bulk (1 UPDATE = 1 webhook
+// senão; com 33 artigos viraria 33 deploys na fila do Cloudflare).
+async function silentBulkUpdate(updates) {
+  const resp = await fetch(`${SUPABASE_URL}/rest/v1/rpc/bulk_update_blog_articles_silent`, {
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       apikey: SUPABASE_KEY,
       Authorization: `Bearer ${SUPABASE_KEY}`,
-      Prefer: 'return=minimal',
     },
-    body: JSON.stringify({ content, updated_at: today }),
+    body: JSON.stringify({ updates }),
   });
-  return resp.ok;
+  if (!resp.ok) {
+    const txt = await resp.text();
+    throw new Error(`RPC silent_bulk falhou (HTTP ${resp.status}): ${txt.slice(0, 300)}`);
+  }
+  return await resp.json(); // retorna nº atualizados
 }
 
 console.log('▶ Buscando artigos mapeados…');
 const articles = await fetchArticles();
 console.log(`  ${articles.length} achados\n`);
 
+// 1) Processa TODOS em memória (sem tocar no banco ainda)
+const updates = [];
 const results = [];
 for (const a of articles) {
   const agente = BLOG_TO_AGENTE[a.slug];
@@ -125,12 +133,29 @@ for (const a of articles) {
     results.push({ slug: a.slug, agente, status: reason });
     continue;
   }
-  const ok = await updateArticle(a.id, html);
-  results.push({ slug: a.slug, agente, status: ok ? 'OK' : 'FALHOU' });
-  process.stdout.write(ok ? '.' : 'F');
+  updates.push({ id: a.id, content: html });
+  results.push({ slug: a.slug, agente, status: 'queued' });
 }
-console.log('\n');
+
+// 2) Manda TUDO numa única RPC silent (0 webhooks disparados)
+if (updates.length === 0) {
+  console.log('Nada pra atualizar.');
+} else {
+  console.log(`▶ ${updates.length} artigos pra atualizar — chamando RPC silent (pausa o webhook)…`);
+  try {
+    const n = await silentBulkUpdate(updates);
+    console.log(`✅ ${n} atualizados em modo silencioso (0 deploys disparados).`);
+    for (const r of results) if (r.status === 'queued') r.status = 'OK';
+  } catch (err) {
+    console.error('❌ Falha na RPC silent:', err.message);
+    console.error('   → Migration aplicada? Rode supabase/migrations/20260529_bulk_silent_helper.sql no SQL Editor.');
+    for (const r of results) if (r.status === 'queued') r.status = 'FALHOU';
+  }
+}
+console.log();
 console.table(results);
 const okCount = results.filter((r) => r.status === 'OK').length;
 const skipCount = results.filter((r) => r.status === 'já tem').length;
-console.log(`\n✅ ${okCount} atualizados · ${skipCount} já tinham · ${results.length - okCount - skipCount} sem mudança`);
+const failCount = results.filter((r) => r.status === 'FALHOU').length;
+console.log(`\n✅ ${okCount} atualizados · ${skipCount} já tinham · ${failCount} falharam`);
+console.log('\nℹ️  Nenhum deploy foi disparado. Se precisa que o site reflita agora, faça um commit/push qualquer pra triggar 1 build único.');
