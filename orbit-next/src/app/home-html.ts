@@ -45,6 +45,16 @@ export const pageHTML = `
                         <span>no Orbit</span>
                     </div>
                 </div>
+                <!-- ═══ INTEGRAÇÕES GOOGLE (logo abaixo dos credentials — visível pro crawler) ═══ -->
+                <p aria-label="Integrações com produtos Google" style="margin:28px auto 0;max-width:760px;text-align:center;color:#8B949E;font-size:0.95rem;line-height:1.65;">
+                    <i class="fab fa-google" style="color:#ffba1a;margin-right:6px;"></i>
+                    O <strong style="color:#C9D1D9;">Orbit</strong> se integra com
+                    <strong style="color:#ffba1a;">Google Calendar</strong>,
+                    <strong style="color:#ffba1a;">Google Drive</strong>,
+                    <strong style="color:#ffba1a;">Google Analytics</strong> e
+                    <strong style="color:#ffba1a;">Google Ads</strong>
+                    para centralizar seus dados de gestão em um só lugar.
+                </p>
             </div>
         </div>
     </section>
@@ -3655,23 +3665,6 @@ export const pageHTML = `
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- ═══ INTEGRAÇÕES GOOGLE (visível pro crawler — Google Workspace / Analytics / Ads) ═══ -->
-    <section aria-label="Integrações com produtos Google" style="background:#0D1117;padding:34px 24px;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);">
-      <div class="container" style="max-width:1100px;margin:0 auto;text-align:center;">
-        <div style="display:inline-flex;align-items:center;gap:10px;color:#8B949E;font-size:0.78rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:14px;">
-          <i class="fab fa-google" style="color:#ffba1a;"></i> Integrações
-        </div>
-        <p style="color:#C9D1D9;font-size:1.05rem;line-height:1.7;margin:0 auto;max-width:780px;">
-          O <strong style="color:#fff;">Orbit</strong> se integra com
-          <strong style="color:#ffba1a;">Google Calendar</strong>,
-          <strong style="color:#ffba1a;">Google Drive</strong>,
-          <strong style="color:#ffba1a;">Google Analytics</strong> e
-          <strong style="color:#ffba1a;">Google Ads</strong>
-          para centralizar seus dados de gestão em um só lugar.
-        </p>
-      </div>
     </section>
 
     <hr class="glow-divider">
