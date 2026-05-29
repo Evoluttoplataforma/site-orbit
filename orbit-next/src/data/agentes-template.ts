@@ -7,6 +7,23 @@
 import { Item, AGENTES_INDEX, MODULOS_INDEX } from './agentes';
 import { headerHTML } from '@/components/shared-header';
 import { footerHTML } from '@/components/shared-footer';
+import { getMockup } from './agentes-mockups';
+import articles from './articles.json';
+
+interface BlogArticle {
+  title: string;
+  slug: string;
+  cover_url: string | null;
+  category: string | null;
+}
+const ARTICLES_BY_SLUG: Record<string, BlogArticle> = Object.fromEntries(
+  (articles as BlogArticle[]).map((a) => [a.slug, a])
+);
+const CAT_LABELS: Record<string, string> = {
+  estrategica: 'Gestão Estratégica', processos: 'Processos', indicadores: 'Indicadores',
+  lideranca: 'Liderança', ia: 'IA & Inovação', novidades: 'Novidades', marketing: 'Marketing',
+  'planejamento-estrategico': 'Planejamento',
+};
 
 const DEMO_URL = 'https://demonstracao.orbitgestao.com.br/chat';
 const HERO_BG = '/images/hero-bg.avif';
@@ -14,13 +31,6 @@ const HERO_BG = '/images/hero-bg.avif';
 function esc(s: string): string {
   return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
-
-// Depoimentos genéricos do site (mesmos da home)
-const DEPOIMENTOS = [
-  { quote: 'Em 3 meses, conseguimos mapear todos os processos críticos e reduzir retrabalho em 40%. O Orbit organizou o que a gente tentava há anos.', name: 'Maria Silva', role: 'Diretora de Operações, TechParts Ltda', av: 'MS' },
-  { quote: 'O agente de treinamento via WhatsApp mudou o jogo. A equipe engaja porque não precisa logar em nada. Simples e direto.', name: 'Roberto Costa', role: 'CEO, Grupo Nordeste', av: 'RC' },
-  { quote: 'Finalmente tenho KPIs em tempo real. Antes, descobria os problemas na semana seguinte. Agora, atuo no mesmo dia.', name: 'Ana Mendes', role: 'Gerente de Qualidade, FastLog', av: 'AM' },
-];
 
 export function renderItemHTML(a: Item): string {
   // Outros itens do mesmo tipo (cross-link) + items do tipo oposto (rodapé)
@@ -34,7 +44,7 @@ export function renderItemHTML(a: Item): string {
   return `
     ${headerHTML}
 
-    <!-- HERO com background image -->
+    <!-- HERO com background image + mockup contextual -->
     <section class="lp-hero" id="hero" style="min-height:auto;padding:140px 0 100px;position:relative;overflow:hidden;">
       <div class="lp-hero__bg-image" style="position:absolute;inset:0;z-index:0;opacity:0.18;">
         <img src="${HERO_BG}" alt="" width="1920" height="1072" loading="eager" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:cover;">
@@ -42,26 +52,43 @@ export function renderItemHTML(a: Item): string {
       <div class="lp-hero__glow lp-hero__glow--1"></div>
       <div class="lp-hero__glow lp-hero__glow--2"></div>
       <div class="container" style="position:relative;z-index:1;">
-        <span class="hero-zoom__badge" data-reveal>
-          <i class="${a.fa}" style="margin-right:8px;"></i>${esc(a.pill)}
-        </span>
-        <h1 class="hero-zoom__title" data-reveal style="margin-top:20px;">
-          ${esc(a.h1)} <span class="hero-zoom__title-highlight">${esc(a.h1Highlight)}</span>
-        </h1>
-        <p class="hero-zoom__subtitle" data-reveal>${esc(a.sub)}</p>
-        <div class="hero-zoom__ctas" data-reveal style="margin-top:40px;">
-          <a href="${DEMO_URL}" class="btn btn-primary btn-lg hero-cta-glow">VER O ${esc(a.nome).toUpperCase()} EM AÇÃO</a>
-          <a href="#capacidades" class="btn btn-ghost btn-lg">Conhecer as capacidades <i class="fas fa-arrow-down"></i></a>
-        </div>
-        <div class="hero-zoom__credentials" data-reveal style="margin-top:48px;">
-          <div class="hero-zoom__credential"><strong>30 anos</strong><span>de metodologia GSN</span></div>
-          <div class="hero-zoom__credential-divider"></div>
-          <div class="hero-zoom__credential"><strong>8.000+</strong><span>empresas atendidas</span></div>
-          <div class="hero-zoom__credential-divider"></div>
-          <div class="hero-zoom__credential"><strong>+2.900</strong><span>no Orbit</span></div>
+        <div class="agent-hero-grid">
+          <div>
+            <span class="hero-zoom__badge" data-reveal>
+              <i class="${a.fa}" style="margin-right:8px;"></i>${esc(a.pill)}
+            </span>
+            <h1 class="hero-zoom__title" data-reveal style="margin-top:20px;text-align:left;">
+              ${esc(a.h1)} <span class="hero-zoom__title-highlight">${esc(a.h1Highlight)}</span>
+            </h1>
+            <p class="hero-zoom__subtitle" data-reveal style="text-align:left;margin-left:0;">${esc(a.sub)}</p>
+            <div class="hero-zoom__ctas" data-reveal style="margin-top:36px;justify-content:flex-start;">
+              <a href="${DEMO_URL}" class="btn btn-primary btn-lg hero-cta-glow">VER EM AÇÃO</a>
+              <a href="#capacidades" class="btn btn-ghost btn-lg">Capacidades <i class="fas fa-arrow-down"></i></a>
+            </div>
+            <div class="hero-zoom__credentials" data-reveal style="margin-top:40px;justify-content:flex-start;">
+              <div class="hero-zoom__credential"><strong>30 anos</strong><span>metodologia GSN</span></div>
+              <div class="hero-zoom__credential-divider"></div>
+              <div class="hero-zoom__credential"><strong>8.000+</strong><span>empresas</span></div>
+              <div class="hero-zoom__credential-divider"></div>
+              <div class="hero-zoom__credential"><strong>+2.900</strong><span>no Orbit</span></div>
+            </div>
+          </div>
+          <div class="agent-hero-mockup" data-reveal>
+            ${getMockup(a.slug)}
+          </div>
         </div>
       </div>
     </section>
+    <style>
+      .agent-hero-grid { display:grid; grid-template-columns: 1fr 1.05fr; gap:48px; align-items:center; }
+      .agent-hero-mockup { width:100%; max-width:560px; justify-self:end; }
+      @media (max-width: 980px) {
+        .agent-hero-grid { grid-template-columns: 1fr; gap:40px; }
+        .agent-hero-mockup { justify-self:center; max-width:520px; }
+        .agent-hero-grid h1, .agent-hero-grid p, .agent-hero-grid .hero-zoom__ctas, .agent-hero-grid .hero-zoom__credentials { text-align:center !important; justify-content:center !important; }
+        .agent-hero-grid .hero-zoom__subtitle { margin-left:auto !important; margin-right:auto !important; }
+      }
+    </style>
 
     <hr class="glow-divider">
 
@@ -128,27 +155,33 @@ export function renderItemHTML(a: Item): string {
 
     <hr class="glow-divider">
 
-    <!-- DEPOIMENTOS -->
-    <section class="testi-section">
-      <div class="container">
-        <div class="testi-header" data-reveal>
-          <div class="testi-badge">Depoimentos</div>
-          <h2>Quem usa, recomenda</h2>
-          <p>Empresas brasileiras de médio porte transformando a gestão com o Orbit.</p>
+    <!-- DEPOIMENTOS EM VÍDEO (mesma da home) -->
+    <section class="depo-section" style="padding:80px 20px;background:linear-gradient(180deg,#0D1117 0%,#161B22 100%);position:relative;overflow:hidden;">
+      <div class="container" style="text-align:center;margin-bottom:48px;">
+        <span class="section-badge" style="display:inline-block;padding:6px 14px;background:rgba(255,186,26,0.10);border:1px solid rgba(255,186,26,0.25);border-radius:50px;color:#ffba1a;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:2px;margin-bottom:18px;">Quem já usa</span>
+        <h2 style="font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;color:#fff;line-height:1.15;letter-spacing:-0.02em;margin:0 0 14px;">Empresários que viram o <span style="color:#ffba1a;">Orbit transformar</span> a operação</h2>
+        <p style="color:#C9D1D9;font-size:1.05rem;line-height:1.6;max-width:680px;margin:0 auto;">Quatro consultorias brasileiras contam, em primeira pessoa, o que mudou depois de implantar a Orbit.</p>
+      </div>
+      <div class="depo-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1200px;margin:0 auto;">
+        <div class="depo-card">
+          <div class="depo-card__video"><iframe src="https://player.vimeo.com/video/1194123078?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+          <div class="depo-card__info"><h3>Lucineia Pedrosa</h3><p>Econtech Consultoria</p></div>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:48px;">
-          ${DEPOIMENTOS.map((d) => `
-            <div class="testi-card">
-              <p class="testi-quote">"${esc(d.quote)}"</p>
-              <div class="testi-author">
-                <div class="testi-avatar">${esc(d.av)}</div>
-                <div class="testi-info">
-                  <div class="testi-name">${esc(d.name)}</div>
-                  <div class="testi-role">${esc(d.role)}</div>
-                </div>
-              </div>
-            </div>`).join('')}
+        <div class="depo-card">
+          <div class="depo-card__video"><iframe src="https://player.vimeo.com/video/1194124564?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+          <div class="depo-card__info"><h3>Hygor Limar</h3><p>Potencialize Resultados</p></div>
         </div>
+        <div class="depo-card">
+          <div class="depo-card__video"><iframe src="https://player.vimeo.com/video/1194125389?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+          <div class="depo-card__info"><h3>Bruno Lozano</h3><p>Ritual de Gestão</p></div>
+        </div>
+        <div class="depo-card">
+          <div class="depo-card__video"><iframe src="https://player.vimeo.com/video/1194126879?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+          <div class="depo-card__info"><h3>Rogério Menossi</h3><p>Time Produtivo</p></div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:36px;">
+        <a href="/historias" style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:rgba(255,186,26,0.10);border:1px solid rgba(255,186,26,0.30);color:#ffba1a;border-radius:50px;font-weight:700;font-size:14px;text-decoration:none;transition:all 0.2s;">Ver todas as histórias de clientes <i class="fa-solid fa-arrow-right"></i></a>
       </div>
     </section>
 
@@ -170,19 +203,34 @@ export function renderItemHTML(a: Item): string {
 
     <hr class="glow-divider">
 
-    <!-- BLOG RELACIONADO (dark) -->
-    <section class="lp-section lp-section--dark">
+    <!-- BLOG RELACIONADO — knowledge-card com imagem (mesmo padrão da home) -->
+    <section class="knowledge-section section--light">
       <div class="container">
-        <div class="lp-header" data-reveal>
-          <span class="lp-badge lp-badge--gold">Leitura recomendada</span>
-          <h2>Conteúdos relacionados ao <span class="highlight">${esc(a.nome)}</span></h2>
+        <div class="section-header" data-reveal>
+          <h2>Amplie seus <span class="highlight">conhecimentos sobre ${esc(a.nome)}</span></h2>
+          <p style="color:var(--gray-400);margin-top:8px;font-size:0.95rem;">Artigos recentes selecionados pelo time editorial</p>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:40px;">
-          ${a.blog.map((b) => `
-            <a href="/blog/${esc(b.slug)}" class="agent-card" style="text-decoration:none;display:block;">
-              <div style="font-size:11px;color:#ffba1a;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">Blog · ${esc(b.cat)}</div>
-              <h3>${esc(b.title)}</h3>
-            </a>`).join('')}
+        <div class="knowledge-grid">
+          ${a.blog.slice(0, 3).map((b) => {
+            const real = ARTICLES_BY_SLUG[b.slug];
+            const cover = real?.cover_url || 'https://placehold.co/400x250/0D1117/ffba1a?text=Orbit+Blog';
+            const title = real?.title || b.title;
+            const cat = (real?.category && CAT_LABELS[real.category]) || b.cat;
+            return `
+            <a href="/blog/${esc(b.slug)}" class="knowledge-card" style="text-decoration:none;color:inherit;display:block;">
+              <div class="knowledge-card__image">
+                <img src="${esc(cover)}" alt="${esc(title)}" width="400" height="250" loading="lazy" decoding="async">
+                <span class="knowledge-card__type"><i class="fas fa-file-alt"></i> ${esc(cat)}</span>
+              </div>
+              <div class="knowledge-card__body">
+                <h4>${esc(title)}</h4>
+                <span class="knowledge-card__link">Ler artigo</span>
+              </div>
+            </a>`;
+          }).join('')}
+        </div>
+        <div style="text-align:center;margin-top:36px;">
+          <a href="/blog" class="btn btn-dark btn-lg">Ver todos os artigos</a>
         </div>
       </div>
     </section>
