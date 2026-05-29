@@ -128,8 +128,8 @@ export function renderItemHTML(a: Item): string {
 
     <hr class="glow-divider">
 
-    <!-- DEPOIMENTOS (light section) -->
-    <section class="testi-section section--light">
+    <!-- DEPOIMENTOS -->
+    <section class="testi-section">
       <div class="container">
         <div class="testi-header" data-reveal>
           <div class="testi-badge">Depoimentos</div>

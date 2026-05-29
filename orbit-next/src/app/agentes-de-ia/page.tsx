@@ -173,8 +173,8 @@ export default function AgentesPillarPage() {
 
     <hr class="glow-divider">
 
-    <!-- DEPOIMENTOS (light) -->
-    <section class="testi-section section--light">
+    <!-- DEPOIMENTOS -->
+    <section class="testi-section">
       <div class="container">
         <div class="testi-header" data-reveal>
           <div class="testi-badge">Depoimentos</div>
@@ -185,21 +185,21 @@ export default function AgentesPillarPage() {
       </div>
     </section>
 
-    <!-- POR QUE UM TIME DE AGENTES (light) -->
-    <section class="lp-section section--light">
+    <!-- POR QUE UM TIME DE AGENTES (dark) -->
+    <section class="lp-section lp-section--dark">
       <div class="container" style="max-width:900px;">
         <div class="lp-header" data-reveal>
           <span class="lp-badge lp-badge--gold">Por que um time?</span>
-          <h2 style="color:#1A1D23;">Por que dividir em <span class="highlight">12 agentes</span> em vez de um único assistente?</h2>
+          <h2>Por que dividir em <span class="highlight">12 agentes</span> em vez de um único assistente?</h2>
         </div>
-        <div style="margin-top:36px;color:#4B5563;font-size:1.1rem;line-height:1.75;">
+        <div style="margin-top:36px;color:#C9D1D9;font-size:1.1rem;line-height:1.75;">
           <p data-reveal style="margin-bottom:18px;">Software de gestão tradicional foi pensado pra ser usado por humanos: você abre o sistema, navega menus, preenche campos, gera relatórios.</p>
           <p data-reveal style="margin-bottom:18px;">A nova geração de plataformas inverte essa lógica. Os agentes de IA fazem o trabalho operacional — você só decide.</p>
-          <p data-reveal style="margin-bottom:18px;"><strong style="color:#1A1D23;">Especialização.</strong> Cada agente entende profundamente sua área. O Agente Comercial sabe funil B2B, qualificação BANT. O Agente de Indicadores conhece métricas operacionais e estratégicas. Esse conhecimento profundo é impossível com agente genérico.</p>
-          <p data-reveal style="margin-bottom:18px;"><strong style="color:#1A1D23;">Memória contextual.</strong> Cada agente acumula histórico da sua empresa especificamente. Em 12 meses, ele opera como um especialista que conhece sua empresa há anos.</p>
-          <p data-reveal style="margin-bottom:18px;"><strong style="color:#1A1D23;">Coordenação pela Olívia.</strong> A Olívia mantém visão sistêmica. Venda fechada? Ela informa o módulo Financeiro pra preparar fatura, o Agente de Processos pra disparar onboarding, e o Agente de Documentos pra gerar contrato. Sem você coordenar manualmente.</p>
-          <p data-reveal style="margin-bottom:18px;"><strong style="color:#1A1D23;">Decisão humana protegida.</strong> Os agentes executam dentro de políticas que você define. Não tomam decisões críticas sem aprovação. Você lidera — eles trabalham junto com seu time humano, 24 horas por dia.</p>
-          <p data-reveal style="margin-bottom:0;">É exatamente o que SAP, Salesforce e Microsoft estão construindo globalmente. Nós construímos pra realidade brasileira — sobre <strong style="color:#1A1D23;">30 anos de metodologia consolidada do Grupo GSN</strong> (Templum &amp; Evolutto).</p>
+          <p data-reveal style="margin-bottom:18px;"><strong style="color:#fff;">Especialização.</strong> Cada agente entende profundamente sua área. O Agente Comercial sabe funil B2B, qualificação BANT. O Agente de Indicadores conhece métricas operacionais e estratégicas. Esse conhecimento profundo é impossível com agente genérico.</p>
+          <p data-reveal style="margin-bottom:18px;"><strong style="color:#fff;">Memória contextual.</strong> Cada agente acumula histórico da sua empresa especificamente. Em 12 meses, ele opera como um especialista que conhece sua empresa há anos.</p>
+          <p data-reveal style="margin-bottom:18px;"><strong style="color:#fff;">Coordenação pela Olívia.</strong> A Olívia mantém visão sistêmica. Venda fechada? Ela informa o módulo Financeiro pra preparar fatura, o Agente de Processos pra disparar onboarding, e o Agente de Documentos pra gerar contrato. Sem você coordenar manualmente.</p>
+          <p data-reveal style="margin-bottom:18px;"><strong style="color:#fff;">Decisão humana protegida.</strong> Os agentes executam dentro de políticas que você define. Não tomam decisões críticas sem aprovação. Você lidera — eles trabalham junto com seu time humano, 24 horas por dia.</p>
+          <p data-reveal style="margin-bottom:0;">É exatamente o que SAP, Salesforce e Microsoft estão construindo globalmente. Nós construímos pra realidade brasileira — sobre <strong style="color:#fff;">30 anos de metodologia consolidada do Grupo GSN</strong> (Templum &amp; Evolutto).</p>
         </div>
       </div>
     </section>
