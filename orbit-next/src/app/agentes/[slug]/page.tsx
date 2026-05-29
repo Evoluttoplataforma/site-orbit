@@ -6,6 +6,7 @@ import { footerHTML } from '@/components/shared-footer';
 
 const BASE = 'https://orbitgestao.com.br';
 const OG_FALLBACK = '/images/og-image.png'; // TODO: gerar OG dedicada por agente (1200x630) em /public/og/agente-{slug}.jpg
+const DEMO_URL = 'https://demonstracao.orbitgestao.com.br/chat';
 
 function esc(s: string): string {
   return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -25,164 +26,188 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: a.metaDesc,
     alternates: { canonical: url },
     openGraph: {
-      type: 'website',
-      title: a.metaTitle,
-      description: a.metaDesc,
-      url,
-      locale: 'pt_BR',
+      type: 'website', title: a.metaTitle, description: a.metaDesc, url, locale: 'pt_BR',
       images: [{ url: OG_FALLBACK, width: 1200, height: 630, alt: a.nome }],
     },
-    twitter: {
-      card: 'summary_large_image',
-      title: a.metaTitle,
-      description: a.metaDesc,
-      images: [OG_FALLBACK],
-    },
+    twitter: { card: 'summary_large_image', title: a.metaTitle, description: a.metaDesc, images: [OG_FALLBACK] },
   };
 }
 
-function renderAgenteHTML(a: Agente): string {
-  const url = `${BASE}/agentes/${a.slug}`;
+function renderHTML(a: Agente): string {
   const outros = AGENTES_INDEX.filter((x) => x.slug !== a.slug);
 
   return `
     ${headerHTML}
 
-    <main class="bg-[#0D1117] text-[#F5F5F0]" style="font-family:'Plus Jakarta Sans',system-ui,sans-serif;padding-top:100px;">
+    <!-- BREADCRUMB -->
+    <section class="lp-section" style="background:#0D1117;padding:100px 0 0;">
+      <div class="container">
+        <nav aria-label="Breadcrumb" style="font-size:14px;color:#8B949E;">
+          <a href="/" style="color:#8B949E;text-decoration:none;">Início</a> ›
+          <a href="/agentes-de-ia" style="color:#8B949E;text-decoration:none;">Agentes de IA</a> ›
+          <span style="color:#fff;">${esc(a.nome)}</span>
+        </nav>
+      </div>
+    </section>
 
-      <!-- BREADCRUMB -->
-      <nav aria-label="Breadcrumb" class="max-w-7xl mx-auto px-6 py-4 text-sm">
-        <ol class="flex items-center gap-2 text-white/60">
-          <li><a href="/" class="hover:text-[#FFBA1A]">Início</a></li>
-          <li>›</li>
-          <li><a href="/agentes-de-ia" class="hover:text-[#FFBA1A]">Agentes de IA</a></li>
-          <li>›</li>
-          <li class="text-white" aria-current="page">${esc(a.nome)}</li>
-        </ol>
-      </nav>
-
-      <!-- HERO -->
-      <header class="max-w-7xl mx-auto px-6 pt-8 pb-20">
-        <div class="inline-flex items-center gap-2 bg-[#FFBA1A]/10 border border-[#FFBA1A]/30 text-[#FFBA1A] text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider mb-8">
-          <i class="${a.fa}"></i>
-          Time Olívia · ${esc(a.pill)}
-        </div>
-        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.05] mb-6">
-          ${esc(a.h1)} <span class="text-[#FFBA1A]">${esc(a.h1Highlight)}</span>
+    <!-- HERO -->
+    <section class="lp-hero" id="hero" style="min-height:auto;padding:48px 0 100px;">
+      <div class="lp-hero__glow lp-hero__glow--1"></div>
+      <div class="lp-hero__glow lp-hero__glow--2"></div>
+      <div class="container">
+        <span class="hero-zoom__badge" data-reveal>
+          <i class="${a.fa}" style="margin-right:8px;"></i>Time Olívia · ${esc(a.pill)}
+        </span>
+        <h1 class="hero-zoom__title" data-reveal style="margin-top:20px;">
+          ${esc(a.h1)} <span class="hero-zoom__title-highlight">${esc(a.h1Highlight)}</span>
         </h1>
-        <p class="text-xl md:text-2xl text-white/80 max-w-3xl mb-10 leading-relaxed">${esc(a.sub)}</p>
-        <div class="flex flex-wrap gap-4 items-center">
-          <a href="https://demonstracao.orbitgestao.com.br/chat" class="bg-[#FFBA1A] hover:bg-[#E6A200] text-[#0D1117] font-bold px-8 py-4 rounded-lg transition">
-            Ver o ${esc(a.nome)} em ação
-          </a>
-          <a href="#capacidades" class="text-white/80 hover:text-white font-medium px-4 py-4 transition">
-            Conheça as capacidades ↓
-          </a>
+        <p class="hero-zoom__subtitle" data-reveal>${esc(a.sub)}</p>
+        <div class="hero-zoom__ctas" data-reveal style="margin-top:40px;">
+          <a href="${DEMO_URL}" class="btn btn-primary btn-lg hero-cta-glow">VER O ${esc(a.nome).toUpperCase()} EM AÇÃO</a>
+          <a href="#capacidades" class="btn btn-ghost btn-lg">Conhecer as capacidades <i class="fas fa-arrow-down"></i></a>
         </div>
-      </header>
+      </div>
+    </section>
 
-      <!-- CAPACIDADES -->
-      <section id="capacidades" class="max-w-7xl mx-auto px-6 py-20 border-t border-white/10">
-        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">O que o ${esc(a.nome)} faz</h2>
-        <p class="text-lg text-white/70 max-w-3xl mb-12">Capacidades que o agente executa por padrão, sem você precisar configurar do zero.</p>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <hr class="glow-divider">
+
+    <!-- CAPACIDADES -->
+    <section class="lp-section lp-section--dark" id="capacidades">
+      <div class="container">
+        <div class="lp-header" data-reveal>
+          <span class="lp-badge lp-badge--gold">Capacidades</span>
+          <h2>O que o ${esc(a.nome)} <span class="highlight">faz</span></h2>
+          <p>Capacidades que o agente executa por padrão, sem você precisar configurar do zero.</p>
+        </div>
+        <div class="agents-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:48px;">
           ${a.capacidades.map((c) => `
-            <article class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-[#FFBA1A]/40 transition">
-              <div class="w-10 h-10 bg-[#FFBA1A]/10 border border-[#FFBA1A]/30 rounded-lg flex items-center justify-center mb-4">
-                <i class="${c.fa} text-[#FFBA1A]"></i>
-              </div>
-              <h3 class="text-lg font-bold mb-2">${esc(c.titulo)}</h3>
-              <p class="text-sm text-white/70">${esc(c.desc)}</p>
+            <article class="agent-card">
+              <div class="agent-card__icon"><i class="${c.fa}"></i></div>
+              <h3>${esc(c.titulo)}</h3>
+              <p>${esc(c.desc)}</p>
             </article>`).join('')}
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- INTEGRAÇÕES COM OUTROS AGENTES -->
-      <section class="max-w-7xl mx-auto px-6 py-20 border-t border-white/10">
-        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Como o ${esc(a.nome)} opera com os outros agentes do Time Olívia</h2>
-        <p class="text-lg text-white/70 max-w-3xl mb-12">A Olívia conecta os agentes — o evento de uma área dispara ações nas outras automaticamente.</p>
-        <div class="grid md:grid-cols-2 gap-6">
+    <hr class="glow-divider">
+
+    <!-- INTEGRAÇÕES -->
+    <section class="lp-section lp-section--dark">
+      <div class="container">
+        <div class="lp-header" data-reveal>
+          <span class="lp-badge lp-badge--gold">Integrações no Time Olívia</span>
+          <h2>Como o ${esc(a.nome)} <span class="highlight">opera com os outros agentes</span></h2>
+          <p>A Olívia conecta os agentes — o evento de uma área dispara ações nas outras automaticamente.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:48px;">
           ${a.integracoes.map((i) => `
-            <article class="bg-white/5 border border-white/10 rounded-2xl p-6">
-              <div class="text-xs text-[#FFBA1A] font-bold uppercase tracking-wider mb-2">${esc(i.par)}</div>
-              <h3 class="text-lg font-bold mb-2">${esc(i.caso)}</h3>
-              <p class="text-sm text-white/70">${esc(i.desc)}</p>
+            <article class="agent-card">
+              <div style="font-size:11px;color:#ffba1a;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">${esc(i.par)}</div>
+              <h3>${esc(i.caso)}</h3>
+              <p>${esc(i.desc)}</p>
             </article>`).join('')}
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- CASOS DE USO -->
-      <section class="max-w-7xl mx-auto px-6 py-20 border-t border-white/10">
-        <h2 class="text-3xl md:text-4xl font-extrabold mb-12">3 cenários onde o ${esc(a.nome)} entrega mais valor</h2>
-        <div class="grid md:grid-cols-3 gap-8">
+    <hr class="glow-divider">
+
+    <!-- CASOS DE USO -->
+    <section class="lp-section lp-section--dark">
+      <div class="container">
+        <div class="lp-header" data-reveal>
+          <span class="lp-badge lp-badge--gold">Onde entrega mais valor</span>
+          <h2>3 cenários onde o ${esc(a.nome)} <span class="highlight">faz diferença</span></h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;margin-top:56px;">
           ${a.casos.map((c, i) => `
-            <article>
-              <div class="text-6xl font-extrabold text-[#FFBA1A] mb-4">0${i + 1}</div>
-              <h3 class="text-xl font-bold mb-3">${esc(c.titulo)}</h3>
-              <p class="text-white/70">${esc(c.desc)}</p>
+            <article style="text-align:left;">
+              <div style="font-size:4rem;font-weight:800;color:#ffba1a;line-height:1;margin-bottom:18px;">0${i + 1}</div>
+              <h3 style="font-size:1.3rem;font-weight:700;color:#fff;margin:0 0 14px;line-height:1.3;">${esc(c.titulo)}</h3>
+              <p style="color:#C9D1D9;line-height:1.65;margin:0;">${esc(c.desc)}</p>
             </article>`).join('')}
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- CTA DEMO -->
-      <section id="demo" class="max-w-7xl mx-auto px-6 py-20 border-t border-white/10">
-        <div class="bg-gradient-to-br from-[#FFBA1A]/10 to-transparent border border-[#FFBA1A]/30 rounded-3xl p-10 md:p-16 text-center">
-          <h2 class="text-3xl md:text-5xl font-extrabold mb-6">Quer ver o ${esc(a.nome)} operando na sua empresa?</h2>
-          <p class="text-xl text-white/80 max-w-2xl mx-auto mb-10">Demonstração de 30 minutos. Mostramos o ${esc(a.nome)} aplicado ao cenário real do seu negócio.</p>
-          <a href="https://demonstracao.orbitgestao.com.br/chat" class="inline-block bg-[#FFBA1A] hover:bg-[#E6A200] text-[#0D1117] font-bold text-lg px-10 py-5 rounded-lg transition">
-            Agendar demonstração →
-          </a>
-          <div class="mt-6 text-sm text-white/60 flex flex-wrap gap-6 justify-center">
-            <span>✓ 30 min</span><span>✓ Sem cartão</span><span>✓ Roadmap incluído</span>
-          </div>
+    <hr class="glow-divider">
+
+    <!-- FAQ -->
+    <section class="faq-section section--light" id="faq">
+      <div class="container">
+        <div class="section-header" data-reveal>
+          <h2>Perguntas frequentes sobre o ${esc(a.nome)}</h2>
         </div>
-      </section>
-
-      <!-- FAQ -->
-      <section class="max-w-4xl mx-auto px-6 py-20 border-t border-white/10">
-        <h2 class="text-3xl md:text-4xl font-extrabold mb-12 text-center">Perguntas frequentes sobre o ${esc(a.nome)}</h2>
-        <div class="space-y-4">
+        <div class="faq-list">
           ${a.faqs.map((f) => `
-            <details class="bg-white/5 border border-white/10 rounded-xl p-6 group">
-              <summary class="font-bold text-lg cursor-pointer flex justify-between items-center gap-4">
-                ${esc(f.q)}
-                <i class="fa-solid fa-chevron-down text-[#FFBA1A] transition group-open:rotate-180"></i>
-              </summary>
-              <p class="mt-4 text-white/70 leading-relaxed">${esc(f.a)}</p>
+            <details class="faq-item">
+              <summary>${esc(f.q)}</summary>
+              <div class="faq-item__answer"><p>${esc(f.a)}</p></div>
             </details>`).join('')}
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- BLOG RELACIONADO -->
-      <section class="max-w-7xl mx-auto px-6 py-20 border-t border-white/10">
-        <h2 class="text-2xl font-bold mb-8">Conteúdos relacionados ao ${esc(a.nome)}</h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <hr class="glow-divider">
+
+    <!-- BLOG RELACIONADO -->
+    <section class="lp-section lp-section--dark">
+      <div class="container">
+        <div class="lp-header" data-reveal>
+          <span class="lp-badge lp-badge--gold">Leitura recomendada</span>
+          <h2>Conteúdos relacionados ao <span class="highlight">${esc(a.nome)}</span></h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:40px;">
           ${a.blog.map((b) => `
-            <a href="/blog/${esc(b.slug)}" class="bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#FFBA1A]/40 rounded-xl p-6 transition block">
-              <div class="text-xs text-[#FFBA1A] uppercase tracking-wider font-bold mb-2">Blog · ${esc(b.cat)}</div>
-              <h3 class="font-bold mb-2">${esc(b.title)}</h3>
+            <a href="/blog/${esc(b.slug)}" class="agent-card" style="text-decoration:none;display:block;">
+              <div style="font-size:11px;color:#ffba1a;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px;">Blog · ${esc(b.cat)}</div>
+              <h3>${esc(b.title)}</h3>
             </a>`).join('')}
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- OUTROS AGENTES -->
-      <section class="max-w-7xl mx-auto px-6 py-20 border-t border-white/10">
-        <h2 class="text-2xl font-bold mb-8">Os outros agentes do Time Olívia</h2>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+    <hr class="glow-divider">
+
+    <!-- OUTROS AGENTES -->
+    <section class="lp-section lp-section--dark">
+      <div class="container">
+        <div class="lp-header" data-reveal>
+          <span class="lp-badge lp-badge--gold">Time Olívia</span>
+          <h2>Os outros agentes do <span class="highlight">time</span></h2>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:40px;">
           ${outros.map((o) => `
-            <a href="/agentes/${esc(o.slug)}" class="bg-white/5 hover:bg-white/10 border border-white/10 hover:border-[#FFBA1A]/40 rounded-lg p-4 transition text-center block">
-              <i class="${o.fa} text-[#FFBA1A] text-2xl mb-2 block"></i>
-              <div class="font-bold text-sm">${esc(o.nome)}</div>
+            <a href="/agentes/${esc(o.slug)}" class="agent-card" style="text-decoration:none;display:block;text-align:center;padding:24px 16px;">
+              <i class="${o.fa}" style="font-size:1.8rem;color:#ffba1a;margin-bottom:12px;display:block;"></i>
+              <div style="font-weight:700;font-size:0.95rem;color:#fff;">${esc(o.nome)}</div>
             </a>`).join('')}
         </div>
-        <div class="mt-8 text-center">
-          <a href="/agentes-de-ia" class="inline-flex items-center gap-2 text-[#FFBA1A] hover:text-[#FFCA4A] font-semibold">
-            <i class="fa-solid fa-arrow-right"></i> Veja o time completo na pillar
+        <div style="text-align:center;margin-top:40px;" data-reveal>
+          <a href="/agentes-de-ia" style="color:#ffba1a;font-weight:700;text-decoration:none;">
+            Veja o time completo na visão geral <i class="fas fa-arrow-right"></i>
           </a>
         </div>
-      </section>
+      </div>
+    </section>
 
-    </main>
+    <!-- CTA FINAL -->
+    <section class="lp-cta-final" id="contato-form">
+      <div class="lp-cta-final__glow"></div>
+      <div class="container">
+        <h2 data-reveal>Quer ver o <span class="text-gold">${esc(a.nome)}</span> operando na sua empresa?</h2>
+        <p data-reveal>Demonstração de 30 minutos. Mostramos o ${esc(a.nome)} aplicado ao cenário real do seu negócio.</p>
+        <div data-reveal>
+          <a href="${DEMO_URL}" class="btn-gold">AGENDAR DEMONSTRAÇÃO</a>
+        </div>
+        <div class="lp-cta-final__stats" data-reveal>
+          <div class="lp-cta-final__stat"><strong>30 min</strong><span>de duração</span></div>
+          <div class="lp-cta-final__stat"><strong>Sem cartão</strong><span>100% gratuito</span></div>
+          <div class="lp-cta-final__stat"><strong>Roadmap incluído</strong><span>aplicável ao seu negócio</span></div>
+        </div>
+      </div>
+    </section>
 
     ${footerHTML}
   `;
@@ -194,40 +219,25 @@ export default async function AgentePage({ params }: { params: Promise<{ slug: s
   if (!a) notFound();
   const url = `${BASE}/agentes/${slug}`;
 
-  // ═══ JSON-LD SCHEMAS (3 por página) ═══
   const serviceSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: a.nome,
-    alternateName: a.alternateNames,
-    description: a.metaDesc,
+    '@context': 'https://schema.org', '@type': 'Service',
+    name: a.nome, alternateName: a.alternateNames, description: a.metaDesc,
     provider: {
-      '@type': 'Organization',
-      name: 'Orbit Gestão',
-      url: BASE,
+      '@type': 'Organization', name: 'Orbit Gestão', url: BASE,
       sameAs: ['https://www.linkedin.com/company/orbit-gestao', 'https://www.instagram.com/orbitgestao'],
     },
     serviceType: `AI Operating System for Business — ${a.pill}`,
     areaServed: { '@type': 'Country', name: 'Brasil' },
     audience: { '@type': 'BusinessAudience', audienceType: 'Empresas B2B brasileiras' },
-    category: 'Business Software with AI Agents',
-    url,
+    category: 'Business Software with AI Agents', url,
     isRelatedTo: [{ '@type': 'Service', name: 'Olívia — IA Coordenadora', url: `${BASE}/agentes-de-ia` }],
   };
-
   const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: a.faqs.map((f) => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
-    })),
+    '@context': 'https://schema.org', '@type': 'FAQPage',
+    mainEntity: a.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
   };
-
   const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Início', item: BASE },
       { '@type': 'ListItem', position: 2, name: 'Agentes de IA', item: `${BASE}/agentes-de-ia` },
@@ -240,7 +250,7 @@ export default async function AgentePage({ params }: { params: Promise<{ slug: s
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <div dangerouslySetInnerHTML={{ __html: renderAgenteHTML(a) }} />
+      <div dangerouslySetInnerHTML={{ __html: renderHTML(a) }} />
     </main>
   );
 }
