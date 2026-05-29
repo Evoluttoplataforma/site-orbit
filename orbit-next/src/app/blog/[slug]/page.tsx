@@ -363,14 +363,17 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     </div>
   `;
 
+  // body é display:flex global → SEM um wrapper único com width:100%, os múltiplos
+  // filhos viram flex items e encolhem ao max-content (article ficava 582px em vez
+  // de 1200px). O <main> além de resolver isso é semântico/SEO friendly.
   return (
-    <>
+    <main style={{ width: '100%' }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       {faqJsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />}
       <div dangerouslySetInnerHTML={{ __html: articleHTML }} />
       <BlogComments slug={article.slug} />
       <div dangerouslySetInnerHTML={{ __html: footerHTML }} />
-    </>
+    </main>
   );
 }

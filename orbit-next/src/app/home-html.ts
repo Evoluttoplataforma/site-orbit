@@ -13,10 +13,9 @@ export const pageHTML = `
             <div class="hero-zoom__header">
                 <span class="hero-zoom__badge">30 anos de gestão empresarial. Agora com IA.</span>
                 <h1 class="hero-zoom__title" data-i18n="hero.title">
-                    Imagina sua empresa rodando <span class="hero-zoom__title-highlight">24 horas por dia</span>.<br>
-                    Agora ela pode com o Orbit Gestão.
+                    Plataforma de gestão empresarial operada por um <span class="hero-zoom__title-highlight">time de agentes de inteligência Artificial</span>.
                 </h1>
-                <p class="hero-zoom__subtitle" data-i18n="hero.subtitle">O Orbit é a plataforma de gestão operada por um <strong>time de agentes de IA</strong>. Vendas, financeiro, processos, RH, indicadores, estratégia &mdash; tudo isso em uma só plataforma, <strong>coordenada pela Olívia</strong>.</p>
+                <p class="hero-zoom__subtitle" data-i18n="hero.subtitle">Cada departamento ganha um agente especialista. <strong>A Olívia coordena.</strong> Sua gestão acontece sozinha &mdash; mas você decide. Construída sobre <strong>30 anos de metodologia</strong> do Grupo GSN (Templum &amp; Evolutto).</p>
                 <div class="hero-zoom__ctas">
                     <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary btn-lg hero-cta-glow">QUERO CONHECER O TIME DE IA</a>
                     <a href="#gallery3d" class="btn btn-ghost btn-lg">Ver os agentes <i class="fas fa-arrow-down"></i></a>
@@ -158,8 +157,8 @@ export const pageHTML = `
     <section class="one-platform" id="plataforma">
         <div class="container">
             <div class="one-platform__header" data-reveal>
-                <h2>Plataforma de gestão empresarial operada por um <span class="highlight">time de agentes de inteligência Artificial</span>.</h2>
-                <p data-i18n="platform.subtitle">Cada departamento ganha um agente especialista. <strong>A Olívia coordena.</strong> Sua gestão acontece sozinha &mdash; mas você decide. Construída sobre <strong>30 anos de metodologia</strong> do Grupo GSN (Templum &amp; Evolutto).</p>
+                <h2>Imagina sua empresa rodando <span class="highlight">24 horas por dia</span>.<br>Agora ela pode com o Orbit Gestão.</h2>
+                <p data-i18n="platform.subtitle">O Orbit é a plataforma de gestão operada por um <strong>time de agentes de IA</strong>. Vendas, financeiro, processos, RH, indicadores, estratégia &mdash; tudo isso em uma só plataforma, <strong>coordenada pela Olívia</strong>.</p>
             </div>
 
             <!-- Dock macOS-style: 12 agents -->
@@ -480,6 +479,12 @@ export const pageHTML = `
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div style="text-align:center;margin-top:48px;" data-reveal>
+                <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary btn-lg hero-cta-glow" style="font-size:16px;padding:18px 44px;">
+                    QUERO CONHECER O TIME DE IA
+                </a>
             </div>
         </div>
     </section>
