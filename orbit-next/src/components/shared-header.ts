@@ -11,6 +11,9 @@ export const headerHTML = `
 
             <ul class="nav-menu">
                 <li>
+                    <a href="/agentes-de-ia"><span data-i18n="nav.agents">Agentes de IA</span></a>
+                </li>
+                <li>
                     <a href="#para-quem"><span data-i18n="nav.for_who">Para quem</span> <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <div class="dropdown dropdown--sm">
                         <div class="dropdown__links">
@@ -102,6 +105,7 @@ export const headerHTML = `
         <div class="mobile-menu__body">
             <div class="mobile-menu__label" data-i18n="mobile.nav">Navegação</div>
             <a href="/bootcamp-orbit" id="navBootcampMobile" style="color:#ffba1a;font-weight:700;border:1px solid rgba(255,186,26,0.45);border-radius:8px;"><i class="fas fa-medal" style="color:#ffba1a;"></i> Bootcamp Orbit</a>
+            <a href="/agentes-de-ia"><i class="fas fa-wand-magic-sparkles" style="color:#ffba1a;"></i> Agentes de IA</a>
             <a href="/"><i class="fas fa-home"></i> <span data-i18n="nav.home">Início</span></a>
             <a href="https://demonstracao.orbitgestao.com.br/chat" onclick="closeMobileMenu()"><i class="fas fa-envelope"></i> <span data-i18n="mobile.contact">Fale Conosco</span></a>
 
