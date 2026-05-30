@@ -105,8 +105,6 @@ const SITEMAP_PAGES = [
   ['/', '1.0', 'weekly'],
   ['/empresarios', '1.0', 'weekly'],
   ['/consultores', '1.0', 'weekly'],
-  ['/agentes', '0.9', 'monthly'],
-  ['/agentes/estrategista', '0.8', 'monthly'],
   ['/preco', '0.9', 'monthly'],
   ['/sobre', '0.8', 'monthly'],
   ['/faq', '0.7', 'monthly'],
