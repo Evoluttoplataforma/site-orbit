@@ -1,0 +1,7 @@
+# Cloudflare Pages redirects
+# Sintaxe: <de> <para> <status>
+
+# Páginas de agentes/módulos descontinuadas — vão pra home (que tem o time de agentes)
+/agentes-de-ia       /  301
+/agentes/*           /  301
+/modulos/*           /  301
