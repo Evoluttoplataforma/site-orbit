@@ -97,7 +97,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/plataforma-treinamento-corporativo</loc>
+    <loc>https://orbitgestao.com.br/blog/tirar-planejamento-estrategico-do-papel</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -127,19 +127,13 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/como-organizar-prospeccao-vendas-b2b</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://orbitgestao.com.br/blog/software-bpms-como-escolher</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://orbitgestao.com.br/blog/encontrar-documento-empresa</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://orbitgestao.com.br/blog/gestao-financeira-integrada-empresa</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -157,31 +151,13 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/gestao-financeira-integrada-empresa</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://orbitgestao.com.br/blog/vendedor-nao-preenche-crm</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/plataformas-comunicacao-corporativa</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://orbitgestao.com.br/blog/software-rh-como-escolher</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://orbitgestao.com.br/blog/tirar-planejamento-estrategico-do-papel</loc>
+    <loc>https://orbitgestao.com.br/blog/plataforma-treinamento-corporativo</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -205,6 +181,30 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://orbitgestao.com.br/blog/software-bpms-como-escolher</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://orbitgestao.com.br/blog/plataformas-comunicacao-corporativa</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://orbitgestao.com.br/blog/software-rh-como-escolher</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://orbitgestao.com.br/blog/como-organizar-prospeccao-vendas-b2b</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://orbitgestao.com.br/blog/como-automatizar-processos-empresa</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
@@ -217,31 +217,13 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/plataforma-gestao-escalavel</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://orbitgestao.com.br/blog/como-criar-indicadores-empresa</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/consultoria-empresarial-nao-resolve</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://orbitgestao.com.br/blog/dashboard-gestao-empresarial</loc>
-    <lastmod>2026-05-26</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://orbitgestao.com.br/blog/plataforma-gestao-ia-agentic-alternativa-consultoria</loc>
+    <loc>https://orbitgestao.com.br/blog/plataforma-gestao-escalavel</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -265,13 +247,31 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/operacao-nao-escala-causas</loc>
+    <loc>https://orbitgestao.com.br/blog/consultoria-empresarial-nao-resolve</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://orbitgestao.com.br/blog/dashboard-gestao-empresarial</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://orbitgestao.com.br/blog/plataforma-gestao-ia-agentic-alternativa-consultoria</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://orbitgestao.com.br/blog/processos-manuais-empresa</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://orbitgestao.com.br/blog/operacao-nao-escala-causas</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -319,13 +319,13 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/ia-agentic-para-ceo-decisao-estrategica</loc>
+    <loc>https://orbitgestao.com.br/blog/ai-operating-system-business</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://orbitgestao.com.br/blog/ai-operating-system-business</loc>
+    <loc>https://orbitgestao.com.br/blog/ia-agentic-para-ceo-decisao-estrategica</loc>
     <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
