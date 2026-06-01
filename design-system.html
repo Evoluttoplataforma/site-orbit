@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Orbit Gestão — Design System</title>
+  <meta name="robots" content="noindex,nofollow">
+
+  <!-- Mesmas fontes e assets do site real -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- CSS oficial do site (snapshot do build em 2026-05-29 — atualizar copiando de orbit-next/out/_next/static/chunks/*.css) -->
+  <link rel="stylesheet" href="./design-system-assets/orbit.css">
+
+  <style>
+    /* ESTILOS APENAS DA DOC — nunca tocam nos componentes. */
+    /* Reset: o orbit.css compilado bundla regras body{display:flex} de páginas
+       de login/CMS — neutralizamos aqui pra que esta página renderize fluxo
+       normal (block, sem flex, sem center). */
+    html, body { display: block !important; min-height: 0 !important; align-items: stretch !important; justify-content: flex-start !important; overflow: visible !important; margin: 0; padding: 0; }
+    body { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; background: #0D1117; color: #C9D1D9; }
+    /* Doc sections — wrapper limita largura e adiciona ar.
+       .ds-doc-section--light = fundo claro (mesma regra da home: section--light) */
+    .ds-doc-wrap { padding: 80px 24px; border-top: 1px solid rgba(255,255,255,0.05); }
+    .ds-doc-wrap--light { background: #FAFBFC; border-top: 1px solid rgba(0,0,0,0.06); }
+    .ds-doc-section { max-width: 1200px; margin: 0 auto; }
+    .ds-doc-section h2.ds-h { font-size: 12px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: #ffba1a; margin: 0 0 8px; }
+    .ds-doc-section h3.ds-t { font-size: 36px; font-weight: 700; color: #fff; margin: 0 0 16px; letter-spacing: -0.02em; }
+    .ds-doc-section p.ds-p { color: #8B949E; font-size: 16px; line-height: 1.6; max-width: 720px; margin: 0 0 48px; }
+    /* Light-mode overrides p/ texto e bordas dentro de uma .ds-doc-wrap--light */
+    .ds-doc-wrap--light .ds-doc-section h3.ds-t { color: #1A1D23; }
+    .ds-doc-wrap--light .ds-doc-section p.ds-p { color: #5A6069; }
+    .ds-doc-wrap--light .ds-row { border-bottom-color: rgba(0,0,0,0.08); }
+    .ds-doc-wrap--light .ds-row__label,
+    .ds-doc-wrap--light .ds-row__name { color: #5A6069; }
+    .ds-doc-wrap--light .ds-swatch { background: #fff; border: 1px solid rgba(0,0,0,0.08); }
+    .ds-doc-wrap--light .ds-swatch__name { color: #1A1D23; }
+    .ds-doc-wrap--light .ds-swatch__val { color: #5A6069; }
+    .ds-row { display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: baseline; padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .ds-row__label { color: #6E7884; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; text-align: right; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    .ds-row__name { color: #8B949E; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
+    .ds-swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+    .ds-swatch { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; overflow: hidden; }
+    .ds-swatch__color { height: 88px; }
+    .ds-swatch__meta { padding: 12px 14px; }
+    .ds-swatch__name { color: #fff; font-size: 13px; font-weight: 700; margin: 0 0 2px; }
+    .ds-swatch__val { color: #8B949E; font-size: 11px; font-family: 'JetBrains Mono', ui-monospace, monospace; margin: 0; }
+    .ds-states { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; align-items: center; margin: 24px 0 48px; }
+    .ds-state-cell { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 28px 16px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; }
+    .ds-state-cell__label { color: #6E7884; font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    .ds-cmp-block { margin: 36px 0 64px; }
+    .ds-cmp-block__head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 18px; }
+    .ds-cmp-block__head h4 { color: #fff; font-size: 18px; font-weight: 700; margin: 0; }
+    .ds-cmp-block__head code { background: rgba(255,186,26,0.10); color: #ffba1a; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; padding: 2px 8px; border-radius: 6px; }
+    .ds-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 24px 0 48px; }
+    .ds-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 24px 0 48px; }
+    .ds-icon-cell { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 24px 12px; text-align: center; }
+    .ds-icon-cell i { color: #ffba1a; }
+    .ds-icon-cell__name { color: #8B949E; font-size: 11px; font-family: 'JetBrains Mono', ui-monospace, monospace; margin: 12px 0 0; }
+    @media (max-width: 720px) {
+      .ds-row { grid-template-columns: 1fr; }
+      .ds-row__label { text-align: left; }
+      .ds-grid-3, .ds-grid-4 { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ HEADER REAL DO SITE (clone do shared-header.ts) ═══ -->
+  <header class="header">
+    <div class="container">
+      <div class="logo">
+        <a href="/"><img src="https://orbitgestao.com.br/images/logo-orbit-white.png" alt="Orbit Gestão" height="40"></a>
+      </div>
+
+      <ul class="nav-menu">
+        <li>
+          <a href="#"><span>Para quem</span> <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+          <div class="dropdown dropdown--sm">
+            <div class="dropdown__links">
+              <a href="/empresarios">
+                <div class="dd-icon"><i class="fas fa-building"></i></div>
+                <div class="dd-text"><span>Empresários</span><small>Time de IA para sua empresa</small></div>
+              </a>
+              <a href="/consultores">
+                <div class="dd-icon"><i class="fas fa-user-tie"></i></div>
+                <div class="dd-text"><span>Consultores</span><small>Modelo de canais B2B2B</small></div>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="/blog"><span>Conteúdo</span> <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+          <div class="dropdown dropdown--sm">
+            <div class="dropdown__links">
+              <a href="/blog">
+                <div class="dd-icon"><i class="fas fa-newspaper"></i></div>
+                <div class="dd-text"><span>Blog</span><small>Artigos e insights</small></div>
+              </a>
+              <a href="/historias">
+                <div class="dd-icon"><i class="fas fa-star"></i></div>
+                <div class="dd-text"><span>Histórias de Clientes</span><small>Cases de sucesso</small></div>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="/live" style="position:relative;">
+            <span style="display:inline-block;width:8px;height:8px;background:#ff4444;border-radius:50%;margin-right:6px;animation:livePulse 1.5s ease-in-out infinite;vertical-align:middle;"></span>
+            <span>Eventos</span> <i class="fas fa-chevron-down dropdown-arrow"></i>
+          </a>
+          <div class="dropdown dropdown--sm">
+            <div class="dropdown__links">
+              <a href="/live">
+                <div class="dd-icon"><i class="fas fa-play-circle" style="color:#ff0000;"></i></div>
+                <div class="dd-text"><span>Live Semanal</span><small>Toda terça 13h com Igor</small></div>
+              </a>
+              <a href="/live/chris">
+                <div class="dd-icon"><i class="fas fa-chalkboard-user" style="color:#ffba1a;"></i></div>
+                <div class="dd-text"><span>Masterclass Consultores</span><small>Quinta 18h com Christian Hart</small></div>
+              </a>
+              <a href="/treinamentos">
+                <div class="dd-icon"><i class="fas fa-chalkboard-teacher" style="color:#ffba1a;"></i></div>
+                <div class="dd-text"><span>Treinamentos</span><small>10 módulos semanais · Seg a Sex</small></div>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a href="/sobre"><span>Empresa</span></a>
+        </li>
+        <li class="nav-bootcamp">
+          <a href="/bootcamp-orbit" style="color:#ffba1a;font-weight:700;border:1px solid rgba(255,186,26,0.45);border-radius:8px;padding:6px 14px;">🎖️ Bootcamp</a>
+        </li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="https://app.orbitgestao.com.br/login" class="btn btn-outline">Entrar</a>
+        <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary">Conhecer o Time de IA</a>
+      </div>
+
+      <button class="lang-switch" aria-label="Change language">
+        <span class="lang-switch__flag">🇺🇸</span>
+        <span class="lang-switch__label">EN</span>
+      </button>
+
+      <button class="menu-toggle"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       §0 HERO — clone exato do hero da home, só texto adaptado
+       ═══════════════════════════════════════════════════════════════ -->
+  <section class="hero-zoom" id="hero">
+    <div class="hero-zoom__bg-image"></div>
+    <div class="hero-zoom__bg">
+      <div class="hero-zoom__glow hero-zoom__glow--1"></div>
+      <div class="hero-zoom__glow hero-zoom__glow--2"></div>
+    </div>
+
+    <div class="container">
+      <div class="hero-zoom__header">
+        <span class="hero-zoom__badge">Pattern Library · Snapshot 2026-05-29</span>
+        <h1 class="hero-zoom__title">
+          O design system do Orbit, organizado em <span class="hero-zoom__title-highlight">componentes vivos e reutilizáveis</span>.
+        </h1>
+        <p class="hero-zoom__subtitle">Tudo que esta página mostra usa as <strong>classes reais do orbit.css</strong>. Nada é redesenhado, nada é aproximação. Use como referência ao construir novas páginas ou estender LPs.</p>
+        <div class="hero-zoom__ctas">
+          <a href="#typography" class="btn btn-primary btn-lg hero-cta-glow">EXPLORAR O SISTEMA</a>
+          <a href="#components" class="btn btn-ghost btn-lg">Ver componentes <i class="fas fa-arrow-down"></i></a>
+        </div>
+        <p class="hero-zoom__note">📐 Hero clonado · Typography · Colors · Components · Motion · Icons</p>
+        <div class="hero-zoom__credentials">
+          <div class="hero-zoom__credential">
+            <strong>1 source</strong>
+            <span>orbit.css real</span>
+          </div>
+          <div class="hero-zoom__credential-divider"></div>
+          <div class="hero-zoom__credential">
+            <strong>6 seções</strong>
+            <span>de pattern library</span>
+          </div>
+          <div class="hero-zoom__credential-divider"></div>
+          <div class="hero-zoom__credential">
+            <strong>0 invenção</strong>
+            <span>só o que existe</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="glow-divider">
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       §1 TYPOGRAPHY (dark)
+       Specs extraídas de orbit.css. Todos os exemplos usam classes reais.
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="ds-doc-wrap">
+  <section class="ds-doc-section" id="typography">
+    <h2 class="ds-h">§1</h2>
+    <h3 class="ds-t">Typography</h3>
+    <p class="ds-p">Fonte única: <strong style="color:#fff;">Plus Jakarta Sans</strong>. Pesos usados: 400 / 500 / 600 / 700 / 800. Hierarquia segue clamp() responsivo — valores à direita são o range em viewport pequeno → grande.</p>
+
+    <div class="ds-row">
+      <div>
+        <p class="ds-row__name">Hero title · <code style="background:rgba(255,186,26,0.10);color:#ffba1a;font-family:'JetBrains Mono',monospace;font-size:11px;padding:2px 6px;border-radius:4px;">.hero-zoom__title</code></p>
+        <h1 class="hero-zoom__title" style="margin:0;">Operação <span class="hero-zoom__title-highlight">com IA</span></h1>
+      </div>
+      <span class="ds-row__label">36 → 64px / 1.1<br>weight 600 · gradient</span>
+    </div>
+
+    <div class="ds-row">
+      <div>
+        <p class="ds-row__name">Section header · <code style="background:rgba(255,186,26,0.10);color:#ffba1a;font-family:'JetBrains Mono',monospace;font-size:11px;padding:2px 6px;border-radius:4px;">.section-header h2</code></p>
+        <h2 style="font-size:clamp(32px,4.5vw,48px);font-weight:600;line-height:1.15;letter-spacing:-0.02em;color:#fff;margin:0;">Quem usa, <span class="highlight">recomenda</span></h2>
+      </div>
+      <span class="ds-row__label">32 → 48px / 1.15<br>weight 600</span>
+    </div>
+
+    <div class="ds-row">
+      <div>
+        <p class="ds-row__name">Card title · <code style="background:rgba(255,186,26,0.10);color:#ffba1a;font-family:'JetBrains Mono',monospace;font-size:11px;padding:2px 6px;border-radius:4px;">.agent-card h3</code></p>
+        <h3 style="color:#fff;font-size:1.3rem;font-weight:700;margin:0;">Agente Comercial</h3>
+      </div>
+      <span class="ds-row__label">~21px<br>weight 700</span>
+    </div>
+
+    <div class="ds-row">
+      <div>
+        <p class="ds-row__name">Hero subtitle · <code style="background:rgba(255,186,26,0.10);color:#ffba1a;font-family:'JetBrains Mono',monospace;font-size:11px;padding:2px 6px;border-radius:4px;">.hero-zoom__subtitle</code></p>
+        <p class="hero-zoom__subtitle" style="margin:0;max-width:none;">Cada departamento ganha um agente especialista. A Olívia coordena.</p>
+      </div>
+      <span class="ds-row__label">16 → 20px / 1.6<br>weight 400</span>
+    </div>
+
+    <div class="ds-row">
+      <div>
+        <p class="ds-row__name">Section sub · <code style="background:rgba(255,186,26,0.10);color:#ffba1a;font-family:'JetBrains Mono',monospace;font-size:11px;padding:2px 6px;border-radius:4px;">.section-header p</code></p>
+        <p style="font-size:18px;color:rgba(255,255,255,0.5);line-height:1.6;margin:0;">Empresas brasileiras de médio porte transformando a gestão com o Orbit.</p>
+      </div>
+      <span class="ds-row__label">18px / 1.6<br>weight 400</span>
+    </div>
+
+    <div class="ds-row">
+      <div>
+        <p class="ds-row__name">Card body · <code style="background:rgba(255,186,26,0.10);color:#ffba1a;font-family:'JetBrains Mono',monospace;font-size:11px;padding:2px 6px;border-radius:4px;">.agent-card &gt; p</code></p>
+        <p style="color:#C9D1D9;line-height:1.65;margin:0;">Pipeline desenhado, qualificação, atividades, automações, formulários, dashboards comerciais e insights em tempo real.</p>
+      </div>
+      <span class="ds-row__label">~15px / 1.65<br>weight 400</span>
+    </div>
+
+    <div class="ds-row">
+      <div>
+        <p class="ds-row__name">Hero badge · <code style="background:rgba(255,186,26,0.10);color:#ffba1a;font-family:'JetBrains Mono',monospace;font-size:11px;padding:2px 6px;border-radius:4px;">.hero-zoom__badge</code></p>
+        <span class="hero-zoom__badge" style="margin-bottom:0;">30 anos de gestão. Agora com IA.</span>
+      </div>
+      <span class="ds-row__label">13px / weight 600<br>letter-spacing 0.3px</span>
+    </div>
+  </section>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       §2 COLORS & SURFACES  (LIGHT — section--light style)
+       Demonstra a alternância dark→light igual home.
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="ds-doc-wrap ds-doc-wrap--light">
+  <section class="ds-doc-section" id="colors">
+    <h2 class="ds-h">§2</h2>
+    <h3 class="ds-t">Colors &amp; Surfaces</h3>
+    <p class="ds-p">CSS custom properties em <code style="background:rgba(255,186,26,0.10);color:#ffba1a;font-family:'JetBrains Mono',monospace;font-size:12px;padding:2px 6px;border-radius:4px;">:root</code> do orbit.css. Toda a paleta do site sai daqui.</p>
+
+    <p class="ds-row__name" style="margin:24px 0 12px;">Primary · brand</p>
+    <div class="ds-swatch-grid">
+      <div class="ds-swatch"><div class="ds-swatch__color" style="background:#ffba1a;"></div><div class="ds-swatch__meta"><p class="ds-swatch__name">--primary</p><p class="ds-swatch__val">#ffba1a</p></div></div>
+      <div class="ds-swatch"><div class="ds-swatch__color" style="background:#e6a200;"></div><div class="ds-swatch__meta"><p class="ds-swatch__name">--primary-dark</p><p class="ds-swatch__val">#e6a200</p></div></div>
+      <div class="ds-swatch"><div class="ds-swatch__color" style="background:#ffca4a;"></div><div class="ds-swatch__meta"><p class="ds-swatch__name">--primary-light</p><p class="ds-swatch__val">#ffca4a</p></div></div>
+      <div class="ds-swatch"><div class="ds-swatch__color" style="background:rgba(255,186,26,0.3);"></div><div class="ds-swatch__meta"><p class="ds-swatch__name">--primary-glow</p><p class="ds-swatch__val">rgba(255,186,26,0.3)</p></div></div>
+    </div>
+
+    <p class="ds-row__name" style="margin:36px 0 12px;">Surfaces · dark</p>
+    <div class="ds-swatch-grid">
+      <div class="ds-swatch"><div class="ds-swatch__color" style="background:#0D1117;"></div><div class="ds-swatch__meta"><p class="ds-swatch__name">--black (page bg)</p><p class="ds-swatch__val">#0D1117</p></div></div>
+      <div class="ds-swatch"><div class="ds-swatch__color" style="background:#161B22;"></div><div class="ds-swatch__meta"><p class="ds-swatch__name">--black-soft</p><p class="ds-swatch__val">#161B22</p></div></div>
+      <div class="ds-swatch"><div class="ds-swatch__color" style="background:#1C2333;"></div><div class="ds-swatch__meta"><p class="ds-swatch__name">--black-card</p><p class="ds-swatch__val">#1C2333</p></div></div>
+      <div class="ds-swatch"><div class="ds-swatch__color" style="background:#30363D;"></div><div class="ds-swatch__meta"><p class="ds-swatch__name">--gray-200 (border)</p><p class="ds-swatch__val">#30363D</p></div></div>
+    </div>
+
+    <p class="ds-row__name" style="margin:36px 0 12px;">Surfaces · light section</p>
+    <div class="ds-swatch-grid">
+      <div class="ds-swatch"><div class="ds-swatch__color" style="background:#FAFBFC;"></div><div class="ds-swatch__meta"><p class="ds-swatch__name">--light-bg</p><p class="ds-swatch__val">#FAFBFC</p></div></div>
+      <div class="ds-swatch"><div class="ds-swatch__color" style="background:#F0F2F5;"></div><div class="ds-swatch__meta"><p class="ds-swatch__name">--light-bg-alt</p><p class="ds-swatch__val">#F0F2F5</p></div></div>
+      <div class="ds-swatch"><div class="ds-swatch__color" style="background:#FFFFFF;"></div><div class="ds-swatch__meta"><p class="ds-swatch__name">--light-card</p><p class="ds-swatch__val">#FFFFFF</p></div></div>
+      <div class="ds-swatch"><div class="ds-swatch__color" style="background:#1A1D23;"></div><div class="ds-swatch__meta"><p class="ds-swatch__name">--light-text</p><p class="ds-swatch__val">#1A1D23</p></div></div>
+    </div>
+
+    <p class="ds-row__name" style="margin:36px 0 12px;">Text · on dark</p>
+    <div class="ds-swatch-grid">
+      <div class="ds-swatch"><div class="ds-swatch__color" style="background:#ffffff;"></div><div class="ds-swatch__meta"><p class="ds-swatch__name">--white (titles)</p><p class="ds-swatch__val">#ffffff</p></div></div>
+      <div class="ds-swatch"><div class="ds-swatch__color" style="background:#E6EDF3;"></div><div class="ds-swatch__meta"><p class="ds-swatch__name">--gray-800/900</p><p class="ds-swatch__val">#E6EDF3</p></div></div>
+      <div class="ds-swatch"><div class="ds-swatch__color" style="background:#C9D1D9;"></div><div class="ds-swatch__meta"><p class="ds-swatch__name">--gray-600/700 (body)</p><p class="ds-swatch__val">#C9D1D9</p></div></div>
+      <div class="ds-swatch"><div class="ds-swatch__color" style="background:#8B949E;"></div><div class="ds-swatch__meta"><p class="ds-swatch__name">--gray-400/500 (muted)</p><p class="ds-swatch__val">#8B949E</p></div></div>
+    </div>
+
+    <p class="ds-row__name" style="margin:36px 0 12px;">States · feedback</p>
+    <div class="ds-swatch-grid">
+      <div class="ds-swatch"><div class="ds-swatch__color" style="background:#3FB950;"></div><div class="ds-swatch__meta"><p class="ds-swatch__name">--success</p><p class="ds-swatch__val">#3FB950</p></div></div>
+      <div class="ds-swatch"><div class="ds-swatch__color" style="background:#F85149;"></div><div class="ds-swatch__meta"><p class="ds-swatch__name">--error</p><p class="ds-swatch__val">#F85149</p></div></div>
+    </div>
+
+    <p class="ds-row__name" style="margin:36px 0 12px;">Gradients · usage</p>
+    <div class="ds-swatch-grid">
+      <div class="ds-swatch"><div class="ds-swatch__color" style="background:linear-gradient(135deg,#ffba1a,#ffca4a);"></div><div class="ds-swatch__meta"><p class="ds-swatch__name">Gold highlight</p><p class="ds-swatch__val">.hero-zoom__title-highlight</p></div></div>
+      <div class="ds-swatch"><div class="ds-swatch__color" style="background:linear-gradient(180deg,#fff,rgba(255,255,255,0.55));"></div><div class="ds-swatch__meta"><p class="ds-swatch__name">Title fade</p><p class="ds-swatch__val">.hero-zoom__title</p></div></div>
+      <div class="ds-swatch"><div class="ds-swatch__color" style="background:linear-gradient(90deg,transparent,rgba(255,186,26,0.3),transparent);"></div><div class="ds-swatch__meta"><p class="ds-swatch__name">Glow divider</p><p class="ds-swatch__val">.glow-divider</p></div></div>
+      <div class="ds-swatch"><div class="ds-swatch__color" style="background:linear-gradient(180deg,#0D1117,#161B22);"></div><div class="ds-swatch__meta"><p class="ds-swatch__name">Section dark</p><p class="ds-swatch__val">.depo-section bg</p></div></div>
+    </div>
+  </section>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       §3 UI COMPONENTS (dark)
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="ds-doc-wrap">
+  <section class="ds-doc-section" id="components">
+    <h2 class="ds-h">§3</h2>
+    <h3 class="ds-t">UI Components</h3>
+    <p class="ds-p">Cada bloco mostra o componente real com sua classe. Passe o mouse para ver hover/transitions exatos do site.</p>
+
+    <!-- BUTTONS -->
+    <div class="ds-cmp-block">
+      <div class="ds-cmp-block__head">
+        <h4>Buttons</h4>
+        <code>.btn .btn-primary .btn-ghost .btn-outline .btn-lg</code>
+      </div>
+      <div class="ds-states">
+        <div class="ds-state-cell">
+          <a href="#" class="btn btn-primary">QUERO CONHECER</a>
+          <span class="ds-state-cell__label">.btn-primary</span>
+        </div>
+        <div class="ds-state-cell">
+          <a href="#" class="btn btn-primary btn-lg">VER EM AÇÃO</a>
+          <span class="ds-state-cell__label">+ .btn-lg</span>
+        </div>
+        <div class="ds-state-cell">
+          <a href="#" class="btn btn-ghost btn-lg">Ver os agentes <i class="fas fa-arrow-down"></i></a>
+          <span class="ds-state-cell__label">.btn-ghost</span>
+        </div>
+        <div class="ds-state-cell">
+          <a href="#" class="btn btn-outline">Saiba mais</a>
+          <span class="ds-state-cell__label">.btn-outline</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AGENT CARD -->
+    <div class="ds-cmp-block">
+      <div class="ds-cmp-block__head">
+        <h4>Agent card</h4>
+        <code>.agent-card</code>
+      </div>
+      <div class="ds-grid-3">
+        <article class="agent-card">
+          <div class="agent-card__icon"><i class="fa-solid fa-chart-line"></i></div>
+          <h3>Indicadores</h3>
+          <p>KPIs e dashboards conectados à operação real, atualizados automaticamente.</p>
+        </article>
+        <article class="agent-card">
+          <div class="agent-card__icon"><i class="fa-solid fa-sitemap"></i></div>
+          <h3>Processos</h3>
+          <p>BPMN, instruções de trabalho e execução monitorada em tempo real.</p>
+        </article>
+        <article class="agent-card">
+          <div class="agent-card__icon"><i class="fa-solid fa-users"></i></div>
+          <h3>Pessoas</h3>
+          <p>Organograma, PDI por colaborador e gestão de cultura ponta a ponta.</p>
+        </article>
+      </div>
+    </div>
+
+    <!-- FAQ ITEM — vive sempre dentro de .section--light no site real.
+         Aqui simulamos o contexto envolvendo o demo numa "ilha clara"
+         pra herdar o estilo correto (card branco, texto escuro). -->
+    <div class="ds-cmp-block">
+      <div class="ds-cmp-block__head">
+        <h4>FAQ item</h4>
+        <code>.faq-item · dentro de .section--light</code>
+      </div>
+      <p style="color:#6E7884;font-size:12px;margin:0 0 14px;font-family:'JetBrains Mono',monospace;">↓ Bloco renderizado em fundo claro (igual home — <code style="color:#D4960A;">.faq-section.section--light</code>)</p>
+      <div class="faq-section section--light" style="padding:32px;border-radius:14px;">
+        <div class="faq-list" style="max-width:760px;margin:0 auto;">
+          <details class="faq-item" open>
+            <summary>Quanto tempo leva para começar?</summary>
+            <div class="faq-item__answer"><p>Cadastro em 5 minutos. Planejamento e processos em 1 tarde. Operação completa em 7 dias.</p></div>
+          </details>
+          <details class="faq-item">
+            <summary>É mais um software de gestão?</summary>
+            <div class="faq-item__answer"><p>Não. O Orbit tem agentes de IA que fazem o trabalho pesado — você valida e decide.</p></div>
+          </details>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO BADGE / PILLS -->
+    <div class="ds-cmp-block">
+      <div class="ds-cmp-block__head">
+        <h4>Badges / pills</h4>
+        <code>.hero-zoom__badge</code>
+      </div>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+        <span class="hero-zoom__badge" style="margin-bottom:0;">30 anos de gestão. Agora com IA.</span>
+        <span class="hero-zoom__badge" style="margin-bottom:0;">Convocação aberta</span>
+        <span class="hero-zoom__badge" style="margin-bottom:0;">+2.900 no Orbit</span>
+      </div>
+    </div>
+
+    <!-- DIVIDER -->
+    <div class="ds-cmp-block">
+      <div class="ds-cmp-block__head">
+        <h4>Glow divider</h4>
+        <code>.glow-divider</code>
+      </div>
+      <hr class="glow-divider">
+      <p style="color:#6E7884;font-size:12px;margin:16px 0 0;font-family:'JetBrains Mono',monospace;">Separa seções dark · gradiente dourado central, transparente nas pontas</p>
+    </div>
+  </section>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       §3.4 TEXTUAL TESTIMONIALS — clone do .testi-section da home
+       (dark; #depoimentos no site)
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="ds-doc-wrap" id="testi">
+    <section class="ds-doc-section" style="padding-bottom:0;">
+      <h2 class="ds-h">§3.4</h2>
+      <h3 class="ds-t">Depoimentos textuais</h3>
+      <p class="ds-p">Bloco <code style="background:rgba(255,186,26,0.10);color:#ffba1a;font-family:'JetBrains Mono',monospace;font-size:12px;padding:2px 6px;border-radius:4px;">.testi-section</code> com 3 colunas auto-scroll. Cada card usa <code style="background:rgba(255,186,26,0.10);color:#ffba1a;font-family:'JetBrains Mono',monospace;font-size:12px;padding:2px 6px;border-radius:4px;">.testi-card · .testi-quote · .testi-author · .testi-avatar</code>. Aqui mostro 3 cards estáticos pra inspecionar o componente.</p>
+    </section>
+    <div style="max-width:1200px;margin:0 auto;">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+        <div class="testi-card">
+          <p class="testi-quote">"Em 3 meses, mapeamos todos os processos críticos e reduzimos retrabalho em 40%. O Orbit organizou o que a gente tentava há anos."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">MS</div>
+            <div class="testi-info">
+              <div class="testi-name">Maria Silva</div>
+              <div class="testi-role">Diretora de Operações · TechParts Ltda</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote">"O agente de treinamento via WhatsApp mudou o jogo. A equipe engaja porque não precisa logar em nada. Simples e direto."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">RC</div>
+            <div class="testi-info">
+              <div class="testi-name">Roberto Costa</div>
+              <div class="testi-role">CEO · Grupo Nordeste</div>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <p class="testi-quote">"Finalmente tenho KPIs em tempo real. Antes, descobria problemas na semana seguinte. Agora, atuo no mesmo dia."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">AM</div>
+            <div class="testi-info">
+              <div class="testi-name">Ana Mendes</div>
+              <div class="testi-role">Gerente de Qualidade · FastLog</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p style="color:#6E7884;font-size:12px;margin:24px 0 0;font-family:'JetBrains Mono',monospace;text-align:center;">No site real, 3 colunas verticais com auto-scroll infinito (animação <code style="color:#D4960A;">scrollUpFast/Medium/Slow</code>).</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       §3.5 VIDEO TESTIMONIALS — clone exato da .depo-section da home
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="ds-doc-wrap">
+    <section class="ds-doc-section" id="videos" style="padding-bottom:0;">
+      <h2 class="ds-h">§3.5</h2>
+      <h3 class="ds-t">Vídeos de depoimentos</h3>
+      <p class="ds-p">Bloco usado na home logo após o FAQ. 4 vídeos verticais (9:16) via Vimeo. Hover lifta o card + border dourada. <strong style="color:#fff;">Classes:</strong> <code style="background:rgba(255,186,26,0.10);color:#ffba1a;font-family:'JetBrains Mono',monospace;font-size:12px;padding:2px 6px;border-radius:4px;">.depo-section / .depo-grid / .depo-card / .depo-card__video / .depo-card__info</code></p>
+    </section>
+  </div>
+
+  <section class="depo-section" style="padding:60px 20px 80px;background:linear-gradient(180deg,#0D1117 0%,#161B22 100%);position:relative;overflow:hidden;">
+    <div class="container" style="text-align:center;margin-bottom:48px;">
+      <span class="section-badge" style="display:inline-block;padding:6px 14px;background:rgba(255,186,26,0.10);border:1px solid rgba(255,186,26,0.25);border-radius:50px;color:#ffba1a;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:2px;margin-bottom:18px;">Quem já usa</span>
+      <h2 style="font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;color:#fff;line-height:1.15;letter-spacing:-0.02em;margin:0 0 14px;">Empresários que viram o <span style="color:#ffba1a;">Orbit transformar</span> a operação</h2>
+      <p style="color:#C9D1D9;font-size:1.05rem;line-height:1.6;max-width:680px;margin:0 auto;">Quatro consultorias brasileiras contam, em primeira pessoa, o que mudou depois de implantar a Orbit.</p>
+    </div>
+    <div class="depo-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1200px;margin:0 auto;">
+      <div class="depo-card">
+        <div class="depo-card__video"><iframe src="https://player.vimeo.com/video/1194123078?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+        <div class="depo-card__info"><h3>Lucineia Pedrosa</h3><p>Econtech Consultoria</p></div>
+      </div>
+      <div class="depo-card">
+        <div class="depo-card__video"><iframe src="https://player.vimeo.com/video/1194124564?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+        <div class="depo-card__info"><h3>Hygor Limar</h3><p>Potencialize Resultados</p></div>
+      </div>
+      <div class="depo-card">
+        <div class="depo-card__video"><iframe src="https://player.vimeo.com/video/1194125389?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+        <div class="depo-card__info"><h3>Bruno Lozano</h3><p>Ritual de Gestão</p></div>
+      </div>
+      <div class="depo-card">
+        <div class="depo-card__video"><iframe src="https://player.vimeo.com/video/1194126879?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+        <div class="depo-card__info"><h3>Rogério Menossi</h3><p>Time Produtivo</p></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:36px;">
+      <a href="/historias" style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:rgba(255,186,26,0.10);border:1px solid rgba(255,186,26,0.30);color:#ffba1a;border-radius:50px;font-weight:700;font-size:14px;text-decoration:none;transition:all 0.2s;">Ver todas as histórias de clientes <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <style>
+      .depo-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:14px; overflow:hidden; transition:all 0.25s; }
+      .depo-card:hover { border-color:rgba(255,186,26,0.45); transform:translateY(-3px); box-shadow:0 12px 28px rgba(0,0,0,0.40); }
+      .depo-card__video { aspect-ratio:9/16; width:100%; background:#000; display:block; }
+      .depo-card__video iframe { width:100%; height:100%; border:0; display:block; }
+      .depo-card__info { padding:14px 16px 16px; border-top:1px solid rgba(255,255,255,0.08); }
+      .depo-card__info h3 { color:#fff; font-size:0.95rem; font-weight:700; margin:0 0 3px; letter-spacing:-0.005em; }
+      .depo-card__info p { color:#ffba1a; font-size:12px; font-weight:600; margin:0; letter-spacing:0.3px; }
+      @media (max-width:1024px) { .depo-grid { grid-template-columns:repeat(2,1fr) !important; } }
+      @media (max-width:560px) { .depo-grid { grid-template-columns:1fr !important; max-width:340px; } }
+    </style>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       §3.6 KNOWLEDGE CARDS (LIGHT — section--light style)
+       Bloco de blog/conteúdo da home. Aqui em fundo claro como no site.
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="ds-doc-wrap ds-doc-wrap--light" id="knowledge">
+    <section class="ds-doc-section" style="padding-bottom:0;">
+      <h2 class="ds-h">§3.6</h2>
+      <h3 class="ds-t">Knowledge cards (blog)</h3>
+      <p class="ds-p">Bloco <code style="background:rgba(255,186,26,0.10);color:#ffba1a;font-family:'JetBrains Mono',monospace;font-size:12px;padding:2px 6px;border-radius:4px;">.knowledge-section.section--light</code> da home. Card com imagem topo, tipo, título e link. Hover lifta o card + border dourada.</p>
+    </section>
+    <div class="knowledge-section section--light" style="padding:24px 0 0;">
+      <div class="knowledge-grid" style="max-width:1200px;margin:0 auto;">
+        <a href="#" class="knowledge-card" style="text-decoration:none;color:inherit;display:block;">
+          <div class="knowledge-card__image">
+            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=250&fit=crop" alt="" width="400" height="250">
+            <span class="knowledge-card__type"><i class="fas fa-file-alt"></i> Gestão Estratégica</span>
+          </div>
+          <div class="knowledge-card__body">
+            <h4>Como tirar o planejamento estratégico do papel sem aumentar custo</h4>
+            <span class="knowledge-card__link">Ler artigo</span>
+          </div>
+        </a>
+        <a href="#" class="knowledge-card" style="text-decoration:none;color:inherit;display:block;">
+          <div class="knowledge-card__image">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop" alt="" width="400" height="250">
+            <span class="knowledge-card__type"><i class="fas fa-file-alt"></i> Indicadores</span>
+          </div>
+          <div class="knowledge-card__body">
+            <h4>DRE em tempo real: o guia completo para visibilidade financeira</h4>
+            <span class="knowledge-card__link">Ler artigo</span>
+          </div>
+        </a>
+        <a href="#" class="knowledge-card" style="text-decoration:none;color:inherit;display:block;">
+          <div class="knowledge-card__image">
+            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&h=250&fit=crop" alt="" width="400" height="250">
+            <span class="knowledge-card__type"><i class="fas fa-file-alt"></i> Processos</span>
+          </div>
+          <div class="knowledge-card__body">
+            <h4>Como mapear processos da empresa em BPMN (passo a passo)</h4>
+            <span class="knowledge-card__link">Ler artigo</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       §4 LAYOUT & SPACING (dark)
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="ds-doc-wrap">
+  <section class="ds-doc-section" id="layout">
+    <h2 class="ds-h">§4</h2>
+    <h3 class="ds-t">Layout &amp; Spacing</h3>
+    <p class="ds-p">Container fixo com paddings responsivos. Section padding vertical de 140px no desktop. Grids auto-fit pra cards.</p>
+
+    <div class="ds-row">
+      <div>
+        <p class="ds-row__name">Container max-width</p>
+        <div style="background:rgba(255,186,26,0.08);border:1px dashed rgba(255,186,26,0.3);height:40px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#ffba1a;font-size:11px;font-family:'JetBrains Mono',monospace;font-weight:700;">1200px max-width · 24px padding</div>
+      </div>
+      <span class="ds-row__label">--max-width<br>1200px</span>
+    </div>
+
+    <div class="ds-row">
+      <div>
+        <p class="ds-row__name">Section padding</p>
+        <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:6px;padding:32px 16px;color:#8B949E;font-size:12px;text-align:center;font-family:'JetBrains Mono',monospace;">↕ 140px vertical · ⤞ 24px horizontal</div>
+      </div>
+      <span class="ds-row__label">--section-py<br>140px</span>
+    </div>
+
+    <div class="ds-row">
+      <div>
+        <p class="ds-row__name">Border radius scale</p>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;">
+          <div style="width:60px;height:60px;background:#1C2333;border:1px solid rgba(255,255,255,0.08);border-radius:8px;"></div>
+          <div style="width:60px;height:60px;background:#1C2333;border:1px solid rgba(255,255,255,0.08);border-radius:14px;"></div>
+          <div style="width:60px;height:60px;background:#1C2333;border:1px solid rgba(255,255,255,0.08);border-radius:16px;"></div>
+          <div style="width:60px;height:60px;background:#1C2333;border:1px solid rgba(255,255,255,0.08);border-radius:24px;"></div>
+          <div style="width:60px;height:60px;background:#1C2333;border:1px solid rgba(255,255,255,0.08);border-radius:32px;"></div>
+        </div>
+      </div>
+      <span class="ds-row__label">8 / 14 / 16<br>24 / 32 px</span>
+    </div>
+
+    <p class="ds-row__name" style="margin:48px 0 12px;">Pattern: 3-column auto-fit grid (cards)</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;">
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:24px;text-align:center;color:#8B949E;font-family:'JetBrains Mono',monospace;font-size:12px;">minmax(260px, 1fr)</div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:24px;text-align:center;color:#8B949E;font-family:'JetBrains Mono',monospace;font-size:12px;">gap: 24px</div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:24px;text-align:center;color:#8B949E;font-family:'JetBrains Mono',monospace;font-size:12px;">auto-fit</div>
+    </div>
+
+    <p class="ds-row__name" style="margin:48px 0 12px;">Pattern: Dark / Light section alternation</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);">
+      <div style="background:#0D1117;padding:36px 24px;color:#fff;">
+        <span class="hero-zoom__badge" style="margin-bottom:14px;">Section dark</span>
+        <h4 style="color:#fff;margin:0 0 6px;">Hero / Capacidades / Casos</h4>
+        <p style="color:#C9D1D9;font-size:13px;margin:0;">Default. Bg <code style="color:#ffba1a;font-family:'JetBrains Mono',monospace;font-size:11px;">--black</code> / text <code style="color:#ffba1a;font-family:'JetBrains Mono',monospace;font-size:11px;">--white</code>.</p>
+      </div>
+      <div style="background:#FAFBFC;padding:36px 24px;color:#1A1D23;">
+        <span style="display:inline-block;background:rgba(255,186,26,0.15);color:#D4960A;padding:6px 18px;border-radius:50px;font-size:13px;font-weight:600;margin-bottom:14px;">Section light</span>
+        <h4 style="color:#1A1D23;margin:0 0 6px;">FAQ / Knowledge / Pricing</h4>
+        <p style="color:#5A6069;font-size:13px;margin:0;">Class <code style="color:#D4960A;font-family:'JetBrains Mono',monospace;font-size:11px;">.section--light</code>. Bg <code style="color:#D4960A;font-family:'JetBrains Mono',monospace;font-size:11px;">--light-bg</code>.</p>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       §4.5 PAGE WRAPPER RECIPE (dark)
+       Padrão obrigatório pra criar QUALQUER página dark nova.
+       Resolve o problema do Tailwind v4 (body=branco) que sobrescreve
+       a herança de cor escura do orbit.css. Extraído da página
+       /modulos/financeiro depois das iterações de 29/05/2026.
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="ds-doc-wrap" id="wrapper">
+  <section class="ds-doc-section">
+    <h2 class="ds-h">§4.5</h2>
+    <h3 class="ds-t">Page wrapper recipe</h3>
+    <p class="ds-p">
+      Padrão para criar qualquer página dark nova no site. O body herda
+      fundo branco do Tailwind v4 preflight — sem este wrapper, todo texto
+      branco vira invisível e seções <code style="background:rgba(255,186,26,0.10);color:#ffba1a;font-family:'JetBrains Mono',monospace;font-size:12px;padding:2px 6px;border-radius:4px;">.section--light</code> herdam o cinza-claro do dark
+      e ficam ilegíveis. <strong style="color:#fff;">Copie o bloco abaixo no topo do <code style="background:rgba(255,186,26,0.10);color:#ffba1a;font-family:'JetBrains Mono',monospace;font-size:12px;padding:2px 6px;border-radius:4px;">html.ts</code> e envolva todo o conteúdo em <code style="background:rgba(255,186,26,0.10);color:#ffba1a;font-family:'JetBrains Mono',monospace;font-size:12px;padding:2px 6px;border-radius:4px;">&lt;div class="pg-dark"&gt;</code>.</strong>
+    </p>
+
+    <div class="ds-cmp-block">
+      <div class="ds-cmp-block__head">
+        <h4>1. CSS wrapper · cole no &lt;style&gt; do html.ts</h4>
+        <code>.pg-dark · .section-dark · .section-dark-soft</code>
+      </div>
+      <pre style="background:#0d1117;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:24px;color:#C9D1D9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;line-height:1.7;overflow-x:auto;white-space:pre;margin:0;">.pg-dark { background: #0D1117; color: #C9D1D9; }
+.pg-dark .section-dark { background: #0D1117; }
+.pg-dark .section-dark-soft { background: #161B22; }
+<span style="color:#6E7884;">/* Anula herança do wrapper dentro de .section--light */</span>
+.pg-dark .section--light { color: var(--light-text); }
+.pg-dark .section--light h2,
+.pg-dark .section--light h3,
+.pg-dark .section--light h4 { color: var(--light-text); }
+.pg-dark .section--light p,
+.pg-dark .section--light li { color: var(--light-text-secondary); }
+.pg-dark .section--light .segment-card h3 { color: var(--light-text); }
+.pg-dark .section--light .segment-card p { color: var(--light-text-secondary); }</pre>
+    </div>
+
+    <div class="ds-cmp-block">
+      <div class="ds-cmp-block__head">
+        <h4>2. Section sequence · ordem recomendada de blocos</h4>
+        <code>dark → light → dark → light → light → dark</code>
+      </div>
+      <p style="color:#8B949E;font-size:14px;margin:0 0 24px;">Mesma cadência da home — luzes intercaladas com vídeos pra não acumular dois claros em sequência.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;">
+        <!-- Sequência de blocos visuais -->
+        <div style="background:#0D1117;border:1px solid rgba(255,255,255,0.10);border-radius:10px;padding:18px 14px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#ffba1a;font-weight:800;letter-spacing:1.5px;">§0 · DARK</span>
+          <p style="color:#fff;font-size:13px;font-weight:700;margin:6px 0 2px;">Hero</p>
+          <p style="color:#8B949E;font-size:11px;margin:0;font-family:'JetBrains Mono',monospace;">.hero-zoom</p>
+        </div>
+        <div style="background:#0D1117;border:1px solid rgba(255,255,255,0.10);border-radius:10px;padding:18px 14px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#ffba1a;font-weight:800;letter-spacing:1.5px;">§1 · DARK</span>
+          <p style="color:#fff;font-size:13px;font-weight:700;margin:6px 0 2px;">Funcionalidades</p>
+          <p style="color:#8B949E;font-size:11px;margin:0;font-family:'JetBrains Mono',monospace;">.agent-card grid</p>
+        </div>
+        <div style="background:#FAFBFC;border:1px solid rgba(0,0,0,0.10);border-radius:10px;padding:18px 14px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#D4960A;font-weight:800;letter-spacing:1.5px;">§2 · LIGHT</span>
+          <p style="color:#1A1D23;font-size:13px;font-weight:700;margin:6px 0 2px;">Cenários</p>
+          <p style="color:#5A6069;font-size:11px;margin:0;font-family:'JetBrains Mono',monospace;">.segment-card</p>
+        </div>
+        <div style="background:#161B22;border:1px solid rgba(255,255,255,0.10);border-radius:10px;padding:18px 14px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#ffba1a;font-weight:800;letter-spacing:1.5px;">§3 · DARK</span>
+          <p style="color:#fff;font-size:13px;font-weight:700;margin:6px 0 2px;">Depoimentos</p>
+          <p style="color:#8B949E;font-size:11px;margin:0;font-family:'JetBrains Mono',monospace;">.testi-card</p>
+        </div>
+        <div style="background:#FAFBFC;border:1px solid rgba(0,0,0,0.10);border-radius:10px;padding:18px 14px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#D4960A;font-weight:800;letter-spacing:1.5px;">§4 · LIGHT</span>
+          <p style="color:#1A1D23;font-size:13px;font-weight:700;margin:6px 0 2px;">FAQ</p>
+          <p style="color:#5A6069;font-size:11px;margin:0;font-family:'JetBrains Mono',monospace;">.faq-section .section--light</p>
+        </div>
+        <div style="background:linear-gradient(180deg,#0D1117 0%,#161B22 100%);border:1px solid rgba(255,255,255,0.10);border-radius:10px;padding:18px 14px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#ffba1a;font-weight:800;letter-spacing:1.5px;">§4.5 · DARK</span>
+          <p style="color:#fff;font-size:13px;font-weight:700;margin:6px 0 2px;">Vídeos depoimentos</p>
+          <p style="color:#8B949E;font-size:11px;margin:0;font-family:'JetBrains Mono',monospace;">.depo-section</p>
+        </div>
+        <div style="background:#FAFBFC;border:1px solid rgba(0,0,0,0.10);border-radius:10px;padding:18px 14px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#D4960A;font-weight:800;letter-spacing:1.5px;">§5 · LIGHT</span>
+          <p style="color:#1A1D23;font-size:13px;font-weight:700;margin:6px 0 2px;">Conteúdo blog</p>
+          <p style="color:#5A6069;font-size:11px;margin:0;font-family:'JetBrains Mono',monospace;">.knowledge-card · articles.json</p>
+        </div>
+        <div style="background:#0D1117;border:1px solid rgba(255,255,255,0.10);border-radius:10px;padding:18px 14px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#ffba1a;font-weight:800;letter-spacing:1.5px;">§6 · DARK</span>
+          <p style="color:#fff;font-size:13px;font-weight:700;margin:6px 0 2px;">CTA final</p>
+          <p style="color:#8B949E;font-size:11px;margin:0;font-family:'JetBrains Mono',monospace;">.cta-section</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-cmp-block">
+      <div class="ds-cmp-block__head">
+        <h4>3. Conteúdo do blog · sempre real, nunca inventado</h4>
+        <code>import articlesData from '@/data/articles.json'</code>
+      </div>
+      <p style="color:#8B949E;font-size:14px;margin:0 0 18px;">Os 6 cards do §5 saem do mesmo JSON estático que alimenta <code style="color:#ffba1a;font-family:'JetBrains Mono',monospace;font-size:12px;">/blog</code>. Sem imagens unsplash, sem títulos inventados. Se algum slug sumir do CMS, o <code style="color:#ffba1a;font-family:'JetBrains Mono',monospace;font-size:12px;">.filter()</code> ignora silenciosamente — build não quebra.</p>
+      <pre style="background:#0d1117;border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:24px;color:#C9D1D9;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;line-height:1.7;overflow-x:auto;white-space:pre;margin:0;">import articlesData from '@/data/articles.json';
+
+type Article = { slug:string; title:string; category:string; cover_url:string|null };
+
+const RELATED_SLUGS = [<span style="color:#6E7884;">/* 6 slugs relevantes do tema da página */</span>];
+
+const RELATED_BLOG: Article[] = RELATED_SLUGS
+  .map(slug =&gt; (articlesData as Article[]).find(a =&gt; a.slug === slug))
+  .filter((a): a is Article =&gt; Boolean(a));
+
+<span style="color:#6E7884;">// No JSX/HTML string:</span>
+const blogCards = RELATED_BLOG.map(a =&gt; `
+  &lt;a href="/blog/${'$'}{a.slug}" class="knowledge-card"&gt;
+    &lt;div class="knowledge-card__image"&gt;
+      &lt;img src="${'$'}{a.cover_url || '/images/og-image.png'}" alt="${'$'}{a.title}"&gt;
+      &lt;span class="knowledge-card__type"&gt;${'$'}{CATEGORY_LABEL[a.category]}&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="knowledge-card__body"&gt;
+      &lt;h4&gt;${'$'}{a.title}&lt;/h4&gt;
+      &lt;span class="knowledge-card__link"&gt;Ler artigo&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/a&gt;
+`).join('');</pre>
+    </div>
+
+    <div class="ds-cmp-block">
+      <div class="ds-cmp-block__head">
+        <h4>4. Referência viva</h4>
+        <code>/modulos/financeiro</code>
+      </div>
+      <p style="color:#8B949E;font-size:14px;margin:0;">A primeira página que aplicou esse padrão é <a href="/modulos/financeiro" style="color:#ffba1a;text-decoration:none;border-bottom:1px solid rgba(255,186,26,0.3);">/modulos/financeiro</a>. Toda nova página de agente/módulo segue exatamente os 8 blocos acima na ordem § 0→6.</p>
+    </div>
+  </section>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       §5 MOTION & INTERACTION (dark)
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="ds-doc-wrap">
+  <section class="ds-doc-section" id="motion">
+    <h2 class="ds-h">§5</h2>
+    <h3 class="ds-t">Motion &amp; Interaction</h3>
+    <p class="ds-p">Animações reais do orbit.css. Scroll-reveal via IntersectionObserver em <code style="background:rgba(255,186,26,0.10);color:#ffba1a;font-family:'JetBrains Mono',monospace;font-size:12px;padding:2px 6px;border-radius:4px;">main-v2.js</code> (não incluído aqui — esta página não anima no scroll).</p>
+
+    <div class="ds-cmp-block">
+      <div class="ds-cmp-block__head">
+        <h4>Easing tokens</h4>
+        <code>--transition / --ease-snap</code>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:18px;">
+          <p class="ds-swatch__name">--transition</p>
+          <p class="ds-swatch__val" style="margin:4px 0 0;">all 0.3s cubic-bezier(0.4, 0, 0.2, 1)</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:18px;">
+          <p class="ds-swatch__name">--ease-snap</p>
+          <p class="ds-swatch__val" style="margin:4px 0 0;">cubic-bezier(0.16, 1, 0.3, 1)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-cmp-block">
+      <div class="ds-cmp-block__head">
+        <h4>Hover: button</h4>
+        <code>.btn-primary:hover</code>
+      </div>
+      <p style="color:#8B949E;font-size:13px;margin:0 0 18px;">Padding shifts e a seta dourada gira 45° e desliza pra esquerda. <strong style="color:#fff;">Passe o mouse:</strong></p>
+      <a href="#" class="btn btn-primary btn-lg">HOVER ME</a>
+    </div>
+
+    <div class="ds-cmp-block">
+      <div class="ds-cmp-block__head">
+        <h4>Hover: card lift</h4>
+        <code>.agent-card:hover</code>
+      </div>
+      <p style="color:#8B949E;font-size:13px;margin:0 0 18px;">Translate-Y discreto + border dourada. <strong style="color:#fff;">Passe o mouse:</strong></p>
+      <div class="ds-grid-3">
+        <article class="agent-card">
+          <div class="agent-card__icon"><i class="fa-solid fa-bolt"></i></div>
+          <h3>Hover lift</h3>
+          <p>Hover para ver a transição.</p>
+        </article>
+        <article class="agent-card">
+          <div class="agent-card__icon"><i class="fa-solid fa-eye"></i></div>
+          <h3>Border glow</h3>
+          <p>Border dourada acende no hover.</p>
+        </article>
+        <article class="agent-card">
+          <div class="agent-card__icon"><i class="fa-solid fa-shield-halved"></i></div>
+          <h3>Soft shadow</h3>
+          <p>Sombra suave acompanha o lift.</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="ds-cmp-block">
+      <div class="ds-cmp-block__head">
+        <h4>Pulse: CTA glow</h4>
+        <code>@keyframes ctaGlow · .hero-cta-glow</code>
+      </div>
+      <p style="color:#8B949E;font-size:13px;margin:0 0 18px;">Glow dourado pulsando ao redor do CTA principal da home.</p>
+      <a href="#" class="btn btn-primary btn-lg hero-cta-glow">PULSANDO 24/7</a>
+    </div>
+
+    <div class="ds-cmp-block">
+      <div class="ds-cmp-block__head">
+        <h4>Reveal-on-scroll</h4>
+        <code>[data-reveal] / [data-reveal-stagger]</code>
+      </div>
+      <p style="color:#8B949E;font-size:13px;margin:0;">Aplicado no JSX/HTML: opacity 0 → 1 + translate-Y 16px. Stagger filhos com delay incremental (0, 80, 160, 240ms…). Ativado quando entra no viewport via IntersectionObserver.</p>
+    </div>
+  </section>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       §6 ICONS (dark)
+       ═══════════════════════════════════════════════════════════════ -->
+  <div class="ds-doc-wrap">
+  <section class="ds-doc-section" id="icons">
+    <h2 class="ds-h">§6</h2>
+    <h3 class="ds-t">Icons</h3>
+    <p class="ds-p">Sistema único: <strong style="color:#fff;">Font Awesome 6 Solid</strong> (CDN). Cor herda do parent — dourado <code style="background:rgba(255,186,26,0.10);color:#ffba1a;font-family:'JetBrains Mono',monospace;font-size:12px;padding:2px 6px;border-radius:4px;">#ffba1a</code> é o padrão dentro de cards/CTAs.</p>
+
+    <div class="ds-cmp-block">
+      <div class="ds-cmp-block__head">
+        <h4>Size variants</h4>
+        <code>&lt;i class="fa-solid fa-..."&gt;</code>
+      </div>
+      <div style="display:flex;gap:32px;align-items:flex-end;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:32px;">
+        <div style="text-align:center;"><i class="fa-solid fa-rocket" style="color:#ffba1a;font-size:16px;"></i><p class="ds-icon-cell__name">16px</p></div>
+        <div style="text-align:center;"><i class="fa-solid fa-rocket" style="color:#ffba1a;font-size:24px;"></i><p class="ds-icon-cell__name">24px (card)</p></div>
+        <div style="text-align:center;"><i class="fa-solid fa-rocket" style="color:#ffba1a;font-size:32px;"></i><p class="ds-icon-cell__name">32px</p></div>
+        <div style="text-align:center;"><i class="fa-solid fa-rocket" style="color:#ffba1a;font-size:48px;"></i><p class="ds-icon-cell__name">48px</p></div>
+      </div>
+    </div>
+
+    <div class="ds-cmp-block">
+      <div class="ds-cmp-block__head">
+        <h4>Icons usados no site (amostra)</h4>
+        <code>fa-solid</code>
+      </div>
+      <div class="ds-grid-4">
+        <div class="ds-icon-cell"><i class="fa-solid fa-chess-king" style="font-size:28px;"></i><p class="ds-icon-cell__name">fa-chess-king</p></div>
+        <div class="ds-icon-cell"><i class="fa-solid fa-sitemap" style="font-size:28px;"></i><p class="ds-icon-cell__name">fa-sitemap</p></div>
+        <div class="ds-icon-cell"><i class="fa-solid fa-users" style="font-size:28px;"></i><p class="ds-icon-cell__name">fa-users</p></div>
+        <div class="ds-icon-cell"><i class="fa-solid fa-graduation-cap" style="font-size:28px;"></i><p class="ds-icon-cell__name">fa-graduation-cap</p></div>
+        <div class="ds-icon-cell"><i class="fa-solid fa-chart-line" style="font-size:28px;"></i><p class="ds-icon-cell__name">fa-chart-line</p></div>
+        <div class="ds-icon-cell"><i class="fa-solid fa-magnifying-glass-chart" style="font-size:28px;"></i><p class="ds-icon-cell__name">fa-magnifying-glass-chart</p></div>
+        <div class="ds-icon-cell"><i class="fa-solid fa-shield-halved" style="font-size:28px;"></i><p class="ds-icon-cell__name">fa-shield-halved</p></div>
+        <div class="ds-icon-cell"><i class="fa-solid fa-lightbulb" style="font-size:28px;"></i><p class="ds-icon-cell__name">fa-lightbulb</p></div>
+        <div class="ds-icon-cell"><i class="fa-solid fa-triangle-exclamation" style="font-size:28px;"></i><p class="ds-icon-cell__name">fa-triangle-exclamation</p></div>
+        <div class="ds-icon-cell"><i class="fa-solid fa-file-lines" style="font-size:28px;"></i><p class="ds-icon-cell__name">fa-file-lines</p></div>
+        <div class="ds-icon-cell"><i class="fa-solid fa-handshake" style="font-size:28px;"></i><p class="ds-icon-cell__name">fa-handshake</p></div>
+        <div class="ds-icon-cell"><i class="fa-solid fa-video" style="font-size:28px;"></i><p class="ds-icon-cell__name">fa-video</p></div>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <footer style="text-align:center;padding:48px 24px;border-top:1px solid rgba(255,255,255,0.06);color:#6E7884;font-size:12px;font-family:'JetBrains Mono',monospace;">
+    Orbit Design System · gerado a partir de orbit-next/src/app/orbit.css<br>
+    Snapshot: 2026-05-29 · re-rodar comando "Extract HTML Design System" pra atualizar
+  </footer>
+
+</body>
+</html>
