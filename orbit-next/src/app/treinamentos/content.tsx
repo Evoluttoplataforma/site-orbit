@@ -84,17 +84,20 @@ export function PageContent() {
       byDay[t.day].push(t);
     });
 
+    // Treinamentos agora rodam no Zoom (substitui o form/modal antigo).
+    // Cada card vira <a> direto pra sala — sem necessidade de inscrição prévia.
+    const ZOOM_URL = 'https://us06web.zoom.us/j/81490344017';
     const cols = [1, 2, 3, 4, 5].map(day => {
       const items = (byDay[day] || []).sort((a, b) => a.hour - b.hour);
       const slots = items.map(t => `
-        <div class="tr-slot" data-slug="${t.slug}">
+        <a class="tr-slot" href="${ZOOM_URL}" target="_blank" rel="noopener" data-slug="${t.slug}" style="text-decoration:none;color:inherit;">
           <span class="tr-slot__time"><i class="fa-solid fa-clock"></i>${String(t.hour).padStart(2,'0')}h</span>
           <div class="tr-slot__icon"><i class="fa-solid ${t.icon}"></i></div>
           <div class="tr-slot__title">${t.title}</div>
           ${t.subtitle ? `<div class="tr-slot__sub">${t.subtitle}</div>` : ''}
           <p class="tr-slot__desc">${t.description}</p>
-          <span class="tr-slot__cta">Quero participar <i class="fa-solid fa-arrow-right"></i></span>
-        </div>
+          <span class="tr-slot__cta"><i class="fa-solid fa-video" style="color:#2D8CFF;"></i> Entrar no Zoom <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
       `).join('');
       return `
         <div class="tr-day">
@@ -159,13 +162,11 @@ export function PageContent() {
       document.body.style.overflow = '';
     }
 
-    ref.current.querySelectorAll('.tr-slot').forEach(card => {
-      card.addEventListener('click', () => {
-        const slug = (card as HTMLElement).dataset.slug;
-        const t = TRAININGS.find(x => x.slug === slug);
-        if (t) openModal(t);
-      });
-    });
+    // Cards agora são <a> que vão direto pro Zoom — sem modal/form de inscrição.
+    // O modal HTML continua no DOM mas não é mais aberto por nada nesta página
+    // (mantido pra não quebrar querySelectors abaixo; pode ser removido no
+    //  futuro com a função openModal/form).
+    void openModal; // suprime warning de unused
 
     closeBtn?.addEventListener('click', closeModal);
     modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
