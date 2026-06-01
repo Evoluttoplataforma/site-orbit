@@ -96,6 +96,31 @@ export const pageHTML = `
   .tr-modal__submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
   .tr-modal__error { color: #F85149; font-size: 0.85rem; margin: 8px 0 0; display: none; background: rgba(248,81,73,0.08); padding: 10px 14px; border-radius: 8px; border-left: 3px solid #F85149; }
   .tr-modal__error.show { display: block; }
+  /* CTAs Zoom no hero: primário azul Zoom, ghost branco */
+  .tr-zoom-cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 26px; border-radius: 50px;
+    background: linear-gradient(135deg, #2D8CFF, #1A6FD9);
+    color: #fff; text-decoration: none;
+    font-weight: 700; font-size: 15px; letter-spacing: 0.2px;
+    border: 1px solid rgba(45,140,255,0.6);
+    box-shadow: 0 8px 24px rgba(45,140,255,0.30);
+    transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
+  }
+  .tr-zoom-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(45,140,255,0.45); }
+  .tr-zoom-cta i { font-size: 16px; }
+  .tr-zoom-cta--ghost {
+    background: transparent;
+    color: #C9D1D9;
+    border-color: rgba(255,255,255,0.20);
+    box-shadow: none;
+  }
+  .tr-zoom-cta--ghost:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,186,26,0.45);
+    color: #ffba1a;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.20);
+  }
 </style>
 
 <!-- HERO -->
@@ -103,12 +128,20 @@ export const pageHTML = `
     <div class="tr-hero__inner">
         <span class="tr-hero__badge"><i class="fa-solid fa-graduation-cap"></i>Treinamentos Orbit</span>
         <h1>Domine o Orbit em <span class="accent">10 sess&otilde;es semanais</span> ao vivo</h1>
-        <p class="lead">Toda semana, de segunda a sexta, dois treinamentos por dia. Aprenda direto com nosso time, ao vivo no YouTube, sem custo.</p>
+        <p class="lead">Toda semana, de segunda a sexta, dois treinamentos por dia. Aprenda direto com nosso time, ao vivo no Zoom, sem custo.</p>
         <div class="tr-hero__stats">
             <div class="tr-hero__stat"><i class="fa-solid fa-layer-group"></i><span><strong>10 m&oacute;dulos</strong> por semana</span></div>
-            <div class="tr-hero__stat"><i class="fa-brands fa-youtube" style="color:#ff0000;"></i><span>Ao vivo no <strong>YouTube</strong></span></div>
+            <div class="tr-hero__stat"><i class="fa-solid fa-video" style="color:#2D8CFF;"></i><span>Ao vivo no <strong>Zoom</strong></span></div>
             <div class="tr-hero__stat"><i class="fa-solid fa-calendar-week"></i><span><strong>Seg a Sex</strong> &middot; 10h e 16h</span></div>
             <div class="tr-hero__stat"><i class="fa-solid fa-circle-check" style="color:#3FB950;"></i><span><strong>100% gratuito</strong></span></div>
+        </div>
+        <div style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center;">
+            <a href="https://us06web.zoom.us/j/81490344017" target="_blank" rel="noopener" class="tr-zoom-cta">
+                <i class="fa-solid fa-video"></i> Entrar no Zoom agora
+            </a>
+            <a href="#trainingGrid" class="tr-zoom-cta tr-zoom-cta--ghost">
+                <i class="fa-solid fa-calendar-check"></i> Ver agenda da semana
+            </a>
         </div>
     </div>
 </section>
@@ -144,9 +177,9 @@ export const pageHTML = `
         </div>
         <div class="tr-step">
             <div class="tr-step__num">03</div>
-            <div class="tr-step__icon"><i class="fa-brands fa-youtube" style="color:#ff0000;"></i></div>
-            <h3>Entre no YouTube</h3>
-            <p>No hor&aacute;rio, acesse o link que enviamos por email e participe ao vivo.</p>
+            <div class="tr-step__icon"><i class="fa-solid fa-video" style="color:#2D8CFF;"></i></div>
+            <h3>Entre no Zoom</h3>
+            <p>No hor&aacute;rio, <a href="https://us06web.zoom.us/j/81490344017" target="_blank" rel="noopener" style="color:#ffba1a;font-weight:700;text-decoration:none;border-bottom:1px solid rgba(255,186,26,0.4);">clique aqui pra entrar no Zoom</a> ou acesse o link que enviamos por email.</p>
         </div>
     </div>
 </section>
