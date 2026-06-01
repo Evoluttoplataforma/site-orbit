@@ -126,18 +126,18 @@ const MODULE_COPY: Record<string, ModuleCopy> = {
 // Cada agente tem 1 imagem de retrato pronta em /public/images/
 // (alguns slugs diferem do nome da imagem, mapeado em `img`).
 const ALL_AGENTS: Array<{ slug: string; name: string; icon: string; img: string; tagline: string }> = [
-  { slug: 'estrategico', name: 'Estratégico', icon: 'fa-compass', img: '/images/agente-estrategista.png', tagline: 'SWOT, BSC e planejamento estratégico' },
-  { slug: 'processos', name: 'Processos', icon: 'fa-diagram-project', img: '/images/agente-processos.jpg', tagline: 'BPMN, playbooks e execução' },
-  { slug: 'pessoas', name: 'Pessoas', icon: 'fa-users', img: '/images/agente-pessoas.png', tagline: 'Cargos, PDI e organograma vivo' },
-  { slug: 'indicadores', name: 'Indicadores', icon: 'fa-chart-line', img: '/images/agente-indicadores.jpg', tagline: 'KPIs em tempo real e causa raiz' },
-  { slug: 'riscos', name: 'Riscos', icon: 'fa-shield-halved', img: '/images/agente-riscos.jpg', tagline: 'Matriz, plano e detecção emergente' },
-  { slug: 'treinamento', name: 'Treinamento', icon: 'fa-graduation-cap', img: '/images/agente-treinamento.jpg', tagline: 'Microlearning e aprendizagem aplicada' },
-  { slug: 'oportunidades', name: 'Oportunidades', icon: 'fa-lightbulb', img: '/images/agente-oportunidades.jpg', tagline: 'Captura, viabilidade e priorização' },
-  { slug: 'documentos', name: 'Documentos', icon: 'fa-folder-tree', img: '/images/agente-documentos.jpg', tagline: 'Repositório, versionamento e busca semântica' },
-  { slug: 'comercial', name: 'Comercial', icon: 'fa-code-branch', img: '/images/agente-vendas.jpg', tagline: 'CRM, pipeline e WhatsApp Business' },
-  { slug: 'problemas-operacionais', name: 'Problemas', icon: 'fa-triangle-exclamation', img: '/images/agente-problemas.jpg', tagline: 'RCA com 5 Porquês e Ishikawa' },
-  { slug: 'reunioes', name: 'Reuniões', icon: 'fa-microphone-lines', img: '/images/agente-reunioes.jpg', tagline: 'Pauta, transcrição PT-BR e ata automática' },
-  { slug: 'pesquisas', name: 'Pesquisas', icon: 'fa-clipboard-list', img: '/images/agente-pesquisa.jpg', tagline: 'Clima, NPS e plano automático' },
+  { slug: 'estrategico', name: 'Estratégico', icon: 'fa-compass', img: '/images/agente-estrategista.webp', tagline: 'SWOT, BSC e planejamento estratégico' },
+  { slug: 'processos', name: 'Processos', icon: 'fa-diagram-project', img: '/images/agente-processos.webp', tagline: 'BPMN, playbooks e execução' },
+  { slug: 'pessoas', name: 'Pessoas', icon: 'fa-users', img: '/images/agente-pessoas.webp', tagline: 'Cargos, PDI e organograma vivo' },
+  { slug: 'indicadores', name: 'Indicadores', icon: 'fa-chart-line', img: '/images/agente-indicadores.webp', tagline: 'KPIs em tempo real e causa raiz' },
+  { slug: 'riscos', name: 'Riscos', icon: 'fa-shield-halved', img: '/images/agente-riscos.webp', tagline: 'Matriz, plano e detecção emergente' },
+  { slug: 'treinamento', name: 'Treinamento', icon: 'fa-graduation-cap', img: '/images/agente-treinamento.webp', tagline: 'Microlearning e aprendizagem aplicada' },
+  { slug: 'oportunidades', name: 'Oportunidades', icon: 'fa-lightbulb', img: '/images/agente-oportunidades.webp', tagline: 'Captura, viabilidade e priorização' },
+  { slug: 'documentos', name: 'Documentos', icon: 'fa-folder-tree', img: '/images/agente-documentos.webp', tagline: 'Repositório, versionamento e busca semântica' },
+  { slug: 'comercial', name: 'Comercial', icon: 'fa-code-branch', img: '/images/agente-vendas.webp', tagline: 'CRM, pipeline e WhatsApp Business' },
+  { slug: 'problemas-operacionais', name: 'Problemas', icon: 'fa-triangle-exclamation', img: '/images/agente-problemas.webp', tagline: 'RCA com 5 Porquês e Ishikawa' },
+  { slug: 'reunioes', name: 'Reuniões', icon: 'fa-microphone-lines', img: '/images/agente-reunioes.webp', tagline: 'Pauta, transcrição PT-BR e ata automática' },
+  { slug: 'pesquisas', name: 'Pesquisas', icon: 'fa-clipboard-list', img: '/images/agente-pesquisa.webp', tagline: 'Clima, NPS e plano automático' },
 ];
 
 const ALL_MODULES: Array<{ slug: string; name: string; icon: string }> = [
