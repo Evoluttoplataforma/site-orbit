@@ -84,21 +84,27 @@ export function PageContent() {
       byDay[t.day].push(t);
     });
 
-    // Treinamentos agora rodam no Zoom (substitui o form/modal antigo).
-    // Cada card vira <a> direto pra sala — sem necessidade de inscrição prévia.
-    const ZOOM_URL = 'https://us06web.zoom.us/j/81490344017';
+    // Treinamentos rodam como webinars no Zoom — cada horário tem URL própria de
+    // inscrição (precisa cadastrar antes pra receber o link da sala).
+    const ZOOM_URLS: Record<number, string> = {
+      10: 'https://us06web.zoom.us/webinar/register/WN_PYSfYyi4Q1Gv85XAASQ4tQ',
+      16: 'https://us06web.zoom.us/webinar/register/WN_weXjyujGQl2RUWYw9X3gCw',
+    };
     const cols = [1, 2, 3, 4, 5].map(day => {
       const items = (byDay[day] || []).sort((a, b) => a.hour - b.hour);
-      const slots = items.map(t => `
-        <a class="tr-slot" href="${ZOOM_URL}" target="_blank" rel="noopener" data-slug="${t.slug}" style="text-decoration:none;color:inherit;">
+      const slots = items.map(t => {
+        const url = ZOOM_URLS[t.hour] || ZOOM_URLS[10];
+        return `
+        <a class="tr-slot" href="${url}" target="_blank" rel="noopener" data-slug="${t.slug}" style="text-decoration:none;color:inherit;">
           <span class="tr-slot__time"><i class="fa-solid fa-clock"></i>${String(t.hour).padStart(2,'0')}h</span>
           <div class="tr-slot__icon"><i class="fa-solid ${t.icon}"></i></div>
           <div class="tr-slot__title">${t.title}</div>
           ${t.subtitle ? `<div class="tr-slot__sub">${t.subtitle}</div>` : ''}
           <p class="tr-slot__desc">${t.description}</p>
-          <span class="tr-slot__cta"><i class="fa-solid fa-video" style="color:#2D8CFF;"></i> Entrar no Zoom <i class="fa-solid fa-arrow-right"></i></span>
+          <span class="tr-slot__cta"><i class="fa-solid fa-calendar-check" style="color:#2D8CFF;"></i> Reservar minha vaga <i class="fa-solid fa-arrow-right"></i></span>
         </a>
-      `).join('');
+      `;
+      }).join('');
       return `
         <div class="tr-day">
           <div class="tr-day__header">

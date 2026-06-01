@@ -136,11 +136,8 @@ export const pageHTML = `
             <div class="tr-hero__stat"><i class="fa-solid fa-circle-check" style="color:#3FB950;"></i><span><strong>100% gratuito</strong></span></div>
         </div>
         <div style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center;">
-            <a href="https://us06web.zoom.us/j/81490344017" target="_blank" rel="noopener" class="tr-zoom-cta">
-                <i class="fa-solid fa-video"></i> Entrar no Zoom agora
-            </a>
-            <a href="#trainingGrid" class="tr-zoom-cta tr-zoom-cta--ghost">
-                <i class="fa-solid fa-calendar-check"></i> Ver agenda da semana
+            <a href="#trainingGrid" class="tr-zoom-cta">
+                <i class="fa-solid fa-calendar-check"></i> Reservar minha vaga
             </a>
         </div>
     </div>
@@ -177,9 +174,9 @@ export const pageHTML = `
         </div>
         <div class="tr-step">
             <div class="tr-step__num">03</div>
-            <div class="tr-step__icon"><i class="fa-solid fa-video" style="color:#2D8CFF;"></i></div>
-            <h3>Entre no Zoom</h3>
-            <p>No hor&aacute;rio, <a href="https://us06web.zoom.us/j/81490344017" target="_blank" rel="noopener" style="color:#ffba1a;font-weight:700;text-decoration:none;border-bottom:1px solid rgba(255,186,26,0.4);">clique aqui pra entrar no Zoom</a> ou acesse o link que enviamos por email.</p>
+            <div class="tr-step__icon"><i class="fa-solid fa-calendar-check" style="color:#2D8CFF;"></i></div>
+            <h3>Reserve sua vaga</h3>
+            <p>Inscri&ccedil;&atilde;o gr&aacute;tis no Zoom Webinar. O link da sala chega no seu email logo ap&oacute;s o cadastro.</p>
         </div>
     </div>
 </section>
