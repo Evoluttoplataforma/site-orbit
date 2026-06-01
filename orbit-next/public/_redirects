@@ -1,7 +1,6 @@
 # Cloudflare Pages redirects
 # Sintaxe: <de> <para> <status>
 
-# Páginas de agentes/módulos descontinuadas — vão pra home (que tem o time de agentes)
-/agentes-de-ia       /  301
-/agentes/*           /  301
-/modulos/*           /  301
+# /agentes-de-ia (pillar) e /agentes/* (12 agentes) ativos novamente.
+# /modulos/* (4 módulos) também ativos.
+# As rotas que não existirem servem 404 normal — não 301 pra home.
