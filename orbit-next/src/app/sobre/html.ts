@@ -582,6 +582,6 @@ export const pageHTML = `
     </script>
 
     <!-- Scripts -->
-    <script src="/js/main-v2.js?v=1"></script>
+
     <script src="/js/seo.js"></script>
 `;

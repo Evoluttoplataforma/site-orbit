@@ -159,10 +159,20 @@
       closeBtn.innerHTML = '&times;';
       closeBtn.style.cssText = 'position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,0.6);color:#fff;border:none;font-size:20px;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;line-height:1;backdrop-filter:blur(4px);';
 
+      // WebP com fallback JPG; fetchpriority low pra não competir com LCP
+      var picture = document.createElement('picture');
+      var srcWebp = document.createElement('source');
+      srcWebp.type = 'image/webp';
+      srcWebp.srcset = '/images/banner-live.webp?v=20260601';
       var img = document.createElement('img');
       img.src = '/images/banner-live.jpg?v=20260408';
       img.alt = 'Live - A Nova Era da Gestao';
       img.style.cssText = 'width:100%;display:block;';
+      img.setAttribute('fetchpriority', 'low');
+      img.setAttribute('decoding', 'async');
+      img.loading = 'lazy';
+      picture.appendChild(srcWebp);
+      picture.appendChild(img);
 
       function dismiss() {
         overlay.style.opacity = '0';
@@ -175,7 +185,7 @@
       card.onclick = function(e) { e.stopPropagation(); dismiss(); window.location.href = '/live#inscreva-se'; };
 
       card.appendChild(closeBtn);
-      card.appendChild(img);
+      card.appendChild(picture);
       overlay.appendChild(card);
       document.body.appendChild(overlay);
 
@@ -186,7 +196,7 @@
           card.style.transform = 'scale(1)';
         });
       });
-    }, 3000);
+    }, 6000);
   }
 
   if (document.readyState === 'loading') {
