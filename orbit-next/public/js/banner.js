@@ -134,74 +134,9 @@
     init();
   }
 
-  // ═══ LIVE POPUP — appears once per session ═══
-  function showLivePopup() {
-    // Skip on live page itself, CMS e chat
-    if (window.location.pathname.indexOf('/live') === 0) return;
-    if (window.location.pathname.indexOf('/acesso') === 0) return;
-    if (window.location.pathname.indexOf('/chat') === 0) return;
-    // Só mostra 1 vez por sessão do browser
-    try { if (sessionStorage.getItem('orbit_live_popup_shown') === '1') return; } catch(e) {}
-    try { sessionStorage.setItem('orbit_live_popup_shown', '1'); } catch(e) {}
-    if (window.__livePopupShown) return;
-    window.__livePopupShown = true;
-
-    setTimeout(function() {
-
-      var overlay = document.createElement('div');
-      overlay.id = 'livePopupOverlay';
-      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);z-index:3000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity 0.3s;cursor:pointer;';
-
-      var card = document.createElement('div');
-      card.style.cssText = 'position:relative;max-width:480px;width:100%;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5);transform:scale(0.9);transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);cursor:pointer;';
-
-      var closeBtn = document.createElement('button');
-      closeBtn.innerHTML = '&times;';
-      closeBtn.style.cssText = 'position:absolute;top:10px;right:10px;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,0.6);color:#fff;border:none;font-size:20px;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;line-height:1;backdrop-filter:blur(4px);';
-
-      // WebP com fallback JPG; fetchpriority low pra não competir com LCP
-      var picture = document.createElement('picture');
-      var srcWebp = document.createElement('source');
-      srcWebp.type = 'image/webp';
-      srcWebp.srcset = '/images/banner-live.webp?v=20260601';
-      var img = document.createElement('img');
-      img.src = '/images/banner-live.jpg?v=20260408';
-      img.alt = 'Live - A Nova Era da Gestao';
-      img.style.cssText = 'width:100%;display:block;';
-      img.setAttribute('fetchpriority', 'low');
-      img.setAttribute('decoding', 'async');
-      img.loading = 'lazy';
-      picture.appendChild(srcWebp);
-      picture.appendChild(img);
-
-      function dismiss() {
-        overlay.style.opacity = '0';
-        card.style.transform = 'scale(0.9)';
-        setTimeout(function() { overlay.remove(); }, 300);
-      }
-
-      closeBtn.onclick = function(e) { e.stopPropagation(); dismiss(); };
-      overlay.onclick = dismiss;
-      card.onclick = function(e) { e.stopPropagation(); dismiss(); window.location.href = '/live#inscreva-se'; };
-
-      card.appendChild(closeBtn);
-      card.appendChild(picture);
-      overlay.appendChild(card);
-      document.body.appendChild(overlay);
-
-      // Animate in
-      requestAnimationFrame(function() {
-        requestAnimationFrame(function() {
-          overlay.style.opacity = '1';
-          card.style.transform = 'scale(1)';
-        });
-      });
-    }, 6000);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', showLivePopup);
-  } else {
-    showLivePopup();
-  }
+  // ═══ LIVE POPUP — REMOVIDO em 2026-06-01 ═══
+  // Penalizava Core Web Vitals (LCP) sem retorno proporcional.
+  // Conversão pro /live agora acontece via header (badge live) e mentions
+  // nas FAQs. A imagem /images/banner-live.{jpg,webp} continua no public/
+  // pra histórico; se quiser reativar, restaura desse commit.
 })();
