@@ -5,9 +5,14 @@ import { pageHTML } from './html';
 import { headerHTML } from '@/components/shared-header';
 import staticStories from '@/data/stories.json';
 
+// Tabs primários da página de histórias: distingue B2B direto (Empresas) de
+// canais (Consultoria). Substitui o antigo "Serviços" que era genérico.
+// Histórias antigas com segment='servicos' são migradas pra 'consultoria'
+// via legacyMap abaixo.
 const SEGMENTS: Record<string, string> = {
+  empresa: 'Empresas',
+  consultoria: 'Consultoria',
   industria: 'Indústria',
-  servicos: 'Serviços',
   tecnologia: 'Tecnologia',
   saude: 'Saúde',
   educacao: 'Educação',
@@ -16,6 +21,12 @@ const SEGMENTS: Record<string, string> = {
   agronegocio: 'Agronegócio',
   outro: 'Outro',
 };
+
+// Compatibilidade com dados antigos no Supabase
+function normalizeSegment(raw: string): string {
+  if (raw === 'servicos') return 'consultoria';
+  return raw || 'outro';
+}
 
 function escapeHtml(str: string) {
   if (!str) return '';
@@ -73,7 +84,7 @@ export function PageContent() {
           empresa: String(s.company_name || ''),
           nome: String(s.contact_name || '').split('|')[0].trim(),
           cargo: String(s.contact_role || ''),
-          segmento: String(s.segment || ''),
+          segmento: normalizeSegment(String(s.segment || '')),
           desafio: String(s.challenge || ''),
           companyLogo: String(s.logo_url || ''),
         }));
@@ -91,8 +102,20 @@ export function PageContent() {
 
         const filterBar = document.getElementById('filterBar');
         if (filterBar) {
-          const segments = [...new Set(stories.map((s) => s.segmento).filter(Boolean))];
-          segments.forEach((seg) => {
+          // Tabs PRIMÁRIOS sempre visíveis (Empresas / Consultoria), independente
+          // de já existir história desse tipo no JSON. Se houver outros segmentos
+          // (industria, varejo, etc.) também adiciona como tabs secundários.
+          const PRIMARY_TABS = ['empresa', 'consultoria'] as const;
+          PRIMARY_TABS.forEach((seg) => {
+            const btn = document.createElement('button');
+            btn.className = 'filter-btn';
+            btn.dataset.filter = seg;
+            btn.textContent = SEGMENTS[seg];
+            filterBar.appendChild(btn);
+          });
+          const secondarySegments = [...new Set(stories.map((s) => s.segmento).filter(Boolean))]
+            .filter((seg) => !PRIMARY_TABS.includes(seg as 'empresa' | 'consultoria'));
+          secondarySegments.forEach((seg) => {
             const btn = document.createElement('button');
             btn.className = 'filter-btn';
             btn.dataset.filter = seg;

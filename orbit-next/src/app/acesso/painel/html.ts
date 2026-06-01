@@ -662,8 +662,9 @@ export const pageHTML = `
                                         <label for="seSegmento">Segmento *</label>
                                         <select id="seSegmento">
                                             <option value="">Selecione...</option>
+                                            <option value="empresa">Empresas (B2B direto)</option>
+                                            <option value="consultoria">Consultoria (canais)</option>
                                             <option value="industria">Indústria</option>
-                                            <option value="servicos">Serviços</option>
                                             <option value="tecnologia">Tecnologia</option>
                                             <option value="saude">Saúde</option>
                                             <option value="educacao">Educação</option>
@@ -2876,7 +2877,10 @@ JSON.stringify(schemaOrg, null, 2) +
 
     // === CUSTOMER STORIES ===
     const SEGMENT_LABELS = {
-        industria: 'Indústria', servicos: 'Serviços', tecnologia: 'Tecnologia',
+        empresa: 'Empresas', consultoria: 'Consultoria',
+        // 'servicos' = legado, hoje serve como rótulo equivalente a Consultoria
+        servicos: 'Consultoria',
+        industria: 'Indústria', tecnologia: 'Tecnologia',
         saude: 'Saúde', educacao: 'Educação', varejo: 'Varejo',
         financeiro: 'Financeiro', agronegocio: 'Agronegócio', outro: 'Outro'
     };
