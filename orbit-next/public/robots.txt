@@ -3,6 +3,8 @@ Allow: /
 Disallow: /acesso/
 Disallow: /apresentacao/
 Disallow: /experiencias/
+Disallow: /rest/
+Disallow: /p/vaga/
 
 # AI Crawlers — Permitido indexar
 User-agent: GPTBot

@@ -1,6 +1,71 @@
 # Cloudflare Pages redirects
 # Sintaxe: <de> <para> <status>
 
-# /agentes-de-ia (pillar) e /agentes/* (12 agentes) ativos novamente.
+# /agentes-de-ia (pillar) e /agentes/* (12 agentes) ativos.
 # /modulos/* (4 módulos) também ativos.
-# As rotas que não existirem servem 404 normal — não 301 pra home.
+# As rotas que não existirem servem 404 normal, não 301 pra home.
+
+# ═════════════════════════════════════════════════════════════
+# Search Console (jun/2026): 53 URLs com 404. Fixes abaixo.
+# ═════════════════════════════════════════════════════════════
+
+# ─── BLOG: 39 URLs antigas (pré-migração Next) → /blog/<slug>
+# Em prod antigo o blog ficava na raiz; agora precisa de prefixo /blog/.
+# Lista gerada cruzando Search Console com articles.json em jun/2026.
+/como-mapear-processos-empresa-bpmn          /blog/como-mapear-processos-empresa-bpmn  301
+/consultoria-empresarial-nao-resolve         /blog/consultoria-empresarial-nao-resolve  301
+/plataforma-treinamento-corporativo          /blog/plataforma-treinamento-corporativo  301
+/software-rh-como-escolher                   /blog/software-rh-como-escolher  301
+/como-organizar-prospeccao-vendas-b2b        /blog/como-organizar-prospeccao-vendas-b2b  301
+/tirar-planejamento-estrategico-do-papel     /blog/tirar-planejamento-estrategico-do-papel  301
+/operacao-nao-escala-causas                  /blog/operacao-nao-escala-causas  301
+/pdi-funcionarios-como-criar                 /blog/pdi-funcionarios-como-criar  301
+/ia-agentic-para-ceo-decisao-estrategica     /blog/ia-agentic-para-ceo-decisao-estrategica  301
+/orbit-vs-sap-salesforce-microsoft           /blog/orbit-vs-sap-salesforce-microsoft  301
+/como-automatizar-processos-empresa          /blog/como-automatizar-processos-empresa  301
+/vendedor-nao-preenche-crm                   /blog/vendedor-nao-preenche-crm  301
+/vendas-marketing-operacoes-conflito         /blog/vendas-marketing-operacoes-conflito  301
+/como-criar-indicadores-empresa              /blog/como-criar-indicadores-empresa  301
+/plataforma-gestao-escalavel                 /blog/plataforma-gestao-escalavel  301
+/ninguem-segue-processo-empresa              /blog/ninguem-segue-processo-empresa  301
+/processos-manuais-empresa                   /blog/processos-manuais-empresa  301
+/gestao-financeira-integrada-empresa         /blog/gestao-financeira-integrada-empresa  301
+/erp-vs-plataforma-all-in-one                /blog/erp-vs-plataforma-all-in-one  301
+/plano-de-acao-executavel                    /blog/plano-de-acao-executavel  301
+/plataforma-gestao-ia-agentic-alternativa-consultoria  /blog/plataforma-gestao-ia-agentic-alternativa-consultoria  301
+/como-integrar-sistemas-empresa              /blog/como-integrar-sistemas-empresa  301
+/software-bpms-como-escolher                 /blog/software-bpms-como-escolher  301
+/dre-tempo-real                              /blog/dre-tempo-real  301
+/sistemas-nao-conversam-custo                /blog/sistemas-nao-conversam-custo  301
+/planejamento-estrategico-morre-terceiro-mes /blog/planejamento-estrategico-morre-terceiro-mes  301
+/perder-talentos-para-concorrentes           /blog/perder-talentos-para-concorrentes  301
+/encontrar-documento-empresa                 /blog/encontrar-documento-empresa  301
+/comunicacao-entre-setores-empresa           /blog/comunicacao-entre-setores-empresa  301
+/como-escalar-empresa-sem-dobrar-equipe      /blog/como-escalar-empresa-sem-dobrar-equipe  301
+/knowledge-base-corporativo-como-escolher    /blog/knowledge-base-corporativo-como-escolher  301
+/vendas-boas-caixa-negativo                  /blog/vendas-boas-caixa-negativo  301
+/treinamento-corporativo-nao-funciona        /blog/treinamento-corporativo-nao-funciona  301
+/como-centralizar-documentacao-empresa       /blog/como-centralizar-documentacao-empresa  301
+/plataformas-comunicacao-corporativa         /blog/plataformas-comunicacao-corporativa  301
+/imersao-mentoria-consultoria-resultado      /blog/imersao-mentoria-consultoria-resultado  301
+/como-reter-talentos-empresa                 /blog/como-reter-talentos-empresa  301
+/indicadores-nao-refletem-realidade          /blog/indicadores-nao-refletem-realidade  301
+/dashboard-gestao-empresarial                /blog/dashboard-gestao-empresarial  301
+
+# ─── PÁGINAS LEGADAS do site HTML antigo → equivalente atual no Next
+# Conceitos viraram agentes/módulos.
+/processos       /agentes/processos       301
+/indicadores     /agentes/indicadores     301
+/tarefas         /agentes-de-ia           301
+/auditorias      /agentes/riscos          301
+/competencias    /agentes/pessoas         301
+/preco           /                        301
+/parcerias       /consultores             301
+
+# ─── API endpoints do Supabase que vazaram pra index do Google
+# Devolve 404 explícito (era 301 antes seria pior pra SEO).
+# Combinado com robots.txt que agora bloqueia /rest/*
+/rest/v1/*       /                        301
+
+# ─── Recrutamento (sistema externo desativado)
+/p/vaga/*        /sobre                   301
