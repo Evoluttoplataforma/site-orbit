@@ -4137,6 +4137,17 @@ export const pageHTML = `
 
     <!-- ═══ FAQ ═══ -->
     <section class="faq-section section--light">
+        <style>
+          /* Link inline interno nas respostas de FAQ, gold sutil com underline-on-hover */
+          .faq-section .faq-inline-link { color: #D4960A; text-decoration: none; border-bottom: 1px dashed rgba(212,150,10,0.45); transition: all 0.15s; }
+          .faq-section .faq-inline-link:hover { color: #ffba1a; border-bottom-color: #ffba1a; }
+          /* CTA banner pós-FAQ */
+          .faq-section .faq-cta { max-width: 840px; margin: 36px auto 0; display: flex; align-items: center; gap: 24px; padding: 28px 32px; background: linear-gradient(135deg, #0D1117, #161B22); border: 1px solid rgba(255,186,26,0.30); border-radius: 18px; color: #fff; flex-wrap: wrap; transition: all 0.25s; }
+          .faq-section .faq-cta:hover { border-color: rgba(255,186,26,0.55); transform: translateY(-2px); box-shadow: 0 14px 32px rgba(0,0,0,0.15); }
+          .faq-section .faq-cta__icon { width: 54px; height: 54px; border-radius: 14px; background: linear-gradient(135deg, #ffba1a, #ffca4a); color: #0D1117; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; box-shadow: 0 8px 20px rgba(255,186,26,0.35); }
+          .faq-section .faq-cta__title { color: #fff !important; font-size: 18px; font-weight: 700; margin: 0 0 4px; line-height: 1.3; }
+          .faq-section .faq-cta__sub { color: #C9D1D9 !important; font-size: 14px; margin: 0; }
+        </style>
         <div class="container">
             <div class="section-header" data-reveal>
                 <h2>Perguntas frequentes</h2>
@@ -4146,38 +4157,50 @@ export const pageHTML = `
                 <details class="faq-item">
                     <summary>O que é o Orbit?</summary>
                     <div class="faq-item__answer">
-                        <p>O Orbit é uma plataforma de gestão empresarial com dezenas de agentes de IA especializados. Não é mais um software que você precisa alimentar - são agentes que constroem e operam a gestão da sua empresa, 24/7.</p>
+                        <p>O Orbit é uma plataforma de gestão empresarial com <a href="/agentes-de-ia" class="faq-inline-link">dezenas de agentes de IA especializados</a>. Não é mais um software que você precisa alimentar, são agentes que constroem e operam a gestão da sua empresa, 24/7.</p>
                     </div>
                 </details>
 
                 <details class="faq-item">
                     <summary>Para quem é indicado?</summary>
                     <div class="faq-item__answer">
-                        <p>Para empresas de 20 a 300 funcionários, de qualquer segmento, que querem profissionalizar a gestão sem depender exclusivamente de consultoria ou software que ninguém usa.</p>
+                        <p>Para empresas de 20 a 300 funcionários, de qualquer segmento, que querem profissionalizar a gestão sem depender exclusivamente de consultoria ou software que ninguém usa. Veja <a href="/empresarios" class="faq-inline-link">como funciona pra empresários</a> ou <a href="/consultores" class="faq-inline-link">pra consultores</a>.</p>
                     </div>
                 </details>
 
                 <details class="faq-item">
                     <summary>Quanto tempo leva para começar?</summary>
                     <div class="faq-item__answer">
-                        <p>Cadastro em 5 minutos. Planejamento e processos em 1 tarde. Operação completa rodando em 7 dias.</p>
+                        <p>Cadastro em 5 minutos. <a href="/blog/tirar-planejamento-estrategico-do-papel" class="faq-inline-link">Planejamento</a> e <a href="/blog/como-mapear-processos-empresa-bpmn" class="faq-inline-link">processos</a> em 1 tarde. Operação completa rodando em 7 dias.</p>
                     </div>
                 </details>
 
                 <details class="faq-item">
                     <summary>É mais um software de gestão?</summary>
                     <div class="faq-item__answer">
-                        <p>Não. Software é ferramenta vazia que espera ser alimentada. O Orbit tem agentes de IA que fazem o trabalho pesado - você valida e decide.</p>
+                        <p>Não. Software é ferramenta vazia que espera ser alimentada. O Orbit tem <a href="/agentes-de-ia" class="faq-inline-link">agentes de IA</a> que fazem o trabalho pesado, você valida e decide.</p>
                     </div>
                 </details>
 
                 <details class="faq-item">
                     <summary>Funciona para o meu segmento?</summary>
                     <div class="faq-item__answer">
-                        <p>Sim. Em 30 anos, já atendemos +9.000 empresas de todos os segmentos. Gestão é universal. O que muda é o conteúdo - e é exatamente isso que a IA personaliza.</p>
+                        <p>Sim. Em 30 anos, já atendemos +9.000 empresas de todos os segmentos. Gestão é universal. O que muda é o conteúdo, e é exatamente isso que a <a href="/agentes-de-ia" class="faq-inline-link">IA personaliza</a>. Veja <a href="/historias" class="faq-inline-link">histórias de clientes</a> reais.</p>
                     </div>
                 </details>
 
+            </div>
+
+            <!-- CTA banner pós-FAQ, capta intenção mid-research -->
+            <div class="faq-cta">
+                <div style="display:flex;align-items:center;gap:18px;flex:1;min-width:240px;">
+                    <div class="faq-cta__icon"><i class="fa-solid fa-comments"></i></div>
+                    <div>
+                        <h4 class="faq-cta__title">Não achou a resposta?</h4>
+                        <p class="faq-cta__sub">Converse com a Olívia agora, 2 min, sem compromisso.</p>
+                    </div>
+                </div>
+                <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary" style="flex-shrink:0;">Falar com a Olívia <i class="fa-solid fa-arrow-right" style="margin-left:6px;"></i></a>
             </div>
         </div>
     </section>

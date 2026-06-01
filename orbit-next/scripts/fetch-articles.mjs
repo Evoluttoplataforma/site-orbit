@@ -318,6 +318,24 @@ function generateSitemap(articles) {
     ['/bootcamp-orbit', '0.9', 'weekly'],
     ['/politica-privacidade', '0.3', 'yearly'],
     ['/termos-de-servico', '0.3', 'yearly'],
+    // ─── Plataforma: pillar + 12 agentes + 4 módulos ───
+    ['/agentes-de-ia', '0.95', 'weekly'],
+    ['/agentes/estrategico', '0.9', 'monthly'],
+    ['/agentes/processos', '0.9', 'monthly'],
+    ['/agentes/pessoas', '0.9', 'monthly'],
+    ['/agentes/indicadores', '0.9', 'monthly'],
+    ['/agentes/riscos', '0.85', 'monthly'],
+    ['/agentes/treinamento', '0.85', 'monthly'],
+    ['/agentes/oportunidades', '0.85', 'monthly'],
+    ['/agentes/documentos', '0.85', 'monthly'],
+    ['/agentes/comercial', '0.9', 'monthly'],
+    ['/agentes/problemas-operacionais', '0.85', 'monthly'],
+    ['/agentes/reunioes', '0.85', 'monthly'],
+    ['/agentes/pesquisas', '0.85', 'monthly'],
+    ['/modulos/financeiro', '0.9', 'monthly'],
+    ['/modulos/recrutamento-selecao', '0.85', 'monthly'],
+    ['/modulos/projetos', '0.85', 'monthly'],
+    ['/modulos/compras', '0.85', 'monthly'],
   ];
 
   const urls = pages.map(
