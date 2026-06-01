@@ -1,7 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://orbitgestao.com.br/sitemap.xml
-
-# Disallow CMS
-Disallow: /acesso/
