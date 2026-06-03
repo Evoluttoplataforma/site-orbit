@@ -22,7 +22,7 @@ export default function Page() {
       <div style={container}>
         <a href="/" style={back}>← Voltar para o site</a>
         <h1 style={h1}>Política de Privacidade</h1>
-        <p style={stamp}>Última atualização: 6 de maio de 2026</p>
+        <p style={stamp}>Última atualização: 3 de junho de 2026</p>
 
         <section style={section}>
           <h2 style={h2}>1. Introdução</h2>
@@ -61,13 +61,30 @@ export default function Page() {
           </ul>
 
           <h3 style={h3}>2.5. Dados de Integrações</h3>
+          <p style={p}>Dados obtidos de serviços de terceiros somente quando você conecta a integração na plataforma (por exemplo: Google Calendar e Google Drive; WhatsApp Business; e-mail; gateways de pagamento), limitados às permissões que você autorizar em cada provedor.</p>
+
+          <h3 style={h3}>2.6. Dados do Google (Calendar e Google Drive)</h3>
+          <p style={p}>Se você conectar sua conta Google, a Orbit acessa dados da API do Google apenas para oferecer e melhorar as funcionalidades que você usa no aplicativo, tais como:</p>
           <ul style={ul}>
-            <li>Dados de serviços terceiros conectados pelo usuário (Google Calendar, WhatsApp Business, e-mail via MailerSend, gateways de pagamento etc.), limitados ao escopo de permissão concedido.</li>
+            <li><strong style={strong}>Google Calendar:</strong> exibir e sincronizar eventos relacionados ao uso da plataforma (conforme as permissões concedidas).</li>
+            <li><strong style={strong}>Google Drive / Documentos:</strong> permitir que você selecione arquivos ou pastas (por exemplo, modelos de propostas e contratos), gerar documentos a partir desses modelos e operações técnicas necessárias para isso (cópia, preenchimento de variáveis, exportação), somente nos arquivos que você escolher ou que forem criados/abertos pelo aplicativo no seu Drive.</li>
           </ul>
+          <p style={p}><strong style={strong}>Não utilizamos dados de usuário do Google para:</strong></p>
+          <ul style={ul}>
+            <li>publicidade ou remarketing;</li>
+            <li>venda ou licenciamento a terceiros;</li>
+            <li>criação de perfil para fins não relacionados à funcionalidade do Orbit;</li>
+            <li>treinamento de modelos de IA genéricos com conteúdo do seu Google Drive/Calendar;</li>
+            <li>qualquer finalidade diferente de fornecer ou aprimorar os recursos de integração que você solicitou.</li>
+          </ul>
+          <p style={p}>O tratamento segue a Política de Dados do Usuário dos Serviços de API do Google, incluindo os requisitos de uso limitado.</p>
+          <p style={p}><strong style={strong}>Armazenamento:</strong> mantemos tokens de acesso e metadados mínimos (por exemplo, identificador de arquivo e e-mail da conta conectada) enquanto a integração estiver ativa.</p>
+          <p style={p}><strong style={strong}>Revogação:</strong> você pode desconectar a integração nas configurações do Orbit e revogar o acesso em <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener" style={accent}>https://myaccount.google.com/permissions</a>. Para exclusão de dados relacionados à integração, contate <span style={accent}>contato@orbitgestao.com.br</span>.</p>
         </section>
 
         <section style={section}>
           <h2 style={h2}>3. Como Utilizamos seus Dados</h2>
+          <p style={p}>Os itens abaixo referem-se aos dados da plataforma Orbit. Dados obtidos via Google são tratados exclusivamente conforme a seção 2.6 e não são utilizados para publicidade ou personalização genérica fora das funcionalidades de integração.</p>
           <ul style={ul}>
             <li><strong style={strong}>Prestação dos Serviços</strong>: operar, manter e melhorar a plataforma, incluindo processamento de reuniões, geração de transcrições, execução de automações e entrega de notificações.</li>
             <li><strong style={strong}>Inteligência Artificial</strong>: treinar e aprimorar modelos de IA para fornecer respostas, análises e automações contextualizadas. Nunca utilizamos dados pessoais sensíveis ou identificáveis para treinamento de modelos de terceiros sem consentimento explícito.</li>
