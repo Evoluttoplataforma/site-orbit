@@ -107,7 +107,7 @@ export const headerHTML = `
                         <div class="dropdown__links">
                             <a href="/live">
                                 <div class="dd-icon"><i class="fas fa-play-circle" style="color:#ff0000;"></i></div>
-                                <div class="dd-text"><span>Live Semanal</span><small>Toda terca 13h com Igor</small></div>
+                                <div class="dd-text"><span>Live Quinzenal</span><small>A cada 15 dias, ter&ccedil;a 13h com Igor</small></div>
                             </a>
                             <a href="/live/chris">
                                 <div class="dd-icon"><i class="fas fa-chalkboard-user" style="color:#ffba1a;"></i></div>
@@ -208,7 +208,7 @@ export const headerHTML = `
                 <span style="display:inline-block;width:8px;height:8px;background:#ff4444;border-radius:50%;margin-right:6px;animation:livePulse 1.5s ease-in-out infinite;"></span>
                 Eventos
             </div>
-            <a href="/live"><i class="fas fa-play-circle" style="color:#ff0000;"></i> Live Semanal (Ter 13h)</a>
+            <a href="/live"><i class="fa-solid fa-video" style="color:#2D8CFF;"></i> Live Quinzenal (Ter 13h)</a>
             <a href="/live/chris"><i class="fas fa-chalkboard-user" style="color:#ffba1a;"></i> Masterclass Consultores (Quinta 18h)</a>
             <a href="/treinamentos"><i class="fas fa-chalkboard-teacher" style="color:#ffba1a;"></i> Treinamentos</a>
             <a href="https://demonstracao.orbitgestao.com.br/salas/onboarding" target="_blank"><i class="fas fa-graduation-cap" style="color:#3FB950;"></i> Onboarding</a>

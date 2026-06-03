@@ -1034,7 +1034,7 @@ export const pageHTML = `
                 <div class="topbar-actions">
                     <select id="emktFilter" onchange="refreshEmailMkt()" style="padding:6px 12px;border-radius:8px;border:1px solid var(--gray-200);font-size:0.85rem;background:#fff;">
                         <option value="all">Todos os eventos</option>
-                        <option value="live-semanal">Live Semanal (Ter 13h)</option>
+                        <option value="live-semanal">Live Quinzenal (Ter 13h)</option>
                         <option value="live-rd-consultores">Masterclass RDs (Seg/Qua 16h)</option>
                         <option value="live-24-03">Live 24/03 (antigo)</option>
                     </select>
@@ -1051,7 +1051,7 @@ export const pageHTML = `
                         <div class="stat-card__value stat-card__value--primary" id="emktTotal">0</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-card__label">Live Semanal</div>
+                        <div class="stat-card__label">Live Quinzenal</div>
                         <div class="stat-card__value" id="emktLive">0</div>
                     </div>
                     <div class="stat-card">
@@ -3595,7 +3595,7 @@ JSON.stringify(schemaOrg, null, 2) +
     var EMKT_SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
 
     var EMKT_SOURCE_LABELS = {
-        'live-semanal': 'Live Semanal',
+        'live-semanal': 'Live Quinzenal',
         'live-rd-consultores': 'Masterclass RDs',
         'live-24-03': 'Live 24/03',
         'live-teste-individual': 'Teste'

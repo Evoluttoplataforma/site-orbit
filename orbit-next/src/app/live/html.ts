@@ -51,8 +51,12 @@ export const pageHTML = `
                     <span style="font-size:18px;font-weight:600;">13h (hor&aacute;rio de Bras&iacute;lia)</span>
                 </div>
                 <div style="display:flex;align-items:center;gap:10px;color:#C9D1D9;">
-                    <i class="fa-brands fa-youtube" style="color:#ff0000;font-size:20px;"></i>
-                    <span style="font-size:18px;font-weight:600;">YouTube</span>
+                    <i class="fa-solid fa-video" style="color:#2D8CFF;font-size:20px;"></i>
+                    <span style="font-size:18px;font-weight:600;">Ao vivo pelo Zoom</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;color:#C9D1D9;">
+                    <i class="fa-solid fa-rotate" style="color:#ffba1a;font-size:18px;"></i>
+                    <span style="font-size:18px;font-weight:600;">A cada 15 dias</span>
                 </div>
             </div>
 
@@ -802,7 +806,7 @@ export const pageHTML = `
                 Garanta sua vaga na live
             </h2>
             <p style="color:#8B949E;font-size:1.1rem;margin-bottom:32px;" data-reveal>
-                Toda ter&ccedil;a-feira &agrave;s 13h. Inscri&ccedil;&atilde;o gratuita pelo Zoom &mdash; o link e os lembretes chegam por l&aacute;.
+                A cada 15 dias, &agrave;s ter&ccedil;as 13h. Inscri&ccedil;&atilde;o gratuita pelo Zoom &mdash; o link e os lembretes chegam por l&aacute;.
             </p>
 
             <div style="background:#161B22;border:1px solid rgba(255,186,26,0.18);border-radius:16px;padding:36px 28px;" data-reveal>
@@ -818,23 +822,26 @@ export const pageHTML = `
 
 
 
-    <!-- Dynamic countdown to next Tuesday 13h BRT -->
+    <!-- Dynamic countdown — lives a cada 15 dias (terças 13h BRT)
+         Âncora confirmada: 16/06/2026 (próxima após pular 09/06/2026).
+         A função soma 14 dias enquanto o target estiver no passado. -->
     <script>
     (function() {
-        function getNextTuesday() {
+        function getNextLive() {
+            // 16/06/2026 13h BRT (UTC-3) = 16/06/2026 16h UTC
+            var ANCHOR = new Date(Date.UTC(2026, 5, 16, 16, 0, 0));
+            var FORTNIGHT_MS = 14 * 24 * 60 * 60 * 1000;
             var now = new Date();
-            var day = now.getDay();
-            var daysUntilTuesday = (2 - day + 7) % 7;
-            if (daysUntilTuesday === 0) {
-                var todayAt13 = new Date(now);
-                todayAt13.setHours(14, 0, 0, 0);
-                if (now >= todayAt13) daysUntilTuesday = 7;
+            var next = new Date(ANCHOR);
+            // Avança 14 dias enquanto a próxima live já passou
+            // (margem de 1h pra exibir "Ao vivo agora" durante a transmissão)
+            while (next.getTime() + 3600000 < now.getTime()) {
+                next = new Date(next.getTime() + FORTNIGHT_MS);
             }
-            var next = new Date(now);
-            next.setDate(now.getDate() + daysUntilTuesday);
-            next.setHours(13, 0, 0, 0);
             return next;
         }
+        // Mantido o nome antigo pra não quebrar uso interno do script.
+        var getNextTuesday = getNextLive;
 
         function formatDateBR(d) {
             var months = ['Janeiro','Fevereiro','Mar\u00e7o','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
