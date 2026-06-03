@@ -9,15 +9,15 @@ export const pageHTML = `
         <div class="container" style="max-width:900px;">
 
             <!-- Recurrence badge -->
-            <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,186,26,0.12);border:1px solid rgba(255,186,26,0.3);border-radius:100px;padding:8px 20px;margin-bottom:24px;" data-reveal>
-                <span style="width:10px;height:10px;background:#ff4444;border-radius:50%;display:inline-block;animation:livePulse 1.5s ease-in-out infinite;"></span>
-                <span style="color:#ffba1a;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:1.5px;">AO VIVO NO YOUTUBE</span>
+            <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(45,140,255,0.12);border:1px solid rgba(45,140,255,0.4);border-radius:100px;padding:8px 20px;margin-bottom:24px;" data-reveal>
+                <span style="width:10px;height:10px;background:#2D8CFF;border-radius:50%;display:inline-block;animation:livePulse 1.5s ease-in-out infinite;"></span>
+                <span style="color:#2D8CFF;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:1.5px;">AO VIVO PELO ZOOM</span>
             </div>
 
             <!-- Schedule highlight -->
             <div style="display:inline-block;background:linear-gradient(135deg,rgba(255,186,26,0.15),rgba(255,186,26,0.05));border:2px solid rgba(255,186,26,0.4);border-radius:16px;padding:16px 36px;margin-bottom:32px;" data-reveal>
                 <span style="color:#ffba1a;font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:800;letter-spacing:0.5px;">
-                    <i class="fa-solid fa-calendar-check" style="margin-right:10px;"></i>TODA TERCA-FEIRA AS 13H
+                    <i class="fa-solid fa-calendar-check" style="margin-right:10px;"></i>A CADA 15 DIAS &middot; TER&Ccedil;A 13H
                 </span>
             </div>
 
