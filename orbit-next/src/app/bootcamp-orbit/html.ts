@@ -494,7 +494,8 @@ export const pageHTML = `
     pointer-events: none;
   }
   .bc-hosts > * { position: relative; z-index: 1; }
-  .bc-hosts__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; max-width: 1100px; margin: 40px auto 0; }
+  .bc-hosts__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1280px; margin: 40px auto 0; }
+  @media (max-width: 1100px) { .bc-hosts__grid { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 800px) { .bc-hosts__grid { grid-template-columns: 1fr; } }
   .bc-host {
     background: rgba(43,57,40,0.30);
@@ -1224,7 +1225,7 @@ export const pageHTML = `
 <section class="bc-hosts">
   <div style="text-align:center;max-width:880px;margin:0 auto 12px;">
     <div class="bc-eyebrow"><i class="fa-solid fa-medal"></i>Alto Comando</div>
-    <h2 class="bc-h2">Dois empresários, <span class="accent">40 anos somados</span> em campo</h2>
+    <h2 class="bc-h2">Três empresários, <span class="accent">60+ anos somados</span> em campo</h2>
   </div>
   <div class="bc-hosts__grid">
     <div class="bc-host">
@@ -1244,6 +1245,16 @@ export const pageHTML = `
         <h3 class="bc-host__name">Christian Hart</h3>
         <p class="bc-host__role">Co-Founder &amp; Head de Canais · Orbit Gestão</p>
         <p class="bc-host__bio">15 anos como empresário de consultoria, executivo e mentor de empresários. Especialista em estruturar canais e operações de alta performance.</p>
+        <div class="bc-host__rank">★ ★ ★ ★</div>
+      </div>
+    </div>
+    <div class="bc-host">
+      <div class="bc-host__photo bc-host__photo--img"><img src="/images/bootcamp/rogerio-fardado.webp" alt="Rogério Menossi"></div>
+      <div class="bc-host__content">
+        <div style="display:inline-block;background:linear-gradient(135deg,#ffba1a,#ff8c00);color:#0A0E13;font-family:'Black Ops One',impact,sans-serif;font-size:10px;letter-spacing:2px;padding:3px 10px;margin-bottom:8px;text-transform:uppercase;">MAJOR · GESTÃO DE PESSOAS</div>
+        <h3 class="bc-host__name">Rogério Menossi</h3>
+        <p class="bc-host__role">CEO &amp; Founder · Time Produtivo</p>
+        <p class="bc-host__bio">Empresário, palestrante e especialista em gestão de pessoas, liderança e cultura organizacional. Fundador da Time Produtivo, consultoria focada em comunicação, engajamento e produtividade de equipes.</p>
         <div class="bc-host__rank">★ ★ ★ ★</div>
       </div>
     </div>
