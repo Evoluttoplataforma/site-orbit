@@ -33,7 +33,7 @@ export const pageHTML = `
 
             <!-- Apresentador -->
             <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin:28px 0 8px;" data-reveal>
-                <img src="/images/diretor-chris.jpg" alt="Christian Hart" width="64" height="64" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,186,26,0.4);">
+                <img src="/images/diretor-chris-novo.jpg" alt="Christian Hart" width="64" height="64" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,186,26,0.4);">
                 <div style="text-align:left;">
                     <span style="color:#fff;font-weight:700;font-size:17px;display:block;line-height:1.3;">Christian Hart</span>
                     <span style="color:#8B949E;font-size:14px;">Diretor de Canais &mdash; Grupo GSN</span>
@@ -215,7 +215,7 @@ export const pageHTML = `
             </h2>
 
             <div style="background:#161B22;border:1px solid rgba(255,186,26,0.2);border-radius:24px;padding:48px 36px;" data-reveal>
-                <img src="/images/diretor-chris.jpg" alt="Christian Hart" width="140" height="140" style="width:140px;height:140px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,186,26,0.5);margin:0 auto 24px;display:block;">
+                <img src="/images/diretor-chris-novo.jpg" alt="Christian Hart" width="140" height="140" style="width:140px;height:140px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,186,26,0.5);margin:0 auto 24px;display:block;">
                 <h3 style="color:#fff;font-size:1.5rem;font-weight:700;margin:0 0 6px;">Christian Hart</h3>
                 <p style="color:#ffba1a;font-size:1rem;font-weight:600;margin:0 0 24px;">Diretor de Canais &mdash; Grupo GSN</p>
                 <p style="color:#C9D1D9;font-size:1.05rem;line-height:1.7;margin:0 0 16px;">
