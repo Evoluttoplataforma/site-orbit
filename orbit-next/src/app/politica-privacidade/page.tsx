@@ -22,7 +22,7 @@ export default function Page() {
       <div style={container}>
         <a href="/" style={back}>← Voltar para o site</a>
         <h1 style={h1}>Política de Privacidade</h1>
-        <p style={stamp}>Última atualização: 3 de junho de 2026</p>
+        <p style={stamp}>Última atualização: 15 de junho de 2026</p>
 
         <section style={section}>
           <h2 style={h2}>1. Introdução</h2>
@@ -44,7 +44,7 @@ export default function Page() {
           <ul style={ul}>
             <li>Logs de atividades, interações com módulos (processos, tarefas, indicadores, reuniões, documentos, compras, pessoas etc.).</li>
             <li>Configurações personalizadas, automações criadas e permissões de usuários.</li>
-            <li>Dados gerados pelo uso da IA (Olívia): prompts, respostas e contextos de conversas, utilizados para melhoria contínua do serviço, sempre de forma anonimizada.</li>
+            <li>Dados gerados pelo uso da IA (Olívia): prompts, respostas e contextos de conversas na plataforma, utilizados para operar e melhorar o serviço contratado (suporte, qualidade e correções). Não incluímos conteúdo obtido via integrações Google (Calendar, Drive, Analytics, Ads) nesse processamento para treinamento ou aprimoramento de modelos de IA. Quando aplicável, dados são tratados de forma agregada ou anonimizada, conforme a seção 2.6.</li>
           </ul>
 
           <h3 style={h3}>2.3. Dados de Reuniões e Comunicações</h3>
@@ -61,24 +61,27 @@ export default function Page() {
           </ul>
 
           <h3 style={h3}>2.5. Dados de Integrações</h3>
-          <p style={p}>Dados obtidos de serviços de terceiros somente quando você conecta a integração na plataforma (por exemplo: Google Calendar e Google Drive; WhatsApp Business; e-mail; gateways de pagamento), limitados às permissões que você autorizar em cada provedor.</p>
+          <p style={p}>Dados obtidos de serviços de terceiros somente quando você conecta a integração na plataforma (por exemplo: Google Calendar, Google Drive, Google Docs, Google Sheets, Google Slides, Google Analytics, Google Ads; WhatsApp Business; e-mail; gateways de pagamento), limitados aos escopos OAuth e permissões que você autorizar em cada provedor.</p>
 
-          <h3 style={h3}>2.6. Dados do Google (Calendar e Google Drive)</h3>
-          <p style={p}>Se você conectar sua conta Google, a Orbit acessa dados da API do Google apenas para oferecer e melhorar as funcionalidades que você usa no aplicativo, tais como:</p>
+          <h3 style={h3}>2.6. Dados do Google (Workspace, Analytics e Ads)</h3>
+          <p style={p}>Se você conectar sua conta Google, a Orbit acessa dados das APIs do Google apenas para oferecer as funcionalidades que você habilitar, conforme os escopos autorizados:</p>
           <ul style={ul}>
-            <li><strong style={strong}>Google Calendar:</strong> exibir e sincronizar eventos relacionados ao uso da plataforma (conforme as permissões concedidas).</li>
-            <li><strong style={strong}>Google Drive / Documentos:</strong> permitir que você selecione arquivos ou pastas (por exemplo, modelos de propostas e contratos), gerar documentos a partir desses modelos e operações técnicas necessárias para isso (cópia, preenchimento de variáveis, exportação), somente nos arquivos que você escolher ou que forem criados/abertos pelo aplicativo no seu Drive.</li>
+            <li><strong style={strong}>Google Calendar:</strong> exibir e sincronizar eventos de reuniões criadas ou vinculadas no Orbit.</li>
+            <li><strong style={strong}>Google Drive / Docs / Sheets / Slides:</strong> permitir seleção de arquivos ou pastas (modelos de propostas, contratos etc.), listar conteúdo de pastas vinculadas pelo usuário, gerar documentos a partir de modelos, e operações técnicas necessárias (cópia, preenchimento de variáveis, exportação) somente nos arquivos que você escolher ou que forem criados/abertos pelo aplicativo no seu Drive.</li>
+            <li><strong style={strong}>Google Analytics (GA4):</strong> importar métricas de tráfego e conversão que você configurar nos conectores de Indicadores.</li>
+            <li><strong style={strong}>Google Ads:</strong> importar métricas de campanhas (impressões, cliques, custo, conversões etc.) que você configurar nos conectores de Indicadores.</li>
           </ul>
           <p style={p}><strong style={strong}>Não utilizamos dados de usuário do Google para:</strong></p>
           <ul style={ul}>
             <li>publicidade ou remarketing;</li>
             <li>venda ou licenciamento a terceiros;</li>
             <li>criação de perfil para fins não relacionados à funcionalidade do Orbit;</li>
-            <li>treinamento de modelos de IA genéricos com conteúdo do seu Google Drive/Calendar;</li>
-            <li>qualquer finalidade diferente de fornecer ou aprimorar os recursos de integração que você solicitou.</li>
+            <li>treinamento, fine-tuning ou melhoria de modelos de IA genéricos (próprios ou de terceiros) com conteúdo de Calendar, Drive, Docs, Sheets, Slides, Analytics ou Ads;</li>
+            <li>envio de dados Google a provedores de IA para treinamento de modelos;</li>
+            <li>qualquer finalidade diferente de fornecer os recursos de integração que você solicitou.</li>
           </ul>
-          <p style={p}>O tratamento segue a Política de Dados do Usuário dos Serviços de API do Google, incluindo os requisitos de uso limitado.</p>
-          <p style={p}><strong style={strong}>Armazenamento:</strong> mantemos tokens de acesso e metadados mínimos (por exemplo, identificador de arquivo e e-mail da conta conectada) enquanto a integração estiver ativa.</p>
+          <p style={p}>O tratamento segue a Política de Dados do Usuário dos Serviços de API do Google, incluindo os requisitos de Uso Limitado (Limited Use).</p>
+          <p style={p}><strong style={strong}>Armazenamento:</strong> mantemos tokens de acesso e metadados mínimos (por exemplo, identificadores de arquivos, IDs de propriedade GA4/conta Ads e e-mail da conta conectada) enquanto a integração estiver ativa.</p>
           <p style={p}><strong style={strong}>Revogação:</strong> você pode desconectar a integração nas configurações do Orbit e revogar o acesso em <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener" style={accent}>https://myaccount.google.com/permissions</a>. Para exclusão de dados relacionados à integração, contate <span style={accent}>contato@orbitgestao.com.br</span>.</p>
         </section>
 
@@ -87,7 +90,7 @@ export default function Page() {
           <p style={p}>Os itens abaixo referem-se aos dados da plataforma Orbit. Dados obtidos via Google são tratados exclusivamente conforme a seção 2.6 e não são utilizados para publicidade ou personalização genérica fora das funcionalidades de integração.</p>
           <ul style={ul}>
             <li><strong style={strong}>Prestação dos Serviços</strong>: operar, manter e melhorar a plataforma, incluindo processamento de reuniões, geração de transcrições, execução de automações e entrega de notificações.</li>
-            <li><strong style={strong}>Inteligência Artificial</strong>: treinar e aprimorar modelos de IA para fornecer respostas, análises e automações contextualizadas. Nunca utilizamos dados pessoais sensíveis ou identificáveis para treinamento de modelos de terceiros sem consentimento explícito.</li>
+            <li><strong style={strong}>Inteligência Artificial</strong>: utilizamos provedores de IA de terceiros (como OpenAI, Google Gemini, Anthropic e Perplexity) para respostas, análises e automações com base em dados que você insere na plataforma ou que já estão no workspace da sua organização no Orbit. Dados obtidos via OAuth do Google (Calendar, Drive, Docs, Sheets, Slides, Analytics e Ads) não são usados para treinar, fine-tunar ou melhorar modelos de IA genéricos, nem enviados a provedores de IA para esse fim — conforme a seção 2.6. Não utilizamos categorias sensíveis de dados pessoais para treinamento de modelos de terceiros sem consentimento explícito e específico.</li>
             <li><strong style={strong}>Comunicações</strong>: enviar avisos técnicos, atualizações de segurança, newsletters (com opção de descadastro) e alertas de uso.</li>
             <li><strong style={strong}>Segurança e Conformidade</strong>: prevenir fraudes, detectar abusos, cumprir obrigações legais e regulatórias.</li>
             <li><strong style={strong}>Análises Agregadas</strong>: gerar estatísticas anônimas sobre uso da plataforma para aprimoramento do produto.</li>
@@ -109,7 +112,7 @@ export default function Page() {
           <h2 style={h2}>5. Compartilhamento de Dados</h2>
           <p style={p}><strong style={strong}>Não vendemos seus dados.</strong> Podemos compartilhar informações com:</p>
           <ul style={ul}>
-            <li><strong style={strong}>Prestadores de Serviço</strong>: infraestrutura de nuvem (Supabase), processamento de pagamentos (Stripe/Paddle), transcrição de áudio (Evolumeet), envio de e-mail (MailerSend), sincronização de calendário (Google) e outras integrações, sempre sob contratos de confidencialidade e processamento de dados.</li>
+            <li><strong style={strong}>Prestadores de Serviço</strong>: infraestrutura de nuvem (Supabase), processamento de pagamentos (Stripe/Paddle), transcrição de áudio (Evolumeet), envio de e-mail (MailerSend), sincronização de calendário e documentos (Google), provedores de inteligência artificial (OpenAI, Google, Anthropic, Perplexity) e outras integrações, sempre sob contratos de confidencialidade e processamento de dados, sem compartilhar dados Google OAuth para treinamento de modelos de IA.</li>
             <li><strong style={strong}>Parceiros de Canal (White-Label)</strong>: quando sua organização está vinculada a um canal parceiro, dados de contato e métricas de uso podem ser compartilhados para fins de suporte e gestão de licenças.</li>
             <li><strong style={strong}>Obrigação Legal</strong>: quando exigido por lei, ordem judicial ou autoridade competente.</li>
           </ul>
@@ -132,6 +135,7 @@ export default function Page() {
             <li><strong style={strong}>Conta ativa</strong>: mantemos seus dados enquanto sua conta estiver ativa ou conforme necessário para prestação dos Serviços.</li>
             <li><strong style={strong}>Cancelamento</strong>: após o encerramento da conta, seus dados serão mantidos por até 90 (noventa) dias para possível recuperação, e então excluídos ou anonimizados, salvo obrigação legal de retenção.</li>
             <li><strong style={strong}>Gravações de reuniões</strong>: armazenadas pelo período definido pelo plano contratado ou conforme configuração da organização, podendo ser excluídas a qualquer momento pelo administrador.</li>
+            <li><strong style={strong}>Integrações Google</strong>: tokens e metadados relacionados são removidos quando você desconecta a integração ou solicita exclusão, conforme seção 2.6.</li>
           </ul>
         </section>
 
