@@ -24,8 +24,10 @@ interface Story {
 }
 
 const SEGMENTS: Record<string, string> = {
+  empresa: 'Empresas',
+  consultoria: 'Consultoria',
+  servicos: 'Consultoria',
   industria: 'Indústria',
-  servicos: 'Serviços',
   tecnologia: 'Tecnologia',
   saude: 'Saúde',
   educacao: 'Educação',
@@ -182,7 +184,7 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
             ${story.challenge ? `<h2 style="color:#ffba1a;"><i class="fas fa-triangle-exclamation" style="margin-right:8px;"></i>O Desafio</h2><p>${escapeHtml(story.challenge)}</p>` : ''}
             ${story.solution ? `<h2 style="color:#ffba1a;"><i class="fas fa-lightbulb" style="margin-right:8px;"></i>A Solução</h2><p>${escapeHtml(story.solution)}</p>` : ''}
             ${story.results ? `<h2 style="color:#22C55E;"><i class="fas fa-chart-line" style="margin-right:8px;"></i>Os Resultados</h2><p>${escapeHtml(story.results)}</p>` : ''}
-            ${story.testimonial ? `<blockquote style="border-left:3px solid #ffba1a;padding:16px 20px;margin:32px 0;background:rgba(255,186,26,0.05);border-radius:0 12px 12px 0;"><p style="font-style:italic;line-height:1.8;font-size:1.1rem;">"${escapeHtml(story.testimonial)}"</p><footer style="margin-top:12px;font-size:0.9rem;color:#8B949E;">— ${escapeHtml(story.contact_name)}${story.contact_role ? ', ' + escapeHtml(story.contact_role) : ''}${story.company_name ? ' na ' + escapeHtml(story.company_name) : ''}</footer></blockquote>` : ''}
+            ${story.testimonial ? `<blockquote style="border-left:3px solid #ffba1a;padding:16px 20px;margin:32px 0;background:rgba(255,186,26,0.05);border-radius:0 12px 12px 0;"><p style="font-style:italic;line-height:1.8;font-size:1.1rem;">"${escapeHtml(story.testimonial?.replace(/^["“]/, '').replace(/["”]$/, '') || '')}"</p><footer style="margin-top:12px;font-size:0.9rem;color:#8B949E;">— ${escapeHtml(story.contact_name)}${story.contact_role ? ', ' + escapeHtml(story.contact_role?.split(' na ')[0].split(' no ')[0].trim()) : ''}</footer></blockquote>` : ''}
           </div>
 
           <div class="blog-article__bottom-cta">
@@ -194,14 +196,13 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
         <aside class="blog-article__sidebar">
           <div class="blog-article__sidebar-sticky">
             <div class="blog-sidebar-card">
-              <p class="blog-sidebar-card__label">Empresa</p>
+              <p class="blog-sidebar-card__label">${escapeHtml(segLabel)}</p>
               <div class="blog-sidebar-card__author">
                 ${story.logo_url
                   ? `<img src="${story.logo_url}" style="width:48px;height:48px;border-radius:12px;object-fit:cover;" alt="${escapeHtml(story.company_name)}">`
                   : `<div class="blog-card__avatar blog-card__avatar--lg">${initials}</div>`}
                 <div>
                   <p class="blog-sidebar-card__name">${escapeHtml(story.company_name)}</p>
-                  <p class="blog-sidebar-card__role">${escapeHtml(segLabel)}</p>
                 </div>
               </div>
             </div>
