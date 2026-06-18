@@ -46,6 +46,7 @@ interface Story {
   segmento: string;
   desafio: string;
   companyLogo: string;
+  coverImage: string;
 }
 
 export function PageContent() {
@@ -87,6 +88,7 @@ export function PageContent() {
           segmento: normalizeSegment(String(s.segment || '')),
           desafio: String(s.challenge || ''),
           companyLogo: String(s.logo_url || ''),
+          coverImage: String(s.cover_url || ''),
         }));
 
         const grid = document.getElementById('storiesGrid');
@@ -150,10 +152,12 @@ export function PageContent() {
               const href = story.slug ? `/historias/${story.slug}` : `/historias`;
 
               return `<a href="${href}" class="blog-card blog-card--animate" style="animation-delay:${i * 80}ms;text-decoration:none;color:inherit;display:block;">
-                <div class="blog-card__image" style="background:linear-gradient(135deg,#0D1117 0%,#1a1f2e 100%);display:flex;align-items:center;justify-content:center;min-height:180px;">
-                  ${story.companyLogo
-                    ? `<img src="${story.companyLogo}" alt="${escapeHtml(story.empresa)}" style="max-width:120px;max-height:80px;object-fit:contain;" loading="lazy">`
-                    : `<div style="width:80px;height:80px;border-radius:50%;background:rgba(255,186,26,0.15);display:flex;align-items:center;justify-content:center;"><i class="fas fa-building" style="color:#ffba1a;font-size:32px;"></i></div>`}
+                <div class="blog-card__image" style="${story.coverImage ? 'min-height:180px;padding:0;overflow:hidden;' : 'background:linear-gradient(135deg,#0D1117 0%,#1a1f2e 100%);display:flex;align-items:center;justify-content:center;min-height:180px;'}">
+                  ${story.coverImage
+                    ? `<img src="${escapeHtml(story.coverImage)}" alt="${escapeHtml(story.empresa)}" style="width:100%;height:180px;object-fit:cover;object-position:center top;display:block;" loading="lazy">`
+                    : story.companyLogo
+                      ? `<img src="${story.companyLogo}" alt="${escapeHtml(story.empresa)}" style="max-width:120px;max-height:80px;object-fit:contain;" loading="lazy">`
+                      : `<div style="width:80px;height:80px;border-radius:50%;background:rgba(255,186,26,0.15);display:flex;align-items:center;justify-content:center;"><i class="fas fa-building" style="color:#ffba1a;font-size:32px;"></i></div>`}
                   ${segLabel ? `<span class="blog-card__tag" style="background:rgba(255,186,26,0.15);color:#ffba1a;border:1px solid rgba(255,186,26,0.3);">${escapeHtml(segLabel)}</span>` : ''}
                 </div>
                 <div class="blog-card__body">
@@ -161,7 +165,7 @@ export function PageContent() {
                   ${preview ? `<p>${escapeHtml(preview)}</p>` : ''}
                   <div class="blog-card__footer">
                     <div class="blog-card__author">
-                      <div class="blog-card__avatar">${initials}</div>
+                      ${story.coverImage ? '' : `<div class="blog-card__avatar">${initials}</div>`}
                       <div class="blog-card__author-info">
                         <span class="blog-card__author-name">${escapeHtml(story.nome || 'Equipe')}</span>
                         <span class="blog-card__date">${story.cargo ? escapeHtml(story.cargo) : ''}</span>

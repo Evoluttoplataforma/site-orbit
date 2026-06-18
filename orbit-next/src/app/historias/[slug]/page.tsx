@@ -13,6 +13,7 @@ interface Story {
   segment: string | null;
   contact_name: string | null;
   contact_role: string | null;
+  contact_photo?: string | null;
   challenge: string | null;
   solution: string | null;
   results: string | null;
@@ -141,9 +142,12 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
     inLanguage: 'pt-BR',
   };
 
-  const heroLogo = story.logo_url
-    ? `<img src="${story.logo_url}" alt="${escapeHtml(story.company_name)}" style="max-width:140px;max-height:80px;object-fit:contain;display:block;margin:0 auto 24px;" loading="eager">`
-    : `<div style="width:80px;height:80px;border-radius:50%;background:rgba(255,186,26,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;"><span style="color:#ffba1a;font-weight:800;font-size:1.5rem;">${initials}</span></div>`;
+  const contactPhoto = (story as any).contact_photo || null;
+  const heroLogo = contactPhoto
+    ? `<img src="${escapeHtml(contactPhoto)}" alt="${escapeHtml(story.contact_name || '')}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;object-position:center top;display:block;margin:0 auto 24px;border:3px solid rgba(255,186,26,0.4);" loading="eager">`
+    : story.logo_url
+      ? `<img src="${story.logo_url}" alt="${escapeHtml(story.company_name)}" style="max-width:140px;max-height:80px;object-fit:contain;display:block;margin:0 auto 24px;" loading="eager">`
+      : `<div style="width:80px;height:80px;border-radius:50%;background:rgba(255,186,26,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;"><span style="color:#ffba1a;font-weight:800;font-size:1.5rem;">${initials}</span></div>`;
 
   const subtitleHTML = story.subtitle
     ? `<p style="font-size:1.15rem;line-height:1.6;color:#5A6069;max-width:720px;margin:24px auto 0;text-align:center;">${escapeHtml(story.subtitle)}</p>`
@@ -200,7 +204,7 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
               <div class="blog-sidebar-card__author">
                 ${story.logo_url
                   ? `<img src="${story.logo_url}" style="width:48px;height:48px;border-radius:12px;object-fit:cover;" alt="${escapeHtml(story.company_name)}">`
-                  : `<div class="blog-card__avatar blog-card__avatar--lg">${initials}</div>`}
+                  : ''}
                 <div>
                   <p class="blog-sidebar-card__name">${escapeHtml(story.company_name)}</p>
                 </div>
