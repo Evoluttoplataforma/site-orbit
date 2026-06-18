@@ -152,7 +152,7 @@ export function PageContent() {
               const href = story.slug ? `/historias/${story.slug}` : `/historias`;
 
               return `<a href="${href}" class="blog-card blog-card--animate" style="animation-delay:${i * 80}ms;text-decoration:none;color:inherit;display:block;">
-                <div class="blog-card__image" style="${story.coverImage ? 'min-height:180px;padding:0;overflow:hidden;' : 'background:linear-gradient(135deg,#0D1117 0%,#1a1f2e 100%);display:flex;align-items:center;justify-content:center;min-height:180px;'}">
+                <div class="blog-card__image" style="${story.coverImage ? 'min-height:180px;padding:0;overflow:hidden;position:relative;display:block;' : 'background:linear-gradient(135deg,#0D1117 0%,#1a1f2e 100%);display:flex;align-items:center;justify-content:center;min-height:180px;'}">
                   ${story.coverImage
                     ? `<img src="${escapeHtml(story.coverImage)}" alt="${escapeHtml(story.empresa)}" style="width:100%;height:180px;object-fit:cover;object-position:center top;display:block;" loading="lazy">`
                     : story.companyLogo

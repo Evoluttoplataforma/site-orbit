@@ -202,9 +202,11 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
             <div class="blog-sidebar-card">
               <p class="blog-sidebar-card__label">${escapeHtml(segLabel)}</p>
               <div class="blog-sidebar-card__author">
-                ${story.logo_url
-                  ? `<img src="${story.logo_url}" style="width:48px;height:48px;border-radius:12px;object-fit:cover;" alt="${escapeHtml(story.company_name)}">`
-                  : ''}
+                ${contactPhoto
+                  ? `<img src="${escapeHtml(contactPhoto)}" style="width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:center top;" alt="${escapeHtml(story.contact_name || '')}">`
+                  : story.logo_url
+                    ? `<img src="${story.logo_url}" style="width:48px;height:48px;border-radius:12px;object-fit:cover;" alt="${escapeHtml(story.company_name)}">`
+                    : ''}
                 <div>
                   <p class="blog-sidebar-card__name">${escapeHtml(story.company_name)}</p>
                 </div>
