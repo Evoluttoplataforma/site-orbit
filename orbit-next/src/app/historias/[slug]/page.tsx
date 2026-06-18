@@ -153,10 +153,7 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
     ? `<p style="font-size:1.15rem;line-height:1.6;color:#5A6069;max-width:720px;margin:24px auto 0;text-align:center;">${escapeHtml(story.subtitle)}</p>`
     : '';
 
-  const contactLine =
-    story.contact_name || story.contact_role
-      ? `<p style="margin-top:32px;font-size:0.95rem;color:#6B7280;text-align:center;">${escapeHtml(story.contact_name)}${story.contact_role ? ' — ' + escapeHtml(story.contact_role) : ''}</p>`
-      : '';
+  const contactLine = '';
 
   const breadcrumbHTML = `
     <nav style="max-width:920px;margin:32px auto 0;padding:0 24px;font-size:0.9rem;color:#6B7280;" aria-label="Breadcrumb">
@@ -208,7 +205,8 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
                     ? `<img src="${story.logo_url}" style="width:48px;height:48px;border-radius:12px;object-fit:cover;" alt="${escapeHtml(story.company_name)}">`
                     : ''}
                 <div>
-                  <p class="blog-sidebar-card__name">${escapeHtml(story.company_name)}</p>
+                  <p class="blog-sidebar-card__name">${escapeHtml(story.contact_name || '')}</p>
+                  <p style="font-size:0.85rem;color:#6B7280;margin:2px 0 0;">${escapeHtml(story.company_name)}</p>
                 </div>
               </div>
             </div>
