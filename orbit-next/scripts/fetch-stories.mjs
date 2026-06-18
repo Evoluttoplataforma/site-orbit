@@ -18,7 +18,7 @@ const SUPABASE_KEY = RAW_KEY.replace(/\s+/g, '');
 
 async function fetchStories() {
   console.log('📥 Buscando histórias do Supabase...');
-  const url = `${SUPABASE_URL}/rest/v1/customer_stories?status=eq.published&order=published_at.desc&select=id,slug,title,subtitle,company_name,segment,contact_name,contact_role,challenge,solution,results,testimonial,logo_url,cover_url,published_at,updated_at`;
+  const url = `${SUPABASE_URL}/rest/v1/customer_stories?status=eq.published&order=published_at.desc&select=id,slug,title,subtitle,company_name,segment,contact_name,contact_role,challenge,solution,results,testimonial,logo_url,cover_url,contact_photo,published_at,updated_at`;
 
   const resp = await fetch(url, {
     headers: {
