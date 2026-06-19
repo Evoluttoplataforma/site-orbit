@@ -10,7 +10,7 @@ import staticStories from '@/data/stories.json';
 // Histórias antigas com segment='servicos' são migradas pra 'consultoria'
 // via legacyMap abaixo.
 const SEGMENTS: Record<string, string> = {
-  empresa: 'Empresas',
+  empresa: 'Empresa',
   consultoria: 'Consultoria',
   industria: 'Indústria',
   tecnologia: 'Tecnologia',
@@ -152,7 +152,7 @@ export function PageContent() {
               const href = story.slug ? `/historias/${story.slug}` : `/historias`;
 
               return `<a href="${href}" class="blog-card blog-card--animate" style="animation-delay:${i * 80}ms;text-decoration:none;color:inherit;display:block;">
-                <div class="blog-card__image" style="${story.coverImage ? 'padding:0;overflow:hidden;position:relative;display:block;aspect-ratio:800/360;width:100%;' : 'background:linear-gradient(135deg,#0D1117 0%,#1a1f2e 100%);display:flex;align-items:center;justify-content:center;min-height:180px;'}">
+                <div class="blog-card__image" style="${story.coverImage ? 'padding:0;overflow:hidden;position:relative;display:block;aspect-ratio:400/200;width:100%;' : 'background:linear-gradient(135deg,#0D1117 0%,#1a1f2e 100%);display:flex;align-items:center;justify-content:center;min-height:180px;'}">
                   ${story.coverImage
                     ? `<img src="${escapeHtml(story.coverImage)}" alt="${escapeHtml(story.empresa)}" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;" loading="lazy">`
                     : story.companyLogo

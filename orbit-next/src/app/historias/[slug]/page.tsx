@@ -25,7 +25,7 @@ interface Story {
 }
 
 const SEGMENTS: Record<string, string> = {
-  empresa: 'Empresas',
+  empresa: 'Empresa',
   consultoria: 'Consultoria',
   servicos: 'Consultoria',
   industria: 'Indústria',
