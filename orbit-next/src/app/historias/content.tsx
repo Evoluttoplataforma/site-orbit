@@ -154,7 +154,7 @@ export function PageContent() {
               return `<a href="${href}" class="blog-card blog-card--animate" style="animation-delay:${i * 80}ms;text-decoration:none;color:inherit;display:block;">
                 <div class="blog-card__image" style="${story.coverImage ? 'padding:0;overflow:hidden;position:relative;display:block;aspect-ratio:400/200;width:100%;' : 'background:linear-gradient(135deg,#0D1117 0%,#1a1f2e 100%);display:flex;align-items:center;justify-content:center;min-height:180px;'}">
                   ${story.coverImage
-                    ? `<img src="${escapeHtml(story.coverImage)}" alt="${escapeHtml(story.empresa)}" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;" loading="lazy">`
+                    ? `<img src="${escapeHtml(story.coverImage)}" alt="${escapeHtml(story.empresa)}" style="width:100%;height:100%;display:block;" loading="lazy">`
                     : story.companyLogo
                       ? `<img src="${story.companyLogo}" alt="${escapeHtml(story.empresa)}" style="max-width:120px;max-height:80px;object-fit:contain;" loading="lazy">`
                       : `<div style="width:80px;height:80px;border-radius:50%;background:rgba(255,186,26,0.15);display:flex;align-items:center;justify-content:center;"><i class="fas fa-building" style="color:#ffba1a;font-size:32px;"></i></div>`}
