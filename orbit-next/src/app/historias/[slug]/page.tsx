@@ -220,7 +220,6 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
         </aside>
       </div>
     </div>
-    ${footerHTML}
   `;
 
   return (
@@ -228,6 +227,7 @@ export default async function StoryPage({ params }: { params: Promise<{ slug: st
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <div dangerouslySetInnerHTML={{ __html: articleHTML }} />
+      <div dangerouslySetInnerHTML={{ __html: footerHTML }} />
     </>
   );
 }
