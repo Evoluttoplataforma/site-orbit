@@ -54,7 +54,7 @@ export const pageHTML = `
                     <div class="footer-logo"><img src="/images/logo-orbit-white.png" alt="Orbit Gestão" height="36"></div>
                     <p data-i18n="footer.tagline">Plataforma de gestão com IA. Contrate um time que executa.</p>
                     <div class="social-hover">
-                        <a href="https://wa.me/554898149776" target="_blank" rel="noopener nofollow" class="social-hover__item" data-name="WhatsApp">
+                        <a href="https://wa.me/5548998246863" target="_blank" rel="noopener nofollow" class="social-hover__item" data-name="WhatsApp">
                             <i class="fab fa-whatsapp"></i>
                             <span class="social-hover__label">WhatsApp</span>
                         </a>
@@ -70,7 +70,7 @@ export const pageHTML = `
                 </div>
                 <div class="footer-column">
                     <h5 data-i18n="footer.contact">Contato</h5>
-                    <ul class="footer-contact">                        <li><a href="https://wa.me/554898149776" target="_blank" rel="noopener nofollow" style="color:inherit;text-decoration:none;"><i class="fab fa-whatsapp"></i> (48) 9814-9776</a></li>
+                    <ul class="footer-contact">                        <li><a href="https://wa.me/5548998246863" target="_blank" rel="noopener nofollow" style="color:inherit;text-decoration:none;"><i class="fab fa-whatsapp"></i> (48) 99824-6863</a></li>
                         <li><i class="fas fa-map-marker-alt"></i> Square SC, Florianópolis - SC</li>
                     </ul>
                 </div>

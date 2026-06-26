@@ -5,7 +5,7 @@ import { supabaseMkt } from '@/lib/supabase-mkt';
 import { normalizePhone } from '@/lib/phone';
 import { validateEmail } from '@/lib/email-validation';
 
-const PHONE = '554898149776';
+const PHONE = '5548998246863';
 
 const C = {
   green: '#25D366',
@@ -277,7 +277,7 @@ export default function WhatsAppWidget() {
           </svg>
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ color: '#fff', fontWeight: 700, fontSize: '15px', lineHeight: 1.2 }}>Fale com a Orbit</div>
+          <div style={{ color: '#fff', fontWeight: 700, fontSize: '15px', lineHeight: 1.2 }}>Fale com o Orbit</div>
           <div style={{ color: 'rgba(255,255,255,0.85)', fontSize: '12px', marginTop: '2px' }}>Resposta em poucos minutos</div>
         </div>
         <button
