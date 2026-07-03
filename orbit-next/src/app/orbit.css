@@ -17282,3 +17282,371 @@ hr.glow-divider { display: none !important; }
   }
   .orbit-banner--popup-side.orbit-banner--bar { padding: 16px 36px 16px 16px; }
 }
+
+
+/* ═══════════════════════════════════════════════════════
+   LIGA ORBIT · CANAIS — /programa (reusa tokens existentes)
+   ═══════════════════════════════════════════════════════ */
+
+/* --- HERO --- */
+.liga-hero {
+  text-align: center;
+  padding: 150px 0 100px;
+}
+.liga-hero__glow {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 680px;
+  max-width: 90%;
+  height: 420px;
+  background: radial-gradient(circle, rgba(255,186,26,0.14) 0%, transparent 70%);
+  pointer-events: none;
+}
+.liga-hero__inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+.liga-hero__title {
+  color: #fff;
+  font-size: clamp(38px, 6vw, 64px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -1px;
+  margin: 0 0 20px;
+}
+.liga-hero__sub {
+  color: rgba(255,255,255,0.72);
+  font-size: clamp(16px, 2vw, 19px);
+  line-height: 1.6;
+  max-width: 640px;
+  margin: 0 auto 20px;
+}
+.liga-hero__tagline {
+  font-size: clamp(18px, 2.4vw, 24px);
+  font-weight: 800;
+  margin: 0 0 36px;
+}
+.liga-hero__ctas {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* --- A META DA REDE (100 × +6 = 600) --- */
+.liga-math {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.liga-math__cell { text-align: center; }
+.liga-math__num {
+  font-size: clamp(44px, 7vw, 72px);
+  font-weight: 900;
+  color: #1A1D23;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+.liga-math__cell--goal .liga-math__num { color: #ffba1a; }
+.liga-math__label {
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #9CA3AF;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.liga-math__op {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  color: #ffba1a;
+}
+.liga-note {
+  text-align: center;
+  max-width: 640px;
+  margin: 48px auto 0;
+  color: #5A6069;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* --- A REGRA --- */
+.liga-rules {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 720px;
+  display: grid;
+  gap: 14px;
+}
+.liga-rule {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 20px 24px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  color: rgba(255,255,255,0.85);
+  font-size: 16px;
+  line-height: 1.5;
+}
+.liga-rule i { color: #ffba1a; font-size: 18px; margin-top: 2px; flex-shrink: 0; }
+
+/* --- NÃO É SÓ PRO TOPO (leads) --- */
+.liga-leads {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.liga-lead-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 28px 24px;
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 18px;
+  box-shadow: 0 8px 28px rgba(13,17,23,0.05);
+}
+.liga-lead-card__from { font-size: 18px; font-weight: 700; color: #1A1D23; white-space: nowrap; }
+.liga-lead-card__arrow { color: #ffba1a; font-size: 16px; }
+.liga-lead-card__to {
+  font-size: 22px;
+  font-weight: 900;
+  color: #ffba1a;
+  white-space: nowrap;
+}
+
+/* --- O PÓDIO --- */
+.liga-podium {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.liga-podium__card {
+  padding: 32px 28px;
+  background: linear-gradient(145deg, #111827, #0D1117);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+}
+.liga-podium__card--champion {
+  border-color: rgba(255,186,26,0.4);
+  box-shadow: 0 0 40px rgba(255,186,26,0.12);
+  grid-row: span 1;
+}
+.liga-podium__rank {
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.liga-podium__card--champion .liga-podium__rank { color: #ffba1a; }
+.liga-podium__rank i { font-size: 20px; }
+.liga-podium__card--champion .liga-podium__rank i { color: #ffba1a; }
+.liga-podium__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.liga-podium__list li {
+  position: relative;
+  padding-left: 22px;
+  color: rgba(255,255,255,0.6);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.liga-podium__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ffba1a;
+}
+
+/* --- A LINHA DE CHEGADA --- */
+.liga-finish { text-align: center; max-width: 680px; margin: 0 auto; }
+.liga-finish__date {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 800;
+  color: #1A1D23 !important;
+  margin: 8px 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.liga-finish__date i { color: #ffba1a; }
+
+/* --- RANKING (cabeçalho + board) --- */
+.liga-ranking-head { padding-bottom: 24px; }
+.liga-ranking { padding-top: 24px; }
+.liga-ranking__grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.liga-board {
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 20px;
+  padding: 12px;
+  box-shadow: 0 10px 36px rgba(13,17,23,0.06);
+}
+.liga-board__state { padding: 48px 24px; text-align: center; color: #5A6069; font-size: 15px; }
+.liga-board__list { list-style: none; margin: 0; padding: 0; }
+
+.liga-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  border-radius: 14px;
+}
+.liga-row + .liga-row { border-top: 1px solid #F0F1F3; }
+.liga-row--you {
+  margin-top: 8px;
+  border: 2px dashed rgba(255,186,26,0.6);
+  background: rgba(255,186,26,0.05);
+}
+.liga-rank {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 800;
+  color: #5A6069;
+  background: #F3F4F6;
+}
+.liga-rank--gold { background: rgba(255,186,26,0.15); color: #ffba1a; }
+.liga-rank--silver { background: rgba(148,163,184,0.18); color: #64748B; }
+.liga-rank--bronze { background: rgba(180,120,60,0.15); color: #B4783C; }
+.liga-rank--you { background: rgba(255,186,26,0.15); color: #ffba1a; }
+
+.liga-avatar {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #F3F4F6;
+}
+.liga-avatar--initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffba1a;
+  background: rgba(255,186,26,0.12);
+  border: 1px solid rgba(255,186,26,0.25);
+}
+.liga-row__info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.liga-row__name { font-size: 15px; font-weight: 700; color: #1A1D23; }
+.liga-row__city { font-size: 13px; color: #9CA3AF; }
+.liga-row__score { text-align: right; flex-shrink: 0; }
+.liga-row__num { display: block; font-size: 22px; font-weight: 900; color: #ffba1a; line-height: 1; }
+.liga-row__unit { font-size: 11px; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* --- Card de inscrição --- */
+.liga-enroll {
+  background: linear-gradient(145deg, #111827, #0D1117);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 32px 28px;
+  position: sticky;
+  top: 100px;
+}
+.liga-enroll__title { color: #fff !important; font-size: 22px; font-weight: 800; margin: 0 0 6px; }
+.liga-enroll__hint { color: rgba(255,255,255,0.55) !important; font-size: 14px; margin: 0 0 24px; }
+.liga-field { display: block; margin-bottom: 16px; }
+.liga-field span {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 6px;
+}
+.liga-field input {
+  width: 100%;
+  padding: 13px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  color: #fff;
+  font-size: 15px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: border-color 0.2s, background 0.2s;
+}
+.liga-field input:focus {
+  outline: none;
+  border-color: #ffba1a;
+  background: rgba(255,255,255,0.06);
+}
+.liga-enroll__btn { width: 100%; margin-top: 8px; }
+.liga-enroll__btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.liga-enroll__error { color: #F87171; font-size: 14px; margin: 12px 0 0; }
+.liga-enroll__consent { color: rgba(255,255,255,0.45) !important; font-size: 12px; line-height: 1.5; margin: 16px 0 0; text-align: center; }
+.liga-enroll__success { text-align: center; padding: 20px 8px; }
+.liga-enroll__success i { color: #ffba1a; font-size: 44px; margin-bottom: 16px; }
+.liga-enroll__success h3 { color: #fff !important; font-size: 22px; font-weight: 800; margin: 0 0 10px; }
+.liga-enroll__success p { color: rgba(255,255,255,0.6) !important; font-size: 15px; line-height: 1.6; margin: 0; }
+
+/* --- CTA FINAL microcopy --- */
+.liga-cta-micro { color: rgba(255,255,255,0.45) !important; font-size: 13px; margin-top: 18px; }
+
+/* --- Responsivo --- */
+@media (max-width: 900px) {
+  .liga-ranking__grid { grid-template-columns: 1fr; }
+  .liga-enroll { position: static; }
+  .liga-leads { grid-template-columns: 1fr; max-width: 480px; }
+  .liga-podium { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .liga-hero { padding: 120px 0 80px; }
+  .liga-math { gap: 20px; }
+  .liga-math__op { font-size: 28px; }
+  .liga-row { gap: 12px; padding: 14px 12px; }
+  .liga-avatar { width: 38px; height: 38px; }
+}
+
+/* --- Teaser (usado em /consultores) --- */
+.liga-teaser__card {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 48px 40px;
+  border: 1px solid rgba(255,186,26,0.3);
+  border-radius: 24px;
+  background: radial-gradient(circle at top, rgba(255,186,26,0.08) 0%, transparent 60%), #111827;
+}
+.liga-teaser__title {
+  color: #fff !important;
+  font-size: clamp(24px, 3.5vw, 34px);
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 16px 0 14px;
+}
+.liga-teaser__sub {
+  color: rgba(255,255,255,0.65) !important;
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 560px;
+  margin: 0 auto 28px;
+}
+@media (max-width: 768px) {
+  .liga-teaser__card { padding: 36px 24px; }
+}
