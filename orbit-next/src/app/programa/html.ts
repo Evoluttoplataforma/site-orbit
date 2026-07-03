@@ -11,8 +11,7 @@ export const htmlTop = `
             <div class="liga-hero__inner" data-reveal>
                 <span class="lp-badge">LIGA ORBIT · CANAIS</span>
                 <h1 class="liga-hero__title">Vence quem mais cresce.</h1>
-                <p class="liga-hero__sub">Uma disputa entre canais: quem adiciona mais licenças novas até o Bootcamp de setembro leva o pódio — e ganha leads, experiências com os founders e um treinamento de liderança no Disney Institute, nos EUA. Vale para canais atuais e para quem entrar agora.</p>
-                <p class="liga-hero__sub">Você parou de vender projeto. Agora você opera uma rede que cresce — e quanto mais ela cresce, mais ela te devolve.</p>
+                <p class="liga-hero__sub">A disputa entre canais que mais expandem. Quem mais cresce até setembro leva o pódio.</p>
                 <p class="liga-hero__tagline"><span class="lp-gold">Cresça de verdade. Leve o pódio.</span></p>
                 <div class="liga-hero__ctas">
                     <a href="#ranking" class="lp-btn lp-btn--gold">Entrar no ranking</a>
@@ -127,11 +126,14 @@ export const htmlTop = `
                     </ul>
                 </div>
             </div>
+            <div class="liga-podium-cta" data-reveal>
+                <a href="#ranking" class="lp-btn lp-btn--gold">Quero entrar no ranking</a>
+            </div>
         </div>
     </section>
 
     <!-- ═══ 6. A LINHA DE CHEGADA ═══ -->
-    <section class="lp-section lp-section--light">
+    <section class="lp-section lp-section--light liga-finish-section">
         <div class="lp-container">
             <div class="liga-finish" data-reveal>
                 <span class="lp-badge lp-badge--light">A linha de chegada</span>
@@ -143,10 +145,10 @@ export const htmlTop = `
     </section>
 
     <!-- ═══ 7. RANKING (cabeçalho; <LigaRanking/> renderiza logo abaixo) ═══ -->
-    <section class="lp-section lp-section--light liga-ranking-head" id="ranking">
+    <section class="lp-section lp-section--dark liga-ranking-head" id="ranking">
         <div class="lp-container">
             <div class="lp-section-header" data-reveal>
-                <span class="lp-badge lp-badge--light">Ranking ao vivo</span>
+                <span class="lp-badge">Ranking ao vivo</span>
                 <h2>O ranking já começou. E você?</h2>
                 <p>Licenças novas desde 1º de julho · atualizado ao longo do programa</p>
             </div>
@@ -169,7 +171,7 @@ export const htmlBottom = `
                     </button>
                     <div class="faq-answer">
                         <div class="faq-answer__inner">
-                            Adicionando licenças novas pagantes no seu canal. Cada nova assinatura ativa soma pontos; cancelamentos descontam. O Orbit mede tudo automaticamente — você só precisa crescer.
+                            Adicionando licenças novas pagantes no seu canal. Cada nova assinatura ativa soma pontos; cancelamentos descontam. O Orbit acompanha o crescimento de cada canal — você só precisa crescer.
                         </div>
                     </div>
                 </div>

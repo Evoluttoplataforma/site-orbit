@@ -22,6 +22,10 @@ export const headerHTML = `
                                 <div class="dd-icon"><i class="fas fa-user-tie"></i></div>
                                 <div class="dd-text"><span data-i18n="nav.consultants">Consultores</span><small data-i18n="nav.consultants.sub">Modelo de canais B2B2B</small></div>
                             </a>
+                            <a href="/programa" class="dd-subitem">
+                                <div class="dd-icon"><i class="fas fa-trophy"></i></div>
+                                <div class="dd-text"><span data-i18n="nav.program">Programa de Recompensa</span><small data-i18n="nav.program.sub">Liga Orbit · Canais</small></div>
+                            </a>
                         </div>
                     </div>
                 </li>

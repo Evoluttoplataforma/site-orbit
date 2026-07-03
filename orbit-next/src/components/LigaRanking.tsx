@@ -65,8 +65,12 @@ export function LigaRanking() {
     }
   }, [form, submitting]);
 
+  const scrollToEnroll = useCallback(() => {
+    document.getElementById('liga-inscricao')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, []);
+
   return (
-    <section className="lp-section lp-section--light liga-ranking">
+    <section className="lp-section lp-section--dark liga-ranking">
       <div className="lp-container liga-ranking__grid">
         {/* ─── Lista do ranking ─── */}
         <div className="liga-board">
@@ -97,8 +101,14 @@ export function LigaRanking() {
             </ul>
           )}
 
-          {/* Linha "Sua posição" */}
-          <div className="liga-row liga-row--you">
+          {/* Linha "Sua posição" — clicável, rola até a inscrição */}
+          <div
+            className="liga-row liga-row--you"
+            role="button"
+            tabIndex={0}
+            onClick={scrollToEnroll}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); scrollToEnroll(); } }}
+          >
             <span className="liga-rank liga-rank--you"><i className="fas fa-user"></i></span>
             <div className="liga-row__info">
               <span className="liga-row__name">Sua posição</span>
@@ -111,7 +121,7 @@ export function LigaRanking() {
         </div>
 
         {/* ─── Card de inscrição ─── */}
-        <div className="liga-enroll">
+        <div className="liga-enroll" id="liga-inscricao">
           {submitted ? (
             <div className="liga-enroll__success">
               <i className="fas fa-circle-check"></i>
@@ -129,15 +139,15 @@ export function LigaRanking() {
               </label>
               <label className="liga-field">
                 <span>E-mail</span>
-                <input type="email" value={form.email} onChange={onChange('email')} required autoComplete="email" />
+                <input type="email" inputMode="email" value={form.email} onChange={onChange('email')} required autoComplete="email" />
               </label>
               <label className="liga-field">
                 <span>Telefone</span>
-                <input type="tel" value={form.phone} onChange={onChange('phone')} required autoComplete="tel" />
+                <input type="tel" inputMode="tel" value={form.phone} onChange={onChange('phone')} required autoComplete="tel" />
               </label>
               <label className="liga-field">
                 <span>Token do Orbit</span>
-                <input type="text" value={form.token} onChange={onChange('token')} required />
+                <input type="text" value={form.token} onChange={onChange('token')} required autoComplete="off" autoCapitalize="none" spellCheck={false} />
               </label>
 
               {error && <p className="liga-enroll__error">{error}</p>}

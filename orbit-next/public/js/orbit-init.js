@@ -1947,6 +1947,7 @@ function applyEnglish() {
     'nav.audits': 'Audits', 'nav.audits.sub': 'Compliance & quality',
     'nav.businesses': 'Business Owners', 'nav.businesses.sub': 'AI team for your company',
     'nav.consultants': 'Consultants', 'nav.consultants.sub': 'B2B2B channel model',
+    'nav.program': 'Rewards Program', 'nav.program.sub': 'Liga Orbit · Channels',
     'nav.blog': 'Blog', 'nav.blog.sub': 'Articles & insights',
     'nav.stories': 'Customer Stories', 'nav.stories.sub': 'Success cases',
     'nav.faq': 'FAQ', 'nav.faq.sub': 'Frequently asked questions',

@@ -437,6 +437,22 @@ ul { list-style: none; }
 }
 .dropdown__links a:hover .dd-text small { color: var(--light-text); }
 
+/* Subitem indentado sob Consultores (Programa de Recompensa) */
+.dropdown__links a.dd-subitem {
+  margin-left: 14px;
+  padding-left: 18px;
+  border-left: 2px solid rgba(255,186,26,0.25);
+  border-radius: 0 10px 10px 0;
+}
+.dropdown__links a.dd-subitem .dd-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+}
+.dropdown__links a.dd-subitem .dd-text span { font-size: 0.8rem; font-weight: 500; }
+.dropdown__links a.dd-subitem .dd-text small { font-size: 0.66rem; }
+
 .nav-actions {
   display: flex;
   gap: 12px;
@@ -8899,10 +8915,13 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
             transition: max-height 0.35s ease;
         }
         .faq-answer__inner {
-            padding: 0 0 24px;
+            padding: 0 24px 24px;
             font-size: 0.9375rem;
             line-height: 1.7;
             color: #5A6069;
+        }
+        @media (max-width: 768px) {
+            .faq-answer__inner { padding: 0 20px 16px; }
         }
 
         /* --- 9. CTA FINAL --- */
@@ -17290,8 +17309,21 @@ hr.glow-divider { display: none !important; }
 
 /* --- HERO --- */
 .liga-hero {
+  position: relative;
   text-align: center;
   padding: 150px 0 100px;
+  background-color: #0D1117;
+  background-image: linear-gradient(180deg, rgba(13,17,23,0.62) 0%, rgba(13,17,23,0.90) 100%), url('/images/imagem-hero-programa.jpg');
+  background-size: cover;
+  background-position: center 20%;
+  background-repeat: no-repeat;
+}
+/* Upgrade para WebP quando suportado (fallback JPG acima) */
+@supports (background-image: image-set(url("i.webp") type("image/webp"))) {
+  .liga-hero {
+    background-image: linear-gradient(180deg, rgba(13,17,23,0.62) 0%, rgba(13,17,23,0.90) 100%),
+      image-set(url('/images/imagem-hero-programa.webp') type("image/webp"), url('/images/imagem-hero-programa.jpg') type("image/jpeg"));
+  }
 }
 .liga-hero__glow {
   position: absolute;
@@ -17354,7 +17386,7 @@ hr.glow-divider { display: none !important; }
   margin-top: 10px;
   font-size: 13px;
   font-weight: 600;
-  color: #9CA3AF;
+  color: #6B7280;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -17471,8 +17503,10 @@ hr.glow-divider { display: none !important; }
   border-radius: 50%;
   background: #ffba1a;
 }
+.liga-podium-cta { text-align: center; margin-top: 44px; }
 
 /* --- A LINHA DE CHEGADA --- */
+.liga-finish-section { padding-top: 72px; padding-bottom: 72px; }
 .liga-finish { text-align: center; max-width: 680px; margin: 0 auto; }
 .liga-finish__date {
   font-size: clamp(22px, 3vw, 32px);
@@ -17496,13 +17530,13 @@ hr.glow-divider { display: none !important; }
   align-items: start;
 }
 .liga-board {
-  background: #fff;
-  border: 1px solid #E5E7EB;
+  background: linear-gradient(145deg, #111827, #0D1117);
+  border: 1px solid rgba(255,255,255,0.08);
   border-radius: 20px;
   padding: 12px;
-  box-shadow: 0 10px 36px rgba(13,17,23,0.06);
+  box-shadow: 0 10px 36px rgba(0,0,0,0.3);
 }
-.liga-board__state { padding: 48px 24px; text-align: center; color: #5A6069; font-size: 15px; }
+.liga-board__state { padding: 48px 24px; text-align: center; color: rgba(255,255,255,0.6); font-size: 15px; }
 .liga-board__list { list-style: none; margin: 0; padding: 0; }
 
 .liga-row {
@@ -17512,11 +17546,19 @@ hr.glow-divider { display: none !important; }
   padding: 16px 18px;
   border-radius: 14px;
 }
-.liga-row + .liga-row { border-top: 1px solid #F0F1F3; }
+.liga-row + .liga-row { border-top: 1px solid rgba(255,255,255,0.06); }
 .liga-row--you {
   margin-top: 8px;
   border: 2px dashed rgba(255,186,26,0.6);
   background: rgba(255,186,26,0.05);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.liga-row--you:hover,
+.liga-row--you:focus-visible {
+  background: rgba(255,186,26,0.1);
+  border-color: rgba(255,186,26,0.9);
+  outline: none;
 }
 .liga-rank {
   flex-shrink: 0;
@@ -17528,8 +17570,8 @@ hr.glow-divider { display: none !important; }
   border-radius: 12px;
   font-size: 17px;
   font-weight: 800;
-  color: #5A6069;
-  background: #F3F4F6;
+  color: rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.06);
 }
 .liga-rank--gold { background: rgba(255,186,26,0.15); color: #ffba1a; }
 .liga-rank--silver { background: rgba(148,163,184,0.18); color: #64748B; }
@@ -17555,7 +17597,7 @@ hr.glow-divider { display: none !important; }
   border: 1px solid rgba(255,186,26,0.25);
 }
 .liga-row__info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.liga-row__name { font-size: 15px; font-weight: 700; color: #1A1D23; }
+.liga-row__name { font-size: 15px; font-weight: 700; color: #F0F3F6; }
 .liga-row__city { font-size: 13px; color: #9CA3AF; }
 .liga-row__score { text-align: right; flex-shrink: 0; }
 .liga-row__num { display: block; font-size: 22px; font-weight: 900; color: #ffba1a; line-height: 1; }
@@ -17616,11 +17658,21 @@ hr.glow-divider { display: none !important; }
   .liga-podium { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
-  .liga-hero { padding: 120px 0 80px; }
-  .liga-math { gap: 20px; }
-  .liga-math__op { font-size: 28px; }
-  .liga-row { gap: 12px; padding: 14px 12px; }
+  .liga-hero { padding: 120px 0 80px; background-position: center; }
+  /* Conta da rede: leitura vertical limpa, operadores centralizados entre os cards */
+  .liga-math { flex-direction: column; gap: 10px; }
+  .liga-math__op { font-size: 26px; line-height: 1; }
+  .liga-podium-cta { margin-top: 32px; }
+  /* Linhas do ranking: altura padronizada, nome/cidade em 1 linha com reticências */
+  .liga-row { gap: 12px; padding: 14px 12px; min-height: 62px; }
   .liga-avatar { width: 38px; height: 38px; }
+  .liga-row__name,
+  .liga-row__city {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
 }
 
 /* --- Teaser (usado em /consultores) --- */
