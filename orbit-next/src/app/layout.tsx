@@ -53,8 +53,12 @@ export default function RootLayout({
         <link rel="preload" href="/images/hero-bg.avif" as="image" type="image/avif" />
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" crossOrigin="anonymous" />
         <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" /></noscript>
-        <script dangerouslySetInnerHTML={{ __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-W6H3729J');` }} />
-        <script dangerouslySetInnerHTML={{ __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KPD8KVTH');` }} />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
+        {/* Google Analytics 4 (gtag.js) — G-W6LGVPYQ5X */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-W6LGVPYQ5X"></script>
+        <script dangerouslySetInnerHTML={{ __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-W6LGVPYQ5X');` }} />
+        {/* Meta Pixel — 914082348011782 (PageView automatico; ClickToDemo via listener) */}
+        <script dangerouslySetInnerHTML={{ __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','914082348011782');fbq('track','PageView');` }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
@@ -118,8 +122,7 @@ export default function RootLayout({
         }) }} />
       </head>
       <body>
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W6H3729J" height="0" width="0" style={{display:'none',visibility:'hidden'}}></iframe></noscript>
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KPD8KVTH" height="0" width="0" style={{display:'none',visibility:'hidden'}}></iframe></noscript>
+        <noscript><img height="1" width="1" style={{display:'none'}} alt="" src="https://www.facebook.com/tr?id=914082348011782&ev=PageView&noscript=1" /></noscript>
         <LocaleProvider>
         {children}
         <ChatPopup />
@@ -297,6 +300,33 @@ export default function RootLayout({
   applyAll();
   setTimeout(applyAll, 600);
   setTimeout(applyAll, 1800);
+})();
+        ` }} />
+        <script dangerouslySetInnerHTML={{ __html: `
+// ===== Mensuracao client-side: cliques (GA4 + Pixel remarketing) =====
+// Listener que SO observa o clique: sem preventDefault, sem tocar no href.
+// Nao interfere no forwarder de UTM/fbclid/gclid (captura, acima).
+(function(){
+  function ga(n,p){ if(window.gtag) window.gtag('event',n,p||{}); }
+  function eventoName(p){ return p==='/live/chris'?'masterclass_consultores':p==='/live'?'live_quinzenal':p; }
+  document.addEventListener('click', function(e){
+    var a=e.target; while(a && a.tagName!=='A'){ a=a.parentElement; }
+    if(!a || !a.href) return;
+    var href=a.href;
+    if(href.indexOf('demonstracao.orbitgestao.com.br')>-1){
+      ga('click_to_demo',{location:location.pathname});
+      if(window.fbq) window.fbq('trackCustom','ClickToDemo');
+    } else if(href.indexOf('wa.me')>-1){
+      ga('click_whatsapp');
+    } else if(href.indexOf('zoom.us')>-1){
+      ga('click_zoom_registro',{evento:eventoName(location.pathname)});
+    } else {
+      var p=a.pathname||'';
+      if((p==='/live'||p==='/live/chris') && a.closest('header,.mobile-menu')){
+        ga('click_evento',{destino:p});
+      }
+    }
+  });
 })();
         ` }} />
         <script src="/js/main-v2.js?v=2" defer></script>

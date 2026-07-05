@@ -56,8 +56,13 @@ export function LigaRanking() {
     setSubmitting(true);
     try {
       const res = await submitEnrollment(form);
-      if (res.ok) setSubmitted(true);
-      else setError('Não foi possível concluir a inscrição. Tente novamente.');
+      if (res.ok) {
+        setSubmitted(true);
+        // enroll_submit: EXCLUSIVO do GA4 (nao vai ao Meta nem como conversao Google)
+        if (typeof window !== 'undefined' && (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag) {
+          (window as unknown as { gtag: (...a: unknown[]) => void }).gtag('event', 'enroll_submit', { program: 'recompensa_q3' });
+        }
+      } else setError('Não foi possível concluir a inscrição. Tente novamente.');
     } catch {
       setError('Não foi possível concluir a inscrição. Tente novamente.');
     } finally {

@@ -160,7 +160,10 @@ export default function WhatsAppWidget() {
     }
     const waUrl = `https://wa.me/${PHONE}?text=${encodeURIComponent(lines.join('\n'))}`;
 
-    // 4. Redireciona pro WhatsApp
+    // 4. Evento GA4 (nao bloqueia navegacao) + redireciona pro WhatsApp
+    if (typeof window !== 'undefined' && (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag) {
+      (window as unknown as { gtag: (...a: unknown[]) => void }).gtag('event', 'click_whatsapp');
+    }
     window.location.href = waUrl;
   };
 
