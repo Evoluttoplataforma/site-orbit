@@ -822,19 +822,21 @@ export const pageHTML = `
 
 
 
-    <!-- Dynamic countdown — lives a cada 15 dias (terças 13h BRT)
-         Âncora confirmada: 16/06/2026 (próxima após pular 09/06/2026).
+    <!-- Dynamic countdown — cronograma: live extra em 07/07/2026, depois retoma
+         quinzenal (terças 13h BRT) a partir de 28/07/2026 → 11/08 → 25/08 → ...
          A função soma 14 dias enquanto o target estiver no passado. -->
     <script>
     (function() {
         function getNextLive() {
-            // 16/06/2026 13h BRT (UTC-3) = 16/06/2026 16h UTC
-            var ANCHOR = new Date(Date.UTC(2026, 5, 16, 16, 0, 0));
-            var FORTNIGHT_MS = 14 * 24 * 60 * 60 * 1000;
             var now = new Date();
-            var next = new Date(ANCHOR);
-            // Avança 14 dias enquanto a próxima live já passou
+            // Live extra desta semana: 07/07/2026 13h BRT (UTC-3) = 16h UTC
             // (margem de 1h pra exibir "Ao vivo agora" durante a transmissão)
+            var ONEOFF = Date.UTC(2026, 6, 7, 16, 0, 0);
+            if (now.getTime() < ONEOFF + 3600000) return new Date(ONEOFF);
+            // Depois da extra, retoma quinzenal a partir de 28/07/2026 13h BRT
+            var ANCHOR = new Date(Date.UTC(2026, 6, 28, 16, 0, 0));
+            var FORTNIGHT_MS = 14 * 24 * 60 * 60 * 1000;
+            var next = new Date(ANCHOR);
             while (next.getTime() + 3600000 < now.getTime()) {
                 next = new Date(next.getTime() + FORTNIGHT_MS);
             }
