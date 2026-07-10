@@ -14,7 +14,7 @@ export const htmlTop = `
                 <p class="liga-hero__sub">A disputa entre canais que mais expandem. Quem mais cresce até setembro leva o pódio.</p>
                 <p class="liga-hero__tagline"><span class="lp-gold">Cresça de verdade. Leve o pódio.</span></p>
                 <div class="liga-hero__ctas">
-                    <a href="#ranking" class="lp-btn lp-btn--gold">Entrar no ranking</a>
+                    <a href="#ranking" class="lp-btn lp-btn--gold">Ver o ranking</a>
                     <a href="#podio" class="lp-btn lp-btn--outline">Ver o pódio</a>
                 </div>
             </div>
@@ -127,7 +127,7 @@ export const htmlTop = `
                 </div>
             </div>
             <div class="liga-podium-cta" data-reveal>
-                <a href="#ranking" class="lp-btn lp-btn--gold">Quero entrar no ranking</a>
+                <a href="#ranking" class="lp-btn lp-btn--gold">Ver o ranking ao vivo</a>
             </div>
         </div>
     </section>
@@ -188,12 +188,12 @@ export const htmlBottom = `
                 </div>
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>Pra que serve o token do Orbit?</span>
+                        <span>Preciso me inscrever?</span>
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="faq-answer">
                         <div class="faq-answer__inner">
-                            Ele conecta o ranking às suas licenças ativas no Orbit — seu placar é puxado automaticamente, sem você preencher número nenhum. É só colar o token na inscrição.
+                            Não. O ranking é automático: o Orbit acompanha as licenças ativas de cada canal e monta o placar sozinho. Para ver a sua posição, é só usar o e-mail de login do Orbit no card "Sua posição", aqui na página.
                         </div>
                     </div>
                 </div>
@@ -217,7 +217,7 @@ export const htmlBottom = `
         <div class="lp-container">
             <div data-reveal>
                 <h2>Seu placar começa agora.</h2>
-                <a href="#ranking" class="lp-btn lp-btn--gold">Entrar no ranking</a>
+                <a href="#ranking" class="lp-btn lp-btn--gold">Ver o ranking</a>
                 <p class="liga-cta-micro">Prêmios e metas sujeitos ao regulamento do programa.</p>
             </div>
         </div>
