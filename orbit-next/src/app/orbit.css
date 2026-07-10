@@ -17523,11 +17523,8 @@ hr.glow-divider { display: none !important; }
 /* --- RANKING (cabeçalho + board) --- */
 .liga-ranking-head { padding-bottom: 24px; }
 .liga-ranking { padding-top: 24px; }
-.liga-ranking__grid {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 32px;
-  align-items: start;
+.liga-ranking__wrap {
+  display: block;
 }
 .liga-board {
   background: linear-gradient(145deg, #111827, #0D1117);
@@ -17603,57 +17600,30 @@ hr.glow-divider { display: none !important; }
 .liga-row__num { display: block; font-size: 22px; font-weight: 900; color: #ffba1a; line-height: 1; }
 .liga-row__unit { font-size: 11px; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.5px; }
 
-/* --- Card de inscrição --- */
+/* --- Card de convite --- */
 .liga-enroll {
   background: linear-gradient(145deg, #111827, #0D1117);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 20px;
   padding: 32px 28px;
-  position: sticky;
-  top: 100px;
 }
-.liga-enroll__title { color: #fff !important; font-size: 22px; font-weight: 800; margin: 0 0 6px; }
-.liga-enroll__hint { color: rgba(255,255,255,0.55) !important; font-size: 14px; margin: 0 0 24px; }
-.liga-field { display: block; margin-bottom: 16px; }
-.liga-field span {
-  display: block;
-  font-size: 13px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.7);
-  margin-bottom: 6px;
+/* Bloco de convite (faixa full-width abaixo do ranking) */
+.liga-invite {
+  text-align: center;
+  max-width: 700px;
+  margin: 40px auto 0;
+  padding: 48px 32px;
 }
-.liga-field input {
-  width: 100%;
-  padding: 13px 16px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.04);
-  color: #fff;
-  font-size: 15px;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  transition: border-color 0.2s, background 0.2s;
-}
-.liga-field input:focus {
-  outline: none;
-  border-color: #ffba1a;
-  background: rgba(255,255,255,0.06);
-}
-.liga-enroll__btn { width: 100%; margin-top: 8px; }
-.liga-enroll__btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-.liga-enroll__error { color: #F87171; font-size: 14px; margin: 12px 0 0; }
-.liga-enroll__consent { color: rgba(255,255,255,0.45) !important; font-size: 12px; line-height: 1.5; margin: 16px 0 0; text-align: center; }
-.liga-enroll__success { text-align: center; padding: 20px 8px; }
-.liga-enroll__success i { color: #ffba1a; font-size: 44px; margin-bottom: 16px; }
-.liga-enroll__success h3 { color: #fff !important; font-size: 22px; font-weight: 800; margin: 0 0 10px; }
-.liga-enroll__success p { color: rgba(255,255,255,0.6) !important; font-size: 15px; line-height: 1.6; margin: 0; }
+.liga-invite__title { color: #fff !important; font-size: 24px; font-weight: 800; line-height: 1.25; margin: 0 0 12px; }
+.liga-invite__text { color: rgba(255,255,255,0.65) !important; font-size: 15px; line-height: 1.6; margin: 0 0 28px; }
+.liga-invite__btn { width: 100%; }
 
 /* --- CTA FINAL microcopy --- */
 .liga-cta-micro { color: rgba(255,255,255,0.45) !important; font-size: 13px; margin-top: 18px; }
 
 /* --- Responsivo --- */
 @media (max-width: 900px) {
-  .liga-ranking__grid { grid-template-columns: 1fr; }
-  .liga-enroll { position: static; }
+  .liga-invite { padding: 36px 24px; }
   .liga-leads { grid-template-columns: 1fr; max-width: 480px; }
   .liga-podium { grid-template-columns: 1fr; }
 }

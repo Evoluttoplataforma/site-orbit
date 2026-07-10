@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect, useState, useCallback, type ChangeEvent, type FormEvent } from 'react';
-import { fetchRanking, submitEnrollment, type RankingEntry } from '@/lib/liga';
+import { useEffect, useState, useCallback } from 'react';
+import { fetchRanking, type RankingEntry } from '@/lib/liga';
 
 function initials(name: string): string {
   return name
@@ -31,11 +31,6 @@ export function LigaRanking() {
   const [entries, setEntries] = useState<RankingEntry[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const [form, setForm] = useState({ name: '', email: '', phone: '', token: '' });
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState('');
-
   useEffect(() => {
     let active = true;
     fetchRanking(5)
@@ -45,38 +40,21 @@ export function LigaRanking() {
     return () => { active = false; };
   }, []);
 
-  const onChange = useCallback((field: keyof typeof form) => (e: ChangeEvent<HTMLInputElement>) => {
-    setForm((f) => ({ ...f, [field]: e.target.value }));
-  }, []);
-
-  const onSubmit = useCallback(async (e: FormEvent) => {
-    e.preventDefault();
-    if (submitting) return;
-    setError('');
-    setSubmitting(true);
-    try {
-      const res = await submitEnrollment(form);
-      if (res.ok) {
-        setSubmitted(true);
-        // enroll_submit: EXCLUSIVO do GA4 (nao vai ao Meta nem como conversao Google)
-        if (typeof window !== 'undefined' && (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag) {
-          (window as unknown as { gtag: (...a: unknown[]) => void }).gtag('event', 'enroll_submit', { program: 'recompensa_q3' });
-        }
-      } else setError('Não foi possível concluir a inscrição. Tente novamente.');
-    } catch {
-      setError('Não foi possível concluir a inscrição. Tente novamente.');
-    } finally {
-      setSubmitting(false);
-    }
-  }, [form, submitting]);
-
   const scrollToEnroll = useCallback(() => {
     document.getElementById('liga-inscricao')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }, []);
 
+  const onCtaClick = useCallback(() => {
+    // click_ranking_cta: EXCLUSIVO do GA4. Sem preventDefault — a navegacao segue
+    // normal e o forwarder global (layout.tsx) reescreve o href antes do unload.
+    if (typeof window !== 'undefined' && (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag) {
+      (window as unknown as { gtag: (...a: unknown[]) => void }).gtag('event', 'click_ranking_cta', { program: 'recompensa_q3', location: 'programa' });
+    }
+  }, []);
+
   return (
     <section className="lp-section lp-section--dark liga-ranking">
-      <div className="lp-container liga-ranking__grid">
+      <div className="lp-container liga-ranking__wrap">
         {/* ─── Lista do ranking ─── */}
         <div className="liga-board">
           {loading ? (
@@ -117,7 +95,7 @@ export function LigaRanking() {
             <span className="liga-rank liga-rank--you"><i className="fas fa-user"></i></span>
             <div className="liga-row__info">
               <span className="liga-row__name">Sua posição</span>
-              <span className="liga-row__city">inscreva-se para revelar</span>
+              <span className="liga-row__city">cresça com o Orbit para aparecer</span>
             </div>
             <div className="liga-row__score">
               <span className="liga-row__num">—</span>
@@ -125,47 +103,19 @@ export function LigaRanking() {
           </div>
         </div>
 
-        {/* ─── Card de inscrição ─── */}
-        <div className="liga-enroll" id="liga-inscricao">
-          {submitted ? (
-            <div className="liga-enroll__success">
-              <i className="fas fa-circle-check"></i>
-              <h3>Você está no ranking!</h3>
-              <p>Recebemos sua inscrição. Em breve seu placar aparece aqui, puxado direto das suas licenças ativas no Orbit.</p>
-            </div>
-          ) : (
-            <form className="liga-enroll__form" onSubmit={onSubmit}>
-              <h3 className="liga-enroll__title">Entrar no ranking</h3>
-              <p className="liga-enroll__hint">Seu token puxa suas licenças ativas automaticamente.</p>
-
-              <label className="liga-field">
-                <span>Nome</span>
-                <input type="text" value={form.name} onChange={onChange('name')} required autoComplete="name" />
-              </label>
-              <label className="liga-field">
-                <span>E-mail</span>
-                <input type="email" inputMode="email" value={form.email} onChange={onChange('email')} required autoComplete="email" />
-              </label>
-              <label className="liga-field">
-                <span>Telefone</span>
-                <input type="tel" inputMode="tel" value={form.phone} onChange={onChange('phone')} required autoComplete="tel" />
-              </label>
-              <label className="liga-field">
-                <span>Token do Orbit</span>
-                <input type="text" value={form.token} onChange={onChange('token')} required autoComplete="off" autoCapitalize="none" spellCheck={false} />
-              </label>
-
-              {error && <p className="liga-enroll__error">{error}</p>}
-
-              <button type="submit" className="lp-btn lp-btn--gold liga-enroll__btn" disabled={submitting}>
-                {submitting ? 'Enviando…' : 'Entrar no ranking'}
-              </button>
-
-              <p className="liga-enroll__consent">
-                Ao entrar, você autoriza exibir nome e foto no ranking público.
-              </p>
-            </form>
-          )}
+        {/* ─── Convite para virar canal ─── */}
+        <div className="liga-enroll liga-invite" id="liga-inscricao">
+          <h3 className="liga-invite__title">Seu nome podia estar nessa lista.</h3>
+          <p className="liga-invite__text">
+            O ranking é de quem cresce levando o Orbit para seus clientes. Entre para o time e dispute o pódio.
+          </p>
+          <a
+            className="lp-btn lp-btn--gold liga-invite__btn"
+            href="https://demonstracao.orbitgestao.com.br/chat?utm_source=site&utm_medium=programa&utm_campaign=ranking_recompensa_q3&origem=ranking_programa"
+            onClick={onCtaClick}
+          >
+            Quero o Orbit para meus clientes
+          </a>
         </div>
       </div>
     </section>
