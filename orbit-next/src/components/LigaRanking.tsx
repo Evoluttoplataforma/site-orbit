@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
-import { fetchRanking, type RankingEntry } from '@/lib/liga';
+import type { ChangeEvent, FormEvent } from 'react';
+import { fetchRanking, fetchMyPositionByEmail, type RankingEntry, type MyPosition } from '@/lib/liga';
 
 function initials(name: string): string {
   return name
@@ -31,18 +32,51 @@ export function LigaRanking() {
   const [entries, setEntries] = useState<RankingEntry[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Lookup "minha posição" por e-mail
+  const [myEmail, setMyEmail] = useState('');
+  const [myLoading, setMyLoading] = useState(false);
+  const [myResult, setMyResult] = useState<MyPosition | null>(null);
+  const [highlightName, setHighlightName] = useState<string | null>(null);
+
   useEffect(() => {
     let active = true;
-    fetchRanking(5)
-      .then((data) => { if (active) setEntries(data); })
-      .catch(() => { if (active) setEntries([]); })
-      .finally(() => { if (active) setLoading(false); });
-    return () => { active = false; };
+    // Carga inicial + refresh a cada 5 min. Em erro de rede: silencioso,
+    // mantém o último estado (não zera a lista). Lista vazia só quando a RPC
+    // responde com sucesso sem canais → cai no placeholder.
+    const load = async () => {
+      try {
+        const data = await fetchRanking(10);
+        if (active) setEntries(data);
+      } catch {
+        /* silencioso: mantém último estado */
+      } finally {
+        if (active) setLoading(false);
+      }
+    };
+    load();
+    const id = setInterval(load, 5 * 60 * 1000);
+    return () => { active = false; clearInterval(id); };
   }, []);
 
-  const scrollToEnroll = useCallback(() => {
-    document.getElementById('liga-inscricao')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const onMyEmailChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setMyEmail(e.target.value);
   }, []);
+
+  const onMyPos = useCallback(async (e: FormEvent) => {
+    e.preventDefault();
+    const email = myEmail.trim().toLowerCase();
+    if (!email || myLoading) return;
+    setMyLoading(true);
+    try {
+      const res = await fetchMyPositionByEmail(email);
+      setMyResult(res);
+      setHighlightName(res.found ? res.nome.toLowerCase() : null);
+    } catch {
+      /* erro de rede: silencioso — mantém o que já está na tela */
+    } finally {
+      setMyLoading(false);
+    }
+  }, [myEmail, myLoading]);
 
   const onCtaClick = useCallback(() => {
     // click_ranking_cta: EXCLUSIVO do GA4. Sem preventDefault — a navegacao segue
@@ -68,7 +102,10 @@ export function LigaRanking() {
           ) : (
             <ul className="liga-board__list">
               {entries.map((entry) => (
-                <li className="liga-row" key={entry.id}>
+                <li
+                  className={`liga-row${highlightName && entry.name.toLowerCase() === highlightName ? ' liga-row--highlight' : ''}`}
+                  key={entry.id}
+                >
                   <RankBadge position={entry.position} />
                   <Avatar entry={entry} />
                   <div className="liga-row__info">
@@ -84,22 +121,44 @@ export function LigaRanking() {
             </ul>
           )}
 
-          {/* Linha "Sua posição" — clicável, rola até a inscrição */}
-          <div
-            className="liga-row liga-row--you"
-            role="button"
-            tabIndex={0}
-            onClick={scrollToEnroll}
-            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); scrollToEnroll(); } }}
-          >
-            <span className="liga-rank liga-rank--you"><i className="fas fa-user"></i></span>
-            <div className="liga-row__info">
-              <span className="liga-row__name">Sua posição</span>
-              <span className="liga-row__city">cresça com o Orbit para aparecer</span>
+          {/* Card "Sua posição" — descubra sua posição pelo e-mail de login do Orbit */}
+          <div className="liga-row liga-row--you">
+            <div className="liga-mypos__head">
+              <span className="liga-rank liga-rank--you"><i className="fas fa-user"></i></span>
+              <div className="liga-row__info">
+                <span className="liga-row__name">Sua posição</span>
+                {myResult?.found ? (
+                  <span className="liga-mypos__result">
+                    Você está em {myResult.posicao}º lugar · {myResult.licencas} licenças novas
+                  </span>
+                ) : (
+                  <span className="liga-row__city">cresça com o Orbit para aparecer</span>
+                )}
+              </div>
             </div>
-            <div className="liga-row__score">
-              <span className="liga-row__num">—</span>
-            </div>
+
+            {!myResult?.found && (
+              <form className="liga-mypos__form" onSubmit={onMyPos}>
+                <input
+                  className="liga-mypos__input"
+                  type="email"
+                  inputMode="email"
+                  autoComplete="email"
+                  placeholder="E-mail que você usa para entrar no Orbit"
+                  aria-label="E-mail que você usa para entrar no Orbit"
+                  value={myEmail}
+                  onChange={onMyEmailChange}
+                />
+                <button type="submit" className="lp-btn lp-btn--gold liga-mypos__btn" disabled={myLoading}>
+                  {myLoading ? 'Verificando…' : 'Ver minha posição'}
+                </button>
+                {myResult && !myResult.found && (
+                  <p className="liga-mypos__error">
+                    Não encontramos esse e-mail no ranking ainda. Use o e-mail de login do seu Orbit — ou compre suas primeiras licenças para aparecer aqui.
+                  </p>
+                )}
+              </form>
+            )}
           </div>
         </div>
 

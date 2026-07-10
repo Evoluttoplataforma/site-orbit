@@ -1,14 +1,11 @@
 // Liga Orbit · Canais — camada de dados isolada.
 //
-// AGORA: tudo mock, para o front funcionar sem back-end.
-// DEPOIS (Igor): trocar cada função pela integração real indicada nos TODO.
-//   - Leitura pública do ranking: view `liga_ranking_public` no Supabase MKT
-//     (projeto yfpdrckyuxltvznqfqgh) — reusar o client `supabaseMkt` de
-//     `@/lib/supabase-mkt` (mesmo usado por chat/leads/banners).
-//   - Inscrição e "minha posição": Edge Functions que validam o token no Orbit
-//     SERVER-SIDE. O placar NUNCA é calculado a partir do input do formulário.
-//
-// import { supabaseMkt } from '@/lib/supabase-mkt'; // TODO(Igor): habilitar
+// Ranking e "minha posição" vêm de RPCs públicas (somente leitura) no Supabase
+// MKT (projeto yfpdrckyuxltvznqfqgh), via o client compartilhado `supabaseMkt`
+// (mesmo usado por chat/leads/banners) — a anon key já vive nesse client.
+// Inscrição por token ainda é mock (Edge Function futura do Igor).
+
+import { supabaseMkt } from '@/lib/supabase-mkt';
 
 export type RankingEntry = {
   position: number;
@@ -19,37 +16,45 @@ export type RankingEntry = {
   licensesNew: number;
 };
 
-// Métrica oficial = licenças novas líquidas (ativações - churn) desde 2026-07-01,
-// medidas pelo próprio Orbit (assinaturas pagas). Aqui é só ilustrativo.
-const MOCK_RANKING: RankingEntry[] = [
-  { position: 1, id: 'canal-01', name: 'Consultoria Vértice', photoUrl: null, city: 'São Paulo · SP', licensesNew: 14 },
-  { position: 2, id: 'canal-02', name: 'Nexo Gestão', photoUrl: null, city: 'Belo Horizonte · MG', licensesNew: 11 },
-  { position: 3, id: 'canal-03', name: 'Órbita Consultores', photoUrl: null, city: 'Curitiba · PR', licensesNew: 9 },
-  { position: 4, id: 'canal-04', name: 'Prisma Partners', photoUrl: null, city: 'Porto Alegre · RS', licensesNew: 7 },
-  { position: 5, id: 'canal-05', name: 'Alavanca Digital', photoUrl: null, city: 'Recife · PE', licensesNew: 6 },
-];
-
 /**
  * Top N do ranking público, ordenado por licenças novas (desc).
- * MOCK agora — retorna dados de exemplo.
+ * Fonte: RPC `ranking_canais` (já retorna `canais` ordenado por licencas desc).
+ * Em erro, propaga a exceção — quem chama decide manter o último estado.
  */
-export async function fetchRanking(limit = 5): Promise<RankingEntry[]> {
-  // TODO(Igor): substituir pelo real:
-  // const { data, error } = await supabaseMkt
-  //   .from('liga_ranking_public')
-  //   .select('*')
-  //   .order('licenses_new', { ascending: false })
-  //   .limit(limit);
-  // if (error) throw error;
-  // return (data ?? []).map((row, i) => ({
-  //   position: i + 1,
-  //   id: String(row.id),
-  //   name: row.name,
-  //   photoUrl: row.photo_url ?? null,
-  //   city: row.city ?? null,
-  //   licensesNew: row.licenses_new,
-  // }));
-  return MOCK_RANKING.slice(0, limit);
+export async function fetchRanking(limit = 10): Promise<RankingEntry[]> {
+  const { data, error } = await supabaseMkt.rpc('ranking_canais', {});
+  if (error) throw error;
+  const canais = (data?.canais ?? []) as Array<{ nome: string; licencas: number; novo: number; exp: number }>;
+  return canais.slice(0, limit).map((c, i) => ({
+    position: i + 1,
+    id: `${i}-${c.nome}`,
+    name: c.nome,
+    photoUrl: null,
+    city: null,
+    licensesNew: c.licencas,
+  }));
+}
+
+export type MyPosition =
+  | { found: true; posicao: number; nome: string; licencas: number; total: number }
+  | { found: false; motivo?: string };
+
+/**
+ * Posição do canal a partir do e-mail de login do Orbit.
+ * Fonte: RPC `minha_posicao_canal` ({ p_email }). Em erro, propaga a exceção.
+ */
+export async function fetchMyPositionByEmail(email: string): Promise<MyPosition> {
+  const { data, error } = await supabaseMkt.rpc('minha_posicao_canal', {
+    p_email: email.trim().toLowerCase(),
+  });
+  if (error) throw error;
+  const row = (Array.isArray(data) ? data[0] : data) as
+    | { encontrado?: boolean; posicao?: number; nome?: string; licencas?: number; total?: number; motivo?: string }
+    | null;
+  if (row?.encontrado) {
+    return { found: true, posicao: row.posicao ?? 0, nome: row.nome ?? '', licencas: row.licencas ?? 0, total: row.total ?? 0 };
+  }
+  return { found: false, motivo: row?.motivo };
 }
 
 /**

@@ -17544,19 +17544,46 @@ hr.glow-divider { display: none !important; }
   border-radius: 14px;
 }
 .liga-row + .liga-row { border-top: 1px solid rgba(255,255,255,0.06); }
+/* Linha realçada quando o consultor descobre sua posição (inset → não altera layout) */
+.liga-row--highlight {
+  box-shadow: inset 0 0 0 2px rgba(255,186,26,0.7);
+  background: rgba(255,186,26,0.08);
+}
+/* Card "Sua posição" — coluna: cabeçalho + form de lookup por e-mail */
 .liga-row--you {
   margin-top: 8px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
   border: 2px dashed rgba(255,186,26,0.6);
   background: rgba(255,186,26,0.05);
-  cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  cursor: default;
+  transition: border-color 0.15s ease;
 }
-.liga-row--you:hover,
-.liga-row--you:focus-visible {
-  background: rgba(255,186,26,0.1);
-  border-color: rgba(255,186,26,0.9);
+.liga-row--you:focus-within { border-color: rgba(255,186,26,0.9); }
+.liga-mypos__head { display: flex; align-items: center; gap: 16px; }
+.liga-mypos__result { font-size: 14px; font-weight: 700; color: #ffba1a; }
+.liga-mypos__form { display: flex; flex-direction: column; gap: 10px; }
+.liga-mypos__input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  font-size: 15px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: border-color 0.2s, background 0.2s;
+}
+.liga-mypos__input::placeholder { color: rgba(255,255,255,0.4); }
+.liga-mypos__input:focus {
   outline: none;
+  border-color: #ffba1a;
+  background: rgba(255,255,255,0.08);
 }
+.liga-mypos__btn { width: 100%; }
+.liga-mypos__btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.liga-mypos__error { color: rgba(255,255,255,0.6); font-size: 13px; line-height: 1.5; margin: 4px 0 0; }
 .liga-rank {
   flex-shrink: 0;
   width: 40px;
