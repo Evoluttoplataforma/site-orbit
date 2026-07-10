@@ -40,9 +40,10 @@ export function LigaRanking() {
 
   useEffect(() => {
     let active = true;
-    // Carga inicial + refresh a cada 5 min. Em erro de rede: silencioso,
-    // mantém o último estado (não zera a lista). Lista vazia só quando a RPC
-    // responde com sucesso sem canais → cai no placeholder.
+    // "Quase ao vivo": polling curto (30s) + refetch imediato ao voltar para a
+    // aba. Não faz poll enquanto a aba está oculta (economiza chamadas). Em erro
+    // de rede: silencioso, mantém o último estado (não zera a lista). Lista vazia
+    // só quando a RPC responde com sucesso sem canais → cai no placeholder.
     const load = async () => {
       try {
         const data = await fetchRanking(10);
@@ -54,8 +55,16 @@ export function LigaRanking() {
       }
     };
     load();
-    const id = setInterval(load, 5 * 60 * 1000);
-    return () => { active = false; clearInterval(id); };
+    const id = setInterval(() => {
+      if (document.visibilityState === 'visible') load();
+    }, 30 * 1000);
+    const onVisible = () => { if (document.visibilityState === 'visible') load(); };
+    document.addEventListener('visibilitychange', onVisible);
+    return () => {
+      active = false;
+      clearInterval(id);
+      document.removeEventListener('visibilitychange', onVisible);
+    };
   }, []);
 
   const onMyEmailChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
