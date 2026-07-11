@@ -2647,14 +2647,14 @@ export const pageHTML = `
     </section>
 
 
-    <!-- ═══ TEASER: LIGA ORBIT · CANAIS ═══ -->
+    <!-- ═══ TEASER: PROGRAMA ORBIT DE CRESCIMENTO E RECONHECIMENTO ═══ -->
     <section class="lp-section lp-section--dark liga-teaser">
         <div class="lp-container">
             <div class="liga-teaser__card" data-reveal>
-                <span class="lp-badge">LIGA ORBIT · CANAIS</span>
+                <span class="lp-badge">PROGRAMA ORBIT DE CRESCIMENTO E RECONHECIMENTO</span>
                 <h2 class="liga-teaser__title">O ranking dos canais que mais crescem já começou.</h2>
                 <p class="liga-teaser__sub">Cada licença nova conta. Quem mais expande leva leads, experiências com os founders e uma imersão de liderança nos EUA.</p>
-                <a href="/programa" class="lp-btn lp-btn--gold">Ver o programa e entrar no ranking →</a>
+                <a href="/programa" class="lp-btn lp-btn--gold">Ver o programa →</a>
             </div>
         </div>
     </section>

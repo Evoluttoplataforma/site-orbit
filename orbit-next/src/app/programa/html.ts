@@ -9,7 +9,7 @@ export const htmlTop = `
         <div class="liga-hero__glow"></div>
         <div class="lp-container">
             <div class="liga-hero__inner" data-reveal>
-                <span class="lp-badge">LIGA ORBIT · CANAIS</span>
+                <span class="lp-badge">PROGRAMA ORBIT DE CRESCIMENTO E RECONHECIMENTO</span>
                 <h1 class="liga-hero__title">Vence quem mais cresce.</h1>
                 <p class="liga-hero__sub">A disputa entre canais que mais expandem. Quem mais cresce até setembro leva o pódio.</p>
                 <p class="liga-hero__tagline"><span class="lp-gold">Cresça de verdade. Leve o pódio.</span></p>
@@ -138,7 +138,7 @@ export const htmlTop = `
             <div class="liga-finish" data-reveal>
                 <span class="lp-badge lp-badge--light">A linha de chegada</span>
                 <h2>Bootcamp do 3º trimestre</h2>
-                <p class="liga-finish__date"><i class="fas fa-flag-checkered"></i> Última semana de setembro</p>
+                <p class="liga-finish__date"><i class="fas fa-flag-checkered"></i> 01, 02 e 03/10</p>
                 <p>É lá que o placar fecha e a premiação acontece. A receita das licenças precisa estar ativa nesse dia. Até lá, cada licença nova que seu canal inclui conta.</p>
             </div>
         </div>
@@ -182,7 +182,7 @@ export const htmlBottom = `
                     </button>
                     <div class="faq-answer">
                         <div class="faq-answer__inner">
-                            Na última semana de setembro, no Bootcamp do 3º trimestre. É nesse dia que o placar fecha — e a receita das licenças precisa estar ativa.
+                            Nos dias 01, 02 e 03 de outubro, no Bootcamp do 3º trimestre. É quando o placar fecha — e a receita das licenças precisa estar ativa.
                         </div>
                     </div>
                 </div>

@@ -24,7 +24,7 @@ export const headerHTML = `
                             </a>
                             <a href="/programa" class="dd-subitem">
                                 <div class="dd-icon"><i class="fas fa-trophy"></i></div>
-                                <div class="dd-text"><span data-i18n="nav.program">Programa de Recompensa</span><small data-i18n="nav.program.sub">Liga Orbit · Canais</small></div>
+                                <div class="dd-text"><span data-i18n="nav.program">Programa de Recompensa</span><small data-i18n="nav.program.sub">Programa Orbit de Crescimento e Reconhecimento</small></div>
                             </a>
                         </div>
                     </div>
