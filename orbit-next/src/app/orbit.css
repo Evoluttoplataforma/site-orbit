@@ -5899,20 +5899,20 @@ h1, h2, h3 {
 
     /* ═══ HERO ROTATING WORDS ═══ */
     .hero-rotate {
-        position: relative;
-        display: inline-flex;
-        overflow: hidden;
+        display: inline-grid;
         vertical-align: bottom;
-        height: 1.2em;
-        min-width: 200px;
+        overflow: hidden;
+        text-align: left;
     }
     .hero-rotate__word {
-        position: absolute;
-        left: 0;
-        width: 100%;
+        grid-area: 1 / 1;
+        white-space: nowrap;
         opacity: 0;
+        visibility: hidden;
         transform: translateY(100%);
-        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                    visibility 0.5s;
         color: #ffba1a !important;
         -webkit-text-fill-color: #ffba1a !important;
         background: none !important;
@@ -5921,12 +5921,13 @@ h1, h2, h3 {
         font-weight: 600;
     }
     .hero-rotate__word--active {
-        position: relative;
         opacity: 1;
+        visibility: visible;
         transform: translateY(0);
     }
     .hero-rotate__word--exit {
         opacity: 0;
+        visibility: visible;
         transform: translateY(-120%);
     }
 
@@ -17044,19 +17045,22 @@ hr.glow-divider { display: none !important; }
 
 /* Fix "que" on same line as rotating word on mobile */
 @media (max-width: 768px) {
+  /* On mobile the rotate stays inline with the preceding text, so we use a
+     bulletproof display:none/inline toggle instead of the grid stack. */
   .hero-rotate {
     display: inline !important;
+    overflow: visible !important;
     min-width: auto !important;
-  }
-  .hero-rotate__word--active {
-    position: relative !important;
-    display: inline !important;
   }
   .hero-rotate__word {
     display: none !important;
+    transform: none !important;
   }
   .hero-rotate__word--active {
     display: inline !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
   }
   
   /* Orbital hub on mobile - circular but fits screen */

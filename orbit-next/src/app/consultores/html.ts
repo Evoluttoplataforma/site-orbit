@@ -3047,6 +3047,8 @@ export const pageHTML = `
 
         /* --- FAQ Accordion --- */
         document.querySelectorAll('.faq-question').forEach(function(btn) {
+            if (btn.dataset.init) return;
+            btn.dataset.init = '1';
             btn.addEventListener('click', function() {
                 var item = btn.parentElement;
                 var answer = item.querySelector('.faq-answer');
