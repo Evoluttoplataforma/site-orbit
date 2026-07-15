@@ -6,7 +6,7 @@ export const pageHTML = `
   .tr-hero__inner { position: relative; max-width: 920px; margin: 0 auto; }
   .tr-hero__badge { display: inline-flex; align-items: center; gap: 10px; padding: 8px 20px; border-radius: 50px; background: rgba(255,186,26,0.08); color: #ffba1a; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 28px; border: 1px solid rgba(255,186,26,0.25); backdrop-filter: blur(8px); }
   .tr-hero__badge i { font-size: 11px; }
-  .tr-hero h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 800; color: #fff; margin: 0 0 20px; letter-spacing: -0.03em; line-height: 1.1; }
+  .tr-hero h1 { font-size: clamp(1.6rem, 3.8vw, 2.6rem); font-weight: 800; color: #fff; margin: 0 0 20px; letter-spacing: -0.03em; line-height: 1.2; }
   .tr-hero h1 span.accent { background: linear-gradient(135deg, #ffba1a 0%, #ff8c00 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
   .tr-hero p.lead { color: #C9D1D9; font-size: clamp(1.05rem, 1.6vw, 1.2rem); line-height: 1.6; max-width: 680px; margin: 0 auto; }
   .tr-hero__stats { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 40px; }
@@ -25,18 +25,17 @@ export const pageHTML = `
   .tr-how .tr-section__title { color: #fff; }
   .tr-how .tr-section__sub { color: #8B949E; }
 
-  .tr-week { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; align-items: stretch; }
-  @media (max-width: 1024px) { .tr-week { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 600px) { .tr-week { grid-template-columns: 1fr; } }
+  .tr-week { max-width: 920px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; align-items: stretch; }
+  @media (max-width: 768px) { .tr-week { grid-template-columns: 1fr; } }
 
   .tr-day { display: flex; flex-direction: column; gap: 14px; background: transparent; border: none; }
-  .tr-day__header { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0 0 4px; text-align: center; }
+  .tr-day__header { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 0 0 4px; text-align: center; }
   .tr-day__name { display: inline-flex; align-items: center; gap: 8px; padding: 7px 16px; background: rgba(255,186,26,0.10); border: 1px solid rgba(255,186,26,0.25); border-radius: 50px; color: #ffba1a; font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
   .tr-day__name::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #ffba1a; box-shadow: 0 0 8px rgba(255,186,26,0.6); }
-  .tr-day__count { color: #6B7280; font-size: 12px; font-weight: 600; }
+  .tr-day__count { color: #6B7280; font-size: 13px; font-weight: 500; line-height: 1.4; max-width: 280px; }
   .tr-day__slots { display: flex; flex-direction: column; gap: 14px; flex: 1; }
 
-  .tr-slot { display: flex; flex-direction: column; background: linear-gradient(180deg, #161B22 0%, #0D1117 100%); border: 1px solid rgba(255,255,255,0.10); border-radius: 16px; padding: 18px 18px 16px; cursor: pointer; transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; position: relative; overflow: hidden; flex: 1; min-height: 260px; }
+  .tr-slot { display: flex; flex-direction: column; background: linear-gradient(180deg, #161B22 0%, #0D1117 100%); border: 1px solid rgba(255,255,255,0.10); border-radius: 16px; padding: 18px 18px 16px; cursor: pointer; transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; position: relative; overflow: hidden; flex: 1; min-height: 220px; }
   .tr-slot::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #ffba1a 0%, #ff8c00 100%); opacity: 0; transition: opacity 0.25s; }
   .tr-slot:hover { transform: translateY(-3px); border-color: rgba(255,186,26,0.5); box-shadow: 0 16px 36px rgba(0,0,0,0.5); }
   .tr-slot:hover::before { opacity: 1; }
@@ -127,17 +126,17 @@ export const pageHTML = `
 <section class="tr-hero">
     <div class="tr-hero__inner">
         <span class="tr-hero__badge"><i class="fa-solid fa-graduation-cap"></i>Treinamentos Orbit</span>
-        <h1>Domine o Orbit em <span class="accent">10 sess&otilde;es semanais</span> ao vivo</h1>
-        <p class="lead">Toda semana, de segunda a sexta, dois treinamentos por dia. Aprenda direto com nosso time, ao vivo no Zoom, sem custo.</p>
+        <h1>Domine todos os <span class="accent">pilares de gest&atilde;o</span> da sua empresa no Orbit &mdash; Treinamentos detalhados de cada m&oacute;dulo do Orbit para voc&ecirc; e seu time.</h1>
+        <p class="lead">Sess&otilde;es de tira d&uacute;vidas ao vivo no Google Meet &mdash; uma grade para clientes finais e outra para consultorias. Participe no hor&aacute;rio certo, sem custo e sem inscri&ccedil;&atilde;o.</p>
         <div class="tr-hero__stats">
-            <div class="tr-hero__stat"><i class="fa-solid fa-layer-group"></i><span><strong>10 m&oacute;dulos</strong> por semana</span></div>
-            <div class="tr-hero__stat"><i class="fa-solid fa-video" style="color:#2D8CFF;"></i><span>Ao vivo no <strong>Zoom</strong></span></div>
-            <div class="tr-hero__stat"><i class="fa-solid fa-calendar-week"></i><span><strong>Seg a Sex</strong> &middot; 10h e 16h</span></div>
+            <div class="tr-hero__stat"><i class="fa-solid fa-building"></i><span><strong>Clientes finais</strong> · Seg 14h · Qua 10h</span></div>
+            <div class="tr-hero__stat"><i class="fa-solid fa-handshake"></i><span><strong>Consultorias</strong> · Qua 13h · Sex 10h</span></div>
+            <div class="tr-hero__stat"><i class="fa-solid fa-video" style="color:#34A853;"></i><span>Ao vivo no <strong>Google Meet</strong></span></div>
             <div class="tr-hero__stat"><i class="fa-solid fa-circle-check" style="color:#3FB950;"></i><span><strong>100% gratuito</strong></span></div>
         </div>
         <div style="margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center;">
-            <a href="#trainingGrid" class="tr-zoom-cta">
-                <i class="fa-solid fa-calendar-check"></i> Reservar minha vaga
+            <a href="https://evoluhub.evolutto.com/exclusivo/9ddce2dc-1b7b-44be-ad71-3adcc077f43d?utm_source=site&amp;utm_medium=cta&amp;utm_campaign=treinamentos_hero" target="_blank" rel="noopener noreferrer" class="tr-zoom-cta">
+                <i class="fa-solid fa-arrow-right"></i> Acesse aqui
             </a>
         </div>
     </div>
@@ -147,8 +146,8 @@ export const pageHTML = `
 <section class="tr-section" style="padding-top:40px;">
     <div class="tr-section__head">
         <span class="tr-section__eyebrow">Agenda da semana</span>
-        <h2 class="tr-section__title">Escolha um treinamento e marque sua presen&ccedil;a</h2>
-        <p class="tr-section__sub">Cada m&oacute;dulo cobre uma &aacute;rea da plataforma com foco pr&aacute;tico. Voc&ecirc; participa quantas vezes quiser.</p>
+        <h2 class="tr-section__title">Escolha sua sess&atilde;o de tira d&uacute;vidas</h2>
+        <p class="tr-section__sub">Duas frentes: clientes finais e consultorias. Entre no hor&aacute;rio certo e tire suas d&uacute;vidas ao vivo no Google Meet.</p>
     </div>
     <div class="tr-week" id="trainingGrid"></div>
 </section>
@@ -163,20 +162,20 @@ export const pageHTML = `
         <div class="tr-step">
             <div class="tr-step__num">01</div>
             <div class="tr-step__icon"><i class="fa-solid fa-hand-pointer"></i></div>
-            <h3>Escolha o m&oacute;dulo</h3>
-            <p>Selecione um dos 10 treinamentos da grade. Cada um foca em uma &aacute;rea diferente do Orbit.</p>
+            <h3>Escolha seu perfil</h3>
+            <p>Selecione a sess&atilde;o de <strong style="color:#fff;">Clientes finais</strong> ou <strong style="color:#fff;">Consultorias</strong>, conforme o seu perfil.</p>
         </div>
         <div class="tr-step">
             <div class="tr-step__num">02</div>
             <div class="tr-step__icon"><i class="fa-solid fa-calendar-check"></i></div>
-            <h3>Marque a data</h3>
-            <p>Pegue a pr&oacute;xima data dispon&iacute;vel ou agende para uma das pr&oacute;ximas semanas.</p>
+            <h3>Escolha o hor&aacute;rio</h3>
+            <p>Clientes finais: segundas 14h e quartas 10h. Consultorias: quartas 13h e sextas 10h.</p>
         </div>
         <div class="tr-step">
             <div class="tr-step__num">03</div>
-            <div class="tr-step__icon"><i class="fa-solid fa-calendar-check" style="color:#2D8CFF;"></i></div>
-            <h3>Reserve sua vaga</h3>
-            <p>Inscri&ccedil;&atilde;o gr&aacute;tis no Zoom Webinar. O link da sala chega no seu email logo ap&oacute;s o cadastro.</p>
+            <div class="tr-step__icon"><i class="fa-solid fa-video" style="color:#34A853;"></i></div>
+            <h3>Entre no Meet</h3>
+            <p>Clique em &ldquo;Entrar no Meet&rdquo; e acesse a sess&atilde;o ao vivo no Google Meet. N&atilde;o &eacute; preciso se inscrever nem receber e-mail.</p>
         </div>
     </div>
 </section>
