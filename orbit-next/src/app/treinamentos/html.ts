@@ -35,7 +35,7 @@ export const pageHTML = `
   .tr-day__count { color: #6B7280; font-size: 13px; font-weight: 500; line-height: 1.4; max-width: 280px; }
   .tr-day__slots { display: flex; flex-direction: column; gap: 14px; flex: 1; }
 
-  .tr-slot { display: flex; flex-direction: column; background: linear-gradient(180deg, #161B22 0%, #0D1117 100%); border: 1px solid rgba(255,255,255,0.10); border-radius: 16px; padding: 18px 18px 16px; cursor: pointer; transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; position: relative; overflow: hidden; flex: 1; min-height: 220px; }
+  .tr-slot { display: flex; flex-direction: column; background: linear-gradient(180deg, #161B22 0%, #0D1117 100%); border: 1px solid rgba(255,255,255,0.10); border-radius: 16px; padding: 18px 18px 16px; cursor: pointer; transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; position: relative; overflow: hidden; flex: 1; min-height: 220px; color: inherit; appearance: none; -webkit-appearance: none; }
   .tr-slot::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #ffba1a 0%, #ff8c00 100%); opacity: 0; transition: opacity 0.25s; }
   .tr-slot:hover { transform: translateY(-3px); border-color: rgba(255,186,26,0.5); box-shadow: 0 16px 36px rgba(0,0,0,0.5); }
   .tr-slot:hover::before { opacity: 1; }
@@ -127,7 +127,7 @@ export const pageHTML = `
     <div class="tr-hero__inner">
         <span class="tr-hero__badge"><i class="fa-solid fa-graduation-cap"></i>Treinamentos Orbit</span>
         <h1>Domine todos os <span class="accent">pilares de gest&atilde;o</span> da sua empresa no Orbit &mdash; Treinamentos detalhados de cada m&oacute;dulo do Orbit para voc&ecirc; e seu time.</h1>
-        <p class="lead">Sess&otilde;es de tira d&uacute;vidas ao vivo no Google Meet &mdash; uma grade para clientes finais e outra para consultorias. Participe no hor&aacute;rio certo, sem custo e sem inscri&ccedil;&atilde;o.</p>
+        <p class="lead">Sess&otilde;es de tira d&uacute;vidas ao vivo no Google Meet &mdash; uma grade para clientes finais e outra para consultorias. Reserve sua vaga e acesse a sala ap&oacute;s a confirma&ccedil;&atilde;o.</p>
         <div class="tr-hero__stats">
             <div class="tr-hero__stat"><i class="fa-solid fa-building"></i><span><strong>Clientes finais</strong> · Seg 14h · Qua 10h</span></div>
             <div class="tr-hero__stat"><i class="fa-solid fa-handshake"></i><span><strong>Consultorias</strong> · Qua 13h · Sex 10h</span></div>
@@ -147,7 +147,7 @@ export const pageHTML = `
     <div class="tr-section__head">
         <span class="tr-section__eyebrow">Agenda da semana</span>
         <h2 class="tr-section__title">Escolha sua sess&atilde;o de tira d&uacute;vidas</h2>
-        <p class="tr-section__sub">Duas frentes: clientes finais e consultorias. Entre no hor&aacute;rio certo e tire suas d&uacute;vidas ao vivo no Google Meet.</p>
+        <p class="tr-section__sub">Duas frentes: clientes finais e consultorias. Reserve sua vaga e, ap&oacute;s a confirma&ccedil;&atilde;o, acesse a sala do Google Meet.</p>
     </div>
     <div class="tr-week" id="trainingGrid"></div>
 </section>
@@ -174,8 +174,8 @@ export const pageHTML = `
         <div class="tr-step">
             <div class="tr-step__num">03</div>
             <div class="tr-step__icon"><i class="fa-solid fa-video" style="color:#34A853;"></i></div>
-            <h3>Entre no Meet</h3>
-            <p>Clique em &ldquo;Entrar no Meet&rdquo; e acesse a sess&atilde;o ao vivo no Google Meet. N&atilde;o &eacute; preciso se inscrever.</p>
+            <h3>Confirme e entre na sala</h3>
+            <p>Preencha a inscri&ccedil;&atilde;o gratuita. Depois da confirma&ccedil;&atilde;o, voc&ecirc; acessa a sala do Google Meet.</p>
         </div>
     </div>
 </section>

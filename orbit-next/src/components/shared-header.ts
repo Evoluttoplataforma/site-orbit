@@ -119,7 +119,7 @@ export const headerHTML = `
                             </a>
                             <a href="/treinamentos">
                                 <div class="dd-icon"><i class="fas fa-chalkboard-teacher" style="color:#ffba1a;"></i></div>
-                                <div class="dd-text"><span>Treinamentos</span><small>10 m&oacute;dulos semanais &middot; Seg a Sex</small></div>
+                                <div class="dd-text"><span>Treinamentos</span><small>Tira d&uacute;vidas ao vivo &middot; Clientes e consultorias</small></div>
                             </a>
                             <a href="https://demonstracao.orbitgestao.com.br/salas/onboarding" target="_blank">
                                 <div class="dd-icon"><i class="fas fa-graduation-cap" style="color:#3FB950;"></i></div>

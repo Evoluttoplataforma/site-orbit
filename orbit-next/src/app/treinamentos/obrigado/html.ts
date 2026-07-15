@@ -11,7 +11,7 @@ export const pageHTML = `
         </h1>
 
         <p id="trainingObrigadoMsg" style="color:#8B949E;font-size:1.1rem;line-height:1.6;margin-bottom:32px;">
-            Voc&ecirc; vai receber o e-mail de confirma&ccedil;&atilde;o com o arquivo .ics pra adicionar na sua agenda.
+            Sua vaga est&aacute; reservada. No hor&aacute;rio da sess&atilde;o, entre pela sala do Google Meet.
         </p>
 
         <div style="background:#161B22;border:1px solid rgba(255,186,26,0.15);border-radius:16px;padding:24px;margin-bottom:24px;text-align:left;">
@@ -23,16 +23,13 @@ export const pageHTML = `
                 <i class="fa-solid fa-calendar-plus" style="color:#ffba1a;font-size:18px;"></i>
                 <strong style="color:#fff;font-size:15px;">Salvar na agenda</strong>
             </div>
-            <p style="color:#8B949E;font-size:13px;line-height:1.5;margin:0 0 16px;">Escolha sua agenda preferida — vamos te lembrar 30 minutos antes.</p>
+            <p style="color:#8B949E;font-size:13px;line-height:1.5;margin:0 0 16px;">Escolha sua agenda preferida — o lembrete ajuda a chegar no hor&aacute;rio certo.</p>
             <div id="trainingCalendarBtns" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;"></div>
         </div>
 
         <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
             <a href="/treinamentos" style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:rgba(255,186,26,0.12);border:1px solid rgba(255,186,26,0.3);color:#ffba1a;border-radius:50px;font-weight:700;text-decoration:none;font-size:14px;">
-                <i class="fa-solid fa-arrow-left"></i>Ver outros treinamentos
-            </a>
-            <a href="https://www.youtube.com/@orbitgestao/live" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:#ff0000;color:#fff;border-radius:50px;font-weight:700;text-decoration:none;font-size:14px;">
-                <i class="fa-brands fa-youtube"></i>Canal no YouTube
+                <i class="fa-solid fa-arrow-left"></i>Ver outras sess&otilde;es
             </a>
         </div>
     </div>
@@ -42,9 +39,6 @@ export const pageHTML = `
     .ty-cal-btn { display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:14px 10px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;color:#C9D1D9;text-decoration:none;font-size:12px;font-weight:600;transition:all 0.2s;cursor:pointer;font-family:inherit; }
     .ty-cal-btn:hover { border-color:rgba(255,186,26,0.45);background:rgba(255,186,26,0.06);color:#fff;transform:translateY(-2px); }
     .ty-cal-btn i { font-size:22px; }
-    .ty-cal-btn .ty-cal-google { color:#4285F4; }
-    .ty-cal-btn .ty-cal-outlook { color:#0078D4; }
-    .ty-cal-btn .ty-cal-apple { color:#ffffff; }
     @media (max-width: 480px) { #trainingCalendarBtns { grid-template-columns:1fr !important; } }
 </style>
 
