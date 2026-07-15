@@ -175,7 +175,7 @@ export const pageHTML = `
             <div class="tr-step__num">03</div>
             <div class="tr-step__icon"><i class="fa-solid fa-video" style="color:#34A853;"></i></div>
             <h3>Entre no Meet</h3>
-            <p>Clique em &ldquo;Entrar no Meet&rdquo; e acesse a sess&atilde;o ao vivo no Google Meet. N&atilde;o &eacute; preciso se inscrever nem receber e-mail.</p>
+            <p>Clique em &ldquo;Entrar no Meet&rdquo; e acesse a sess&atilde;o ao vivo no Google Meet. N&atilde;o &eacute; preciso se inscrever.</p>
         </div>
     </div>
 </section>
