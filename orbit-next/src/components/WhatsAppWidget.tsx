@@ -125,25 +125,23 @@ export default function WhatsAppWidget() {
       console.error('[WA Widget] Save lead failed:', err);
     }
 
-    // 2. Cria deal no Pipedrive com nota indicando origem + etiqueta CHAT1
+    // 2. Cria lead no CRM Orbit (funil B2B) — token so na Edge Function
     try {
-      await supabaseMkt.functions.invoke('create-pipedrive-lead', {
+      await supabaseMkt.functions.invoke('create-orbit-crm-lead', {
         body: {
-          action: 'create',
-          name: name.trim(),
-          whatsapp: normalizedPhone,
+          lead_id: leadId,
+          nome: name.trim(),
           email: email.trim().toLowerCase(),
+          whatsapp: normalizedPhone,
           empresa: company.trim(),
-          oqueFaz: 'Widget WhatsApp',
-          label: 'CHAT1',
-          labelColor: 'blue',
-          leadId,
+          source: 'whatsapp_widget',
+          tags: ['whatsapp', 'inbound'],
+          notes: 'Lead via Widget WhatsApp do site',
           utmData,
-          noteExtra: '🟢 Lead via Widget WhatsApp do site',
         },
       });
     } catch (err) {
-      console.warn('[WA Widget] Pipedrive create failed:', err);
+      console.warn('[WA Widget] Orbit CRM create failed:', err);
     }
 
     // 3. Monta mensagem do WhatsApp com os dados

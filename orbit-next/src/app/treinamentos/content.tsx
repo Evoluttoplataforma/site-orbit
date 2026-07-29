@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { pageHTML } from './html';
 import { headerHTML } from '@/components/shared-header';
 import { footerHTML } from '@/components/shared-footer';
+import { supabaseMkt } from '@/lib/supabase-mkt';
 
 const SB_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
@@ -269,6 +270,25 @@ export function PageContent() {
           },
           body: JSON.stringify(payload),
         });
+
+        // CRM Orbit (funil Treinamento) — nao bloqueia redirect se falhar
+        try {
+          await supabaseMkt.functions.invoke('create-orbit-crm-lead', {
+            body: {
+              nome: payload.nome,
+              email: payload.email,
+              telefone: payload.telefone,
+              empresa: payload.empresa,
+              source: payload.source,
+              training_slug: slug,
+              chosen_date: payload.chosen_date,
+              tags: ['treinamento', 'clientes', slug],
+              notes: `Inscricao /treinamentos — ${slug} — ${payload.chosen_date}`,
+            },
+          });
+        } catch (crmErr) {
+          console.warn('[treinamentos] Orbit CRM create failed:', crmErr);
+        }
 
         window.location.href =
           '/treinamentos/obrigado?t=' +
