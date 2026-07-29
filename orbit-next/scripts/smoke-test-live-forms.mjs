@@ -10,8 +10,10 @@ import { dirname, join } from 'node:path';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 
+// /live foi removido daqui: a página não tem mais form próprio (a inscrição passou a ser
+// no Zoom e depois foi desativada na pausa de agenda). /live/rd é hoje o único form de live
+// que grava em live_orbit_leads.
 const FILES = [
-  { name: '/live', path: join(ROOT, 'src/app/live/html.ts') },
   { name: '/live/rd', path: join(ROOT, 'src/app/live/rd/html.ts') },
 ];
 
