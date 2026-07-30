@@ -604,5 +604,4 @@ export const pageHTML = `
         }, 800);
     })();
     </script>
-    <script src="/js/seo.js"></script>
 `;

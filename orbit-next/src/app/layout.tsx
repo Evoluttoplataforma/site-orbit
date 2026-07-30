@@ -15,6 +15,8 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Orbit - Contrate um time de IA que executa",
   description: "Gestão Operada por IA com consultoria recorrente passiva. Dezenas de agentes especializados constroem e operam a gestão da sua empresa 24/7.",
+  // Um dos sinais que o Google usa para decidir o nome do site nos resultados.
+  applicationName: "Orbit Gestão",
   icons: {
     icon: '/images/favicon.png',
     apple: '/images/favicon.png',
@@ -62,6 +64,10 @@ export default function RootLayout({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
+          // Ancora a entidade. O bloco WebSite abaixo referencia este @id como
+          // publisher — sem ele a referencia fica pendurada e o Google nao
+          // consegue consolidar quem e o dono do site.
+          "@id": "https://orbitgestao.com.br/#organization",
           "name": "Orbit Gestão",
           "alternateName": ["Orbit", "Orbit Gestao"],
           "description": "Plataforma de gestão operada por IA com consultoria recorrente passiva. Dezenas de agentes de IA especializados constroem e operam a gestão da sua empresa 24/7.",
@@ -105,6 +111,7 @@ export default function RootLayout({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
+          "@id": "https://orbitgestao.com.br/#website",
           "name": "Orbit Gestão",
           "alternateName": "Orbit",
           "url": "https://orbitgestao.com.br",

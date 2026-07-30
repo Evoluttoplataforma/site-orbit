@@ -4251,5 +4251,4 @@ export const pageHTML = `
 
     <!-- Scripts -->
 
-    <script src="/js/seo.js"></script>
 `;

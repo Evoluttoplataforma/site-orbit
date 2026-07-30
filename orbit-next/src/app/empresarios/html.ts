@@ -3478,5 +3478,4 @@ export const pageHTML = `
     })();
     </script>
 
-    <script src="/js/seo.js"></script>
 `;

@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import articles from '@/data/articles.json';
 import { headerHTML } from '@/components/shared-header';
 import { footerHTML } from '@/components/shared-footer';
+import { ORG_ID, WEBSITE_ID } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Blog — Orbit Gestão',
@@ -381,11 +382,9 @@ export default function BlogPage() {
     name: 'Blog Orbit Gestão',
     description: 'Artigos sobre gestão estratégica com inteligência artificial.',
     url: 'https://orbitgestao.com.br/blog',
-    publisher: {
-      '@type': 'Organization',
-      name: 'Orbit Gestão',
-      logo: { '@type': 'ImageObject', url: 'https://orbitgestao.com.br/images/logo-orbit-white.png' },
-    },
+    // Referencia a Organization/WebSite ancorados no layout raiz.
+    publisher: { '@id': ORG_ID },
+    isPartOf: { '@id': WEBSITE_ID },
     blogPost: sorted.map((a) => ({
       '@type': 'BlogPosting',
       headline: a.title,
