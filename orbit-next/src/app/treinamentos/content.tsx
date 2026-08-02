@@ -5,118 +5,23 @@ import { pageHTML } from './html';
 import { headerHTML } from '@/components/shared-header';
 import { footerHTML } from '@/components/shared-footer';
 import { supabaseMkt } from '@/lib/supabase-mkt';
+import { validateEmail } from '@/lib/email-validation';
+import {
+  TRAINING_SESSIONS,
+  TRAINING_BY_SLUG,
+  WEEKDAY_FULL,
+  slotLabel,
+  timeLabel,
+  nextOccurrence,
+  longDateLabel,
+  type TrainingSession,
+} from '@/lib/training-sessions';
 
-const SB_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
-const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
+/** Chave do sessionStorage lida pela página de obrigado para mostrar o join_url pessoal. */
+const RESULT_KEY = 'orbit_training_reg';
 
-interface Session {
-  slug: string;
-  audience: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  day: number;
-  hour: number;
-  icon: string;
-}
-
-interface AudienceGroup {
-  id: string;
-  title: string;
-  subtitle: string;
-  sessions: Session[];
-}
-
-const SESSIONS: Session[] = [
-  {
-    slug: 'clientes-seg-14',
-    audience: 'Clientes finais',
-    title: 'Segunda',
-    subtitle: 'Tira dúvidas · 14h',
-    description: 'Tire dúvidas sobre a operação do Orbit na sua empresa.',
-    day: 1,
-    hour: 14,
-    icon: 'fa-building',
-  },
-  {
-    slug: 'clientes-qua-10',
-    audience: 'Clientes finais',
-    title: 'Quarta',
-    subtitle: 'Tira dúvidas · 10h',
-    description: 'Sessão ao vivo com o time para apoiar o uso da plataforma.',
-    day: 3,
-    hour: 10,
-    icon: 'fa-building',
-  },
-  {
-    slug: 'consultorias-qua-13',
-    audience: 'Consultorias',
-    title: 'Quarta',
-    subtitle: 'Tira dúvidas · 13h',
-    description: 'Tire dúvidas sobre operação, clientes e modelo com Orbit.',
-    day: 3,
-    hour: 13,
-    icon: 'fa-handshake',
-  },
-  {
-    slug: 'consultorias-sex-10',
-    audience: 'Consultorias',
-    title: 'Sexta',
-    subtitle: 'Tira dúvidas · 10h',
-    description: 'Sessão ao vivo focada em consultores e canais.',
-    day: 5,
-    hour: 10,
-    icon: 'fa-handshake',
-  },
-];
-
-const AUDIENCES: AudienceGroup[] = [
-  {
-    id: 'clientes',
-    title: 'Clientes finais',
-    subtitle: 'Sessões de tira dúvidas para empresas que usam o Orbit',
-    sessions: SESSIONS.filter((s) => s.audience === 'Clientes finais'),
-  },
-  {
-    id: 'consultorias',
-    title: 'Consultorias',
-    subtitle: 'Sessões de tira dúvidas para canais e parceiros B2B',
-    sessions: SESSIONS.filter((s) => s.audience === 'Consultorias'),
-  },
-];
-
-const DAY_FULL: Record<number, string> = {
-  1: 'Segunda-feira',
-  2: 'Terça-feira',
-  3: 'Quarta-feira',
-  4: 'Quinta-feira',
-  5: 'Sexta-feira',
-};
-const WEEKDAYS_SHORT = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
-
-function fmtDateISO(d: Date): string {
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-}
-
-function getNextOccurrences(dayOfWeek: number, count = 4): Date[] {
-  const out: Date[] = [];
-  const now = new Date();
-  now.setHours(0, 0, 0, 0);
-  const today = now.getDay();
-  let diff = (dayOfWeek - today + 7) % 7;
-  if (diff === 0) {
-    const nowFull = new Date();
-    if (nowFull.getHours() >= 18) diff = 7;
-  }
-  const first = new Date(now);
-  first.setDate(now.getDate() + diff);
-  out.push(new Date(first));
-  for (let i = 1; i < count; i++) {
-    const next = new Date(first);
-    next.setDate(first.getDate() + 7 * i);
-    out.push(next);
-  }
-  return out;
+function esc(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 export function PageContent() {
@@ -129,83 +34,78 @@ export function PageContent() {
 
   useEffect(() => {
     if (!mounted || !ref.current) return;
+    const root = ref.current;
 
-    const grid = ref.current.querySelector('#trainingGrid');
+    const grid = root.querySelector('#trainingGrid');
     if (!grid) return;
 
-    const bySlug = Object.fromEntries(SESSIONS.map((s) => [s.slug, s]));
-
-    grid.innerHTML = AUDIENCES.map((group) => {
-      const slots = group.sessions
-        .map(
-          (s) => `
-        <button type="button" class="tr-slot" data-slug="${s.slug}" style="text-align:left;font:inherit;width:100%;">
-          <span class="tr-slot__time"><i class="fa-solid fa-clock"></i>${String(s.hour).padStart(2, '0')}h</span>
-          <div class="tr-slot__icon"><i class="fa-solid ${s.icon}"></i></div>
-          <div class="tr-slot__title">${s.title}</div>
-          <div class="tr-slot__sub">${s.subtitle}</div>
-          <p class="tr-slot__desc">${s.description}</p>
-          <span class="tr-slot__cta"><i class="fa-solid fa-calendar-check"></i> Reservar minha vaga</span>
-        </button>
-      `
-        )
-        .join('');
-
+    // ─── grade de sessões ────────────────────────────────────────────────
+    grid.innerHTML = TRAINING_SESSIONS.map((s) => {
+      const next = nextOccurrence(s);
       return `
-        <div class="tr-day">
-          <div class="tr-day__header">
-            <div class="tr-day__name">${group.title}</div>
-            <div class="tr-day__count">${group.subtitle}</div>
-          </div>
-          <div class="tr-day__slots">${slots}</div>
-        </div>
-      `;
+        <button type="button" class="tr-slot" data-slug="${s.slug}">
+          <span class="tr-slot__time"><i class="fa-solid fa-clock"></i>${timeLabel(s)}</span>
+          <div class="tr-slot__icon"><i class="fa-solid ${s.icon}"></i></div>
+          <div class="tr-slot__title">${esc(s.title)}</div>
+          <div class="tr-slot__sub">${WEEKDAY_FULL[s.weekday]} · toda semana</div>
+          <p class="tr-slot__desc">${esc(s.description)}</p>
+          <span class="tr-slot__cta"><i class="fa-solid fa-calendar-check"></i> Pr&oacute;xima: ${longDateLabel(next)}</span>
+        </button>`;
     }).join('');
 
-    const modal = ref.current.querySelector('#trainingModal') as HTMLElement | null;
-    const modalTitle = ref.current.querySelector('#trainingModalTitle') as HTMLElement | null;
-    const modalSubtitle = ref.current.querySelector('#trainingModalSubtitle') as HTMLElement | null;
-    const modalIcon = ref.current.querySelector('#trainingModalIcon') as HTMLElement | null;
-    const modalMeta = ref.current.querySelector('#trainingModalMeta') as HTMLElement | null;
-    const slugInput = ref.current.querySelector('#trainingSlug') as HTMLInputElement | null;
-    const dateInput = ref.current.querySelector('#trainingChosenDate') as HTMLInputElement | null;
-    const datesContainer = ref.current.querySelector('#trainingDates') as HTMLElement | null;
-    const errorEl = ref.current.querySelector('#trainingError') as HTMLElement | null;
-    const submitBtn = ref.current.querySelector('#trainingSubmit') as HTMLButtonElement | null;
-    const form = ref.current.querySelector('#trainingForm') as HTMLFormElement | null;
-    const closeBtn = ref.current.querySelector('#trainingModalClose');
+    // ─── checkboxes do modal ─────────────────────────────────────────────
+    const checksBox = root.querySelector('#trainingSessionChecks') as HTMLElement | null;
+    if (checksBox) {
+      checksBox.innerHTML = TRAINING_SESSIONS.map(
+        (s) => `
+        <label class="tr-check">
+          <input type="checkbox" name="sessions" value="${s.slug}">
+          <span class="tr-check__body">
+            <span class="tr-check__title">${esc(s.title)} <span class="tr-check__when">${slotLabel(s)}</span></span>
+            <span class="tr-check__desc">${esc(s.description)}</span>
+          </span>
+        </label>`
+      ).join('');
+    }
 
-    function openModal(session: Session) {
-      if (!modal || !modalTitle || !modalIcon || !modalMeta || !slugInput || !dateInput || !datesContainer) return;
-      slugInput.value = session.slug;
-      modalTitle.textContent = `${session.audience} — ${session.title}`;
-      if (modalSubtitle) modalSubtitle.textContent = session.subtitle;
-      modalIcon.innerHTML = `<i class="fa-solid ${session.icon}"></i>`;
-      modalMeta.innerHTML = `
-        <span class="tr-modal__chip"><i class="fa-solid fa-calendar"></i>${DAY_FULL[session.day]}</span>
-        <span class="tr-modal__chip"><i class="fa-solid fa-clock"></i>${String(session.hour).padStart(2, '0')}h00 — ${String(session.hour + 1).padStart(2, '0')}h00</span>
-        <span class="tr-modal__chip"><i class="fa-solid fa-video" style="color:#34A853;"></i>Google Meet</span>
-      `;
-      const dates = getNextOccurrences(session.day, 4);
-      dateInput.value = '';
-      datesContainer.innerHTML = dates
-        .map((d) => {
-          const months = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
-          const label = `${String(d.getDate()).padStart(2, '0')} ${months[d.getMonth()]}`;
-          const wk = WEEKDAYS_SHORT[d.getDay()];
-          return `<button type="button" class="tr-modal__date-btn" data-date="${fmtDateISO(d)}"><small>${wk}</small>${label}</button>`;
-        })
-        .join('');
-      datesContainer.querySelectorAll('.tr-modal__date-btn').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          datesContainer.querySelectorAll('.tr-modal__date-btn').forEach((b) => b.classList.remove('selected'));
-          btn.classList.add('selected');
-          if (dateInput) dateInput.value = (btn as HTMLElement).dataset.date || '';
+    const modal = root.querySelector('#trainingModal') as HTMLElement | null;
+    const errorEl = root.querySelector('#trainingError') as HTMLElement | null;
+    const submitBtn = root.querySelector('#trainingSubmit') as HTMLButtonElement | null;
+    const form = root.querySelector('#trainingForm') as HTMLFormElement | null;
+    const tsInput = root.querySelector('#trainingTs') as HTMLInputElement | null;
+    const closeBtn = root.querySelector('#trainingModalClose');
+    const openAllBtn = root.querySelector('#trainingOpenAll');
+
+    function showError(msg: string) {
+      if (!errorEl) return;
+      errorEl.textContent = msg;
+      errorEl.classList.add('show');
+    }
+    function clearError() {
+      errorEl?.classList.remove('show');
+    }
+
+    /** Abre o modal. Com sessão, pré-marca só ela; sem, mantém o que estiver marcado. */
+    function openModal(session?: TrainingSession) {
+      if (!modal) return;
+      const boxes = Array.from(
+        root.querySelectorAll('#trainingSessionChecks input[name="sessions"]')
+      ) as HTMLInputElement[];
+      if (session) {
+        boxes.forEach((b) => {
+          b.checked = b.value === session.slug;
         });
-      });
-      if (errorEl) errorEl.classList.remove('show');
+      } else if (!boxes.some((b) => b.checked)) {
+        // abrindo pelo CTA geral sem nada marcado: sugere o treinamento
+        const suggested = boxes.find((b) => TRAINING_BY_SLUG[b.value]?.kind === 'treinamento');
+        if (suggested) suggested.checked = true;
+      }
+      // marca o instante de abertura — o servidor rejeita preenchimento < 2s
+      if (tsInput) tsInput.value = String(Date.now());
+      clearError();
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
+      (root.querySelector('#trainingForm input[name="nome"]') as HTMLInputElement | null)?.focus();
     }
 
     function closeModal() {
@@ -217,11 +117,10 @@ export function PageContent() {
     grid.querySelectorAll('.tr-slot').forEach((btn) => {
       btn.addEventListener('click', () => {
         const slug = (btn as HTMLElement).dataset.slug || '';
-        const session = bySlug[slug];
-        if (session) openModal(session);
+        openModal(TRAINING_BY_SLUG[slug]);
       });
     });
-
+    openAllBtn?.addEventListener('click', () => openModal());
     closeBtn?.addEventListener('click', closeModal);
     modal?.addEventListener('click', (e) => {
       if (e.target === modal) closeModal();
@@ -231,85 +130,119 @@ export function PageContent() {
     };
     document.addEventListener('keydown', onKey);
 
-    form?.addEventListener('submit', async (e) => {
+    // ─── submit ──────────────────────────────────────────────────────────
+    // Guarda in-flight: antes daqui, dois cliques rápidos criavam dois leads.
+    let submitting = false;
+
+    const onSubmit = async (e: Event) => {
       e.preventDefault();
-      if (!dateInput?.value) {
-        if (errorEl) {
-          errorEl.textContent = 'Escolha uma data antes de confirmar.';
-          errorEl.classList.add('show');
-        }
-        return;
-      }
-      if (errorEl) errorEl.classList.remove('show');
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="margin-right:8px;"></i>Enviando...';
-      }
+      if (submitting || !form) return;
 
       const fd = new FormData(form);
-      const slug = String(fd.get('training_slug') || '');
-      const payload = {
-        nome: String(fd.get('nome') || ''),
-        empresa: String(fd.get('empresa') || ''),
-        email: String(fd.get('email') || ''),
-        telefone: String(fd.get('telefone') || ''),
-        source: 'treinamento-' + slug,
-        chosen_date: String(fd.get('chosen_date') || ''),
+      const slugs = fd.getAll('sessions').map(String).filter(Boolean);
+      if (!slugs.length) {
+        showError('Marque pelo menos uma sessão para continuar.');
+        return;
+      }
+
+      const nome = String(fd.get('nome') || '').trim();
+      const email = String(fd.get('email') || '').trim().toLowerCase();
+      const emailCheck = validateEmail(email);
+      if (!emailCheck.valid) {
+        showError(emailCheck.error || 'Digite um e-mail válido.');
+        return;
+      }
+
+      clearError();
+      submitting = true;
+      const originalLabel = submitBtn?.innerHTML ?? '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML =
+          '<i class="fa-solid fa-spinner fa-spin" style="margin-right:8px;"></i>Inscrevendo...';
+      }
+
+      const params = new URLSearchParams(window.location.search);
+      const body = {
+        nome,
+        empresa: String(fd.get('empresa') || '').trim(),
+        email,
+        telefone: String(fd.get('telefone') || '').trim(),
+        sessions: slugs,
+        hp: String(fd.get('hp') || ''),
+        ts: Number(fd.get('ts')) || 0,
         landing_page: window.location.href,
         referrer: document.referrer || null,
+        utm: {
+          utm_source: params.get('utm_source'),
+          utm_medium: params.get('utm_medium'),
+          utm_campaign: params.get('utm_campaign'),
+          utm_content: params.get('utm_content'),
+          utm_term: params.get('utm_term'),
+        },
+        gclid: params.get('gclid'),
+        fbclid: params.get('fbclid'),
       };
 
       try {
-        await fetch(`${SB_URL}/rest/v1/live_orbit_leads`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            apikey: SB_KEY,
-            Authorization: `Bearer ${SB_KEY}`,
-            Prefer: 'return=minimal',
-          },
-          body: JSON.stringify(payload),
-        });
+        const { data, error } = await supabaseMkt.functions.invoke('register-training', { body });
 
-        // CRM Orbit (funil Treinamento) — nao bloqueia redirect se falhar
+        if (error || !data?.ok) {
+          const code = data?.error || '';
+          const msg =
+            code === 'rate_limited'
+              ? 'Muitas tentativas em pouco tempo. Aguarde alguns minutos e tente de novo.'
+              : code === 'invalid_email' || code === 'disposable_email'
+              ? 'Use um e-mail válido para receber o link de acesso.'
+              : 'Não conseguimos concluir agora. Tente novamente em instantes.';
+          showError(msg);
+          submitting = false;
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalLabel;
+          }
+          return;
+        }
+
+        // Guarda os join_url pessoais para a página de obrigado. Não vão na URL:
+        // são links de acesso individuais e apareceriam em referrer e analytics.
         try {
-          await supabaseMkt.functions.invoke('create-orbit-crm-lead', {
-            body: {
-              nome: payload.nome,
-              email: payload.email,
-              telefone: payload.telefone,
-              empresa: payload.empresa,
-              source: payload.source,
-              training_slug: slug,
-              chosen_date: payload.chosen_date,
-              tags: ['treinamento', 'clientes', slug],
-              notes: `Inscricao /treinamentos — ${slug} — ${payload.chosen_date}`,
-            },
-          });
-        } catch (crmErr) {
-          console.warn('[treinamentos] Orbit CRM create failed:', crmErr);
+          sessionStorage.setItem(
+            RESULT_KEY,
+            JSON.stringify({ nome, email, results: data.results ?? [] })
+          );
+        } catch {
+          /* modo privado sem storage: a obrigado cai no texto do e-mail */
         }
 
-        window.location.href =
-          '/treinamentos/obrigado?t=' +
-          encodeURIComponent(slug) +
-          '&d=' +
-          encodeURIComponent(payload.chosen_date);
-      } catch {
-        if (errorEl) {
-          errorEl.textContent = 'Erro ao enviar. Tente novamente.';
-          errorEl.classList.add('show');
+        try {
+          const w = window as Window & { dataLayer?: Record<string, unknown>[] };
+          w.dataLayer = w.dataLayer || [];
+          w.dataLayer.push({
+            event: 'treinamento_inscricao',
+            sessions: slugs.join(','),
+            session_count: slugs.length,
+          });
+        } catch {
+          /* tracking nunca bloqueia */
         }
+
+        window.location.href = `/treinamentos/obrigado?t=${encodeURIComponent(slugs.join(','))}`;
+      } catch {
+        showError('Erro de conexão. Verifique sua internet e tente novamente.');
+        submitting = false;
         if (submitBtn) {
           submitBtn.disabled = false;
-          submitBtn.innerHTML =
-            '<i class="fa-solid fa-check" style="margin-right:8px;"></i>Confirmar inscrição gratuita';
+          submitBtn.innerHTML = originalLabel;
         }
       }
-    });
+    };
+
+    form?.addEventListener('submit', onSubmit);
 
     return () => {
       document.removeEventListener('keydown', onKey);
+      form?.removeEventListener('submit', onSubmit);
     };
   }, [mounted]);
 
