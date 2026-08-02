@@ -7,15 +7,17 @@ import { TRAINING_SESSIONS, TRAINING_LIVE_CARDS, slotLabel, WEEKDAY_SHORT, timeL
 // que competia com o botão principal em vez de apoiá-lo.
 const agendaResumo = TRAINING_SESSIONS.map((s) => `${WEEKDAY_SHORT[s.weekday]} ${timeLabel(s)}`).join(' · ');
 
+// O chip de "quando" vem de whenLabel, nao de dia+hora: a Live Orbit acontece em
+// datas pontuais do mes, entao mostrar "Terça · 13h" daria a entender que e semanal.
 const liveCards = TRAINING_LIVE_CARDS.map(
   (c) => `
-            <a class="tr-live" href="${c.href}">
+            <a class="tr-live${c.cadence === 'pontual' ? ' tr-live--pontual' : ''}" href="${c.href}">
                 <div class="tr-live__icon"><i class="fa-solid ${c.icon}"></i></div>
                 <div class="tr-live__body">
                     <div class="tr-live__top">
                         <span class="tr-live__title">${c.title}</span>
                         ${c.note ? `<span class="tr-live__note">${c.note}</span>` : ''}
-                        <span class="tr-live__day">${WEEKDAY_SHORT[c.weekday]} &middot; ${timeLabel(c)}</span>
+                        <span class="tr-live__day">${c.whenLabel}</span>
                     </div>
                     <p class="tr-live__desc">${c.description}</p>
                 </div>
@@ -105,6 +107,12 @@ export const pageHTML = `
   .tr-live__title { color: #fff; font-size: 0.97rem; font-weight: 700; }
   .tr-live__note { padding: 2px 8px; border-radius: 50px; background: rgba(255,186,26,0.16); color: #ffba1a; font-size: 9.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px; }
   .tr-live__day { padding: 2px 9px; border-radius: 50px; background: rgba(45,140,255,0.14); color: #6BB0FF; font-size: 10px; font-weight: 800; }
+  /* Cadencia pontual (Live Orbit): chip neutro em vez de azul de "toda semana",
+     e sotaque cinza, para nao prometer recorrencia que nao existe. */
+  .tr-live--pontual .tr-live__day { background: rgba(255,255,255,0.07); color: #8B949E; }
+  .tr-live--pontual .tr-live__icon { background: rgba(255,255,255,0.08); color: #8B949E; }
+  .tr-live--pontual .tr-live__arrow { color: #8B949E; }
+  .tr-live--pontual:hover { border-color: rgba(255,255,255,0.22); }
   .tr-live__desc { color: #8B949E; font-size: 0.84rem; line-height: 1.5; margin: 0; }
   .tr-live__arrow { color: #6BB0FF; font-size: 0.8rem; flex-shrink: 0; margin-top: 11px; transition: transform 0.2s; }
   .tr-live:hover .tr-live__arrow { transform: translateX(3px); }
@@ -256,8 +264,8 @@ export const pageHTML = `
 
     <div class="tr-lives-wrap">
         <div class="tr-lives-wrap__head">
-            <h3>Tamb&eacute;m acontecem toda semana</h3>
-            <p>Estas t&ecirc;m p&aacute;gina e inscri&ccedil;&atilde;o pr&oacute;prias.</p>
+            <h3>Outras sess&otilde;es ao vivo</h3>
+            <p>Cada uma tem p&aacute;gina e inscri&ccedil;&atilde;o pr&oacute;prias.</p>
         </div>
         <div class="tr-lives">${liveCards}
         </div>

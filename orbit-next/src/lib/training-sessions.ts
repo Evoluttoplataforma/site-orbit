@@ -42,6 +42,15 @@ export interface TrainingLiveCard {
   description: string;
   href: string;
   note?: string;
+  /**
+   * 'semanal' = acontece toda semana no mesmo dia.
+   * 'pontual' = datas específicas do mês, sem cadência fixa.
+   * Importa porque a Live Orbit (terça) NÃO é semanal — anunciar como se fosse
+   * seria informação errada na página.
+   */
+  cadence: 'semanal' | 'pontual';
+  /** Rótulo de quando acontece. Substitui o chip de dia+hora quando é pontual. */
+  whenLabel: string;
 }
 
 export const WEEKDAY_FULL: Record<number, string> = {
@@ -116,16 +125,6 @@ export const TRAINING_SESSIONS: TrainingSession[] = [
 
 export const TRAINING_LIVE_CARDS: TrainingLiveCard[] = [
   {
-    key: 'live-orbit',
-    title: 'Live Orbit',
-    weekday: 2,
-    hour: 13,
-    minute: 0,
-    icon: 'fa-video',
-    description: 'Gestão com time de IA, ao vivo. Próxima edição em definição.',
-    href: '/live',
-  },
-  {
     key: 'live-negocios',
     title: 'Live de Negócios',
     weekday: 4,
@@ -135,6 +134,20 @@ export const TRAINING_LIVE_CARDS: TrainingLiveCard[] = [
     description: 'Como escalar sua consultoria com o Orbit, com Christian Hart.',
     href: '/live/chris',
     note: 'Somente canais',
+    cadence: 'semanal',
+    whenLabel: 'Toda quinta · 18h',
+  },
+  {
+    key: 'live-orbit',
+    title: 'Live Orbit',
+    weekday: 2,
+    hour: 13,
+    minute: 0,
+    icon: 'fa-video',
+    description: 'Gestão com time de IA, ao vivo. Acontece em datas pontuais do mês.',
+    href: '/live',
+    cadence: 'pontual',
+    whenLabel: 'Próxima edição em definição',
   },
 ];
 
