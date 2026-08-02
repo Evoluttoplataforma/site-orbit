@@ -40,16 +40,25 @@ export function PageContent() {
     if (!grid) return;
 
     // ─── grade de sessões ────────────────────────────────────────────────
+    // A data da próxima ocorrência é INFORMAÇÃO (texto secundário), e o CTA é a
+    // ação. Antes a data vinha estilizada como botão dourado e as pessoas
+    // clicavam nela esperando ver a agenda, não abrir o formulário.
     grid.innerHTML = TRAINING_SESSIONS.map((s) => {
       const next = nextOccurrence(s);
+      const isTreino = s.kind === 'treinamento';
       return `
-        <button type="button" class="tr-slot" data-slug="${s.slug}">
-          <span class="tr-slot__time"><i class="fa-solid fa-clock"></i>${timeLabel(s)}</span>
-          <div class="tr-slot__icon"><i class="fa-solid ${s.icon}"></i></div>
-          <div class="tr-slot__title">${esc(s.title)}</div>
-          <div class="tr-slot__sub">${WEEKDAY_FULL[s.weekday]} · toda semana</div>
+        <button type="button" class="tr-slot${isTreino ? ' tr-slot--treino' : ''}" data-slug="${s.slug}"
+                aria-label="Inscrever-se em ${esc(s.title)}, ${WEEKDAY_FULL[s.weekday]} às ${timeLabel(s)}">
+          <div class="tr-slot__head">
+            <div class="tr-slot__icon"><i class="fa-solid ${s.icon}"></i></div>
+            <div class="tr-slot__labels">
+              <div class="tr-slot__title">${esc(s.title)}</div>
+              <span class="tr-slot__when">${WEEKDAY_FULL[s.weekday]} &middot; ${timeLabel(s)}</span>
+            </div>
+          </div>
           <p class="tr-slot__desc">${esc(s.description)}</p>
-          <span class="tr-slot__cta"><i class="fa-solid fa-calendar-check"></i> Pr&oacute;xima: ${longDateLabel(next)}</span>
+          <p class="tr-slot__next"><i class="fa-solid fa-calendar-day"></i>Pr&oacute;xima: <strong>${longDateLabel(next)}</strong></p>
+          <span class="tr-slot__cta">Quero participar <i class="fa-solid fa-arrow-right"></i></span>
         </button>`;
     }).join('');
 
@@ -105,13 +114,21 @@ export function PageContent() {
       clearError();
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
-      (root.querySelector('#trainingForm input[name="nome"]') as HTMLInputElement | null)?.focus();
+      // a classe esconde os widgets flutuantes (WhatsApp/chat), que ficavam por
+      // cima do modal e do botão de confirmar
+      document.body.classList.add('tr-modal-open');
+      // Não dar foco automático em tela pequena: abriria o teclado por cima da
+      // lista de sessões, que é a primeira decisão a tomar.
+      if (window.innerWidth > 560) {
+        (root.querySelector('#trainingForm input[name="nome"]') as HTMLInputElement | null)?.focus();
+      }
     }
 
     function closeModal() {
       if (!modal) return;
       modal.classList.remove('active');
       document.body.style.overflow = '';
+      document.body.classList.remove('tr-modal-open');
     }
 
     grid.querySelectorAll('.tr-slot').forEach((btn) => {
@@ -243,6 +260,9 @@ export function PageContent() {
     return () => {
       document.removeEventListener('keydown', onKey);
       form?.removeEventListener('submit', onSubmit);
+      // não deixar o site travado nem os widgets escondidos se desmontar aberto
+      document.body.style.overflow = '';
+      document.body.classList.remove('tr-modal-open');
     };
   }, [mounted]);
 

@@ -141,9 +141,11 @@ function htmlFor(
   const first = (nome || "").trim().split(/\s+/)[0] || "Olá";
   const isTreino = s.kind === "treinamento";
   const headline = kind === "d1" ? "Amanhã tem sessão!" : "Começa em 1 hora!";
+  // Sem prometer que a dúvida será resolvida ao vivo — não está sob nosso controle.
+  // O que a sessão entrega é resposta e direção.
   const pitch = isTreino
     ? "É aula preparada, passo a passo. Se puder, deixe o Orbit aberto ao lado para acompanhar."
-    : "Não tem conteúdo preparado: a pauta é a sua. Chegue com a dúvida ou o caso que quer resolver.";
+    : "A pauta é sua: chegue com a dúvida ou o caso que quer entender, e a gente responde ao vivo.";
   const cta = kind === "d1" ? "VER O LINK DE ACESSO" : "ENTRAR AGORA";
 
   return `<div style="font-family:'Plus Jakarta Sans',Arial,sans-serif;max-width:600px;margin:0 auto;background:#0D1117;color:#fff;border-radius:12px;overflow:hidden;">

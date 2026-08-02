@@ -69,6 +69,15 @@ const ICAL_BYDAY: Record<number, string> = {
   0: 'SU', 1: 'MO', 2: 'TU', 3: 'WE', 4: 'TH', 5: 'FR', 6: 'SA',
 };
 
+// Copy das descrições: NÃO prometer que a dúvida será resolvida ao vivo — isso não
+// está sob nosso controle. O que a sessão entrega é resposta e direção. Também
+// evitar "sem conteúdo preparado", que vendia o Tira Dúvidas como sessão vazia.
+// Ao mudar aqui, atualizar também a coluna description de training_sessions.
+const DESC_TIRA_DUVIDAS =
+  'Perguntas e respostas ao vivo sobre o uso do Orbit. Você traz o que está travando e sai com o próximo passo claro.';
+const DESC_TREINAMENTO =
+  'Aula preparada: um módulo ou as novidades da plataforma, destrinchados passo a passo.';
+
 export const TRAINING_SESSIONS: TrainingSession[] = [
   {
     slug: 'seg-17-tira-duvidas',
@@ -78,8 +87,8 @@ export const TRAINING_SESSIONS: TrainingSession[] = [
     hour: 17,
     minute: 0,
     durationMin: 60,
-    icon: 'fa-circle-question',
-    description: 'Você traz a dúvida e a gente resolve ao vivo. Sem conteúdo preparado — a sessão é sua.',
+    icon: 'fa-comments',
+    description: DESC_TIRA_DUVIDAS,
   },
   {
     slug: 'qua-10-treinamento',
@@ -90,7 +99,7 @@ export const TRAINING_SESSIONS: TrainingSession[] = [
     minute: 0,
     durationMin: 60,
     icon: 'fa-graduation-cap',
-    description: 'Aula passo a passo de um módulo, tema ou das novidades da plataforma.',
+    description: DESC_TREINAMENTO,
   },
   {
     slug: 'sex-09-tira-duvidas',
@@ -100,8 +109,8 @@ export const TRAINING_SESSIONS: TrainingSession[] = [
     hour: 9,
     minute: 0,
     durationMin: 60,
-    icon: 'fa-circle-question',
-    description: 'Você traz a dúvida e a gente resolve ao vivo. Sem conteúdo preparado — a sessão é sua.',
+    icon: 'fa-comments',
+    description: DESC_TIRA_DUVIDAS,
   },
 ];
 

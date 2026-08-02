@@ -151,8 +151,8 @@ export function PageContent() {
         durationMin: s.durationMin,
         description:
           s.kind === 'treinamento'
-            ? `Aula passo a passo da Orbit. Acesso: ${location}`
-            : `Sessão de tira dúvidas da Orbit — traga sua pergunta. Acesso: ${location}`,
+            ? `Aula preparada da Orbit, passo a passo. Acesso: ${location}`
+            : `Perguntas e respostas ao vivo sobre o Orbit. A pauta é sua. Acesso: ${location}`,
         location,
         byDay: icalByDay(s.weekday),
         uidKey: s.slug,
