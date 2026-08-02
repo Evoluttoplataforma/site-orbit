@@ -17,9 +17,13 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 const MAILERSEND_KEY = Deno.env.get("MAILERSEND_API_KEY") || "";
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-// Domínio sem o "i" de propósito (anti-spam). Ver supabase/EMAILS-LIVE.md:10.
-// Trocar para orbitgestao.com.br quebra o envio: não é o domínio verificado.
-const FROM_EMAIL = Deno.env.get("TRAINING_FROM_EMAIL") || "noreply@orbtgestao.com.br";
+// Remetente no domínio REAL. Antes era noreply@orbtgestao.com.br (sem o "i"), um
+// domínio separado criado para "proteção anti-spam" — mas o efeito era o oposto:
+// o Gmail comparava com orbitgestao.com.br, concluía que alguém estava imitando a
+// Orbit e marcava todo e-mail com o aviso vermelho "Esta mensagem pode ser
+// perigosa". Confirmado que o domínio real já tem SPF e DKIM do MailerSend, e que
+// o envio é aceito. NÃO voltar para o domínio sem "i".
+const FROM_EMAIL = Deno.env.get("ORBIT_FROM_EMAIL") || "noreply@orbitgestao.com.br";
 const FROM_NAME = "Orbit Gestão";
 const SITE = "https://orbitgestao.com.br";
 const TZ = "America/Sao_Paulo";

@@ -2,8 +2,8 @@
 //
 // Descadastro dos lembretes de /treinamentos. GET ?r=<registration_id>.
 // Linkado no rodapé e no header List-Unsubscribe de todo lembrete — exigência
-// prática de e-mail em volume, e protege a reputação de orbtgestao.com.br, que é
-// compartilhada com as lives e o bootcamp.
+// prática de e-mail em volume, e protege a reputação de orbitgestao.com.br, que é
+// compartilhada com as lives, o bootcamp e o e-mail corporativo.
 //
 // Não remove o registro no Zoom nem apaga o lead: só desliga os lembretes. A
 // pessoa continua com o link de acesso que já recebeu.

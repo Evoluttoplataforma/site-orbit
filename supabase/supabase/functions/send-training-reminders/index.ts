@@ -17,9 +17,13 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 const MAILERSEND_KEY = Deno.env.get("MAILERSEND_API_KEY") || "";
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-// Domínio sem o "i" de propósito (anti-spam). Ver supabase/EMAILS-LIVE.md:10.
-// Trocar para orbitgestao.com.br quebra o envio: não é o domínio verificado.
-const FROM_EMAIL = Deno.env.get("TRAINING_FROM_EMAIL") || "noreply@orbtgestao.com.br";
+// Remetente no domínio REAL. Antes era noreply@orbtgestao.com.br (sem o "i"), um
+// domínio separado criado para "proteção anti-spam" — mas o efeito era o oposto:
+// o Gmail comparava com orbitgestao.com.br, concluía que alguém estava imitando a
+// Orbit e marcava todo e-mail com o aviso vermelho "Esta mensagem pode ser
+// perigosa". Confirmado que o domínio real já tem SPF e DKIM do MailerSend, e que
+// o envio é aceito. NÃO voltar para o domínio sem "i".
+const FROM_EMAIL = Deno.env.get("ORBIT_FROM_EMAIL") || "noreply@orbitgestao.com.br";
 const FROM_NAME = "Orbit Gestão";
 const SITE = "https://orbitgestao.com.br";
 const TZ = "America/Sao_Paulo";
@@ -141,9 +145,11 @@ function htmlFor(
   const first = (nome || "").trim().split(/\s+/)[0] || "Olá";
   const isTreino = s.kind === "treinamento";
   const headline = kind === "d1" ? "Amanhã tem sessão!" : "Começa em 1 hora!";
+  // Sem prometer que a dúvida será resolvida ao vivo — não está sob nosso controle.
+  // O que a sessão entrega é resposta e direção.
   const pitch = isTreino
     ? "É aula preparada, passo a passo. Se puder, deixe o Orbit aberto ao lado para acompanhar."
-    : "Não tem conteúdo preparado: a pauta é a sua. Chegue com a dúvida ou o caso que quer resolver.";
+    : "A pauta é sua: chegue com a dúvida ou o caso que quer entender, e a gente responde ao vivo.";
   const cta = kind === "d1" ? "VER O LINK DE ACESSO" : "ENTRAR AGORA";
 
   return `<div style="font-family:'Plus Jakarta Sans',Arial,sans-serif;max-width:600px;margin:0 auto;background:#0D1117;color:#fff;border-radius:12px;overflow:hidden;">

@@ -45,7 +45,7 @@ if ($missing) {
 }
 
 $secretArgs = @()
-foreach ($k in @('ZOOM_ACCOUNT_ID','ZOOM_CLIENT_ID','ZOOM_CLIENT_SECRET','MAILERSEND_API_KEY','CRON_SECRET','RATE_SALT','TRAINING_FROM_EMAIL')) {
+foreach ($k in @('ZOOM_ACCOUNT_ID','ZOOM_CLIENT_ID','ZOOM_CLIENT_SECRET','MAILERSEND_API_KEY','CRON_SECRET','RATE_SALT','ORBIT_FROM_EMAIL')) {
   if ($keys[$k]) { $secretArgs += "$k=$($keys[$k])" }
 }
 
