@@ -4,22 +4,37 @@
 -- ⚠️  NAO APLICAR ANTES DE:
 --     1. criar as 3 reuniões no Zoom e gravar zoom_meeting_id em training_sessions
 --     2. definir os secrets da function (deploy-training-zoom.ps1)
---     3. rodar os dois ALTER DATABASE abaixo
+--     3. gravar os 2 segredos no Vault (abaixo)
 --
 --     Sem isso os jobs rodam a cada 10 min e só acumulam erro 403.
 --
--- Diferente dos crons do bootcamp (20260527_bootcamp_cron.sql), aqui a anon key e
--- o cron secret NAO ficam cravados no SQL — vêm de configuração do banco, então
--- este arquivo pode ser commitado sem vazar credencial.
+-- Diferente dos crons do bootcamp (20260527_bootcamp_cron.sql), que cravam a anon
+-- key literal no comando, aqui as credenciais vêm do Vault do Supabase — então
+-- este arquivo pode ser commitado sem vazar nada.
 --
--- Rodar UMA VEZ, fora deste arquivo (valores reais, nunca commitados):
---   alter database postgres set app.settings.mkt_anon_key   = '<anon key>';
---   alter database postgres set app.settings.training_cron_secret = '<mesmo valor do secret CRON_SECRET da function>';
---   -- depois: select pg_reload_conf();
+-- ALTER DATABASE ... SET não funciona no Supabase (sem superusuário), por isso
+-- Vault e não configuração de banco.
+--
+-- Gravar UMA VEZ (com os valores reais, fora deste arquivo):
+--   select vault.create_secret('<anon key>',    'mkt_anon_key');
+--   select vault.create_secret('<CRON_SECRET>', 'training_cron_secret');
+-- O CRON_SECRET tem de ser o MESMO valor do secret da edge function.
 -- ═══════════════════════════════════════════════════════════════════════════
 
 create extension if not exists pg_cron;
 create extension if not exists pg_net;
+
+-- Lê um segredo do Vault. Existe para o comando do cron não precisar de acesso
+-- direto ao schema vault e para manter o SQL do job legível.
+create or replace function public.vault_secret(p_name text)
+returns text
+language sql
+security definer
+set search_path = vault, public
+as $$
+  select decrypted_secret from vault.decrypted_secrets where name = p_name limit 1;
+$$;
+revoke all on function public.vault_secret(text) from anon, authenticated;
 
 -- idempotente
 select cron.unschedule('training-reminders')     where exists (select 1 from cron.job where jobname = 'training-reminders');
@@ -38,9 +53,9 @@ select cron.schedule(
     url     := 'https://yfpdrckyuxltvznqfqgh.supabase.co/functions/v1/send-training-reminders',
     headers := jsonb_build_object(
       'Content-Type',   'application/json',
-      'apikey',         current_setting('app.settings.mkt_anon_key', true),
-      'Authorization',  'Bearer ' || current_setting('app.settings.mkt_anon_key', true),
-      'x-cron-secret',  current_setting('app.settings.training_cron_secret', true)
+      'apikey',         public.vault_secret('mkt_anon_key'),
+      'Authorization',  'Bearer ' || public.vault_secret('mkt_anon_key'),
+      'x-cron-secret',  public.vault_secret('training_cron_secret')
     ),
     body    := '{"kind":"both","limit":200}'::jsonb,
     timeout_milliseconds := 120000
@@ -58,9 +73,9 @@ select cron.schedule(
     url     := 'https://yfpdrckyuxltvznqfqgh.supabase.co/functions/v1/register-training',
     headers := jsonb_build_object(
       'Content-Type',   'application/json',
-      'apikey',         current_setting('app.settings.mkt_anon_key', true),
-      'Authorization',  'Bearer ' || current_setting('app.settings.mkt_anon_key', true),
-      'x-cron-secret',  current_setting('app.settings.training_cron_secret', true)
+      'apikey',         public.vault_secret('mkt_anon_key'),
+      'Authorization',  'Bearer ' || public.vault_secret('mkt_anon_key'),
+      'x-cron-secret',  public.vault_secret('training_cron_secret')
     ),
     body    := '{"mode":"retry_pending","limit":50}'::jsonb,
     timeout_milliseconds := 120000

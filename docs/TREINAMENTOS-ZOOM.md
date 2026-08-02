@@ -95,12 +95,23 @@ update training_sessions set zoom_meeting_id = '...', zoom_join_url = '...',
 
 ### 5. Só então agendar os crons
 
+As credenciais dos crons ficam no **Vault do Supabase**, não no comando do job —
+diferente dos crons do bootcamp, que cravam a anon key literal no SQL.
+`ALTER DATABASE ... SET` não funciona no Supabase (sem superusuário), por isso Vault.
+
 ```sql
-alter database postgres set app.settings.mkt_anon_key = '<anon key>';
-alter database postgres set app.settings.training_cron_secret = '<o mesmo CRON_SECRET>';
-select pg_reload_conf();
+select vault.create_secret('<anon key>',    'mkt_anon_key');
+select vault.create_secret('<CRON_SECRET>', 'training_cron_secret');
 ```
-E aplicar `supabase/migrations/20260802_training_reminders_cron.sql`.
+O `CRON_SECRET` tem de ser **o mesmo valor** do secret da edge function, senão o
+cron leva 403. Depois aplique `supabase/migrations/20260802_training_reminders_cron.sql`,
+que cria o helper `public.vault_secret()` e agenda os 4 jobs.
+
+Para rotacionar depois:
+```sql
+update vault.secrets set secret = '<novo valor>' where name = 'training_cron_secret';
+```
+e atualize o `.env.local` + rode `deploy-training-zoom.ps1 -SecretsOnly`.
 
 Antes de agendar, teste à mão:
 ```bash

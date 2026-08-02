@@ -51,9 +51,13 @@ foreach ($k in @('ZOOM_ACCOUNT_ID','ZOOM_CLIENT_ID','ZOOM_CLIENT_SECRET','MAILER
 
 if ($secretArgs.Count -gt 0) {
   Write-Host "Setting secrets ($($secretArgs.Count))..." -ForegroundColor Cyan
-  # Nao imprime valores
+  # Nao imprime valores.
+  # O CLI do Supabase escreve avisos em stderr; no PowerShell isso derruba $? mesmo
+  # com exit code 0. Por isso checamos $LASTEXITCODE, nao $?.
+  $ErrorActionPreference = 'Continue'
   npx --yes supabase secrets set @secretArgs --project-ref $projectRef
-  if (-not $?) { throw 'secrets set falhou' }
+  if ($LASTEXITCODE -ne 0) { throw "secrets set falhou (exit $LASTEXITCODE)" }
+  $ErrorActionPreference = 'Stop'
 } else {
   Write-Warning 'Nenhum secret para definir.'
 }
@@ -88,18 +92,34 @@ foreach ($fn in $fns) {
 }
 
 # ─── deploy ──────────────────────────────────────────────────────────────────
-# Sem --no-verify-jwt: supabaseMkt.functions.invoke ja manda o JWT anon.
-# (A anon key e publica, entao isso e quebra-molas — os controles reais sao
-# honeypot + rate limit dentro da function.)
+# JWT por function:
+#   register-training       COM jwt  — chamada por supabaseMkt.functions.invoke,
+#                                      que ja manda o JWT anon automaticamente
+#   send-training-reminders COM jwt  — o cron manda a anon key no Authorization,
+#                                      e alem disso a function exige x-cron-secret
+#   training-unsubscribe    SEM jwt  — e um link clicado dentro do e-mail; o
+#                                      navegador nao manda header nenhum. Com JWT
+#                                      obrigatorio, o descadastro devolve 401.
+# (A anon key e publica, entao "com jwt" e quebra-molas, nao controle. Os
+#  controles reais sao honeypot + rate limit + cron secret dentro da function.)
+$noJwt = @('training-unsubscribe')
+
 Push-Location (Join-Path $repo 'supabase\supabase')
 try {
+  $ErrorActionPreference = 'Continue'
   foreach ($fn in $fns) {
     if (-not (Test-Path (Join-Path $repo "supabase\functions\$fn\index.ts"))) { continue }
-    Write-Host "Deploying $fn..." -ForegroundColor Cyan
-    npx --yes supabase functions deploy $fn --project-ref $projectRef
-    if (-not $?) { throw "deploy de $fn falhou" }
+    if ($noJwt -contains $fn) {
+      Write-Host "Deploying $fn (sem verificacao de JWT)..." -ForegroundColor Cyan
+      npx --yes supabase functions deploy $fn --project-ref $projectRef --no-verify-jwt
+    } else {
+      Write-Host "Deploying $fn..." -ForegroundColor Cyan
+      npx --yes supabase functions deploy $fn --project-ref $projectRef
+    }
+    if ($LASTEXITCODE -ne 0) { throw "deploy de $fn falhou (exit $LASTEXITCODE)" }
   }
 } finally {
+  $ErrorActionPreference = 'Stop'
   Pop-Location
   Remove-Item Env:SUPABASE_ACCESS_TOKEN -ErrorAction SilentlyContinue
 }
