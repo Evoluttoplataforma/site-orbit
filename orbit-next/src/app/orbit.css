@@ -515,6 +515,26 @@ ul { list-style: none; }
   background: #fff;
   border-radius: 2px;
   transition: var(--transition);
+  transform-origin: center;
+}
+/* Hamburguer -> X. O JS ja marcava .active, mas nao existia regra nenhuma para
+   isso, entao o icone ficava de hamburguer com o menu aberto. O translateY
+   compensa o gap:5px antes de rotacionar. */
+.menu-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-toggle.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.menu-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Pulso "ao vivo" no nivel 1 (Eventos). Era style inline duplicado nos dois menus. */
+.nav-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #ff4444;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+  flex-shrink: 0;
+  animation: livePulse 1.5s ease-in-out infinite;
 }
 
 /* Mobile Menu Overlay */
@@ -549,7 +569,15 @@ ul { list-style: none; }
   -webkit-overflow-scrolling: touch;
   border-left: 1px solid rgba(255,255,255,0.06);
 }
-.mobile-menu.active { transform: translateX(0); }
+.mobile-menu.active { transform: translateX(0); visibility: visible; }
+/* Fechado, o menu ficava apenas deslocado para fora da tela — sem visibility nem
+   inert. Resultado: os ~50 links dele estavam na ordem de tabulacao de TODA pagina,
+   inclusive no desktop, e leitor de tela lia o menu duas vezes. Com isto, nao
+   precisa prender foco. */
+.mobile-menu:not(.active) {
+  visibility: hidden;
+  pointer-events: none;
+}
 
 /* Mobile Menu Header */
 .mobile-menu__header {
@@ -591,14 +619,18 @@ ul { list-style: none; }
 }
 
 .mobile-menu__label {
-  font-size: 0.6rem;
-  font-weight: 700;
+  font-size: 0.68rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: rgba(255,255,255,0.2);
-  padding: 16px 12px 6px;
+  letter-spacing: 1.4px;
+  /* era 0.6rem com opacidade 0.2 — praticamente ilegivel */
+  color: rgba(255,255,255,0.45);
+  padding: 18px 12px 6px;
 }
 .mobile-menu__label:first-child { padding-top: 4px; }
+/* Modificador em vez de style="color:#ffba1a" inline, que deixava dois labels
+   dourados e os outros nao. */
+.mobile-menu__label--accent { color: #ffba1a; }
 
 /* Mobile menu dropdown */
 .mobile-menu__dropdown { margin: 4px 0; }
@@ -619,13 +651,32 @@ ul { list-style: none; }
   display: none; padding: 4px 0 4px 20px;
 }
 .mobile-menu__dropdown.open .mobile-menu__dropdown-items { display: block; }
-.mobile-menu__dropdown-items span {
+/* ESCOPADO com `>` de proposito. Esta regra estava dormente (os itens do acordeao
+   eram <a><i> sem <span>). Ao envolver os rotulos em <span data-i18n> — necessario
+   para a traducao nao apagar o icone — ela acordaria e aplicaria padding duplo e
+   texto 60% mais apagado dentro de cada <a>. */
+.mobile-menu__dropdown-items > span {
   display: flex; align-items: center; gap: 10px;
   padding: 8px 12px; color: rgba(255,255,255,0.4); font-size: 0.82rem;
 }
-.mobile-menu__dropdown-items span i {
+.mobile-menu__dropdown-items > span > i {
   width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
   font-size: 0.7rem; color: var(--primary); opacity: 0.5;
+}
+
+/* Texto do item mobile: rotulo + sub-rotulo empilhados. `.mobile-menu a` e
+   flex/align-center, entao um <small> irmao ficaria AO LADO do rotulo. */
+.mobile-menu .mm-txt {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  line-height: 1.35;
+}
+.mobile-menu .mm-txt small {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.42);
+  font-weight: 400;
 }
 .mobile-menu a:not(.btn) {
   display: flex;

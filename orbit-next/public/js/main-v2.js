@@ -5,43 +5,111 @@
 
 // ═══ MOBILE MENU (event delegation - works on ALL pages) ═══
 (function() {
+  function setOpenState(open) {
+    var toggle = document.querySelector('.menu-toggle');
+    var menu = document.querySelector('.mobile-menu');
+    var overlay = document.querySelector('.mobile-menu-overlay');
+    if (!menu) return;
+    menu.classList.toggle('active', open);
+    menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+    if (overlay) overlay.classList.toggle('active', open);
+    if (toggle) {
+      toggle.classList.toggle('active', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open) openGroupForCurrentPage();
+  }
+
   // Toggle menu
   document.addEventListener('click', function(e) {
     if (!e.target || !e.target.closest) return;
     var toggle = e.target.closest('.menu-toggle');
     if (!toggle) return;
     var menu = document.querySelector('.mobile-menu');
-    var overlay = document.querySelector('.mobile-menu-overlay');
     if (!menu) return;
-    var isOpen = menu.classList.contains('active');
-    if (isOpen) {
-      toggle.classList.remove('active'); menu.classList.remove('active');
-      if (overlay) overlay.classList.remove('active');
-      document.body.style.overflow = '';
-    } else {
-      toggle.classList.add('active'); menu.classList.add('active');
-      if (overlay) overlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
+    setOpenState(!menu.classList.contains('active'));
   });
 
   // Close menu functions
   window.closeMobileMenu = function() {
+    setOpenState(false);
+    // Devolve o foco ao botao APENAS se ele estiver visivel: no desktop o
+    // .menu-toggle e display:none e o foco cairia no <body>, perdendo a posicao.
     var toggle = document.querySelector('.menu-toggle');
-    var menu = document.querySelector('.mobile-menu');
-    var overlay = document.querySelector('.mobile-menu-overlay');
-    if (toggle) toggle.classList.remove('active');
-    if (menu) menu.classList.remove('active');
-    if (overlay) overlay.classList.remove('active');
-    document.body.style.overflow = '';
+    if (toggle && toggle.offsetParent !== null) toggle.focus();
   };
 
   // Close on link click
   document.addEventListener('click', function(e) {
     if (!e.target || !e.target.closest) return;
+    // O toggle do acordeao e <button>, nao <a>, exatamente para nao cair aqui.
     if (e.target.closest('.mobile-menu a')) window.closeMobileMenu();
     if (e.target.closest('.mobile-menu-close')) window.closeMobileMenu();
     if (e.target.classList && e.target.classList.contains('mobile-menu-overlay')) window.closeMobileMenu();
+  });
+
+  // ═══ Acordeao do menu mobile ═══
+  // Por delegacao, nao por onclick inline no HTML (regra do CLAUDE.md: handler
+  // direto em HTML string causa toggle duplo).
+  function setGroupOpen(dd, open) {
+    dd.classList.toggle('open', open);
+    var btn = dd.querySelector('.mobile-menu__dropdown-toggle');
+    if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  document.addEventListener('click', function(e) {
+    if (!e.target || !e.target.closest) return;
+    var btn = e.target.closest('.mobile-menu__dropdown-toggle');
+    if (!btn) return;
+    var dd = btn.parentElement;
+    if (!dd) return;
+    var willOpen = !dd.classList.contains('open');
+    // Abertura exclusiva: com varios grupos abertos, o painel de 320px empurra o
+    // resto para fora da tela.
+    document.querySelectorAll('.mobile-menu__dropdown.open').forEach(function(other) {
+      if (other !== dd) setGroupOpen(other, false);
+    });
+    setGroupOpen(dd, willOpen);
+  });
+
+  // Abre o grupo que contem a pagina atual. Derivado dos proprios hrefs do menu,
+  // nao de um mapa paralelo pathname->grupo (mapa paralelo e a mesma duplicacao
+  // que a fonte unica de nav-data.ts existe para evitar).
+  function normalizePath(p) {
+    return (String(p || '').toLowerCase().replace(/\.html$/, '').replace(/\/+$/, '') || '/');
+  }
+  var groupsInitialized = false;
+  function openGroupForCurrentPage() {
+    if (groupsInitialized) return;
+    groupsInitialized = true;
+    var here = normalizePath(location.pathname);
+    var best = null;
+    var bestLen = -1;
+    document.querySelectorAll('.mobile-menu__dropdown').forEach(function(dd) {
+      dd.querySelectorAll('.mobile-menu__dropdown-items a[href^="/"]').forEach(function(a) {
+        var href = normalizePath(a.getAttribute('href').split('#')[0]);
+        if (href === '/') return; // a home casaria com tudo
+        // prefixo com barra: evita /agentes-de-ia casar com /agentes
+        var match = here === href || here.indexOf(href + '/') === 0;
+        if (match && href.length > bestLen) { bestLen = href.length; best = dd; }
+      });
+    });
+    if (best) setGroupOpen(best, true);
+  }
+
+  // Escape fecha o menu
+  document.addEventListener('keydown', function(e) {
+    if (e.key !== 'Escape') return;
+    var menu = document.querySelector('.mobile-menu');
+    if (menu && menu.classList.contains('active')) window.closeMobileMenu();
+  });
+
+  // Girar para desktop com o menu aberto deixava body.overflow travado
+  window.addEventListener('resize', function() {
+    if (window.innerWidth <= 1024) return;
+    var menu = document.querySelector('.mobile-menu');
+    if (menu && menu.classList.contains('active')) setOpenState(false);
   });
 
   // Nav dropdown hover/touch
