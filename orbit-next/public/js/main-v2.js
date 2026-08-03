@@ -336,7 +336,12 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const target = document.querySelector(href);
       if (target) {
-        const offset = header.offsetHeight + 20;
+        // `header` nao estava declarado aqui: a linha lancava ReferenceError e,
+        // como o preventDefault ja tinha rodado, TODA ancora do site ficava morta.
+        // So funcionavam as paginas que reimplementaram o scroll localmente
+        // (/consultores, /programa, /experiencias/canal).
+        const hdr = document.querySelector('.header');
+        const offset = (hdr ? hdr.offsetHeight : 0) + 20;
         const top = target.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top, behavior: 'smooth' });
       }
