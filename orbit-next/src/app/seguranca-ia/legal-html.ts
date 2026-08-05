@@ -31,6 +31,8 @@ const li = 'position:relative;padding-left:26px;color:#C9D1D9;font-size:0.98rem;
 const bullet = '<span style="position:absolute;left:0;top:2px;color:#ffba1a;">•</span>';
 const sec = 'background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:26px 28px;margin:0 0 16px;';
 const foot = 'margin:36px 0 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);color:#8B949E;font-size:0.92rem;line-height:1.7;';
+const ol = 'margin:0 0 14px;padding-left:22px;color:#C9D1D9;font-size:0.98rem;line-height:1.7;display:flex;flex-direction:column;gap:8px;';
+const optBadge = 'display:inline-flex;align-items:center;gap:8px;background:rgba(255,186,26,0.12);border:1px solid rgba(255,186,26,0.3);color:#ffba1a;font-size:11.5px;font-weight:800;padding:5px 12px;border-radius:100px;text-transform:uppercase;letter-spacing:0.8px;margin:0 0 14px;';
 const link = 'color:#ffba1a;font-weight:700;text-decoration:none;';
 const st = 'color:#fff;';
 
@@ -209,5 +211,97 @@ ${docHead('Política de Privacidade — Auto Chat', '05 de agosto de 2026', ESCO
                 Para solicitar a exclusão de dados ou tirar dúvidas sobre esta política, entre em
                 contato com nosso Encarregado de Proteção de Dados (DPO) pelo e-mail
                 <!--email_off--><a href="mailto:suporte@orbitgestao.com.br" style="${link}">suporte@orbitgestao.com.br</a><!--email_on-->.
+                Para o passo a passo de remoção, veja
+                <a href="#exclusao-dados" data-sia-goto="exclusao" style="${link}">Exclusão de Dados</a>.
             </p>
+        </div>`;
+
+// ─── INSTRUÇÕES PARA EXCLUSÃO DE DADOS ──────────────────────────────────────
+// Campo obrigatório na submissão da Meta ("Data Deletion Instructions URL").
+// URL: /seguranca-ia#exclusao-dados
+//
+// O documento de origem trazia igor@orbitgestao.com.br, divergindo do suporte@ usado
+// nos outros dois. Unificado em suporte@orbitgestao.com.br por decisão do time
+// (05/08/2026): caixa compartilhada não depende de uma pessoa estar disponível, e a
+// mesma página não pode indicar dois endereços para o mesmo cargo de DPO.
+//
+// ⚠️ A caixa suporte@orbitgestao.com.br PRECISA existir e ser monitorada. Este é o
+// canal de exclusão de dados declarado à Meta — se ele devolver erro, é pior do que
+// um endereço errado: reprova a submissão e deixa o canal de DPO inacessível para
+// efeito de LGPD.
+export const exclusaoHTML = `
+        <div style="${wrap}">
+${docHead(
+  'Instruções para Exclusão de Dados',
+  '05 de agosto de 2026',
+  'Este documento explica como remover seus dados do <strong style="color:#fff;">Auto Chat</strong>, ' +
+    'nossa integração de atendimento via WhatsApp Business e Facebook. ' +
+    'Veja também a <a href="#privacidade" data-sia-goto="privacidade" style="' + link + '">Política de Privacidade</a> do Auto Chat.'
+)}
+
+            <p style="${p}">
+                A Orbit Gestão / Auto Chat valoriza a privacidade dos seus usuários e cumpre
+                rigorosamente as diretrizes da LGPD (Lei Geral de Proteção de Dados) e as políticas
+                da Meta.
+            </p>
+            <p style="${p}">
+                Se você conectou sua conta do WhatsApp Business ou perfil do Facebook à nossa
+                plataforma e deseja remover seus dados, siga <strong style="${st}">uma</strong> das
+                opções abaixo:
+            </p>
+
+            <div style="${sec}">
+                <span style="${optBadge}"><i class="fas fa-sliders"></i>Opção 1 — pelo painel</span>
+                <h2 style="${h2}">Exclusão automática pelo painel da plataforma</h2>
+                <ol style="${ol}">
+                    <li>Faça login na sua conta no painel da Orbit Gestão (<a href="https://app.orbitgestao.com.br" target="_blank" rel="noopener" style="${link}">app.orbitgestao.com.br</a>).</li>
+                    <li>Acesse o menu <strong style="${st}">Configurações &gt; Integrações &gt; WhatsApp SDR</strong>.</li>
+                    <li>Clique no botão <strong style="${st}">Desconectar Canal</strong> ou <strong style="${st}">Cancelar / Abandonar Setup</strong>.</li>
+                    <li>Confirme a desconexão.</li>
+                </ol>
+                <p style="${p}margin-bottom:0;">
+                    Todos os tokens de acesso (<code style="background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;font-size:0.9em;">system_user_access_token</code>),
+                    WABA IDs e identificadores salvos serão revogados e
+                    <strong style="${st}">excluídos imediatamente</strong> dos nossos servidores de banco de dados.
+                </p>
+            </div>
+
+            <div style="${sec}">
+                <span style="${optBadge}"><i class="fab fa-facebook"></i>Opção 2 — pelo Facebook</span>
+                <h2 style="${h2}">Revogação de permissões via Facebook</h2>
+                <p style="${p}">
+                    Você também pode remover o acesso da nossa aplicação diretamente pelas
+                    configurações da sua conta do Facebook:
+                </p>
+                <ol style="${ol}">
+                    <li>Acesse o seu perfil no Facebook e vá em <strong style="${st}">Configurações e Privacidade &gt; Configurações</strong>.</li>
+                    <li>No menu lateral, clique em <strong style="${st}">Integrações de Negócios</strong> ou <strong style="${st}">Aplicativos e Sites</strong>.</li>
+                    <li>Procure pelo aplicativo <strong style="${st}">Auto Chat</strong> ou <strong style="${st}">Orbit Gestão</strong>.</li>
+                    <li>Clique em <strong style="${st}">Remover</strong> para revogar todo e qualquer acesso da plataforma às suas informações.</li>
+                </ol>
+                <p style="${p}margin-bottom:0;">
+                    Após o recebimento da notificação de exclusão enviada pela Meta, nosso servidor
+                    processará o apagamento definitivo dos metadados associados à sua conta
+                    <strong style="${st}">em até 48 horas</strong>.
+                </p>
+            </div>
+
+            <div style="${sec}">
+                <span style="${optBadge}"><i class="fas fa-envelope"></i>Opção 3 — pelo DPO</span>
+                <h2 style="${h2}">Solicitação direta via suporte / DPO</h2>
+                <p style="${p}">
+                    Caso deseje solicitar a exclusão total da sua conta e do histórico de dados em
+                    nossos bancos de dados, envie um e-mail para o nosso Encarregado de Proteção de Dados:
+                </p>
+                <ul style="${ul}">
+                    <li style="${li}">${bullet}<strong style="${st}">E-mail:</strong> <!--email_off--><a href="mailto:suporte@orbitgestao.com.br" style="${link}">suporte@orbitgestao.com.br</a><!--email_on--></li>
+                    <li style="${li}">${bullet}<strong style="${st}">Assunto:</strong> "Solicitação de Exclusão de Dados - [Nome da sua Empresa]"</li>
+                    <li style="${li}">${bullet}<strong style="${st}">Informações necessárias:</strong> e-mail de cadastro na plataforma e número do WhatsApp associado.</li>
+                </ul>
+                <p style="${p}margin-bottom:0;">
+                    Após a validação da solicitação, responderemos <strong style="${st}">em até 5 dias
+                    úteis</strong> confirmando a eliminação definitiva de todos os seus dados
+                    armazenados em nossos sistemas.
+                </p>
+            </div>
         </div>`;

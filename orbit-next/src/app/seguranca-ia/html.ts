@@ -12,13 +12,25 @@
 // Os 3 painéis estão TODOS no HTML estático (só ocultos por style inline), então
 // rastreador que não executa JS enxerga o conteúdo inteiro. O <noscript> abaixo
 // revela os três, para o caso de JS desligado.
-import { termosHTML, privacidadeHTML } from './legal-html';
+import { termosHTML, privacidadeHTML, exclusaoHTML } from './legal-html';
 
+// O "· Auto Chat" existe para não confundir com /termos-de-servico e
+// /politica-privacidade, que cobrem a plataforma toda. A aba de exclusão não leva o
+// sufixo porque não há documento geral concorrente — e com 4 abas, rótulo curto ajuda.
 const tabs = [
   { id: 'seguranca', label: 'Segurança &amp; IA', icon: 'fa-shield-halved' },
   { id: 'termos', label: 'Termos · Auto Chat', icon: 'fa-file-contract' },
   { id: 'privacidade', label: 'Privacidade · Auto Chat', icon: 'fa-user-shield' },
+  { id: 'exclusao', label: 'Exclusão de Dados', icon: 'fa-trash-can' },
 ];
+
+// Hash de cada aba. 'exclusao-dados' é mais explícito na URL que vai no formulário
+// da Meta (campo "Data Deletion Instructions URL").
+const HASHES: Record<string, string> = {
+  termos: 'termos',
+  privacidade: 'privacidade',
+  exclusao: 'exclusao-dados',
+};
 
 const tabBar = tabs
   .map(
@@ -422,6 +434,13 @@ ${privacidadeHTML}
         </div>
     </div>
 
+    <!-- ═══ ABA 4 — Instruções para Exclusão de Dados ═══ -->
+    <div data-sia-panel="exclusao" id="sia-panel-exclusao" role="tabpanel" style="display:none;">
+        <div class="sia-doc">
+${exclusaoHTML}
+        </div>
+    </div>
+
     <script>
     (function () {
         var tabs = document.querySelectorAll('[data-sia-tab]');
@@ -444,25 +463,39 @@ ${privacidadeHTML}
             return true;
         }
 
+        // hash da URL -> id do painel, e o inverso
+        var HASH_OF = ${JSON.stringify(HASHES)};
+        var PANEL_OF = {};
+        Object.keys(HASH_OF).forEach(function (k) { PANEL_OF[HASH_OF[k]] = k; });
+
+        function goTo(name) {
+            if (!show(name)) return;
+            try {
+                var hash = HASH_OF[name];
+                // replaceState em vez de pushState: o botao voltar deve sair da
+                // pagina, nao percorrer as abas.
+                history.replaceState(null, '', hash ? location.pathname + '#' + hash : location.pathname);
+            } catch (err) { /* file:// bloqueia history */ }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
         tabs.forEach(function (tb) {
-            tb.addEventListener('click', function () {
-                var name = tb.getAttribute('data-sia-tab');
-                if (!show(name)) return;
-                // Guarda a aba na URL para poder compartilhar/recarregar. replaceState
-                // em vez de pushState: o botao voltar deve sair da pagina, nao
-                // percorrer as abas.
-                try {
-                    history.replaceState(null, '', name === 'seguranca' ? location.pathname : location.pathname + '#' + name);
-                } catch (err) { /* file:// bloqueia history */ }
-                var bar = document.querySelector('.sia-tabs-wrap');
-                if (bar) window.scrollTo({ top: 0, behavior: 'smooth' });
+            tb.addEventListener('click', function () { goTo(tb.getAttribute('data-sia-tab')); });
+        });
+
+        // Links de um documento para outro (data-sia-goto) trocam de aba em vez de
+        // pular para uma ancora que nao existe no painel visivel.
+        document.querySelectorAll('[data-sia-goto]').forEach(function (a) {
+            a.addEventListener('click', function (ev) {
+                ev.preventDefault();
+                goTo(a.getAttribute('data-sia-goto'));
             });
         });
 
         // Deep link. Sem rolar a pagina: o proprio navegador ja tenta posicionar
         // pelo hash, e forcar scroll aqui brigaria com isso.
         var h = (location.hash || '').replace('#', '').toLowerCase();
-        if (h === 'termos' || h === 'privacidade') show(h);
+        if (PANEL_OF[h]) show(PANEL_OF[h]);
     })();
     </script>
 
