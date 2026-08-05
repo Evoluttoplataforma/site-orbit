@@ -13,6 +13,12 @@
 // medida de linha legivel em texto legal), mas em inline style, que e o paradigma
 // desta pagina — ela foge do orbit.css de proposito.
 
+// Os e-mails vão entre <!--email_off--> e <!--email_on-->: o Cloudflare tem
+// "Email Address Obfuscation" ligado no domínio e reescreve mailto: como
+// /cdn-cgi/l/email-protection, exibindo "[email protected]" para quem não executa
+// JS. Numa política de privacidade isso esconde justamente o contato do DPO do
+// rastreador da Meta, que é quem vai auditar esta página. O marcador desliga a
+// ofuscação apenas nesse trecho.
 const wrap = 'max-width:820px;margin:0 auto;';
 const h1 = 'font-size:clamp(1.7rem,4vw,2.4rem);font-weight:800;color:#fff;line-height:1.2;margin:0 0 10px;letter-spacing:-0.01em;';
 const stamp = 'color:#8B949E;font-size:0.92rem;margin:0 0 8px;';
@@ -122,7 +128,7 @@ ${docHead('Termos de Serviço — Auto Chat', '05 de agosto de 2026', ESCOPO_COM
 
             <p style="${foot}">
                 Em caso de dúvidas sobre estes Termos, entre em contato pelo e-mail
-                <a href="mailto:suporte@orbitgestao.com.br" style="${link}">suporte@orbitgestao.com.br</a>.
+                <!--email_off--><a href="mailto:suporte@orbitgestao.com.br" style="${link}">suporte@orbitgestao.com.br</a><!--email_on-->.
             </p>
         </div>`;
 
@@ -202,6 +208,6 @@ ${docHead('Política de Privacidade — Auto Chat', '05 de agosto de 2026', ESCO
             <p style="${foot}">
                 Para solicitar a exclusão de dados ou tirar dúvidas sobre esta política, entre em
                 contato com nosso Encarregado de Proteção de Dados (DPO) pelo e-mail
-                <a href="mailto:suporte@orbitgestao.com.br" style="${link}">suporte@orbitgestao.com.br</a>.
+                <!--email_off--><a href="mailto:suporte@orbitgestao.com.br" style="${link}">suporte@orbitgestao.com.br</a><!--email_on-->.
             </p>
         </div>`;

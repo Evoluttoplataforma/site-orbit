@@ -347,9 +347,9 @@ export const pageHTML = `
                 </ul>
                 <div style="margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);text-align:center;">
                     <p style="color:#8B949E;font-size:0.9rem;margin:0 0 10px;">Para exercer qualquer direito ou tirar dúvidas:</p>
-                    <a href="mailto:suporte@orbitgestao.com.br" style="color:#ffba1a;font-weight:700;font-size:1.05rem;text-decoration:none;">
+                    <!--email_off--><a href="mailto:suporte@orbitgestao.com.br" style="color:#ffba1a;font-weight:700;font-size:1.05rem;text-decoration:none;">
                         <i class="fas fa-envelope" style="margin-right:8px;"></i>suporte@orbitgestao.com.br
-                    </a>
+                    </a><!--email_on-->
                 </div>
             </div>
         </div>
