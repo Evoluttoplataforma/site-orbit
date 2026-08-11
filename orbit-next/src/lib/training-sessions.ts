@@ -78,6 +78,23 @@ const ICAL_BYDAY: Record<number, string> = {
   0: 'SU', 1: 'MO', 2: 'TU', 3: 'WE', 4: 'TH', 5: 'FR', 6: 'SA',
 };
 
+/**
+ * Fim da recorrência semanal, espelhando training_sessions.recurrence_ends_at no
+ * Supabase. O Zoom limita reunião recorrente a 50 ocorrências (~11,5 meses), então a
+ * série criada em ago/2026 expira em julho de 2027.
+ *
+ * Serve para fechar a RRULE dos convites de calendário. Sem UNTIL o evento se repete
+ * PARA SEMPRE na agenda de quem adicionou, e o Google manda notificação de cada
+ * ocorrência — foi o que gerou enxurrada de e-mail depois da migração.
+ *
+ * As 3 sessões vencem em datas ligeiramente diferentes (12, 14 e 16/07/2027). Uso a mais
+ * CEDO para todas: é melhor o convite terminar 4 dias antes do que sobrar evento na
+ * agenda apontando para uma sala que já não existe.
+ *
+ * ⚠️ Ao recriar a recorrência no Zoom, atualizar esta data junto.
+ */
+export const RECURRENCE_ENDS_AT = new Date('2027-07-12T20:00:00Z');
+
 // Copy das descrições: NÃO prometer que a dúvida será resolvida ao vivo — isso não
 // está sob nosso controle. O que a sessão entrega é resposta e direção. Também
 // evitar "sem conteúdo preparado", que vendia o Tira Dúvidas como sessão vazia.

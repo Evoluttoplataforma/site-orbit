@@ -11,6 +11,7 @@ import {
   timeLabel,
   icalByDay,
   WEEKDAY_FULL,
+  RECURRENCE_ENDS_AT,
   type TrainingSession,
 } from '@/lib/training-sessions';
 import {
@@ -155,6 +156,7 @@ export function PageContent() {
             : `Perguntas e respostas ao vivo sobre o Orbit. A pauta é sua. Acesso: ${location}`,
         location,
         byDay: icalByDay(s.weekday),
+        until: RECURRENCE_ENDS_AT,
         uidKey: s.slug,
       };
     });

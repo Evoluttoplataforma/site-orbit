@@ -125,7 +125,12 @@ export async function addMeetingRegistrant(
     body: JSON.stringify({
       email: p.email,
       first_name: p.firstName,
-      ...(p.lastName ? { last_name: p.lastName } : {}),
+      // last_name SEMPRE vai, mesmo vazio. A conta exige esse campo no cadastro do
+      // inscrito, e omiti-lo devolve 400 code 300 ("The parameter is required:
+      // last_name") — classificado como permanent, ou seja, o retry nunca reprocessa.
+      // Entre 03 e 10/08/2026 isso silenciou 10 inscricoes de gente que digitou so o
+      // primeiro nome: elas ficaram sem registro no Zoom e sem link nenhum.
+      last_name: p.lastName || "-",
       ...(p.phone ? { phone: p.phone } : {}),
       ...(p.org ? { org: p.org } : {}),
       auto_approve: true,

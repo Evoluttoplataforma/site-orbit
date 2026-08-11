@@ -175,9 +175,12 @@ active = false where slug = '...'` e remover de `TRAINING_SESSIONS`.
 
 ## Detalhes que não são óbvios
 
-- **`noreply@orbtgestao.com.br` não é typo.** É o domínio sem "i", verificado no
-  MailerSend por escolha anti-spam (ver `supabase/EMAILS-LIVE.md:10`). Trocar para
-  `orbitgestao.com.br` quebra o envio.
+- **O remetente é `noreply@orbitgestao.com.br`, COM "i".** Este item dizia o oposto —
+  que o domínio sem "i" (`orbtgestao.com.br`) "não é typo" e era escolha anti-spam.
+  Estava errado e o efeito era o inverso do pretendido: o Gmail marcava as mensagens
+  com "o endereço do remetente contém caracteres incomuns que talvez sejam usados para
+  imitar endereços reais". Corrigido em 05/08/2026 nas 6 functions via `ORBIT_FROM_EMAIL`.
+  Ver `supabase/EMAILS-LIVE.md:12-21`. **Não voltar para o domínio sem "i".**
 - **Não passar `occurrence_ids`** ao registrar. Com `registration_type=1` o registro
   já vale para a série; passar o parâmetro escopa a ocorrências específicas.
 - **Não editar as 3 reuniões pela UI do Zoom.** Mudar recorrência ou tipo de
@@ -187,6 +190,16 @@ active = false where slug = '...'` e remover de `TRAINING_SESSIONS`.
 - **A página nunca foi traduzida para EN.** Nenhuma string dela está no dicionário
   de `orbit-init.js` — nem antes desta mudança. Se for traduzir, traduza a página
   inteira; parcial fica pior que nada.
-- **`send-training-confirmation` está órfã** e com a grade antiga de 10 slugs. Hoje
-  quem confirma é o próprio e-mail do Zoom. Se quiser um e-mail nosso na inscrição,
-  reescreva ela para multi-sessão.
+- **Quem confirma a inscrição é o próprio e-mail do Zoom**, não uma function nossa
+  (`registrants_confirmation_email: true` em `_shared/zoom.ts`). A antiga
+  `send-training-confirmation`, órfã e com a grade de 10 slugs, foi removida do repo em
+  11/08/2026 — está no histórico do git se precisar. Se um dia quiserem e-mail próprio na
+  inscrição, escrevam do zero para multi-sessão; não ressuscitem aquela.
+- **`last_name` sempre vai no cadastro do inscrito, mesmo vazio** (`_shared/zoom.ts`).
+  A conta exige o campo: omiti-lo devolve 400 code 300, classificado `permanent`, então o
+  retry nunca reprocessa. Isso silenciou 10 inscrições de gente que digitou só o primeiro
+  nome entre 03 e 10/08/2026 — elas ficaram sem link nenhum e sem ninguém saber.
+- **Host das 3 reuniões: `igor@evolutto.com.br`**, com `join_before_host: false`. Quem for
+  conduzir precisa ser host alternativo, senão a sala não abre e os inscritos ficam
+  esperando: `node scripts/zoom-set-alt-host.mjs --list` (o app Zoom ainda não tem o escopo
+  `user:read:list_users:admin`, então a listagem de usuários não funciona).
