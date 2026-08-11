@@ -618,10 +618,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ref: tracking.ref || null
       });
 
-      // ChatGPT Ads — conversao de lead (nao disparar no head global)
-      if (typeof window.oaiq === 'function') {
-        window.oaiq('measure', 'lead_created', { type: 'customer_action' });
-      }
+      var openaiEventIdFallback = 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
 
       var SUPA_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
       var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
@@ -652,6 +649,7 @@ document.addEventListener('DOMContentLoaded', () => {
         li_fat_id: tracking.li_fat_id || null,
         twclid: tracking.twclid || null,
         sck: tracking.sck || null,
+        oppref: tracking.oppref || null,
         landing_page: tracking.landing_page || null,
         referrer: tracking.referrer || null,
         user_agent: tracking.user_agent || null,
@@ -676,6 +674,13 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(function(r) { return r.ok ? r.json() : null; })
         .then(function(rows) {
           var leadId = (rows && rows[0] && rows[0].id) || null;
+          var openaiEventId = leadId ? ('lead_' + leadId) : openaiEventIdFallback;
+
+          // ChatGPT Ads — pixel + mesmo event_id da Conversions API
+          if (typeof window.oaiq === 'function') {
+            window.oaiq('measure', 'lead_created', { type: 'customer_action' }, { event_id: openaiEventId });
+          }
+
           // 1) Cria deal no Pipedrive — funil Orbit, etiqueta CHAT1
           return fetch(SUPA_URL + '/functions/v1/create-pipedrive-lead', {
             method: 'POST',
@@ -693,7 +698,8 @@ document.addEventListener('DOMContentLoaded', () => {
               label: 'CHAT1',
               labelColor: 'blue',
               leadId: leadId,
-              utmData: tracking
+              utmData: tracking,
+              openaiEventId: openaiEventId
             })
           }).then(function(r) { return r.ok ? r.json() : null; });
         })

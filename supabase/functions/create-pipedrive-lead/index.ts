@@ -9,6 +9,69 @@ const corsHeaders = {
 const BASE_URL = 'https://api.pipedrive.com/v1';
 const BASE_URL_V2 = 'https://api.pipedrive.com/api/v2';
 
+async function sha256Hex(value: string): Promise<string> {
+  const data = new TextEncoder().encode(value);
+  const hash = await crypto.subtle.digest('SHA-256', data);
+  return [...new Uint8Array(hash)].map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+/** ChatGPT Ads Conversions API — fire-and-forget; nunca bloqueia o fluxo do lead. */
+async function sendOpenAILeadCreated(opts: {
+  eventId: string;
+  sourceUrl?: string;
+  email?: string;
+  oppref?: string;
+  obref?: string;
+  userAgent?: string;
+  ipAddress?: string;
+}): Promise<void> {
+  const apiKey = Deno.env.get('OPENAI_ADS_CAPI_KEY');
+  const pixelId = Deno.env.get('OPENAI_ADS_PIXEL_ID') || '3XumL6UcyJP1nbxj8PV1M';
+  if (!apiKey) {
+    console.warn('[OpenAI CAPI] OPENAI_ADS_CAPI_KEY not configured — skipping');
+    return;
+  }
+
+  const user: Record<string, string> = {};
+  if (opts.email) {
+    user.email_sha256 = await sha256Hex(opts.email.trim().toLowerCase());
+  }
+  if (opts.obref) user.obref = opts.obref;
+  if (opts.userAgent) user.user_agent = opts.userAgent;
+  if (opts.ipAddress) user.ip_address = opts.ipAddress;
+
+  const event: Record<string, unknown> = {
+    id: opts.eventId,
+    type: 'lead_created',
+    timestamp_ms: Date.now(),
+    source_url: opts.sourceUrl || 'https://orbitgestao.com.br/',
+    action_source: 'web',
+    data: { type: 'customer_action' },
+  };
+  if (opts.oppref) event.oppref = opts.oppref;
+  if (Object.keys(user).length) event.user = user;
+
+  const res = await fetch(`https://bzr.openai.com/v1/events?pid=${encodeURIComponent(pixelId)}`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      validate_only: false,
+      integration_source: 'orbit-site',
+      events: [event],
+    }),
+  });
+
+  if (!res.ok) {
+    const body = await res.text().catch(() => '');
+    console.warn(`[OpenAI CAPI] ${res.status}: ${body.slice(0, 300)}`);
+    return;
+  }
+  console.log('[OpenAI CAPI] lead_created sent', opts.eventId);
+}
+
 async function pipedriveFetch(
   endpoint: string,
   method: string,
@@ -239,7 +302,25 @@ serve(async (req) => {
 
     // ACTION: CREATE — initial lead with basic info (name, email, whatsapp, empresa)
     if (action === 'create') {
-      const { name, whatsapp, email, empresa, oqueFaz, cargo, leadId, utmData, copyVariant } = payload;
+      const { name, whatsapp, email, empresa, oqueFaz, cargo, leadId, utmData, copyVariant, openaiEventId } = payload;
+      const openaiEventIdResolved =
+        (typeof openaiEventId === 'string' && openaiEventId.trim()) ||
+        (leadId != null ? `lead_${leadId}` : `lead_${crypto.randomUUID()}`);
+      const clientIp =
+        req.headers.get('cf-connecting-ip') ||
+        req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+        undefined;
+
+      const fireOpenAICapi = () =>
+        sendOpenAILeadCreated({
+          eventId: openaiEventIdResolved,
+          sourceUrl: utmData?.landing_page || utmData?.origin_page || undefined,
+          email,
+          oppref: utmData?.oppref || undefined,
+          obref: utmData?.obref || undefined,
+          userAgent: utmData?.user_agent || undefined,
+          ipAddress: clientIp,
+        }).catch((e) => console.warn('[OpenAI CAPI] error:', e));
 
       // IDEMPOTENCY: Check if person already exists by email to avoid duplicates
       const searchRes = await fetch(
@@ -277,7 +358,7 @@ serve(async (req) => {
         }
 
         // Ensure UTM custom fields exist
-        const [utmSourceKey, utmMediumKey, utmCampaignKey, utmContentKey, utmTermKey, gclidKey, fbclidKey, landingPageKey, originPageKey] = await Promise.all([
+        const [utmSourceKey, utmMediumKey, utmCampaignKey, utmContentKey, utmTermKey, gclidKey, fbclidKey, opprefKey, landingPageKey, originPageKey] = await Promise.all([
           ensureCustomField(PIPEDRIVE_API_TOKEN, 'dealFields', 'UTM Source', 'varchar'),
           ensureCustomField(PIPEDRIVE_API_TOKEN, 'dealFields', 'UTM Medium', 'varchar'),
           ensureCustomField(PIPEDRIVE_API_TOKEN, 'dealFields', 'UTM Campaign', 'varchar'),
@@ -285,6 +366,7 @@ serve(async (req) => {
           ensureCustomField(PIPEDRIVE_API_TOKEN, 'dealFields', 'UTM Term', 'varchar'),
           ensureCustomField(PIPEDRIVE_API_TOKEN, 'dealFields', 'GCLID', 'varchar'),
           ensureCustomField(PIPEDRIVE_API_TOKEN, 'dealFields', 'FBCLID', 'varchar'),
+          ensureCustomField(PIPEDRIVE_API_TOKEN, 'dealFields', 'OPPREF', 'varchar'),
           ensureCustomField(PIPEDRIVE_API_TOKEN, 'dealFields', 'Landing Page', 'varchar'),
           ensureCustomField(PIPEDRIVE_API_TOKEN, 'dealFields', 'Origin Page', 'varchar'),
         ]);
@@ -304,6 +386,7 @@ serve(async (req) => {
           if (utmData.utm_term) dealBody[utmTermKey] = utmData.utm_term;
           if (utmData.gclid) dealBody[gclidKey] = utmData.gclid;
           if (utmData.fbclid) dealBody[fbclidKey] = utmData.fbclid;
+          if (utmData.oppref) dealBody[opprefKey] = utmData.oppref;
           if (utmData.landing_page) dealBody[landingPageKey] = utmData.landing_page;
           if (utmData.origin_page) dealBody[originPageKey] = utmData.origin_page;
         }
@@ -440,6 +523,8 @@ serve(async (req) => {
           console.warn('[create-pipedrive-lead] ManyChat tag error:', e);
         }
 
+        fireOpenAICapi();
+
         return new Response(JSON.stringify({ 
           success: true, 
           person_id: personId, 
@@ -452,7 +537,7 @@ serve(async (req) => {
         });
       }
 
-      const [cargoKey, segmentoPersonKey, utmSourceKey, utmMediumKey, utmCampaignKey, utmContentKey, utmTermKey, gclidKey, fbclidKey, landingPageKey, originPageKey] = await Promise.all([
+      const [cargoKey, segmentoPersonKey, utmSourceKey, utmMediumKey, utmCampaignKey, utmContentKey, utmTermKey, gclidKey, fbclidKey, opprefKey, landingPageKey, originPageKey] = await Promise.all([
         ensureCustomField(PIPEDRIVE_API_TOKEN, 'personFields', 'Cargo', 'varchar'),
         ensureCustomField(PIPEDRIVE_API_TOKEN, 'personFields', 'Ramo de Atividade', 'varchar'),
         ensureCustomField(PIPEDRIVE_API_TOKEN, 'dealFields', 'UTM Source', 'varchar'),
@@ -462,6 +547,7 @@ serve(async (req) => {
         ensureCustomField(PIPEDRIVE_API_TOKEN, 'dealFields', 'UTM Term', 'varchar'),
         ensureCustomField(PIPEDRIVE_API_TOKEN, 'dealFields', 'GCLID', 'varchar'),
         ensureCustomField(PIPEDRIVE_API_TOKEN, 'dealFields', 'FBCLID', 'varchar'),
+        ensureCustomField(PIPEDRIVE_API_TOKEN, 'dealFields', 'OPPREF', 'varchar'),
         ensureCustomField(PIPEDRIVE_API_TOKEN, 'dealFields', 'Landing Page', 'varchar'),
         ensureCustomField(PIPEDRIVE_API_TOKEN, 'dealFields', 'Origin Page', 'varchar'),
       ]);
@@ -517,6 +603,7 @@ serve(async (req) => {
         if (utmData.utm_term) dealBody[utmTermKey] = utmData.utm_term;
         if (utmData.gclid) dealBody[gclidKey] = utmData.gclid;
         if (utmData.fbclid) dealBody[fbclidKey] = utmData.fbclid;
+        if (utmData.oppref) dealBody[opprefKey] = utmData.oppref;
         if (utmData.landing_page) dealBody[landingPageKey] = utmData.landing_page;
         if (utmData.origin_page) dealBody[originPageKey] = utmData.origin_page;
       }
@@ -534,6 +621,7 @@ serve(async (req) => {
         if (utmData.utm_term) utmLines.push(`🔑 Termo: ${utmData.utm_term}`);
         if (utmData.gclid) utmLines.push(`📊 GCLID: ${utmData.gclid}`);
         if (utmData.fbclid) utmLines.push(`📊 FBCLID: ${utmData.fbclid}`);
+        if (utmData.oppref) utmLines.push(`📊 OPPREF: ${utmData.oppref}`);
         if (utmData.landing_page) utmLines.push(`🌐 LP: ${utmData.landing_page}`);
         if (utmData.origin_page) utmLines.push(`↩️ Origem: ${utmData.origin_page}`);
       }
@@ -673,6 +761,8 @@ serve(async (req) => {
       } catch (e) {
         console.warn('[create-pipedrive-lead] ManyChat tag error:', e);
       }
+
+      fireOpenAICapi();
 
       return new Response(JSON.stringify({ 
         success: true, 

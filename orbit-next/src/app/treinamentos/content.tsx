@@ -233,19 +233,13 @@ export function PageContent() {
         }
 
         try {
-          const w = window as Window & {
-            dataLayer?: Record<string, unknown>[];
-            oaiq?: (...args: unknown[]) => void;
-          };
+          const w = window as Window & { dataLayer?: Record<string, unknown>[] };
           w.dataLayer = w.dataLayer || [];
           w.dataLayer.push({
             event: 'treinamento_inscricao',
             sessions: slugs.join(','),
             session_count: slugs.length,
           });
-          if (typeof w.oaiq === 'function') {
-            w.oaiq('measure', 'lead_created', { type: 'customer_action' });
-          }
         } catch {
           /* tracking nunca bloqueia */
         }

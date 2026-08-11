@@ -145,7 +145,7 @@ export default function RootLayout({
   function getCookie(n){var m=document.cookie.match(new RegExp("(^| )"+n+"=([^;]+)"));return m?decodeURIComponent(m[2]):""}
   function generateSessionId(){return Date.now().toString(36)+"."+Math.random().toString(36).substring(2,10)}
   var STORAGE_KEY="__wl_tracking";
-  var urlParams=["utm_source","utm_medium","utm_campaign","utm_content","utm_term","gclid","gbraid","wbraid","gad_campaignid","gad_source","fbclid","ttclid","msclkid","li_fat_id","twclid","sck","ref"];
+  var urlParams=["utm_source","utm_medium","utm_campaign","utm_content","utm_term","gclid","gbraid","wbraid","gad_campaignid","gad_source","fbclid","ttclid","msclkid","li_fat_id","twclid","sck","ref","oppref"];
   var stored=null;
   try{stored=JSON.parse(sessionStorage.getItem(STORAGE_KEY))}catch(e){}
   // Mapeia referrer (quando lead chega sem UTM na URL) → utm_source/medium sintéticos
@@ -227,6 +227,10 @@ export default function RootLayout({
     var fbc=getCookie("_fbc"),fbp=getCookie("_fbp");
     if(fbc)stored.fbc=fbc;if(fbp)stored.fbp=fbp;
     if(stored.fbclid&&!stored.fbc){stored.fbc="fb.1."+Date.now()+"."+stored.fbclid}
+    var opprefCookie=getCookie("__oppref");
+    if(opprefCookie&&!stored.oppref)stored.oppref=opprefCookie;
+    var obrefCookie=getCookie("__obref");
+    if(obrefCookie)stored.obref=obrefCookie;
     stored.landing_page=window.location.href;
     stored.originPage=window.location.href;
     stored.referrer=document.referrer||"";
@@ -236,9 +240,16 @@ export default function RootLayout({
     var attrs={};urlParams.forEach(function(p){if(stored[p])attrs[p]=stored[p]});
     try{stored.session_attributes_encoded=btoa(JSON.stringify(attrs))}catch(e){}
     try{sessionStorage.setItem(STORAGE_KEY,JSON.stringify(stored))}catch(e){}
+  } else {
+    // Sessao existente: atualiza click IDs OpenAI se aparecerem na URL/cookie
+    var opprefLater=getParam("oppref")||getCookie("__oppref");
+    if(opprefLater)stored.oppref=opprefLater;
+    var obrefLater=getCookie("__obref");
+    if(obrefLater)stored.obref=obrefLater;
+    try{sessionStorage.setItem(STORAGE_KEY,JSON.stringify(stored))}catch(e){}
   }
   function populateHiddenFields(){
-    var fields=["utm_source","utm_medium","utm_campaign","utm_content","utm_term","gclid","gbraid","wbraid","gad_campaignid","gad_source","fbclid","fbc","fbp","ttclid","msclkid","li_fat_id","twclid","sck","landing_page","referrer","user_agent","first_visit","session_id","session_attributes_encoded","originPage","ref"];
+    var fields=["utm_source","utm_medium","utm_campaign","utm_content","utm_term","gclid","gbraid","wbraid","gad_campaignid","gad_source","fbclid","fbc","fbp","ttclid","msclkid","li_fat_id","twclid","sck","oppref","landing_page","referrer","user_agent","first_visit","session_id","session_attributes_encoded","originPage","ref"];
     fields.forEach(function(f){var el=document.getElementById("h_"+f);if(el&&stored[f])el.value=stored[f]});
   }
   if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",populateHiddenFields)}else{populateHiddenFields()}
@@ -249,7 +260,7 @@ export default function RootLayout({
 // ===== Propaga UTMs/tracking pro chat externo (demonstracao.orbitgestao.com.br) =====
 (function(){
   var EXTERNAL_HOST="demonstracao.orbitgestao.com.br";
-  var FORWARD=["utm_source","utm_medium","utm_campaign","utm_content","utm_term","gclid","gbraid","wbraid","gad_campaignid","gad_source","fbclid","fbc","fbp","ttclid","msclkid","li_fat_id","twclid","sck","ref"];
+  var FORWARD=["utm_source","utm_medium","utm_campaign","utm_content","utm_term","gclid","gbraid","wbraid","gad_campaignid","gad_source","fbclid","fbc","fbp","ttclid","msclkid","li_fat_id","twclid","sck","ref","oppref"];
   function getTracking(){try{return JSON.parse(sessionStorage.getItem("__wl_tracking")||"null")}catch(e){return null}}
   function appendUtms(url){
     try{
@@ -341,7 +352,7 @@ export default function RootLayout({
         ` }} />
         {/* Arquivos de /public nao recebem hash do Next: ao mudar estes scripts,
             BUMPAR o ?v= — senao quem tem o arquivo em cache nao recebe a correcao. */}
-        <script src="/js/main-v2.js?v=4" defer></script>
+        <script src="/js/main-v2.js?v=5" defer></script>
         <script src="/js/orbit-init.js?v=3" defer></script>
         <script src="/js/banner.js?v=6" defer></script>
         <script dangerouslySetInnerHTML={{ __html: `(function(){var l=document.createElement('link');l.rel='stylesheet';l.href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';document.head.appendChild(l)})()` }} />

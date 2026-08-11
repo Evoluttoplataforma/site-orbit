@@ -176,13 +176,19 @@ export default function ChatPopup() {
         const trackingFields = [
           'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
           'gclid', 'gbraid', 'wbraid', 'gad_campaignid', 'gad_source',
-          'fbclid', 'ttclid', 'msclkid', 'li_fat_id', 'sck',
+          'fbclid', 'ttclid', 'msclkid', 'li_fat_id', 'sck', 'oppref', 'obref',
           'landing_page', 'origin_page', 'session_attributes_encoded',
-          'apex_session_id',
+          'apex_session_id', 'user_agent',
         ];
         for (const f of trackingFields) if (utmData[f]) tracking[f] = utmData[f];
       }
     } catch {}
+
+    // event_id compartilhado pixel <-> Conversions API (dedup)
+    const openaiEventId =
+      typeof crypto !== 'undefined' && 'randomUUID' in crypto
+        ? `lead_${crypto.randomUUID()}`
+        : `lead_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`;
 
     let leadId: number | null = null;
     try {
@@ -223,6 +229,7 @@ export default function ChatPopup() {
           labelColor: 'blue',
           leadId,
           utmData,
+          openaiEventId: leadId != null ? `lead_${leadId}` : openaiEventId,
         },
       });
       if (pdResult?.success) {
@@ -235,6 +242,8 @@ export default function ChatPopup() {
     } catch (err) {
       console.warn('Pipedrive create from popup failed:', err);
     }
+
+    const eventIdForAds = leadId != null ? `lead_${leadId}` : openaiEventId;
 
     // GTM: dispara form_submit_success com dados do lead + tracking
     try {
@@ -271,9 +280,14 @@ export default function ChatPopup() {
         origin_page: utmData.origin_page || utmData.originPage || null,
         referrer: utmData.referrer || null,
       });
-      // ChatGPT Ads — conversao de lead
+      // ChatGPT Ads — conversao de lead (event_id = CAPI id)
       if (typeof w.oaiq === 'function') {
-        w.oaiq('measure', 'lead_created', { type: 'customer_action' });
+        w.oaiq(
+          'measure',
+          'lead_created',
+          { type: 'customer_action' },
+          { event_id: eventIdForAds },
+        );
       }
     } catch (err) {
       console.warn('[ChatPopup] dataLayer push failed:', err);
