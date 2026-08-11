@@ -238,7 +238,10 @@ export default function ChatPopup() {
 
     // GTM: dispara form_submit_success com dados do lead + tracking
     try {
-      const w = window as Window & { dataLayer?: Record<string, unknown>[] };
+      const w = window as Window & {
+        dataLayer?: Record<string, unknown>[];
+        oaiq?: (...args: unknown[]) => void;
+      };
       w.dataLayer = w.dataLayer || [];
       w.dataLayer.push({
         event: 'form_submit_success',
@@ -268,6 +271,10 @@ export default function ChatPopup() {
         origin_page: utmData.origin_page || utmData.originPage || null,
         referrer: utmData.referrer || null,
       });
+      // ChatGPT Ads — conversao de lead
+      if (typeof w.oaiq === 'function') {
+        w.oaiq('measure', 'lead_created', { type: 'customer_action' });
+      }
     } catch (err) {
       console.warn('[ChatPopup] dataLayer push failed:', err);
     }

@@ -56,11 +56,14 @@ export default function RootLayout({
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" crossOrigin="anonymous" />
         <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" /></noscript>
         <link rel="dns-prefetch" href="https://connect.facebook.net" />
+        <link rel="dns-prefetch" href="https://bzrcdn.openai.com" />
         {/* Google Analytics 4 (gtag.js) — G-W6LGVPYQ5X */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-W6LGVPYQ5X"></script>
         <script dangerouslySetInnerHTML={{ __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-W6LGVPYQ5X');` }} />
         {/* Meta Pixel — 914082348011782 (PageView automatico; ClickToDemo via listener) */}
         <script dangerouslySetInnerHTML={{ __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','914082348011782');fbq('track','PageView');` }} />
+        {/* OpenAI / ChatGPT Ads Measurement Pixel — 3XumL6UcyJP1nbxj8PV1M (init only; lead_created nos formularios) */}
+        <script dangerouslySetInnerHTML={{ __html: `!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var js=d.createElement(s);js.async=!0;js.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(js,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"3XumL6UcyJP1nbxj8PV1M"});` }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
@@ -338,7 +341,7 @@ export default function RootLayout({
         ` }} />
         {/* Arquivos de /public nao recebem hash do Next: ao mudar estes scripts,
             BUMPAR o ?v= — senao quem tem o arquivo em cache nao recebe a correcao. */}
-        <script src="/js/main-v2.js?v=3" defer></script>
+        <script src="/js/main-v2.js?v=4" defer></script>
         <script src="/js/orbit-init.js?v=3" defer></script>
         <script src="/js/banner.js?v=6" defer></script>
         <script dangerouslySetInnerHTML={{ __html: `(function(){var l=document.createElement('link');l.rel='stylesheet';l.href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';document.head.appendChild(l)})()` }} />

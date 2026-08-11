@@ -363,7 +363,7 @@ export function PageContent() {
         body: JSON.stringify({ type: 'confirmacao', nome: answers.nome, email: answers.email, modo }),
       }).catch(() => {});
 
-      // GTM
+      // GTM + ChatGPT Ads
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const w = window as any;
       w.dataLayer = w.dataLayer || [];
@@ -374,6 +374,9 @@ export function PageContent() {
         lead_name: answers.nome,
         empresa: answers.empresa,
       });
+      if (typeof w.oaiq === 'function') {
+        w.oaiq('measure', 'lead_created', { type: 'customer_action' });
+      }
 
       // Beep de confirmação + redirect pra página de obrigado militar (sempre)
       beep(1200, 0.15, 0.10);

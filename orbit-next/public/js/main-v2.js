@@ -618,6 +618,11 @@ document.addEventListener('DOMContentLoaded', () => {
         ref: tracking.ref || null
       });
 
+      // ChatGPT Ads — conversao de lead (nao disparar no head global)
+      if (typeof window.oaiq === 'function') {
+        window.oaiq('measure', 'lead_created', { type: 'customer_action' });
+      }
+
       var SUPA_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
       var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
 
