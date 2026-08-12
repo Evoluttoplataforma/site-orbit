@@ -12,8 +12,8 @@ export const pageHTML = `
 
             <h1 class="hero-zoom__title" data-reveal>
                 Pare de vender projeto.<br>
-                Comece a vender <span class="hero-zoom__title-highlight">operação de IA</span> que
-                <span class="hero-rotate" id="heroRotate">
+                Comece a vender <span class="hero-zoom__title-highlight">operação de IA</span><br>
+                que <span class="hero-rotate" id="heroRotate">
                     <span class="hero-rotate__word hero-rotate__word--active">escala.</span>
                     <span class="hero-rotate__word">retém.</span>
                     <span class="hero-rotate__word">opera 24/7.</span>

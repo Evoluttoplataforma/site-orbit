@@ -182,17 +182,25 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.querySelector('.sidebar-nav')) return;
 
   // ═══ HERO ROTATING WORDS ═══
+  // Exit completa antes do enter — evita duas palavras pintadas no mesmo grid cell.
   const heroRotate = document.getElementById('heroRotate');
   if (heroRotate) {
     const words = heroRotate.querySelectorAll('.hero-rotate__word');
     let currentIndex = 0;
+    let rotating = false;
     setInterval(() => {
+      if (rotating || words.length < 2) return;
+      rotating = true;
       const current = words[currentIndex];
+      const nextIndex = (currentIndex + 1) % words.length;
       current.classList.remove('hero-rotate__word--active');
       current.classList.add('hero-rotate__word--exit');
-      setTimeout(() => { current.classList.remove('hero-rotate__word--exit'); }, 500);
-      currentIndex = (currentIndex + 1) % words.length;
-      words[currentIndex].classList.add('hero-rotate__word--active');
+      setTimeout(() => {
+        current.classList.remove('hero-rotate__word--exit');
+        words[nextIndex].classList.add('hero-rotate__word--active');
+        currentIndex = nextIndex;
+        rotating = false;
+      }, 420);
     }, 2500);
   }
 

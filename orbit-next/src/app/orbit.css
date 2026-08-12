@@ -5954,6 +5954,10 @@ h1, h2, h3 {
         vertical-align: bottom;
         overflow: hidden;
         text-align: left;
+        isolation: isolate;
+        height: 1.15em;
+        min-width: 17ch; /* cabe "gera recorrência." */
+        align-items: start;
     }
     .hero-rotate__word {
         grid-area: 1 / 1;
@@ -5961,25 +5965,32 @@ h1, h2, h3 {
         opacity: 0;
         visibility: hidden;
         transform: translateY(100%);
-        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-                    visibility 0.5s;
+        transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                    visibility 0s linear 0.4s;
         color: #ffba1a !important;
         -webkit-text-fill-color: #ffba1a !important;
         background: none !important;
-        -webkit-background-clip: unset !important;
-        background-clip: unset !important;
+        -webkit-background-clip: border-box !important;
+        background-clip: border-box !important;
         font-weight: 600;
+        pointer-events: none;
     }
     .hero-rotate__word--active {
         opacity: 1;
         visibility: visible;
         transform: translateY(0);
+        transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                    visibility 0s linear 0s;
     }
     .hero-rotate__word--exit {
         opacity: 0;
-        visibility: visible;
+        visibility: hidden;
         transform: translateY(-120%);
+        transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                    visibility 0s linear 0.4s;
     }
 
     /* ═══ DOCK - macOS STYLE ═══ */
