@@ -1714,6 +1714,8 @@ function applyEnglish() {
     'Fundador e CEO do Grupo GSN. 30 anos liderando operações de gestão e consultoria em milhares de empresas.': 'Founder and CEO of Grupo GSN. 30 years leading management and consulting operations across thousands of companies.',
     'Diretora de Operações. Responsável pela entrega e qualidade — garante resultado mensurável para cada cliente.': 'Director of Operations. Responsible for delivery and quality — ensures measurable results for every client.',
     'Diretor de Produto. Lidera o desenvolvimento da plataforma e a evolução dos 12 agentes de IA.': 'Director of Product. Leads the platform development and the evolution of the 12 AI agents.',
+    'Co-Founder. Diretor de Produto. Lidera o desenvolvimento da plataforma e a evolução dos agentes de IA.': 'Co-Founder. Director of Product. Leads the platform development and the evolution of the AI agents.',
+    'Co-Founder BR, Founder USA.': 'Co-Founder BR, Founder USA.',
     'Diretor de Vendas. Responsável pela expansão comercial, canais e parcerias estratégicas.': 'Director of Sales. Responsible for commercial expansion, channels and strategic partnerships.',
     'Diretor de Tecnologia. Arquiteto da infraestrutura que garante performance, segurança e escala.': 'Director of Technology. Architect of the infrastructure that ensures performance, security and scale.',
 

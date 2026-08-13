@@ -2959,7 +2959,14 @@ export const pageHTML = `
                             <div class="origin-director-card__avatar"><img src="/images/diretor-chris.jpg" alt="Christian Hart" width="600" height="669" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Christian Hart</h3>
-                                <p>Diretor de Produto. Lidera o desenvolvimento da plataforma e a evolução dos agentes de IA.</p>
+                                <p>Co-Founder. Diretor de Produto. Lidera o desenvolvimento da plataforma e a evolução dos agentes de IA.</p>
+                            </div>
+                        </div>
+                        <div class="origin-director-card">
+                            <div class="origin-director-card__avatar"><img src="/images/perfis/pedro-muschitz.jpg" alt="Pedro Muschitz" width="600" height="750" loading="lazy" decoding="async"></div>
+                            <div class="origin-director-card__info">
+                                <h3>Pedro Muschitz</h3>
+                                <p>Co-Founder BR, Founder USA.</p>
                             </div>
                         </div>
                         <div class="origin-director-card">
