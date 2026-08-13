@@ -12,8 +12,8 @@ export const pageHTML = `
 
             <h1 class="hero-zoom__title" data-reveal>
                 Pare de vender projeto.<br>
-                Comece a vender <span class="hero-zoom__title-highlight">operação de IA</span> que
-                <span class="hero-rotate" id="heroRotate">
+                Comece a vender <span class="hero-zoom__title-highlight">operação de IA</span><br>
+                que <span class="hero-rotate" id="heroRotate">
                     <span class="hero-rotate__word hero-rotate__word--active">escala.</span>
                     <span class="hero-rotate__word">retém.</span>
                     <span class="hero-rotate__word">opera 24/7.</span>
@@ -2647,6 +2647,19 @@ export const pageHTML = `
     </section>
 
 
+    <!-- ═══ TEASER: PROGRAMA ORBIT DE CRESCIMENTO E RECONHECIMENTO ═══ -->
+    <section class="lp-section lp-section--dark liga-teaser">
+        <div class="lp-container">
+            <div class="liga-teaser__card" data-reveal>
+                <span class="lp-badge">PROGRAMA ORBIT DE CRESCIMENTO E RECONHECIMENTO</span>
+                <h2 class="liga-teaser__title">O ranking dos canais que mais crescem já começou.</h2>
+                <p class="liga-teaser__sub">Cada licença nova conta. Quem mais expande leva leads, experiências com os founders e uma imersão de liderança nos EUA.</p>
+                <a href="/programa" class="lp-btn lp-btn--gold">Ver o programa →</a>
+            </div>
+        </div>
+    </section>
+
+
     <!-- ═══ 7. ROADMAP ═══ -->
     <section class="lp-section lp-section--dark">
         <div class="lp-container">
@@ -2929,7 +2942,7 @@ export const pageHTML = `
             <div data-reveal>
                 <h2>Pronto para ter receita recorrente?</h2>
                 <p>30+ consultorias já estão ganhando com IA. Sua vez.</p>
-                <a href="https://wa.me/554898149776?text=Quero%20ser%20uma%20plataforma%20de%20IA%20para%20meus%20clientes" target="_blank" rel="nofollow noopener" class="lp-btn lp-btn--gold">QUERO SER UMA PLATAFORMA DE IA PARA MEUS CLIENTES</a>
+                <a href="https://wa.me/5548998246863?text=Quero%20ser%20uma%20plataforma%20de%20IA%20para%20meus%20clientes" target="_blank" rel="nofollow noopener" class="lp-btn lp-btn--gold">QUERO SER UMA PLATAFORMA DE IA PARA MEUS CLIENTES</a>
 
                 <div class="cta-stats">
                     <div class="cta-stats__item">
@@ -2959,7 +2972,7 @@ export const pageHTML = `
                     </div>
                     <p data-i18n="footer.tagline">Plataforma de gestão com IA. Contrate um time que executa.</p>
                     <div class="social-hover">
-                        <a href="https://wa.me/554898149776" target="_blank" rel="noopener nofollow" class="social-hover__item" data-name="WhatsApp">
+                        <a href="https://wa.me/5548998246863" target="_blank" rel="noopener nofollow" class="social-hover__item" data-name="WhatsApp">
                             <i class="fab fa-whatsapp"></i>
                             <span class="social-hover__label">WhatsApp</span>
                         </a>
@@ -2980,7 +2993,7 @@ export const pageHTML = `
                     <div class="footer-units">
                         <div class="footer-unit">
                             <div class="footer-unit__head"><span class="footer-unit__flag">🇧🇷</span> <strong data-i18n="footer.unit.br">Brasil</strong></div>
-                            <a href="https://wa.me/554898149776" target="_blank" rel="noopener nofollow"><i class="fab fa-whatsapp"></i> (48) 9814-9776</a>
+                            <a href="https://wa.me/5548998246863" target="_blank" rel="noopener nofollow"><i class="fab fa-whatsapp"></i> (48) 99824-6863</a>
                             <a class="footer-unit__addr" href="https://maps.google.com/?q=Square+SC+Florianopolis" target="_blank" rel="noopener"><i class="fas fa-map-marker-alt"></i> Square SC, Florianópolis - SC</a>
                         </div>
                         <div class="footer-unit">
@@ -3044,6 +3057,8 @@ export const pageHTML = `
 
         /* --- FAQ Accordion --- */
         document.querySelectorAll('.faq-question').forEach(function(btn) {
+            if (btn.dataset.init) return;
+            btn.dataset.init = '1';
             btn.addEventListener('click', function() {
                 var item = btn.parentElement;
                 var answer = item.querySelector('.faq-answer');
@@ -3077,5 +3092,4 @@ export const pageHTML = `
     })();
     </script>
 
-    <script src="/js/seo.js"></script>
 `;

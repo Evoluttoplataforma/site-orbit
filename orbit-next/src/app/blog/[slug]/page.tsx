@@ -4,6 +4,7 @@ import articles from '@/data/articles.json';
 import { headerHTML } from '@/components/shared-header';
 import { footerHTML } from '@/components/shared-footer';
 import BlogComments from '@/components/blog/BlogComments';
+import { articleCanonical, ORG_ID, WEBSITE_ID } from '@/lib/seo';
 
 interface Article {
   id: number;
@@ -35,6 +36,9 @@ const CATEGORIES: Record<string, string> = {
 function getArticle(slug: string): Article | undefined {
   return (articles as Article[]).find((a) => a.slug === slug);
 }
+
+// Slugs realmente publicados — usado para validar canonical entre artigos.
+const KNOWN_SLUGS: ReadonlySet<string> = new Set((articles as Article[]).map((a) => a.slug));
 
 export function generateStaticParams() {
   return (articles as Article[]).map((a) => ({ slug: a.slug }));
@@ -74,7 +78,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       images: [image],
     },
     alternates: {
-      canonical: article.seo_canonical || url,
+      canonical: articleCanonical(article.slug, article.seo_canonical, KNOWN_SLUGS),
     },
   };
 }
@@ -190,7 +194,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const mins = readTime(article.content);
   const initials = getInitials(article.author);
   const author = article.author || 'Equipe Orbit';
-  const seoUrl = article.seo_canonical || `https://orbitgestao.com.br/blog/${article.slug}`;
+  const seoUrl = articleCanonical(article.slug, article.seo_canonical, KNOWN_SLUGS);
   const seoImage = article.seo_og_image || article.cover_url || '/images/og-image.png';
 
   const jsonLd = {
@@ -200,11 +204,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     description: article.excerpt || article.content.replace(/<[^>]*>/g, '').slice(0, 160),
     image: seoImage,
     author: { '@type': 'Person', name: author },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Orbit Gestão',
-      logo: { '@type': 'ImageObject', url: 'https://orbitgestao.com.br/images/logo-orbit-white.png' },
-    },
+    // Referencia a Organization ancorada no layout raiz em vez de repetir uma
+    // Organization inline solta — mantem o grafo de entidades conectado.
+    publisher: { '@id': ORG_ID },
+    isPartOf: { '@id': WEBSITE_ID },
     datePublished: article.published_at,
     dateModified: article.updated_at || article.published_at,
     mainEntityOfPage: { '@type': 'WebPage', '@id': seoUrl },

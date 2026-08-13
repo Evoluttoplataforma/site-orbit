@@ -278,7 +278,12 @@ async function upsertArticle(art) {
     published_at: meta.published_at ? `${meta.published_at}T12:00:00.000Z` : new Date().toISOString(),
     updated_at: meta.updated_at ? `${meta.updated_at}T12:00:00.000Z` : new Date().toISOString(),
     seo_title: humanizeText(meta.meta_title || ''),
-    seo_canonical: meta.canonical ? meta.canonical.replace('https://orbitgestao.com.br/blog/', '') : (meta.slug || art.slug),
+    // Deixa NULL de proposito: src/lib/seo.ts::articleCanonical() deriva o canonical
+    // correto do slug (https://orbitgestao.com.br/blog/<slug>), que e exatamente o
+    // que o sitemap.xml declara. Antes este campo era gravado com o prefixo do
+    // dominio REMOVIDO, sobrando so o slug — canonical relativo que resolvia para a
+    // raiz do dominio (301/404) e contradizia o sitemap. Nao reintroduzir.
+    seo_canonical: null,
     seo_keyword: art.seo_keyword,
     cover_url: art.cover_url,
   };

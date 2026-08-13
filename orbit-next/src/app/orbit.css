@@ -437,6 +437,22 @@ ul { list-style: none; }
 }
 .dropdown__links a:hover .dd-text small { color: var(--light-text); }
 
+/* Subitem indentado sob Consultores (Programa de Recompensa) */
+.dropdown__links a.dd-subitem {
+  margin-left: 14px;
+  padding-left: 18px;
+  border-left: 2px solid rgba(255,186,26,0.25);
+  border-radius: 0 10px 10px 0;
+}
+.dropdown__links a.dd-subitem .dd-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  font-size: 0.72rem;
+}
+.dropdown__links a.dd-subitem .dd-text span { font-size: 0.8rem; font-weight: 500; }
+.dropdown__links a.dd-subitem .dd-text small { font-size: 0.66rem; }
+
 .nav-actions {
   display: flex;
   gap: 12px;
@@ -499,6 +515,26 @@ ul { list-style: none; }
   background: #fff;
   border-radius: 2px;
   transition: var(--transition);
+  transform-origin: center;
+}
+/* Hamburguer -> X. O JS ja marcava .active, mas nao existia regra nenhuma para
+   isso, entao o icone ficava de hamburguer com o menu aberto. O translateY
+   compensa o gap:5px antes de rotacionar. */
+.menu-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-toggle.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.menu-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Pulso "ao vivo" no nivel 1 (Eventos). Era style inline duplicado nos dois menus. */
+.nav-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: #ff4444;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+  flex-shrink: 0;
+  animation: livePulse 1.5s ease-in-out infinite;
 }
 
 /* Mobile Menu Overlay */
@@ -533,7 +569,15 @@ ul { list-style: none; }
   -webkit-overflow-scrolling: touch;
   border-left: 1px solid rgba(255,255,255,0.06);
 }
-.mobile-menu.active { transform: translateX(0); }
+.mobile-menu.active { transform: translateX(0); visibility: visible; }
+/* Fechado, o menu ficava apenas deslocado para fora da tela — sem visibility nem
+   inert. Resultado: os ~50 links dele estavam na ordem de tabulacao de TODA pagina,
+   inclusive no desktop, e leitor de tela lia o menu duas vezes. Com isto, nao
+   precisa prender foco. */
+.mobile-menu:not(.active) {
+  visibility: hidden;
+  pointer-events: none;
+}
 
 /* Mobile Menu Header */
 .mobile-menu__header {
@@ -575,14 +619,18 @@ ul { list-style: none; }
 }
 
 .mobile-menu__label {
-  font-size: 0.6rem;
-  font-weight: 700;
+  font-size: 0.68rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: rgba(255,255,255,0.2);
-  padding: 16px 12px 6px;
+  letter-spacing: 1.4px;
+  /* era 0.6rem com opacidade 0.2 — praticamente ilegivel */
+  color: rgba(255,255,255,0.45);
+  padding: 18px 12px 6px;
 }
 .mobile-menu__label:first-child { padding-top: 4px; }
+/* Modificador em vez de style="color:#ffba1a" inline, que deixava dois labels
+   dourados e os outros nao. */
+.mobile-menu__label--accent { color: #ffba1a; }
 
 /* Mobile menu dropdown */
 .mobile-menu__dropdown { margin: 4px 0; }
@@ -603,13 +651,32 @@ ul { list-style: none; }
   display: none; padding: 4px 0 4px 20px;
 }
 .mobile-menu__dropdown.open .mobile-menu__dropdown-items { display: block; }
-.mobile-menu__dropdown-items span {
+/* ESCOPADO com `>` de proposito. Esta regra estava dormente (os itens do acordeao
+   eram <a><i> sem <span>). Ao envolver os rotulos em <span data-i18n> — necessario
+   para a traducao nao apagar o icone — ela acordaria e aplicaria padding duplo e
+   texto 60% mais apagado dentro de cada <a>. */
+.mobile-menu__dropdown-items > span {
   display: flex; align-items: center; gap: 10px;
   padding: 8px 12px; color: rgba(255,255,255,0.4); font-size: 0.82rem;
 }
-.mobile-menu__dropdown-items span i {
+.mobile-menu__dropdown-items > span > i {
   width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
   font-size: 0.7rem; color: var(--primary); opacity: 0.5;
+}
+
+/* Texto do item mobile: rotulo + sub-rotulo empilhados. `.mobile-menu a` e
+   flex/align-center, entao um <small> irmao ficaria AO LADO do rotulo. */
+.mobile-menu .mm-txt {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  line-height: 1.35;
+}
+.mobile-menu .mm-txt small {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.42);
+  font-weight: 400;
 }
 .mobile-menu a:not(.btn) {
   display: flex;
@@ -5931,35 +5998,47 @@ h1, h2, h3 {
 
     /* ═══ HERO ROTATING WORDS ═══ */
     .hero-rotate {
-        position: relative;
-        display: inline-flex;
-        overflow: hidden;
+        display: inline-grid;
         vertical-align: bottom;
-        height: 1.2em;
-        min-width: 200px;
+        overflow: hidden;
+        text-align: left;
+        isolation: isolate;
+        height: 1.15em;
+        min-width: 17ch; /* cabe "gera recorrência." */
+        align-items: start;
     }
     .hero-rotate__word {
-        position: absolute;
-        left: 0;
-        width: 100%;
+        grid-area: 1 / 1;
+        white-space: nowrap;
         opacity: 0;
+        visibility: hidden;
         transform: translateY(100%);
-        transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                    visibility 0s linear 0.4s;
         color: #ffba1a !important;
         -webkit-text-fill-color: #ffba1a !important;
         background: none !important;
-        -webkit-background-clip: unset !important;
-        background-clip: unset !important;
+        -webkit-background-clip: border-box !important;
+        background-clip: border-box !important;
         font-weight: 600;
+        pointer-events: none;
     }
     .hero-rotate__word--active {
-        position: relative;
         opacity: 1;
+        visibility: visible;
         transform: translateY(0);
+        transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                    visibility 0s linear 0s;
     }
     .hero-rotate__word--exit {
         opacity: 0;
+        visibility: hidden;
         transform: translateY(-120%);
+        transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                    visibility 0s linear 0.4s;
     }
 
     /* ═══ DOCK - macOS STYLE ═══ */
@@ -8947,10 +9026,13 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
             transition: max-height 0.35s ease;
         }
         .faq-answer__inner {
-            padding: 0 0 24px;
+            padding: 0 24px 24px;
             font-size: 0.9375rem;
             line-height: 1.7;
             color: #5A6069;
+        }
+        @media (max-width: 768px) {
+            .faq-answer__inner { padding: 0 20px 16px; }
         }
 
         /* --- 9. CTA FINAL --- */
@@ -17073,19 +17155,22 @@ hr.glow-divider { display: none !important; }
 
 /* Fix "que" on same line as rotating word on mobile */
 @media (max-width: 768px) {
+  /* On mobile the rotate stays inline with the preceding text, so we use a
+     bulletproof display:none/inline toggle instead of the grid stack. */
   .hero-rotate {
     display: inline !important;
+    overflow: visible !important;
     min-width: auto !important;
-  }
-  .hero-rotate__word--active {
-    position: relative !important;
-    display: inline !important;
   }
   .hero-rotate__word {
     display: none !important;
+    transform: none !important;
   }
   .hero-rotate__word--active {
     display: inline !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
   }
   
   /* Orbital hub on mobile - circular but fits screen */
@@ -17329,4 +17414,402 @@ hr.glow-divider { display: none !important; }
     max-width: calc(100vw - 24px);
   }
   .orbit-banner--popup-side.orbit-banner--bar { padding: 16px 36px 16px 16px; }
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   LIGA ORBIT · CANAIS — /programa (reusa tokens existentes)
+   ═══════════════════════════════════════════════════════ */
+
+/* --- HERO --- */
+.liga-hero {
+  position: relative;
+  text-align: center;
+  padding: 150px 0 100px;
+  background-color: #0D1117;
+  background-image: linear-gradient(180deg, rgba(13,17,23,0.62) 0%, rgba(13,17,23,0.90) 100%), url('/images/imagem-hero-programa.jpg');
+  background-size: cover;
+  background-position: center 20%;
+  background-repeat: no-repeat;
+}
+/* Upgrade para WebP quando suportado (fallback JPG acima) */
+@supports (background-image: image-set(url("i.webp") type("image/webp"))) {
+  .liga-hero {
+    background-image: linear-gradient(180deg, rgba(13,17,23,0.62) 0%, rgba(13,17,23,0.90) 100%),
+      image-set(url('/images/imagem-hero-programa.webp') type("image/webp"), url('/images/imagem-hero-programa.jpg') type("image/jpeg"));
+  }
+}
+.liga-hero__glow {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 680px;
+  max-width: 90%;
+  height: 420px;
+  background: radial-gradient(circle, rgba(255,186,26,0.14) 0%, transparent 70%);
+  pointer-events: none;
+}
+.liga-hero__inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+.liga-hero__title {
+  color: #fff;
+  font-size: clamp(38px, 6vw, 64px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -1px;
+  margin: 0 0 20px;
+}
+.liga-hero__sub {
+  color: rgba(255,255,255,0.72);
+  font-size: clamp(16px, 2vw, 19px);
+  line-height: 1.6;
+  max-width: 640px;
+  margin: 0 auto 20px;
+}
+.liga-hero__tagline {
+  font-size: clamp(18px, 2.4vw, 24px);
+  font-weight: 800;
+  margin: 0 0 36px;
+}
+.liga-hero__ctas {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* --- A META DA REDE (100 × +6 = 600) --- */
+.liga-math {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.liga-math__cell { text-align: center; }
+.liga-math__num {
+  font-size: clamp(44px, 7vw, 72px);
+  font-weight: 900;
+  color: #1A1D23;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+.liga-math__cell--goal .liga-math__num { color: #ffba1a; }
+.liga-math__label {
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.liga-math__op {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  color: #ffba1a;
+}
+.liga-note {
+  text-align: center;
+  max-width: 640px;
+  margin: 48px auto 0;
+  color: #5A6069;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* --- A REGRA --- */
+.liga-rules {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 720px;
+  display: grid;
+  gap: 14px;
+}
+.liga-rule {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 20px 24px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  color: rgba(255,255,255,0.85);
+  font-size: 16px;
+  line-height: 1.5;
+}
+.liga-rule i { color: #ffba1a; font-size: 18px; margin-top: 2px; flex-shrink: 0; }
+
+/* --- NÃO É SÓ PRO TOPO (leads) --- */
+.liga-leads {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.liga-lead-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 28px 24px;
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 18px;
+  box-shadow: 0 8px 28px rgba(13,17,23,0.05);
+}
+.liga-lead-card__from { font-size: 18px; font-weight: 700; color: #1A1D23; white-space: nowrap; }
+.liga-lead-card__arrow { color: #ffba1a; font-size: 16px; }
+.liga-lead-card__to {
+  font-size: 22px;
+  font-weight: 900;
+  color: #ffba1a;
+  white-space: nowrap;
+}
+
+/* --- O PÓDIO --- */
+.liga-podium {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.liga-podium__card {
+  padding: 32px 28px;
+  background: linear-gradient(145deg, #111827, #0D1117);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+}
+.liga-podium__card--champion {
+  border-color: rgba(255,186,26,0.4);
+  box-shadow: 0 0 40px rgba(255,186,26,0.12);
+  grid-row: span 1;
+}
+.liga-podium__rank {
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.liga-podium__card--champion .liga-podium__rank { color: #ffba1a; }
+.liga-podium__rank i { font-size: 20px; }
+.liga-podium__card--champion .liga-podium__rank i { color: #ffba1a; }
+.liga-podium__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.liga-podium__list li {
+  position: relative;
+  padding-left: 22px;
+  color: rgba(255,255,255,0.6);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.liga-podium__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ffba1a;
+}
+.liga-podium-cta { text-align: center; margin-top: 44px; }
+
+/* --- A LINHA DE CHEGADA --- */
+.liga-finish-section { padding-top: 72px; padding-bottom: 72px; }
+.liga-finish { text-align: center; max-width: 680px; margin: 0 auto; }
+.liga-finish__date {
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 800;
+  color: #1A1D23 !important;
+  margin: 8px 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.liga-finish__date i { color: #ffba1a; }
+
+/* --- RANKING (cabeçalho + board) --- */
+.liga-ranking-head { padding-bottom: 24px; }
+.liga-ranking { padding-top: 24px; }
+.liga-ranking__wrap {
+  display: block;
+}
+.liga-board {
+  background: linear-gradient(145deg, #111827, #0D1117);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 12px;
+  box-shadow: 0 10px 36px rgba(0,0,0,0.3);
+}
+.liga-board__state { padding: 48px 24px; text-align: center; color: rgba(255,255,255,0.6); font-size: 15px; }
+.liga-board__list { list-style: none; margin: 0; padding: 0; }
+
+.liga-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  border-radius: 14px;
+}
+.liga-row + .liga-row { border-top: 1px solid rgba(255,255,255,0.06); }
+/* Linha realçada quando o consultor descobre sua posição (inset → não altera layout) */
+.liga-row--highlight {
+  box-shadow: inset 0 0 0 2px rgba(255,186,26,0.7);
+  background: rgba(255,186,26,0.08);
+}
+/* Card "Sua posição" — coluna: cabeçalho + form de lookup por e-mail */
+.liga-row--you {
+  margin-top: 8px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  border: 2px dashed rgba(255,186,26,0.6);
+  background: rgba(255,186,26,0.05);
+  cursor: default;
+  transition: border-color 0.15s ease;
+}
+.liga-row--you:focus-within { border-color: rgba(255,186,26,0.9); }
+.liga-mypos__head { display: flex; align-items: center; gap: 16px; }
+.liga-mypos__result { font-size: 14px; font-weight: 700; color: #ffba1a; }
+.liga-mypos__form { display: flex; flex-direction: column; gap: 10px; }
+.liga-mypos__input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  font-size: 15px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: border-color 0.2s, background 0.2s;
+}
+.liga-mypos__input::placeholder { color: rgba(255,255,255,0.4); }
+.liga-mypos__input:focus {
+  outline: none;
+  border-color: #ffba1a;
+  background: rgba(255,255,255,0.08);
+}
+.liga-mypos__btn { width: 100%; }
+.liga-mypos__btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.liga-mypos__error { color: rgba(255,255,255,0.6); font-size: 13px; line-height: 1.5; margin: 4px 0 0; }
+.liga-rank {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 800;
+  color: rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.06);
+}
+.liga-rank--gold { background: rgba(255,186,26,0.15); color: #ffba1a; }
+.liga-rank--silver { background: rgba(148,163,184,0.18); color: #64748B; }
+.liga-rank--bronze { background: rgba(180,120,60,0.15); color: #B4783C; }
+.liga-rank--you { background: rgba(255,186,26,0.15); color: #ffba1a; }
+
+.liga-avatar {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #F3F4F6;
+}
+.liga-avatar--initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffba1a;
+  background: rgba(255,186,26,0.12);
+  border: 1px solid rgba(255,186,26,0.25);
+}
+.liga-row__info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.liga-row__name { font-size: 15px; font-weight: 700; color: #F0F3F6; }
+.liga-row__city { font-size: 13px; color: #9CA3AF; }
+.liga-row__score { text-align: right; flex-shrink: 0; }
+.liga-row__num { display: block; font-size: 22px; font-weight: 900; color: #ffba1a; line-height: 1; }
+.liga-row__unit { font-size: 11px; color: #9CA3AF; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* --- Card de convite --- */
+.liga-enroll {
+  background: linear-gradient(145deg, #111827, #0D1117);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 32px 28px;
+}
+/* Bloco de convite (faixa full-width abaixo do ranking) */
+.liga-invite {
+  text-align: center;
+  max-width: 700px;
+  margin: 40px auto 0;
+  padding: 48px 32px;
+}
+.liga-invite__title { color: #fff !important; font-size: 24px; font-weight: 800; line-height: 1.25; margin: 0 0 12px; }
+.liga-invite__text { color: rgba(255,255,255,0.65) !important; font-size: 15px; line-height: 1.6; margin: 0 0 28px; }
+.liga-invite__btn { width: 100%; }
+
+/* --- CTA FINAL microcopy --- */
+.liga-cta-micro { color: rgba(255,255,255,0.45) !important; font-size: 13px; margin-top: 18px; }
+
+/* --- Responsivo --- */
+@media (max-width: 900px) {
+  .liga-invite { padding: 36px 24px; }
+  .liga-leads { grid-template-columns: 1fr; max-width: 480px; }
+  .liga-podium { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .liga-hero { padding: 120px 0 80px; background-position: center; }
+  /* Conta da rede: leitura vertical limpa, operadores centralizados entre os cards */
+  .liga-math { flex-direction: column; gap: 10px; }
+  .liga-math__op { font-size: 26px; line-height: 1; }
+  .liga-podium-cta { margin-top: 32px; }
+  /* Linhas do ranking: altura padronizada, nome/cidade em 1 linha com reticências */
+  .liga-row { gap: 12px; padding: 14px 12px; min-height: 62px; }
+  .liga-avatar { width: 38px; height: 38px; }
+  .liga-row__name,
+  .liga-row__city {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+}
+
+/* --- Teaser (usado em /consultores) --- */
+.liga-teaser__card {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 48px 40px;
+  border: 1px solid rgba(255,186,26,0.3);
+  border-radius: 24px;
+  background: radial-gradient(circle at top, rgba(255,186,26,0.08) 0%, transparent 60%), #111827;
+}
+.liga-teaser__title {
+  color: #fff !important;
+  font-size: clamp(24px, 3.5vw, 34px);
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 16px 0 14px;
+}
+.liga-teaser__sub {
+  color: rgba(255,255,255,0.65) !important;
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 560px;
+  margin: 0 auto 28px;
+}
+@media (max-width: 768px) {
+  .liga-teaser__card { padding: 36px 24px; }
 }

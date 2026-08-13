@@ -1,18 +1,83 @@
 // Página: Segurança & Inteligência Artificial
 // Tudo com inline styles + classes únicas (prefixo sia-) pra escapar do reset agressivo do orbit.css
+//
+// A página tem 3 ABAS. A badge "Segurança & IA" que ficava no hero virou a primeira
+// delas; as outras duas hospedam os documentos legais do Auto Chat, exigidos na
+// submissão do app na Meta — que precisa de URL pública para política e termos.
+//
+// Deep link: /seguranca-ia#termos e /seguranca-ia#privacidade abrem a aba direto.
+// Isso importa porque um revisor da Meta que receba a URL precisa cair no
+// documento, não na aba 1.
+//
+// Os 3 painéis estão TODOS no HTML estático (só ocultos por style inline), então
+// rastreador que não executa JS enxerga o conteúdo inteiro. O <noscript> abaixo
+// revela os três, para o caso de JS desligado.
+import { termosHTML, privacidadeHTML, exclusaoHTML } from './legal-html';
+
+// O "· Auto Chat" existe para não confundir com /termos-de-servico e
+// /politica-privacidade, que cobrem a plataforma toda. A aba de exclusão não leva o
+// sufixo porque não há documento geral concorrente — e com 4 abas, rótulo curto ajuda.
+const tabs = [
+  { id: 'seguranca', label: 'Segurança &amp; IA', icon: 'fa-shield-halved' },
+  { id: 'termos', label: 'Termos · Auto Chat', icon: 'fa-file-contract' },
+  { id: 'privacidade', label: 'Privacidade · Auto Chat', icon: 'fa-user-shield' },
+  { id: 'exclusao', label: 'Exclusão de Dados', icon: 'fa-trash-can' },
+];
+
+// Hash de cada aba. 'exclusao-dados' é mais explícito na URL que vai no formulário
+// da Meta (campo "Data Deletion Instructions URL").
+const HASHES: Record<string, string> = {
+  termos: 'termos',
+  privacidade: 'privacidade',
+  exclusao: 'exclusao-dados',
+};
+
+const tabBar = tabs
+  .map(
+    (t, i) => `<button type="button" class="sia-tab${i === 0 ? ' is-active' : ''}" data-sia-tab="${t.id}"
+                        role="tab" aria-selected="${i === 0 ? 'true' : 'false'}" aria-controls="sia-panel-${t.id}">
+                    <i class="fas ${t.icon}"></i><span>${t.label}</span>
+                </button>`
+  )
+  .join('\n                ');
+
 export const pageHTML = `
 <div class="sia-page" style="background:#0D1117;color:#C9D1D9;font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;">
 
+    <style>
+      .sia-tabs-wrap { background:#0D1117; padding:104px 24px 0; }
+      .sia-tabs { max-width:1200px; margin:0 auto; display:flex; gap:6px; flex-wrap:wrap; border-bottom:1px solid rgba(255,255,255,0.10); }
+      .sia-tab { display:inline-flex; align-items:center; gap:9px; padding:14px 20px; background:none; border:none; border-bottom:2px solid transparent; margin-bottom:-1px; color:#8B949E; font-family:inherit; font-size:14px; font-weight:700; cursor:pointer; border-radius:10px 10px 0 0; transition:color .18s, background .18s, border-color .18s; }
+      .sia-tab i { font-size:13px; }
+      .sia-tab:hover { color:#C9D1D9; background:rgba(255,255,255,0.03); }
+      .sia-tab.is-active { color:#ffba1a; border-bottom-color:#ffba1a; background:rgba(255,186,26,0.06); }
+      .sia-tab:focus-visible { outline:2px solid #ffba1a; outline-offset:2px; }
+      .sia-doc { padding:56px 24px 100px; }
+      @media (max-width:640px) {
+        .sia-tabs-wrap { padding:96px 14px 0; }
+        .sia-tab { padding:12px 13px; font-size:12.5px; gap:7px; flex:1 1 auto; justify-content:center; }
+        .sia-tab i { font-size:12px; }
+        .sia-doc { padding:36px 18px 72px; }
+      }
+    </style>
+    <noscript><style>[data-sia-panel]{display:block !important}</style></noscript>
+
+    <!-- ═══ ABAS ═══ -->
+    <div class="sia-tabs-wrap">
+        <div class="sia-tabs" role="tablist" aria-label="Seções e documentos">
+                ${tabBar}
+        </div>
+    </div>
+
+    <!-- ═══ ABA 1 — Segurança & IA (conteúdo original da página) ═══ -->
+    <div data-sia-panel="seguranca" id="sia-panel-seguranca" role="tabpanel" style="display:block;">
+
     <!-- ═══ HERO ═══ -->
-    <section class="sia-hero" style="position:relative;background:#0D1117;padding:140px 24px 100px;text-align:center;overflow:hidden;">
+    <section class="sia-hero" style="position:relative;background:#0D1117;padding:72px 24px 100px;text-align:center;overflow:hidden;">
         <div style="position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(255,186,26,0.12) 0%,transparent 60%);pointer-events:none;"></div>
         <div style="position:absolute;bottom:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(255,186,26,0.06) 0%,transparent 60%);pointer-events:none;"></div>
 
         <div style="position:relative;max-width:900px;margin:0 auto;">
-            <span style="display:inline-block;background:rgba(255,186,26,0.12);border:1px solid rgba(255,186,26,0.3);color:#ffba1a;font-size:13px;font-weight:700;padding:8px 18px;border-radius:100px;text-transform:uppercase;letter-spacing:1px;margin-bottom:24px;">
-                <i class="fas fa-shield-halved" style="margin-right:6px;"></i> Segurança & IA
-            </span>
-
             <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:800;color:#fff;line-height:1.15;margin:0 0 24px;letter-spacing:-0.02em;">
                 Sua empresa na era da IA — com<br>
                 <span style="color:#ffba1a;">segurança e transparência</span>
@@ -294,9 +359,9 @@ export const pageHTML = `
                 </ul>
                 <div style="margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);text-align:center;">
                     <p style="color:#8B949E;font-size:0.9rem;margin:0 0 10px;">Para exercer qualquer direito ou tirar dúvidas:</p>
-                    <a href="mailto:contato@orbitprocessos.com" style="color:#ffba1a;font-weight:700;font-size:1.05rem;text-decoration:none;">
-                        <i class="fas fa-envelope" style="margin-right:8px;"></i>contato@orbitprocessos.com
-                    </a>
+                    <!--email_off--><a href="mailto:suporte@orbitgestao.com.br" style="color:#ffba1a;font-weight:700;font-size:1.05rem;text-decoration:none;">
+                        <i class="fas fa-envelope" style="margin-right:8px;"></i>suporte@orbitgestao.com.br
+                    </a><!--email_on-->
                 </div>
             </div>
         </div>
@@ -352,6 +417,87 @@ export const pageHTML = `
             </a>
         </div>
     </section>
+
+    </div><!-- /aba 1 -->
+
+    <!-- ═══ ABA 2 — Termos de Serviço · Auto Chat ═══ -->
+    <div data-sia-panel="termos" id="sia-panel-termos" role="tabpanel" style="display:none;">
+        <div class="sia-doc">
+${termosHTML}
+        </div>
+    </div>
+
+    <!-- ═══ ABA 3 — Política de Privacidade · Auto Chat ═══ -->
+    <div data-sia-panel="privacidade" id="sia-panel-privacidade" role="tabpanel" style="display:none;">
+        <div class="sia-doc">
+${privacidadeHTML}
+        </div>
+    </div>
+
+    <!-- ═══ ABA 4 — Instruções para Exclusão de Dados ═══ -->
+    <div data-sia-panel="exclusao" id="sia-panel-exclusao" role="tabpanel" style="display:none;">
+        <div class="sia-doc">
+${exclusaoHTML}
+        </div>
+    </div>
+
+    <script>
+    (function () {
+        var tabs = document.querySelectorAll('[data-sia-tab]');
+        var panels = document.querySelectorAll('[data-sia-panel]');
+        if (!tabs.length || !panels.length) return;
+
+        var valid = {};
+        panels.forEach(function (pn) { valid[pn.getAttribute('data-sia-panel')] = true; });
+
+        function show(name) {
+            if (!valid[name]) return false;
+            panels.forEach(function (pn) {
+                pn.style.display = pn.getAttribute('data-sia-panel') === name ? 'block' : 'none';
+            });
+            tabs.forEach(function (tb) {
+                var on = tb.getAttribute('data-sia-tab') === name;
+                tb.classList.toggle('is-active', on);
+                tb.setAttribute('aria-selected', on ? 'true' : 'false');
+            });
+            return true;
+        }
+
+        // hash da URL -> id do painel, e o inverso
+        var HASH_OF = ${JSON.stringify(HASHES)};
+        var PANEL_OF = {};
+        Object.keys(HASH_OF).forEach(function (k) { PANEL_OF[HASH_OF[k]] = k; });
+
+        function goTo(name) {
+            if (!show(name)) return;
+            try {
+                var hash = HASH_OF[name];
+                // replaceState em vez de pushState: o botao voltar deve sair da
+                // pagina, nao percorrer as abas.
+                history.replaceState(null, '', hash ? location.pathname + '#' + hash : location.pathname);
+            } catch (err) { /* file:// bloqueia history */ }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        tabs.forEach(function (tb) {
+            tb.addEventListener('click', function () { goTo(tb.getAttribute('data-sia-tab')); });
+        });
+
+        // Links de um documento para outro (data-sia-goto) trocam de aba em vez de
+        // pular para uma ancora que nao existe no painel visivel.
+        document.querySelectorAll('[data-sia-goto]').forEach(function (a) {
+            a.addEventListener('click', function (ev) {
+                ev.preventDefault();
+                goTo(a.getAttribute('data-sia-goto'));
+            });
+        });
+
+        // Deep link. Sem rolar a pagina: o proprio navegador ja tenta posicionar
+        // pelo hash, e forcar scroll aqui brigaria com isso.
+        var h = (location.hash || '').replace('#', '').toLowerCase();
+        if (PANEL_OF[h]) show(PANEL_OF[h]);
+    })();
+    </script>
 
 </div>
 `;

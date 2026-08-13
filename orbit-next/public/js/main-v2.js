@@ -5,43 +5,111 @@
 
 // ═══ MOBILE MENU (event delegation - works on ALL pages) ═══
 (function() {
+  function setOpenState(open) {
+    var toggle = document.querySelector('.menu-toggle');
+    var menu = document.querySelector('.mobile-menu');
+    var overlay = document.querySelector('.mobile-menu-overlay');
+    if (!menu) return;
+    menu.classList.toggle('active', open);
+    menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+    if (overlay) overlay.classList.toggle('active', open);
+    if (toggle) {
+      toggle.classList.toggle('active', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open) openGroupForCurrentPage();
+  }
+
   // Toggle menu
   document.addEventListener('click', function(e) {
     if (!e.target || !e.target.closest) return;
     var toggle = e.target.closest('.menu-toggle');
     if (!toggle) return;
     var menu = document.querySelector('.mobile-menu');
-    var overlay = document.querySelector('.mobile-menu-overlay');
     if (!menu) return;
-    var isOpen = menu.classList.contains('active');
-    if (isOpen) {
-      toggle.classList.remove('active'); menu.classList.remove('active');
-      if (overlay) overlay.classList.remove('active');
-      document.body.style.overflow = '';
-    } else {
-      toggle.classList.add('active'); menu.classList.add('active');
-      if (overlay) overlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
+    setOpenState(!menu.classList.contains('active'));
   });
 
   // Close menu functions
   window.closeMobileMenu = function() {
+    setOpenState(false);
+    // Devolve o foco ao botao APENAS se ele estiver visivel: no desktop o
+    // .menu-toggle e display:none e o foco cairia no <body>, perdendo a posicao.
     var toggle = document.querySelector('.menu-toggle');
-    var menu = document.querySelector('.mobile-menu');
-    var overlay = document.querySelector('.mobile-menu-overlay');
-    if (toggle) toggle.classList.remove('active');
-    if (menu) menu.classList.remove('active');
-    if (overlay) overlay.classList.remove('active');
-    document.body.style.overflow = '';
+    if (toggle && toggle.offsetParent !== null) toggle.focus();
   };
 
   // Close on link click
   document.addEventListener('click', function(e) {
     if (!e.target || !e.target.closest) return;
+    // O toggle do acordeao e <button>, nao <a>, exatamente para nao cair aqui.
     if (e.target.closest('.mobile-menu a')) window.closeMobileMenu();
     if (e.target.closest('.mobile-menu-close')) window.closeMobileMenu();
     if (e.target.classList && e.target.classList.contains('mobile-menu-overlay')) window.closeMobileMenu();
+  });
+
+  // ═══ Acordeao do menu mobile ═══
+  // Por delegacao, nao por onclick inline no HTML (regra do CLAUDE.md: handler
+  // direto em HTML string causa toggle duplo).
+  function setGroupOpen(dd, open) {
+    dd.classList.toggle('open', open);
+    var btn = dd.querySelector('.mobile-menu__dropdown-toggle');
+    if (btn) btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  document.addEventListener('click', function(e) {
+    if (!e.target || !e.target.closest) return;
+    var btn = e.target.closest('.mobile-menu__dropdown-toggle');
+    if (!btn) return;
+    var dd = btn.parentElement;
+    if (!dd) return;
+    var willOpen = !dd.classList.contains('open');
+    // Abertura exclusiva: com varios grupos abertos, o painel de 320px empurra o
+    // resto para fora da tela.
+    document.querySelectorAll('.mobile-menu__dropdown.open').forEach(function(other) {
+      if (other !== dd) setGroupOpen(other, false);
+    });
+    setGroupOpen(dd, willOpen);
+  });
+
+  // Abre o grupo que contem a pagina atual. Derivado dos proprios hrefs do menu,
+  // nao de um mapa paralelo pathname->grupo (mapa paralelo e a mesma duplicacao
+  // que a fonte unica de nav-data.ts existe para evitar).
+  function normalizePath(p) {
+    return (String(p || '').toLowerCase().replace(/\.html$/, '').replace(/\/+$/, '') || '/');
+  }
+  var groupsInitialized = false;
+  function openGroupForCurrentPage() {
+    if (groupsInitialized) return;
+    groupsInitialized = true;
+    var here = normalizePath(location.pathname);
+    var best = null;
+    var bestLen = -1;
+    document.querySelectorAll('.mobile-menu__dropdown').forEach(function(dd) {
+      dd.querySelectorAll('.mobile-menu__dropdown-items a[href^="/"]').forEach(function(a) {
+        var href = normalizePath(a.getAttribute('href').split('#')[0]);
+        if (href === '/') return; // a home casaria com tudo
+        // prefixo com barra: evita /agentes-de-ia casar com /agentes
+        var match = here === href || here.indexOf(href + '/') === 0;
+        if (match && href.length > bestLen) { bestLen = href.length; best = dd; }
+      });
+    });
+    if (best) setGroupOpen(best, true);
+  }
+
+  // Escape fecha o menu
+  document.addEventListener('keydown', function(e) {
+    if (e.key !== 'Escape') return;
+    var menu = document.querySelector('.mobile-menu');
+    if (menu && menu.classList.contains('active')) window.closeMobileMenu();
+  });
+
+  // Girar para desktop com o menu aberto deixava body.overflow travado
+  window.addEventListener('resize', function() {
+    if (window.innerWidth <= 1024) return;
+    var menu = document.querySelector('.mobile-menu');
+    if (menu && menu.classList.contains('active')) setOpenState(false);
   });
 
   // Nav dropdown hover/touch
@@ -114,17 +182,25 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.querySelector('.sidebar-nav')) return;
 
   // ═══ HERO ROTATING WORDS ═══
+  // Exit completa antes do enter — evita duas palavras pintadas no mesmo grid cell.
   const heroRotate = document.getElementById('heroRotate');
   if (heroRotate) {
     const words = heroRotate.querySelectorAll('.hero-rotate__word');
     let currentIndex = 0;
+    let rotating = false;
     setInterval(() => {
+      if (rotating || words.length < 2) return;
+      rotating = true;
       const current = words[currentIndex];
+      const nextIndex = (currentIndex + 1) % words.length;
       current.classList.remove('hero-rotate__word--active');
       current.classList.add('hero-rotate__word--exit');
-      setTimeout(() => { current.classList.remove('hero-rotate__word--exit'); }, 500);
-      currentIndex = (currentIndex + 1) % words.length;
-      words[currentIndex].classList.add('hero-rotate__word--active');
+      setTimeout(() => {
+        current.classList.remove('hero-rotate__word--exit');
+        words[nextIndex].classList.add('hero-rotate__word--active');
+        currentIndex = nextIndex;
+        rotating = false;
+      }, 420);
     }, 2500);
   }
 
@@ -336,7 +412,12 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const target = document.querySelector(href);
       if (target) {
-        const offset = header.offsetHeight + 20;
+        // `header` nao estava declarado aqui: a linha lancava ReferenceError e,
+        // como o preventDefault ja tinha rodado, TODA ancora do site ficava morta.
+        // So funcionavam as paginas que reimplementaram o scroll localmente
+        // (/consultores, /programa, /experiencias/canal).
+        const hdr = document.querySelector('.header');
+        const offset = (hdr ? hdr.offsetHeight : 0) + 20;
         const top = target.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top, behavior: 'smooth' });
       }
@@ -545,6 +626,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ref: tracking.ref || null
       });
 
+      var openaiEventIdFallback = 'lead_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+
       var SUPA_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
       var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
 
@@ -574,6 +657,7 @@ document.addEventListener('DOMContentLoaded', () => {
         li_fat_id: tracking.li_fat_id || null,
         twclid: tracking.twclid || null,
         sck: tracking.sck || null,
+        oppref: tracking.oppref || null,
         landing_page: tracking.landing_page || null,
         referrer: tracking.referrer || null,
         user_agent: tracking.user_agent || null,
@@ -598,6 +682,13 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(function(r) { return r.ok ? r.json() : null; })
         .then(function(rows) {
           var leadId = (rows && rows[0] && rows[0].id) || null;
+          var openaiEventId = leadId ? ('lead_' + leadId) : openaiEventIdFallback;
+
+          // ChatGPT Ads — pixel + mesmo event_id da Conversions API
+          if (typeof window.oaiq === 'function') {
+            window.oaiq('measure', 'lead_created', { type: 'customer_action' }, { event_id: openaiEventId });
+          }
+
           // 1) Cria deal no Pipedrive — funil Orbit, etiqueta CHAT1
           return fetch(SUPA_URL + '/functions/v1/create-pipedrive-lead', {
             method: 'POST',
@@ -615,7 +706,8 @@ document.addEventListener('DOMContentLoaded', () => {
               label: 'CHAT1',
               labelColor: 'blue',
               leadId: leadId,
-              utmData: tracking
+              utmData: tracking,
+              openaiEventId: openaiEventId
             })
           }).then(function(r) { return r.ok ? r.json() : null; });
         })

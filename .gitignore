@@ -19,3 +19,10 @@ orbit-chat-context-claude-code.md
 *.csv
 /base*
 supabase/.temp/
+
+# Material de trabalho local (PDFs de live, estudos) — nao versionar
+*.pdf
+docs/Estudo Materiais Pedro/
+
+# IDs das reunioes Zoom geradas pelo setup (nao versionar)
+scripts/.zoom-meetings.json

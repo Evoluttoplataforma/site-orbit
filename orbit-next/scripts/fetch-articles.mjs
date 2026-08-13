@@ -7,6 +7,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import sharp from 'sharp';
+import { SITEMAP_PAGES, CLUSTER_SLUGS, sitemapUrl } from './sitemap-config.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -302,75 +303,17 @@ function generateSitemap(articles) {
   console.log('🗺️  Gerando sitemap...');
   const today = new Date().toISOString().split('T')[0];
 
-  const pages = [
-    ['/', '1.0', 'weekly'],
-    ['/empresarios', '1.0', 'weekly'],
-    ['/consultores', '1.0', 'weekly'],
-    ['/sobre', '0.8', 'monthly'],
-    ['/faq', '0.7', 'monthly'],
-    ['/blog', '0.9', 'weekly'],
-    ['/glossario', '0.7', 'monthly'],
-    ['/historias', '0.7', 'weekly'],
-    ['/historias/enviar', '0.5', 'monthly'],
-    ['/seguranca-ia', '0.6', 'monthly'],
-    ['/live', '0.8', 'weekly'],
-    ['/treinamentos', '0.8', 'weekly'],
-    ['/bootcamp-orbit', '0.9', 'weekly'],
-    ['/politica-privacidade', '0.3', 'yearly'],
-    ['/termos-de-servico', '0.3', 'yearly'],
-    // ─── Plataforma: pillar + 12 agentes + 4 módulos ───
-    ['/agentes-de-ia', '0.95', 'weekly'],
-    ['/agentes/estrategico', '0.9', 'monthly'],
-    ['/agentes/processos', '0.9', 'monthly'],
-    ['/agentes/pessoas', '0.9', 'monthly'],
-    ['/agentes/indicadores', '0.9', 'monthly'],
-    ['/agentes/riscos', '0.85', 'monthly'],
-    ['/agentes/treinamento', '0.85', 'monthly'],
-    ['/agentes/oportunidades', '0.85', 'monthly'],
-    ['/agentes/documentos', '0.85', 'monthly'],
-    ['/agentes/comercial', '0.9', 'monthly'],
-    ['/agentes/problemas-operacionais', '0.85', 'monthly'],
-    ['/agentes/reunioes', '0.85', 'monthly'],
-    ['/agentes/pesquisas', '0.85', 'monthly'],
-    ['/modulos/financeiro', '0.9', 'monthly'],
-    ['/modulos/recrutamento-selecao', '0.85', 'monthly'],
-    ['/modulos/projetos', '0.85', 'monthly'],
-    ['/modulos/compras', '0.85', 'monthly'],
-  ];
-
-  const urls = pages.map(
-    ([p, priority, freq]) => `  <url>
-    <loc>https://orbitgestao.com.br${p}</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>${freq}</changefreq>
-    <priority>${priority}</priority>
-  </url>`
-  );
+  // Lista de páginas vem de scripts/sitemap-config.mjs (fonte única, compartilhada
+  // com fetch-stories.mjs, que regenera este arquivo depois incluindo as histórias).
+  const urls = SITEMAP_PAGES.map(([p, priority, freq]) => sitemapUrl(p, today, freq, priority));
 
   for (const a of articles) {
     const pubDate = (a.published_at || today).slice(0, 10);
-    urls.push(`  <url>
-    <loc>https://orbitgestao.com.br/blog/${a.slug}</loc>
-    <lastmod>${pubDate}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>`);
+    urls.push(sitemapUrl(`/blog/${a.slug}`, pubDate, 'monthly', '0.8'));
   }
 
-  // 13 hub pages por cluster (uma por dor do playbook)
-  const clusterSlugs = [
-    'processos-manuais', 'processos-bpmn', 'estrategia-execucao', 'comunicacao-entre-setores',
-    'sistemas-integracao', 'rh-talentos', 'indicadores', 'vendas-crm',
-    'gestao-pessoas-capacitacao', 'consultoria-accountability', 'documentacao',
-    'operacao-escalavel', 'financeiro-integrado',
-  ];
-  for (const cs of clusterSlugs) {
-    urls.push(`  <url>
-    <loc>https://orbitgestao.com.br/blog/cluster/${cs}</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>`);
+  for (const cs of CLUSTER_SLUGS) {
+    urls.push(sitemapUrl(`/blog/cluster/${cs}`, today, 'monthly', '0.7'));
   }
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -379,7 +322,7 @@ ${urls.join('\n')}
 </urlset>`;
 
   fs.writeFileSync(path.join(ROOT, 'public', 'sitemap.xml'), sitemap);
-  console.log(`   ${pages.length} páginas + ${articles.length} artigos = ${pages.length + articles.length} URLs`);
+  console.log(`   ${SITEMAP_PAGES.length} páginas + ${articles.length} artigos + ${CLUSTER_SLUGS.length} clusters = ${urls.length} URLs`);
 }
 
 async function main() {

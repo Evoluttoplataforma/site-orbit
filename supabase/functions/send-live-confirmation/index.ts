@@ -3,7 +3,7 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 const MAILERSEND_KEY = Deno.env.get("MAILERSEND_API_KEY")!;
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
 const SUPABASE_SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
-const FROM_EMAIL = "noreply@orbtgestao.com.br";
+const FROM_EMAIL = Deno.env.get("ORBIT_FROM_EMAIL") || "noreply@orbitgestao.com.br";
 const FROM_NAME = "Orbit Gestão";
 const LIVE_URL = "https://www.youtube.com/@orbitgestao/live";
 

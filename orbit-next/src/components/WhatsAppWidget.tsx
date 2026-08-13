@@ -10,7 +10,7 @@ const COPY = {
   pt: {
     ariaOpen: 'Falar no WhatsApp',
     ariaClose: 'Fechar',
-    title: 'Fale com a Orbit',
+    title: 'Fale com o Orbit',
     subtitle: 'Resposta em poucos minutos',
     intro: 'Preencha seus dados e a gente já te chama no WhatsApp 👇',
     name: 'Nome completo',
@@ -45,7 +45,7 @@ const COPY = {
   },
 } as const;
 
-const PHONE = '554898149776';
+const PHONE = '5548998246863';
 
 const C = {
   green: '#25D366',
@@ -167,25 +167,23 @@ export default function WhatsAppWidget() {
       console.error('[WA Widget] Save lead failed:', err);
     }
 
-    // 2. Cria deal no Pipedrive com nota indicando origem + etiqueta CHAT1
+    // 2. Cria lead no CRM Orbit (funil B2B) — token so na Edge Function
     try {
-      await supabaseMkt.functions.invoke('create-pipedrive-lead', {
+      await supabaseMkt.functions.invoke('create-orbit-crm-lead', {
         body: {
-          action: 'create',
-          name: name.trim(),
-          whatsapp: normalizedPhone,
+          lead_id: leadId,
+          nome: name.trim(),
           email: email.trim().toLowerCase(),
+          whatsapp: normalizedPhone,
           empresa: company.trim(),
-          oqueFaz: 'Widget WhatsApp',
-          label: 'CHAT1',
-          labelColor: 'blue',
-          leadId,
+          source: 'whatsapp_widget',
+          tags: ['whatsapp', 'inbound'],
+          notes: 'Lead via Widget WhatsApp do site',
           utmData,
-          noteExtra: '🟢 Lead via Widget WhatsApp do site',
         },
       });
     } catch (err) {
-      console.warn('[WA Widget] Pipedrive create failed:', err);
+      console.warn('[WA Widget] Orbit CRM create failed:', err);
     }
 
     // 3. Monta mensagem do WhatsApp com os dados
@@ -202,7 +200,10 @@ export default function WhatsAppWidget() {
     }
     const waUrl = `https://wa.me/${PHONE}?text=${encodeURIComponent(lines.join('\n'))}`;
 
-    // 4. Redireciona pro WhatsApp
+    // 4. Evento GA4 (nao bloqueia navegacao) + redireciona pro WhatsApp
+    if (typeof window !== 'undefined' && (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag) {
+      (window as unknown as { gtag: (...a: unknown[]) => void }).gtag('event', 'click_whatsapp');
+    }
     window.location.href = waUrl;
   };
 

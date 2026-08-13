@@ -5,226 +5,266 @@ import { pageHTML } from './html';
 import { headerHTML } from '@/components/shared-header';
 import { footerHTML } from '@/components/shared-footer';
 import { reapplyOrbitLang } from '@/lib/reapply-lang';
+import { supabaseMkt } from '@/lib/supabase-mkt';
+import { validateEmail } from '@/lib/email-validation';
+import {
+  TRAINING_SESSIONS,
+  TRAINING_BY_SLUG,
+  WEEKDAY_FULL,
+  slotLabel,
+  timeLabel,
+  nextOccurrence,
+  longDateLabel,
+  type TrainingSession,
+} from '@/lib/training-sessions';
 
-const SB_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
-const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
+/** Chave do sessionStorage lida pela página de obrigado para mostrar o join_url pessoal. */
+const RESULT_KEY = 'orbit_training_reg';
 
-interface Training {
-  slug: string;
-  title: string;
-  subtitle?: string;
-  description: string;
-  day: number;
-  hour: number;
-  icon: string;
-}
-
-const TRAININGS: Training[] = [
-  { slug: 'pessoas-1', title: 'Pessoas 1', subtitle: 'Cargos / PDI / Treinamentos', description: 'Estruture o organograma, defina PDIs e organize a trilha de treinamentos.', day: 1, hour: 10, icon: 'fa-users' },
-  { slug: 'estrategia-mercado', title: 'Estratégia e Mercado', description: 'Mapa estratégico, concorrentes e radar de mercado do Orbit.', day: 1, hour: 16, icon: 'fa-chess-knight' },
-  { slug: 'pessoas-2', title: 'Pessoas 2', subtitle: 'Documentos dos Colaboradores', description: 'Contratos, certificados e documentos obrigatórios da equipe.', day: 2, hour: 10, icon: 'fa-id-card' },
-  { slug: 'processos', title: 'Processos', description: 'Mapeie e documente processos com versionamento e responsáveis.', day: 2, hour: 16, icon: 'fa-diagram-project' },
-  { slug: 'indicadores', title: 'Indicadores', description: 'KPIs por área, metas e desempenho operacional em tempo real.', day: 3, hour: 10, icon: 'fa-chart-line' },
-  { slug: 'documentos', title: 'Documentos', description: 'Base de conhecimento: políticas, procedimentos e contratos.', day: 3, hour: 16, icon: 'fa-folder-open' },
-  { slug: 'crm-fluxos', title: 'CRM / Fluxos', subtitle: 'Operação Comercial', description: 'Pipeline comercial, fluxos de operação e régua de clientes.', day: 4, hour: 10, icon: 'fa-bullseye' },
-  { slug: 'problemas-riscos', title: 'Problemas / Riscos', subtitle: 'e Oportunidades', description: 'Não conformidades, riscos e melhoria contínua.', day: 4, hour: 16, icon: 'fa-triangle-exclamation' },
-  { slug: 'tarefas-projetos', title: 'Tarefas / Projetos', description: 'Gerenciamento de tarefas, projetos e prazos com a Olívia.', day: 5, hour: 10, icon: 'fa-list-check' },
-  { slug: 'financeiro', title: 'Financeiro', description: 'Plano de contas, fluxo de caixa e integrações financeiras.', day: 5, hour: 16, icon: 'fa-sack-dollar' },
-];
-
-const DAY_LABELS: Record<number, string> = { 1: 'Segunda', 2: 'Terça', 3: 'Quarta', 4: 'Quinta', 5: 'Sexta' };
-const DAY_FULL: Record<number, string> = { 1: 'Segunda-feira', 2: 'Terça-feira', 3: 'Quarta-feira', 4: 'Quinta-feira', 5: 'Sexta-feira' };
-const WEEKDAYS_SHORT = ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'];
-
-function fmtDateISO(d: Date): string {
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-}
-
-// Treinamentos comecam na semana de 01/06/2026 — pode ser removido depois dessa data
-const TRAINING_START_FLOOR = new Date(2026, 5, 1);
-
-function getNextOccurrences(dayOfWeek: number, count = 4): Date[] {
-  const out: Date[] = [];
-  const now = new Date();
-  now.setHours(0,0,0,0);
-  const today = now.getDay();
-  let diff = (dayOfWeek - today + 7) % 7;
-  if (diff === 0) {
-    const nowFull = new Date();
-    if (nowFull.getHours() >= 18) diff = 7;
-  }
-  const first = new Date(now);
-  first.setDate(now.getDate() + diff);
-  while (first < TRAINING_START_FLOOR) {
-    first.setDate(first.getDate() + 7);
-  }
-  out.push(new Date(first));
-  for (let i = 1; i < count; i++) {
-    const next = new Date(first);
-    next.setDate(first.getDate() + 7 * i);
-    out.push(next);
-  }
-  return out;
+function esc(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 export function PageContent() {
   const ref = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => { setMounted(true); }, []);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!mounted || !ref.current) return;
+    const root = ref.current;
 
-    const grid = ref.current.querySelector('#trainingGrid');
+    const grid = root.querySelector('#trainingGrid');
     if (!grid) return;
 
-    const byDay: Record<number, Training[]> = {};
-    TRAININGS.forEach(t => {
-      if (!byDay[t.day]) byDay[t.day] = [];
-      byDay[t.day].push(t);
-    });
-
-    // Treinamentos rodam como webinars no Zoom — cada horário tem URL própria de
-    // inscrição (precisa cadastrar antes pra receber o link da sala).
-    const ZOOM_URLS: Record<number, string> = {
-      10: 'https://us06web.zoom.us/webinar/register/WN_PYSfYyi4Q1Gv85XAASQ4tQ',
-      16: 'https://us06web.zoom.us/webinar/register/WN_weXjyujGQl2RUWYw9X3gCw',
-    };
-    const cols = [1, 2, 3, 4, 5].map(day => {
-      const items = (byDay[day] || []).sort((a, b) => a.hour - b.hour);
-      const slots = items.map(t => {
-        const url = ZOOM_URLS[t.hour] || ZOOM_URLS[10];
-        return `
-        <a class="tr-slot" href="${url}" target="_blank" rel="noopener" data-slug="${t.slug}" style="text-decoration:none;color:inherit;">
-          <span class="tr-slot__time"><i class="fa-solid fa-clock"></i>${String(t.hour).padStart(2,'0')}h</span>
-          <div class="tr-slot__icon"><i class="fa-solid ${t.icon}"></i></div>
-          <div class="tr-slot__title">${t.title}</div>
-          ${t.subtitle ? `<div class="tr-slot__sub">${t.subtitle}</div>` : ''}
-          <p class="tr-slot__desc">${t.description}</p>
-          <span class="tr-slot__cta"><i class="fa-solid fa-calendar-check" style="color:#2D8CFF;"></i> Reservar minha vaga <i class="fa-solid fa-arrow-right"></i></span>
-        </a>
-      `;
-      }).join('');
+    // ─── grade de sessões ────────────────────────────────────────────────
+    // A data da próxima ocorrência é INFORMAÇÃO (texto secundário), e o CTA é a
+    // ação. Antes a data vinha estilizada como botão dourado e as pessoas
+    // clicavam nela esperando ver a agenda, não abrir o formulário.
+    grid.innerHTML = TRAINING_SESSIONS.map((s) => {
+      const next = nextOccurrence(s);
+      const isTreino = s.kind === 'treinamento';
       return `
-        <div class="tr-day">
-          <div class="tr-day__header">
-            <div class="tr-day__name">${DAY_LABELS[day]}</div>
-            <div class="tr-day__count">${items.length} m&oacute;dulos</div>
+        <button type="button" class="tr-slot${isTreino ? ' tr-slot--treino' : ''}" data-slug="${s.slug}"
+                aria-label="Inscrever-se em ${esc(s.title)}, ${WEEKDAY_FULL[s.weekday]} às ${timeLabel(s)}">
+          <div class="tr-slot__head">
+            <div class="tr-slot__icon"><i class="fa-solid ${s.icon}"></i></div>
+            <div class="tr-slot__labels">
+              <div class="tr-slot__title">${esc(s.title)}</div>
+              <span class="tr-slot__when">${WEEKDAY_FULL[s.weekday]} &middot; ${timeLabel(s)}</span>
+            </div>
           </div>
-          <div class="tr-day__slots">${slots}</div>
-        </div>
-      `;
-    });
+          <p class="tr-slot__desc">${esc(s.description)}</p>
+          <p class="tr-slot__next"><i class="fa-solid fa-calendar-day"></i>Pr&oacute;xima: <strong>${longDateLabel(next)}</strong></p>
+          <span class="tr-slot__cta">Quero participar <i class="fa-solid fa-arrow-right"></i></span>
+        </button>`;
+    }).join('');
 
-    grid.innerHTML = cols.join('');
+    // ─── checkboxes do modal ─────────────────────────────────────────────
+    const checksBox = root.querySelector('#trainingSessionChecks') as HTMLElement | null;
+    if (checksBox) {
+      checksBox.innerHTML = TRAINING_SESSIONS.map(
+        (s) => `
+        <label class="tr-check">
+          <input type="checkbox" name="sessions" value="${s.slug}">
+          <span class="tr-check__body">
+            <span class="tr-check__title">${esc(s.title)} <span class="tr-check__when">${slotLabel(s)}</span></span>
+            <span class="tr-check__desc">${esc(s.description)}</span>
+          </span>
+        </label>`
+      ).join('');
+    }
 
-    const modal = ref.current.querySelector('#trainingModal') as HTMLElement | null;
-    const modalTitle = ref.current.querySelector('#trainingModalTitle') as HTMLElement | null;
-    const modalSubtitle = ref.current.querySelector('#trainingModalSubtitle') as HTMLElement | null;
-    const modalIcon = ref.current.querySelector('#trainingModalIcon') as HTMLElement | null;
-    const modalMeta = ref.current.querySelector('#trainingModalMeta') as HTMLElement | null;
-    const slugInput = ref.current.querySelector('#trainingSlug') as HTMLInputElement | null;
-    const dateInput = ref.current.querySelector('#trainingChosenDate') as HTMLInputElement | null;
-    const datesContainer = ref.current.querySelector('#trainingDates') as HTMLElement | null;
-    const errorEl = ref.current.querySelector('#trainingError') as HTMLElement | null;
-    const submitBtn = ref.current.querySelector('#trainingSubmit') as HTMLButtonElement | null;
-    const form = ref.current.querySelector('#trainingForm') as HTMLFormElement | null;
-    const closeBtn = ref.current.querySelector('#trainingModalClose');
+    const modal = root.querySelector('#trainingModal') as HTMLElement | null;
+    const errorEl = root.querySelector('#trainingError') as HTMLElement | null;
+    const submitBtn = root.querySelector('#trainingSubmit') as HTMLButtonElement | null;
+    const form = root.querySelector('#trainingForm') as HTMLFormElement | null;
+    const tsInput = root.querySelector('#trainingTs') as HTMLInputElement | null;
+    const closeBtn = root.querySelector('#trainingModalClose');
+    const openAllBtn = root.querySelector('#trainingOpenAll');
 
-    function openModal(training: Training) {
-      if (!modal || !modalTitle || !modalIcon || !modalMeta || !slugInput || !dateInput || !datesContainer) return;
-      slugInput.value = training.slug;
-      modalTitle.textContent = training.title;
-      if (modalSubtitle) modalSubtitle.textContent = training.subtitle || '';
-      modalIcon.innerHTML = `<i class="fa-solid ${training.icon}"></i>`;
-      modalMeta.innerHTML = `
-        <span class="tr-modal__chip"><i class="fa-solid fa-calendar"></i>${DAY_FULL[training.day]}</span>
-        <span class="tr-modal__chip"><i class="fa-solid fa-clock"></i>${String(training.hour).padStart(2,'0')}h00 — ${String(training.hour + 1).padStart(2,'0')}h00</span>
-        <span class="tr-modal__chip yt"><i class="fa-brands fa-youtube"></i>YouTube</span>
-      `;
-      const dates = getNextOccurrences(training.day, 4);
-      dateInput.value = '';
-      datesContainer.innerHTML = dates.map(d => {
-        const months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-        const label = `${String(d.getDate()).padStart(2,'0')} ${months[d.getMonth()]}`;
-        const wk = WEEKDAYS_SHORT[d.getDay()];
-        return `<button type="button" class="tr-modal__date-btn" data-date="${fmtDateISO(d)}"><small>${wk}</small>${label}</button>`;
-      }).join('');
-      datesContainer.querySelectorAll('.tr-modal__date-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          datesContainer.querySelectorAll('.tr-modal__date-btn').forEach(b => b.classList.remove('selected'));
-          btn.classList.add('selected');
-          if (dateInput) dateInput.value = (btn as HTMLElement).dataset.date || '';
+    function showError(msg: string) {
+      if (!errorEl) return;
+      errorEl.textContent = msg;
+      errorEl.classList.add('show');
+    }
+    function clearError() {
+      errorEl?.classList.remove('show');
+    }
+
+    /** Abre o modal. Com sessão, pré-marca só ela; sem, mantém o que estiver marcado. */
+    function openModal(session?: TrainingSession) {
+      if (!modal) return;
+      const boxes = Array.from(
+        root.querySelectorAll('#trainingSessionChecks input[name="sessions"]')
+      ) as HTMLInputElement[];
+      if (session) {
+        boxes.forEach((b) => {
+          b.checked = b.value === session.slug;
         });
-      });
-      if (errorEl) errorEl.classList.remove('show');
+      } else if (!boxes.some((b) => b.checked)) {
+        // abrindo pelo CTA geral sem nada marcado: sugere o treinamento
+        const suggested = boxes.find((b) => TRAINING_BY_SLUG[b.value]?.kind === 'treinamento');
+        if (suggested) suggested.checked = true;
+      }
+      // marca o instante de abertura — o servidor rejeita preenchimento < 2s
+      if (tsInput) tsInput.value = String(Date.now());
+      clearError();
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
+      // a classe esconde os widgets flutuantes (WhatsApp/chat), que ficavam por
+      // cima do modal e do botão de confirmar
+      document.body.classList.add('tr-modal-open');
+      // Não dar foco automático em tela pequena: abriria o teclado por cima da
+      // lista de sessões, que é a primeira decisão a tomar.
+      if (window.innerWidth > 560) {
+        (root.querySelector('#trainingForm input[name="nome"]') as HTMLInputElement | null)?.focus();
+      }
     }
 
     function closeModal() {
       if (!modal) return;
       modal.classList.remove('active');
       document.body.style.overflow = '';
+      document.body.classList.remove('tr-modal-open');
     }
 
-    // Cards agora são <a> que vão direto pro Zoom — sem modal/form de inscrição.
-    // O modal HTML continua no DOM mas não é mais aberto por nada nesta página
-    // (mantido pra não quebrar querySelectors abaixo; pode ser removido no
-    //  futuro com a função openModal/form).
-    void openModal; // suprime warning de unused
-
+    grid.querySelectorAll('.tr-slot').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const slug = (btn as HTMLElement).dataset.slug || '';
+        openModal(TRAINING_BY_SLUG[slug]);
+      });
+    });
+    openAllBtn?.addEventListener('click', () => openModal());
     closeBtn?.addEventListener('click', closeModal);
-    modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal?.classList.contains('active')) closeModal(); });
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && modal?.classList.contains('active')) closeModal();
+    };
+    document.addEventListener('keydown', onKey);
 
-    form?.addEventListener('submit', async (e) => {
+    // ─── submit ──────────────────────────────────────────────────────────
+    // Guarda in-flight: antes daqui, dois cliques rápidos criavam dois leads.
+    let submitting = false;
+
+    const onSubmit = async (e: Event) => {
       e.preventDefault();
-      if (!dateInput?.value) {
-        if (errorEl) { errorEl.textContent = 'Escolha uma data antes de confirmar.'; errorEl.classList.add('show'); }
-        return;
-      }
-      if (errorEl) errorEl.classList.remove('show');
-      if (submitBtn) { submitBtn.disabled = true; submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="margin-right:8px;"></i>Enviando...'; }
+      if (submitting || !form) return;
 
       const fd = new FormData(form);
-      const payload = {
-        nome: String(fd.get('nome') || ''),
-        empresa: String(fd.get('empresa') || ''),
-        email: String(fd.get('email') || ''),
-        telefone: String(fd.get('telefone') || ''),
-        source: 'treinamento-' + String(fd.get('training_slug') || ''),
-        chosen_date: String(fd.get('chosen_date') || ''),
+      const slugs = fd.getAll('sessions').map(String).filter(Boolean);
+      if (!slugs.length) {
+        showError('Marque pelo menos uma sessão para continuar.');
+        return;
+      }
+
+      const nome = String(fd.get('nome') || '').trim();
+      const email = String(fd.get('email') || '').trim().toLowerCase();
+      const emailCheck = validateEmail(email);
+      if (!emailCheck.valid) {
+        showError(emailCheck.error || 'Digite um e-mail válido.');
+        return;
+      }
+
+      clearError();
+      submitting = true;
+      const originalLabel = submitBtn?.innerHTML ?? '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML =
+          '<i class="fa-solid fa-spinner fa-spin" style="margin-right:8px;"></i>Inscrevendo...';
+      }
+
+      const params = new URLSearchParams(window.location.search);
+      const body = {
+        nome,
+        empresa: String(fd.get('empresa') || '').trim(),
+        email,
+        telefone: String(fd.get('telefone') || '').trim(),
+        sessions: slugs,
+        hp: String(fd.get('hp') || ''),
+        ts: Number(fd.get('ts')) || 0,
         landing_page: window.location.href,
         referrer: document.referrer || null,
+        utm: {
+          utm_source: params.get('utm_source'),
+          utm_medium: params.get('utm_medium'),
+          utm_campaign: params.get('utm_campaign'),
+          utm_content: params.get('utm_content'),
+          utm_term: params.get('utm_term'),
+        },
+        gclid: params.get('gclid'),
+        fbclid: params.get('fbclid'),
       };
 
       try {
-        await fetch(`${SB_URL}/rest/v1/live_orbit_leads`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}`, Prefer: 'return=minimal' },
-          body: JSON.stringify(payload),
-        });
+        const { data, error } = await supabaseMkt.functions.invoke('register-training', { body });
 
-        fetch(`${SB_URL}/functions/v1/send-training-confirmation`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}` },
-          body: JSON.stringify({ nome: payload.nome, empresa: payload.empresa, email: payload.email, training_slug: String(fd.get('training_slug') || ''), chosen_date: payload.chosen_date }),
-        }).catch(() => {});
+        if (error || !data?.ok) {
+          const code = data?.error || '';
+          const msg =
+            code === 'rate_limited'
+              ? 'Muitas tentativas em pouco tempo. Aguarde alguns minutos e tente de novo.'
+              : code === 'invalid_email' || code === 'disposable_email'
+              ? 'Use um e-mail válido para receber o link de acesso.'
+              : 'Não conseguimos concluir agora. Tente novamente em instantes.';
+          showError(msg);
+          submitting = false;
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalLabel;
+          }
+          return;
+        }
 
-        fetch(`${SB_URL}/functions/v1/subscribe-manychat-training`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}` },
-          body: JSON.stringify({ nome: payload.nome, empresa: payload.empresa, email: payload.email, telefone: payload.telefone, training_slug: String(fd.get('training_slug') || ''), chosen_date: payload.chosen_date }),
-        }).catch(() => {});
+        // Guarda os join_url pessoais para a página de obrigado. Não vão na URL:
+        // são links de acesso individuais e apareceriam em referrer e analytics.
+        try {
+          sessionStorage.setItem(
+            RESULT_KEY,
+            JSON.stringify({ nome, email, results: data.results ?? [] })
+          );
+        } catch {
+          /* modo privado sem storage: a obrigado cai no texto do e-mail */
+        }
 
-        window.location.href = '/treinamentos/obrigado?t=' + encodeURIComponent(String(fd.get('training_slug') || '')) + '&d=' + encodeURIComponent(payload.chosen_date);
+        try {
+          const w = window as Window & { dataLayer?: Record<string, unknown>[] };
+          w.dataLayer = w.dataLayer || [];
+          w.dataLayer.push({
+            event: 'treinamento_inscricao',
+            sessions: slugs.join(','),
+            session_count: slugs.length,
+          });
+        } catch {
+          /* tracking nunca bloqueia */
+        }
+
+        window.location.href = `/treinamentos/obrigado?t=${encodeURIComponent(slugs.join(','))}`;
       } catch {
-        if (errorEl) { errorEl.textContent = 'Erro ao enviar. Tente novamente.'; errorEl.classList.add('show'); }
-        if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = '<i class="fa-solid fa-check" style="margin-right:8px;"></i>Confirmar inscrição gratuita'; }
+        showError('Erro de conexão. Verifique sua internet e tente novamente.');
+        submitting = false;
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalLabel;
+        }
       }
-    });
+    };
+
+    form?.addEventListener('submit', onSubmit);
+
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      form?.removeEventListener('submit', onSubmit);
+      // não deixar o site travado nem os widgets escondidos se desmontar aberto
+      document.body.style.overflow = '';
+      document.body.classList.remove('tr-modal-open');
+    };
   }, [mounted]);
 
   useEffect(() => {

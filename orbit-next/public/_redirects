@@ -69,3 +69,9 @@
 
 # ─── Recrutamento (sistema externo desativado)
 /p/vaga/*        /sobre                   301
+
+# ─── Chat legado do site → chat real (app externo)
+# A rota /chat do Next foi removida: ninguém linkava pra ela, todos os CTAs do
+# site apontam pra demonstracao.orbitgestao.com.br/chat. O 301 cobre links
+# antigos, anúncios e a URL caso o Google tenha indexado.
+/chat            https://demonstracao.orbitgestao.com.br/chat   301

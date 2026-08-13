@@ -15,6 +15,8 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Orbit - Contrate um time de IA que executa",
   description: "Gestão Operada por IA com consultoria recorrente passiva. Dezenas de agentes especializados constroem e operam a gestão da sua empresa 24/7.",
+  // Um dos sinais que o Google usa para decidir o nome do site nos resultados.
+  applicationName: "Orbit Gestão",
   icons: {
     icon: '/images/favicon.png',
     apple: '/images/favicon.png',
@@ -53,11 +55,22 @@ export default function RootLayout({
         <link rel="preload" href="/images/hero-bg.avif" as="image" type="image/avif" />
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" crossOrigin="anonymous" />
         <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" /></noscript>
-        <script dangerouslySetInnerHTML={{ __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-W6H3729J');` }} />
-        <script dangerouslySetInnerHTML={{ __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KPD8KVTH');` }} />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
+        <link rel="dns-prefetch" href="https://bzrcdn.openai.com" />
+        {/* Google Analytics 4 (gtag.js) — G-W6LGVPYQ5X */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-W6LGVPYQ5X"></script>
+        <script dangerouslySetInnerHTML={{ __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-W6LGVPYQ5X');` }} />
+        {/* Meta Pixel — 914082348011782 (PageView automatico; ClickToDemo via listener) */}
+        <script dangerouslySetInnerHTML={{ __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','914082348011782');fbq('track','PageView');` }} />
+        {/* OpenAI / ChatGPT Ads Measurement Pixel — 3XumL6UcyJP1nbxj8PV1M (init only; lead_created nos formularios) */}
+        <script dangerouslySetInnerHTML={{ __html: `!function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var js=d.createElement(s);js.async=!0;js.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(js,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");oaiq("init",{pixelId:"3XumL6UcyJP1nbxj8PV1M"});` }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
+          // Ancora a entidade. O bloco WebSite abaixo referencia este @id como
+          // publisher — sem ele a referencia fica pendurada e o Google nao
+          // consegue consolidar quem e o dono do site.
+          "@id": "https://orbitgestao.com.br/#organization",
           "name": "Orbit Gestão",
           "alternateName": ["Orbit", "Orbit Gestao"],
           "description": "Plataforma de gestão operada por IA com consultoria recorrente passiva. Dezenas de agentes de IA especializados constroem e operam a gestão da sua empresa 24/7.",
@@ -86,7 +99,7 @@ export default function RootLayout({
           "contactPoint": [
             {
               "@type": "ContactPoint",
-              "telephone": "+55-48-9814-9776",
+              "telephone": "+5548998246863",
               "contactType": "customer service",
               "areaServed": "BR",
               "availableLanguage": ["Portuguese"]
@@ -122,6 +135,7 @@ export default function RootLayout({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
+          "@id": "https://orbitgestao.com.br/#website",
           "name": "Orbit Gestão",
           "alternateName": "Orbit",
           "url": "https://orbitgestao.com.br",
@@ -139,8 +153,7 @@ export default function RootLayout({
         }) }} />
       </head>
       <body>
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W6H3729J" height="0" width="0" style={{display:'none',visibility:'hidden'}}></iframe></noscript>
-        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KPD8KVTH" height="0" width="0" style={{display:'none',visibility:'hidden'}}></iframe></noscript>
+        <noscript><img height="1" width="1" style={{display:'none'}} alt="" src="https://www.facebook.com/tr?id=914082348011782&ev=PageView&noscript=1" /></noscript>
         <LocaleProvider>
         {children}
         <ChatPopup />
@@ -153,7 +166,7 @@ export default function RootLayout({
   function getCookie(n){var m=document.cookie.match(new RegExp("(^| )"+n+"=([^;]+)"));return m?decodeURIComponent(m[2]):""}
   function generateSessionId(){return Date.now().toString(36)+"."+Math.random().toString(36).substring(2,10)}
   var STORAGE_KEY="__wl_tracking";
-  var urlParams=["utm_source","utm_medium","utm_campaign","utm_content","utm_term","gclid","gbraid","wbraid","gad_campaignid","gad_source","fbclid","ttclid","msclkid","li_fat_id","twclid","sck","ref"];
+  var urlParams=["utm_source","utm_medium","utm_campaign","utm_content","utm_term","gclid","gbraid","wbraid","gad_campaignid","gad_source","fbclid","ttclid","msclkid","li_fat_id","twclid","sck","ref","oppref"];
   var stored=null;
   try{stored=JSON.parse(sessionStorage.getItem(STORAGE_KEY))}catch(e){}
   // Mapeia referrer (quando lead chega sem UTM na URL) → utm_source/medium sintéticos
@@ -235,6 +248,10 @@ export default function RootLayout({
     var fbc=getCookie("_fbc"),fbp=getCookie("_fbp");
     if(fbc)stored.fbc=fbc;if(fbp)stored.fbp=fbp;
     if(stored.fbclid&&!stored.fbc){stored.fbc="fb.1."+Date.now()+"."+stored.fbclid}
+    var opprefCookie=getCookie("__oppref");
+    if(opprefCookie&&!stored.oppref)stored.oppref=opprefCookie;
+    var obrefCookie=getCookie("__obref");
+    if(obrefCookie)stored.obref=obrefCookie;
     stored.landing_page=window.location.href;
     stored.originPage=window.location.href;
     stored.referrer=document.referrer||"";
@@ -244,9 +261,16 @@ export default function RootLayout({
     var attrs={};urlParams.forEach(function(p){if(stored[p])attrs[p]=stored[p]});
     try{stored.session_attributes_encoded=btoa(JSON.stringify(attrs))}catch(e){}
     try{sessionStorage.setItem(STORAGE_KEY,JSON.stringify(stored))}catch(e){}
+  } else {
+    // Sessao existente: atualiza click IDs OpenAI se aparecerem na URL/cookie
+    var opprefLater=getParam("oppref")||getCookie("__oppref");
+    if(opprefLater)stored.oppref=opprefLater;
+    var obrefLater=getCookie("__obref");
+    if(obrefLater)stored.obref=obrefLater;
+    try{sessionStorage.setItem(STORAGE_KEY,JSON.stringify(stored))}catch(e){}
   }
   function populateHiddenFields(){
-    var fields=["utm_source","utm_medium","utm_campaign","utm_content","utm_term","gclid","gbraid","wbraid","gad_campaignid","gad_source","fbclid","fbc","fbp","ttclid","msclkid","li_fat_id","twclid","sck","landing_page","referrer","user_agent","first_visit","session_id","session_attributes_encoded","originPage","ref"];
+    var fields=["utm_source","utm_medium","utm_campaign","utm_content","utm_term","gclid","gbraid","wbraid","gad_campaignid","gad_source","fbclid","fbc","fbp","ttclid","msclkid","li_fat_id","twclid","sck","oppref","landing_page","referrer","user_agent","first_visit","session_id","session_attributes_encoded","originPage","ref"];
     fields.forEach(function(f){var el=document.getElementById("h_"+f);if(el&&stored[f])el.value=stored[f]});
   }
   if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",populateHiddenFields)}else{populateHiddenFields()}
@@ -257,7 +281,7 @@ export default function RootLayout({
 // ===== Propaga UTMs/tracking pro chat externo (demonstracao.orbitgestao.com.br) =====
 (function(){
   var EXTERNAL_HOST="demonstracao.orbitgestao.com.br";
-  var FORWARD=["utm_source","utm_medium","utm_campaign","utm_content","utm_term","gclid","gbraid","wbraid","gad_campaignid","gad_source","fbclid","fbc","fbp","ttclid","msclkid","li_fat_id","twclid","sck","ref"];
+  var FORWARD=["utm_source","utm_medium","utm_campaign","utm_content","utm_term","gclid","gbraid","wbraid","gad_campaignid","gad_source","fbclid","fbc","fbp","ttclid","msclkid","li_fat_id","twclid","sck","ref","oppref"];
   function getTracking(){try{return JSON.parse(sessionStorage.getItem("__wl_tracking")||"null")}catch(e){return null}}
   function appendUtms(url){
     try{
@@ -320,8 +344,37 @@ export default function RootLayout({
   setTimeout(applyAll, 1800);
 })();
         ` }} />
-        <script src="/js/main-v2.js?v=2" defer></script>
-        <script src="/js/orbit-init.js?v=4" defer></script>
+        <script dangerouslySetInnerHTML={{ __html: `
+// ===== Mensuracao client-side: cliques (GA4 + Pixel remarketing) =====
+// Listener que SO observa o clique: sem preventDefault, sem tocar no href.
+// Nao interfere no forwarder de UTM/fbclid/gclid (captura, acima).
+(function(){
+  function ga(n,p){ if(window.gtag) window.gtag('event',n,p||{}); }
+  function eventoName(p){ return p==='/live/chris'?'masterclass_consultores':p==='/live'?'live_quinzenal':p; }
+  document.addEventListener('click', function(e){
+    var a=e.target; while(a && a.tagName!=='A'){ a=a.parentElement; }
+    if(!a || !a.href) return;
+    var href=a.href;
+    if(href.indexOf('demonstracao.orbitgestao.com.br')>-1){
+      ga('click_to_demo',{location:location.pathname});
+      if(window.fbq) window.fbq('trackCustom','ClickToDemo');
+    } else if(href.indexOf('wa.me')>-1){
+      ga('click_whatsapp');
+    } else if(href.indexOf('zoom.us')>-1){
+      ga('click_zoom_registro',{evento:eventoName(location.pathname)});
+    } else {
+      var p=a.pathname||'';
+      if((p==='/live'||p==='/live/chris') && a.closest('header,.mobile-menu')){
+        ga('click_evento',{destino:p});
+      }
+    }
+  });
+})();
+        ` }} />
+        {/* Arquivos de /public nao recebem hash do Next: ao mudar estes scripts,
+            BUMPAR o ?v= — senao quem tem o arquivo em cache nao recebe a correcao. */}
+        <script src="/js/main-v2.js?v=6" defer></script>
+        <script src="/js/orbit-init.js?v=7" defer></script>
         <script src="/js/banner.js?v=6" defer></script>
         <script dangerouslySetInnerHTML={{ __html: `(function(){var l=document.createElement('link');l.rel='stylesheet';l.href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';document.head.appendChild(l)})()` }} />
       </body>

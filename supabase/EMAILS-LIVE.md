@@ -7,7 +7,18 @@ Sistema automático de e-mails para a live semanal da Orbit Gestão usando **Mai
 - **Live**: Toda **terça-feira às 13h BRT**
 - **YouTube**: https://www.youtube.com/@orbitgestao/live
 - **Página de inscrição**: https://orbitgestao.com.br/live
-- **Remetente**: noreply@orbtgestao.com.br (domínio sem "i" para proteção anti-spam)
+- **Remetente**: `noreply@orbitgestao.com.br` (secret `ORBIT_FROM_EMAIL`)
+
+> ⚠️ **Não voltar para `orbtgestao.com.br`** (sem o "i"). Aquele domínio foi criado
+> para "proteção anti-spam", mas o efeito era o oposto: o Gmail comparava com
+> `orbitgestao.com.br`, concluía que era alguém imitando a Orbit e marcava **todo
+> e-mail** com o aviso vermelho *"Esta mensagem pode ser perigosa — o endereço do
+> remetente contém caracteres incomuns"*. Confirmado em 02/08/2026 que o domínio
+> real já tem SPF e DKIM do MailerSend e que o envio é aceito.
+>
+> Se algum dia quiserem isolar a reputação transacional do e-mail corporativo, o
+> caminho é um **subdomínio do domínio real** (ex.: `mail.orbitgestao.com.br`) —
+> nunca um domínio parecido, que a caixa de entrada lê como golpe.
 
 ---
 

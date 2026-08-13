@@ -244,7 +244,7 @@ export const pageHTML = `
                     <div class="footer-logo"><img src="/images/logo-orbit-white.png" alt="Orbit Gestão" height="36"></div>
                     <p data-i18n="footer.tagline">Plataforma de gestão com IA. Contrate um time que executa.</p>
                     <div class="social-hover">
-                        <a href="https://wa.me/554898149776" target="_blank" rel="noopener nofollow" class="social-hover__item" data-name="WhatsApp">
+                        <a href="https://wa.me/5548998246863" target="_blank" rel="noopener nofollow" class="social-hover__item" data-name="WhatsApp">
                             <i class="fab fa-whatsapp"></i>
                             <span class="social-hover__label">WhatsApp</span>
                         </a>
@@ -264,7 +264,7 @@ export const pageHTML = `
                     <div class="footer-units">
                         <div class="footer-unit">
                             <div class="footer-unit__head"><span class="footer-unit__flag">🇧🇷</span> <strong data-i18n="footer.unit.br">Brasil</strong></div>
-                            <a href="https://wa.me/554898149776" target="_blank" rel="noopener nofollow"><i class="fab fa-whatsapp"></i> (48) 9814-9776</a>
+                            <a href="https://wa.me/5548998246863" target="_blank" rel="noopener nofollow"><i class="fab fa-whatsapp"></i> (48) 99824-6863</a>
                             <a class="footer-unit__addr" href="https://maps.google.com/?q=Square+SC+Florianopolis" target="_blank" rel="noopener"><i class="fas fa-map-marker-alt"></i> Square SC, Florianópolis - SC</a>
                         </div>
                         <div class="footer-unit">
@@ -614,5 +614,4 @@ export const pageHTML = `
         }, 800);
     })();
     </script>
-    <script src="/js/seo.js"></script>
 `;

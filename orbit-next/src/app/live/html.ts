@@ -1,3 +1,8 @@
+// AGENDA PAUSADA em 29/07/2026.
+// A versão anterior desta página (Live Quinzenal do Igor, terça 13h, com countdown e
+// inscrição no Zoom) está arquivada em src/app/live/igor/html.ts — rota noindex /live/igor.
+// Para reativar: restaurar aquele HTML aqui e ajustar as constantes de data ONEOFF / ANCHOR.
+// Os blocos afetados estão marcados abaixo com "pausa de agenda".
 export const pageHTML = `
     <!-- ═══ LIVE HERO ═══ -->
     <section class="lp-hero" id="hero" style="min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;">
@@ -8,17 +13,9 @@ export const pageHTML = `
         <div class="lp-hero__glow lp-hero__glow--2"></div>
         <div class="container" style="max-width:900px;">
 
-            <!-- Recurrence badge -->
-            <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(45,140,255,0.12);border:1px solid rgba(45,140,255,0.4);border-radius:100px;padding:8px 20px;margin-bottom:24px;" data-reveal>
-                <span style="width:10px;height:10px;background:#2D8CFF;border-radius:50%;display:inline-block;animation:livePulse 1.5s ease-in-out infinite;"></span>
-                <span style="color:#2D8CFF;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:1.5px;">AO VIVO PELO ZOOM</span>
-            </div>
-
-            <!-- Schedule highlight -->
-            <div style="display:inline-block;background:linear-gradient(135deg,rgba(255,186,26,0.15),rgba(255,186,26,0.05));border:2px solid rgba(255,186,26,0.4);border-radius:16px;padding:16px 36px;margin-bottom:32px;" data-reveal>
-                <span style="color:#ffba1a;font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:800;letter-spacing:0.5px;">
-                    <i class="fa-solid fa-calendar-check" style="margin-right:10px;"></i>A CADA 15 DIAS &middot; TER&Ccedil;A 13H
-                </span>
+            <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,186,26,0.12);border:1px solid rgba(255,186,26,0.4);border-radius:100px;padding:8px 20px;margin-bottom:24px;" data-reveal>
+                <span style="width:10px;height:10px;background:#ffba1a;border-radius:50%;display:inline-block;animation:livePulse 1.5s ease-in-out infinite;"></span>
+                <span style="color:#ffba1a;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:1.5px;">PR&Oacute;XIMA EDI&Ccedil;&Atilde;O EM DEFINI&Ccedil;&Atilde;O</span>
             </div>
 
             <!-- Title -->
@@ -31,70 +28,14 @@ export const pageHTML = `
                 Como resolver problemas de <strong style="color:#ffba1a;">gest&atilde;o e processos com IA</strong>. Uma conversa pr&aacute;tica sobre o que j&aacute; &eacute; poss&iacute;vel fazer hoje &mdash; e como aplicar na sua empresa.
             </p>
 
-            <!-- Apresentadores -->
-            <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin:24px 0 8px;" data-reveal>
-                <img src="/images/diretor-igor.jpg" alt="Igor Furniel" width="64" height="64" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,186,26,0.4);">
-                <div style="text-align:left;">
-                    <span style="color:#fff;font-weight:700;font-size:17px;display:block;line-height:1.3;">Igor Furniel</span>
-                    <span style="color:#8B949E;font-size:14px;">CEO Templum & Evolutto</span>
-                </div>
-            </div>
-
-            <!-- Next live info -->
-            <div style="display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;margin:32px 0;" data-reveal>
-                <div style="display:flex;align-items:center;gap:10px;color:#C9D1D9;">
-                    <i class="fa-solid fa-calendar-day" style="color:#ffba1a;font-size:18px;"></i>
-                    <span id="nextLiveDate" style="font-size:18px;font-weight:600;">Proxima terca-feira</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:10px;color:#C9D1D9;">
-                    <i class="fa-solid fa-clock" style="color:#ffba1a;font-size:18px;"></i>
-                    <span style="font-size:18px;font-weight:600;">13h (hor&aacute;rio de Bras&iacute;lia)</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:10px;color:#C9D1D9;">
-                    <i class="fa-solid fa-video" style="color:#2D8CFF;font-size:20px;"></i>
-                    <span style="font-size:18px;font-weight:600;">Ao vivo pelo Zoom</span>
-                </div>
-                <div style="display:flex;align-items:center;gap:10px;color:#C9D1D9;">
-                    <i class="fa-solid fa-rotate" style="color:#ffba1a;font-size:18px;"></i>
-                    <span style="font-size:18px;font-weight:600;">A cada 15 dias</span>
-                </div>
-            </div>
-
-            <!-- Countdown -->
-            <div id="liveCountdown" style="display:flex;justify-content:center;gap:16px;margin:40px 0;" data-reveal>
-                <div style="background:rgba(255,186,26,0.08);border:1px solid rgba(255,186,26,0.2);border-radius:16px;padding:20px 24px;min-width:90px;text-align:center;">
-                    <span id="countDays" style="font-size:2.5rem;font-weight:800;color:#ffba1a;display:block;line-height:1;">00</span>
-                    <span style="font-size:12px;color:#8B949E;text-transform:uppercase;letter-spacing:1px;">Dias</span>
-                </div>
-                <div style="background:rgba(255,186,26,0.08);border:1px solid rgba(255,186,26,0.2);border-radius:16px;padding:20px 24px;min-width:90px;text-align:center;">
-                    <span id="countHours" style="font-size:2.5rem;font-weight:800;color:#ffba1a;display:block;line-height:1;">00</span>
-                    <span style="font-size:12px;color:#8B949E;text-transform:uppercase;letter-spacing:1px;">Horas</span>
-                </div>
-                <div style="background:rgba(255,186,26,0.08);border:1px solid rgba(255,186,26,0.2);border-radius:16px;padding:20px 24px;min-width:90px;text-align:center;">
-                    <span id="countMinutes" style="font-size:2.5rem;font-weight:800;color:#ffba1a;display:block;line-height:1;">00</span>
-                    <span style="font-size:12px;color:#8B949E;text-transform:uppercase;letter-spacing:1px;">Minutos</span>
-                </div>
-                <div style="background:rgba(255,186,26,0.08);border:1px solid rgba(255,186,26,0.2);border-radius:16px;padding:20px 24px;min-width:90px;text-align:center;">
-                    <span id="countSeconds" style="font-size:2.5rem;font-weight:800;color:#ffba1a;display:block;line-height:1;">00</span>
-                    <span style="font-size:12px;color:#8B949E;text-transform:uppercase;letter-spacing:1px;">Segundos</span>
-                </div>
-            </div>
-
-            <!-- Live now message (hidden until live) -->
-            <div id="liveNow" style="display:none;margin:40px 0;">
-                <p style="font-size:1.5rem;font-weight:700;color:#3FB950;">
-                    <i class="fa-solid fa-circle" style="font-size:12px;animation:livePulse 1.5s ease-in-out infinite;margin-right:8px;"></i>
-                    Estamos ao vivo agora!
+            <!-- Aviso de pausa (substitui apresentador, agenda, countdown e CTA de inscrição) -->
+            <div class="live-pause-card" style="background:#161B22;border:1px solid rgba(255,186,26,0.25);border-radius:16px;padding:32px 28px;max-width:620px;margin:40px auto 0;" data-reveal>
+                <i class="fa-solid fa-calendar-xmark" style="color:#ffba1a;font-size:28px;display:block;margin-bottom:16px;"></i>
+                <p style="color:#C9D1D9;font-size:1.05rem;line-height:1.7;margin:0;">
+                    Estamos <strong style="color:#fff;">redefinindo a agenda das pr&oacute;ximas lives</strong>. A nova data e o tema ser&atilde;o anunciados em breve, aqui e nos nossos canais.
                 </p>
-            </div>
-
-            <!-- CTA -->
-            <div style="margin-top:8px;" data-reveal>
-                <a href="https://us06web.zoom.us/webinar/register/WN_bMupzir5TKuaip3sm8r8Hw" target="_blank" rel="noopener" class="btn btn-primary btn-lg hero-cta-glow" style="font-size:18px;padding:18px 48px;cursor:pointer;">
-                    <i class="fa-solid fa-video" style="margin-right:8px;"></i>QUERO PARTICIPAR DA LIVE
-                </a>
-                <p style="color:#8B949E;font-size:14px;margin-top:16px;">
-                    <i class="fa-solid fa-lock" style="margin-right:6px;"></i>Gratuito · Inscreva-se no Zoom pra receber o link.
+                <p style="color:#8B949E;font-size:14px;margin:18px 0 0;">
+                    <i class="fa-solid fa-circle-info" style="margin-right:6px;"></i>As inscri&ccedil;&otilde;es est&atilde;o temporariamente encerradas.
                 </p>
             </div>
         </div>
@@ -277,10 +218,9 @@ export const pageHTML = `
                     </div>
                 </div>
 
-                <!-- Bottom CTA -->
+                <!-- Bottom CTA — botão de inscrição removido na pausa de agenda -->
                 <div style="text-align:center;margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.06);" data-reveal>
-                    <p style="color:rgba(255,255,255,0.5);font-size:1.1rem;margin-bottom:20px;">Veja tudo isso funcionando <strong style="color:#fff;">ao vivo na live.</strong></p>
-                    <a href="https://us06web.zoom.us/webinar/register/WN_bMupzir5TKuaip3sm8r8Hw" target="_blank" rel="noopener" class="btn btn-primary btn-lg" style="cursor:pointer;"><i class="fa-solid fa-video" style="margin-right:8px;"></i>QUERO PARTICIPAR DA LIVE</a>
+                    <p style="color:rgba(255,255,255,0.5);font-size:1.1rem;margin-bottom:0;">Tudo isso &eacute; o que a gente mostra funcionando <strong style="color:#fff;">nas nossas lives.</strong></p>
                 </div>
 
                 <script>
@@ -799,97 +739,25 @@ export const pageHTML = `
         </div>
     </section>
 
-    <!-- ═══ AGENDA + FORMULARIO ═══ -->
+    <!-- ═══ AGENDA ═══ -->
     <section id="inscreva-se" style="padding:100px 0;background:#0D1117;text-align:center;">
         <div class="container" style="max-width:640px;">
             <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;color:#fff;margin-bottom:12px;" data-reveal>
-                Garanta sua vaga na live
+                Nova edi&ccedil;&atilde;o em defini&ccedil;&atilde;o
             </h2>
             <p style="color:#8B949E;font-size:1.1rem;margin-bottom:32px;" data-reveal>
-                A cada 15 dias, &agrave;s ter&ccedil;as 13h. Inscri&ccedil;&atilde;o gratuita pelo Zoom &mdash; o link e os lembretes chegam por l&aacute;.
+                Estamos definindo a data e o tema da pr&oacute;xima live. Por enquanto, n&atilde;o h&aacute; inscri&ccedil;&otilde;es abertas.
             </p>
 
             <div style="background:#161B22;border:1px solid rgba(255,186,26,0.18);border-radius:16px;padding:36px 28px;" data-reveal>
-                <a href="https://us06web.zoom.us/webinar/register/WN_bMupzir5TKuaip3sm8r8Hw" target="_blank" rel="noopener" class="btn btn-primary btn-lg hero-cta-glow" style="font-size:17px;padding:18px 40px;display:inline-block;">
-                    <i class="fa-solid fa-video" style="margin-right:8px;"></i>INSCREVER-ME NA LIVE
-                </a>
-                <p style="color:#8B949E;font-size:13px;margin-top:18px;">
-                    <i class="fa-solid fa-lock" style="margin-right:6px;"></i>Inscri&ccedil;&atilde;o no Zoom &middot; voc&ecirc; recebe link e lembretes automaticamente.
+                <i class="fa-solid fa-hourglass-half" style="color:#ffba1a;font-size:26px;display:block;margin-bottom:14px;"></i>
+                <p style="color:#C9D1D9;font-size:1rem;line-height:1.7;margin:0;">
+                    Assim que a nova agenda estiver fechada, a inscri&ccedil;&atilde;o volta a ficar dispon&iacute;vel nesta p&aacute;gina.
                 </p>
             </div>
         </div>
     </section>
 
-
-
-    <!-- Dynamic countdown — lives a cada 15 dias (terças 13h BRT)
-         Âncora confirmada: 16/06/2026 (próxima após pular 09/06/2026).
-         A função soma 14 dias enquanto o target estiver no passado. -->
-    <script>
-    (function() {
-        function getNextLive() {
-            // 16/06/2026 13h BRT (UTC-3) = 16/06/2026 16h UTC
-            var ANCHOR = new Date(Date.UTC(2026, 5, 16, 16, 0, 0));
-            var FORTNIGHT_MS = 14 * 24 * 60 * 60 * 1000;
-            var now = new Date();
-            var next = new Date(ANCHOR);
-            // Avança 14 dias enquanto a próxima live já passou
-            // (margem de 1h pra exibir "Ao vivo agora" durante a transmissão)
-            while (next.getTime() + 3600000 < now.getTime()) {
-                next = new Date(next.getTime() + FORTNIGHT_MS);
-            }
-            return next;
-        }
-        // Mantido o nome antigo pra não quebrar uso interno do script.
-        var getNextTuesday = getNextLive;
-
-        function formatDateBR(d) {
-            var months = ['Janeiro','Fevereiro','Mar\u00e7o','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
-            return d.getDate() + ' de ' + months[d.getMonth()] + ', ' + d.getFullYear();
-        }
-
-        var target = getNextTuesday();
-
-        var dateEl = document.getElementById('nextLiveDate');
-        if (dateEl) dateEl.textContent = formatDateBR(target);
-
-        function updateCountdown() {
-            var now = new Date().getTime();
-            var diff = target.getTime() - now;
-
-            if (diff <= 0 && diff > -3600000) {
-                var countdownEl = document.getElementById('liveCountdown');
-                var liveNowEl = document.getElementById('liveNow');
-                if (countdownEl) countdownEl.style.display = 'none';
-                if (liveNowEl) liveNowEl.style.display = 'block';
-                return;
-            }
-
-            if (diff <= 0) {
-                target = getNextTuesday();
-                if (dateEl) dateEl.textContent = formatDateBR(target);
-                diff = target.getTime() - now;
-            }
-
-            var days = Math.floor(diff / 86400000);
-            var hours = Math.floor((diff % 86400000) / 3600000);
-            var minutes = Math.floor((diff % 3600000) / 60000);
-            var seconds = Math.floor((diff % 60000) / 1000);
-
-            var d = document.getElementById('countDays');
-            var h = document.getElementById('countHours');
-            var m = document.getElementById('countMinutes');
-            var s = document.getElementById('countSeconds');
-            if (d) d.textContent = days.toString().padStart(2, '0');
-            if (h) h.textContent = hours.toString().padStart(2, '0');
-            if (m) m.textContent = minutes.toString().padStart(2, '0');
-            if (s) s.textContent = seconds.toString().padStart(2, '0');
-        }
-
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-    })();
-    </script>
 
 
     <style>
@@ -912,16 +780,9 @@ export const pageHTML = `
 
     @media (max-width: 768px) {
         .lp-hero .container { padding: 0 20px !important; }
-        #liveCountdown { gap: 8px !important; }
-        #liveCountdown > div { min-width: 65px !important; padding: 14px 8px !important; }
-        #liveCountdown > div > span:first-child { font-size: 1.6rem !important; }
         .cta-form-card { padding: 24px 20px !important; }
+        .live-pause-card { padding: 24px 20px !important; }
         .btn-lg { font-size: 15px !important; padding: 14px 24px !important; }
-    }
-    @media (max-width: 420px) {
-        #liveCountdown > div { min-width: 58px !important; padding: 10px 6px !important; }
-        #liveCountdown > div > span:first-child { font-size: 1.3rem !important; }
-        #liveCountdown > div > span:last-child { font-size: 10px !important; }
     }
     </style>
 `;
