@@ -14,6 +14,7 @@ O público-alvo são empresas de médio porte (R$ 5M a R$ 100M/ano de faturament
 - [Para Consultores](https://orbitgestao.com.br/consultores): Modelo de canais B2B2B para consultores
 - [Sobre](https://orbitgestao.com.br/sobre): História do Grupo GSN e equipe de diretores
 - [Blog](https://orbitgestao.com.br/blog): Artigos sobre gestão estratégica, processos, indicadores, IA e inovação
+- [Gestão por indicadores](https://orbitgestao.com.br/blog/funcionalidades-do-orbit-gestao-de-indicadores-como-transformar-dados-em-decisoes-melhores-para-sua-empresa): Guia para ligar estratégia, processos e pessoas a metas e decidir com fato
 - [FAQ](https://orbitgestao.com.br/faq): Perguntas frequentes sobre a plataforma
 - [Histórias de Clientes](https://orbitgestao.com.br/historias): Cases de sucesso
 - [Parcerias](https://orbitgestao.com.br/parcerias): Programa de canais para consultores e mentores
