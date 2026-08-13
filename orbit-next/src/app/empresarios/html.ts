@@ -2963,10 +2963,10 @@ export const pageHTML = `
                             </div>
                         </div>
                         <div class="origin-director-card">
-                            <div class="origin-director-card__avatar"><img src="/images/diretor-pedro.jpg" alt="Pedro Muschitz" width="600" height="400" loading="lazy" decoding="async"></div>
+                            <div class="origin-director-card__avatar"><img src="/images/diretor-pedro.jpg" alt="Pedro Muschitz" width="600" height="600" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Pedro Muschitz</h3>
-                                <p>Co-Founder BR, Founder USA.</p>
+                                <p>Co-Founder BR, 15 anos de experiência em consultoria de governança, gestão ágil e M&A, Founder USA e responsável pela expansão da operação.</p>
                             </div>
                         </div>
                         <div class="origin-director-card">

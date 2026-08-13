@@ -1718,6 +1718,7 @@ function applyEnglish() {
     'Co-Founder. Diretor de Produto. Lidera o desenvolvimento da plataforma e a evolução dos agentes de IA.': 'Co-Founder. Director of Product. Leads the platform development and the evolution of the AI agents.',
     'Co-Founder. Diretor de Operações. Lidera a operação da plataforma e a entrega para os clientes.': 'Co-Founder. Director of Operations. Leads platform operations and delivery for clients.',
     'Co-Founder BR, Founder USA.': 'Co-Founder BR, Founder USA.',
+    'Co-Founder BR, 15 anos de experiência em consultoria de governança, gestão ágil e M&A, Founder USA e responsável pela expansão da operação.': 'Co-Founder BR, 15 years of experience in governance consulting, agile management and M&A, Founder USA and responsible for expanding the operation.',
     'Diretor de Vendas. Responsável pela expansão comercial, canais e parcerias estratégicas.': 'Director of Sales. Responsible for commercial expansion, channels and strategic partnerships.',
     'Diretor de Tecnologia. Arquiteto da infraestrutura que garante performance, segurança e escala.': 'Director of Technology. Architect of the infrastructure that ensures performance, security and scale.',
 
