@@ -67,10 +67,10 @@ function humanizeCategory(slug: string): string {
   return slug.split('-').map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
 }
 
-function formatDate(dateStr: string | null): string {
+function formatDate(dateStr: string | null, locale = 'pt-BR'): string {
   if (!dateStr) return '';
   const d = new Date(dateStr);
-  return d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
+  return d.toLocaleDateString(locale, { day: '2-digit', month: 'short', year: 'numeric' });
 }
 
 function readTime(content: string): number {
@@ -138,11 +138,12 @@ export default function BlogPage() {
       <p>${i18nText('O que postamos ultimamente — atualizado toda vez que sai conteúdo novo.', 'What we posted lately — updated every time new content goes out.')}</p>
     </div>
   `;
+  const moreCount = sorted.length - RECENT_COUNT;
   const moreButtonHTML = sorted.length > RECENT_COUNT ? `
     <div class="blog-more-wrap" id="blogMoreWrap">
       <button type="button" id="blogMoreBtn" class="blog-more-btn">
         <i class="fas fa-arrow-down"></i>
-        Ver mais ${sorted.length - RECENT_COUNT} artigo${sorted.length - RECENT_COUNT > 1 ? 's' : ''}
+        ${i18nText(`Ver mais ${moreCount} artigo${moreCount > 1 ? 's' : ''}`, `See ${moreCount} more article${moreCount > 1 ? 's' : ''}`)}
       </button>
     </div>
   ` : '';
@@ -155,6 +156,7 @@ export default function BlogPage() {
       const preview = a.excerpt || truncate(a.content, 140);
       const previewEn = en.excerpt || preview;
       const date = formatDate(a.published_at);
+      const dateEn = formatDate(a.published_at, 'en-US');
       const mins = readTime(a.content);
       const initials = getInitials(a.author);
       const imgSrc = a.cover_url || '/images/og-image.png';
@@ -169,8 +171,8 @@ export default function BlogPage() {
           <span class="blog-card__tag">${i18nText(escapeHtml(catLabel), escapeHtml(CATEGORIES_EN[cat] || catLabel))}</span>
         </div>
         <div class="blog-card__body">
-          ${i18nEl('h3', escapeHtml(a.title), escapeHtml(en.title || a.title))}
-          ${i18nEl('p', escapeHtml(preview), escapeHtml(previewEn))}
+          ${i18nEl('h3', escapeHtml(a.title), en.title ? escapeHtml(en.title) : undefined)}
+          ${i18nEl('p', escapeHtml(preview), en.excerpt ? escapeHtml(previewEn) : undefined)}
           <div class="blog-card__footer">
             <div class="blog-card__author">
               ${a.author_avatar
@@ -178,7 +180,7 @@ export default function BlogPage() {
                 : `<div class="blog-card__avatar">${initials}</div>`}
               <div class="blog-card__author-info">
                 <span class="blog-card__author-name">${escapeHtml(a.author || 'Equipe Orbit')}</span>
-                <time class="blog-card__date" datetime="${escapeHtml(isoDate)}">${date}</time>
+                <time class="blog-card__date" datetime="${escapeHtml(isoDate)}">${i18nText(date, dateEn)}</time>
               </div>
             </div>
             <span class="blog-card__read-time"><i class="fas fa-clock"></i> ${mins} min</span>

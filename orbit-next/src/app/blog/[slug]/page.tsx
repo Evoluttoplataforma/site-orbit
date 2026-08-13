@@ -281,8 +281,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             <div class="blog-related__img"><img src="${escapeHtml(rImg)}" alt="${escapeHtml(rEn.title || r.title)}" loading="lazy" width="600" height="338"></div>
             <div class="blog-related__body">
               <span class="blog-related__tag">${i18nText(escapeHtml(rCat), escapeHtml(rCatEn))}</span>
-              ${i18nEl('h3', escapeHtml(r.title), escapeHtml(rEn.title || r.title))}
-              ${i18nEl('p', escapeHtml(rExcerpt), escapeHtml(rExcerptEn), 'class="blog-related__excerpt"')}
+              ${i18nEl('h3', escapeHtml(r.title), rEn.title ? escapeHtml(rEn.title) : undefined)}
+              ${i18nEl('p', escapeHtml(rExcerpt), rEn.excerpt ? escapeHtml(rExcerptEn) : undefined, 'class="blog-related__excerpt"')}
               <div class="blog-related__meta">
                 <time datetime="${escapeHtml(rIso)}">${i18nText(rDate, rDateEn)}</time>
                 <span class="blog-related__sep">&middot;</span>
