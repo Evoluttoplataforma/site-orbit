@@ -6,7 +6,7 @@ import { headerHTML } from '@/components/shared-header';
 import staticStories from '@/data/stories.json';
 import storiesEnJson from '@/data/stories-en.json';
 import { reapplyOrbitLang } from '@/lib/reapply-lang';
-import { i18nText } from '@/lib/i18n-html';
+import { i18nText, i18nEl } from '@/lib/i18n-html';
 
 // Tabs primários da página de histórias: distingue B2B direto (Empresas) de
 // canais (Consultoria). Substitui o antigo "Serviços" que era genérico.
@@ -180,8 +180,8 @@ export function PageContent() {
                   ${segLabel ? `<span class="blog-card__tag" style="background:rgba(255,186,26,0.15);color:#ffba1a;border:1px solid rgba(255,186,26,0.3);">${i18nText(escapeHtml(segLabel), escapeHtml(SEGMENTS_EN[story.segmento] || segLabel))}</span>` : ''}
                 </div>
                 <div class="blog-card__body">
-                  <h3>${i18nText(escapeHtml(headline), escapeHtml(headlineEn))}</h3>
-                  ${preview ? `<p>${i18nText(escapeHtml(preview), escapeHtml(previewEn))}</p>` : ''}
+                  ${i18nEl('h3', escapeHtml(headline), escapeHtml(headlineEn))}
+                  ${preview ? i18nEl('p', escapeHtml(preview), escapeHtml(previewEn)) : ''}
                   <div class="blog-card__footer">
                     <div class="blog-card__author">
                       ${story.coverImage ? '' : `<div class="blog-card__avatar">${initials}</div>`}

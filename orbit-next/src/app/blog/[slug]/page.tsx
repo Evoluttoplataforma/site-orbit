@@ -281,8 +281,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             <div class="blog-related__img"><img src="${escapeHtml(rImg)}" alt="${escapeHtml(rEn.title || r.title)}" loading="lazy" width="600" height="338"></div>
             <div class="blog-related__body">
               <span class="blog-related__tag">${i18nText(escapeHtml(rCat), escapeHtml(rCatEn))}</span>
-              <h3>${i18nText(escapeHtml(r.title), escapeHtml(rEn.title || r.title))}</h3>
-              <p class="blog-related__excerpt">${i18nText(escapeHtml(rExcerpt), escapeHtml(rExcerptEn))}</p>
+              ${i18nEl('h3', escapeHtml(r.title), escapeHtml(rEn.title || r.title))}
+              ${i18nEl('p', escapeHtml(rExcerpt), escapeHtml(rExcerptEn), 'class="blog-related__excerpt"')}
               <div class="blog-related__meta">
                 <time datetime="${escapeHtml(rIso)}">${i18nText(rDate, rDateEn)}</time>
                 <span class="blog-related__sep">&middot;</span>
@@ -348,8 +348,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             <span><i class="fas fa-calendar-alt"></i> ${i18nText(date, dateEn)}</span>
             <span><i class="fas fa-clock"></i> ${i18nText(`${mins} min de leitura`, `${mins} min read`)}</span>
           </div>
-          <div class="blog-article-content i18n-pt">${article.content}</div>
-          ${en.content ? `<div class="blog-article-content i18n-en">${en.content}</div>` : ''}
+          ${en.content
+            ? `<div class="blog-article-content i18n-pt">${article.content}</div><div class="blog-article-content i18n-en">${en.content}</div>`
+            : `<div class="blog-article-content">${article.content}</div>`}
           <div class="blog-article__bottom-cta">
             <a href="/blog" class="btn btn-primary"><i class="fas fa-arrow-left"></i> ${i18nText('Voltar ao Blog', 'Back to the Blog')}</a>
           </div>

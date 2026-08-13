@@ -4,7 +4,7 @@ import articlesEnJson from '@/data/articles-en.json';
 import { headerHTML } from '@/components/shared-header';
 import { footerHTML } from '@/components/shared-footer';
 import { ORG_ID, WEBSITE_ID } from '@/lib/seo';
-import { i18nText } from '@/lib/i18n-html';
+import { i18nText, i18nEl } from '@/lib/i18n-html';
 
 export const metadata: Metadata = {
   title: 'Blog — Orbit Gestão',
@@ -169,8 +169,8 @@ export default function BlogPage() {
           <span class="blog-card__tag">${i18nText(escapeHtml(catLabel), escapeHtml(CATEGORIES_EN[cat] || catLabel))}</span>
         </div>
         <div class="blog-card__body">
-          <h3>${i18nText(escapeHtml(a.title), escapeHtml(en.title || a.title))}</h3>
-          <p>${i18nText(escapeHtml(preview), escapeHtml(previewEn))}</p>
+          ${i18nEl('h3', escapeHtml(a.title), escapeHtml(en.title || a.title))}
+          ${i18nEl('p', escapeHtml(preview), escapeHtml(previewEn))}
           <div class="blog-card__footer">
             <div class="blog-card__author">
               ${a.author_avatar
