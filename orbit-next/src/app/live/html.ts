@@ -1,3 +1,5 @@
+import { i18nText } from '@/lib/i18n-html';
+
 // AGENDA PAUSADA em 29/07/2026.
 // A versão anterior desta página (Live Quinzenal do Igor, terça 13h, com countdown e
 // inscrição no Zoom) está arquivada em src/app/live/igor/html.ts — rota noindex /live/igor.
@@ -220,7 +222,7 @@ export const pageHTML = `
 
                 <!-- Bottom CTA — botão de inscrição removido na pausa de agenda -->
                 <div style="text-align:center;margin-top:48px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.06);" data-reveal>
-                    <p style="color:rgba(255,255,255,0.5);font-size:1.1rem;margin-bottom:0;">Tudo isso &eacute; o que a gente mostra funcionando <strong style="color:#fff;">nas nossas lives.</strong></p>
+                    <p style="color:rgba(255,255,255,0.5);font-size:1.1rem;margin-bottom:0;">${i18nText('Tudo isso é o que a gente mostra funcionando', 'This is what we show working')} <strong style="color:#fff;">${i18nText('nas nossas lives.', 'in our lives.')}</strong></p>
                 </div>
 
                 <script>

@@ -11,12 +11,16 @@ import {
   TRAINING_SESSIONS,
   TRAINING_BY_SLUG,
   WEEKDAY_FULL,
+  WEEKDAY_FULL_EN,
   slotLabel,
+  slotLabelEn,
   timeLabel,
   nextOccurrence,
   longDateLabel,
+  longDateLabelEn,
   type TrainingSession,
 } from '@/lib/training-sessions';
+import { i18nText, i18nEl } from '@/lib/i18n-html';
 
 /** Chave do sessionStorage lida pela página de obrigado para mostrar o join_url pessoal. */
 const RESULT_KEY = 'orbit_training_reg';
@@ -53,13 +57,13 @@ export function PageContent() {
           <div class="tr-slot__head">
             <div class="tr-slot__icon"><i class="fa-solid ${s.icon}"></i></div>
             <div class="tr-slot__labels">
-              <div class="tr-slot__title">${esc(s.title)}</div>
-              <span class="tr-slot__when">${WEEKDAY_FULL[s.weekday]} &middot; ${timeLabel(s)}</span>
+              <div class="tr-slot__title">${i18nText(esc(s.title), esc(s.titleEn))}</div>
+              <span class="tr-slot__when">${i18nText(`${WEEKDAY_FULL[s.weekday]} · ${timeLabel(s)}`, `${WEEKDAY_FULL_EN[s.weekday]} · ${timeLabel(s)}`)}</span>
             </div>
           </div>
-          <p class="tr-slot__desc">${esc(s.description)}</p>
-          <p class="tr-slot__next"><i class="fa-solid fa-calendar-day"></i>Pr&oacute;xima: <strong>${longDateLabel(next)}</strong></p>
-          <span class="tr-slot__cta">Quero participar <i class="fa-solid fa-arrow-right"></i></span>
+          ${i18nEl('p', esc(s.description), esc(s.descriptionEn), 'class="tr-slot__desc"')}
+          <p class="tr-slot__next"><i class="fa-solid fa-calendar-day"></i>${i18nText('Próxima:', 'Next:')} <strong>${i18nText(longDateLabel(next), longDateLabelEn(next))}</strong></p>
+          <span class="tr-slot__cta">${i18nText('Quero participar', 'I want to join')} <i class="fa-solid fa-arrow-right"></i></span>
         </button>`;
     }).join('');
 
@@ -71,8 +75,8 @@ export function PageContent() {
         <label class="tr-check">
           <input type="checkbox" name="sessions" value="${s.slug}">
           <span class="tr-check__body">
-            <span class="tr-check__title">${esc(s.title)} <span class="tr-check__when">${slotLabel(s)}</span></span>
-            <span class="tr-check__desc">${esc(s.description)}</span>
+            <span class="tr-check__title">${i18nText(esc(s.title), esc(s.titleEn))} <span class="tr-check__when">${i18nText(slotLabel(s), slotLabelEn(s))}</span></span>
+            <span class="tr-check__desc">${i18nText(esc(s.description), esc(s.descriptionEn))}</span>
           </span>
         </label>`
       ).join('');
@@ -86,9 +90,9 @@ export function PageContent() {
     const closeBtn = root.querySelector('#trainingModalClose');
     const openAllBtn = root.querySelector('#trainingOpenAll');
 
-    function showError(msg: string) {
+    function showError(pt: string, en?: string) {
       if (!errorEl) return;
-      errorEl.textContent = msg;
+      errorEl.innerHTML = en ? i18nText(pt, en) : pt;
       errorEl.classList.add('show');
     }
     function clearError() {
@@ -159,7 +163,7 @@ export function PageContent() {
       const fd = new FormData(form);
       const slugs = fd.getAll('sessions').map(String).filter(Boolean);
       if (!slugs.length) {
-        showError('Marque pelo menos uma sessão para continuar.');
+        showError('Marque pelo menos uma sessão para continuar.', 'Select at least one session to continue.');
         return;
       }
 
@@ -167,7 +171,7 @@ export function PageContent() {
       const email = String(fd.get('email') || '').trim().toLowerCase();
       const emailCheck = validateEmail(email);
       if (!emailCheck.valid) {
-        showError(emailCheck.error || 'Digite um e-mail válido.');
+        showError(emailCheck.error || 'Digite um e-mail válido.', 'Enter a valid email.');
         return;
       }
 
@@ -177,7 +181,8 @@ export function PageContent() {
       if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.innerHTML =
-          '<i class="fa-solid fa-spinner fa-spin" style="margin-right:8px;"></i>Inscrevendo...';
+          '<i class="fa-solid fa-spinner fa-spin" style="margin-right:8px;"></i>' +
+          i18nText('Inscrevendo...', 'Signing up...');
       }
 
       const params = new URLSearchParams(window.location.search);
@@ -207,13 +212,19 @@ export function PageContent() {
 
         if (error || !data?.ok) {
           const code = data?.error || '';
-          const msg =
+          const msgPt =
             code === 'rate_limited'
               ? 'Muitas tentativas em pouco tempo. Aguarde alguns minutos e tente de novo.'
               : code === 'invalid_email' || code === 'disposable_email'
               ? 'Use um e-mail válido para receber o link de acesso.'
               : 'Não conseguimos concluir agora. Tente novamente em instantes.';
-          showError(msg);
+          const msgEn =
+            code === 'rate_limited'
+              ? 'Too many attempts in a short time. Wait a few minutes and try again.'
+              : code === 'invalid_email' || code === 'disposable_email'
+              ? 'Use a valid email to receive the access link.'
+              : 'We could not finish now. Try again in a moment.';
+          showError(msgPt, msgEn);
           submitting = false;
           if (submitBtn) {
             submitBtn.disabled = false;

@@ -1,4 +1,5 @@
-import { TRAINING_SESSIONS, TRAINING_LIVE_CARDS, slotLabel, WEEKDAY_SHORT, timeLabel } from '@/lib/training-sessions';
+import { TRAINING_SESSIONS, TRAINING_LIVE_CARDS, WEEKDAY_SHORT, WEEKDAY_SHORT_EN, timeLabel } from '@/lib/training-sessions';
+import { i18nText, i18nEl } from '@/lib/i18n-html';
 
 // Chips do hero e textos da agenda vêm da fonte única (src/lib/training-sessions.ts),
 // não mais cravados aqui — antes mudar um horário exigia editar 3 arquivos.
@@ -6,6 +7,7 @@ import { TRAINING_SESSIONS, TRAINING_LIVE_CARDS, slotLabel, WEEKDAY_SHORT, timeL
 // Só UM chip resume a agenda. Antes eram 5 chips (3 sessões + Zoom + gratuito), o
 // que competia com o botão principal em vez de apoiá-lo.
 const agendaResumo = TRAINING_SESSIONS.map((s) => `${WEEKDAY_SHORT[s.weekday]} ${timeLabel(s)}`).join(' · ');
+const agendaResumoEn = TRAINING_SESSIONS.map((s) => `${WEEKDAY_SHORT_EN[s.weekday]} ${timeLabel(s)}`).join(' · ');
 
 // O chip de "quando" vem de whenLabel, nao de dia+hora: a Live Orbit acontece em
 // datas pontuais do mes, entao mostrar "Terça · 13h" daria a entender que e semanal.
@@ -15,11 +17,11 @@ const liveCards = TRAINING_LIVE_CARDS.map(
                 <div class="tr-live__icon"><i class="fa-solid ${c.icon}"></i></div>
                 <div class="tr-live__body">
                     <div class="tr-live__top">
-                        <span class="tr-live__title">${c.title}</span>
-                        ${c.note ? `<span class="tr-live__note">${c.note}</span>` : ''}
-                        <span class="tr-live__day">${c.whenLabel}</span>
+                        <span class="tr-live__title">${i18nText(c.title, c.titleEn)}</span>
+                        ${c.note ? `<span class="tr-live__note">${i18nText(c.note, c.noteEn || c.note)}</span>` : ''}
+                        <span class="tr-live__day">${i18nText(c.whenLabel, c.whenLabelEn || c.whenLabel)}</span>
                     </div>
-                    <p class="tr-live__desc">${c.description}</p>
+                    ${i18nEl('p', c.description, c.descriptionEn, 'class="tr-live__desc"')}
                 </div>
                 <span class="tr-live__arrow"><i class="fa-solid fa-arrow-right"></i></span>
             </a>`
@@ -229,43 +231,43 @@ export const pageHTML = `
 <!-- HERO -->
 <section class="tr-hero">
     <div class="tr-hero__inner">
-        <span class="tr-hero__badge"><i class="fa-solid fa-graduation-cap"></i>Treinamentos Orbit</span>
-        <h1>Treinamento e tira d&uacute;vidas <span class="accent">ao vivo</span>, toda semana.</h1>
-        <p class="lead">Inscreva-se uma vez e receba o convite de todas as pr&oacute;ximas sess&otilde;es. Ao vivo pelo Zoom, com espa&ccedil;o para perguntar, mostrar a tela e conversar.</p>
+        <span class="tr-hero__badge"><i class="fa-solid fa-graduation-cap"></i>${i18nText('Treinamentos Orbit', 'Orbit Trainings')}</span>
+        ${i18nEl('h1', 'Treinamento e tira dúvidas <span class="accent">ao vivo</span>, toda semana.', 'Live <span class="accent">training and Q&amp;A</span>, every week.')}
+        ${i18nEl('p', 'Inscreva-se uma vez e receba o convite de todas as próximas sessões. Ao vivo pelo Zoom, com espaço para perguntar, mostrar a tela e conversar.', 'Sign up once and receive the invite for every upcoming session. Live on Zoom, with room to ask, share your screen and talk.', 'class="lead"')}
 
         <div class="tr-hero__agenda">
-            <span class="tr-hero__agenda-item"><i class="fa-solid fa-calendar-week"></i>${agendaResumo}</span>
+            <span class="tr-hero__agenda-item"><i class="fa-solid fa-calendar-week"></i>${i18nText(agendaResumo, agendaResumoEn)}</span>
             <span class="tr-hero__agenda-sep"></span>
-            <span class="tr-hero__agenda-item tr-hero__agenda-zoom"><i class="fa-solid fa-video"></i>Pelo Zoom</span>
+            <span class="tr-hero__agenda-item tr-hero__agenda-zoom"><i class="fa-solid fa-video"></i>${i18nText('Pelo Zoom', 'On Zoom')}</span>
             <span class="tr-hero__agenda-sep"></span>
-            <span class="tr-hero__agenda-item"><i class="fa-solid fa-circle-check" style="color:#3FB950;"></i>Gratuito</span>
+            <span class="tr-hero__agenda-item"><i class="fa-solid fa-circle-check" style="color:#3FB950;"></i>${i18nText('Gratuito', 'Free')}</span>
         </div>
 
         <div class="tr-hero__ctas">
             <button type="button" class="tr-zoom-cta" id="trainingOpenAll">
-                <i class="fa-solid fa-calendar-check"></i> Quero me inscrever
+                <i class="fa-solid fa-calendar-check"></i> ${i18nText('Quero me inscrever', 'I want to sign up')}
             </button>
             <a href="https://evoluhub.evolutto.com/exclusivo/9ddce2dc-1b7b-44be-ad71-3adcc077f43d?utm_source=site&amp;utm_medium=cta&amp;utm_campaign=treinamentos_hero" target="_blank" rel="noopener noreferrer" class="tr-zoom-cta tr-zoom-cta--ghost">
-                <i class="fa-solid fa-book-open"></i> Material de apoio
+                <i class="fa-solid fa-book-open"></i> ${i18nText('Material de apoio', 'Support material')}
             </a>
         </div>
-        <p class="tr-hero__note">Leva menos de um minuto &middot; sem custo</p>
+        <p class="tr-hero__note">${i18nText('Leva menos de um minuto · sem custo', 'Takes less than a minute · no cost')}</p>
     </div>
 </section>
 
 <!-- GRADE SEMANAL -->
 <section class="tr-section" style="padding-top:44px;">
     <div class="tr-section__head">
-        <span class="tr-section__eyebrow">Agenda da semana</span>
-        <h2 class="tr-section__title">Tr&ecirc;s encontros por semana</h2>
-        <p class="tr-section__sub">Escolha os que fazem sentido para voc&ecirc;. A inscri&ccedil;&atilde;o &eacute; &uacute;nica e vale para todas as semanas seguintes.</p>
+        <span class="tr-section__eyebrow">${i18nText('Agenda da semana', 'This week\'s agenda')}</span>
+        ${i18nEl('h2', 'Três encontros por semana', 'Three sessions a week', 'class="tr-section__title"')}
+        ${i18nEl('p', 'Escolha os que fazem sentido para você. A inscrição é única e vale para todas as semanas seguintes.', 'Pick the ones that make sense for you. Sign-up is once and covers every following week.', 'class="tr-section__sub"')}
     </div>
     <div class="tr-week" id="trainingGrid"></div>
 
     <div class="tr-lives-wrap">
         <div class="tr-lives-wrap__head">
-            <h3>Outras sess&otilde;es ao vivo</h3>
-            <p>Cada uma tem p&aacute;gina e inscri&ccedil;&atilde;o pr&oacute;prias.</p>
+            ${i18nEl('h3', 'Outras sessões ao vivo', 'Other live sessions')}
+            ${i18nEl('p', 'Cada uma tem página e inscrição próprias.', 'Each one has its own page and registration.')}
         </div>
         <div class="tr-lives">${liveCards}
         </div>
@@ -275,27 +277,27 @@ export const pageHTML = `
 <!-- COMO FUNCIONA -->
 <section class="tr-section tr-how">
     <div class="tr-section__head">
-        <span class="tr-section__eyebrow">Como funciona</span>
-        <h2 class="tr-section__title">Tr&ecirc;s passos, uma vez s&oacute;</h2>
+        <span class="tr-section__eyebrow">${i18nText('Como funciona', 'How it works')}</span>
+        ${i18nEl('h2', 'Três passos, uma vez só', 'Three steps, just once', 'class="tr-section__title"')}
     </div>
     <div class="tr-how__steps">
         <div class="tr-step">
             <div class="tr-step__num">01</div>
             <div class="tr-step__icon"><i class="fa-solid fa-list-check"></i></div>
-            <h3>Escolha as sess&otilde;es</h3>
-            <p>No <strong style="color:#fff;">Tira D&uacute;vidas</strong> a pauta &eacute; sua. O <strong style="color:#fff;">Treinamento</strong> &eacute; aula preparada. D&aacute; para marcar mais de uma.</p>
+            ${i18nEl('h3', 'Escolha as sessões', 'Choose the sessions')}
+            ${i18nEl('p', 'No <strong style="color:#fff;">Tira Dúvidas</strong> a pauta é sua. O <strong style="color:#fff;">Treinamento</strong> é aula preparada. Dá para marcar mais de uma.', 'In <strong style="color:#fff;">Q&amp;A</strong> the agenda is yours. <strong style="color:#fff;">Training</strong> is a prepared class. You can pick more than one.')}
         </div>
         <div class="tr-step">
             <div class="tr-step__num">02</div>
             <div class="tr-step__icon"><i class="fa-solid fa-user-check"></i></div>
-            <h3>Inscreva-se uma vez</h3>
-            <p>Quatro campos e pronto. N&atilde;o precisa voltar aqui toda semana &mdash; a inscri&ccedil;&atilde;o vale para as pr&oacute;ximas sess&otilde;es.</p>
+            ${i18nEl('h3', 'Inscreva-se uma vez', 'Sign up once')}
+            ${i18nEl('p', 'Quatro campos e pronto. Não precisa voltar aqui toda semana — a inscrição vale para as próximas sessões.', 'Four fields and you are done. You do not need to come back every week — registration covers the upcoming sessions.')}
         </div>
         <div class="tr-step">
             <div class="tr-step__num">03</div>
             <div class="tr-step__icon"><i class="fa-solid fa-bell" style="color:#2D8CFF;"></i></div>
-            <h3>Receba o lembrete</h3>
-            <p>O link do Zoom chega por e-mail na inscri&ccedil;&atilde;o, e avisamos <strong style="color:#fff;">1 dia antes</strong> e <strong style="color:#fff;">1 hora antes</strong> de cada encontro.</p>
+            ${i18nEl('h3', 'Receba o lembrete', 'Get the reminder')}
+            ${i18nEl('p', 'O link do Zoom chega por e-mail na inscrição, e avisamos <strong style="color:#fff;">1 dia antes</strong> e <strong style="color:#fff;">1 hora antes</strong> de cada encontro.', 'The Zoom link arrives by email when you sign up, and we remind you <strong style="color:#fff;">1 day before</strong> and <strong style="color:#fff;">1 hour before</strong> each session.')}
         </div>
     </div>
 </section>
@@ -305,30 +307,31 @@ export const pageHTML = `
     <div class="tr-modal">
         <button class="tr-modal__close" type="button" id="trainingModalClose" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
         <div class="tr-modal__head">
-            <h2 class="tr-modal__title" id="trainingModalTitle">Inscri&ccedil;&atilde;o gratuita</h2>
-            <p class="tr-modal__sub">Escolha as sess&otilde;es e preencha seus dados</p>
+            <h2 class="tr-modal__title i18n-pt" id="trainingModalTitle">Inscrição gratuita</h2>
+            <h2 class="tr-modal__title i18n-en">Free registration</h2>
+            ${i18nEl('p', 'Escolha as sessões e preencha seus dados', 'Choose the sessions and fill in your details', 'class="tr-modal__sub"')}
             <div class="tr-modal__meta">
-                <span class="tr-modal__chip zoom"><i class="fa-solid fa-video"></i>Ao vivo pelo Zoom</span>
-                <span class="tr-modal__chip"><i class="fa-solid fa-repeat"></i>Toda semana</span>
-                <span class="tr-modal__chip"><i class="fa-solid fa-clock"></i>1 hora</span>
+                <span class="tr-modal__chip zoom"><i class="fa-solid fa-video"></i>${i18nText('Ao vivo pelo Zoom', 'Live on Zoom')}</span>
+                <span class="tr-modal__chip"><i class="fa-solid fa-repeat"></i>${i18nText('Toda semana', 'Every week')}</span>
+                <span class="tr-modal__chip"><i class="fa-solid fa-clock"></i>${i18nText('1 hora', '1 hour')}</span>
             </div>
         </div>
 
         <form id="trainingForm">
             <div class="tr-modal__body">
-                <label class="tr-modal__label">Quais sess&otilde;es voc&ecirc; quer participar? <span class="tr-modal__label-sub">pode marcar mais de uma</span></label>
+                <label class="tr-modal__label">${i18nText('Quais sessões você quer participar?', 'Which sessions do you want to join?')} <span class="tr-modal__label-sub">${i18nText('pode marcar mais de uma', 'you can pick more than one')}</span></label>
                 <div class="tr-checks" id="trainingSessionChecks"></div>
 
                 <div class="tr-modal__note">
                     <i class="fa-solid fa-circle-info"></i>
-                    <span>Voc&ecirc; se inscreve <strong style="color:#fff;">uma vez</strong> e recebe o convite das pr&oacute;ximas sess&otilde;es. O link de acesso chega no seu e-mail.</span>
+                    <span>${i18nText('Você se inscreve <strong style="color:#fff;">uma vez</strong> e recebe o convite das próximas sessões. O link de acesso chega no seu e-mail.', 'You sign up <strong style="color:#fff;">once</strong> and receive the invite for upcoming sessions. The access link arrives in your email.')}</span>
                 </div>
 
-                <label class="tr-modal__label">Seus dados</label>
-                <input class="tr-modal__input" type="text" name="nome" required placeholder="Nome completo" autocomplete="name">
-                <input class="tr-modal__input" type="text" name="empresa" required placeholder="Nome da empresa" autocomplete="organization">
-                <input class="tr-modal__input" type="email" name="email" required placeholder="E-mail" autocomplete="email" inputmode="email">
-                <input class="tr-modal__input" type="tel" name="telefone" required placeholder="WhatsApp com DDD" autocomplete="tel" inputmode="tel" style="margin-bottom:0;">
+                <label class="tr-modal__label">${i18nText('Seus dados', 'Your details')}</label>
+                <input class="tr-modal__input" type="text" name="nome" required placeholder="Nome completo" data-i18n-placeholder="tr.name" autocomplete="name">
+                <input class="tr-modal__input" type="text" name="empresa" required placeholder="Nome da empresa" data-i18n-placeholder="tr.company" autocomplete="organization">
+                <input class="tr-modal__input" type="email" name="email" required placeholder="E-mail" data-i18n-placeholder="tr.email" autocomplete="email" inputmode="email">
+                <input class="tr-modal__input" type="tel" name="telefone" required placeholder="WhatsApp com DDD" data-i18n-placeholder="tr.whatsapp" autocomplete="tel" inputmode="tel" style="margin-bottom:0;">
 
                 <input class="tr-hp" type="text" name="hp" tabindex="-1" aria-hidden="true" autocomplete="off">
                 <input type="hidden" name="ts" id="trainingTs">
@@ -337,9 +340,9 @@ export const pageHTML = `
             <div class="tr-modal__foot">
                 <p class="tr-modal__error" id="trainingError" role="alert"></p>
                 <button type="submit" class="tr-modal__submit" id="trainingSubmit">
-                    <i class="fa-solid fa-check" style="margin-right:8px;"></i>Confirmar inscri&ccedil;&atilde;o
+                    <i class="fa-solid fa-check" style="margin-right:8px;"></i>${i18nText('Confirmar inscrição', 'Confirm registration')}
                 </button>
-                <p class="tr-modal__legal">Gratuito. Voc&ecirc; pode cancelar os lembretes quando quiser.</p>
+                <p class="tr-modal__legal">${i18nText('Gratuito. Você pode cancelar os lembretes quando quiser.', 'Free. You can cancel the reminders whenever you want.')}</p>
             </div>
         </form>
     </div>

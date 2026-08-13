@@ -375,7 +375,7 @@ export default function RootLayout({
         {/* Arquivos de /public nao recebem hash do Next: ao mudar estes scripts,
             BUMPAR o ?v= — senao quem tem o arquivo em cache nao recebe a correcao. */}
         <script src="/js/main-v2.js?v=6" defer></script>
-        <script src="/js/orbit-init.js?v=11" defer></script>
+        <script src="/js/orbit-init.js?v=12" defer></script>
         <script src="/js/banner.js?v=6" defer></script>
         <script dangerouslySetInnerHTML={{ __html: `(function(){var l=document.createElement('link');l.rel='stylesheet';l.href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';document.head.appendChild(l)})()` }} />
       </body>

@@ -102,11 +102,14 @@ export function LigaRanking() {
         <div className="liga-board">
           {loading ? (
             <div className="liga-board__state">
-              <i className="fas fa-spinner fa-spin"></i> Carregando o ranking…
+              <i className="fas fa-spinner fa-spin"></i>{' '}
+              <span className="i18n-pt">Carregando o ranking…</span>
+              <span className="i18n-en">Loading the ranking…</span>
             </div>
           ) : entries.length === 0 ? (
             <div className="liga-board__state">
-              O ranking abre em breve. Inscreva-se para ser um dos primeiros.
+              <span className="i18n-pt">O ranking abre em breve. Inscreva-se para ser um dos primeiros.</span>
+              <span className="i18n-en">The ranking opens soon. Sign up to be one of the first.</span>
             </div>
           ) : (
             <ul className="liga-board__list">
@@ -123,7 +126,10 @@ export function LigaRanking() {
                   </div>
                   <div className="liga-row__score">
                     <span className="liga-row__num">{entry.licensesNew}</span>
-                    <span className="liga-row__unit">licenças novas</span>
+                    <span className="liga-row__unit">
+                      <span className="i18n-pt">licenças novas</span>
+                      <span className="i18n-en">new licenses</span>
+                    </span>
                   </div>
                 </li>
               ))}
@@ -135,13 +141,20 @@ export function LigaRanking() {
             <div className="liga-mypos__head">
               <span className="liga-rank liga-rank--you"><i className="fas fa-user"></i></span>
               <div className="liga-row__info">
-                <span className="liga-row__name">Sua posição</span>
+                <span className="liga-row__name">
+                  <span className="i18n-pt">Sua posição</span>
+                  <span className="i18n-en">Your position</span>
+                </span>
                 {myResult?.found ? (
                   <span className="liga-mypos__result">
-                    Você está em {myResult.posicao}º lugar · {myResult.licencas} licenças novas
+                    <span className="i18n-pt">Você está em {myResult.posicao}º lugar · {myResult.licencas} licenças novas</span>
+                    <span className="i18n-en">You are in {myResult.posicao}{myResult.posicao === 1 ? 'st' : myResult.posicao === 2 ? 'nd' : myResult.posicao === 3 ? 'rd' : 'th'} place · {myResult.licencas} new licenses</span>
                   </span>
                 ) : (
-                  <span className="liga-row__city">cresça com o Orbit para aparecer</span>
+                  <span className="liga-row__city">
+                    <span className="i18n-pt">cresça com o Orbit para aparecer</span>
+                    <span className="i18n-en">grow with Orbit to show up</span>
+                  </span>
                 )}
               </div>
             </div>
@@ -155,15 +168,27 @@ export function LigaRanking() {
                   autoComplete="email"
                   placeholder="E-mail que você usa para entrar no Orbit"
                   aria-label="E-mail que você usa para entrar no Orbit"
+                  data-i18n-placeholder="liga.email"
                   value={myEmail}
                   onChange={onMyEmailChange}
                 />
                 <button type="submit" className="lp-btn lp-btn--gold liga-mypos__btn" disabled={myLoading}>
-                  {myLoading ? 'Verificando…' : 'Ver minha posição'}
+                  {myLoading ? (
+                    <>
+                      <span className="i18n-pt">Verificando…</span>
+                      <span className="i18n-en">Checking…</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="i18n-pt">Ver minha posição</span>
+                      <span className="i18n-en">See my position</span>
+                    </>
+                  )}
                 </button>
                 {myResult && !myResult.found && (
                   <p className="liga-mypos__error">
-                    Não encontramos esse e-mail no ranking ainda. Use o e-mail de login do seu Orbit — ou compre suas primeiras licenças para aparecer aqui.
+                    <span className="i18n-pt">Não encontramos esse e-mail no ranking ainda. Use o e-mail de login do seu Orbit — ou compre suas primeiras licenças para aparecer aqui.</span>
+                    <span className="i18n-en">We have not found that email in the ranking yet. Use your Orbit login email — or buy your first licenses to show up here.</span>
                   </p>
                 )}
               </form>
@@ -173,16 +198,21 @@ export function LigaRanking() {
 
         {/* ─── Convite para virar canal ─── */}
         <div className="liga-enroll liga-invite" id="liga-inscricao">
-          <h3 className="liga-invite__title">Seu nome podia estar nessa lista.</h3>
+          <h3 className="liga-invite__title">
+            <span className="i18n-pt">Seu nome podia estar nessa lista.</span>
+            <span className="i18n-en">Your name could be on this list.</span>
+          </h3>
           <p className="liga-invite__text">
-            O ranking é de quem cresce levando o Orbit para seus clientes. Entre para o time e dispute o pódio.
+            <span className="i18n-pt">O ranking é de quem cresce levando o Orbit para seus clientes. Entre para o time e dispute o pódio.</span>
+            <span className="i18n-en">The ranking is for those who grow by taking Orbit to their clients. Join the team and compete for the podium.</span>
           </p>
           <a
             className="lp-btn lp-btn--gold liga-invite__btn"
             href="https://demonstracao.orbitgestao.com.br/chat?utm_source=site&utm_medium=programa&utm_campaign=ranking_recompensa_q3&origem=ranking_programa"
             onClick={onCtaClick}
           >
-            Quero o Orbit para meus clientes
+            <span className="i18n-pt">Quero o Orbit para meus clientes</span>
+            <span className="i18n-en">I want Orbit for my clients</span>
           </a>
         </div>
       </div>

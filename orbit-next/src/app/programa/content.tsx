@@ -5,6 +5,7 @@ import { htmlTop, htmlBottom } from './html';
 import { headerHTML } from '@/components/shared-header';
 import { footerHTML } from '@/components/shared-footer';
 import { LigaRanking } from '@/components/LigaRanking';
+import { reapplyOrbitLang } from '@/lib/reapply-lang';
 
 export function PageContent() {
   const ref = useRef<HTMLDivElement>(null);
@@ -35,6 +36,12 @@ export function PageContent() {
     const t2 = setTimeout(initScripts, 300);
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, [mounted, initScripts]);
+
+  useEffect(() => {
+    reapplyOrbitLang();
+    const t = setTimeout(reapplyOrbitLang, 80);
+    return () => clearTimeout(t);
+  });
 
   return (
     <div ref={ref}>

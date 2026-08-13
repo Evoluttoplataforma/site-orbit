@@ -21,6 +21,7 @@ export type TrainingKind = 'tira-duvidas' | 'treinamento';
 export interface TrainingSession {
   slug: string;
   title: string;
+  titleEn: string;
   kind: TrainingKind;
   /** Padrão JS getDay(): 0=Dom .. 6=Sáb. O weekly_days do Zoom usa 1=Dom (+1). */
   weekday: number;
@@ -29,19 +30,23 @@ export interface TrainingSession {
   durationMin: number;
   icon: string;
   description: string;
+  descriptionEn: string;
 }
 
 /** Faixas da agenda que NÃO têm inscrição aqui — levam para a página própria. */
 export interface TrainingLiveCard {
   key: string;
   title: string;
+  titleEn: string;
   weekday: number;
   hour: number;
   minute: number;
   icon: string;
   description: string;
+  descriptionEn: string;
   href: string;
   note?: string;
+  noteEn?: string;
   /**
    * 'semanal' = acontece toda semana no mesmo dia.
    * 'pontual' = datas específicas do mês, sem cadência fixa.
@@ -51,6 +56,7 @@ export interface TrainingLiveCard {
   cadence: 'semanal' | 'pontual';
   /** Rótulo de quando acontece. Substitui o chip de dia+hora quando é pontual. */
   whenLabel: string;
+  whenLabelEn: string;
 }
 
 export const WEEKDAY_FULL: Record<number, string> = {
@@ -63,6 +69,16 @@ export const WEEKDAY_FULL: Record<number, string> = {
   6: 'Sábado',
 };
 
+export const WEEKDAY_FULL_EN: Record<number, string> = {
+  0: 'Sunday',
+  1: 'Monday',
+  2: 'Tuesday',
+  3: 'Wednesday',
+  4: 'Thursday',
+  5: 'Friday',
+  6: 'Saturday',
+};
+
 export const WEEKDAY_SHORT: Record<number, string> = {
   0: 'Domingo',
   1: 'Segunda',
@@ -71,6 +87,16 @@ export const WEEKDAY_SHORT: Record<number, string> = {
   4: 'Quinta',
   5: 'Sexta',
   6: 'Sábado',
+};
+
+export const WEEKDAY_SHORT_EN: Record<number, string> = {
+  0: 'Sunday',
+  1: 'Monday',
+  2: 'Tuesday',
+  3: 'Wednesday',
+  4: 'Thursday',
+  5: 'Friday',
+  6: 'Saturday',
 };
 
 /** BYDAY do iCalendar, por getDay(). */
@@ -101,13 +127,18 @@ export const RECURRENCE_ENDS_AT = new Date('2027-07-12T20:00:00Z');
 // Ao mudar aqui, atualizar também a coluna description de training_sessions.
 const DESC_TIRA_DUVIDAS =
   'Perguntas e respostas ao vivo sobre o uso do Orbit. Você traz o que está travando e sai com o próximo passo claro.';
+const DESC_TIRA_DUVIDAS_EN =
+  'Live Q&A on using Orbit. You bring what is stuck and leave with a clear next step.';
 const DESC_TREINAMENTO =
   'Aula preparada: um módulo ou as novidades da plataforma, destrinchados passo a passo.';
+const DESC_TREINAMENTO_EN =
+  'A prepared class: a module or the latest platform updates, broken down step by step.';
 
 export const TRAINING_SESSIONS: TrainingSession[] = [
   {
     slug: 'seg-17-tira-duvidas',
     title: 'Tira Dúvidas',
+    titleEn: 'Q&A',
     kind: 'tira-duvidas',
     weekday: 1,
     hour: 17,
@@ -115,10 +146,12 @@ export const TRAINING_SESSIONS: TrainingSession[] = [
     durationMin: 60,
     icon: 'fa-comments',
     description: DESC_TIRA_DUVIDAS,
+    descriptionEn: DESC_TIRA_DUVIDAS_EN,
   },
   {
     slug: 'qua-10-treinamento',
     title: 'Treinamento',
+    titleEn: 'Training',
     kind: 'treinamento',
     weekday: 3,
     hour: 10,
@@ -126,10 +159,12 @@ export const TRAINING_SESSIONS: TrainingSession[] = [
     durationMin: 60,
     icon: 'fa-graduation-cap',
     description: DESC_TREINAMENTO,
+    descriptionEn: DESC_TREINAMENTO_EN,
   },
   {
     slug: 'sex-09-tira-duvidas',
     title: 'Tira Dúvidas',
+    titleEn: 'Q&A',
     kind: 'tira-duvidas',
     weekday: 5,
     hour: 9,
@@ -137,6 +172,7 @@ export const TRAINING_SESSIONS: TrainingSession[] = [
     durationMin: 60,
     icon: 'fa-comments',
     description: DESC_TIRA_DUVIDAS,
+    descriptionEn: DESC_TIRA_DUVIDAS_EN,
   },
 ];
 
@@ -144,27 +180,34 @@ export const TRAINING_LIVE_CARDS: TrainingLiveCard[] = [
   {
     key: 'live-negocios',
     title: 'Live de Negócios',
+    titleEn: 'Business Live',
     weekday: 4,
     hour: 18,
     minute: 0,
     icon: 'fa-handshake',
     description: 'Como escalar sua consultoria com o Orbit, com Christian Hart.',
+    descriptionEn: 'How to scale your consultancy with Orbit, with Christian Hart.',
     href: '/live/chris',
     note: 'Somente canais',
+    noteEn: 'Channels only',
     cadence: 'semanal',
     whenLabel: 'Toda quinta · 18h',
+    whenLabelEn: 'Every Thursday · 6pm',
   },
   {
     key: 'live-orbit',
     title: 'Live Orbit',
+    titleEn: 'Orbit Live',
     weekday: 2,
     hour: 13,
     minute: 0,
     icon: 'fa-video',
     description: 'Gestão com time de IA, ao vivo. Acontece em datas pontuais do mês.',
+    descriptionEn: 'Management with an AI team, live. Happens on specific dates each month.',
     href: '/live',
     cadence: 'pontual',
     whenLabel: 'Próxima edição em definição',
+    whenLabelEn: 'Next edition to be announced',
   },
 ];
 
@@ -189,9 +232,13 @@ export function timeLabel(s: TrainingSession | TrainingLiveCard): string {
   return s.minute ? `${pad2(s.hour)}h${pad2(s.minute)}` : `${s.hour}h`;
 }
 
-/** 'Segunda · 17h' */
+/** 'Segunda · 17h' / 'Monday · 17h' */
 export function slotLabel(s: TrainingSession | TrainingLiveCard): string {
   return `${WEEKDAY_SHORT[s.weekday]} · ${timeLabel(s)}`;
+}
+
+export function slotLabelEn(s: TrainingSession | TrainingLiveCard): string {
+  return `${WEEKDAY_SHORT_EN[s.weekday]} · ${timeLabel(s)}`;
 }
 
 export function icalByDay(weekday: number): string {
@@ -246,11 +293,19 @@ export function toDateISO(d: Date): string {
   return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
 }
 
-/** '4 de agosto' */
+/** '4 de agosto' / 'August 4' */
 export function longDateLabel(d: Date): string {
   const months = [
     'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
     'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro',
   ];
   return `${d.getDate()} de ${months[d.getMonth()]}`;
+}
+
+export function longDateLabelEn(d: Date): string {
+  const months = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December',
+  ];
+  return `${months[d.getMonth()]} ${d.getDate()}`;
 }
