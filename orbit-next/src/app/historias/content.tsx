@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { pageHTML } from './html';
 import { headerHTML } from '@/components/shared-header';
 import staticStories from '@/data/stories.json';
+import { reapplyOrbitLang } from '@/lib/reapply-lang';
 
 // Tabs primários da página de histórias: distingue B2B direto (Empresas) de
 // canais (Consultoria). Substitui o antigo "Serviços" que era genérico.
@@ -180,6 +181,7 @@ export function PageContent() {
         }
 
         renderGrid('all');
+        reapplyOrbitLang();
       }
     }
   }, []);
@@ -188,7 +190,8 @@ export function PageContent() {
     if (!mounted) return;
     const t1 = setTimeout(initScripts, 50);
     const t2 = setTimeout(fetchAndRenderStories, 100);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
+    const t3 = setTimeout(reapplyOrbitLang, 80);
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, [mounted, initScripts, fetchAndRenderStories]);
 
   const fullHTML = headerHTML + '\n' + pageHTML;

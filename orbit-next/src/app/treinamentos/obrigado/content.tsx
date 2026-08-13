@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { pageHTML } from './html';
 import { headerHTML } from '@/components/shared-header';
 import { footerHTML } from '@/components/shared-footer';
+import { reapplyOrbitLang } from '@/lib/reapply-lang';
 
 const TRAININGS_LOOKUP: Record<string, { title: string; day: number; hour: number }> = {
   'pessoas-1':         { title: 'Pessoas 1 — Cargos / PDI / Treinamentos', day: 1, hour: 10 },
@@ -179,6 +180,12 @@ export function PageContent() {
       }
     }
   }, [mounted]);
+
+  useEffect(() => {
+    reapplyOrbitLang();
+    const t = setTimeout(reapplyOrbitLang, 80);
+    return () => clearTimeout(t);
+  });
 
   const fullHTML = headerHTML + '\n' + pageHTML + '\n' + footerHTML;
   return <div ref={ref} dangerouslySetInnerHTML={{ __html: fullHTML }} />;

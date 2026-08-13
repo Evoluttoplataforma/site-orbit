@@ -4,6 +4,56 @@ import { User, Mail, Building2, X, MessageCircle, ChevronDown, Loader2 } from 'l
 import { supabaseMkt } from '@/lib/supabase-mkt';
 import { normalizePhone } from '@/lib/phone';
 import { validateEmail } from '@/lib/email-validation';
+import { useLocale } from '@/components/LocaleProvider';
+
+const COPY = {
+  pt: {
+    close: 'Fechar',
+    fillToStart: 'Preencha para iniciar:',
+    confirmData: 'Confirme seus dados',
+    planConfirm: (plan: string) => `Plano ${plan} — confirme seus dados`,
+    checkoutHint: 'Você será redirecionado para o checkout em seguida',
+    freeHint: '100% gratuito • Sem compromisso',
+    name: 'Nome Completo *',
+    email: 'Email *',
+    phone: 'Número',
+    company: 'Nome da Empresa *',
+    consent: 'Ao preencher este formulário, concordo em compartilhar meus dados com a Orbit para fins de contato e demonstração, conforme a',
+    privacy: 'Política de Privacidade',
+    sending: 'ENVIANDO...',
+    checkout: 'IR PARA O CHECKOUT',
+    start: 'INICIAR CONVERSA',
+    errName: 'Digite seu nome completo',
+    errEmail: 'Email inválido',
+    errPhone: 'Telefone incompleto',
+    errCompany: 'Informe a empresa',
+    errConsent: 'Aceite os termos para continuar',
+    countries: { BR: 'Brasil', PT: 'Portugal', US: 'EUA', AR: 'Argentina', ES: 'Espanha' } as Record<string, string>,
+  },
+  en: {
+    close: 'Close',
+    fillToStart: 'Fill in to start:',
+    confirmData: 'Confirm your details',
+    planConfirm: (plan: string) => `Plan ${plan} — confirm your details`,
+    checkoutHint: 'You will be redirected to checkout next',
+    freeHint: '100% free • No commitment',
+    name: 'Full name *',
+    email: 'Email *',
+    phone: 'Number',
+    company: 'Company name *',
+    consent: 'By filling this form, I agree to share my data with Orbit for contact and demo purposes, according to the',
+    privacy: 'Privacy Policy',
+    sending: 'SENDING...',
+    checkout: 'GO TO CHECKOUT',
+    start: 'START CONVERSATION',
+    errName: 'Enter your full name',
+    errEmail: 'Invalid email',
+    errPhone: 'Incomplete phone number',
+    errCompany: 'Enter the company',
+    errConsent: 'Accept the terms to continue',
+    countries: { BR: 'Brazil', PT: 'Portugal', US: 'USA', AR: 'Argentina', ES: 'Spain' } as Record<string, string>,
+  },
+};
 
 const COUNTRIES = [
   { code: 'BR', ddi: '55', flag: '🇧🇷', name: 'Brasil', maxDigits: 11 },
@@ -55,6 +105,8 @@ const inputEl: React.CSSProperties = {
 type PopupMode = 'chat' | 'checkout';
 
 export default function ChatPopup() {
+  const { locale } = useLocale();
+  const t = COPY[locale] || COPY.pt;
   const [isExperiment, setIsExperiment] = useState(false);
   useEffect(() => {
     const p = window.location.pathname;
@@ -143,13 +195,13 @@ export default function ChatPopup() {
 
   const validate = (): boolean => {
     const errs: Record<string, string> = {};
-    if (!name.trim() || name.trim().split(' ').length < 2) errs.name = 'Digite seu nome completo';
+    if (!name.trim() || name.trim().split(' ').length < 2) errs.name = t.errName;
     const emailResult = validateEmail(email);
-    if (!emailResult.valid) errs.email = emailResult.error || 'Email inválido';
+    if (!emailResult.valid) errs.email = locale === 'en' ? t.errEmail : (emailResult.error || t.errEmail);
     const phoneDigits = phone.replace(/\D/g, '');
-    if (phoneDigits.length < 8) errs.phone = 'Telefone incompleto';
-    if (!company.trim()) errs.company = 'Informe a empresa';
-    if (!consent) errs.consent = 'Aceite os termos para continuar';
+    if (phoneDigits.length < 8) errs.phone = t.errPhone;
+    if (!company.trim()) errs.company = t.errCompany;
+    if (!consent) errs.consent = t.errConsent;
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -348,7 +400,7 @@ export default function ChatPopup() {
         {/* Close */}
         <button
           onClick={() => setOpen(false)}
-          aria-label="Fechar"
+          aria-label={t.close}
           style={{
             position: 'absolute',
             top: '16px',
@@ -376,14 +428,14 @@ export default function ChatPopup() {
           <h2 style={{ fontSize: '24px', fontWeight: 800, color: C.primary, margin: '0 0 6px', lineHeight: 1.2 }}>
             {mode === 'checkout'
               ? planLabel
-                ? `Plano ${planLabel} — confirme seus dados`
-                : 'Confirme seus dados'
-              : 'Preencha para iniciar:'}
+                ? t.planConfirm(planLabel)
+                : t.confirmData
+              : t.fillToStart}
           </h2>
           <p style={{ fontSize: '13px', color: C.textMuted, margin: 0 }}>
             {mode === 'checkout'
-              ? 'Você será redirecionado para o checkout em seguida'
-              : '100% gratuito • Sem compromisso'}
+              ? t.checkoutHint
+              : t.freeHint}
           </p>
         </div>
 
@@ -399,7 +451,7 @@ export default function ChatPopup() {
                 onChange={(e) => { setName(e.target.value); if (errors.name) setErrors({ ...errors, name: '' }); }}
                 onFocus={() => setFocusedField('name')}
                 onBlur={() => setFocusedField(null)}
-                placeholder="Nome Completo *"
+                placeholder={t.name}
                 style={{ ...inputEl, '::placeholder': { color: C.textPlaceholder } } as React.CSSProperties}
               />
               <User size={18} color={C.textMuted} style={{ flexShrink: 0 }} />
@@ -417,7 +469,7 @@ export default function ChatPopup() {
                 onChange={(e) => { setEmail(e.target.value); if (errors.email) setErrors({ ...errors, email: '' }); }}
                 onFocus={() => setFocusedField('email')}
                 onBlur={() => setFocusedField(null)}
-                placeholder="Email *"
+                placeholder={t.email}
                 style={inputEl}
               />
               <Mail size={18} color={C.textMuted} style={{ flexShrink: 0 }} />
@@ -490,7 +542,7 @@ export default function ChatPopup() {
                         onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
                       >
                         <span>{c.flag}</span>
-                        <span style={{ flex: 1 }}>{c.name}</span>
+                        <span style={{ flex: 1 }}>{t.countries[c.code] || c.name}</span>
                         <span style={{ color: C.textMuted }}>+{c.ddi}</span>
                       </button>
                     ))}
@@ -507,7 +559,7 @@ export default function ChatPopup() {
                   onChange={(e) => { handlePhoneChange(e.target.value); if (errors.phone) setErrors({ ...errors, phone: '' }); }}
                   onFocus={() => setFocusedField('phone')}
                   onBlur={() => setFocusedField(null)}
-                  placeholder={country.code === 'BR' ? '(11) 99999-9999' : 'Número'}
+                  placeholder={country.code === 'BR' ? '(11) 99999-9999' : t.phone}
                   style={inputEl}
                 />
               </div>
@@ -524,7 +576,7 @@ export default function ChatPopup() {
                 onChange={(e) => { setCompany(e.target.value); if (errors.company) setErrors({ ...errors, company: '' }); }}
                 onFocus={() => setFocusedField('company')}
                 onBlur={() => setFocusedField(null)}
-                placeholder="Nome da Empresa *"
+                placeholder={t.company}
                 style={inputEl}
               />
               <Building2 size={18} color={C.textMuted} style={{ flexShrink: 0 }} />
@@ -541,8 +593,8 @@ export default function ChatPopup() {
               style={{ marginTop: '3px', width: '16px', height: '16px', accentColor: C.primary, flexShrink: 0, cursor: 'pointer' }}
             />
             <span style={{ fontSize: '12px', color: C.textMuted, lineHeight: 1.55 }}>
-              Ao preencher este formulário, concordo em compartilhar meus dados com a Orbit para fins de contato e demonstração, conforme a{' '}
-              <a href="https://demonstracao.orbitgestao.com.br/privacidade" target="_blank" rel="noopener noreferrer" style={{ color: C.primary, textDecoration: 'underline' }}>Política de Privacidade</a>.
+              {t.consent}{' '}
+              <a href="https://demonstracao.orbitgestao.com.br/privacidade" target="_blank" rel="noopener noreferrer" style={{ color: C.primary, textDecoration: 'underline' }}>{t.privacy}</a>.
             </span>
           </label>
           {errors.consent && <p style={{ color: C.destructive, fontSize: '12px', marginLeft: '26px' }}>{errors.consent}</p>}
@@ -577,10 +629,10 @@ export default function ChatPopup() {
           >
             {submitting ? <Loader2 size={18} className="animate-spin" /> : <MessageCircle size={18} />}
             {submitting
-              ? 'ENVIANDO...'
+              ? t.sending
               : mode === 'checkout'
-              ? 'IR PARA O CHECKOUT'
-              : 'INICIAR CONVERSA'}
+              ? t.checkout
+              : t.start}
           </button>
         </div>
       </div>

@@ -4,6 +4,46 @@ import { X, User, Mail, Building2, Send, Loader2 } from 'lucide-react';
 import { supabaseMkt } from '@/lib/supabase-mkt';
 import { normalizePhone } from '@/lib/phone';
 import { validateEmail } from '@/lib/email-validation';
+import { useLocale } from '@/components/LocaleProvider';
+
+const COPY = {
+  pt: {
+    ariaOpen: 'Falar no WhatsApp',
+    ariaClose: 'Fechar',
+    title: 'Fale com a Orbit',
+    subtitle: 'Resposta em poucos minutos',
+    intro: 'Preencha seus dados e a gente já te chama no WhatsApp 👇',
+    name: 'Nome completo',
+    email: 'Email',
+    company: 'Nome da empresa',
+    message: 'Mensagem (opcional)',
+    sending: 'ENVIANDO...',
+    submit: 'ABRIR CONVERSA NO WHATSAPP',
+    footer: 'Seus dados são salvos e enviamos junto da mensagem.',
+    errName: 'Informe seu nome',
+    errEmail: 'Email inválido',
+    errPhone: 'Telefone incompleto',
+    errCompany: 'Informe a empresa',
+  },
+  en: {
+    ariaOpen: 'Chat on WhatsApp',
+    ariaClose: 'Close',
+    title: 'Talk to Orbit',
+    subtitle: 'Reply in a few minutes',
+    intro: "Fill in your details and we'll message you on WhatsApp 👇",
+    name: 'Full name',
+    email: 'Email',
+    company: 'Company name',
+    message: 'Message (optional)',
+    sending: 'SENDING...',
+    submit: 'OPEN WHATSAPP CHAT',
+    footer: 'Your details are saved and sent with the message.',
+    errName: 'Enter your name',
+    errEmail: 'Invalid email',
+    errPhone: 'Incomplete phone number',
+    errCompany: 'Enter the company',
+  },
+} as const;
 
 const PHONE = '554898149776';
 
@@ -21,6 +61,8 @@ const C = {
 };
 
 export default function WhatsAppWidget() {
+  const { locale } = useLocale();
+  const t = COPY[locale] || COPY.pt;
   const [isExperiment, setIsExperiment] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
@@ -65,11 +107,11 @@ export default function WhatsAppWidget() {
 
   const validate = () => {
     const errs: Record<string, string> = {};
-    if (!name.trim()) errs.name = 'Informe seu nome';
+    if (!name.trim()) errs.name = t.errName;
     const emailResult = validateEmail(email);
-    if (!emailResult.valid) errs.email = emailResult.error || 'Email inválido';
-    if (phone.replace(/\D/g, '').length < 10) errs.phone = 'Telefone incompleto';
-    if (!company.trim()) errs.company = 'Informe a empresa';
+    if (!emailResult.valid) errs.email = locale === 'en' ? t.errEmail : (emailResult.error || t.errEmail);
+    if (phone.replace(/\D/g, '').length < 10) errs.phone = t.errPhone;
+    if (!company.trim()) errs.company = t.errCompany;
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
@@ -171,7 +213,7 @@ export default function WhatsAppWidget() {
     return (
       <button
         onClick={() => setOpen(true)}
-        aria-label="Falar no WhatsApp"
+        aria-label={t.ariaOpen}
         style={{
           position: 'fixed',
           bottom: '24px',
@@ -277,12 +319,12 @@ export default function WhatsAppWidget() {
           </svg>
         </div>
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ color: '#fff', fontWeight: 700, fontSize: '15px', lineHeight: 1.2 }}>Fale com a Orbit</div>
-          <div style={{ color: 'rgba(255,255,255,0.85)', fontSize: '12px', marginTop: '2px' }}>Resposta em poucos minutos</div>
+          <div style={{ color: '#fff', fontWeight: 700, fontSize: '15px', lineHeight: 1.2 }}>{t.title}</div>
+          <div style={{ color: 'rgba(255,255,255,0.85)', fontSize: '12px', marginTop: '2px' }}>{t.subtitle}</div>
         </div>
         <button
           onClick={() => setOpen(false)}
-          aria-label="Fechar"
+          aria-label={t.ariaClose}
           style={{
             width: '32px',
             height: '32px',
@@ -304,7 +346,7 @@ export default function WhatsAppWidget() {
       {/* Body */}
       <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '12px', overflowY: 'auto' }}>
         <p style={{ fontSize: '13px', color: C.textMuted, margin: 0, lineHeight: 1.5 }}>
-          Preencha seus dados e a gente já te chama no WhatsApp 👇
+          {t.intro}
         </p>
 
         <div style={inputBox('name', !!errors.name)}>
@@ -315,7 +357,7 @@ export default function WhatsAppWidget() {
             onChange={(e) => { setName(e.target.value); if (errors.name) setErrors({ ...errors, name: '' }); }}
             onFocus={() => setFocused('name')}
             onBlur={() => setFocused(null)}
-            placeholder="Nome completo"
+            placeholder={t.name}
             style={inputEl}
           />
         </div>
@@ -328,7 +370,7 @@ export default function WhatsAppWidget() {
             onChange={(e) => { setEmail(e.target.value); if (errors.email) setErrors({ ...errors, email: '' }); }}
             onFocus={() => setFocused('email')}
             onBlur={() => setFocused(null)}
-            placeholder="Email"
+            placeholder={t.email}
             style={inputEl}
           />
         </div>
@@ -355,7 +397,7 @@ export default function WhatsAppWidget() {
             onChange={(e) => { setCompany(e.target.value); if (errors.company) setErrors({ ...errors, company: '' }); }}
             onFocus={() => setFocused('company')}
             onBlur={() => setFocused(null)}
-            placeholder="Nome da empresa"
+            placeholder={t.company}
             style={inputEl}
           />
         </div>
@@ -363,7 +405,7 @@ export default function WhatsAppWidget() {
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Mensagem (opcional)"
+          placeholder={t.message}
           rows={3}
           style={{
             background: C.cardLight,
@@ -402,11 +444,11 @@ export default function WhatsAppWidget() {
           }}
         >
           {submitting ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
-          {submitting ? 'ENVIANDO...' : 'ABRIR CONVERSA NO WHATSAPP'}
+          {submitting ? t.sending : t.submit}
         </button>
 
         <p style={{ fontSize: '11px', color: C.textMuted, margin: '4px 0 0', textAlign: 'center', lineHeight: 1.5 }}>
-          Seus dados são salvos e enviamos junto da mensagem.
+          {t.footer}
         </p>
       </div>
 

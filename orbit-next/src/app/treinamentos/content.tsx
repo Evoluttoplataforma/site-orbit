@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { pageHTML } from './html';
 import { headerHTML } from '@/components/shared-header';
 import { footerHTML } from '@/components/shared-footer';
+import { reapplyOrbitLang } from '@/lib/reapply-lang';
 
 const SB_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
@@ -225,6 +226,12 @@ export function PageContent() {
       }
     });
   }, [mounted]);
+
+  useEffect(() => {
+    reapplyOrbitLang();
+    const t = setTimeout(reapplyOrbitLang, 80);
+    return () => clearTimeout(t);
+  });
 
   const fullHTML = headerHTML + '\n' + pageHTML + '\n' + footerHTML;
   return <div ref={ref} dangerouslySetInnerHTML={{ __html: fullHTML }} />;

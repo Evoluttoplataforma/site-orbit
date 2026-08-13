@@ -70,9 +70,19 @@ export const pageHTML = `
                 </div>
                 <div class="footer-column">
                     <h5 data-i18n="footer.contact">Contato</h5>
-                    <ul class="footer-contact">                        <li><a href="https://wa.me/554898149776" target="_blank" rel="noopener nofollow" style="color:inherit;text-decoration:none;"><i class="fab fa-whatsapp"></i> (48) 9814-9776</a></li>
-                        <li><i class="fas fa-map-marker-alt"></i> Square SC, Florianópolis - SC</li>
-                    </ul>
+                    <p class="footer-units-label" data-i18n="footer.units">2 unidades · 2 países</p>
+                    <div class="footer-units">
+                        <div class="footer-unit">
+                            <div class="footer-unit__head"><span class="footer-unit__flag">🇧🇷</span> <strong data-i18n="footer.unit.br">Brasil</strong></div>
+                            <a href="https://wa.me/554898149776" target="_blank" rel="noopener nofollow"><i class="fab fa-whatsapp"></i> (48) 9814-9776</a>
+                            <a class="footer-unit__addr" href="https://maps.google.com/?q=Square+SC+Florianopolis" target="_blank" rel="noopener"><i class="fas fa-map-marker-alt"></i> Square SC, Florianópolis - SC</a>
+                        </div>
+                        <div class="footer-unit">
+                            <div class="footer-unit__head"><span class="footer-unit__flag">🇺🇸</span> <strong data-i18n="footer.unit.us">Estados Unidos</strong></div>
+                            <a href="https://wa.me/19548182885" target="_blank" rel="noopener nofollow"><i class="fab fa-whatsapp"></i> +1 (954) 818-2885</a>
+                            <a class="footer-unit__addr" href="https://maps.google.com/?q=14051+International+Dr,+Orlando,+FL+32821" target="_blank" rel="noopener"><i class="fas fa-map-marker-alt"></i> Bainbridge World Center<br>14051 International Dr, Orlando, FL 32821</a>
+                        </div>
+                    </div>
                 </div>
                 
 

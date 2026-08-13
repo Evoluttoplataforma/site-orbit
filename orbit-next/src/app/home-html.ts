@@ -38,7 +38,7 @@ export const pageHTML = `
                     </div>
                 </div>
                 <!-- ═══ INTEGRAÇÕES GOOGLE (logo abaixo dos credentials — visível pro crawler) ═══ -->
-                <p aria-label="Integrações com produtos Google" style="margin:28px auto 0;max-width:760px;text-align:center;color:#8B949E;font-size:0.95rem;line-height:1.65;">
+                <p data-i18n="hero.integrations" aria-label="Google product integrations" style="margin:28px auto 0;max-width:760px;text-align:center;color:#8B949E;font-size:0.95rem;line-height:1.65;">
                     O <strong style="color:#C9D1D9;">Orbit</strong> se integra com
                     <strong style="color:#ffba1a;">Google Calendar</strong>,
                     <strong style="color:#ffba1a;">Google Drive</strong>,
@@ -4194,9 +4194,19 @@ export const pageHTML = `
 
                 <div class="footer-column">
                     <h5 data-i18n="footer.contact">Contato</h5>
-                    <ul class="footer-contact">                        <li><a href="https://wa.me/554898149776" target="_blank" rel="noopener nofollow" style="color:inherit;text-decoration:none;"><i class="fab fa-whatsapp"></i> (48) 9814-9776</a></li>
-                        <li><i class="fas fa-map-marker-alt"></i> Square SC, Florianópolis - SC</li>
-                    </ul>
+                    <p class="footer-units-label" data-i18n="footer.units">2 unidades · 2 países</p>
+                    <div class="footer-units">
+                        <div class="footer-unit">
+                            <div class="footer-unit__head"><span class="footer-unit__flag">🇧🇷</span> <strong data-i18n="footer.unit.br">Brasil</strong></div>
+                            <a href="https://wa.me/554898149776" target="_blank" rel="noopener nofollow"><i class="fab fa-whatsapp"></i> (48) 9814-9776</a>
+                            <a class="footer-unit__addr" href="https://maps.google.com/?q=Square+SC+Florianopolis" target="_blank" rel="noopener"><i class="fas fa-map-marker-alt"></i> Square SC, Florianópolis - SC</a>
+                        </div>
+                        <div class="footer-unit">
+                            <div class="footer-unit__head"><span class="footer-unit__flag">🇺🇸</span> <strong data-i18n="footer.unit.us">Estados Unidos</strong></div>
+                            <a href="https://wa.me/19548182885" target="_blank" rel="noopener nofollow"><i class="fab fa-whatsapp"></i> +1 (954) 818-2885</a>
+                            <a class="footer-unit__addr" href="https://maps.google.com/?q=14051+International+Dr,+Orlando,+FL+32821" target="_blank" rel="noopener"><i class="fas fa-map-marker-alt"></i> Bainbridge World Center<br>14051 International Dr, Orlando, FL 32821</a>
+                        </div>
+                    </div>
                 </div>
 
                 
@@ -4217,7 +4227,7 @@ export const pageHTML = `
 
             <div class="footer-bottom">
                 <p data-i18n="footer.rights">&copy; 2026 Orbit - Grupo GSN. Todos os direitos reservados.</p>
-                <p style="margin-top:8px;font-size:13px;"><a href="/politica-privacidade" style="color:#8B949E;text-decoration:underline;">Pol&iacute;tica de Privacidade</a> <span style="margin:0 8px;color:#484F58;">&middot;</span> <a href="/termos-de-servico" style="color:#8B949E;text-decoration:underline;">Termos de Servi&ccedil;o</a> <span style="margin:0 8px;color:#484F58;">&middot;</span> <a href="/seguranca-ia" style="color:#8B949E;text-decoration:underline;">Seguran&ccedil;a &amp; IA</a></p>
+                <p style="margin-top:8px;font-size:13px;"><a href="/politica-privacidade" style="color:#8B949E;text-decoration:underline;" data-i18n="footer.privacy">Pol&iacute;tica de Privacidade</a> <span style="margin:0 8px;color:#484F58;">&middot;</span> <a href="/termos-de-servico" style="color:#8B949E;text-decoration:underline;" data-i18n="footer.terms">Termos de Servi&ccedil;o</a> <span style="margin:0 8px;color:#484F58;">&middot;</span> <a href="/seguranca-ia" style="color:#8B949E;text-decoration:underline;" data-i18n="footer.security">Seguran&ccedil;a &amp; IA</a></p>
             </div>
         </div>
     </footer>

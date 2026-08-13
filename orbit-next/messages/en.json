@@ -79,6 +79,9 @@
   "footer": {
     "tagline": "AI-powered management platform. Hire a team that executes.",
     "contact": "Contact",
+    "units": "2 locations · 2 countries",
+    "unitBr": "Brazil",
+    "unitUs": "United States",
     "platform": "Platform",
     "content": "Resources",
     "company": "Company",

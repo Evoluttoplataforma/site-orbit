@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { pageHTML } from './html';
+import { reapplyOrbitLang } from '@/lib/reapply-lang';
 
 export function PageContent() {
   const ref = useRef<HTMLDivElement>(null);
@@ -65,6 +66,12 @@ export function PageContent() {
       document.body.removeAttribute('data-bc');
     };
   }, [mounted]);
+
+  useEffect(() => {
+    reapplyOrbitLang();
+    const t = setTimeout(reapplyOrbitLang, 80);
+    return () => clearTimeout(t);
+  });
 
   return <div ref={ref} dangerouslySetInnerHTML={{ __html: pageHTML }} />;
 }

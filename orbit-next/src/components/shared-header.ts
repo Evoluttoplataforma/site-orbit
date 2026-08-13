@@ -26,7 +26,7 @@ export const headerHTML = `
                     </div>
                 </li>
                 <li>
-                    <a href="/agentes-de-ia"><span>Plataforma</span> <i class="fas fa-chevron-down dropdown-arrow"></i></a>
+                    <a href="/agentes-de-ia"><span data-i18n="nav.platform">Plataforma</span> <i class="fas fa-chevron-down dropdown-arrow"></i></a>
                     <!-- Mega-menu compacto: 12 agentes em 2 sub-colunas + 4 módulos -->
                     <div class="dropdown dropdown--sm" style="width:880px;max-width:94vw;">
                         <style>
@@ -48,7 +48,7 @@ export const headerHTML = `
                             <div style="border-right:1px solid rgba(0,0,0,0.06);padding:0 8px 8px;">
                                 <a href="/agentes-de-ia" class="pl-menu-head">
                                     <div class="pl-hd-icon"><i class="fas fa-robot"></i></div>
-                                    <div class="pl-hd-text"><span>Time Olívia · 12 agentes</span><small>Visão geral · 30 anos de metodologia GSN</small></div>
+                                    <div class="pl-hd-text"><span data-i18n="nav.olivia_team">Time Olívia · 12 agentes</span><small data-i18n="nav.olivia_team.sub">Visão geral · 30 anos de metodologia GSN</small></div>
                                 </a>
                                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;padding:0 6px;">
                                     <a href="/agentes/estrategico" class="pl-menu-row"><i class="fa-solid fa-compass"></i> Estratégico</a>
@@ -64,21 +64,21 @@ export const headerHTML = `
                                     <a href="/agentes/problemas-operacionais" class="pl-menu-row"><i class="fa-solid fa-triangle-exclamation"></i> Problemas</a>
                                     <a href="/agentes/pesquisas" class="pl-menu-row"><i class="fa-solid fa-clipboard-list"></i> Pesquisas</a>
                                 </div>
-                                <div class="pl-menu-foot"><a href="/agentes-de-ia">Ver visão geral do Time Olívia <i class="fa-solid fa-arrow-right"></i></a></div>
+                                <div class="pl-menu-foot"><a href="/agentes-de-ia"><span data-i18n="nav.olivia_overview">Ver visão geral do Time Olívia</span> <i class="fa-solid fa-arrow-right"></i></a></div>
                             </div>
                             <!-- BLOCO 2: 4 MÓDULOS -->
                             <div style="padding:0 8px 8px;">
                                 <a href="/agentes-de-ia#modulos" class="pl-menu-head">
                                     <div class="pl-hd-icon"><i class="fas fa-cubes"></i></div>
-                                    <div class="pl-hd-text"><span>Módulos da plataforma</span><small>4 módulos operacionais integrados</small></div>
+                                    <div class="pl-hd-text"><span data-i18n="nav.modules">Módulos da plataforma</span><small data-i18n="nav.modules.sub">4 módulos operacionais integrados</small></div>
                                 </a>
                                 <div style="padding:0 6px;">
                                     <a href="/modulos/financeiro" class="pl-menu-row"><i class="fa-solid fa-building-columns"></i> Financeiro</a>
-                                    <a href="/modulos/recrutamento-selecao" class="pl-menu-row"><i class="fa-solid fa-user-plus"></i> Recrutamento e Seleção</a>
+                                    <a href="/modulos/recrutamento-selecao" class="pl-menu-row"><i class="fa-solid fa-user-plus"></i> <span data-i18n="nav.recruiting">Recrutamento e Seleção</span></a>
                                     <a href="/modulos/projetos" class="pl-menu-row"><i class="fa-solid fa-chart-gantt"></i> Projetos</a>
                                     <a href="/modulos/compras" class="pl-menu-row"><i class="fa-solid fa-bag-shopping"></i> Compras</a>
                                 </div>
-                                <div class="pl-menu-foot"><a href="/agentes-de-ia#modulos">Ver todos os módulos <i class="fa-solid fa-arrow-right"></i></a></div>
+                                <div class="pl-menu-foot"><a href="/agentes-de-ia#modulos"><span data-i18n="nav.modules_all">Ver todos os módulos</span> <i class="fa-solid fa-arrow-right"></i></a></div>
                             </div>
                         </div>
                     </div>
@@ -101,25 +101,25 @@ export const headerHTML = `
                 <li>
                     <a href="/live" style="position:relative;">
                         <span style="display:inline-block;width:8px;height:8px;background:#ff4444;border-radius:50%;margin-right:6px;animation:livePulse 1.5s ease-in-out infinite;vertical-align:middle;"></span>
-                        <span>Eventos</span> <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        <span data-i18n="nav.events">Eventos</span> <i class="fas fa-chevron-down dropdown-arrow"></i>
                     </a>
                     <div class="dropdown dropdown--sm">
                         <div class="dropdown__links">
                             <a href="/live">
                                 <div class="dd-icon"><i class="fas fa-play-circle" style="color:#ff0000;"></i></div>
-                                <div class="dd-text"><span>Live Quinzenal</span><small>A cada 15 dias, ter&ccedil;a 13h com Igor</small></div>
+                                <div class="dd-text"><span data-i18n="nav.live">Live Quinzenal</span><small data-i18n="nav.live.sub">A cada 15 dias, terça 13h com Igor</small></div>
                             </a>
                             <a href="/live/chris">
                                 <div class="dd-icon"><i class="fas fa-chalkboard-user" style="color:#ffba1a;"></i></div>
-                                <div class="dd-text"><span>Masterclass Consultores</span><small>Quinta 18h com Christian Hart</small></div>
+                                <div class="dd-text"><span data-i18n="nav.masterclass">Masterclass Consultores</span><small data-i18n="nav.masterclass.sub">Quinta 18h com Christian Hart</small></div>
                             </a>
                             <a href="/treinamentos">
                                 <div class="dd-icon"><i class="fas fa-chalkboard-teacher" style="color:#ffba1a;"></i></div>
-                                <div class="dd-text"><span>Treinamentos</span><small>10 m&oacute;dulos semanais &middot; Seg a Sex</small></div>
+                                <div class="dd-text"><span data-i18n="nav.trainings">Treinamentos</span><small data-i18n="nav.trainings.sub">10 módulos semanais · Seg a Sex</small></div>
                             </a>
                             <a href="https://demonstracao.orbitgestao.com.br/salas/onboarding" target="_blank">
                                 <div class="dd-icon"><i class="fas fa-graduation-cap" style="color:#3FB950;"></i></div>
-                                <div class="dd-text"><span>Onboarding</span><small>Qua 9h/17h &bull; Sex 14h</small></div>
+                                <div class="dd-text"><span>Onboarding</span><small data-i18n="nav.onboarding.sub">Qua 9h/17h • Sex 14h</small></div>
                             </a>
                         </div>
                     </div>
@@ -135,8 +135,8 @@ export const headerHTML = `
             </div>
 
             <button class="lang-switch" aria-label="Change language">
-                <span class="lang-switch__flag">🇺🇸</span>
-                <span class="lang-switch__label">EN</span>
+                <span class="lang-switch__flag">🇧🇷</span>
+                <span class="lang-switch__label">PT</span>
             </button>
 
             <button class="menu-toggle">
@@ -160,12 +160,12 @@ export const headerHTML = `
             <a href="https://demonstracao.orbitgestao.com.br/chat" onclick="closeMobileMenu()"><i class="fas fa-envelope"></i> <span data-i18n="mobile.contact">Fale Conosco</span></a>
 
             <!-- Plataforma · Agentes + Módulos (mobile) -->
-            <div class="mobile-menu__label" style="color:#ffba1a;">🤖 Plataforma</div>
-            <a href="/agentes-de-ia" style="font-weight:700;"><i class="fas fa-robot" style="color:#ffba1a;"></i> Time Olívia · 12 agentes</a>
+            <div class="mobile-menu__label" style="color:#ffba1a;" data-i18n="mobile.platform_label">🤖 Plataforma</div>
+            <a href="/agentes-de-ia" style="font-weight:700;"><i class="fas fa-robot" style="color:#ffba1a;"></i> <span data-i18n="nav.olivia_team">Time Olívia · 12 agentes</span></a>
 
             <div class="mobile-menu__dropdown">
                 <button class="mobile-menu__dropdown-toggle" onclick="this.parentElement.classList.toggle('open')">
-                    <span><i class="fas fa-list"></i> Os 12 agentes</span>
+                    <span><i class="fas fa-list"></i> <span data-i18n="mobile.agents12">Os 12 agentes</span></span>
                     <i class="fas fa-chevron-down mobile-menu__dropdown-arrow"></i>
                 </button>
                 <div class="mobile-menu__dropdown-items">
@@ -178,7 +178,7 @@ export const headerHTML = `
                     <a href="/agentes/oportunidades"><i class="fa-solid fa-lightbulb"></i> Oportunidades</a>
                     <a href="/agentes/documentos"><i class="fa-solid fa-folder-tree"></i> Documentos</a>
                     <a href="/agentes/comercial"><i class="fa-solid fa-code-branch"></i> Comercial</a>
-                    <a href="/agentes/problemas-operacionais"><i class="fa-solid fa-triangle-exclamation"></i> Problemas Operacionais</a>
+                    <a href="/agentes/problemas-operacionais"><i class="fa-solid fa-triangle-exclamation"></i> <span data-i18n="nav.ops_problems">Problemas Operacionais</span></a>
                     <a href="/agentes/reunioes"><i class="fa-solid fa-microphone-lines"></i> Reuniões</a>
                     <a href="/agentes/pesquisas"><i class="fa-solid fa-clipboard-list"></i> Pesquisas</a>
                 </div>
@@ -186,12 +186,12 @@ export const headerHTML = `
 
             <div class="mobile-menu__dropdown">
                 <button class="mobile-menu__dropdown-toggle" onclick="this.parentElement.classList.toggle('open')">
-                    <span><i class="fas fa-cubes"></i> Os 4 módulos</span>
+                    <span><i class="fas fa-cubes"></i> <span data-i18n="mobile.modules4">Os 4 módulos</span></span>
                     <i class="fas fa-chevron-down mobile-menu__dropdown-arrow"></i>
                 </button>
                 <div class="mobile-menu__dropdown-items">
                     <a href="/modulos/financeiro"><i class="fa-solid fa-building-columns"></i> Financeiro</a>
-                    <a href="/modulos/recrutamento-selecao"><i class="fa-solid fa-user-plus"></i> Recrutamento e Seleção</a>
+                    <a href="/modulos/recrutamento-selecao"><i class="fa-solid fa-user-plus"></i> <span data-i18n="nav.recruiting">Recrutamento e Seleção</span></a>
                     <a href="/modulos/projetos"><i class="fa-solid fa-chart-gantt"></i> Projetos</a>
                     <a href="/modulos/compras"><i class="fa-solid fa-bag-shopping"></i> Compras</a>
                 </div>
@@ -199,21 +199,21 @@ export const headerHTML = `
 
             <div class="mobile-menu__label" data-i18n="mobile.content">Conteúdo</div>
             <a href="/blog"><i class="fas fa-newspaper"></i> Blog</a>
-            <a href="/historias"><i class="fas fa-star"></i> Histórias de Clientes</a>
+            <a href="/historias"><i class="fas fa-star"></i> <span data-i18n="nav.stories">Histórias de Clientes</span></a>
             <div class="mobile-menu__label" style="color:#ffba1a;">
                 <span style="display:inline-block;width:8px;height:8px;background:#ff4444;border-radius:50%;margin-right:6px;animation:livePulse 1.5s ease-in-out infinite;"></span>
-                Eventos
+                <span data-i18n="nav.events">Eventos</span>
             </div>
-            <a href="/live"><i class="fa-solid fa-video" style="color:#2D8CFF;"></i> Live Quinzenal (Ter 13h)</a>
-            <a href="/live/chris"><i class="fas fa-chalkboard-user" style="color:#ffba1a;"></i> Masterclass Consultores (Quinta 18h)</a>
-            <a href="/treinamentos"><i class="fas fa-chalkboard-teacher" style="color:#ffba1a;"></i> Treinamentos</a>
+            <a href="/live"><i class="fa-solid fa-video" style="color:#2D8CFF;"></i> <span data-i18n="nav.live_mobile">Live Quinzenal (Ter 13h)</span></a>
+            <a href="/live/chris"><i class="fas fa-chalkboard-user" style="color:#ffba1a;"></i> <span data-i18n="nav.masterclass_mobile">Masterclass Consultores (Quinta 18h)</span></a>
+            <a href="/treinamentos"><i class="fas fa-chalkboard-teacher" style="color:#ffba1a;"></i> <span data-i18n="nav.trainings">Treinamentos</span></a>
             <a href="https://demonstracao.orbitgestao.com.br/salas/onboarding" target="_blank"><i class="fas fa-graduation-cap" style="color:#3FB950;"></i> Onboarding</a>
             <div class="mobile-menu__label" data-i18n="mobile.company">Empresa</div>
-            <a href="/sobre"><i class="fas fa-building"></i> Sobre Nós</a>
+            <a href="/sobre"><i class="fas fa-building"></i> <span data-i18n="footer.about">Sobre Nós</span></a>
         </div>
         <div class="mobile-menu__footer">
-            <a href="https://app.orbitgestao.com.br/login" class="btn btn-outline" style="flex:1;text-align:center;color:#fff;border-color:rgba(255,255,255,0.4);">Entrar</a>
-            <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary" onclick="closeMobileMenu()" data-i18n="nav.cta" style="flex:1;text-align:center;">Conhecer o Time</a>
+            <a href="https://app.orbitgestao.com.br/login" class="btn btn-outline" style="flex:1;text-align:center;color:#fff;border-color:rgba(255,255,255,0.4);" data-i18n="nav.login">Entrar</a>
+            <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary" onclick="closeMobileMenu()" data-i18n="nav.cta" style="flex:1;text-align:center;">Conhecer o Time de IA</a>
         </div>
     </div>
 

@@ -26,9 +26,19 @@ export const footerHTML = `
 
                 <div class="footer-column">
                     <h5 data-i18n="footer.contact">Contato</h5>
-                    <ul class="footer-contact">                        <li><a href="https://wa.me/554898149776" target="_blank" rel="noopener nofollow" style="color:inherit;text-decoration:none;"><i class="fab fa-whatsapp"></i> (48) 9814-9776</a></li>
-                        <li><i class="fas fa-map-marker-alt"></i> Square SC, Florianópolis - SC</li>
-                    </ul>
+                    <p class="footer-units-label" data-i18n="footer.units">2 unidades · 2 países</p>
+                    <div class="footer-units">
+                        <div class="footer-unit">
+                            <div class="footer-unit__head"><span class="footer-unit__flag">🇧🇷</span> <strong data-i18n="footer.unit.br">Brasil</strong></div>
+                            <a href="https://wa.me/554898149776" target="_blank" rel="noopener nofollow"><i class="fab fa-whatsapp"></i> (48) 9814-9776</a>
+                            <a class="footer-unit__addr" href="https://maps.google.com/?q=Square+SC+Florianopolis" target="_blank" rel="noopener"><i class="fas fa-map-marker-alt"></i> Square SC, Florianópolis - SC</a>
+                        </div>
+                        <div class="footer-unit">
+                            <div class="footer-unit__head"><span class="footer-unit__flag">🇺🇸</span> <strong data-i18n="footer.unit.us">Estados Unidos</strong></div>
+                            <a href="https://wa.me/19548182885" target="_blank" rel="noopener nofollow"><i class="fab fa-whatsapp"></i> +1 (954) 818-2885</a>
+                            <a class="footer-unit__addr" href="https://maps.google.com/?q=14051+International+Dr,+Orlando,+FL+32821" target="_blank" rel="noopener"><i class="fas fa-map-marker-alt"></i> Bainbridge World Center<br>14051 International Dr, Orlando, FL 32821</a>
+                        </div>
+                    </div>
                 </div>
 
 
@@ -44,17 +54,17 @@ export const footerHTML = `
                         <li><a href="/sobre" data-i18n="footer.about">Sobre Nós</a></li>
                         <li><a href="/consultores" data-i18n="footer.partners">Seja Parceiro</a></li>
                     </ul>
-                    <h5 style="margin-top: 20px;">Legal</h5>
+                    <h5 style="margin-top: 20px;" data-i18n="footer.legal">Legal</h5>
                     <ul>
-                        <li><a href="/politica-privacidade">Pol&iacute;tica de Privacidade</a></li>
-                        <li><a href="/termos-de-servico">Termos de Servi&ccedil;o</a></li>
-                        <li><a href="/seguranca-ia">Seguran&ccedil;a &amp; IA</a></li>
+                        <li><a href="/politica-privacidade" data-i18n="footer.privacy">Política de Privacidade</a></li>
+                        <li><a href="/termos-de-servico" data-i18n="footer.terms">Termos de Serviço</a></li>
+                        <li><a href="/seguranca-ia" data-i18n="footer.security">Segurança &amp; IA</a></li>
                     </ul>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <p data-i18n="footer.rights">&copy; 2026 Orbit - Grupo GSN. Todos os direitos reservados. <a href="/politica-privacidade" style="color:#8B949E;text-decoration:underline;margin-left:8px;">Pol&iacute;tica de Privacidade</a> <a href="/termos-de-servico" style="color:#8B949E;text-decoration:underline;margin-left:8px;">Termos de Servi&ccedil;o</a> <a href="/seguranca-ia" style="color:#8B949E;text-decoration:underline;margin-left:8px;">Seguran&ccedil;a &amp; IA</a></p>
+                <p data-i18n="footer.rights">&copy; 2026 Orbit - Grupo GSN. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>

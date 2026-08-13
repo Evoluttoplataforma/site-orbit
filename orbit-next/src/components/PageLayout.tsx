@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useCallback } from 'react';
 import { headerHTML } from './shared-header';
+import { reapplyOrbitLang } from '@/lib/reapply-lang';
 
 interface PageLayoutProps {
   contentHTML: string;
@@ -42,6 +43,13 @@ export function PageLayout({ contentHTML }: PageLayoutProps) {
     const t2 = setTimeout(initAll, 300);
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, [initAll]);
+
+  // LocaleProvider re-render resets dangerouslySetInnerHTML back to PT — re-apply EN after commit
+  useEffect(() => {
+    reapplyOrbitLang();
+    const t = setTimeout(reapplyOrbitLang, 80);
+    return () => clearTimeout(t);
+  });
 
   const fullHTML = headerHTML + '\n' + contentHTML;
 

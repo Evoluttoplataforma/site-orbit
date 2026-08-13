@@ -65,19 +65,40 @@ export default function RootLayout({
           "logo": "https://orbitgestao.com.br/images/logo-orbit-white.png",
           "image": "https://orbitgestao.com.br/images/og-image.png",
           "foundingDate": "1996",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Florianópolis",
-            "addressRegion": "SC",
-            "addressCountry": "BR"
-          },
-          "contactPoint": [{
-            "@type": "ContactPoint",
-            "telephone": "+55-48-98149-776",
-            "contactType": "customer service",
-            "areaServed": "BR",
-            "availableLanguage": ["Portuguese"]
-          }],
+          "address": [
+            {
+              "@type": "PostalAddress",
+              "streetAddress": "Square SC",
+              "addressLocality": "Florianópolis",
+              "addressRegion": "SC",
+              "addressCountry": "BR"
+            },
+            {
+              "@type": "PostalAddress",
+              "name": "Bainbridge World Center",
+              "streetAddress": "14051 International Dr",
+              "addressLocality": "Orlando",
+              "addressRegion": "FL",
+              "postalCode": "32821",
+              "addressCountry": "US"
+            }
+          ],
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "telephone": "+55-48-9814-9776",
+              "contactType": "customer service",
+              "areaServed": "BR",
+              "availableLanguage": ["Portuguese"]
+            },
+            {
+              "@type": "ContactPoint",
+              "telephone": "+1-954-818-2885",
+              "contactType": "customer service",
+              "areaServed": "US",
+              "availableLanguage": ["English", "Portuguese"]
+            }
+          ],
           "sameAs": [
             "https://www.instagram.com/orbitgestao/",
             "https://www.youtube.com/@Orbit.Gest%C3%A3o"
@@ -300,7 +321,7 @@ export default function RootLayout({
 })();
         ` }} />
         <script src="/js/main-v2.js?v=2" defer></script>
-        <script src="/js/orbit-init.js?v=2" defer></script>
+        <script src="/js/orbit-init.js?v=4" defer></script>
         <script src="/js/banner.js?v=6" defer></script>
         <script dangerouslySetInnerHTML={{ __html: `(function(){var l=document.createElement('link');l.rel='stylesheet';l.href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';document.head.appendChild(l)})()` }} />
       </body>

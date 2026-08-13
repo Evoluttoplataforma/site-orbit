@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { useState, useEffect, createContext, useContext, useCallback } from 'react';
 import ptMessages from '../../messages/pt.json';
 import enMessages from '../../messages/en.json';
+import { reapplyOrbitLang } from '@/lib/reapply-lang';
 
 type Locale = 'pt' | 'en';
 
@@ -25,6 +26,10 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
     const saved = localStorage.getItem('orbit_lang');
     if (saved === 'en') setLocaleState('en');
   }, []);
+
+  useEffect(() => {
+    reapplyOrbitLang();
+  }, [locale]);
 
   const setLocale = useCallback((next: Locale) => {
     localStorage.setItem('orbit_lang', next);

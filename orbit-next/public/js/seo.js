@@ -11,18 +11,38 @@
         "description": "Plataforma de gestão empresarial com agentes de IA integrados. Grupo GSN - 30 anos, 8.000+ empresas.",
         "foundingDate": "1996",
         "numberOfEmployees": { "@type": "QuantitativeValue", "value": "50+" },
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Florianópolis",
-            "addressRegion": "SC",
-            "addressCountry": "BR",
-            "streetAddress": "Square SC"
-        },
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+55-48-99120-6282",
-            "contactType": "sales"
-        },
+        "address": [
+            {
+                "@type": "PostalAddress",
+                "streetAddress": "Square SC",
+                "addressLocality": "Florianópolis",
+                "addressRegion": "SC",
+                "addressCountry": "BR"
+            },
+            {
+                "@type": "PostalAddress",
+                "name": "Bainbridge World Center",
+                "streetAddress": "14051 International Dr",
+                "addressLocality": "Orlando",
+                "addressRegion": "FL",
+                "postalCode": "32821",
+                "addressCountry": "US"
+            }
+        ],
+        "contactPoint": [
+            {
+                "@type": "ContactPoint",
+                "telephone": "+55-48-9814-9776",
+                "contactType": "sales",
+                "areaServed": "BR"
+            },
+            {
+                "@type": "ContactPoint",
+                "telephone": "+1-954-818-2885",
+                "contactType": "sales",
+                "areaServed": "US"
+            }
+        ],
         "parentOrganization": {
             "@type": "Organization",
             "name": "Grupo GSN",
