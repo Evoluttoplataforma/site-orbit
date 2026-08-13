@@ -1,8 +1,10 @@
 import { Metadata } from 'next';
 import articles from '@/data/articles.json';
+import articlesEnJson from '@/data/articles-en.json';
 import { headerHTML } from '@/components/shared-header';
 import { footerHTML } from '@/components/shared-footer';
 import { ORG_ID, WEBSITE_ID } from '@/lib/seo';
+import { i18nText } from '@/lib/i18n-html';
 
 export const metadata: Metadata = {
   title: 'Blog — Orbit Gestão',
@@ -43,6 +45,22 @@ const CATEGORIES: Record<string, string> = {
   indicadores: 'Indicadores',
   'planejamento-estrategico': 'Planejamento',
 };
+
+const CATEGORIES_EN: Record<string, string> = {
+  estrategica: 'Strategy',
+  operacional: 'Operations',
+  tecnologia: 'Technology',
+  novidades: 'News',
+  cultura: 'Culture',
+  financeiro: 'Finance',
+  ia: 'AI',
+  marketing: 'Marketing',
+  indicadores: 'KPIs',
+  'planejamento-estrategico': 'Planning',
+};
+
+type ArticleEn = { title?: string; excerpt?: string };
+const ARTICLES_EN = articlesEnJson as Record<string, ArticleEn>;
 
 function humanizeCategory(slug: string): string {
   if (CATEGORIES[slug]) return CATEGORIES[slug];
@@ -93,21 +111,21 @@ export default function BlogPage() {
       <div class="blog-filters__row">
         <div class="blog-search">
           <i class="fas fa-search"></i>
-          <input id="blogSearch" type="search" placeholder="Buscar artigos pelo título..." autocomplete="off">
+          <input id="blogSearch" type="search" placeholder="Buscar artigos pelo título..." data-i18n-placeholder="blog.search" autocomplete="off">
         </div>
         <div class="blog-sort-wrap">
           <i class="fas fa-arrow-down-wide-short"></i>
           <select id="blogSort" aria-label="Ordenar">
-            <option value="recent">Mais recentes</option>
-            <option value="oldest">Mais antigos</option>
+            <option value="recent" data-i18n="blog.newest">Mais recentes</option>
+            <option value="oldest" data-i18n="blog.oldest">Mais antigos</option>
             <option value="az">A — Z</option>
           </select>
         </div>
       </div>
       <div class="blog-cats">
-        <button type="button" class="blog-cat-chip is-active" data-cat="all">Todos <span>${sorted.length}</span></button>
+        <button type="button" class="blog-cat-chip is-active" data-cat="all">${i18nText('Todos', 'All')} <span>${sorted.length}</span></button>
         ${categoriesUsed
-          .map(([slug, count]) => `<button type="button" class="blog-cat-chip" data-cat="${escapeHtml(slug)}">${escapeHtml(humanizeCategory(slug))} <span>${count}</span></button>`)
+          .map(([slug, count]) => `<button type="button" class="blog-cat-chip" data-cat="${escapeHtml(slug)}">${i18nText(escapeHtml(humanizeCategory(slug)), escapeHtml(CATEGORIES_EN[slug] || humanizeCategory(slug)))} <span>${count}</span></button>`)
           .join('')}
       </div>
     </div>
@@ -116,8 +134,8 @@ export default function BlogPage() {
   const RECENT_COUNT = 6;
   const sectionHeaderHTML = `
     <div class="blog-section-head" id="blogSectionHead">
-      <h2><i class="fas fa-bolt"></i> Artigos recentes</h2>
-      <p>O que postamos ultimamente — atualizado toda vez que sai conteúdo novo.</p>
+      <h2><i class="fas fa-bolt"></i> ${i18nText('Artigos recentes', 'Recent articles')}</h2>
+      <p>${i18nText('O que postamos ultimamente — atualizado toda vez que sai conteúdo novo.', 'What we posted lately — updated every time new content goes out.')}</p>
     </div>
   `;
   const moreButtonHTML = sorted.length > RECENT_COUNT ? `
@@ -133,24 +151,26 @@ export default function BlogPage() {
     .map((a, i) => {
       const cat = a.category || 'sem-categoria';
       const catLabel = humanizeCategory(cat);
+      const en = ARTICLES_EN[a.slug] || {};
       const preview = a.excerpt || truncate(a.content, 140);
+      const previewEn = en.excerpt || preview;
       const date = formatDate(a.published_at);
       const mins = readTime(a.content);
       const initials = getInitials(a.author);
       const imgSrc = a.cover_url || '/images/og-image.png';
       const ts = a.published_at ? new Date(a.published_at).getTime() : 0;
-      const titleLower = a.title.toLowerCase();
+      const titleLower = (a.title + ' ' + (en.title || '')).toLowerCase();
 
       const hiddenMore = i >= RECENT_COUNT ? '1' : '0';
       const isoDate = a.published_at || '';
       return `<a href="/blog/${escapeHtml(a.slug)}" class="blog-card blog-card--animate" role="article" data-category="${escapeHtml(cat)}" data-title-lower="${escapeHtml(titleLower)}" data-date-ts="${ts}" data-title-az="${escapeHtml(titleLower)}" data-hidden-more="${hiddenMore}" style="animation-delay:${i * 80}ms;text-decoration:none;color:inherit;display:block;">
         <div class="blog-card__image">
-          <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(a.title)}" loading="lazy" width="600" height="340">
-          <span class="blog-card__tag">${escapeHtml(catLabel)}</span>
+          <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(en.title || a.title)}" loading="lazy" width="600" height="340">
+          <span class="blog-card__tag">${i18nText(escapeHtml(catLabel), escapeHtml(CATEGORIES_EN[cat] || catLabel))}</span>
         </div>
         <div class="blog-card__body">
-          <h3>${escapeHtml(a.title)}</h3>
-          <p>${escapeHtml(preview)}</p>
+          <h3>${i18nText(escapeHtml(a.title), escapeHtml(en.title || a.title))}</h3>
+          <p>${i18nText(escapeHtml(preview), escapeHtml(previewEn))}</p>
           <div class="blog-card__footer">
             <div class="blog-card__author">
               ${a.author_avatar

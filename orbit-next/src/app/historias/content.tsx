@@ -4,7 +4,9 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { pageHTML } from './html';
 import { headerHTML } from '@/components/shared-header';
 import staticStories from '@/data/stories.json';
+import storiesEnJson from '@/data/stories-en.json';
 import { reapplyOrbitLang } from '@/lib/reapply-lang';
+import { i18nText } from '@/lib/i18n-html';
 
 // Tabs primários da página de histórias: distingue B2B direto (Empresas) de
 // canais (Consultoria). Substitui o antigo "Serviços" que era genérico.
@@ -23,7 +25,20 @@ const SEGMENTS: Record<string, string> = {
   outro: 'Outro',
 };
 
-// Compatibilidade com dados antigos no Supabase
+const SEGMENTS_EN: Record<string, string> = {
+  empresa: 'Company',
+  consultoria: 'Consulting',
+  industria: 'Industry',
+  tecnologia: 'Technology',
+  saude: 'Healthcare',
+  educacao: 'Education',
+  varejo: 'Retail',
+  financeiro: 'Finance',
+  agronegocio: 'Agribusiness',
+  outro: 'Other',
+};
+
+const STORIES_EN = storiesEnJson as Record<string, { title?: string; subtitle?: string; challenge?: string }>;
 function normalizeSegment(raw: string): string {
   if (raw === 'servicos') return 'consultoria';
   return raw || 'outro';
@@ -113,7 +128,7 @@ export function PageContent() {
             const btn = document.createElement('button');
             btn.className = 'filter-btn';
             btn.dataset.filter = seg;
-            btn.textContent = SEGMENTS[seg];
+            btn.innerHTML = i18nText(SEGMENTS[seg], SEGMENTS_EN[seg] || SEGMENTS[seg]);
             filterBar.appendChild(btn);
           });
           const secondarySegments = [...new Set(stories.map((s) => s.segmento).filter(Boolean))]
@@ -122,7 +137,7 @@ export function PageContent() {
             const btn = document.createElement('button');
             btn.className = 'filter-btn';
             btn.dataset.filter = seg;
-            btn.textContent = SEGMENTS[seg] || seg;
+            btn.innerHTML = i18nText(SEGMENTS[seg] || seg, SEGMENTS_EN[seg] || seg);
             filterBar.appendChild(btn);
           });
           filterBar.querySelectorAll('.filter-btn').forEach((btn) => {
@@ -148,7 +163,10 @@ export function PageContent() {
             .map((story, i) => {
               const segLabel = SEGMENTS[story.segmento] || story.segmento || '';
               const headline = story.titulo || story.empresa;
+              const en = STORIES_EN[story.slug] || {};
+              const headlineEn = en.title || headline;
               const preview = story.subtitulo || (story.desafio ? story.desafio.slice(0, 140) + (story.desafio.length > 140 ? '...' : '') : '');
+              const previewEn = en.subtitle || (en.challenge ? en.challenge.slice(0, 140) + (en.challenge.length > 140 ? '...' : '') : preview);
               const initials = story.empresa ? story.empresa.split(' ').map(w => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase() : 'O';
               const href = story.slug ? `/historias/${story.slug}` : `/historias`;
 
@@ -159,11 +177,11 @@ export function PageContent() {
                     : story.companyLogo
                       ? `<img src="${story.companyLogo}" alt="${escapeHtml(story.empresa)}" style="max-width:120px;max-height:80px;object-fit:contain;" loading="lazy">`
                       : `<div style="width:80px;height:80px;border-radius:50%;background:rgba(255,186,26,0.15);display:flex;align-items:center;justify-content:center;"><i class="fas fa-building" style="color:#ffba1a;font-size:32px;"></i></div>`}
-                  ${segLabel ? `<span class="blog-card__tag" style="background:rgba(255,186,26,0.15);color:#ffba1a;border:1px solid rgba(255,186,26,0.3);">${escapeHtml(segLabel)}</span>` : ''}
+                  ${segLabel ? `<span class="blog-card__tag" style="background:rgba(255,186,26,0.15);color:#ffba1a;border:1px solid rgba(255,186,26,0.3);">${i18nText(escapeHtml(segLabel), escapeHtml(SEGMENTS_EN[story.segmento] || segLabel))}</span>` : ''}
                 </div>
                 <div class="blog-card__body">
-                  <h3>${escapeHtml(headline)}</h3>
-                  ${preview ? `<p>${escapeHtml(preview)}</p>` : ''}
+                  <h3>${i18nText(escapeHtml(headline), escapeHtml(headlineEn))}</h3>
+                  ${preview ? `<p>${i18nText(escapeHtml(preview), escapeHtml(previewEn))}</p>` : ''}
                   <div class="blog-card__footer">
                     <div class="blog-card__author">
                       ${story.coverImage ? '' : `<div class="blog-card__avatar">${initials}</div>`}
@@ -172,7 +190,7 @@ export function PageContent() {
                         <span class="blog-card__date">${story.cargo ? escapeHtml(story.cargo) : ''}</span>
                       </div>
                     </div>
-                    <span class="blog-card__read-time"><i class="fas fa-arrow-right"></i> Ver história</span>
+                    <span class="blog-card__read-time"><i class="fas fa-arrow-right"></i> ${i18nText('Ver história', 'See story')}</span>
                   </div>
                 </div>
               </a>`;

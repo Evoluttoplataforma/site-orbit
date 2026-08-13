@@ -15,27 +15,27 @@ export const pageHTML = `
 
             <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,186,26,0.12);border:1px solid rgba(255,186,26,0.4);border-radius:100px;padding:8px 20px;margin-bottom:24px;" data-reveal>
                 <span style="width:10px;height:10px;background:#ffba1a;border-radius:50%;display:inline-block;animation:livePulse 1.5s ease-in-out infinite;"></span>
-                <span style="color:#ffba1a;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:1.5px;">PR&Oacute;XIMA EDI&Ccedil;&Atilde;O EM DEFINI&Ccedil;&Atilde;O</span>
+                <span style="color:#ffba1a;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:1.5px;" data-i18n="live.badge">PRÓXIMA EDIÇÃO EM DEFINIÇÃO</span>
             </div>
 
             <!-- Title -->
-            <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:800;color:#fff;line-height:1.15;margin-bottom:20px;" data-reveal>
-                A Nova Era da Gest&atilde;o com Time de IA
+            <h1 style="font-size:clamp(2rem,5vw,3.5rem);font-weight:800;color:#fff;line-height:1.15;margin-bottom:20px;" data-reveal data-i18n="live.title">
+                A Nova Era da Gestão com Time de IA
             </h1>
 
             <!-- Subtitle -->
-            <p style="font-size:clamp(1rem,2.5vw,1.35rem);color:#8B949E;max-width:700px;margin:0 auto 16px;line-height:1.6;" data-reveal>
-                Como resolver problemas de <strong style="color:#ffba1a;">gest&atilde;o e processos com IA</strong>. Uma conversa pr&aacute;tica sobre o que j&aacute; &eacute; poss&iacute;vel fazer hoje &mdash; e como aplicar na sua empresa.
+            <p style="font-size:clamp(1rem,2.5vw,1.35rem);color:#8B949E;max-width:700px;margin:0 auto 16px;line-height:1.6;" data-reveal data-i18n="live.subtitle">
+                Como resolver problemas de <strong style="color:#ffba1a;">gestão e processos com IA</strong>. Uma conversa prática sobre o que já é possível fazer hoje — e como aplicar na sua empresa.
             </p>
 
             <!-- Aviso de pausa (substitui apresentador, agenda, countdown e CTA de inscrição) -->
             <div class="live-pause-card" style="background:#161B22;border:1px solid rgba(255,186,26,0.25);border-radius:16px;padding:32px 28px;max-width:620px;margin:40px auto 0;" data-reveal>
                 <i class="fa-solid fa-calendar-xmark" style="color:#ffba1a;font-size:28px;display:block;margin-bottom:16px;"></i>
-                <p style="color:#C9D1D9;font-size:1.05rem;line-height:1.7;margin:0;">
-                    Estamos <strong style="color:#fff;">redefinindo a agenda das pr&oacute;ximas lives</strong>. A nova data e o tema ser&atilde;o anunciados em breve, aqui e nos nossos canais.
+                <p style="color:#C9D1D9;font-size:1.05rem;line-height:1.7;margin:0;" data-i18n="live.pause">
+                    Estamos <strong style="color:#fff;">redefinindo a agenda das próximas lives</strong>. A nova data e o tema serão anunciados em breve, aqui e nos nossos canais.
                 </p>
-                <p style="color:#8B949E;font-size:14px;margin:18px 0 0;">
-                    <i class="fa-solid fa-circle-info" style="margin-right:6px;"></i>As inscri&ccedil;&otilde;es est&atilde;o temporariamente encerradas.
+                <p style="color:#8B949E;font-size:14px;margin:18px 0 0;" data-i18n="live.pause.note">
+                    <i class="fa-solid fa-circle-info" style="margin-right:6px;"></i>As inscrições estão temporariamente encerradas.
                 </p>
             </div>
         </div>

@@ -182,7 +182,7 @@ export const pageHTML = `
                             <div class="origin-director-card__avatar"><img src="/images/diretor-igor.jpg" alt="Igor Furniel" width="600" height="586" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Igor Furniel</h3>
-                                <p>Fundador e CEO do Grupo GSN. 30 anos liderando operações de gestão e consultoria em milhares de empresas.</p>
+                                <p>Fundador, CEO e Diretor de Produtos do Grupo GSN. 30 anos liderando a gestão e consultoria em milhares de empresas.</p>
                             </div>
                         </div>
                         <div class="origin-director-card">
@@ -196,11 +196,11 @@ export const pageHTML = `
                             <div class="origin-director-card__avatar"><img src="/images/diretor-chris-novo.jpg" alt="Christian Hart" width="600" height="669" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Christian Hart</h3>
-                                <p>Co-Founder. Diretor de Produto. Lidera o desenvolvimento da plataforma e a evolução dos agentes de IA.</p>
+                                <p>Co-Founder. Diretor de Operações. Lidera a operação da plataforma e a entrega para os clientes.</p>
                             </div>
                         </div>
                         <div class="origin-director-card">
-                            <div class="origin-director-card__avatar"><img src="/images/perfis/pedro-muschitz.jpg" alt="Pedro Muschitz" width="600" height="750" loading="lazy" decoding="async"></div>
+                            <div class="origin-director-card__avatar"><img src="/images/diretor-pedro.jpg" alt="Pedro Muschitz" width="600" height="552" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Pedro Muschitz</h3>
                                 <p>Co-Founder BR, Founder USA.</p>

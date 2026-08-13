@@ -1712,9 +1712,11 @@ function applyEnglish() {
 
     // === SOBRE PAGE - Director bios ===
     'Fundador e CEO do Grupo GSN. 30 anos liderando operações de gestão e consultoria em milhares de empresas.': 'Founder and CEO of Grupo GSN. 30 years leading management and consulting operations across thousands of companies.',
+    'Fundador, CEO e Diretor de Produtos do Grupo GSN. 30 anos liderando a gestão e consultoria em milhares de empresas.': 'Founder, CEO and Director of Products at Grupo GSN. 30 years leading management and consulting across thousands of companies.',
     'Diretora de Operações. Responsável pela entrega e qualidade — garante resultado mensurável para cada cliente.': 'Director of Operations. Responsible for delivery and quality — ensures measurable results for every client.',
     'Diretor de Produto. Lidera o desenvolvimento da plataforma e a evolução dos 12 agentes de IA.': 'Director of Product. Leads the platform development and the evolution of the 12 AI agents.',
     'Co-Founder. Diretor de Produto. Lidera o desenvolvimento da plataforma e a evolução dos agentes de IA.': 'Co-Founder. Director of Product. Leads the platform development and the evolution of the AI agents.',
+    'Co-Founder. Diretor de Operações. Lidera a operação da plataforma e a entrega para os clientes.': 'Co-Founder. Director of Operations. Leads platform operations and delivery for clients.',
     'Co-Founder BR, Founder USA.': 'Co-Founder BR, Founder USA.',
     'Diretor de Vendas. Responsável pela expansão comercial, canais e parcerias estratégicas.': 'Director of Sales. Responsible for commercial expansion, channels and strategic partnerships.',
     'Diretor de Tecnologia. Arquiteto da infraestrutura que garante performance, segurança e escala.': 'Director of Technology. Architect of the infrastructure that ensures performance, security and scale.',
@@ -2131,8 +2133,6 @@ function applyEnglish() {
     'Cada cliente novo é receita pura': 'Each new client is pure revenue',
 
     // === LIVE / TRAININGS UI ===
-    'Como resolver problemas de': 'How to solve problems of',
-    'Essa live para voc que...': 'This live is for you who...',
     'Garanta sua vaga na live': 'Secure your live seat',
     'Escolha um treinamento e marque sua presena': 'Pick a training and book your seat',
     'Pegue a prxima data disponvel ou agende para uma das prximas semanas.': 'Grab the next available date or schedule one of the coming weeks.',
@@ -2569,6 +2569,30 @@ function applyEnglish() {
     'footer.privacy': 'Privacy Policy',
     'footer.terms': 'Terms of Service',
     'footer.security': 'Security & AI',
+    'live.badge': 'NEXT EDITION TO BE ANNOUNCED',
+    'live.title': 'The New Era of Management with an AI Team',
+    'live.subtitle': 'How to solve <strong style="color:#ffba1a;">management and process problems with AI</strong>. A practical conversation about what is already possible today — and how to apply it in your company.',
+    'live.pause': 'We are <strong style="color:#fff;">redefining the schedule for upcoming lives</strong>. The new date and topic will be announced soon, here and on our channels.',
+    'live.pause.note': '<i class="fa-solid fa-circle-info" style="margin-right:6px;"></i>Registration is temporarily closed.',
+    'blog.back': 'Back to the Blog',
+    'blog.back_stories': 'Back to Stories',
+    'blog.challenge': 'The Challenge',
+    'blog.solution': 'The Solution',
+    'blog.results': 'The Results',
+    'blog.read': 'min read',
+    'blog.written': 'Written by',
+    'blog.team': 'Orbit Team',
+    'blog.share': 'Share',
+    'blog.recent': 'Recent articles',
+    'blog.search': 'Search articles by title...',
+    'blog.sort': 'Sort',
+    'blog.newest': 'Newest',
+    'blog.oldest': 'Oldest',
+    'blog.all': 'All',
+    'blog.more': 'See more',
+    'story.see': 'See story',
+    'story.transform': 'Want to transform your company\'s management?',
+    'story.demo_body': 'Book a demo and see how Orbit can help you reach the same results.',
     'mobile.title': 'Menu', 'mobile.nav': 'Navigation',
     'mobile.plans': 'Plans & Pricing', 'mobile.contact': 'Contact Us',
     'mobile.platform': 'Platform', 'mobile.content': 'Resources', 'mobile.company': 'Company',
@@ -2687,6 +2711,11 @@ function applyEnglish() {
         el.textContent = i18nMap[key];
       }
     }
+  });
+
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+    var key = el.getAttribute('data-i18n-placeholder');
+    if (key && i18nMap[key]) el.setAttribute('placeholder', i18nMap[key]);
   });
 
   // Update page title and lang

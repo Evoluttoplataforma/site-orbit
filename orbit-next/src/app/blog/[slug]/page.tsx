@@ -1,10 +1,12 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import articles from '@/data/articles.json';
+import articlesEnJson from '@/data/articles-en.json';
 import { headerHTML } from '@/components/shared-header';
 import { footerHTML } from '@/components/shared-footer';
 import BlogComments from '@/components/blog/BlogComments';
 import { articleCanonical, ORG_ID, WEBSITE_ID } from '@/lib/seo';
+import { i18nText, i18nEl } from '@/lib/i18n-html';
 
 interface Article {
   id: number;
@@ -32,6 +34,18 @@ const CATEGORIES: Record<string, string> = {
   cultura: 'Cultura',
   financeiro: 'Financeiro',
 };
+
+const CATEGORIES_EN: Record<string, string> = {
+  estrategica: 'Strategy',
+  operacional: 'Operations',
+  tecnologia: 'Technology',
+  novidades: 'News',
+  cultura: 'Culture',
+  financeiro: 'Finance',
+};
+
+type ArticleEn = { title?: string; excerpt?: string; content?: string };
+const ARTICLES_EN = articlesEnJson as Record<string, ArticleEn>;
 
 function getArticle(slug: string): Article | undefined {
   return (articles as Article[]).find((a) => a.slug === slug);
@@ -83,10 +97,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-function formatDate(dateStr: string | null): string {
+function formatDate(dateStr: string | null, locale = 'pt-BR'): string {
   if (!dateStr) return '';
   const d = new Date(dateStr);
-  return d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+  return d.toLocaleDateString(locale, { day: '2-digit', month: 'long', year: 'numeric' });
 }
 
 function readTime(content: string): number {
@@ -189,8 +203,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const article = getArticle(slug);
   if (!article) notFound();
 
+  const en = ARTICLES_EN[article.slug] || {};
   const categoryLabel = CATEGORIES[article.category || ''] || article.category || 'Artigo';
+  const categoryLabelEn = CATEGORIES_EN[article.category || ''] || categoryLabel;
   const date = formatDate(article.published_at);
+  const dateEn = formatDate(article.published_at, 'en-US');
   const mins = readTime(article.content);
   const initials = getInitials(article.author);
   const author = article.author || 'Equipe Orbit';
@@ -245,28 +262,32 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const relatedHTML = related.length > 0 ? `
     <section class="blog-related" aria-label="Artigos relacionados">
       <div class="blog-related__head">
-        <h2><i class="fas fa-newspaper"></i> Continue lendo</h2>
-        <a href="/blog" class="blog-related__see-all">Ver todos <i class="fas fa-arrow-right"></i></a>
+        <h2><i class="fas fa-newspaper"></i> ${i18nText('Continue lendo', 'Keep reading')}</h2>
+        <a href="/blog" class="blog-related__see-all">${i18nText('Ver todos', 'See all')} <i class="fas fa-arrow-right"></i></a>
       </div>
       <div class="blog-related__grid">
         ${related.map((r) => {
+          const rEn = ARTICLES_EN[r.slug] || {};
           const rCat = CATEGORIES[r.category || ''] || r.category || 'Artigo';
+          const rCatEn = CATEGORIES_EN[r.category || ''] || rCat;
           const rImg = r.cover_url || '/images/og-image.png';
           const rDate = formatDate(r.published_at);
+          const rDateEn = formatDate(r.published_at, 'en-US');
           const rIso = r.published_at || '';
           const rMins = readTime(r.content);
           const rExcerpt = (r.excerpt || r.content.replace(/<[^>]*>/g, '').slice(0, 110) + '...').slice(0, 140);
+          const rExcerptEn = (rEn.excerpt || rExcerpt).slice(0, 140);
           return `<a href="/blog/${escapeHtml(r.slug)}" class="blog-related__card" role="article">
-            <div class="blog-related__img"><img src="${escapeHtml(rImg)}" alt="${escapeHtml(r.title)}" loading="lazy" width="600" height="338"></div>
+            <div class="blog-related__img"><img src="${escapeHtml(rImg)}" alt="${escapeHtml(rEn.title || r.title)}" loading="lazy" width="600" height="338"></div>
             <div class="blog-related__body">
-              <span class="blog-related__tag">${escapeHtml(rCat)}</span>
-              <h3>${escapeHtml(r.title)}</h3>
-              <p class="blog-related__excerpt">${escapeHtml(rExcerpt)}</p>
+              <span class="blog-related__tag">${i18nText(escapeHtml(rCat), escapeHtml(rCatEn))}</span>
+              <h3>${i18nText(escapeHtml(r.title), escapeHtml(rEn.title || r.title))}</h3>
+              <p class="blog-related__excerpt">${i18nText(escapeHtml(rExcerpt), escapeHtml(rExcerptEn))}</p>
               <div class="blog-related__meta">
-                <time datetime="${escapeHtml(rIso)}">${rDate}</time>
+                <time datetime="${escapeHtml(rIso)}">${i18nText(rDate, rDateEn)}</time>
                 <span class="blog-related__sep">&middot;</span>
                 <span><i class="fas fa-clock"></i> ${rMins} min</span>
-                <span class="blog-related__arrow">Ler <i class="fas fa-arrow-right"></i></span>
+                <span class="blog-related__arrow">${i18nText('Ler', 'Read')} <i class="fas fa-arrow-right"></i></span>
               </div>
             </div>
           </a>`;
@@ -311,12 +332,12 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const articleHTML = `
     ${headerHTML}
     <div class="blog-article" style="padding-top:100px;">
-      <a href="/blog" class="blog-article__back"><i class="fas fa-arrow-left"></i> Voltar ao Blog</a>
+      <a href="/blog" class="blog-article__back"><i class="fas fa-arrow-left"></i> ${i18nText('Voltar ao Blog', 'Back to the Blog')}</a>
       <div class="blog-article__layout">
         <article class="blog-article__main">
-          ${article.cover_url ? `<img class="blog-article__cover" src="${article.cover_url}" alt="${article.title}" width="1200" height="630" loading="eager">` : ''}
-          <span class="blog-article__category">${categoryLabel}</span>
-          <h1 class="blog-article__title">${article.title}</h1>
+          ${article.cover_url ? `<img class="blog-article__cover" src="${article.cover_url}" alt="${escapeHtml(en.title || article.title)}" width="1200" height="630" loading="eager">` : ''}
+          <span class="blog-article__category">${i18nText(escapeHtml(categoryLabel), escapeHtml(categoryLabelEn))}</span>
+          ${i18nEl('h1', escapeHtml(article.title), en.title ? escapeHtml(en.title) : undefined, 'class="blog-article__title"')}
           <div class="blog-article__meta">
             <div class="blog-article__meta-author">
               ${article.author_avatar
@@ -324,36 +345,37 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 : `<div class="blog-card__avatar">${initials}</div>`}
               <span>${author}</span>
             </div>
-            <span><i class="fas fa-calendar-alt"></i> ${date}</span>
-            <span><i class="fas fa-clock"></i> ${mins} min de leitura</span>
+            <span><i class="fas fa-calendar-alt"></i> ${i18nText(date, dateEn)}</span>
+            <span><i class="fas fa-clock"></i> ${i18nText(`${mins} min de leitura`, `${mins} min read`)}</span>
           </div>
-          <div class="blog-article-content">${article.content}</div>
+          <div class="blog-article-content i18n-pt">${article.content}</div>
+          ${en.content ? `<div class="blog-article-content i18n-en">${en.content}</div>` : ''}
           <div class="blog-article__bottom-cta">
-            <a href="/blog" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Voltar ao Blog</a>
+            <a href="/blog" class="btn btn-primary"><i class="fas fa-arrow-left"></i> ${i18nText('Voltar ao Blog', 'Back to the Blog')}</a>
           </div>
         </article>
         <aside class="blog-article__sidebar">
           <div class="blog-article__sidebar-sticky">
             <div class="blog-sidebar-card">
-              <p class="blog-sidebar-card__label">Escrito por</p>
+              <p class="blog-sidebar-card__label">${i18nText('Escrito por', 'Written by')}</p>
               <div class="blog-sidebar-card__author">
                 ${article.author_avatar
                   ? `<img src="${article.author_avatar}" style="width:48px;height:48px;border-radius:50%;object-fit:cover;" alt="${author}">`
                   : `<div class="blog-card__avatar blog-card__avatar--lg">${initials}</div>`}
                 <div>
                   <p class="blog-sidebar-card__name">${author}</p>
-                  <p class="blog-sidebar-card__role">Equipe Orbit</p>
+                  <p class="blog-sidebar-card__role">${i18nText('Equipe Orbit', 'Orbit Team')}</p>
                 </div>
               </div>
             </div>
             <div class="blog-sidebar-cta">
               <div class="blog-sidebar-cta__icon"><i class="fas fa-robot"></i></div>
-              <h3>Conheça o Time de IA</h3>
-              <p>Dezenas de agentes especializados que operam a gestão da sua empresa 24/7.</p>
-              <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary" style="width:100%;text-align:center;">Agendar demonstração</a>
+              ${i18nEl('h3', 'Conheça o Time de IA', 'Meet the AI Team')}
+              ${i18nEl('p', 'Dezenas de agentes especializados que operam a gestão da sua empresa 24/7.', 'Dozens of specialist agents that run your company\'s management 24/7.')}
+              <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary" style="width:100%;text-align:center;">${i18nText('Agendar demonstração', 'Book a demo')}</a>
             </div>
             <div class="blog-sidebar-card">
-              <p class="blog-sidebar-card__label">Compartilhar</p>
+              <p class="blog-sidebar-card__label">${i18nText('Compartilhar', 'Share')}</p>
               <div class="blog-sidebar-share">
                 <a href="https://www.instagram.com/orbitgestao/" target="_blank" class="blog-share-btn blog-share-btn--instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 <button class="blog-share-btn blog-share-btn--copy" onclick="navigator.clipboard.writeText(location.href)" aria-label="Copiar link"><i class="fas fa-link"></i></button>
