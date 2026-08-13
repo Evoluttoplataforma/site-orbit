@@ -1,3 +1,5 @@
+import { i18nText } from '@/lib/i18n-html';
+
 // Auto-generated
 export const pageHTML = `
     <!-- ═══ 1. HERO ═══ -->
@@ -86,7 +88,7 @@ export const pageHTML = `
                                 <div class="wa-header__online"></div>
                             </div>
                             <div class="wa-header__info">
-                                <span class="wa-header__name">Marcos - Consultor</span>
+                                <span class="wa-header__name">${i18nText('Marcos - Consultor', 'Marcos - Consultant')}</span>
                                 <span class="wa-header__status">online</span>
                             </div>
                             <div class="wa-header__actions">
@@ -163,7 +165,7 @@ export const pageHTML = `
                                 <div class="wa-header__online"></div>
                             </div>
                             <div class="wa-header__info">
-                                <span class="wa-header__name">Fernando - Consultoria</span>
+                                <span class="wa-header__name">${i18nText('Fernando - Consultoria', 'Fernando - Consulting')}</span>
                                 <span class="wa-header__status">online</span>
                             </div>
                             <div class="wa-header__actions">
@@ -236,7 +238,7 @@ export const pageHTML = `
                                 <div class="wa-header__online"></div>
                             </div>
                             <div class="wa-header__info">
-                                <span class="wa-header__name">Ricardo - Consultoria</span>
+                                <span class="wa-header__name">${i18nText('Ricardo - Consultoria', 'Ricardo - Consulting')}</span>
                                 <span class="wa-header__status">online</span>
                             </div>
                             <div class="wa-header__actions">
@@ -1599,7 +1601,7 @@ export const pageHTML = `
                     </div>
                     <div class="math-calc__result">
                         <span class="math-calc__result-label">Margem estimada (~60%)</span>
-                        <span class="math-calc__result-value math-calc__result-value--green" id="calcMargem">R$ 180.000/ano</span>
+                        <span class="math-calc__result-value math-calc__result-value--green"><span id="calcMargem">R$ 180.000</span>${i18nText('/ano', '/year')}</span>
                     </div>
                 </div>
 
@@ -1752,7 +1754,7 @@ export const pageHTML = `
 
                     mensalEl.textContent = fmt(mensal);
                     anualEl.textContent = fmt(anual);
-                    margemEl.textContent = fmt(margem) + '/ano';
+                    margemEl.textContent = fmt(margem);
                 }
 
                 clientesInput.addEventListener('input', calc);
