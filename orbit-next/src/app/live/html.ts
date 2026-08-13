@@ -1,4 +1,4 @@
-import { i18nText } from '@/lib/i18n-html';
+import { i18nText, i18nEl } from '@/lib/i18n-html';
 
 // AGENDA PAUSADA em 29/07/2026.
 // A versão anterior desta página (Live Quinzenal do Igor, terça 13h, com countdown e
@@ -44,8 +44,8 @@ export const pageHTML = `
     </section>
 
     <!-- ═══ OLIVIA + AGENTES (Orbit Hub) ═══ -->
-    <section style="padding:80px 0 40px;background:#0D1117;overflow:hidden;">
-        <div class="container" style="overflow:hidden;">
+    <section class="live-orbit-hub-section" style="padding:80px 0 80px;background:#0D1117;position:relative;z-index:4;overflow:visible;">
+        <div class="container" style="overflow:visible;">
             <!-- ═══ ORBITAL: dezenas de agentes ao redor da Olívia ═══ -->
             <div style="margin-top:80px;" id="agentes">
                 <!-- Section header -->
@@ -346,6 +346,8 @@ export const pageHTML = `
                     max-width: 860px;
                     height: 860px;
                     margin: 0 auto;
+                    overflow: visible;
+                    z-index: 2;
                 }
 
                 /* SVG connector lines */
@@ -532,7 +534,7 @@ export const pageHTML = `
                 .orbit-hub__node { cursor: pointer; }
                 .orbit-hub__node.orbit-node--active {
                     transform: translate(-50%, -50%) scale(1.2);
-                    z-index: 100;
+                    z-index: 50;
                 }
                 .orbit-hub__node.orbit-node--active .orbit-hub__node-icon {
                     border-color: #ffba1a;
@@ -564,6 +566,27 @@ export const pageHTML = `
                     opacity: 1;
                     pointer-events: auto;
                     transform: translateX(-50%) scale(1);
+                }
+                /* Bottom-half nodes: open the card upward so it is not clipped by the next section */
+                .orbit-hub__node[data-idx="4"] .orbit-node-card,
+                .orbit-hub__node[data-idx="5"] .orbit-node-card,
+                .orbit-hub__node[data-idx="6"] .orbit-node-card,
+                .orbit-hub__node[data-idx="7"] .orbit-node-card,
+                .orbit-hub__node[data-idx="8"] .orbit-node-card {
+                    top: auto;
+                    bottom: calc(100% + 12px);
+                }
+                .orbit-hub__node[data-idx="4"] .orbit-node-card::before,
+                .orbit-hub__node[data-idx="5"] .orbit-node-card::before,
+                .orbit-hub__node[data-idx="6"] .orbit-node-card::before,
+                .orbit-hub__node[data-idx="7"] .orbit-node-card::before,
+                .orbit-hub__node[data-idx="8"] .orbit-node-card::before {
+                    top: auto;
+                    bottom: -6px;
+                    border-left: none;
+                    border-top: none;
+                    border-right: 1px solid rgba(255,186,26,0.25);
+                    border-bottom: 1px solid rgba(255,186,26,0.25);
                 }
                 .orbit-node-card::before {
                     content: '';
@@ -715,47 +738,39 @@ export const pageHTML = `
 
 
     <!-- ═══ QUEM DEVE PARTICIPAR ═══ -->
-    <section style="padding:100px 0;background:var(--black-soft);">
+    <section style="padding:100px 0;background:var(--black-soft);position:relative;z-index:1;">
         <div class="container" style="max-width:800px;text-align:center;">
-            <h2 style="font-size:clamp(1.5rem,3vw,2.25rem);font-weight:800;color:#fff;margin-bottom:16px;" data-reveal>
-                Essa live &eacute; para voc&ecirc; que...
-            </h2>
+            ${i18nEl('h2', 'Essa live é para você que...', 'This live is for you if you...', 'style="font-size:clamp(1.5rem,3vw,2.25rem);font-weight:800;color:#fff;margin-bottom:16px;" data-reveal')}
             <div style="display:flex;flex-direction:column;gap:16px;margin-top:40px;text-align:left;max-width:600px;margin-left:auto;margin-right:auto;">
                 <div style="display:flex;align-items:flex-start;gap:14px;" data-reveal>
                     <i class="fa-solid fa-check-circle" style="color:#ffba1a;font-size:20px;margin-top:3px;flex-shrink:0;"></i>
-                    <span style="color:#C9D1D9;font-size:17px;line-height:1.6;">E empresario ou gestor e quer ver <strong style="color:#fff;">IA operando gestao de verdade</strong></span>
+                    <span style="color:#C9D1D9;font-size:17px;line-height:1.6;">${i18nText('É empresário ou gestor e quer ver <strong style="color:#fff;">IA operando gestão de verdade</strong>', 'Are a business owner or manager and want to see <strong style="color:#fff;">AI actually running management</strong>')}</span>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:14px;" data-reveal>
                     <i class="fa-solid fa-check-circle" style="color:#ffba1a;font-size:20px;margin-top:3px;flex-shrink:0;"></i>
-                    <span style="color:#C9D1D9;font-size:17px;line-height:1.6;">Quer conhecer a <strong style="color:#ffba1a;">Olivia</strong> e os agentes antes de contratar</span>
+                    <span style="color:#C9D1D9;font-size:17px;line-height:1.6;">${i18nText('Quer conhecer a <strong style="color:#ffba1a;">Olívia</strong> e os agentes antes de contratar', 'Want to meet <strong style="color:#ffba1a;">Olívia</strong> and the agents before hiring')}</span>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:14px;" data-reveal>
                     <i class="fa-solid fa-check-circle" style="color:#ffba1a;font-size:20px;margin-top:3px;flex-shrink:0;"></i>
-                    <span style="color:#C9D1D9;font-size:17px;line-height:1.6;">Busca uma <strong style="color:#fff;">solu&ccedil;&atilde;o completa</strong>, n&atilde;o s&oacute; mais uma ferramenta</span>
+                    <span style="color:#C9D1D9;font-size:17px;line-height:1.6;">${i18nText('Busca uma <strong style="color:#fff;">solução completa</strong>, não só mais uma ferramenta', 'Are looking for a <strong style="color:#fff;">complete solution</strong>, not just another tool')}</span>
                 </div>
                 <div style="display:flex;align-items:flex-start;gap:14px;" data-reveal>
                     <i class="fa-solid fa-check-circle" style="color:#ffba1a;font-size:20px;margin-top:3px;flex-shrink:0;"></i>
-                    <span style="color:#C9D1D9;font-size:17px;line-height:1.6;">Quer tirar duvidas <strong style="color:#fff;">ao vivo</strong> com quem criou a plataforma</span>
+                    <span style="color:#C9D1D9;font-size:17px;line-height:1.6;">${i18nText('Quer tirar dúvidas <strong style="color:#fff;">ao vivo</strong> com quem criou a plataforma', 'Want to ask questions <strong style="color:#fff;">live</strong> with the people who built the platform')}</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ═══ AGENDA ═══ -->
-    <section id="inscreva-se" style="padding:100px 0;background:#0D1117;text-align:center;">
+    <section id="inscreva-se" style="padding:100px 0;background:#0D1117;text-align:center;position:relative;z-index:1;">
         <div class="container" style="max-width:640px;">
-            <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;color:#fff;margin-bottom:12px;" data-reveal>
-                Nova edi&ccedil;&atilde;o em defini&ccedil;&atilde;o
-            </h2>
-            <p style="color:#8B949E;font-size:1.1rem;margin-bottom:32px;" data-reveal>
-                Estamos definindo a data e o tema da pr&oacute;xima live. Por enquanto, n&atilde;o h&aacute; inscri&ccedil;&otilde;es abertas.
-            </p>
+            ${i18nEl('h2', 'Nova edição em definição', 'New edition being scheduled', 'style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;color:#fff;margin-bottom:12px;" data-reveal')}
+            ${i18nEl('p', 'Estamos definindo a data e o tema da próxima live. Por enquanto, não há inscrições abertas.', 'We are setting the date and topic of the next live. For now, registration is closed.', 'style="color:#8B949E;font-size:1.1rem;margin-bottom:32px;" data-reveal')}
 
             <div style="background:#161B22;border:1px solid rgba(255,186,26,0.18);border-radius:16px;padding:36px 28px;" data-reveal>
                 <i class="fa-solid fa-hourglass-half" style="color:#ffba1a;font-size:26px;display:block;margin-bottom:14px;"></i>
-                <p style="color:#C9D1D9;font-size:1rem;line-height:1.7;margin:0;">
-                    Assim que a nova agenda estiver fechada, a inscri&ccedil;&atilde;o volta a ficar dispon&iacute;vel nesta p&aacute;gina.
-                </p>
+                ${i18nEl('p', 'Assim que a nova agenda estiver fechada, a inscrição volta a ficar disponível nesta página.', 'As soon as the new schedule is set, registration will be available again on this page.', 'style="color:#C9D1D9;font-size:1rem;line-height:1.7;margin:0;"')}
             </div>
         </div>
     </section>
