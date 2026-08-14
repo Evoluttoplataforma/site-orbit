@@ -357,23 +357,13 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </article>
         <aside class="blog-article__sidebar">
           <div class="blog-article__sidebar-sticky">
-            <div class="blog-sidebar-card">
-              <p class="blog-sidebar-card__label">${i18nText('Escrito por', 'Written by')}</p>
-              <div class="blog-sidebar-card__author">
-                ${article.author_avatar
-                  ? `<img src="${article.author_avatar}" style="width:48px;height:48px;border-radius:50%;object-fit:cover;" alt="${author}">`
-                  : `<div class="blog-card__avatar blog-card__avatar--lg">${initials}</div>`}
-                <div>
-                  <p class="blog-sidebar-card__name">${author}</p>
-                  <p class="blog-sidebar-card__role">${i18nText('Equipe Orbit', 'Orbit Team')}</p>
-                </div>
-              </div>
-            </div>
             <div class="blog-sidebar-cta">
-              <div class="blog-sidebar-cta__icon"><i class="fas fa-robot"></i></div>
+              <div class="blog-sidebar-cta__logo">
+                <img src="/images/logo-orbit-white.png" alt="Orbit" width="40" height="40">
+              </div>
               ${i18nEl('h3', 'Conheça o Time de IA', 'Meet the AI Team')}
               ${i18nEl('p', 'Dezenas de agentes especializados que operam a gestão da sua empresa 24/7.', 'Dozens of specialist agents that run your company\'s management 24/7.')}
-              <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary" style="width:100%;text-align:center;">${i18nText('Agendar demonstração', 'Book a demo')}</a>
+              <a href="https://demonstracao.orbitgestao.com.br/chat" class="btn btn-primary">${i18nText('Agendar demonstração', 'Book a demo')} <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="blog-sidebar-card">
               <p class="blog-sidebar-card__label">${i18nText('Compartilhar', 'Share')}</p>

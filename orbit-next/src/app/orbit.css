@@ -13965,8 +13965,11 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
         .blog-article-content > div { margin-bottom: 24px; }
 
         /* Sidebar */
-        .blog-article__sidebar {}
-        .blog-article__sidebar-sticky {}
+        .blog-article__sidebar { align-self: start; }
+        .blog-article__sidebar-sticky {
+            position: sticky;
+            top: 104px;
+        }
         .blog-sidebar-card {
             background: #fff; border: 1px solid #E5E7EB; border-radius: 16px;
             padding: 24px; margin-bottom: 20px;
@@ -13982,18 +13985,29 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
         .blog-sidebar-card__role { color: #9CA3AF; font-size: 13px; margin: 0; }
 
         .blog-sidebar-cta {
-            background: linear-gradient(135deg, rgba(255,186,26,0.06), rgba(255,186,26,0.02));
-            border: 1px solid rgba(255,186,26,0.2); border-radius: 16px;
-            padding: 28px; margin-bottom: 20px;
+            background: #0D1117;
+            border: 1px solid rgba(255,186,26,0.18);
+            border-radius: 20px;
+            padding: 32px 24px 28px;
+            margin-bottom: 20px;
+            text-align: center;
         }
+        .blog-sidebar-cta__logo,
         .blog-sidebar-cta__icon {
-            width: 48px; height: 48px; background: rgba(255,186,26,0.12);
-            border-radius: 12px; display: flex; align-items: center; justify-content: center;
-            margin-bottom: 16px;
+            width: 72px; height: 72px; margin: 0 auto 18px;
+            border-radius: 50%; border: 2px solid #ffba1a;
+            background: #161b22;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
         }
-        .blog-sidebar-cta__icon i { color: #ffba1a; font-size: 20px; }
-        .blog-sidebar-cta h3 { color: #1A1D23; font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
-        .blog-sidebar-cta p { color: #6B7280; font-size: 14px; line-height: 1.6; margin-bottom: 20px; }
+        .blog-sidebar-cta__logo img { width: 40px; height: auto; }
+        .blog-sidebar-cta__icon i { color: #ffba1a; font-size: 24px; }
+        .blog-sidebar-cta h3 { color: #fff; font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
+        .blog-sidebar-cta p { color: #9CA3AF; font-size: 14px; line-height: 1.6; margin-bottom: 22px; }
+        .blog-sidebar-cta .btn {
+            width: 100%; text-align: center; border-radius: 999px;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+        }
 
         .blog-sidebar-share { display: flex; gap: 10px; }
         .blog-share-btn {
@@ -14017,6 +14031,7 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
             .blog-article__layout { grid-template-columns: 1fr; gap: 32px; }
             .blog-article__main { max-width: 100%; }
             .blog-article__sidebar { position: static; order: 2; }
+            .blog-article__sidebar-sticky { position: static; }
         }
         /* ═══ Quebra de palavras longas (escopo: só conteudo e titulo do artigo) ═══ */
         /* NUNCA mexer no .blog-article container — quebraria max-width 1200px desktop */
