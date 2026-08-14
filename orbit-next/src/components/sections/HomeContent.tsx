@@ -2,7 +2,8 @@ import { PageLayout } from '@/components/PageLayout';
 import { pageHTML } from '@/app/home-html';
 import articles from '@/data/articles.json';
 import articlesEnJson from '@/data/articles-en.json';
-import { i18nText, i18nEl } from '@/lib/i18n-html';
+import { i18nText } from '@/lib/i18n-html';
+import { blogCoverHTML } from '@/lib/blog-cover';
 
 interface Article {
   title: string;
@@ -49,18 +50,23 @@ function renderHomeArticlesGrid(): string {
     return `<p style="color:var(--gray-400);text-align:center;width:100%;">${i18nText('Em breve novos artigos serão publicados.', 'New articles will be published soon.')}</p>`;
   }
   return recent.map((a) => {
-    const imgSrc = a.cover_url || 'https://placehold.co/400x250/0D1117/ffba1a?text=Orbit+Blog';
     const cat = HOME_CATS[a.category || ''] || a.category || 'Artigo';
     const catEn = HOME_CATS_EN[a.category || ''] || cat;
     const en = ARTICLES_EN[a.slug] || {};
-    const alt = escapeHtml(en.title || a.title);
     return `<a href="/blog/${escapeHtml(a.slug)}" class="knowledge-card" style="text-decoration:none;color:inherit;display:block;">
       <div class="knowledge-card__image">
-        <img src="${escapeHtml(imgSrc)}" alt="${alt}" width="400" height="250" loading="lazy" decoding="async">
-        <span class="knowledge-card__type"><i class="fas fa-file-alt"></i> ${i18nText(escapeHtml(cat), escapeHtml(catEn))}</span>
+        ${blogCoverHTML({
+          slug: a.slug,
+          titlePt: a.title,
+          titleEn: en.title,
+          category: a.category || 'estrategica',
+          categoryLabelPt: cat,
+          categoryLabelEn: catEn,
+          size: 'thumb',
+          headingTag: 'h4',
+        })}
       </div>
       <div class="knowledge-card__body">
-        ${i18nEl('h4', escapeHtml(a.title), en.title ? escapeHtml(en.title) : undefined)}
         <span class="knowledge-card__link">${i18nText('Ler artigo', 'Read article')}</span>
       </div>
     </a>`;

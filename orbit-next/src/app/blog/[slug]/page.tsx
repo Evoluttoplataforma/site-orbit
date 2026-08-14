@@ -7,6 +7,7 @@ import { footerHTML } from '@/components/shared-footer';
 import BlogComments from '@/components/blog/BlogComments';
 import { articleCanonical, ORG_ID, WEBSITE_ID } from '@/lib/seo';
 import { i18nText, i18nEl } from '@/lib/i18n-html';
+import { blogCoverHTML } from '@/lib/blog-cover';
 
 interface Article {
   id: number;
@@ -270,7 +271,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           const rEn = ARTICLES_EN[r.slug] || {};
           const rCat = CATEGORIES[r.category || ''] || r.category || 'Artigo';
           const rCatEn = CATEGORIES_EN[r.category || ''] || rCat;
-          const rImg = r.cover_url || '/images/og-image.png';
           const rDate = formatDate(r.published_at);
           const rDateEn = formatDate(r.published_at, 'en-US');
           const rIso = r.published_at || '';
@@ -278,10 +278,17 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           const rExcerpt = (r.excerpt || r.content.replace(/<[^>]*>/g, '').slice(0, 110) + '...').slice(0, 140);
           const rExcerptEn = (rEn.excerpt || rExcerpt).slice(0, 140);
           return `<a href="/blog/${escapeHtml(r.slug)}" class="blog-related__card" role="article">
-            <div class="blog-related__img"><img src="${escapeHtml(rImg)}" alt="${escapeHtml(rEn.title || r.title)}" loading="lazy" width="600" height="338"></div>
+            <div class="blog-related__img">${blogCoverHTML({
+              slug: r.slug,
+              titlePt: r.title,
+              titleEn: rEn.title,
+              category: r.category || 'estrategica',
+              categoryLabelPt: rCat,
+              categoryLabelEn: rCatEn,
+              size: 'thumb',
+              headingTag: 'h3',
+            })}</div>
             <div class="blog-related__body">
-              <span class="blog-related__tag">${i18nText(escapeHtml(rCat), escapeHtml(rCatEn))}</span>
-              ${i18nEl('h3', escapeHtml(r.title), rEn.title ? escapeHtml(rEn.title) : undefined)}
               ${i18nEl('p', escapeHtml(rExcerpt), rEn.excerpt ? escapeHtml(rExcerptEn) : undefined, 'class="blog-related__excerpt"')}
               <div class="blog-related__meta">
                 <time datetime="${escapeHtml(rIso)}">${i18nText(rDate, rDateEn)}</time>
@@ -307,7 +314,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       @media (max-width: 900px) { .blog-related__grid { grid-template-columns: 1fr; gap: 20px; } }
       .blog-related__card { display: flex; flex-direction: column; background: #fff; border: 1px solid #E5E7EB; border-radius: 18px; overflow: hidden; text-decoration: none; color: inherit; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
       .blog-related__card:hover { transform: translateY(-6px); border-color: rgba(255,186,26,0.5); box-shadow: 0 20px 40px rgba(255,186,26,0.10), 0 8px 16px rgba(0,0,0,0.06); }
-      .blog-related__img { aspect-ratio: 16/9; overflow: hidden; background: #0D1117; }
+      .blog-related__img { overflow: hidden; background: #0D1117; }
       .blog-related__img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s; }
       .blog-related__card:hover .blog-related__img img { transform: scale(1.05); }
       .blog-related__body { padding: 24px 24px 22px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
@@ -335,9 +342,16 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <a href="/blog" class="blog-article__back"><i class="fas fa-arrow-left"></i> ${i18nText('Voltar ao Blog', 'Back to the Blog')}</a>
       <div class="blog-article__layout">
         <article class="blog-article__main">
-          ${article.cover_url ? `<img class="blog-article__cover" src="${article.cover_url}" alt="${escapeHtml(en.title || article.title)}" width="1200" height="630" loading="eager">` : ''}
-          <span class="blog-article__category">${i18nText(escapeHtml(categoryLabel), escapeHtml(categoryLabelEn))}</span>
-          ${i18nEl('h1', escapeHtml(article.title), en.title ? escapeHtml(en.title) : undefined, 'class="blog-article__title"')}
+          ${blogCoverHTML({
+            slug: article.slug,
+            titlePt: article.title,
+            titleEn: en.title,
+            category: article.category || 'estrategica',
+            categoryLabelPt: categoryLabel,
+            categoryLabelEn: categoryLabelEn,
+            size: 'hero',
+            headingTag: 'h1',
+          })}
           <div class="blog-article__meta">
             <div class="blog-article__meta-author">
               ${article.author_avatar

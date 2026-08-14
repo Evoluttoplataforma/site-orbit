@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import articles from '@/data/articles.json';
 import { headerHTML } from '@/components/shared-header';
 import { footerHTML } from '@/components/shared-footer';
+import articlesEnJson from '@/data/articles-en.json';
+import { blogCoverHTML } from '@/lib/blog-cover';
 
 interface Article {
   id: number;
@@ -132,6 +134,22 @@ const CATEGORIES_LABEL: Record<string, string> = {
   'planejamento-estrategico': 'Planejamento',
 };
 
+const CATEGORIES_LABEL_EN: Record<string, string> = {
+  estrategica: 'Strategy',
+  operacional: 'Operations',
+  tecnologia: 'Technology',
+  novidades: 'News',
+  cultura: 'Culture',
+  financeiro: 'Finance',
+  ia: 'AI',
+  marketing: 'Marketing',
+  indicadores: 'KPIs',
+  'planejamento-estrategico': 'Planning',
+};
+
+type ArticleEn = { title?: string; excerpt?: string };
+const ARTICLES_EN = articlesEnJson as Record<string, ArticleEn>;
+
 function escapeHtml(str: string): string {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
@@ -220,15 +238,23 @@ export default async function ClusterHubPage({ params }: { params: Promise<{ slu
   const cardsHTML = clusterArticles.map((a, i) => {
     const role = i === 0 ? 'Pillar — comece por aqui' : i === 1 ? 'Diagnóstico / Problema' : 'Solução / BOFU';
     const cat = CATEGORIES_LABEL[a.category || ''] || a.category || 'Artigo';
-    const img = a.cover_url || '/images/og-image.png';
+    const catEn = CATEGORIES_LABEL_EN[a.category || ''] || cat;
+    const en = ARTICLES_EN[a.slug] || {};
     const mins = readTime(a.content);
     const excerpt = a.excerpt || a.content.replace(/<[^>]*>/g, '').slice(0, 140);
     return `<a href="/blog/${escapeHtml(a.slug)}" class="cluster-card" role="article">
-      <div class="cluster-card__img"><img src="${escapeHtml(img)}" alt="${escapeHtml(a.title)}" loading="lazy" width="600" height="315"></div>
+      <div class="cluster-card__img">${blogCoverHTML({
+        slug: a.slug,
+        titlePt: a.title,
+        titleEn: en.title,
+        category: a.category || 'estrategica',
+        categoryLabelPt: cat,
+        categoryLabelEn: catEn,
+        size: 'thumb',
+        headingTag: 'h3',
+      })}</div>
       <div class="cluster-card__body">
         <span class="cluster-card__role">${role}</span>
-        <span class="cluster-card__tag">${escapeHtml(cat)}</span>
-        <h3>${escapeHtml(a.title)}</h3>
         <p>${escapeHtml(excerpt)}</p>
         <span class="cluster-card__cta">Ler artigo <i class="fas fa-arrow-right"></i> <small>${mins} min</small></span>
       </div>
@@ -249,7 +275,7 @@ export default async function ClusterHubPage({ params }: { params: Promise<{ slu
       @media (max-width: 900px) { .cluster-grid { grid-template-columns: 1fr; gap: 18px; } }
       .cluster-card { display: flex; flex-direction: column; background: #fff; border: 1px solid #E5E7EB; border-radius: 16px; overflow: hidden; text-decoration: none; color: inherit; transition: all 0.25s; box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
       .cluster-card:hover { transform: translateY(-4px); border-color: #ffba1a; box-shadow: 0 18px 36px rgba(0,0,0,0.10); }
-      .cluster-card__img { aspect-ratio: 16/9; background: #F3F4F6; overflow: hidden; }
+      .cluster-card__img { background: #0D1117; overflow: hidden; }
       .cluster-card__img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s; }
       .cluster-card:hover .cluster-card__img img { transform: scale(1.04); }
       .cluster-card__body { padding: 20px 20px 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; }

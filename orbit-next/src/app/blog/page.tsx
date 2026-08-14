@@ -5,6 +5,7 @@ import { headerHTML } from '@/components/shared-header';
 import { footerHTML } from '@/components/shared-footer';
 import { ORG_ID, WEBSITE_ID } from '@/lib/seo';
 import { i18nText, i18nEl } from '@/lib/i18n-html';
+import { blogCoverHTML } from '@/lib/blog-cover';
 
 export const metadata: Metadata = {
   title: 'Blog — Orbit Gestão',
@@ -159,7 +160,6 @@ export default function BlogPage() {
       const dateEn = formatDate(a.published_at, 'en-US');
       const mins = readTime(a.content);
       const initials = getInitials(a.author);
-      const imgSrc = a.cover_url || '/images/og-image.png';
       const ts = a.published_at ? new Date(a.published_at).getTime() : 0;
       const titleLower = (a.title + ' ' + (en.title || '')).toLowerCase();
 
@@ -167,11 +167,18 @@ export default function BlogPage() {
       const isoDate = a.published_at || '';
       return `<a href="/blog/${escapeHtml(a.slug)}" class="blog-card blog-card--animate" role="article" data-category="${escapeHtml(cat)}" data-title-lower="${escapeHtml(titleLower)}" data-date-ts="${ts}" data-title-az="${escapeHtml(titleLower)}" data-hidden-more="${hiddenMore}" style="animation-delay:${i * 80}ms;text-decoration:none;color:inherit;display:block;">
         <div class="blog-card__image">
-          <img src="${escapeHtml(imgSrc)}" alt="${escapeHtml(en.title || a.title)}" loading="lazy" width="600" height="340">
-          <span class="blog-card__tag">${i18nText(escapeHtml(catLabel), escapeHtml(CATEGORIES_EN[cat] || catLabel))}</span>
+          ${blogCoverHTML({
+            slug: a.slug,
+            titlePt: a.title,
+            titleEn: en.title,
+            category: cat,
+            categoryLabelPt: catLabel,
+            categoryLabelEn: CATEGORIES_EN[cat] || catLabel,
+            size: 'card',
+            headingTag: 'h3',
+          })}
         </div>
         <div class="blog-card__body">
-          ${i18nEl('h3', escapeHtml(a.title), en.title ? escapeHtml(en.title) : undefined)}
           ${i18nEl('p', escapeHtml(preview), en.excerpt ? escapeHtml(previewEn) : undefined)}
           <div class="blog-card__footer">
             <div class="blog-card__author">
