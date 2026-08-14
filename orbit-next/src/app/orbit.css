@@ -13964,20 +13964,22 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
         }
         .blog-article-content > div { margin-bottom: 24px; }
 
-        /* Sidebar — sticky no aside (coluna do grid), não no filho.
-           align-self:start + sticky no wrapper interno = aside da mesma
-           altura do CTA, sem espaço para grudar na rolagem. */
-        html:has(.blog-article),
-        body:has(.blog-article) {
-            overflow-x: visible;
-        }
+        /* Sidebar: a página rola; o CTA fica parado no desktop.
+           sticky não funciona com overflow-x:clip no html/body. */
         .blog-article__sidebar {
             align-self: start;
-            position: sticky;
-            top: 104px;
         }
         .blog-article__sidebar-sticky {
             position: static;
+        }
+        @media (min-width: 1025px) {
+            .blog-article__sidebar-sticky {
+                position: fixed;
+                top: 104px;
+                width: 340px;
+                z-index: 5;
+                right: max(32px, calc((100% - 1200px) / 2 + 32px));
+            }
         }
         .blog-sidebar-card {
             background: #fff; border: 1px solid #E5E7EB; border-radius: 16px;
@@ -14040,7 +14042,11 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
             .blog-article__layout { grid-template-columns: 1fr; gap: 32px; }
             .blog-article__main { max-width: 100%; }
             .blog-article__sidebar { position: static; order: 2; }
-            .blog-article__sidebar-sticky { position: static; }
+            .blog-article__sidebar-sticky {
+                position: static;
+                width: auto;
+                right: auto;
+            }
         }
         /* ═══ Quebra de palavras longas (escopo: só conteudo e titulo do artigo) ═══ */
         /* NUNCA mexer no .blog-article container — quebraria max-width 1200px desktop */
