@@ -13964,11 +13964,20 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
         }
         .blog-article-content > div { margin-bottom: 24px; }
 
-        /* Sidebar */
-        .blog-article__sidebar { align-self: start; }
-        .blog-article__sidebar-sticky {
+        /* Sidebar — sticky no aside (coluna do grid), não no filho.
+           align-self:start + sticky no wrapper interno = aside da mesma
+           altura do CTA, sem espaço para grudar na rolagem. */
+        html:has(.blog-article),
+        body:has(.blog-article) {
+            overflow-x: visible;
+        }
+        .blog-article__sidebar {
+            align-self: start;
             position: sticky;
             top: 104px;
+        }
+        .blog-article__sidebar-sticky {
+            position: static;
         }
         .blog-sidebar-card {
             background: #fff; border: 1px solid #E5E7EB; border-radius: 16px;

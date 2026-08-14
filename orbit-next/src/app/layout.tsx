@@ -3,7 +3,6 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { LocaleProvider } from "@/components/LocaleProvider";
 import ChatPopup from "@/components/chat/ChatPopup";
-import WhatsAppWidget from "@/components/WhatsAppWidget";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -158,7 +157,6 @@ export default function RootLayout({
         <LocaleProvider>
         {children}
         <ChatPopup />
-        <WhatsAppWidget />
         </LocaleProvider>
         <script dangerouslySetInnerHTML={{ __html: `
 // ===== CAMPOS OCULTOS GTM - Captura e Preenchimento =====
