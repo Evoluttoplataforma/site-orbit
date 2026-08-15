@@ -112,28 +112,6 @@ export const pageHTML = `
 
 ${trustHTML}
 
-    <!-- ═══ CTA FINAL ═══ -->
-    <section id="sia-cta" style="position:relative;background:#0D1117;padding:120px 24px;border-top:1px solid rgba(255,255,255,0.06);overflow:hidden;">
-        <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(255,186,26,0.12) 0%,transparent 60%);pointer-events:none;"></div>
-
-        <div style="position:relative;max-width:760px;margin:0 auto;text-align:center;">
-            <h2 style="font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;color:#fff;line-height:1.2;margin:0 0 18px;">
-                Precisa de evidências sob confidencialidade?
-            </h2>
-            <p style="font-size:1.1rem;color:#C9D1D9;line-height:1.65;margin:0 0 36px;">
-                O atestado PTaaS da HOUS3 é público nesta página. Relatório técnico de pentest e evidências de controle vão sob NDA. O DPA é o Anexo IV dos Termos v3.0, já aceito na Plataforma.
-            </p>
-            <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-                <a href="mailto:contato@orbitgestao.com.br?subject=Due%20diligence%20de%20seguranca%20%E2%80%94%20pacote%20NDA" style="display:inline-flex;align-items:center;gap:10px;background:#ffba1a;color:#0D1117;font-weight:800;font-size:16px;padding:18px 38px;border-radius:50px;text-decoration:none;letter-spacing:0.5px;box-shadow:0 12px 32px rgba(255,186,26,0.35);">
-                    SOLICITAR PACOTE SOB NDA <i class="fas fa-envelope"></i>
-                </a>
-                <a href="https://demonstracao.orbitgestao.com.br/chat" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.2);font-weight:700;font-size:16px;padding:18px 38px;border-radius:50px;text-decoration:none;">
-                    FALAR COM O TIME TÉCNICO
-                </a>
-            </div>
-        </div>
-    </section>
-
     </div><!-- /aba 1 -->
 
     <!-- ═══ ABA 2 — Termos de Serviço · Auto Chat ═══ -->
