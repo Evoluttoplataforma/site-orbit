@@ -255,7 +255,6 @@ export const trustHTML = `
               <table class="sia-kv">
                 <tr><th>Executor</th><td>HOUS3 Digital — teste de intrusão independente (PTaaS)</td></tr>
                 <tr><th>Atestado público</th><td>HOUS3-2026-0002 · <a href="https://www.hous3.com.br/v/orb26-p9n4" target="_blank" rel="noopener noreferrer" style="color:${gold};font-weight:700;">verificar em hous3.com.br</a></td></tr>
-                <tr><th>Último ciclo documentado</th><td>Concluído em 10 de agosto de 2026. A validade vigente aparece no badge (fonte: verificação pública da HOUS3)</td></tr>
                 <tr><th>Escopo</th><td>Aplicação web e API (white-box), inclusive a camada de autenticação da plataforma Orbit</td></tr>
                 <tr><th>Resultado material</th><td>Não houve vazamento de dados entre organizações nem quebra do isolamento multi-tenant (RLS/RBAC resistiram ao teste)</td></tr>
                 <tr><th>Tratamento</th><td>Achados de resiliência da autenticação e da configuração web foram remediados no mesmo mês, com plano formal de fechamento</td></tr>
