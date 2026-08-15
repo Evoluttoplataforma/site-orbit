@@ -67,6 +67,8 @@ export function blogCoverHTML(opts: {
   categoryLabelEn: string;
   size: BlogCoverSize;
   headingTag?: 'h1' | 'h3' | 'h4' | 'p';
+  author?: string | null;
+  minutes?: number;
 }): string {
   const meta = getCoverMeta(opts.slug);
   const hlPt = meta.hl || autoHighlight(opts.titlePt);
@@ -75,6 +77,13 @@ export function blogCoverHTML(opts: {
   const titlePt = wrapHighlight(opts.titlePt, hlPt);
   const titleEn = opts.titleEn ? wrapHighlight(opts.titleEn, hlEn) : undefined;
   const cat = (opts.category || 'estrategica').replace(/[^a-z0-9-]/gi, '');
+  const byline = opts.author || opts.minutes
+    ? `<span class="blog-cover__meta">${
+        opts.author ? `<span class="blog-cover__author">${escapeHtml(opts.author)}</span>` : ''
+      }${opts.author && opts.minutes ? `<span class="blog-cover__dot" aria-hidden="true">·</span>` : ''}${
+        opts.minutes ? `<span class="blog-cover__time"><i class="fas fa-clock"></i> ${opts.minutes} min</span>` : ''
+      }</span>`
+    : '';
 
   return `<div class="blog-cover blog-cover--${opts.size} blog-cover--${escapeHtml(cat)}">
     <div class="blog-cover__glow" aria-hidden="true"></div>
@@ -83,6 +92,7 @@ export function blogCoverHTML(opts: {
     ${i18nEl(tag, titlePt, titleEn, 'class="blog-cover__title"')}
     <div class="blog-cover__foot">
       <span class="blog-cover__brand"><span class="blog-cover__ring" aria-hidden="true"></span> Orbit Gestão</span>
+      ${byline}
     </div>
   </div>`;
 }

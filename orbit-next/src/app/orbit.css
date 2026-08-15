@@ -13632,16 +13632,16 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
 
         /* Blog Card */
         .blog-card {
-            background: #fff; border-radius: 16px; overflow: hidden;
-            border: 1px solid #E5E7EB;
+            background: #0D1117; border-radius: 16px; overflow: hidden;
+            border: 1px solid rgba(255,186,26,0.16);
             transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
             display: flex; flex-direction: column;
             cursor: pointer;
         }
         .blog-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 16px 40px rgba(0,0,0,0.1);
-            border-color: rgba(255,186,26,0.3);
+            box-shadow: 0 18px 44px rgba(0,0,0,0.28);
+            border-color: rgba(255,186,26,0.45);
         }
         .blog-card__image {
             position: relative; height: auto; overflow: hidden; background: #0D1117;
@@ -13712,10 +13712,24 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
         }
         .blog-cover__foot {
             position: relative; z-index: 2;
-            display: flex; align-items: center;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 10px;
             padding-top: 12px;
             border-top: 1px solid rgba(255,186,26,0.28);
         }
+        .blog-cover__meta {
+            display: inline-flex; align-items: center; gap: 6px;
+            color: rgba(255,255,255,0.58);
+            font-size: 11px; font-weight: 600;
+            min-width: 0;
+        }
+        .blog-cover__author {
+            overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+            max-width: 14ch;
+        }
+        .blog-cover__dot { opacity: 0.45; }
+        .blog-cover__time { white-space: nowrap; }
+        .blog-cover__time i { margin-right: 4px; font-size: 10px; color: #ffba1a; }
         .blog-cover__brand {
             display: inline-flex; align-items: center; gap: 8px;
             color: #fff; font-size: 12px; font-weight: 700; letter-spacing: -0.01em;
@@ -13745,15 +13759,17 @@ html[lang="en"] .pricing-preview-badge { content: "MOST POPULAR"; }
         .blog-cover--hero .blog-cover__ring { width: 18px; height: 18px; }
 
         .blog-cover--card {
-            min-height: 248px;
+            min-height: 300px;
             height: 100%;
-            padding: 20px 20px 16px;
+            padding: 22px 20px 16px;
+            border-radius: 16px;
         }
         .blog-cover--card .blog-cover__motif { top: -6px; right: -10px; width: 128px; height: 128px; opacity: 0.7; }
         .blog-cover--card .blog-cover__tag { margin-bottom: 14px; }
         .blog-cover--card .blog-cover__title {
-            font-size: 1.12rem;
-            display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
+            font-size: clamp(1.28rem, 1.8vw, 1.42rem);
+            line-height: 1.22;
+            display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden;
             flex: 1;
         }
         .blog-cover--card .blog-cover__foot { margin-top: 16px; }

@@ -4,7 +4,7 @@ import articlesEnJson from '@/data/articles-en.json';
 import { headerHTML } from '@/components/shared-header';
 import { footerHTML } from '@/components/shared-footer';
 import { ORG_ID, WEBSITE_ID } from '@/lib/seo';
-import { i18nText, i18nEl } from '@/lib/i18n-html';
+import { i18nText } from '@/lib/i18n-html';
 import { blogCoverHTML } from '@/lib/blog-cover';
 
 export const metadata: Metadata = {
@@ -68,25 +68,9 @@ function humanizeCategory(slug: string): string {
   return slug.split('-').map((s) => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
 }
 
-function formatDate(dateStr: string | null, locale = 'pt-BR'): string {
-  if (!dateStr) return '';
-  const d = new Date(dateStr);
-  return d.toLocaleDateString(locale, { day: '2-digit', month: 'short', year: 'numeric' });
-}
-
 function readTime(content: string): number {
   const words = content.replace(/<[^>]*>/g, '').split(/\s+/).length;
   return Math.max(1, Math.ceil(words / 200));
-}
-
-function getInitials(name: string | null): string {
-  if (!name) return 'O';
-  return name.split(' ').map((n) => n[0]).filter(Boolean).slice(0, 2).join('').toUpperCase();
-}
-
-function truncate(html: string, len: number): string {
-  const text = html.replace(/<[^>]*>/g, '');
-  return text.length > len ? text.slice(0, len) + '...' : text;
 }
 
 function escapeHtml(str: string): string {
@@ -154,45 +138,24 @@ export default function BlogPage() {
       const cat = a.category || 'sem-categoria';
       const catLabel = humanizeCategory(cat);
       const en = ARTICLES_EN[a.slug] || {};
-      const preview = a.excerpt || truncate(a.content, 140);
-      const previewEn = en.excerpt || preview;
-      const date = formatDate(a.published_at);
-      const dateEn = formatDate(a.published_at, 'en-US');
       const mins = readTime(a.content);
-      const initials = getInitials(a.author);
       const ts = a.published_at ? new Date(a.published_at).getTime() : 0;
       const titleLower = (a.title + ' ' + (en.title || '')).toLowerCase();
 
       const hiddenMore = i >= RECENT_COUNT ? '1' : '0';
-      const isoDate = a.published_at || '';
       return `<a href="/blog/${escapeHtml(a.slug)}" class="blog-card blog-card--animate" role="article" data-category="${escapeHtml(cat)}" data-title-lower="${escapeHtml(titleLower)}" data-date-ts="${ts}" data-title-az="${escapeHtml(titleLower)}" data-hidden-more="${hiddenMore}" style="animation-delay:${i * 80}ms;text-decoration:none;color:inherit;display:block;">
-        <div class="blog-card__image">
-          ${blogCoverHTML({
-            slug: a.slug,
-            titlePt: a.title,
-            titleEn: en.title,
-            category: cat,
-            categoryLabelPt: catLabel,
-            categoryLabelEn: CATEGORIES_EN[cat] || catLabel,
-            size: 'card',
-            headingTag: 'h3',
-          })}
-        </div>
-        <div class="blog-card__body">
-          ${i18nEl('p', escapeHtml(preview), en.excerpt ? escapeHtml(previewEn) : undefined)}
-          <div class="blog-card__footer">
-            <div class="blog-card__author">
-              ${a.author_avatar
-                ? `<img src="${escapeHtml(a.author_avatar)}" style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0;" alt="">`
-                : `<div class="blog-card__avatar">${initials}</div>`}
-              <div class="blog-card__author-info">
-                <span class="blog-card__author-name">${escapeHtml(a.author || 'Equipe Orbit')}</span>
-                <time class="blog-card__date" datetime="${escapeHtml(isoDate)}">${i18nText(date, dateEn)}</time>
-              </div>
-            </div>
-            <span class="blog-card__read-time"><i class="fas fa-clock"></i> ${mins} min</span>
-          </div>
-        </div>
+        ${blogCoverHTML({
+          slug: a.slug,
+          titlePt: a.title,
+          titleEn: en.title,
+          category: cat,
+          categoryLabelPt: catLabel,
+          categoryLabelEn: CATEGORIES_EN[cat] || catLabel,
+          size: 'card',
+          headingTag: 'h3',
+          author: a.author || 'Equipe Orbit',
+          minutes: mins,
+        })}
       </a>`;
     })
     .join('');
