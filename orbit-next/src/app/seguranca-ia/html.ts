@@ -121,8 +121,7 @@ ${trustHTML}
                 Precisa de evidências sob confidencialidade?
             </h2>
             <p style="font-size:1.1rem;color:#C9D1D9;line-height:1.65;margin:0 0 36px;">
-                Relatório de pentest e evidências de controle são enviados sob NDA. O DPA é o Anexo IV dos Termos v3.0, já aceito na Plataforma.
-                Relatório de intrusão não é publicado em página aberta.
+                O atestado PTaaS da HOUS3 é público nesta página. Relatório técnico de pentest e evidências de controle vão sob NDA. O DPA é o Anexo IV dos Termos v3.0, já aceito na Plataforma.
             </p>
             <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
                 <a href="mailto:contato@orbitgestao.com.br?subject=Due%20diligence%20de%20seguranca%20%E2%80%94%20pacote%20NDA" style="display:inline-flex;align-items:center;gap:10px;background:#ffba1a;color:#0D1117;font-weight:800;font-size:16px;padding:18px 38px;border-radius:50px;text-decoration:none;letter-spacing:0.5px;box-shadow:0 12px 32px rgba(255,186,26,0.35);">

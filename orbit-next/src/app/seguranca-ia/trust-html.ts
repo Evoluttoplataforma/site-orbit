@@ -55,7 +55,7 @@ function section(
 const tocItems: { href: string; n: string; title: string; status: string; kind: BadgeKind }[] = [
   { href: '#sia-certificacoes', n: '01', title: 'Certificações e escopo', status: 'Em implementação', kind: 'progress' },
   { href: '/politica-seguranca', n: '02', title: 'Política de Segurança da Informação', status: 'Vigente', kind: 'live' },
-  { href: '#sia-pentest', n: '03', title: 'Pentest independente', status: 'HOUS3 · mensal · NDA', kind: 'nda' },
+  { href: '#sia-pentest', n: '03', title: 'Pentest independente', status: 'HOUS3 · atestado público', kind: 'nda' },
   { href: '#sia-backup', n: '04', title: 'Backup e continuidade', status: 'PITR · restore testado', kind: 'live' },
   { href: '#sia-sla', n: '05', title: 'Disponibilidade e suporte', status: '99,0% · /status', kind: 'live' },
   { href: '#sia-incidentes', n: '06', title: 'Resposta a incidentes (LGPD art. 48)', status: '48 h ao cliente', kind: 'live' },
@@ -70,7 +70,7 @@ function statusRow(): string {
   const items = [
     { label: 'Dados no Brasil', sub: 'AWS São Paulo · sa-east-1' },
     { label: 'ISO 27001 / 27701', sub: 'SGSI em implementação' },
-    { label: 'Pentest independente', sub: 'HOUS3 · rotina mensal' },
+    { label: 'Pentest independente', sub: 'HOUS3 PTaaS · atestado público' },
     { label: 'DPO nomeado', sub: 'Templum · DPOnet' },
     { label: 'Isolamento por org', sub: 'RLS no PostgreSQL' },
   ];
@@ -93,7 +93,7 @@ function packTable(): string {
     ['Certificado ISO/IEC 27001 da Orbit', 'Não emitido — SGSI em implementação com a Templum', 'Quando o certificado for emitido', 'progress'],
     ['SOC 2 Tipo II da Orbit', 'Não possuímos. SOC 2 Tipo II e ISO 27001 cobrem a infraestrutura (Supabase / AWS)', 'Não reivindicar como certificação nossa', 'progress'],
     ['Política de Segurança da Informação aprovada', 'Vigente — <a href="/politica-seguranca" style="color:' + gold + ';font-weight:700;">política pública</a>', 'Documento público', 'live'],
-    ['Sumário executivo de pentest', 'HOUS3 contratada em rotina mensal; ciclo documentado em agosto/2026', 'Relatório completo sob NDA', 'nda'],
+    ['Atestado PTaaS (HOUS3)', 'Vigente — HOUS3-2026-0002; o badge nesta página lê o status em tempo real. Relatório técnico completo sob NDA', '<a href="https://www.hous3.com.br/v/orb26-p9n4" target="_blank" rel="noopener noreferrer" style="color:' + gold + ';font-weight:700;">Página de verificação</a>', 'live'],
     ['Política de backup e continuidade', 'PITR ativo (WAL 2 min, 7 dias, São Paulo); restore completo periódico para projeto novo — último ciclo documentado: jul/2026, COMPLETED', 'RTO de failover in-place ainda não cronometrado', 'live'],
     ['SLA de disponibilidade e suporte', '99,0% mensal (Anexo III dos Termos v3.0); crédito na contratação direta; status em /status', 'Página pública /status', 'live'],
     ['Plano de resposta a incidentes', 'Cliente em até 48 h (cláusula 10.7); ANPD compete ao controlador, com apoio da Orbit', 'Playbook interno sob NDA', 'nda'],
@@ -239,12 +239,24 @@ export const trustHTML = `
       `
             ${kicker('03', 'Pentest')}
             ${h2('Teste de intrusão por', 'terceiro independente')}
-            ${p('O relatório completo não é público — contém detalhe que não deve circular fora de NDA. O que pode ser afirmado sem expor a superfície de ataque:')}
+            ${p('O relatório completo não é público — contém detalhe que não deve circular fora de NDA. O atestado PTaaS da HOUS3 é público e atualiza o status em tempo real.')}
+            <p style="margin:0 0 22px;">
+              <a href="https://www.hous3.com.br/v/orb26-p9n4" target="_blank" rel="noopener noreferrer" style="display:inline-block;">
+                <img
+                  src="https://www.hous3.com.br/badge/orb26-p9n4.svg?v=info&amp;t=dark"
+                  alt="HOUS3 PTaaS – Orbit Gestão"
+                  width="490"
+                  height="88"
+                  style="max-width:100%;height:auto;display:block;"
+                />
+              </a>
+            </p>
             <div style="${card}margin-bottom:18px;">
               <table class="sia-kv">
-                <tr><th>Executor</th><td>HOUS3 — empresa independente de segurança ofensiva, contratada em rotina mensal</td></tr>
-                <tr><th>Último ciclo documentado</th><td>Agosto de 2026</td></tr>
-                <tr><th>Escopo</th><td>Aplicação web, API e camada de autenticação da plataforma Orbit</td></tr>
+                <tr><th>Executor</th><td>HOUS3 Digital — teste de intrusão independente (PTaaS)</td></tr>
+                <tr><th>Atestado público</th><td>HOUS3-2026-0002 · <a href="https://www.hous3.com.br/v/orb26-p9n4" target="_blank" rel="noopener noreferrer" style="color:${gold};font-weight:700;">verificar em hous3.com.br</a></td></tr>
+                <tr><th>Último ciclo documentado</th><td>Concluído em 10 de agosto de 2026. A validade vigente aparece no badge (fonte: verificação pública da HOUS3)</td></tr>
+                <tr><th>Escopo</th><td>Aplicação web e API (white-box), inclusive a camada de autenticação da plataforma Orbit</td></tr>
                 <tr><th>Resultado material</th><td>Não houve vazamento de dados entre organizações nem quebra do isolamento multi-tenant (RLS/RBAC resistiram ao teste)</td></tr>
                 <tr><th>Tratamento</th><td>Achados de resiliência da autenticação e da configuração web foram remediados no mesmo mês, com plano formal de fechamento</td></tr>
                 <tr><th>Frequência</th><td>Pentest externo mensal pela HOUS3, com reteste após remediação, somado a validação interna contínua (revisão de código, testes automatizados, inventário de endpoints)</td></tr>

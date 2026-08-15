@@ -154,8 +154,12 @@ export default function Page() {
             <li>Logs de aplicação e API, auditoria de banco, trilha administrativa e métricas de Edge Functions, com acesso restrito. Registros de acesso a aplicações de internet: 6 meses (Marco Civil, art. 15).</li>
             <li>
               Teste de intrusão por terceiro independente (<strong style={strong}>HOUS3</strong>), em rotina mensal,
-              sobre aplicação web, API e autenticação. Achados são tratados com plano de fechamento. O relatório
-              completo permanece sob NDA; não se publicam vetores nem payloads.
+              sobre aplicação web e API (white-box), inclusive autenticação. Achados são tratados com plano de fechamento.
+              Atestado público HOUS3-2026-0002 em{' '}
+              <a href="https://www.hous3.com.br/v/orb26-p9n4" target="_blank" rel="noopener noreferrer" style={accent}>
+                hous3.com.br/v/orb26-p9n4
+              </a>
+              . O relatório completo permanece sob NDA; não se publicam vetores nem payloads.
             </li>
             <li>
               Último ciclo documentado na Central de confiança: agosto de 2026. Resultado material comunicado:
