@@ -2496,6 +2496,8 @@ function applyEnglish() {
   function translateNode(el) {
     // Skip script/style tags
     if (el.tagName === 'SCRIPT' || el.tagName === 'STYLE') return;
+    // Twins already have both languages; CSS shows one side via html[lang].
+    if (el.classList && (el.classList.contains('i18n-en') || el.classList.contains('i18n-pt'))) return;
 
     if (el.childNodes) {
       for (var i = 0; i < el.childNodes.length; i++) {
@@ -2531,7 +2533,18 @@ function applyEnglish() {
     'Sim': 'Yes',
     'ou': 'or',
   };
-  var walker2 = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
+  var walker2 = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode: function (node) {
+      var p = node.parentElement;
+      while (p) {
+        if (p.classList && (p.classList.contains('i18n-en') || p.classList.contains('i18n-pt'))) {
+          return NodeFilter.FILTER_REJECT;
+        }
+        p = p.parentElement;
+      }
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
   var n2;
   while (n2 = walker2.nextNode()) {
     var trimmed = n2.textContent ? n2.textContent.trim() : '';

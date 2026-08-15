@@ -13,15 +13,16 @@
 // revela todos, para o caso de JS desligado.
 import { termosHTML, privacidadeHTML, exclusaoHTML } from './legal-html';
 import { trustHTML } from './trust-html';
+import { i18nText } from '@/lib/i18n-html';
 
 // O "· Auto Chat" existe para não confundir com /termos-de-servico e
 // /politica-privacidade, que cobrem a plataforma toda. A aba de exclusão não leva o
 // sufixo porque não há documento geral concorrente — e com 4 abas, rótulo curto ajuda.
 const tabs = [
-  { id: 'seguranca', label: 'Central de confiança', icon: 'fa-shield-halved' },
-  { id: 'termos', label: 'Termos · Auto Chat', icon: 'fa-file-contract' },
-  { id: 'privacidade', label: 'Privacidade · Auto Chat', icon: 'fa-user-shield' },
-  { id: 'exclusao', label: 'Exclusão de Dados', icon: 'fa-trash-can' },
+  { id: 'seguranca', label: i18nText('Central de confiança', 'Trust Center'), icon: 'fa-shield-halved' },
+  { id: 'termos', label: i18nText('Termos · Auto Chat', 'Terms · Auto Chat'), icon: 'fa-file-contract' },
+  { id: 'privacidade', label: i18nText('Privacidade · Auto Chat', 'Privacy · Auto Chat'), icon: 'fa-user-shield' },
+  { id: 'exclusao', label: i18nText('Exclusão de Dados', 'Data Deletion'), icon: 'fa-trash-can' },
 ];
 
 // Hash de cada aba. 'exclusao-dados' é mais explícito na URL que vai no formulário
@@ -102,7 +103,7 @@ export const pageHTML = `
 
     <!-- ═══ ABAS ═══ -->
     <div class="sia-tabs-wrap">
-        <div class="sia-tabs" role="tablist" aria-label="Seções e documentos">
+        <div class="sia-tabs" role="tablist" aria-label="Seções e documentos / Sections and documents">
                 ${tabBar}
         </div>
     </div>
