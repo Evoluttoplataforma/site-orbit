@@ -57,8 +57,10 @@ export const footerHTML = `
                     <h5 style="margin-top: 20px;" data-i18n="footer.legal">Legal</h5>
                     <ul>
                         <li><a href="/politica-privacidade" data-i18n="footer.privacy">Política de Privacidade</a></li>
+                        <li><a href="/politica-seguranca" data-i18n="footer.isp">Política de Segurança da Informação</a></li>
                         <li><a href="/termos-de-servico" data-i18n="footer.terms">Termos de Serviço</a></li>
-                        <li><a href="/seguranca-ia" data-i18n="footer.security">Segurança &amp; IA</a></li>
+                        <li><a href="/seguranca-ia" data-i18n="footer.security">Central de confiança</a></li>
+                        <li><a href="/status" data-i18n="footer.status">Status e disponibilidade</a></li>
                     </ul>
                 </div>
             </div>

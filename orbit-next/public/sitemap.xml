@@ -80,9 +80,21 @@
   </url>
   <url>
     <loc>https://orbitgestao.com.br/politica-privacidade</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-08-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://orbitgestao.com.br/politica-seguranca</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://orbitgestao.com.br/status</loc>
+    <lastmod>2026-08-15</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://orbitgestao.com.br/termos-de-servico</loc>

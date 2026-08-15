@@ -1,6 +1,6 @@
 export const metadata = {
   title: 'Política de Privacidade — Orbit Gestão',
-  description: 'Política de Privacidade e Proteção de Dados da Orbit (Evoluum Tecnologia Ltda.) — LGPD.',
+  description: 'Política de Privacidade e Proteção de Dados da Orbit Gestão — LGPD.',
 };
 
 const wrap = { background: '#0D1117', color: '#C9D1D9', minHeight: '100vh', padding: '60px 20px', fontFamily: "'Plus Jakarta Sans', Arial, sans-serif" } as const;
@@ -22,11 +22,11 @@ export default function Page() {
       <div style={container}>
         <a href="/" style={back}>← Voltar para o site</a>
         <h1 style={h1}>Política de Privacidade</h1>
-        <p style={stamp}>Última atualização: 15 de junho de 2026</p>
+        <p style={stamp}>Última atualização: 15 de agosto de 2026</p>
 
         <section style={section}>
           <h2 style={h2}>1. Introdução</h2>
-          <p style={p}>A Orbit, plataforma de gestão empresarial desenvolvida pela <strong style={strong}>Evoluum Tecnologia Ltda.</strong> (&quot;nós&quot;, &quot;nosso&quot; ou &quot;Orbit&quot;), está comprometida em proteger a privacidade e a segurança dos dados dos nossos usuários. Esta Política de Privacidade descreve de forma transparente como coletamos, usamos, armazenamos, compartilhamos e protegemos suas informações pessoais e corporativas quando você utiliza nossa plataforma, aplicativos, APIs e serviços relacionados (conjuntamente, os &quot;Serviços&quot;).</p>
+          <p style={p}>A Orbit, plataforma de gestão empresarial operada pela <strong style={strong}>Orbit Gestão</strong> (&quot;nós&quot;, &quot;nosso&quot; ou &quot;Orbit&quot;), está comprometida em proteger a privacidade e a segurança dos dados dos nossos usuários. Esta Política de Privacidade descreve de forma transparente como coletamos, usamos, armazenamos, compartilhamos e protegemos suas informações pessoais e corporativas quando você utiliza nossa plataforma, aplicativos, APIs e serviços relacionados (conjuntamente, os &quot;Serviços&quot;). A qualificação completa da Empresa consta das Informações Legais da Plataforma e da tela de aceite dos Termos de Uso v3.0.</p>
           <p style={p}>Ao utilizar os Serviços da Orbit, você concorda com as práticas descritas nesta política. Caso não concorde, não utilize nossos Serviços.</p>
         </section>
 
@@ -90,7 +90,7 @@ export default function Page() {
           <p style={p}>Os itens abaixo referem-se aos dados da plataforma Orbit. Dados obtidos via Google são tratados exclusivamente conforme a seção 2.6 e não são utilizados para publicidade ou personalização genérica fora das funcionalidades de integração.</p>
           <ul style={ul}>
             <li><strong style={strong}>Prestação dos Serviços</strong>: operar, manter e melhorar a plataforma, incluindo processamento de reuniões, geração de transcrições, execução de automações e entrega de notificações.</li>
-            <li><strong style={strong}>Inteligência Artificial</strong>: utilizamos provedores de IA de terceiros (como OpenAI, Google Gemini, Anthropic e Perplexity) para respostas, análises e automações com base em dados que você insere na plataforma ou que já estão no workspace da sua organização no Orbit. Dados obtidos via OAuth do Google (Calendar, Drive, Docs, Sheets, Slides, Analytics e Ads) não são usados para treinar, fine-tunar ou melhorar modelos de IA genéricos, nem enviados a provedores de IA para esse fim — conforme a seção 2.6. Não utilizamos categorias sensíveis de dados pessoais para treinamento de modelos de terceiros sem consentimento explícito e específico.</li>
+            <li><strong style={strong}>Inteligência Artificial</strong>: utilizamos provedores de IA de terceiros relacionados no Anexo IV dos Termos de Uso v3.0 (OpenAI de forma permanente; Google, Perplexity e correlatos somente se a integração for habilitada) para respostas, análises e automações com base em dados que você insere na plataforma ou que já estão no workspace da sua organização no Orbit. O Conteúdo do Cliente não é usado para treinar modelos próprios ou de terceiros. Dados obtidos via OAuth do Google (Calendar, Drive, Docs, Sheets, Slides, Analytics e Ads) não são usados para treinar, fine-tunar ou melhorar modelos de IA genéricos — conforme a seção 2.6.</li>
             <li><strong style={strong}>Comunicações</strong>: enviar avisos técnicos, atualizações de segurança, newsletters (com opção de descadastro) e alertas de uso.</li>
             <li><strong style={strong}>Segurança e Conformidade</strong>: prevenir fraudes, detectar abusos, cumprir obrigações legais e regulatórias.</li>
             <li><strong style={strong}>Análises Agregadas</strong>: gerar estatísticas anônimas sobre uso da plataforma para aprimoramento do produto.</li>
@@ -112,8 +112,8 @@ export default function Page() {
           <h2 style={h2}>5. Compartilhamento de Dados</h2>
           <p style={p}><strong style={strong}>Não vendemos seus dados.</strong> Podemos compartilhar informações com:</p>
           <ul style={ul}>
-            <li><strong style={strong}>Prestadores de Serviço</strong>: infraestrutura de nuvem (Supabase), processamento de pagamentos (Stripe/Paddle), transcrição de áudio (Evolumeet), envio de e-mail (MailerSend), sincronização de calendário e documentos (Google), provedores de inteligência artificial (OpenAI, Google, Anthropic, Perplexity) e outras integrações, sempre sob contratos de confidencialidade e processamento de dados, sem compartilhar dados Google OAuth para treinamento de modelos de IA.</li>
-            <li><strong style={strong}>Parceiros de Canal (White-Label)</strong>: quando sua organização está vinculada a um canal parceiro, dados de contato e métricas de uso podem ser compartilhados para fins de suporte e gestão de licenças.</li>
+            <li><strong style={strong}>Prestadores de Serviço</strong>: os subprocessadores do Anexo IV dos Termos de Uso v3.0 (essenciais: Supabase, Cloudflare, OpenAI, Evolumeet, ElevenLabs, Twilio, Resend, MailerSend, Stripe; opcionais só se habilitados, inclusive Google, Meta, LinkedIn, Perplexity/Firecrawl/Apify). Sempre para executar o serviço, sem venda de dados e sem uso de dados Google OAuth para treino de modelos.</li>
+            <li><strong style={strong}>Canal (white-label)</strong>: quando o acesso é via consultoria autorizada, o Canal trata dados da Organização nos limites do suporte, configuração e acompanhamento (cláusula 5.3 dos Termos). Não é venda de dados.</li>
             <li><strong style={strong}>Obrigação Legal</strong>: quando exigido por lei, ordem judicial ou autoridade competente.</li>
           </ul>
         </section>
@@ -127,14 +127,16 @@ export default function Page() {
             <li>Monitoramento contínuo, detecção de intrusões e auditorias periódicas.</li>
             <li>Backups automatizados com criptografia e planos de recuperação de desastres.</li>
           </ul>
+          <p style={p}>As medidas técnicas e organizacionais vigentes estão detalhadas na <a href="/politica-seguranca" style={accent}>Política de Segurança da Informação</a>.</p>
         </section>
 
         <section style={section}>
           <h2 style={h2}>7. Retenção e Exclusão</h2>
           <ul style={ul}>
             <li><strong style={strong}>Conta ativa</strong>: mantemos seus dados enquanto sua conta estiver ativa ou conforme necessário para prestação dos Serviços.</li>
-            <li><strong style={strong}>Cancelamento</strong>: após o encerramento da conta, seus dados serão mantidos por até 90 (noventa) dias para possível recuperação, e então excluídos ou anonimizados, salvo obrigação legal de retenção.</li>
-            <li><strong style={strong}>Gravações de reuniões</strong>: armazenadas pelo período definido pelo plano contratado ou conforme configuração da organização, podendo ser excluídas a qualquer momento pelo administrador.</li>
+            <li><strong style={strong}>Encerramento</strong>: 30 (trinta) dias de acesso restrito, somente leitura, para exportação; em seguida 60 (sessenta) dias em arquivo recuperável a pedido; depois exclusão ou anonimização, salvo obrigação legal (Termos v3.0, cláusula 15.3).</li>
+            <li><strong style={strong}>Gravações de reuniões</strong>: arquivo de mídia retido por 90 (noventa) dias contados da reunião; transcrições e análises permanecem durante a vigência do acesso (Anexo II.5). O administrador pode excluir antes.</li>
+            <li><strong style={strong}>Registros de acesso</strong>: 6 (seis) meses, na forma do art. 15 do Marco Civil da Internet.</li>
             <li><strong style={strong}>Integrações Google</strong>: tokens e metadados relacionados são removidos quando você desconecta a integração ou solicita exclusão, conforme seção 2.6.</li>
           </ul>
         </section>
@@ -170,8 +172,9 @@ export default function Page() {
 
         <section style={section}>
           <h2 style={h2}>10. Contato e Encarregado de Dados (DPO)</h2>
-          <p style={p}>Para questões relacionadas ao tratamento de dados pessoais ou para exercer seus direitos previstos na LGPD, entre em contato com nosso Encarregado de Dados:</p>
-          <p style={p}><strong style={strong}>E-mail:</strong> <span style={accent}>contato@orbitgestao.com.br</span></p>
+          <p style={p}>Para questões relacionadas ao tratamento de dados pessoais ou para exercer seus direitos previstos na LGPD, entre em contato com a Encarregada. Função nomeada nos Termos de Uso v3.0, com atuação via Templum Consultoria e plataforma DPOnet. Requisições sobre o Conteúdo do Cliente devem ser dirigidas ao Controlador (sua organização); as demais, à Encarregada. Prazo: 15 dias.</p>
+          <p style={p}><strong style={strong}>Encarregada:</strong> Jennifer Dantas</p>
+          <p style={p}><strong style={strong}>E-mail:</strong> <a href="mailto:jennifer.dantas@templum.com.br" style={accent}>jennifer.dantas@templum.com.br</a></p>
         </section>
 
         <section style={section}>
@@ -179,7 +182,7 @@ export default function Page() {
           <p style={p}>Podemos atualizar esta Política de Privacidade periodicamente para refletir mudanças em nossas práticas ou na legislação. Notificaremos os usuários sobre alterações significativas via e-mail ou notificação na plataforma. A data da última atualização está no topo desta página.</p>
         </section>
 
-        <p style={{ color: '#484F58', fontSize: 13, marginTop: 48, paddingTop: 24, borderTop: '1px solid #21262d', textAlign: 'center' }}>Orbit — Evoluum Tecnologia Ltda. © 2026</p>
+        <p style={{ color: '#484F58', fontSize: 13, marginTop: 48, paddingTop: 24, borderTop: '1px solid #21262d', textAlign: 'center' }}>Orbit Gestão © 2026</p>
       </div>
     </div>
   );

@@ -64,8 +64,10 @@ export function Footer() {
             <h5 className="text-sm font-semibold text-white mb-4 mt-6">Legal</h5>
             <ul className="space-y-2.5 text-sm">
               <li><Link href="/politica-privacidade" className="hover:text-white transition-colors">Política de Privacidade</Link></li>
+              <li><Link href="/politica-seguranca" className="hover:text-white transition-colors">Política de Segurança da Informação</Link></li>
               <li><Link href="/termos-de-servico" className="hover:text-white transition-colors">Termos de Serviço</Link></li>
-              <li><Link href="/seguranca-ia" className="hover:text-white transition-colors">Segurança &amp; IA</Link></li>
+              <li><Link href="/seguranca-ia" className="hover:text-white transition-colors">Central de confiança</Link></li>
+              <li><Link href="/status" className="hover:text-white transition-colors">Status e disponibilidade</Link></li>
             </ul>
           </div>
         </div>
@@ -75,9 +77,13 @@ export function Footer() {
           <p className="text-white/40 text-xs">
             <Link href="/politica-privacidade" className="hover:text-white transition-colors">Política de Privacidade</Link>
             <span className="mx-2">·</span>
+            <Link href="/politica-seguranca" className="hover:text-white transition-colors">Política de Segurança</Link>
+            <span className="mx-2">·</span>
             <Link href="/termos-de-servico" className="hover:text-white transition-colors">Termos de Serviço</Link>
             <span className="mx-2">·</span>
-            <Link href="/seguranca-ia" className="hover:text-white transition-colors">Segurança &amp; IA</Link>
+            <Link href="/seguranca-ia" className="hover:text-white transition-colors">Central de confiança</Link>
+            <span className="mx-2">·</span>
+            <Link href="/status" className="hover:text-white transition-colors">Status</Link>
           </p>
         </div>
       </div>

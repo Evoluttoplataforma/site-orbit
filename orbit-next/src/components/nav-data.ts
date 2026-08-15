@@ -242,7 +242,7 @@ export const EMPRESA: NavLink[] = [
   { href: '/sobre', label: 'Sobre Nós', sub: 'Quem constrói o Orbit', icon: 'fas fa-building', i18n: 'nav.about', i18nSub: 'nav.about.sub' },
   { href: '/faq', label: 'Perguntas Frequentes', icon: 'fas fa-circle-question', i18n: 'nav.faq', visibility: 'mobile' },
   { href: '/glossario', label: 'Glossário', icon: 'fas fa-book', i18n: 'nav.glossary', visibility: 'mobile' },
-  { href: '/seguranca-ia', label: 'Segurança & IA', icon: 'fas fa-lock', i18n: 'nav.security', visibility: 'mobile' },
+  { href: '/seguranca-ia', label: 'Central de confiança', icon: 'fas fa-lock', i18n: 'nav.security', visibility: 'mobile' },
 ];
 
 // ─── Ações e links soltos ───────────────────────────────────────────────────

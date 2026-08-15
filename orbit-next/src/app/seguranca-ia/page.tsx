@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { PageContent } from './content';
 
-const TITLE = 'Segurança & IA, Termos e Privacidade — Orbit Gestão';
+const TITLE = 'Central de confiança — Segurança, privacidade e IA — Orbit Gestão';
 const DESC =
-  'Transparência sobre quais IAs usamos e como protegemos seus dados, além dos Termos de Serviço e da Política de Privacidade do Auto Chat, nossa integração de WhatsApp.';
+  'Controles de segurança, privacidade (LGPD), backup, resposta a incidentes, subprocessadores e uso de IA da Orbit. Certificações da empresa e da infraestrutura distinguídas com precisão.';
 
 export const metadata: Metadata = {
   title: TITLE,
