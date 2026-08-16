@@ -196,7 +196,7 @@ export const pageHTML = `
                             <div class="origin-director-card__avatar"><img src="/images/diretor-chris-novo.jpg" alt="Christian Hart" width="600" height="669" loading="lazy" decoding="async"></div>
                             <div class="origin-director-card__info">
                                 <h3>Christian Hart</h3>
-                                <p>Co-Founder. Diretor de Operações. Lidera a operação da plataforma e a entrega para os clientes.</p>
+                                <p>Founder. Diretor de Operações. Lidera a operação da plataforma e a entrega para os clientes.</p>
                             </div>
                         </div>
                         <div class="origin-director-card">

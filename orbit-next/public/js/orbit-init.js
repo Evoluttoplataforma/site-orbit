@@ -1716,7 +1716,7 @@ function applyEnglish() {
     'Diretora de Operações. Responsável pela entrega e qualidade — garante resultado mensurável para cada cliente.': 'Director of Operations. Responsible for delivery and quality — ensures measurable results for every client.',
     'Diretor de Produto. Lidera o desenvolvimento da plataforma e a evolução dos 12 agentes de IA.': 'Director of Product. Leads the platform development and the evolution of the 12 AI agents.',
     'Co-Founder. Diretor de Produto. Lidera o desenvolvimento da plataforma e a evolução dos agentes de IA.': 'Co-Founder. Director of Product. Leads the platform development and the evolution of the AI agents.',
-    'Co-Founder. Diretor de Operações. Lidera a operação da plataforma e a entrega para os clientes.': 'Co-Founder. Director of Operations. Leads platform operations and delivery for clients.',
+    'Founder. Diretor de Operações. Lidera a operação da plataforma e a entrega para os clientes.': 'Founder. Director of Operations. Leads platform operations and delivery for clients.',
     'Co-Founder BR, Founder USA.': 'Co-Founder BR, Founder USA.',
     'Co-Founder BR, 15 anos de experiência em consultoria de governança, gestão ágil e M&A, Founder USA e responsável pela expansão da operação.': 'Co-Founder BR, 15 years of experience in governance consulting, agile management and M&A, Founder USA and responsible for expanding the operation.',
     'Diretor de Vendas. Responsável pela expansão comercial, canais e parcerias estratégicas.': 'Director of Sales. Responsible for commercial expansion, channels and strategic partnerships.',
