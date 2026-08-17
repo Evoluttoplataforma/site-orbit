@@ -228,8 +228,8 @@ export const EVENTOS: NavLink[] = [
 ];
 
 // ─── Empresa ────────────────────────────────────────────────────────────────
-// No desktop é só um link de nível 1 para /sobre. No mobile o grupo ganha as
-// páginas que não estavam em NENHUM dos dois menus.
+// Desktop e mobile: dropdown com Sobre e Central de confiança.
+// FAQ e glossário continuam só no mobile (não cabem no dropdown curto do desktop).
 export const GROUP_EMPRESA: NavGroup = {
   id: 'empresa',
   label: 'Empresa',
@@ -240,9 +240,9 @@ export const GROUP_EMPRESA: NavGroup = {
 
 export const EMPRESA: NavLink[] = [
   { href: '/sobre', label: 'Sobre Nós', sub: 'Quem constrói o Orbit', icon: 'fas fa-building', i18n: 'nav.about', i18nSub: 'nav.about.sub' },
+  { href: '/seguranca-ia', label: 'Central de confiança', sub: 'Controles, pentest e DPA', icon: 'fas fa-shield-halved', i18n: 'nav.security', i18nSub: 'nav.security.sub' },
   { href: '/faq', label: 'Perguntas Frequentes', icon: 'fas fa-circle-question', i18n: 'nav.faq', visibility: 'mobile' },
   { href: '/glossario', label: 'Glossário', icon: 'fas fa-book', i18n: 'nav.glossary', visibility: 'mobile' },
-  { href: '/seguranca-ia', label: 'Central de confiança', icon: 'fas fa-lock', i18n: 'nav.security', visibility: 'mobile' },
 ];
 
 // ─── Ações e links soltos ───────────────────────────────────────────────────

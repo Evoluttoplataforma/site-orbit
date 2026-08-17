@@ -122,9 +122,7 @@ ${ddGroup(GROUP_PARA_QUEM, PARA_QUEM)}
                 </li>
 ${ddGroup(GROUP_CONTEUDO, CONTEUDO)}
 ${ddGroup(GROUP_EVENTOS, EVENTOS)}
-                <li>
-                    <a href="${attr(GROUP_EMPRESA.href)}"><span${i18nAttr(GROUP_EMPRESA.i18n)}>${GROUP_EMPRESA.label}</span></a>
-                </li>
+${ddGroup(GROUP_EMPRESA, EMPRESA)}
             </ul>`;
 
 // ═══════════════════════════════ MOBILE ════════════════════════════════
