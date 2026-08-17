@@ -173,6 +173,7 @@ function applyEnglish() {
     'Planos': 'Plans',
     'Conteúdo': 'Resources',
     'Empresa': 'Company',
+    'Segurança': 'Security',
     'Entrar': 'Login',
     'Conhecer o Time de IA': 'Meet the AI Team',
     'Todos os Agentes': 'All Agents',
