@@ -206,8 +206,8 @@ export const TRAINING_LIVE_CARDS: TrainingLiveCard[] = [
     descriptionEn: 'Management with an AI team, live. Happens on specific dates each month.',
     href: '/live',
     cadence: 'pontual',
-    whenLabel: 'Próxima edição em definição',
-    whenLabelEn: 'Next edition to be announced',
+    whenLabel: '19/08, 16h · consultorias',
+    whenLabelEn: '19 Aug, 4pm · consultancies',
   },
 ];
 

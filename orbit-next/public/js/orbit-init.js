@@ -2679,7 +2679,7 @@ function applyEnglish() {
     'nav.mod.recrutamento': 'Recruiting & Hiring',
     'nav.mod.projetos': 'Projects',
     'nav.mod.compras': 'Procurement',
-    'nav.ev.live': 'Live Orbit', 'nav.ev.live.sub': 'Next edition coming soon',
+    'nav.ev.live': 'Live Orbit', 'nav.ev.live.sub': '19 Aug, 4pm · consultancies',
     'nav.ev.masterclass': 'Consultants Masterclass', 'nav.ev.masterclass.sub': 'Thursday 6pm with Christian Hart',
     'nav.ev.trainings': 'Training', 'nav.ev.trainings.sub': 'Live Q&A and training',
     'nav.ev.onboarding': 'Onboarding', 'nav.ev.onboarding.sub': 'Wed 9am/5pm • Fri 2pm',

@@ -189,7 +189,7 @@ export const EVENTOS: NavLink[] = [
   {
     href: '/live',
     label: 'Live Orbit',
-    sub: 'Próxima edição em breve',
+    sub: '19/08, 16h · consultorias',
     // Câmera azul nos dois menus: as sessões acontecem no Zoom. O play vermelho
     // do desktop remetia a YouTube, que não é mais o canal.
     icon: 'fa-solid fa-video',

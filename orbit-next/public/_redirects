@@ -75,3 +75,9 @@
 # site apontam pra demonstracao.orbitgestao.com.br/chat. O 301 cobre links
 # antigos, anúncios e a URL caso o Google tenha indexado.
 /chat            https://demonstracao.orbitgestao.com.br/chat   301
+
+# ─── Campanha 19/08: LP exclusiva SDR consultorias
+# 302 (não 301): Google mantém /live no índice. REMOVER após a live para a
+# página institucional voltar. Sem splat — /live/chris, /igor e /rd ficam.
+/live            https://live.orbitgestao.com.br/               302
+/live/           https://live.orbitgestao.com.br/               302
