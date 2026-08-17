@@ -21,7 +21,7 @@ import {
   GROUP_PLATAFORMA, AGENTES, AGENTES_HEAD, MODULOS, MODULOS_HEAD,
   GROUP_CONTEUDO, CONTEUDO,
   GROUP_EVENTOS, EVENTOS,
-  GROUP_EMPRESA, EMPRESA,
+  GROUP_EMPRESA, EMPRESA, NAV_SECURITY,
   NAV_ACTIONS, MOBILE_EXTRA, MOBILE_GROUPS,
   isVisible,
   type NavLink, type NavGroup,
@@ -51,6 +51,12 @@ function ddItem(item: NavLink): string {
                                 <div class="dd-icon"><i class="${attr(item.icon)}"${color}></i></div>
                                 <div class="dd-text"><span${i18nAttr(item.i18n)}>${item.label}</span>${small}</div>
                             </a>`;
+}
+
+function topLink(href: string, label: string, i18n?: string): string {
+  return `                <li>
+                    <a href="${attr(href)}"><span${i18nAttr(i18n)}>${label}</span></a>
+                </li>`;
 }
 
 function ddGroup(group: NavGroup, items: NavLink[]): string {
@@ -122,7 +128,8 @@ ${ddGroup(GROUP_PARA_QUEM, PARA_QUEM)}
                 </li>
 ${ddGroup(GROUP_CONTEUDO, CONTEUDO)}
 ${ddGroup(GROUP_EVENTOS, EVENTOS)}
-${ddGroup(GROUP_EMPRESA, EMPRESA)}
+${topLink(GROUP_EMPRESA.href, GROUP_EMPRESA.label, GROUP_EMPRESA.i18n)}
+${topLink(NAV_SECURITY.href, NAV_SECURITY.label, NAV_SECURITY.i18n)}
             </ul>`;
 
 // ═══════════════════════════════ MOBILE ════════════════════════════════

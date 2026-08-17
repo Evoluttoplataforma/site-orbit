@@ -228,14 +228,22 @@ export const EVENTOS: NavLink[] = [
 ];
 
 // ─── Empresa ────────────────────────────────────────────────────────────────
-// Desktop e mobile: dropdown com Sobre e Central de confiança.
-// FAQ e glossário continuam só no mobile (não cabem no dropdown curto do desktop).
+// No desktop, Empresa continua link direto para /sobre. Segurança vai ao lado,
+// no nível 1 — senão some num hover que ninguém abre. No mobile o grupo Empresa
+// lista Sobre, Central de confiança, FAQ e glossário.
 export const GROUP_EMPRESA: NavGroup = {
   id: 'empresa',
   label: 'Empresa',
   href: '/sobre',
   i18n: 'nav.company',
   icon: 'fa-building',
+};
+
+/** Item de nível 1 no desktop. O mobile usa o mesmo destino dentro de EMPRESA. */
+export const NAV_SECURITY = {
+  href: '/seguranca-ia',
+  label: 'Segurança',
+  i18n: 'nav.security_nav',
 };
 
 export const EMPRESA: NavLink[] = [
@@ -279,5 +287,6 @@ export function allI18nKeys(): string[] {
   }
   for (const h of [AGENTES_HEAD, MODULOS_HEAD]) { add(h.i18n); add(h.i18nSub); }
   add(NAV_ACTIONS.login.i18n); add(NAV_ACTIONS.cta.i18n);
+  add(NAV_SECURITY.i18n);
   return [...keys].sort();
 }

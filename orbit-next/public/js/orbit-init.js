@@ -2685,6 +2685,7 @@ function applyEnglish() {
     'nav.glossary': 'Glossary',
     'nav.security': 'Trust Center',
     'nav.security.sub': 'Controls, pentest and DPA',
+    'nav.security_nav': 'Security',
     'mobile.sections': 'Sections',
     'hero.title': 'Business management platform operated by an <span class="hero-zoom__title-highlight">Artificial Intelligence agent team</span>.',
     'hero.subtitle': 'Each department gets a specialist agent. <strong>Olívia coordinates.</strong> Your management runs on its own — but you decide. Built on <strong>30 years of methodology</strong> from Grupo GSN (Templum &amp; Evolutto).',
