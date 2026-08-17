@@ -3777,6 +3777,11 @@ html[lang="en"] .i18n-pt { display: none !important; }
   font-size: 13px;
   color: rgba(255,255,255,0.3);
 }
+.footer-bottom .btn {
+  margin-top: 14px;
+  padding: 8px 18px;
+  font-size: 13px;
+}
 
 /* ═══ 14. BACK TO TOP ═══ */
 .back-to-top {

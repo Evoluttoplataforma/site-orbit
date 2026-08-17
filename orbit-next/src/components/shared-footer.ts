@@ -67,6 +67,8 @@ export const footerHTML = `
 
             <div class="footer-bottom">
                 <p data-i18n="footer.rights">&copy; 2026 Orbit - Grupo GSN. Todos os direitos reservados.</p>
+                <p style="margin-top:8px;font-size:13px;"><a href="/politica-privacidade" style="color:#8B949E;text-decoration:underline;" data-i18n="footer.privacy">Política de Privacidade</a> <span style="margin:0 8px;color:#484F58;">&middot;</span> <a href="/termos-de-servico" style="color:#8B949E;text-decoration:underline;" data-i18n="footer.terms">Termos de Serviço</a></p>
+                <a href="/seguranca-ia" class="btn btn-outline"><i class="fas fa-shield-halved" aria-hidden="true"></i><span data-i18n="footer.security">Central de confiança</span></a>
             </div>
         </div>
     </footer>
