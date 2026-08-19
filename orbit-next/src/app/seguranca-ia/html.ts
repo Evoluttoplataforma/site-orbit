@@ -1,36 +1,46 @@
-// Página: Central de confiança + documentos Auto Chat (Meta).
+// Página: Central de confiança + documentos Auto Chat e Auto Ads (Meta).
 // Tudo com inline styles + classes únicas (prefixo sia-) pra escapar do reset agressivo do orbit.css
 //
 // Aba 1: due diligence alinhada ao Termos de Uso v3.0 (aceite na Plataforma).
 // Abas 2–4: documentos legais do Auto Chat, exigidos na submissão do app na Meta.
+// Aba 5: Termos + Privacidade + Exclusão do Auto Ads (Marketing API).
 //
 // Deep link: /seguranca-ia#termos e /seguranca-ia#privacidade abrem a aba direto.
+// Auto Ads: #termos-auto-ads, #privacidade-auto-ads, #exclusao-auto-ads.
 // Isso importa porque um revisor da Meta que receba a URL precisa cair no
 // documento, não na aba 1.
 //
 // Os painéis estão TODOS no HTML estático (só ocultos por style inline), então
 // rastreador que não executa JS enxerga o conteúdo inteiro. O <noscript> abaixo
 // revela todos, para o caso de JS desligado.
-import { termosHTML, privacidadeHTML, exclusaoHTML } from './legal-html';
+import { termosHTML, privacidadeHTML, exclusaoHTML, autoAdsHTML } from './legal-html';
 import { trustHTML } from './trust-html';
 import { i18nText } from '@/lib/i18n-html';
 
-// O "· Auto Chat" existe para não confundir com /termos-de-servico e
-// /politica-privacidade, que cobrem a plataforma toda. A aba de exclusão não leva o
-// sufixo porque não há documento geral concorrente — e com 4 abas, rótulo curto ajuda.
+// O "· Auto Chat" / "· Auto Ads" existe para não confundir com /termos-de-servico e
+// /politica-privacidade, que cobrem a plataforma toda. A aba de exclusão do Auto Chat
+// não leva o sufixo porque não há documento geral concorrente.
 const tabs = [
   { id: 'seguranca', label: i18nText('Central de confiança', 'Trust Center'), icon: 'fa-shield-halved' },
   { id: 'termos', label: i18nText('Termos · Auto Chat', 'Terms · Auto Chat'), icon: 'fa-file-contract' },
   { id: 'privacidade', label: i18nText('Privacidade · Auto Chat', 'Privacy · Auto Chat'), icon: 'fa-user-shield' },
   { id: 'exclusao', label: i18nText('Exclusão de Dados', 'Data Deletion'), icon: 'fa-trash-can' },
+  { id: 'termos-ads', label: i18nText('Termos · Auto Ads', 'Terms · Auto Ads'), icon: 'fa-bullhorn' },
 ];
 
-// Hash de cada aba. 'exclusao-dados' é mais explícito na URL que vai no formulário
-// da Meta (campo "Data Deletion Instructions URL").
+// Hash canônico de cada aba. 'exclusao-dados' e 'exclusao-auto-ads' são as URLs
+// declaradas nos formulários da Meta (campo "Data Deletion Instructions URL").
 const HASHES: Record<string, string> = {
   termos: 'termos',
   privacidade: 'privacidade',
   exclusao: 'exclusao-dados',
+  'termos-ads': 'termos-auto-ads',
+};
+
+// Âncoras internas da aba Auto Ads que também precisam abrir esse painel.
+const EXTRA_HASHES: Record<string, string> = {
+  'privacidade-auto-ads': 'termos-ads',
+  'exclusao-auto-ads': 'termos-ads',
 };
 
 const tabBar = tabs
@@ -86,12 +96,16 @@ export const pageHTML = `
       .sia-list li::before { content:''; position:absolute; left:0; top:8px; width:8px; height:8px; border-radius:50%; background:#ffba1a; }
       .sia-ol { margin:0; padding-left:22px; display:flex; flex-direction:column; gap:14px; color:#C9D1D9; font-size:0.98rem; line-height:1.65; }
       .sia-ol li::marker { color:#ffba1a; font-weight:800; }
+      #termos-auto-ads, #privacidade-auto-ads, #exclusao-auto-ads { scroll-margin-top: 120px; }
+      @media (max-width:1100px) {
+        .sia-tab { padding:12px 14px; font-size:13px; }
+      }
       @media (max-width:900px) {
         .sia-status { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
       }
       @media (max-width:640px) {
         .sia-tabs-wrap { padding:96px 14px 0; }
-        .sia-tab { padding:12px 13px; font-size:12.5px; gap:7px; flex:1 1 auto; justify-content:center; }
+        .sia-tab { padding:12px 13px; font-size:12.5px; gap:7px; flex:1 1 auto; justify-content:center; white-space:nowrap; }
         .sia-tab i { font-size:12px; }
         .sia-doc { padding:36px 18px 72px; }
         .sia-status { grid-template-columns:1fr !important; }
@@ -136,6 +150,13 @@ ${exclusaoHTML}
         </div>
     </div>
 
+    <!-- ═══ ABA 5 — Termos · Privacidade · Exclusão — Auto Ads ═══ -->
+    <div data-sia-panel="termos-ads" id="sia-panel-termos-ads" role="tabpanel" style="display:none;">
+        <div class="sia-doc">
+${autoAdsHTML}
+        </div>
+    </div>
+
     <script>
     (function () {
         var tabs = document.querySelectorAll('[data-sia-tab]');
@@ -162,6 +183,8 @@ ${exclusaoHTML}
         var HASH_OF = ${JSON.stringify(HASHES)};
         var PANEL_OF = {};
         Object.keys(HASH_OF).forEach(function (k) { PANEL_OF[HASH_OF[k]] = k; });
+        var EXTRA = ${JSON.stringify(EXTRA_HASHES)};
+        Object.keys(EXTRA).forEach(function (h) { PANEL_OF[h] = EXTRA[h]; });
 
         function goTo(name) {
             if (!show(name)) return;
@@ -187,11 +210,23 @@ ${exclusaoHTML}
             });
         });
 
-        // Deep link. Sem rolar a pagina: o proprio navegador ja tenta posicionar
-        // pelo hash, e forcar scroll aqui brigaria com isso.
-        var h = (location.hash || '').replace('#', '').toLowerCase();
-        if (PANEL_OF[h]) show(PANEL_OF[h]);
-        else if (h.indexOf('sia-') === 0) show('seguranca');
+        // Deep link. Âncoras da Central de confiança (#sia-*) ficam na aba 1, visível
+        // por padrão — o navegador posiciona sozinho. Âncoras de outras abas (incluindo
+        // #exclusao-auto-ads da Meta) precisam abrir o painel antes de rolar.
+        function applyHash() {
+            var h = (location.hash || '').replace('#', '').toLowerCase();
+            if (PANEL_OF[h]) {
+                show(PANEL_OF[h]);
+                var target = document.getElementById(h);
+                if (target) {
+                    requestAnimationFrame(function () { target.scrollIntoView({ block: 'start' }); });
+                }
+                return;
+            }
+            if (h.indexOf('sia-') === 0) show('seguranca');
+        }
+        applyHash();
+        window.addEventListener('hashchange', applyHash);
     })();
     </script>
 

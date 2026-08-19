@@ -83,6 +83,7 @@ const tocItems: { href: string; n: string; title: string; titleEn: string; statu
   { href: '#sia-subprocessadores', n: '09', title: 'Subprocessadores e transferências', titleEn: 'Sub-processors and transfers', status: 'Anexo IV', statusEn: 'Annex IV', kind: 'live' },
   { href: '#sia-retencao', n: '10', title: 'Retenção, portabilidade e descarte', titleEn: 'Retention, portability and disposal', status: '30 + 60 dias', statusEn: '30 + 60 days', kind: 'live' },
   { href: '#sia-financeiro', n: '11', title: 'Controles do módulo financeiro', titleEn: 'Finance module controls', status: 'No produto', statusEn: 'In the product', kind: 'live' },
+  { href: '#sia-csa-star', n: '12', title: 'CSA STAR Level 1 (CAIQ) U.S.', titleEn: 'CSA STAR Level 1 (CAIQ) U.S.', status: 'Em implementação', statusEn: 'In progress', kind: 'progress' },
 ];
 
 function statusRow(): string {
@@ -120,6 +121,7 @@ function packTable(): string {
     ['Lista de subprocessadores', 'Sub-processor list', 'Anexo IV (essenciais e opcionais), nesta página', 'Annex IV (essential and optional), on this page', 'Atualização com aviso de 30 dias se essencial/nova jurisdição', '30-day notice if essential or a new jurisdiction', 'live'],
     ['Política de retenção e descarte', 'Retention and disposal policy', '30 dias só leitura + 60 arquivado (cláusula 15.3); gravações 90 dias (Anexo II.5)', '30 days read-only + 60 archived (clause 15.3); recordings 90 days (Annex II.5)', 'Termos v3.0', 'Terms v3.0', 'live'],
     ['Trilha de auditoria financeira', 'Financial audit trail', 'Controles no produto, descritos abaixo', 'In-product controls, described below', 'Evidência de configuração da org sob NDA', 'Org configuration evidence under NDA', 'live'],
+    ['CSA STAR Level 1 (CAIQ) U.S.', 'CSA STAR Level 1 (CAIQ) U.S.', 'Em preenchimento — autoavaliação CAIQ; submissão prevista ao registro público da Cloud Security Alliance nos EUA. Ainda não está no registro.', 'In progress — CAIQ self-assessment; submission planned to the Cloud Security Alliance public registry in the U.S. Not yet listed.', 'Não reivindicar como STAR publicado', 'Do not claim it as a published STAR listing', 'progress'],
   ];
   return `
     <div class="sia-table-wrap">
@@ -262,8 +264,8 @@ export const trustHTML = `
             </div>
             ${i18nEl(
               'p',
-              `Referências públicas dos provedores: <a href="https://supabase.com/security" target="_blank" rel="noopener noreferrer" style="color:${gold};">supabase.com/security</a> · <a href="https://aws.amazon.com/compliance/programs/" target="_blank" rel="noopener noreferrer" style="color:${gold};">aws.amazon.com/compliance</a>. Cópias de certificados da nuvem não são apresentados como se fossem da Orbit.`,
-              `Public provider references: <a href="https://supabase.com/security" target="_blank" rel="noopener noreferrer" style="color:${gold};">supabase.com/security</a> · <a href="https://aws.amazon.com/compliance/programs/" target="_blank" rel="noopener noreferrer" style="color:${gold};">aws.amazon.com/compliance</a>. Copies of cloud certificates are not presented as if they belonged to Orbit.`,
+              `Referências públicas dos provedores: <a href="https://supabase.com/security" target="_blank" rel="noopener noreferrer" style="color:${gold};">supabase.com/security</a> · <a href="https://aws.amazon.com/compliance/programs/" target="_blank" rel="noopener noreferrer" style="color:${gold};">aws.amazon.com/compliance</a>. Cópias de certificados da nuvem não são apresentados como se fossem da Orbit. A autoavaliação <a href="#sia-csa-star" style="color:${gold};font-weight:700;">CSA STAR Level 1 (CAIQ) U.S.</a> está em preenchimento — ainda não consta no registro público da CSA.`,
+              `Public provider references: <a href="https://supabase.com/security" target="_blank" rel="noopener noreferrer" style="color:${gold};">supabase.com/security</a> · <a href="https://aws.amazon.com/compliance/programs/" target="_blank" rel="noopener noreferrer" style="color:${gold};">aws.amazon.com/compliance</a>. Copies of cloud certificates are not presented as if they belonged to Orbit. The <a href="#sia-csa-star" style="color:${gold};font-weight:700;">CSA STAR Level 1 (CAIQ) U.S.</a> self-assessment is being completed — it is not yet in the CSA public registry.`,
               `style="color:${muted};font-size:0.92rem;line-height:1.6;margin:0;"`,
             )}
       `,
@@ -667,6 +669,29 @@ export const trustHTML = `
               'The trail is append-only at the application layer. Infrastructure administrators with a database service credential can, as in any SaaS, operate the datastore — that access is restricted, MFA-protected and logged. We do not describe this as cryptographic WORM like a fiscal recorder.',
               `style="color:${muted};font-size:0.88rem;line-height:1.55;margin:16px 0 0;"`,
             )}
+      `,
+    )}
+
+    ${section(
+      'sia-csa-star',
+      true,
+      `
+            ${kicker('12', 'CSA STAR', 'CSA STAR')}
+            ${h2('CSA STAR Level 1', '(CAIQ) U.S.', 'CSA STAR Level 1', '(CAIQ) U.S.')}
+            ${p(
+              'Autoavaliação de segurança em nuvem em preenchimento, com submissão prevista ao registro público da Cloud Security Alliance nos EUA. Não é certificado emitido nem listagem já publicada — o questionário CAIQ ainda não foi submetido.',
+              'Cloud security self-assessment being completed, with submission planned to the Cloud Security Alliance public registry in the United States. It is not an issued certificate and not a listing already published — the CAIQ questionnaire has not been submitted yet.',
+            )}
+            <div style="${card}">
+              <div style="margin-bottom:12px;">${badge('Orbit · operador', 'progress', 'Orbit · operator')}</div>
+              ${i18nEl('h3', 'O que é o Level 1', 'What Level 1 is', `style="color:${white};font-size:1.15rem;font-weight:800;margin:0 0 10px;"`)}
+              ${i18nEl(
+                'p',
+                `O STAR Level 1 da CSA é uma <strong style="color:${white};">autoavaliação</strong> (Consensus Assessments Initiative Questionnaire — CAIQ), não uma auditoria de terceira parte. A Orbit está preenchendo o questionário para submeter ao registro público da CSA nos Estados Unidos. Enquanto a listagem não estiver publicada, este item permanece <strong style="color:${white};">em implementação</strong>.`,
+                `CSA STAR Level 1 is a <strong style="color:${white};">self-assessment</strong> (Consensus Assessments Initiative Questionnaire — CAIQ), not a third-party audit. Orbit is completing the questionnaire for submission to the CSA public registry in the United States. Until the listing is published, this item remains <strong style="color:${white};">in progress</strong>.`,
+                `style="color:${text};font-size:0.95rem;line-height:1.65;margin:0;"`,
+              )}
+            </div>
       `,
     )}
 
