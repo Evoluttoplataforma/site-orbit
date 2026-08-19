@@ -1,13 +1,16 @@
-// Documentos legais do Orbit Gestão / Auto Chat — a integração de WhatsApp via
-// Meta Cloud API e Twilio.
+// Documentos legais do Orbit Gestão para apps Meta:
+//   Auto Chat — WhatsApp via Meta Cloud API e Twilio
+//   Auto Ads  — Marketing API (Facebook e Instagram Ads)
 //
 // IMPORTANTE: estes NÃO substituem /politica-privacidade e /termos-de-servico, que
 // cobrem a plataforma Orbit como um todo (Evoluum Tecnologia, LGPD, Google
 // Workspace). São documentos de escopo específico, exigidos na submissão do app
 // na Meta, que precisa de URL pública para política de privacidade e termos.
 //
-// Ficam como abas de /seguranca-ia por decisão de produto (nao criar pagina nova),
-// com deep link: /seguranca-ia#termos e /seguranca-ia#privacidade.
+// Ficam como abas de /seguranca-ia por decisão de produto (nao criar pagina nova).
+// Deep links Auto Chat: /seguranca-ia#termos, #privacidade, #exclusao-dados
+// Deep links Auto Ads:  /seguranca-ia#termos-auto-ads, #privacidade-auto-ads,
+//                       #exclusao-auto-ads (campo "User data deletion" na Meta).
 //
 // Tipografia espelha /politica-privacidade e /termos-de-servico (maxWidth 820 para
 // medida de linha legivel em texto legal), mas em inline style, que e o paradigma
@@ -50,6 +53,17 @@ function para(pt: string, en: string, extra = ''): string {
 function item(pt: string, en: string): string {
   return i18nEl('li', `${bullet}${pt}`, `${bullet}${en}`, `style="${li}"`);
 }
+
+function subh(pt: string, en: string): string {
+  return i18nEl(
+    'h3',
+    pt,
+    en,
+    `style="font-size:0.98rem;font-weight:700;color:#fff;margin:18px 0 10px;letter-spacing:-0.01em;"`,
+  );
+}
+
+const sep = '<div style="height:1px;background:rgba(255,255,255,0.08);margin:56px 0 48px;"></div>';
 
 /** Cabeçalho comum: título, data e a nota de escopo que diferencia dos documentos gerais. */
 function docHead(titulo: string, tituloEn: string, data: string, dataEn: string, escopo: string, escopoEn: string): string {
@@ -315,6 +329,361 @@ ${docHead(
                 ${para(
                   `Após a validação da solicitação, responderemos <strong style="${st}">em até 5 dias úteis</strong> confirmando a eliminação definitiva de todos os seus dados armazenados em nossos sistemas.`,
                   `After validating the request, we will reply <strong style="${st}">within 5 business days</strong> confirming the permanent deletion of all your data stored in our systems.`,
+                  'margin-bottom:0;',
+                )}
+            </div>
+        </div>`;
+
+// ─── AUTO ADS (Meta Marketing API) ──────────────────────────────────────────
+// Uma aba só: termos + privacidade + exclusão, no mesmo padrão visual do Auto Chat.
+// A Meta exige heading visível "Política de Privacidade — Auto Ads" e URL pública
+// HTTP 200 (https://orbitgestao.com.br/seguranca-ia). Exclusão: #exclusao-auto-ads.
+//
+// Privacy Policy URL:     https://orbitgestao.com.br/seguranca-ia
+// User data deletion:     https://orbitgestao.com.br/seguranca-ia#exclusao-auto-ads
+// Data deletion callback: Edge Function meta-data-deletion (não exibir a URL da API aqui)
+
+const ESCOPO_ADS =
+  'Este documento trata especificamente do <strong style="color:#fff;">Auto Ads</strong>, ' +
+  'a integração da Orbit Gestão com a Marketing API da Meta (Facebook e Instagram Ads), ' +
+  'disponível em Mercado → Anúncios. Para a plataforma Orbit como um todo, consulte os ' +
+  `<a href="/termos-de-servico" style="${link}">Termos de Serviço</a> e a ` +
+  `<a href="/politica-privacidade" style="${link}">Política de Privacidade</a> gerais. ` +
+  'Para WhatsApp / Auto Chat, consulte os ' +
+  `<a href="#termos" data-sia-goto="termos" style="${link}">documentos específicos</a> nesta mesma página.`;
+
+const ESCOPO_ADS_EN =
+  'This document covers specifically <strong style="color:#fff;">Auto Ads</strong>, ' +
+  'Orbit Gestão’s integration with Meta’s Marketing API (Facebook and Instagram Ads), ' +
+  'available under Market → Ads. For the Orbit platform as a whole, see the general ' +
+  `<a href="/termos-de-servico" style="${link}">Terms of Service</a> and ` +
+  `<a href="/politica-privacidade" style="${link}">Privacy Policy</a>. ` +
+  'For WhatsApp / Auto Chat, see the ' +
+  `<a href="#termos" data-sia-goto="termos" style="${link}">specific documents</a> on this same page.`;
+
+const ESCOPO_ADS_PRIV =
+  'Este documento é a política de privacidade do aplicativo Meta <strong style="color:#fff;">“Auto Ads”</strong>, ' +
+  'operado pela Orbit Gestão. Descreve quais informações coletamos via Facebook Login for Business e Marketing API, ' +
+  'para que as usamos, com quem as compartilhamos e como solicitar a exclusão. Não é a política de privacidade da Meta. ' +
+  `Para a plataforma Orbit em geral, consulte a <a href="/politica-privacidade" style="${link}">Política de Privacidade</a> geral. ` +
+  `Para WhatsApp, consulte a <a href="#privacidade" data-sia-goto="privacidade" style="${link}">Política de Privacidade — Auto Chat</a> nesta mesma página.`;
+
+const ESCOPO_ADS_PRIV_EN =
+  'This document is the privacy policy of the Meta application <strong style="color:#fff;">“Auto Ads”</strong>, ' +
+  'operated by Orbit Gestão. It describes what information we collect via Facebook Login for Business and the Marketing API, ' +
+  'why we use it, with whom we share it, and how to request deletion. It is not Meta’s privacy policy. ' +
+  `For the Orbit platform as a whole, see the general <a href="/politica-privacidade" style="${link}">Privacy Policy</a>. ` +
+  `For WhatsApp, see <a href="#privacidade" data-sia-goto="privacidade" style="${link}">Privacy Policy — Auto Chat</a> on this same page.`;
+
+function adsToc(): string {
+  const items: { href: string; pt: string; en: string }[] = [
+    { href: '#termos-auto-ads', pt: 'Termos de Serviço', en: 'Terms of Service' },
+    { href: '#privacidade-auto-ads', pt: 'Política de Privacidade', en: 'Privacy Policy' },
+    { href: '#exclusao-auto-ads', pt: 'Exclusão de Dados', en: 'Data Deletion' },
+  ];
+  return `<nav aria-label="Documentos Auto Ads / Auto Ads documents" style="display:flex;gap:10px;flex-wrap:wrap;margin:0 0 44px;">
+                ${items
+                  .map(
+                    (it) =>
+                      `<a class="sia-toc-card" href="${it.href}" style="flex:1;min-width:160px;border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px 16px;color:#C9D1D9;font-size:0.92rem;font-weight:700;">${i18nText(it.pt, it.en)}</a>`,
+                  )
+                  .join('\n                ')}
+            </nav>`;
+}
+
+export const autoAdsHTML = `
+        <div style="${wrap}">
+            ${adsToc()}
+        </div>
+
+        <div id="termos-auto-ads" style="${wrap}">
+${docHead('Termos de Serviço — Auto Ads', 'Terms of Service — Auto Ads', '19 de agosto de 2026', '19 August 2026', ESCOPO_ADS, ESCOPO_ADS_EN)}
+
+            ${para(
+              'Estes Termos regem o uso do Auto Ads. Ao clicar em <em>Conectar</em> no modal Contas de anúncios ou ao publicar um criativo no Meta, você concorda com as condições abaixo.',
+              'These Terms govern use of Auto Ads. By clicking <em>Connect</em> in the Ad accounts dialog or by publishing a creative to Meta, you agree to the conditions below.',
+            )}
+
+            <div style="${sec}">
+                ${heading('01', 'Descrição dos serviços', 'Description of the services')}
+                ${para(
+                  'O Auto Ads permite que a organização cliente, na plataforma Orbit (<a href="https://app.orbitgestao.com.br" target="_blank" rel="noopener" style="' +
+                    link +
+                    '">app.orbitgestao.com.br</a>):',
+                  'Auto Ads lets the customer organization, on the Orbit platform (<a href="https://app.orbitgestao.com.br" target="_blank" rel="noopener" style="' +
+                    link +
+                    '">app.orbitgestao.com.br</a>):',
+                )}
+                <ul style="${ul}">
+                    ${item('conecte, uma vez, a conta de anúncios, a Página e o Instagram Business da organização, via <em>Facebook Login for Business</em>;', 'connect, once, the organization’s ad account, Page and Instagram Business account via <em>Facebook Login for Business</em>;')}
+                    ${item('publique ou agende criativos (imagem ou carrossel) na Marketing API, em regra <em>pausados</em>;', 'publish or schedule creatives (image or carousel) through the Marketing API, typically <em>paused</em>;')}
+                    ${item('consulte o status da publicação e pause/ative anúncios já criados.', 'read publication status and pause/activate ads already created.')}
+                </ul>
+                ${para(
+                  'Não faz parte deste app: post orgânico no feed da Página ou do Instagram, mensagens diretas, catálogo de produtos, WhatsApp, nem o servidor MCP de anúncios da Meta.',
+                  'This app does <em>not</em> include: organic posts on the Page or Instagram feed, direct messages, product catalog, WhatsApp, or Meta’s ads MCP server.',
+                  'margin-bottom:0;',
+                )}
+            </div>
+
+            <div style="${sec}">
+                ${heading('02', 'Cumprimento das políticas da Meta', 'Compliance with Meta policies')}
+                ${para(
+                  'O usuário compromete-se a usar a integração em conformidade com os Termos da Plataforma da Meta, as Políticas Comerciais, as Políticas de Publicidade e as regras da Marketing API. É expressamente proibido:',
+                  'The user undertakes to use the integration in compliance with Meta Platform Terms, Commerce Policies, Advertising Policies and Marketing API rules. The following are expressly prohibited:',
+                )}
+                <ul style="${ul}margin-bottom:0;">
+                    ${item('publicar conteúdo ilícito, enganoso, discriminatório ou que viole direitos de terceiros;', 'publishing unlawful, misleading or discriminatory content, or content that violates third-party rights;')}
+                    ${item('usar a conexão para anunciar em contas, Páginas ou Instagram que o usuário não esteja autorizado a gerir;', 'using the connection to advertise on ad accounts, Pages or Instagram accounts the user is not authorized to manage;')}
+                    ${item('contornar limites, sandboxes ou restrições de acesso da Meta.', 'circumventing Meta limits, sandboxes or access restrictions.')}
+                </ul>
+            </div>
+
+            <div style="${sec}">
+                ${heading('03', 'Isenção', 'Disclaimer')}
+                ${para(
+                  `A Orbit Gestão fornece o software e a ponte com a Graph API. A responsabilidade pelo conteúdo do anúncio, destino (landing page), orçamento, categorias especiais, pagamento da conta de anúncios e cumprimento das políticas da Meta é <strong style="${st}">do usuário / da organização cliente</strong>. A Orbit não se responsabiliza por rejeição de anúncio, suspensão de conta ou cobrança no Ads Manager decorrentes do uso da API pelo cliente.`,
+                  `Orbit Gestão provides the software and the Graph API bridge. Responsibility for ad content, destination (landing page), budget, special ad categories, ad-account billing and compliance with Meta policies is <strong style="${st}">the user’s / customer organization’s</strong>. Orbit is not liable for ad rejection, account suspension or Ads Manager charges arising from the customer’s use of the API.`,
+                  'margin-bottom:0;',
+                )}
+            </div>
+
+            <div style="${sec}">
+                ${heading('04', 'Cancelamento e desconexão', 'Cancellation and disconnection')}
+                ${para(
+                  'O usuário pode desconectar o Meta a qualquer momento em <em>Mercado → Anúncios → Contas de anúncios</em>. A Orbit pode suspender a integração se houver violação grave destes Termos ou das políticas da Meta.',
+                  'The user may disconnect Meta at any time under <em>Market → Ads → Ad accounts</em>. Orbit may suspend the integration if there is a serious violation of these Terms or of Meta’s policies.',
+                  'margin-bottom:0;',
+                )}
+            </div>
+
+            <div style="${sec}">
+                ${heading('05', 'Propriedade intelectual', 'Intellectual property')}
+                ${para(
+                  'Código, marcas e interfaces da Orbit permanecem da Orbit Gestão. Criativos, textos e mídias que o cliente envia à Meta continuam do cliente (ou de quem detém os direitos). IDs de campanha/anúncio gerados pela Meta pertencem ao ecossistema Meta, associados à conta de anúncios do cliente.',
+                  'Orbit code, trademarks and interfaces remain Orbit Gestão’s. Creatives, copy and media the customer sends to Meta remain the customer’s (or the rights holder’s). Campaign/ad IDs generated by Meta belong to the Meta ecosystem, tied to the customer’s ad account.',
+                  'margin-bottom:0;',
+                )}
+            </div>
+
+            <div style="${sec}">
+                ${heading('06', 'Foro e legislação', 'Venue and governing law')}
+                ${para(
+                  'Leis da República Federativa do Brasil, inclusive LGPD (Lei nº 13.709/2018) e Marco Civil da Internet (Lei nº 12.965/2014). Foro da comarca da sede da Orbit Gestão.',
+                  'Laws of the Federative Republic of Brazil, including the LGPD (Law No. 13,709/2018) and the Brazilian Internet Civil Framework (Law No. 12,965/2014). Courts of Orbit Gestão’s headquarters district.',
+                  'margin-bottom:0;',
+                )}
+            </div>
+
+            ${i18nEl(
+              'p',
+              `Dúvidas: <!--email_off--><a href="mailto:suporte@orbitgestao.com.br" style="${link}">suporte@orbitgestao.com.br</a><!--email_on-->.`,
+              `Questions: <!--email_off--><a href="mailto:suporte@orbitgestao.com.br" style="${link}">suporte@orbitgestao.com.br</a><!--email_on-->.`,
+              `style="${foot}"`,
+            )}
+        </div>
+
+        ${sep}
+
+        <div id="privacidade-auto-ads" style="${wrap}">
+${docHead('Política de Privacidade — Auto Ads', 'Privacy Policy — Auto Ads', '19 de agosto de 2026', '19 August 2026', ESCOPO_ADS_PRIV, ESCOPO_ADS_PRIV_EN)}
+
+            ${para(
+              `A organização cliente é, em regra, a <strong style="${st}">controladora</strong> dos dados de marketing que trata na Orbit. A Orbit Gestão atua como <strong style="${st}">operadora</strong> (LGPD) para executar o contrato SaaS. A Meta Platforms, Inc. trata dados conforme os próprios termos quando você autoriza o Login e quando anúncios são criados na sua conta.`,
+              `The customer organization is, as a rule, the <strong style="${st}">controller</strong> of the marketing data it processes in Orbit. Orbit Gestão acts as <strong style="${st}">processor</strong> (LGPD) to perform the SaaS contract. Meta Platforms, Inc. processes data under its own terms when you authorize Login and when ads are created in your account.`,
+            )}
+
+            <div style="${sec}">
+                ${heading('01', 'Informações que coletamos', 'Information we collect')}
+                ${para(
+                  'Coletamos apenas o necessário para conectar a organização e publicar/gerir anúncios <em>a pedido do usuário autenticado na Orbit</em>:',
+                  'We collect only what is required to connect the organization and publish/manage ads <em>at the request of the user signed in to Orbit</em>:',
+                )}
+                ${subh('Dados de quem autoriza (Facebook Login for Business)', 'Data of the person who authorizes (Facebook Login for Business)')}
+                <ul style="${ul}">
+                    ${item('identificador do usuário Facebook (user_id);', 'Facebook user identifier (user_id);')}
+                    ${item('nome público associado à conta (public_profile);', 'public name associated with the account (public_profile);')}
+                    ${item('lista de Páginas que o usuário gerencia (pages_show_list);', 'list of Pages the user manages (pages_show_list);')}
+                    ${item('dados de engajamento da Página na medida em que a API os devolve para validar o ativo (pages_read_engagement);', 'Page engagement data to the extent the API returns it to validate the asset (pages_read_engagement);')}
+                    ${item('Instagram Business vinculado à Página escolhida (instagram_basic: id e username);', 'Instagram Business account linked to the chosen Page (instagram_basic: id and username);')}
+                    ${item('negócios / portfólio de negócios visíveis ao usuário (business_management);', 'businesses / business portfolios visible to the user (business_management);')}
+                    ${item('contas de anúncios visíveis (ads_read);', 'visible ad accounts (ads_read);')}
+                    ${item('permissões concedidas (escopos) e data da conexão.', 'granted permissions (scopes) and connection date.')}
+                </ul>
+                ${subh('Credenciais e ativos escolhidos pela organização', 'Credentials and assets chosen by the organization')}
+                <ul style="${ul}">
+                    ${item('token de acesso (system-user ou de usuário) emitido pela Meta — armazenado só no servidor, <em>nunca</em> no navegador;', 'access token (system-user or user) issued by Meta — stored only on the server, <em>never</em> in the browser;')}
+                    ${item('ID e nome da conta de anúncios selecionada;', 'ID and name of the selected ad account;')}
+                    ${item('ID e nome da Página selecionada;', 'ID and name of the selected Page;')}
+                    ${item('ID e username do Instagram Business, se houver;', 'Instagram Business ID and username, if any;')}
+                    ${item('identificador do negócio cliente, quando a Meta o envia;', 'client-business identifier, when Meta sends it;')}
+                    ${item('status da conexão (ativa, expirada, desconectada, erro).', 'connection status (active, expired, disconnected, error).')}
+                </ul>
+                ${subh('Dados de publicação (quando o usuário publica ou agenda um criativo)', 'Publication data (when the user publishes or schedules a creative)')}
+                <ul style="${ul}">
+                    ${item('textos e mídias do criativo já existentes na Orbit (título, copy, imagens do anúncio);', 'copy and media of the creative already stored in Orbit (title, body, ad images);')}
+                    ${item('URL de destino (landing page Orbit ou URL informada);', 'destination URL (Orbit landing page or a URL the user provides);')}
+                    ${item('objetivo (tráfego), orçamento diário, data/hora de agendamento, status (pausado, agendado, ativo);', 'objective (traffic), daily budget, schedule timestamp, status (paused, scheduled, active);')}
+                    ${item('IDs devolvidos pela Meta (campanha, conjunto, criativo, anúncio).', 'IDs returned by Meta (campaign, ad set, creative, ad).')}
+                </ul>
+                ${subh('O que este app não coleta', 'What this app does not collect')}
+                <ul style="${ul}">
+                    ${item('conteúdo do feed pessoal do Facebook;', 'content from the user’s personal Facebook feed;')}
+                    ${item('lista de amigos;', 'friends lists;')}
+                    ${item('mensagens do Instagram ou do Messenger;', 'Instagram or Messenger messages;')}
+                    ${item('catálogo de produtos / Pixel, salvo se uma versão futura for contratada e esta política for atualizada;', 'product catalog / Pixel, unless a future version is contracted and this policy is updated;')}
+                    ${item('dados de contas de anúncios de terceiros sem autorização do Login for Business.', 'data from third-party ad accounts without Login for Business authorization.')}
+                </ul>
+                ${para(
+                  'Dados de cadastro da Orbit (e-mail, organização, papel) já existem na conta SaaS e seguem a Política de Privacidade geral da plataforma.',
+                  'Orbit account data (e-mail, organization, role) already exist on the SaaS account and follow the platform’s general Privacy Policy.',
+                  'margin-bottom:0;',
+                )}
+            </div>
+
+            <div style="${sec}">
+                ${heading('02', 'Como processamos e para que finalidade', 'How we process data and for what purpose')}
+                ${para('Usamos essas informações <em>exclusivamente</em> para:', 'We use this information <em>exclusively</em> to:')}
+                <ul style="${ul}">
+                    ${item('estabelecer e manter a conexão técnica da organização com a Marketing API;', 'establish and maintain the technical connection of the organization with the Marketing API;')}
+                    ${item('mostrar no painel qual conta, Página e Instagram estão vinculados;', 'show in the dashboard which ad account, Page and Instagram are linked;')}
+                    ${item('criar, pausar, ativar ou agendar anúncios <em>somente quando o usuário dispara a ação</em> na Orbit;', 'create, pause, activate or schedule ads <em>only when the user triggers the action</em> in Orbit;')}
+                    ${item('gravar o status da publicação e o link para o Ads Manager;', 'record publication status and the link to Ads Manager;')}
+                    ${item('sincronizar status já existentes (job de sincronização), sem criar campanha nova por conta própria;', 'sync already existing statuses (sync job), without creating a new campaign on its own;')}
+                    ${item('prestar suporte técnico à organização;', 'provide technical support to the organization;')}
+                    ${item('segurança, auditoria, prevenção a abuso e cumprimento de obrigação legal.', 'security, audit, abuse prevention and compliance with a legal duty.')}
+                </ul>
+                ${para(
+                  'Não usamos dados do Auto Ads para anunciar a Orbit para o usuário, para treinar modelos de IA da Orbit ou de terceiros, nem para vender listas. O conteúdo do cliente <em>não</em> é usado para treinar modelos (cláusula 6.6 dos Termos da plataforma).',
+                  'We do not use Auto Ads data to advertise Orbit to the user, to train Orbit or third-party AI models, or to sell lists. Customer content is <em>not</em> used to train models (clause 6.6 of the platform Terms).',
+                )}
+                ${para(
+                  'Base legal (LGPD): execução de contrato (prestação do SaaS) e, no Login, o consentimento dado na tela da Meta. A organização cliente, como controladora, é responsável por ter base legal perante os titulares que eventualmente apareçam em criativos ou páginas de destino.',
+                  'Legal basis (LGPD): performance of contract (SaaS) and, at Login, consent given on Meta’s screen. The customer organization, as controller, is responsible for having a legal basis towards data subjects who may appear in creatives or landing pages.',
+                  'margin-bottom:0;',
+                )}
+            </div>
+
+            <div style="${sec}">
+                ${heading('03', 'Compartilhamento com terceiros', 'Sharing with third parties')}
+                ${para(
+                  `A Orbit Gestão <strong style="${st}">não vende, aluga ou comercializa</strong> esses dados para publicidade de terceiros.`,
+                  `Orbit Gestão <strong style="${st}">does not sell, rent or commercialize</strong> this data for third-party advertising.`,
+                )}
+                ${para('Compartilhamento estritamente operacional:', 'Operational sharing only:')}
+                <ul style="${ul}">
+                    ${item('<strong style="' + st + '">Meta Platforms, Inc.</strong> — Login for Business e Marketing API (criação e gestão de anúncios na conta que você escolheu). Tratamento nos Estados Unidos, segundo os termos da Meta.', '<strong style="' + st + '">Meta Platforms, Inc.</strong> — Login for Business and Marketing API (creating and managing ads in the account you chose). Processing in the United States, under Meta’s terms.')}
+                    ${item('<strong style="' + st + '">Supabase / AWS (sa-east-1, São Paulo)</strong> — banco e funções onde o token e os metadados da conexão ficam armazenados.', '<strong style="' + st + '">Supabase / AWS (sa-east-1, São Paulo)</strong> — database and functions where the token and connection metadata are stored.')}
+                    ${item('<strong style="' + st + '">Canal (consultoria white-label)</strong>, se a organização acessa a Orbit via Canal, somente nos limites dos Termos v3.0 (configuração e suporte — sem exportar ou revender).', '<strong style="' + st + '">Channel (white-label consultancy)</strong>, if the organization accesses Orbit via Channel, only within the limits of Terms v3.0 (configuration and support — no export or resale).')}
+                </ul>
+                ${para(
+                  'Não enviamos o token de acesso ao navegador. Chamadas à Graph API saem das Edge Functions da Orbit.',
+                  'We do not send the access token to the browser. Graph API calls originate from Orbit Edge Functions.',
+                  'margin-bottom:0;',
+                )}
+            </div>
+
+            <div style="${sec}">
+                ${heading('04', 'Armazenamento, segurança e retenção', 'Storage, security and retention')}
+                <ul style="${ul}margin-bottom:0;">
+                    ${item('Produção no Brasil (AWS São Paulo, sa-east-1), com TLS em trânsito.', 'Production in Brazil (AWS São Paulo, sa-east-1), with TLS in transit.')}
+                    ${item('Token e identificadores da conexão ficam na tabela da organização, isolados por RLS; acesso de escrita pelo backend autenticado.', 'The token and connection identifiers sit in the organization table, isolated by RLS; writes go through the authenticated backend.')}
+                    ${item('Retenção: enquanto a conexão estiver ativa e o contrato da organização vigorar. Após desconexão, o token é anulado imediatamente. Metadados de publicação (IDs de campanha na Meta) podem permanecer para histórico do criativo na Orbit até exclusão da organização ou pedido de apagamento.', 'Retention: while the connection is active and the organization contract is in force. After disconnect, the token is cleared immediately. Publication metadata (Meta campaign IDs) may remain for creative history in Orbit until the organization is deleted or an erasure request is made.')}
+                    ${item('Após encerramento da conta Orbit: 30 dias só leitura + 60 dias arquivo, depois eliminação ou anonimização, salvo obrigação legal (Termos v3.0, cláusula 15.3).', 'After Orbit account termination: 30 days read-only + 60 days archive, then deletion or anonymization, unless a legal duty applies (Terms v3.0, clause 15.3).')}
+                    ${item('Campanhas e anúncios <em>já criados na Meta</em> continuam na conta de anúncios do cliente até o cliente apagá-los no Ads Manager. Desconectar o Auto Ads não apaga sozinho o histórico no Ads Manager.', 'Campaigns and ads <em>already created on Meta</em> remain in the customer’s ad account until the customer deletes them in Ads Manager. Disconnecting Auto Ads does not by itself delete Ads Manager history.')}
+                </ul>
+            </div>
+
+            <div style="${sec}">
+                ${heading('05', 'Direitos do titular e exclusão de dados', 'Data-subject rights and data deletion')}
+                ${para(
+                  `Em conformidade com a LGPD e as <a href="https://developers.facebook.com/documentation/development/terms-and-policies/privacy-policy" target="_blank" rel="noopener noreferrer" style="${link}">expectativas de privacidade da Meta</a>, você pode:`,
+                  `In accordance with the LGPD and <a href="https://developers.facebook.com/documentation/development/terms-and-policies/privacy-policy" target="_blank" rel="noopener noreferrer" style="${link}">Meta’s privacy-policy expectations</a>, you may:`,
+                )}
+                <ul style="${ul}">
+                    ${item('acessar, corrigir ou atualizar dados da conexão pelo painel Orbit (Contas de anúncios);', 'access, correct or update connection data through the Orbit dashboard (Ad accounts);')}
+                    ${item('revogar o Login em <em>Contas de anúncios → Desconectar</em>, ou em Facebook → Configurações → Integrações de negócios, app <strong style="' + st + '">Auto Ads</strong>;', 'revoke Login under <em>Ad accounts → Disconnect</em>, or in Facebook → Settings → Business integrations, app <strong style="' + st + '">Auto Ads</strong>;')}
+                    ${item('solicitar exclusão definitiva do token e dos identificadores nos servidores da Orbit.', 'request permanent deletion of the token and identifiers on Orbit’s servers.')}
+                </ul>
+                ${para(
+                  `Pedidos sobre criativos e dados de marketing da organização: ao <strong style="${st}">administrador da organização</strong> (controlador). Pedidos sobre dados de que a Orbit é controladora: à Encarregada (DPO).`,
+                  `Requests about creatives and the organization’s marketing data: to the <strong style="${st}">organization administrator</strong> (controller). Requests about data for which Orbit is controller: to the DPO.`,
+                )}
+                <ul style="${ul}margin-bottom:0;">
+                    ${item('<strong style="' + st + '">Encarregada (DPO):</strong> Jennifer Dantas — <!--email_off--><a href="mailto:jennifer.dantas@templum.com.br" style="' + link + '">jennifer.dantas@templum.com.br</a><!--email_on-->', '<strong style="' + st + '">Data Protection Officer (DPO):</strong> Jennifer Dantas — <!--email_off--><a href="mailto:jennifer.dantas@templum.com.br" style="' + link + '">jennifer.dantas@templum.com.br</a><!--email_on-->')}
+                    ${item('<strong style="' + st + '">Suporte:</strong> <!--email_off--><a href="mailto:suporte@orbitgestao.com.br" style="' + link + '">suporte@orbitgestao.com.br</a><!--email_on-->', '<strong style="' + st + '">Support:</strong> <!--email_off--><a href="mailto:suporte@orbitgestao.com.br" style="' + link + '">suporte@orbitgestao.com.br</a><!--email_on-->')}
+                    ${item('Prazo de resposta a requisições à DPO: 15 dias.', 'Response time for DPO requests: 15 days.')}
+                </ul>
+            </div>
+
+            ${i18nEl(
+              'p',
+              `Passo a passo: ver <a href="#exclusao-auto-ads" style="${link}">Instruções para Exclusão de Dados — Auto Ads</a> abaixo.`,
+              `Step-by-step: see <a href="#exclusao-auto-ads" style="${link}">Data Deletion Instructions — Auto Ads</a> below.`,
+              `style="${foot}"`,
+            )}
+        </div>
+
+        ${sep}
+
+        <div id="exclusao-auto-ads" style="${wrap}">
+${docHead(
+  'Instruções para Exclusão de Dados — Auto Ads',
+  'Data Deletion Instructions — Auto Ads',
+  '19 de agosto de 2026',
+  '19 August 2026',
+  'Este documento explica como remover os dados do <strong style="color:#fff;">Auto Ads</strong> (conexão Meta Ads na Orbit). Veja também a <a href="#privacidade-auto-ads" style="' +
+    link +
+    '">Política de Privacidade — Auto Ads</a>.',
+  'This document explains how to remove <strong style="color:#fff;">Auto Ads</strong> data (the Meta Ads connection in Orbit). See also <a href="#privacidade-auto-ads" style="' +
+    link +
+    '">Privacy Policy — Auto Ads</a>.',
+)}
+
+            <div style="${sec}">
+                <span style="${optBadge}"><i class="fas fa-sliders"></i>${i18nText('Opção 1 — pelo painel Orbit', 'Option 1 — from the Orbit dashboard')}</span>
+                ${i18nEl('h2', 'Exclusão pelo painel da plataforma', 'Deletion from the platform dashboard', `style="${h2}"`)}
+                <ol style="${ol}">
+                    ${i18nEl('li', 'Entre em <a href="https://app.orbitgestao.com.br" target="_blank" rel="noopener" style="' + link + '">https://app.orbitgestao.com.br</a>.', 'Sign in at <a href="https://app.orbitgestao.com.br" target="_blank" rel="noopener" style="' + link + '">https://app.orbitgestao.com.br</a>.')}
+                    ${i18nEl('li', 'Abra <strong style="' + st + '">Mercado → Anúncios</strong>.', 'Open <strong style="' + st + '">Market → Ads</strong>.')}
+                    ${i18nEl('li', 'Clique na engrenagem <strong style="' + st + '">Contas de anúncios</strong>.', 'Click the <strong style="' + st + '">Ad accounts</strong> gear.')}
+                    ${i18nEl('li', 'Em Meta Ads, clique em <strong style="' + st + '">Desconectar</strong>.', 'Under Meta Ads, click <strong style="' + st + '">Disconnect</strong>.')}
+                    ${i18nEl('li', 'Confirme.', 'Confirm.')}
+                </ol>
+                ${para(
+                  `O token de acesso é <strong style="${st}">apagado imediatamente</strong>. IDs de Página, Instagram e conta de anúncios deixam de ficar associados à organização. Anúncios já existentes no Ads Manager <strong style="${st}">não</strong> são apagados automaticamente.`,
+                  `The access token is <strong style="${st}">deleted immediately</strong>. Page, Instagram and ad-account IDs are no longer associated with the organization. Ads already in Ads Manager are <strong style="${st}">not</strong> deleted automatically.`,
+                  'margin-bottom:0;',
+                )}
+            </div>
+
+            <div style="${sec}">
+                <span style="${optBadge}"><i class="fab fa-facebook"></i>${i18nText('Opção 2 — pelo Facebook', 'Option 2 — from Facebook')}</span>
+                ${i18nEl('h2', 'Revogação no Facebook', 'Revocation on Facebook', `style="${h2}"`)}
+                <ol style="${ol}">
+                    ${i18nEl('li', 'Facebook → <strong style="' + st + '">Configurações e privacidade → Configurações</strong>.', 'Facebook → <strong style="' + st + '">Settings &amp; privacy → Settings</strong>.')}
+                    ${i18nEl('li', '<strong style="' + st + '">Integrações de negócios</strong> (ou <strong style="' + st + '">Aplicativos e sites</strong>).', '<strong style="' + st + '">Business integrations</strong> (or <strong style="' + st + '">Apps and websites</strong>).')}
+                    ${i18nEl('li', 'Localize o aplicativo <strong style="' + st + '">Auto Ads</strong>.', 'Find the <strong style="' + st + '">Auto Ads</strong> app.')}
+                    ${i18nEl('li', 'Clique em <strong style="' + st + '">Remover</strong>.', 'Click <strong style="' + st + '">Remove</strong>.')}
+                </ol>
+                ${para(
+                  `A Meta envia um pedido assinado ao nosso callback (meta-data-deletion). Processamos o apagamento do token e dos identificadores ligados àquele user_id <strong style="${st}">em até 48 horas</strong>.`,
+                  `Meta sends a signed request to our callback (meta-data-deletion). We erase the token and identifiers tied to that user_id <strong style="${st}">within 48 hours</strong>.`,
+                  'margin-bottom:0;',
+                )}
+            </div>
+
+            <div style="${sec}">
+                <span style="${optBadge}"><i class="fas fa-envelope"></i>${i18nText('Opção 3 — DPO / suporte', 'Option 3 — DPO / support')}</span>
+                ${i18nEl('h2', 'Solicitação direta', 'Direct request', `style="${h2}"`)}
+                <ul style="${ul}">
+                    ${item('<strong style="' + st + '">E-mail:</strong> <!--email_off--><a href="mailto:suporte@orbitgestao.com.br" style="' + link + '">suporte@orbitgestao.com.br</a><!--email_on--> e/ou <!--email_off--><a href="mailto:jennifer.dantas@templum.com.br" style="' + link + '">jennifer.dantas@templum.com.br</a><!--email_on-->', '<strong style="' + st + '">E-mail:</strong> <!--email_off--><a href="mailto:suporte@orbitgestao.com.br" style="' + link + '">suporte@orbitgestao.com.br</a><!--email_on--> and/or <!--email_off--><a href="mailto:jennifer.dantas@templum.com.br" style="' + link + '">jennifer.dantas@templum.com.br</a><!--email_on-->')}
+                    ${item('<strong style="' + st + '">Assunto:</strong> Solicitação de Exclusão de Dados — Auto Ads — [Nome da empresa]', '<strong style="' + st + '">Subject:</strong> Data Deletion Request — Auto Ads — [Company name]')}
+                    ${item('Informe: e-mail da conta Orbit e, se possível, nome da Página ou ID da conta de anúncios.', 'Include: the Orbit account e-mail and, if possible, the Page name or ad-account ID.')}
+                </ul>
+                ${para(
+                  `Após validar, confirmamos a eliminação <strong style="${st}">em até 5 dias úteis</strong>.`,
+                  `After validation, we confirm deletion <strong style="${st}">within 5 business days</strong>.`,
                   'margin-bottom:0;',
                 )}
             </div>
