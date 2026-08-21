@@ -28,7 +28,7 @@
  * quebraria o match. O escape aplicado no render cobre só & < > " em atributos.
  */
 
-export type NavVisibility = 'both' | 'desktop' | 'mobile';
+export type NavVisibility = 'both' | 'desktop' | 'mobile' | 'hidden';
 
 export interface NavLink {
   href: string;
@@ -62,6 +62,7 @@ export interface NavGroup {
 
 export function isVisible(item: NavLink, target: 'desktop' | 'mobile'): boolean {
   const v = item.visibility ?? 'both';
+  if (v === 'hidden') return false;
   return v === 'both' || v === target;
 }
 
@@ -189,13 +190,16 @@ export const EVENTOS: NavLink[] = [
   {
     href: '/live',
     label: 'Live Orbit',
-    sub: '19/08, 16h · consultorias',
+    sub: 'Próxima edição em breve',
     // Câmera azul nos dois menus: as sessões acontecem no Zoom. O play vermelho
     // do desktop remetia a YouTube, que não é mais o canal.
     icon: 'fa-solid fa-video',
     iconColor: '#2D8CFF',
     i18n: 'nav.ev.live',
     i18nSub: 'nav.ev.live.sub',
+    // Sem data pública após 19/08: some do menu. href continua /live (página
+    // institucional pausada). Para a próxima live: visibility 'both' + novo sub.
+    visibility: 'hidden',
   },
   {
     href: '/live/chris',

@@ -57,6 +57,8 @@ export interface TrainingLiveCard {
   /** Rótulo de quando acontece. Substitui o chip de dia+hora quando é pontual. */
   whenLabel: string;
   whenLabelEn: string;
+  /** Some da grade de /treinamentos. O card fica no array para a próxima live. */
+  hidden?: boolean;
 }
 
 export const WEEKDAY_FULL: Record<number, string> = {
@@ -206,8 +208,9 @@ export const TRAINING_LIVE_CARDS: TrainingLiveCard[] = [
     descriptionEn: 'Management with an AI team, live. Happens on specific dates each month.',
     href: '/live',
     cadence: 'pontual',
-    whenLabel: '19/08, 16h · consultorias',
-    whenLabelEn: '19 Aug, 4pm · consultancies',
+    whenLabel: 'Próxima edição em definição',
+    whenLabelEn: 'Next edition to be announced',
+    hidden: true,
   },
 ];
 
