@@ -33,6 +33,9 @@ export interface TrainingSession {
   descriptionEn: string;
 }
 
+/** Sessão da /live/chris. NÃO entra na grade de /treinamentos — inscrição só lá. */
+export const MASTERCLASS_SLUG = 'qui-18-masterclass';
+
 /** Faixas da agenda que NÃO têm inscrição aqui — levam para a página própria. */
 export interface TrainingLiveCard {
   key: string;

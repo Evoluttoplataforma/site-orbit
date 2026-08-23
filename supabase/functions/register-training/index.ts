@@ -335,9 +335,14 @@ Deno.serve(async (req) => {
       telefone,
       empresa,
       source: "treinamentos",
-      tags: ["treinamento", ...sessions.map((s) => s.slug)],
-      notes:
-        `Inscrição /treinamentos\nSessões: ${sessions.map((s) => `${s.title} (${s.slug})`).join(", ")}`,
+      tags: [
+        "treinamento",
+        ...sessions.map((s) => s.slug),
+        ...(sessions.some((s) => s.slug.includes("masterclass")) ? ["masterclass"] : []),
+      ],
+      notes: sessions.some((s) => s.slug.includes("masterclass"))
+        ? `Inscrição /live/chris (masterclass)\nSessões: ${sessions.map((s) => `${s.title} (${s.slug})`).join(", ")}`
+        : `Inscrição /treinamentos\nSessões: ${sessions.map((s) => `${s.title} (${s.slug})`).join(", ")}`,
       custom_fields: { training_slugs: sessions.map((s) => s.slug).join(",") },
     };
     const crmTask = fetch(`${supabaseUrl}/functions/v1/create-orbit-crm-lead`, {

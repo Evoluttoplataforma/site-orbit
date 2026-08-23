@@ -49,8 +49,8 @@ export const pageHTML = `
                     <span style="font-size:18px;font-weight:600;">${i18nText('18h (horário de Brasília)', '6pm (Brasília time)')}</span>
                 </div>
                 <div style="display:flex;align-items:center;gap:10px;color:#C9D1D9;">
-                    <i class="fa-brands fa-whatsapp" style="color:#25D366;font-size:20px;"></i>
-                    <span style="font-size:18px;font-weight:600;">${i18nText('Grupo fechado', 'Closed group')}</span>
+                    <i class="fa-solid fa-envelope" style="color:#ffba1a;font-size:18px;"></i>
+                    <span style="font-size:18px;font-weight:600;">${i18nText('Link por e-mail', 'Link by email')}</span>
                 </div>
             </div>
 
@@ -84,11 +84,11 @@ export const pageHTML = `
 
             <!-- CTA -->
             <div style="margin-top:8px;" data-reveal>
-                <a href="https://us06web.zoom.us/webinar/register/WN_heirSJIJSIGmsFdtbmGKTg" target="_blank" rel="noopener" class="btn btn-primary btn-lg hero-cta-glow" style="font-size:18px;padding:18px 48px;cursor:pointer;">
+                <button type="button" data-open-chris-form class="btn btn-primary btn-lg hero-cta-glow" style="font-size:18px;padding:18px 48px;cursor:pointer;border:none;">
                     <i class="fa-solid fa-arrow-right" style="margin-right:8px;"></i>${i18nText('QUERO ENTRAR NA PRÓXIMA AULA', 'I WANT TO JOIN THE NEXT CLASS')}
-                </a>
+                </button>
                 <p style="color:#8B949E;font-size:14px;margin-top:16px;">
-                    <i class="fa-brands fa-whatsapp" style="margin-right:6px;color:#25D366;"></i>${i18nText('Entre para o grupo fechado de avisos no WhatsApp após a inscrição.', 'Join the closed WhatsApp notice group after signing up.')}
+                    ${i18nText('Inscrição única · o link do Zoom chega no e-mail', 'Sign up once · the Zoom link arrives by email')}
                 </p>
             </div>
         </div>
@@ -208,14 +208,14 @@ export const pageHTML = `
     <section id="inscreva-se" style="padding:100px 0;background:#0D1117;text-align:center;">
         <div class="container" style="max-width:640px;">
             ${i18nEl('h2', 'Garanta sua vaga na masterclass', 'Secure your seat in the masterclass', 'style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;color:#fff;margin-bottom:12px;" data-reveal')}
-            ${i18nEl('p', 'Toda quinta-feira às 18h. Inscrição gratuita pelo Zoom — o link e os lembretes chegam por lá.', 'Every Thursday at 6pm. Free registration on Zoom — the link and reminders arrive there.', 'style="color:#8B949E;font-size:1.1rem;margin-bottom:32px;" data-reveal')}
+            ${i18nEl('p', 'Toda quinta-feira às 18h. Inscreva-se uma vez — o link e os avisos (1 dia e 1 hora antes) chegam no e-mail.', 'Every Thursday at 6pm. Sign up once — the link and reminders (1 day and 1 hour before) arrive by email.', 'style="color:#8B949E;font-size:1.1rem;margin-bottom:32px;" data-reveal')}
 
             <div style="background:#161B22;border:1px solid rgba(255,186,26,0.18);border-radius:16px;padding:36px 28px;" data-reveal>
-                <a href="https://us06web.zoom.us/webinar/register/WN_heirSJIJSIGmsFdtbmGKTg" target="_blank" rel="noopener" class="btn btn-primary btn-lg hero-cta-glow" style="font-size:17px;padding:18px 40px;display:inline-block;">
+                <button type="button" data-open-chris-form class="btn btn-primary btn-lg hero-cta-glow" style="font-size:17px;padding:18px 40px;display:inline-block;border:none;cursor:pointer;">
                     <i class="fa-solid fa-video" style="margin-right:8px;"></i>${i18nText('INSCREVER-ME NA MASTERCLASS', 'REGISTER FOR THE MASTERCLASS')}
-                </a>
+                </button>
                 <p style="color:#8B949E;font-size:13px;margin-top:18px;">
-                    <i class="fa-solid fa-lock" style="margin-right:6px;"></i>${i18nText('Inscrição no Zoom · você recebe link e lembretes automaticamente.', 'Zoom registration · you receive the link and reminders automatically.')}
+                    <i class="fa-solid fa-envelope" style="margin-right:6px;"></i>${i18nText('Quatro campos. Uma vez. Vale para as próximas quintas.', 'Four fields. Once. Covers the upcoming Thursdays.')}
                 </p>
             </div>
         </div>
@@ -254,7 +254,7 @@ export const pageHTML = `
                         <i class="fa-solid fa-plus" style="color:#ffba1a;font-size:14px;"></i>
                     </summary>
                     <div style="color:#C9D1D9;font-size:0.98rem;line-height:1.6;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.06);">
-                        ${i18nText('Sim. Você entra gratuitamente no grupo e recebe o acesso à aula ao vivo.', 'Yes. You join the group for free and receive access to the live class.')}
+                        ${i18nText('Sim. Você se inscreve no site e recebe o link do Zoom no e-mail, com aviso 1 dia e 1 hora antes.', 'Yes. You sign up on the site and receive the Zoom link by email, with a reminder 1 day and 1 hour before.')}
                     </div>
                 </details>
 
@@ -387,5 +387,74 @@ export const pageHTML = `
         #liveCountdown > div > span:first-child { font-size: 1.3rem !important; }
         #liveCountdown > div > span:last-child { font-size: 10px !important; }
     }
+
+    .tr-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.82); z-index: 10050; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+    .tr-modal-overlay.active { display: flex; }
+    body.tr-modal-open [aria-label="Falar no WhatsApp"] { display: none !important; }
+    .tr-modal { display: flex; flex-direction: column; background: #0D1117; border: 1px solid rgba(255,186,26,0.22); border-radius: 22px; width: 100%; max-width: 500px; max-height: 88dvh; position: relative; box-shadow: 0 24px 80px rgba(0,0,0,0.7); overflow: hidden; }
+    .tr-modal__head { flex-shrink: 0; padding: 22px 24px 16px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .tr-modal__close { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.07); border: none; color: #C9D1D9; font-size: 15px; cursor: pointer; }
+    .tr-modal__title { color: #fff; font-size: 1.16rem; font-weight: 800; margin: 0; padding-right: 44px; }
+    .tr-modal__sub { color: #8B949E; font-size: 0.83rem; margin: 4px 0 13px; padding-right: 44px; }
+    .tr-modal__meta { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tr-modal__chip { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); border-radius: 50px; color: #C9D1D9; font-size: 11.5px; font-weight: 600; }
+    .tr-modal__chip i { color: #ffba1a; font-size: 10.5px; }
+    #chrisForm { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+    .tr-modal__body { flex: 1; min-height: 0; overflow-y: auto; padding: 20px 24px; }
+    .tr-modal__label { display: block; color: #fff; font-size: 0.81rem; font-weight: 700; margin: 0 0 10px; }
+    .tr-modal__note { display: flex; gap: 9px; align-items: flex-start; margin: 0 0 18px; padding: 11px 13px; background: rgba(45,140,255,0.07); border: 1px solid rgba(45,140,255,0.2); border-radius: 11px; }
+    .tr-modal__note i { color: #2D8CFF; font-size: 12px; margin-top: 2px; }
+    .tr-modal__note span { color: #C9D1D9; font-size: 0.78rem; line-height: 1.5; }
+    .tr-modal__input { width: 100%; min-height: 48px; padding: 13px 15px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.09); border-radius: 12px; color: #fff; font-size: 16px; font-family: inherit; box-sizing: border-box; margin-bottom: 10px; }
+    .tr-modal__input:focus { outline: none; border-color: rgba(255,186,26,0.5); }
+    .tr-hp { position: absolute !important; left: -9999px !important; width: 1px !important; height: 1px !important; opacity: 0 !important; }
+    .tr-modal__foot { flex-shrink: 0; padding: 14px 24px 18px; border-top: 1px solid rgba(255,255,255,0.07); }
+    .tr-modal__submit { width: 100%; min-height: 52px; padding: 15px 22px; background: linear-gradient(135deg, #ffba1a 0%, #ff8c00 100%); color: #0D1117; border: none; border-radius: 50px; font-size: 15px; font-weight: 800; cursor: pointer; font-family: inherit; }
+    .tr-modal__submit:disabled { opacity: 0.6; cursor: not-allowed; }
+    .tr-modal__error { color: #F85149; font-size: 0.83rem; margin: 0 0 11px; display: none; background: rgba(248,81,73,0.09); padding: 10px 13px; border-radius: 9px; }
+    .tr-modal__error.show { display: block; }
+    .tr-modal__legal { color: #6B7280; font-size: 11px; text-align: center; margin: 10px 0 0; }
+    @media (max-width: 560px) {
+        .tr-modal-overlay { padding: 0; align-items: flex-end; }
+        .tr-modal { max-width: 100%; max-height: 92dvh; border-radius: 20px 20px 0 0; }
+    }
     </style>
+
+    <div class="tr-modal-overlay" id="chrisModal" role="dialog" aria-modal="true" aria-labelledby="chrisModalTitle">
+        <div class="tr-modal">
+            <button class="tr-modal__close" type="button" id="chrisModalClose" aria-label="Fechar"><i class="fa-solid fa-xmark"></i></button>
+            <div class="tr-modal__head">
+                <h2 class="tr-modal__title" id="chrisModalTitle">${i18nText('Inscrição gratuita', 'Free registration')}</h2>
+                ${i18nEl('p', 'Masterclass com Christian Hart · quinta 18h', 'Masterclass with Christian Hart · Thursday 6pm', 'class="tr-modal__sub"')}
+                <div class="tr-modal__meta">
+                    <span class="tr-modal__chip"><i class="fa-solid fa-video"></i>${i18nText('Ao vivo pelo Zoom', 'Live on Zoom')}</span>
+                    <span class="tr-modal__chip"><i class="fa-solid fa-repeat"></i>${i18nText('Toda semana', 'Every week')}</span>
+                    <span class="tr-modal__chip"><i class="fa-solid fa-clock"></i>${i18nText('1 hora', '1 hour')}</span>
+                </div>
+            </div>
+            <form id="chrisForm">
+                <div class="tr-modal__body">
+                    <div class="tr-modal__note">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span>${i18nText('Você se inscreve <strong style="color:#fff;">uma vez</strong>. O link chega no e-mail, com aviso 1 dia e 1 hora antes de cada quinta.', 'You sign up <strong style="color:#fff;">once</strong>. The link arrives by email, with a reminder 1 day and 1 hour before each Thursday.')}</span>
+                    </div>
+                    <label class="tr-modal__label">${i18nText('Seus dados', 'Your details')}</label>
+                    <input class="tr-modal__input" type="text" name="nome" required placeholder="Nome completo" autocomplete="name">
+                    <input class="tr-modal__input" type="text" name="empresa" required placeholder="Nome da empresa" autocomplete="organization">
+                    <input class="tr-modal__input" type="email" name="email" required placeholder="E-mail" autocomplete="email" inputmode="email">
+                    <input class="tr-modal__input" type="tel" name="telefone" required placeholder="WhatsApp com DDD" autocomplete="tel" inputmode="tel" style="margin-bottom:0;">
+                    <input class="tr-hp" type="text" name="hp" tabindex="-1" aria-hidden="true" autocomplete="off">
+                    <input type="hidden" name="ts" id="chrisTs">
+                    <input type="hidden" name="sessions" value="qui-18-masterclass">
+                </div>
+                <div class="tr-modal__foot">
+                    <p class="tr-modal__error" id="chrisError" role="alert"></p>
+                    <button type="submit" class="tr-modal__submit" id="chrisSubmit">
+                        <i class="fa-solid fa-check" style="margin-right:8px;"></i>${i18nText('Confirmar inscrição', 'Confirm registration')}
+                    </button>
+                    <p class="tr-modal__legal">${i18nText('Gratuito. Você pode cancelar os lembretes quando quiser.', 'Free. You can cancel the reminders whenever you want.')}</p>
+                </div>
+            </form>
+        </div>
+    </div>
 `;
