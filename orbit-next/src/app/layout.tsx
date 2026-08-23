@@ -140,7 +140,9 @@ export default function RootLayout({
           "@type": "WebSite",
           "@id": "https://orbitgestao.com.br/#website",
           "name": "Orbit Gestão",
-          "alternateName": "Orbit",
+          // Dominio em minusculas e o fallback oficial do Google quando o
+          // sitename da marca e recusado ou misturado com outro site.
+          "alternateName": ["Orbit", "Orbit Gestao", "orbitgestao.com.br"],
           "url": "https://orbitgestao.com.br",
           "description": "Plataforma de gestão operada por IA. Contrate um time de agentes de IA que executa.",
           "inLanguage": ["pt-BR", "en"],
