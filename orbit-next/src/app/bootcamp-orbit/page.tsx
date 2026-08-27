@@ -2,22 +2,22 @@ import type { Metadata } from 'next';
 import { PageContent } from './content';
 
 export const metadata: Metadata = {
-  title: 'Bootcamp Orbit — Imersão Canais 13/06/2026 | Orbit Gestão',
-  description: 'Imersão de 4 horas, 100% mão na massa, para canais e consultorias clientes Orbit. Acelere a adoção do Orbit Gestão e blinde sua operação para o 2º semestre de 2026.',
+  title: 'Bootcamp Orbit — Imersão Canais 15/10/2026 | Orbit Gestão',
+  description: 'Encontro híbrido para destravar a adoção do Orbit no dia a dia da consultoria. 15 de outubro, 8h30 às 12h30, com Igor Furniel e Christian Hart. Square SC + Zoom.',
   alternates: { canonical: 'https://orbitgestao.com.br/bootcamp-orbit' },
   openGraph: {
-    title: 'Bootcamp Orbit — Imersão Canais 13/06/2026',
-    description: 'Atração, conversão, produtização, precificação e atendimento — 4h mão na massa em Florianópolis + online ao vivo.',
+    title: 'Bootcamp Orbit — Imersão Canais 15/10/2026',
+    description: 'Adoção da plataforma, na prática. 15 de outubro, 8h30 às 12h30, em Florianópolis + online ao vivo.',
     url: 'https://orbitgestao.com.br/bootcamp-orbit',
     siteName: 'Orbit Gestão',
     locale: 'pt_BR',
     type: 'website',
-    images: [{ url: '/images/bootcamp/og-bootcamp.webp', width: 1200, height: 1500, alt: 'Bootcamp Orbit — Imersão Canais 13/06' }],
+    images: [{ url: '/images/bootcamp/og-bootcamp.webp', width: 1200, height: 1500, alt: 'Bootcamp Orbit — Imersão Canais 15/10' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Bootcamp Orbit — Imersão Canais 13/06/2026',
-    description: 'Imersão híbrida exclusiva para canais Orbit. 4 horas mão na massa.',
+    title: 'Bootcamp Orbit — Imersão Canais 15/10/2026',
+    description: 'Imersão híbrida para canais e leads quentes. 4 horas para acelerar a adoção do Orbit.',
   },
 };
 
@@ -25,15 +25,15 @@ const eventSchema = {
   '@context': 'https://schema.org',
   '@type': 'Event',
   name: 'Bootcamp Orbit — Imersão Canais',
-  description: 'Imersão híbrida de 4 horas para canais e consultorias clientes Orbit Gestão. Atração, conversão, produtização, precificação e atendimento.',
-  startDate: '2026-06-13T09:00:00-03:00',
-  endDate: '2026-06-13T13:00:00-03:00',
+  description: 'Encontro híbrido para destravar o uso da plataforma Orbit na operação de consultoria. Conduzido por Igor Furniel e Christian Hart.',
+  startDate: '2026-10-15T08:30:00-03:00',
+  endDate: '2026-10-15T12:30:00-03:00',
   eventStatus: 'https://schema.org/EventScheduled',
   eventAttendanceMode: 'https://schema.org/MixedEventAttendanceMode',
   location: [
     {
       '@type': 'Place',
-      name: 'Square SC',
+      name: 'Centro de Convenções Square SC',
       address: {
         '@type': 'PostalAddress',
         addressLocality: 'Florianópolis',
@@ -67,7 +67,15 @@ const eventSchema = {
     {
       '@type': 'Offer',
       name: 'Presencial Florianópolis',
-      price: '150',
+      price: '250',
+      priceCurrency: 'BRL',
+      availability: 'https://schema.org/LimitedAvailability',
+      url: 'https://orbitgestao.com.br/bootcamp-orbit#inscricao',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Mentoria presencial em grupo',
+      price: '2500',
       priceCurrency: 'BRL',
       availability: 'https://schema.org/LimitedAvailability',
       url: 'https://orbitgestao.com.br/bootcamp-orbit#inscricao',

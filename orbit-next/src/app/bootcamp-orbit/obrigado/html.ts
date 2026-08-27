@@ -175,15 +175,15 @@ export const pageHTML = `
 
     <!-- BRIEFING DA OPERAÇÃO -->
     <div class="bco-briefing">
-      <div class="bco-briefing__head">◢ Briefing da Operação BC-260613 ◣</div>
+      <div class="bco-briefing__head">◢ Briefing da Operação BC-261015 ◣</div>
       <div class="bco-briefing__body">
         <div class="bco-briefing__row">
           <span class="bco-briefing__label">▸ Data</span>
-          <span class="bco-briefing__value"><strong>13 de junho de 2026</strong> · sábado</span>
+          <span class="bco-briefing__value"><strong>15 de outubro de 2026</strong> · quinta</span>
         </div>
         <div class="bco-briefing__row">
           <span class="bco-briefing__label">▸ Horário</span>
-          <span class="bco-briefing__value"><strong>09h às 13h</strong> (BRT)</span>
+          <span class="bco-briefing__value" id="bcoHorario"><strong>08h30 às 12h30</strong> (BRT)</span>
         </div>
         <div class="bco-briefing__row">
           <span class="bco-briefing__label">▸ Modalidade</span>
@@ -195,7 +195,7 @@ export const pageHTML = `
         </div>
         <div class="bco-briefing__row">
           <span class="bco-briefing__label">▸ Código</span>
-          <span class="bco-briefing__value" style="font-family:'Black Ops One',impact,sans-serif;font-size:16px;letter-spacing:2px;">BC-260613</span>
+          <span class="bco-briefing__value" style="font-family:'Black Ops One',impact,sans-serif;font-size:16px;letter-spacing:2px;">BC-261015</span>
         </div>
       </div>
     </div>
@@ -203,13 +203,32 @@ export const pageHTML = `
     <!-- PAGAMENTO (só presencial) -->
     <div id="bcoPagamento" style="display:none;margin:0 0 28px;background:linear-gradient(135deg,rgba(255,186,26,0.12),rgba(199,62,29,0.10));border:1px solid #ffba1a;border-radius:14px;padding:24px;text-align:center;">
       <div style="font-family:'Black Ops One',impact,sans-serif;color:#ffba1a;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">⚠ Falta 1 passo pra garantir sua vaga</div>
-      <h3 style="color:#fff;font-family:'Black Ops One',impact,sans-serif;font-size:1.4rem;margin:0 0 6px;text-transform:uppercase;">Pagamento do presencial · R$150</h3>
-      <p style="color:#C9D1D9;font-size:14px;line-height:1.6;margin:0 0 18px;">As vagas presenciais em Florianópolis só são confirmadas após o pagamento. Conclua agora pra travar a sua.</p>
-      <a id="bcoPagarBtn" href="https://buy.stripe.com/3cIfZgbnr7gRfL5dS3aAw01" target="_blank" rel="noopener"
+      <h3 style="color:#fff;font-family:'Black Ops One',impact,sans-serif;font-size:1.4rem;margin:0 0 6px;text-transform:uppercase;">Pagamento do presencial · R$250</h3>
+      <p style="color:#C9D1D9;font-size:14px;line-height:1.6;margin:0 0 18px;">As vagas presenciais em Florianópolis só são confirmadas após o pagamento (até 15/09). Conclua agora pra travar a sua.</p>
+      <a id="bcoPagarBtn" href="https://www.asaas.com/c/na1azgdsfwsmeed2" target="_blank" rel="noopener"
          style="display:inline-flex;align-items:center;gap:10px;background:#ffba1a;color:#0A0E13;font-family:'Black Ops One',impact,sans-serif;font-size:16px;letter-spacing:1px;text-transform:uppercase;padding:16px 38px;border-radius:9px;text-decoration:none;box-shadow:0 8px 26px rgba(255,186,26,0.32);">
-        <i class="fa-solid fa-lock"></i> Pagar R$150 e confirmar vaga
+        <i class="fa-solid fa-lock"></i> Pagar e confirmar vaga
       </a>
-      <p style="color:#8B7355;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;margin:14px 0 0;">🔒 Pagamento seguro via Stripe</p>
+      <p style="color:#8B7355;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;margin:14px 0 0;">🔒 Pagamento seguro via Asaas</p>
+    </div>
+
+    <!-- ZOOM (só online) -->
+    <div id="bcoZoom" style="display:none;margin:0 0 28px;background:linear-gradient(135deg,rgba(45,140,255,0.12),rgba(13,17,23,0.6));border:1px solid rgba(45,140,255,0.4);border-radius:14px;padding:24px;text-align:center;">
+      <div style="font-family:'Black Ops One',impact,sans-serif;color:#2D8CFF;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Link da transmissão</div>
+      <h3 style="color:#fff;font-family:'Black Ops One',impact,sans-serif;font-size:1.4rem;margin:0 0 6px;text-transform:uppercase;">Você já está no Zoom</h3>
+      <p style="color:#C9D1D9;font-size:14px;line-height:1.6;margin:0;">Inscrevemos você na reunião automaticamente. O link exclusivo da sala chega no e-mail (e na confirmação do Zoom). Confira também o spam.</p>
+    </div>
+
+    <!-- MENTORIA -->
+    <div id="bcoMentoriaPay" style="display:none;margin:0 0 28px;background:linear-gradient(135deg,rgba(255,186,26,0.12),rgba(13,17,23,0.6));border:1px solid #ffba1a;border-radius:14px;padding:24px;text-align:center;">
+      <div style="font-family:'Black Ops One',impact,sans-serif;color:#ffba1a;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">⚠ Falta 1 passo pra garantir sua vaga</div>
+      <h3 style="color:#fff;font-family:'Black Ops One',impact,sans-serif;font-size:1.4rem;margin:0 0 6px;text-transform:uppercase;">Pagamento da mentoria · R$2.500</h3>
+      <p style="color:#C9D1D9;font-size:14px;line-height:1.6;margin:0 0 18px;">A vaga da mentoria presencial (14h–18h, grupo com Igor e Chris) só é confirmada após o pagamento (até 15/09). Use este checkout — não o do presencial.</p>
+      <a href="https://www.asaas.com/c/hs50xqdo7o4ejk7s" target="_blank" rel="noopener"
+         style="display:inline-flex;align-items:center;gap:10px;background:#ffba1a;color:#0A0E13;font-family:'Black Ops One',impact,sans-serif;font-size:16px;letter-spacing:1px;text-transform:uppercase;padding:16px 38px;border-radius:9px;text-decoration:none;box-shadow:0 8px 26px rgba(255,186,26,0.32);">
+        <i class="fa-solid fa-lock"></i> Pagar mentoria
+      </a>
+      <p style="color:#8B7355;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;margin:14px 0 0;">🔒 Pagamento seguro via Asaas</p>
     </div>
 
     <!-- PRÓXIMOS PASSOS -->
@@ -261,7 +280,7 @@ export const pageHTML = `
       </a>
     </div>
 
-    <p class="bco-foot">[ COMUNICADO ARQUIVADO · OPERAÇÃO BC-260613 · ★ ESTÁVEL ★ ]</p>
+    <p class="bco-foot">[ COMUNICADO ARQUIVADO · OPERAÇÃO BC-261015 · ★ ESTÁVEL ★ ]</p>
   </div>
 </section>
 `;

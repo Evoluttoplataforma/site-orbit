@@ -6,7 +6,7 @@ const SB_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
 const SB_KEY =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
 
-const PRECO_PRESENCIAL = 150;
+const PRECO_PRESENCIAL = 250;
 
 interface Lead {
   nome: string | null;
@@ -20,8 +20,10 @@ interface Lead {
 interface Data {
   online: Lead[];
   presencial: Lead[];
+  mentoria?: Lead[];
   total_online: number;
   total_presencial: number;
+  total_mentoria?: number;
   total_pagos?: number;
   total: number;
 }
@@ -95,12 +97,15 @@ export function PageContent() {
       [l.nome, l.email, l.empresa, l.telefone].some((v) => (v || '').toLowerCase().includes(term));
     const online = clean(data.online);
     const presencial = clean(data.presencial);
+    const mentoria = clean(data.mentoria || []);
     const pagos = presencial.filter((l) => l.pago).length;
     return {
       online: online.filter(match),
       presencial: presencial.filter(match),
+      mentoria: mentoria.filter(match),
       total_online: online.length,
       total_presencial: presencial.length,
+      total_mentoria: mentoria.length,
       pagos,
       receita: pagos * PRECO_PRESENCIAL,
     };
@@ -117,7 +122,7 @@ export function PageContent() {
     .rec-actions { display: flex; gap: 10px; }
     .rec-ibtn { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.04); border: 1px solid #232D38; color: #C9D1D9; border-radius: 9px; padding: 9px 15px; font-size: 13.5px; font-weight: 600; cursor: pointer; transition: .15s; }
     .rec-ibtn:hover { border-color: #ffba1a; color: #ffba1a; }
-    .rec-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 26px; }
+    .rec-stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 26px; }
     .rec-stat { position: relative; background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0)); border: 1px solid #1B232D; border-radius: 14px; padding: 18px 18px; overflow: hidden; }
     .rec-stat__ico { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 17px; margin-bottom: 12px; }
     .rec-stat__n { font-size: 30px; font-weight: 800; line-height: 1; }
@@ -190,7 +195,7 @@ export function PageContent() {
             <div className="rec-brand__badge">🎖️</div>
             <div>
               <h1 className="rec-brand__t">Painel de Recrutas</h1>
-              <p className="rec-brand__s">BOOTCAMP ORBIT · 13 JUN 2026 · 09H BRT</p>
+              <p className="rec-brand__s">BOOTCAMP ORBIT · 15 OUT 2026 · 08H30 BRT</p>
             </div>
           </div>
           <div className="rec-actions">
@@ -202,6 +207,7 @@ export function PageContent() {
         <div className="rec-stats">
           <StatCard ico="📡" bg="rgba(63,185,80,0.14)" fg="#3FB950" n={view.total_online} label="Online (grátis)" />
           <StatCard ico="🪖" bg="rgba(255,186,26,0.14)" fg="#ffba1a" n={view.total_presencial} label="Presencial (inscritos)" />
+          <StatCard ico="⭐" bg="rgba(45,140,255,0.14)" fg="#2D8CFF" n={view.total_mentoria} label="Mentoria" />
           <StatCard ico="✅" bg="rgba(63,185,80,0.14)" fg="#3FB950" n={`${view.pagos}/${view.total_presencial}`} label="Presencial pagos" />
           <StatCard ico="💰" bg="rgba(255,186,26,0.14)" fg="#ffba1a" n={`R$ ${view.receita.toLocaleString('pt-BR')}`} label="Receita confirmada" />
         </div>
@@ -212,7 +218,8 @@ export function PageContent() {
         </div>
 
         <Painel titulo="Online ao vivo" sub="grátis" ico="📡" cor="#3FB950" leads={view.online} onCSV={() => download('bootcamp-online.csv', toCSV(view.online, 'Online'))} />
-        <Painel titulo="Presencial · Floripa" sub="R$150" ico="🪖" cor="#ffba1a" status leads={view.presencial} onCSV={() => download('bootcamp-presencial.csv', toCSV(view.presencial, 'Presencial'))} />
+        <Painel titulo="Presencial · Floripa" sub="R$250" ico="🪖" cor="#ffba1a" status leads={view.presencial} onCSV={() => download('bootcamp-presencial.csv', toCSV(view.presencial, 'Presencial'))} />
+        <Painel titulo="Mentoria presencial" sub="R$2.500" ico="⭐" cor="#2D8CFF" leads={view.mentoria} onCSV={() => download('bootcamp-mentoria.csv', toCSV(view.mentoria, 'Mentoria'))} />
       </div>
     </div>
   );
@@ -246,7 +253,7 @@ function Painel({ titulo, sub, ico, cor, leads, onCSV, status }: { titulo: strin
         </thead>
         <tbody>
           {leads.length === 0 ? (
-            <tr><td data-label="" className="rec-empty" colSpan={cols}>Nenhum inscrito {sub === 'R$150' ? 'no presencial' : ''} ainda.</td></tr>
+            <tr><td data-label="" className="rec-empty" colSpan={cols}>Nenhum inscrito ainda.</td></tr>
           ) : (
             leads.map((l, i) => (
               <tr key={(l.email || '') + i}>

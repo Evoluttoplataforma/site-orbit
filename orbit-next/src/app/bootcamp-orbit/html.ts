@@ -1,4 +1,4 @@
-// Bootcamp Orbit — Imersão Canais 13/06/2026
+// Bootcamp Orbit — Imersão Canais 15/10/2026
 // VISUAL: Operação militar / guerra. Camuflagem, stencil, mira, dog tags, carimbo CLASSIFIED.
 export const pageHTML = `
 <style>
@@ -622,8 +622,8 @@ export const pageHTML = `
   }
   .bc-format > * { position: relative; z-index: 1; }
   .bc-format__head { text-align: center; max-width: 800px; margin: 0 auto 40px; }
-  .bc-format__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1000px; margin: 0 auto; }
-  @media (max-width: 800px) { .bc-format__grid { grid-template-columns: 1fr; } }
+  .bc-format__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1180px; margin: 0 auto; }
+  @media (max-width: 980px) { .bc-format__grid { grid-template-columns: 1fr; } }
   .bc-fmt {
     background: rgba(43,57,40,0.30);
     border: 2px solid #4B5320;
@@ -1017,17 +1017,17 @@ export const pageHTML = `
     <span>▶ <span class="bc-tick-hi">TRANSMISSÃO TÁTICA</span> · COORDENADAS CONFIRMADAS LAT -27.5954 LON -48.5480</span>
     <span>▶ <span class="bc-tick-hi">ZONA DE OPERAÇÃO</span> SQUARE SC · ZULU-03</span>
     <span>▶ <span class="bc-tick-hi">CONVOCAÇÃO ATIVA</span> EXCLUSIVA PARA CANAIS ORBIT</span>
-    <span>▶ DATA: <span class="bc-tick-hi">13 JUN 2026 · 09H BRT</span></span>
-    <span>▶ MISSÃO: <span class="bc-tick-hi">BLINDAR OPERAÇÃO 2º SEMESTRE</span></span>
-    <span>▶ <span class="bc-tick-hi">5 OBJETIVOS TÁTICOS</span> · ATRAÇÃO · CONVERSÃO · PRODUTIZAÇÃO · PRECIFICAÇÃO · ATENDIMENTO</span>
+    <span>▶ DATA: <span class="bc-tick-hi">15 OUT 2026 · 08H30 BRT</span></span>
+    <span>▶ MISSÃO: <span class="bc-tick-hi">DESTRAVAR ADOÇÃO DO ORBIT</span></span>
+    <span>▶ <span class="bc-tick-hi">HÍBRIDO</span> · PRESENCIAL SQUARE SC + ZOOM GRATUITO</span>
     <span>▶ <span class="bc-tick-hi">PRÉ-REQUISITO</span> AGENTE DE ATIVAÇÃO CONCLUÍDO</span>
     <!-- Duplica pra loop infinito -->
     <span>▶ <span class="bc-tick-hi">TRANSMISSÃO TÁTICA</span> · COORDENADAS CONFIRMADAS LAT -27.5954 LON -48.5480</span>
     <span>▶ <span class="bc-tick-hi">ZONA DE OPERAÇÃO</span> SQUARE SC · ZULU-03</span>
     <span>▶ <span class="bc-tick-hi">CONVOCAÇÃO ATIVA</span> EXCLUSIVA PARA CANAIS ORBIT</span>
-    <span>▶ DATA: <span class="bc-tick-hi">13 JUN 2026 · 09H BRT</span></span>
-    <span>▶ MISSÃO: <span class="bc-tick-hi">BLINDAR OPERAÇÃO 2º SEMESTRE</span></span>
-    <span>▶ <span class="bc-tick-hi">5 OBJETIVOS TÁTICOS</span> · ATRAÇÃO · CONVERSÃO · PRODUTIZAÇÃO · PRECIFICAÇÃO · ATENDIMENTO</span>
+    <span>▶ DATA: <span class="bc-tick-hi">15 OUT 2026 · 08H30 BRT</span></span>
+    <span>▶ MISSÃO: <span class="bc-tick-hi">DESTRAVAR ADOÇÃO DO ORBIT</span></span>
+    <span>▶ <span class="bc-tick-hi">HÍBRIDO</span> · PRESENCIAL SQUARE SC + ZOOM GRATUITO</span>
     <span>▶ <span class="bc-tick-hi">PRÉ-REQUISITO</span> AGENTE DE ATIVAÇÃO CONCLUÍDO</span>
   </div>
 </div>
@@ -1095,8 +1095,8 @@ export const pageHTML = `
     <!-- Badge VOCE FOI CONVOCADO -->
     <div style="display:inline-block;background:#0A0E13;border:3px dashed #ffba1a;color:#ffba1a;font-family:'Black Ops One',impact,sans-serif;font-size:14px;letter-spacing:4px;padding:10px 24px;margin:14px 0 18px;text-transform:uppercase;transform:rotate(-1deg);">★ VOCÊ FOI CONVOCADO ★</div>
 
-    <h1>Prepare sua consultoria para a <span class="accent bc-glitch" data-text="guerra">guerra</span> do 2º semestre</h1>
-    <p class="bc-hero__sub">Uma imersão de 4 horas, 100% mão na massa, para acelerar a adoção do Orbit Gestão e blindar sua operação contra a Copa do Mundo, feriados e eleições.</p>
+    <h1>Destrave a adoção do Orbit na <span class="accent bc-glitch" data-text="sua operação">sua operação</span></h1>
+    <p class="bc-hero__sub">Uma imersão de 4 horas, 100% mão na massa, com Igor Furniel e Christian Hart. Caminhos concretos para tirar mais valor da plataforma, eliminar a fricção do dia a dia e sair com um plano claro de próximos passos.</p>
 
     <div class="bc-countdown" id="bcCountdown">
       <div class="bc-count"><span class="bc-count__num" id="bcDays">--</span><span class="bc-count__lbl">Dias</span></div>
@@ -1119,8 +1119,8 @@ export const pageHTML = `
     <!-- ROSTER: contador de inscritos ao vivo (puxa do Supabase) -->
     <div class="bc-roster" id="bcRoster">
       <span class="bc-roster__label">★ Recrutas convocados ★</span>
-      <span class="bc-roster__num"><span id="bcRosterCount">147</span> <small>/ 200 vagas</small></span>
-      <div class="bc-roster__bar"><div class="bc-roster__bar-fill" id="bcRosterBar" style="width:73%"></div></div>
+      <span class="bc-roster__num"><span id="bcRosterCount">0</span> <small>/ 40 vagas presenciais</small></span>
+      <div class="bc-roster__bar"><div class="bc-roster__bar-fill" id="bcRosterBar" style="width:0%"></div></div>
     </div>
 
     <div class="bc-hero__chips">
@@ -1134,24 +1134,19 @@ export const pageHTML = `
 
 <div class="bc-warning-stripes"></div>
 
-<!-- ═══ CARD DE MISSAO (detalhes da operacao) ═══ -->
-<section style="padding:60px 24px 40px;background:#0A0E13;text-align:center;">
-  <img src="/images/bootcamp/missao-card.webp" alt="Missão Bootcamp Orbit · Data: 13 de junho · Hora: 9h às 13h · Local: Square SC Florianópolis · Formato: Presencial + Online · Investimento: Gratuito" style="max-width:880px;width:100%;height:auto;margin:0 auto;display:block;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.6));" loading="lazy">
-</section>
-
 <!-- ═══ PROMESSA ═══ -->
 <section class="bc-promise" id="promessa" style="position:relative;">
   <div class="bc-promise__head">
-    <div class="bc-eyebrow"><i class="fa-solid fa-flag"></i>Briefing Tático · 5 objetivos</div>
-    <h2 class="bc-h2">Vamos abrir a caixa-preta da <span class="accent">consultoria recorrente</span></h2>
-    <p class="bc-lead">4 horas intensas onde cada bloco vira ação prática dentro da sua operação Orbit. Você sai com playbooks, scripts e ativações rodando no mesmo dia.</p>
+    <div class="bc-eyebrow"><i class="fa-solid fa-flag"></i>Briefing Tático · adoção na prática</div>
+    <h2 class="bc-h2">Vamos destravar o uso do Orbit na <span class="accent">sua consultoria</span></h2>
+    <p class="bc-lead">4 horas intensas para tirar mais valor das funcionalidades que você já tem, eliminar os pontos que travam o uso e conectar a ferramenta a resultados reais de gestão e crescimento. Você sai com um plano claro de próximos passos.</p>
   </div>
   <div class="bc-promise__grid">
-    <div class="bc-mission"><div class="bc-mission__num">01</div><h3 class="bc-mission__title">Atração de Demanda</h3><p class="bc-mission__desc">Como abrir torneira de leads qualificados sem depender de indicação.</p></div>
-    <div class="bc-mission"><div class="bc-mission__num">02</div><h3 class="bc-mission__title">Conversão</h3><p class="bc-mission__desc">O processo comercial que transforma reunião em contrato assinado.</p></div>
-    <div class="bc-mission"><div class="bc-mission__num">03</div><h3 class="bc-mission__title">Produtização</h3><p class="bc-mission__desc">Empacotar serviço em produto escalável e replicável.</p></div>
-    <div class="bc-mission"><div class="bc-mission__num">04</div><h3 class="bc-mission__title">Precificação</h3><p class="bc-mission__desc">Modelo que protege margem e justifica preço premium.</p></div>
-    <div class="bc-mission"><div class="bc-mission__num">05</div><h3 class="bc-mission__title">Atendimento</h3><p class="bc-mission__desc">Operação que retém cliente e gera receita recorrente.</p></div>
+    <div class="bc-mission"><div class="bc-mission__num">01</div><h3 class="bc-mission__title">Uso no dia a dia</h3><p class="bc-mission__desc">Caminhos concretos para a plataforma entrar na operação da consultoria — não ficar parada.</p></div>
+    <div class="bc-mission"><div class="bc-mission__num">02</div><h3 class="bc-mission__title">Tirar a fricção</h3><p class="bc-mission__desc">Identificar o que trava a adoção e resolver na prática, com Igor e Chris no comando.</p></div>
+    <div class="bc-mission"><div class="bc-mission__num">03</div><h3 class="bc-mission__title">Valor das funções</h3><p class="bc-mission__desc">Como extrair mais das funcionalidades já disponíveis, sem esperar feature nova.</p></div>
+    <div class="bc-mission"><div class="bc-mission__num">04</div><h3 class="bc-mission__title">Gestão e crescimento</h3><p class="bc-mission__desc">Conectar o Orbit a resultado real: gestão do cliente, recorrência e escala do canal.</p></div>
+    <div class="bc-mission"><div class="bc-mission__num">05</div><h3 class="bc-mission__title">Plano de próximos passos</h3><p class="bc-mission__desc">Cada canal sai com o que fazer na própria operação na semana seguinte.</p></div>
   </div>
 </section>
 
@@ -1208,9 +1203,14 @@ export const pageHTML = `
           <span style="color:#C9D1D9;flex:1;">08/11/2025 · Florianópolis · 31 recrutas</span>
           <span style="color:#3FB950;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Vitoriosa</span>
         </div>
+        <div style="display:flex;align-items:center;gap:14px;padding:10px 14px;background:rgba(43,57,40,0.30);border-left:3px solid #3FB950;">
+          <span style="color:#3FB950;font-weight:700;letter-spacing:1.5px;">▶ BC-260613</span>
+          <span style="color:#C9D1D9;flex:1;">13/06 · Florianópolis + Online</span>
+          <span style="color:#3FB950;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Vitoriosa</span>
+        </div>
         <div style="display:flex;align-items:center;gap:14px;padding:12px 14px;background:rgba(255,186,26,0.10);border:1px solid #ffba1a;margin-top:6px;">
-          <span style="color:#ffba1a;font-weight:700;letter-spacing:1.5px;">▶ BC-260613</span>
-          <span style="color:#fff;flex:1;font-weight:700;">13/06 · Florianópolis + Online · ATUAL</span>
+          <span style="color:#ffba1a;font-weight:700;letter-spacing:1.5px;">▶ BC-261015</span>
+          <span style="color:#fff;flex:1;font-weight:700;">15/10 · Florianópolis + Online · ATUAL</span>
           <span style="color:#ffba1a;font-weight:700;text-transform:uppercase;letter-spacing:1px;animation:bc-blink 1.5s steps(2) infinite;">▮ Em Curso</span>
         </div>
       </div>
@@ -1303,9 +1303,9 @@ export const pageHTML = `
       <p class="bc-fmt__label">Quartel Remoto · Online</p>
       <h3 class="bc-fmt__name">Transmissão ao vivo</h3>
       <p class="bc-fmt__free">Gratuito</p>
-      <p class="bc-fmt__desc">Transmissão exclusiva para canais e clientes ativos Orbit Gestão, com apoio digital.</p>
+      <p class="bc-fmt__desc">Transmissão exclusiva para canais e leads quentes, com apoio digital no Zoom.</p>
       <ul class="bc-fmt__features">
-        <li><i class="fa-solid fa-check"></i>4h de imersão ao vivo</li>
+        <li><i class="fa-solid fa-check"></i>4h de imersão ao vivo (8h30–12h30)</li>
         <li><i class="fa-solid fa-check"></i>Acesso a material digital</li>
         <li><i class="fa-solid fa-check"></i>Q&amp;A ao vivo durante o evento</li>
       </ul>
@@ -1315,15 +1315,55 @@ export const pageHTML = `
       <div class="bc-fmt__icon"><i class="fa-solid fa-helmet-safety"></i></div>
       <p class="bc-fmt__label">Linha de Frente · Presencial</p>
       <h3 class="bc-fmt__name">Imersão In Loco</h3>
-      <p class="bc-fmt__price">R$150<small>/ vaga</small></p>
-      <p class="bc-fmt__desc">Valor 100% revertido para o almoço especial + sessão extra de mentoria com Igor e Christian.</p>
+      <p class="bc-fmt__price">R$250<small>/ vaga</small></p>
+      <p class="bc-fmt__desc">Coffee + participação presencial + almoço. Pagamento até 15/09. 40 vagas.</p>
       <ul class="bc-fmt__features">
         <li><i class="fa-solid fa-check"></i>4h de imersão presencial no Square SC</li>
-        <li><i class="fa-solid fa-check"></i>Almoço especial com os hosts</li>
-        <li><i class="fa-solid fa-check"></i>Mentoria extra durante o almoço</li>
+        <li><i class="fa-solid fa-check"></i>Coffee e almoço inclusos</li>
         <li><i class="fa-solid fa-check"></i>Networking com canais Orbit</li>
+        <li><i class="fa-solid fa-check"></i>Pagamento até 15 de setembro</li>
       </ul>
       <a href="#inscricao" class="bc-btn bc-btn--primary" style="width:100%;justify-content:center;">Garantir presencial</a>
+    </div>
+    <div class="bc-fmt">
+      <div class="bc-fmt__icon"><i class="fa-solid fa-star"></i></div>
+      <p class="bc-fmt__label">Comando · Mentoria</p>
+      <h3 class="bc-fmt__name">Mentoria em grupo</h3>
+      <p class="bc-fmt__price">R$2.500<small>/ vaga</small></p>
+      <p class="bc-fmt__desc">Sessão presencial com Igor e Chris, a partir das 14h, 4 horas. Pagamento até 15/09.</p>
+      <ul class="bc-fmt__features">
+        <li><i class="fa-solid fa-check"></i>14h–18h no dia 15/10, após o Bootcamp</li>
+        <li><i class="fa-solid fa-check"></i>Grupo com Igor Furniel e Christian Hart</li>
+        <li><i class="fa-solid fa-check"></i>Acesso à visita ao escritório (16/10) e à experiência em Floripa (17/10)</li>
+        <li><i class="fa-solid fa-check"></i>Pagamento até 15 de setembro</li>
+      </ul>
+      <a href="#inscricao" class="bc-btn bc-btn--ghost" style="width:100%;justify-content:center;">Quero a mentoria</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ AGENDA 3 DIAS (informativo — sexta/sábado não são inscrição aberta) ═══ -->
+<section class="bc-promise" id="agenda" style="padding-top:40px;">
+  <div class="bc-promise__head">
+    <div class="bc-eyebrow"><i class="fa-solid fa-calendar-days"></i>Operação 15–17/10</div>
+    <h2 class="bc-h2">Três dias. A inscrição aberta é <span class="accent">só na quinta</span>.</h2>
+    <p class="bc-lead">Sexta e sábado são para o Top 5 canais e para quem participar da mentoria. Não há formulário público desses dois dias.</p>
+  </div>
+  <div class="bc-promise__grid">
+    <div class="bc-mission">
+      <div class="bc-mission__num">15</div>
+      <h3 class="bc-mission__title">Quinta · Bootcamp</h3>
+      <p class="bc-mission__desc">8h30–12h30 no Square SC + Zoom. Presencial R$250 (coffee + almoço). Online gratuito. Mentoria em grupo 14h–18h, R$2.500.</p>
+    </div>
+    <div class="bc-mission">
+      <div class="bc-mission__num">16</div>
+      <h3 class="bc-mission__title">Sexta · Escritório</h3>
+      <p class="bc-mission__desc">8h–18h. Experiência com os founders no escritório Orbit. Top 5 canais + participantes da mentoria. Gravação de conteúdo.</p>
+    </div>
+    <div class="bc-mission">
+      <div class="bc-mission__num">17</div>
+      <h3 class="bc-mission__title">Sábado · Floripa</h3>
+      <p class="bc-mission__desc">8h–18h. Experiência pessoal com os founders em Florianópolis. Top 5 canais + participantes da mentoria.</p>
     </div>
   </div>
 </section>

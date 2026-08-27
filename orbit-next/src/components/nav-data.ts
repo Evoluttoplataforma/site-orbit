@@ -202,6 +202,15 @@ export const EVENTOS: NavLink[] = [
     visibility: 'hidden',
   },
   {
+    href: '/bootcamp-orbit',
+    label: 'Bootcamp Orbit',
+    sub: '15/10 · online e presencial',
+    icon: 'fas fa-flag',
+    iconColor: '#ffba1a',
+    i18n: 'nav.ev.bootcamp',
+    i18nSub: 'nav.ev.bootcamp.sub',
+  },
+  {
     href: '/live/chris',
     label: 'Masterclass Consultores',
     sub: 'Quinta 18h com Christian Hart',

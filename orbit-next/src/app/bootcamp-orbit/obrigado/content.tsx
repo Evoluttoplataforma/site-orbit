@@ -23,7 +23,6 @@ export function PageContent() {
     const params = new URLSearchParams(window.location.search);
     const modo = (params.get('modo') || 'online').toLowerCase();
     const nome = params.get('nome') || '';
-    const email = params.get('email') || '';
 
     const root = ref.current;
     const nomeEl = root.querySelector('#bcoNome') as HTMLElement | null;
@@ -31,27 +30,27 @@ export function PageContent() {
     const localRow = root.querySelector('#bcoLocalRow') as HTMLElement | null;
     const localEl = root.querySelector('#bcoLocal') as HTMLElement | null;
     const pagamento = root.querySelector('#bcoPagamento') as HTMLElement | null;
-    const pagarBtn = root.querySelector('#bcoPagarBtn') as HTMLAnchorElement | null;
+    const zoomBox = root.querySelector('#bcoZoom') as HTMLElement | null;
+    const mentoriaPay = root.querySelector('#bcoMentoriaPay') as HTMLElement | null;
+    const horarioEl = root.querySelector('#bcoHorario') as HTMLElement | null;
 
     if (nomeEl && nome) {
       nomeEl.textContent = `Recruta ${nome.charAt(0).toUpperCase() + nome.slice(1)}, sua patente foi registrada no manifesto.`;
     }
 
-    if (modo.includes('presencial')) {
+    if (modo.includes('mentoria')) {
+      if (modEl) modEl.innerHTML = '<strong>Mentoria presencial</strong> · grupo com Igor e Chris';
+      if (localEl) localEl.innerHTML = '<strong>Square SC</strong> · 14h–18h · endereço no e-mail';
+      if (horarioEl) horarioEl.innerHTML = '<strong>14h às 18h</strong> (BRT) · 15/10';
+      if (mentoriaPay) mentoriaPay.style.display = 'block';
+    } else if (modo.includes('presencial')) {
       if (modEl) modEl.innerHTML = '<strong>Presencial</strong> · Florianópolis/SC';
       if (localEl) localEl.innerHTML = '<strong>Square SC</strong> · endereço completo no e-mail';
-      // revela o bloco de pagamento Stripe (vaga presencial só confirma pagando)
       if (pagamento) pagamento.style.display = 'block';
-      if (pagarBtn && email) {
-        try {
-          const u = new URL(pagarBtn.href);
-          u.searchParams.set('prefilled_email', email);
-          pagarBtn.href = u.toString();
-        } catch { /* mantém href padrão */ }
-      }
     } else {
-      if (modEl) modEl.innerHTML = '<strong>Online ao vivo</strong> · transmissão exclusiva';
+      if (modEl) modEl.innerHTML = '<strong>Online ao vivo</strong> · Zoom';
       if (localRow) localRow.style.display = 'none';
+      if (zoomBox) zoomBox.style.display = 'block';
     }
 
     // GTM — confirmação de chegada na thank-you

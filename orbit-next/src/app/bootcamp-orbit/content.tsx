@@ -4,11 +4,18 @@ import { useEffect, useRef, useState } from 'react';
 import { pageHTML } from './html';
 import { footerHTML } from '@/components/shared-footer';
 import { reapplyOrbitLang } from '@/lib/reapply-lang';
+import { supabaseMkt } from '@/lib/supabase-mkt';
 
 const SB_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
 
-const BOOTCAMP_DATE = new Date('2026-06-13T09:00:00-03:00');
+const BOOTCAMP_DATE = new Date('2026-10-15T08:30:00-03:00');
+type BootcampModo = 'online' | 'presencial' | 'mentoria';
+function resolveModo(raw: string | undefined): BootcampModo {
+  if (raw === 'presencial') return 'presencial';
+  if (raw === 'mentoria') return 'mentoria';
+  return 'online';
+}
 
 const IGOR_AVATAR = '/images/bootcamp/igor-fardado.webp';
 
@@ -37,7 +44,7 @@ type Step =
 const VALID_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const STEPS: Step[] = [
   { kind: 'msg', text: 'Olá, recruta. Sou o General Igor Furniel. 🪖' },
-  { kind: 'msg', text: 'Vou te fazer 5 perguntas rápidas pra garantir sua vaga no Bootcamp Orbit do dia 13/06.', delay: 1400 },
+  { kind: 'msg', text: 'Vou te fazer 5 perguntas rápidas pra garantir sua vaga no Bootcamp Orbit do dia 15/10.', delay: 1400 },
   { kind: 'msg', text: 'Vamos começar — qual é seu nome completo?', delay: 1200 },
   { kind: 'input', field: 'nome', placeholder: 'Digite seu nome', validate: (v) => v.trim().length < 3 ? 'Digite seu nome completo' : null },
   { kind: 'msg', text: 'Bom ter você aqui. Qual é o melhor e-mail pra te enviarmos as coordenadas da operação?', delay: 800 },
@@ -48,8 +55,9 @@ const STEPS: Step[] = [
   { kind: 'input', field: 'empresa', placeholder: 'Nome da consultoria', validate: (v) => v.trim().length < 2 ? 'Digite o nome da empresa' : null },
   { kind: 'msg', text: 'Último passo — como você quer participar?', delay: 700 },
   { kind: 'choices', field: 'modalidade', options: [
-    { label: '🪖 Presencial · Floripa · R$150', value: 'presencial' },
     { label: '📡 Online ao vivo · Grátis', value: 'online' },
+    { label: '🪖 Presencial · Floripa · R$250', value: 'presencial' },
+    { label: '⭐ Mentoria presencial · R$2.500', value: 'mentoria' },
   ] },
   { kind: 'msg', text: 'Inscrição em análise...', delay: 600 },
 ];
@@ -115,14 +123,13 @@ export function PageContent() {
     // ═══ Roster ═══
     const rosterCount = root.querySelector('#bcRosterCount') as HTMLElement | null;
     const rosterBar = root.querySelector('#bcRosterBar') as HTMLElement | null;
-    const TOTAL_VAGAS = 200;
-    const BASE_INSCRITOS = 147;
-    fetch(`${SB_URL}/rest/v1/live_orbit_leads?source=like.bootcamp-orbit%25&select=id`, {
+    const TOTAL_VAGAS = 40;
+    fetch(`${SB_URL}/rest/v1/live_orbit_leads?source=eq.bootcamp-orbit-presencial&select=id`, {
       headers: { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}`, Prefer: 'count=exact' },
     }).then((r) => {
       const range = r.headers.get('content-range') || '0-0/0';
       const real = parseInt(range.split('/')[1] || '0', 10);
-      const display = Math.min(BASE_INSCRITOS + real, TOTAL_VAGAS);
+      const display = Math.min(Number.isFinite(real) ? real : 0, TOTAL_VAGAS);
       const pct = Math.min(Math.round((display / TOTAL_VAGAS) * 100), 100);
       if (rosterCount) rosterCount.textContent = String(display);
       if (rosterBar) rosterBar.style.width = pct + '%';
@@ -321,7 +328,7 @@ export function PageContent() {
 
     async function submitForm() {
       submitted = true;
-      const modo = answers.modalidade === 'presencial' ? 'presencial' : 'online';
+      const modo = resolveModo(answers.modalidade);
 
       // Só colunas que existem em live_orbit_leads (whitelist) — spread do __wlTracking
       // inteiro estourava 400 (PGRST204: coluna inexistente, ex. originPage/user_agent).
@@ -334,7 +341,7 @@ export function PageContent() {
         telefone: answers.telefone,
         empresa: answers.empresa,
         source: `bootcamp-orbit-${modo}`,
-        chosen_date: '2026-06-13',
+        chosen_date: '2026-10-15',
         landing_page: window.location.href,
         referrer: document.referrer || null,
         utm_source: pick('utm_source'),
@@ -357,11 +364,33 @@ export function PageContent() {
         });
       } catch { /* segue mesmo se o save falhar */ }
 
+      // CRM Orbit — funil Treinamento / Inscrito (source precisa começar com "treinamento")
+      supabaseMkt.functions.invoke('create-orbit-crm-lead', {
+        body: {
+          nome: answers.nome,
+          email: answers.email,
+          telefone: answers.telefone,
+          empresa: answers.empresa,
+          source: 'treinamentos',
+          tags: ['bootcamp', 'bootcamp-orbit', modo],
+          chosen_date: '2026-10-15',
+          notes: `Inscrição /bootcamp-orbit\nModalidade: ${modo}`,
+          custom_fields: { bootcamp_modalidade: modo },
+        },
+      }).catch(() => {});
+
       // Email de confirmação (tema guerra) — fire-and-forget
       fetch(`${SB_URL}/functions/v1/send-bootcamp-email`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}` },
-        body: JSON.stringify({ type: 'confirmacao', nome: answers.nome, email: answers.email, modo }),
+        body: JSON.stringify({
+          type: 'confirmacao',
+          nome: answers.nome,
+          email: answers.email,
+          modo,
+          telefone: answers.telefone,
+          empresa: answers.empresa,
+        }),
       }).catch(() => {});
 
       // GTM
