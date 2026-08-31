@@ -151,6 +151,18 @@ export const pageHTML = `
     text-align: center;
   }
 
+  .bco-pay-video {
+    position: relative; width: 100%; max-width: 560px; margin: 0 auto 18px;
+    aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden;
+    background: #000; border: 1px solid rgba(255,186,26,0.25);
+  }
+  .bco-pay-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .bco-pay-note {
+    color: #ffba1a; font-size: 14px; line-height: 1.6; margin: 0 0 18px;
+    background: rgba(255,186,26,0.08); border: 1px solid rgba(255,186,26,0.35);
+    border-radius: 8px; padding: 12px 14px; text-align: left;
+  }
+
   @media (max-width: 600px) {
     .bco-briefing__row { flex-direction: column; gap: 4px; padding: 10px 0; }
     .bco-briefing__label { min-width: 0; }
@@ -206,10 +218,14 @@ export const pageHTML = `
     <div id="bcoPagamento" style="display:none;margin:0 0 28px;background:linear-gradient(135deg,rgba(255,186,26,0.12),rgba(199,62,29,0.10));border:1px solid #ffba1a;border-radius:14px;padding:24px;text-align:center;">
       <div style="font-family:'Black Ops One',impact,sans-serif;color:#ffba1a;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">⚠ Falta 1 passo pra garantir sua vaga</div>
       <h3 style="color:#fff;font-family:'Black Ops One',impact,sans-serif;font-size:1.4rem;margin:0 0 6px;text-transform:uppercase;">Confirme sua participação no Bootcamp presencial · R$250</h3>
-      <p style="color:#C9D1D9;font-size:14px;line-height:1.6;margin:0 0 18px;">Para garantir sua vaga, acesse o seu perfil de administrador no Orbit e realize o pagamento até 15 de setembro.</p>
-      <a data-payment-mode="presencial" href="https://app.orbitgestao.com.br/login" target="_blank" rel="noopener"
+      <p style="color:#C9D1D9;font-size:14px;line-height:1.6;margin:0 0 16px;">Para garantir sua vaga na imersão presencial, assista ao vídeo abaixo e siga o passo a passo para realizar o pagamento pelo seu perfil de administrador no Orbit.</p>
+      <div class="bco-pay-video">
+        <iframe src="https://drive.google.com/file/d/1Vu2Y05IF5Rksc1WKigfZJN_MIPo78SrN/preview" title="Passo a passo do pagamento do Bootcamp presencial" allow="autoplay" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p style="margin:0 0 16px;"><a href="https://drive.google.com/file/d/1Vu2Y05IF5Rksc1WKigfZJN_MIPo78SrN/view?usp=drive_link" target="_blank" rel="noopener" style="color:#ffba1a;font-size:13px;">Abrir o vídeo em nova aba</a></p>
+      <a data-payment-mode="presencial" href="https://app.orbitgestao.com.br/my-space" target="_blank" rel="noopener"
          style="display:inline-flex;align-items:center;gap:10px;background:#ffba1a;color:#0A0E13;font-family:'Black Ops One',impact,sans-serif;font-size:16px;letter-spacing:1px;text-transform:uppercase;padding:16px 38px;border-radius:9px;text-decoration:none;box-shadow:0 8px 26px rgba(255,186,26,0.32);">
-        <i class="fa-solid fa-arrow-up-right-from-square"></i> Ir para o pagamento
+        <i class="fa-solid fa-arrow-up-right-from-square"></i> Ir para o Orbit
       </a>
       <p style="color:#8B7355;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;margin:14px 0 0;">Acesso seguro ao perfil administrador Orbit</p>
     </div>
@@ -225,10 +241,15 @@ export const pageHTML = `
     <div id="bcoMentoriaPay" style="display:none;margin:0 0 28px;background:linear-gradient(135deg,rgba(255,186,26,0.12),rgba(13,17,23,0.6));border:1px solid #ffba1a;border-radius:14px;padding:24px;text-align:center;">
       <div style="font-family:'Black Ops One',impact,sans-serif;color:#ffba1a;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">⚠ Falta 1 passo pra garantir sua vaga</div>
       <h3 style="color:#fff;font-family:'Black Ops One',impact,sans-serif;font-size:1.4rem;margin:0 0 6px;text-transform:uppercase;">Confirme sua participação na mentoria presencial · R$2.500</h3>
-      <p style="color:#C9D1D9;font-size:14px;line-height:1.6;margin:0 0 18px;">Para garantir sua vaga no Bootcamp + mentoria presencial, acesse o seu perfil de administrador no Orbit e realize o pagamento até 15 de setembro.</p>
-      <a data-payment-mode="mentoria" href="https://app.orbitgestao.com.br/login" target="_blank" rel="noopener"
+      <p style="color:#C9D1D9;font-size:14px;line-height:1.6;margin:0 0 12px;">Para garantir sua vaga na imersão + mentoria presencial, assista ao vídeo abaixo e siga o passo a passo para realizar o pagamento pelo seu perfil de administrador no Orbit.</p>
+      <p class="bco-pay-note"><strong>Importante:</strong> ao adquirir a mentoria, sua vaga no Bootcamp já está garantida. Portanto, finalize o pagamento apenas da mentoria — não é necessário realizar o pagamento separado do Bootcamp.</p>
+      <div class="bco-pay-video">
+        <iframe src="https://drive.google.com/file/d/1Vu2Y05IF5Rksc1WKigfZJN_MIPo78SrN/preview" title="Passo a passo do pagamento da mentoria presencial" allow="autoplay" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p style="margin:0 0 16px;"><a href="https://drive.google.com/file/d/1Vu2Y05IF5Rksc1WKigfZJN_MIPo78SrN/view?usp=drive_link" target="_blank" rel="noopener" style="color:#ffba1a;font-size:13px;">Abrir o vídeo em nova aba</a></p>
+      <a data-payment-mode="mentoria" href="https://app.orbitgestao.com.br/my-space" target="_blank" rel="noopener"
          style="display:inline-flex;align-items:center;gap:10px;background:#ffba1a;color:#0A0E13;font-family:'Black Ops One',impact,sans-serif;font-size:16px;letter-spacing:1px;text-transform:uppercase;padding:16px 38px;border-radius:9px;text-decoration:none;box-shadow:0 8px 26px rgba(255,186,26,0.32);">
-        <i class="fa-solid fa-arrow-up-right-from-square"></i> Ir para o pagamento
+        <i class="fa-solid fa-arrow-up-right-from-square"></i> Ir para o Orbit
       </a>
       <p style="color:#8B7355;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;margin:14px 0 0;">Acesso seguro ao perfil administrador Orbit</p>
     </div>

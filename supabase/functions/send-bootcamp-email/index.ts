@@ -18,7 +18,8 @@ const PRESENCIAL_LOCAL = "Square SC — Rod. José Carlos Daux, 5500 — Saco Gr
 const WHATSAPP_GROUP = "https://chat.whatsapp.com/HeVwpSJYmNw86wp7dCaxXB";
 const HAS_WHATSAPP = !WHATSAPP_GROUP.includes("CHANGE_ME");
 const PAGE_URL = "https://orbitgestao.com.br/bootcamp-orbit";
-const PAYMENT_LOGIN = "https://app.orbitgestao.com.br/login";
+const PAYMENT_LOGIN = "https://app.orbitgestao.com.br/my-space";
+const PAYMENT_VIDEO = "https://drive.google.com/file/d/1Vu2Y05IF5Rksc1WKigfZJN_MIPo78SrN/view?usp=drive_link";
 const MAP_URL = "https://www.google.com/maps/search/?api=1&query=Square+SC%2C+Rod.+Jos%C3%A9+Carlos+Daux%2C+5500+-+Saco+Grande%2C+Florian%C3%B3polis+-+SC%2C+88032-005";
 
 type EmailType = "confirmacao" | "lembrete_d7" | "lembrete_d1" | "dia_evento" | "ao_vivo";
@@ -171,15 +172,18 @@ function btn(href: string, label: string): string {
 function payBlock(modo: "presencial" | "mentoria"): string {
   if (modo === "mentoria") {
     return `<div style="background:linear-gradient(135deg,rgba(255,186,26,0.12),rgba(199,62,29,0.10));border:1px solid #ffba1a;border-radius:10px;padding:20px;margin:18px 0;text-align:center;">
-<p style="${GOLD}font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 6px;">⚠ Sua vaga da mentoria só é confirmada após o pagamento</p>
-<p style="${P}margin:0 0 14px;">Acesse seu perfil de administrador no Orbit para realizar o pagamento de <strong style="${GOLD}">R$2.500</strong> até 15/09.</p>
-<a href="${PAYMENT_LOGIN}" style="display:inline-block;background:#ffba1a;color:#0A0E13;font-weight:800;font-size:16px;padding:15px 38px;border-radius:6px;text-decoration:none;text-transform:uppercase;letter-spacing:1px;">Ir para o pagamento</a>
+<p style="${GOLD}font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 6px;">⚠ Confirme sua participação na mentoria presencial · R$2.500</p>
+<p style="${P}margin:0 0 10px;">Para garantir sua vaga na imersão + mentoria presencial, assista ao vídeo e siga o passo a passo no perfil de administrador no Orbit.</p>
+<p style="${P}margin:0 0 14px;color:#ffba1a;"><strong>Importante:</strong> ao adquirir a mentoria, sua vaga no Bootcamp já está garantida. Finalize o pagamento apenas da mentoria — não é necessário pagar o Bootcamp separado.</p>
+<a href="${PAYMENT_VIDEO}" style="display:inline-block;color:#ffba1a;font-weight:700;font-size:14px;margin:0 0 16px;">Assistir o passo a passo</a><br>
+<a href="${PAYMENT_LOGIN}" style="display:inline-block;background:#ffba1a;color:#0A0E13;font-weight:800;font-size:16px;padding:15px 38px;border-radius:6px;text-decoration:none;text-transform:uppercase;letter-spacing:1px;">Ir para o Orbit</a>
 </div>`;
   }
   return `<div style="background:linear-gradient(135deg,rgba(255,186,26,0.12),rgba(199,62,29,0.10));border:1px solid #ffba1a;border-radius:10px;padding:20px;margin:18px 0;text-align:center;">
-<p style="${GOLD}font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 6px;">⚠ Sua vaga presencial só é confirmada após o pagamento</p>
-<p style="${P}margin:0 0 14px;">Acesse seu perfil de administrador no Orbit para realizar o pagamento de <strong style="${GOLD}">R$250</strong> até 15/09.</p>
-<a href="${PAYMENT_LOGIN}" style="display:inline-block;background:#ffba1a;color:#0A0E13;font-weight:800;font-size:16px;padding:15px 38px;border-radius:6px;text-decoration:none;text-transform:uppercase;letter-spacing:1px;">Ir para o pagamento</a>
+<p style="${GOLD}font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 6px;">⚠ Confirme sua participação no Bootcamp presencial · R$250</p>
+<p style="${P}margin:0 0 14px;">Para garantir sua vaga na imersão presencial, assista ao vídeo e siga o passo a passo no perfil de administrador no Orbit.</p>
+<a href="${PAYMENT_VIDEO}" style="display:inline-block;color:#ffba1a;font-weight:700;font-size:14px;margin:0 0 16px;">Assistir o passo a passo</a><br>
+<a href="${PAYMENT_LOGIN}" style="display:inline-block;background:#ffba1a;color:#0A0E13;font-weight:800;font-size:16px;padding:15px 38px;border-radius:6px;text-decoration:none;text-transform:uppercase;letter-spacing:1px;">Ir para o Orbit</a>
 </div>`;
 }
 
@@ -226,8 +230,8 @@ function getHTML(type: EmailType, nome: string, modo: Modo, zoomJoinUrl = ""): s
     const intro = isOnline
       ? `Missão confirmada. Sua inscrição foi concluída e seu nome já está no pelotão do <strong style="${STRONG}">Bootcamp Canais Orbit</strong>. No dia 15 de outubro, esteja a postos: é hora de entrar em campo.`
       : modo === "mentoria"
-      ? `Missão iniciada. Para concluir sua inscrição no <strong style="${STRONG}">Bootcamp Canais Orbit + Mentoria</strong>, realize o pagamento pelo perfil de administrador no Orbit até 15 de setembro.`
-      : `Missão iniciada. Para concluir sua inscrição no <strong style="${STRONG}">Bootcamp Canais Orbit presencial</strong>, realize o pagamento pelo perfil de administrador no Orbit até 15 de setembro.`;
+      ? `Missão iniciada. Para concluir sua inscrição no <strong style="${STRONG}">Bootcamp Canais Orbit + Mentoria</strong>, assista ao vídeo do passo a passo e realize o pagamento no Orbit até 15 de setembro.`
+      : `Missão iniciada. Para concluir sua inscrição no <strong style="${STRONG}">Bootcamp Canais Orbit presencial</strong>, assista ao vídeo do passo a passo e realize o pagamento no Orbit até 15 de setembro.`;
     return shell(
       isOnline ? "Missão confirmada" : "Inscrição iniciada",
       "linear-gradient(135deg,#3D4127 0%,#0A0E13 100%)",

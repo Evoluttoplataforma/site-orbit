@@ -42,8 +42,8 @@ export function PageContent() {
     if (modo.includes('mentoria')) {
       if (stampEl) stampEl.style.display = 'none';
       if (eyebrowEl) eyebrowEl.innerHTML = '<i class="fa-solid fa-file-circle-check"></i>Inscrição iniciada';
-      if (titleEl) titleEl.innerHTML = 'Bootcamp + <span class="accent">mentoria presencial</span>';
-      if (subEl) subEl.textContent = `${namePrefix}Missão iniciada. Para concluir sua inscrição e garantir seu nome no pelotão da Mentoria com Igor e Chris + Bootcamp Canais Orbit, realize o pagamento até 15 de setembro pelo seu perfil de administrador na plataforma.`;
+      if (titleEl) titleEl.innerHTML = 'Confirme sua participação na <span class="accent">mentoria presencial</span> · R$2.500';
+      if (subEl) subEl.textContent = `${namePrefix}Missão iniciada. Para concluir sua inscrição e garantir seu nome no pelotão da Mentoria com Igor e Chris + Bootcamp Canais Orbit, assista ao vídeo abaixo e veja o passo a passo para realizar o pagamento da taxa de inscrição até 15 de setembro pelo seu perfil de administrador na plataforma.`;
       if (benefitsEl) {
         benefitsEl.style.display = 'block';
         benefitsEl.innerHTML = '<strong style="color:#ffba1a;">Sua inscrição garante:</strong><ul><li>Vaga no Bootcamp presencial, com 4 horas de imersão, material digital, Q&amp;A ao vivo, coffee e almoço de networking</li><li>4 horas de mentoria em grupo com Igor e Christian</li><li>Direcionamento estratégico sobre posicionamento, produtização, precificação, atendimento e gestão da consultoria</li></ul>';
@@ -55,8 +55,8 @@ export function PageContent() {
     } else if (modo.includes('presencial')) {
       if (stampEl) stampEl.style.display = 'none';
       if (eyebrowEl) eyebrowEl.innerHTML = '<i class="fa-solid fa-file-circle-check"></i>Inscrição iniciada';
-      if (titleEl) titleEl.innerHTML = 'Bootcamp <span class="accent">presencial</span>';
-      if (subEl) subEl.textContent = `${namePrefix}Missão iniciada. Para concluir sua inscrição e garantir seu nome no pelotão do Bootcamp Canais Orbit, realize o pagamento da taxa de inscrição até 15 de setembro pelo seu perfil de administrador na plataforma.`;
+      if (titleEl) titleEl.innerHTML = 'Confirme sua participação no <span class="accent">Bootcamp presencial</span> · R$250';
+      if (subEl) subEl.textContent = `${namePrefix}Missão iniciada. Para concluir sua inscrição e garantir seu nome no pelotão do Bootcamp Canais Orbit, assista ao vídeo abaixo e veja o passo a passo para realizar o pagamento da taxa de inscrição até 15 de setembro pelo seu perfil de administrador na plataforma.`;
       if (benefitsEl) {
         benefitsEl.style.display = 'block';
         benefitsEl.innerHTML = '<strong style="color:#ffba1a;">Sua inscrição garante:</strong><ul><li>4 horas de imersão no Square SC, em Florianópolis, das 8h30 às 12h30</li><li>Acesso a material digital</li><li>Q&amp;A ao vivo durante o evento</li><li>Coffee + almoço de networking com outros canais</li></ul>';
@@ -87,12 +87,21 @@ export function PageContent() {
     w.dataLayer = w.dataLayer || [];
     w.dataLayer.push({ event: isWaitlist ? 'bootcamp_lista_espera_obrigado' : 'bootcamp_inscricao_obrigado', modalidade: modo });
 
-    const paymentLinks = root.querySelectorAll<HTMLElement>('[data-payment-mode]');
+    const paymentLinks = root.querySelectorAll<HTMLAnchorElement>('[data-payment-mode]');
+    const tracking = (window as Window & { __wlTracking?: Record<string, unknown> }).__wlTracking || {};
+    const orbitUrl = new URL('https://app.orbitgestao.com.br/my-space');
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'fbclid'].forEach((key) => {
+      const value = tracking[key];
+      if (typeof value === 'string' && value && !value.startsWith('(')) orbitUrl.searchParams.set(key, value);
+    });
     const trackPaymentClick = (event: Event) => {
       const target = event.currentTarget as HTMLElement;
       w.dataLayer.push({ event: 'bootcamp_pagamento_click', modalidade: target.dataset.paymentMode || modo });
     };
-    paymentLinks.forEach((link) => link.addEventListener('click', trackPaymentClick));
+    paymentLinks.forEach((link) => {
+      link.href = orbitUrl.toString();
+      link.addEventListener('click', trackPaymentClick);
+    });
 
     return () => {
       paymentLinks.forEach((link) => link.removeEventListener('click', trackPaymentClick));
