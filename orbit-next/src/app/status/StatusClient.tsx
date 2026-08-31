@@ -341,7 +341,7 @@ export function StatusClient() {
           </a>{' '}
           e{' '}
           <a href="/termos-de-servico" style={{ color: GOLD }}>
-            Termos de Serviço
+            Termos de Uso
           </a>
           . Intercorrência da aplicação: contato@orbitgestao.com.br.
         </p>

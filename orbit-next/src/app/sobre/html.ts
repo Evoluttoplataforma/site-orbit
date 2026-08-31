@@ -435,7 +435,28 @@ export const pageHTML = `
         </script>
     </section>
 
-    <!-- ═══════════════════════════════════════════════════════
+    <!-- ═══ ESTRUTURA EMPRESARIAL ═══ -->
+    <section class="section-padded-lg" style="background:#161B22;" id="estrutura-empresarial">
+        <div class="container" style="max-width:820px;">
+            <span class="section-badge">Identificação</span>
+            <h2 style="font-size:clamp(28px,4vw,42px);font-weight:800;color:#fff;margin:16px 0 24px;">Nossa estrutura empresarial</h2>
+            <p style="color:#C9D1D9;font-size:1.05rem;line-height:1.7;margin-bottom:16px;"><strong style="color:#fff;">Orbit Gestão</strong> é uma marca comercial utilizada por <strong style="color:#fff;">FURNIEL DESENVOLVIMENTO DE SOFTWARE LTDA</strong>.</p>
+            <div style="background:#0D1117;border:1px solid rgba(255,186,26,0.2);border-radius:14px;padding:24px 28px;margin:28px 0;">
+                <p style="color:#8B949E;font-size:13px;margin:0 0 6px;text-transform:uppercase;letter-spacing:0.06em;">Razão social</p>
+                <p style="color:#fff;margin:0 0 16px;">FURNIEL DESENVOLVIMENTO DE SOFTWARE LTDA</p>
+                <p style="color:#8B949E;font-size:13px;margin:0 0 6px;text-transform:uppercase;letter-spacing:0.06em;">CNPJ</p>
+                <p style="color:#fff;margin:0 0 16px;">65.167.064/0001-27</p>
+                <p style="color:#8B949E;font-size:13px;margin:0 0 6px;text-transform:uppercase;letter-spacing:0.06em;">Endereço</p>
+                <p style="color:#fff;margin:0 0 16px;">Rodovia Jose Carlos Daux, 5500, Conj. 306, Saco Grande, Florianópolis, Santa Catarina, CEP 88032-005, Brasil</p>
+                <p style="color:#8B949E;font-size:13px;margin:0 0 6px;text-transform:uppercase;letter-spacing:0.06em;">Contato</p>
+                <p style="color:#fff;margin:0;"><a href="mailto:contato@orbitgestao.com.br" style="color:#ffba1a;">contato@orbitgestao.com.br</a> · <a href="https://wa.me/5548998246863" style="color:#ffba1a;">+55 (48) 99824-6863</a></p>
+            </div>
+            <h3 style="color:#fff;font-size:1.35rem;font-weight:700;margin:32px 0 12px;">Grupo GSN</h3>
+            <p style="color:#C9D1D9;line-height:1.7;margin-bottom:12px;">A Orbit Gestão integra o ecossistema do <strong style="color:#fff;">Grupo GSN</strong>. A relação com o Grupo GSN representa a estrutura empresarial à qual a operação Orbit está vinculada.</p>
+            <p style="color:#C9D1D9;line-height:1.7;margin-bottom:24px;">A pessoa jurídica responsável pela operação dos Serviços Orbit identificados neste website é <strong style="color:#fff;">FURNIEL DESENVOLVIMENTO DE SOFTWARE LTDA</strong>, CNPJ <strong style="color:#fff;">65.167.064/0001-27</strong>.</p>
+            <p style="margin:0;"><a href="/informacoes-legais" style="color:#ffba1a;font-weight:600;">Ver Informações Legais <i class="fas fa-arrow-right" style="font-size:12px;margin-left:6px;"></i></a></p>
+        </div>
+    </section>
 
         <!-- ═══ CTA ═══ -->
     <section style="position:relative;padding:120px 0;overflow:hidden;">
@@ -456,9 +477,9 @@ export const pageHTML = `
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="footer-logo">
-                        <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" width="92" height="36" loading="lazy" decoding="async">
+                        <img src="/images/logo-orbit-white.png" alt="Orbit Gestão" width="92" height="36" style="width:92px !important;height:36px !important;max-width:92px !important;">
                     </div>
-                    <p data-i18n="footer.tagline">Plataforma de gestão com IA. Contrate um time que executa.</p>
+                    <p data-i18n="footer.tagline">Plataforma de gestão empresarial com agentes de inteligência artificial. Transforme estratégia, processos, indicadores, pessoas, projetos e outras áreas da gestão em uma operação conectada, acompanhada e executável.</p>
                     <div class="social-hover">
                         <a href="https://wa.me/5548998246863" target="_blank" rel="noopener nofollow" class="social-hover__item" data-name="WhatsApp">
                             <i class="fab fa-whatsapp"></i>
@@ -476,42 +497,52 @@ export const pageHTML = `
                 </div>
 
                 <div class="footer-column">
-                    <h5 data-i18n="footer.contact">Contato</h5>
-                    <p class="footer-units-label" data-i18n="footer.units">2 unidades · 2 países</p>
-                    <div class="footer-units">
-                        <div class="footer-unit">
-                            <div class="footer-unit__head"><span class="footer-unit__flag">🇧🇷</span> <strong data-i18n="footer.unit.br">Brasil</strong></div>
-                            <a href="https://wa.me/5548998246863" target="_blank" rel="noopener nofollow"><i class="fab fa-whatsapp"></i> (48) 99824-6863</a>
-                            <a class="footer-unit__addr" href="https://maps.google.com/?q=Square+SC+Florianopolis" target="_blank" rel="noopener"><i class="fas fa-map-marker-alt"></i> Square SC, Florianópolis - SC</a>
-                        </div>
-                        <div class="footer-unit">
-                            <div class="footer-unit__head"><span class="footer-unit__flag">🇺🇸</span> <strong data-i18n="footer.unit.us">Estados Unidos</strong></div>
-                            <a href="https://wa.me/19548182885" target="_blank" rel="noopener nofollow"><i class="fab fa-whatsapp"></i> +1 (954) 818-2885</a>
-                            <a class="footer-unit__addr" href="https://maps.google.com/?q=14051+International+Dr,+Orlando,+FL+32821" target="_blank" rel="noopener"><i class="fas fa-map-marker-alt"></i> Bainbridge World Center<br>14051 International Dr, Orlando, FL 32821</a>
-                        </div>
-                    </div>
-                </div>
-
-                
-                <div class="footer-column">
-                    <h5 data-i18n="footer.content">Conteúdo</h5>
+                    <h5 data-i18n="footer.institutional">Institucional</h5>
                     <ul>
+                        <li><a href="/sobre" data-i18n="footer.about">Sobre o Orbit</a></li>
+                        <li><a href="/consultores" data-i18n="footer.partners">Para Consultorias</a></li>
+                        <li><a href="/seguranca-ia" data-i18n="footer.security">Central de Confiança</a></li>
                         <li><a href="/blog">Blog</a></li>
                         <li><a href="/historias" data-i18n="footer.stories">Histórias de Clientes</a></li>
                         <li><a href="/faq">FAQ</a></li>
                     </ul>
-                    <h5 style="margin-top: 20px;" data-i18n="footer.company">Empresa</h5>
+                </div>
+
+                <div class="footer-column">
+                    <h5 data-i18n="footer.legal">Legal</h5>
                     <ul>
-                        <li><a href="/sobre" data-i18n="footer.about">Sobre Nós</a></li>
-                        <li><a href="/consultores" data-i18n="footer.partners">Seja Parceiro</a></li>
+                        <li><a href="/informacoes-legais" data-i18n="footer.legalInfo">Informações Legais</a></li>
+                        <li><a href="/politica-privacidade" data-i18n="footer.privacy">Política de Privacidade</a></li>
+                        <li><a href="/termos-de-servico" data-i18n="footer.terms">Termos de Uso</a></li>
+                        <li><a href="/politica-seguranca" data-i18n="footer.isp">Política de Segurança da Informação</a></li>
+                        <li><a href="/status" data-i18n="footer.status">Status e disponibilidade</a></li>
                     </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h5 data-i18n="footer.contact">Contato</h5>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:contato@orbitgestao.com.br">contato@orbitgestao.com.br</a></li>
+                        <li><i class="fas fa-phone"></i> <a href="https://wa.me/5548998246863" target="_blank" rel="noopener nofollow">+55 (48) 99824-6863</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i> Florianópolis, Santa Catarina, Brasil</li>
+                    </ul>
+                    <p class="footer-units-label" data-i18n="footer.officeUs">Escritório comercial · EUA</p>
+                    <div class="footer-unit">
+                        <div class="footer-unit__head"><span class="footer-unit__flag">🇺🇸</span> <strong data-i18n="footer.unit.us">Estados Unidos</strong></div>
+                        <a href="https://wa.me/19548182885" target="_blank" rel="noopener nofollow"><i class="fab fa-whatsapp"></i> +1 (954) 818-2885</a>
+                        <a class="footer-unit__addr" href="https://maps.google.com/?q=14051+International+Dr,+Orlando,+FL+32821" target="_blank" rel="noopener"><i class="fas fa-map-marker-alt"></i> Bainbridge World Center<br>14051 International Dr, Orlando, FL 32821</a>
+                    </div>
                 </div>
             </div>
 
+            <div class="footer-legal-id">
+                <p data-i18n="footer.legalEntity"><strong>Orbit Gestão</strong> é a marca comercial utilizada por <strong>FURNIEL DESENVOLVIMENTO DE SOFTWARE LTDA</strong>, inscrita no CNPJ sob nº <strong>65.167.064/0001-27</strong>.</p>
+                <p data-i18n="footer.legalAddress"><strong>Endereço:</strong> Rodovia Jose Carlos Daux, 5500, Conj. 306, Saco Grande, Florianópolis, SC, CEP 88032-005, Brasil.</p>
+                <p data-i18n="footer.legalGroup">A Orbit Gestão integra o ecossistema do <strong>Grupo GSN</strong>.</p>
+            </div>
+
             <div class="footer-bottom">
-                <p data-i18n="footer.rights">&copy; 2026 Orbit - Grupo GSN. Todos os direitos reservados.</p>
-                <p style="margin-top:8px;font-size:13px;"><a href="/politica-privacidade" style="color:#8B949E;text-decoration:underline;" data-i18n="footer.privacy">Pol&iacute;tica de Privacidade</a> <span style="margin:0 8px;color:#484F58;">&middot;</span> <a href="/termos-de-servico" style="color:#8B949E;text-decoration:underline;" data-i18n="footer.terms">Termos de Servi&ccedil;o</a></p>
-                <a href="/seguranca-ia" class="btn btn-outline"><i class="fas fa-shield-halved" aria-hidden="true"></i><span data-i18n="footer.security">Central de confiança</span></a>
+                <p data-i18n="footer.rights">&copy; 2026 Orbit Gestão | Grupo GSN. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>

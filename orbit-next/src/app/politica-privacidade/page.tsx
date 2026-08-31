@@ -2,7 +2,9 @@ import { I18n } from '@/lib/i18n-react';
 
 export const metadata = {
   title: 'Política de Privacidade — Orbit Gestão',
-  description: 'Política de Privacidade e Proteção de Dados da Orbit Gestão — LGPD.',
+  description:
+    'Política de Privacidade da Orbit Gestão, operada por FURNIEL DESENVOLVIMENTO DE SOFTWARE LTDA (CNPJ 65.167.064/0001-27). LGPD, dados, IA e direitos dos titulares.',
+  alternates: { canonical: 'https://orbitgestao.com.br/politica-privacidade' },
 };
 
 const wrap = { background: '#0D1117', color: '#C9D1D9', minHeight: '100vh', padding: '60px 20px', fontFamily: "'Plus Jakarta Sans', Arial, sans-serif" } as const;
@@ -24,7 +26,7 @@ export default function Page() {
       <div style={container}>
         <I18n as="a" href="/" style={back} pt="← Voltar para o site" en="← Back to the site" />
         <I18n as="h1" style={h1} pt="Política de Privacidade" en="Privacy Policy" />
-        <I18n as="p" style={stamp} pt="Última atualização: 15 de agosto de 2026" en="Last updated: 15 August 2026" />
+        <I18n as="p" style={stamp} pt="Última atualização: 31 de agosto de 2026" en="Last updated: 31 August 2026" />
 
         <section style={section}>
           <I18n as="h2" style={h2} pt="1. Introdução" en="1. Introduction" />
@@ -32,19 +34,67 @@ export default function Page() {
             style={p}
             pt={
               <>
-                A Orbit, plataforma de gestão empresarial operada pela <strong style={strong}>Orbit Gestão</strong> (&quot;nós&quot;, &quot;nosso&quot; ou &quot;Orbit&quot;), está comprometida em proteger a privacidade e a segurança dos dados dos nossos usuários. Esta Política de Privacidade descreve de forma transparente como coletamos, usamos, armazenamos, compartilhamos e protegemos suas informações pessoais e corporativas quando você utiliza nossa plataforma, aplicativos, APIs e serviços relacionados (conjuntamente, os &quot;Serviços&quot;). A qualificação completa da Empresa consta das Informações Legais da Plataforma e da tela de aceite dos Termos de Uso v3.0.
+                A <strong style={strong}>Orbit Gestão</strong> é uma plataforma de gestão empresarial operada por{' '}
+                <strong style={strong}>FURNIEL DESENVOLVIMENTO DE SOFTWARE LTDA</strong>, inscrita no CNPJ sob nº{' '}
+                <strong style={strong}>65.167.064/0001-27</strong>, com sede na Rodovia Jose Carlos Daux, 5500, Conj. 306,
+                Saco Grande, Florianópolis, Santa Catarina, CEP 88032-005, Brasil, doravante denominada “Orbit”,
+                “Empresa”, “nós” ou “nosso”.
               </>
             }
             en={
               <>
-                Orbit, a business management platform operated by <strong style={strong}>Orbit Gestão</strong> (&quot;we&quot;, &quot;our&quot; or &quot;Orbit&quot;), is committed to protecting the privacy and security of our users&apos; data. This Privacy Policy describes, in a transparent manner, how we collect, use, store, share and protect your personal and corporate information when you use our platform, applications, APIs and related services (together, the &quot;Services&quot;). The Company&apos;s full legal identification appears in the Platform Legal Information and on the Terms of Use v3.0 acceptance screen.
+                <strong style={strong}>Orbit Gestão</strong> is a business management platform operated by{' '}
+                <strong style={strong}>FURNIEL DESENVOLVIMENTO DE SOFTWARE LTDA</strong>, registered under CNPJ{' '}
+                <strong style={strong}>65.167.064/0001-27</strong>, with registered office at Rodovia Jose Carlos Daux,
+                5500, Conj. 306, Saco Grande, Florianópolis, Santa Catarina, CEP 88032-005, Brazil, hereinafter “Orbit”,
+                “Company”, “we” or “our”.
               </>
             }
           />
           <I18n
             style={p}
-            pt="Ao utilizar os Serviços da Orbit, você concorda com as práticas descritas nesta política. Caso não concorde, não utilize nossos Serviços."
-            en="By using Orbit’s Services, you agree to the practices described in this policy. If you do not agree, do not use our Services."
+            pt="Orbit Gestão é a marca comercial utilizada por FURNIEL DESENVOLVIMENTO DE SOFTWARE LTDA para a disponibilização dos Serviços. A qualificação completa consta das Informações Legais e da tela de aceite dos Termos de Uso v3.0."
+            en="Orbit Gestão is the trade name used by FURNIEL DESENVOLVIMENTO DE SOFTWARE LTDA to make the Services available. Full legal identification appears in Legal Information and on the Terms of Use v3.0 acceptance screen."
+          />
+          <I18n
+            style={p}
+            pt={
+              <>
+                A Orbit está comprometida com a privacidade, proteção e segurança das informações tratadas em seus
+                websites, plataformas, aplicações, APIs, integrações e demais serviços relacionados. Esta Política
+                explica quais dados podem ser coletados, como podem ser utilizados, armazenados, compartilhados e
+                protegidos, além dos direitos dos titulares. Detalhes societários:{' '}
+                <a href="/informacoes-legais" style={accent}>Informações Legais</a>.
+              </>
+            }
+            en={
+              <>
+                Orbit is committed to the privacy, protection and security of information processed through its
+                websites, platforms, applications, APIs, integrations and related services. This Policy explains what
+                data may be collected, how they may be used, stored, shared and protected, and the rights of data
+                subjects. Corporate details:{' '}
+                <a href="/informacoes-legais" style={accent}>Legal Information</a>.
+              </>
+            }
+          />
+          <I18n
+            style={p}
+            pt="Ao utilizar nossos Serviços, o usuário declara estar ciente das práticas descritas nesta Política. Caso não concorde, não utilize nossos Serviços."
+            en="By using our Services, the user acknowledges the practices described in this Policy. If you do not agree, do not use our Services."
+          />
+        </section>
+
+        <section style={section}>
+          <I18n as="h2" style={h2} pt="1.1. Aplicação desta Política" en="1.1. Scope of this Policy" />
+          <I18n
+            style={p}
+            pt="Esta Política se aplica aos dados pessoais tratados por meio de: site orbitgestao.com.br; plataforma Orbit Gestão; aplicativos e interfaces relacionadas; formulários; canais de atendimento; integrações; APIs; serviços vinculados à operação da plataforma; e ambientes disponibilizados por consultorias, parceiros e canais que utilizem a infraestrutura Orbit em modelo white label."
+            en="This Policy applies to personal data processed through: the website orbitgestao.com.br; the Orbit Gestão platform; related applications and interfaces; forms; support channels; integrations; APIs; services linked to platform operations; and environments made available by consultancies, partners and channels that use Orbit infrastructure in a white-label model."
+          />
+          <I18n
+            style={p}
+            pt="Quando determinado ambiente utilizar identidade visual de uma consultoria ou parceiro, poderão existir responsabilidades adicionais estabelecidas entre a Orbit, o parceiro e o cliente final, conforme os contratos aplicáveis."
+            en="When an environment uses a consultancy’s or partner’s visual identity, additional responsibilities may exist among Orbit, the partner and the end customer, as set out in the applicable contracts."
           />
         </section>
 
@@ -441,6 +491,15 @@ export default function Page() {
         </section>
 
         <section style={section}>
+          <I18n as="h2" style={h2} pt="5.1. Transferência internacional de dados" en="5.1. International data transfers" />
+          <I18n
+            style={p}
+            pt="Determinados fornecedores tecnológicos utilizados pela Orbit poderão possuir infraestrutura localizada fora do Brasil. Nessas situações, dados poderão ser tratados ou armazenados internacionalmente, observadas as medidas previstas na legislação aplicável para proteção das informações."
+            en="Certain technology providers used by Orbit may have infrastructure located outside Brazil. In those cases, data may be processed or stored internationally, subject to the measures required by applicable law to protect the information."
+          />
+        </section>
+
+        <section style={section}>
           <I18n as="h2" style={h2} pt="6. Segurança dos Dados" en="6. Data Security" />
           <I18n
             style={p}
@@ -616,6 +675,67 @@ export default function Page() {
                 <strong style={strong}>E-mail:</strong> <a href="mailto:jennifer.dantas@templum.com.br" style={accent}>jennifer.dantas@templum.com.br</a>
               </>
             }
+          />
+          <I18n
+            style={p}
+            pt="Para dúvidas institucionais relacionadas a esta Política ou ao tratamento de dados pela Orbit:"
+            en="For institutional questions related to this Policy or to Orbit’s processing of data:"
+          />
+          <I18n
+            style={p}
+            pt={
+              <>
+                <strong style={strong}>Orbit Gestão</strong> — FURNIEL DESENVOLVIMENTO DE SOFTWARE LTDA
+                <br />
+                CNPJ: 65.167.064/0001-27
+                <br />
+                Rodovia Jose Carlos Daux, 5500, Conj. 306, Saco Grande, Florianópolis, SC, CEP 88032-005, Brasil.
+                <br />
+                E-mail: <a href="mailto:contato@orbitgestao.com.br" style={accent}>contato@orbitgestao.com.br</a>
+                <br />
+                Telefone: +55 (48) 99824-6863
+              </>
+            }
+            en={
+              <>
+                <strong style={strong}>Orbit Gestão</strong> — FURNIEL DESENVOLVIMENTO DE SOFTWARE LTDA
+                <br />
+                CNPJ: 65.167.064/0001-27
+                <br />
+                Rodovia Jose Carlos Daux, 5500, Conj. 306, Saco Grande, Florianópolis, SC, CEP 88032-005, Brazil.
+                <br />
+                E-mail: <a href="mailto:contato@orbitgestao.com.br" style={accent}>contato@orbitgestao.com.br</a>
+                <br />
+                Telephone: +55 (48) 99824-6863
+              </>
+            }
+          />
+        </section>
+
+        <section style={section}>
+          <I18n as="h2" style={h2} pt="10.1. Dados inseridos pelos clientes" en="10.1. Data entered by customers" />
+          <I18n
+            style={p}
+            pt="Empresas clientes, consultorias e parceiros poderão inserir dados relacionados aos seus próprios colaboradores, clientes, fornecedores ou demais pessoas. Nessas situações, a responsabilidade pelo fundamento jurídico para coleta e utilização dessas informações poderá pertencer ao cliente ou parceiro que determinou sua inserção na plataforma. A Orbit poderá atuar como operadora de dados em determinados tratamentos realizados em nome dos clientes, conforme previsto contratualmente e de acordo com a legislação aplicável."
+            en="Customer companies, consultancies and partners may enter data relating to their own employees, customers, suppliers or other persons. In those situations, responsibility for the legal basis for collecting and using that information may lie with the customer or partner that determined its insertion into the platform. Orbit may act as a data processor for certain processing carried out on behalf of customers, as provided contractually and in accordance with applicable law."
+          />
+        </section>
+
+        <section style={section}>
+          <I18n as="h2" style={h2} pt="10.2. Ambientes white label" en="10.2. White-label environments" />
+          <I18n
+            style={p}
+            pt="O Orbit permite que determinados clientes, consultorias ou canais disponibilizem a experiência da plataforma utilizando sua própria identidade visual. A utilização de uma marca diferente na interface não significa necessariamente que a infraestrutura tecnológica tenha sido desenvolvida ou operada pela marca apresentada ao usuário. Quando aplicável, a infraestrutura dos Serviços permanece sendo fornecida pela Orbit Gestão, operada por FURNIEL DESENVOLVIMENTO DE SOFTWARE LTDA, observadas as responsabilidades estabelecidas contratualmente entre as partes."
+            en="Orbit allows certain customers, consultancies or channels to offer the platform experience using their own visual identity. Use of a different brand in the interface does not necessarily mean that the technology infrastructure was developed or operated by the brand shown to the user. Where applicable, the Services infrastructure continues to be provided by Orbit Gestão, operated by FURNIEL DESENVOLVIMENTO DE SOFTWARE LTDA, subject to the responsibilities established contractually among the parties."
+          />
+        </section>
+
+        <section style={section}>
+          <I18n as="h2" style={h2} pt="10.3. Crianças e adolescentes" en="10.3. Children and adolescents" />
+          <I18n
+            style={p}
+            pt="Os Serviços Orbit são destinados principalmente a empresas, profissionais e organizações. Não direcionamos nossos serviços intencionalmente a crianças. Caso sejam tratados dados relacionados a crianças ou adolescentes dentro de ambientes empresariais, caberá às partes envolvidas observar as exigências legais aplicáveis."
+            en="Orbit Services are intended primarily for companies, professionals and organizations. We do not intentionally direct our services to children. If data relating to children or adolescents are processed within business environments, the parties involved must observe the applicable legal requirements."
           />
         </section>
 

@@ -489,8 +489,8 @@ export const trustHTML = `
             </div>
             ${i18nEl(
               'p',
-              `Documentos públicos correlatos: <a href="/politica-seguranca" style="color:${gold};">Política de Segurança da Informação</a> · <a href="/politica-privacidade" style="color:${gold};">Política de Privacidade</a> · <a href="/termos-de-servico" style="color:${gold};">Termos de Uso (resumo público)</a>. O documento vinculante é o aceite v3.0 na Área de Conformidade da Plataforma.`,
-              `Related public documents: <a href="/politica-seguranca" style="color:${gold};">Information Security Policy</a> · <a href="/politica-privacidade" style="color:${gold};">Privacy Policy</a> · <a href="/termos-de-servico" style="color:${gold};">Terms of Use (public summary)</a>. The binding document is the v3.0 acceptance in the Platform Compliance Area.`,
+              `Documentos públicos correlatos: <a href="/politica-seguranca" style="color:${gold};">Política de Segurança da Informação</a> · <a href="/politica-privacidade" style="color:${gold};">Política de Privacidade</a> · <a href="/termos-de-servico" style="color:${gold};">Termos de Uso</a> · <a href="/informacoes-legais" style="color:${gold};">Informações Legais</a>. Contratos e o aceite v3.0 na Área de Conformidade da Plataforma prevalecem em caso de conflito.`,
+              `Related public documents: <a href="/politica-seguranca" style="color:${gold};">Information Security Policy</a> · <a href="/politica-privacidade" style="color:${gold};">Privacy Policy</a> · <a href="/termos-de-servico" style="color:${gold};">Terms of Use</a> · <a href="/informacoes-legais" style="color:${gold};">Legal Information</a>. Contracts and the v3.0 acceptance in the Platform Compliance Area prevail in case of conflict.`,
               `style="color:${muted};font-size:0.92rem;line-height:1.6;margin:0;"`,
             )}
       `,
@@ -717,7 +717,7 @@ export const trustHTML = `
                 ${i18nText('POLÍTICA DE PRIVACIDADE', 'PRIVACY POLICY')}
               </a>
               <a href="/termos-de-servico" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:${white};border:1.5px solid rgba(255,255,255,0.2);font-weight:700;font-size:15px;padding:16px 28px;border-radius:50px;text-decoration:none;">
-                ${i18nText('TERMOS DE SERVIÇO', 'TERMS OF SERVICE')}
+                ${i18nText('TERMOS DE USO', 'TERMS OF USE')}
               </a>
             </div>
       `,

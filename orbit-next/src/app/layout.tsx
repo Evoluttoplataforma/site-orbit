@@ -75,34 +75,29 @@ export default function RootLayout({
           // consegue consolidar quem e o dono do site.
           "@id": "https://orbitgestao.com.br/#organization",
           "name": "Orbit Gestão",
+          "legalName": "FURNIEL DESENVOLVIMENTO DE SOFTWARE LTDA",
           "alternateName": ["Orbit", "Orbit Gestao"],
-          "description": "Plataforma de gestão operada por IA com consultoria recorrente passiva. Dezenas de agentes de IA especializados constroem e operam a gestão da sua empresa 24/7.",
+          "taxID": "65.167.064/0001-27",
+          "description": "Plataforma de gestão operada por IA com consultoria recorrente passiva. Dezenas de agentes de IA especializados constroem e operam a gestão da sua empresa 24/7. Orbit Gestão é a marca comercial utilizada por FURNIEL DESENVOLVIMENTO DE SOFTWARE LTDA.",
           "url": "https://orbitgestao.com.br",
           "logo": "https://orbitgestao.com.br/images/logo-orbit-white.png",
           "image": "https://orbitgestao.com.br/images/og-image.png",
           "foundingDate": "1996",
-          "address": [
-            {
-              "@type": "PostalAddress",
-              "streetAddress": "Square SC",
-              "addressLocality": "Florianópolis",
-              "addressRegion": "SC",
-              "addressCountry": "BR"
-            },
-            {
-              "@type": "PostalAddress",
-              "name": "Bainbridge World Center",
-              "streetAddress": "14051 International Dr",
-              "addressLocality": "Orlando",
-              "addressRegion": "FL",
-              "postalCode": "32821",
-              "addressCountry": "US"
-            }
-          ],
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Rodovia Jose Carlos Daux, 5500, Conj. 306, Saco Grande",
+            "addressLocality": "Florianópolis",
+            "addressRegion": "SC",
+            "postalCode": "88032-005",
+            "addressCountry": "BR"
+          },
+          "email": "contato@orbitgestao.com.br",
+          "telephone": "+55-48-99824-6863",
           "contactPoint": [
             {
               "@type": "ContactPoint",
               "telephone": "+5548998246863",
+              "email": "contato@orbitgestao.com.br",
               "contactType": "customer service",
               "areaServed": "BR",
               "availableLanguage": ["Portuguese"]
@@ -110,7 +105,7 @@ export default function RootLayout({
             {
               "@type": "ContactPoint",
               "telephone": "+1-954-818-2885",
-              "contactType": "customer service",
+              "contactType": "sales",
               "areaServed": "US",
               "availableLanguage": ["English", "Portuguese"]
             }

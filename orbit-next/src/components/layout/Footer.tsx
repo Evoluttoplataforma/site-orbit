@@ -4,87 +4,60 @@ import Link from 'next/link';
 
 export function Footer() {
   const t = useTranslations('footer');
-  const nav = useTranslations('nav');
 
   return (
     <footer className="bg-[#0D1117] pt-16 text-white/60">
-      <div className="max-w-[1200px] mx-auto px-6">
+      <div className="max-w-[1100px] mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-10 border-b border-white/[0.08]">
-          {/* Brand */}
           <div>
-            <Image src="/images/logo-orbit-white.png" alt="Orbit" width={140} height={36} className="h-9 w-auto mb-4" />
+            <Image src="/images/logo-orbit-white.png" alt="Orbit Gestão" width={92} height={36} className="h-9 w-auto mb-4" />
             <p className="text-sm leading-relaxed">{t('tagline')}</p>
-            <div className="flex items-center gap-0 mt-5">
-              {['LinkedIn', 'Facebook', 'Instagram', 'YouTube'].map((name) => (
-                <a key={name} href="#" className="relative px-4 py-2.5 text-white/50 text-lg hover:text-white transition-all group" title={name}>
-                  <span>{name === 'LinkedIn' ? '🔗' : name === 'Facebook' ? '📘' : name === 'Instagram' ? '📷' : '🎬'}</span>
-                  <span className="absolute -top-7 left-1/2 -translate-x-1/2 bg-gold/15 border border-gold/30 text-gold text-[0.65rem] font-bold px-2.5 py-0.5 rounded-md opacity-0 group-hover:opacity-100 transition-all pointer-events-none whitespace-nowrap">{name}</span>
-                </a>
-              ))}
-            </div>
           </div>
 
-          {/* Contact */}
           <div>
-            <h5 className="text-sm font-semibold text-white mb-4">{t('contact')}</h5>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-center gap-2">📞 (48) 99824-6863</li>
-              <li className="flex items-center gap-2">📍 Square SC, Florianópolis - SC</li>
-            </ul>
-          </div>
-
-          {/* Platform */}
-          <div>
-            <h5 className="text-sm font-semibold text-white mb-4">{t('platform')}</h5>
-            <ul className="space-y-2.5 text-sm">
-              <li><Link href="/agentes" className="hover:text-white transition-colors">{nav('agents')}</Link></li>
-              <li><Link href="/processos" className="hover:text-white transition-colors">{nav('processes')}</Link></li>
-              <li><Link href="/indicadores" className="hover:text-white transition-colors">{nav('indicators')}</Link></li>
-              <li><Link href="/tarefas" className="hover:text-white transition-colors">{nav('tasks')}</Link></li>
-              <li><Link href="/competencias" className="hover:text-white transition-colors">{nav('skills')}</Link></li>
-              <li><Link href="/auditorias" className="hover:text-white transition-colors">{nav('audits')}</Link></li>
-              <li><Link href="https://demonstracao.orbitgestao.com.br/chat" className="hover:text-white transition-colors">{t('plans')}</Link></li>
-            </ul>
-          </div>
-
-          {/* Content + Company */}
-          <div>
-            <h5 className="text-sm font-semibold text-white mb-4">{t('content')}</h5>
-            <ul className="space-y-2.5 text-sm">
-              <li><Link href="/blog" className="hover:text-white transition-colors">{nav('blog')}</Link></li>
-              <li><Link href="/historias" className="hover:text-white transition-colors">{t('stories')}</Link></li>
-              <li><Link href="/faq" className="hover:text-white transition-colors">{nav('faq')}</Link></li>
-            </ul>
-            <h5 className="text-sm font-semibold text-white mb-4 mt-6">{t('company')}</h5>
+            <h5 className="text-sm font-semibold text-white mb-4 uppercase tracking-wide">{t('institutional')}</h5>
             <ul className="space-y-2.5 text-sm">
               <li><Link href="/sobre" className="hover:text-white transition-colors">{t('about')}</Link></li>
               <li><Link href="/consultores" className="hover:text-white transition-colors">{t('partners')}</Link></li>
-              <li><Link href="/consultores" className="hover:text-white transition-colors">{t('channels')}</Link></li>
+              <li><Link href="/seguranca-ia" className="hover:text-white transition-colors">{t('security')}</Link></li>
+              <li><Link href="/blog" className="hover:text-white transition-colors">Blog</Link></li>
+              <li><Link href="/historias" className="hover:text-white transition-colors">{t('stories')}</Link></li>
+              <li><Link href="/faq" className="hover:text-white transition-colors">FAQ</Link></li>
             </ul>
-            <h5 className="text-sm font-semibold text-white mb-4 mt-6">Legal</h5>
+          </div>
+
+          <div>
+            <h5 className="text-sm font-semibold text-white mb-4 uppercase tracking-wide">{t('legal')}</h5>
             <ul className="space-y-2.5 text-sm">
-              <li><Link href="/politica-privacidade" className="hover:text-white transition-colors">Política de Privacidade</Link></li>
-              <li><Link href="/politica-seguranca" className="hover:text-white transition-colors">Política de Segurança da Informação</Link></li>
-              <li><Link href="/termos-de-servico" className="hover:text-white transition-colors">Termos de Serviço</Link></li>
-              <li><Link href="/seguranca-ia" className="hover:text-white transition-colors">Central de confiança</Link></li>
-              <li><Link href="/status" className="hover:text-white transition-colors">Status e disponibilidade</Link></li>
+              <li><Link href="/informacoes-legais" className="hover:text-white transition-colors">{t('legalInfo')}</Link></li>
+              <li><Link href="/politica-privacidade" className="hover:text-white transition-colors">{t('privacy')}</Link></li>
+              <li><Link href="/termos-de-servico" className="hover:text-white transition-colors">{t('terms')}</Link></li>
+              <li><Link href="/politica-seguranca" className="hover:text-white transition-colors">{t('isp')}</Link></li>
+              <li><Link href="/status" className="hover:text-white transition-colors">{t('status')}</Link></li>
             </ul>
+          </div>
+
+          <div>
+            <h5 className="text-sm font-semibold text-white mb-4 uppercase tracking-wide">{t('contact')}</h5>
+            <ul className="space-y-3 text-sm">
+              <li><a href="mailto:contato@orbitgestao.com.br" className="hover:text-white transition-colors">contato@orbitgestao.com.br</a></li>
+              <li><a href="https://wa.me/5548998246863" className="hover:text-white transition-colors">+55 (48) 99824-6863</a></li>
+              <li>Florianópolis, Santa Catarina, Brasil</li>
+            </ul>
+            <p className="text-xs font-bold text-[#ffba1a] tracking-wide mt-4 mb-2">{t('officeUs')}</p>
+            <p className="text-sm">{t('unitUs')}</p>
+            <p className="text-sm mt-1">Bainbridge World Center, Orlando, FL</p>
           </div>
         </div>
 
-        <div className="py-6 text-center text-sm space-y-2">
+        <div className="py-6 text-sm space-y-2 text-white/45">
+          <p>{t('legalEntity')}</p>
+          <p>{t('legalAddress')}</p>
+          <p>{t('legalGroup')}</p>
+        </div>
+
+        <div className="py-6 text-center text-sm border-t border-white/[0.08]">
           <p>{t('rights')}</p>
-          <p className="text-white/40 text-xs">
-            <Link href="/politica-privacidade" className="hover:text-white transition-colors">Política de Privacidade</Link>
-            <span className="mx-2">·</span>
-            <Link href="/politica-seguranca" className="hover:text-white transition-colors">Política de Segurança</Link>
-            <span className="mx-2">·</span>
-            <Link href="/termos-de-servico" className="hover:text-white transition-colors">Termos de Serviço</Link>
-            <span className="mx-2">·</span>
-            <Link href="/seguranca-ia" className="hover:text-white transition-colors">Central de confiança</Link>
-            <span className="mx-2">·</span>
-            <Link href="/status" className="hover:text-white transition-colors">Status</Link>
-          </p>
         </div>
       </div>
     </footer>

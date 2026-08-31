@@ -3629,11 +3629,11 @@ html[lang="en"] .i18n-pt { display: none !important; }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.3fr 1.4fr 1fr;
-  gap: 48px;
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+  gap: 40px;
   padding-bottom: 40px;
   border-bottom: 1px solid rgba(255,255,255,0.08);
-  max-width: 980px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 .footer-logo {
@@ -3711,16 +3711,42 @@ html[lang="en"] .i18n-pt { display: none !important; }
 .footer-column ul li a:hover {
   color: var(--primary);
 }
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
 .footer-contact li {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.45;
 }
+.footer-contact li a {
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+}
+.footer-contact li a:hover { color: var(--primary); }
 .footer-contact li i {
   color: var(--primary);
   font-size: 14px;
   width: 16px;
+  margin-top: 3px;
+  flex-shrink: 0;
 }
+.footer-legal-id {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 0 8px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.45);
+}
+.footer-legal-id p { margin: 0 0 8px; }
+.footer-legal-id strong { color: rgba(255,255,255,0.75); font-weight: 600; }
 .footer-units-label {
   font-size: 12px;
   font-weight: 700;
