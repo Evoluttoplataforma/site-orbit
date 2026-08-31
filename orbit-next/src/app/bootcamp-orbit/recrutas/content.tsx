@@ -6,8 +6,6 @@ const SB_URL = 'https://yfpdrckyuxltvznqfqgh.supabase.co';
 const SB_KEY =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlmcGRyY2t5dXhsdHZ6bnFmcWdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTYwMDYsImV4cCI6MjA5MDAzMjAwNn0.PVMRz04lvMLepjv0ZCsr5mJ8K_Ux1fQlQgX1vOd4O2g';
 
-const PRECO_PRESENCIAL = 250;
-
 interface Lead {
   nome: string | null;
   email: string | null;
@@ -15,16 +13,17 @@ interface Lead {
   empresa: string | null;
   source: string | null;
   created_at: string | null;
-  pago?: boolean;
 }
 interface Data {
   online: Lead[];
   presencial: Lead[];
   mentoria?: Lead[];
+  waitlist?: Lead[];
   total_online: number;
   total_presencial: number;
   total_mentoria?: number;
-  total_pagos?: number;
+  total_waitlist?: number;
+  payment_tracking?: 'unavailable';
   total: number;
 }
 
@@ -98,16 +97,17 @@ export function PageContent() {
     const online = clean(data.online);
     const presencial = clean(data.presencial);
     const mentoria = clean(data.mentoria || []);
-    const pagos = presencial.filter((l) => l.pago).length;
+    const waitlist = clean(data.waitlist || []);
     return {
       online: online.filter(match),
       presencial: presencial.filter(match),
       mentoria: mentoria.filter(match),
+      waitlist: waitlist.filter(match),
       total_online: online.length,
       total_presencial: presencial.length,
       total_mentoria: mentoria.length,
-      pagos,
-      receita: pagos * PRECO_PRESENCIAL,
+      total_waitlist: waitlist.length,
+      physicalSeats: presencial.length + mentoria.length,
     };
   }, [data, q]);
 
@@ -147,9 +147,7 @@ export function PageContent() {
     .rec-recruta__nome { font-weight: 600; line-height: 1.2; }
     .rec-recruta__mail { font-size: 12px; color: #7C8794; }
     .rec-wa { color: #C9D1D9; font-family: 'JetBrains Mono', monospace; font-size: 13px; }
-    .rec-badge { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
-    .rec-badge--pago { background: rgba(63,185,80,0.15); color: #3FB950; border: 1px solid rgba(63,185,80,0.4); }
-    .rec-badge--pend { background: rgba(255,186,26,0.12); color: #ffba1a; border: 1px solid rgba(255,186,26,0.35); }
+    .rec-notice { margin: -8px 0 22px; padding: 13px 16px; border: 1px solid rgba(255,186,26,0.35); background: rgba(255,186,26,0.08); color: #C9D1D9; border-radius: 10px; font-size: 13px; line-height: 1.5; }
     .rec-empty { text-align: center; color: #5C6672; padding: 26px 12px; font-size: 14px; }
     @media (max-width: 760px) {
       .rec-stats { grid-template-columns: repeat(2, 1fr); }
@@ -173,7 +171,7 @@ export function PageContent() {
         <form onSubmit={entrar} style={{ width: '100%', maxWidth: 380, background: 'linear-gradient(180deg, rgba(255,255,255,0.03), transparent)', border: '1px solid #1B232D', borderRadius: 18, padding: 34 }}>
           <div style={{ width: 54, height: 54, margin: '0 auto 16px', borderRadius: 14, background: 'linear-gradient(135deg,#3D4127,#0A0E13)', border: '1px solid #4B5320', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 26 }}>🎖️</div>
           <h1 style={{ fontSize: 19, fontWeight: 800, textAlign: 'center', margin: '0 0 4px', textTransform: 'uppercase', letterSpacing: 1 }}>Painel de Recrutas</h1>
-          <p style={{ color: '#7C8794', fontSize: 13, textAlign: 'center', margin: '0 0 22px' }}>Acesso restrito · Bootcamp Orbit</p>
+          <p style={{ color: '#7C8794', fontSize: 13, textAlign: 'center', margin: '0 0 22px' }}>Acesso restrito · Bootcamp Canais Orbit</p>
           <input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} placeholder="Senha de acesso" autoFocus
             style={{ width: '100%', padding: '13px 15px', borderRadius: 10, border: '1px solid #232D38', background: 'rgba(255,255,255,0.04)', color: '#fff', fontSize: 15, outline: 'none', boxSizing: 'border-box' }} />
           {erro && <p style={{ color: '#F0654A', fontSize: 13, margin: '12px 0 0' }}>⚠ {erro}</p>}
@@ -195,7 +193,7 @@ export function PageContent() {
             <div className="rec-brand__badge">🎖️</div>
             <div>
               <h1 className="rec-brand__t">Painel de Recrutas</h1>
-              <p className="rec-brand__s">BOOTCAMP ORBIT · 15 OUT 2026 · 08H30 BRT</p>
+              <p className="rec-brand__s">BOOTCAMP CANAIS ORBIT · 15 OUT 2026 · 08H30 BRT</p>
             </div>
           </div>
           <div className="rec-actions">
@@ -208,8 +206,12 @@ export function PageContent() {
           <StatCard ico="📡" bg="rgba(63,185,80,0.14)" fg="#3FB950" n={view.total_online} label="Online (grátis)" />
           <StatCard ico="🪖" bg="rgba(255,186,26,0.14)" fg="#ffba1a" n={view.total_presencial} label="Presencial (inscritos)" />
           <StatCard ico="⭐" bg="rgba(45,140,255,0.14)" fg="#2D8CFF" n={view.total_mentoria} label="Mentoria" />
-          <StatCard ico="✅" bg="rgba(63,185,80,0.14)" fg="#3FB950" n={`${view.pagos}/${view.total_presencial}`} label="Presencial pagos" />
-          <StatCard ico="💰" bg="rgba(255,186,26,0.14)" fg="#ffba1a" n={`R$ ${view.receita.toLocaleString('pt-BR')}`} label="Receita confirmada" />
+          <StatCard ico="🎟️" bg="rgba(255,186,26,0.14)" fg="#ffba1a" n={`${view.physicalSeats}/40`} label="Vagas físicas ocupadas" />
+          <StatCard ico="⏳" bg="rgba(240,101,74,0.14)" fg="#F0654A" n={view.total_waitlist} label="Lista de espera" />
+        </div>
+
+        <div className="rec-notice">
+          <strong>Pagamentos não exibidos:</strong> o checkout acontece dentro do Orbit e este repositório ainda não recebe uma confirmação autenticada dessa fonte. Nenhuma inscrição é marcada como paga ou usada para calcular receita neste painel.
         </div>
 
         <div className="rec-search">
@@ -218,8 +220,9 @@ export function PageContent() {
         </div>
 
         <Painel titulo="Online ao vivo" sub="grátis" ico="📡" cor="#3FB950" leads={view.online} onCSV={() => download('bootcamp-online.csv', toCSV(view.online, 'Online'))} />
-        <Painel titulo="Presencial · Floripa" sub="R$250" ico="🪖" cor="#ffba1a" status leads={view.presencial} onCSV={() => download('bootcamp-presencial.csv', toCSV(view.presencial, 'Presencial'))} />
+        <Painel titulo="Presencial · Floripa" sub="R$250" ico="🪖" cor="#ffba1a" leads={view.presencial} onCSV={() => download('bootcamp-presencial.csv', toCSV(view.presencial, 'Presencial'))} />
         <Painel titulo="Mentoria presencial" sub="R$2.500" ico="⭐" cor="#2D8CFF" leads={view.mentoria} onCSV={() => download('bootcamp-mentoria.csv', toCSV(view.mentoria, 'Mentoria'))} />
+        <Painel titulo="Lista de espera presencial" sub="40 vagas preenchidas" ico="⏳" cor="#F0654A" leads={view.waitlist} onCSV={() => download('bootcamp-lista-espera.csv', toCSV(view.waitlist, 'Lista de espera'))} />
       </div>
     </div>
   );
@@ -235,8 +238,8 @@ function StatCard({ ico, bg, fg, n, label }: { ico: string; bg: string; fg: stri
   );
 }
 
-function Painel({ titulo, sub, ico, cor, leads, onCSV, status }: { titulo: string; sub: string; ico: string; cor: string; leads: Lead[]; onCSV: () => void; status?: boolean }) {
-  const cols = status ? 6 : 5;
+function Painel({ titulo, sub, ico, cor, leads, onCSV }: { titulo: string; sub: string; ico: string; cor: string; leads: Lead[]; onCSV: () => void }) {
+  const cols = 5;
   return (
     <div className="rec-panel">
       <div className="rec-phead">
@@ -249,7 +252,7 @@ function Painel({ titulo, sub, ico, cor, leads, onCSV, status }: { titulo: strin
       </div>
       <table className="rec-table">
         <thead>
-          <tr><th>#</th><th>Recruta</th>{status && <th>Pagamento</th>}<th>WhatsApp</th><th>Consultoria</th><th>Inscrição</th></tr>
+          <tr><th>#</th><th>Recruta</th><th>WhatsApp</th><th>Consultoria</th><th>Inscrição</th></tr>
         </thead>
         <tbody>
           {leads.length === 0 ? (
@@ -267,13 +270,6 @@ function Painel({ titulo, sub, ico, cor, leads, onCSV, status }: { titulo: strin
                     </div>
                   </div>
                 </td>
-                {status && (
-                  <td data-label="Pagamento">
-                    {l.pago
-                      ? <span className="rec-badge rec-badge--pago">✅ Pago</span>
-                      : <span className="rec-badge rec-badge--pend">⏳ Pendente</span>}
-                  </td>
-                )}
                 <td data-label="WhatsApp"><span className="rec-wa">{l.telefone || '—'}</span></td>
                 <td data-label="Consultoria">{l.empresa || '—'}</td>
                 <td data-label="Inscrição" style={{ color: '#8B949E', whiteSpace: 'nowrap' }}>{fmtDate(l.created_at)}</td>

@@ -1,17 +1,14 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { pageHTML } from './html';
 import { reapplyOrbitLang } from '@/lib/reapply-lang';
 
 export function PageContent() {
   const ref = useRef<HTMLDivElement>(null);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
-    if (!mounted || !ref.current) return;
+    if (!ref.current) return;
 
     // Trava overflow horizontal igual à página principal
     const prevHtmlOX = document.documentElement.style.overflowX;
@@ -21,50 +18,89 @@ export function PageContent() {
     document.body.setAttribute('data-bc', '1');
 
     const params = new URLSearchParams(window.location.search);
-    const modo = (params.get('modo') || 'online').toLowerCase();
+    const rawModo = (params.get('modo') || 'online').toLowerCase();
+    const modo = rawModo === 'mentoria' || rawModo === 'presencial' ? rawModo : 'online';
+    const isWaitlist = params.get('status') === 'waitlist' && modo !== 'online';
     const nome = params.get('nome') || '';
+    const namePrefix = nome ? `Recruta ${nome.charAt(0).toUpperCase() + nome.slice(1)}. ` : '';
 
     const root = ref.current;
-    const nomeEl = root.querySelector('#bcoNome') as HTMLElement | null;
+    const stampEl = root.querySelector('#bcoStamp') as HTMLElement | null;
+    const eyebrowEl = root.querySelector('#bcoEyebrow') as HTMLElement | null;
+    const titleEl = root.querySelector('#bcoTitle') as HTMLElement | null;
+    const subEl = root.querySelector('#bcoSub') as HTMLElement | null;
+    const benefitsEl = root.querySelector('#bcoBenefits') as HTMLElement | null;
     const modEl = root.querySelector('#bcoModalidade') as HTMLElement | null;
     const localRow = root.querySelector('#bcoLocalRow') as HTMLElement | null;
     const localEl = root.querySelector('#bcoLocal') as HTMLElement | null;
     const pagamento = root.querySelector('#bcoPagamento') as HTMLElement | null;
     const zoomBox = root.querySelector('#bcoZoom') as HTMLElement | null;
     const mentoriaPay = root.querySelector('#bcoMentoriaPay') as HTMLElement | null;
+    const waitlistBox = root.querySelector('#bcoWaitlist') as HTMLElement | null;
     const horarioEl = root.querySelector('#bcoHorario') as HTMLElement | null;
 
-    if (nomeEl && nome) {
-      nomeEl.textContent = `Recruta ${nome.charAt(0).toUpperCase() + nome.slice(1)}, sua patente foi registrada no manifesto.`;
-    }
-
     if (modo.includes('mentoria')) {
-      if (modEl) modEl.innerHTML = '<strong>Mentoria presencial</strong> · grupo com Igor e Chris';
-      if (localEl) localEl.innerHTML = '<strong>Square SC</strong> · 14h–18h · endereço no e-mail';
-      if (horarioEl) horarioEl.innerHTML = '<strong>14h às 18h</strong> (BRT) · 15/10';
-      if (mentoriaPay) mentoriaPay.style.display = 'block';
+      if (stampEl) stampEl.style.display = 'none';
+      if (eyebrowEl) eyebrowEl.innerHTML = '<i class="fa-solid fa-file-circle-check"></i>Inscrição iniciada';
+      if (titleEl) titleEl.innerHTML = 'Bootcamp + <span class="accent">mentoria presencial</span>';
+      if (subEl) subEl.textContent = `${namePrefix}Missão iniciada. Para concluir sua inscrição e garantir seu nome no pelotão da Mentoria com Igor e Chris + Bootcamp Canais Orbit, realize o pagamento até 15 de setembro pelo seu perfil de administrador na plataforma.`;
+      if (benefitsEl) {
+        benefitsEl.style.display = 'block';
+        benefitsEl.innerHTML = '<strong style="color:#ffba1a;">Sua inscrição garante:</strong><ul><li>Vaga no Bootcamp presencial, com 4 horas de imersão, material digital, Q&amp;A ao vivo, coffee e almoço de networking</li><li>4 horas de mentoria em grupo com Igor e Christian</li><li>Direcionamento estratégico sobre posicionamento, produtização, precificação, atendimento e gestão da consultoria</li></ul>';
+      }
+      if (modEl) modEl.innerHTML = '<strong>Mentoria presencial em grupo</strong> · com Igor e Chris';
+      if (localEl) localEl.innerHTML = '<strong>Square SC</strong> · Rod. José Carlos Daux, 5500 - Saco Grande, Florianópolis - SC, 88032-005';
+      if (horarioEl) horarioEl.innerHTML = '<strong>8h30 às 12h30</strong> Bootcamp · <strong>14h às 18h</strong> Mentoria';
+      if (!isWaitlist && mentoriaPay) mentoriaPay.style.display = 'block';
     } else if (modo.includes('presencial')) {
-      if (modEl) modEl.innerHTML = '<strong>Presencial</strong> · Florianópolis/SC';
-      if (localEl) localEl.innerHTML = '<strong>Square SC</strong> · endereço completo no e-mail';
-      if (pagamento) pagamento.style.display = 'block';
+      if (stampEl) stampEl.style.display = 'none';
+      if (eyebrowEl) eyebrowEl.innerHTML = '<i class="fa-solid fa-file-circle-check"></i>Inscrição iniciada';
+      if (titleEl) titleEl.innerHTML = 'Bootcamp <span class="accent">presencial</span>';
+      if (subEl) subEl.textContent = `${namePrefix}Missão iniciada. Para concluir sua inscrição e garantir seu nome no pelotão do Bootcamp Canais Orbit, realize o pagamento da taxa de inscrição até 15 de setembro pelo seu perfil de administrador na plataforma.`;
+      if (benefitsEl) {
+        benefitsEl.style.display = 'block';
+        benefitsEl.innerHTML = '<strong style="color:#ffba1a;">Sua inscrição garante:</strong><ul><li>4 horas de imersão no Square SC, em Florianópolis, das 8h30 às 12h30</li><li>Acesso a material digital</li><li>Q&amp;A ao vivo durante o evento</li><li>Coffee + almoço de networking com outros canais</li></ul>';
+      }
+      if (modEl) modEl.innerHTML = '<strong>Imersão Presencial</strong> · Florianópolis';
+      if (localEl) localEl.innerHTML = '<strong>Square SC</strong> · Rod. José Carlos Daux, 5500 - Saco Grande, Florianópolis - SC, 88032-005';
+      if (!isWaitlist && pagamento) pagamento.style.display = 'block';
     } else {
+      if (eyebrowEl) eyebrowEl.innerHTML = '<i class="fa-solid fa-circle-check"></i>Missão confirmada';
+      if (titleEl) titleEl.innerHTML = 'Bem-vindo ao <span class="accent">Bootcamp Canais Orbit</span>, recruta';
+      if (subEl) subEl.textContent = `${namePrefix}Missão confirmada. Sua inscrição foi concluída e seu nome já está no pelotão do Bootcamp Canais Orbit. A partir de agora, o General Igor e o Coronel Christian assumem o comando. No dia 15 de outubro, esteja a postos: é hora de entrar em campo.`;
       if (modEl) modEl.innerHTML = '<strong>Online ao vivo</strong> · Zoom';
       if (localRow) localRow.style.display = 'none';
       if (zoomBox) zoomBox.style.display = 'block';
+    }
+
+    if (isWaitlist) {
+      if (eyebrowEl) eyebrowEl.innerHTML = '<i class="fa-solid fa-clock"></i>Lista de espera';
+      if (titleEl) titleEl.innerHTML = 'Vagas presenciais <span class="accent">preenchidas</span>';
+      if (subEl) subEl.textContent = `${namePrefix}Recebemos seus dados e registramos seu interesse. Nossa equipe poderá entrar em contato pelos dados cadastrados se houver disponibilidade presencial.`;
+      if (benefitsEl) benefitsEl.style.display = 'none';
+      if (waitlistBox) waitlistBox.style.display = 'block';
     }
 
     // GTM — confirmação de chegada na thank-you
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const w = window as any;
     w.dataLayer = w.dataLayer || [];
-    w.dataLayer.push({ event: 'bootcamp_inscricao_obrigado', modalidade: modo });
+    w.dataLayer.push({ event: isWaitlist ? 'bootcamp_lista_espera_obrigado' : 'bootcamp_inscricao_obrigado', modalidade: modo });
+
+    const paymentLinks = root.querySelectorAll<HTMLElement>('[data-payment-mode]');
+    const trackPaymentClick = (event: Event) => {
+      const target = event.currentTarget as HTMLElement;
+      w.dataLayer.push({ event: 'bootcamp_pagamento_click', modalidade: target.dataset.paymentMode || modo });
+    };
+    paymentLinks.forEach((link) => link.addEventListener('click', trackPaymentClick));
 
     return () => {
+      paymentLinks.forEach((link) => link.removeEventListener('click', trackPaymentClick));
       document.documentElement.style.overflowX = prevHtmlOX;
       document.body.style.overflowX = prevBodyOX;
       document.body.removeAttribute('data-bc');
     };
-  }, [mounted]);
+  }, []);
 
   useEffect(() => {
     reapplyOrbitLang();

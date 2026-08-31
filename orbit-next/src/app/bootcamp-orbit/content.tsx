@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { pageHTML } from './html';
 import { footerHTML } from '@/components/shared-footer';
 import { reapplyOrbitLang } from '@/lib/reapply-lang';
@@ -19,22 +19,6 @@ function resolveModo(raw: string | undefined): BootcampModo {
 
 const IGOR_AVATAR = '/images/bootcamp/igor-fardado.webp';
 
-// Lista de alistamentos fakes que ficam aparecendo no canto
-const FAKE_ENLISTS = [
-  { nome: 'Lucas Silva', empresa: 'Pinnacle Consultoria', cidade: 'São Paulo · SP' },
-  { nome: 'Mariana Costa', empresa: 'NextStep Estratégia', cidade: 'Belo Horizonte · MG' },
-  { nome: 'Roberto Almeida', empresa: 'Vértice Gestão', cidade: 'Curitiba · PR' },
-  { nome: 'Patrícia Oliveira', empresa: 'Atlas Consultoria', cidade: 'Porto Alegre · RS' },
-  { nome: 'André Mendes', empresa: 'Engaja PME', cidade: 'Recife · PE' },
-  { nome: 'Camila Rocha', empresa: 'Foco Consultoria', cidade: 'Goiânia · GO' },
-  { nome: 'Felipe Tavares', empresa: 'Sigma Gestão', cidade: 'Florianópolis · SC' },
-  { nome: 'Juliana Pereira', empresa: 'Orbit Partner Cuiabá', cidade: 'Cuiabá · MT' },
-  { nome: 'Eduardo Pinheiro', empresa: 'Acta Consultoria', cidade: 'Salvador · BA' },
-  { nome: 'Renata Souza', empresa: 'Vetor Gestão', cidade: 'Fortaleza · CE' },
-  { nome: 'Marcos Vinícius', empresa: 'Eixo Estratégico', cidade: 'Brasília · DF' },
-  { nome: 'Beatriz Lima', empresa: 'Trilha Consultoria', cidade: 'Vitória · ES' },
-];
-
 // Perguntas do Igor no chat — em ordem
 type Step =
   | { kind: 'msg'; text: string; delay?: number }
@@ -44,7 +28,7 @@ type Step =
 const VALID_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const STEPS: Step[] = [
   { kind: 'msg', text: 'Olá, recruta. Sou o General Igor Furniel. 🪖' },
-  { kind: 'msg', text: 'Vou te fazer 5 perguntas rápidas pra garantir sua vaga no Bootcamp Orbit do dia 15/10.', delay: 1400 },
+  { kind: 'msg', text: 'Vou te fazer 5 perguntas rápidas para sua inscrição no Bootcamp Canais Orbit do dia 15/10.', delay: 1400 },
   { kind: 'msg', text: 'Vamos começar — qual é seu nome completo?', delay: 1200 },
   { kind: 'input', field: 'nome', placeholder: 'Digite seu nome', validate: (v) => v.trim().length < 3 ? 'Digite seu nome completo' : null },
   { kind: 'msg', text: 'Bom ter você aqui. Qual é o melhor e-mail pra te enviarmos as coordenadas da operação?', delay: 800 },
@@ -55,20 +39,18 @@ const STEPS: Step[] = [
   { kind: 'input', field: 'empresa', placeholder: 'Nome da consultoria', validate: (v) => v.trim().length < 2 ? 'Digite o nome da empresa' : null },
   { kind: 'msg', text: 'Último passo — como você quer participar?', delay: 700 },
   { kind: 'choices', field: 'modalidade', options: [
-    { label: '📡 Online ao vivo · Grátis', value: 'online' },
-    { label: '🪖 Presencial · Floripa · R$250', value: 'presencial' },
-    { label: '⭐ Mentoria presencial · R$2.500', value: 'mentoria' },
+    { label: '📡 ONLINE', value: 'online' },
+    { label: '🪖 PRESENCIAL FLORIANÓPOLIS', value: 'presencial' },
+    { label: '⭐ MENTORIA COM IGOR E CHRISTIAN', value: 'mentoria' },
   ] },
   { kind: 'msg', text: 'Inscrição em análise...', delay: 600 },
 ];
 
 export function PageContent() {
   const ref = useRef<HTMLDivElement>(null);
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
-    if (!mounted || !ref.current) return;
+    if (!ref.current) return;
     const root = ref.current;
 
     // ═══ Marca body com data-bc pra ativar cursor mira global ═══
@@ -120,21 +102,6 @@ export function PageContent() {
     updateCountdown();
     const cdInterval = setInterval(updateCountdown, 1000);
 
-    // ═══ Roster ═══
-    const rosterCount = root.querySelector('#bcRosterCount') as HTMLElement | null;
-    const rosterBar = root.querySelector('#bcRosterBar') as HTMLElement | null;
-    const TOTAL_VAGAS = 40;
-    fetch(`${SB_URL}/rest/v1/live_orbit_leads?source=eq.bootcamp-orbit-presencial&select=id`, {
-      headers: { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}`, Prefer: 'count=exact' },
-    }).then((r) => {
-      const range = r.headers.get('content-range') || '0-0/0';
-      const real = parseInt(range.split('/')[1] || '0', 10);
-      const display = Math.min(Number.isFinite(real) ? real : 0, TOTAL_VAGAS);
-      const pct = Math.min(Math.round((display / TOTAL_VAGAS) * 100), 100);
-      if (rosterCount) rosterCount.textContent = String(display);
-      if (rosterBar) rosterBar.style.width = pct + '%';
-    }).catch(() => {});
-
     // ═══ Audio de tecla — Web Audio API gerado em código ═══
     let audioCtx: AudioContext | null = null;
     function getAudio() {
@@ -165,34 +132,42 @@ export function PageContent() {
       setTimeout(() => beep(900, 0.06, 0.08), 60);
     }
 
-    // ═══ Toast de alistamentos fakes ═══
-    let toastIdx = 0;
-    function showToast() {
-      const fake = FAKE_ENLISTS[toastIdx % FAKE_ENLISTS.length];
-      toastIdx++;
-      // Cria toast
+    // ═══ Sinal social real, sem nomes, empresas ou outra PII ═══
+    let lastEnlistCount: number | null = null;
+    function showToast(delta: number) {
       const t = document.createElement('div');
       t.className = 'bc-toast';
       t.innerHTML = `
         <div class="bc-toast__icon"><i class="fa-solid fa-user-plus"></i></div>
         <div class="bc-toast__body">
-          <p class="bc-toast__title">★ Novo Alistamento ★</p>
-          <p class="bc-toast__text">${fake.nome} se alistou<small>${fake.empresa} · ${fake.cidade}</small></p>
+          <p class="bc-toast__title">★ Pelotão em movimento ★</p>
+          <p class="bc-toast__text">${delta === 1 ? 'Uma nova inscrição foi registrada' : `${delta} novas inscrições foram registradas`}<small>Contagem real do Bootcamp Canais Orbit</small></p>
         </div>`;
       document.body.appendChild(t);
-      // anima entrada
       requestAnimationFrame(() => requestAnimationFrame(() => t.classList.add('is-visible')));
-      // remove depois de 6s
       setTimeout(() => {
         t.classList.remove('is-visible');
         setTimeout(() => t.remove(), 800);
       }, 6000);
     }
-    // primeiro toast após 8s; depois a cada 18-30s aleatório
-    const firstToastTo = window.setTimeout(showToast, 8000);
-    const toastInterval = window.setInterval(() => {
-      showToast();
-    }, 22000);
+    async function checkEnlistGrowth() {
+      try {
+        const sources = '("bootcamp-orbit-online","bootcamp-orbit-presencial","bootcamp-orbit-mentoria")';
+        const response = await fetch(`${SB_URL}/rest/v1/live_orbit_leads?source=in.${sources}&select=id`, {
+          headers: { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}`, Prefer: 'count=exact', Range: '0-0' },
+        });
+        if (!response.ok) return;
+        const range = response.headers.get('content-range') || '0-0/0';
+        const count = Number.parseInt(range.split('/')[1] || '0', 10);
+        if (!Number.isFinite(count)) return;
+        if (lastEnlistCount !== null && count > lastEnlistCount) showToast(count - lastEnlistCount);
+        lastEnlistCount = count;
+      } catch {
+        // Sem sinal real, não exibe notificação.
+      }
+    }
+    void checkEnlistGrowth();
+    const enlistPollInterval = window.setInterval(checkEnlistGrowth, 30000);
 
     // ═══ CHAT CONVERSACIONAL ═══
     const chatBody = root.querySelector('#bcChatBody') as HTMLElement | null;
@@ -208,7 +183,7 @@ export function PageContent() {
     // Só auto-rola depois que o usuário interagiu — evita arrastar a página pro form no load
     let userInteracted = false;
 
-    function maybeScrollTo(_el: HTMLElement) {
+    function maybeScrollTo() {
       if (!userInteracted || !chatBody) return;
       // chat agora vive num overlay com scroll próprio — rola o container, não a página
       chatBody.scrollTop = chatBody.scrollHeight;
@@ -222,7 +197,7 @@ export function PageContent() {
         ? `<div class="bc-msg__avatar">EU</div><div class="bc-msg__bubble">${escapeHtml(text)}</div>`
         : `<div class="bc-msg__avatar"><img src="${IGOR_AVATAR}" alt="Igor"></div><div class="bc-msg__bubble">${escapeHtml(text)}</div>`;
       chatBody.appendChild(div);
-      requestAnimationFrame(() => maybeScrollTo(div));
+      requestAnimationFrame(maybeScrollTo);
     }
     function escapeHtml(s: string) {
       return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -232,7 +207,7 @@ export function PageContent() {
       div.className = 'bc-msg';
       div.innerHTML = `<div class="bc-msg__avatar"><img src="${IGOR_AVATAR}" alt="Igor"></div><div class="bc-msg__bubble"><span class="bc-typing"><span></span><span></span><span></span></span></div>`;
       chatBody?.appendChild(div);
-      requestAnimationFrame(() => maybeScrollTo(div));
+      requestAnimationFrame(maybeScrollTo);
       return div;
     }
     function updateProgress() {
@@ -268,6 +243,14 @@ export function PageContent() {
         }
       } else if (step.kind === 'choices') {
         if (inputArea) inputArea.style.display = 'none';
+        const preselected = step.options.find((option) => option.value === answers[step.field]);
+        if (preselected) {
+          appendMsg(preselected.label, true);
+          updateProgress();
+          stepIdx++;
+          setTimeout(runStep, 400);
+          return;
+        }
         if (chatChoices) {
           chatChoices.style.display = 'flex';
           chatChoices.innerHTML = step.options.map((o) =>
@@ -332,7 +315,6 @@ export function PageContent() {
 
       // Só colunas que existem em live_orbit_leads (whitelist) — spread do __wlTracking
       // inteiro estourava 400 (PGRST204: coluna inexistente, ex. originPage/user_agent).
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const tk = (typeof window !== 'undefined' && (window as unknown as { __wlTracking?: Record<string, unknown> }).__wlTracking) || {};
       const pick = (k: string) => (tk[k] != null && tk[k] !== '' ? tk[k] : null);
       const payload: Record<string, unknown> = {
@@ -354,15 +336,21 @@ export function PageContent() {
         session_id: pick('session_id'),
       };
 
-      // Salva o lead — best-effort. Falha aqui NÃO bloqueia o fluxo: a inscrição
-      // tem que seguir pra /obrigado de qualquer jeito.
+      let registrationStatus: 'registered' | 'waitlist' = 'registered';
       try {
-        await fetch(`${SB_URL}/rest/v1/live_orbit_leads`, {
+        const registrationResponse = await fetch(`${SB_URL}/rest/v1/rpc/register_bootcamp_lead`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}`, Prefer: 'return=minimal' },
-          body: JSON.stringify(payload),
+          headers: { 'Content-Type': 'application/json', apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}` },
+          body: JSON.stringify({ lead: payload }),
         });
-      } catch { /* segue mesmo se o save falhar */ }
+        if (!registrationResponse.ok) throw new Error(`registration_${registrationResponse.status}`);
+        const registration = await registrationResponse.json() as { status?: 'registered' | 'waitlist' };
+        registrationStatus = registration.status === 'waitlist' ? 'waitlist' : 'registered';
+      } catch {
+        submitted = false;
+        appendMsg('Não foi possível registrar sua inscrição agora. Tente novamente em alguns instantes.');
+        return;
+      }
 
       // CRM Orbit — funil Treinamento / Inscrito (source precisa começar com "treinamento")
       supabaseMkt.functions.invoke('create-orbit-crm-lead', {
@@ -372,44 +360,50 @@ export function PageContent() {
           telefone: answers.telefone,
           empresa: answers.empresa,
           source: 'treinamentos',
-          tags: ['bootcamp', 'bootcamp-orbit', modo],
+          tags: ['bootcamp', 'bootcamp-orbit', modo, registrationStatus],
           chosen_date: '2026-10-15',
           notes: `Inscrição /bootcamp-orbit\nModalidade: ${modo}`,
           custom_fields: { bootcamp_modalidade: modo },
         },
       }).catch(() => {});
 
-      // Email de confirmação (tema guerra) — fire-and-forget
-      fetch(`${SB_URL}/functions/v1/send-bootcamp-email`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}` },
-        body: JSON.stringify({
-          type: 'confirmacao',
-          nome: answers.nome,
-          email: answers.email,
-          modo,
-          telefone: answers.telefone,
-          empresa: answers.empresa,
-        }),
-      }).catch(() => {});
+      if (registrationStatus === 'registered') {
+        fetch(`${SB_URL}/functions/v1/send-bootcamp-email`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}` },
+          body: JSON.stringify({
+            type: 'confirmacao',
+            nome: answers.nome,
+            email: answers.email,
+            modo,
+            telefone: answers.telefone,
+            empresa: answers.empresa,
+          }),
+        }).catch(() => {});
+      }
 
       // GTM
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const w = window as any;
       w.dataLayer = w.dataLayer || [];
       w.dataLayer.push({
-        event: 'bootcamp_inscricao',
-        modalidade: answers.modalidade,
-        lead_email: answers.email,
-        lead_name: answers.nome,
-        empresa: answers.empresa,
+        event: registrationStatus === 'waitlist' ? 'bootcamp_lista_espera' : 'bootcamp_inscricao',
+        modalidade: modo,
       });
+
+      if (registrationStatus === 'waitlist') {
+        appendMsg('As 40 vagas presenciais já foram preenchidas. Seu nome entrou na lista de espera e nossa equipe poderá entrar em contato pelos dados cadastrados se houver disponibilidade.');
+      }
 
       // Beep de confirmação + redirect pra página de obrigado militar (sempre)
       beep(1200, 0.15, 0.10);
       setTimeout(() => beep(1500, 0.20, 0.10), 180);
-      const params = new URLSearchParams({ modo, nome: (answers.nome || '').split(' ')[0] || '', email: answers.email || '' });
-      setTimeout(() => { window.location.href = `/bootcamp-orbit/obrigado?${params.toString()}`; }, 600);
+      const params = new URLSearchParams({
+        modo,
+        nome: (answers.nome || '').split(' ')[0] || '',
+        ...(registrationStatus === 'waitlist' ? { status: 'waitlist' } : {}),
+      });
+      setTimeout(() => { window.location.href = `/bootcamp-orbit/obrigado?${params.toString()}`; }, registrationStatus === 'waitlist' ? 2600 : 600);
     }
 
     // ═══ Overlay: abre/fecha o chat (popup centralizado) ═══
@@ -437,11 +431,18 @@ export function PageContent() {
       chatOverlay.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = prevBodyOverflow;
     }
-    // Qualquer CTA da página (links pra #inscricao ou [data-open-chat]) abre o popup direto
+    // Somente os CTAs de modalidade abrem o chat; o CTA do hero rola até esta seção.
     const onCtaOpen = (e: Event) => {
-      const el = (e.target as HTMLElement | null)?.closest('a[href="#inscricao"], [data-open-chat]');
+      const el = (e.target as HTMLElement | null)?.closest<HTMLElement>('[data-bc-mode], [data-open-chat]');
       if (!el) return;
       e.preventDefault();
+      const selectedMode = el.dataset.bcMode;
+      if (selectedMode) {
+        answers.modalidade = resolveModo(selectedMode);
+        const analytics = window as Window & { dataLayer?: Record<string, unknown>[] };
+        analytics.dataLayer = analytics.dataLayer || [];
+        analytics.dataLayer.push({ event: 'bootcamp_modalidade_click', modalidade: answers.modalidade });
+      }
       openChat();
     };
     root.addEventListener('click', onCtaOpen);
@@ -455,8 +456,7 @@ export function PageContent() {
       document.removeEventListener('keydown', onEsc);
       document.body.style.overflow = prevBodyOverflow;
       clearInterval(cdInterval);
-      window.clearTimeout(firstToastTo);
-      window.clearInterval(toastInterval);
+      window.clearInterval(enlistPollInterval);
       window.removeEventListener('resize', syncTopbarSpacer);
       window.clearTimeout(topbarT1);
       window.clearTimeout(topbarT2);
@@ -466,7 +466,7 @@ export function PageContent() {
       // remove toasts vivos
       document.querySelectorAll('.bc-toast').forEach((t) => t.remove());
     };
-  }, [mounted]);
+  }, []);
 
   useEffect(() => {
     reapplyOrbitLang();

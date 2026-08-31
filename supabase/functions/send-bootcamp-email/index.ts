@@ -15,15 +15,13 @@ const EVENT_DURATION_MIN = 240;             // 4 horas (8h30–12h30)
 const ONLINE_LINK = "https://us06web.zoom.us/j/85057730138";
 const ZOOM_MEETING_ID = "85057730138";
 const PRESENCIAL_LOCAL = "Square SC — Rod. José Carlos Daux, 5500 — Saco Grande, Florianópolis/SC, 88032-005";
-const WHATSAPP_GROUP = "https://chat.whatsapp.com/JDzmJ9WTutLJPYSnqQTd4y";
+const WHATSAPP_GROUP = "https://chat.whatsapp.com/HeVwpSJYmNw86wp7dCaxXB";
 const HAS_WHATSAPP = !WHATSAPP_GROUP.includes("CHANGE_ME");
 const PAGE_URL = "https://orbitgestao.com.br/bootcamp-orbit";
+const PAYMENT_LOGIN = "https://app.orbitgestao.com.br/login";
+const MAP_URL = "https://www.google.com/maps/search/?api=1&query=Square+SC%2C+Rod.+Jos%C3%A9+Carlos+Daux%2C+5500+-+Saco+Grande%2C+Florian%C3%B3polis+-+SC%2C+88032-005";
 
-// ═══ ASAAS (pagamento presencial e mentoria) ═══
-const ASAAS_PRESENCIAL = "https://www.asaas.com/c/na1azgdsfwsmeed2";
-const ASAAS_MENTORIA = "https://www.asaas.com/c/hs50xqdo7o4ejk7s";
-
-type EmailType = "confirmacao" | "lembrete_d1" | "dia_evento" | "ao_vivo";
+type EmailType = "confirmacao" | "lembrete_d7" | "lembrete_d1" | "dia_evento" | "ao_vivo";
 type Modo = "online" | "presencial" | "mentoria";
 
 function sourceToModo(source: string): Modo {
@@ -37,29 +35,9 @@ function splitName(full: string): { first: string; last: string } {
   return { first: parts[0] || "Participante", last: parts.slice(1).join(" ") };
 }
 
-// Pagos via webhook → bootcamp_pagamentos. Sem isso, o botão Asaas continua no e-mail.
-async function fetchPaidEmails(): Promise<Set<string>> {
-  try {
-    const resp = await fetch(
-      `${SUPABASE_URL}/rest/v1/bootcamp_pagamentos?select=email&status=eq.paid&limit=10000`,
-      { headers: { apikey: SUPABASE_SERVICE_KEY, Authorization: `Bearer ${SUPABASE_SERVICE_KEY}` } }
-    );
-    if (!resp.ok) return new Set();
-    const rows = (await resp.json()) as Array<{ email: string }>;
-    return new Set(rows.map((r) => (r.email || "").toLowerCase().trim()).filter(Boolean));
-  } catch {
-    return new Set();
-  }
-}
-
 // ═══ .ICS (convite de calendário) ═══
 function buildICS(modo: Modo): string {
   const [y, m, d] = EVENT_DATE.split("-").map(Number);
-  const hour = modo === "mentoria" ? 14 : EVENT_HOUR_BRT;
-  const minute = modo === "mentoria" ? 0 : EVENT_MINUTE_BRT;
-  // BRT -03:00 → UTC: soma 3h
-  const startUTC = new Date(Date.UTC(y, m - 1, d, hour + 3, minute, 0));
-  const endUTC = new Date(startUTC.getTime() + EVENT_DURATION_MIN * 60 * 1000);
   const fmt = (dt: Date) =>
     dt.getUTCFullYear().toString() +
     String(dt.getUTCMonth() + 1).padStart(2, "0") +
@@ -70,38 +48,75 @@ function buildICS(modo: Modo): string {
     "00Z";
   const esc = (s: string) =>
     s.replace(/\\/g, "\\\\").replace(/,/g, "\\,").replace(/;/g, "\\;").replace(/\n/g, "\\n");
-  const local = modo === "online" ? ONLINE_LINK : PRESENCIAL_LOCAL;
-  const description =
-    modo === "presencial"
-      ? `Bootcamp Orbit — Imersão Canais (PRESENCIAL). Local: ${PRESENCIAL_LOCAL}. Detalhes: ${PAGE_URL}`
-      : modo === "mentoria"
-      ? `Bootcamp Orbit — Mentoria presencial em grupo com Igor e Chris. Local: ${PRESENCIAL_LOCAL}. Detalhes: ${PAGE_URL}`
-      : `Bootcamp Orbit — Imersão Canais (ONLINE AO VIVO). Link: ${ONLINE_LINK}`;
-  const uid = `bootcamp-orbit-${modo}-${EVENT_DATE.replace(/-/g, "")}-${Math.random().toString(36).slice(2, 10)}@orbitgestao.com.br`;
+  const toUTC = (hour: number, minute: number) =>
+    new Date(Date.UTC(y, m - 1, d, hour + 3, minute, 0));
+  const uidBase = `bootcamp-orbit-${modo}-${EVENT_DATE.replace(/-/g, "")}-${Math.random().toString(36).slice(2, 10)}`;
+  const status = modo === "online" ? "CONFIRMED" : "TENTATIVE";
+  const event = (
+    suffix: string,
+    startHour: number,
+    startMinute: number,
+    duration: number,
+    summary: string,
+    description: string,
+    location: string,
+  ) => {
+    const start = toUTC(startHour, startMinute);
+    const end = new Date(start.getTime() + duration * 60 * 1000);
+    return [
+      "BEGIN:VEVENT",
+      `UID:${uidBase}-${suffix}@orbitgestao.com.br`,
+      `DTSTAMP:${fmt(new Date())}`,
+      `DTSTART:${fmt(start)}`,
+      `DTEND:${fmt(end)}`,
+      `SUMMARY:${esc(summary)}`,
+      `DESCRIPTION:${esc(description)}`,
+      `LOCATION:${esc(location)}`,
+      `URL:${modo === "online" ? ONLINE_LINK : PAGE_URL}`,
+      `ORGANIZER;CN=Bootcamp Canais Orbit:MAILTO:${FROM_EMAIL}`,
+      `STATUS:${status}`,
+      "TRANSP:OPAQUE",
+      "BEGIN:VALARM",
+      "TRIGGER:-PT60M",
+      "ACTION:DISPLAY",
+      `DESCRIPTION:${esc(`${summary} começa em 1 hora`)}`,
+      "END:VALARM",
+      "END:VEVENT",
+    ];
+  };
+  const bootcampDescription =
+    modo === "online"
+      ? `Bootcamp Canais Orbit (ONLINE AO VIVO), das 8h30 às 12h30. Link: ${ONLINE_LINK}`
+      : `Bootcamp Canais Orbit (PRESENCIAL), das 8h30 às 12h30. Local: ${PRESENCIAL_LOCAL}. Detalhes: ${PAGE_URL}`;
+  const events = event(
+    "bootcamp",
+    EVENT_HOUR_BRT,
+    EVENT_MINUTE_BRT,
+    EVENT_DURATION_MIN,
+    "Bootcamp Canais Orbit",
+    bootcampDescription,
+    modo === "online" ? ONLINE_LINK : PRESENCIAL_LOCAL,
+  );
+  if (modo === "mentoria") {
+    events.push(
+      ...event(
+        "mentoria",
+        14,
+        0,
+        240,
+        "Mentoria Presencial — Bootcamp Canais Orbit",
+        `Mentoria presencial em grupo com Igor e Chris, das 14h às 18h. Local: ${PRESENCIAL_LOCAL}. Detalhes: ${PAGE_URL}`,
+        PRESENCIAL_LOCAL,
+      ),
+    );
+  }
   return [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
     "PRODID:-//Orbit Gestao//Bootcamp//PT",
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
-    "BEGIN:VEVENT",
-    `UID:${uid}`,
-    `DTSTAMP:${fmt(new Date())}`,
-    `DTSTART:${fmt(startUTC)}`,
-    `DTEND:${fmt(endUTC)}`,
-    `SUMMARY:${esc("Bootcamp Orbit — Imersão Canais")}`,
-    `DESCRIPTION:${esc(description)}`,
-    `LOCATION:${esc(local)}`,
-    `URL:${modo === "online" ? ONLINE_LINK : PAGE_URL}`,
-    `ORGANIZER;CN=Bootcamp Orbit:MAILTO:${FROM_EMAIL}`,
-    "STATUS:CONFIRMED",
-    "TRANSP:OPAQUE",
-    "BEGIN:VALARM",
-    "TRIGGER:-PT60M",
-    "ACTION:DISPLAY",
-    `DESCRIPTION:${esc("Bootcamp Orbit comeca em 1 hora")}`,
-    "END:VALARM",
-    "END:VEVENT",
+    ...events,
     "END:VCALENDAR",
   ].join("\r\n");
 }
@@ -116,13 +131,15 @@ function toBase64(s: string): string {
 function getSubject(type: EmailType, modo: Modo): string {
   switch (type) {
     case "confirmacao":
-      if (modo === "presencial") return "🎖️ ALISTAMENTO CONFIRMADO — Bootcamp Orbit (Presencial · Floripa)";
-      if (modo === "mentoria") return "🎖️ ALISTAMENTO CONFIRMADO — Mentoria Bootcamp Orbit";
-      return "🎖️ ALISTAMENTO CONFIRMADO — Bootcamp Orbit (Online ao vivo)";
+      if (modo === "presencial") return "🎖️ INSCRIÇÃO INICIADA — Bootcamp Canais Orbit (Presencial)";
+      if (modo === "mentoria") return "🎖️ INSCRIÇÃO INICIADA — Bootcamp Canais Orbit + Mentoria";
+      return "🎖️ MISSÃO CONFIRMADA — Bootcamp Canais Orbit (Online ao vivo)";
+    case "lembrete_d7":
+      return "🗓️ FALTAM 7 DIAS — Bootcamp Canais Orbit · 15/10";
     case "lembrete_d1":
-      return "⚠️ É AMANHÃ — Operação Bootcamp Orbit · 15/10 · 08h30";
+      return "⚠️ É AMANHÃ — Bootcamp Canais Orbit · 15/10 · 08h30";
     case "dia_evento":
-      return "🚨 HOJE É O DIA — Operação Bootcamp Orbit · 08h30 BRT";
+      return "🚨 HOJE É O DIA — Bootcamp Canais Orbit · 08h30 BRT";
     case "ao_vivo":
       return "🔴 COMEÇA EM 15 MINUTOS — Entre na operação agora";
   }
@@ -155,16 +172,14 @@ function payBlock(modo: "presencial" | "mentoria"): string {
   if (modo === "mentoria") {
     return `<div style="background:linear-gradient(135deg,rgba(255,186,26,0.12),rgba(199,62,29,0.10));border:1px solid #ffba1a;border-radius:10px;padding:20px;margin:18px 0;text-align:center;">
 <p style="${GOLD}font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 6px;">⚠ Sua vaga da mentoria só é confirmada após o pagamento</p>
-<p style="${P}margin:0 0 14px;">Conclua o pagamento de <strong style="${GOLD}">R$2.500</strong> (até 15/09). Não use o checkout do presencial.</p>
-<a href="${ASAAS_MENTORIA}" style="display:inline-block;background:#ffba1a;color:#0A0E13;font-weight:800;font-size:16px;padding:15px 38px;border-radius:6px;text-decoration:none;text-transform:uppercase;letter-spacing:1px;">🔒 Pagar mentoria</a>
-<p style="font-size:11px;color:#8B7355;margin:12px 0 0;">Pagamento seguro via Asaas</p>
+<p style="${P}margin:0 0 14px;">Acesse seu perfil de administrador no Orbit para realizar o pagamento de <strong style="${GOLD}">R$2.500</strong> até 15/09.</p>
+<a href="${PAYMENT_LOGIN}" style="display:inline-block;background:#ffba1a;color:#0A0E13;font-weight:800;font-size:16px;padding:15px 38px;border-radius:6px;text-decoration:none;text-transform:uppercase;letter-spacing:1px;">Ir para o pagamento</a>
 </div>`;
   }
   return `<div style="background:linear-gradient(135deg,rgba(255,186,26,0.12),rgba(199,62,29,0.10));border:1px solid #ffba1a;border-radius:10px;padding:20px;margin:18px 0;text-align:center;">
 <p style="${GOLD}font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase;margin:0 0 6px;">⚠ Sua vaga presencial só é confirmada após o pagamento</p>
-<p style="${P}margin:0 0 14px;">Conclua o pagamento de <strong style="${GOLD}">R$250</strong> pra travar sua vaga em Florianópolis (até 15/09).</p>
-<a href="${ASAAS_PRESENCIAL}" style="display:inline-block;background:#ffba1a;color:#0A0E13;font-weight:800;font-size:16px;padding:15px 38px;border-radius:6px;text-decoration:none;text-transform:uppercase;letter-spacing:1px;">🔒 Pagar e confirmar vaga</a>
-<p style="font-size:11px;color:#8B7355;margin:12px 0 0;">Pagamento seguro via Asaas</p>
+<p style="${P}margin:0 0 14px;">Acesse seu perfil de administrador no Orbit para realizar o pagamento de <strong style="${GOLD}">R$250</strong> até 15/09.</p>
+<a href="${PAYMENT_LOGIN}" style="display:inline-block;background:#ffba1a;color:#0A0E13;font-weight:800;font-size:16px;padding:15px 38px;border-radius:6px;text-decoration:none;text-transform:uppercase;letter-spacing:1px;">Ir para o pagamento</a>
 </div>`;
 }
 
@@ -178,7 +193,7 @@ function localBlock(modo: Modo): string {
   if (modo === "mentoria") {
     return `<div style="background:#0F1410;border:1px solid #4B5320;border-radius:8px;padding:18px 20px;margin:0 0 14px;">
 <p style="${P}margin:0 0 6px;">⭐ <strong style="${STRONG}">MENTORIA PRESENCIAL</strong> — grupo com Igor e Chris</p>
-<p style="${P}margin:0;">🗓️ <strong style="${GOLD}">15 OUT 2026 · 14h–18h BRT</strong> · ${PRESENCIAL_LOCAL}</p>
+<p style="${P}margin:0;">🗓️ <strong style="${GOLD}">15 OUT 2026</strong> · Bootcamp 8h30–12h30 + mentoria 14h–18h · ${PRESENCIAL_LOCAL}</p>
 </div>`;
   }
   return `<div style="background:#0F1410;border:1px solid #4B5320;border-radius:8px;padding:18px 20px;margin:0 0 14px;">
@@ -187,10 +202,16 @@ function localBlock(modo: Modo): string {
 </div>`;
 }
 
-function getHTML(type: EmailType, nome: string, modo: Modo, email = "", pago = false, zoomJoinUrl = ""): string {
+function pendingConfirmationNote(modo: Modo): string {
+  if (modo === "online") return "";
+  return `<div style="background:#0F1410;border:1px solid #8B5A00;border-radius:8px;padding:14px 18px;margin:0 0 14px;">
+<p style="${P}margin:0;">Sua participação presencial fica confirmada somente após o pagamento no Orbit. Se você já concluiu essa etapa, nenhuma ação adicional é necessária.</p>
+</div>`;
+}
+
+function getHTML(type: EmailType, nome: string, modo: Modo, zoomJoinUrl = ""): string {
   const first = (nome || "").split(" ")[0] || "Recruta";
-  const pay =
-    !pago && (modo === "presencial" || modo === "mentoria") ? payBlock(modo) : "";
+  const pay = modo === "presencial" || modo === "mentoria" ? payBlock(modo) : "";
 
   if (type === "confirmacao") {
     const acesso =
@@ -199,19 +220,39 @@ function getHTML(type: EmailType, nome: string, modo: Modo, email = "", pago = f
           ? `<p style="${P}">Você já está inscrito no Zoom. O link exclusivo da sala:</p>${btn(zoomJoinUrl, "Entrar no Zoom")}<p style="font-size:13px;color:#6B7339;text-align:center;">O Zoom também manda a confirmação no mesmo e-mail.</p>`
           : `<p style="${P}">Estamos registrando você no Zoom. A confirmação e o link da sala chegam neste e-mail em instantes. Não use link de senha — só o convite do Zoom.</p>`
         : modo === "mentoria"
-        ? `<p style="${P}">No anexo (.ics) está seu convite — adiciona na agenda agora. Te esperamos no <strong style="${STRONG}">${PRESENCIAL_LOCAL}</strong> às 14h.</p>`
-        : `<p style="${P}">No anexo (.ics) está seu convite — adiciona na agenda agora. Te esperamos no <strong style="${STRONG}">${PRESENCIAL_LOCAL}</strong>.</p>`;
+        ? `<p style="${P}">O convite anexo (.ics) inclui o Bootcamp das 8h30 às 12h30 e a mentoria das 14h às 18h. Adicione-o à agenda.</p>`
+        : `<p style="${P}">No anexo (.ics) está seu convite. Adicione-o à agenda agora.</p>`;
+    const isOnline = modo === "online";
+    const intro = isOnline
+      ? `Missão confirmada. Sua inscrição foi concluída e seu nome já está no pelotão do <strong style="${STRONG}">Bootcamp Canais Orbit</strong>. No dia 15 de outubro, esteja a postos: é hora de entrar em campo.`
+      : modo === "mentoria"
+      ? `Missão iniciada. Para concluir sua inscrição no <strong style="${STRONG}">Bootcamp Canais Orbit + Mentoria</strong>, realize o pagamento pelo perfil de administrador no Orbit até 15 de setembro.`
+      : `Missão iniciada. Para concluir sua inscrição no <strong style="${STRONG}">Bootcamp Canais Orbit presencial</strong>, realize o pagamento pelo perfil de administrador no Orbit até 15 de setembro.`;
     return shell(
-      "Alistamento confirmado",
+      isOnline ? "Missão confirmada" : "Inscrição iniciada",
       "linear-gradient(135deg,#3D4127 0%,#0A0E13 100%)",
-      "Você está dentro da operação",
+      isOnline ? "Você está dentro da operação" : "Conclua sua participação",
       `<p style="${P}">Recruta <strong style="${STRONG}">${first}</strong>,</p>
-<p style="${P}">Seu alistamento no <strong style="${STRONG}">Bootcamp Orbit</strong> está <strong style="${GOLD}">CONFIRMADO</strong>. Missão: destravar a adoção do Orbit na sua operação — com Igor e Chris.</p>
+<p style="${P}">${intro}</p>
 ${localBlock(modo)}
 ${pay}
 ${acesso}
 ${HAS_WHATSAPP ? `<p style="${P}">Entre no grupo de avisos pra não perder nenhuma ordem:</p>${btn(WHATSAPP_GROUP, "Entrar no grupo de avisos")}` : ""}
 <p style="font-size:13px;color:#6B7339;text-align:center;margin:0;">Dúvidas? Responda este e-mail. Câmbio, desligo.</p>`
+    );
+  }
+
+  if (type === "lembrete_d7") {
+    return shell(
+      "Contagem regressiva · D-7",
+      "linear-gradient(135deg,#4B5320 0%,#0A0E13 100%)",
+      "Faltam 7 dias, recruta",
+      `<p style="${P}">Recruta <strong style="${STRONG}">${first}</strong>,</p>
+<p style="${P}">Em uma semana, no dia <strong style="${GOLD}">15/10 às 08h30 BRT</strong>, começa o Bootcamp Canais Orbit. Bloqueie a agenda, separe seu caderno e prepare as dúvidas da operação da sua consultoria.</p>
+${localBlock(modo)}
+${pendingConfirmationNote(modo)}
+${btn(PAGE_URL, "Ver detalhes da operação")}
+<p style="font-size:13px;color:#6B7339;text-align:center;margin:0;">Todas as próximas coordenadas chegarão por e-mail.</p>`
     );
   }
 
@@ -221,11 +262,11 @@ ${HAS_WHATSAPP ? `<p style="${P}">Entre no grupo de avisos pra não perder nenhu
       "linear-gradient(135deg,#8B5A00 0%,#0A0E13 100%)",
       "É amanhã, recruta",
       `<p style="${P}">Recruta <strong style="${STRONG}">${first}</strong>,</p>
-<p style="${P}">Amanhã, <strong style="${GOLD}">15/10 às 08h30 BRT</strong>, começa a operação Bootcamp Orbit. Prepare o terreno: bloqueie a agenda, separe caderno e deixe o pré-requisito (Agente de Ativação) concluído.</p>
+<p style="${P}">Amanhã, <strong style="${GOLD}">15/10 às 08h30 BRT</strong>, começa o Bootcamp Canais Orbit. Prepare o terreno: bloqueie a agenda, separe o caderno e deixe suas dúvidas prontas.</p>
 ${localBlock(modo)}
-${pay}
+${pendingConfirmationNote(modo)}
 ${btn(PAGE_URL, "Ver detalhes da operação")}
-<p style="font-size:13px;color:#6B7339;text-align:center;margin:0;">Confirme presença no grupo de avisos. Câmbio.</p>`
+<p style="font-size:13px;color:#6B7339;text-align:center;margin:0;">As próximas coordenadas chegarão por e-mail. Câmbio.</p>`
     );
   }
 
@@ -233,7 +274,7 @@ ${btn(PAGE_URL, "Ver detalhes da operação")}
     const cta =
       modo === "online"
         ? btn(ONLINE_LINK, "Entrar na transmissão")
-        : btn(PAGE_URL, "Como chegar");
+        : btn(MAP_URL, "Como chegar");
     return shell(
       "Hoje · Dia D",
       "linear-gradient(135deg,#C73E1D 0%,#0A0E13 100%)",
@@ -241,9 +282,9 @@ ${btn(PAGE_URL, "Ver detalhes da operação")}
       `<p style="${P}">Recruta <strong style="${STRONG}">${first}</strong>,</p>
 <p style="${P}">A operação começa <strong style="${GOLD}">hoje às 08h30 BRT</strong>. Não atrase — formação não espera retardatário.</p>
 ${localBlock(modo)}
-${pay}
+${pendingConfirmationNote(modo)}
 ${cta}
-<p style="font-size:13px;color:#6B7339;text-align:center;margin:0;">Fique de olho no grupo de avisos. Câmbio, desligo.</p>`
+<p style="font-size:13px;color:#6B7339;text-align:center;margin:0;">Fique de olho no seu e-mail. Câmbio, desligo.</p>`
     );
   }
 
@@ -251,13 +292,19 @@ ${cta}
   const cta =
     modo === "online"
       ? btn(ONLINE_LINK, "Entrar agora")
-      : btn(PAGE_URL, "Estou a caminho");
+      : btn(MAP_URL, "Abrir rota no Maps");
+  const startMessage =
+    modo === "online"
+      ? `Faltam <strong style="${GOLD}">15 minutos</strong>. Posição de combate — entre agora pra não perder a abertura.`
+      : `Faltam <strong style="${GOLD}">15 minutos</strong>. Dirija-se à sala do Bootcamp no Square SC para não perder a abertura.`;
   return shell(
     "🔴 Ao vivo agora",
     "linear-gradient(135deg,#8B0000 0%,#0A0E13 100%)",
     "Começa em 15 minutos",
     `<p style="${P}">Recruta <strong style="${STRONG}">${first}</strong>,</p>
-<p style="${P}">Faltam <strong style="${GOLD}">15 minutos</strong>. Posição de combate — entre agora pra não perder a abertura.</p>
+<p style="${P}">${startMessage}</p>
+${modo === "online" ? "" : localBlock(modo)}
+${pendingConfirmationNote(modo)}
 ${cta}
 <p style="font-size:13px;color:#6B7339;text-align:center;margin:0;">Câmbio, desligo.</p>`
   );
@@ -269,7 +316,6 @@ async function sendEmail(
   nome: string,
   type: EmailType,
   modo: Modo,
-  pago = false,
   extra?: { telefone?: string; empresa?: string }
 ): Promise<boolean> {
   let zoomJoinUrl = "";
@@ -305,7 +351,7 @@ async function sendEmail(
       from: { email: FROM_EMAIL, name: FROM_NAME },
       to: [{ email, name: nome || "" }],
       subject: getSubject(type, modo),
-      html: getHTML(type, nome, modo, email, pago, zoomJoinUrl),
+      html: getHTML(type, nome, modo, zoomJoinUrl),
       ...(attachments.length ? { attachments } : {}),
     }),
   });
@@ -335,10 +381,10 @@ async function sendEmail(
 }
 
 async function fetchLeads(modo?: Modo): Promise<Array<{ nome: string; email: string; modo: Modo }>> {
-  // Por modo: source = bootcamp-orbit-online | bootcamp-orbit-presencial. Sem modo: todos.
+  // Lista de espera não recebe confirmação nem lembretes de participação.
   const filter = modo
     ? `source=eq.bootcamp-orbit-${modo}`
-    : `source=like.bootcamp-orbit%`;
+    : `source=in.("bootcamp-orbit-online","bootcamp-orbit-presencial","bootcamp-orbit-mentoria")`;
   const url = `${SUPABASE_URL}/rest/v1/live_orbit_leads?select=nome,email,source&${filter}&order=created_at.desc&limit=5000`;
   const resp = await fetch(url, {
     headers: { apikey: SUPABASE_SERVICE_KEY, Authorization: `Bearer ${SUPABASE_SERVICE_KEY}` },
@@ -375,9 +421,9 @@ serve(async (req) => {
       test?: boolean;
     };
     const type = body.type;
-    if (!type || !["confirmacao", "lembrete_d1", "dia_evento", "ao_vivo"].includes(type)) {
+    if (!type || !["confirmacao", "lembrete_d7", "lembrete_d1", "dia_evento", "ao_vivo"].includes(type)) {
       return new Response(
-        JSON.stringify({ error: "type deve ser: confirmacao | lembrete_d1 | dia_evento | ao_vivo" }),
+        JSON.stringify({ error: "type deve ser: confirmacao | lembrete_d7 | lembrete_d1 | dia_evento | ao_vivo" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
@@ -386,14 +432,11 @@ serve(async (req) => {
     if (body.email) {
       const modo: Modo =
         body.modo === "presencial" ? "presencial" : body.modo === "mentoria" ? "mentoria" : "online";
-      // Na inscrição ainda não pagou; mas se for re-envio e já tiver pago, omite o botão.
-      const paid = modo === "presencial" ? await fetchPaidEmails() : new Set<string>();
-      const pago = paid.has(body.email.toLowerCase().trim());
-      const ok = await sendEmail(body.email, body.nome || "", type, modo, pago, {
+      const ok = await sendEmail(body.email, body.nome || "", type, modo, {
         telefone: body.telefone,
         empresa: body.empresa,
       });
-      return new Response(JSON.stringify({ success: ok, mode: "single", modo, pago }), {
+      return new Response(JSON.stringify({ success: ok, mode: "single", modo }), {
         status: ok ? 200 : 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -401,12 +444,10 @@ serve(async (req) => {
 
     // MODO 2 — disparo em massa (cron): varre os leads do bootcamp
     const leads = await fetchLeads(body.modo);
-    const paidSet = await fetchPaidEmails(); // quem já pagou o presencial (não recebe botão)
     let sent = 0;
     let failed = 0;
     for (const lead of leads) {
-      const pago = lead.modo === "presencial" && paidSet.has(lead.email.toLowerCase().trim());
-      const ok = await sendEmail(lead.email, lead.nome, type, lead.modo, pago);
+      const ok = await sendEmail(lead.email, lead.nome, type, lead.modo);
       ok ? sent++ : failed++;
       // pequeno respiro pra não estourar rate limit do MailerSend
       await new Promise((r) => setTimeout(r, 120));
