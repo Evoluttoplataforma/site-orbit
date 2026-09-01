@@ -578,7 +578,7 @@ export const pageHTML = `
   .bc-testi-card__video { aspect-ratio: 9/16; width: 100%; background: #000; display: block; }
   .bc-testi-card__video iframe { width: 100%; height: 100%; border: 0; display: block; }
   .bc-testi-card__info { padding: 14px 16px 16px; border-top: 1px solid #4B5320; }
-  .bc-testi-card__name { color: #fff; font-family: 'Black Ops One', impact, sans-serif; font-size: 1rem; margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.8px; }
+  .bc-testi-card__name { color: #fff; font-family: 'Black Ops One', impact, sans-serif; font-size: 1rem; margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.8px; line-height: 1.25; }
   .bc-testi-card__company { color: #ffba1a; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
 
   /* ═══ FORMATO — Posto de Combate vs Quartel Remoto ═══ */
@@ -1180,8 +1180,8 @@ export const pageHTML = `
       <div class="bc-testi-card__info"><h3 class="bc-testi-card__name">Guilherme Tourinho</h3><p class="bc-testi-card__company">Linha 36 Tecnologia e Gestão</p></div>
     </div>
     <div class="bc-testi-card">
-      <div class="bc-testi-card__video"><iframe src="https://player.vimeo.com/video/1222166232?title=0&byline=0&portrait=0" title="Depoimento de Hygor Lima — Potencialize Resultados" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
-      <div class="bc-testi-card__info"><h3 class="bc-testi-card__name">Hygor Lima</h3><p class="bc-testi-card__company">Potencialize Resultados</p></div>
+      <div class="bc-testi-card__video"><iframe src="https://player.vimeo.com/video/1222166232?title=0&byline=0&portrait=0" title="Depoimento de Hygor Lima e Bruno Bezerril — Potencialize Resultados" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+      <div class="bc-testi-card__info"><h3 class="bc-testi-card__name">Hygor Lima e Bruno Bezerril</h3><p class="bc-testi-card__company">Potencialize Resultados</p></div>
     </div>
     <div class="bc-testi-card">
       <div class="bc-testi-card__video"><iframe src="https://player.vimeo.com/video/1222166177?title=0&byline=0&portrait=0" title="Depoimento de Vagner Isidorio — VNI Consultoria Empresarial" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
@@ -1204,9 +1204,9 @@ export const pageHTML = `
       <div class="bc-fmt__icon"><i class="fa-solid fa-users-viewfinder"></i></div>
       <p class="bc-fmt__label">Bootcamp presencial + online</p>
       <h3 class="bc-fmt__name">2ª edição Bootcamp Canais Orbit</h3>
-      <p class="bc-fmt__desc">2ª edição do Bootcamp Canais Orbit, exclusiva para canais Orbit.</p>
       <ul class="bc-fmt__features">
-        <li><i class="fa-solid fa-check"></i>4 horas de imersão, das 8h30 às 12h30</li>
+        <li><i class="fa-solid fa-check"></i>4 horas de imersão (8h30-12h30)</li>
+        <li><i class="fa-solid fa-check"></i>Evento exclusivo para canais Orbit</li>
         <li><i class="fa-solid fa-check"></i>Acesso a material digital</li>
         <li><i class="fa-solid fa-check"></i>Q&amp;A ao vivo durante o evento</li>
         <li><i class="fa-solid fa-check"></i>Networking com outros canais</li>
@@ -1214,8 +1214,10 @@ export const pageHTML = `
       </ul>
       <div style="display:grid;gap:12px;">
         <a href="#posto-de-combate" data-bc-mode="online" class="bc-btn bc-btn--ghost" style="width:100%;justify-content:center;">Online · Gratuito</a>
-        <a href="#posto-de-combate" data-bc-mode="presencial" class="bc-btn bc-btn--primary" style="width:100%;justify-content:center;">Presencial no Square SC · R$250/vaga</a>
-        <p style="color:#C9D1D9;font-size:13px;text-align:center;margin:0;">Presencial inclui coffee e almoço de networking.</p>
+        <div>
+          <a href="#posto-de-combate" data-bc-mode="presencial" class="bc-btn bc-btn--primary" style="width:100%;justify-content:center;">Presencial no Square SC</a>
+          <p style="color:#C9D1D9;font-size:12px;text-align:center;margin:8px 0 0;">Incluso coffee e almoço de networking</p>
+        </div>
       </div>
     </div>
     <div class="bc-fmt bc-fmt--featured">
@@ -1223,13 +1225,10 @@ export const pageHTML = `
       <p class="bc-fmt__label">Bootcamp + mentoria presencial</p>
       <h3 class="bc-fmt__name">Mentoria em grupo</h3>
       <p class="bc-fmt__price">R$2.500<small>/ vaga</small></p>
-      <p class="bc-fmt__desc">Um dia inteiro ao lado de Igor Furniel e Christian Hart para transformar conhecimento em decisões práticas para sua consultoria.</p>
       <ul class="bc-fmt__features">
-        <li><i class="fa-solid fa-check"></i>Vaga no Bootcamp presencial, das 8h30 às 12h30</li>
-        <li><i class="fa-solid fa-check"></i>4 horas de mentoria com Igor e Christian, das 14h às 18h</li>
-        <li><i class="fa-solid fa-check"></i>Direcionamento sobre posicionamento, produtização e precificação</li>
-        <li><i class="fa-solid fa-check"></i>Atendimento, gestão e próximos passos da operação</li>
-        <li><i class="fa-solid fa-check"></i>Pagamento até 15 de setembro</li>
+        <li><i class="fa-solid fa-check"></i>Vaga no Bootcamp presencial (4 horas de imersão + material digital + Q&amp;A ao vivo + coffee e almoço de networking)</li>
+        <li><i class="fa-solid fa-check"></i>4 horas de mentoria em grupo com Igor e Christian</li>
+        <li><i class="fa-solid fa-check"></i>Direcionamento estratégico sobre posicionamento, produtização, precificação, atendimento e gestão da consultoria</li>
       </ul>
       <a href="#posto-de-combate" data-bc-mode="mentoria" class="bc-btn bc-btn--primary" style="width:100%;justify-content:center;">Quero Bootcamp + mentoria</a>
     </div>
@@ -1247,7 +1246,7 @@ export const pageHTML = `
     <div class="bc-mission">
       <div class="bc-mission__num">15</div>
       <h3 class="bc-mission__title">Quinta · Bootcamp + Mentoria</h3>
-      <p class="bc-mission__desc"><strong>8h30–12h30:</strong> Bootcamp, premiação do Top 5 Programa de Aceleração Orbit, presencial + online.<br><br><strong>14h–18h:</strong> Mentoria presencial em grupo com Igor e Christian.</p>
+      <p class="bc-mission__desc"><strong>8h30–12h30:</strong> Bootcamp, premiação do Top 5 Programa de Aceleração Orbit, presencial + online.<br><br><strong>14h–18h:</strong> Mentoria em grupo com Igor e Chris. Presencial.</p>
     </div>
     <div class="bc-mission">
       <div class="bc-mission__num">16</div>
