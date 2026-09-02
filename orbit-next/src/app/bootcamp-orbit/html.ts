@@ -454,6 +454,56 @@ export const pageHTML = `
   }
   .bc-mission__desc { color: #C9D1D9; font-size: 0.92rem; line-height: 1.55; margin: 0; }
 
+  /* Agenda 15–17/10 — diagramação em 3 colunas (briefing Maira) */
+  .bc-agenda {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1080px;
+    margin: 0 auto;
+    border: 1px solid #ffba1a;
+    background: rgba(13,17,23,0.92);
+    text-align: left;
+  }
+  .bc-agenda__col {
+    padding: 28px 26px 32px;
+    border-right: 1px solid #ffba1a;
+  }
+  .bc-agenda__col:last-child { border-right: none; }
+  .bc-agenda__date {
+    color: #fff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin: 0 0 4px;
+    line-height: 1.3;
+  }
+  .bc-agenda__title {
+    color: #fff;
+    font-family: 'Black Ops One', impact, sans-serif;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin: 0 0 18px;
+    line-height: 1.25;
+  }
+  .bc-agenda__body {
+    color: #C9D1D9;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    margin: 0;
+  }
+  .bc-agenda__body p { margin: 0; }
+  .bc-agenda__body p + p { margin-top: 2px; }
+  .bc-agenda__time { font-weight: 800; color: #fff; }
+  .bc-agenda__mod { font-style: italic; }
+  .bc-agenda__slot { margin-top: 16px; }
+  .bc-agenda__note { font-size: 0.78rem; line-height: 1.4; color: #C9D1D9; }
+  @media (max-width: 800px) {
+    .bc-agenda { grid-template-columns: 1fr; }
+    .bc-agenda__col { border-right: none; border-bottom: 1px solid #ffba1a; }
+    .bc-agenda__col:last-child { border-bottom: none; }
+  }
+
   /* ═══ HOSTS — Oficiais Comandantes ═══ */
   .bc-hosts { padding: 90px 24px; background: linear-gradient(180deg, #0F1410 0%, #0A0E13 100%); border-top: 4px double #4B5320; border-bottom: 4px double #4B5320; position: relative; overflow: hidden; }
   .bc-hosts::before {
@@ -619,13 +669,13 @@ export const pageHTML = `
   .bc-fmt__name {
     color: #fff;
     font-family: 'Black Ops One', impact, sans-serif;
-    font-size: 1.6rem; margin: 0 0 18px;
+    font-size: 1.6rem; margin: 0 0 10px;
     text-transform: uppercase; letter-spacing: 1px;
   }
   .bc-fmt__price {
     color: #ffba1a;
     font-family: 'Black Ops One', impact, sans-serif;
-    font-size: 2.6rem; margin: 0 0 4px;
+    font-size: 2.6rem; margin: 0 0 18px;
     text-shadow: 3px 3px 0 #000;
   }
   .bc-fmt__price small { font-size: 0.9rem; color: #8B7355; font-weight: 600; letter-spacing: 0; text-transform: none; margin-left: 4px; font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -1204,6 +1254,7 @@ export const pageHTML = `
       <div class="bc-fmt__icon"><i class="fa-solid fa-users-viewfinder"></i></div>
       <p class="bc-fmt__label">Bootcamp presencial + online</p>
       <h3 class="bc-fmt__name">2ª edição Bootcamp Canais Orbit</h3>
+      <p class="bc-fmt__price">R$250<small>/ vaga</small></p>
       <ul class="bc-fmt__features">
         <li><i class="fa-solid fa-check"></i>4 horas de imersão (8h30-12h30)</li>
         <li><i class="fa-solid fa-check"></i>Evento exclusivo para canais Orbit</li>
@@ -1242,28 +1293,47 @@ export const pageHTML = `
     <h2 class="bc-h2">O Bootcamp é só o <span class="accent">início da missão</span></h2>
     <p class="bc-lead">A programação começa na quinta-feira com o Bootcamp Orbit e continua na sexta e no sábado com experiências exclusivas para o Top 5 do Programa de Aceleração Orbit e para quem adquirir a mentoria.</p>
   </div>
-  <div class="bc-promise__grid bc-promise__grid--agenda">
-    <div class="bc-mission">
-      <div class="bc-mission__num">15</div>
-      <h3 class="bc-mission__title">Quinta · Bootcamp + Mentoria</h3>
-      <p class="bc-mission__desc"><strong>8h30–12h30:</strong> Bootcamp, premiação do Top 5 Programa de Aceleração Orbit, presencial + online.<br><br><strong>14h–18h:</strong> Mentoria em grupo com Igor e Chris. Presencial.</p>
+  <div class="bc-agenda">
+    <div class="bc-agenda__col">
+      <p class="bc-agenda__date">15/10 (quinta-feira)</p>
+      <h3 class="bc-agenda__title">Bootcamp + Mentoria</h3>
+      <div class="bc-agenda__body">
+        <p class="bc-agenda__time">8h30-12h30</p>
+        <p>Bootcamp</p>
+        <p class="bc-agenda__note">Premiação do Top 5 Programa de Aceleração Orbit</p>
+        <p class="bc-agenda__mod">Presencial + Online</p>
+        <div class="bc-agenda__slot">
+          <p class="bc-agenda__time">14h-18h</p>
+          <p>Mentoria em grupo com Igor e Chris</p>
+          <p class="bc-agenda__mod">Presencial</p>
+        </div>
+      </div>
     </div>
-    <div class="bc-mission">
-      <div class="bc-mission__num">16</div>
-      <h3 class="bc-mission__title">Sexta · Visita ao escritório Orbit</h3>
-      <p class="bc-mission__desc"><strong>8h–18h:</strong> experiência com os founders e o time no escritório Orbit, no Square SC em Florianópolis, e gravação de conteúdo.</p>
+    <div class="bc-agenda__col">
+      <p class="bc-agenda__date">16/10 (sexta-feira)</p>
+      <h3 class="bc-agenda__title">Visita ao escritório Orbit</h3>
+      <div class="bc-agenda__body">
+        <p class="bc-agenda__time">8h-18h</p>
+        <p>Experiência com os founders e o time no escritório Orbit no Square SC em Florianópolis</p>
+        <div class="bc-agenda__slot">
+          <p>Gravação de conteúdo</p>
+        </div>
+      </div>
     </div>
-    <div class="bc-mission">
-      <div class="bc-mission__num">17</div>
-      <h3 class="bc-mission__title">Sábado · Visita a Florianópolis</h3>
-      <p class="bc-mission__desc"><strong>8h–18h:</strong> experiência pessoal com os founders pela ilha de Florianópolis.</p>
+    <div class="bc-agenda__col">
+      <p class="bc-agenda__date">17/10 (sábado)</p>
+      <h3 class="bc-agenda__title">Visita à Florianópolis</h3>
+      <div class="bc-agenda__body">
+        <p class="bc-agenda__time">8h-18h</p>
+        <p>Experiência pessoal com os founders pela ilha de Florianópolis</p>
+      </div>
     </div>
-    <div class="bc-mission" style="border-color:#ffba1a;background:linear-gradient(180deg,rgba(255,186,26,0.16),rgba(13,17,23,0.96));">
-      <div class="bc-mission__num"><i class="fa-solid fa-trophy"></i></div>
-      <h3 class="bc-mission__title">Premiação do Top 5 Programa de Aceleração Orbit</h3>
-      <p class="bc-mission__desc">O Programa de Aceleração Orbit foi criado para reconhecer e impulsionar os canais que mais avançam dentro do ecossistema.<br><br>Ao longo do trimestre (1/7 a 30/9), cada nova licença movimenta o ranking, gera novas oportunidades comerciais e aproxima os participantes das premiações e experiências exclusivas do programa.<br><br>A premiação dos canais que mais se destacarem acontecerá no dia 15 de outubro, durante o Bootcamp Orbit, em um momento especial de reconhecimento aos melhores resultados do ciclo.</p>
-      <a href="/programa" class="bc-btn bc-btn--ghost" style="width:100%;justify-content:center;margin-top:20px;">Conhecer o Programa de Aceleração Orbit</a>
-    </div>
+  </div>
+  <div class="bc-mission" style="max-width:1080px;margin:24px auto 0;border-color:#ffba1a;background:linear-gradient(180deg,rgba(255,186,26,0.16),rgba(13,17,23,0.96));">
+    <div class="bc-mission__num"><i class="fa-solid fa-trophy"></i></div>
+    <h3 class="bc-mission__title">Premiação do Top 5 Programa de Aceleração Orbit</h3>
+    <p class="bc-mission__desc">O Programa de Aceleração Orbit foi criado para reconhecer e impulsionar os canais que mais avançam dentro do ecossistema.<br><br>Ao longo do trimestre (1/7 a 30/9), cada nova licença movimenta o ranking, gera novas oportunidades comerciais e aproxima os participantes das premiações e experiências exclusivas do programa.<br><br>A premiação dos canais que mais se destacarem acontecerá no dia 15 de outubro, durante o Bootcamp Orbit, em um momento especial de reconhecimento aos melhores resultados do ciclo.</p>
+    <a href="/programa" class="bc-btn bc-btn--ghost" style="width:100%;justify-content:center;margin-top:20px;">Conhecer o Programa de Aceleração Orbit</a>
   </div>
 </section>
 
