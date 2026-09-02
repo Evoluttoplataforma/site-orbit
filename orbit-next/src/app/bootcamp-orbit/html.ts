@@ -1261,7 +1261,7 @@ export const pageHTML = `
         <li><i class="fa-solid fa-check"></i>Acesso a material digital</li>
         <li><i class="fa-solid fa-check"></i>Q&amp;A ao vivo durante o evento</li>
         <li><i class="fa-solid fa-check"></i>Networking com outros canais</li>
-        <li><i class="fa-solid fa-check"></i>Premiação do Top 5 Programa de Aceleração Orbit</li>
+        <li><i class="fa-solid fa-check"></i>Premiação do Top 5 Programa Orbit de Crescimento e Reconhecimento</li>
       </ul>
       <div style="display:grid;gap:12px;">
         <a href="#posto-de-combate" data-bc-mode="online" class="bc-btn bc-btn--ghost" style="width:100%;justify-content:center;">Online · Gratuito</a>
@@ -1291,7 +1291,7 @@ export const pageHTML = `
   <div class="bc-promise__head">
     <div class="bc-eyebrow"><i class="fa-solid fa-calendar-days"></i>Operação de 15 a 17/10</div>
     <h2 class="bc-h2">O Bootcamp é só o <span class="accent">início da missão</span></h2>
-    <p class="bc-lead">A programação começa na quinta-feira com o Bootcamp Orbit e continua na sexta e no sábado com experiências exclusivas para o Top 5 do Programa de Aceleração Orbit e para quem adquirir a mentoria.</p>
+    <p class="bc-lead">A programação começa na quinta-feira com o Bootcamp Orbit e continua na sexta e no sábado com experiências exclusivas para o Top 5 do Programa Orbit de Crescimento e Reconhecimento e para quem adquirir a mentoria.</p>
   </div>
   <div class="bc-agenda">
     <div class="bc-agenda__col">
@@ -1300,7 +1300,7 @@ export const pageHTML = `
       <div class="bc-agenda__body">
         <p class="bc-agenda__time">8h30-12h30</p>
         <p>Bootcamp</p>
-        <p class="bc-agenda__note">Premiação do Top 5 Programa de Aceleração Orbit</p>
+        <p class="bc-agenda__note">Premiação do Top 5 Programa Orbit de Crescimento e Reconhecimento</p>
         <p class="bc-agenda__mod">Presencial + Online</p>
         <div class="bc-agenda__slot">
           <p class="bc-agenda__time">14h-18h</p>
@@ -1331,9 +1331,9 @@ export const pageHTML = `
   </div>
   <div class="bc-mission" style="max-width:1080px;margin:24px auto 0;border-color:#ffba1a;background:linear-gradient(180deg,rgba(255,186,26,0.16),rgba(13,17,23,0.96));">
     <div class="bc-mission__num"><i class="fa-solid fa-trophy"></i></div>
-    <h3 class="bc-mission__title">Premiação do Top 5 Programa de Aceleração Orbit</h3>
-    <p class="bc-mission__desc">O Programa de Aceleração Orbit foi criado para reconhecer e impulsionar os canais que mais avançam dentro do ecossistema.<br><br>Ao longo do trimestre (1/7 a 30/9), cada nova licença movimenta o ranking, gera novas oportunidades comerciais e aproxima os participantes das premiações e experiências exclusivas do programa.<br><br>A premiação dos canais que mais se destacarem acontecerá no dia 15 de outubro, durante o Bootcamp Orbit, em um momento especial de reconhecimento aos melhores resultados do ciclo.</p>
-    <a href="/programa" class="bc-btn bc-btn--ghost" style="width:100%;justify-content:center;margin-top:20px;">Conhecer o Programa de Aceleração Orbit</a>
+    <h3 class="bc-mission__title">Premiação do Top 5 Programa Orbit de Crescimento e Reconhecimento</h3>
+    <p class="bc-mission__desc">O Programa Orbit de Crescimento e Reconhecimento foi criado para reconhecer e impulsionar os canais que mais avançam dentro do ecossistema.<br><br>Ao longo do trimestre (1/7 a 30/9), cada nova licença movimenta o ranking, gera novas oportunidades comerciais e aproxima os participantes das premiações e experiências exclusivas do programa.<br><br>A premiação dos canais que mais se destacarem acontecerá no dia 15 de outubro, durante o Bootcamp Orbit, em um momento especial de reconhecimento aos melhores resultados do ciclo.</p>
+    <a href="/programa" class="bc-btn bc-btn--ghost" style="width:100%;justify-content:center;margin-top:20px;">Conhecer o Programa Orbit de Crescimento e Reconhecimento</a>
   </div>
 </section>
 
