@@ -26,3 +26,5 @@ docs/Estudo Materiais Pedro/
 
 # IDs das reunioes Zoom geradas pelo setup (nao versionar)
 scripts/.zoom-meetings.json
+scripts/.zoom-masterclass.json
+scripts/.zoom-bootcamp.json

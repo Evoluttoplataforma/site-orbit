@@ -30,6 +30,7 @@ export const SITEMAP_PAGES = [
   ['/bootcamp-orbit', '0.9', 'weekly'],
   ['/politica-privacidade', '0.3', 'yearly'],
   ['/termos-de-servico', '0.3', 'yearly'],
+  ['/informacoes-legais', '0.4', 'yearly'],
   // ─── Plataforma: pillar + 12 agentes + 4 módulos ───
   ['/agentes-de-ia', '0.95', 'weekly'],
   ['/agentes/estrategico', '0.9', 'monthly'],

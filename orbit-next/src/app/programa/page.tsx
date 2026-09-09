@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: 'https://orbitgestao.com.br/programa',
-    siteName: 'Orbit',
+    siteName: 'Orbit Gestão',
     title: 'Programa Orbit de Crescimento e Reconhecimento — Vence quem mais cresce',
     description: 'A disputa entre canais. Quem mais cresce até setembro leva o pódio: leads, experiências com os founders e o Disney Institute nos EUA.',
     images: [{ url: '/images/og-programa-v2.png', width: 1200, height: 630, alt: 'Programa Orbit de Crescimento e Reconhecimento' }],

@@ -11,7 +11,7 @@ const agendaResumoEn = TRAINING_SESSIONS.map((s) => `${WEEKDAY_SHORT_EN[s.weekda
 
 // O chip de "quando" vem de whenLabel, nao de dia+hora: a Live Orbit acontece em
 // datas pontuais do mes, entao mostrar "Terça · 13h" daria a entender que e semanal.
-const liveCards = TRAINING_LIVE_CARDS.map(
+const liveCards = TRAINING_LIVE_CARDS.filter((c) => !c.hidden).map(
   (c) => `
             <a class="tr-live${c.cadence === 'pontual' ? ' tr-live--pontual' : ''}" href="${c.href}">
                 <div class="tr-live__icon"><i class="fa-solid ${c.icon}"></i></div>

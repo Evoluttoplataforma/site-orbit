@@ -732,8 +732,8 @@ export default function Page() {
             />
             <I18n
               as="li"
-              pt={<a href="/termos-de-servico" style={accent}>Termos de Serviço</a>}
-              en={<a href="/termos-de-servico" style={accent}>Terms of Service</a>}
+              pt={<a href="/termos-de-servico" style={accent}>Termos de Uso</a>}
+              en={<a href="/termos-de-servico" style={accent}>Terms of Use</a>}
             />
             <I18n
               as="li"

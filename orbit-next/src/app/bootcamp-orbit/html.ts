@@ -1,4 +1,4 @@
-// Bootcamp Orbit — Imersão Canais 13/06/2026
+// Bootcamp Orbit — Imersão Canais 15/10/2026
 // VISUAL: Operação militar / guerra. Camuflagem, stencil, mira, dog tags, carimbo CLASSIFIED.
 export const pageHTML = `
 <style>
@@ -350,37 +350,6 @@ export const pageHTML = `
   .bc-btn--ghost:hover { border-color: #ffba1a; color: #ffba1a; box-shadow: 6px 6px 0 rgba(255,186,26,0.30); }
   .bc-btn .bc-crosshair { width: 18px; height: 18px; }
 
-  /* ═══ ROSTER (contador inscritos) ═══ */
-  .bc-roster {
-    max-width: 520px; margin: 28px auto 28px;
-    padding: 16px 22px;
-    background: linear-gradient(135deg, rgba(255,186,26,0.10), rgba(199,62,29,0.06));
-    border: 2px solid #ffba1a;
-    text-align: center;
-    box-shadow: 4px 4px 0 #000;
-  }
-  .bc-roster__label {
-    display: block; color: #ffba1a;
-    font-family: 'Black Ops One', impact, sans-serif;
-    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-  .bc-roster__num {
-    display: block; color: #fff;
-    font-family: 'Black Ops One', impact, sans-serif;
-    font-size: 2rem; line-height: 1; letter-spacing: -0.02em;
-    text-shadow: 2px 2px 0 #000;
-    margin-bottom: 12px;
-  }
-  .bc-roster__num small { font-size: 0.7rem; color: #8B7355; font-weight: 400; letter-spacing: 1px; margin-left: 4px; }
-  .bc-roster__bar { height: 8px; background: rgba(0,0,0,0.5); border: 1px solid #4B5320; overflow: hidden; }
-  .bc-roster__bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #ffba1a, #ff8c00);
-    transition: width 1.5s ease-out;
-    box-shadow: 0 0 12px rgba(255,186,26,0.6);
-  }
-
   /* ═══ HOVER DOSSIE — missões abrindo ═══ */
   .bc-mission { perspective: 800px; transform-style: preserve-3d; }
   .bc-mission { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, box-shadow 0.3s; }
@@ -441,6 +410,7 @@ export const pageHTML = `
   .bc-lead { color: #C9D1D9; font-size: 1.1rem; line-height: 1.65; max-width: 760px; margin: 0 auto; }
 
   .bc-promise__grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+  .bc-promise__grid--agenda { grid-template-columns: repeat(4, 1fr); max-width: 1320px; }
   @media (max-width: 1024px) { .bc-promise__grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 600px) { .bc-promise__grid { grid-template-columns: 1fr; } }
 
@@ -484,6 +454,56 @@ export const pageHTML = `
   }
   .bc-mission__desc { color: #C9D1D9; font-size: 0.92rem; line-height: 1.55; margin: 0; }
 
+  /* Agenda 15–17/10 — diagramação em 3 colunas (briefing Maira) */
+  .bc-agenda {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1080px;
+    margin: 0 auto;
+    border: 1px solid #ffba1a;
+    background: rgba(13,17,23,0.92);
+    text-align: left;
+  }
+  .bc-agenda__col {
+    padding: 28px 26px 32px;
+    border-right: 1px solid #ffba1a;
+  }
+  .bc-agenda__col:last-child { border-right: none; }
+  .bc-agenda__date {
+    color: #fff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin: 0 0 4px;
+    line-height: 1.3;
+  }
+  .bc-agenda__title {
+    color: #fff;
+    font-family: 'Black Ops One', impact, sans-serif;
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin: 0 0 18px;
+    line-height: 1.25;
+  }
+  .bc-agenda__body {
+    color: #C9D1D9;
+    font-size: 0.95rem;
+    line-height: 1.45;
+    margin: 0;
+  }
+  .bc-agenda__body p { margin: 0; }
+  .bc-agenda__body p + p { margin-top: 2px; }
+  .bc-agenda__time { font-weight: 800; color: #fff; }
+  .bc-agenda__mod { font-style: italic; }
+  .bc-agenda__slot { margin-top: 16px; }
+  .bc-agenda__note { font-size: 0.78rem; line-height: 1.4; color: #C9D1D9; }
+  @media (max-width: 800px) {
+    .bc-agenda { grid-template-columns: 1fr; }
+    .bc-agenda__col { border-right: none; border-bottom: 1px solid #ffba1a; }
+    .bc-agenda__col:last-child { border-bottom: none; }
+  }
+
   /* ═══ HOSTS — Oficiais Comandantes ═══ */
   .bc-hosts { padding: 90px 24px; background: linear-gradient(180deg, #0F1410 0%, #0A0E13 100%); border-top: 4px double #4B5320; border-bottom: 4px double #4B5320; position: relative; overflow: hidden; }
   .bc-hosts::before {
@@ -494,8 +514,7 @@ export const pageHTML = `
     pointer-events: none;
   }
   .bc-hosts > * { position: relative; z-index: 1; }
-  .bc-hosts__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1280px; margin: 40px auto 0; }
-  @media (max-width: 1100px) { .bc-hosts__grid { grid-template-columns: 1fr 1fr; } }
+  .bc-hosts__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; max-width: 1040px; margin: 40px auto 0; }
   @media (max-width: 800px) { .bc-hosts__grid { grid-template-columns: 1fr; } }
   .bc-host {
     background: rgba(43,57,40,0.30);
@@ -565,8 +584,9 @@ export const pageHTML = `
   }
   .bc-testi > * { position: relative; z-index: 1; }
   .bc-testi__head { text-align: center; max-width: 800px; margin: 0 auto 40px; position: relative; z-index: 1; }
-  .bc-testi__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
-  @media (max-width: 1024px) { .bc-testi__grid { grid-template-columns: repeat(2, 1fr); } }
+  .bc-testi__grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; max-width: 1320px; margin: 0 auto; position: relative; z-index: 1; }
+  @media (max-width: 1100px) { .bc-testi__grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 820px) { .bc-testi__grid { grid-template-columns: repeat(2, 1fr); } }
   /* Mobile: carrossel horizontal com snap (em vez de stack) */
   @media (max-width: 700px) {
     .bc-testi__grid {
@@ -608,7 +628,7 @@ export const pageHTML = `
   .bc-testi-card__video { aspect-ratio: 9/16; width: 100%; background: #000; display: block; }
   .bc-testi-card__video iframe { width: 100%; height: 100%; border: 0; display: block; }
   .bc-testi-card__info { padding: 14px 16px 16px; border-top: 1px solid #4B5320; }
-  .bc-testi-card__name { color: #fff; font-family: 'Black Ops One', impact, sans-serif; font-size: 1rem; margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.8px; }
+  .bc-testi-card__name { color: #fff; font-family: 'Black Ops One', impact, sans-serif; font-size: 1rem; margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.8px; line-height: 1.25; }
   .bc-testi-card__company { color: #ffba1a; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
 
   /* ═══ FORMATO — Posto de Combate vs Quartel Remoto ═══ */
@@ -622,8 +642,8 @@ export const pageHTML = `
   }
   .bc-format > * { position: relative; z-index: 1; }
   .bc-format__head { text-align: center; max-width: 800px; margin: 0 auto 40px; }
-  .bc-format__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1000px; margin: 0 auto; }
-  @media (max-width: 800px) { .bc-format__grid { grid-template-columns: 1fr; } }
+  .bc-format__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 1080px; margin: 0 auto; }
+  @media (max-width: 980px) { .bc-format__grid { grid-template-columns: 1fr; } }
   .bc-fmt {
     background: rgba(43,57,40,0.30);
     border: 2px solid #4B5320;
@@ -649,13 +669,13 @@ export const pageHTML = `
   .bc-fmt__name {
     color: #fff;
     font-family: 'Black Ops One', impact, sans-serif;
-    font-size: 1.6rem; margin: 0 0 18px;
+    font-size: 1.6rem; margin: 0 0 10px;
     text-transform: uppercase; letter-spacing: 1px;
   }
   .bc-fmt__price {
     color: #ffba1a;
     font-family: 'Black Ops One', impact, sans-serif;
-    font-size: 2.6rem; margin: 0 0 4px;
+    font-size: 2.6rem; margin: 0 0 18px;
     text-shadow: 3px 3px 0 #000;
   }
   .bc-fmt__price small { font-size: 0.9rem; color: #8B7355; font-weight: 600; letter-spacing: 0; text-transform: none; margin-left: 4px; font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -665,46 +685,6 @@ export const pageHTML = `
   .bc-fmt__features li { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; color: #C9D1D9; font-size: 0.95rem; border-bottom: 1px dashed rgba(107,115,57,0.40); }
   .bc-fmt__features li:last-child { border-bottom: none; }
   .bc-fmt__features li i { color: #3FB950; font-size: 13px; margin-top: 5px; flex-shrink: 0; }
-
-  /* ═══ PRÉ-REQUISITO — alerta máximo ═══ */
-  .bc-prereq { padding: 50px 24px; background: #0A0E13; }
-  .bc-prereq__box {
-    max-width: 920px; margin: 0 auto;
-    background: linear-gradient(135deg, rgba(199,62,29,0.10), rgba(199,62,29,0.04));
-    border: 2px solid #C73E1D;
-    padding: 0;
-    position: relative;
-  }
-  /* Listras de perigo no topo */
-  .bc-prereq__box::before {
-    content: ''; display: block; height: 10px;
-    background: repeating-linear-gradient(45deg, #C73E1D 0 18px, #0A0E13 18px 36px);
-  }
-  .bc-prereq__content { padding: 26px 32px; display: flex; gap: 22px; align-items: flex-start; }
-  /* Mobile: ícone em cima, texto abaixo alinhado */
-  @media (max-width: 600px) {
-    .bc-prereq__content { flex-direction: column; align-items: center; text-align: center; padding: 24px 22px; }
-    .bc-prereq__stamp { margin: 0 auto 8px; }
-    .bc-prereq__title { text-align: center; }
-  }
-  .bc-prereq__stamp {
-    width: 76px; height: 76px;
-    background: #C73E1D;
-    border: 3px solid #fff;
-    display: flex; align-items: center; justify-content: center;
-    color: #fff; font-size: 32px;
-    box-shadow: 4px 4px 0 #000;
-    flex-shrink: 0;
-  }
-  .bc-prereq__title {
-    color: #fff;
-    font-family: 'Black Ops One', impact, sans-serif;
-    font-size: 1.1rem; margin: 0 0 10px;
-    text-transform: uppercase; letter-spacing: 1.5px;
-  }
-  .bc-prereq__title .accent { color: #ffba1a; }
-  .bc-prereq__text { color: #C9D1D9; font-size: 0.95rem; line-height: 1.6; margin: 0; }
-  .bc-prereq__text strong { color: #fff; }
 
   /* ═══ TOAST CONTAINER ═══ */
   .bc-toast-anchor { position: fixed; left: 16px; bottom: 16px; z-index: 200; }
@@ -1017,18 +997,16 @@ export const pageHTML = `
     <span>▶ <span class="bc-tick-hi">TRANSMISSÃO TÁTICA</span> · COORDENADAS CONFIRMADAS LAT -27.5954 LON -48.5480</span>
     <span>▶ <span class="bc-tick-hi">ZONA DE OPERAÇÃO</span> SQUARE SC · ZULU-03</span>
     <span>▶ <span class="bc-tick-hi">CONVOCAÇÃO ATIVA</span> EXCLUSIVA PARA CANAIS ORBIT</span>
-    <span>▶ DATA: <span class="bc-tick-hi">13 JUN 2026 · 09H BRT</span></span>
-    <span>▶ MISSÃO: <span class="bc-tick-hi">BLINDAR OPERAÇÃO 2º SEMESTRE</span></span>
-    <span>▶ <span class="bc-tick-hi">5 OBJETIVOS TÁTICOS</span> · ATRAÇÃO · CONVERSÃO · PRODUTIZAÇÃO · PRECIFICAÇÃO · ATENDIMENTO</span>
-    <span>▶ <span class="bc-tick-hi">PRÉ-REQUISITO</span> AGENTE DE ATIVAÇÃO CONCLUÍDO</span>
+    <span>▶ DATA: <span class="bc-tick-hi">15 OUT 2026 · 08H30 BRT</span></span>
+    <span>▶ MISSÃO: <span class="bc-tick-hi">DESTRAVAR ADOÇÃO DO ORBIT</span></span>
+    <span>▶ <span class="bc-tick-hi">HÍBRIDO</span> · PRESENCIAL SQUARE SC + ZOOM GRATUITO</span>
     <!-- Duplica pra loop infinito -->
     <span>▶ <span class="bc-tick-hi">TRANSMISSÃO TÁTICA</span> · COORDENADAS CONFIRMADAS LAT -27.5954 LON -48.5480</span>
     <span>▶ <span class="bc-tick-hi">ZONA DE OPERAÇÃO</span> SQUARE SC · ZULU-03</span>
     <span>▶ <span class="bc-tick-hi">CONVOCAÇÃO ATIVA</span> EXCLUSIVA PARA CANAIS ORBIT</span>
-    <span>▶ DATA: <span class="bc-tick-hi">13 JUN 2026 · 09H BRT</span></span>
-    <span>▶ MISSÃO: <span class="bc-tick-hi">BLINDAR OPERAÇÃO 2º SEMESTRE</span></span>
-    <span>▶ <span class="bc-tick-hi">5 OBJETIVOS TÁTICOS</span> · ATRAÇÃO · CONVERSÃO · PRODUTIZAÇÃO · PRECIFICAÇÃO · ATENDIMENTO</span>
-    <span>▶ <span class="bc-tick-hi">PRÉ-REQUISITO</span> AGENTE DE ATIVAÇÃO CONCLUÍDO</span>
+    <span>▶ DATA: <span class="bc-tick-hi">15 OUT 2026 · 08H30 BRT</span></span>
+    <span>▶ MISSÃO: <span class="bc-tick-hi">DESTRAVAR ADOÇÃO DO ORBIT</span></span>
+    <span>▶ <span class="bc-tick-hi">HÍBRIDO</span> · PRESENCIAL SQUARE SC + ZOOM GRATUITO</span>
   </div>
 </div>
 </div>
@@ -1095,8 +1073,8 @@ export const pageHTML = `
     <!-- Badge VOCE FOI CONVOCADO -->
     <div style="display:inline-block;background:#0A0E13;border:3px dashed #ffba1a;color:#ffba1a;font-family:'Black Ops One',impact,sans-serif;font-size:14px;letter-spacing:4px;padding:10px 24px;margin:14px 0 18px;text-transform:uppercase;transform:rotate(-1deg);">★ VOCÊ FOI CONVOCADO ★</div>
 
-    <h1>Prepare sua consultoria para a <span class="accent bc-glitch" data-text="guerra">guerra</span> do 2º semestre</h1>
-    <p class="bc-hero__sub">Uma imersão de 4 horas, 100% mão na massa, para acelerar a adoção do Orbit Gestão e blindar sua operação contra a Copa do Mundo, feriados e eleições.</p>
+    <h1>Destrave a adoção do Orbit na <span class="accent bc-glitch" data-text="sua operação">sua operação</span></h1>
+    <p class="bc-hero__sub">4 horas de imersão prática com Igor Furniel e Christian Hart para destravar o uso do Orbit na operação da sua consultoria, eliminar gargalos do dia a dia e sair com um plano claro de próximos passos.</p>
 
     <div class="bc-countdown" id="bcCountdown">
       <div class="bc-count"><span class="bc-count__num" id="bcDays">--</span><span class="bc-count__lbl">Dias</span></div>
@@ -1106,9 +1084,9 @@ export const pageHTML = `
     </div>
 
     <div class="bc-hero__ctas">
-      <a href="#inscricao" class="bc-btn bc-btn--primary bc-btn--pulse">
+      <a href="#posto-de-combate" class="bc-btn bc-btn--primary bc-btn--pulse">
         <svg class="bc-crosshair" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
-        ★ Convocar-se agora ★
+        Quero me alistar agora
       </a>
       <a href="#promessa" class="bc-btn bc-btn--ghost">
         <i class="fa-solid fa-chevron-down"></i>
@@ -1116,17 +1094,9 @@ export const pageHTML = `
       </a>
     </div>
 
-    <!-- ROSTER: contador de inscritos ao vivo (puxa do Supabase) -->
-    <div class="bc-roster" id="bcRoster">
-      <span class="bc-roster__label">★ Recrutas convocados ★</span>
-      <span class="bc-roster__num"><span id="bcRosterCount">147</span> <small>/ 200 vagas</small></span>
-      <div class="bc-roster__bar"><div class="bc-roster__bar-fill" id="bcRosterBar" style="width:73%"></div></div>
-    </div>
-
     <div class="bc-hero__chips">
-      <div class="bc-chip"><i class="fa-solid fa-location-dot"></i><span><strong>Square SC</strong> Florianópolis</span></div>
-      <div class="bc-chip"><i class="fa-solid fa-satellite-dish"></i><span><strong>+ Online</strong> Transmissão ao vivo</span></div>
-      <div class="bc-chip"><i class="fa-solid fa-shield-halved"></i><span><strong>Pré-requisito:</strong> Agente de Ativação</span></div>
+      <div class="bc-chip"><i class="fa-solid fa-location-dot"></i><span><strong>Presencial</strong> Square SC · Florianópolis</span></div>
+      <div class="bc-chip"><i class="fa-solid fa-satellite-dish"></i><span><strong>Online</strong> Transmissão ao vivo</span></div>
     </div>
 
   </div>
@@ -1134,24 +1104,19 @@ export const pageHTML = `
 
 <div class="bc-warning-stripes"></div>
 
-<!-- ═══ CARD DE MISSAO (detalhes da operacao) ═══ -->
-<section style="padding:60px 24px 40px;background:#0A0E13;text-align:center;">
-  <img src="/images/bootcamp/missao-card.webp" alt="Missão Bootcamp Orbit · Data: 13 de junho · Hora: 9h às 13h · Local: Square SC Florianópolis · Formato: Presencial + Online · Investimento: Gratuito" style="max-width:880px;width:100%;height:auto;margin:0 auto;display:block;filter:drop-shadow(0 8px 24px rgba(0,0,0,0.6));" loading="lazy">
-</section>
-
 <!-- ═══ PROMESSA ═══ -->
 <section class="bc-promise" id="promessa" style="position:relative;">
   <div class="bc-promise__head">
-    <div class="bc-eyebrow"><i class="fa-solid fa-flag"></i>Briefing Tático · 5 objetivos</div>
-    <h2 class="bc-h2">Vamos abrir a caixa-preta da <span class="accent">consultoria recorrente</span></h2>
-    <p class="bc-lead">4 horas intensas onde cada bloco vira ação prática dentro da sua operação Orbit. Você sai com playbooks, scripts e ativações rodando no mesmo dia.</p>
+    <div class="bc-eyebrow"><i class="fa-solid fa-flag"></i>Briefing Tático · adoção na prática</div>
+    <h2 class="bc-h2">Vamos destravar o uso do Orbit na <span class="accent">sua consultoria</span></h2>
+    <p class="bc-lead">Venha preparado para 4 horas intensas de imersão para extrair mais valor do Orbit, eliminar os gargalos que travam a operação da sua consultoria e transformar a plataforma em resultados concretos de gestão e crescimento. Ao final, você sai com clareza sobre o que priorizar e um plano definido para os próximos passos.</p>
   </div>
   <div class="bc-promise__grid">
-    <div class="bc-mission"><div class="bc-mission__num">01</div><h3 class="bc-mission__title">Atração de Demanda</h3><p class="bc-mission__desc">Como abrir torneira de leads qualificados sem depender de indicação.</p></div>
-    <div class="bc-mission"><div class="bc-mission__num">02</div><h3 class="bc-mission__title">Conversão</h3><p class="bc-mission__desc">O processo comercial que transforma reunião em contrato assinado.</p></div>
-    <div class="bc-mission"><div class="bc-mission__num">03</div><h3 class="bc-mission__title">Produtização</h3><p class="bc-mission__desc">Empacotar serviço em produto escalável e replicável.</p></div>
-    <div class="bc-mission"><div class="bc-mission__num">04</div><h3 class="bc-mission__title">Precificação</h3><p class="bc-mission__desc">Modelo que protege margem e justifica preço premium.</p></div>
-    <div class="bc-mission"><div class="bc-mission__num">05</div><h3 class="bc-mission__title">Atendimento</h3><p class="bc-mission__desc">Operação que retém cliente e gera receita recorrente.</p></div>
+    <div class="bc-mission"><div class="bc-mission__num">01</div><h3 class="bc-mission__title">Uso no dia a dia</h3><p class="bc-mission__desc">Caminhos concretos para a plataforma entrar na operação da consultoria — não ficar parada.</p></div>
+    <div class="bc-mission"><div class="bc-mission__num">02</div><h3 class="bc-mission__title">Tirar a fricção</h3><p class="bc-mission__desc">Identificar o que trava a adoção e resolver na prática, com Igor e Chris no comando.</p></div>
+    <div class="bc-mission"><div class="bc-mission__num">03</div><h3 class="bc-mission__title">Valor das funções</h3><p class="bc-mission__desc">Como extrair mais das funcionalidades já disponíveis, sem esperar feature nova.</p></div>
+    <div class="bc-mission"><div class="bc-mission__num">04</div><h3 class="bc-mission__title">Gestão e crescimento</h3><p class="bc-mission__desc">Conectar o Orbit a resultado real: gestão do cliente, recorrência e escala do canal.</p></div>
+    <div class="bc-mission"><div class="bc-mission__num">05</div><h3 class="bc-mission__title">Plano de próximos passos</h3><p class="bc-mission__desc">Cada canal sai com o que fazer na própria operação na semana seguinte.</p></div>
   </div>
 </section>
 
@@ -1162,6 +1127,7 @@ export const pageHTML = `
     <!-- MAPA BRASIL -->
     <div style="text-align:center;">
       <div class="bc-eyebrow"><i class="fa-solid fa-map-location-dot"></i>Zona de Operação</div>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Square+SC%2C+Rod.+Jos%C3%A9+Carlos+Daux%2C+5500+-+Saco+Grande%2C+Florian%C3%B3polis+-+SC%2C+88032-005" target="_blank" rel="noopener" aria-label="Abrir o Square SC no Google Maps" style="display:block;text-decoration:none;">
       <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px;margin:18px auto 12px;display:block;">
         <!-- Brasil silhueta simplificada -->
         <path d="M 95,20 L 115,18 L 130,28 L 140,42 L 152,40 L 168,52 L 175,68 L 178,85 L 175,100 L 170,115 L 162,128 L 155,142 L 150,156 L 142,168 L 130,178 L 118,184 L 105,186 L 92,182 L 80,175 L 70,166 L 60,154 L 52,140 L 45,124 L 40,108 L 38,92 L 40,76 L 45,60 L 55,48 L 65,38 L 78,28 Z" fill="rgba(75,83,32,0.40)" stroke="#ffba1a" stroke-width="1.5" stroke-dasharray="3 2"/>
@@ -1185,33 +1151,25 @@ export const pageHTML = `
         </g>
         <text x="100" y="208" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="8" fill="#ffba1a" letter-spacing="1">SC · FLORIANÓPOLIS</text>
       </svg>
-      <div style="display:inline-block;padding:6px 14px;background:rgba(199,62,29,0.15);border:1px solid #C73E1D;color:#C73E1D;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;">● Alvo localizado · LAT -27.5954</div>
+      <div style="display:inline-block;padding:6px 14px;background:rgba(199,62,29,0.15);border:1px solid #C73E1D;color:#C73E1D;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;">● Abrir Square SC no mapa</div>
+      <p style="color:#C9D1D9;font-size:13px;line-height:1.5;margin:12px auto 0;max-width:360px;">Rod. José Carlos Daux, 5500 · Saco Grande · Florianópolis/SC · 88032-005</p>
+      </a>
     </div>
 
     <!-- OPERAÇÕES ANTERIORES -->
     <div>
       <div class="bc-eyebrow"><i class="fa-solid fa-clock-rotate-left"></i>Operações Anteriores</div>
-      <h3 style="color:#fff;font-family:'Black Ops One',impact,sans-serif;font-size:1.5rem;margin:18px 0 22px;text-transform:uppercase;letter-spacing:1px;">Histórico de combate</h3>
+      <h3 style="color:#fff;font-family:'Black Ops One',impact,sans-serif;font-size:1.5rem;margin:18px 0 22px;text-transform:uppercase;letter-spacing:1px;">Bootcamp Canais Orbit</h3>
       <div style="display:flex;flex-direction:column;gap:10px;font-family:'JetBrains Mono',monospace;font-size:13px;">
         <div style="display:flex;align-items:center;gap:14px;padding:10px 14px;background:rgba(43,57,40,0.30);border-left:3px solid #3FB950;">
-          <span style="color:#3FB950;font-weight:700;letter-spacing:1.5px;">▶ BC-260315</span>
-          <span style="color:#C9D1D9;flex:1;">15/03 · Florianópolis · 42 recrutas</span>
-          <span style="color:#3FB950;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Vitoriosa</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:14px;padding:10px 14px;background:rgba(43,57,40,0.30);border-left:3px solid #3FB950;">
-          <span style="color:#3FB950;font-weight:700;letter-spacing:1.5px;">▶ BC-260118</span>
-          <span style="color:#C9D1D9;flex:1;">18/01 · Online · 87 recrutas</span>
-          <span style="color:#3FB950;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Vitoriosa</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:14px;padding:10px 14px;background:rgba(43,57,40,0.30);border-left:3px solid #3FB950;">
-          <span style="color:#3FB950;font-weight:700;letter-spacing:1.5px;">▶ BC-251108</span>
-          <span style="color:#C9D1D9;flex:1;">08/11/2025 · Florianópolis · 31 recrutas</span>
-          <span style="color:#3FB950;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Vitoriosa</span>
+          <span style="color:#3FB950;font-weight:700;letter-spacing:1.5px;">▶ 16/06/2026</span>
+          <span style="color:#C9D1D9;flex:1;">Bootcamp Canais Orbit · 1ª edição · Presencial em Florianópolis + online · 50 recrutas participantes</span>
+          <span style="color:#3FB950;font-weight:700;text-transform:uppercase;letter-spacing:1px;">Concluída</span>
         </div>
         <div style="display:flex;align-items:center;gap:14px;padding:12px 14px;background:rgba(255,186,26,0.10);border:1px solid #ffba1a;margin-top:6px;">
-          <span style="color:#ffba1a;font-weight:700;letter-spacing:1.5px;">▶ BC-260613</span>
-          <span style="color:#fff;flex:1;font-weight:700;">13/06 · Florianópolis + Online · ATUAL</span>
-          <span style="color:#ffba1a;font-weight:700;text-transform:uppercase;letter-spacing:1px;animation:bc-blink 1.5s steps(2) infinite;">▮ Em Curso</span>
+          <span style="color:#ffba1a;font-weight:700;letter-spacing:1.5px;">▶ 15/10/2026</span>
+          <span style="color:#fff;flex:1;font-weight:700;">Bootcamp Canais Orbit · 2ª edição · Presencial em Florianópolis + online · 160 recrutas convocados</span>
+          <span style="color:#ffba1a;font-weight:700;text-transform:uppercase;letter-spacing:1px;animation:bc-blink 1.5s steps(2) infinite;">▮ Inscrições abertas</span>
         </div>
       </div>
     </div>
@@ -1225,7 +1183,7 @@ export const pageHTML = `
 <section class="bc-hosts">
   <div style="text-align:center;max-width:880px;margin:0 auto 12px;">
     <div class="bc-eyebrow"><i class="fa-solid fa-medal"></i>Alto Comando</div>
-    <h2 class="bc-h2">Três empresários, <span class="accent">60+ anos somados</span> em campo</h2>
+    <h2 class="bc-h2">Dois empresários · <span class="accent">+40 anos somados de experiência em campo</span></h2>
   </div>
   <div class="bc-hosts__grid">
     <div class="bc-host">
@@ -1248,16 +1206,6 @@ export const pageHTML = `
         <div class="bc-host__rank">★ ★ ★ ★</div>
       </div>
     </div>
-    <div class="bc-host">
-      <div class="bc-host__photo bc-host__photo--img"><img src="/images/bootcamp/rogerio-fardado.webp" alt="Rogério Menossi"></div>
-      <div class="bc-host__content">
-        <div style="display:inline-block;background:linear-gradient(135deg,#ffba1a,#ff8c00);color:#0A0E13;font-family:'Black Ops One',impact,sans-serif;font-size:10px;letter-spacing:2px;padding:3px 10px;margin-bottom:8px;text-transform:uppercase;">MAJOR · GESTÃO DE PESSOAS</div>
-        <h3 class="bc-host__name">Rogério Menossi</h3>
-        <p class="bc-host__role">CEO &amp; Founder · Time Produtivo</p>
-        <p class="bc-host__bio">Empresário, palestrante e especialista em gestão de pessoas, liderança e cultura organizacional. Fundador da Time Produtivo, consultoria focada em comunicação, engajamento e produtividade de equipes.</p>
-        <div class="bc-host__rank">★ ★ ★ ★</div>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -1270,20 +1218,24 @@ export const pageHTML = `
   </div>
   <div class="bc-testi__grid">
     <div class="bc-testi-card">
-      <div class="bc-testi-card__video"><iframe src="https://player.vimeo.com/video/1194123078?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
-      <div class="bc-testi-card__info"><h3 class="bc-testi-card__name">Lucineia Pedrosa</h3><p class="bc-testi-card__company">Econtech Consultoria</p></div>
+      <div class="bc-testi-card__video"><iframe src="https://player.vimeo.com/video/1222168379?title=0&byline=0&portrait=0" title="Depoimento de Mateus Victal — Victal Consultoria" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+      <div class="bc-testi-card__info"><h3 class="bc-testi-card__name">Mateus Victal</h3><p class="bc-testi-card__company">Victal Consultoria</p></div>
     </div>
     <div class="bc-testi-card">
-      <div class="bc-testi-card__video"><iframe src="https://player.vimeo.com/video/1194124564?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
-      <div class="bc-testi-card__info"><h3 class="bc-testi-card__name">Hygor Limar</h3><p class="bc-testi-card__company">Potencialize Resultados</p></div>
-    </div>
-    <div class="bc-testi-card">
-      <div class="bc-testi-card__video"><iframe src="https://player.vimeo.com/video/1194125389?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
-      <div class="bc-testi-card__info"><h3 class="bc-testi-card__name">Bruno Lozano</h3><p class="bc-testi-card__company">Ritual de Gestão</p></div>
-    </div>
-    <div class="bc-testi-card">
-      <div class="bc-testi-card__video"><iframe src="https://player.vimeo.com/video/1194126879?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+      <div class="bc-testi-card__video"><iframe src="https://player.vimeo.com/video/1222166295?title=0&byline=0&portrait=0" title="Depoimento de Rogério Menossi — Time Produtivo" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
       <div class="bc-testi-card__info"><h3 class="bc-testi-card__name">Rogério Menossi</h3><p class="bc-testi-card__company">Time Produtivo</p></div>
+    </div>
+    <div class="bc-testi-card">
+      <div class="bc-testi-card__video"><iframe src="https://player.vimeo.com/video/1222163766?title=0&byline=0&portrait=0" title="Depoimento de Guilherme Tourinho — Linha 36 Tecnologia e Gestão" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+      <div class="bc-testi-card__info"><h3 class="bc-testi-card__name">Guilherme Tourinho</h3><p class="bc-testi-card__company">Linha 36 Tecnologia e Gestão</p></div>
+    </div>
+    <div class="bc-testi-card">
+      <div class="bc-testi-card__video"><iframe src="https://player.vimeo.com/video/1222166232?title=0&byline=0&portrait=0" title="Depoimento de Hygor Lima e Bruno Bezerril — Potencialize Resultados" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+      <div class="bc-testi-card__info"><h3 class="bc-testi-card__name">Hygor Lima e Bruno Bezerril</h3><p class="bc-testi-card__company">Potencialize Resultados</p></div>
+    </div>
+    <div class="bc-testi-card">
+      <div class="bc-testi-card__video"><iframe src="https://player.vimeo.com/video/1222166177?title=0&byline=0&portrait=0" title="Depoimento de Vagner Isidorio — VNI Consultoria Empresarial" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+      <div class="bc-testi-card__info"><h3 class="bc-testi-card__name">Vagner Isidorio</h3><p class="bc-testi-card__company">VNI Consultoria Empresarial</p></div>
     </div>
   </div>
   <p class="bc-testi__hint">◂ arraste para ver mais ▸</p>
@@ -1292,52 +1244,96 @@ export const pageHTML = `
 <div class="bc-warning-stripes"></div>
 
 <!-- ═══ FORMATO ═══ -->
-<section class="bc-format">
+<section class="bc-format" id="posto-de-combate">
   <div class="bc-format__head">
     <div class="bc-eyebrow"><i class="fa-solid fa-route"></i>Posto de Combate</div>
-    <h2 class="bc-h2">Escolha como vai <span class="accent">se posicionar</span></h2>
+    <h2 class="bc-h2">Escolha como vai <span class="accent">entrar em campo</span></h2>
   </div>
   <div class="bc-format__grid">
     <div class="bc-fmt">
-      <div class="bc-fmt__icon"><i class="fa-solid fa-satellite-dish"></i></div>
-      <p class="bc-fmt__label">Quartel Remoto · Online</p>
-      <h3 class="bc-fmt__name">Transmissão ao vivo</h3>
-      <p class="bc-fmt__free">Gratuito</p>
-      <p class="bc-fmt__desc">Transmissão exclusiva para canais e clientes ativos Orbit Gestão, com apoio digital.</p>
+      <div class="bc-fmt__icon"><i class="fa-solid fa-users-viewfinder"></i></div>
+      <p class="bc-fmt__label">Bootcamp presencial + online</p>
+      <h3 class="bc-fmt__name">2ª edição Bootcamp Canais Orbit</h3>
+      <p class="bc-fmt__price">R$250<small>/ vaga</small></p>
       <ul class="bc-fmt__features">
-        <li><i class="fa-solid fa-check"></i>4h de imersão ao vivo</li>
+        <li><i class="fa-solid fa-check"></i>4 horas de imersão (8h30-12h30)</li>
+        <li><i class="fa-solid fa-check"></i>Evento exclusivo para canais Orbit</li>
         <li><i class="fa-solid fa-check"></i>Acesso a material digital</li>
         <li><i class="fa-solid fa-check"></i>Q&amp;A ao vivo durante o evento</li>
+        <li><i class="fa-solid fa-check"></i>Networking com outros canais</li>
+        <li><i class="fa-solid fa-check"></i>Premiação do Top 5 Programa Orbit de Crescimento e Reconhecimento</li>
       </ul>
-      <a href="#inscricao" class="bc-btn bc-btn--ghost" style="width:100%;justify-content:center;">Assistir online</a>
+      <div style="display:grid;gap:12px;">
+        <a href="#posto-de-combate" data-bc-mode="online" class="bc-btn bc-btn--ghost" style="width:100%;justify-content:center;">Online · Gratuito</a>
+        <div>
+          <a href="#posto-de-combate" data-bc-mode="presencial" class="bc-btn bc-btn--primary" style="width:100%;justify-content:center;">Presencial no Square SC</a>
+          <p style="color:#C9D1D9;font-size:12px;text-align:center;margin:8px 0 0;">Incluso coffee e almoço de networking</p>
+        </div>
+      </div>
     </div>
     <div class="bc-fmt bc-fmt--featured">
-      <div class="bc-fmt__icon"><i class="fa-solid fa-helmet-safety"></i></div>
-      <p class="bc-fmt__label">Linha de Frente · Presencial</p>
-      <h3 class="bc-fmt__name">Imersão In Loco</h3>
-      <p class="bc-fmt__price">R$150<small>/ vaga</small></p>
-      <p class="bc-fmt__desc">Valor 100% revertido para o almoço especial + sessão extra de mentoria com Igor e Christian.</p>
+      <div class="bc-fmt__icon"><i class="fa-solid fa-star"></i></div>
+      <p class="bc-fmt__label">Bootcamp + mentoria presencial</p>
+      <h3 class="bc-fmt__name">Mentoria em grupo</h3>
+      <p class="bc-fmt__price">R$2.500<small>/ vaga</small></p>
       <ul class="bc-fmt__features">
-        <li><i class="fa-solid fa-check"></i>4h de imersão presencial no Square SC</li>
-        <li><i class="fa-solid fa-check"></i>Almoço especial com os hosts</li>
-        <li><i class="fa-solid fa-check"></i>Mentoria extra durante o almoço</li>
-        <li><i class="fa-solid fa-check"></i>Networking com canais Orbit</li>
+        <li><i class="fa-solid fa-check"></i>Vaga no Bootcamp presencial (4 horas de imersão + material digital + Q&amp;A ao vivo + coffee e almoço de networking)</li>
+        <li><i class="fa-solid fa-check"></i>4 horas de mentoria em grupo com Igor e Christian</li>
+        <li><i class="fa-solid fa-check"></i>Direcionamento estratégico sobre posicionamento, produtização, precificação, atendimento e gestão da consultoria</li>
       </ul>
-      <a href="#inscricao" class="bc-btn bc-btn--primary" style="width:100%;justify-content:center;">Garantir presencial</a>
+      <a href="#posto-de-combate" data-bc-mode="mentoria" class="bc-btn bc-btn--primary" style="width:100%;justify-content:center;">Quero Bootcamp + mentoria</a>
     </div>
   </div>
 </section>
 
-<!-- ═══ PRÉ-REQUISITO ═══ -->
-<section class="bc-prereq">
-  <div class="bc-prereq__box">
-    <div class="bc-prereq__content">
-      <div class="bc-prereq__stamp"><i class="fa-solid fa-triangle-exclamation"></i></div>
-      <div>
-        <h3 class="bc-prereq__title">ACESSO RESTRITO · <span class="accent">Agente de Ativação obrigatório</span></h3>
-        <p class="bc-prereq__text">A participação é exclusiva para consultorias que seguiram e executaram todo o conteúdo do <strong>Agente de Ativação de Canal</strong>, disponível no ambiente de cada consultoria dentro do Orbit Gestão. Isso garante que toda a sala esteja no mesmo nível para o trabalho mão na massa.</p>
+<!-- ═══ AGENDA 3 DIAS (informativo — sexta/sábado não são inscrição aberta) ═══ -->
+<section class="bc-promise" id="agenda" style="padding-top:40px;">
+  <div class="bc-promise__head">
+    <div class="bc-eyebrow"><i class="fa-solid fa-calendar-days"></i>Operação de 15 a 17/10</div>
+    <h2 class="bc-h2">O Bootcamp é só o <span class="accent">início da missão</span></h2>
+    <p class="bc-lead">A programação começa na quinta-feira com o Bootcamp Orbit e continua na sexta e no sábado com experiências exclusivas para o Top 5 do Programa Orbit de Crescimento e Reconhecimento e para quem adquirir a mentoria.</p>
+  </div>
+  <div class="bc-agenda">
+    <div class="bc-agenda__col">
+      <p class="bc-agenda__date">15/10 (quinta-feira)</p>
+      <h3 class="bc-agenda__title">Bootcamp + Mentoria</h3>
+      <div class="bc-agenda__body">
+        <p class="bc-agenda__time">8h30-12h30</p>
+        <p>Bootcamp</p>
+        <p class="bc-agenda__note">Premiação do Top 5 Programa Orbit de Crescimento e Reconhecimento</p>
+        <p class="bc-agenda__mod">Presencial + Online</p>
+        <div class="bc-agenda__slot">
+          <p class="bc-agenda__time">14h-18h</p>
+          <p>Mentoria em grupo com Igor e Chris</p>
+          <p class="bc-agenda__mod">Presencial</p>
+        </div>
       </div>
     </div>
+    <div class="bc-agenda__col">
+      <p class="bc-agenda__date">16/10 (sexta-feira)</p>
+      <h3 class="bc-agenda__title">Visita ao escritório Orbit</h3>
+      <div class="bc-agenda__body">
+        <p class="bc-agenda__time">8h-18h</p>
+        <p>Experiência com os founders e o time no escritório Orbit no Square SC em Florianópolis</p>
+        <div class="bc-agenda__slot">
+          <p>Gravação de conteúdo</p>
+        </div>
+      </div>
+    </div>
+    <div class="bc-agenda__col">
+      <p class="bc-agenda__date">17/10 (sábado)</p>
+      <h3 class="bc-agenda__title">Visita à Florianópolis</h3>
+      <div class="bc-agenda__body">
+        <p class="bc-agenda__time">8h-18h</p>
+        <p>Experiência pessoal com os founders pela ilha de Florianópolis</p>
+      </div>
+    </div>
+  </div>
+  <div class="bc-mission" style="max-width:1080px;margin:24px auto 0;border-color:#ffba1a;background:linear-gradient(180deg,rgba(255,186,26,0.16),rgba(13,17,23,0.96));">
+    <div class="bc-mission__num"><i class="fa-solid fa-trophy"></i></div>
+    <h3 class="bc-mission__title">Premiação do Top 5 Programa Orbit de Crescimento e Reconhecimento</h3>
+    <p class="bc-mission__desc">O Programa Orbit de Crescimento e Reconhecimento foi criado para reconhecer e impulsionar os canais que mais avançam dentro do ecossistema.<br><br>Ao longo do trimestre (1/7 a 30/9), cada nova licença movimenta o ranking, gera novas oportunidades comerciais e aproxima os participantes das premiações e experiências exclusivas do programa.<br><br>A premiação dos canais que mais se destacarem acontecerá no dia 15 de outubro, durante o Bootcamp Orbit, em um momento especial de reconhecimento aos melhores resultados do ciclo.</p>
+    <a href="/programa" class="bc-btn bc-btn--ghost" style="width:100%;justify-content:center;margin-top:20px;">Conhecer o Programa Orbit de Crescimento e Reconhecimento</a>
   </div>
 </section>
 

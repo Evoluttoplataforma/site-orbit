@@ -77,19 +77,31 @@
     "btn": "TRY RISK-FREE"
   },
   "footer": {
-    "tagline": "AI-powered management platform. Hire a team that executes.",
+    "tagline": "Business management platform with artificial intelligence agents. Turn strategy, processes, indicators, people, projects and other management areas into a connected, monitored and executable operation.",
     "contact": "Contact",
+    "institutional": "Institutional",
     "units": "2 locations · 2 countries",
     "unitBr": "Brazil",
     "unitUs": "United States",
+    "officeUs": "Commercial office · USA",
     "platform": "Platform",
     "content": "Resources",
     "company": "Company",
-    "rights": "© 2026 Orbit — Grupo GSN. All rights reserved.",
+    "rights": "© 2026 Orbit Gestão | Grupo GSN. All rights reserved.",
     "plans": "Plans & Pricing",
     "stories": "Customer Stories",
-    "about": "About Us",
-    "partners": "Become a Partner",
-    "channels": "B2B2B Channels"
+    "about": "About Orbit",
+    "partners": "For Consultancies",
+    "channels": "B2B2B Channels",
+    "legal": "Legal",
+    "legalInfo": "Legal Information",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "isp": "Information Security Policy",
+    "security": "Trust Center",
+    "status": "Status & uptime",
+    "legalEntity": "Orbit Gestão is the trade name used by FURNIEL DESENVOLVIMENTO DE SOFTWARE LTDA, registered under CNPJ 65.167.064/0001-27.",
+    "legalAddress": "Address: Rodovia Jose Carlos Daux, 5500, Conj. 306, Saco Grande, Florianópolis, SC, CEP 88032-005, Brazil.",
+    "legalGroup": "Orbit Gestão is part of the Grupo GSN ecosystem."
   }
 }

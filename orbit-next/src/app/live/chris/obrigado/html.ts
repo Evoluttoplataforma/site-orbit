@@ -14,7 +14,7 @@ export const pageHTML = `
             </h1>
 
             <p style="color:#8B949E;font-size:1.1rem;line-height:1.6;margin-bottom:32px;">
-                Voc&ecirc; vai receber o link da reuni&atilde;o no seu e-mail. Fique atento &agrave; caixa de entrada.
+                O link do Zoom chega no seu e-mail. Tamb&eacute;m avisamos 1 dia antes e 1 hora antes de cada quinta.
             </p>
 
             <!-- Info card -->
@@ -44,9 +44,9 @@ export const pageHTML = `
                 <div style="width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;">
                     <i class="fa-brands fa-whatsapp" style="color:#fff;font-size:28px;"></i>
                 </div>
-                <h2 style="color:#fff;font-size:18px;font-weight:800;margin:0 0 8px;">Entre no grupo do WhatsApp</h2>
+                <h2 style="color:#fff;font-size:18px;font-weight:800;margin:0 0 8px;">Grupo de avisos no WhatsApp</h2>
                 <p style="color:#C9D1D9;font-size:14px;line-height:1.6;margin:0 0 18px;">
-                    O link da Masterclass &eacute; enviado <strong style="color:#fff;">somente</strong> dentro do grupo fechado, momentos antes de come&ccedil;ar.
+                    O acesso vai por e-mail. O grupo &eacute; extra, para recados da aula.
                 </p>
                 <a href="https://chat.whatsapp.com/JnvD7U2BpdI0Tr4oWNMyuu?mode=gi_t" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;padding:14px 28px;background:#25D366;border-radius:50px;color:#fff;font-size:15px;font-weight:700;text-decoration:none;box-shadow:0 6px 20px rgba(37,211,102,0.35);transition:transform 0.2s;">
                     <i class="fa-brands fa-whatsapp" style="font-size:20px;"></i>Entrar no grupo agora
@@ -78,8 +78,8 @@ export const pageHTML = `
     (function() {
         var EVENT = {
             title: 'Masterclass Consultores — Christian Hart',
-            description: 'Masterclass quinzenal com Christian Hart (Diretor de Canais — Grupo GSN). O link de acesso é enviado pelo grupo fechado de WhatsApp.',
-            location: 'Grupo fechado de WhatsApp da Masterclass',
+            description: 'Masterclass semanal com Christian Hart (Diretor de Canais — Grupo GSN). O link de acesso chega por e-mail.',
+            location: 'Zoom',
             durationHours: 1,
             dayOfWeek: 4,
             hourBRT: 18

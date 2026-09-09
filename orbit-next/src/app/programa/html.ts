@@ -140,7 +140,7 @@ export const htmlTop = `
             <div class="liga-finish" data-reveal>
                 <span class="lp-badge lp-badge--light">${i18nText('A linha de chegada', 'The finish line')}</span>
                 ${i18nEl('h2', 'Bootcamp do 3º trimestre', 'Q3 Bootcamp')}
-                <p class="liga-finish__date"><i class="fas fa-flag-checkered"></i> 01, 02 e 03/10</p>
+                <p class="liga-finish__date"><i class="fas fa-flag-checkered"></i> 15, 16 e 17/10</p>
                 ${i18nEl('p', 'É lá que o placar fecha e a premiação acontece. A receita das licenças precisa estar ativa nesse dia. Até lá, cada licença nova que seu canal inclui conta.', 'That is where the scoreboard closes and the awards happen. License revenue must be active on that day. Until then, every new license your channel adds counts.')}
             </div>
         </div>
@@ -184,7 +184,7 @@ export const htmlBottom = `
                     </button>
                     <div class="faq-answer">
                         <div class="faq-answer__inner">
-                            ${i18nText('Nos dias 01, 02 e 03 de outubro, no Bootcamp do 3º trimestre. É quando o placar fecha — e a receita das licenças precisa estar ativa.', 'On October 1, 2 and 3, at the Q3 Bootcamp. That is when the scoreboard closes — and license revenue must be active.')}
+                            ${i18nText('Nos dias 15, 16 e 17 de outubro, no Bootcamp do 3º trimestre. É quando o placar fecha — e a receita das licenças precisa estar ativa.', 'On October 15, 16 and 17, at the Q3 Bootcamp. That is when the scoreboard closes — and license revenue must be active.')}
                         </div>
                     </div>
                 </div>

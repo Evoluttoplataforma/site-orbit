@@ -151,6 +151,18 @@ export const pageHTML = `
     text-align: center;
   }
 
+  .bco-pay-video {
+    position: relative; width: 100%; max-width: 560px; margin: 0 auto 18px;
+    aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden;
+    background: #000; border: 1px solid rgba(255,186,26,0.25);
+  }
+  .bco-pay-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .bco-pay-note {
+    color: #ffba1a; font-size: 14px; line-height: 1.6; margin: 0 0 18px;
+    background: rgba(255,186,26,0.08); border: 1px solid rgba(255,186,26,0.35);
+    border-radius: 8px; padding: 12px 14px; text-align: left;
+  }
+
   @media (max-width: 600px) {
     .bco-briefing__row { flex-direction: column; gap: 4px; padding: 10px 0; }
     .bco-briefing__label { min-width: 0; }
@@ -167,23 +179,24 @@ export const pageHTML = `
 <div class="bco-stripes"></div>
 <section class="bco-page">
   <div class="bco-container">
-    <img src="/images/bootcamp/missao-aprovada.webp" alt="Missão Aprovada" class="bco-stamp" loading="eager">
+    <img id="bcoStamp" src="/images/bootcamp/missao-aprovada.webp" alt="Missão confirmada" class="bco-stamp" loading="eager">
 
-    <div class="bco-eyebrow"><i class="fa-solid fa-circle-check"></i>Alistamento confirmado</div>
-    <h1 class="bco-h1">Bem-vindo ao <span class="accent">Bootcamp Orbit</span>, recruta</h1>
-    <p class="bco-sub">Sua inscrição foi processada e arquivada no sistema. <span id="bcoNome"></span> Daqui pra frente, o General Igor e o Coronel Christian assumem o comando. Prepare-se para o dia D.</p>
+    <div class="bco-eyebrow" id="bcoEyebrow"><i class="fa-solid fa-circle-check"></i>Inscrição recebida</div>
+    <h1 class="bco-h1" id="bcoTitle">Bem-vindo ao <span class="accent">Bootcamp Canais Orbit</span>, recruta</h1>
+    <p class="bco-sub" id="bcoSub"><span id="bcoNome"></span></p>
+    <div id="bcoBenefits" style="display:none;margin:0 auto 28px;max-width:640px;text-align:left;color:#C9D1D9;font-size:15px;line-height:1.65;"></div>
 
     <!-- BRIEFING DA OPERAÇÃO -->
     <div class="bco-briefing">
-      <div class="bco-briefing__head">◢ Briefing da Operação BC-260613 ◣</div>
+      <div class="bco-briefing__head">◢ Briefing da Operação ◣</div>
       <div class="bco-briefing__body">
         <div class="bco-briefing__row">
           <span class="bco-briefing__label">▸ Data</span>
-          <span class="bco-briefing__value"><strong>13 de junho de 2026</strong> · sábado</span>
+          <span class="bco-briefing__value"><strong>15 de outubro de 2026</strong> · quinta</span>
         </div>
         <div class="bco-briefing__row">
           <span class="bco-briefing__label">▸ Horário</span>
-          <span class="bco-briefing__value"><strong>09h às 13h</strong> (BRT)</span>
+          <span class="bco-briefing__value" id="bcoHorario"><strong>08h30 às 12h30</strong> (BRT)</span>
         </div>
         <div class="bco-briefing__row">
           <span class="bco-briefing__label">▸ Modalidade</span>
@@ -193,23 +206,52 @@ export const pageHTML = `
           <span class="bco-briefing__label">▸ Local</span>
           <span class="bco-briefing__value" id="bcoLocal"><strong>Square SC</strong> · Florianópolis · SC</span>
         </div>
-        <div class="bco-briefing__row">
-          <span class="bco-briefing__label">▸ Código</span>
-          <span class="bco-briefing__value" style="font-family:'Black Ops One',impact,sans-serif;font-size:16px;letter-spacing:2px;">BC-260613</span>
-        </div>
       </div>
+    </div>
+
+    <div id="bcoWaitlist" style="display:none;margin:0 0 28px;background:rgba(199,62,29,0.12);border:1px solid #C73E1D;padding:24px;text-align:center;">
+      <h3 style="color:#fff;font-family:'Black Ops One',impact,sans-serif;font-size:1.4rem;margin:0 0 8px;text-transform:uppercase;">Lista de espera presencial</h3>
+      <p style="color:#C9D1D9;font-size:14px;line-height:1.6;margin:0;">As 40 vagas presenciais já foram preenchidas. Seu nome foi registrado na lista de espera e nossa equipe poderá entrar em contato pelos dados cadastrados se houver disponibilidade.</p>
     </div>
 
     <!-- PAGAMENTO (só presencial) -->
     <div id="bcoPagamento" style="display:none;margin:0 0 28px;background:linear-gradient(135deg,rgba(255,186,26,0.12),rgba(199,62,29,0.10));border:1px solid #ffba1a;border-radius:14px;padding:24px;text-align:center;">
       <div style="font-family:'Black Ops One',impact,sans-serif;color:#ffba1a;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">⚠ Falta 1 passo pra garantir sua vaga</div>
-      <h3 style="color:#fff;font-family:'Black Ops One',impact,sans-serif;font-size:1.4rem;margin:0 0 6px;text-transform:uppercase;">Pagamento do presencial · R$150</h3>
-      <p style="color:#C9D1D9;font-size:14px;line-height:1.6;margin:0 0 18px;">As vagas presenciais em Florianópolis só são confirmadas após o pagamento. Conclua agora pra travar a sua.</p>
-      <a id="bcoPagarBtn" href="https://buy.stripe.com/3cIfZgbnr7gRfL5dS3aAw01" target="_blank" rel="noopener"
+      <h3 style="color:#fff;font-family:'Black Ops One',impact,sans-serif;font-size:1.4rem;margin:0 0 6px;text-transform:uppercase;">Confirme sua participação no Bootcamp presencial · R$250</h3>
+      <p style="color:#C9D1D9;font-size:14px;line-height:1.6;margin:0 0 16px;">Para garantir sua vaga na imersão presencial, assista ao vídeo abaixo e siga o passo a passo para realizar o pagamento pelo seu perfil de administrador no Orbit.</p>
+      <div class="bco-pay-video">
+        <iframe src="https://drive.google.com/file/d/1Vu2Y05IF5Rksc1WKigfZJN_MIPo78SrN/preview" title="Passo a passo do pagamento do Bootcamp presencial" allow="autoplay" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p style="margin:0 0 16px;"><a href="https://drive.google.com/file/d/1Vu2Y05IF5Rksc1WKigfZJN_MIPo78SrN/view?usp=drive_link" target="_blank" rel="noopener" style="color:#ffba1a;font-size:13px;">Abrir o vídeo em nova aba</a></p>
+      <a data-payment-mode="presencial" href="https://app.orbitgestao.com.br/my-space" target="_blank" rel="noopener"
          style="display:inline-flex;align-items:center;gap:10px;background:#ffba1a;color:#0A0E13;font-family:'Black Ops One',impact,sans-serif;font-size:16px;letter-spacing:1px;text-transform:uppercase;padding:16px 38px;border-radius:9px;text-decoration:none;box-shadow:0 8px 26px rgba(255,186,26,0.32);">
-        <i class="fa-solid fa-lock"></i> Pagar R$150 e confirmar vaga
+        <i class="fa-solid fa-arrow-up-right-from-square"></i> Ir para o Orbit
       </a>
-      <p style="color:#8B7355;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;margin:14px 0 0;">🔒 Pagamento seguro via Stripe</p>
+      <p style="color:#8B7355;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;margin:14px 0 0;">Acesso seguro ao perfil administrador Orbit</p>
+    </div>
+
+    <!-- ZOOM (só online) -->
+    <div id="bcoZoom" style="display:none;margin:0 0 28px;background:linear-gradient(135deg,rgba(45,140,255,0.12),rgba(13,17,23,0.6));border:1px solid rgba(45,140,255,0.4);border-radius:14px;padding:24px;text-align:center;">
+      <div style="font-family:'Black Ops One',impact,sans-serif;color:#2D8CFF;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">Link da transmissão</div>
+      <h3 style="color:#fff;font-family:'Black Ops One',impact,sans-serif;font-size:1.4rem;margin:0 0 6px;text-transform:uppercase;">Você já está no Zoom</h3>
+      <p style="color:#C9D1D9;font-size:14px;line-height:1.6;margin:0;">Inscrevemos você na reunião automaticamente. O link exclusivo da sala chega no e-mail (e na confirmação do Zoom). Confira também o spam.</p>
+    </div>
+
+    <!-- MENTORIA -->
+    <div id="bcoMentoriaPay" style="display:none;margin:0 0 28px;background:linear-gradient(135deg,rgba(255,186,26,0.12),rgba(13,17,23,0.6));border:1px solid #ffba1a;border-radius:14px;padding:24px;text-align:center;">
+      <div style="font-family:'Black Ops One',impact,sans-serif;color:#ffba1a;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;">⚠ Falta 1 passo pra garantir sua vaga</div>
+      <h3 style="color:#fff;font-family:'Black Ops One',impact,sans-serif;font-size:1.4rem;margin:0 0 6px;text-transform:uppercase;">Confirme sua participação na mentoria presencial · R$2.500</h3>
+      <p style="color:#C9D1D9;font-size:14px;line-height:1.6;margin:0 0 12px;">Para garantir sua vaga na imersão + mentoria presencial, assista ao vídeo abaixo e siga o passo a passo para realizar o pagamento pelo seu perfil de administrador no Orbit.</p>
+      <p class="bco-pay-note"><strong>Importante:</strong> ao adquirir a mentoria, sua vaga no Bootcamp já está garantida. Portanto, finalize o pagamento apenas da mentoria — não é necessário realizar o pagamento separado do Bootcamp.</p>
+      <div class="bco-pay-video">
+        <iframe src="https://drive.google.com/file/d/1Vu2Y05IF5Rksc1WKigfZJN_MIPo78SrN/preview" title="Passo a passo do pagamento da mentoria presencial" allow="autoplay" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p style="margin:0 0 16px;"><a href="https://drive.google.com/file/d/1Vu2Y05IF5Rksc1WKigfZJN_MIPo78SrN/view?usp=drive_link" target="_blank" rel="noopener" style="color:#ffba1a;font-size:13px;">Abrir o vídeo em nova aba</a></p>
+      <a data-payment-mode="mentoria" href="https://app.orbitgestao.com.br/my-space" target="_blank" rel="noopener"
+         style="display:inline-flex;align-items:center;gap:10px;background:#ffba1a;color:#0A0E13;font-family:'Black Ops One',impact,sans-serif;font-size:16px;letter-spacing:1px;text-transform:uppercase;padding:16px 38px;border-radius:9px;text-decoration:none;box-shadow:0 8px 26px rgba(255,186,26,0.32);">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i> Ir para o Orbit
+      </a>
+      <p style="color:#8B7355;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;margin:14px 0 0;">Acesso seguro ao perfil administrador Orbit</p>
     </div>
 
     <!-- PRÓXIMOS PASSOS -->
@@ -235,33 +277,25 @@ export const pageHTML = `
       <div class="bco-step">
         <div class="bco-step__num">03</div>
         <div class="bco-step__content">
-          <h3 class="bco-step__title">Conclua o Agente de Ativação</h3>
-          <p class="bco-step__desc">Pré-requisito obrigatório. Disponível no ambiente da sua consultoria dentro do Orbit Gestão. Sem isso, toda a sala chega no nível diferente e o trabalho mão na massa não rende.</p>
-        </div>
-      </div>
-
-      <div class="bco-step">
-        <div class="bco-step__num">04</div>
-        <div class="bco-step__content">
           <h3 class="bco-step__title">Lembretes ativados</h3>
-          <p class="bco-step__desc">Vamos te lembrar a 7 dias, 1 dia antes e na manhã do bootcamp. Por e-mail e WhatsApp. Você não vai esquecer.</p>
+          <p class="bco-step__desc">Vamos te lembrar 7 dias antes, 1 dia antes e na manhã do Bootcamp, por e-mail.</p>
         </div>
       </div>
     </div>
 
     <!-- CTAs -->
     <div class="bco-ctas">
-      <a href="https://chat.whatsapp.com/JDzmJ9WTutLJPYSnqQTd4y" target="_blank" rel="noopener" class="bco-btn bco-btn--wa">
+      <a href="https://chat.whatsapp.com/HeVwpSJYmNw86wp7dCaxXB" target="_blank" rel="noopener" class="bco-btn bco-btn--wa">
         <i class="fa-brands fa-whatsapp" style="font-size:18px;"></i>
         Entrar no grupo dos recrutas
       </a>
-      <a href="/" class="bco-btn bco-btn--ghost">
+      <a href="/bootcamp-orbit" class="bco-btn bco-btn--ghost">
         <i class="fa-solid fa-arrow-left"></i>
         Voltar ao QG
       </a>
     </div>
 
-    <p class="bco-foot">[ COMUNICADO ARQUIVADO · OPERAÇÃO BC-260613 · ★ ESTÁVEL ★ ]</p>
+    <p class="bco-foot">[ INSCRIÇÃO RECEBIDA · BOOTCAMP CANAIS ORBIT · ★ ESTÁVEL ★ ]</p>
   </div>
 </section>
 `;

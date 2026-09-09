@@ -77,19 +77,31 @@
     "btn": "QUERO TESTAR SEM RISCO"
   },
   "footer": {
-    "tagline": "Plataforma de gestão com IA. Contrate um time que executa.",
+    "tagline": "Plataforma de gestão empresarial com agentes de inteligência artificial. Transforme estratégia, processos, indicadores, pessoas, projetos e outras áreas da gestão em uma operação conectada, acompanhada e executável.",
     "contact": "Contato",
+    "institutional": "Institucional",
     "units": "2 unidades · 2 países",
     "unitBr": "Brasil",
     "unitUs": "Estados Unidos",
+    "officeUs": "Escritório comercial · EUA",
     "platform": "Plataforma",
     "content": "Conteúdo",
     "company": "Empresa",
-    "rights": "© 2026 Orbit — Grupo GSN. Todos os direitos reservados.",
+    "rights": "© 2026 Orbit Gestão | Grupo GSN. Todos os direitos reservados.",
     "plans": "Planos e Preços",
     "stories": "Histórias de Clientes",
-    "about": "Sobre Nós",
-    "partners": "Seja Parceiro",
-    "channels": "Canais B2B2B"
+    "about": "Sobre o Orbit",
+    "partners": "Para Consultorias",
+    "channels": "Canais B2B2B",
+    "legal": "Legal",
+    "legalInfo": "Informações Legais",
+    "privacy": "Política de Privacidade",
+    "terms": "Termos de Uso",
+    "isp": "Política de Segurança da Informação",
+    "security": "Central de Confiança",
+    "status": "Status e disponibilidade",
+    "legalEntity": "Orbit Gestão é a marca comercial utilizada por FURNIEL DESENVOLVIMENTO DE SOFTWARE LTDA, inscrita no CNPJ sob nº 65.167.064/0001-27.",
+    "legalAddress": "Endereço: Rodovia Jose Carlos Daux, 5500, Conj. 306, Saco Grande, Florianópolis, SC, CEP 88032-005, Brasil.",
+    "legalGroup": "A Orbit Gestão integra o ecossistema do Grupo GSN."
   }
 }
