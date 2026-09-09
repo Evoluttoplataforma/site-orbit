@@ -2070,6 +2070,8 @@ function applyEnglish() {
     'Central de confiança': 'Trust Center',
     'VER CONTROLES': 'SEE CONTROLS',
     'DOCUMENTOS SOB NDA': 'NDA DOCUMENTS',
+    'GERAR DOSSIÊ DE QUALIFICAÇÃO': 'GENERATE QUALIFICATION PACK',
+    'GERAR DOSSIÊ PÚBLICO (ZIP)': 'GENERATE PUBLIC PACK (ZIP)',
     'SOLICITAR PACOTE SOB NDA': 'REQUEST NDA PACK',
     'Segurança, privacidade e continuidade': 'Security, privacy and continuity',
     'da plataforma Orbit': 'of the Orbit platform',

@@ -189,6 +189,9 @@ export const trustHTML = `
                 <a href="#sia-indice" style="display:inline-flex;align-items:center;gap:8px;background:${gold};color:#0D1117;font-weight:800;font-size:15px;padding:16px 32px;border-radius:50px;text-decoration:none;letter-spacing:0.4px;box-shadow:0 8px 24px rgba(255,186,26,0.3);">
                     ${i18nText('VER CONTROLES', 'SEE CONTROLS')} <i class="fas fa-arrow-down"></i>
                 </a>
+                <a href="https://app.orbitgestao.com.br/dossie-seguranca" style="display:inline-flex;align-items:center;gap:8px;background:${gold};color:#0D1117;font-weight:800;font-size:15px;padding:16px 32px;border-radius:50px;text-decoration:none;letter-spacing:0.4px;">
+                    ${i18nText('GERAR DOSSIÊ DE QUALIFICAÇÃO', 'GENERATE QUALIFICATION PACK')} <i class="fas fa-download"></i>
+                </a>
                 <a href="#sia-documentos" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:${white};border:1.5px solid rgba(255,255,255,0.2);font-weight:700;font-size:15px;padding:16px 32px;border-radius:50px;text-decoration:none;">
                     ${i18nText('DOCUMENTOS SOB NDA', 'NDA DOCUMENTS')}
                 </a>
@@ -317,7 +320,7 @@ export const trustHTML = `
             <div style="${card}margin-bottom:18px;">
               <table class="sia-kv">
                 <tr><th>${i18nText('Executor', 'Executor')}</th><td>${i18nText('HOUS3 Digital — teste de intrusão independente (PTaaS)', 'HOUS3 Digital — independent intrusion test (PTaaS)')}</td></tr>
-                <tr><th>${i18nText('Atestado público', 'Public attestation')}</th><td>HOUS3-2026-0002 · <a href="https://www.hous3.com.br/v/orb26-p9n4" target="_blank" rel="noopener noreferrer" style="color:${gold};font-weight:700;">${i18nText('verificar em hous3.com.br', 'verify at hous3.com.br')}</a></td></tr>
+                <tr><th>${i18nText('Atestado público', 'Public attestation')}</th><td>HOUS3-2026-0002 · <a href="https://www.hous3.com.br/v/orb26-p9n4" target="_blank" rel="noopener noreferrer" style="color:${gold};font-weight:700;">${i18nText('verificar em hous3.com.br', 'verify at hous3.com.br')}</a>. ${i18nText('Data de calendário do ciclo: não afirmada além do identificador do atestado.', 'Calendar date of the cycle: not stated beyond the attestation identifier.')}</td></tr>
                 <tr><th>${i18nText('Escopo', 'Scope')}</th><td>${i18nText('Aplicação web e API (white-box), inclusive a camada de autenticação da plataforma Orbit', 'Web application and API (white-box), including the Orbit platform authentication layer')}</td></tr>
                 <tr><th>${i18nText('Resultado material', 'Material result')}</th><td>${i18nText('Não houve vazamento de dados entre organizações nem quebra do isolamento multi-tenant (RLS/RBAC resistiram ao teste)', 'No data leak between organizations and no break of multi-tenant isolation (RLS/RBAC held under test)')}</td></tr>
                 <tr><th>${i18nText('Tratamento', 'Remediation')}</th><td>${i18nText('Achados de resiliência da autenticação e da configuração web foram remediados no mesmo mês, com plano formal de fechamento', 'Authentication resilience and web configuration findings were remediated in the same month, with a formal closure plan')}</td></tr>
@@ -707,7 +710,10 @@ export const trustHTML = `
             )}
             ${packTable()}
             <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:28px;">
-              <a href="mailto:contato@orbitgestao.com.br?subject=Due%20diligence%20de%20seguranca%20%E2%80%94%20pacote%20NDA" style="display:inline-flex;align-items:center;gap:8px;background:${gold};color:#0D1117;font-weight:800;font-size:15px;padding:16px 28px;border-radius:50px;text-decoration:none;">
+              <a href="https://app.orbitgestao.com.br/dossie-seguranca" style="display:inline-flex;align-items:center;gap:8px;background:${gold};color:#0D1117;font-weight:800;font-size:15px;padding:16px 28px;border-radius:50px;text-decoration:none;">
+                ${i18nText('GERAR DOSSIÊ PÚBLICO (ZIP)', 'GENERATE PUBLIC PACK (ZIP)')} <i class="fas fa-download"></i>
+              </a>
+              <a href="mailto:contato@orbitgestao.com.br?subject=Due%20diligence%20de%20seguranca%20%E2%80%94%20pacote%20NDA" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:${white};border:1.5px solid rgba(255,255,255,0.2);font-weight:700;font-size:15px;padding:16px 28px;border-radius:50px;text-decoration:none;">
                 ${i18nText('SOLICITAR PACOTE SOB NDA', 'REQUEST NDA PACK')} <i class="fas fa-envelope"></i>
               </a>
               <a href="/politica-seguranca" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:${white};border:1.5px solid rgba(255,255,255,0.2);font-weight:700;font-size:15px;padding:16px 28px;border-radius:50px;text-decoration:none;">
