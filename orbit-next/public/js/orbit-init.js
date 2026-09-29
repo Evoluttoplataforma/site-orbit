@@ -1206,7 +1206,6 @@ function applyEnglish() {
     'por Parceiro': 'by Partner',
     'por Comunidade': 'by Community',
     'Perguntas frequentes': 'Frequently asked questions',
-    'Quanto eu realmente ganho?': 'How much do I really earn?',
     'Vou perder o controle do cliente?': 'Will I lose control of the client?',
     'Meus clientes são pequenos, vão pagar?': 'Are my clients too small to pay?',
     'E se o Orbit não atender minha metodologia?': "What if Orbit doesn't fit my methodology?",

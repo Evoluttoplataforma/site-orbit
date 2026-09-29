@@ -2864,18 +2864,6 @@ export const pageHTML = `
             <div class="faq-list" data-reveal>
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>Quanto eu realmente ganho?</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="faq-answer">
-                        <div class="faq-answer__inner">
-                            Você recebe R$ 250/mês por cliente ativado, com margem de aproximadamente 90%. Com 25 clientes ativos, são R$ 6.250/mês de receita recorrente. Além disso, você cobra normalmente pelo projeto de implementação.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
                         <span>Vou perder o controle do cliente?</span>
                         <i class="fas fa-chevron-down"></i>
                     </button>
