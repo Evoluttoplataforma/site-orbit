@@ -218,11 +218,12 @@ export const EVENTOS: NavLink[] = [
     iconColor: '#ffba1a',
     i18n: 'nav.ev.masterclass',
     i18nSub: 'nav.ev.masterclass.sub',
+    visibility: 'hidden',
   },
   {
     href: '/treinamentos',
     label: 'Treinamentos',
-    sub: 'Tira dúvidas e treinamento ao vivo',
+    sub: 'Tira dúvidas e mentorias ao vivo',
     icon: 'fas fa-chalkboard-teacher',
     iconColor: '#ffba1a',
     i18n: 'nav.ev.trainings',

@@ -2689,7 +2689,7 @@ function applyEnglish() {
     'nav.ev.live': 'Live Orbit', 'nav.ev.live.sub': 'Next edition coming soon',
     'nav.ev.bootcamp': 'Bootcamp Orbit', 'nav.ev.bootcamp.sub': 'Oct 15 · online and in-person',
     'nav.ev.masterclass': 'Consultants Masterclass', 'nav.ev.masterclass.sub': 'Thursday 6pm with Christian Hart',
-    'nav.ev.trainings': 'Training', 'nav.ev.trainings.sub': 'Live Q&A and training',
+    'nav.ev.trainings': 'Training', 'nav.ev.trainings.sub': 'Live Q&A and mentoring',
     'nav.ev.onboarding': 'Onboarding', 'nav.ev.onboarding.sub': 'Wed 9am/5pm • Fri 2pm',
     'nav.glossary': 'Glossary',
     'nav.security': 'Trust Center',

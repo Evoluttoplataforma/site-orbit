@@ -10,6 +10,8 @@ import { validateEmail } from '@/lib/email-validation';
 import {
   TRAINING_SESSIONS,
   TRAINING_BY_SLUG,
+  ZOOM_SESSIONS,
+  MENTORIA_SESSIONS,
   WEEKDAY_FULL,
   WEEKDAY_FULL_EN,
   slotLabel,
@@ -42,30 +44,42 @@ export function PageContent() {
     const root = ref.current;
 
     const grid = root.querySelector('#trainingGrid');
+    const mentoriaGrid = root.querySelector('#mentoriaGrid');
     if (!grid) return;
 
-    // ─── grade de sessões ────────────────────────────────────────────────
-    // A data da próxima ocorrência é INFORMAÇÃO (texto secundário), e o CTA é a
-    // ação. Antes a data vinha estilizada como botão dourado e as pessoas
-    // clicavam nela esperando ver a agenda, não abrir o formulário.
-    grid.innerHTML = TRAINING_SESSIONS.map((s) => {
+    function slotHTML(s: TrainingSession): string {
       const next = nextOccurrence(s);
-      const isTreino = s.kind === 'treinamento';
+      const isMentoria = s.kind === 'mentoria';
+      const when = i18nText(
+        `${WEEKDAY_FULL[s.weekday]} · ${timeLabel(s)}${s.cadence === 'biweekly' ? ' · a cada 15 dias' : ''}`,
+        `${WEEKDAY_FULL_EN[s.weekday]} · ${timeLabel(s)}${s.cadence === 'biweekly' ? ' · every 2 weeks' : ''}`
+      );
+      const nextLine =
+        s.cadence === 'biweekly'
+          ? `<p class="tr-slot__next"><i class="fa-solid fa-calendar-day"></i>${i18nText('Quinzenal · quinta 18h', 'Every 2 weeks · Thursday 6pm')}</p>`
+          : `<p class="tr-slot__next"><i class="fa-solid fa-calendar-day"></i>${i18nText('Próxima:', 'Next:')} <strong>${i18nText(longDateLabel(next), longDateLabelEn(next))}</strong></p>`;
+      const audience = s.audience
+        ? `<span class="tr-slot__audience">${i18nText(esc(s.audience), esc(s.audienceEn || s.audience))}</span>`
+        : '';
       return `
-        <button type="button" class="tr-slot${isTreino ? ' tr-slot--treino' : ''}" data-slug="${s.slug}"
+        <button type="button" class="tr-slot${isMentoria ? ' tr-slot--mentoria' : ''}" data-slug="${s.slug}"
                 aria-label="Inscrever-se em ${esc(s.title)}, ${WEEKDAY_FULL[s.weekday]} às ${timeLabel(s)}">
           <div class="tr-slot__head">
             <div class="tr-slot__icon"><i class="fa-solid ${s.icon}"></i></div>
             <div class="tr-slot__labels">
               <div class="tr-slot__title">${i18nText(esc(s.title), esc(s.titleEn))}</div>
-              <span class="tr-slot__when">${i18nText(`${WEEKDAY_FULL[s.weekday]} · ${timeLabel(s)}`, `${WEEKDAY_FULL_EN[s.weekday]} · ${timeLabel(s)}`)}</span>
+              <span class="tr-slot__when">${when}</span>
             </div>
           </div>
+          ${audience}
           ${i18nEl('p', esc(s.description), esc(s.descriptionEn), 'class="tr-slot__desc"')}
-          <p class="tr-slot__next"><i class="fa-solid fa-calendar-day"></i>${i18nText('Próxima:', 'Next:')} <strong>${i18nText(longDateLabel(next), longDateLabelEn(next))}</strong></p>
+          ${nextLine}
           <span class="tr-slot__cta">${i18nText('Quero participar', 'I want to join')} <i class="fa-solid fa-arrow-right"></i></span>
         </button>`;
-    }).join('');
+    }
+
+    grid.innerHTML = ZOOM_SESSIONS.map(slotHTML).join('');
+    if (mentoriaGrid) mentoriaGrid.innerHTML = MENTORIA_SESSIONS.map(slotHTML).join('');
 
     // ─── checkboxes do modal ─────────────────────────────────────────────
     const checksBox = root.querySelector('#trainingSessionChecks') as HTMLElement | null;
@@ -76,7 +90,7 @@ export function PageContent() {
           <input type="checkbox" name="sessions" value="${s.slug}">
           <span class="tr-check__body">
             <span class="tr-check__title">${i18nText(esc(s.title), esc(s.titleEn))} <span class="tr-check__when">${i18nText(slotLabel(s), slotLabelEn(s))}</span></span>
-            <span class="tr-check__desc">${i18nText(esc(s.description), esc(s.descriptionEn))}</span>
+            <span class="tr-check__desc">${i18nText(esc(s.audience || s.description), esc(s.audienceEn || s.descriptionEn))}</span>
           </span>
         </label>`
       ).join('');
@@ -110,8 +124,7 @@ export function PageContent() {
           b.checked = b.value === session.slug;
         });
       } else if (!boxes.some((b) => b.checked)) {
-        // abrindo pelo CTA geral sem nada marcado: sugere o treinamento
-        const suggested = boxes.find((b) => TRAINING_BY_SLUG[b.value]?.kind === 'treinamento');
+        const suggested = boxes.find((b) => TRAINING_BY_SLUG[b.value]?.kind === 'tira-duvidas');
         if (suggested) suggested.checked = true;
       }
       // marca o instante de abertura — o servidor rejeita preenchimento < 2s
@@ -137,6 +150,12 @@ export function PageContent() {
     }
 
     grid.querySelectorAll('.tr-slot').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const slug = (btn as HTMLElement).dataset.slug || '';
+        openModal(TRAINING_BY_SLUG[slug]);
+      });
+    });
+    mentoriaGrid?.querySelectorAll('.tr-slot').forEach((btn) => {
       btn.addEventListener('click', () => {
         const slug = (btn as HTMLElement).dataset.slug || '';
         openModal(TRAINING_BY_SLUG[slug]);

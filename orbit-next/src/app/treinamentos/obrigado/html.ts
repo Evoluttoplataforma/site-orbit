@@ -23,7 +23,7 @@ export const pageHTML = `
                 <i class="fa-solid fa-calendar-plus" style="color:#ffba1a;font-size:18px;"></i>
                 <strong style="color:#fff;font-size:15px;">Salvar na agenda</strong>
             </div>
-            <p style="color:#8B949E;font-size:13px;line-height:1.5;margin:0 0 16px;">O evento entra como <strong style="color:#C9D1D9;">recorrente semanal</strong> na sua agenda.</p>
+            <p style="color:#8B949E;font-size:13px;line-height:1.5;margin:0 0 16px;">O evento entra como <strong style="color:#C9D1D9;">recorrente</strong> na sua agenda.</p>
             <div id="trainingCalendarBtns" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;"></div>
         </div>
 

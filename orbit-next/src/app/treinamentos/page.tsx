@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { PageContent } from './content';
 
-const TITLE = 'Treinamento e Tira Dúvidas Orbit — ao vivo toda semana';
+const TITLE = 'Treinamentos e mentorias Orbit — ao vivo toda semana';
 const DESC =
-  'Três encontros ao vivo por semana pelo Zoom: Tira Dúvidas na segunda e na sexta, Treinamento na quarta. Inscreva-se uma vez e receba o convite de todas as próximas sessões.';
+  'Tira dúvidas no Zoom (segunda 17h e sexta 9h) e mentorias de canais no Google Meet (quarta e quinta 18h). Inscreva-se uma vez e receba o link no e-mail.';
 
 export const metadata: Metadata = {
   title: TITLE,

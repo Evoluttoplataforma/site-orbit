@@ -75,3 +75,7 @@
 # site apontam pra demonstracao.orbitgestao.com.br/chat. O 301 cobre links
 # antigos, anúncios e a URL caso o Google tenha indexado.
 /chat            https://demonstracao.orbitgestao.com.br/chat   301
+
+# ─── Masterclass /live/chris encerrada → hub de mentorias
+/live/chris            /treinamentos  301
+/live/chris/obrigado   /treinamentos  301

@@ -10,6 +10,7 @@ import {
   nextOccurrence,
   longDateLabel,
   timeLabel,
+  venueLabel,
   icalByDay,
   WEEKDAY_FULL,
   RECURRENCE_ENDS_AT,
@@ -76,7 +77,7 @@ export function PageContent() {
       // Sem slug reconhecível (link antigo, colado errado): não deixa a página vazia.
       if (msgEl) {
         msgEl.innerHTML =
-          'Sua inscrição foi registrada. O link de acesso e os detalhes das sessões estão no e-mail de confirmação que o Zoom acabou de enviar.';
+          'Sua inscrição foi registrada. O link de acesso e os detalhes das sessões estão no e-mail de confirmação.';
       }
       details.innerHTML = `
         <p style="color:#8B949E;font-size:14px;line-height:1.6;margin:0;">
@@ -91,7 +92,7 @@ export function PageContent() {
       const plural = sessions.length > 1;
       msgEl.innerHTML = `${firstName ? esc(firstName) + ', sua' : 'Sua'} inscrição está confirmada ${
         plural ? `nas <strong style="color:#fff;">${sessions.length} sessões</strong>` : 'na sessão'
-      } abaixo — e vale para <strong style="color:#fff;">todas as semanas</strong>. Você recebe o link por e-mail e um lembrete antes de cada encontro.`;
+      } abaixo — e vale para as <strong style="color:#fff;">próximas ocorrências</strong>. Você recebe o link por e-mail e um lembrete antes de cada encontro.`;
     }
 
     // ─── um bloco por sessão ─────────────────────────────────────────────
@@ -106,16 +107,25 @@ export function PageContent() {
         const next = nextOccurrence(s);
         const joinUrl = r?.join_url || '';
         const registered = r?.status === 'registered';
+        const venue = venueLabel(s);
+        const whenLine =
+          s.cadence === 'biweekly'
+            ? `${WEEKDAY_FULL[s.weekday]} · ${timeLabel(s)} &nbsp;•&nbsp; a cada 15 dias`
+            : `${WEEKDAY_FULL[s.weekday]} · ${timeLabel(s)} &nbsp;•&nbsp; toda semana`;
+        const nextLine =
+          s.cadence === 'biweekly'
+            ? `<span style="color:#6B7280;font-size:12px;display:block;margin-top:2px;">Quinzenal · quinta 18h</span>`
+            : `<span style="color:#6B7280;font-size:12px;display:block;margin-top:2px;">Próxima: ${longDateLabel(next)}</span>`;
 
         const button = joinUrl
           ? `<a href="${esc(joinUrl)}" target="_blank" rel="noopener noreferrer"
                 style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px 20px;background:linear-gradient(135deg,#2D8CFF,#1A6FD9);color:#fff;border-radius:50px;font-weight:800;font-size:14px;text-decoration:none;box-sizing:border-box;">
-               <i class="fa-solid fa-video"></i> Entrar no Zoom
+               <i class="fa-solid fa-video"></i> Entrar no ${esc(venue)}
              </a>`
           : `<p style="color:#8B949E;font-size:12.5px;line-height:1.5;margin:0;padding:12px 14px;background:rgba(45,140,255,0.06);border:1px solid rgba(45,140,255,0.2);border-radius:10px;">
                <i class="fa-solid fa-envelope" style="color:#2D8CFF;margin-right:6px;"></i>
                ${registered
-                 ? 'O link de acesso está no e-mail de confirmação do Zoom.'
+                 ? 'O link de acesso está no e-mail de confirmação.'
                  : 'Estamos finalizando seu cadastro — o link chega por e-mail em alguns minutos.'}
              </p>`;
 
@@ -127,8 +137,8 @@ export function PageContent() {
             </div>
             <div>
               <strong style="color:#fff;font-size:15px;display:block;">${esc(s.title)}</strong>
-              <span style="color:#8B949E;font-size:13px;">${WEEKDAY_FULL[s.weekday]} · ${timeLabel(s)} &nbsp;•&nbsp; toda semana</span>
-              <span style="color:#6B7280;font-size:12px;display:block;margin-top:2px;">Próxima: ${longDateLabel(next)}</span>
+              <span style="color:#8B949E;font-size:13px;">${whenLine}</span>
+              ${nextLine}
             </div>
           </div>
           ${button}
@@ -147,16 +157,20 @@ export function PageContent() {
     const events: CalendarEvent[] = sessions.map((s: TrainingSession) => {
       const r = byslug.get(s.slug);
       const location = r?.join_url || 'https://orbitgestao.com.br/treinamentos';
+      const desc =
+        s.kind === 'mentoria'
+          ? `Mentoria de canais Orbit (${venueLabel(s)}). Acesso: ${location}`
+          : s.kind === 'treinamento'
+          ? `Aula preparada da Orbit, passo a passo. Acesso: ${location}`
+          : `Perguntas e respostas ao vivo sobre o Orbit. A pauta é sua. Acesso: ${location}`;
       return {
         title: `${s.title} Orbit · ${WEEKDAY_FULL[s.weekday]}`,
         start: nextOccurrence(s),
         durationMin: s.durationMin,
-        description:
-          s.kind === 'treinamento'
-            ? `Aula preparada da Orbit, passo a passo. Acesso: ${location}`
-            : `Perguntas e respostas ao vivo sobre o Orbit. A pauta é sua. Acesso: ${location}`,
+        description: desc,
         location,
         byDay: icalByDay(s.weekday),
+        interval: s.cadence === 'biweekly' ? 2 : 1,
         until: RECURRENCE_ENDS_AT,
         uidKey: s.slug,
       };

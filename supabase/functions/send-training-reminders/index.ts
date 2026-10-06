@@ -55,7 +55,13 @@ interface SessionRow {
   start_time: string;
   duration_min: number;
   zoom_join_url: string | null;
+  cadence?: string;
 }
+
+const BIWEEKLY_SLUGS = new Set([
+  "qui-18-mentoria-consolidacao",
+  "qui-18-mentoria-expansao",
+]);
 
 function json(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -130,7 +136,7 @@ function upcomingOccurrences(s: SessionRow, from: Date, days = 3) {
 
 function subjectFor(kind: Kind, s: SessionRow, weekdayLabel: string, timeLbl: string): string {
   if (kind === "d1") return `Amanhã: ${s.title} Orbit · ${weekdayLabel} ${timeLbl}`;
-  return `Começa em 1 hora: ${s.title} Orbit — entre pelo Zoom`;
+  return `Começa em 1 hora: ${s.title} Orbit — entre pela sala`;
 }
 
 function htmlFor(
@@ -144,11 +150,12 @@ function htmlFor(
 ): string {
   const first = (nome || "").trim().split(/\s+/)[0] || "Olá";
   const isTreino = s.kind === "treinamento";
+  const isMentoria = s.kind === "mentoria";
   const headline = kind === "d1" ? "Amanhã tem sessão!" : "Começa em 1 hora!";
-  // Sem prometer que a dúvida será resolvida ao vivo — não está sob nosso controle.
-  // O que a sessão entrega é resposta e direção.
   const pitch = isTreino
     ? "É aula preparada, passo a passo. Se puder, deixe o Orbit aberto ao lado para acompanhar."
+    : isMentoria
+    ? "Mentoria de canais com quem já fez. Entre no horário — o link abaixo abre a sala."
     : "A pauta é sua: chegue com a dúvida ou o caso que quer entender, e a gente responde ao vivo.";
   const cta = kind === "d1" ? "VER O LINK DE ACESSO" : "ENTRAR AGORA";
 
@@ -260,6 +267,7 @@ Deno.serve(async (req) => {
   let pendingTail = 0;
 
   for (const s of (sessions || []) as SessionRow[]) {
+    if (s.cadence === "biweekly" || BIWEEKLY_SLUGS.has(s.slug)) continue;
     for (const occ of upcomingOccurrences(s, now, 3)) {
       const leadMin = Math.round((occ.startUtc.getTime() - now.getTime()) / 60000);
       for (const kind of kinds) {

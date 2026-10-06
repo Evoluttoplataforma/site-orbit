@@ -56,6 +56,8 @@ export interface CalendarEvent {
   location: string;
   /** BYDAY do iCal: 'MO' | 'WE' | 'FR' … Presente = evento semanal recorrente. */
   byDay?: string;
+  /** 2 = quinzenal. Só vale junto de byDay. */
+  interval?: number;
   /**
    * Fim da recorrência. Sem isso a RRULE não tem UNTIL e o evento se repete para
    * sempre — o Google notifica cada ocorrência, indefinidamente.
@@ -72,8 +74,9 @@ export interface CalendarEvent {
  * RFC 5545 exige que, nesse caso, o UNTIL seja UTC. Passar hora local aqui faz o Google
  * ignorar a recorrência inteira em vez de reclamar.
  */
-function weeklyRule(byDay: string, until?: Date): string {
-  return `RRULE:FREQ=WEEKLY;BYDAY=${byDay}` + (until ? `;UNTIL=${utcStamp(until)}` : '');
+function weeklyRule(byDay: string, until?: Date, interval = 1): string {
+  const iv = interval > 1 ? `;INTERVAL=${interval}` : '';
+  return `RRULE:FREQ=WEEKLY${iv};BYDAY=${byDay}` + (until ? `;UNTIL=${utcStamp(until)}` : '');
 }
 
 /** Google Calendar. `recur` faz o evento nascer recorrente. */
@@ -90,7 +93,7 @@ export function buildGoogleUrl(ev: CalendarEvent): string {
   let url = `https://calendar.google.com/calendar/render?${params.toString()}`;
   if (ev.byDay) {
     // Não passa pelo URLSearchParams: o Google espera a RRULE literal aqui.
-    url += `&recur=${encodeURIComponent(weeklyRule(ev.byDay, ev.until))}`;
+    url += `&recur=${encodeURIComponent(weeklyRule(ev.byDay, ev.until, ev.interval))}`;
   }
   return url;
 }
@@ -150,7 +153,7 @@ export function buildICS(events: CalendarEvent[]): string {
       `DTSTAMP:${stamp}`,
       `DTSTART;TZID=${TZ}:${localStamp(ev.start)}`,
       `DTEND;TZID=${TZ}:${localStamp(end)}`,
-      ...(ev.byDay ? [weeklyRule(ev.byDay, ev.until)] : []),
+      ...(ev.byDay ? [weeklyRule(ev.byDay, ev.until, ev.interval)] : []),
       `SUMMARY:${escICS(ev.title)}`,
       `DESCRIPTION:${escICS(ev.description)}`,
       `LOCATION:${escICS(ev.location)}`,

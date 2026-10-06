@@ -1,21 +1,30 @@
-# /treinamentos — inscrição única no Zoom
+# /treinamentos — inscrição única (Zoom + Google Meet)
 
 Como funciona, o que falta ligar, e o que fazer quando algo quebrar.
 
 ## O que a página faz
 
-A pessoa marca uma ou mais das 3 sessões, preenche 4 campos e é registrada no Zoom
-**uma vez, valendo para todas as semanas**. Depois recebe lembrete 1 dia antes e
-1 hora antes de cada sessão.
+A pessoa marca uma ou mais sessões, preenche 4 campos e recebe o link da sala
+**uma vez, valendo para as próximas ocorrências**. Tira dúvidas entra no Zoom
+(registro via API). Mentorias de canais entram no Google Meet (sala da tabela,
+enviada só depois da inscrição). Lembrete 1 dia antes e 1 hora antes — exceto
+as mentorias quinzenais de quinta, que ainda não têm âncora de semana.
 
-| Dia | Sessão | Hora | Natureza |
-|---|---|---|---|
-| Segunda | Tira Dúvidas | 17h | Sem conteúdo preparado — a pauta é do cliente |
-| Quarta | **Treinamento** | 10h | Aula estruturada, passo a passo |
-| Sexta | Tira Dúvidas | 09h | Sem conteúdo preparado |
+| Dia | Sessão | Hora | Sala | Cadência |
+|---|---|---|---|---|
+| Segunda | Tira Dúvidas | 17h | Zoom | Semanal |
+| Sexta | Tira Dúvidas | 09h | Zoom | Semanal |
+| Quarta | Mentoria de Adoção | 18h | Google Meet | Semanal |
+| Quinta | Mentoria de Consolidação | 18h | Google Meet | A cada 15 dias |
+| Quinta | Mentoria de Expansão | 18h | Google Meet | A cada 15 dias |
 
-Terça (Live Orbit 13h) e Quinta (Live de Negócios 18h, só canais) aparecem como
-cards que levam para `/live` e `/live/chris` — não têm inscrição aqui.
+`/live/chris` (Masterclass) foi substituída por essas mentorias: 301 para
+`/treinamentos`. O link do Meet **não** vai no card público — só no e-mail e
+na página de obrigado depois do cadastro.
+
+Quarta 10h (Treinamento Zoom) saiu da grade. Desativar `qua-10-treinamento` e
+`qui-18-masterclass` no banco **depois** do deploy do site, senão a página
+atual em produção quebra a inscrição de quarta.
 
 ### Por que reunião e não webinar
 
@@ -32,7 +41,7 @@ nosso, em `send-training-reminders`. Essa é a razão de existir aquela function
 | Links de agenda | `orbit-next/src/lib/calendar-links.ts` | Google/Outlook/`.ics`, com recorrência semanal |
 | Página | `orbit-next/src/app/treinamentos/{page,content,html}` | Checkboxes, sem seletor de data |
 | Obrigado | `.../treinamentos/obrigado/content.tsx` | Um bloco por sessão, `join_url` pessoal via `sessionStorage` |
-| Inscrição | `supabase/functions/register-training` | Lead + upsert + Zoom + CRM |
+| Inscrição | `supabase/functions/register-training` | Lead + upsert + Zoom + CRM (link + tags) + ManyChat + e-mail |
 | Cliente Zoom | `supabase/functions/_shared/zoom.ts` | OAuth S2S, `addMeetingRegistrant`, `createWeeklyMeeting` |
 | Lembretes | `supabase/functions/send-training-reminders` | d1 e h1, claim-then-send |
 | Descadastro | `supabase/functions/training-unsubscribe` | `?r=<registration_id>` |
@@ -50,6 +59,8 @@ valida os slugs recebidos contra a tabela, então desalinhamento falha alto.
 Em `marketplace.zoom.us` → Develop → Build App → **Server-to-Server OAuth**.
 Escopos: `meeting:write:registrant:admin` e `meeting:read:meeting:admin`
 (mais `meeting:write:admin` se quiser que eu crie as reuniões pela API).
+Para o Bootcamp (webinar): `webinar:write:registrant:admin` e
+`webinar:read:list_registrants:admin`.
 
 Anote **Account ID**, **Client ID** e **Client Secret**.
 
@@ -121,6 +132,44 @@ curl -X POST .../functions/v1/send-training-reminders \
   -d '{"dry_run":true,"now":"2026-08-04T13:05:00Z"}'
 ```
 
+## ManyChat (confirmação + lembrete com link individual)
+
+A API só cria o contato, grava o campo e aplica a tag. A mensagem em si é um
+fluxo no canvas. Sem o canvas, o WhatsApp não sai.
+
+**Campos custom (criar uma vez, nomes exatos):**
+
+| Campo | Uso |
+|---|---|
+| `link_individual_zoom` | `join_url` pessoal. Placeholder no fluxo. |
+| `origem-evento` | "Masterclass Consultores" / "Bootcamp" / "Treinamento" |
+| `nome-do-evento` | título da sessão |
+| `data-e-horario-da-live` | datetime da próxima ocorrência (já existia) |
+
+**Tags aplicadas na inscrição:**
+
+| Tag | Quem recebe |
+|---|---|
+| `confirmacao-inscricao` | todo mundo, na hora — dispara o fluxo de "inscrição confirmada" |
+| `masterclass-consultores` | legado `/live/chris` (encerrada) |
+| `bootcamp` | `/bootcamp-orbit` |
+| `treinamento` | aula (legado quarta 10h) |
+| `tira-duvidas` | segunda 17h / sexta 9h |
+| `mentoria` | Adoção / Consolidação / Expansão |
+| slug da sessão | `qua-18-mentoria-adocao`, `seg-17-tira-duvidas`, etc. |
+
+**Dois fluxos no canvas:**
+
+1. **Confirmação** — gatilho: tag `confirmacao-inscricao` adicionada. Texto com
+   `{{origem-evento}}` e botão/URL `{{link_individual_zoom}}`.
+2. **Perto da sessão** — gatilho: `data-e-horario-da-live` (1h antes, ou o delay
+   que já usam nas lives). Mesmo campo de link. Segmentar pela tag de origem se
+   o texto mudar entre masterclass, bootcamp e treinamento.
+
+O CRM grava o mesmo link em `cf_evento_link_individual_do_zoom` e nas notas do
+card. Um card por pessoa no funil Treinamento: nova inscrição (masterclass,
+bootcamp, live) atualiza o existente.
+
 ## Runbook
 
 ### Alguém não recebeu o link
@@ -190,11 +239,12 @@ active = false where slug = '...'` e remover de `TRAINING_SESSIONS`.
 - **A página nunca foi traduzida para EN.** Nenhuma string dela está no dicionário
   de `orbit-init.js` — nem antes desta mudança. Se for traduzir, traduza a página
   inteira; parcial fica pior que nada.
-- **Quem confirma a inscrição é o próprio e-mail do Zoom**, não uma function nossa
-  (`registrants_confirmation_email: true` em `_shared/zoom.ts`). A antiga
-  `send-training-confirmation`, órfã e com a grade de 10 slugs, foi removida do repo em
-  11/08/2026 — está no histórico do git se precisar. Se um dia quiserem e-mail próprio na
-  inscrição, escrevam do zero para multi-sessão; não ressuscitem aquela.
+- **E-mail de confirmação na inscrição é nosso** (`register-training` via MailerSend),
+  com o `join_url` pessoal. O Zoom ainda manda o e-mail dele também. Perto da sessão
+  o cron `send-training-reminders` reenvia o mesmo link (d1 e h1).
+- **WhatsApp:** `register-training` cria o contato no ManyChat, grava
+  `link_individual_zoom` e aplica a tag de origem + `confirmacao-inscricao`.
+  O canvas do ManyChat é que envia a mensagem — ver seção ManyChat abaixo.
 - **`last_name` sempre vai no cadastro do inscrito, mesmo vazio** (`_shared/zoom.ts`).
   A conta exige o campo: omiti-lo devolve 400 code 300, classificado `permanent`, então o
   retry nunca reprocessa. Isso silenciou 10 inscrições de gente que digitou só o primeiro

@@ -1,31 +1,8 @@
-import { TRAINING_SESSIONS, TRAINING_LIVE_CARDS, WEEKDAY_SHORT, WEEKDAY_SHORT_EN, timeLabel } from '@/lib/training-sessions';
+import { ZOOM_SESSIONS, WEEKDAY_SHORT, WEEKDAY_SHORT_EN, timeLabel } from '@/lib/training-sessions';
 import { i18nText, i18nEl } from '@/lib/i18n-html';
 
-// Chips do hero e textos da agenda vêm da fonte única (src/lib/training-sessions.ts),
-// não mais cravados aqui — antes mudar um horário exigia editar 3 arquivos.
-//
-// Só UM chip resume a agenda. Antes eram 5 chips (3 sessões + Zoom + gratuito), o
-// que competia com o botão principal em vez de apoiá-lo.
-const agendaResumo = TRAINING_SESSIONS.map((s) => `${WEEKDAY_SHORT[s.weekday]} ${timeLabel(s)}`).join(' · ');
-const agendaResumoEn = TRAINING_SESSIONS.map((s) => `${WEEKDAY_SHORT_EN[s.weekday]} ${timeLabel(s)}`).join(' · ');
-
-// O chip de "quando" vem de whenLabel, nao de dia+hora: a Live Orbit acontece em
-// datas pontuais do mes, entao mostrar "Terça · 13h" daria a entender que e semanal.
-const liveCards = TRAINING_LIVE_CARDS.filter((c) => !c.hidden).map(
-  (c) => `
-            <a class="tr-live${c.cadence === 'pontual' ? ' tr-live--pontual' : ''}" href="${c.href}">
-                <div class="tr-live__icon"><i class="fa-solid ${c.icon}"></i></div>
-                <div class="tr-live__body">
-                    <div class="tr-live__top">
-                        <span class="tr-live__title">${i18nText(c.title, c.titleEn)}</span>
-                        ${c.note ? `<span class="tr-live__note">${i18nText(c.note, c.noteEn || c.note)}</span>` : ''}
-                        <span class="tr-live__day">${i18nText(c.whenLabel, c.whenLabelEn || c.whenLabel)}</span>
-                    </div>
-                    ${i18nEl('p', c.description, c.descriptionEn, 'class="tr-live__desc"')}
-                </div>
-                <span class="tr-live__arrow"><i class="fa-solid fa-arrow-right"></i></span>
-            </a>`
-).join('');
+const agendaResumo = ZOOM_SESSIONS.map((s) => `${WEEKDAY_SHORT[s.weekday]} ${timeLabel(s)}`).join(' · ');
+const agendaResumoEn = ZOOM_SESSIONS.map((s) => `${WEEKDAY_SHORT_EN[s.weekday]} ${timeLabel(s)}`).join(' · ');
 
 export const pageHTML = `
 <style>
@@ -59,8 +36,22 @@ export const pageHTML = `
   .tr-how .tr-section__sub { color: #8B949E; }
 
   /* ═══════════════ CARDS DE SESSÃO ═══════════════ */
-  .tr-week { max-width: 1060px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
-  @media (max-width: 940px) { .tr-week { grid-template-columns: 1fr; max-width: 480px; } }
+  .tr-week { max-width: 760px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; align-items: stretch; }
+  @media (max-width: 760px) { .tr-week { grid-template-columns: 1fr; max-width: 480px; } }
+
+  .tr-mentorias { max-width: 1060px; margin: 52px auto 0; padding-top: 40px; border-top: 1px solid rgba(13,17,23,0.10); }
+  .tr-mentorias__head { text-align: center; margin-bottom: 28px; }
+  .tr-mentorias__head h3 { color: #0D1117; font-size: clamp(1.35rem, 2.6vw, 1.7rem); font-weight: 800; margin: 0 0 8px; letter-spacing: -0.02em; }
+  .tr-mentorias__head p { color: #4B5563; font-size: 0.95rem; line-height: 1.55; margin: 0 auto; max-width: 560px; }
+  .tr-mentoria-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: stretch; }
+  @media (max-width: 940px) { .tr-mentoria-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; } }
+  .tr-slot--mentoria .tr-slot__icon { background: linear-gradient(135deg, #3FB950, #2EA043); color: #fff; }
+  .tr-slot--mentoria .tr-slot__when { color: #7EE787; }
+  .tr-slot--mentoria .tr-slot__cta { background: rgba(63,185,80,0.12); border-color: rgba(63,185,80,0.35); color: #7EE787; }
+  .tr-slot--mentoria:hover .tr-slot__cta { background: linear-gradient(135deg, #3FB950, #2EA043); border-color: transparent; color: #0D1117; }
+  .tr-slot--mentoria:hover { border-color: rgba(63,185,80,0.45); }
+  .tr-slot--mentoria::before { background: linear-gradient(90deg, #3FB950, #2EA043); }
+  .tr-slot__audience { display: inline-block; margin: 0 0 12px; padding: 3px 9px; border-radius: 50px; background: rgba(63,185,80,0.14); color: #7EE787; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px; }
 
   .tr-slot { display: flex; flex-direction: column; background: linear-gradient(180deg, #161B22 0%, #0D1117 100%); border: 1px solid rgba(255,255,255,0.10); border-radius: 18px; padding: 22px; cursor: pointer; transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; position: relative; overflow: hidden; flex: 1; color: inherit; appearance: none; -webkit-appearance: none; text-align: left; font: inherit; width: 100%; }
   .tr-slot::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #ffba1a 0%, #ff8c00 100%); opacity: 0; transition: opacity 0.25s; }
@@ -232,13 +223,13 @@ export const pageHTML = `
 <section class="tr-hero">
     <div class="tr-hero__inner">
         <span class="tr-hero__badge"><i class="fa-solid fa-graduation-cap"></i>${i18nText('Treinamentos Orbit', 'Orbit Trainings')}</span>
-        ${i18nEl('h1', 'Treinamento e tira dúvidas <span class="accent">ao vivo</span>, toda semana.', 'Live <span class="accent">training and Q&amp;A</span>, every week.')}
-        ${i18nEl('p', 'Inscreva-se uma vez e receba o convite de todas as próximas sessões. Ao vivo pelo Zoom, com espaço para perguntar, mostrar a tela e conversar.', 'Sign up once and receive the invite for every upcoming session. Live on Zoom, with room to ask, share your screen and talk.', 'class="lead"')}
+        ${i18nEl('h1', 'Tira dúvidas e mentorias <span class="accent">ao vivo</span>, toda semana.', 'Live <span class="accent">Q&amp;A and mentoring</span>, every week.')}
+        ${i18nEl('p', 'Inscreva-se uma vez e receba o convite das próximas sessões. Tira dúvidas no Zoom; mentorias de canais no Google Meet. Tudo nesta página.', 'Sign up once and receive the invite for upcoming sessions. Q&amp;A on Zoom; channel mentoring on Google Meet. All on this page.', 'class="lead"')}
 
         <div class="tr-hero__agenda">
             <span class="tr-hero__agenda-item"><i class="fa-solid fa-calendar-week"></i>${i18nText(agendaResumo, agendaResumoEn)}</span>
             <span class="tr-hero__agenda-sep"></span>
-            <span class="tr-hero__agenda-item tr-hero__agenda-zoom"><i class="fa-solid fa-video"></i>${i18nText('Pelo Zoom', 'On Zoom')}</span>
+            <span class="tr-hero__agenda-item"><i class="fa-solid fa-handshake"></i>${i18nText('Mentorias Qua e Qui 18h', 'Mentoring Wed and Thu 6pm')}</span>
             <span class="tr-hero__agenda-sep"></span>
             <span class="tr-hero__agenda-item"><i class="fa-solid fa-circle-check" style="color:#3FB950;"></i>${i18nText('Gratuito', 'Free')}</span>
         </div>
@@ -259,18 +250,17 @@ export const pageHTML = `
 <section class="tr-section" style="padding-top:44px;">
     <div class="tr-section__head">
         <span class="tr-section__eyebrow">${i18nText('Agenda da semana', 'This week\'s agenda')}</span>
-        ${i18nEl('h2', 'Três encontros por semana', 'Three sessions a week', 'class="tr-section__title"')}
-        ${i18nEl('p', 'Escolha os que fazem sentido para você. A inscrição é única e vale para todas as semanas seguintes.', 'Pick the ones that make sense for you. Sign-up is once and covers every following week.', 'class="tr-section__sub"')}
+        ${i18nEl('h2', 'Tira dúvidas ao vivo', 'Live Q&amp;A', 'class="tr-section__title"')}
+        ${i18nEl('p', 'Segunda e sexta no Zoom. Escolha os horários que fazem sentido. A inscrição é única e vale para as semanas seguintes.', 'Monday and Friday on Zoom. Pick the times that work for you. Sign-up is once and covers the following weeks.', 'class="tr-section__sub"')}
     </div>
     <div class="tr-week" id="trainingGrid"></div>
 
-    <div class="tr-lives-wrap">
-        <div class="tr-lives-wrap__head">
-            ${i18nEl('h3', 'Outras sessões ao vivo', 'Other live sessions')}
-            ${i18nEl('p', 'Cada uma tem página e inscrição próprias.', 'Each one has its own page and registration.')}
+    <div class="tr-mentorias">
+        <div class="tr-mentorias__head">
+            ${i18nEl('h3', 'Mentorias de canais', 'Channel mentoring')}
+            ${i18nEl('p', 'Com Christian Hart, no Google Meet. Inscreva-se aqui — o link da sala chega no e-mail depois do cadastro. Quinta alterna o público a cada 15 dias.', 'With Christian Hart, on Google Meet. Sign up here — the room link arrives by email after registration. Thursday alternates audience every 2 weeks.')}
         </div>
-        <div class="tr-lives">${liveCards}
-        </div>
+        <div class="tr-mentoria-grid" id="mentoriaGrid"></div>
     </div>
 </section>
 
@@ -285,7 +275,7 @@ export const pageHTML = `
             <div class="tr-step__num">01</div>
             <div class="tr-step__icon"><i class="fa-solid fa-list-check"></i></div>
             ${i18nEl('h3', 'Escolha as sessões', 'Choose the sessions')}
-            ${i18nEl('p', 'No <strong style="color:#fff;">Tira Dúvidas</strong> a pauta é sua. O <strong style="color:#fff;">Treinamento</strong> é aula preparada. Dá para marcar mais de uma.', 'In <strong style="color:#fff;">Q&amp;A</strong> the agenda is yours. <strong style="color:#fff;">Training</strong> is a prepared class. You can pick more than one.')}
+            ${i18nEl('p', 'No <strong style="color:#fff;">Tira Dúvidas</strong> a pauta é sua, no Zoom. As <strong style="color:#fff;">mentorias</strong> são no Google Meet, por etapa da consultoria. Dá para marcar mais de uma.', 'In <strong style="color:#fff;">Q&amp;A</strong> the agenda is yours, on Zoom. <strong style="color:#fff;">Mentoring</strong> is on Google Meet, by consultancy stage. You can pick more than one.')}
         </div>
         <div class="tr-step">
             <div class="tr-step__num">02</div>
@@ -297,7 +287,7 @@ export const pageHTML = `
             <div class="tr-step__num">03</div>
             <div class="tr-step__icon"><i class="fa-solid fa-bell" style="color:#2D8CFF;"></i></div>
             ${i18nEl('h3', 'Receba o lembrete', 'Get the reminder')}
-            ${i18nEl('p', 'O link do Zoom chega por e-mail na inscrição, e avisamos <strong style="color:#fff;">1 dia antes</strong> e <strong style="color:#fff;">1 hora antes</strong> de cada encontro.', 'The Zoom link arrives by email when you sign up, and we remind you <strong style="color:#fff;">1 day before</strong> and <strong style="color:#fff;">1 hour before</strong> each session.')}
+            ${i18nEl('p', 'O link (Zoom ou Google Meet) chega por e-mail na inscrição. No tira dúvidas e na mentoria de Adoção avisamos <strong style="color:#fff;">1 dia antes</strong> e <strong style="color:#fff;">1 hora antes</strong>. As de quinta são a cada 15 dias — o link fica no e-mail.', 'The link (Zoom or Google Meet) arrives by email when you sign up. For Q&amp;A and Adoption mentoring we remind you <strong style="color:#fff;">1 day before</strong> and <strong style="color:#fff;">1 hour before</strong>. Thursday sessions are every 2 weeks — the link stays in the email.')}
         </div>
     </div>
 </section>
@@ -311,8 +301,8 @@ export const pageHTML = `
             <h2 class="tr-modal__title i18n-en">Free registration</h2>
             ${i18nEl('p', 'Escolha as sessões e preencha seus dados', 'Choose the sessions and fill in your details', 'class="tr-modal__sub"')}
             <div class="tr-modal__meta">
-                <span class="tr-modal__chip zoom"><i class="fa-solid fa-video"></i>${i18nText('Ao vivo pelo Zoom', 'Live on Zoom')}</span>
-                <span class="tr-modal__chip"><i class="fa-solid fa-repeat"></i>${i18nText('Toda semana', 'Every week')}</span>
+                <span class="tr-modal__chip zoom"><i class="fa-solid fa-video"></i>${i18nText('Zoom e Google Meet', 'Zoom and Google Meet')}</span>
+                <span class="tr-modal__chip"><i class="fa-solid fa-repeat"></i>${i18nText('Agenda semanal', 'Weekly agenda')}</span>
                 <span class="tr-modal__chip"><i class="fa-solid fa-clock"></i>${i18nText('1 hora', '1 hour')}</span>
             </div>
         </div>
@@ -324,7 +314,7 @@ export const pageHTML = `
 
                 <div class="tr-modal__note">
                     <i class="fa-solid fa-circle-info"></i>
-                    <span>${i18nText('Você se inscreve <strong style="color:#fff;">uma vez</strong> e recebe o convite das próximas sessões. O link de acesso chega no seu e-mail.', 'You sign up <strong style="color:#fff;">once</strong> and receive the invite for upcoming sessions. The access link arrives in your email.')}</span>
+                    <span>${i18nText('Você se inscreve <strong style="color:#fff;">uma vez</strong>. Tira dúvidas entra pelo Zoom; mentoria pelo Google Meet. O link chega no seu e-mail.', 'You sign up <strong style="color:#fff;">once</strong>. Q&amp;A is on Zoom; mentoring on Google Meet. The link arrives in your email.')}</span>
                 </div>
 
                 <label class="tr-modal__label">${i18nText('Seus dados', 'Your details')}</label>
