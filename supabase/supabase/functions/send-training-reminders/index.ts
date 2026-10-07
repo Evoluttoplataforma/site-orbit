@@ -229,6 +229,250 @@ async function sendOne(
   return { ok, messageId, status: resp.status };
 }
 
+const NOTICE_QUA10_TYPE = "treinamento_aviso_qua10_encerrada";
+const NOTICE_QUA10_SUBJECT = "A sessão de quarta 10h saiu da grade";
+
+function noticeQua10HTML(nome: string, unsubUrl: string): string {
+  const first = (nome || "").trim().split(/\s+/)[0] || "Olá";
+  return `<div style="font-family:'Plus Jakarta Sans',Arial,sans-serif;max-width:600px;margin:0 auto;background:#0D1117;color:#fff;border-radius:12px;overflow:hidden;">
+<div style="background:linear-gradient(135deg,#0D1117 0%,#1a1f2e 100%);padding:40px 32px;text-align:center;">
+<img src="${SITE}/images/logo-orbit-white.png" alt="Orbit" style="height:40px;margin-bottom:24px;">
+<h1 style="color:#ffba1a;font-size:24px;margin:0 0 8px;font-weight:800;">Amanhã 10h não tem mais aula</h1>
+<p style="color:#C9D1D9;font-size:16px;margin:0;font-weight:600;">A sessão de quarta 10h saiu da grade</p>
+</div>
+<div style="padding:32px;">
+<p style="font-size:16px;line-height:1.7;color:#C9D1D9;">Olá <strong style="color:#fff;">${first}</strong>,</p>
+<p style="font-size:16px;line-height:1.7;color:#C9D1D9;">Hoje de manhã você recebeu um lembrete de que amanhã, quarta, às 10h, haveria treinamento. Esse horário <strong style="color:#fff;">não existe mais</strong> — a grade mudou.</p>
+<p style="font-size:16px;line-height:1.7;color:#C9D1D9;">Quem quiser continuar, a pauta aberta segue na tira-dúvidas: <strong style="color:#ffba1a;">segunda 17h</strong> e <strong style="color:#ffba1a;">sexta 9h</strong>. As mentorias de canais são <strong style="color:#ffba1a;">quarta 18h</strong> (Adoção) e <strong style="color:#ffba1a;">quinta 18h</strong> (Consolidação / Expansão, semanas alternadas).</p>
+<div style="text-align:center;margin:32px 0;">
+<a href="${SITE}/treinamentos" style="display:inline-block;background:#ffba1a;color:#0D1117;font-weight:700;font-size:16px;padding:16px 40px;border-radius:8px;text-decoration:none;">VER A GRADE ATUAL</a>
+</div>
+<p style="font-size:13px;line-height:1.6;color:#8B949E;text-align:center;">Não precisa se inscrever de novo se você já tem ficha numa dessas sessões. Se ainda não tem, escolha na página.</p>
+</div>
+<div style="padding:20px 32px;border-top:1px solid #21262d;text-align:center;">
+<p style="font-size:12px;color:#484F58;margin:0 0 8px;">Orbit Gestão — Gestão Operada por IA</p>
+<p style="font-size:11px;color:#484F58;margin:0;"><a href="${unsubUrl}" style="color:#6B7280;">Não quero mais receber avisos destas sessões</a></p>
+</div>
+</div>`;
+}
+
+async function noticeCancelledQua10(
+  sb: ReturnType<typeof createClient>,
+  dryRun: boolean,
+  limit: number
+) {
+  const sinceD1 = "2026-10-06T00:00:00Z";
+  const sinceLate = "2026-10-06T20:00:00Z";
+
+  const [{ data: d1, error: e1 }, { data: late, error: e2 }, { data: already, error: e3 }] =
+    await Promise.all([
+      sb.from("email_logs")
+        .select("recipient_email,recipient_name")
+        .eq("email_type", "treinamento_d1_qua-10-treinamento")
+        .eq("success", true)
+        .gte("created_at", sinceD1),
+      sb.from("training_registrations")
+        .select("id,email,nome")
+        .eq("session_slug", "qua-10-treinamento")
+        .gte("created_at", sinceLate),
+      sb.from("email_logs")
+        .select("recipient_email")
+        .eq("email_type", NOTICE_QUA10_TYPE)
+        .eq("success", true),
+    ]);
+
+  if (e1 || e2 || e3) {
+    console.error("[send-training-reminders] notice query failed", e1, e2, e3);
+    return json({ ok: false, error: "notice_query_failed" }, 500);
+  }
+
+  const alreadySet = new Set(
+    (already || []).map((r) => String(r.recipient_email || "").trim().toLowerCase()).filter(Boolean)
+  );
+
+  const byEmail = new Map<string, { email: string; nome: string }>();
+  for (const r of d1 || []) {
+    const email = String(r.recipient_email || "").trim().toLowerCase();
+    if (!email.includes("@") || alreadySet.has(email)) continue;
+    byEmail.set(email, { email, nome: String(r.recipient_name || "") });
+  }
+  for (const r of late || []) {
+    const email = String(r.email || "").trim().toLowerCase();
+    if (!email.includes("@") || alreadySet.has(email)) continue;
+    const prev = byEmail.get(email);
+    byEmail.set(email, { email, nome: String(r.nome || prev?.nome || "") });
+  }
+
+  const idByEmail = new Map<string, string>();
+  const { data: regs } = await sb
+    .from("training_registrations")
+    .select("id,email")
+    .eq("session_slug", "qua-10-treinamento");
+  for (const r of regs || []) {
+    const email = String(r.email || "").trim().toLowerCase();
+    if (email && r.id && !idByEmail.has(email)) idByEmail.set(email, String(r.id));
+  }
+
+  const list = [...byEmail.values()].slice(0, limit);
+  if (dryRun) {
+    return json({
+      ok: true,
+      dry_run: true,
+      mode: "notice_cancelled_session",
+      to_send: list.length,
+      skipped_already: alreadySet.size,
+    });
+  }
+
+  let sent = 0;
+  let failed = 0;
+  let stopped = false;
+  for (const p of list) {
+    const rid = idByEmail.get(p.email);
+    const unsub = rid
+      ? `${SUPABASE_URL}/functions/v1/training-unsubscribe?r=${rid}`
+      : `${SITE}/treinamentos`;
+    const res = await sendOne(
+      p.email,
+      p.nome,
+      NOTICE_QUA10_SUBJECT,
+      noticeQua10HTML(p.nome, unsub),
+      NOTICE_QUA10_TYPE,
+      unsub
+    );
+    if (res.ok) sent++;
+    else {
+      failed++;
+      if (res.status === 429) {
+        stopped = true;
+        console.warn("[send-training-reminders] mailersend 429, stopping notice batch");
+        break;
+      }
+    }
+    await new Promise((r2) => setTimeout(r2, 120));
+  }
+
+  return json({
+    ok: true,
+    mode: "notice_cancelled_session",
+    sent,
+    failed,
+    total: list.length,
+    stopped_429: stopped,
+  });
+}
+
+const NOTICE_ADOCAO_MEET_TYPE = "treinamento_aviso_adocao_meet_20261007";
+const NOTICE_ADOCAO_MEET_SUBJECT = "Mentoria de Adoção: entre por este link";
+const ADOCAO_MEET_URL = "https://meet.google.com/mzv-hpim-aeq";
+
+function noticeAdocaoMeetHTML(nome: string, joinUrl: string, unsubUrl: string): string {
+  const first = (nome || "").trim().split(/\s+/)[0] || "Olá";
+  return `<div style="font-family:'Plus Jakarta Sans',Arial,sans-serif;max-width:600px;margin:0 auto;background:#0D1117;color:#fff;border-radius:12px;overflow:hidden;">
+<div style="background:linear-gradient(135deg,#0D1117 0%,#1a1f2e 100%);padding:40px 32px;text-align:center;">
+<img src="${SITE}/images/logo-orbit-white.png" alt="Orbit" style="height:40px;margin-bottom:24px;">
+<h1 style="color:#ffba1a;font-size:24px;margin:0 0 8px;font-weight:800;">O link da sala mudou</h1>
+<p style="color:#C9D1D9;font-size:16px;margin:0;font-weight:600;">Mentoria de Adoção · quarta 18h</p>
+</div>
+<div style="padding:32px;">
+<p style="font-size:16px;line-height:1.7;color:#C9D1D9;">Olá <strong style="color:#fff;">${first}</strong>,</p>
+<p style="font-size:16px;line-height:1.7;color:#C9D1D9;">A Mentoria de Adoção de hoje usa <strong style="color:#fff;">outra sala</strong>. O link que chegou no lembrete não é mais o certo.</p>
+<div style="text-align:center;margin:32px 0;">
+<a href="${joinUrl}" style="display:inline-block;background:#2D8CFF;color:#fff;font-weight:700;font-size:16px;padding:16px 40px;border-radius:8px;text-decoration:none;">ENTRAR NA SALA</a>
+</div>
+<p style="font-size:13px;line-height:1.6;color:#8B949E;text-align:center;">Guarde este link para as próximas quartas também.</p>
+</div>
+<div style="padding:20px 32px;border-top:1px solid #21262d;text-align:center;">
+<p style="font-size:12px;color:#484F58;margin:0 0 8px;">Orbit Gestão — Gestão Operada por IA</p>
+<p style="font-size:11px;color:#484F58;margin:0;"><a href="${unsubUrl}" style="color:#6B7280;">Não quero mais receber avisos destas sessões</a></p>
+</div>
+</div>`;
+}
+
+async function noticeAdocaoMeet(
+  sb: ReturnType<typeof createClient>,
+  dryRun: boolean,
+  limit: number
+) {
+  const [{ data: regs, error: e1 }, { data: already, error: e2 }] = await Promise.all([
+    sb.from("training_registrations")
+      .select("id,email,nome,zoom_join_url")
+      .eq("session_slug", "qua-18-mentoria-adocao"),
+    sb.from("email_logs")
+      .select("recipient_email")
+      .eq("email_type", NOTICE_ADOCAO_MEET_TYPE)
+      .eq("success", true),
+  ]);
+
+  if (e1 || e2) {
+    console.error("[send-training-reminders] adocao meet notice query failed", e1, e2);
+    return json({ ok: false, error: "notice_query_failed" }, 500);
+  }
+
+  const alreadySet = new Set(
+    (already || []).map((r) => String(r.recipient_email || "").trim().toLowerCase()).filter(Boolean)
+  );
+
+  const byEmail = new Map<string, { email: string; nome: string; id: string; joinUrl: string }>();
+  for (const r of regs || []) {
+    const email = String(r.email || "").trim().toLowerCase();
+    if (!email.includes("@") || alreadySet.has(email)) continue;
+    byEmail.set(email, {
+      email,
+      nome: String(r.nome || ""),
+      id: String(r.id || ""),
+      joinUrl: String(r.zoom_join_url || ADOCAO_MEET_URL),
+    });
+  }
+
+  const list = [...byEmail.values()].slice(0, limit);
+  if (dryRun) {
+    return json({
+      ok: true,
+      dry_run: true,
+      mode: "notice_adocao_meet",
+      to_send: list.length,
+      skipped_already: alreadySet.size,
+    });
+  }
+
+  let sent = 0;
+  let failed = 0;
+  let stopped = false;
+  for (const p of list) {
+    const unsub = p.id
+      ? `${SUPABASE_URL}/functions/v1/training-unsubscribe?r=${p.id}`
+      : `${SITE}/treinamentos`;
+    const res = await sendOne(
+      p.email,
+      p.nome,
+      NOTICE_ADOCAO_MEET_SUBJECT,
+      noticeAdocaoMeetHTML(p.nome, p.joinUrl || ADOCAO_MEET_URL, unsub),
+      NOTICE_ADOCAO_MEET_TYPE,
+      unsub
+    );
+    if (res.ok) sent++;
+    else {
+      failed++;
+      if (res.status === 429) {
+        stopped = true;
+        console.warn("[send-training-reminders] mailersend 429, stopping adocao meet notice");
+        break;
+      }
+    }
+    await new Promise((r2) => setTimeout(r2, 120));
+  }
+
+  return json({
+    ok: true,
+    mode: "notice_adocao_meet",
+    sent,
+    failed,
+    total: list.length,
+    stopped_429: stopped,
+  });
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
@@ -253,6 +497,13 @@ Deno.serve(async (req) => {
   if (Number.isNaN(now.getTime())) return json({ ok: false, error: "invalid_now" }, 400);
 
   const sb = createClient(SUPABASE_URL, SERVICE_KEY);
+
+  if (body?.mode === "notice_cancelled_session") {
+    return await noticeCancelledQua10(sb, dryRun, Math.min(limit, 300));
+  }
+  if (body?.mode === "notice_adocao_meet") {
+    return await noticeAdocaoMeet(sb, dryRun, Math.min(limit, 50));
+  }
 
   const { data: sessions, error: sErr } = await sb
     .from("training_sessions")

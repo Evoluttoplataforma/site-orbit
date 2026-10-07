@@ -32,7 +32,7 @@ values
     'mentoria',
     'Comece certo. Tenha quem já fez para te guiar. Mentoria para conquistar seu primeiro cliente, colocar a plataforma em operação e gerar os primeiros resultados.',
     3, '18:00', 60, null,
-    'https://meet.google.com/kyg-fxhf-poe',
+    'https://meet.google.com/mzv-hpim-aeq',
     '2027-07-12 20:00:00+00', true, 4, 'weekly'
   ),
   (
