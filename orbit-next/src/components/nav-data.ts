@@ -202,9 +202,9 @@ export const EVENTOS: NavLink[] = [
     visibility: 'hidden',
   },
   {
-    href: '/bootcamp-orbit',
+    href: 'https://live.orbitgestao.com.br/',
     label: 'Bootcamp Orbit',
-    sub: '15/10 · online e presencial',
+    sub: '17/10 · imersão online',
     icon: 'fas fa-flag',
     iconColor: '#ffba1a',
     i18n: 'nav.ev.bootcamp',
