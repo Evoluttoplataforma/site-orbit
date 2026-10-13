@@ -310,6 +310,11 @@ export function PageContent() {
     });
 
     async function submitForm() {
+      if (window.location.pathname.indexOf('/bootcamp-orbit/arquivo') === 0) {
+        submitted = true;
+        appendMsg('Esta cópia é só para consulta. A inscrição desta página está desligada.');
+        return;
+      }
       submitted = true;
       const modo = resolveModo(answers.modalidade);
 
