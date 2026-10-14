@@ -473,6 +473,134 @@ async function noticeAdocaoMeet(
   });
 }
 
+const NOTICE_PAUSA_TYPE = "treinamento_aviso_pausa_imersao_20261017";
+const NOTICE_PAUSA_SUBJECT = "Esta semana não tem mentoria nem tira dúvidas";
+const PAUSA_SLUGS = [
+  "seg-17-tira-duvidas",
+  "sex-09-tira-duvidas",
+  "qua-18-mentoria-adocao",
+  "qui-18-mentoria-consolidacao",
+  "qui-18-mentoria-expansao",
+];
+const IMERSAO_URL =
+  "https://live.orbitgestao.com.br/?utm_source=email&utm_medium=aviso&utm_campaign=pausa_treinamentos_17out&utm_content=inscritos";
+// Só estas ocorrências. Na semana seguinte o cron volta a lembrar.
+const PAUSED_OCCURRENCES = new Set([
+  "qua-18-mentoria-adocao|2026-10-14",
+  "sex-09-tira-duvidas|2026-10-16",
+]);
+
+function noticePausaHTML(nome: string, unsubUrl: string): string {
+  const first = (nome || "").trim().split(/\s+/)[0] || "Olá";
+  return `<div style="font-family:'Plus Jakarta Sans',Arial,sans-serif;max-width:600px;margin:0 auto;background:#0D1117;color:#fff;border-radius:12px;overflow:hidden;">
+<div style="background:linear-gradient(135deg,#0D1117 0%,#1a1f2e 100%);padding:40px 32px;text-align:center;">
+<img src="${SITE}/images/logo-orbit-white.png" alt="Orbit" style="height:40px;margin-bottom:24px;">
+<h1 style="color:#ffba1a;font-size:24px;margin:0 0 8px;font-weight:800;">Esta semana a sala não abre</h1>
+<p style="color:#C9D1D9;font-size:16px;margin:0;font-weight:600;">Mentorias e tira dúvidas pausados só até sexta</p>
+</div>
+<div style="padding:32px;">
+<p style="font-size:16px;line-height:1.7;color:#C9D1D9;">Olá <strong style="color:#fff;">${first}</strong>,</p>
+<p style="font-size:16px;line-height:1.7;color:#C9D1D9;">Nesta semana não teremos mentoria nem tira dúvidas. Quarta 18h, quinta 18h e sexta 9h ficam pausados por causa da imersão de sábado.</p>
+<p style="font-size:16px;line-height:1.7;color:#C9D1D9;"><strong style="color:#fff;">Na semana que vem os horários voltam ao normal:</strong> tira dúvidas segunda 17h e sexta 9h, Mentoria de Adoção quarta 18h, e quinta 18h nas semanas de Consolidação ou Expansão. Sua inscrição continua valendo. Não precisa se cadastrar de novo.</p>
+<p style="font-size:16px;line-height:1.7;color:#C9D1D9;">Sábado, <strong style="color:#ffba1a;">17/10, das 9h às 13h</strong>, a imersão é gratuita, ao vivo e sem replay.</p>
+<div style="text-align:center;margin:32px 0;">
+<a href="${IMERSAO_URL}" style="display:inline-block;background:#ffba1a;color:#0D1117;font-weight:700;font-size:16px;padding:16px 40px;border-radius:8px;text-decoration:none;">QUERO PARTICIPAR DA IMERSÃO</a>
+</div>
+</div>
+<div style="padding:20px 32px;border-top:1px solid #21262d;text-align:center;">
+<p style="font-size:12px;color:#484F58;margin:0 0 8px;">Orbit Gestão — Gestão Operada por IA</p>
+<p style="font-size:11px;color:#484F58;margin:0;"><a href="${unsubUrl}" style="color:#6B7280;">Não quero mais receber avisos destas sessões</a></p>
+</div>
+</div>`;
+}
+
+async function noticePausaImersao(
+  sb: ReturnType<typeof createClient>,
+  dryRun: boolean,
+  limit: number
+) {
+  const [{ data: regs, error: e1 }, { data: already, error: e2 }] = await Promise.all([
+    sb.from("training_registrations")
+      .select("id,email,nome,created_at")
+      .in("session_slug", PAUSA_SLUGS)
+      .eq("zoom_status", "registered")
+      .eq("reminders_enabled", true)
+      .is("unsubscribed_at", null)
+      .lt("bounce_count", 2),
+    sb.from("email_logs")
+      .select("recipient_email")
+      .eq("email_type", NOTICE_PAUSA_TYPE)
+      .eq("success", true),
+  ]);
+
+  if (e1 || e2) {
+    console.error("[send-training-reminders] pausa notice query failed", e1, e2);
+    return json({ ok: false, error: "notice_query_failed" }, 500);
+  }
+
+  const alreadySet = new Set(
+    (already || []).map((r) => String(r.recipient_email || "").trim().toLowerCase()).filter(Boolean)
+  );
+
+  const byEmail = new Map<string, { email: string; nome: string; id: string }>();
+  const ordered = [...(regs || [])].sort((a, b) =>
+    String(a.created_at || "").localeCompare(String(b.created_at || ""))
+  );
+  for (const r of ordered) {
+    const email = String(r.email || "").trim().toLowerCase();
+    if (!email.includes("@") || alreadySet.has(email) || byEmail.has(email)) continue;
+    byEmail.set(email, { email, nome: String(r.nome || ""), id: String(r.id || "") });
+  }
+
+  const list = [...byEmail.values()].slice(0, limit);
+  if (dryRun) {
+    return json({
+      ok: true,
+      dry_run: true,
+      mode: "notice_pausa_imersao",
+      to_send: list.length,
+      skipped_already: alreadySet.size,
+    });
+  }
+
+  let sent = 0;
+  let failed = 0;
+  let stopped = false;
+  for (const p of list) {
+    const unsub = p.id
+      ? `${SUPABASE_URL}/functions/v1/training-unsubscribe?r=${p.id}`
+      : `${SITE}/treinamentos`;
+    const res = await sendOne(
+      p.email,
+      p.nome,
+      NOTICE_PAUSA_SUBJECT,
+      noticePausaHTML(p.nome, unsub),
+      NOTICE_PAUSA_TYPE,
+      unsub
+    );
+    if (res.ok) sent++;
+    else {
+      failed++;
+      if (res.status === 429) {
+        stopped = true;
+        console.warn("[send-training-reminders] mailersend 429, stopping pausa notice");
+        break;
+      }
+    }
+    await new Promise((r2) => setTimeout(r2, 120));
+  }
+
+  return json({
+    ok: true,
+    mode: "notice_pausa_imersao",
+    sent,
+    failed,
+    total: list.length,
+    remaining: byEmail.size - list.length,
+    stopped_429: stopped,
+  });
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
@@ -504,6 +632,9 @@ Deno.serve(async (req) => {
   if (body?.mode === "notice_adocao_meet") {
     return await noticeAdocaoMeet(sb, dryRun, Math.min(limit, 50));
   }
+  if (body?.mode === "notice_pausa_imersao") {
+    return await noticePausaImersao(sb, dryRun, Math.min(limit, 200));
+  }
 
   const { data: sessions, error: sErr } = await sb
     .from("training_sessions")
@@ -520,6 +651,7 @@ Deno.serve(async (req) => {
   for (const s of (sessions || []) as SessionRow[]) {
     if (s.cadence === "biweekly" || BIWEEKLY_SLUGS.has(s.slug)) continue;
     for (const occ of upcomingOccurrences(s, now, 3)) {
+      if (PAUSED_OCCURRENCES.has(`${s.slug}|${occ.dateBRT}`)) continue;
       const leadMin = Math.round((occ.startUtc.getTime() - now.getTime()) / 60000);
       for (const kind of kinds) {
         const w = WINDOWS[kind];

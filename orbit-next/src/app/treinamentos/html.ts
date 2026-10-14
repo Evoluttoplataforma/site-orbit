@@ -226,6 +226,11 @@ export const pageHTML = `
         ${i18nEl('h1', 'Tira dúvidas e mentorias <span class="accent">ao vivo</span>, toda semana.', 'Live <span class="accent">Q&amp;A and mentoring</span>, every week.')}
         ${i18nEl('p', 'Inscreva-se uma vez e receba o convite das próximas sessões. Tira dúvidas no Zoom; mentorias de canais no Google Meet. Tudo nesta página.', 'Sign up once and receive the invite for upcoming sessions. Q&amp;A on Zoom; channel mentoring on Google Meet. All on this page.', 'class="lead"')}
 
+        <div style="max-width:640px;margin:22px auto 0;padding:14px 18px;border-radius:14px;background:rgba(255,186,26,0.10);border:1px solid rgba(255,186,26,0.35);color:#fff;font-size:14px;line-height:1.55;text-align:left;">
+          ${i18nText('Esta semana (14 a 16/10) não tem mentoria nem tira dúvidas, por causa da imersão de sábado. Na semana que vem os horários voltam ao normal.', 'This week (Oct 14–16) there is no mentoring or Q&amp;A, because of Saturday\'s immersion. Next week the schedule returns to normal.')}
+          <a href="https://live.orbitgestao.com.br/?utm_source=site&amp;utm_medium=banner&amp;utm_campaign=pausa_treinamentos_17out&amp;utm_content=treinamentos" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:8px;color:#ffba1a;font-weight:800;">${i18nText('Ver a imersão de sábado, 17/10, 9h–13h', 'See Saturday\'s immersion, Oct 17, 9am–1pm')}</a>
+        </div>
+
         <div class="tr-hero__agenda">
             <span class="tr-hero__agenda-item"><i class="fa-solid fa-calendar-week"></i>${i18nText(agendaResumo, agendaResumoEn)}</span>
             <span class="tr-hero__agenda-sep"></span>
