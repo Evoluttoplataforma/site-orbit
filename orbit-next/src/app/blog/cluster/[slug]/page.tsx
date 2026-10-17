@@ -315,5 +315,3 @@ export default async function ClusterHubPage({ params }: { params: Promise<{ slu
   );
 }
 
-// Export pra ser usado em outras paginas (sitemap, etc)
-export { CLUSTERS };
