@@ -996,6 +996,62 @@ textarea{overflow:visible!important;resize:none!important}
 .chip.warn{border-color:rgba(240,96,90,.55);color:var(--red)}
 @media (max-width:640px){.alertbox{grid-template-columns:1fr}}
 </style>
+<style id="pdfA4">
+/* PDF A4 · uma tela por página, ajustada para caber */
+@media print{
+@page{size:A4 landscape;margin:0}
+html,body{margin:0!important;padding:0!important;background:var(--bg)!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+}
+body.pdfprep{overflow:visible!important;height:auto!important;zoom:1!important}
+body.pdfprep .top,body.pdfprep nav.toc,body.pdfprep .deckbar,body.pdfprep .fab,body.pdfprep .drawer,body.pdfprep .wbtab,body.pdfprep .wbpanel,body.pdfprep footer,body.pdfprep #roiCur,body.pdfprep .legacyIds{display:none!important}
+body.pdfprep section.sec{display:none!important}
+body.pdfprep section.sec.pp{display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;width:1122px!important;height:792px!important;min-height:0!important;max-height:792px!important;overflow:hidden!important;padding:0!important;margin:0!important;border:0!important;box-sizing:border-box!important;break-before:auto!important;page-break-before:auto!important;break-after:page!important;page-break-after:always!important;break-inside:avoid!important;animation:none!important;position:relative!important}
+body.pdfprep section.sec.pp.pp-last{break-after:auto!important;page-break-after:auto!important}
+body.pdfprep section.sec.pp>.wrap{flex:none!important;margin:0!important;max-width:none!important;box-sizing:border-box!important;padding:38px 54px!important}
+body.pdfprep .pnote,body.pdfprep .trapnext,body.pdfprep .trapnav button,body.pdfprep .r5fs,body.pdfprep .vsound{display:none!important}
+body.pdfprep .rv,body.pdfprep [data-reveal] .rv{opacity:1!important;transform:none!important;transition:none!important}
+body.pdfprep .fx,body.pdfprep .play .fx{opacity:1!important;animation:none!important;transform:none!important}
+body.pdfprep .anim *{animation:none!important}
+body.pdfprep .anim .draw{stroke-dashoffset:0!important}
+body.pdfprep .anim .fade,body.pdfprep .anim .grow{opacity:1!important;transform:none!important}
+body.pdfprep .card,body.pdfprep .act,body.pdfprep .frame{break-inside:auto!important}
+body.pdfprep .mm .w,body.pdfprep .mmt,body.pdfprep .mmimg{animation:none!important;opacity:1!important;filter:none!important}
+body.pdfprep .mm .w{transform:rotate(var(--r))!important}body.pdfprep .mmt{transform:translateX(-50%)!important}body.pdfprep .mmimg{transform:none!important}
+</style>
+<style id="endcta">
+.endcta{display:flex;flex-direction:column;align-items:flex-start}
+.endcta p{flex:1}
+.endbtn{display:inline-flex;align-items:center;gap:12px;margin-top:20px;padding:15px 26px 15px 18px;border-radius:999px;background:var(--amber);color:#14110a!important;font:800 17px/1 'Plus Jakarta Sans',system-ui,sans-serif;letter-spacing:-.01em;text-decoration:none!important;border:1px solid var(--amber);cursor:pointer;box-shadow:0 10px 30px rgba(245,180,42,.28),inset 0 -2px 0 rgba(0,0,0,.18);transition:transform .15s ease,box-shadow .15s ease,background .15s ease}
+.endbtn .ei{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,.16);font-size:16px}
+.endbtn:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(245,180,42,.38),inset 0 -2px 0 rgba(0,0,0,.18)}
+.endbtn:active{transform:translateY(0)}
+.endbtn.ghost{background:transparent;color:var(--amber)!important;box-shadow:inset 0 0 0 1px var(--amber)}
+.endbtn.ghost .ei{background:rgba(245,180,42,.14)}
+.endbtn.ghost:hover{background:rgba(245,180,42,.1);box-shadow:inset 0 0 0 1px var(--amber),0 12px 32px rgba(245,180,42,.18)}
+@media print{button.endbtn{display:none!important}}
+</style>
+<style id="mobfix">
+/* ===== Mobile · ajustes finais ===== */
+@media (max-width:700px){
+ body:not(.paged){padding-bottom:96px}
+ body:not(.paged) #welcome{display:none!important}
+ .m1f.m2f{grid-template-columns:1fr!important;gap:0}
+ .m1f.m2f div{padding:14px 0 12px;border-bottom:1px solid var(--line2);display:flex;align-items:baseline;gap:14px}
+ .m1f.m2f span{font-size:30px!important;margin-top:0}
+ .rtw{flex-wrap:wrap;gap:10px 14px;font-size:clamp(34px,10vw,46px)}
+ .aqgrid{grid-template-columns:1fr!important;gap:16px}
+ .kw3{gap:12px}
+ .kw{min-height:0!important;padding:22px 22px!important}
+ .kw b{font-size:26px}
+ /* nuvens de palavras viram lista legível */
+ .mm{aspect-ratio:auto!important;overflow:visible!important;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;container-type:normal}
+ .mm .mmt{position:static!important;transform:none!important;width:100%;text-align:center;white-space:normal!important;font-size:36px!important;line-height:1.1;margin:0 0 6px!important;order:-2;opacity:1!important;animation:none!important}
+ .mm .mmimg{position:static!important;transform:none!important;width:100%!important;left:auto!important;top:auto!important;order:-1;margin:4px 0 12px;opacity:1!important;animation:none!important}
+ .mm .mmimg.rot{aspect-ratio:16/10;position:relative!important}
+ .mm .w{position:static!important;transform:none!important;font-size:13px!important;white-space:nowrap;padding:6px 11px;border:1px solid var(--line2);border-radius:999px;background:rgba(255,255,255,.02);letter-spacing:0!important;font-family:inherit!important;font-style:normal!important;text-transform:none!important}
+ .mm .w.a{border-color:rgba(245,180,42,.45)}
+}
+</style>
 </head>
 <body>
 
@@ -2106,11 +2162,11 @@ textarea{overflow:visible!important;resize:none!important}
 <section class="sec alt" id="m5c" data-g="m5">
  <div class="wrap wide">
   <p class="kick">Encerramento</p>
-  <h2 class="m1t" style="font-size:clamp(44px,5.6vw,86px)">"É simples assim. Não é fácil — <span class="hl">mas é simples.</span>"</h2>
+  <h2 class="m1t" style="font-size:clamp(56px,7vw,110px)">É simples <span class="hl">assim.</span></h2>
   <p class="m2lead" style="margin-top:22px">Um cliente, uma dor, um agente. <span class="hl">Comece segunda-feira.</span></p>
     <div class="g2 lines4" style="margin-top:34px">
-   <div class="card"><div class="lab">Sua recompensa de conclusão</div><p><b>Workbook Orbit</b> — segunda edição, por Igor Furniel: as doze peças de uma consultoria recorrente passiva, para continuar o trabalho depois da imersão.</p></div>
-   <div class="card"><div class="lab">Leve este guia</div><p>Clique em <b>Salvar PDF</b> no canto da tela e guarde o seu Guia Tático preenchido.</p></div>
+   <div class="card endcta"><div class="lab">Sua recompensa de conclusão</div><p><b>Workbook Orbit</b> — segunda edição, por Igor Furniel: as doze peças de uma consultoria recorrente passiva, para continuar o trabalho depois da imersão.</p><a class="endbtn" href="https://orbitgestao.com.br/workbook.pdf" target="_blank" rel="noopener" download><span class="ei" aria-hidden="true">↓</span>Baixar o Workbook Orbit (PDF)</a></div>
+   <div class="card endcta"><div class="lab">Leve este guia</div><p>Guarde o seu <b>Guia Tático preenchido</b>, com todas as respostas que você escreveu hoje.</p><button type="button" class="endbtn ghost" onclick="var b=document.getElementById('pdfBtn');if(b)b.click();else window.print()"><span class="ei" aria-hidden="true">⤓</span>Salvar meu Guia em PDF</button></div>
   </div>
   <div class="pnote"><div class="pl">Apresentador · 12:50–13:00</div>Dar 6 minutos para o plano. Abrir dúvidas finais (top 3 do chat). Entregar o Workbook a quem ficou até o fim. Pedir print do resumo do guia no grupo.</div>
  </div>
@@ -2636,5 +2692,58 @@ if(document.readyState!=='loading')upd();else document.addEventListener('DOMCont
 setTimeout(upd,300);
 })();</script>
 <script>/* PDF: textareas mostram todo o conteúdo */(function(){var saved=[];addEventListener('beforeprint',function(){saved=[].slice.call(document.querySelectorAll('textarea')).map(function(t){var h=t.style.height;t.style.height='auto';t.style.height=(t.scrollHeight+6)+'px';return [t,h]})});addEventListener('afterprint',function(){saved.forEach(function(x){x[0].style.height=x[1]});saved=[]});})();</script>
+<script id="pdfA4js">/* PDF A4: cada tela vira uma página A4 deitada, com zoom para caber inteira */
+(function(){
+ var W=1122,H=792,st=null,ZMAX=1.25;
+ function printable(sc){return !sc.classList.contains('is-archived')&&!sc.classList.contains('is-locked')&&sc.id!=='welcome'&&sc.id!=='tesla'}
+ function prep(){
+  if(st)return;st={frames:[],secs:[],clones:[]};
+  var secs=[].slice.call(document.querySelectorAll('section.sec')).filter(printable);
+  secs.forEach(function(sc){
+   var fr=[].slice.call(sc.querySelectorAll('.frame[data-step]'));
+   if(fr.length>1){
+    fr.forEach(function(f){st.frames.push([f,f.className,f.style.cssText])});
+    var after=sc;
+    for(var i=1;i<fr.length;i++){
+     var c=sc.cloneNode(true);c.classList.add('pp-clone');c.removeAttribute('id');c.id=sc.id;
+     [].slice.call(c.querySelectorAll('.frame[data-step]')).forEach(function(f,j){if(j===i){f.classList.add('on');f.style.removeProperty('display')}else{f.classList.remove('on');f.style.setProperty('display','none','important')}});
+     var ot=c.querySelector('.origtitle');if(ot)ot.style.setProperty('display','none','important');
+     after.parentNode.insertBefore(c,after.nextSibling);after=c;st.clones.push(c);
+    }
+    fr.forEach(function(f,j){if(j===0){f.classList.add('on');f.style.removeProperty('display')}else{f.classList.remove('on');f.style.setProperty('display','none','important')}});
+    var ot=sc.querySelector('.origtitle');if(ot){st.frames.push([ot,ot.className,ot.style.cssText]);ot.style.removeProperty('display')}
+   }
+  });
+  document.body.classList.add('pdfprep');
+  var all=[].slice.call(document.querySelectorAll('section.sec')).filter(printable);
+  all.forEach(function(sc,i){
+   var w=sc.querySelector(':scope>.wrap')||sc.firstElementChild;
+   st.secs.push([sc,sc.style.cssText,w,w?w.style.cssText:'']);
+   sc.style.cssText='';sc.classList.add('pp');if(i===all.length-1)sc.classList.add('pp-last');
+   if(!w)return;
+   w.style.cssText='';
+   var z=1;
+   for(var k=0;k<8;k++){
+    w.style.setProperty('zoom','1','important');w.style.setProperty('width',(W/z)+'px','important');
+    var h=w.offsetHeight||w.scrollHeight;var zcap=window.innerWidth>=W?ZMAX:1;var nz=Math.min(zcap,(H-4)/Math.max(h,1));
+    if(Math.abs(nz-z)<0.004){z=nz;break}z=nz;
+   }
+   if(window.innerWidth<W)z=z*Math.max(.7,window.innerWidth/W);
+   w.style.setProperty('width',(W/z)+'px','important');w.style.setProperty('zoom',String(z),'important');
+  });
+ }
+ function undo(){
+  if(!st)return;
+  st.clones.forEach(function(c){c.parentNode&&c.parentNode.removeChild(c)});
+  st.frames.forEach(function(x){x[0].className=x[1];x[0].style.cssText=x[2]});
+  st.secs.forEach(function(x){x[0].style.cssText=x[1];x[0].classList.remove('pp','pp-last');if(x[2])x[2].style.cssText=x[3]});
+  document.body.classList.remove('pdfprep');st=null;
+  setTimeout(function(){window.dispatchEvent(new Event('resize'))},30);
+ }
+ addEventListener('beforeprint',prep);
+ addEventListener('afterprint',undo);
+ if(window.matchMedia){var mq=matchMedia('print');var f=function(e){if(e.matches)prep();else undo()};mq.addEventListener?mq.addEventListener('change',f):mq.addListener(f)}
+ window.__pdfPrep=prep;window.__pdfUndo=undo;
+})();</script>
 </body>
 </html>
