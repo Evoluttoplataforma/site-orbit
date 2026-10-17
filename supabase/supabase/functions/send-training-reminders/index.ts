@@ -55,7 +55,13 @@ interface SessionRow {
   start_time: string;
   duration_min: number;
   zoom_join_url: string | null;
+  cadence?: string;
 }
+
+const BIWEEKLY_SLUGS = new Set([
+  "qui-18-mentoria-consolidacao",
+  "qui-18-mentoria-expansao",
+]);
 
 function json(body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
@@ -130,7 +136,7 @@ function upcomingOccurrences(s: SessionRow, from: Date, days = 3) {
 
 function subjectFor(kind: Kind, s: SessionRow, weekdayLabel: string, timeLbl: string): string {
   if (kind === "d1") return `Amanhã: ${s.title} Orbit · ${weekdayLabel} ${timeLbl}`;
-  return `Começa em 1 hora: ${s.title} Orbit — entre pelo Zoom`;
+  return `Começa em 1 hora: ${s.title} Orbit — entre pela sala`;
 }
 
 function htmlFor(
@@ -144,11 +150,12 @@ function htmlFor(
 ): string {
   const first = (nome || "").trim().split(/\s+/)[0] || "Olá";
   const isTreino = s.kind === "treinamento";
+  const isMentoria = s.kind === "mentoria";
   const headline = kind === "d1" ? "Amanhã tem sessão!" : "Começa em 1 hora!";
-  // Sem prometer que a dúvida será resolvida ao vivo — não está sob nosso controle.
-  // O que a sessão entrega é resposta e direção.
   const pitch = isTreino
     ? "É aula preparada, passo a passo. Se puder, deixe o Orbit aberto ao lado para acompanhar."
+    : isMentoria
+    ? "Mentoria de canais com quem já fez. Entre no horário — o link abaixo abre a sala."
     : "A pauta é sua: chegue com a dúvida ou o caso que quer entender, e a gente responde ao vivo.";
   const cta = kind === "d1" ? "VER O LINK DE ACESSO" : "ENTRAR AGORA";
 
@@ -222,6 +229,378 @@ async function sendOne(
   return { ok, messageId, status: resp.status };
 }
 
+const NOTICE_QUA10_TYPE = "treinamento_aviso_qua10_encerrada";
+const NOTICE_QUA10_SUBJECT = "A sessão de quarta 10h saiu da grade";
+
+function noticeQua10HTML(nome: string, unsubUrl: string): string {
+  const first = (nome || "").trim().split(/\s+/)[0] || "Olá";
+  return `<div style="font-family:'Plus Jakarta Sans',Arial,sans-serif;max-width:600px;margin:0 auto;background:#0D1117;color:#fff;border-radius:12px;overflow:hidden;">
+<div style="background:linear-gradient(135deg,#0D1117 0%,#1a1f2e 100%);padding:40px 32px;text-align:center;">
+<img src="${SITE}/images/logo-orbit-white.png" alt="Orbit" style="height:40px;margin-bottom:24px;">
+<h1 style="color:#ffba1a;font-size:24px;margin:0 0 8px;font-weight:800;">Amanhã 10h não tem mais aula</h1>
+<p style="color:#C9D1D9;font-size:16px;margin:0;font-weight:600;">A sessão de quarta 10h saiu da grade</p>
+</div>
+<div style="padding:32px;">
+<p style="font-size:16px;line-height:1.7;color:#C9D1D9;">Olá <strong style="color:#fff;">${first}</strong>,</p>
+<p style="font-size:16px;line-height:1.7;color:#C9D1D9;">Hoje de manhã você recebeu um lembrete de que amanhã, quarta, às 10h, haveria treinamento. Esse horário <strong style="color:#fff;">não existe mais</strong> — a grade mudou.</p>
+<p style="font-size:16px;line-height:1.7;color:#C9D1D9;">Quem quiser continuar, a pauta aberta segue na tira-dúvidas: <strong style="color:#ffba1a;">segunda 17h</strong> e <strong style="color:#ffba1a;">sexta 9h</strong>. As mentorias de canais são <strong style="color:#ffba1a;">quarta 18h</strong> (Adoção) e <strong style="color:#ffba1a;">quinta 18h</strong> (Consolidação / Expansão, semanas alternadas).</p>
+<div style="text-align:center;margin:32px 0;">
+<a href="${SITE}/treinamentos" style="display:inline-block;background:#ffba1a;color:#0D1117;font-weight:700;font-size:16px;padding:16px 40px;border-radius:8px;text-decoration:none;">VER A GRADE ATUAL</a>
+</div>
+<p style="font-size:13px;line-height:1.6;color:#8B949E;text-align:center;">Não precisa se inscrever de novo se você já tem ficha numa dessas sessões. Se ainda não tem, escolha na página.</p>
+</div>
+<div style="padding:20px 32px;border-top:1px solid #21262d;text-align:center;">
+<p style="font-size:12px;color:#484F58;margin:0 0 8px;">Orbit Gestão — Gestão Operada por IA</p>
+<p style="font-size:11px;color:#484F58;margin:0;"><a href="${unsubUrl}" style="color:#6B7280;">Não quero mais receber avisos destas sessões</a></p>
+</div>
+</div>`;
+}
+
+async function noticeCancelledQua10(
+  sb: ReturnType<typeof createClient>,
+  dryRun: boolean,
+  limit: number
+) {
+  const sinceD1 = "2026-10-06T00:00:00Z";
+  const sinceLate = "2026-10-06T20:00:00Z";
+
+  const [{ data: d1, error: e1 }, { data: late, error: e2 }, { data: already, error: e3 }] =
+    await Promise.all([
+      sb.from("email_logs")
+        .select("recipient_email,recipient_name")
+        .eq("email_type", "treinamento_d1_qua-10-treinamento")
+        .eq("success", true)
+        .gte("created_at", sinceD1),
+      sb.from("training_registrations")
+        .select("id,email,nome")
+        .eq("session_slug", "qua-10-treinamento")
+        .gte("created_at", sinceLate),
+      sb.from("email_logs")
+        .select("recipient_email")
+        .eq("email_type", NOTICE_QUA10_TYPE)
+        .eq("success", true),
+    ]);
+
+  if (e1 || e2 || e3) {
+    console.error("[send-training-reminders] notice query failed", e1, e2, e3);
+    return json({ ok: false, error: "notice_query_failed" }, 500);
+  }
+
+  const alreadySet = new Set(
+    (already || []).map((r) => String(r.recipient_email || "").trim().toLowerCase()).filter(Boolean)
+  );
+
+  const byEmail = new Map<string, { email: string; nome: string }>();
+  for (const r of d1 || []) {
+    const email = String(r.recipient_email || "").trim().toLowerCase();
+    if (!email.includes("@") || alreadySet.has(email)) continue;
+    byEmail.set(email, { email, nome: String(r.recipient_name || "") });
+  }
+  for (const r of late || []) {
+    const email = String(r.email || "").trim().toLowerCase();
+    if (!email.includes("@") || alreadySet.has(email)) continue;
+    const prev = byEmail.get(email);
+    byEmail.set(email, { email, nome: String(r.nome || prev?.nome || "") });
+  }
+
+  const idByEmail = new Map<string, string>();
+  const { data: regs } = await sb
+    .from("training_registrations")
+    .select("id,email")
+    .eq("session_slug", "qua-10-treinamento");
+  for (const r of regs || []) {
+    const email = String(r.email || "").trim().toLowerCase();
+    if (email && r.id && !idByEmail.has(email)) idByEmail.set(email, String(r.id));
+  }
+
+  const list = [...byEmail.values()].slice(0, limit);
+  if (dryRun) {
+    return json({
+      ok: true,
+      dry_run: true,
+      mode: "notice_cancelled_session",
+      to_send: list.length,
+      skipped_already: alreadySet.size,
+    });
+  }
+
+  let sent = 0;
+  let failed = 0;
+  let stopped = false;
+  for (const p of list) {
+    const rid = idByEmail.get(p.email);
+    const unsub = rid
+      ? `${SUPABASE_URL}/functions/v1/training-unsubscribe?r=${rid}`
+      : `${SITE}/treinamentos`;
+    const res = await sendOne(
+      p.email,
+      p.nome,
+      NOTICE_QUA10_SUBJECT,
+      noticeQua10HTML(p.nome, unsub),
+      NOTICE_QUA10_TYPE,
+      unsub
+    );
+    if (res.ok) sent++;
+    else {
+      failed++;
+      if (res.status === 429) {
+        stopped = true;
+        console.warn("[send-training-reminders] mailersend 429, stopping notice batch");
+        break;
+      }
+    }
+    await new Promise((r2) => setTimeout(r2, 120));
+  }
+
+  return json({
+    ok: true,
+    mode: "notice_cancelled_session",
+    sent,
+    failed,
+    total: list.length,
+    stopped_429: stopped,
+  });
+}
+
+const NOTICE_ADOCAO_MEET_TYPE = "treinamento_aviso_adocao_meet_20261007";
+const NOTICE_ADOCAO_MEET_SUBJECT = "Mentoria de Adoção: entre por este link";
+const ADOCAO_MEET_URL = "https://meet.google.com/mzv-hpim-aeq";
+
+function noticeAdocaoMeetHTML(nome: string, joinUrl: string, unsubUrl: string): string {
+  const first = (nome || "").trim().split(/\s+/)[0] || "Olá";
+  return `<div style="font-family:'Plus Jakarta Sans',Arial,sans-serif;max-width:600px;margin:0 auto;background:#0D1117;color:#fff;border-radius:12px;overflow:hidden;">
+<div style="background:linear-gradient(135deg,#0D1117 0%,#1a1f2e 100%);padding:40px 32px;text-align:center;">
+<img src="${SITE}/images/logo-orbit-white.png" alt="Orbit" style="height:40px;margin-bottom:24px;">
+<h1 style="color:#ffba1a;font-size:24px;margin:0 0 8px;font-weight:800;">O link da sala mudou</h1>
+<p style="color:#C9D1D9;font-size:16px;margin:0;font-weight:600;">Mentoria de Adoção · quarta 18h</p>
+</div>
+<div style="padding:32px;">
+<p style="font-size:16px;line-height:1.7;color:#C9D1D9;">Olá <strong style="color:#fff;">${first}</strong>,</p>
+<p style="font-size:16px;line-height:1.7;color:#C9D1D9;">A Mentoria de Adoção de hoje usa <strong style="color:#fff;">outra sala</strong>. O link que chegou no lembrete não é mais o certo.</p>
+<div style="text-align:center;margin:32px 0;">
+<a href="${joinUrl}" style="display:inline-block;background:#2D8CFF;color:#fff;font-weight:700;font-size:16px;padding:16px 40px;border-radius:8px;text-decoration:none;">ENTRAR NA SALA</a>
+</div>
+<p style="font-size:13px;line-height:1.6;color:#8B949E;text-align:center;">Guarde este link para as próximas quartas também.</p>
+</div>
+<div style="padding:20px 32px;border-top:1px solid #21262d;text-align:center;">
+<p style="font-size:12px;color:#484F58;margin:0 0 8px;">Orbit Gestão — Gestão Operada por IA</p>
+<p style="font-size:11px;color:#484F58;margin:0;"><a href="${unsubUrl}" style="color:#6B7280;">Não quero mais receber avisos destas sessões</a></p>
+</div>
+</div>`;
+}
+
+async function noticeAdocaoMeet(
+  sb: ReturnType<typeof createClient>,
+  dryRun: boolean,
+  limit: number
+) {
+  const [{ data: regs, error: e1 }, { data: already, error: e2 }] = await Promise.all([
+    sb.from("training_registrations")
+      .select("id,email,nome,zoom_join_url")
+      .eq("session_slug", "qua-18-mentoria-adocao"),
+    sb.from("email_logs")
+      .select("recipient_email")
+      .eq("email_type", NOTICE_ADOCAO_MEET_TYPE)
+      .eq("success", true),
+  ]);
+
+  if (e1 || e2) {
+    console.error("[send-training-reminders] adocao meet notice query failed", e1, e2);
+    return json({ ok: false, error: "notice_query_failed" }, 500);
+  }
+
+  const alreadySet = new Set(
+    (already || []).map((r) => String(r.recipient_email || "").trim().toLowerCase()).filter(Boolean)
+  );
+
+  const byEmail = new Map<string, { email: string; nome: string; id: string; joinUrl: string }>();
+  for (const r of regs || []) {
+    const email = String(r.email || "").trim().toLowerCase();
+    if (!email.includes("@") || alreadySet.has(email)) continue;
+    byEmail.set(email, {
+      email,
+      nome: String(r.nome || ""),
+      id: String(r.id || ""),
+      joinUrl: String(r.zoom_join_url || ADOCAO_MEET_URL),
+    });
+  }
+
+  const list = [...byEmail.values()].slice(0, limit);
+  if (dryRun) {
+    return json({
+      ok: true,
+      dry_run: true,
+      mode: "notice_adocao_meet",
+      to_send: list.length,
+      skipped_already: alreadySet.size,
+    });
+  }
+
+  let sent = 0;
+  let failed = 0;
+  let stopped = false;
+  for (const p of list) {
+    const unsub = p.id
+      ? `${SUPABASE_URL}/functions/v1/training-unsubscribe?r=${p.id}`
+      : `${SITE}/treinamentos`;
+    const res = await sendOne(
+      p.email,
+      p.nome,
+      NOTICE_ADOCAO_MEET_SUBJECT,
+      noticeAdocaoMeetHTML(p.nome, p.joinUrl || ADOCAO_MEET_URL, unsub),
+      NOTICE_ADOCAO_MEET_TYPE,
+      unsub
+    );
+    if (res.ok) sent++;
+    else {
+      failed++;
+      if (res.status === 429) {
+        stopped = true;
+        console.warn("[send-training-reminders] mailersend 429, stopping adocao meet notice");
+        break;
+      }
+    }
+    await new Promise((r2) => setTimeout(r2, 120));
+  }
+
+  return json({
+    ok: true,
+    mode: "notice_adocao_meet",
+    sent,
+    failed,
+    total: list.length,
+    stopped_429: stopped,
+  });
+}
+
+const NOTICE_PAUSA_TYPE = "treinamento_aviso_pausa_imersao_20261017";
+const NOTICE_PAUSA_SUBJECT = "Esta semana não tem mentoria nem tira dúvidas";
+const PAUSA_SLUGS = [
+  "seg-17-tira-duvidas",
+  "sex-09-tira-duvidas",
+  "qua-18-mentoria-adocao",
+  "qui-18-mentoria-consolidacao",
+  "qui-18-mentoria-expansao",
+];
+const IMERSAO_URL =
+  "https://live.orbitgestao.com.br/?utm_source=email&utm_medium=aviso&utm_campaign=pausa_treinamentos_17out&utm_content=inscritos";
+// Só estas ocorrências. Na semana seguinte o cron volta a lembrar.
+const PAUSED_OCCURRENCES = new Set([
+  "qua-18-mentoria-adocao|2026-10-14",
+  "sex-09-tira-duvidas|2026-10-16",
+]);
+
+function noticePausaHTML(nome: string, unsubUrl: string): string {
+  const first = (nome || "").trim().split(/\s+/)[0] || "Olá";
+  return `<div style="font-family:'Plus Jakarta Sans',Arial,sans-serif;max-width:600px;margin:0 auto;background:#0D1117;color:#fff;border-radius:12px;overflow:hidden;">
+<div style="background:linear-gradient(135deg,#0D1117 0%,#1a1f2e 100%);padding:40px 32px;text-align:center;">
+<img src="${SITE}/images/logo-orbit-white.png" alt="Orbit" style="height:40px;margin-bottom:24px;">
+<h1 style="color:#ffba1a;font-size:24px;margin:0 0 8px;font-weight:800;">Esta semana a sala não abre</h1>
+<p style="color:#C9D1D9;font-size:16px;margin:0;font-weight:600;">Mentorias e tira dúvidas pausados só até sexta</p>
+</div>
+<div style="padding:32px;">
+<p style="font-size:16px;line-height:1.7;color:#C9D1D9;">Olá <strong style="color:#fff;">${first}</strong>,</p>
+<p style="font-size:16px;line-height:1.7;color:#C9D1D9;">Nesta semana não teremos mentoria nem tira dúvidas. Quarta 18h, quinta 18h e sexta 9h ficam pausados por causa da imersão de sábado.</p>
+<p style="font-size:16px;line-height:1.7;color:#C9D1D9;"><strong style="color:#fff;">Na semana que vem os horários voltam ao normal:</strong> tira dúvidas segunda 17h e sexta 9h, Mentoria de Adoção quarta 18h, e quinta 18h nas semanas de Consolidação ou Expansão. Sua inscrição continua valendo. Não precisa se cadastrar de novo.</p>
+<p style="font-size:16px;line-height:1.7;color:#C9D1D9;">Sábado, <strong style="color:#ffba1a;">17/10, das 9h às 13h</strong>, a imersão é gratuita, ao vivo e sem replay.</p>
+<div style="text-align:center;margin:32px 0;">
+<a href="${IMERSAO_URL}" style="display:inline-block;background:#ffba1a;color:#0D1117;font-weight:700;font-size:16px;padding:16px 40px;border-radius:8px;text-decoration:none;">QUERO PARTICIPAR DA IMERSÃO</a>
+</div>
+</div>
+<div style="padding:20px 32px;border-top:1px solid #21262d;text-align:center;">
+<p style="font-size:12px;color:#484F58;margin:0 0 8px;">Orbit Gestão — Gestão Operada por IA</p>
+<p style="font-size:11px;color:#484F58;margin:0;"><a href="${unsubUrl}" style="color:#6B7280;">Não quero mais receber avisos destas sessões</a></p>
+</div>
+</div>`;
+}
+
+async function noticePausaImersao(
+  sb: ReturnType<typeof createClient>,
+  dryRun: boolean,
+  limit: number
+) {
+  const [{ data: regs, error: e1 }, { data: already, error: e2 }] = await Promise.all([
+    sb.from("training_registrations")
+      .select("id,email,nome,created_at")
+      .in("session_slug", PAUSA_SLUGS)
+      .eq("zoom_status", "registered")
+      .eq("reminders_enabled", true)
+      .is("unsubscribed_at", null)
+      .lt("bounce_count", 2),
+    sb.from("email_logs")
+      .select("recipient_email")
+      .eq("email_type", NOTICE_PAUSA_TYPE)
+      .eq("success", true),
+  ]);
+
+  if (e1 || e2) {
+    console.error("[send-training-reminders] pausa notice query failed", e1, e2);
+    return json({ ok: false, error: "notice_query_failed" }, 500);
+  }
+
+  const alreadySet = new Set(
+    (already || []).map((r) => String(r.recipient_email || "").trim().toLowerCase()).filter(Boolean)
+  );
+
+  const byEmail = new Map<string, { email: string; nome: string; id: string }>();
+  const ordered = [...(regs || [])].sort((a, b) =>
+    String(a.created_at || "").localeCompare(String(b.created_at || ""))
+  );
+  for (const r of ordered) {
+    const email = String(r.email || "").trim().toLowerCase();
+    if (!email.includes("@") || alreadySet.has(email) || byEmail.has(email)) continue;
+    byEmail.set(email, { email, nome: String(r.nome || ""), id: String(r.id || "") });
+  }
+
+  const list = [...byEmail.values()].slice(0, limit);
+  if (dryRun) {
+    return json({
+      ok: true,
+      dry_run: true,
+      mode: "notice_pausa_imersao",
+      to_send: list.length,
+      skipped_already: alreadySet.size,
+    });
+  }
+
+  let sent = 0;
+  let failed = 0;
+  let stopped = false;
+  for (const p of list) {
+    const unsub = p.id
+      ? `${SUPABASE_URL}/functions/v1/training-unsubscribe?r=${p.id}`
+      : `${SITE}/treinamentos`;
+    const res = await sendOne(
+      p.email,
+      p.nome,
+      NOTICE_PAUSA_SUBJECT,
+      noticePausaHTML(p.nome, unsub),
+      NOTICE_PAUSA_TYPE,
+      unsub
+    );
+    if (res.ok) sent++;
+    else {
+      failed++;
+      if (res.status === 429) {
+        stopped = true;
+        console.warn("[send-training-reminders] mailersend 429, stopping pausa notice");
+        break;
+      }
+    }
+    await new Promise((r2) => setTimeout(r2, 120));
+  }
+
+  return json({
+    ok: true,
+    mode: "notice_pausa_imersao",
+    sent,
+    failed,
+    total: list.length,
+    remaining: byEmail.size - list.length,
+    stopped_429: stopped,
+  });
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
 
@@ -247,6 +626,16 @@ Deno.serve(async (req) => {
 
   const sb = createClient(SUPABASE_URL, SERVICE_KEY);
 
+  if (body?.mode === "notice_cancelled_session") {
+    return await noticeCancelledQua10(sb, dryRun, Math.min(limit, 300));
+  }
+  if (body?.mode === "notice_adocao_meet") {
+    return await noticeAdocaoMeet(sb, dryRun, Math.min(limit, 50));
+  }
+  if (body?.mode === "notice_pausa_imersao") {
+    return await noticePausaImersao(sb, dryRun, Math.min(limit, 200));
+  }
+
   const { data: sessions, error: sErr } = await sb
     .from("training_sessions")
     .select("slug,title,kind,weekday,start_time,duration_min,zoom_join_url")
@@ -260,7 +649,9 @@ Deno.serve(async (req) => {
   let pendingTail = 0;
 
   for (const s of (sessions || []) as SessionRow[]) {
+    if (s.cadence === "biweekly" || BIWEEKLY_SLUGS.has(s.slug)) continue;
     for (const occ of upcomingOccurrences(s, now, 3)) {
+      if (PAUSED_OCCURRENCES.has(`${s.slug}|${occ.dateBRT}`)) continue;
       const leadMin = Math.round((occ.startUtc.getTime() - now.getTime()) / 60000);
       for (const kind of kinds) {
         const w = WINDOWS[kind];

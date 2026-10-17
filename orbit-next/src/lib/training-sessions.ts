@@ -16,13 +16,17 @@
  * training_sessions. Os slugs têm de bater exatamente.
  */
 
-export type TrainingKind = 'tira-duvidas' | 'treinamento';
+export type TrainingKind = 'tira-duvidas' | 'treinamento' | 'mentoria';
+export type TrainingVenue = 'zoom' | 'meet';
+export type TrainingCadence = 'weekly' | 'biweekly';
 
 export interface TrainingSession {
   slug: string;
   title: string;
   titleEn: string;
   kind: TrainingKind;
+  venue: TrainingVenue;
+  cadence: TrainingCadence;
   /** Padrão JS getDay(): 0=Dom .. 6=Sáb. O weekly_days do Zoom usa 1=Dom (+1). */
   weekday: number;
   hour: number;
@@ -31,9 +35,11 @@ export interface TrainingSession {
   icon: string;
   description: string;
   descriptionEn: string;
+  audience?: string;
+  audienceEn?: string;
 }
 
-/** Sessão da /live/chris. NÃO entra na grade de /treinamentos — inscrição só lá. */
+/** Slug legado da Masterclass em /live/chris. A página redireciona para /treinamentos. */
 export const MASTERCLASS_SLUG = 'qui-18-masterclass';
 
 /** Faixas da agenda que NÃO têm inscrição aqui — levam para a página própria. */
@@ -134,10 +140,18 @@ const DESC_TIRA_DUVIDAS =
   'Perguntas e respostas ao vivo sobre o uso do Orbit. Você traz o que está travando e sai com o próximo passo claro.';
 const DESC_TIRA_DUVIDAS_EN =
   'Live Q&A on using Orbit. You bring what is stuck and leave with a clear next step.';
-const DESC_TREINAMENTO =
-  'Aula preparada: um módulo ou as novidades da plataforma, destrinchados passo a passo.';
-const DESC_TREINAMENTO_EN =
-  'A prepared class: a module or the latest platform updates, broken down step by step.';
+const DESC_MENTORIA_ADOCAO =
+  'Comece certo. Tenha quem já fez para te guiar. Mentoria para conquistar seu primeiro cliente, colocar a plataforma em operação e gerar os primeiros resultados.';
+const DESC_MENTORIA_ADOCAO_EN =
+  'Start right, with people who already did it. Mentoring to win your first client, get the platform running and generate the first results.';
+const DESC_MENTORIA_CONSOLIDACAO =
+  'Valide seu método. Transforme resultado em consistência. Mentoria para estruturar sua operação, validar seu método e consolidar o uso do Consultor Digital.';
+const DESC_MENTORIA_CONSOLIDACAO_EN =
+  'Validate your method. Turn results into consistency. Mentoring to structure your operation, validate your method and consolidate Digital Consultant usage.';
+const DESC_MENTORIA_EXPANSAO =
+  'Amplie seus resultados. Escale o que já funciona. Mentoria para expandir sua operação, aumentar o ROI e transformar resultados em crescimento recorrente.';
+const DESC_MENTORIA_EXPANSAO_EN =
+  'Grow your results. Scale what already works. Mentoring to expand your operation, increase ROI and turn results into recurring growth.';
 
 export const TRAINING_SESSIONS: TrainingSession[] = [
   {
@@ -145,6 +159,8 @@ export const TRAINING_SESSIONS: TrainingSession[] = [
     title: 'Tira Dúvidas',
     titleEn: 'Q&A',
     kind: 'tira-duvidas',
+    venue: 'zoom',
+    cadence: 'weekly',
     weekday: 1,
     hour: 17,
     minute: 0,
@@ -154,23 +170,12 @@ export const TRAINING_SESSIONS: TrainingSession[] = [
     descriptionEn: DESC_TIRA_DUVIDAS_EN,
   },
   {
-    slug: 'qua-10-treinamento',
-    title: 'Treinamento',
-    titleEn: 'Training',
-    kind: 'treinamento',
-    weekday: 3,
-    hour: 10,
-    minute: 0,
-    durationMin: 60,
-    icon: 'fa-graduation-cap',
-    description: DESC_TREINAMENTO,
-    descriptionEn: DESC_TREINAMENTO_EN,
-  },
-  {
     slug: 'sex-09-tira-duvidas',
     title: 'Tira Dúvidas',
     titleEn: 'Q&A',
     kind: 'tira-duvidas',
+    venue: 'zoom',
+    cadence: 'weekly',
     weekday: 5,
     hour: 9,
     minute: 0,
@@ -179,26 +184,63 @@ export const TRAINING_SESSIONS: TrainingSession[] = [
     description: DESC_TIRA_DUVIDAS,
     descriptionEn: DESC_TIRA_DUVIDAS_EN,
   },
-];
-
-export const TRAINING_LIVE_CARDS: TrainingLiveCard[] = [
   {
-    key: 'live-negocios',
-    title: 'Live de Negócios',
-    titleEn: 'Business Live',
+    slug: 'qua-18-mentoria-adocao',
+    title: 'Mentoria de Adoção',
+    titleEn: 'Adoption mentoring',
+    kind: 'mentoria',
+    venue: 'meet',
+    cadence: 'weekly',
+    weekday: 3,
+    hour: 18,
+    minute: 0,
+    durationMin: 60,
+    icon: 'fa-bullseye',
+    description: DESC_MENTORIA_ADOCAO,
+    descriptionEn: DESC_MENTORIA_ADOCAO_EN,
+    audience: 'Consultorias na etapa de Adoção',
+    audienceEn: 'Consultancies in the Adoption stage',
+  },
+  {
+    slug: 'qui-18-mentoria-consolidacao',
+    title: 'Mentoria de Consolidação',
+    titleEn: 'Consolidation mentoring',
+    kind: 'mentoria',
+    venue: 'meet',
+    cadence: 'biweekly',
     weekday: 4,
     hour: 18,
     minute: 0,
-    icon: 'fa-handshake',
-    description: 'Como escalar sua consultoria com o Orbit, com Christian Hart.',
-    descriptionEn: 'How to scale your consultancy with Orbit, with Christian Hart.',
-    href: '/live/chris',
-    note: 'Somente canais',
-    noteEn: 'Channels only',
-    cadence: 'semanal',
-    whenLabel: 'Toda quinta · 18h',
-    whenLabelEn: 'Every Thursday · 6pm',
+    durationMin: 60,
+    icon: 'fa-layer-group',
+    description: DESC_MENTORIA_CONSOLIDACAO,
+    descriptionEn: DESC_MENTORIA_CONSOLIDACAO_EN,
+    audience: 'Consultorias na etapa de Consolidação',
+    audienceEn: 'Consultancies in the Consolidation stage',
   },
+  {
+    slug: 'qui-18-mentoria-expansao',
+    title: 'Mentoria de Expansão',
+    titleEn: 'Expansion mentoring',
+    kind: 'mentoria',
+    venue: 'meet',
+    cadence: 'biweekly',
+    weekday: 4,
+    hour: 18,
+    minute: 0,
+    durationMin: 60,
+    icon: 'fa-chart-line',
+    description: DESC_MENTORIA_EXPANSAO,
+    descriptionEn: DESC_MENTORIA_EXPANSAO_EN,
+    audience: 'Consultorias na etapa de Expansão',
+    audienceEn: 'Consultancies in the Expansion stage',
+  },
+];
+
+export const ZOOM_SESSIONS = TRAINING_SESSIONS.filter((s) => s.venue === 'zoom');
+export const MENTORIA_SESSIONS = TRAINING_SESSIONS.filter((s) => s.kind === 'mentoria');
+
+export const TRAINING_LIVE_CARDS: TrainingLiveCard[] = [
   {
     key: 'live-orbit',
     title: 'Live Orbit',
@@ -224,9 +266,11 @@ export const TRAINING_BY_SLUG: Record<string, TrainingSession> = Object.fromEntr
 /** Slugs da grade antiga, para links/bookmarks não quebrarem a página de obrigado. */
 export const LEGACY_SLUG_MAP: Record<string, string> = {
   'clientes-seg-14': 'seg-17-tira-duvidas',
-  'clientes-qua-10': 'qua-10-treinamento',
-  'consultorias-qua-13': 'qua-10-treinamento',
+  'clientes-qua-10': 'qua-18-mentoria-adocao',
+  'consultorias-qua-13': 'qua-18-mentoria-adocao',
+  'qua-10-treinamento': 'qua-18-mentoria-adocao',
   'consultorias-sex-10': 'sex-09-tira-duvidas',
+  'qui-18-masterclass': 'qui-18-mentoria-consolidacao',
 };
 
 export function pad2(n: number): string {
@@ -240,11 +284,23 @@ export function timeLabel(s: TrainingSession | TrainingLiveCard): string {
 
 /** 'Segunda · 17h' / 'Monday · 17h' */
 export function slotLabel(s: TrainingSession | TrainingLiveCard): string {
-  return `${WEEKDAY_SHORT[s.weekday]} · ${timeLabel(s)}`;
+  const base = `${WEEKDAY_SHORT[s.weekday]} · ${timeLabel(s)}`;
+  if ('cadence' in s && s.cadence === 'biweekly') return `${base} · a cada 15 dias`;
+  return base;
 }
 
 export function slotLabelEn(s: TrainingSession | TrainingLiveCard): string {
-  return `${WEEKDAY_SHORT_EN[s.weekday]} · ${timeLabel(s)}`;
+  const base = `${WEEKDAY_SHORT_EN[s.weekday]} · ${timeLabel(s)}`;
+  if ('cadence' in s && s.cadence === 'biweekly') return `${base} · every 2 weeks`;
+  return base;
+}
+
+export function venueLabel(s: TrainingSession): string {
+  return s.venue === 'meet' ? 'Google Meet' : 'Zoom';
+}
+
+export function venueLabelEn(s: TrainingSession): string {
+  return s.venue === 'meet' ? 'Google Meet' : 'Zoom';
 }
 
 export function icalByDay(weekday: number): string {

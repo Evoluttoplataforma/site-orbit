@@ -4,7 +4,8 @@
 //   1. grava o lead em live_orbit_leads
 //   2. cria 1 linha em training_registrations por sessão marcada
 //   3. registra a pessoa no Zoom em cada uma delas
-//   4. cria o lead no CRM Orbit (best-effort, depois da resposta)
+//   4. CRM Orbit com join_url + tags de origem (um card por pessoa)
+//   5. ManyChat só na Masterclass Consultores + e-mail de confirmação com o link
 //
 // A ordem importa: as linhas são criadas com zoom_status='pending' ANTES de
 // chamar o Zoom. Se o Zoom cair ou o isolate morrer, nada é perdido — o cron
@@ -13,6 +14,18 @@
 // Modo interno: POST {"mode":"retry_pending"} + header x-cron-secret.
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { addMeetingRegistrant, hasZoomCreds, ZoomError } from "../_shared/zoom.ts";
+import {
+  crmSourceFor,
+  MANYCHAT_TAG_CONFIRMACAO_MASTERCLASS,
+  originFromSessions,
+} from "../_shared/origin.ts";
+import { subscribeManyChat } from "../_shared/manychat.ts";
+import {
+  eventDateTimeBRT,
+  nextOccurrenceWhenLabel,
+  sendMailerSend,
+  trainingConfirmationHTML,
+} from "../_shared/mailersend.ts";
 
 type Sb = ReturnType<typeof createClient>;
 
@@ -22,7 +35,7 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-cron-secret, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const MAX_SESSIONS = 3;
+const MAX_SESSIONS = 5;
 const MIN_FILL_MS = 2000; // menos que isso é bot
 const RL_SCOPE = "register-training";
 // Se uma sessão passar disso em 24h, para de chamar o Zoom (protege a reunião).
@@ -61,6 +74,24 @@ function splitName(full: string): { first: string; last: string } {
   return { first: parts[0] || "Participante", last: parts.slice(1).join(" ") };
 }
 
+interface SessionRow {
+  slug: string;
+  title: string;
+  kind: string;
+  weekday: number;
+  start_time: string;
+  duration_min: number;
+  zoom_meeting_id: string | null;
+  zoom_join_url: string | null;
+  recurrence_ends_at: string | null;
+}
+
+/** Mentorias no Meet: sem zoom_meeting_id; o join_url da tabela é a sala compartilhada. */
+function isMeetVenue(s: SessionRow): boolean {
+  const url = (s.zoom_join_url || "").toLowerCase();
+  return s.kind === "mentoria" || url.includes("meet.google.com");
+}
+
 /** 'YYYY-MM-DD' da próxima ocorrência, em data LOCAL de São Paulo. */
 function nextOccurrenceDateBRT(weekday: number, hour: number, minute: number): string {
   const nowBRT = new Date(
@@ -73,18 +104,6 @@ function nextOccurrenceDateBRT(weekday: number, hour: number, minute: number): s
   nowBRT.setDate(nowBRT.getDate() + diff);
   const p = (n: number) => String(n).padStart(2, "0");
   return `${nowBRT.getFullYear()}-${p(nowBRT.getMonth() + 1)}-${p(nowBRT.getDate())}`;
-}
-
-interface SessionRow {
-  slug: string;
-  title: string;
-  kind: string;
-  weekday: number;
-  start_time: string;
-  duration_min: number;
-  zoom_meeting_id: string | null;
-  zoom_join_url: string | null;
-  recurrence_ends_at: string | null;
 }
 
 Deno.serve(async (req) => {
@@ -261,6 +280,27 @@ Deno.serve(async (req) => {
         continue;
       }
 
+      if (isMeetVenue(s)) {
+        const meetUrl = s.zoom_join_url;
+        if (meetUrl) {
+          await sb.from("training_registrations").update({
+            zoom_status: "registered",
+            zoom_registrant_id: "meet",
+            zoom_join_url: meetUrl,
+            zoom_error: null,
+            zoom_error_kind: null,
+            zoom_registered_at: new Date().toISOString(),
+          }).eq("id", reg.id);
+          results.push({ ...base, status: "registered", join_url: meetUrl, venue: "meet" });
+        } else {
+          await sb.from("training_registrations")
+            .update({ zoom_status: "pending", zoom_error: "no_meet_url" })
+            .eq("id", reg.id);
+          results.push({ ...base, status: "pending", join_url: null });
+        }
+        continue;
+      }
+
       if (!s.zoom_meeting_id || !hasZoomCreds()) {
         // sala ainda não criada ou integração desligada: fica pendente, o cron pega
         await sb.from("training_registrations")
@@ -327,36 +367,118 @@ Deno.serve(async (req) => {
       }
     }
 
-    // ─── 7) CRM depois da resposta ─────────────────────────────────────────
+    // ─── 7) CRM + ManyChat + e-mail, depois da resposta ────────────────────
+    const origin = originFromSessions(sessions);
+    const joinUrlItems = results
+      .map((r) => {
+        const s = bySlug.get(String(r.slug));
+        return {
+          title: String(r.title || s?.title || origin.originLabel),
+          url: String(r.join_url || ""),
+          slug: String(r.slug || ""),
+          next_occurrence: String(r.next_occurrence || ""),
+          status: String(r.status || ""),
+        };
+      })
+      .filter((r) => r.url);
+    const primaryJoinUrl = joinUrlItems[0]?.url || "";
+    const alreadyAllRegistered = regRows.every(
+      (reg) => reg.zoom_status === "registered" && reg.zoom_registrant_id,
+    );
+    const triggerConfirmation = !alreadyAllRegistered;
+
     const crmBody = {
       lead_id: leadId,
       nome,
       email,
       telefone,
       empresa,
-      source: "treinamentos",
-      tags: [
-        "treinamento",
-        ...sessions.map((s) => s.slug),
-        ...(sessions.some((s) => s.slug.includes("masterclass")) ? ["masterclass"] : []),
-      ],
-      notes: sessions.some((s) => s.slug.includes("masterclass"))
-        ? `Inscrição /live/chris (masterclass)\nSessões: ${sessions.map((s) => `${s.title} (${s.slug})`).join(", ")}`
-        : `Inscrição /treinamentos\nSessões: ${sessions.map((s) => `${s.title} (${s.slug})`).join(", ")}`,
-      custom_fields: { training_slugs: sessions.map((s) => s.slug).join(",") },
+      source: crmSourceFor(origin.origin),
+      origem: origin.origin,
+      tags: origin.tags,
+      join_url: primaryJoinUrl || undefined,
+      join_urls: joinUrlItems.map((i) => ({ title: i.title, url: i.url })),
+      notes: [
+        origin.origin === "masterclass-consultores"
+          ? `Inscrição /live/chris (masterclass consultores)`
+          : `Inscrição /treinamentos`,
+        `Sessões: ${sessions.map((s) => `${s.title} (${s.slug})`).join(", ")}`,
+      ]
+        .filter(Boolean)
+        .join("\n"),
+      custom_fields: {
+        training_slugs: sessions.map((s) => s.slug).join(","),
+        origem_evento: origin.origin,
+      },
     };
-    const crmTask = fetch(`${supabaseUrl}/functions/v1/create-orbit-crm-lead`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${serviceKey}` },
-      body: JSON.stringify(crmBody),
-    }).catch((e) => console.warn("[register-training] crm call failed", String(e)));
+
+    const soonestSlug = joinUrlItems[0]?.slug || String(results[0]?.slug || sessions[0]?.slug || "");
+    const soonestSession = bySlug.get(soonestSlug) || sessions[0];
+    const nextDate = joinUrlItems[0]?.next_occurrence || String(results[0]?.next_occurrence || "");
+    const isMasterclass = origin.origin === "masterclass-consultores";
+    const sideEffects = Promise.allSettled([
+      fetch(`${supabaseUrl}/functions/v1/create-orbit-crm-lead`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${serviceKey}` },
+        body: JSON.stringify(crmBody),
+      }).then(async (res) => {
+        if (!res.ok) console.warn("[register-training] crm http", res.status, await res.text().catch(() => ""));
+      }),
+      isMasterclass
+        ? subscribeManyChat({
+            nome,
+            email,
+            telefone,
+            joinUrl: primaryJoinUrl,
+            origem: origin.origin,
+            origemLabel: origin.originLabel,
+            eventTitle: origin.primaryTitle,
+            eventDateTime:
+              nextDate && soonestSession
+                ? eventDateTimeBRT(nextDate, soonestSession.start_time)
+                : null,
+            tags: origin.tags,
+            triggerConfirmation: true,
+            confirmationTag: MANYCHAT_TAG_CONFIRMACAO_MASTERCLASS,
+            consentPhrase:
+              "Concordou em receber mensagens da Orbit no WhatsApp sobre a Masterclass Consultores ao se inscrever em orbitgestao.com.br/live/chris.",
+          }).then((r) => {
+            if (!r.ok && !r.skipped) console.warn("[register-training] manychat", r.error);
+          })
+        : Promise.resolve(),
+      triggerConfirmation && email
+        ? sendMailerSend({
+            to: email,
+            nome,
+            subject: `Inscrição confirmada · ${origin.originLabel}`,
+            html: trainingConfirmationHTML(
+              nome,
+              origin.originLabel,
+              results.map((r) => {
+                const s = bySlug.get(String(r.slug));
+                const date = String(r.next_occurrence || "");
+                return {
+                  title: String(r.title || s?.title || origin.originLabel),
+                  whenLabel: s
+                    ? nextOccurrenceWhenLabel(s.weekday, s.start_time, date)
+                    : date,
+                  joinUrl: String(r.join_url || ""),
+                };
+              }),
+            ),
+            emailType: `treinamento_confirmacao_${origin.origin}`,
+          }).then((r) => {
+            if (!r.ok) console.warn("[register-training] confirm email", r.status);
+          })
+        : Promise.resolve(),
+    ]).catch((e) => console.warn("[register-training] side effects", String(e)));
 
     // @ts-ignore EdgeRuntime existe no runtime do Supabase
     if (typeof EdgeRuntime !== "undefined" && EdgeRuntime?.waitUntil) {
       // @ts-ignore
-      EdgeRuntime.waitUntil(crmTask);
+      EdgeRuntime.waitUntil(sideEffects);
     } else {
-      await crmTask;
+      await sideEffects;
     }
 
     return json({ ok: true, lead_id: leadId, results });
@@ -410,16 +532,32 @@ async function retryPending(sb: Sb, limit: number): Promise<Response> {
 
   const { data: sessions } = await sb
     .from("training_sessions")
-    .select("slug,zoom_meeting_id,zoom_join_url")
+    .select("slug,title,kind,weekday,start_time,zoom_meeting_id,zoom_join_url")
     .eq("active", true);
   const meetingBySlug = new Map(
     (sessions || []).map((s: SessionRow) => [s.slug, s])
   );
+  const supabaseUrl = Deno.env.get("SUPABASE_URL") || "";
+  const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
 
   let fixed = 0;
   for (const r of rows) {
     const s = meetingBySlug.get(r.session_slug) as SessionRow | undefined;
-    if (!s?.zoom_meeting_id) continue;
+    if (!s?.zoom_meeting_id) {
+      if (s && isMeetVenue(s) && s.zoom_join_url) {
+        await sb.from("training_registrations").update({
+          zoom_status: "registered",
+          zoom_registrant_id: "meet",
+          zoom_join_url: s.zoom_join_url,
+          zoom_error: null,
+          zoom_error_kind: null,
+          zoom_registered_at: new Date().toISOString(),
+          zoom_attempts: (r.zoom_attempts ?? 0) + 1,
+        }).eq("id", r.id);
+        fixed++;
+      }
+      continue;
+    }
     const { first, last } = splitName(r.nome);
     try {
       const z = await addMeetingRegistrant(s.zoom_meeting_id, {
@@ -429,17 +567,36 @@ async function retryPending(sb: Sb, limit: number): Promise<Response> {
         phone: r.telefone,
         org: r.empresa,
       });
+      const joinUrl = z.join_url || s.zoom_join_url || "";
       await sb.from("training_registrations").update({
         zoom_status: "registered",
         zoom_registrant_id: z.registrant_id,
         zoom_participant_id: z.id,
-        zoom_join_url: z.join_url || s.zoom_join_url,
+        zoom_join_url: joinUrl,
         zoom_error: null,
         zoom_error_kind: null,
         zoom_registered_at: new Date().toISOString(),
         zoom_attempts: (r.zoom_attempts ?? 0) + 1,
       }).eq("id", r.id);
       fixed++;
+      const origin = originFromSessions([s]);
+      if (supabaseUrl && serviceKey && joinUrl) {
+        fetch(`${supabaseUrl}/functions/v1/create-orbit-crm-lead`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${serviceKey}` },
+          body: JSON.stringify({
+            nome: r.nome,
+            email: r.email,
+            telefone: r.telefone,
+            empresa: r.empresa,
+            source: crmSourceFor(origin.origin),
+            origem: origin.origin,
+            tags: origin.tags,
+            join_url: joinUrl,
+            join_urls: [{ title: s.title || origin.originLabel, url: joinUrl }],
+          }),
+        }).catch((e) => console.warn("[register-training] retry crm", String(e)));
+      }
     } catch (e) {
       const ze = e instanceof ZoomError ? e : new ZoomError(String(e), "retryable");
       await sb.from("training_registrations").update({

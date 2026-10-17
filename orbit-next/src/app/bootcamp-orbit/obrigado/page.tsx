@@ -1,13 +1,21 @@
 import type { Metadata } from 'next';
-import { PageContent } from './content';
+
+const DEST = 'https://live.orbitgestao.com.br/';
 
 export const metadata: Metadata = {
-  title: 'Inscrição recebida — Bootcamp Canais Orbit 15/10/2026',
-  description: 'Recebemos sua inscrição no Bootcamp Canais Orbit. Veja os próximos passos para a modalidade escolhida.',
+  title: 'Imersão Orbit',
   robots: { index: false, follow: false },
-  alternates: { canonical: 'https://orbitgestao.com.br/bootcamp-orbit/obrigado' },
+  alternates: { canonical: DEST },
 };
 
 export default function Page() {
-  return <PageContent />;
+  return (
+    <main style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', background: '#0D1117', color: '#fff', fontFamily: 'sans-serif', padding: 24, textAlign: 'center' }}>
+      <meta httpEquiv="refresh" content={`0;url=${DEST}`} />
+      <p>
+        A imersão está em outro endereço.{' '}
+        <a href={DEST} style={{ color: '#ffba1a' }}>Entrar na imersão</a>
+      </p>
+    </main>
+  );
 }
