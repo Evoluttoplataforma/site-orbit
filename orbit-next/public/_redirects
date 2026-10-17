@@ -1,6 +1,10 @@
 # Cloudflare Pages redirects
 # Sintaxe: <de> <para> <status>
 
+# Guia Tático de IA — imersão 17 OUT 2026 (HTML estático em public/liveoubtubro/)
+/liveoubtubro     /liveoubtubro/index.html  200
+/liveoubtubro/    /liveoubtubro/index.html  200
+
 # /agentes-de-ia (pillar) e /agentes/* (12 agentes) ativos.
 # /modulos/* (4 módulos) também ativos.
 # As rotas que não existirem servem 404 normal, não 301 pra home.
