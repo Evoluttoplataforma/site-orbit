@@ -985,6 +985,16 @@ textarea{overflow:visible!important;resize:none!important}
 #abertura .trapnav{margin-bottom:26px}
 @media(max-width:1000px){#abertura .frame{grid-template-columns:1fr;grid-template-areas:"h" "l" "c" "q"}}
 @media print{#abertura .frame{display:grid!important}}
+
+/* alerta de cuidado */
+.alertbox{margin-top:34px;display:grid;grid-template-columns:auto 1fr;gap:clamp(18px,2.4vw,32px);align-items:start;background:rgba(240,96,90,.07);border:1px solid rgba(240,96,90,.45);border-left:6px solid var(--red);border-radius:var(--r);padding:clamp(24px,3vw,40px)}
+.alertbox .ico{font-size:clamp(40px,4.4vw,64px);line-height:1}
+.alertbox p{margin:0}
+.alertbox .msg{font-size:clamp(24px,2.8vw,40px);font-weight:800;letter-spacing:-.03em;line-height:1.18;color:#fff;max-width:1050px}
+.alertbox .msg em{font-style:normal;color:var(--red)}
+.alertbox .why{margin-top:18px;font-size:clamp(16px,1.8vw,19px);color:#C9D1D7;max-width:900px}
+.chip.warn{border-color:rgba(240,96,90,.55);color:var(--red)}
+@media (max-width:640px){.alertbox{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -1981,7 +1991,7 @@ textarea{overflow:visible!important;resize:none!important}
  <div class="wrap wide">
   <div class="m1nav"><i></i><i></i><i></i><i class="on"></i><span>O fecho</span></div>
   <h2>Ofereça 30 dias — <span class="hl">e EMPURRE</span></h2>
-  <p class="lead" style="max-width:1100px">Instale o seu Orbit num cliente ativo, gratuito e <b>conduzido</b> por 30 dias. Não entregue e suma.</p>
+  <p class="lead" style="max-width:1100px">Instale o seu Orbit num <b>cliente ativo</b>, gratuito e <b>conduzido</b> por 30 dias. Não entregue e suma.</p>
   <div class="tl30">
    <div class="rv"><small>Semana 1</small><b>Ative 2–3 casos de uso que DOEM hoje na empresa dele</b></div>
    <div class="rv"><small>Toda semana</small><b>Mostre um ganho concreto: tempo, custo ou resultado</b></div>
@@ -1990,6 +2000,21 @@ textarea{overflow:visible!important;resize:none!important}
   </div>
   <p class="exq rv">Dependência por valor — <span class="hl">não por contrato.</span></p>
   <div class="pnote"><div class="pl">Apresentador · O fecho</div>A tática que faz o cliente não conseguir mais largar. O teste é monitorado e empurrado de propósito: semana 1, ative 2–3 casos de uso que doem; toda semana, mostre um ganho concreto; faça a empresa inteira usar; no dia 30, tirar o Orbit é tirar o cérebro da empresa. Não é uma cláusula que prende o cliente — é o valor que ele já não quer perder.</div>
+ </div>
+</section>
+
+<section class="sec" id="m4alerta" data-wb="11" data-g="m4">
+ <div class="wrap wide">
+  <div class="chiprow"><span class="chip a">Missão 03</span><span class="chip warn">⚠ Atenção</span></div>
+  <h2>Cuidado com <span class="hl">como você faz essa oferta</span></h2>
+  <div class="alertbox" role="alert">
+   <div class="ico" aria-hidden="true">⚠️</div>
+   <div>
+    <p class="msg">Não faça essa oferta informando que não irá mais à empresa. Por melhor que seja o seu pitch, o cliente entenderá como <em>perda de direito adquirido!</em></p>
+    <p class="why">Os 30 dias entram somando ao que você já entrega, nunca substituindo a sua presença. A conversa sobre um novo formato só vem depois, com o valor já percebido.</p>
+   </div>
+  </div>
+  <div class="pnote"><div class="pl">Apresentador · Alerta</div>Ler o alerta devagar. Reforçar: o cliente ativo já tem a sua presença como algo conquistado; se a oferta soar como "vou deixar de ir", ele ouve perda, não ganho. O Orbit entra somando. Perguntar no chat: "Quem aqui já perdeu um cliente por mudar o formato da entrega?"</div>
  </div>
 </section>
 
