@@ -22,6 +22,7 @@ supabase/.temp/
 
 # Material de trabalho local (PDFs de live, estudos) — nao versionar
 *.pdf
+!orbit-next/public/workbook.pdf
 docs/Estudo Materiais Pedro/
 
 # IDs das reunioes Zoom geradas pelo setup (nao versionar)
